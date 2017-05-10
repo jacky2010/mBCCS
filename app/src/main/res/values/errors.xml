@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_nick_name_empty">Please enter you nickname</string>
+    <string name="error_nick_name">Nickname is format wrong</string>
+    <string name="error_msg_email">・メールアドレスの形式が正しくありません</string>
+    <string name="error_username">*15文字以内で入力してください。</string>
+    <string name="error_email">*すでに登録されているアドレスです。</string>
+    <string name="error_password">*半角英数8文字以上15文字以内で入力してください。</string>
+    <string name="error_password_confirmation">*パスワードと一致しません。</string>
+    <string name="error_login">
+        ログインに失敗しました。入力したメールアドレスかパスワ\nードに誤りがないかご確認ください。</string>
+    // validation error type 1
+    <string name="error_required_field">*必須項目です。</string>
+    // validation error type 2
+    <string name="error_invalid_character">入力した記号が不正です。</string>
+    // validation error type 3
+    <string name="error_invalid_length">文字数が間違いました。</string>
+    // validation error type 4
+    <string name="error_invalid_format">メールアドレスの入力形式が不正です。</string>
+    // validation error type 5
+    <string name="error_full_width_character">パスワードは半角英数記号を使用してください</string>
+</resources>

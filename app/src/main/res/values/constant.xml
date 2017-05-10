@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="vertical">0</integer>
+    <integer name="horizontal">1</integer>
+    <integer name="animation_duration">300</integer>
+
+    <integer name="max_length_email">256</integer>
+    <integer name="max_length_local_part_email">64</integer>
+    <integer name="max_length_nickname">15</integer>
+    <integer name="min_length_password">8</integer>
+    <integer name="max_length_password">16</integer>
+    <integer name="max_length_inquiry_name">15</integer>
+    <integer name="input_text_free_line">0</integer>
+    <integer name="rating_num_stars">5</integer>
+    <integer name="max_length_price">7</integer>
+    <integer name="max_length_supplemental">2000</integer>
+    <integer name="max_length_appeal_point">2000</integer>
+    <integer name="max_length_detail_address">150</integer>
+    <integer name="min_price">5000</integer>
+    <integer name="max_price">999999</integer>
+    <item format="float" name="rating_step_size" type="dimen">0.5</item>
+</resources>
