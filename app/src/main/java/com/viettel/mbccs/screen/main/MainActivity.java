@@ -15,7 +15,7 @@ public class MainActivity extends BaseActivity implements MainContract.ViewModel
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        mPresenter = new MainPresenter();
+        mPresenter = new MainPresenter(this,this);
         mBinding.setPresenter(mPresenter);
     }
 
