@@ -152,4 +152,9 @@ public class BindingUtils {
         webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         webView.loadUrl(url);
     }
+
+    @BindingAdapter({ "android:src" })
+    public static void setImageResource(ImageView imageview, int resource) {
+        imageview.setImageResource(resource);
+    }
 }

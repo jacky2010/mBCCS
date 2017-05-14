@@ -8,6 +8,7 @@ import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.LoginRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.LoginResponse;
+import com.viettel.mbccs.screen.common.success.SuccessDialog;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 
 /**
@@ -65,6 +66,7 @@ public class LoginPresenter implements LoginContract.Presenter {
     }
 
     public void login() {
+
         if (!TextUtils.isEmpty(userName.get()) && !TextUtils.isEmpty(password.get())) {
             login(userName.get(), password.get());
         }

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <data>
+
+        <variable
+            name="title"
+            type="String"
+            />
+        <variable
+            name="titleColor"
+            type="int"
+            />
+        <variable
+            name="titleTextSize"
+            type="float"
+            />
+        <variable
+            name="leftIcon"
+            type="android.graphics.drawable.Drawable"
+            />
+        <variable
+            name="leftIconClick"
+            type="android.view.View.OnClickListener"
+            />
+        <variable
+            name="rightIcon"
+            type="android.graphics.drawable.Drawable"
+            />
+        <variable
+            name="rightIconClick"
+            type="android.view.View.OnClickListener"
+            />
+        <variable
+            name="background"
+            type="int"
+            />
+        <variable
+            name="showRightIcon"
+            type="boolean"
+            ></variable>
+        <variable
+            name="isShow"
+            type="boolean"
+            />
+        <import type="android.view.View"/>
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@{background}"
+        android:padding="@dimen/dp_5"
+        android:visibility="@{isShow?View.VISIBLE:View.GONE}"
+        >
+        <ImageView
+            android:id="@+id/image_left"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
+            android:layout_alignParentLeft="true"
+            android:onClick="@{leftIconClick}"
+            android:src="@{leftIcon}"
+            />
+        <ImageView
+            android:id="@+id/image_right"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
+            android:layout_alignParentRight="true"
+            android:onClick="@{rightIconClick}"
+            android:src="@{rightIcon}"
+            android:visibility="@{showRightIcon?View.VISIBLE:View.GONE}"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/image_right"
+            android:layout_toRightOf="@id/image_left"
+            android:gravity="center"
+            android:text="@{title}"
+            android:textColor="@{titleColor}"
+            android:textSize="@{titleTextSize}"
+            />
+
+
+    </RelativeLayout>
+</layout>
