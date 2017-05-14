@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="AppButton">
+        <attr format="string" name="type"/>
+        <attr format="color" name="bgColor"/>
+        <attr format="color" name="bgColorSelected"/>
+        <attr format="color" name="bgColorDisabled"/>
+        <attr format="dimension" name="textSizeButton"/>
+        <attr format="color" name="textColorButton"/>
+        <attr format="color" name="textColorSelected"/>
+        <attr format="color" name="textColorDisabled"/>
+        <attr format="dimension" name="corner"/>
+        <attr format="boolean" name="selected"/>
+        <attr format="dimension" name="cornerStrokeWidth"/>
+        <attr format="color" name="cornerStrokeColor"/>
+        <attr format="integer" name="bgDrawable"/>
+    </declare-styleable>
+</resources>
