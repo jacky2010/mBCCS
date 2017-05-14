@@ -8,7 +8,6 @@ import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.LoginRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.LoginResponse;
-import com.viettel.mbccs.screen.common.success.SuccessDialog;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 
 /**

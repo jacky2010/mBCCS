@@ -66,4 +66,5 @@ dependencies {
   compile "com.android.support:design:$rootProject.supportLibraryVersion"
   compile "com.android.support.constraint:constraint-layout:$rootProject.ext.constraintVersion"
   compile 'org.jetbrains:annotations-java5:15.0'
+  compile 'me.dm7.barcodescanner:zbar:1.9.1'
 }

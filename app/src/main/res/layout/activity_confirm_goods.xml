@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <data>
+        <variable
+            name="presenter"
+            type="com.viettel.mbccs.screen.goodsconfirm.GoodsConfirmPresenter"
+            />
+    </data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <RelativeLayout
+            android:id="@+id/lyHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <include
+                layout="@layout/toolbar"
+                app:background="@{@color/grey}"
+                app:isShow="@{true}"
+                app:leftIcon="@{@drawable/ic_close}"
+                app:leftIconClick="@{()->presenter.onCancel()}"
+                app:title="@{@string/confirm_goods}"
+                app:titleColor="@{@color/black}"
+                app:titleTextSize="@{@dimen/sp_17}"
+                />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btn_confirm_good"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:layout_alignParentBottom="true"
+            android:text="@string/confirm"
+            style="@style/button_positive"
+            />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list_good_cofirm"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/btn_confirm_good"
+            android:layout_below="@id/lyHeader"
+            android:adapter="@{presenter.adapter}"
+            ></android.support.v7.widget.RecyclerView>
+
+    </RelativeLayout>
+</layout>

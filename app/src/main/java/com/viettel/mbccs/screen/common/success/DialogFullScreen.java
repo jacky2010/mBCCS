@@ -6,17 +6,18 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.databinding.DialogSuccessBinding;
+import com.viettel.mbccs.databinding.DialogFullscreenBinding;
 
 /**
  * Created by eo_cuong on 5/13/17.
  */
 
-public class SuccessDialog extends Dialog {
+public class DialogFullScreen extends Dialog {
 
-    DialogSuccessBinding mBinding;
+    DialogFullscreenBinding mBinding;
 
     private int icon;
 
@@ -29,6 +30,8 @@ public class SuccessDialog extends Dialog {
     private String negativeButton;
 
     private String titleToolbar;
+
+    private boolean isCenterContent = true;
 
     private SuccessDialogListener mListener;
 
@@ -51,6 +54,7 @@ public class SuccessDialog extends Dialog {
         private String titleToolbar;
 
         private SuccessDialogListener mListener;
+        private boolean isCenterContent;
 
         public Builder(Context context) {
             this.mContext = context;
@@ -76,6 +80,11 @@ public class SuccessDialog extends Dialog {
             return this;
         }
 
+        public Builder setCenterContent(boolean centerContent) {
+            isCenterContent = centerContent;
+            return this;
+        }
+
         public Builder setPositiveButton(String positiveButton) {
             this.positiveButton = positiveButton;
             return this;
@@ -96,8 +105,8 @@ public class SuccessDialog extends Dialog {
             return this;
         }
 
-        public SuccessDialog build() {
-            SuccessDialog successDialog = new SuccessDialog(mContext);
+        public DialogFullScreen build() {
+            DialogFullScreen successDialog = new DialogFullScreen(mContext);
             successDialog.setContent(content);
             successDialog.setIcon(icon);
             successDialog.setNegativeButton(negativeButton);
@@ -105,20 +114,20 @@ public class SuccessDialog extends Dialog {
             successDialog.setTitle(title);
             successDialog.setTitleToolbar(titleToolbar);
             successDialog.setListener(mListener);
+            setCenterContent(isCenterContent);
             return successDialog;
         }
     }
 
-    public SuccessDialog(@NonNull Context context) {
+    public DialogFullScreen(@NonNull Context context) {
         super(context, R.style.DialogTheme);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding =
-                DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.dialog_success,
-                        null, true);
+        mBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()),
+                R.layout.dialog_fullscreen, null, true);
         setContentView(mBinding.getRoot());
         mBinding.setPresenter(this);
     }
@@ -134,7 +143,6 @@ public class SuccessDialog extends Dialog {
     public void setContent(String content) {
         this.content = content;
     }
-
 
     public void setPositiveButton(String positiveButton) {
         this.positiveButton = positiveButton;
@@ -155,7 +163,6 @@ public class SuccessDialog extends Dialog {
     public String getContent() {
         return content;
     }
-
 
     public String getPositiveButton() {
         return positiveButton;
@@ -191,6 +198,13 @@ public class SuccessDialog extends Dialog {
 
     public boolean isShowPositive() {
         return !TextUtils.isEmpty(positiveButton);
+    }
+
+    public int getGravity() {
+        if (isCenterContent) {
+            return Gravity.CENTER;
+        }
+        return Gravity.START;
     }
 
     public void positiveClick() {

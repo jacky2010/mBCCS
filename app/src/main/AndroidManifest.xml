@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.viettel.mbccs">
 
+    <uses-permission android:name="android.permission.CAMERA"/>
+
     <application
         android:name=".MBCCSApplication"
         android:allowBackup="true"
@@ -19,6 +21,9 @@
         </activity>
 
         <activity android:name=".screen.login.LoginActivity"/>
+        <activity android:name=".screen.serialpicker.SerialPickerActivity"/>
+        <activity android:name=".screen.common.success.ScanbarCodeActivity"/>
+        <activity android:name=".screen.goodsconfirm.GoodsConfirmActivity"/>
     </application>
 
 </manifest>

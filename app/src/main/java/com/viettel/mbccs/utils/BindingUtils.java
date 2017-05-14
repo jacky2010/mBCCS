@@ -12,7 +12,9 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.text.SpannableString;
 import android.text.TextUtils;
+import android.text.style.UnderlineSpan;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -156,5 +158,24 @@ public class BindingUtils {
     @BindingAdapter({ "android:src" })
     public static void setImageResource(ImageView imageview, int resource) {
         imageview.setImageResource(resource);
+    }
+
+    @BindingAdapter({ "textHtml" })
+    public static void setText(TextView text, String html) {
+        text.setText(Html.fromHtml(html));
+    }
+
+    @BindingAdapter({ "textUnderLine" })
+    public static void setTextUnderLine(TextView textUnderLine, String text) {
+        SpannableString content = new SpannableString(text);
+        content.setSpan(new UnderlineSpan(), 0, text.length(), 0);
+        textUnderLine.setText(content);
+    }
+
+    @BindingAdapter({ "android:adapter" })
+    public static void setAdapter(RecyclerView recyclerView, RecyclerView.Adapter adapter) {
+        recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(adapter);
     }
 }
