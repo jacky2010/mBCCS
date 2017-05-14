@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- InputText -->
+    <declare-styleable name="IncDecInputText">
+        <attr name="maxLength" format="integer" />
+        <attr name="inputTextSize" format="dimension" />
+        <attr name="inputTextColor" format="color" />
+    </declare-styleable>
+    <declare-styleable name="CustomDatePicker">
+        <attr name="dateTextSize" format="dimension" />
+        <attr name="dateTextColor" format="color" />
+    </declare-styleable>
+</resources>

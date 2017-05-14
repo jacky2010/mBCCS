@@ -38,7 +38,7 @@ ext {
   buildToolsVersion = '25.0.1'
 
   // App dependencies
-  supportLibraryVersion = '25.1.1'
+  supportLibraryVersion = '25.3.1'
   junitVersion = '4.12'
   guavaVersion = '18.0'
   espressoVersion = '2.2.2'

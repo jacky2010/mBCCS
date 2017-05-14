@@ -3,10 +3,14 @@ package com.viettel.mbccs.utils;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
+
 import com.viettel.mbccs.MBCCSApplication;
+
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Locale;
 
 public class Common {
     public static boolean isConnectingToInternet() {
@@ -32,5 +36,15 @@ public class Common {
             e.printStackTrace();
         }
         return "";
+    }
+
+    public static Locale getLocale(Context context) {
+        Locale locale;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            locale = context.getResources().getConfiguration().getLocales().get(0);
+        } else {
+            locale = context.getResources().getConfiguration().locale;
+        }
+        return locale;
     }
 }

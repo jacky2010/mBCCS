@@ -1,7 +1,9 @@
 package com.viettel.mbccs.utils;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,6 +15,7 @@ import java.util.TimeZone;
 public class DateUtils {
 
     public static final String DATE_FORMAT_YYYY_MM_DD = "yyyy-MM-dd";
+    public static final String CALENDAR_DATE_FORMAT = "MM/dd/yyyy";
     public static final String TIMEZONE_FORMAT = "yyyy-MM-dd'T'HH:mm:ssZ";
     public static final String REVIEW_TIME_FORMAT = "yyyy年MM月dd日";
     public static final String BIRTHDAY_TIME_FORMAT = "yyyy/MM/dd";
@@ -78,7 +81,7 @@ public class DateUtils {
     }
 
     public static String changeTimeFormat(@NonNull String oldTime, @NonNull String oldFormat,
-            @NonNull String newFormat) {
+                                          @NonNull String newFormat) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(oldFormat, Locale.JAPAN);
         Date date;
         try {
@@ -94,8 +97,6 @@ public class DateUtils {
         String format = "%1$02d:%2$02d";
         return String.format(format, hourOfDay, minute);
     }
-
-
 
     public static Date convertToDate(String source, String format) {
         if (source == null) {
@@ -113,12 +114,12 @@ public class DateUtils {
         return null;
     }
 
-    public static String convertToString(Date source, String format) {
+    public static String convertToString(Date source, String format, @Nullable Locale locale) {
         if (source == null) {
             return null;
         }
 
-        DateFormat df = new SimpleDateFormat(format);
+        DateFormat df = new SimpleDateFormat(format, locale == null ? Locale.getDefault() : locale);
         return df.format(source);
     }
 }
