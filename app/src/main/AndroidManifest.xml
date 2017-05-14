@@ -18,7 +18,10 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".screen.test.TestActivity"/>
+
         <activity android:name=".screen.login.LoginActivity"/>
+
     </application>
 
 </manifest>
