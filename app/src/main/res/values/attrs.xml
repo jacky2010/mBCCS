@@ -2,12 +2,59 @@
 <resources>
     <!-- InputText -->
     <declare-styleable name="IncDecInputText">
-        <attr name="maxLength" format="integer" />
-        <attr name="inputTextSize" format="dimension" />
-        <attr name="inputTextColor" format="color" />
+        <attr format="integer" name="maxLength"/>
+        <attr format="dimension" name="inputTextSize"/>
+        <attr format="color" name="inputTextColor"/>
     </declare-styleable>
     <declare-styleable name="CustomDatePicker">
-        <attr name="dateTextSize" format="dimension" />
-        <attr name="dateTextColor" format="color" />
+        <attr format="dimension" name="dateTextSize"/>
+        <attr format="color" name="dateTextColor"/>
+    </declare-styleable>
+
+    <declare-styleable name="AppButton">
+        <attr format="string" name="type"/>
+        <attr format="color" name="bgColor"/>
+        <attr format="color" name="bgColorSelected"/>
+        <attr format="color" name="bgColorDisabled"/>
+        <attr format="dimension" name="textSizeButton"/>
+        <attr format="color" name="textColorButton"/>
+        <attr format="color" name="textColorSelected"/>
+        <attr format="color" name="textColorDisabled"/>
+        <attr format="dimension" name="corner"/>
+        <attr format="boolean" name="selected"/>
+        <attr format="dimension" name="cornerStrokeWidth"/>
+        <attr format="color" name="cornerStrokeColor"/>
+        <attr format="integer" name="bgDrawable"/>
+    </declare-styleable>
+
+    <!-- Button Image Custom -->
+    <declare-styleable name="ImageTextButton">
+        <attr format="reference" name="itb_icon"/>
+        <attr format="dimension" name="itb_icon_size"/>
+        <attr format="string" name="itb_text"/>
+        <attr format="color" name="itb_text_color"/>
+        <attr format="dimension" name="itb_text_size"/>
+        <attr format="dimension" name="itb_icon_text_margin"/>
+        <attr format="enum" name="itb_icon_position">
+            <enum name="left" value="0"/>
+            <enum name="top" value="1"/>
+            <enum name="right" value="2"/>
+            <enum name="bottom" value="3"/>
+        </attr>
+        <attr format="color" name="itb_bg"/>
+        <attr format="color" name="itb_bg_pressed"/>
+        <attr format="color" name="itb_bg_disabled"/>
+        <attr format="dimension" name="itb_radius"/>
+        <attr format="dimension" name="itb_padding"/>
+    </declare-styleable>
+
+    <!-- RangeSliderView Custom -->
+    <declare-styleable name="RangeSliderView">
+        <attr format="integer" name="rangeCount"/>
+        <attr format="color" name="filledColor"/>
+        <attr format="color" name="emptyColor"/>
+        <attr format="float" name="barHeightPercent"/>
+        <attr format="float" name="slotRadiusPercent"/>
+        <attr format="float" name="sliderRadiusPercent"/>
     </declare-styleable>
 </resources>

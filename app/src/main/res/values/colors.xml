@@ -8,4 +8,14 @@
     <color name="black">#000000</color>
     <color name="blue">#317BE1</color>
     <color name="white">#ffffff</color>
+    <color name="seafoam_blue">#2b66df</color>
+    <color name="green">#20941a</color>
+    <color name="red_button">#c42126</color>
+
+    <!-- Button Image Custom -->
+    <color name="default_bg">#ff3f83c4</color>
+    <color name="default_bg_pressed">#9c000000</color>
+    <color name="default_bg_disabled">#ff999999</color>
+    <color name="default_text_color">#ffffff</color>
+
 </resources>

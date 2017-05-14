@@ -20,6 +20,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".screen.test.TestActivity"/>
+
         <activity android:name=".screen.login.LoginActivity"/>
         <activity android:name=".screen.serialpicker.SerialPickerActivity"/>
         <activity android:name=".screen.common.success.ScanbarCodeActivity"/>

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="dp_1">1dp</dimen>
+    <dimen name="dp_2">2dp</dimen>
     <dimen name="dp_3">3dp</dimen>
     <dimen name="dp_5">5dp</dimen>
     <dimen name="dp_10">10dp</dimen>
@@ -15,8 +17,17 @@
     <dimen name="sp_16">16sp</dimen>
     <dimen name="sp_17">17sp</dimen>
     <dimen name="sp_18">18sp</dimen>
-    <dimen name="dp_1">1dp</dimen>
     <dimen name="dp_200">200dp</dimen>
     <dimen name="dp_40">40dp</dimen>
     <dimen name="sp_20">20sp</dimen>
+
+    <!-- Button Image Custom -->
+    <dimen name="default_text_margin">5dp</dimen>
+    <dimen name="default_radius">0dp</dimen>
+    <dimen name="default_text_size">16sp</dimen>
+    <dimen name="default_height">48dp</dimen>
+    <dimen name="default_icon_width">24dp</dimen>
+    <dimen name="default_icon_height">24dp</dimen>
+    <dimen name="default_padding">10dp</dimen>
+
 </resources>

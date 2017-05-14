@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.viettel.mbccs.dialog.LoadingDialog;
 
 public abstract class BaseActivity extends AppCompatActivity {
+
     private LoadingDialog mLoadingDialog;
 
     /**
