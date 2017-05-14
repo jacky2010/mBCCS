@@ -81,7 +81,7 @@ public class SearchInputView extends LinearLayout {
                     getResources().getColor(R.color.black));
             inputType = typedArray.getString(R.styleable.SearchInputView_inputType);
             imeOptions = typedArray.getString(R.styleable.SearchInputView_imeOptions);
-            maxLength = typedArray.getInt(R.styleable.SearchInputView_maxLength, Integer.MAX_VALUE);
+            maxLength = typedArray.getInt(R.styleable.SearchInputView_length, Integer.MAX_VALUE);
             lines = typedArray.getInt(R.styleable.SearchInputView_lines, 1);
         } catch (Exception e) {
             typedArray.recycle();

@@ -14,7 +14,7 @@
         <attr format="color" name="textColor"></attr>
         <attr format="string" name="inputType"/>
         <attr format="string" name="imeOptions"/>
-        <attr format="integer" name="maxLength"/>
+        <attr format="integer" name="length"/>
         <attr format="integer" name="lines"/>
     </declare-styleable>
 

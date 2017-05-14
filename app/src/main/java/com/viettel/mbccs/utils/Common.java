@@ -3,6 +3,7 @@ package com.viettel.mbccs.utils;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import com.viettel.mbccs.MBCCSApplication;
 import com.viettel.mbccs.data.model.SerialBlock;
 import java.math.BigInteger;
@@ -14,6 +15,7 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.Locale;
 
 public class Common {
     public static boolean isConnectingToInternet() {
@@ -88,7 +90,16 @@ public class Common {
         if (serialBlock.getFrom() != -1) {
             serialBlocks.add(serialBlock);
         }
-
         return serialBlocks;
+    }
+
+    public static Locale getLocale(Context context) {
+        Locale locale;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            locale = context.getResources().getConfiguration().getLocales().get(0);
+        } else {
+            locale = context.getResources().getConfiguration().locale;
+        }
+        return locale;
     }
 }
