@@ -194,4 +194,9 @@ public class BindingUtils {
     public static void setTableViewEmptyView(TableView tableView, View view) {
         tableView.setEmptyDataIndicatorView(view);
     }
+    
+    @BindingAdapter({ "android:src" })
+    public static void setImageResource(ImageView imageview, int resource) {
+        imageview.setImageResource(resource);
+    }
 }

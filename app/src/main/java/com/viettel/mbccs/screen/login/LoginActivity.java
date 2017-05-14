@@ -20,7 +20,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.ViewMod
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_login);
-        mPresenter = new LoginPresenter();
+        mPresenter = new LoginPresenter(this,this);
         mBinding.setPresenter(mPresenter);
     }
 
@@ -40,6 +40,6 @@ public class LoginActivity extends BaseActivity implements LoginContract.ViewMod
 
     @Override
     public void onLoginSuccess() {
-
+        //TODO go to main
     }
 }

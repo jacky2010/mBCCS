@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <data>
+        <variable
+            name="presenter"
+            type="com.viettel.mbccs.screen.common.success.SuccessDialog"
+            />
+        <import type="android.text.TextUtils"/>
+        <import type="android.view.View"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+
+        >
+
+        <include
+            layout="@layout/toolbar"
+            app:background="@{@color/grey}"
+            app:isShow="@{!TextUtils.isEmpty(presenter.titleToolbar)}"
+            app:leftIcon="@{@drawable/ic_close}"
+            app:leftIconClick="@{() -> presenter.closeClick()}"
+            app:title="@{presenter.titleToolbar}"
+            app:titleColor="@{@color/white}"
+            app:titleTextSize="@{@dimen/sp_13}"
+            ></include>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="false"
+            android:gravity="center"
+            android:orientation="vertical"
+            >
+            <ImageView
+                android:layout_width="@dimen/dp_50"
+                android:layout_height="@dimen/dp_50"
+                android:src="@{presenter.icon}"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_10"
+                android:gravity="center"
+                android:text="@{presenter.title}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_17"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="30dp"
+                android:gravity="center"
+                android:text="@{presenter.content}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_18"
+                />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="50dp"
+                >
+                <Button
+                    android:id="@+id/btn_left"
+                    android:layout_width="@dimen/dp_150"
+                    android:layout_height="@dimen/dp_50"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:onClick="@{() -> presenter.negativeClick()}"
+                    android:text="@{presenter.negativeButton}"
+                    android:visibility="@{presenter.showNegative? View.VISIBLE : View.GONE}"
+                    style="@style/button_nagative"
+                    />
+                <Button
+                    android:layout_width="@dimen/dp_150"
+                    android:layout_height="@dimen/dp_50"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:layout_toRightOf="@id/btn_left"
+                    android:gravity="center"
+                    android:onClick="@{() -> presenter.positiveClick()}"
+                    android:text="@{presenter.positiveButton}"
+                    android:visibility="@{presenter.showPositive?View.VISIBLE:View.GONE}"
+                    style="@style/button_positive"
+                    />
+            </RelativeLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</layout>

@@ -8,4 +8,32 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <declare-styleable name="SearchInputView">
+        <attr format="string" name="text"></attr>
+        <attr format="dimension" name="textSize"></attr>
+        <attr format="color" name="textColor"></attr>
+        <attr format="string" name="inputType"/>
+        <attr format="string" name="imeOptions"/>
+        <attr format="integer" name="maxLength"/>
+        <attr format="integer" name="lines"/>
+    </declare-styleable>
+
+    <style name="button_positive">
+        <item name="android:background">@drawable/bg_btn_positive</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="button_nagative">
+        <item name="android:background">@drawable/bg_btn_nagative</item>
+        <item name="android:textColor">#000</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+    </style>
+
 </resources>
