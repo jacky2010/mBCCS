@@ -8,6 +8,7 @@
             name="presenter"
             type="com.viettel.mbccs.screen.main.MainPresenter"
             />
+        <import type="com.viettel.mbccs.constance.ButtonTyper"/>
     </data>
 
     <LinearLayout
@@ -31,7 +32,15 @@
             app:text="@={presenter.text}"
             app:textColor="@color/colorAccent"
             app:textSize="@dimen/sp_20"
-            ></com.viettel.mbccs.widget.SearchInputView>
+            />
+
+        <!--This is button custom only use demo-->
+        <com.viettel.mbccs.widget.AppButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            app:type="@{ButtonTyper.DEFAULT}"
+            />
 
     </LinearLayout>
 
