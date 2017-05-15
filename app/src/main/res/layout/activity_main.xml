@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
     >
 
     <data>
@@ -8,40 +9,37 @@
             name="presenter"
             type="com.viettel.mbccs.screen.main.MainPresenter"
             />
-        <import type="com.viettel.mbccs.constance.ButtonTyper"/>
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         >
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{()->presenter.gotoLogin()}"
-            android:text="Login"
+        <!--TODO: Insert profile view here.-->
+        <View
+            android:id="@+id/profile"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             />
 
-        <com.viettel.mbccs.widget.SearchInputView
+        <FrameLayout
+            android:id="@+id/frame_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/bottom_navigation"
+            android:layout_below="@+id/profile"
+            />
+
+        <com.viettel.mbccs.widget.BottomNavigationView
+            android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="30dp"
-            app:inputType="number"
-            app:text="@={presenter.text}"
-            app:textColor="@color/colorAccent"
-            app:textSize="@dimen/sp_20"
+            android:layout_alignParentBottom="true"
+            app:bottomBarTextSize="@dimen/sp_12"
+            bind:bottomItemClickListener="@{ presenter.bottomItemClickListener }"
+            bind:bottomListItem="@{ presenter.bottomListItem }"
             />
-
-        <!--This is button custom only use demo-->
-        <com.viettel.mbccs.widget.AppButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Login"
-            app:type="@{ButtonTyper.DEFAULT}"
-            />
-
-    </LinearLayout>
+    </RelativeLayout>
 
 </layout>

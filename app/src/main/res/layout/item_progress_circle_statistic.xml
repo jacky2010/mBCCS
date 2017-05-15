@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools"
+    >
+
+    <data>
+
+        <variable
+            name="textTop"
+            type="String"
+            />
+
+        <variable
+            name="textTopSize"
+            type="float"
+            />
+
+        <variable
+            name="textTopColor"
+            type="int"
+            />
+
+        <variable
+            name="done"
+            type="float"
+            />
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/dp_4"
+        app:cardElevation="@dimen/dp_2"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/dp_8"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:text="@{ textTop }"
+                android:textColor="@{ textTopColor == 0 ? @android:color/black : textTopColor }"
+                android:textSize="@{ textTopSize == 0 ? @dimen/sp_14 : textTopSize }"
+                />
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dp_4"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@{ @string/percent(done) }"
+                    android:textColor="@{ @android:color/holo_green_light }"
+                    android:textSize="@dimen/sp_14"
+                    />
+
+                <com.txusballesteros.widgets.FitChart
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="@dimen/dp_100"
+                    android:layout_gravity="center"
+                    app:animationMode="overdraw"
+                    app:backStrokeColor="@android:color/darker_gray"
+                    app:strokeSize="@dimen/dp_10"
+                    app:valueStrokeColor="@android:color/holo_green_light"
+                    bind:value="@{ done }"
+                    />
+            </FrameLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</layout>

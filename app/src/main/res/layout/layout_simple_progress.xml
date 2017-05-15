@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/tools"
+    >
+
+    <data>
+        <variable
+            name="input"
+            type="com.viettel.mbccs.widget.SimpleProgressChart"
+            />
+    </data>
+
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_centerVertical="true"
+            android:background="@{ input.progressBgColor }"
+            bind:layout_height="@{ input.progressSize == 0 ? @dimen/dp_16 : input.progressSize }"
+            />
+
+        <View
+            android:layout_centerVertical="true"
+            android:background="@{ input.progressColor }"
+            bind:layout_height="@{ input.progressSize == 0 ? @dimen/dp_16 : input.progressSize }"
+            bind:layout_widthPercent="@{ input.done }"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@{ @string/percent(input.done) }"
+            android:textColor="@{ input.textColor }"
+            android:textSize="@{ input.textSize == 0 ? @dimen/sp_14 : input.textSize }"
+            />
+
+    </android.support.percent.PercentRelativeLayout>
+</layout>

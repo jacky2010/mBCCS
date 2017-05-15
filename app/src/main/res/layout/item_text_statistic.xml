@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <data>
+        <variable
+            name="textTop"
+            type="String"
+            />
+        <variable
+            name="textTopSize"
+            type="float"
+            />
+
+        <variable
+            name="textTopColor"
+            type="int"
+            />
+
+        <variable
+            name="textBottom"
+            type="String"
+            />
+        <variable
+            name="textBottomSize"
+            type="float"
+            />
+
+        <variable
+            name="textBottomColor"
+            type="int"
+            />
+    </data>
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/dp_4"
+        app:cardElevation="@dimen/dp_2"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/dp_8"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:text="@{ textTop }"
+                android:textColor="@{ textTopColor == 0 ? @android:color/black : textTopColor }"
+                android:textSize="@{ textTopSize == 0 ? @dimen/sp_14 : textTopSize }"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dp_4"
+                android:gravity="center"
+                android:text="@{ textBottom }"
+                android:textColor="@{ textBottomColor == 0 ? @android:color/black : textBottomColor }"
+                android:textSize="@{ textBottomSize == 0 ? @dimen/sp_14 : textBottomSize }"
+                />
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</layout>
