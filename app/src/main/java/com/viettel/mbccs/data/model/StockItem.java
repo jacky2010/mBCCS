@@ -10,7 +10,7 @@ import java.util.List;
  * Created by eo_cuong on 4/14/17.
  */
 
-public class GoodItem implements Serializable {
+public class StockItem implements Serializable {
 
     @Expose
     private boolean hasSerial;
@@ -19,7 +19,7 @@ public class GoodItem implements Serializable {
     @Expose
     private String imageUrl;
     @Expose
-    private float goodPrice;
+    private int goodPrice;
     @Expose
     private int remainGoodCount;
     @Expose
@@ -100,11 +100,15 @@ public class GoodItem implements Serializable {
         this.imageUrl = imageUrl;
     }
 
-    public float getGoodPrice() {
+    public int getGoodPrice() {
         return goodPrice;
     }
 
-    public void setGoodPrice(float goodPrice) {
+    public String getPriceString() {
+        return goodPrice + " VNĐ";
+    }
+
+    public void setGoodPrice(int goodPrice) {
         this.goodPrice = goodPrice;
     }
 

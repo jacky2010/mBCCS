@@ -1,14 +1,12 @@
 package com.viettel.mbccs.screen.goodsconfirm.adapter;
 
 import android.content.Context;
-import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.data.model.GoodItem;
+import com.viettel.mbccs.data.model.StockItem;
 import com.viettel.mbccs.databinding.ItemGoodConfirmBinding;
 import java.util.List;
 
@@ -20,9 +18,9 @@ public class GoodsConfirmAdapter
         extends RecyclerView.Adapter<GoodsConfirmAdapter.GoodsConfirmViewHolder> {
 
     private Context mContext;
-    private List<GoodItem> mGoodItems;
+    private List<StockItem> mGoodItems;
 
-    public GoodsConfirmAdapter(Context context, List<GoodItem> goodItems) {
+    public GoodsConfirmAdapter(Context context, List<StockItem> goodItems) {
         mContext = context;
         mGoodItems = goodItems;
     }
@@ -53,7 +51,7 @@ public class GoodsConfirmAdapter
             mBinding = binding;
         }
 
-        public void bind(GoodItem item) {
+        public void bind(StockItem item) {
             ItemGoodConfirmPresenter itemGoodConfirmPresenter = new ItemGoodConfirmPresenter();
             itemGoodConfirmPresenter.setGoodItem(item);
             mBinding.setItem(itemGoodConfirmPresenter);

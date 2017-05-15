@@ -4,7 +4,7 @@ import android.databinding.DataBindingUtil;
 import android.text.TextUtils;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
-import com.viettel.mbccs.data.model.GoodItem;
+import com.viettel.mbccs.data.model.StockItem;
 import com.viettel.mbccs.databinding.ActivityConfirmGoodsBinding;
 import com.viettel.mbccs.utils.GsonUtils;
 import com.viettel.mbccs.variable.Constants;
@@ -14,9 +14,9 @@ import java.util.List;
  * Created by eo_cuong on 5/14/17.
  */
 
-public class GoodsConfirmActivity extends BaseDataBindActivity<ActivityConfirmGoodsBinding,GoodsConfirmPresenter> implements GoodsActivityContract.ViewModel {
+public class StockConfirmActivity extends BaseDataBindActivity<ActivityConfirmGoodsBinding,GoodsConfirmPresenter> implements GoodsActivityContract.ViewModel {
 
-    private List<GoodItem> mGoodItems;
+    private List<StockItem> mGoodItems;
 
     @Override
     protected ActivityConfirmGoodsBinding initBinding() {
@@ -27,7 +27,7 @@ public class GoodsConfirmActivity extends BaseDataBindActivity<ActivityConfirmGo
     protected void initData() {
         String json = getIntent().getExtras().getString(Constants.BundleConstant.GOODS_LIST);
         if (!TextUtils.isEmpty(json)) {
-            mGoodItems = GsonUtils.String2ListObject(json, GoodItem[].class);
+            mGoodItems = GsonUtils.String2ListObject(json, StockItem[].class);
         }
 
         mPresenter = new GoodsConfirmPresenter(this, this, mGoodItems);

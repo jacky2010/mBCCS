@@ -5,12 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.ObservableField;
 import android.text.TextUtils;
-import android.widget.RemoteViews;
 import android.widget.Toast;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.data.model.GoodItem;
+import com.viettel.mbccs.data.model.StockItem;
 import com.viettel.mbccs.data.model.SerialBlock;
-import com.viettel.mbccs.databinding.ActivitySerialPickerBinding;
 import com.viettel.mbccs.screen.serialpicker.adapter.SerialAdapter;
 import com.viettel.mbccs.screen.serialpicker.adapter.SerialSelectedAdapter;
 import com.viettel.mbccs.utils.Common;
@@ -43,10 +41,10 @@ public class SerialPickerPresenter
     private List<SerialBlock> mSerialSelected = new ArrayList<>();
     private SerialBlock currentSerialBlock = new SerialBlock();
 
-    private GoodItem mGoodItem;
+    private StockItem mGoodItem;
 
     public SerialPickerPresenter(Context context, SerialPickerContract.ViewModel viewModel,
-            GoodItem goodItem) {
+            StockItem goodItem) {
         mContext = context;
         mViewModel = viewModel;
         mGoodItem = goodItem;

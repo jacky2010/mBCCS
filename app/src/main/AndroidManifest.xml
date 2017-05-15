@@ -4,6 +4,7 @@
     package="com.viettel.mbccs">
 
     <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:name=".MBCCSApplication"
@@ -33,6 +34,9 @@
         <activity android:name=".screen.common.success.ScanbarCodeActivity"/>
         <activity android:name=".screen.goodsconfirm.GoodsConfirmActivity"/>
         <activity android:name=".screen.sell.orders.SellOrdersActivity"/>
+        <activity android:name=".screen.goodsconfirm.StockConfirmActivity"/>
+        <activity android:name=".screen.sellretail.SellRetailActivity"/>
+        <activity android:name=".screen.sellretail.sellprogrampicker.SellProgramPickerActivity"/>
     </application>
 
 </manifest>

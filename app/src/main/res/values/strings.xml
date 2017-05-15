@@ -68,4 +68,16 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="item_orders_id">Mã đơn hàng: %1$s</string>
     <string name="item_orders_date">Đặt ngày: %1$s</string>
     <string name="item_orders_change_code_name">%1$s - %2$s</string>
+    <string name="service">Dịch vụ</string>
+    <string name="sell_program">Chương trình bán hàng</string>
+    <string name="stock_list">Danh sách mặt hàng</string>
+    <string name="price">%s VNĐ</string>
+    <string name="remain_goods"><![CDATA[
+<b>%s</b> sản phẩm
+    ]]></string>
+    <string name="serial_count">
+                Đã chọn %d serial
+                </string>
+    <string name="select_serial">Chọn serial</string>
+    <string name="next">next</string>
 </resources>

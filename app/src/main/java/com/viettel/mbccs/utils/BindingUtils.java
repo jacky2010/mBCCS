@@ -24,6 +24,8 @@ import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -157,6 +159,11 @@ public class BindingUtils {
     @BindingAdapter(value = { "currentItem", "animation" }, requireAll = false)
     public static void setCurrentItem(ViewPager viewPager, int currentItem, boolean animation) {
         viewPager.setCurrentItem(currentItem, animation);
+    }
+
+    @BindingAdapter({ "currentItem" })
+    public static void setCurrentItem(ViewPager viewPager, int currentItem) {
+        viewPager.setCurrentItem(currentItem);
     }
 
     @BindingAdapter(value = { "pageChangedListener" })
@@ -306,5 +313,16 @@ public class BindingUtils {
     @BindingAdapter({ "addItemDecoration" })
     public static void addItemDecoration(RecyclerView view, RecyclerView.ItemDecoration decor) {
         view.addItemDecoration(decor);
+    }
+
+    @BindingAdapter("bindText")
+    public static void setTextScroll(TextView textView, String text) {
+        textView.setText(text);
+        textView.setSelected(true);
+    }
+
+    @BindingAdapter("android:adapter")
+    public static void setAdapterSpinner(Spinner spinner, BaseAdapter adapter) {
+        spinner.setAdapter(adapter);
     }
 }

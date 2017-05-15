@@ -1,7 +1,7 @@
 package com.viettel.mbccs.screen.goodsconfirm.adapter;
 
 import android.databinding.ObservableField;
-import com.viettel.mbccs.data.model.GoodItem;
+import com.viettel.mbccs.data.model.StockItem;
 
 /**
  * Created by eo_cuong on 5/15/17.
@@ -9,7 +9,7 @@ import com.viettel.mbccs.data.model.GoodItem;
 
 public class ItemGoodConfirmPresenter {
 
-    private GoodItem mGoodItem;
+    private StockItem mGoodItem;
 
     private SerialConfirmAdapter mAdapter;
 
@@ -20,11 +20,11 @@ public class ItemGoodConfirmPresenter {
         isExpand.set(false);
     }
 
-    public GoodItem getGoodItem() {
+    public StockItem getGoodItem() {
         return mGoodItem;
     }
 
-    public void setGoodItem(GoodItem goodItem) {
+    public void setGoodItem(StockItem goodItem) {
         mGoodItem = goodItem;
     }
 

@@ -17,5 +17,6 @@
     <color name="default_bg_pressed">#9c000000</color>
     <color name="default_bg_disabled">#ff999999</color>
     <color name="default_text_color">#ffffff</color>
+    <color name="red">#DF0101</color>
 
 </resources>
