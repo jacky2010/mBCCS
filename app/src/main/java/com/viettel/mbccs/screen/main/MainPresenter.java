@@ -1,21 +1,7 @@
 package com.viettel.mbccs.screen.main;
 
-import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.databinding.ObservableField;
-import android.widget.Toast;
-import com.viettel.mbccs.R;
-import com.viettel.mbccs.data.model.GoodItem;
-import com.viettel.mbccs.data.model.SerialBlock;
-import com.viettel.mbccs.screen.common.success.DialogFullScreen;
-import com.viettel.mbccs.screen.goodsconfirm.GoodsConfirmActivity;
-import com.viettel.mbccs.screen.serialpicker.SerialPickerActivity;
-import com.viettel.mbccs.utils.GsonUtils;
-import com.viettel.mbccs.variable.Constants;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by eo_cuong on 5/11/17.

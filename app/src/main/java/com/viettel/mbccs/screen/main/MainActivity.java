@@ -1,21 +1,21 @@
 package com.viettel.mbccs.screen.main;
 
 import android.databinding.DataBindingUtil;
-import android.os.Bundle;
+
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.base.BaseActivity;
+import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.databinding.ActivityMainBinding;
 
-public class MainActivity extends BaseActivity implements MainContract.ViewModel {
-
-    private ActivityMainBinding mBinding;
-    private MainPresenter mPresenter;
+public class MainActivity extends BaseDataBindActivity<ActivityMainBinding, MainPresenter> implements MainContract.ViewModel {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        mPresenter = new MainPresenter(this,this);
+    protected ActivityMainBinding initBinding() {
+        return DataBindingUtil.setContentView(this, R.layout.activity_main);
+    }
+
+    @Override
+    protected void initData() {
+        mPresenter = new MainPresenter(this, this);
         mBinding.setPresenter(mPresenter);
     }
 

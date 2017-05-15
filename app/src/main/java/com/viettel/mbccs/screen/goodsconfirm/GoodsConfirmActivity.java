@@ -1,12 +1,9 @@
 package com.viettel.mbccs.screen.goodsconfirm;
 
 import android.databinding.DataBindingUtil;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import com.google.gson.Gson;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.base.BaseActivity;
+import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.data.model.GoodItem;
 import com.viettel.mbccs.databinding.ActivityConfirmGoodsBinding;
 import com.viettel.mbccs.utils.GsonUtils;
@@ -17,17 +14,17 @@ import java.util.List;
  * Created by eo_cuong on 5/14/17.
  */
 
-public class GoodsConfirmActivity extends BaseActivity implements GoodsActivityContract.ViewModel {
+public class GoodsConfirmActivity extends BaseDataBindActivity<ActivityConfirmGoodsBinding,GoodsConfirmPresenter> implements GoodsActivityContract.ViewModel {
 
-    private ActivityConfirmGoodsBinding mBinding;
-    private GoodsConfirmPresenter mPresenter;
     private List<GoodItem> mGoodItems;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_confirm_goods);
+    protected ActivityConfirmGoodsBinding initBinding() {
+        return DataBindingUtil.setContentView(this, R.layout.activity_confirm_goods);
+    }
 
+    @Override
+    protected void initData() {
         String json = getIntent().getExtras().getString(Constants.BundleConstant.GOODS_LIST);
         if (!TextUtils.isEmpty(json)) {
             mGoodItems = GsonUtils.String2ListObject(json, GoodItem[].class);

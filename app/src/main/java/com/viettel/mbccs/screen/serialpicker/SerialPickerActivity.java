@@ -6,19 +6,14 @@ import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
-import com.google.gson.Gson;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.base.BaseActivity;
+import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.data.model.GoodItem;
-import com.viettel.mbccs.data.model.SerialBlock;
 import com.viettel.mbccs.databinding.ActivitySerialPickerBinding;
 import com.viettel.mbccs.screen.common.success.ScanbarCodeActivity;
-import com.viettel.mbccs.screen.serialpicker.adapter.SerialAdapter;
-import com.viettel.mbccs.screen.serialpicker.adapter.SerialSelectedAdapter;
 import com.viettel.mbccs.utils.GsonUtils;
 import com.viettel.mbccs.variable.Constants;
 
@@ -26,19 +21,20 @@ import com.viettel.mbccs.variable.Constants;
  * Created by eo_cuong on 5/14/17.
  */
 
-public class SerialPickerActivity extends BaseActivity implements SerialPickerContract.ViewModel {
+public class SerialPickerActivity extends BaseDataBindActivity<ActivitySerialPickerBinding,SerialPickerPresenter> implements SerialPickerContract.ViewModel {
 
     public static final int SCANBARCODE_REQUEST_CODE = 125;
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 126;
 
-    private ActivitySerialPickerBinding mBinding;
-    private SerialPickerPresenter mPresenter;
     private GoodItem mGoodItem;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_serial_picker);
+    protected ActivitySerialPickerBinding initBinding() {
+        return DataBindingUtil.setContentView(this, R.layout.activity_serial_picker);
+    }
+
+    @Override
+    protected void initData() {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             String json = bundle.getString(Constants.BundleConstant.GOOD_ITEM);
