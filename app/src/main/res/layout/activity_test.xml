@@ -41,4 +41,6 @@
         rsv:mEmptyColor="#a8aeb8"
         rsv:rangeCount="5"
         rsv:barHeightPercent="0.1" />
+
+    <include layout="@layout/layout_date_picker"/>
 </LinearLayout>

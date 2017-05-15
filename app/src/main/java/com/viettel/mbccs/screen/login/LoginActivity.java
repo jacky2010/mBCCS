@@ -1,26 +1,25 @@
 package com.viettel.mbccs.screen.login;
 
 import android.databinding.DataBindingUtil;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
+
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.base.BaseActivity;
+import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.databinding.ActivityLoginBinding;
 
 /**
  * Created by eo_cuong on 5/10/17.
  */
 
-public class LoginActivity extends BaseActivity implements LoginContract.ViewModel {
-
-    private ActivityLoginBinding mBinding;
-    private LoginPresenter mPresenter;
+public class LoginActivity extends BaseDataBindActivity<ActivityLoginBinding, LoginPresenter> implements LoginContract.ViewModel {
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_login);
-        mPresenter = new LoginPresenter(this,this);
+    protected ActivityLoginBinding initBinding() {
+        return DataBindingUtil.setContentView(this, R.layout.activity_login);
+    }
+
+    @Override
+    protected void initData() {
+        mPresenter = new LoginPresenter(this, this);
         mBinding.setPresenter(mPresenter);
     }
 

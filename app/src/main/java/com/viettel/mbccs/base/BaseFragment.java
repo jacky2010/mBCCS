@@ -9,14 +9,14 @@ import android.support.v4.app.Fragment;
 public abstract class BaseFragment extends Fragment {
 
     public void showLoadingDialog() {
-        if (getActivity() != null && getActivity() instanceof BaseActivity) {
-            ((BaseActivity) getActivity()).showLoadingDialog();
+        if (getActivity() != null && getActivity() instanceof BaseDataBindActivity) {
+            ((BaseDataBindActivity) getActivity()).showLoadingDialog();
         }
     }
 
     public void hideLoadingDialog() {
-        if (getActivity() != null && getActivity() instanceof BaseActivity) {
-            ((BaseActivity) getActivity()).hideLoadingDialog();
+        if (getActivity() != null && getActivity() instanceof BaseDataBindActivity) {
+            ((BaseDataBindActivity) getActivity()).hideLoadingDialog();
         }
     }
 }
