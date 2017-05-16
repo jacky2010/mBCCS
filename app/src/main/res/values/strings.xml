@@ -27,4 +27,16 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="doi_soat_cong_no">Đối soát công nợ</string>
     <string name="total">Tổng số</string>
     <string name="remain">Còn phải thu</string>
+    <!--Reset Password-->
+    <string name="title_reset_password">Quên mật khẩu</string>
+    <string name="description_reset_password">Chúng tôi sẽ gửi mã xác nhận đổi mật khẩu tới số điện thoại: </string>
+    <string name="get_code">Lấy mã xác nhận</string>
+    <string name="we_sent_code">Đã gửi mã xác nhận đổi mật khẩu tới \n số điện thoại <b>%s</b></string>
+    <string name="code_verify">Mã xác nhận</string>
+    <string name="new_password">Mật khẩu mới</string>
+    <string name="not_receive_code">Chưa nhận được mã xác nhận? </string>
+    <string name="resend_code"><u>Gửi lại</u></string>
+    <string name="set_pass_again">Đặt lại mật khẩu</string>
+    <string name="input_type_text">text</string>
+    <string name="input_type_pass">textPassword</string>
 </resources>

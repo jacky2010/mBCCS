@@ -97,4 +97,8 @@ public class StringUtils {
     public static int formatPrice(String price) {
         return Integer.parseInt(price.replaceAll("[\\.\\,\\D]", ""));
     }
+
+    public static String changeTextToBold(String word) {
+        return "<b>"+word+"</b>";
+    }
 }

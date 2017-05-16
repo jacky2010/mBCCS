@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <data>
+        <variable
+            name="inputTyper"
+            type="String"
+            />
+        <variable
+            name="clearInputClick"
+            type="android.view.View.OnClickListener"
+            />
+        <variable
+            name="eyeClick"
+            type="android.view.View.OnClickListener"
+            />
+        <variable
+            name="isShowClear"
+            type="boolean"
+            />
+        <variable
+            name="isShowEyes"
+            type="boolean"
+            />
+        <variable
+            name="isChangeStatePass"
+            type="boolean"
+            />
+        <variable
+            name="content"
+            type="String"
+            />
+        <import type="android.view.View"/>
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        >
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            >
+
+            <com.viettel.mbccs.widget.CustomEdittext
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_30"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="@drawable/bg_input"
+                android:paddingStart="@dimen/dp_10"
+                android:text="@={ content }"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_15"
+                app:eyeClickActive="@{isChangeStatePass}"
+                />
+
+            <Button
+                android:id="@+id/calc_clear_txt_Prise"
+                android:layout_width="@dimen/dp_20"
+                android:layout_height="@dimen/dp_20"
+                android:layout_gravity="end|center"
+                android:layout_marginRight="@dimen/dp_10"
+                android:background="@drawable/ic_close"
+                android:onClick="@{clearInputClick}"
+                android:visibility="@{isShowClear ? View.VISIBLE : View.GONE}"
+                />
+
+        </FrameLayout>
+        <Button
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            android:layout_gravity="end|center"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:background="@drawable/selector_icon_eye"
+            android:onClick="@{ eyeClick }"
+            android:visibility="@{isShowEyes ? View.VISIBLE : View.INVISIBLE}"
+            app:viewSelected="@{isChangeStatePass}"
+            />
+    </LinearLayout>
+</layout>

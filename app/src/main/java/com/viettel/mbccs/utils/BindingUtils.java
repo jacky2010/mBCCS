@@ -13,6 +13,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.text.InputType;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.UnderlineSpan;
@@ -20,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.DrawableRequestBuilder;
@@ -276,5 +278,16 @@ public class BindingUtils {
     @BindingAdapter({ "bottomListItem" })
     public static void setBottomListItem(BottomNavigationView view, List<MenuItem> list) {
         view.setBottomListItem(list);
+    }
+
+    @BindingAdapter({ "eyeClickActive" })
+    public static void enableEyeClick(EditText inputView, boolean isEnable) {
+        if (isEnable) {
+        inputView.setInputType(
+                InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            return;
+        }
+        inputView.setInputType(
+                InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
     }
 }

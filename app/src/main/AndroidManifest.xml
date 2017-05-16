@@ -24,6 +24,10 @@
 
         <!--<activity android:name=".screen.test.TestActivity"/>-->
 
+        <activity
+            android:name=".screen.resetpass.ResetPasswordActivity"
+            android:screenOrientation="portrait"
+            />
         <activity android:name=".screen.login.LoginActivity"/>
         <activity android:name=".screen.serialpicker.SerialPickerActivity"/>
         <activity android:name=".screen.common.success.ScanbarCodeActivity"/>
