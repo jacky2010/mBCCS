@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
-import com.android.annotations.NonNull;
 import com.viettel.mbccs.R;
 
 /**
@@ -27,10 +26,8 @@ public class DialogUtils {
                 .show();
     }
 
-
-
-    public static void showDialog(Context context, @Nullable String title, @NonNull String message,
-            @NonNull String yesTitle, @Nullable DialogInterface.OnClickListener yesListener,
+    public static void showDialog(Context context, @Nullable String title, String message,
+            String yesTitle, @Nullable DialogInterface.OnClickListener yesListener,
             @Nullable String cancelTitle,
             @Nullable DialogInterface.OnClickListener cancelListener) {
         new AlertDialog.Builder(context).setTitle(title)
@@ -40,10 +37,9 @@ public class DialogUtils {
                 .show();
     }
 
-    public static void showDialog(Context context, @StringRes int title,
-            @NonNull @StringRes int message, @NonNull @StringRes int yesTitle,
-            @Nullable DialogInterface.OnClickListener yesListener, @StringRes int cancelTitle,
-            @Nullable DialogInterface.OnClickListener cancelListener) {
+    public static void showDialog(Context context, @StringRes int title, @StringRes int message,
+            @StringRes int yesTitle, @Nullable DialogInterface.OnClickListener yesListener,
+            @StringRes int cancelTitle, @Nullable DialogInterface.OnClickListener cancelListener) {
         new AlertDialog.Builder(context).setTitle(title)
                 .setMessage(message)
                 .setPositiveButton(yesTitle, yesListener)
@@ -51,10 +47,9 @@ public class DialogUtils {
                 .show();
     }
 
-    public static void showDialogError(Context context, @Nullable String title,
-            @NonNull String message, @Nullable DialogInterface.OnClickListener yesListener) {
-        showDialog(context, title, message, context.getString(R.string.ok), yesListener,
-                null, null);
+    public static void showDialogError(Context context, @Nullable String title, String message,
+            @Nullable DialogInterface.OnClickListener yesListener) {
+        showDialog(context, title, message, context.getString(R.string.ok), yesListener, null,
+                null);
     }
-
 }

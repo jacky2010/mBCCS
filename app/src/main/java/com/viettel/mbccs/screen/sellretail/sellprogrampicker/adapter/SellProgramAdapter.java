@@ -6,8 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.data.model.SellProgram;
-import com.viettel.mbccs.databinding.ItemTextSearchBinding;
+import com.viettel.mbccs.data.model.SaleProgram;
+import com.viettel.mbccs.databinding.ItemSaleProgramBinding;
 import java.util.List;
 
 /**
@@ -17,18 +17,18 @@ import java.util.List;
 public class SellProgramAdapter
         extends RecyclerView.Adapter<SellProgramAdapter.SellProgramViewHolder> {
 
-    private List<SellProgram> mSellPrograms;
+    private List<SaleProgram> mSellPrograms;
 
     private OnSellProgramListener mOnSellProgramListener;
 
-    public SellProgramAdapter(List<SellProgram> sellPrograms) {
+    public SellProgramAdapter(List<SaleProgram> sellPrograms) {
         mSellPrograms = sellPrograms;
     }
 
     @Override
     public SellProgramViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new SellProgramViewHolder((ItemTextSearchBinding) DataBindingUtil.inflate(
-                LayoutInflater.from(parent.getContext()), R.layout.item_text_search, parent,
+        return new SellProgramViewHolder((ItemSaleProgramBinding) DataBindingUtil.inflate(
+                LayoutInflater.from(parent.getContext()), R.layout.item_sale_program, parent,
                 false));
     }
 
@@ -48,9 +48,9 @@ public class SellProgramAdapter
 
     class SellProgramViewHolder extends RecyclerView.ViewHolder {
 
-        ItemTextSearchBinding mBinding;
+        ItemSaleProgramBinding mBinding;
 
-        public SellProgramViewHolder(ItemTextSearchBinding binding) {
+        public SellProgramViewHolder(ItemSaleProgramBinding binding) {
             super(binding.getRoot());
             mBinding = binding;
             mBinding.layout.setOnClickListener(new View.OnClickListener() {
@@ -63,12 +63,12 @@ public class SellProgramAdapter
             });
         }
 
-        public void bind(SellProgram sellProgram) {
+        public void bind(SaleProgram sellProgram) {
             mBinding.setItem(sellProgram);
         }
     }
 
     public interface OnSellProgramListener {
-        void onItemClick(SellProgram sellProgram);
+        void onItemClick(SaleProgram sellProgram);
     }
 }

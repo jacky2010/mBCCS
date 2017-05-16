@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.data.model.SerialBlock;
+import com.viettel.mbccs.data.model.SerialBO;
 import com.viettel.mbccs.databinding.ItemSerialSelectedBinding;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +19,10 @@ import java.util.List;
 public class SerialSelectedAdapter
         extends RecyclerView.Adapter<SerialSelectedAdapter.SerialSelectedViewHolder> {
     private Context mContext;
-    private List<SerialBlock> mSerialBlocks = new ArrayList<>();
+    private List<SerialBO> mSerialBlocks = new ArrayList<>();
     private SerialSelectedListener mSerialChooseListener;
 
-    public SerialSelectedAdapter(Context context, List<SerialBlock> serialBlocks) {
+    public SerialSelectedAdapter(Context context, List<SerialBO> serialBlocks) {
         mContext = context;
         mSerialBlocks = serialBlocks;
     }
@@ -67,7 +67,7 @@ public class SerialSelectedAdapter
             });
         }
 
-        public void binData(SerialBlock serialBlock) {
+        public void binData(SerialBO serialBlock) {
             ItemSerialPresenter itemSerialPresenter = new ItemSerialPresenter();
             itemSerialPresenter.setSerialBlock(serialBlock);
             mBinding.setItem(itemSerialPresenter);
@@ -75,6 +75,6 @@ public class SerialSelectedAdapter
     }
 
     public interface SerialSelectedListener {
-        void onDeleteSerial(SerialBlock serialBlock);
+        void onDeleteSerial(SerialBO serialBlock);
     }
 }

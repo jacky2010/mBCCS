@@ -1,10 +1,15 @@
 package com.viettel.mbccs.data.source.remote.service;
 
+import android.databinding.ObservableField;
 import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.SaleOrders;
+import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
+import com.viettel.mbccs.data.source.remote.response.GetSerialsReponse;
+import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListChannelByOwnerTypeIdRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListOrderRequest;
+import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
 import com.viettel.mbccs.data.source.remote.request.LoginRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseResponse;
 import com.viettel.mbccs.data.source.remote.response.LoginResponse;
@@ -36,4 +41,12 @@ public interface MBCSSApi {
     @GET("/login")
     Observable<BaseResponse<List<ChannelInfo>>> getListChannelByOwnerTypeId(
             @Body BaseRequest<GetListChannelByOwnerTypeIdRequest> request);
+
+    @POST("/telecomservice_salproram")
+    Observable<BaseResponse<TelecomServiceAndSaleProgramResponse>> getTelecomserviceAndSaleProgram(
+            @Body BaseRequest<GetTelecomServiceAndSaleProgramRequest> request);
+
+    @POST("/getserials")
+    Observable<BaseResponse<GetSerialsReponse>> getSerials(
+            @Body BaseRequest<GetSerialRequest> request);
 }

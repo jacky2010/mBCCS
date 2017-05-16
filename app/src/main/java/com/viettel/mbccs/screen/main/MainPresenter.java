@@ -6,7 +6,10 @@ import com.viettel.mbccs.data.model.MenuItem;
 import com.viettel.mbccs.widget.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.List;
-
+import android.content.Intent;
+import android.databinding.ObservableField;
+import android.widget.Toast;
+import com.viettel.mbccs.screen.sellretail.SaleRetailActivity;
 
 /**
  * Created by eo_cuong on 5/11/17.
@@ -21,6 +24,7 @@ public class MainPresenter implements MainContract.Presenter {
     public MainPresenter(Context context, MainContract.ViewModel viewModel) {
         mContext = context;
         mViewModel = viewModel;
+
     }
 
     @Override
@@ -38,6 +42,7 @@ public class MainPresenter implements MainContract.Presenter {
             @Override
             public void onBottomItemClick(int position) {
                 // TODO: Handle menu item clicked later
+                mContext.startActivity(new Intent(mContext, SaleRetailActivity.class));
             }
         };
     }

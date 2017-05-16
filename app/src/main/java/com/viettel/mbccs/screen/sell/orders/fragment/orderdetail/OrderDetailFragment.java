@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.viettel.mbccs.base.BaseFragment;
-import com.viettel.mbccs.data.model.StockItem;
+import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.databinding.FragmentOrderDetailBinding;
 import com.viettel.mbccs.screen.sell.orders.adapter.OrderDetailAdapter;
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ public class OrderDetailFragment extends BaseFragment implements OrderDetailFrag
     private static final String ARG_ID_ORDER = "ID_ORDER";
     private FragmentOrderDetailBinding binding;
     private OrderDetailFragmentPresenter presenter;
-    private List<StockItem> goodItemList;
+    private List<ModelSale> goodItemList;
     private OrderDetailAdapter orderDetailAdapter;
 
     public static OrderDetailFragment newInstance(String idOrder) {
@@ -69,7 +69,7 @@ public class OrderDetailFragment extends BaseFragment implements OrderDetailFrag
     }
 
     @Override
-    public void setData(List<StockItem> items) {
+    public void setData(List<ModelSale> items) {
         goodItemList = items;
         orderDetailAdapter = new OrderDetailAdapter(goodItemList);
         presenter.setAdapterOrderDetail(orderDetailAdapter);

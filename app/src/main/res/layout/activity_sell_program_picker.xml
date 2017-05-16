@@ -3,7 +3,7 @@
     <data>
         <variable
             name="presenter"
-            type="com.viettel.mbccs.screen.sellretail.sellprogrampicker.SellProgramPresenter"
+            type="com.viettel.mbccs.screen.sellretail.sellprogrampicker.SaleProgramPresenter"
             />
     </data>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -23,14 +23,16 @@
             app:titleTextSize="@{@dimen/sp_17}"
             />
         <com.viettel.mbccs.widget.SearchInputView
+            android:id="@+id/searchInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dp_20"
             app:text="@={presenter.text}"
-            app:textColor="@color/colorAccent"
+            app:textColor="@color/black"
             app:textSize="@dimen/sp_13"
             />
         <android.support.v7.widget.RecyclerView
+            android:layout_margin="@dimen/dp_10"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:adapter="@{presenter.adapter}"

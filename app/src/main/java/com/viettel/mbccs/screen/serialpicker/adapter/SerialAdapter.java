@@ -7,12 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.data.model.SerialBlock;
+import com.viettel.mbccs.data.model.SerialBO;
 import com.viettel.mbccs.databinding.ItemSerialAdapterBinding;
 import com.viettel.mbccs.utils.Common;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -21,12 +19,12 @@ import java.util.List;
 
 public class SerialAdapter extends RecyclerView.Adapter<SerialAdapter.SerialViewHolder> {
     private Context mContext;
-    private List<Integer> mSerials;
-    private List<SerialBlock> mSerialBlocks = new ArrayList<>();
+    private List<String> mSerials;
+    private List<SerialBO> mSerialBlocks = new ArrayList<>();
     private int currentSelect = -1;
     private SerialChooseListener mSerialChooseListener;
 
-    public SerialAdapter(Context context, List<Integer> serials) {
+    public SerialAdapter(Context context, List<String> serials) {
         mContext = context;
         mSerials = serials;
         formatData();
@@ -58,7 +56,7 @@ public class SerialAdapter extends RecyclerView.Adapter<SerialAdapter.SerialView
         notifyDataSetChanged();
     }
 
-    public void removeSerial(List<Integer> serials) {
+    public void removeSerial(List<String> serials) {
         mSerials.removeAll(serials);
         formatData();
     }
@@ -92,7 +90,7 @@ public class SerialAdapter extends RecyclerView.Adapter<SerialAdapter.SerialView
             });
         }
 
-        public void binData(SerialBlock serialBlock, boolean isSelected) {
+        public void binData(SerialBO serialBlock, boolean isSelected) {
             ItemSerialPresenter itemSerialPresenter = new ItemSerialPresenter();
             itemSerialPresenter.setSerialBlock(serialBlock);
             itemSerialPresenter.setSelected(isSelected);
@@ -101,6 +99,6 @@ public class SerialAdapter extends RecyclerView.Adapter<SerialAdapter.SerialView
     }
 
     public interface SerialChooseListener {
-        void onSerialSelect(SerialBlock serialBlock);
+        void onSerialSelect(SerialBO serialBlock);
     }
 }

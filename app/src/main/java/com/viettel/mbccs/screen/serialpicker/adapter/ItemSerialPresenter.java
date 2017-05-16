@@ -1,6 +1,6 @@
 package com.viettel.mbccs.screen.serialpicker.adapter;
 
-import com.viettel.mbccs.data.model.SerialBlock;
+import com.viettel.mbccs.data.model.SerialBO;
 
 /**
  * Created by eo_cuong on 5/14/17.
@@ -8,7 +8,7 @@ import com.viettel.mbccs.data.model.SerialBlock;
 
 public class ItemSerialPresenter {
     private boolean isSelected;
-    private SerialBlock mSerialBlock;
+    private SerialBO mSerialBlock;
     private int type;
 
     public boolean isSelected() {
@@ -19,11 +19,11 @@ public class ItemSerialPresenter {
         isSelected = selected;
     }
 
-    public SerialBlock getSerialBlock() {
+    public SerialBO getSerialBlock() {
         return mSerialBlock;
     }
 
-    public void setSerialBlock(SerialBlock serialBlock) {
+    public void setSerialBlock(SerialBO serialBlock) {
         mSerialBlock = serialBlock;
     }
 

@@ -6,6 +6,7 @@
             name="item"
             type="com.viettel.mbccs.screen.sellretail.adapter.ItemStockPresenter"
             />
+        <import type="android.view.View"/>
     </data>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -166,6 +167,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:text="@{item.selectedSerial}"
+                        android:visibility="@{item.item.choiceCount==0?View.GONE:View.VISIBLE}"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_12"
                         />
@@ -176,6 +178,7 @@
                         android:layout_marginTop="5dp"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="12sp"
+                        android:visibility="@{item.item.choiceCount==0?View.GONE:View.VISIBLE}"
                         app:textUnderLine="@{@string/select_serial}"
                         />
                 </LinearLayout>

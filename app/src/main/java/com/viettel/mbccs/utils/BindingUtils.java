@@ -231,7 +231,7 @@ public class BindingUtils {
         textUnderLine.setText(content);
     }
 
-    @BindingAdapter({ "adapter" })
+    @BindingAdapter({ "android:adapter" })
     public static void setAdapter(RecyclerView recyclerView, RecyclerView.Adapter adapter) {
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
         recyclerView.setHasFixedSize(true);
@@ -321,8 +321,12 @@ public class BindingUtils {
         textView.setSelected(true);
     }
 
-    @BindingAdapter("android:adapter")
+    @BindingAdapter(value = {
+            "android:adapter"
+    }, requireAll = false)
     public static void setAdapterSpinner(Spinner spinner, BaseAdapter adapter) {
         spinner.setAdapter(adapter);
     }
+
+
 }

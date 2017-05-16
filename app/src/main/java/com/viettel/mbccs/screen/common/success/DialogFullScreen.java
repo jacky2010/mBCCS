@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -19,7 +20,7 @@ public class DialogFullScreen extends Dialog {
 
     DialogFullscreenBinding mBinding;
 
-    private int icon;
+    private int icon = R.drawable.ic_done;
 
     private String title;
 
@@ -32,6 +33,8 @@ public class DialogFullScreen extends Dialog {
     private String titleToolbar;
 
     private boolean isCenterContent = true;
+
+    private boolean isAutoClose = false;
 
     private SuccessDialogListener mListener;
 
@@ -55,6 +58,7 @@ public class DialogFullScreen extends Dialog {
 
         private SuccessDialogListener mListener;
         private boolean isCenterContent;
+        private boolean isAutoClose = false;
 
         public Builder(Context context) {
             this.mContext = context;
@@ -100,6 +104,11 @@ public class DialogFullScreen extends Dialog {
             return this;
         }
 
+        public Builder setAutoClose(boolean autoClose) {
+            isAutoClose = autoClose;
+            return this;
+        }
+
         public Builder setListener(SuccessDialogListener listener) {
             mListener = listener;
             return this;
@@ -115,6 +124,8 @@ public class DialogFullScreen extends Dialog {
             successDialog.setTitleToolbar(titleToolbar);
             successDialog.setListener(mListener);
             setCenterContent(isCenterContent);
+            successDialog.setAutoClose(isAutoClose);
+
             return successDialog;
         }
     }
@@ -130,6 +141,17 @@ public class DialogFullScreen extends Dialog {
                 R.layout.dialog_fullscreen, null, true);
         setContentView(mBinding.getRoot());
         mBinding.setPresenter(this);
+        if (isAutoClose) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    dismiss();
+                    if (mListener != null) {
+                        mListener.onDialogClose();
+                    }
+                }
+            }, 3000);
+        }
     }
 
     public void setIcon(int icon) {
@@ -200,6 +222,14 @@ public class DialogFullScreen extends Dialog {
         return !TextUtils.isEmpty(positiveButton);
     }
 
+    public boolean isAutoClose() {
+        return isAutoClose;
+    }
+
+    public void setAutoClose(boolean autoClose) {
+        isAutoClose = autoClose;
+    }
+
     public int getGravity() {
         if (isCenterContent) {
             return Gravity.CENTER;
@@ -223,5 +253,7 @@ public class DialogFullScreen extends Dialog {
         void onPosotiveButtonClick(Dialog dialog);
 
         void onNegativeButtonClick(Dialog dialog);
+
+        void onDialogClose();
     }
 }

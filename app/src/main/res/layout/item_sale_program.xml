@@ -3,12 +3,14 @@
     <data>
         <variable
             name="item"
-            type="com.viettel.mbccs.data.model.BaseItem"
+            type="com.viettel.mbccs.data.model.SaleProgram"
             />
     </data>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_5"
+        android:background="@drawable/bg_text_input"
         android:orientation="vertical"
         >
         <LinearLayout

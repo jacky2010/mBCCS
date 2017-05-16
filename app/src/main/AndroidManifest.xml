@@ -35,8 +35,9 @@
         <activity android:name=".screen.goodsconfirm.GoodsConfirmActivity"/>
         <activity android:name=".screen.sell.orders.SellOrdersActivity"/>
         <activity android:name=".screen.goodsconfirm.StockConfirmActivity"/>
-        <activity android:name=".screen.sellretail.SellRetailActivity"/>
-        <activity android:name=".screen.sellretail.sellprogrampicker.SellProgramPickerActivity"/>
+        <activity android:name=".screen.sellretail.SaleRetailActivity"/>
+        <activity android:name=".screen.sellretail.sellprogrampicker.SaleProgramPickerActivity"/>
+        <activity android:name=".screen.sellretail.payment.PaymentInforRetailActivty"/>
     </application>
 
 </manifest>

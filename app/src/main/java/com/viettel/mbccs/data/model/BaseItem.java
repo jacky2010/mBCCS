@@ -1,12 +1,19 @@
 package com.viettel.mbccs.data.model;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * Created by eo_cuong on 5/16/17.
  */
 
 public class BaseItem {
+    @Expose
     private int id;
+    @Expose
     private String name;
+
+    public BaseItem() {
+    }
 
     public BaseItem(int id, String name) {
         this.id = id;

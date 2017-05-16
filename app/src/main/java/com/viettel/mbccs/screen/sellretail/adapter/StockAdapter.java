@@ -14,9 +14,8 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.data.model.StockItem;
+import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.databinding.ItemStockBinding;
-import com.viettel.mbccs.variable.Constants;
 import java.util.List;
 
 /**
@@ -27,11 +26,16 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
         implements View.OnFocusChangeListener {
 
     private Context mContext;
-    private List<StockItem> mStockItems;
+    private List<ModelSale> mStockItems;
+    private OnStockListener mOnStockListener;
 
-    public StockAdapter(Context context, List<StockItem> stockItems) {
+    public StockAdapter(Context context, List<ModelSale> stockItems) {
         mContext = context;
         mStockItems = stockItems;
+    }
+
+    public void setOnStockListener(OnStockListener onStockListener) {
+        mOnStockListener = onStockListener;
     }
 
     public Context getContext() {
@@ -42,11 +46,11 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
         mContext = context;
     }
 
-    public List<StockItem> getStockItems() {
+    public List<ModelSale> getStockItems() {
         return mStockItems;
     }
 
-    public void setStockItems(List<StockItem> stockItems) {
+    public void setStockItems(List<ModelSale> stockItems) {
         mStockItems = stockItems;
     }
 
@@ -82,7 +86,7 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
     class StockViewHolder extends RecyclerView.ViewHolder {
 
         ItemStockBinding mBinding;
-        StockItem mStockItem;
+        ModelSale mStockItem;
 
         public StockViewHolder(final ItemStockBinding binding) {
             super(binding.getRoot());
@@ -162,12 +166,25 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
                     });
 
             mBinding.inputQuantityChoice.setOnFocusChangeListener(StockAdapter.this);
+
+            binding.textSerial.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mOnStockListener != null) {
+                        mOnStockListener.onSerialClick(mStockItem,getAdapterPosition());
+                    }
+                }
+            });
         }
 
-        public void bind(StockItem item) {
+        public void bind(ModelSale item) {
             mStockItem = item;
             ItemStockPresenter itemStockPresenter = new ItemStockPresenter(mContext, item);
             mBinding.setItem(itemStockPresenter);
         }
+    }
+
+    public interface OnStockListener {
+        void onSerialClick(ModelSale item, int position);
     }
 }

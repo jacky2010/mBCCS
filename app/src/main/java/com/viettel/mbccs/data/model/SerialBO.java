@@ -2,11 +2,14 @@ package com.viettel.mbccs.data.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.TextUtils;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Created by HuyQuyet on 5/17/17.
+ * Created by eo_cuong on 5/14/17.
  */
 
 public class SerialBO implements Parcelable {
@@ -27,39 +30,14 @@ public class SerialBO implements Parcelable {
     @Expose
     private String toSerial;
 
+    public SerialBO(String fromSerial, String toSerial) {
+        this.fromSerial = fromSerial;
+        this.toSerial = toSerial;
+    }
+
     public SerialBO() {
-    }
-
-    protected SerialBO(Parcel in) {
-        stockModelId = in.readLong();
-        quantity = in.readLong();
-        fromSerial = in.readString();
-        toSerial = in.readString();
-    }
-
-    public static final Creator<SerialBO> CREATOR = new Creator<SerialBO>() {
-        @Override
-        public SerialBO createFromParcel(Parcel in) {
-            return new SerialBO(in);
-        }
-
-        @Override
-        public SerialBO[] newArray(int size) {
-            return new SerialBO[size];
-        }
-    };
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(stockModelId);
-        dest.writeLong(quantity);
-        dest.writeString(fromSerial);
-        dest.writeString(toSerial);
+        fromSerial = "-1";
+        toSerial = "-1";
     }
 
     public long getStockModelId() {
@@ -68,10 +46,6 @@ public class SerialBO implements Parcelable {
 
     public void setStockModelId(long stockModelId) {
         this.stockModelId = stockModelId;
-    }
-
-    public long getQuantity() {
-        return quantity;
     }
 
     public void setQuantity(long quantity) {
@@ -93,4 +67,57 @@ public class SerialBO implements Parcelable {
     public void setToSerial(String toSerial) {
         this.toSerial = toSerial;
     }
+
+    public long getQuantity() {
+        if (quantity == 0) {
+            if (TextUtils.isEmpty(getFromSerial()) || TextUtils.isEmpty(getToSerial())) {
+                return 0;
+            }
+        }
+        return Long.parseLong(getToSerial()) - Long.parseLong(getFromSerial()) + 1;
+    }
+
+    public String getQuantityString() {
+        return String.valueOf(getQuantity());
+    }
+
+    public List<String> toSerialList() {
+        List<String> serials = new ArrayList<>();
+        for (long i = Long.parseLong(fromSerial); i <= Long.parseLong(toSerial); i++) {
+            serials.add(String.valueOf(i));
+        }
+        return serials;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(this.stockModelId);
+        dest.writeLong(this.quantity);
+        dest.writeString(this.fromSerial);
+        dest.writeString(this.toSerial);
+    }
+
+    protected SerialBO(Parcel in) {
+        this.stockModelId = in.readLong();
+        this.quantity = in.readLong();
+        this.fromSerial = in.readString();
+        this.toSerial = in.readString();
+    }
+
+    public static final Creator<SerialBO> CREATOR = new Creator<SerialBO>() {
+        @Override
+        public SerialBO createFromParcel(Parcel source) {
+            return new SerialBO(source);
+        }
+
+        @Override
+        public SerialBO[] newArray(int size) {
+            return new SerialBO[size];
+        }
+    };
 }

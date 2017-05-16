@@ -38,7 +38,7 @@
                         android:gravity="center"
                         android:padding="5dp"
                         android:textColor="@color/blue"
-                        app:textUnderLine="@{item.serialBlock.fromString}"
+                        app:textUnderLine="@{item.serialBlock.fromSerial}"
                         />
                 </LinearLayout>
 
@@ -60,7 +60,7 @@
                         android:gravity="center"
                         android:padding="5dp"
                         android:textColor="@color/blue"
-                        app:textUnderLine="@{item.serialBlock.toString}"
+                        app:textUnderLine="@{item.serialBlock.toSerial}"
                         />
                 </LinearLayout>
                 <View

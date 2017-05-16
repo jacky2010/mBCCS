@@ -2,7 +2,7 @@ package com.viettel.mbccs.screen.sellretail.adapter;
 
 import android.content.Context;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.data.model.StockItem;
+import com.viettel.mbccs.data.model.ModelSale;
 
 /**
  * Created by eo_cuong on 5/15/17.
@@ -10,15 +10,15 @@ import com.viettel.mbccs.data.model.StockItem;
 
 public class ItemStockPresenter {
 
-    private StockItem mItem;
+    private ModelSale mItem;
     private Context mContext;
 
-    public ItemStockPresenter(Context context, StockItem item) {
+    public ItemStockPresenter(Context context, ModelSale item) {
         mItem = item;
         mContext = context;
     }
 
-    public StockItem getItem() {
+    public ModelSale getItem() {
         return mItem;
     }
 

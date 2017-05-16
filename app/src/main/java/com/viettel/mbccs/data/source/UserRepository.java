@@ -1,10 +1,15 @@
 package com.viettel.mbccs.data.source;
 
 import com.viettel.mbccs.data.model.LoginResult;
+import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
+import com.viettel.mbccs.data.source.remote.response.GetSerialsReponse;
+import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import com.viettel.mbccs.data.source.local.IUserLocalDataSource;
 import com.viettel.mbccs.data.source.local.UserLocalDataSource;
 import com.viettel.mbccs.data.source.remote.IUserRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.UserRemoteDataSource;
+import com.viettel.mbccs.data.source.remote.request.BaseRequest;
+import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
 import com.viettel.mbccs.data.source.remote.request.LoginRequest;
 import com.viettel.mbccs.data.source.remote.response.LoginResponse;
 import rx.Observable;
@@ -51,5 +56,16 @@ public class UserRepository implements IUserLocalDataSource, IUserRemoteDataSour
     @Override
     public Observable<Object> sendCodeChangePass(String phone) {
         return mUserRemoteDataSource.sendCodeChangePass(phone);
+    }
+
+    @Override
+    public Observable<TelecomServiceAndSaleProgramResponse> getTelecomserviceAndSaleProgram(
+            BaseRequest<GetTelecomServiceAndSaleProgramRequest> request) {
+        return mUserRemoteDataSource.getTelecomserviceAndSaleProgram(request);
+    }
+
+    @Override
+    public Observable<GetSerialsReponse> getSerial(BaseRequest<GetSerialRequest> request) {
+        return mUserRemoteDataSource.getSerial(request);
     }
 }

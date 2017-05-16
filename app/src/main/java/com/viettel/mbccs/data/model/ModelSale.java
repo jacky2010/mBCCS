@@ -10,7 +10,7 @@ import java.util.List;
  * Created by eo_cuong on 4/14/17.
  */
 
-public class StockItem implements Serializable {
+public class ModelSale implements Serializable {
 
     @Expose
     private boolean hasSerial;
@@ -27,11 +27,11 @@ public class StockItem implements Serializable {
     @Expose
     private int serialCount;
     @Expose
-    private List<SerialBlock> mSerialBlocks = new ArrayList<>();
+    private List<SerialBO> mSerialBlocks = new ArrayList<>();
     @Expose
-    private List<Integer> mSerials = new ArrayList<>();
+    private List<String> mSerials = new ArrayList<>();
 
-    public List<SerialBlock> getSerialBlocks() {
+    public List<SerialBO> getSerialBlocks() {
         if (mSerialBlocks.size() == 0) {
             if (mSerials.size() > 0) {
                 return Common.getSerialBlockBySerials(mSerials);
@@ -40,7 +40,7 @@ public class StockItem implements Serializable {
         return mSerialBlocks;
     }
 
-    public void setSerialBlocks(List<SerialBlock> serialBlocks) {
+    public void setSerialBlocks(List<SerialBO> serialBlocks) {
 
         mSerialBlocks = serialBlocks;
     }
@@ -112,11 +112,11 @@ public class StockItem implements Serializable {
         this.goodPrice = goodPrice;
     }
 
-    public List<Integer> getSerials() {
+    public List<String> getSerials() {
         return mSerials;
     }
 
-    public void setSerials(List<Integer> serials) {
+    public void setSerials(List<String> serials) {
         mSerials = serials;
     }
 }
