@@ -39,4 +39,5 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="set_pass_again">Đặt lại mật khẩu</string>
     <string name="input_type_text">text</string>
     <string name="input_type_pass">textPassword</string>
+    <string name="no_network_connection">Không có kết nối mạng</string>
 </resources>

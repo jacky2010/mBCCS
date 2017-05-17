@@ -63,17 +63,21 @@ public class ResetPasswordPresenter implements ResetPasswordContract.Presenter {
         Subscription subscription = UserRepository.getInstance()
                 .sendCodeChangePass(phone.get())
                 .subscribe(new MBCCSSubscribe<BaseResponse>() {
+
                     @Override
-                    public void onSuccess(BaseResponse object) {
-                        isCodeSent.set(true);
-                        description.set(String.format(mContext.getString(R.string.we_sent_code),
-                                StringUtils.changeTextToBold(phone.get())));
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                isNeedVerify.set(true);
-                            }
-                        }, 3000);
+                    public void onCompleted(BaseResponse object, boolean isSuccess,
+                            String errorMessage) {
+                        if (isSuccess) {
+                            isCodeSent.set(true);
+                            description.set(String.format(mContext.getString(R.string.we_sent_code),
+                                    StringUtils.changeTextToBold(phone.get())));
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    isNeedVerify.set(true);
+                                }
+                            }, 3000);
+                        }
                     }
 
                     @Override

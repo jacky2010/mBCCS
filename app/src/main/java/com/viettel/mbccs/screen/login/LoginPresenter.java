@@ -51,9 +51,11 @@ public class LoginPresenter implements LoginContract.Presenter {
         UserRepository.getInstance()
                 .login(loginRequest)
                 .subscribe(new MBCCSSubscribe<LoginResponse>() {
+
                     @Override
-                    public void onSuccess(LoginResponse object) {
-                        mViewModel.onLoginSuccess();
+                    public void onCompleted(LoginResponse object, boolean isSuccess,
+                            String errorMessage) {
+
                     }
 
                     @Override
