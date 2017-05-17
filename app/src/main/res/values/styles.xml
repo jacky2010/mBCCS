@@ -39,4 +39,12 @@
         <item name="android:textStyle">bold</item>
         <item name="android:layout_marginBottom">@dimen/dp_5</item>
     </style>
+
+    <style name="IconToolbar">
+        <item name="android:layout_width">?android:attr/actionBarSize</item>
+        <item name="android:layout_height">?android:attr/actionBarSize</item>
+        <item name="android:padding">@dimen/dp_8</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+        <item name="android:gravity">center</item>
+    </style>
 </resources>

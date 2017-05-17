@@ -83,6 +83,7 @@ public class AppButton extends AppCompatButton {
     private void configDefault() {
         mTextSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, DEFAULT_TEXT_SIZE,
                 getContext().getResources().getDisplayMetrics());
+        setBorderButton();
     }
 
     /**
@@ -96,28 +97,19 @@ public class AppButton extends AppCompatButton {
 
                 mTextColorSelected = ColorUtils.addAlpha(mTextColor, TEXT_SELECTED_ALPHA);
                 mBgColorSelected = mBgColor;
-
-                mStrokeWidth = (int) getContext().getResources().getDimension(R.dimen.dp_1);
-                mStrokeColor = ContextCompat.getColor(getContext(), R.color.seafoam_blue);
                 break;
             case ButtonTyper.GREEN:
                 mBgColor = ContextCompat.getColor(getContext(), R.color.green);
                 mTextColor = ContextCompat.getColor(getContext(), R.color.white);
-
                 mTextColorSelected = ColorUtils.addAlpha(mTextColor, TEXT_SELECTED_ALPHA);
                 mBgColorSelected = mBgColor;
-
                 mTextColorDisabled = ContextCompat.getColor(getContext(), R.color.white);
                 break;
             case ButtonTyper.RED:
                 mBgColor = ContextCompat.getColor(getContext(), R.color.red_button);
                 mTextColor = ContextCompat.getColor(getContext(), R.color.seafoam_blue);
-
                 mTextColorSelected = ColorUtils.addAlpha(mTextColor, TEXT_SELECTED_ALPHA);
                 mBgColorSelected = mBgColor;
-
-                mStrokeWidth = (int) getContext().getResources().getDimension(R.dimen.dp_1);
-                mStrokeColor = ContextCompat.getColor(getContext(), R.color.seafoam_blue);
                 break;
             case ButtonTyper.WHITE:
                 mBgColor = ContextCompat.getColor(getContext(), R.color.white);
@@ -125,13 +117,15 @@ public class AppButton extends AppCompatButton {
 
                 mTextColorSelected = ColorUtils.addAlpha(mTextColor, TEXT_SELECTED_ALPHA);
                 mBgColorSelected = mBgColor;
-
-                mStrokeWidth = (int) getContext().getResources().getDimension(R.dimen.dp_1);
-                mStrokeColor = ContextCompat.getColor(getContext(), R.color.black);
                 break;
             default:
                 break;
         }
+    }
+
+    private void setBorderButton() {
+        mStrokeWidth = (int) getContext().getResources().getDimension(R.dimen.dp_1);
+        mStrokeColor = ContextCompat.getColor(getContext(), R.color.black);
     }
 
     private void getConfigFromXML(TypedArray a) {

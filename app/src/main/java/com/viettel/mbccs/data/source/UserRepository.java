@@ -6,6 +6,7 @@ import com.viettel.mbccs.data.source.local.UserLocalDataSource;
 import com.viettel.mbccs.data.source.remote.IUserRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.UserRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.request.LoginRequest;
+import com.viettel.mbccs.data.source.remote.response.BaseResponse;
 import com.viettel.mbccs.data.source.remote.response.LoginResponse;
 import rx.Observable;
 
@@ -46,5 +47,10 @@ public class UserRepository implements IUserLocalDataSource, IUserRemoteDataSour
     @Override
     public Observable<LoginResponse> login(LoginRequest loginRequest) {
         return mUserRemoteDataSource.login(loginRequest);
+    }
+
+    @Override
+    public Observable<BaseResponse> sendCodeChangePass(String phone) {
+        return mUserRemoteDataSource.sendCodeChangePass(phone);
     }
 }

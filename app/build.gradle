@@ -63,7 +63,7 @@ dependencies {
   // Dependencies for local unit tests
   testCompile "junit:junit:$rootProject.ext.junitVersion"
   // Espresso UI Testing
-
+  androidTestCompile "com.android.support.test.espresso:espresso-core:$rootProject.espressoVersion"
   //Using retrofit library for connect api service
   compile "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofitVersion"
   compile "com.squareup.retrofit2:converter-gson:$rootProject.ext.gsonConverterVersion"
