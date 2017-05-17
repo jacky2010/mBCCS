@@ -8,14 +8,21 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="Theme.AppCompat.Light.NoActionBar.FullScreen" parent="AppTheme">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
     <declare-styleable name="SearchInputView">
-        <attr format="string" name="text"/>
-        <attr format="dimension" name="textSize"/>
-        <attr format="color" name="textColor"/>
-        <attr format="string" name="inputType"/>
-        <attr format="string" name="imeOptions"/>
-        <attr format="integer" name="length"/>
-        <attr format="integer" name="lines"/>
+        <attr name="text" format="string" />
+        <attr name="textSize" format="dimension" />
+        <attr name="textColor" format="color" />
+        <attr name="inputType" format="string" />
+        <attr name="imeOptions" format="string" />
+        <attr name="length" format="integer" />
+        <attr name="lines" format="integer" />
     </declare-styleable>
 
     <style name="button_positive">

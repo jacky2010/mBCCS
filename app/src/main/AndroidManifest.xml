@@ -3,8 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.viettel.mbccs">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:name=".MBCCSApplication"
@@ -15,26 +18,28 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="ManifestResource">
-        <activity android:name=".screen.main.MainActivity">
+        <activity
+            android:name=".screen.splash.SplashActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
-        <!--<activity android:name=".screen.test.TestActivity"/>-->
-
         <activity
             android:name=".screen.resetpass.ResetPasswordActivity"
             android:screenOrientation="portrait"
             />
-        <activity android:name=".screen.login.LoginActivity"/>
+        <activity
+            android:name=".screen.login.LoginActivity"
+            android:configChanges="screenLayout|screenSize"
+            android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".screen.changepassword.ChangePasswordActivity"/>
+        <activity android:name=".screen.main.MainActivity"/>
         <activity android:name=".screen.serialpicker.SerialPickerActivity"/>
         <activity android:name=".screen.common.success.ScanbarCodeActivity"/>
-        <activity android:name=".screen.goodsconfirm.GoodsConfirmActivity"/>
         <activity android:name=".screen.sell.orders.SellOrdersActivity"/>
-        <activity android:name=".screen.goodsconfirm.StockConfirmActivity"/>
         <activity android:name=".screen.sellretail.SaleRetailActivity"/>
         <activity android:name=".screen.sellretail.sellprogrampicker.SaleProgramPickerActivity"/>
         <activity android:name=".screen.sellretail.payment.PaymentInforRetailActivty"/>
