@@ -18,4 +18,13 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="total_serial">Tổng số</string>
     <string name="confirm_goods">Xác nhận mặt hàng bán</string>
     <string name="confirm">Xác nhận</string>
+    <string name="menu_dashboard">Dashboard</string>
+    <string name="menu_job">Công việc</string>
+    <string name="menu_sale">Bán hàng</string>
+    <string name="menu_customer">Khách hàng</string>
+    <string name="menu_more">more</string>
+    <string name="percent">%1$.2f%%</string>
+    <string name="doi_soat_cong_no">Đối soát công nợ</string>
+    <string name="total">Tổng số</string>
+    <string name="remain">Còn phải thu</string>
 </resources>

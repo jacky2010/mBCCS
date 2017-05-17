@@ -4,11 +4,24 @@
     <declare-styleable name="IncDecInputText">
         <attr format="integer" name="maxLength"/>
         <attr format="dimension" name="inputTextSize"/>
-        <attr format="color" name="inputTextColor"/>
+        <attr format="color|reference" name="inputTextColor"/>
     </declare-styleable>
     <declare-styleable name="CustomDatePicker">
         <attr format="dimension" name="dateTextSize"/>
-        <attr format="color" name="dateTextColor"/>
+        <attr format="color|reference" name="dateTextColor"/>
+    </declare-styleable>
+    <declare-styleable name="BottomNavigationView">
+        <attr format="color|reference" name="bottomBarBgColor"/>
+        <attr format="dimension" name="bottomBarTextSize"/>
+        <attr format="color|reference" name="bottomBarTextColor"/>
+    </declare-styleable>
+    <declare-styleable name="SimpleProgressChart">
+        <attr format="color|reference" name="progressTextColor"/>
+        <attr format="dimension" name="progressTextSize"/>
+        <attr format="dimension" name="progressSize"/>
+        <attr format="float" name="progressDone"/>
+        <attr format="integer|reference" name="progressBgColor"/>
+        <attr format="integer|reference" name="progressColor"/>
     </declare-styleable>
 
     <declare-styleable name="AppButton">

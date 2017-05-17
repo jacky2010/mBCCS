@@ -6,8 +6,6 @@
         <variable
             name="input"
             type="com.viettel.mbccs.widget.IncDecTextInput" />
-
-        <import type="android.view.View" />
     </data>
 
     <LinearLayout

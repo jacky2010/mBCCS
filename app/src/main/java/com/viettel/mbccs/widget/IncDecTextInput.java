@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.databinding.LayoutIncDecTextInputBinding;
+import com.viettel.mbccs.variable.Constants;
 
 /**
  * Created by Anh Vu Viet on 5/14/2017.
@@ -81,7 +82,7 @@ public class IncDecTextInput extends LinearLayout {
                     int i = Integer.valueOf(mEditText.getText().toString());
                     if (i < 0) {
                         mNumber = 0;
-                        textNumber.set("0");
+                        textNumber.set(Constants.DEFAULT_NUMBER_INPUT);
                         return;
                     }
                     mNumber = i;
@@ -90,7 +91,7 @@ public class IncDecTextInput extends LinearLayout {
                 }
             }
         });
-        textNumber.set("0");
+        textNumber.set(Constants.DEFAULT_NUMBER_INPUT);
     }
 
     public int getNumber() {

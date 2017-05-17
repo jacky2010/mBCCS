@@ -38,7 +38,7 @@
         <variable
             name="showRightIcon"
             type="boolean"
-            ></variable>
+            />
         <variable
             name="isShow"
             type="boolean"
@@ -58,7 +58,6 @@
             android:id="@+id/image_left"
             android:layout_width="@dimen/dp_30"
             android:layout_height="@dimen/dp_30"
-            android:layout_alignParentLeft="true"
             android:onClick="@{leftIconClick}"
             android:src="@{leftIcon}"
             />
@@ -67,6 +66,7 @@
             android:layout_width="@dimen/dp_30"
             android:layout_height="@dimen/dp_30"
             android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:onClick="@{rightIconClick}"
             android:src="@{rightIcon}"
             android:visibility="@{showRightIcon?View.VISIBLE:View.GONE}"
@@ -76,14 +76,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@id/image_right"
-            android:layout_toRightOf="@id/image_left"
+            android:layout_toStartOf="@id/image_right"
+            android:layout_toEndOf="@id/image_left"
             android:gravity="center"
             android:text="@{title}"
             android:textColor="@{titleColor}"
             android:textSize="@{titleTextSize}"
             />
-
 
     </RelativeLayout>
 </layout>
