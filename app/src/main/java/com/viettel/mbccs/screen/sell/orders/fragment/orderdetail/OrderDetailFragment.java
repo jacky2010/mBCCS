@@ -11,9 +11,12 @@ import com.google.gson.reflect.TypeToken;
 import com.viettel.mbccs.base.BaseFragment;
 import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.model.SaleOrdersDetail;
+import com.viettel.mbccs.data.model.SerialPickerModel;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.databinding.FragmentOrderDetailBinding;
 import com.viettel.mbccs.screen.sell.orders.adapter.OrderDetailAdapter;
+import com.viettel.mbccs.screen.serialpicker.SerialPickerActivity;
+import com.viettel.mbccs.utils.Common;
 import com.viettel.mbccs.utils.GsonUtils;
 import com.viettel.mbccs.variable.Constants;
 import java.lang.reflect.Type;
@@ -25,6 +28,7 @@ import java.util.List;
 
 public class OrderDetailFragment extends BaseFragment implements OrderDetailFragmentContract.View {
     private static final String ARG_ID_ORDER = "ID_ORDER";
+    private static final int GET_SERIAL = 12345;
     private FragmentOrderDetailBinding binding;
     private OrderDetailFragmentPresenter presenter;
     private List<ModelSale> goodItemList;
@@ -89,14 +93,27 @@ public class OrderDetailFragment extends BaseFragment implements OrderDetailFrag
     }
 
     @Override
+    public void pickSerial(ModelSale stockItem) {
+        Intent intent = new Intent(getActivity(), SerialPickerActivity.class);
+        SerialPickerModel serialPickerModel = new SerialPickerModel();
+        serialPickerModel.setStockModelId(stockItem.getStockModelId());
+        serialPickerModel.setStockMoldeName(stockItem.getStockMoldeName());
+        serialPickerModel.setQuantity(stockItem.getChoiceCount());
+        serialPickerModel.setLstSerial(stockItem.getSerialBlocks());
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(Constants.BundleConstant.SERIAL_PICKER_MODEL, serialPickerModel);
+        intent.putExtras(bundle);
+        startActivityForResult(intent, GET_SERIAL);
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         //        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 0 && resultCode == Activity.RESULT_OK) {
-            String json = data.getStringExtra(Constants.BundleConstant.LIST_SERIAL);
-            Type collectionType = new TypeToken<List<Integer>>() {
-            }.getType();
-            List<Integer> serialBlockList = GsonUtils.String2Object(json, collectionType);
-            presenter.setSerialBlockList(serialBlockList);
+        if (requestCode == GET_SERIAL && resultCode == Activity.RESULT_OK) {
+            List<String> serials = GsonUtils.String2ListObject(
+                    data.getExtras().getString(Constants.BundleConstant.LIST_SERIAL),
+                    String[].class);
+            presenter.onSerialPickerSuccess(Common.getSerialBlockBySerials(serials));
         }
     }
 }

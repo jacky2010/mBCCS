@@ -4,104 +4,57 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import java.io.Serializable;
 
 /**
- * Created by HuyQuyet on 5/18/17.
+ * Created by eo_cuong on 5/19/17.
  */
 
-public class SaleTrans implements Parcelable {
+public class SaleTrans implements Serializable, Parcelable {
+
+    @SerializedName("saleTransId")
     @Expose
-    @SerializedName("SaleTransId")
     private long saleTransId;
 
+    @SerializedName("saleTransCode")
     @Expose
-    @SerializedName("SaleTransCode")
     private String saleTransCode;
 
+    @SerializedName("saleTransDate")
     @Expose
-    @SerializedName("SaleTransDate")
     private String saleTransDate;
 
+    @SerializedName("amountTax")
     @Expose
-    @SerializedName("AmountTax")
     private double amountTax = 10.000;
 
+    @SerializedName("amountNotTax")
     @Expose
-    @SerializedName("AmountNotTax")
     private double amountNotTax;
 
-    @Expose
     @SerializedName("VAT")
-    private double vAT;
-
     @Expose
-    @SerializedName("Tax")
+    private double VAT;
+
+    @SerializedName("tax")
+    @Expose
     private double tax;
 
+    @SerializedName("discount")
     @Expose
-    @SerializedName("Discount")
     private double discount;
 
+    @SerializedName("custName")
     @Expose
-    @SerializedName("CustName")
     private String custName;
 
+    @SerializedName("status")
     @Expose
-    @SerializedName("Status")
     private long status;
 
+    @SerializedName("statusName")
     @Expose
-    @SerializedName("StatusName")
     private String statusName;
-
-    public SaleTrans() {
-    }
-
-    protected SaleTrans(Parcel in) {
-        saleTransId = in.readLong();
-        saleTransCode = in.readString();
-        saleTransDate = in.readString();
-        amountTax = in.readDouble();
-        amountNotTax = in.readDouble();
-        vAT = in.readDouble();
-        tax = in.readDouble();
-        discount = in.readDouble();
-        custName = in.readString();
-        status = in.readLong();
-        statusName = in.readString();
-    }
-
-    public static final Creator<SaleTrans> CREATOR = new Creator<SaleTrans>() {
-        @Override
-        public SaleTrans createFromParcel(Parcel in) {
-            return new SaleTrans(in);
-        }
-
-        @Override
-        public SaleTrans[] newArray(int size) {
-            return new SaleTrans[size];
-        }
-    };
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(saleTransId);
-        dest.writeString(saleTransCode);
-        dest.writeString(saleTransDate);
-        dest.writeDouble(amountTax);
-        dest.writeDouble(amountNotTax);
-        dest.writeDouble(vAT);
-        dest.writeDouble(tax);
-        dest.writeDouble(discount);
-        dest.writeString(custName);
-        dest.writeLong(status);
-        dest.writeString(statusName);
-    }
 
     public long getSaleTransId() {
         return saleTransId;
@@ -143,12 +96,12 @@ public class SaleTrans implements Parcelable {
         this.amountNotTax = amountNotTax;
     }
 
-    public double getvAT() {
-        return vAT;
+    public double getVAT() {
+        return VAT;
     }
 
-    public void setvAT(double vAT) {
-        this.vAT = vAT;
+    public void setVAT(double VAT) {
+        this.VAT = VAT;
     }
 
     public double getTax() {
@@ -190,4 +143,53 @@ public class SaleTrans implements Parcelable {
     public void setStatusName(String statusName) {
         this.statusName = statusName;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(this.saleTransId);
+        dest.writeString(this.saleTransCode);
+        dest.writeString(this.saleTransDate);
+        dest.writeDouble(this.amountTax);
+        dest.writeDouble(this.amountNotTax);
+        dest.writeDouble(this.VAT);
+        dest.writeDouble(this.tax);
+        dest.writeDouble(this.discount);
+        dest.writeString(this.custName);
+        dest.writeLong(this.status);
+        dest.writeString(this.statusName);
+    }
+
+    public SaleTrans() {
+    }
+
+    protected SaleTrans(Parcel in) {
+        this.saleTransId = in.readLong();
+        this.saleTransCode = in.readString();
+        this.saleTransDate = in.readString();
+        this.amountTax = in.readDouble();
+        this.amountNotTax = in.readDouble();
+        this.VAT = in.readDouble();
+        this.tax = in.readDouble();
+        this.discount = in.readDouble();
+        this.custName = in.readString();
+        this.status = in.readLong();
+        this.statusName = in.readString();
+    }
+
+    public static final Creator<SaleTrans> CREATOR = new Creator<SaleTrans>() {
+        @Override
+        public SaleTrans createFromParcel(Parcel source) {
+            return new SaleTrans(source);
+        }
+
+        @Override
+        public SaleTrans[] newArray(int size) {
+            return new SaleTrans[size];
+        }
+    };
 }

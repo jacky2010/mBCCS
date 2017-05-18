@@ -62,35 +62,51 @@
                         />
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/dp_40"
                         android:background="@drawable/bg_border"
+                        android:padding="@dimen/dp_5"
                         >
                         <Spinner
                             android:id="@+id/spinner"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_5"
+                            android:layout_height="match_parent"
                             android:adapter="@{presenter.adapter}"
                             ></Spinner>
                     </LinearLayout>
-                    <TextView
+                    <com.viettel.mbccs.widget.CustomTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_5"
                         android:text="@string/sell_program"
                         />
-                    <EditText
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_5"
-                        android:background="@drawable/bg_input"
-                        android:editable="false"
-                        android:lines="1"
-                        android:onClick="@{()->presenter.chooseSellProgram()}"
-                        android:padding="@dimen/dp_10"
-                        android:text="@{presenter.sellProgram}"
-                        android:textSize="@dimen/sp_13"
-                        />
+                        android:layout_height="@dimen/dp_40"
+                        android:background="@drawable/bg_input_tranparent"
+                        >
+                        <ImageView
+                            android:id="@+id/icon_right"
+                            android:layout_width="@dimen/dp_12"
+                            android:layout_height="@dimen/dp_12"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="20dp"
+                            android:src="@drawable/triangle"
+                            />
+                        <com.viettel.mbccs.widget.CustomEdittext
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_5"
+                            android:layout_toLeftOf="@id/icon_right"
+                            android:background="@color/transparent"
+                            android:editable="false"
+                            android:lines="1"
+                            android:onClick="@{()->presenter.chooseSellProgram()}"
+                            android:padding="@dimen/dp_10"
+                            android:text="@{presenter.sellProgram}"
+                            android:textSize="@dimen/sp_13"
+                            />
+                    </RelativeLayout>
                 </LinearLayout>
             </RelativeLayout>
 

@@ -2,12 +2,13 @@ package com.viettel.mbccs.data.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import java.io.Serializable;
 
 /**
  * Created by eo_cuong on 5/15/17.
  */
 
-public class SaleProgram {
+public class SaleProgram implements Serializable {
 
     @SerializedName("programId")
     @Expose
@@ -30,6 +31,13 @@ public class SaleProgram {
     private String toDate;
 
     public SaleProgram() {
+
+    }
+
+    public SaleProgram(long id, String code, String name) {
+        this.id = id;
+        this.name = name;
+        this.code = code;
     }
 
     public SaleProgram(long id, String name) {

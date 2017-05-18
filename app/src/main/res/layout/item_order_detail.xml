@@ -24,7 +24,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                bind:loadCircleImage="@{ presenter.goodItem.getImageUrl() } "
+                bind:loadCircleImage="@{ presenter.stockSerial.getImageUrl() } "
                 />
         </LinearLayout>
         <View
@@ -54,7 +54,7 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_14"
                 />
-            <!--android:text="@{ presenter.saleOrdersDetail.getStockMoldeName()}"-->
+            <!--android:text="@{ presenter.stockSerial.getName()}"-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
                 android:textColor="@color/red_button"
                 android:textSize="@dimen/sp_14"
                 />
-            <!--android:text="@{ @string/item_order_detail_price_item(presenter.saleOrdersDetail.getPrice()) }"-->
+            <!--android:text="@{ @string/item_order_detail_price_item(presenter.stockSerial.getPrice()) }"-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -74,7 +74,8 @@
                 android:textSize="@dimen/sp_18"
                 android:textStyle="bold"
                 />
-            <!--android:text="@{ presenter.totalStock }"-->
+
+            <!--android:text="@{ presenter.stockSerial.getChoiceCount() }"-->
         </LinearLayout>
         <View
             android:layout_width="@dimen/dp_1"
@@ -108,7 +109,7 @@
                     android:textColor="@color/grey"
                     android:textSize="@dimen/sp_28"
                     />
-                <!--android:text="@{ presenter.goodItem.getRemainGoodCount() }"-->
+                <!--android:text="@{ presenter.stockSerial.getRemainGoodCount() }"-->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

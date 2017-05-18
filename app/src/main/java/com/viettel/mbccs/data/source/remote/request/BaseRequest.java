@@ -2,12 +2,13 @@ package com.viettel.mbccs.data.source.remote.request;
 
 import com.google.gson.annotations.SerializedName;
 import com.viettel.mbccs.data.model.Session;
+import java.io.Serializable;
 
 /**
  * Created by eo_cuong on 5/10/17.
  */
 
-public class BaseRequest<T> {
+public class BaseRequest<T extends Serializable> implements Serializable {
 
     @SerializedName("sessionId")
     private Session mSession;

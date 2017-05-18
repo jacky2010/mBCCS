@@ -62,6 +62,7 @@ public class DialogFullScreen extends Dialog {
 
         public Builder(Context context) {
             this.mContext = context;
+            icon = R.drawable.ic_done;
         }
 
         public Builder setIcon(int icon) {

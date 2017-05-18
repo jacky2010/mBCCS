@@ -107,7 +107,7 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
                 @Override
                 public void onClick(View view) {
                     int currentChoice = mStockItem.getChoiceCount();
-                    if (currentChoice < mStockItem.getRemainGoodCount()) {
+                    if (currentChoice < mStockItem.getQuantity()) {
                         currentChoice++;
                         mStockItem.setChoiceCount(currentChoice);
                         notifyDataSetChanged();
@@ -128,7 +128,7 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
                             mStockItem.setChoiceCount(0);
                         } else {
                             int quantity = Integer.parseInt(charSequence.toString());
-                            if (quantity <= mStockItem.getRemainGoodCount()) {
+                            if (quantity <= mStockItem.getQuantity()) {
                                 mStockItem.setChoiceCount(quantity);
                             } else {
                                 binding.inputQuantityChoice.setText(
@@ -171,7 +171,7 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
                 @Override
                 public void onClick(View v) {
                     if (mOnStockListener != null) {
-                        mOnStockListener.onSerialClick(mStockItem,getAdapterPosition());
+                        mOnStockListener.onSerialClick(mStockItem, getAdapterPosition());
                     }
                 }
             });

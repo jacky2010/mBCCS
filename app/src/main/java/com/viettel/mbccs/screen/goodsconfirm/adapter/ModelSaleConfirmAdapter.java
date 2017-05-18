@@ -6,8 +6,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.data.model.ModelSale;
+import com.viettel.mbccs.data.model.StockSerial;
 import com.viettel.mbccs.databinding.ItemSaleConfirmBinding;
+import com.viettel.mbccs.utils.Common;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,15 +20,15 @@ public class ModelSaleConfirmAdapter
         extends RecyclerView.Adapter<ModelSaleConfirmAdapter.StockConfirmViewHolder> {
 
     private Context mContext;
-    private List<ModelSale> mStockItems;
-    private List<ModelSale> mStockItemsFilter=new ArrayList<>();
+    private List<StockSerial> mStockSerials;
+    private List<StockSerial> mStockSerialsFilter = new ArrayList<>();
 
-    public ModelSaleConfirmAdapter(Context context, List<ModelSale> goodItems) {
+    public ModelSaleConfirmAdapter(Context context, List<StockSerial> stockSerials) {
         mContext = context;
-        mStockItems = goodItems;
-        for (ModelSale stockItem : mStockItems) {
-            if (stockItem.getSerials().size() > 0) {
-                mStockItemsFilter.add(stockItem);
+        mStockSerials = stockSerials;
+        for (StockSerial stockItem : mStockSerials) {
+            if (Common.getSerialCountByListSerialBlock(stockItem.getSerialBOs()) > 0) {
+                mStockSerialsFilter.add(stockItem);
             }
         }
     }
@@ -41,12 +42,12 @@ public class ModelSaleConfirmAdapter
 
     @Override
     public void onBindViewHolder(StockConfirmViewHolder holder, int position) {
-            holder.bind(mStockItemsFilter.get(position));
+        holder.bind(mStockSerialsFilter.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return mStockItemsFilter.size();
+        return mStockSerialsFilter.size();
     }
 
     class StockConfirmViewHolder extends RecyclerView.ViewHolder {
@@ -58,9 +59,9 @@ public class ModelSaleConfirmAdapter
             mBinding = binding;
         }
 
-        public void bind(ModelSale item) {
+        public void bind(StockSerial item) {
             ItemModelSalePresenter itemGoodConfirmPresenter = new ItemModelSalePresenter();
-            itemGoodConfirmPresenter.setGoodItem(item);
+            itemGoodConfirmPresenter.setStockSerial(item);
             mBinding.setItem(itemGoodConfirmPresenter);
         }
     }

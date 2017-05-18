@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
-import com.viettel.mbccs.data.model.ModelSale;
+import com.viettel.mbccs.data.model.SerialPickerModel;
 import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
 import com.viettel.mbccs.databinding.ActivitySerialPickerBinding;
 import com.viettel.mbccs.screen.common.success.ScanbarCodeActivity;
@@ -29,7 +29,7 @@ public class SerialPickerActivity
 
     public static final int SCANBARCODE_REQUEST_CODE = 125;
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 126;
-    private ModelSale mModelSale;
+    private SerialPickerModel mSerialPickerModel;
     private GetSerialRequest mRequest;
 
     @Override
@@ -41,20 +41,20 @@ public class SerialPickerActivity
     protected void initData() {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            String json = bundle.getString(Constants.BundleConstant.GOOD_ITEM);
-            mModelSale = GsonUtils.String2Object(json, ModelSale.class);
+            mSerialPickerModel = (SerialPickerModel) bundle.getSerializable(
+                    Constants.BundleConstant.SERIAL_PICKER_MODEL);
         }
-        mPresenter = new SerialPickerPresenter(this, this, mModelSale);
+        mPresenter = new SerialPickerPresenter(this, this, mSerialPickerModel);
         mBinding.setPresenter(mPresenter);
 
         getSerials();
     }
 
     private void getSerials() {
-        if (mModelSale == null) {
+        if (mSerialPickerModel == null) {
             return;
         }
-        mRequest=new GetSerialRequest();
+        mRequest = new GetSerialRequest();
     }
 
     @Override
@@ -64,12 +64,12 @@ public class SerialPickerActivity
 
     @Override
     public void showLoading() {
-
+        showLoadingDialog();
     }
 
     @Override
     public void hideLoading() {
-
+        hideLoadingDialog();
     }
 
     @Override

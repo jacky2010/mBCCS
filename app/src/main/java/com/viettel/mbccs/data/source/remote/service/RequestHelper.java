@@ -14,7 +14,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RequestHelper {
-    private static final int CONNECTION_TIMEOUT = 30;
+    private static final int CONNECTION_TIMEOUT = 1;
 
     public static MBCSSApi getRequest() {
         return getRequest(false, false);

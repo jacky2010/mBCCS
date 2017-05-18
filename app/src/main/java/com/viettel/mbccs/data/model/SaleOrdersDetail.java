@@ -47,7 +47,7 @@ public class SaleOrdersDetail implements Parcelable {
 
     @SerializedName("lstSerial")
     @Expose
-    private List<StockSerial> lstSerial;
+    private List<SerialBO> lstSerial;
 
     public SaleOrdersDetail() {
     }
@@ -160,11 +160,11 @@ public class SaleOrdersDetail implements Parcelable {
         this.vat = vat;
     }
 
-    public List<StockSerial> getLstSerial() {
+    public List<SerialBO> getLstSerial() {
         return lstSerial;
     }
 
-    public void setLstSerial(List<StockSerial> lstSerial) {
+    public void setLstSerial(List<SerialBO> lstSerial) {
         this.lstSerial = lstSerial;
     }
 }

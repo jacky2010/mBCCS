@@ -63,7 +63,7 @@ public class MainPresenter implements MainContract.Presenter {
             @Override
             public void onBottomItemClick(int position) {
                 // TODO: Handle menu item clicked later. Should use menu Id instead of position.
-                mContext.startActivity(new Intent(mContext, SaleRetailActivity.class));
+               // mContext.startActivity(new Intent(mContext, SaleRetailActivity.class));
                 switch (position) {
                     case 0:
                         mViewModel.backToMain();

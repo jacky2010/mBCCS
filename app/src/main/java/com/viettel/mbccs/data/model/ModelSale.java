@@ -1,6 +1,7 @@
 package com.viettel.mbccs.data.model;
 
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import com.viettel.mbccs.utils.Common;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,16 +13,46 @@ import java.util.List;
 
 public class ModelSale implements Serializable {
 
+    @SerializedName("StockModelId")
     @Expose
-    private boolean hasSerial;
+    private long stockModelId;
+
+    @SerializedName("StockModelCode")
     @Expose
-    private String name;
+    private String stockModelCode;
+
+    @SerializedName("StockMoldeName")
     @Expose
-    private String imageUrl;
+    private String stockMoldeName;
+
+    @SerializedName("Quantity")
     @Expose
-    private int goodPrice;
+    private long quantity;
+
+    @SerializedName("QuantityIssue")
     @Expose
-    private int remainGoodCount;
+    private long quantityIssue;
+
+    @SerializedName("Path_image1")
+    @Expose
+    private String pathImage1;
+
+    @SerializedName("pathImage2")
+    @Expose
+    private String pathImage2;
+
+    @SerializedName("pathImage3")
+    @Expose
+    private String pathImage3;
+
+    @SerializedName("Price")
+    @Expose
+    private double price;
+
+    @SerializedName("vat")
+    @Expose
+    private double vat;
+
     @Expose
     private int choiceCount;
     @Expose
@@ -45,10 +76,6 @@ public class ModelSale implements Serializable {
         mSerialBlocks = serialBlocks;
     }
 
-    public boolean isHasSerial() {
-        return hasSerial;
-    }
-
     public int getSerialCount() {
         if (getSerialBlocks() == null) {
             return 0;
@@ -60,14 +87,6 @@ public class ModelSale implements Serializable {
         this.serialCount = serialCount;
     }
 
-    public int getRemainGoodCount() {
-        return remainGoodCount;
-    }
-
-    public void setRemainGoodCount(int remainGoodCount) {
-        this.remainGoodCount = remainGoodCount;
-    }
-
     public int getChoiceCount() {
         return choiceCount;
     }
@@ -76,40 +95,24 @@ public class ModelSale implements Serializable {
         this.choiceCount = choiceCount;
     }
 
-    public boolean hasSerial() {
-        return hasSerial;
+    public String getPathImage1() {
+        return pathImage1;
     }
 
-    public void setHasSerial(boolean hasSerial) {
-        this.hasSerial = hasSerial;
+    public void setPathImage1(String pathImage1) {
+        this.pathImage1 = pathImage1;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    public int getGoodPrice() {
-        return goodPrice;
+    public double getPrice() {
+        return price;
     }
 
     public String getPriceString() {
-        return goodPrice + " VNĐ";
+        return price + " VNĐ";
     }
 
-    public void setGoodPrice(int goodPrice) {
-        this.goodPrice = goodPrice;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public List<String> getSerials() {
@@ -118,5 +121,69 @@ public class ModelSale implements Serializable {
 
     public void setSerials(List<String> serials) {
         mSerials = serials;
+    }
+
+    public long getStockModelId() {
+        return stockModelId;
+    }
+
+    public void setStockModelId(long stockModelId) {
+        this.stockModelId = stockModelId;
+    }
+
+    public String getStockModelCode() {
+        return stockModelCode;
+    }
+
+    public void setStockModelCode(String stockModelCode) {
+        this.stockModelCode = stockModelCode;
+    }
+
+    public String getStockMoldeName() {
+        return stockMoldeName;
+    }
+
+    public void setStockMoldeName(String stockMoldeName) {
+        this.stockMoldeName = stockMoldeName;
+    }
+
+    public long getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(long quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getPathImage2() {
+        return pathImage2;
+    }
+
+    public void setPathImage2(String pathImage2) {
+        this.pathImage2 = pathImage2;
+    }
+
+    public String getPathImage3() {
+        return pathImage3;
+    }
+
+    public void setPathImage3(String pathImage3) {
+        this.pathImage3 = pathImage3;
+    }
+
+    public long getQuantityIssue() {
+        return quantityIssue;
+    }
+
+    public void setQuantityIssue(long quantityIssue) {
+        this.quantityIssue = quantityIssue;
+    }
+
+    public double getVat() {
+        return vat;
+    }
+
+    public void setVat(double vat) {
+        this.vat = vat;
     }
 }
