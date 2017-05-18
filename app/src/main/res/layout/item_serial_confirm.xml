@@ -4,7 +4,7 @@
     <data>
         <variable
             name="serial"
-            type="com.viettel.mbccs.data.model.SerialBlock"
+            type="com.viettel.mbccs.data.model.SerialBO"
             />
     </data>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -27,7 +27,7 @@
                 android:paddingBottom="5dp"
                 android:paddingTop="5dp"
                 android:textColor="@color/blue"
-                app:textUnderLine="@{String.valueOf(serial.from)}"
+                app:textUnderLine="@{String.valueOf(serial.fromSerial)}"
                 />
             <View
                 android:layout_width="1dp"
@@ -43,7 +43,7 @@
                 android:paddingBottom="5dp"
                 android:paddingTop="5dp"
                 android:textColor="@color/blue"
-                app:textUnderLine="@{String.valueOf(serial.to)}"
+                app:textUnderLine="@{String.valueOf(serial.toSerial)}"
                 />
             <View
                 android:layout_width="1dp"

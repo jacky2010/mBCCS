@@ -5,12 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.ObservableField;
 import android.text.TextUtils;
-import android.widget.RemoteViews;
 import android.widget.Toast;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.data.model.GoodItem;
-import com.viettel.mbccs.data.model.SerialBlock;
-import com.viettel.mbccs.databinding.ActivitySerialPickerBinding;
+import com.viettel.mbccs.data.model.ModelSale;
+import com.viettel.mbccs.data.model.SerialBO;
 import com.viettel.mbccs.screen.serialpicker.adapter.SerialAdapter;
 import com.viettel.mbccs.screen.serialpicker.adapter.SerialSelectedAdapter;
 import com.viettel.mbccs.utils.Common;
@@ -37,16 +35,16 @@ public class SerialPickerPresenter
     public ObservableField<String> quantity;
     private SerialAdapter mSerialAdapter;
     private SerialSelectedAdapter mSerialSelectedAdapter;
-    private List<Integer> mSerials = new ArrayList<>();
+    private List<String> mSerials = new ArrayList<>();
     private Context mContext;
     private SerialPickerContract.ViewModel mViewModel;
-    private List<SerialBlock> mSerialSelected = new ArrayList<>();
-    private SerialBlock currentSerialBlock = new SerialBlock();
+    private List<SerialBO> mSerialSelected = new ArrayList<>();
+    private SerialBO currentSerialBlock = new SerialBO();
 
-    private GoodItem mGoodItem;
+    private ModelSale mGoodItem;
 
     public SerialPickerPresenter(Context context, SerialPickerContract.ViewModel viewModel,
-            GoodItem goodItem) {
+            ModelSale goodItem) {
         mContext = context;
         mViewModel = viewModel;
         mGoodItem = goodItem;
@@ -54,9 +52,9 @@ public class SerialPickerPresenter
     }
 
     private void loadSerial() {
-        mSerials.addAll(Arrays.asList(new Integer[] {
-                11111, 11112, 11113, 11114, 11116, 11117, 11119, 11121, 11122, 11123, 11124, 11125,
-                11126, 11127, 11130, 11131, 11133, 11135, 11136, 11137, 11138,
+        mSerials.addAll(Arrays.asList(new String[] {
+                "11111", "11112", "11113", "11114", "11116", "11117", "11119", "11121", "11122", "11123", "11124", "11125",
+                "11126", "11127", "11130", "11131", "11133", "11135", "11136", "11136", "11136",
         }));
 
         init();
@@ -68,7 +66,7 @@ public class SerialPickerPresenter
         }
         mSerialSelected.addAll(Common.getSerialBlockBySerials(mGoodItem.getSerials()));
         mSerials.removeAll(mGoodItem.getSerials());
-
+        chooseAble = new ObservableField<>();
         serialFrom = new ObservableField<String>() {
             @Override
             public void set(String value) {
@@ -86,7 +84,7 @@ public class SerialPickerPresenter
             }
         };
         summary = new ObservableField<>();
-        chooseAble = new ObservableField<>();
+
         quantity = new ObservableField<>();
 
         mSerialAdapter = new SerialAdapter(mContext, mSerials);
@@ -95,7 +93,6 @@ public class SerialPickerPresenter
         mSerialSelectedAdapter = new SerialSelectedAdapter(mContext, mSerialSelected);
         mSerialSelectedAdapter.setSerialChooseListener(this);
         refreshProgressSerial();
-        quantity.set(String.valueOf(getSerialCountByListSerialBlock(mSerialSelected)));
     }
 
     @Override
@@ -117,9 +114,9 @@ public class SerialPickerPresenter
     }
 
     @Override
-    public void onSerialSelect(SerialBlock serialBlock) {
-        serialFrom.set(serialBlock.getFromString());
-        serialTo.set(serialBlock.getToString());
+    public void onSerialSelect(SerialBO serialBlock) {
+        serialFrom.set(serialBlock.getFromSerial());
+        serialTo.set(serialBlock.getToSerial());
     }
 
     @Override
@@ -141,14 +138,14 @@ public class SerialPickerPresenter
         }
 
         if (validate()) {
-            SerialBlock serialBlock = new SerialBlock();
-            serialBlock.setFrom(Integer.parseInt(serialFrom.get()));
+            SerialBO serialBlock = new SerialBO();
+            serialBlock.setFromSerial((serialFrom.get()));
             int remain =
                     mGoodItem.getChoiceCount() - getSerialCountByListSerialBlock(mSerialSelected);
             if (remain >= currentSerialBlock.toSerialList().size()) {
-                serialBlock.setTo(Integer.parseInt(serialTo.get()));
+                serialBlock.setToSerial((serialTo.get()));
             } else {
-                serialBlock.setTo(Integer.parseInt(serialFrom.get()) + remain - 1);
+                serialBlock.setToSerial(String.valueOf(Long.parseLong(serialFrom.get())+remain-1));
             }
 
             mSerialSelected.add(serialBlock);
@@ -157,15 +154,13 @@ public class SerialPickerPresenter
             mSerialSelectedAdapter.notifyDataSetChanged();
             serialFrom.set("");
             serialTo.set("");
-
             refreshProgressSerial();
-            quantity.set(String.valueOf(getSerialCountByListSerialBlock(mSerialSelected)));
         }
     }
 
     private boolean validate() {
-        currentSerialBlock.setFrom(Integer.parseInt(serialFrom.get()));
-        currentSerialBlock.setTo(Integer.parseInt(serialTo.get()));
+        currentSerialBlock.setFromSerial((serialFrom.get()));
+        currentSerialBlock.setToSerial((serialTo.get()));
         if (currentSerialBlock.getQuantity() < 1) {
             Toast.makeText(mContext, mContext.getResources().getString(R.string.invalid_serial),
                     Toast.LENGTH_SHORT).show();
@@ -192,9 +187,9 @@ public class SerialPickerPresenter
         return true;
     }
 
-    public int getSerialCountByListSerialBlock(List<SerialBlock> serialBlock) {
-        Set<Integer> sets = new HashSet<>();
-        for (SerialBlock s : serialBlock) {
+    public int getSerialCountByListSerialBlock(List<SerialBO> serialBlock) {
+        Set<String> sets = new HashSet<>();
+        for (SerialBO s : serialBlock) {
             sets.addAll(s.toSerialList());
         }
         return sets.size();
@@ -204,10 +199,11 @@ public class SerialPickerPresenter
         summary.set(String.format(mContext.getResources().getString(R.string.count_serial_selected),
                 Common.getSerialCountByListSerialBlock(mSerialSelected), mGoodItem.getChoiceCount(),
                 mGoodItem.getName()));
+        quantity.set(String.valueOf(getSerialCountByListSerialBlock(mSerialSelected)));
     }
 
     @Override
-    public void onDeleteSerial(SerialBlock serialBlock) {
+    public void onDeleteSerial(SerialBO serialBlock) {
         mSerialSelected.remove(serialBlock);
         mSerialSelectedAdapter.notifyDataSetChanged();
         mSerials.addAll(serialBlock.toSerialList());

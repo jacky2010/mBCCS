@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.databinding.ObservableField;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import com.viettel.mbccs.data.model.GoodItem;
+import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.screen.sell.orders.adapter.OrderDetailAdapter;
 import com.viettel.mbccs.screen.serialpicker.SerialPickerActivity;
 import com.viettel.mbccs.utils.GsonUtils;
@@ -21,7 +21,7 @@ import java.util.List;
 public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract.Presenter {
     private Context context;
     private OrderDetailFragmentContract.View view;
-    private List<GoodItem> goodItemList;
+    private List<ModelSale> goodItemList;
 
     public ObservableField<OrderDetailAdapter> adapterOrderDetail;
     public ObservableField<String> idOrder;

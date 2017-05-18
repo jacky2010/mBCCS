@@ -4,7 +4,7 @@ import android.databinding.ObservableField;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import com.viettel.mbccs.data.model.GoodItem;
+import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.databinding.ItemOrderDetailBinding;
 import java.util.List;
 
@@ -15,10 +15,10 @@ import java.util.List;
 public class OrderDetailAdapter
         extends RecyclerView.Adapter<OrderDetailAdapter.OrderDetailViewHolder> {
     private ItemOrderDetailBinding binding;
-    private List<GoodItem> goodItemList;
+    private List<ModelSale> goodItemList;
     private OrderDetailAdapterCallback callback;
 
-    public OrderDetailAdapter(List<GoodItem> goodItemList) {
+    public OrderDetailAdapter(List<ModelSale> goodItemList) {
         this.goodItemList = goodItemList;
     }
 
@@ -44,7 +44,7 @@ public class OrderDetailAdapter
         private ItemOrderDetailBinding itemBinding;
         private int position;
 
-        public ObservableField<GoodItem> goodItem;
+        public ObservableField<ModelSale> goodItem;
 
         public OrderDetailViewHolder(ItemOrderDetailBinding itemView) {
             super(itemView.getRoot());
@@ -52,7 +52,7 @@ public class OrderDetailAdapter
             goodItem = new ObservableField<>();
         }
 
-        public void bind(GoodItem goodItem, int position) {
+        public void bind(ModelSale goodItem, int position) {
             if (itemBinding.getPresenter() == null) {
                 itemBinding.setPresenter(this);
                 itemBinding.executePendingBindings();

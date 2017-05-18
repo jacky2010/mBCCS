@@ -1,18 +1,14 @@
 package com.viettel.mbccs.screen.goodsconfirm.adapter;
 
-import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.data.model.SerialBlock;
+import com.viettel.mbccs.data.model.SerialBO;
 import com.viettel.mbccs.databinding.ItemFooterSerialConfirmBinding;
 import com.viettel.mbccs.databinding.ItemSerialConfirmBinding;
 import com.viettel.mbccs.utils.Common;
-import com.viettel.mbccs.utils.DateUtils;
 import java.util.List;
 
 /**
@@ -24,9 +20,9 @@ public class SerialConfirmAdapter extends RecyclerView.Adapter<RecyclerView.View
     public static final int TYPE_ROW = 0;
     public static final int TYPE_FOOTER = 1;
 
-    private List<SerialBlock> mSerialBlocks;
+    private List<SerialBO> mSerialBlocks;
 
-    public SerialConfirmAdapter(List<SerialBlock> serialBlocks) {
+    public SerialConfirmAdapter(List<SerialBO> serialBlocks) {
         mSerialBlocks = serialBlocks;
     }
 
@@ -92,7 +88,7 @@ public class SerialConfirmAdapter extends RecyclerView.Adapter<RecyclerView.View
             mBinding = binding;
         }
 
-        public void bind(SerialBlock serialBlock) {
+        public void bind(SerialBO serialBlock) {
             mBinding.setSerial(serialBlock);
         }
     }

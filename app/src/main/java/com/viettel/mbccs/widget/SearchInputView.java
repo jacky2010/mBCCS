@@ -6,6 +6,7 @@ import android.databinding.BindingAdapter;
 import android.databinding.BindingMethod;
 import android.databinding.BindingMethods;
 import android.databinding.DataBindingUtil;
+import android.databinding.InverseBindingAdapter;
 import android.databinding.InverseBindingListener;
 import android.databinding.InverseBindingMethod;
 import android.databinding.InverseBindingMethods;
@@ -23,11 +24,8 @@ import android.widget.LinearLayout;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.databinding.SearchViewBinding;
 
-@BindingMethods({
-        @BindingMethod(type = SearchInputView.class, attribute = "text", method = "setText")
-})
 @InverseBindingMethods({
-        @InverseBindingMethod(type = SearchInputView.class, attribute = "text", method = "getText")
+        @InverseBindingMethod(type = SearchInputView.class, attribute = "text")
 })
 public class SearchInputView extends LinearLayout {
 
@@ -100,25 +98,34 @@ public class SearchInputView extends LinearLayout {
         setTextSize(textSize);
     }
 
-    @BindingAdapter("textAttrChanged")
+    @BindingAdapter(value = { "textAttrChanged" })
     public static void setTextChangedListener(SearchInputView view,
             final InverseBindingListener contentChanged) {
-        view.getEditText().addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        if (contentChanged == null) {
+            view.getEditText().addTextChangedListener(null);
+        } else {
+            view.getEditText().addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            }
+                }
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                contentChanged.onChange();
-            }
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    contentChanged.onChange();
+                }
 
-            @Override
-            public void afterTextChanged(Editable editable) {
+                @Override
+                public void afterTextChanged(Editable editable) {
 
-            }
-        });
+                }
+            });
+        }
+    }
+
+    @InverseBindingAdapter(attribute = "text")
+    public static String getText(EditText editText) {
+        return editText.getText().toString();
     }
 
     public void setInputType(String inputType) {
@@ -213,7 +220,7 @@ public class SearchInputView extends LinearLayout {
     }
 
     public String getText() {
-        return text.get();
+        return getEditText().getText().toString();
     }
 
     public void setText(String s) {
@@ -222,5 +229,9 @@ public class SearchInputView extends LinearLayout {
 
     public EditText getEditText() {
         return mEditText;
+    }
+
+    public void addOnTextChange(TextWatcher textWatcher) {
+        getEditText().addTextChangedListener(textWatcher);
     }
 }

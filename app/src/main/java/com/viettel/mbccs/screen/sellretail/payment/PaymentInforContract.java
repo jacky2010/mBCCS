@@ -1,13 +1,13 @@
-package com.viettel.mbccs.screen.goodsconfirm;
+package com.viettel.mbccs.screen.sellretail.payment;
 
 import com.viettel.mbccs.base.BasePresenter;
 import com.viettel.mbccs.base.BaseView;
 
 /**
- * Created by eo_cuong on 5/14/17.
+ * Created by eo_cuong on 5/16/17.
  */
 
-public interface GoodsActivityContract {
+public interface PaymentInforContract {
 
     interface Presenter extends BasePresenter {
 

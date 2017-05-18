@@ -21,6 +21,9 @@ public class BaseRequest<T> {
     @SerializedName("wsRequest")
     private T request;
 
+    public BaseRequest() {
+    }
+
     public Session getSession() {
         return mSession;
     }

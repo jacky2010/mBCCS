@@ -64,7 +64,7 @@ public class BaseException extends RuntimeException {
                 }
                 return "";
             default:
-                return "";
+                return "An error occurs";
         }
     }
 

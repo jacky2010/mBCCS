@@ -37,7 +37,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:padding="5dp"
-                        android:text="@{item.serialBlock.fromString}"
+                        android:text="@{item.serialBlock.fromSerial}"
                         android:textColor="@color/black"
                         />
                 </LinearLayout>
@@ -59,7 +59,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:padding="5dp"
-                        android:text="@{item.serialBlock.toString}"
+                        android:text="@{item.serialBlock.toSerial}"
                         android:textColor="@color/black"
                         />
                 </LinearLayout>

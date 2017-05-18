@@ -24,6 +24,8 @@ import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -159,6 +161,11 @@ public class BindingUtils {
         viewPager.setCurrentItem(currentItem, animation);
     }
 
+    @BindingAdapter({ "currentItem" })
+    public static void setCurrentItem(ViewPager viewPager, int currentItem) {
+        viewPager.setCurrentItem(currentItem);
+    }
+
     @BindingAdapter(value = { "pageChangedListener" })
     public static void setOnPageChangedListener(ViewPager viewPager,
             ViewPager.OnPageChangeListener listener) {
@@ -224,7 +231,7 @@ public class BindingUtils {
         textUnderLine.setText(content);
     }
 
-    @BindingAdapter({ "adapter" })
+    @BindingAdapter({ "android:adapter" })
     public static void setAdapter(RecyclerView recyclerView, RecyclerView.Adapter adapter) {
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
         recyclerView.setHasFixedSize(true);
@@ -307,4 +314,19 @@ public class BindingUtils {
     public static void addItemDecoration(RecyclerView view, RecyclerView.ItemDecoration decor) {
         view.addItemDecoration(decor);
     }
+
+    @BindingAdapter("bindText")
+    public static void setTextScroll(TextView textView, String text) {
+        textView.setText(text);
+        textView.setSelected(true);
+    }
+
+    @BindingAdapter(value = {
+            "android:adapter"
+    }, requireAll = false)
+    public static void setAdapterSpinner(Spinner spinner, BaseAdapter adapter) {
+        spinner.setAdapter(adapter);
+    }
+
+
 }
