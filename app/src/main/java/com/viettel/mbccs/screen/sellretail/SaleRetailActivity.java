@@ -106,7 +106,7 @@ public class SaleRetailActivity
 
     @Override
     public void onNext(List<ModelSale> stockItems) {
-        Intent intent1 = new Intent(this,SaleConfirmActivity.class);
+        Intent intent1 = new Intent(this, SaleConfirmActivity.class);
         intent1.putExtra(Constants.BundleConstant.GOODS_LIST, GsonUtils.Object2String(stockItems));
         startActivity(intent1);
     }

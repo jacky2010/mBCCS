@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.ModelSale;
-import com.viettel.mbccs.databinding.ItemStockConfirmBinding;
+import com.viettel.mbccs.databinding.ItemSaleConfirmBinding;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,8 +35,8 @@ public class ModelSaleConfirmAdapter
     @Override
     public StockConfirmViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new StockConfirmViewHolder(
-                (ItemStockConfirmBinding) DataBindingUtil.inflate(LayoutInflater.from(mContext),
-                        R.layout.item_stock_confirm, parent, false));
+                (ItemSaleConfirmBinding) DataBindingUtil.inflate(LayoutInflater.from(mContext),
+                        R.layout.item_sale_confirm, parent, false));
     }
 
     @Override
@@ -51,9 +51,9 @@ public class ModelSaleConfirmAdapter
 
     class StockConfirmViewHolder extends RecyclerView.ViewHolder {
 
-        ItemStockConfirmBinding mBinding;
+        ItemSaleConfirmBinding mBinding;
 
-        public StockConfirmViewHolder(ItemStockConfirmBinding binding) {
+        public StockConfirmViewHolder(ItemSaleConfirmBinding binding) {
             super(binding.getRoot());
             mBinding = binding;
         }
