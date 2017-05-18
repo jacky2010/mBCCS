@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools"
+    >
+
+    <data>
+        <variable
+            name="presenter"
+            type="com.viettel.mbccs.screen.sell.orders.SellOrdersPresenter"
+            />
+        <import type="android.view.View"/>
+    </data>
+    <FrameLayout
+        android:id="@+id/frame_sell_orders"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <include
+                layout="@layout/toolbar"
+                app:background="@{@color/grey}"
+                app:isShow="@{true}"
+                app:leftIcon="@{@drawable/ic_arrow_left_24dp}"
+                app:leftIconClick="@{()->presenter.onCancel()}"
+                app:title="@{@string/sell_orders_title}"
+                app:titleColor="@{@color/white}"
+                app:titleTextSize="@{@dimen/sp_17}"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="@{ v -> presenter.expandSearch() }"
+                android:orientation="vertical"
+                android:visibility="@{ presenter.isHideSearch ? View.VISIBLE : View.GONE }"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_6"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:text="@{ presenter.textSearch }"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/dp_16"
+                android:paddingRight="@dimen/dp_16"
+                android:visibility="@{ presenter.isHideSearch ? View.GONE : View.VISIBLE }"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:onClick="@{ v -> presenter.expandSearch() }"
+                    android:src="@drawable/ic_expand_less_black_24dp"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sell_orders_date_orders"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <com.viettel.mbccs.widget.CustomDatePicker
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="-"
+                        />
+                    <com.viettel.mbccs.widget.CustomDatePicker
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sell_orders_time_range"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:text="@string/sell_orders_unit"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:background="@drawable/bg_order"
+                    android:text="@{ presenter.staffInfo.getShopName() }"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:text="@string/sell_orders_user_manager"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:background="@drawable/bg_order"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:text="@{ presenter.staffInfo.getStaffName() }"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:text="@string/sell_orders_change"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16"
+                    />
+                <Spinner
+                    android:id="@+id/spinnerChannel"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:background="@drawable/bg_order"
+                    bind:spinnerAdapter="@{ presenter.spinnerAdapterChannel }"
+                    />
+                <Button
+                    android:layout_width="@dimen/dp_150"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/dp_6"
+                    android:background="@color/blue"
+                    android:gravity="center"
+                    android:onClick="@{ v -> presenter.clickSearch() }"
+                    android:text="@string/sell_orders_search"
+                    android:textColor="@color/white"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_6"
+                android:orientation="vertical"
+                >
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_0.6"
+                    android:background="@color/grey"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dp_8"
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:text="@{ @string/sell_orders_list_orders(presenter.totalOrders) }"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_20"
+                    />
+
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/tabLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_order"
+                    app:tabTextAppearance="@style/tablayoutStyle"
+                    />
+                <com.viettel.mbccs.widget.NonSwipeViewPager
+                    android:id="@+id/vpPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    bind:pagerAdapter="@{ presenter.sellOrdersFragmentAdapter }"
+                    >
+                </com.viettel.mbccs.widget.NonSwipeViewPager>
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+</layout>

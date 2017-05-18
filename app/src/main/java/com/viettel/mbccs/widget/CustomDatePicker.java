@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
@@ -45,7 +46,8 @@ public class CustomDatePicker extends LinearLayout {
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public CustomDatePicker(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public CustomDatePicker(Context context, @Nullable AttributeSet attrs, int defStyleAttr,
+            int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
@@ -66,7 +68,8 @@ public class CustomDatePicker extends LinearLayout {
                         mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                         setDate();
                     }
-                }, mCalendar.get(Calendar.YEAR), mCalendar.get(Calendar.MONTH), mCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                }, mCalendar.get(Calendar.YEAR), mCalendar.get(Calendar.MONTH),
+                        mCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
 
@@ -74,16 +77,19 @@ public class CustomDatePicker extends LinearLayout {
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CustomDatePicker);
         try {
-            textView.setTextSize(a.getDimension(R.styleable.CustomDatePicker_dateTextSize,
-                    getResources().getDimension(R.dimen.sp_14)));
-            textView.setTextColor(a.getColor(R.styleable.CustomDatePicker_dateTextColor, Color.BLACK));
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    a.getDimension(R.styleable.CustomDatePicker_dateTextSize,
+                            getResources().getDimension(R.dimen.sp_14)));
+            textView.setTextColor(
+                    a.getColor(R.styleable.CustomDatePicker_dateTextColor, Color.BLACK));
         } finally {
             a.recycle();
         }
     }
 
     private void setDate() {
-        date.set(DateUtils.convertToString(mCalendar.getTime(), DateUtils.CALENDAR_DATE_FORMAT, null));
+        date.set(DateUtils.convertToString(mCalendar.getTime(), DateUtils.CALENDAR_DATE_FORMAT,
+                null));
     }
 
     public long getDateInMilis() {

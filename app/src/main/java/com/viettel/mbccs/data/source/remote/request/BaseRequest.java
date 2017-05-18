@@ -21,5 +21,35 @@ public class BaseRequest<T> {
     @SerializedName("wsRequest")
     private T request;
 
+    public Session getSession() {
+        return mSession;
+    }
 
+    public void setSession(Session mSession) {
+        this.mSession = mSession;
+    }
+
+    public String getWsCode() {
+        return wsCode;
+    }
+
+    public void setWsCode(String wsCode) {
+        this.wsCode = wsCode;
+    }
+
+    public String getApiKey() {
+        return apiKey;
+    }
+
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
+    }
+
+    public T getRequest() {
+        return request;
+    }
+
+    public void setRequest(T request) {
+        this.request = request;
+    }
 }

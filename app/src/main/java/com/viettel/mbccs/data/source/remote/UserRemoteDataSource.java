@@ -1,9 +1,6 @@
 package com.viettel.mbccs.data.source.remote;
 
-import com.viettel.mbccs.data.model.LoginResult;
-import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.LoginRequest;
-import com.viettel.mbccs.data.source.remote.response.BaseResponse;
 import com.viettel.mbccs.data.source.remote.response.LoginResponse;
 import com.viettel.mbccs.data.source.remote.service.RequestHelper;
 import com.viettel.mbccs.utils.rx.SchedulerUtils;
@@ -32,13 +29,15 @@ public class UserRemoteDataSource implements IUserRemoteDataSource {
     public Observable<LoginResponse> login(LoginRequest loginRequest) {
         return RequestHelper.getRequest()
                 .login(loginRequest)
+                .flatMap(SchedulerUtils.<LoginResponse>convertDataFlatMap())
                 .compose(SchedulerUtils.<LoginResponse>applyAsyncSchedulers());
     }
 
     @Override
-    public Observable<BaseResponse> sendCodeChangePass(String phone) {
+    public Observable<Object> sendCodeChangePass(String phone) {
         return RequestHelper.getRequest()
                 .sendCodeChangePass(phone)
-                .compose(SchedulerUtils.<BaseResponse>applyAsyncSchedulers());
+                .flatMap(SchedulerUtils.<Object>convertDataFlatMap())
+                .compose(SchedulerUtils.<Object>applyAsyncSchedulers());
     }
 }
