@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
+
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.data.model.ModelSale;
@@ -32,8 +33,8 @@ public class SerialPickerActivity
     private GetSerialRequest mRequest;
 
     @Override
-    protected ActivitySerialPickerBinding initBinding() {
-        return DataBindingUtil.setContentView(this, R.layout.activity_serial_picker);
+    protected int getIdLayout() {
+        return R.layout.activity_serial_picker;
     }
 
     @Override
@@ -91,7 +92,7 @@ public class SerialPickerActivity
                     // No explanation needed, we can request the permission.
 
                     ActivityCompat.requestPermissions(SerialPickerActivity.this,
-                            new String[] { Manifest.permission.CAMERA },
+                            new String[]{Manifest.permission.CAMERA},
                             MY_PERMISSIONS_REQUEST_CAMERA);
 
                     // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
@@ -123,7 +124,7 @@ public class SerialPickerActivity
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[],
-            int[] grantResults) {
+                                           int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_CAMERA: {
                 // If request is cancelled, the result arrays are empty.

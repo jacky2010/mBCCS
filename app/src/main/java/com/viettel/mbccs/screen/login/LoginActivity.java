@@ -1,7 +1,7 @@
 package com.viettel.mbccs.screen.login;
 
+
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
 import android.support.annotation.Nullable;
 
 import com.viettel.mbccs.R;
@@ -18,9 +18,10 @@ public class LoginActivity extends BaseDataBindActivity<ActivityLoginBinding, Lo
         implements LoginContract.ViewModel {
 
     @Override
-    protected ActivityLoginBinding initBinding() {
-        return DataBindingUtil.setContentView(this, R.layout.activity_login);
+    protected int getIdLayout() {
+        return R.layout.activity_login;
     }
+
 
     @Override
     protected void initData() {

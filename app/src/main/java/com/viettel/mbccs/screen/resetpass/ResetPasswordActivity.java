@@ -1,6 +1,5 @@
 package com.viettel.mbccs.screen.resetpass;
 
-import android.databinding.DataBindingUtil;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.databinding.ActivityResetPasswordBinding;
@@ -38,9 +37,10 @@ public class ResetPasswordActivity
         finish();
     }
 
+
     @Override
-    protected ActivityResetPasswordBinding initBinding() {
-        return DataBindingUtil.setContentView(this, R.layout.activity_reset_password);
+    protected int getIdLayout() {
+        return R.layout.activity_reset_password;
     }
 
     @Override

@@ -1,9 +1,7 @@
 package com.viettel.mbccs.screen.splash;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
 
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseActivity;
@@ -19,14 +17,12 @@ public class SplashActivity extends BaseActivity {
     private Runnable mRunnable;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
+    protected int getIdLayout() {
+        return R.layout.activity_splash;
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void initData() {
         mHandler = new Handler();
         mRunnable = new Runnable() {
             @Override

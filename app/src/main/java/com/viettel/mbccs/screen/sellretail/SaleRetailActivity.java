@@ -48,8 +48,8 @@ public class SaleRetailActivity
     }
 
     @Override
-    protected ActivitySellRetailBinding initBinding() {
-        return DataBindingUtil.setContentView(this, R.layout.activity_sell_retail);
+    protected int getIdLayout() {
+        return R.layout.activity_sell_retail;
     }
 
     @Override

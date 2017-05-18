@@ -1,13 +1,14 @@
 package com.viettel.mbccs.screen.goodsconfirm;
 
-import android.databinding.DataBindingUtil;
 import android.text.TextUtils;
+
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.databinding.ActivityConfirmGoodsBinding;
 import com.viettel.mbccs.utils.GsonUtils;
 import com.viettel.mbccs.variable.Constants;
+
 import java.util.List;
 
 /**
@@ -16,11 +17,12 @@ import java.util.List;
 
 public class SaleConfirmActivity extends BaseDataBindActivity<ActivityConfirmGoodsBinding,SaleConfirmPresenter> implements SaleActivityContract.ViewModel {
 
+
     private List<ModelSale> mGoodItems;
 
     @Override
-    protected ActivityConfirmGoodsBinding initBinding() {
-        return DataBindingUtil.setContentView(this, R.layout.activity_confirm_goods);
+    protected int getIdLayout() {
+        return R.layout.activity_confirm_goods;
     }
 
     @Override

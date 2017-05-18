@@ -127,4 +127,21 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="config_logout">Đăng xuất</string>
     <string name="config_spinner_on">Bật</string>
     <string name="config_spinner_off">Tắt</string>
+
+    <!--Billing-->
+    <string name="billing_title">Lập hóa đơn</string>
+    <string name="billing_info">Thông báo</string>
+    <string name="title_search">Tìm kiếm</string>
+    <string name="title_confirm">Xác Nhận</string>
+    <string name="msg_title_confirm_trans">Bạn đã lập hóa đơn cho các giao dịch sau:</string>
+    <string name="msg_before_tax" formatted="false">Trước thuế: %f</string>
+    <string name="msg_rent" formatted="false">Tiền thuế: %f</string>
+    <string name="msg_discount" formatted="false">Chiết khấu: %f</string>
+    <string name="msg_total_amount_payable" formatted="false">Tổng tiền phải trả: %f</string>
+    <string name="msg_choose_transaction">Chọn giao dịch</string>
+    <string name="msg_list_trans">Danh sách giao dịch (%d)</string>
+    <string name="title_channel">Kênh</string>
+    <string name="msg_default_choose_time_trans">Khoảng thời gian (tối đa 1 tháng)</string>
+    <string name="msg_date_create_trans">Ngày tạo giao dịch *</string>
+
 </resources>

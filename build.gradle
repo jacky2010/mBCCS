@@ -54,4 +54,5 @@ ext {
   gsonConverterVersion = '2.0.2'
   glideVersion = '3.7.0'
   constraintVersion = '1.0.2'
+  butterknifeVersion = '8.5.1'
 }
