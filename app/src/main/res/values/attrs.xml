@@ -13,7 +13,7 @@
     <declare-styleable name="BottomNavigationView">
         <attr format="color|reference" name="bottomBarBgColor"/>
         <attr format="dimension" name="bottomBarTextSize"/>
-        <attr format="color|reference" name="bottomBarTextColor"/>
+        <attr format="reference" name="bottomBarTextColor"/>
     </declare-styleable>
     <declare-styleable name="SimpleProgressChart">
         <attr format="color|reference" name="progressTextColor"/>

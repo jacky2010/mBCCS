@@ -35,7 +35,6 @@
             android:name=".screen.login.LoginActivity"
             android:configChanges="screenLayout|screenSize"
             android:windowSoftInputMode="adjustResize"/>
-        <activity android:name=".screen.changepassword.ChangePasswordActivity"/>
         <activity android:name=".screen.main.MainActivity"/>
         <activity android:name=".screen.serialpicker.SerialPickerActivity"/>
         <activity android:name=".screen.common.success.ScanbarCodeActivity"/>

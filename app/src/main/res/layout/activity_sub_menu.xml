@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="presenter"
+            type="com.viettel.mbccs.base.BaseSubMenuActivity" />
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include
+                layout="@layout/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:background="@{ @android:color/darker_gray }"
+                app:isShow="@{ true }"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:leftIcon="@{ @drawable/ic_arrow_back_black_24dp }"
+                app:leftIconClick="@{ () -> presenter.onBackPressed() }"
+                app:rightIcon="@{ presenter.isGrid ? @drawable/ic_list_view_black_24dp : @drawable/ic_grid_view_black_24dp }"
+                app:rightIconClick="@{ () -> presenter.switchView() }"
+                app:showRightIcon="@{ true }"
+                app:title="@{ presenter.toolbarTitle }"
+                app:titleColor="@{ @color/black }"
+                app:titleTextSize="@{ @dimen/sp_18 }" />
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/sub_menu_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/dp_16"
+            android:adapter="@{ presenter.menuAdapter }"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    </android.support.design.widget.CoordinatorLayout>
+</layout>

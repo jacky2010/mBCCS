@@ -1,13 +1,14 @@
 package com.viettel.mbccs.screen.main.fragments.main;
 
 import android.content.Context;
-import android.graphics.Rect;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
-import android.view.View;
+
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.HomeModel;
+import com.viettel.mbccs.widget.SpacesItemDecoration;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,37 +78,5 @@ public class MainFragmentPresenter implements MainFragmentContract.Presenter {
         return new SpacesItemDecoration((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX,
                 mContext.getResources().getDimension(R.dimen.dp_6),
                 mContext.getResources().getDisplayMetrics()), getLayoutManager());
-    }
-
-    public static class SpacesItemDecoration extends RecyclerView.ItemDecoration {
-        private int space;
-
-        private RecyclerView.LayoutManager layoutManager;
-
-        public SpacesItemDecoration(int space, RecyclerView.LayoutManager layoutManager) {
-            this.space = space;
-            this.layoutManager = layoutManager;
-        }
-
-        @Override
-        public void getItemOffsets(Rect outRect, View view, RecyclerView parent,
-                RecyclerView.State state) {
-            outRect.left = space;
-            outRect.right = space;
-            outRect.bottom = space;
-            outRect.top = 0;
-
-            if (layoutManager instanceof GridLayoutManager) {
-                for (int i = 0; i < ((GridLayoutManager) layoutManager).getSpanCount(); i++) {
-                    if (parent.getChildLayoutPosition(view) == i) {
-                        outRect.top = space;
-                    }
-                }
-            } else {
-                if (parent.getChildLayoutPosition(view) == 0) {
-                    outRect.top = space;
-                }
-            }
-        }
     }
 }
