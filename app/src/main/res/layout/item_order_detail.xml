@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/tools"
+    >
+    <data>
+        <variable
+            name="presenter"
+            type="com.viettel.mbccs.screen.sell.orders.adapter.OrderDetailAdapter.OrderDetailViewHolder"
+            />
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@drawable/bg_order"
+        android:orientation="horizontal"
+        >
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            >
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                bind:loadCircleImage="@{ presenter.goodItem.getImageUrl() } "
+                />
+        </LinearLayout>
+        <View
+            android:layout_width="@dimen/dp_1"
+            android:layout_height="match_parent"
+            android:background="@color/grey"
+            />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="@dimen/dp_14"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Đặt"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_14"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:text="Handset Nokia"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_14"
+                />
+            <!--android:text="@{ presenter.goodItem.getName()}"-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:text="300 000 VNĐ"
+                android:textColor="@color/red_button"
+                android:textSize="@dimen/sp_14"
+                />
+            <!--android:text="@{ @string/item_order_detail_price_item(presenter.goodItem.getGoodPrice()) }"-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:gravity="center"
+                android:text="02"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_18"
+                android:textStyle="bold"
+                />
+            <!--android:text="@{ presenter.goodItem.getChoiceCount() }"-->
+        </LinearLayout>
+        <View
+            android:layout_width="@dimen/dp_1"
+            android:layout_height="match_parent"
+            android:background="@color/grey"
+            />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="@dimen/dp_14"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kho còn"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_14"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="01"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/sp_28"
+                    />
+                <!--android:text="@{ presenter.goodItem.getRemainGoodCount() }"-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="sản phẩm"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/sp_14"
+                    />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:gravity="center"
+                android:onClick="@{v -> presenter.selectSerial()}"
+                android:text="Chọn serial"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/sp_14"
+                android:textStyle="italic"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:text="Đã chọn 0/2"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_14"
+                />
+        </LinearLayout>
+    </LinearLayout>
+</layout>

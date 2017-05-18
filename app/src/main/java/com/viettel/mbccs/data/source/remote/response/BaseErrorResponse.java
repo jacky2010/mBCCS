@@ -14,6 +14,13 @@ public class BaseErrorResponse {
         return errors.get(0).message;
     }
 
+    public void setError(int code, String message) {
+        Error error = new Error();
+        error.code = code;
+        error.message = message;
+        errors.add(error);
+    }
+
     public boolean isError() {
         return errors != null;
     }

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    >
+    <data>
+        <variable
+            name="presenter"
+            type="com.viettel.mbccs.screen.sell.orders.fragment.orderdetail.OrderDetailFragmentPresenter"
+            />
+    </data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:clickable="false"
+        >
+        <include
+            layout="@layout/toolbar"
+            android:id="@+id/toolbar"
+            app:background="@{@color/grey}"
+            app:isShow="@{true}"
+            app:leftIcon="@{@drawable/ic_arrow_left_24dp}"
+            app:leftIconClick="@{()->presenter.onCancel()}"
+            app:title="@{ @string/order_detail_title(presenter.idOrder) }"
+            app:titleColor="@{@color/white}"
+            app:titleTextSize="@{@dimen/sp_17}"
+            />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/toolbar"
+            bind:adapter="@{ presenter.adapterOrderDetail }"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/layout_button"
+            android:background="#fd9827"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/dp_10"
+            android:paddingLeft="@dimen/dp_6"
+            android:paddingRight="@dimen/dp_6"
+            android:paddingTop="@dimen/dp_10"
+            >
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{ @string/order_detail_total_money(presenter.totalMoney) }"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="@{ @string/order_detail_pay_money(presenter.payMoney) }"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{ @string/order_detail_discount_money(presenter.discountMoney) }"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="@{ @string/order_detail_tax_percent(presenter.taxPercent) }"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="@{ @string/order_detail_tax_money(presenter.taxMoney) }"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layout_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/dp_6"
+            android:layout_marginTop="@dimen/dp_10"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dp_2"
+            android:paddingRight="@dimen/dp_2"
+            >
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/dp_1"
+                android:layout_weight="1"
+                android:background="@color/red_button"
+                android:text="@string/order_detail_cancel"
+                android:onClick="@{ v -> presenter.onCancel() }"
+                android:textColor="@color/white"
+                />
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_1"
+                android:layout_weight="1"
+                android:background="@color/blue"
+                android:text="@string/order_detail_ok"
+                android:onClick="@{ v -> presenter.onClickSell() }"
+                android:textColor="@color/white"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

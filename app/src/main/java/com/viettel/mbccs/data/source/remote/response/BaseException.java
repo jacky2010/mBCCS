@@ -1,7 +1,5 @@
 package com.viettel.mbccs.data.source.remote.response;
 
-import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import java.io.IOException;
 import java.net.SocketTimeoutException;
@@ -51,7 +49,7 @@ public class BaseException extends RuntimeException {
         return type;
     }
 
-    public String getMessage(@NonNull Context context) {
+    public String getMessage() {
         switch (type) {
             case SERVER:
                 if (errorResponse != null) {
@@ -59,10 +57,10 @@ public class BaseException extends RuntimeException {
                 }
                 return "";
             case NETWORK:
-                return getNetworkErrorMessage(context, getCause());
+                return getNetworkErrorMessage(getCause());
             case HTTP:
                 if (response != null) {
-                    return getHttpErrorMessage(context, response.code());
+                    return getHttpErrorMessage(response.code());
                 }
                 return "";
             default:
@@ -74,7 +72,7 @@ public class BaseException extends RuntimeException {
         return errorResponse != null ? errorResponse.getErrorCode() : -1;
     }
 
-    private String getNetworkErrorMessage(Context context, Throwable throwable) {
+    private String getNetworkErrorMessage(Throwable throwable) {
         // TODO update later with Japanese
         if (throwable instanceof SocketTimeoutException) {
             return throwable.getMessage();
@@ -91,7 +89,7 @@ public class BaseException extends RuntimeException {
         return throwable.getMessage();
     }
 
-    private String getHttpErrorMessage(Context context, int httpCode) {
+    private String getHttpErrorMessage(int httpCode) {
         // TODO update later with Japanese
         if (httpCode >= 300 && httpCode <= 308) {
             // Redirection

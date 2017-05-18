@@ -22,7 +22,10 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.EditText;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import com.bumptech.glide.DrawableRequestBuilder;
 import com.bumptech.glide.Glide;
@@ -221,7 +224,7 @@ public class BindingUtils {
         textUnderLine.setText(content);
     }
 
-    @BindingAdapter({ "android:adapter" })
+    @BindingAdapter({ "adapter" })
     public static void setAdapter(RecyclerView recyclerView, RecyclerView.Adapter adapter) {
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
         recyclerView.setHasFixedSize(true);
@@ -283,11 +286,25 @@ public class BindingUtils {
     @BindingAdapter({ "eyeClickActive" })
     public static void enableEyeClick(EditText inputView, boolean isEnable) {
         if (isEnable) {
-        inputView.setInputType(
-                InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            inputView.setInputType(
+                    InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             return;
         }
-        inputView.setInputType(
-                InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+        inputView.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+    }
+
+    @BindingAdapter({ "spinnerAdapter" })
+    public static void setSpinnerAdapter(Spinner view, ArrayAdapter adapter) {
+        view.setAdapter(adapter);
+    }
+
+    @BindingAdapter({ "spinnerClickItem" })
+    public static void spinnerClickItem(Spinner view, AdapterView.OnItemSelectedListener listener) {
+        view.setOnItemSelectedListener(listener);
+    }
+
+    @BindingAdapter({ "addItemDecoration" })
+    public static void addItemDecoration(RecyclerView view, RecyclerView.ItemDecoration decor) {
+        view.addItemDecoration(decor);
     }
 }
