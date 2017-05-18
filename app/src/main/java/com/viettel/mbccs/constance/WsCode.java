@@ -5,6 +5,159 @@ package com.viettel.mbccs.constance;
  */
 public class WsCode {
 
+    // 3.1.3.1
+    public final static String CheckIdNo = "WS_checkIdNo";
+
+    // TODO: 5/18/17 Error WsCode
+    // 3.1.3.2 - 4.3.3.1
+    // public final static String GetContractInfo = "WS_getContractInfo";
+    public final static String GetContractInfo = "WS_checkIdNo";
+
+    // 3.1.3.3
+    public final static String GetStockType = "WS_getStockType";
+
+    // 3.1.3.4
+    public final static String GetStockModel = "WS_getStockModel";
+
+    // 3.1.3.5
+    public final static String GetStockSerial = "WS_getStockSerial";
+
+    // 3.1.3.6
+    public final static String GetCheckSerial = "WS_getCheckSerial";
+
+    // 3.1.3.7
+    public final static String GetListProduct = "WS_getListProduct";
+
+    // 3.1.3.8
+    public final static String GetListSubType = "WS_getListSubType";
+
+    // 3.1.3.9
+    public final static String GetListRegType = "WS_getListRegType";
+
+    // 3.1.3.10
+    public final static String GetListBusType = "WS_getListBusType";
+
+    // 3.1.3.11
+    public final static String GetListBusTypeIdRequire = "WS_getListBusTypeIdRequire";
+
+    // 3.1.3.12
+    public final static String ConnectSubscriber = "WS_connectSubscriber";
+
+    // 3.1.3.13
+    public final static String GetProvince = "WS_getProvince";
+
+    // 3.1.3.14
+    public final static String GetDistrict = "WS_getDistrict";
+
+    // 3.1.3.15
+    public final static String GetPrecinct = "WS_getPrecinct";
+
+    // 3.2.3.1
+    public final static String GetTechnology = "WS_getTechnology";
+
+    // 3.2.3.2
+    public final static String SurveyOnline = "WS_surveyOnline";
+
+    // 3.2.3.3
+    public final static String GetListTeam = "WS_getListTeam";
+
+    // 3.2.3.4
+    public final static String GetListDsLamByTeamId = "WS_getListDsLamByTeamId";
+
+    // 3.2.3.5
+    public final static String ReceiverRequest = "WS_receiverRequest";
+
+    // 3.2.3.6
+    public final static String SearchRequest = "WS_searchRequest";
+
+    // 3.2.3.7
+    public final static String SignContract = "WS_signContract";
+
+    // 3.2.3.8
+    public final static String ConnectionSubscriberFixService = "WS_connectionSubscriberFixService";
+
+    // 3.3.3.1
+    public final static String GetRegiterSubInfo = "WS_getRegiterSubInfo";
+
+    // 3.3.3.2
+    public final static String RegisterCustomerInfo = "WS_registerCustomerInfo";
+
+    // 3.4.3.1
+    public final static String GetAllSubInfo = "WS_getAllSubInfo";
+
+    // 3.4.3.2 -  9.6.3.1 - 4.2.3.3
+    public final static String GetOTP = "wsGetOTP";
+
+    // 3.4.3.3 - 9.6.3.2 - 4.2.3.3
+    public final static String CheckOTP = "wsCheckOTP";
+
+    // 3.4.3.4
+    public final static String UpdateAllSubInfo = "WS_updateAllSubInfo";
+
+    // 3.5.3.1
+    public final static String CheckDebit = "WS_checkDebit";
+
+    // 3.5.3.2
+    public final static String CheckCalledIsdn = "WS_checkCalledIsdn";
+
+    // 3.5.3.3
+    public final static String ChangeSim = "WS_changeSim";
+
+    // 3.6.3.1
+    public final static String ReceiverChangeAddress = "WS_receiverChangeAddress";
+
+    /**
+     * ---------------------------
+     */
+
+    // 4.1.3.1
+    public final static String GetAreaLevel1 = "wsGetAreaLevel1";
+
+    // 4.1.3.2
+    public final static String GetAreaLevel2 = "wsGetAreaLevel2";
+
+    // 4.1.3.3
+    public final static String GetAreaLevel3 = "wsGetAreaLevel3";
+
+    // 4.1.3.4
+    public final static String GetUnassignContractByArea = "wsGetUnassignContractByArea";
+
+    // 4.1.3.5
+    public final static String GetChildStaffByArea = "wsGetChildStaffByArea";
+
+    // 4.1.3.6
+    public final static String AssignVerification = "wsAssignVerification";
+
+    // 4.1.3.7
+    public final static String UpdateVerification = "wsUpdateVerification";
+
+    // 4.2.3.1
+    public final static String GetPaymentContract = "wsGetPaymentContract";
+
+    // 4.2.3.2
+    public final static String GetDetailPaymentContract = "wsGetDetailPaymentContract";
+
+    // 4.2.3.3
+    public final static String PaymentContract = "wsPaymentContract";
+
+    // 4.3.3.1
+    // public final static String GetContractInfo  = "wsGetContractInfo ";
+
+    // 4.3.3.2
+    // public final static String GetOTP = "wsGetOTP";
+
+    // 4.3.3.3
+    // public final static String CheckOTP  = "wsCheckOTP ";
+
+    // 4.3.3.4
+    public final static String GetHotcharge = "wsGetHotcharge";
+
+    // 4.4.3.1
+    public final static String GetChargeByPeriod = "wsGetChargeByPeriod";
+
+    /**
+     * ---------------------------
+     */
     // 5.1.3.1
     public final static String GetTelecomServiceAndSaleProgram =
             "WS_GetTelecomServiceAndSaleProgram";
@@ -33,11 +186,11 @@ public class WsCode {
     // 5.3.3.1
     public final static String GetAllInfo = "WS_GetAllInfo";
 
-    // 5.3.3.2
+    // 5.3.3.2 - 5.18.3
     public final static String GetListOrder = "WS_GetListOrder";
 
-    // 5.3.3.3
-    public final static String GetOrderInfo = "GetOrderInfo";
+    // 5.3.3.3 - 5.18.3
+    public final static String GetOrderInfo = "WS_GetOrderInfo";
 
     // 5.3.3.4
     public final static String CreateSaleTransFromOrder = "WS_CreateSaleTransFromOrder";
@@ -77,10 +230,10 @@ public class WsCode {
     // 5.7.3.2
     public final static String TransferAnypay = "WS_TransferAnypay";
 
-    // 5.8.3.1
+    // 5.8.3.1 - 5.14.3 - 5.18.3
     public final static String GetListStockModel = "WS_getListStockModel";
 
-    // 5.8.3.2
+    // 5.8.3.2 - 5.12.3
     public final static String ViewInfoSerial = "WS_ViewInfoSerial";
 
     // 5.8.3.3
@@ -92,6 +245,156 @@ public class WsCode {
     // 5.8.3.5
     public final static String GetListShop = "WS_getListShop";
 
-    // 5.8.3.6
+    // 5.8.3.6 - 5.14.3
     public final static String GetListOwnerCode = "WS_getListOwnerCode";
+
+    // 5.9.3.1
+    public final static String GetListInvoiceImport = "Ws_getListInvoiceImport";
+
+    // 5.9.3.2
+    public final static String GetListInvoiceExport = "Ws_getListInvoiceExport";
+
+    // 5.9.3.3
+    public final static String ImportInvoiceList = "WS_importInvoiceList";
+
+    // 5.10.3.1 - 5.12.3 - 5.14.3
+    public final static String CreateExpCmd = "Ws_createExpCmd";
+
+    // 5.10.3.2 - 5.12.3 - 5.14.3
+    public final static String GetListExpCmd = "Ws_getListExpCmd";
+
+    // 5.10.3.3 - 5.12.3 - 5.13.3 - 5.14.3 - 5.15.3
+    public final static String GetListStockTransDetail = "WS_getListStockTransDetail";
+
+    // 5.10.3.4 - 5.12.3 - 5.14.3
+    public final static String CreateExpNote = "Ws_createExpNote";
+
+    // 5.10.3.5 - 5.12.3
+    public final static String CreateExpStock = "Ws_createExpStock";
+
+    // 5.11.3.1 - 5.13.3 - 5.17.3
+    public final static String CreateImpCmd = "Ws_createImpCmd";
+
+    // 5.11.3.2 - 5.13.3 - 5.15.3
+    public final static String GetListCmd = "WS_getListCmd";
+
+    // 5.11.3.3 - 5.13.3
+    public final static String CreateImpNote = "Ws_createImpNote";
+
+    // 5.11.3.4 - 5.13.3
+    public final static String CreateImpStock = "WS_createImpStock";
+
+    // 5.15.3.1
+    public final static String CreateImpStockNotHaveCmd = "Ws_createImpStockNotHaveCmd";
+
+    // 5.16.2.2
+    public final static String CreateExpStockNotHaveCmd = "WS_createExpStockNotHaveCmd";
+
+    // 5.18.3.1
+    public final static String CreateSaleOrders = "Ws_createSaleOrders";
+
+    // 5.19.3.1
+    public final static String GetListInvoiceUsed = "Ws_getListInvoiceUsed";
+
+    // 5.19.3.2 - 5.21.3
+    public final static String GetListInvoiceUsedDetail = "Ws_getListInvoiceUsedDetail";
+
+    // 5.19.3.3
+    public final static String CreateBankReceipt = "Ws_createBankReceipt";
+
+    // 5.20.3.1
+    public final static String GetReceiptBank = "Ws_getReceiptBank";
+
+    // 5.20.3.2 - 5.21.3
+    public final static String GetInfoReceiptBank = "WS_getInfoReceiptBank";
+
+    // 5.20.3.3
+    public final static String CreateBankReceiptAccept = "Ws_createBankReceiptAccept";
+
+    // 5.21.3.1
+    public final static String GetAllDebit = "Ws_getAllDebit";
+
+    /**
+     * ---------------------------
+     */
+
+    // 6.1.3.1
+    public final static String CheckReceiveWarrantyRequest = "WS_CheckReceiveWarrantyRequest";
+
+    // TODO: 5/18/17 Error
+    // 6.1.3.2
+    // public final static String GetWarrantyRequest = "WS_GetWarrantyRequest";
+    // public final static String GetWarrantyRequestImage = "WS_GetWarrantyRequestImage";
+
+    // TODO: 5/18/17 Error
+    // 6.1.3.3
+    // public final static String WS_GetWarrantyRequest = "WS_GetWarrantyRequest";
+    // public final static String GetHistoryDevice = "WS_GetHistoryDevice";
+
+    // TODO: 5/18/17 Error
+    // 6.1.3.4
+    // public final static String GetWarrantyRequest = "WS_GetWarrantyRequest";
+    // public final static String GetHistoryDeviceDetail  = "WS_GetHistoryDeviceDetail";
+
+
+    // 6.2.3.1
+    public final static String GetWarrantyRequest = "WS_GetWarrantyRequest";
+
+    /**
+     * ----------------------------
+     */
+
+    // 8.1.3.1
+    public final static String GET_KPP = "WS_GET_KPP";
+
+    // 8.1.3.2
+    public final static String CREATE_KPP = "WS_CREATE_KPP";
+
+    // 8.2.3.1
+    public final static String UPDATE_GPS_BTS = "WS_UPDATE_GPS_BTS";
+
+    // 8.2.3.2
+    public final static String GET_MAP = "WS_GET_MAP";
+
+    // 8.2.3.3
+    public final static String GET_LIST_BTS = "WS_GET_LIST_BTS";
+
+    // 8.2.3.4
+    public final static String GET_LIST_TTKD = "WS_GET_LIST_TTKD";
+
+    // 8.2.3.5
+    public final static String GET_LIST_CHO_LE_HOI = "WS_GET_LIST_CHO_LE_HOI";
+
+    // 8.3.3.1
+    public final static String GET_KPI_KPP = "WS_GET_KPI_KPP";
+
+    // 8.4.3.1
+    public final static String GET_LIST_KENH = "WS_GET_LIST_KENH";
+
+    // 8.4.3.2
+    public final static String GET_INFO_KENH = "WS_GET_INFO_KENH";
+
+    // 8.4.3.3
+    public final static String EDIT_INFO_KPP = "WS_EDIT_INFO_KPP";
+
+    // 8.5.3.1
+    public final static String GET_DOC = "WS_GET_DOC";
+
+    // 8.5.3.2
+    public final static String GET_INFO_DOC = "WS_GET_INFO_DOC";
+
+    // 9.1.3.1
+    public final static String GetLoginInfo = "getLoginInfo";
+
+    // 9.2.3.1
+    public final static String GetDashboardInfo = "getDashboardInfo";
+
+    // 9.3.3.1
+    public final static String GetFunctionInfo = "getFunctionInfo";
+
+    // 9.4.3.1
+    public final static String GetProfileInfo = "getProfileInfo";
+
+    // 9.6.3.3
+    public final static String GetUserInfo = "getUserInfo";
 }

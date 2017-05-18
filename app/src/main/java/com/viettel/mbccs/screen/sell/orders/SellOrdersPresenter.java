@@ -91,7 +91,7 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
 
                     @Override
                     public void onError(BaseException error) {
-                        // TODO: 5/18/17 show error
+                        // TODO: 5/18/17 Show error
                     }
                 });
 
