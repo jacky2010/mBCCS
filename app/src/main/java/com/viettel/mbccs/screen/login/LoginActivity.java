@@ -3,11 +3,12 @@ package com.viettel.mbccs.screen.login;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.Nullable;
+
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.databinding.ActivityLoginBinding;
-import com.viettel.mbccs.screen.changepassword.ChangePasswordActivity;
 import com.viettel.mbccs.screen.main.MainActivity;
+import com.viettel.mbccs.screen.resetpass.ResetPasswordActivity;
 
 /**
  * Created by eo_cuong on 5/10/17.
@@ -49,7 +50,7 @@ public class LoginActivity extends BaseDataBindActivity<ActivityLoginBinding, Lo
 
     @Override
     public void onForgotPassword(String username) {
-        startActivity(new Intent(this, ChangePasswordActivity.class));
+        startActivity(new Intent(this, ResetPasswordActivity.class));
     }
 
     @Override

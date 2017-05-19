@@ -22,11 +22,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.EditText;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -317,6 +316,14 @@ public class BindingUtils {
     @BindingAdapter({ "spinnerClickItem" })
     public static void spinnerClickItem(Spinner view, AdapterView.OnItemSelectedListener listener) {
         view.setOnItemSelectedListener(listener);
+    }
+
+    @BindingAdapter(value = {
+            "drawableStart", "drawableTop", "drawableEnd", "drawableBottom"
+    }, requireAll = false)
+    public static void setDrawableStart(TextView view, Drawable left, Drawable top, Drawable right,
+            Drawable bottom) {
+        view.setCompoundDrawablesRelativeWithIntrinsicBounds(left, top, right, bottom);
     }
 
     @BindingAdapter({ "addItemDecoration" })

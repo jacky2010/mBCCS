@@ -1,25 +1,19 @@
-package com.viettel.mbccs.screen.main;
+package com.viettel.mbccs.screen.main.fragments.menu;
 
 import com.viettel.mbccs.base.BasePresenter;
 import com.viettel.mbccs.base.BaseView;
-import com.viettel.mbccs.data.model.MenuItem;
-import java.util.List;
 
 /**
  * Created by eo_cuong on 5/11/17.
  */
 
-public interface MainContract {
+public interface MenuContract {
 
     interface ViewModel extends BaseView<Presenter> {
 
-        void gotoMenu();
-
-        void backToMain();
     }
 
     interface Presenter extends BasePresenter {
 
-        List<MenuItem> getMenuItemList();
     }
 }

@@ -107,4 +107,6 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="password_cannot_be_empty">Mật khẩu không thể bỏ trống.</string>
     <string name="customer_service">Tổng đài chăm sóc khách hàng\n%1$s</string>
 
+    <string name="menu_help">Trợ giúp</string>
+    <string name="menu_settings">Cấu hình</string>
 </resources>
