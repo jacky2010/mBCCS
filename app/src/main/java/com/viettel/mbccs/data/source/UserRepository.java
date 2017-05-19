@@ -1,6 +1,7 @@
 package com.viettel.mbccs.data.source;
 
 import com.viettel.mbccs.data.model.LoginResult;
+import com.viettel.mbccs.data.model.StaffInfo;
 import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsReponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
@@ -20,7 +21,7 @@ import rx.Observable;
 
 public class UserRepository implements IUserLocalDataSource, IUserRemoteDataSource {
 
-    private static UserRepository instance;
+    private volatile static UserRepository instance;
     private UserLocalDataSource mUserLocalDataSource;
     private UserRemoteDataSource mUserRemoteDataSource;
 
@@ -46,6 +47,76 @@ public class UserRepository implements IUserLocalDataSource, IUserRemoteDataSour
     @Override
     public void saveUser(LoginResult loginResult) {
         mUserLocalDataSource.saveUser(loginResult);
+    }
+
+    @Override
+    public void saveStaffInfoToSharePrefs(StaffInfo staffInfo) {
+        mUserLocalDataSource.saveStaffInfoToSharePrefs(staffInfo);
+    }
+
+    @Override
+    public StaffInfo getStaffInfoFromSharePrefs() {
+        return mUserLocalDataSource.getStaffInfoFromSharePrefs();
+    }
+
+    @Override
+    public void saveLanguageToSharePrefs(String language) {
+        mUserLocalDataSource.saveLanguageToSharePrefs(language);
+    }
+
+    @Override
+    public String getLanguageFromSharePrefs() {
+        return mUserLocalDataSource.getLanguageFromSharePrefs();
+    }
+
+    @Override
+    public void saveCountryToSharePrefs(String code) {
+        mUserLocalDataSource.saveCountryToSharePrefs(code);
+    }
+
+    @Override
+    public String getCountryFromSharePrefs() {
+        return mUserLocalDataSource.getCountryFromSharePrefs();
+    }
+
+    @Override
+    public void saveStatusNotification(boolean status) {
+        mUserLocalDataSource.saveStatusNotification(status);
+    }
+
+    @Override
+    public boolean getStatusNotification() {
+        return mUserLocalDataSource.getStatusNotification();
+    }
+
+    @Override
+    public void saveDisplayDashBoard(boolean status) {
+        mUserLocalDataSource.saveDisplayDashBoard(status);
+    }
+
+    @Override
+    public boolean getDisplayDashBoard() {
+        return mUserLocalDataSource.getDisplayDashBoard();
+    }
+
+    @Override
+    public void saveSyncBCCS(boolean status) {
+        mUserLocalDataSource.saveSyncBCCS(status);
+    }
+
+    @Override
+    public boolean getSyncBCCS() {
+        return mUserLocalDataSource.getSyncBCCS();
+    }
+
+    @Override
+    public void saveTimeSyncBCCS(int time) {
+        mUserLocalDataSource.saveTimeSyncBCCS(time);
+    }
+
+    @Override
+    public int getTimeSyncBCCS() {
+        return mUserLocalDataSource.getTimeSyncBCCS();
     }
 
     @Override

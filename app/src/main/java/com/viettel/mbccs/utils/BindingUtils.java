@@ -12,6 +12,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SwitchCompat;
 import android.text.Html;
 import android.text.InputType;
 import android.text.SpannableString;
@@ -25,6 +26,7 @@ import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -343,6 +345,10 @@ public class BindingUtils {
     public static void setAdapterSpinner(Spinner spinner, BaseAdapter adapter) {
         spinner.setAdapter(adapter);
     }
-
+    @BindingAdapter("onCheckedChangedListener")
+    public static void setOnCheckedChangedListener(SwitchCompat v,
+            CompoundButton.OnCheckedChangeListener listener) {
+        v.setOnCheckedChangeListener(listener);
+    }
 
 }

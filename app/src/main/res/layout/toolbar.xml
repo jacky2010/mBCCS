@@ -62,8 +62,8 @@
             />
         <ImageView
             android:id="@+id/image_right"
-            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:onClick="@{ rightIconClick }"
             android:src="@{ rightIcon }"
             android:visibility="@{ showRightIcon ? View.VISIBLE : View.GONE }"
@@ -74,11 +74,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@id/image_right"
-            android:layout_toStartOf="@id/image_right"
-            android:layout_toRightOf="@id/image_left"
-            android:layout_toEndOf="@id/image_left"
             android:gravity="center"
+            android:paddingLeft="@dimen/dp_40"
+            android:paddingRight="@dimen/dp_40"
             android:text="@{ title }"
             android:textColor="@{ titleColor }"
             android:textSize="@{ titleTextSize }"
