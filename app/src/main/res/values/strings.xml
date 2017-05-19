@@ -27,6 +27,7 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="doi_soat_cong_no">Đối soát công nợ</string>
     <string name="total">Tổng số</string>
     <string name="remain">Còn phải thu</string>
+
     <!--Reset Password-->
     <string name="title_reset_password">Quên mật khẩu</string>
     <string name="description_reset_password">Chúng tôi sẽ gửi mã xác nhận đổi mật khẩu tới số điện thoại: </string>
@@ -90,4 +91,13 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="payment">Thanh toán</string>
     <string name="sale_success">Bán hàng thành công</string>
     <string name="sale_success_content">Tin nhắn thông báo đã gửi đến SĐT của khách hàng và người bán</string>
+
+    <string name="login_number_hint">Số đăng nhập</string>
+    <string name="password_hint">Mật khẩu</string>
+    <string name="login">Đăng nhập</string>
+    <string name="forgot_password">Quên mật khẩu?</string>
+    <string name="phone_number_cannot_be_empty">Số điện thoại không thể bỏ trống.</string>
+    <string name="password_cannot_be_empty">Mật khẩu không thể bỏ trống.</string>
+    <string name="customer_service">Tổng đài chăm sóc khách hàng\n%1$s</string>
+
 </resources>

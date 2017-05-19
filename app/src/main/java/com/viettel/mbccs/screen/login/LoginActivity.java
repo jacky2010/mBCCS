@@ -1,16 +1,20 @@
 package com.viettel.mbccs.screen.login;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
-
+import android.support.annotation.Nullable;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.databinding.ActivityLoginBinding;
+import com.viettel.mbccs.screen.changepassword.ChangePasswordActivity;
+import com.viettel.mbccs.screen.main.MainActivity;
 
 /**
  * Created by eo_cuong on 5/10/17.
  */
 
-public class LoginActivity extends BaseDataBindActivity<ActivityLoginBinding, LoginPresenter> implements LoginContract.ViewModel {
+public class LoginActivity extends BaseDataBindActivity<ActivityLoginBinding, LoginPresenter>
+        implements LoginContract.ViewModel {
 
     @Override
     protected ActivityLoginBinding initBinding() {
@@ -39,6 +43,26 @@ public class LoginActivity extends BaseDataBindActivity<ActivityLoginBinding, Lo
 
     @Override
     public void onLoginSuccess() {
-        //TODO go to main
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
+    }
+
+    @Override
+    public void onForgotPassword(String username) {
+        startActivity(new Intent(this, ChangePasswordActivity.class));
+    }
+
+    @Override
+    public void showError(int type, @Nullable String message) {
+        switch (type) {
+            case LoginPresenter.TYPE_ERROR_USERNAME:
+                mBinding.username.setError(message);
+                mBinding.username.requestFocus();
+                break;
+            case LoginPresenter.TYPE_ERROR_PASSWORD:
+            default:
+                mBinding.password.setError(message);
+                mBinding.password.requestFocus();
+        }
     }
 }
