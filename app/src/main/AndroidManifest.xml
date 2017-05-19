@@ -43,6 +43,7 @@
         <activity android:name=".screen.sellretail.SaleRetailActivity"/>
         <activity android:name=".screen.sellretail.sellprogrampicker.SaleProgramPickerActivity"/>
         <activity android:name=".screen.sellretail.payment.PaymentInforRetailActivty"/>
+        <activity android:name=".screen.branches.BranchesActivity"/>
     </application>
 
 </manifest>

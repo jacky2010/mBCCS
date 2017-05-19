@@ -26,11 +26,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_8"
-                android:text="@string/sell_orders_unit"
+                android:text="So Giay To(*)"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_16" />
 
-            <TextView
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_40"
                 android:background="@drawable/bg_order"
@@ -49,10 +49,11 @@
         </LinearLayout>
 
         <ScrollView
-            android:paddingTop="@dimen/dp_6"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:paddingTop="@dimen/dp_6">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -63,10 +64,10 @@
                     android:layout_height="@dimen/dp_0.6"
                     android:background="@color/grey" />
 
-                <ListView
-                    android:id="@+id/lvDocumentList"
+                <android.support.v7.widget.RecyclerView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"></ListView>
+                    android:layout_height="wrap_content"
+                    android:adapter="@{presenter.branchesListAdapter}"></android.support.v7.widget.RecyclerView>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
