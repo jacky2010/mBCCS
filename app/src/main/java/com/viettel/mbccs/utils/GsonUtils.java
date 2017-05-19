@@ -2,6 +2,7 @@ package com.viettel.mbccs.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,6 +20,11 @@ public class GsonUtils {
     public static <T> T String2Object(String json, Class<T> clzz) {
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         return gson.fromJson(json, clzz);
+    }
+
+    public static <T> T String2Object(String json, Type typeOfT) {
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        return gson.fromJson(json, typeOfT);
     }
 
     public static <T> List<T> String2ListObject(String json, Class<T[]> clazz) {

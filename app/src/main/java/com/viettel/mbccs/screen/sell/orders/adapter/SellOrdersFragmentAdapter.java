@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import com.viettel.mbccs.constance.OrderStatus;
+import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.SaleOrders;
 import com.viettel.mbccs.screen.sell.orders.fragment.orders.OrdersFragment;
 import java.util.ArrayList;
@@ -18,9 +19,12 @@ public class SellOrdersFragmentAdapter extends FragmentPagerAdapter {
     private List<SaleOrders> orderListApprovals;
     private List<SaleOrders> orderListPending;
     private List<SaleOrders> orderListReject;
+    private ChannelInfo channelInfoSell;
 
-    public SellOrdersFragmentAdapter(FragmentManager fm, List<SaleOrders> saleOrderses) {
+    public SellOrdersFragmentAdapter(FragmentManager fm, List<SaleOrders> saleOrderses,
+            ChannelInfo channelInfoSell) {
         super(fm);
+        this.channelInfoSell = channelInfoSell;
         orderListApprovals = new ArrayList<>();
         orderListPending = new ArrayList<>();
         orderListReject = new ArrayList<>();
@@ -43,11 +47,11 @@ public class SellOrdersFragmentAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return OrdersFragment.newInstance(orderListPending);
+                return OrdersFragment.newInstance(orderListPending, channelInfoSell);
             case 1:
-                return OrdersFragment.newInstance(orderListApprovals);
+                return OrdersFragment.newInstance(orderListApprovals, channelInfoSell);
             case 2:
-                return OrdersFragment.newInstance(orderListReject);
+                return OrdersFragment.newInstance(orderListReject, channelInfoSell);
             //            default:
             //                return null;
         }

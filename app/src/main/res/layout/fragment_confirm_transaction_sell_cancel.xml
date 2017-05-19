@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    >
+    <data>
+        <variable
+            name="presenter"
+            type="com.viettel.mbccs.screen.sell.orders.fragment.ConfirmTransactionSellCancelFragment"
+            />
+        <import type="android.view.View"/>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:clickable="false"
+        android:orientation="vertical"
+        >
+        <include
+            layout="@layout/toolbar"
+            android:id="@+id/toolbar"
+            app:background="@{@color/grey}"
+            app:isShow="@{true}"
+            app:leftIcon="@{@drawable/ic_arrow_left_24dp}"
+            app:leftIconClick="@{()->presenter.onClose()}"
+            app:title="@{ presenter.title }"
+            app:titleColor="@{@color/white}"
+            app:titleTextSize="@{@dimen/sp_17}"
+            />
+        <TextView
+            android:id="@+id/idOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/toolbar"
+            android:layout_marginTop="@dimen/dp_50"
+            android:paddingLeft="@dimen/dp_16"
+            android:text="@{ presenter.idSaleTrans }"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_20"
+            android:textStyle="bold"
+            />
+
+        <LinearLayout
+            android:id="@+id/layout_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/idOrder"
+            android:layout_marginTop="@dimen/dp_40"
+            android:orientation="vertical"
+            android:padding="@dimen/dp_16"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Đơn đặt hàng từ kênh"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_14"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_8"
+                    android:text="@{ presenter.nameChange }"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_18"
+                    android:textStyle="bold"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="- Số điện thoại: "
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_14"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_8"
+                    android:text="@{ presenter.phoneNumberChange }"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16"
+                    android:textStyle="bold"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="- Số tiền thanh toán: "
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_14"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_8"
+                    android:text="@{ presenter.sumMoneyTransaction }"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16"
+                    android:textStyle="bold"
+                    />
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/dp_100"
+                android:text="(Một triệu đồng)"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                android:textStyle="bold"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layout_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_detail"
+            android:layout_marginTop="@dimen/dp_40"
+            android:orientation="vertical"
+            android:padding="@dimen/dp_16"
+            android:visibility="@{ presenter.isShow ? View.VISIBLE : View.GONE }"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="LÝ DO HỦY"
+                android:textColor="@color/black"
+                />
+            <Spinner
+                android:id="@+id/spinner_reason_cancel"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@drawable/bg_order"
+                bind:spinnerAdapter="@{ presenter.spinnerReasonCancelAdapter }"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layout_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/dp_50"
+            android:layout_marginTop="@dimen/dp_10"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dp_2"
+            android:paddingRight="@dimen/dp_2"
+            >
+            <Button
+                android:layout_width="@dimen/dp_150"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/dp_16"
+                android:background="@color/default_bg_disabled"
+                android:onClick="@{ v -> presenter.onClose() }"
+                android:text="@string/close"
+                android:textColor="@color/black"
+                />
+            <Button
+                android:layout_width="@dimen/dp_150"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:background="@color/red_button"
+                android:onClick="@{ v -> presenter.onSellOrCancel() }"
+                android:text="@{ presenter.textButton }"
+                android:textColor="@{ presenter.colorButton }"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

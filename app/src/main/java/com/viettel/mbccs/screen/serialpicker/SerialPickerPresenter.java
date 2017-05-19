@@ -53,8 +53,9 @@ public class SerialPickerPresenter
 
     private void loadSerial() {
         mSerials.addAll(Arrays.asList(new String[] {
-                "11111", "11112", "11113", "11114", "11116", "11117", "11119", "11121", "11122", "11123", "11124", "11125",
-                "11126", "11127", "11130", "11131", "11133", "11135", "11136", "11136", "11136",
+                "11111", "11112", "11113", "11114", "11116", "11117", "11119", "11121", "11122",
+                "11123", "11124", "11125", "11126", "11127", "11130", "11131", "11133", "11135",
+                "11136", "11136", "11136",
         }));
 
         init();
@@ -145,7 +146,8 @@ public class SerialPickerPresenter
             if (remain >= currentSerialBlock.toSerialList().size()) {
                 serialBlock.setToSerial((serialTo.get()));
             } else {
-                serialBlock.setToSerial(String.valueOf(Long.parseLong(serialFrom.get())+remain-1));
+                serialBlock.setToSerial(
+                        String.valueOf(Long.parseLong(serialFrom.get()) + remain - 1));
             }
 
             mSerialSelected.add(serialBlock);

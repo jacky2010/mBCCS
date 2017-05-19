@@ -5,7 +5,9 @@ import android.support.design.widget.TabLayout;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.constance.OrderStatus;
+import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.SaleOrders;
+import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.databinding.ActivitySellOrdersBinding;
 import com.viettel.mbccs.screen.sell.orders.adapter.SellOrdersFragmentAdapter;
 import java.util.ArrayList;
@@ -30,9 +32,9 @@ public class SellOrdersActivity
     @Override
     protected void initData() {
         presenter = new SellOrdersPresenter(this, this);
-        presenter.subscribe();
         mBinding.setPresenter(presenter);
         initView();
+        presenter.subscribe();
     }
 
     @Override
@@ -61,12 +63,12 @@ public class SellOrdersActivity
 
     @Override
     public void showLoading() {
-
+        showLoadingDialog();
     }
 
     @Override
     public void hideLoading() {
-
+        hideLoadingDialog();
     }
 
     @Override
@@ -85,7 +87,7 @@ public class SellOrdersActivity
     }
 
     @Override
-    public void setDataResult(List<SaleOrders> saleOrdersList) {
+    public void setDataResult(List<SaleOrders> saleOrdersList, ChannelInfo channelInfoSelect) {
         int countApp = 0, countPen = 0, countRe = 0;
         for (SaleOrders saleOrders : saleOrdersList) {
             switch ((int) saleOrders.getOrderStatus()) {
@@ -107,13 +109,15 @@ public class SellOrdersActivity
         mBinding.tabLayout.getTabAt(2)
                 .setText(getString(R.string.sell_orders_title_reject, countRe));
         sellOrdersFragmentAdapter =
-                new SellOrdersFragmentAdapter(getSupportFragmentManager(), saleOrdersList);
+                new SellOrdersFragmentAdapter(getSupportFragmentManager(), saleOrdersList,
+                        channelInfoSelect);
         presenter.setSellOrdersFragmentAdapter(sellOrdersFragmentAdapter);
         presenter.setTotalOrders(saleOrdersList.size());
     }
 
     @Override
     public void getDataError() {
+        // TODO: 5/18/17 show error
         // Fake data
         List<SaleOrders> saleOrdersList = new ArrayList<>();
         mBinding.tabLayout.getTabAt(0).setText(getString(R.string.sell_orders_title_pending, 10));
@@ -139,7 +143,12 @@ public class SellOrdersActivity
             saleOrdersList.add(order);
         }
         sellOrdersFragmentAdapter =
-                new SellOrdersFragmentAdapter(getSupportFragmentManager(), saleOrdersList);
+                new SellOrdersFragmentAdapter(getSupportFragmentManager(), saleOrdersList, new ChannelInfo());
         presenter.setSellOrdersFragmentAdapter(sellOrdersFragmentAdapter);
+    }
+
+    @Override
+    public void getListChannelByOwnerTypeIdError(BaseException error) {
+        // TODO: 5/18/17 show error
     }
 }
