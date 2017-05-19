@@ -3,21 +3,21 @@ package com.viettel.mbccs.screen.goodsconfirm;
 import android.app.Activity;
 import android.content.Context;
 import com.viettel.mbccs.data.model.ModelSale;
-import com.viettel.mbccs.screen.goodsconfirm.adapter.StockConfirmAdapter;
+import com.viettel.mbccs.screen.goodsconfirm.adapter.ModelSaleConfirmAdapter;
 import java.util.List;
 
 /**
  * Created by eo_cuong on 5/14/17.
  */
 
-public class StockConfirmPresenter implements StockActivityContract.Presenter {
+public class SaleConfirmPresenter implements SaleActivityContract.Presenter {
 
     private Context mContext;
-    private StockActivityContract.ViewModel mViewModel;
+    private SaleActivityContract.ViewModel mViewModel;
     private List<ModelSale> mGoodItems;
-    private StockConfirmAdapter mAdapter;
+    private ModelSaleConfirmAdapter mAdapter;
 
-    public StockConfirmPresenter(Context context, StockActivityContract.ViewModel viewModel,
+    public SaleConfirmPresenter(Context context, SaleActivityContract.ViewModel viewModel,
             List<ModelSale> goodItems) {
         mContext = context;
         mViewModel = viewModel;
@@ -26,7 +26,7 @@ public class StockConfirmPresenter implements StockActivityContract.Presenter {
     }
 
     private void init() {
-        mAdapter = new StockConfirmAdapter(mContext, mGoodItems);
+        mAdapter = new ModelSaleConfirmAdapter(mContext, mGoodItems);
     }
 
     @Override
@@ -43,11 +43,11 @@ public class StockConfirmPresenter implements StockActivityContract.Presenter {
         ((Activity) mContext).finish();
     }
 
-    public StockConfirmAdapter getAdapter() {
+    public ModelSaleConfirmAdapter getAdapter() {
         return mAdapter;
     }
 
-    public void setAdapter(StockConfirmAdapter adapter) {
+    public void setAdapter(ModelSaleConfirmAdapter adapter) {
         mAdapter = adapter;
     }
 }

@@ -14,7 +14,7 @@ import java.util.List;
  * Created by eo_cuong on 5/14/17.
  */
 
-public class StockConfirmActivity extends BaseDataBindActivity<ActivityConfirmGoodsBinding,StockConfirmPresenter> implements StockActivityContract.ViewModel {
+public class SaleConfirmActivity extends BaseDataBindActivity<ActivityConfirmGoodsBinding,SaleConfirmPresenter> implements SaleActivityContract.ViewModel {
 
     private List<ModelSale> mGoodItems;
 
@@ -30,12 +30,12 @@ public class StockConfirmActivity extends BaseDataBindActivity<ActivityConfirmGo
             mGoodItems = GsonUtils.String2ListObject(json, ModelSale[].class);
         }
 
-        mPresenter = new StockConfirmPresenter(this, this, mGoodItems);
+        mPresenter = new SaleConfirmPresenter(this, this, mGoodItems);
         mBinding.setPresenter(mPresenter);
     }
 
     @Override
-    public void setPresenter(StockActivityContract.Presenter presenter) {
+    public void setPresenter(SaleActivityContract.Presenter presenter) {
 
     }
 

@@ -11,7 +11,7 @@ import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.model.SaleProgram;
 import com.viettel.mbccs.databinding.ActivitySellRetailBinding;
-import com.viettel.mbccs.screen.goodsconfirm.StockConfirmActivity;
+import com.viettel.mbccs.screen.goodsconfirm.SaleConfirmActivity;
 import com.viettel.mbccs.screen.sellretail.sellprogrampicker.SaleProgramPickerActivity;
 import com.viettel.mbccs.screen.serialpicker.SerialPickerActivity;
 import com.viettel.mbccs.utils.GsonUtils;
@@ -106,7 +106,7 @@ public class SaleRetailActivity
 
     @Override
     public void onNext(List<ModelSale> stockItems) {
-        Intent intent1 = new Intent(this, StockConfirmActivity.class);
+        Intent intent1 = new Intent(this,SaleConfirmActivity.class);
         intent1.putExtra(Constants.BundleConstant.GOODS_LIST, GsonUtils.Object2String(stockItems));
         startActivity(intent1);
     }
