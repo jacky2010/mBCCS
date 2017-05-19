@@ -7,7 +7,7 @@ import com.viettel.mbccs.base.BaseView;
  * Created by eo_cuong on 5/14/17.
  */
 
-public interface StockActivityContract {
+public interface SaleActivityContract {
 
     interface Presenter extends BasePresenter {
 

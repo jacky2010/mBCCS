@@ -7,7 +7,7 @@ import com.viettel.mbccs.data.model.ModelSale;
  * Created by eo_cuong on 5/15/17.
  */
 
-public class ItemGoodConfirmPresenter {
+public class ItemModelSalePresenter {
 
     private ModelSale mGoodItem;
 
@@ -15,7 +15,7 @@ public class ItemGoodConfirmPresenter {
 
     public ObservableField<Boolean> isExpand;
 
-    public ItemGoodConfirmPresenter() {
+    public ItemModelSalePresenter() {
         isExpand = new ObservableField<>();
         isExpand.set(false);
     }

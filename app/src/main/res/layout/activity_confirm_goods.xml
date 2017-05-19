@@ -6,7 +6,7 @@
     <data>
         <variable
             name="presenter"
-            type="com.viettel.mbccs.screen.goodsconfirm.StockConfirmPresenter"
+            type="com.viettel.mbccs.screen.goodsconfirm.SaleConfirmPresenter"
             />
     </data>
     <RelativeLayout

@@ -15,14 +15,14 @@ import java.util.List;
  * Created by eo_cuong on 5/14/17.
  */
 
-public class StockConfirmAdapter
-        extends RecyclerView.Adapter<StockConfirmAdapter.StockConfirmViewHolder> {
+public class ModelSaleConfirmAdapter
+        extends RecyclerView.Adapter<ModelSaleConfirmAdapter.StockConfirmViewHolder> {
 
     private Context mContext;
     private List<ModelSale> mStockItems;
     private List<ModelSale> mStockItemsFilter=new ArrayList<>();
 
-    public StockConfirmAdapter(Context context, List<ModelSale> goodItems) {
+    public ModelSaleConfirmAdapter(Context context, List<ModelSale> goodItems) {
         mContext = context;
         mStockItems = goodItems;
         for (ModelSale stockItem : mStockItems) {
@@ -59,7 +59,7 @@ public class StockConfirmAdapter
         }
 
         public void bind(ModelSale item) {
-            ItemModelSalePrsenter itemGoodConfirmPresenter = new ItemModelSalePrsenter();
+            ItemModelSalePresenter itemGoodConfirmPresenter = new ItemModelSalePresenter();
             itemGoodConfirmPresenter.setGoodItem(item);
             mBinding.setItem(itemGoodConfirmPresenter);
         }
