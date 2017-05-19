@@ -99,7 +99,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrdersView
         }
 
         public void onClickItem() {
-            if ((int) saleOrders.getOrderStatus() == OrderStatus.APPROVALS && callback != null) {
+            if ((int) saleOrders.getOrderStatus() == OrderStatus.PENDING && callback != null) {
                 callback.itemOrderClick(position);
             }
         }

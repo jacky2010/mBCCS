@@ -1,11 +1,14 @@
 package com.viettel.mbccs.data.source;
 
 import com.viettel.mbccs.data.model.ChannelInfo;
+import com.viettel.mbccs.data.model.Reason;
 import com.viettel.mbccs.data.model.SaleOrders;
 import com.viettel.mbccs.data.source.remote.ISellOrdersRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListChannelByOwnerTypeIdRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListOrderRequest;
+import com.viettel.mbccs.data.source.remote.request.GetOrderInfoRequest;
+import com.viettel.mbccs.data.source.remote.response.OrderInfoResponse;
 import com.viettel.mbccs.data.source.remote.service.RequestHelper;
 import com.viettel.mbccs.utils.rx.SchedulerUtils;
 import java.util.List;
@@ -43,5 +46,18 @@ public class SellOrdersRepository implements ISellOrdersRemoteDataSource {
                 .getListChannelByOwnerTypeId(request)
                 .flatMap(SchedulerUtils.<List<ChannelInfo>>convertDataFlatMap())
                 .compose(SchedulerUtils.<List<ChannelInfo>>applyAsyncSchedulers());
+    }
+
+    @Override
+    public Observable<OrderInfoResponse> getOrderInfo(BaseRequest<GetOrderInfoRequest> request) {
+        return RequestHelper.getRequest()
+                .getOrderInfo(request)
+                .flatMap(SchedulerUtils.<OrderInfoResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<OrderInfoResponse>applyAsyncSchedulers());
+    }
+
+    @Override
+    public Observable<List<Reason>> getListReason(BaseRequest<Object> request) {
+        return null;
     }
 }

@@ -11,7 +11,7 @@
     </data>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="@dimen/dp_150"
         android:background="@drawable/bg_order"
         android:orientation="horizontal"
         >
@@ -54,7 +54,7 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_14"
                 />
-            <!--android:text="@{ presenter.goodItem.getName()}"-->
+            <!--android:text="@{ presenter.saleOrdersDetail.getStockMoldeName()}"-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
                 android:textColor="@color/red_button"
                 android:textSize="@dimen/sp_14"
                 />
-            <!--android:text="@{ @string/item_order_detail_price_item(presenter.goodItem.getGoodPrice()) }"-->
+            <!--android:text="@{ @string/item_order_detail_price_item(presenter.saleOrdersDetail.getPrice()) }"-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
                 android:textSize="@dimen/sp_18"
                 android:textStyle="bold"
                 />
-            <!--android:text="@{ presenter.goodItem.getChoiceCount() }"-->
+            <!--android:text="@{ presenter.totalStock }"-->
         </LinearLayout>
         <View
             android:layout_width="@dimen/dp_1"

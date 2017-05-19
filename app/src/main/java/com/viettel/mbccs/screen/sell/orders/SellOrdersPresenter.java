@@ -64,6 +64,7 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
 
     public void subscribe() {
         // TODO: 5/18/17 get data StaffInfo from SharedPreferences
+        sellOrdersView.showLoading();
         staffInfo.set(new StaffInfo());
 
         GetListChannelByOwnerTypeIdRequest g = new GetListChannelByOwnerTypeIdRequest();
@@ -87,20 +88,23 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
                         for (ChannelInfo c : channelInfoList) {
                             dataSpinnerChannel.add(c.getManagementName());
                         }
+                        spinnerAdapterChannel.set(
+                                new ArrayAdapter<>(context, android.R.layout.simple_spinner_item,
+                                        dataSpinnerChannel));
+                        spinnerAdapterChannel.get()
+                                .setDropDownViewResource(
+                                        android.R.layout.simple_spinner_dropdown_item);
+
+                        sellOrdersView.hideLoading();
                     }
 
                     @Override
                     public void onError(BaseException error) {
-                        // TODO: 5/18/17 Show error
+                        // TODO: 5/18/17 show error
+                        sellOrdersView.hideLoading();
+                        sellOrdersView.getListChannelByOwnerTypeIdError(error);
                     }
                 });
-
-        spinnerAdapterChannel.set(new ArrayAdapter<>(context, android.R.layout.simple_spinner_item,
-                dataSpinnerChannel));
-        spinnerAdapterChannel.get()
-                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        //        spinnerListener.set(this);
     }
 
     public void unSubscribe() {
@@ -111,7 +115,6 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
         Activity activity = (Activity) context;
         activity.setResult(Activity.RESULT_CANCELED);
         activity.finish();
-        // TODO: 5/15/17 cancel
     }
 
     @Override
@@ -119,7 +122,6 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
         switch (parent.getId()) {
             case R.id.spinnerChannel:
                 channelInfoSelect = channelInfoList.get(position);
-                // TODO: 5/15/17
                 break;
         }
     }
@@ -132,6 +134,7 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
     public void clickSearch() {
         String dateFrom = "";
         String dateTo = "";
+
         GetListOrderRequest getListOrderRequest = new GetListOrderRequest();
         getListOrderRequest.setShopId(staffInfo.get().getShopId());
         getListOrderRequest.setStaffId(staffInfo.get().getStaffId());
@@ -152,8 +155,7 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
                 .subscribe(new MBCCSSubscribe<List<SaleOrders>>() {
                     @Override
                     public void onSuccess(List<SaleOrders> object) {
-                        // TODO: 5/16/17 set data Recycler view
-                        sellOrdersView.setDataResult(object);
+                        sellOrdersView.setDataResult(object, channelInfoSelect);
                     }
 
                     @Override

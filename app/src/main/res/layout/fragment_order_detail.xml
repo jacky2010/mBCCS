@@ -107,7 +107,7 @@
                 android:layout_weight="1"
                 android:background="@color/red_button"
                 android:text="@string/order_detail_cancel"
-                android:onClick="@{ v -> presenter.onCancel() }"
+                android:onClick="@{ v -> presenter.onCancelSell() }"
                 android:textColor="@color/white"
                 />
             <Button

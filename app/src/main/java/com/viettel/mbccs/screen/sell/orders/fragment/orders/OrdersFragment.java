@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseFragment;
+import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.SaleOrders;
 import com.viettel.mbccs.databinding.FragmentOrdersBinding;
 import com.viettel.mbccs.screen.sell.orders.adapter.OrdersAdapter;
@@ -31,7 +32,7 @@ public class OrdersFragment extends BaseFragment implements OrdersAdapter.Orders
     public ObservableField<OrdersAdapter> adapterOrders;
     public ObservableField<RecyclerView.ItemDecoration> itemDecoration;
 
-    public static OrdersFragment newInstance(List<SaleOrders> saleOrdersList) {
+    public static OrdersFragment newInstance(List<SaleOrders> saleOrdersList, ChannelInfo channelInfoSale) {
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList(ARG_DATA, (ArrayList<? extends Parcelable>) saleOrdersList);
         OrdersFragment fragment = new OrdersFragment();
@@ -69,7 +70,8 @@ public class OrdersFragment extends BaseFragment implements OrdersAdapter.Orders
         FragmentTransaction fragmentTransaction =
                 getActivity().getSupportFragmentManager().beginTransaction();
         fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.replace(R.id.frame_sell_orders, OrderDetailFragment.newInstance("1245"))
+        fragmentTransaction.replace(R.id.frame_sell_orders,
+                OrderDetailFragment.newInstance(saleOrdersList.get(position).getSaleOrdersId()))
                 .commit();
     }
 }

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">MBCCS</string>
     <string name="ok">ok</string>
+    <string name="cancel">Hủy</string>
     <string name="serial_step1">1. Chọn dải serial</string>
     <string name="or">Hoặc</string>
     <string name="close">Đóng</string>
@@ -69,6 +70,12 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="item_orders_id">Mã đơn hàng: %1$s</string>
     <string name="item_orders_date">Đặt ngày: %1$s</string>
     <string name="item_orders_change_code_name">%1$s - %2$s</string>
+
+    <string name="confirm_transaction_cancel_title">Xác nhận hủy đơn hàng</string>
+    <string name="confirm_transaction_sell_title">Xác nhận bán hàng</string>
+    <string name="confirm_transaction_btn_cancel">Hủy</string>
+    <string name="confirm_transaction_btn_sell">Bán</string>
+
     <string name="service">Dịch vụ</string>
     <string name="sell_program">Chương trình bán hàng</string>
     <string name="stock_list">Danh sách mặt hàng</string>
