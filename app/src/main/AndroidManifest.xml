@@ -27,24 +27,46 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <activity android:name=".screen.billing.BillingActivity"/>
+
         <activity
             android:name=".screen.resetpass.ResetPasswordActivity"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.login.LoginActivity"
             android:configChanges="screenLayout|screenSize"
             android:windowSoftInputMode="adjustResize"/>
-        <activity android:name=".screen.main.MainActivity"/>
-        <activity android:name=".screen.serialpicker.SerialPickerActivity"/>
-        <activity android:name=".screen.common.success.ScanbarCodeActivity"/>
-        <activity android:name=".screen.goodsconfirm.SaleConfirmActivity"/>
-        <activity android:name=".screen.sell.orders.SellOrdersActivity"/>
-        <activity android:name=".screen.sellretail.SaleRetailActivity"/>
-        <activity android:name=".screen.sellretail.sellprogrampicker.SaleProgramPickerActivity"/>
-        <activity android:name=".screen.sellretail.payment.PaymentInforRetailActivty"/>
-        <activity android:name=".screen.branches.BranchesActivity"/>
-        <activity android:name=".screen.config.ConfigActivity"/>
+        <activity
+            android:name=".screen.main.MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screen.serialpicker.SerialPickerActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screen.common.success.ScanbarCodeActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screen.sell.orders.SellOrdersActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screen.sellretail.SaleRetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screen.sellretail.sellprogrampicker.SaleProgramPickerActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screen.config.ConfigActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screen.goodsconfirm.SaleReviewActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screen.sellretail.CreateSaleRetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screen.branches.BranchesActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
