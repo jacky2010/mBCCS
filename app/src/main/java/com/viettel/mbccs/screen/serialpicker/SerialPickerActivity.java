@@ -9,9 +9,10 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
+
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
-import com.viettel.mbccs.data.model.ModelSale;
+import com.viettel.mbccs.data.model.SerialPickerModel;
 import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
 import com.viettel.mbccs.databinding.ActivitySerialPickerBinding;
 import com.viettel.mbccs.screen.common.success.ScanbarCodeActivity;
@@ -28,32 +29,32 @@ public class SerialPickerActivity
 
     public static final int SCANBARCODE_REQUEST_CODE = 125;
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 126;
-    private ModelSale mModelSale;
+    private SerialPickerModel mSerialPickerModel;
     private GetSerialRequest mRequest;
 
     @Override
-    protected ActivitySerialPickerBinding initBinding() {
-        return DataBindingUtil.setContentView(this, R.layout.activity_serial_picker);
+    protected int getIdLayout() {
+        return R.layout.activity_serial_picker;
     }
 
     @Override
     protected void initData() {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            String json = bundle.getString(Constants.BundleConstant.GOOD_ITEM);
-            mModelSale = GsonUtils.String2Object(json, ModelSale.class);
+            mSerialPickerModel = (SerialPickerModel) bundle.getSerializable(
+                    Constants.BundleConstant.SERIAL_PICKER_MODEL);
         }
-        mPresenter = new SerialPickerPresenter(this, this, mModelSale);
+        mPresenter = new SerialPickerPresenter(this, this, mSerialPickerModel);
         mBinding.setPresenter(mPresenter);
 
         getSerials();
     }
 
     private void getSerials() {
-        if (mModelSale == null) {
+        if (mSerialPickerModel == null) {
             return;
         }
-        mRequest=new GetSerialRequest();
+        mRequest = new GetSerialRequest();
     }
 
     @Override
@@ -63,12 +64,12 @@ public class SerialPickerActivity
 
     @Override
     public void showLoading() {
-
+        showLoadingDialog();
     }
 
     @Override
     public void hideLoading() {
-
+        hideLoadingDialog();
     }
 
     @Override
@@ -91,7 +92,7 @@ public class SerialPickerActivity
                     // No explanation needed, we can request the permission.
 
                     ActivityCompat.requestPermissions(SerialPickerActivity.this,
-                            new String[] { Manifest.permission.CAMERA },
+                            new String[]{Manifest.permission.CAMERA},
                             MY_PERMISSIONS_REQUEST_CAMERA);
 
                     // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
@@ -123,7 +124,7 @@ public class SerialPickerActivity
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[],
-            int[] grantResults) {
+                                           int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_CAMERA: {
                 // If request is cancelled, the result arrays are empty.

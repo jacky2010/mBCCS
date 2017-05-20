@@ -4,6 +4,7 @@ import com.viettel.mbccs.base.BasePresenter;
 import com.viettel.mbccs.base.BaseView;
 import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.model.SaleOrdersDetail;
+import com.viettel.mbccs.data.model.SerialBO;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.screen.sell.orders.adapter.OrderDetailAdapter;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
 
 public class OrderDetailFragmentContract {
     interface Presenter extends BasePresenter,  OrderDetailAdapter.OrderDetailAdapterCallback{
+        void onSerialPickerSuccess(List<SerialBO> serialBlockBySerials);
     }
 
     interface View extends BaseView<Presenter> {
@@ -21,5 +23,7 @@ public class OrderDetailFragmentContract {
         void setData(List<SaleOrdersDetail> items);
 
         void getOrderInfoError(BaseException error);
+
+        void pickSerial(ModelSale modelSale);
     }
 }

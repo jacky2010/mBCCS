@@ -5,6 +5,7 @@ import android.os.Parcelable;
 import android.text.TextUtils;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  * Created by eo_cuong on 5/14/17.
  */
 
-public class SerialBO implements Parcelable {
+public class SerialBO implements Parcelable, Serializable {
 
     @SerializedName("stockModelId")
     @Expose

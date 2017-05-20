@@ -10,6 +10,7 @@ import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.SaleOrdersDetail;
 import com.viettel.mbccs.data.model.SaleTrans;
+import com.viettel.mbccs.data.model.SerialBO;
 import com.viettel.mbccs.data.model.Session;
 import com.viettel.mbccs.data.source.SellOrdersRepository;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
@@ -76,13 +77,14 @@ public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract
 
     @Override
     public void selectSerialClick(int position) {
-        Activity activity = (Activity) context;
-        //        String json = GsonUtils.Object2String(goodItemList.get(position));
-        Intent intent = new Intent(activity, SerialPickerActivity.class);
-        Bundle bundle = new Bundle();
-        //        bundle.putString(Constants.BundleConstant.GOOD_ITEM, json);
-        intent.putExtras(bundle);
-        activity.startActivityForResult(intent, 0);
+
+        if (goodItemList == null) {
+            return;
+        }
+
+        ModelSale modelSale = goodItemList.get(position);
+
+        view.pickSerial(modelSale);
     }
 
     public void getDetailOrder(long idOrder) {
@@ -121,7 +123,7 @@ public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract
         this.totalMoney.set(String.valueOf(saleTrans.getAmountTax()));
         this.payMoney.set(String.valueOf(saleTrans.getAmountNotTax()));
         this.discountMoney.set(String.valueOf(saleTrans.getDiscount()));
-        this.taxPercent.set(String.valueOf(saleTrans.getvAT()));
+        this.taxPercent.set(String.valueOf(saleTrans.getVAT()));
         this.taxMoney.set(String.valueOf(saleTrans.getTax()));
     }
 
@@ -140,5 +142,10 @@ public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract
 
     public void setSerialBlockList(List<Integer> list) {
         //        if (list.size())
+    }
+
+    @Override
+    public void onSerialPickerSuccess(List<SerialBO> serialBlockBySerials) {
+        //TODO upte serialBO list
     }
 }

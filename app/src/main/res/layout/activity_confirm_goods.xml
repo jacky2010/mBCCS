@@ -6,7 +6,7 @@
     <data>
         <variable
             name="presenter"
-            type="com.viettel.mbccs.screen.goodsconfirm.SaleConfirmPresenter"
+            type="com.viettel.mbccs.screen.goodsconfirm.SaleReviewPresenter"
             />
     </data>
     <RelativeLayout
@@ -36,6 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_50"
             android:layout_alignParentBottom="true"
+            android:onClick="@{()->presenter.onConfirm()}"
             android:text="@string/confirm"
             style="@style/button_positive"
             />

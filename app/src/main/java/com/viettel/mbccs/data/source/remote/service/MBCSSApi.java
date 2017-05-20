@@ -1,8 +1,12 @@
 package com.viettel.mbccs.data.source.remote.service;
 
 import com.viettel.mbccs.data.model.ChannelInfo;
+import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.model.SaleOrders;
+import com.viettel.mbccs.data.model.SaleTrans;
+import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
+import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsReponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
@@ -54,4 +58,15 @@ public interface MBCSSApi {
     @GET("/login")
     Observable<BaseResponse<OrderInfoResponse>> getOrderInfo(
             @Body BaseRequest<GetOrderInfoRequest> request);
+    @POST("/getsalemodel")
+    Observable<BaseResponse<List<ModelSale>>> getModelSales(
+            @Body BaseRequest<GetTotalStockRequest> request);
+
+    @POST("/getinfortrans")
+    Observable<BaseResponse<SaleTrans>> getSaleTransInfo(
+            @Body BaseRequest<GetInfoSaleTranRequest> request);
+
+    @POST("/savetransaction")
+    Observable<BaseResponse<SaleTrans>> createSaleTransRetail(
+            @Body BaseRequest<GetInfoSaleTranRequest> request);
 }

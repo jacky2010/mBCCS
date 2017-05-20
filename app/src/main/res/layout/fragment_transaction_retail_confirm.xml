@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="presenter"
+            type="com.viettel.mbccs.screen.sellretail.savetransconfirm.SaveTransConfirmPresenter"
+            />
+    </data>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <include
+            layout="@layout/toolbar"
+            app:background="@{@color/grey}"
+            app:isShow="@{true}"
+            app:leftIcon="@{@drawable/back}"
+            app:leftIconClick="@{()->presenter.onBack()}"
+            app:title="@{@string/sale_retail}"
+            app:titleColor="@{@color/black}"
+            app:titleTextSize="@{@dimen/sp_17}"
+            />
+
+        <LinearLayout
+            android:id="@+id/layout_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:paddingBottom="20dp"
+            android:paddingTop="10dp"
+            >
+
+            <com.viettel.mbccs.widget.CustomButton
+                android:id="@+id/btn_cancel"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_marginRight="20dp"
+                android:gravity="center"
+                android:onClick="@{()->presenter.onClose()}"
+                android:text="@string/close"
+                android:textAllCaps="true"
+                style="@style/button_nagative"
+                />
+
+            <com.viettel.mbccs.widget.CustomButton
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:onClick="@{()->presenter.saveTransaction()}"
+                android:text="@string/confirm"
+                android:textAllCaps="true"
+                style="@style/button_positive"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/layout_button"
+            android:layout_below="@id/lyHeader"
+            >
+            <com.viettel.mbccs.widget.CustomTextView
+                android:id="@+id/text_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:padding="20dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:textHtml="@{presenter.content}"
+                />
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>

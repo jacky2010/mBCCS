@@ -1,10 +1,12 @@
 package com.viettel.mbccs.data.source.remote.request;
 
+import java.io.Serializable;
+
 /**
  * Created by HuyQuyet on 5/17/17.
  */
 
-public class GetListOrderRequest{
+public class GetListOrderRequest implements Serializable{
 
     private long shopId;
     private long staffId;

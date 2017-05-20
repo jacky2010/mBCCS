@@ -1,7 +1,7 @@
 package com.viettel.mbccs.screen.main;
 
-import android.databinding.DataBindingUtil;
 import android.support.v4.app.Fragment;
+
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.databinding.ActivityMainBinding;
@@ -12,8 +12,8 @@ public class MainActivity extends BaseDataBindActivity<ActivityMainBinding, Main
         implements MainContract.ViewModel {
 
     @Override
-    protected ActivityMainBinding initBinding() {
-        return DataBindingUtil.setContentView(this, R.layout.activity_main);
+    protected int getIdLayout() {
+        return R.layout.activity_main;
     }
 
     @Override

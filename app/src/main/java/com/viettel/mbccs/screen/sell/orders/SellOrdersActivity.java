@@ -1,6 +1,5 @@
 package com.viettel.mbccs.screen.sell.orders;
 
-import android.databinding.DataBindingUtil;
 import android.support.design.widget.TabLayout;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
@@ -24,9 +23,10 @@ public class SellOrdersActivity
     private SellOrdersPresenter presenter;
     private SellOrdersFragmentAdapter sellOrdersFragmentAdapter;
 
+
     @Override
-    protected ActivitySellOrdersBinding initBinding() {
-        return DataBindingUtil.setContentView(this, R.layout.activity_sell_orders);
+    protected int getIdLayout() {
+        return R.layout.activity_sell_orders;
     }
 
     @Override

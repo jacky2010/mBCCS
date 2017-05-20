@@ -2,12 +2,13 @@ package com.viettel.mbccs.data.source.remote.request;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import java.io.Serializable;
 
 /**
  * Created by eo_cuong on 5/18/17.
  */
 
-public class GetSerialRequest {
+public class GetSerialRequest implements Serializable{
 
 
     @SerializedName("ownerId")

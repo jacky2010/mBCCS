@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:padding="5dp"
-                android:text="@{item.goodItem.name}"
+                android:text="@{item.stockSerial.stockMoldeName}"
                 android:textColor="@color/black"
                 />
         </LinearLayout>
@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:padding="5dp"
-                android:text="@{String.valueOf(item.goodItem.choiceCount)}"
+                android:text="@{String.valueOf(item.stockSerial.quantity)}"
                 android:textColor="@color/black"
                 android:textSize="17sp"
                 android:textStyle="bold"
