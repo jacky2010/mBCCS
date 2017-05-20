@@ -111,6 +111,7 @@ public class Common {
         return numberToString(money);
     }
 
+
     public static String formatNumberForRead(double number) {
         NumberFormat nf = NumberFormat.getInstance();
         String temp = nf.format(number);
@@ -124,6 +125,10 @@ public class Common {
             }
         }
         return strReturn;
+    }
+
+    public static String formatDouble(double number) {
+        return String.format(Locale.getDefault(), "%,.0f", number);
     }
 
     public static String numberToString(double number) {

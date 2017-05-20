@@ -1,8 +1,9 @@
 package com.viettel.mbccs.data.source.remote.request;
 
 import com.google.gson.annotations.SerializedName;
+import java.io.Serializable;
 
-public class GetTelecomServiceAndSaleProgramRequest {
+public class GetTelecomServiceAndSaleProgramRequest implements Serializable{
     @SerializedName("shop_id")
     private String shopId;
 

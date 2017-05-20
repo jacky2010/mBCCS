@@ -1,14 +1,15 @@
 package com.viettel.mbccs.data.source.remote.request;
 
+import java.io.Serializable;
+
 /**
  * Created by HuyQuyet on 5/18/17.
  */
 
-public class GetListChannelByOwnerTypeIdRequest {
-
-    private long shopId;
-    private long staffId;
-    private long channelTypeId;
+public class GetListChannelByOwnerTypeIdRequest implements Serializable {
+    public long shopId;
+    public long staffId;
+    public long channelTypeId;
 
     public long getShopId() {
         return shopId;

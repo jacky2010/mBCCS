@@ -3,6 +3,7 @@ package com.viettel.mbccs.screen.sellretail.adapter;
 import android.content.Context;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.ModelSale;
+import com.viettel.mbccs.utils.Common;
 
 /**
  * Created by eo_cuong on 5/15/17.
@@ -24,7 +25,7 @@ public class ItemStockPresenter {
 
     public String getRemainStock() {
         return String.format(mContext.getResources().getString(R.string.remain_goods),
-                String.valueOf(mItem.getRemainGoodCount()));
+                String.valueOf(mItem.getQuantity()));
     }
 
     public String getSelectedSerial() {
@@ -34,6 +35,6 @@ public class ItemStockPresenter {
 
     public String getPrice() {
         return String.format(mContext.getResources().getString(R.string.price),
-                String.valueOf(mItem.getGoodPrice()));
+                Common.formatDouble(mItem.getPrice()));
     }
 }

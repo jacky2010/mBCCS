@@ -2,7 +2,7 @@ package com.viettel.mbccs.screen.goodsconfirm;
 
 import android.app.Activity;
 import android.content.Context;
-import com.viettel.mbccs.data.model.ModelSale;
+import com.viettel.mbccs.data.model.StockSerial;
 import com.viettel.mbccs.screen.goodsconfirm.adapter.ModelSaleConfirmAdapter;
 import java.util.List;
 
@@ -10,23 +10,23 @@ import java.util.List;
  * Created by eo_cuong on 5/14/17.
  */
 
-public class SaleConfirmPresenter implements SaleActivityContract.Presenter {
+public class SaleReviewPresenter implements SaleReviewContract.Presenter {
 
     private Context mContext;
-    private SaleActivityContract.ViewModel mViewModel;
-    private List<ModelSale> mGoodItems;
+    private SaleReviewContract.ViewModel mViewModel;
+    private List<StockSerial> mStockSerials;
     private ModelSaleConfirmAdapter mAdapter;
 
-    public SaleConfirmPresenter(Context context, SaleActivityContract.ViewModel viewModel,
-            List<ModelSale> goodItems) {
+    public SaleReviewPresenter(Context context, SaleReviewContract.ViewModel viewModel,
+            List<StockSerial> stockSerials) {
         mContext = context;
         mViewModel = viewModel;
-        mGoodItems = goodItems;
+        mStockSerials = stockSerials;
         init();
     }
 
     private void init() {
-        mAdapter = new ModelSaleConfirmAdapter(mContext, mGoodItems);
+        mAdapter = new ModelSaleConfirmAdapter(mContext, mStockSerials);
     }
 
     @Override
@@ -37,6 +37,10 @@ public class SaleConfirmPresenter implements SaleActivityContract.Presenter {
     @Override
     public void unSubscribe() {
 
+    }
+
+    public void onConfirm() {
+        mViewModel.onConfrirm(mStockSerials);
     }
 
     public void onCancel() {

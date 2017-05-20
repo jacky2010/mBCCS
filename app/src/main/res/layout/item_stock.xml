@@ -40,7 +40,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
                         android:scaleType="fitCenter"
-                        app:loadImage="@{item.item.imageUrl}"
+                        app:loadImage="@{item.item.pathImage1}"
                         />
                 </LinearLayout>
 
@@ -69,7 +69,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="@{item.item.name}"
+                        android:text="@{item.item.stockMoldeName}"
                         android:textColor="@color/black"
                         android:textSize="12sp"
                         />

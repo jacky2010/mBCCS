@@ -4,6 +4,7 @@ import com.viettel.mbccs.base.BasePresenter;
 import com.viettel.mbccs.base.BaseView;
 import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.model.SaleProgram;
+import com.viettel.mbccs.data.model.TeleComService;
 import java.util.List;
 
 /**
@@ -18,9 +19,9 @@ public interface SaleRetailContract {
 
         void onItemServiceClick(int position);
 
-
-
         void onSerialPickerSuccess(List<String> serials);
+
+        void refresh();
     }
 
     interface ViewModel extends BaseView<Presenter> {
@@ -28,6 +29,8 @@ public interface SaleRetailContract {
         void onChooseSaleProgram(List<SaleProgram> salePrograms);
         void onSerialPicker(ModelSale stockItem);
 
-        void onNext(List<ModelSale> stockItems);
+        void onNext(List<ModelSale> stockItems,TeleComService teleComService, SaleProgram saleProgram);
+
+        void refresh();
     }
 }

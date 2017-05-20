@@ -8,6 +8,7 @@ import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListChannelByOwnerTypeIdRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.GetOrderInfoRequest;
+import com.viettel.mbccs.data.source.remote.request.GetResonRequest;
 import com.viettel.mbccs.data.source.remote.response.OrderInfoResponse;
 import com.viettel.mbccs.data.source.remote.service.RequestHelper;
 import com.viettel.mbccs.utils.rx.SchedulerUtils;
@@ -57,7 +58,7 @@ public class SellOrdersRepository implements ISellOrdersRemoteDataSource {
     }
 
     @Override
-    public Observable<List<Reason>> getListReason(BaseRequest<Object> request) {
+    public Observable<List<Reason>> getListReason(BaseRequest<GetResonRequest> request) {
         return null;
     }
 }

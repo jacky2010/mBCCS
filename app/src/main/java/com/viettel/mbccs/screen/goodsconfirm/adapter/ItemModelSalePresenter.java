@@ -2,6 +2,7 @@ package com.viettel.mbccs.screen.goodsconfirm.adapter;
 
 import android.databinding.ObservableField;
 import com.viettel.mbccs.data.model.ModelSale;
+import com.viettel.mbccs.data.model.StockSerial;
 
 /**
  * Created by eo_cuong on 5/15/17.
@@ -9,7 +10,7 @@ import com.viettel.mbccs.data.model.ModelSale;
 
 public class ItemModelSalePresenter {
 
-    private ModelSale mGoodItem;
+    private StockSerial mStockSerial;
 
     private SerialConfirmAdapter mAdapter;
 
@@ -20,16 +21,16 @@ public class ItemModelSalePresenter {
         isExpand.set(false);
     }
 
-    public ModelSale getGoodItem() {
-        return mGoodItem;
+    public StockSerial getStockSerial() {
+        return mStockSerial;
     }
 
-    public void setGoodItem(ModelSale goodItem) {
-        mGoodItem = goodItem;
+    public void setStockSerial(StockSerial stockSerial) {
+        mStockSerial = stockSerial;
     }
 
     public SerialConfirmAdapter getAdapter() {
-        mAdapter = new SerialConfirmAdapter(mGoodItem.getSerialBlocks());
+        mAdapter = new SerialConfirmAdapter(mStockSerial.getSerialBOs());
         return mAdapter;
     }
 

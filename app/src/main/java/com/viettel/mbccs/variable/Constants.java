@@ -58,9 +58,12 @@ public class Constants {
     public class BundleConstant {
         public static final String SCAN_SERIAL = "scan_serial";
         public static final String LIST_SERIAL = "list_serial";
-        public static final String GOOD_ITEM = "good_item";
-        public static final String GOODS_LIST = "goods_list";
+        public static final String SERIAL_PICKER_MODEL = "serial_picker_model";
+        public static final String STOCK_SERIAL_LIST = "goods_list";
         public static final String SALE_PROGRAM = "sell_program";
         public static final String SALE_PROGRAM_LIST = "sale_program_list";
+        public static final String TELECOMSERIVE = "telecomservice";
+        public static final String INFOR_SALE_REQUEST = "infor_sale_request";
+        public static final String SALE_TRANS = "sale_trans";
     }
 }
