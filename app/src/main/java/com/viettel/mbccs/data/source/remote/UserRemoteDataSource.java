@@ -17,7 +17,7 @@ import rx.Observable;
 
 public class UserRemoteDataSource implements IUserRemoteDataSource {
 
-    public static UserRemoteDataSource instance;
+    public volatile static UserRemoteDataSource instance;
 
     public UserRemoteDataSource() {
 

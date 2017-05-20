@@ -1,25 +1,72 @@
 package com.viettel.mbccs.data.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.IntDef;
 
 /**
  * Created by FRAMGIA\vu.viet.anh on 16/05/2017.
  */
 
-public class MenuItem {
+public class MenuItem implements Parcelable {
+
+    /**
+     * Id for menu to handle event, add more if need
+     * Do not use Id 0, it's a placeholder for mock menu
+     */
+    @IntDef({
+            MenuId.MENU_PLACEHOLDER, MenuId.MENU_DASHBOARD, MenuId.MENU_HELP, MenuId.MENU_SETTING
+    })
+    public @interface MenuId {
+        int MENU_PLACEHOLDER = 0;
+        int MENU_DASHBOARD = 1;
+        int MENU_HELP = 2;
+        int MENU_SETTING = 3;
+    }
+
+    @MenuId
+    private int mId;
 
     private String mTitle;
 
     @DrawableRes
-    private int mResId;
+    private int mIcon;
+
+    private int mColor;
+
+    private float mSize;
 
     public MenuItem() {
     }
 
-    public MenuItem(String title, int resId) {
+    public MenuItem(@MenuId int id, String title, int resId, int color, int size) {
+        mId = id;
         mTitle = title;
-        mResId = resId;
+        mIcon = resId;
+        mColor = color;
+        mSize = size;
     }
+
+    protected MenuItem(Parcel in) {
+        mId = in.readInt();
+        mTitle = in.readString();
+        mIcon = in.readInt();
+        mColor = in.readInt();
+        mSize = in.readFloat();
+    }
+
+    public static final Creator<MenuItem> CREATOR = new Creator<MenuItem>() {
+        @Override
+        public MenuItem createFromParcel(Parcel in) {
+            return new MenuItem(in);
+        }
+
+        @Override
+        public MenuItem[] newArray(int size) {
+            return new MenuItem[size];
+        }
+    };
 
     public String getTitle() {
         return mTitle;
@@ -30,11 +77,50 @@ public class MenuItem {
     }
 
     @DrawableRes
-    public int getResId() {
-        return mResId;
+    public int getIcon() {
+        return mIcon;
     }
 
-    public void setResId(@DrawableRes int resId) {
-        this.mResId = resId;
+    public void setIcon(@DrawableRes int resId) {
+        mIcon = resId;
+    }
+
+    public int getColor() {
+        return mColor;
+    }
+
+    public void setColor(int color) {
+        mColor = color;
+    }
+
+    public float getSize() {
+        return mSize;
+    }
+
+    public void setSize(float size) {
+        mSize = size;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(mId);
+        dest.writeString(mTitle);
+        dest.writeInt(mIcon);
+        dest.writeInt(mColor);
+        dest.writeFloat(mSize);
+    }
+
+    @MenuId
+    public int getId() {
+        return mId;
+    }
+
+    public void setId(@MenuId int id) {
+        mId = id;
     }
 }

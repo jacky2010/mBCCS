@@ -12,6 +12,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SwitchCompat;
 import android.text.Html;
 import android.text.InputType;
 import android.text.SpannableString;
@@ -22,11 +23,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.EditText;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -319,6 +320,14 @@ public class BindingUtils {
         view.setOnItemSelectedListener(listener);
     }
 
+    @BindingAdapter(value = {
+            "drawableStart", "drawableTop", "drawableEnd", "drawableBottom"
+    }, requireAll = false)
+    public static void setDrawableStart(TextView view, Drawable left, Drawable top, Drawable right,
+            Drawable bottom) {
+        view.setCompoundDrawablesRelativeWithIntrinsicBounds(left, top, right, bottom);
+    }
+
     @BindingAdapter({ "addItemDecoration" })
     public static void addItemDecoration(RecyclerView view, RecyclerView.ItemDecoration decor) {
         view.addItemDecoration(decor);
@@ -336,6 +345,10 @@ public class BindingUtils {
     public static void setAdapterSpinner(Spinner spinner, BaseAdapter adapter) {
         spinner.setAdapter(adapter);
     }
-
+    @BindingAdapter("onCheckedChangedListener")
+    public static void setOnCheckedChangedListener(SwitchCompat v,
+            CompoundButton.OnCheckedChangeListener listener) {
+        v.setOnCheckedChangeListener(listener);
+    }
 
 }

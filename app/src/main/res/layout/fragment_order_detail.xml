@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/toolbar"
-            bind:adapter="@{ presenter.adapterOrderDetail }"
+            android:adapter="@{ presenter.adapterOrderDetail }"
             />
         <LinearLayout
             android:layout_width="match_parent"

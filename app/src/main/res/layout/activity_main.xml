@@ -36,6 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            app:bottomBarTextColor="@color/bottom_menu_color_selector"
             app:bottomBarTextSize="@dimen/sp_12"
             bind:bottomItemClickListener="@{ presenter.bottomItemClickListener }"
             bind:bottomListItem="@{ presenter.bottomListItem }"

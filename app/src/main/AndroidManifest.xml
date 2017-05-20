@@ -35,15 +35,16 @@
             android:name=".screen.login.LoginActivity"
             android:configChanges="screenLayout|screenSize"
             android:windowSoftInputMode="adjustResize"/>
-        <activity android:name=".screen.changepassword.ChangePasswordActivity"/>
         <activity android:name=".screen.main.MainActivity"/>
         <activity android:name=".screen.serialpicker.SerialPickerActivity"/>
         <activity android:name=".screen.common.success.ScanbarCodeActivity"/>
+        <activity android:name=".screen.goodsconfirm.SaleConfirmActivity"/>
         <activity android:name=".screen.sell.orders.SellOrdersActivity"/>
         <activity android:name=".screen.sellretail.SaleRetailActivity"/>
         <activity android:name=".screen.sellretail.sellprogrampicker.SaleProgramPickerActivity"/>
         <activity android:name=".screen.sellretail.payment.PaymentInforRetailActivty"/>
         <activity android:name=".screen.branches.BranchesActivity"/>
+        <activity android:name=".screen.config.ConfigActivity"/>
     </application>
 
 </manifest>

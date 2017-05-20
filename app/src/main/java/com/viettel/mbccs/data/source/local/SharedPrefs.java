@@ -11,9 +11,9 @@ import com.viettel.mbccs.variable.Constants;
 
 public class SharedPrefs {
     private SharedPreferences mSharedpreferences;
-    private static SharedPrefs instance;
+    private volatile static SharedPrefs instance;
 
-    public SharedPrefs() {
+    private SharedPrefs() {
         mSharedpreferences = MBCCSApplication.self()
                 .getSharedPreferences(Constants.SharePref.PREF_NAME, Context.MODE_PRIVATE);
     }

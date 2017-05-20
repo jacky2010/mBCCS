@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="text"
+            type="String" />
+
+        <variable
+            name="onClicked"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="image"
+            type="android.graphics.drawable.Drawable" />
+
+        <variable
+            name="textSize"
+            type="float" />
+
+        <variable
+            name="textColor"
+            type="int" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_8"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/dp_4"
+            android:padding="@dimen/dp_4"
+            android:text="@{ text }"
+            android:textColor="@{ textColor == 0 ? @android:color/black : textColor }"
+            android:textSize="@{ textSize == 0 ? @dimen/sp_22 : textSize }"
+            app:drawableEnd="@{ @drawable/ic_arrow_right_black_24dp }"
+            app:drawableStart="@{ image }" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0.6"
+            android:background="@color/black" />
+    </LinearLayout>
+</layout>
