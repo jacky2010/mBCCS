@@ -58,9 +58,10 @@ public class SaleProgramPickerActivity extends
     }
 
     @Override
-    protected ActivitySellProgramPickerBinding initBinding() {
-        return DataBindingUtil.setContentView(this, R.layout.activity_sell_program_picker);
+    protected int getIdLayout() {
+        return R.layout.activity_sell_program_picker;
     }
+
 
     @Override
     protected void initData() {

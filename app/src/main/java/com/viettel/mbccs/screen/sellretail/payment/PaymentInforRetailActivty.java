@@ -1,6 +1,5 @@
 package com.viettel.mbccs.screen.sellretail.payment;
 
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import com.viettel.mbccs.R;
@@ -23,9 +22,10 @@ public class PaymentInforRetailActivty extends
     }
 
     @Override
-    protected ActivityPaymentInforRetailBinding initBinding() {
-        return DataBindingUtil.setContentView(this, R.layout.activity_payment_infor_retail);
+    protected int getIdLayout() {
+        return R.layout.activity_payment_infor_retail;
     }
+
 
     @Override
     protected void initData() {

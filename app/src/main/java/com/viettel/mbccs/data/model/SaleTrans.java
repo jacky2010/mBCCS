@@ -24,7 +24,7 @@ public class SaleTrans implements Parcelable {
 
     @Expose
     @SerializedName("AmountTax")
-    private double amountTax;
+    private double amountTax = 10.000;
 
     @Expose
     @SerializedName("AmountNotTax")

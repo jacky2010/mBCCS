@@ -1,6 +1,5 @@
 package com.viettel.mbccs.screen.config;
 
-import android.databinding.DataBindingUtil;
 import com.google.gson.Gson;
 import com.mukesh.countrypicker.Country;
 import com.mukesh.countrypicker.CountryPicker;
@@ -24,8 +23,8 @@ public class ConfigActivity extends BaseDataBindActivity<ActivityConfigBinding, 
     }
 
     @Override
-    protected ActivityConfigBinding initBinding() {
-        return DataBindingUtil.setContentView(this, R.layout.activity_config);
+    protected int getIdLayout() {
+        return R.layout.activity_config;
     }
 
     @Override

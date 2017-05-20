@@ -166,11 +166,17 @@ public class ButtonIconView extends RelativeLayout {
     }
 
     private void initPadding(TypedArray typedArray) {
-        int padding = typedArray.getDimensionPixelOffset(R.styleable.ImageTextButton_itb_padding,
+        int padding_top = typedArray.getDimensionPixelOffset(R.styleable.ImageTextButton_itb_padding_top,
                 getResources().getDimensionPixelOffset(R.dimen.default_padding));
-        if (padding > 0) {
-            setPadding(padding, padding, padding, padding);
-        }
+        int padding_bottom = typedArray.getDimensionPixelOffset(R.styleable.ImageTextButton_itb_padding_bottom,
+                getResources().getDimensionPixelOffset(R.dimen.default_padding));
+        int padding_left = typedArray.getDimensionPixelOffset(R.styleable.ImageTextButton_itb_padding_left,
+                getResources().getDimensionPixelOffset(R.dimen.default_padding));
+        int padding_right = typedArray.getDimensionPixelOffset(R.styleable.ImageTextButton_itb_padding_right,
+                getResources().getDimensionPixelOffset(R.dimen.default_padding));
+
+        setPadding(padding_left, padding_top, padding_right, padding_bottom);
+
     }
 
     private void initTextView(TypedArray typedArray, TextView textView) {
@@ -184,24 +190,24 @@ public class ButtonIconView extends RelativeLayout {
                     getResources().getColor(R.color.default_text_color));
             textView.setTextColor(btnTextColor);
             textView.setTextSize(px2dip(btnTextSize));
-            int marggin = typedArray.getDimensionPixelOffset(R.styleable.ImageTextButton_itb_icon_text_margin,
+            int margin = typedArray.getDimensionPixelOffset(R.styleable.ImageTextButton_itb_icon_text_margin,
                     getResources().getDimensionPixelOffset(R.dimen.default_text_margin));
             ViewGroup.MarginLayoutParams params = (MarginLayoutParams) textView.getLayoutParams();
             switch (mIconPosition) {
                 case ICON_POSITION_LEFT:
-                    params.setMargins(marggin, 0, 0, 0);
+                    params.setMargins(margin, 0, 0, 0);
                     break;
                 case ICON_POSITION_TOP:
-                    params.setMargins(0, marggin, 0, 0);
+                    params.setMargins(0, margin, 0, 0);
                     break;
                 case ICON_POSITION_RIGHT:
-                    params.setMargins(0, 0, marggin, 0);
+                    params.setMargins(0, 0, margin, 0);
                     break;
                 case ICON_POSITION_BOTTOM:
-                    params.setMargins(0, 0, 0, marggin);
+                    params.setMargins(0, 0, 0, margin);
                     break;
                 default:
-                    params.setMargins(marggin, 0, 0, 0);
+                    params.setMargins(margin, 0, 0, 0);
                     break;
             }
             textView.setLayoutParams(params);
