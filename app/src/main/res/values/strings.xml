@@ -269,5 +269,29 @@ Từ <b>%s</b><br>
         <item>Hàng mới</item>
         <item>Hàng cũ</item>
     </array>
+    <string name="job_cskpp">Chăm sóc kênh phân phối</string>
+    <string name="job_arising">Việc phát sinh</string>
+    <string name="job_team">Việc tổ đội</string>
+    <string name="reject">Từ chối</string>
+    <string name="not_accepted">Chưa nhận</string>
+    <string name="inprogress">Đang thực hiện</string>
+    <string name="finished">Hoàn thành</string>
+    <string name="search_job_hint">Lọc công việc</string>
+    <string name="job_type">Loại công việc</string>
+    <string name="job_status">Trạng thái công việc</string>
+    <string name="date_assign_job">Ngày giao việc</string>
+    <string name="select_assign_job_type">Chọn loại công việc giao</string>
+    <string name="text_continue">Tiếp</string>
+    <string name="job_duration">Thời gian thực hiện*</string>
+    <string name="staff">Nhân viên</string>
+    <string name="job_title">Tên công việc</string>
+    <string name="description">Mô tả</string>
+    <string name="assign_job">Giao việc</string>
 
+    <string name="menu_qlkh"><![CDATA[Đấu nối & Quản lý khách hàng]]></string>
+    <string name="menu_quan_ly_thu_cuoc">Quản lý thu cước</string>
+    <string name="menu_bh_kho_tc">Bán hàng - Kho - Tài chính</string>
+    <string name="menu_bh_cskh">Bảo hành và QL CSKH</string>
+    <string name="menu_bao_cao">Báo cáo</string>
+    <string name="menu_quan_ly_dia_ban">Quản lý địa bàn</string>
 </resources>

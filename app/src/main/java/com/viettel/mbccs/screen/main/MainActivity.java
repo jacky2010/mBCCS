@@ -1,7 +1,6 @@
 package com.viettel.mbccs.screen.main;
 
 import android.support.v4.app.Fragment;
-
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.databinding.ActivityMainBinding;
@@ -10,6 +9,12 @@ import com.viettel.mbccs.screen.main.fragments.menu.MenuFragment;
 
 public class MainActivity extends BaseDataBindActivity<ActivityMainBinding, MainPresenter>
         implements MainContract.ViewModel {
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        setBottomPosition(mPresenter.mLastIndex.get());
+    }
 
     @Override
     protected int getIdLayout() {
@@ -59,5 +64,23 @@ public class MainActivity extends BaseDataBindActivity<ActivityMainBinding, Main
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.frame_main);
         if (fragment != null && fragment instanceof MainFragment) return;
         getSupportFragmentManager().popBackStack();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.frame_main);
+        if (fragment != null && fragment instanceof MenuFragment) {
+            setBottomPosition(0);
+            mPresenter.mLastIndex.set(0);
+        }
+        super.onBackPressed();
+    }
+
+    private void setBottomPosition(int position) {
+        try {
+            mBinding.bottomNavigation.setSelection(position);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

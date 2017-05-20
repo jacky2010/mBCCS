@@ -36,7 +36,7 @@
             android:layout_gravity="center_vertical"
             android:adjustViewBounds="true"
             android:onClick="@{ () -> input.onAddClick() }"
-            android:src="@drawable/ic_add_24dp" />
+            android:src="@drawable/ic_add_black_24dp" />
 
     </LinearLayout>
 </layout>

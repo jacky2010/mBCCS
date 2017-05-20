@@ -50,7 +50,7 @@
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
                 android:text="@{ textTop }"
-                android:textColor="@{ textTopColor == 0 ? @android:color/black : textTopColor }"
+                android:textColor="@{ textTopColor == 0 ? @color/black : textTopColor }"
                 android:textSize="@{ textTopSize == 0 ? @dimen/sp_14 : textTopSize }"
                 />
 
@@ -61,7 +61,7 @@
                 android:layout_marginTop="@dimen/dp_4"
                 android:gravity="center"
                 android:text="@{ textBottom }"
-                android:textColor="@{ textBottomColor == 0 ? @android:color/black : textBottomColor }"
+                android:textColor="@{ textBottomColor == 0 ? @color/black : textBottomColor }"
                 android:textSize="@{ textBottomSize == 0 ? @dimen/sp_14 : textBottomSize }"
                 />
 

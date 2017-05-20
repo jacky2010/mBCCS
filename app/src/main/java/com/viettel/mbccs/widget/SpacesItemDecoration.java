@@ -19,6 +19,10 @@ public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
         this.layoutManager = layoutManager;
     }
 
+    public SpacesItemDecoration(int space) {
+        this.space = space;
+    }
+
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent,
                                RecyclerView.State state) {
@@ -27,7 +31,7 @@ public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
         outRect.bottom = space;
         outRect.top = 0;
 
-        if (layoutManager instanceof GridLayoutManager) {
+        if (layoutManager != null && layoutManager instanceof GridLayoutManager) {
             for (int i = 0; i < ((GridLayoutManager) layoutManager).getSpanCount(); i++) {
                 if (parent.getChildLayoutPosition(view) == i) {
                     outRect.top = space;
