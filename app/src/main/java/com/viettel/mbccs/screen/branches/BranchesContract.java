@@ -9,11 +9,8 @@ import com.viettel.mbccs.base.BaseView;
 
 public class BranchesContract {
     interface ViewModel extends BaseView<Presenter> {
-        void onDocumentFound(String documentId);
-        void onDocumentNotFound(String documentId);
     }
 
     interface Presenter extends BasePresenter {
-        void searchDocument();
     }
 }
