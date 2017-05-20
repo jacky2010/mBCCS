@@ -20,4 +20,6 @@
     <color name="red">#DF0101</color>
     <color name="transparent">#00ffffff</color>
 
+    <color name="bg_config">#e6e6e6</color>
+
 </resources>
