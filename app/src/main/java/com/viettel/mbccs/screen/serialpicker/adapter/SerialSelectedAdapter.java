@@ -9,8 +9,10 @@ import android.view.ViewGroup;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.SerialBO;
 import com.viettel.mbccs.databinding.ItemSerialSelectedBinding;
+import com.viettel.mbccs.utils.Common;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by eo_cuong on 5/14/17.
@@ -19,12 +21,19 @@ import java.util.List;
 public class SerialSelectedAdapter
         extends RecyclerView.Adapter<SerialSelectedAdapter.SerialSelectedViewHolder> {
     private Context mContext;
+    private Set<String> mSerials;
     private List<SerialBO> mSerialBlocks = new ArrayList<>();
     private SerialSelectedListener mSerialChooseListener;
 
-    public SerialSelectedAdapter(Context context, List<SerialBO> serialBlocks) {
+    public SerialSelectedAdapter(Context context, Set<String> serialBlocks) {
         mContext = context;
-        mSerialBlocks = serialBlocks;
+        mSerials = serialBlocks;
+        refreshData();
+    }
+
+    public void refreshData() {
+        mSerialBlocks = Common.getSerialBlockBySerials(new ArrayList<String>(mSerials));
+        notifyDataSetChanged();
     }
 
     @Override

@@ -5,7 +5,7 @@
     <data>
         <variable
             name="presenter"
-            type="com.viettel.mbccs.screen.sell.retail.SaleRetailPresenter"
+            type="com.viettel.mbccs.screen.sell.channel.SaleChannelPresenter"
             />
         <import type="android.view.View"/>
     </data>
@@ -54,7 +54,42 @@
                         android:onClick="@{()->presenter.onCollapse()}"
                         android:src="@drawable/collapse"
                         />
-
+                    <com.viettel.mbccs.widget.CustomTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_5"
+                        android:text="@string/channel_title"
+                        />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_40"
+                        android:background="@drawable/bg_input_tranparent"
+                        android:onClick="@{()->presenter.chooseChannel()}"
+                        >
+                        <ImageView
+                            android:id="@+id/icon_right_1"
+                            android:layout_width="@dimen/dp_12"
+                            android:layout_height="@dimen/dp_12"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="20dp"
+                            android:src="@drawable/triangle"
+                            />
+                        <com.viettel.mbccs.widget.CustomEdittext
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_toLeftOf="@id/icon_right_1"
+                            android:background="@color/transparent"
+                            android:editable="false"
+                            android:gravity="center_vertical"
+                            android:lines="1"
+                            android:textColor="@color/black"
+                            android:onClick="@{()->presenter.chooseChannel()}"
+                            android:padding="@dimen/dp_10"
+                            android:text="@={presenter.channelText}"
+                            android:textSize="@dimen/sp_13"
+                            />
+                    </RelativeLayout>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -62,14 +97,13 @@
                         />
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/dp_40"
+                        android:layout_height="wrap_content"
                         android:background="@drawable/bg_border"
-                        android:padding="@dimen/dp_5"
                         >
                         <Spinner
                             android:id="@+id/spinner"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:adapter="@{presenter.adapter}"
                             ></Spinner>
                     </LinearLayout>
@@ -83,6 +117,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_40"
                         android:background="@drawable/bg_input_tranparent"
+                        android:onClick="@{()->presenter.chooseSellProgram()}"
                         >
                         <ImageView
                             android:id="@+id/icon_right"
@@ -93,16 +128,17 @@
                             android:layout_marginRight="20dp"
                             android:src="@drawable/triangle"
                             />
-                        <com.viettel.mbccs.widget.CustomEdittext
+                        <com.viettel.mbccs.widget.CustomTextView
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_5"
+                            android:layout_height="match_parent"
                             android:layout_toLeftOf="@id/icon_right"
                             android:background="@color/transparent"
                             android:editable="false"
+                            android:gravity="center_vertical"
                             android:lines="1"
-                            android:onClick="@{()->presenter.chooseSellProgram()}"
+                            android:onClick="@{()->presenter.chooseChannel()}"
                             android:padding="@dimen/dp_10"
+                            android:textColor="@color/black"
                             android:text="@{presenter.sellProgram}"
                             android:textSize="@dimen/sp_13"
                             />

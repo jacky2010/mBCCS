@@ -65,5 +65,7 @@ public class Constants {
         public static final String TELECOMSERIVE = "telecomservice";
         public static final String INFOR_SALE_REQUEST = "infor_sale_request";
         public static final String SALE_TRANS = "sale_trans";
+        public static final String CHANNEL = "channel";
+        public static final String CHANNEL_LIST = "channel_list";
     }
 }
