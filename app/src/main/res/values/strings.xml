@@ -127,4 +127,17 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="config_logout">Đăng xuất</string>
     <string name="config_spinner_on">Bật</string>
     <string name="config_spinner_off">Tắt</string>
+    <string name="branches_search_document_no">Số giấy tờ (*)</string>
+    <string name="branches_channel_code">Mã kênh:</string>
+    <string name="branches_customer_id">Số CMTND:</string>
+    <string name="branches_search_not_found">Chưa tồn tại kênh có số giấy tờ này, bạn có thể thêm mới</string>
+    <string name="branches_add_channel_type">Loại kênh</string>
+    <string name="branches_add_phone_no">Số điện thoại</string>
+    <string name="branches_add_document_type">Loại giấy tờ</string>
+    <string name="branches_add_document_id">Số giấy tờ</string>
+    <string name="branches_add_address">Địa chỉ</string>
+    <string name="branches_add_location">Toạ độ</string>
+    <string name="branches_add_manager">Nhân viên quản lý</string>
+    <string name="branches_add_bts">BTS</string>
+    <string name="branches_add_contract">Hợp đồng</string>
 </resources>
