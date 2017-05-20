@@ -9,6 +9,8 @@
     <string name="select_serials">Chọn serials</string>
     <string name="select_serials_step2">2. Sửa dải serial đã chọn ở b1</string>
     <string name="select_serials_step3">3. Xác nhận các serial đã chọn</string>
+    <string name="input_empty">Hãy nhập thông tin</string>
+    <string name="not_phone">Số điện thoai không hợp lệ</string>
     <string formatted="false" name="count_serial_selected">
         <![CDATA[
 Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt hàng <font color="#317BE1"><u> %s</u></font>
@@ -88,11 +90,12 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
                 </string>
     <string name="select_serial">Chọn serial</string>
     <string name="next">next</string>
+    <string name="sale_retail">Bán lẻ</string>
     <string name="all">Tất cả</string>
     <string name="all_">-Tất cả-</string>
     <string name="customer_info">Thông tin khách hàng</string>
     <string name="customer_name">Tên khách hàng/Công ty</string>
-    <string name="customer_identity">Chứng mình thư/Mã số thuế</string>
+    <string name="customer_identity">Chứng minh thư/Mã số thuế</string>
     <string name="address">Địa chỉ</string>
     <string name="back">Quay lại</string>
     <string name="payment">Thanh toán</string>
@@ -127,6 +130,54 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="config_logout">Đăng xuất</string>
     <string name="config_spinner_on">Bật</string>
     <string name="config_spinner_off">Tắt</string>
+
+    <!--Billing-->
+    <string name="billing_title">Lập hóa đơn</string>
+    <string name="billing_info">Thông báo</string>
+    <string name="title_search">Tìm kiếm</string>
+    <string name="title_confirm">Xác Nhận</string>
+    <string name="msg_title_confirm_trans">Bạn đã lập hóa đơn cho các giao dịch sau:</string>
+    <string name="msg_before_tax" formatted="false">Trước thuế: %f</string>
+    <string name="msg_rent" formatted="false">Tiền thuế: %f</string>
+    <string name="msg_discount" formatted="false">Chiết khấu: %f</string>
+    <string name="msg_total_amount_payable" formatted="false">Tổng tiền phải trả: %f</string>
+    <string name="msg_choose_transaction">Chọn giao dịch</string>
+    <string name="msg_list_trans">Danh sách giao dịch (%d)</string>
+    <string name="title_channel">Kênh</string>
+    <string name="msg_default_choose_time_trans">Khoảng thời gian (tối đa 1 tháng)</string>
+    <string name="msg_date_create_trans">Ngày tạo giao dịch *</string>
+
+    <string name="bank_plus">Bank Plus</string>
+    <string name="phone">Số điện thoại</string>
+    <string name="secure_code">Mã bí mật</string>
+    <string name="wellet">Ví điện tử</string>
+    <string name="phone_wellet">Số điện thoại ví</string>
+    <string name="amount_no_tax">Tổng tiền : %s đồng</string>
+    <string name="amount">Số tiền phải thanh toán : %s đồng</string>
+    <string name="tax">Tiền thuế : %s đồng</string>
+    <string formatted="false" name="confirm_before_save_trans_msg"><![CDATA[
+Bán cho khách hàng <b>%s</b> :<br>
+ · Số điện thoại : <b>%s</b><br>
+ · Số tiền thanh toán : <b>%s</b>(%s)<br>
+<br>
+<br>
+<br>
+Từ <b>%s</b><br>
+· Số điện thoại : <b>%s</b><br>
+Theo mã chương trình bán hàng %s
+    ]]></string>
+    <string formatted="false" name="confirm_before_save_trans_msg_no_saleprogram"><![CDATA[
+Bán cho khách hàng <b>%s</b> :<br>
+ · Số điện thoại : <b>%s</b><br>
+ · Số tiền thanh toán : <b>%s</b>(%s đồng)<br>
+<br>
+<br>
+<br>
+Từ <b>%s</b><br>
+· Số điện thoại : <b>%s</b><br>
+    ]]></string>
+    <string name="confirm_sale_retail">Xác nhận bán lẻ</string>
+    <string name="no_serial">Chưa có sản phẩm nào được chọn</string>
     <string name="branches_search_document_no">Số giấy tờ (*)</string>
     <string name="branches_channel_code">Mã kênh:</string>
     <string name="branches_customer_id">Số CMTND:</string>
@@ -140,4 +191,5 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="branches_add_manager">Nhân viên quản lý</string>
     <string name="branches_add_bts">BTS</string>
     <string name="branches_add_contract">Hợp đồng</string>
+    <string name="branches_add">Thêm Mới</string>
 </resources>
