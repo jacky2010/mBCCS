@@ -1,6 +1,7 @@
 package com.viettel.mbccs.screen.branches;
 
 import android.content.Context;
+import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 
 import com.viettel.mbccs.data.model.BranchItem;
@@ -20,6 +21,7 @@ public class BranchesPresenter implements BranchesContract.Presenter {
     private BranchesListAdapter brachesAdapter;
 
     public ObservableField<String> documentId;
+    public ObservableBoolean searchFound;
     public ObservableField<BranchesListAdapter> branchesListAdapter;
 
     public BranchesPresenter(Context context, BranchesContract.ViewModel viewModel){
@@ -28,7 +30,18 @@ public class BranchesPresenter implements BranchesContract.Presenter {
 
         documentId = new ObservableField<>();
         branchesListAdapter = new ObservableField<>();
+        searchFound = new ObservableBoolean(true);
         brachesAdapter = new BranchesListAdapter(context, new ArrayList<BranchItem>());
+
+        initListeners();
+    }
+
+    private void initListeners(){
+        try{
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -73,5 +86,10 @@ public class BranchesPresenter implements BranchesContract.Presenter {
         brachesAdapter.setBranchItems(items);
 
         branchesListAdapter.set(brachesAdapter);
+
+        searchFound.set(false);
     }
+
+    public void addNewDocument(){}
+
 }
