@@ -32,8 +32,9 @@ public class ConfigActivity extends BaseDataBindActivity<ActivityConfigBinding, 
         mPresenter = new ConfigPresenter(this, this);
         mBinding.setPresenter(mPresenter);
         mPresenter.subscribe();
+        mPresenter.setPositionSpinner(mPresenter.getPositionDefaultSpinnerSync());
+
         mBinding.spinnerTimeSyncBccs.setOnItemSelectedListener(mPresenter);
-        mBinding.spinnerTimeSyncBccs.setSelection(mPresenter.getPositionDefaultSpinnerSync());
     }
 
     @Override
