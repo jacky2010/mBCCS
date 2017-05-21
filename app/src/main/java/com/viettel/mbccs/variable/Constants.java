@@ -16,19 +16,19 @@ public class Constants {
          * key put get language in app
          * put when user login in app
          */
-        public static final String STAFF_INFO = "staff_info";
+        public static final String STAFF_INFO = "STAFF_INFO";
 
         /**
          * key put get language in app
          * put when language have set in config
          */
-        public static final String LANGUAGE = "language";
+        public static final String LANGUAGE = "LANGUAGE";
 
         /**
          * key put get country in app
          * put when language have set in config
          */
-        public static final String COUNTRY = "country";
+        public static final String COUNTRY = "COUNTRY";
 
         /**
          * key put get DISPLAY DASHBOARD in app (true or false)

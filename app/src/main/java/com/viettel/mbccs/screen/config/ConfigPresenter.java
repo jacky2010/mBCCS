@@ -35,6 +35,7 @@ public class ConfigPresenter
     public ObservableBoolean statusDisplayDashBoard;
     public ObservableBoolean statusSyncBCCS;
     public ObservableField<ArrayAdapter<String>> spinnerAdapterTimeSyncBCCS;
+    public ObservableInt positionSpinner;
 
     public ConfigPresenter(Context context, ConfigContract.View configView) {
         this.context = context;
@@ -48,6 +49,7 @@ public class ConfigPresenter
         statusDisplayDashBoard = new ObservableBoolean();
         statusSyncBCCS = new ObservableBoolean();
         spinnerAdapterTimeSyncBCCS = new ObservableField<>();
+        positionSpinner = new ObservableInt();
 
         dataSpinnerTimeSyncBCCS = new ArrayList<>();
     }
@@ -135,7 +137,8 @@ public class ConfigPresenter
         for (Locale locale : all) {
             String c = locale.getCountry();
             if (c.equalsIgnoreCase(country.getCode())) {
-                nameCurrentLanguage.set(locale.getLanguage());
+                nameCurrentLanguage.set(locale.getDisplayLanguage());
+                codeCurrentLanguage = locale.getLanguage();
                 break;
             }
         }
@@ -178,5 +181,9 @@ public class ConfigPresenter
             if (dataSpinnerTimeSyncBCCS.get(i).equals(dataDefault + "s")) return i;
         }
         return 0;
+    }
+
+    public void setPositionSpinner(int position) {
+        positionSpinner.set(position);
     }
 }

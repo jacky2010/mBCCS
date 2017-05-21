@@ -310,7 +310,7 @@ public class BindingUtils {
         inputView.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
     }
 
-    @BindingAdapter({ "spinnerAdapter" })
+    @BindingAdapter({ "setSpinnerAdapter" })
     public static void setSpinnerAdapter(Spinner view, ArrayAdapter adapter) {
         view.setAdapter(adapter);
     }
@@ -344,6 +344,11 @@ public class BindingUtils {
     }, requireAll = false)
     public static void setAdapterSpinner(Spinner spinner, BaseAdapter adapter) {
         spinner.setAdapter(adapter);
+    }
+
+    @BindingAdapter("setSpinnerSelection")
+    public static void setSpinnerSelection(Spinner spinner, int position) {
+        spinner.setSelection(position);
     }
 
     @BindingAdapter("onCheckedChangedListener")
