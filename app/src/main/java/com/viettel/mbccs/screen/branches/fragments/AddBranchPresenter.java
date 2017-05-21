@@ -9,6 +9,7 @@ import com.viettel.mbccs.data.model.BranchItem;
 import com.viettel.mbccs.data.model.KeyValue;
 import com.viettel.mbccs.data.source.BranchesRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -58,6 +59,11 @@ public class AddBranchPresenter implements AddBranchContract.Presenter {
         documentTypeAdapter = new ObservableField<>();
         managerAdapter = new ObservableField<>();
         btsAdapter = new ObservableField<>();
+
+        channelTypesList = new ArrayList<>();
+        documentTypesList = new ArrayList<>();
+        managersList = new ArrayList<>();
+        btsesList = new ArrayList<>();
 
         initListeners();
     }

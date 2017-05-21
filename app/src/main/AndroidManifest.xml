@@ -72,6 +72,10 @@
         <activity
             android:name=".screen.sell.channel.channelpicker.ChannelPickerActivity"
             android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screen.branches.BranchesActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
