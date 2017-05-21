@@ -12,6 +12,7 @@ public class SearchBranchContract {
         void onDocumentFound(String documentId);
         void onDocumentNotFound(String documentId);
         void onAddNewDocument();
+        void showError(String message);
     }
 
     interface Presenter extends BasePresenter {

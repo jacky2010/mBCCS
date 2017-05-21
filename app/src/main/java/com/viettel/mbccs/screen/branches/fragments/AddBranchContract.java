@@ -11,10 +11,9 @@ import com.viettel.mbccs.data.model.BranchItem;
 public class AddBranchContract {
     interface ViewModel extends BaseView<Presenter> {
         void onBranchAdded(BranchItem branchItem);
-        void onBranchAddFailed(BranchItem branchItem);
+        void onBranchAddFailed();
     }
 
     interface Presenter extends BasePresenter {
-        void addBranch();
     }
 }

@@ -3,11 +3,13 @@ package com.viettel.mbccs.data.model;
 import com.google.gson.annotations.Expose;
 import com.viettel.mbccs.base.BaseModel;
 
+import java.io.Serializable;
+
 /**
  * Created by minhnx on 5/19/17.
  */
 
-public class BranchItem extends BaseModel {
+public class BranchItem extends BaseModel implements Serializable{
     @Expose
     private String channelType;
     @Expose

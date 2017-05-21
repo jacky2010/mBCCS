@@ -1,24 +1,29 @@
 package com.viettel.mbccs.data.source.remote.service;
 
+import com.viettel.mbccs.data.model.BranchItem;
 import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.model.SaleOrders;
 import com.viettel.mbccs.data.model.SaleTrans;
-import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
-import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
-import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
-import com.viettel.mbccs.data.source.remote.response.GetSerialsReponse;
-import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
+import com.viettel.mbccs.data.source.remote.request.AddBranchRequest;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
+import com.viettel.mbccs.data.source.remote.request.SearchBranchRequest;
+import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListChannelByOwnerTypeIdRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListOrderRequest;
-import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
 import com.viettel.mbccs.data.source.remote.request.GetOrderInfoRequest;
+import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
+import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
+import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
 import com.viettel.mbccs.data.source.remote.request.LoginRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseResponse;
+import com.viettel.mbccs.data.source.remote.response.GetSerialsReponse;
 import com.viettel.mbccs.data.source.remote.response.LoginResponse;
 import com.viettel.mbccs.data.source.remote.response.OrderInfoResponse;
+import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
+
 import java.util.List;
+
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -69,4 +74,12 @@ public interface MBCSSApi {
     @POST("/savetransaction")
     Observable<BaseResponse<SaleTrans>> createSaleTransRetail(
             @Body BaseRequest<GetInfoSaleTranRequest> request);
+
+    @POST("/getDistributtedChannelInfo")
+    Observable<BaseResponse<BranchItem>> getDistributtedChannelInfo(
+            @Body SearchBranchRequest request);
+
+    @POST("/createDistributtedChannel")
+    Observable<BaseResponse<BranchItem>> createDistributtedChannel(
+            @Body AddBranchRequest request);
 }

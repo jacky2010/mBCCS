@@ -1,8 +1,10 @@
 package com.viettel.mbccs.screen.branches.fragments;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Toast;
 
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindFragment;
@@ -50,8 +52,15 @@ public class SearchBranchFragment extends BaseDataBindFragment<FragmentSearchBra
     @Override
     public void onAddNewDocument() {
         try{
+            AddBranchFragment fragment = AddBranchFragment.newInstance();
+
+            Bundle args = new Bundle();
+            args.putInt("In.formType", AddBranchFragment.FORM_ADD);
+
+            fragment.setArguments(args);
+
             mActivity.getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.frame_main, AddBranchFragment.newInstance())
+                    .replace(R.id.frame_main, fragment)
                     .addToBackStack(null)
                     .commit();
         }catch (Exception e){
@@ -79,7 +88,7 @@ public class SearchBranchFragment extends BaseDataBindFragment<FragmentSearchBra
 
     private void initListeners(){
         try{
-            mBinding.txtSearchKey.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            mBinding.txtDocumentId.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View view, boolean b) {
                     if(!b)
@@ -99,5 +108,10 @@ public class SearchBranchFragment extends BaseDataBindFragment<FragmentSearchBra
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         mActivity = (AppCompatActivity) activity;
+    }
+
+    @Override
+    public void showError(String message) {
+        Toast.makeText(mActivity, message, Toast.LENGTH_LONG).show();
     }
 }

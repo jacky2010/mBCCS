@@ -8,110 +8,177 @@
         <variable
             name="presenter"
             type="com.viettel.mbccs.screen.branches.fragments.AddBranchPresenter" />
-        <import name="View" type="android.view.View"/>
+
+        <import
+            name="View"
+            type="android.view.View" />
     </data>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingLeft="@dimen/dp_16"
-            android:paddingRight="@dimen/dp_16">
+            android:orientation="vertical">
 
-            <!--<TextView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginTop="@dimen/dp_8"-->
-                <!--android:text="@string/branches_search_document_no"-->
-                <!--android:textColor="@color/black"-->
-                <!--android:textSize="@dimen/sp_16" />-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/dp_16"
+                android:paddingRight="@dimen/dp_16">
 
-            <!--<EditText-->
-                <!--android:id="@+id/txtSearchKey"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="@dimen/dp_40"-->
-                <!--android:background="@drawable/bg_order"-->
-                <!--android:text="@={ presenter.documentId }" />-->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:text="@string/branches_add_channel_type"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
 
-            <!--<Button-->
-                <!--android:layout_width="@dimen/dp_150"-->
-                <!--android:layout_height="@dimen/dp_40"-->
-                <!--android:layout_gravity="center"-->
-                <!--android:layout_marginTop="@dimen/dp_6"-->
-                <!--android:background="@color/blue"-->
-                <!--android:gravity="center"-->
-                <!--android:onClick="@{ v -> presenter.searchDocument() }"-->
-                <!--android:text="@string/sell_orders_search"-->
-                <!--android:textColor="@color/white" />-->
+                <Spinner
+                    android:id="@+id/spChannelType"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:background="@drawable/bg_order"
+                    bind:spinnerAdapter="@{ presenter.channelTypeAdapter }"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:text="@string/branches_add_phone_no"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:background="@drawable/bg_order"
+                    android:inputType="phone"
+                    android:text="@={ presenter.phoneNo }" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:text="@string/branches_add_document_type"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+
+                <Spinner
+                    android:id="@+id/spDocumentType"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:background="@drawable/bg_order"
+                    bind:spinnerAdapter="@{ presenter.documentTypeAdapter }" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:text="@string/branches_add_document_id"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:background="@drawable/bg_order"
+                    android:text="@={ presenter.documentNo }" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:text="@string/branches_add_image"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:text="@string/branches_add_address"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:background="@drawable/bg_order"
+                    android:text="@={ presenter.address }" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:text="@string/branches_add_location"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:background="@drawable/bg_order"
+                    android:text="@={ presenter.location }" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:text="@string/branches_add_manager"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+
+                <Spinner
+                    android:id="@+id/spManager"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:background="@drawable/bg_order"
+                    bind:spinnerAdapter="@{ presenter.managerAdapter }" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:text="@string/branches_add_bts"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+
+                <Spinner
+                    android:id="@+id/spBts"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:background="@drawable/bg_order"
+                    bind:spinnerAdapter="@{ presenter.btsAdapter }" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:text="@string/branches_add_contract"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+
+            </LinearLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dp_20"
+                android:background="@color/blue"
+                android:gravity="center"
+                android:onClick="@{ v -> presenter.addNewDocument() }"
+                android:paddingEnd="@dimen/dp_8"
+                android:paddingStart="@dimen/dp_8"
+                android:text="@string/branches_add"
+                android:textColor="@color/white"
+                app:layout_marginLeftPercent="10%"
+                app:layout_marginRightPercent="10%" />
         </LinearLayout>
-        <View android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_6"
-            android:layout_marginTop="@dimen/dp_6"
-            android:background="@color/grey"/>
-        <!--<ScrollView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="0dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:paddingTop="@dimen/dp_6"-->
-            <!--android:visibility="@{presenter.searchFound != true ? View.GONE : View.VISIBLE}">-->
-
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="vertical">-->
-
-                <!--<View-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="@dimen/dp_0.6"-->
-                    <!--android:background="@color/grey" />-->
-
-                <!--<android.support.v7.widget.RecyclerView-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:adapter="@{presenter.branchesListAdapter}"></android.support.v7.widget.RecyclerView>-->
-            <!--</LinearLayout>-->
-        <!--</ScrollView>-->
-        <!--<LinearLayout-->
-            <!--android:visibility="@{presenter.searchFound == true ? View.GONE : View.VISIBLE}"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="0dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:paddingTop="@dimen/dp_6"-->
-            <!--android:orientation="vertical">-->
-            <!--<TextView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="@string/branches_search_not_found"-->
-                <!--app:layout_marginLeftPercent="10%"-->
-                <!--app:layout_marginRightPercent="10%"-->
-                <!--android:background="@color/blue_trans"-->
-                <!--android:paddingEnd="@dimen/dp_8"-->
-                <!--android:paddingStart="@dimen/dp_8"-->
-                <!--android:layout_margin="@dimen/dp_10"-->
-                <!--android:padding="@dimen/dp_10"/>-->
-            <!--<View-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="0dp"-->
-                <!--android:layout_weight="1"/>-->
-            <!--<Button-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="@dimen/dp_40"-->
-                <!--android:layout_gravity="center"-->
-                <!--android:layout_marginTop="@dimen/dp_6"-->
-                <!--android:background="@color/blue"-->
-                <!--android:gravity="center"-->
-                <!--android:onClick="@{ v -> presenter.addNewDocument() }"-->
-                <!--android:text="@string/branches_add"-->
-                <!--android:textColor="@color/white"-->
-                <!--android:paddingEnd="@dimen/dp_8"-->
-                <!--android:paddingStart="@dimen/dp_8"-->
-                <!--app:layout_marginLeftPercent="10%"-->
-                <!--app:layout_marginRightPercent="10%"/>-->
-        <!--</LinearLayout>-->
-    </LinearLayout>
+    </ScrollView>
 </layout>

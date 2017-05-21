@@ -193,4 +193,5 @@ Từ <b>%s</b><br>
     <string name="branches_add">Thêm Mới</string>
     <string name="branches_add_image">Ảnh</string>
     <string name="branches_search_isdn">Isdn</string>
+    <string name="branches_error_search_key_required">Số Giấy Tờ không được để trống!</string>
 </resources>

@@ -19,7 +19,7 @@ public class ChannelInfo implements Parcelable {
     @Expose
     private String channelCode;
 
-    @SerializedName("ChannelType")
+    @SerializedName("KeyValue")
     @Expose
     private String channelType;
 

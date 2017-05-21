@@ -1,6 +1,7 @@
 package com.viettel.mbccs.screen.branches.fragments;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.viettel.mbccs.R;
@@ -16,7 +17,11 @@ import com.viettel.mbccs.utils.ActivityUtils;
 public class AddBranchFragment extends BaseDataBindFragment<FragmentAddBranchBinding, AddBranchPresenter>
         implements AddBranchContract.ViewModel{
 
+    public static final int FORM_ADD = 1;
+    public static final int FORM_EDIT = 2;
+
     private AppCompatActivity mActivity;
+    private int formType;
 
     public static AddBranchFragment newInstance() {
         return new AddBranchFragment();
@@ -43,6 +48,9 @@ public class AddBranchFragment extends BaseDataBindFragment<FragmentAddBranchBin
         mBinding.setPresenter(mPresenter);
 
         initListeners();
+
+        Bundle args = getArguments();
+        formType = args.getInt("In.formType");
     }
 
     @Override
@@ -69,7 +77,7 @@ public class AddBranchFragment extends BaseDataBindFragment<FragmentAddBranchBin
     }
 
     @Override
-    public void onBranchAddFailed(BranchItem branchItem) {
+    public void onBranchAddFailed() {
 
     }
 
