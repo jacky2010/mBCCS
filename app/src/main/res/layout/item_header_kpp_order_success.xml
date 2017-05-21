@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black_opacity_30"
+        android:orientation="horizontal"
+        >
+
+        <com.viettel.mbccs.widget.CustomTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/mode_code1"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_13"
+            />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/black"
+            />
+        <com.viettel.mbccs.widget.CustomTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:text="@string/quantity"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_13"
+            />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/black"
+            />
+        <com.viettel.mbccs.widget.CustomTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/sum_money"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_13"
+            />
+    </LinearLayout>
+</layout>

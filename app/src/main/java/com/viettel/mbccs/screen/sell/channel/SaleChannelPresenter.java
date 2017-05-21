@@ -1,5 +1,6 @@
 package com.viettel.mbccs.screen.sell.channel;
 
+import android.app.Activity;
 import android.content.Context;
 import android.databinding.ObservableField;
 import android.widget.ArrayAdapter;
@@ -273,11 +274,9 @@ public class SaleChannelPresenter
         mModelSales.add(good2);
         mModelSales.add(good3);
         stockAdapter.notifyDataSetChanged();
-
-
     }
 
-    void fakeLoadChannel(){
+    void fakeLoadChannel() {
         ChannelInfo channel1 = new ChannelInfo();
         channel1.setChannelId(1);
         channel1.setChannelName("CTV1");
@@ -467,6 +466,10 @@ public class SaleChannelPresenter
     }
 
     public void onNext() {
-        mViewModel.onNext(mModelSales, currentTelecomService, currentSaleProgram,currentChannel);
+        mViewModel.onNext(mModelSales, currentTelecomService, currentSaleProgram, currentChannel);
+    }
+
+    public void onCancel() {
+        ((Activity) mContext).finish();
     }
 }

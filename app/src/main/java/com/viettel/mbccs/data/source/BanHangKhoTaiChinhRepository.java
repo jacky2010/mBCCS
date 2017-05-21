@@ -20,7 +20,9 @@ import com.viettel.mbccs.data.source.remote.request.GetListStockModelRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListTTKDRequest;
 import com.viettel.mbccs.data.source.remote.request.GetOrderInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.GetResonRequest;
+import com.viettel.mbccs.data.source.remote.request.KPPOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.ViewInfoSerialRequest;
+import com.viettel.mbccs.data.source.remote.response.BaseResponse;
 import com.viettel.mbccs.data.source.remote.response.OrderInfoResponse;
 import java.util.List;
 import rx.Observable;
@@ -97,5 +99,10 @@ public class BanHangKhoTaiChinhRepository
     @Override
     public Observable<List<Shop>> getListShop(BaseRequest<GetListShopRequest> request) {
         return banHangKhoTaiChinhRemoteDataSource.getListShop(request);
+    }
+
+    public Observable<BaseResponse> createSaleOrders(
+            BaseRequest<KPPOrderRequest> requestBaseRequest) {
+        return banHangKhoTaiChinhRemoteDataSource.createSaleOrders(requestBaseRequest);
     }
 }

@@ -5,6 +5,8 @@ import com.viettel.mbccs.data.model.SaleTrans;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
+import com.viettel.mbccs.data.source.remote.request.KPPOrderRequest;
+import com.viettel.mbccs.data.source.remote.response.BaseResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsReponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
@@ -34,4 +36,6 @@ public interface IUserRemoteDataSource {
     Observable<SaleTrans> getSaleTransInfo(BaseRequest<GetInfoSaleTranRequest> request);
 
     Observable<SaleTrans> createSaleTransRetail(BaseRequest<GetInfoSaleTranRequest> request);
+
+
 }

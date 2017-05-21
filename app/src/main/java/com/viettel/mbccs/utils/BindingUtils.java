@@ -358,6 +358,17 @@ public class BindingUtils {
         v.setOnCheckedChangeListener(listener);
     }
 
+    @BindingAdapter("selected")
+    public static void setTextSelected(TextView textView, boolean isSelected) {
+        textView.setSelected(isSelected);
+    }
+
+    @BindingAdapter("position")
+    public static void setPosition(Spinner spinner, int position) {
+
+        spinner.setSelection(position);
+    }
+
     @BindingAdapter("error")
     public static void setTextError(EditText textView, String error) {
         textView.setError(error);
