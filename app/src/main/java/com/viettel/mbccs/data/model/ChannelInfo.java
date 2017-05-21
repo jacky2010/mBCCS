@@ -2,14 +2,19 @@ package com.viettel.mbccs.data.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.TextUtils;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import java.io.Serializable;
 
 /**
  * Created by HuyQuyet on 5/17/17.
  */
 
-public class ChannelInfo implements Parcelable {
+public class ChannelInfo implements Parcelable, Serializable {
+
+    public static final String CHANNEL_TYPE_SHOP = "1";
+    public static final String CHANNEL_TYPE_STAFF = "2";
 
     @SerializedName("ChannelId")
     @Expose
@@ -72,6 +77,11 @@ public class ChannelInfo implements Parcelable {
     private String discountPolicy;
 
     public ChannelInfo() {
+    }
+
+    public ChannelInfo(long channelId, String channelName) {
+        this.channelId = channelId;
+        this.channelName = channelName;
     }
 
     protected ChannelInfo(Parcel in) {
@@ -145,6 +155,9 @@ public class ChannelInfo implements Parcelable {
     }
 
     public String getChannelType() {
+        if (TextUtils.isEmpty(channelType)) {
+            return "0";
+        }
         return channelType;
     }
 

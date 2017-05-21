@@ -53,10 +53,10 @@
             android:name=".screen.sell.orders.SellOrdersActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".screen.sellretail.SaleRetailActivity"
+            android:name=".screen.sell.retail.SaleRetailActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".screen.sellretail.sellprogrampicker.SaleProgramPickerActivity"
+            android:name=".screen.sell.retail.sellprogrampicker.SaleProgramPickerActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.config.ConfigActivity"
@@ -65,7 +65,14 @@
             android:name=".screen.goodsconfirm.SaleReviewActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".screen.sellretail.CreateSaleRetailActivity"
+            android:name=".screen.sell.retail.CreateSaleActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screen.sell.channel.SaleChannelActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screen.sell.channel.channelpicker.ChannelPickerActivity"
             android:screenOrientation="portrait"/>
     </application>
 

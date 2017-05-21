@@ -32,23 +32,22 @@
         <com.viettel.mbccs.widget.CustomEdittext
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="30dp"
             android:background="@drawable/bg_input"
             android:padding="@dimen/dp_5"
             android:text="@={presenter.phone}"
+            android:textSize="@dimen/sp_15"
             app:error="@{presenter.phoneError}"
-            android:textSize="@dimen/sp_12"
             />
 
         <com.viettel.mbccs.widget.CustomButton
             android:layout_width="@dimen/dp_150"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="@string/ok"
-            android:onClick="@{()->presenter.onOkClick()}"
-            android:gravity="center"
-            android:padding="@dimen/dp_10"
             android:layout_margin="@dimen/dp_10"
+            android:gravity="center"
+            android:onClick="@{()->presenter.onOkClick()}"
+            android:padding="@dimen/dp_10"
+            android:text="@string/ok"
             style="@style/button_positive"
             />
     </LinearLayout>

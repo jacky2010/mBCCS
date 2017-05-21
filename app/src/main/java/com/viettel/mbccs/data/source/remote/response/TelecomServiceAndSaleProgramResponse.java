@@ -4,17 +4,18 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.viettel.mbccs.data.model.SaleProgram;
 import com.viettel.mbccs.data.model.TeleComService;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TelecomServiceAndSaleProgramResponse {
 
     @SerializedName("TelecomService")
     @Expose
-    private List<TeleComService> mTeleComServices;
+    private List<TeleComService> mTeleComServices = new ArrayList<>();
 
     @SerializedName("SaleProgram")
     @Expose
-    private List<SaleProgram> mSalePrograms;
+    private List<SaleProgram> mSalePrograms = new ArrayList<>();
 
     public List<TeleComService> getTeleComServices() {
         return mTeleComServices;

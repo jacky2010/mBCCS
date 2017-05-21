@@ -17,6 +17,7 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
         ]]>
     </string>
     <string name="invalid_serial">Serials không hợp lệ!</string>
+    <string name="not_enought_serial">Hết serial!</string>
     <string name="full_serial">Đã chọn đủ số serial</string>
     <string name="total_serial">Tổng số</string>
     <string name="confirm_goods">Xác nhận mặt hàng bán</string>
@@ -136,16 +137,18 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="title_search">Tìm kiếm</string>
     <string name="title_confirm">Xác Nhận</string>
     <string name="msg_title_confirm_trans">Bạn đã lập hóa đơn cho các giao dịch sau:</string>
-    <string name="msg_before_tax" formatted="false">Trước thuế: %f</string>
-    <string name="msg_rent" formatted="false">Tiền thuế: %f</string>
-    <string name="msg_discount" formatted="false">Chiết khấu: %f</string>
-    <string name="msg_total_amount_payable" formatted="false">Tổng tiền phải trả: %f</string>
+    <string formatted="false" name="msg_before_tax">Trước thuế: %f</string>
+    <string formatted="false" name="msg_rent">Tiền thuế: %f</string>
+    <string formatted="false" name="msg_discount">Chiết khấu: %f</string>
+    <string formatted="false" name="msg_total_amount_payable">Tổng tiền phải trả: %f</string>
     <string name="msg_choose_transaction">Chọn giao dịch</string>
     <string name="msg_list_trans">Danh sách giao dịch (%d)</string>
     <string name="title_channel">Kênh</string>
     <string name="msg_default_choose_time_trans">Khoảng thời gian (tối đa 1 tháng)</string>
     <string name="msg_date_create_trans">Ngày tạo giao dịch *</string>
-
+    <string name="channel_title">Kênh *</string>
+    <string name="sale_program">Chương trình bán hàng</string>
+    <string name="choose_channel">Chọn kênh</string>
     <string name="bank_plus">Bank Plus</string>
     <string name="phone">Số điện thoại</string>
     <string name="secure_code">Mã bí mật</string>
@@ -165,6 +168,18 @@ Từ <b>%s</b><br>
 · Số điện thoại : <b>%s</b><br>
 Theo mã chương trình bán hàng %s
     ]]></string>
+
+    <string formatted="false" name="confirm_before_save_trans_msg_channel"><![CDATA[
+Bán cho kênh <b>%s</b> :<br>
+ · Số điện thoại : <b>%s</b><br>
+ · Số tiền thanh toán : <b>%s</b>(%s)<br>
+<br>
+<br>
+<br>
+Từ <b>%s</b><br>
+· Số điện thoại : <b>%s</b><br>
+Theo mã chương trình bán hàng %s
+    ]]></string>
     <string formatted="false" name="confirm_before_save_trans_msg_no_saleprogram"><![CDATA[
 Bán cho khách hàng <b>%s</b> :<br>
  · Số điện thoại : <b>%s</b><br>
@@ -175,6 +190,20 @@ Bán cho khách hàng <b>%s</b> :<br>
 Từ <b>%s</b><br>
 · Số điện thoại : <b>%s</b><br>
     ]]></string>
+
+    <string formatted="false" name="confirm_before_save_trans_msg_no_saleprogram_channel"><![CDATA[
+Bán cho kênh <b>%s</b> :<br>
+ · Số điện thoại : <b>%s</b><br>
+ · Số tiền thanh toán : <b>%s</b>(%s đồng)<br>
+<br>
+<br>
+<br>
+Từ <b>%s</b><br>
+· Số điện thoại : <b>%s</b><br>
+    ]]></string>
     <string name="confirm_sale_retail">Xác nhận bán lẻ</string>
     <string name="no_serial">Chưa có sản phẩm nào được chọn</string>
+    <string name="channel_code">Mã kênh</string>
+    <string name="channel_name">Tên kênh</string>
+    <string name="tax_code">Mã số thuế</string>
 </resources>

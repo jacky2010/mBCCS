@@ -6,8 +6,9 @@
     <data>
         <variable
             name="presenter"
-            type="com.viettel.mbccs.screen.sell.retail.payment.PaymentInfoPresenter"
+            type="com.viettel.mbccs.screen.sell.channel.payment.PaymentInforChannelPresenter"
             />
+        />
         />
         <import type="android.view.View"/>
     </data>
@@ -88,7 +89,26 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:padding="5dp"
-                        android:text="@string/customer_name"
+                        android:text="@string/channel_code"
+                        android:textColor="#000"
+                        />
+
+                    <com.viettel.mbccs.widget.CustomEdittext
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_input_tranparent"
+                        android:editable="false"
+                        android:padding="5dp"
+                        android:text="@{String.valueOf(presenter.channelInfo.channelId)}"
+                        android:textColor="#000"
+                        android:textSize="18sp"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:padding="5dp"
+                        android:text="@string/channel_name"
                         android:textColor="#000"
                         />
 
@@ -97,10 +117,9 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_input_tranparent"
                         android:padding="5dp"
-                        android:text="@={presenter.name}"
+                        android:text="@={presenter.channelInfo.channelName}"
                         android:textColor="#000"
                         android:textSize="18sp"
-                        app:error="@{presenter.nameError}"
                         />
 
                     <TextView
@@ -108,7 +127,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:padding="5dp"
-                        android:text="@string/customer_identity"
+                        android:text="@string/tax_code"
                         android:textColor="#000"
                         />
 
@@ -138,10 +157,10 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_input_tranparent"
                         android:padding="5dp"
-                        android:text="@={presenter.address}"
+                        android:text="@={presenter.channelInfo.address}"
                         android:textColor="#000"
                         android:textSize="18sp"
-                        app:error="@{presenter.addressError}"
+                        android:editable="false"
                         />
 
                 </LinearLayout>
@@ -295,10 +314,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:background="@drawable/bg_input_tranparent"
                         android:layout_marginRight="10dp"
-                        android:text="@={presenter.coupon}"
+                        android:background="@drawable/bg_input_tranparent"
                         android:padding="@dimen/dp_5"
+                        android:text="@={presenter.coupon}"
                         android:textSize="18sp"
                         />
                 </LinearLayout>

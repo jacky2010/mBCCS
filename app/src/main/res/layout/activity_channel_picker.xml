@@ -3,8 +3,9 @@
     <data>
         <variable
             name="presenter"
-            type="com.viettel.mbccs.screen.sell.retail.sellprogrampicker.SaleProgramPresenter"
+            type="com.viettel.mbccs.screen.sell.channel.channelpicker.ChannelPickerPresenter"
             />
+        />
     </data>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -18,7 +19,7 @@
             app:isShow="@{true}"
             app:leftIcon="@{@drawable/ic_close}"
             app:leftIconClick="@{()->presenter.onCancel()}"
-            app:title="@{@string/sale_program}"
+            app:title="@{@string/choose_channel}"
             app:titleColor="@{@color/white}"
             app:titleTextSize="@{@dimen/sp_17}"
             />
@@ -32,9 +33,9 @@
             app:textSize="@dimen/sp_13"
             />
         <android.support.v7.widget.RecyclerView
-            android:layout_margin="@dimen/dp_10"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="@dimen/dp_10"
             android:adapter="@{presenter.adapter}"
             >
         </android.support.v7.widget.RecyclerView>

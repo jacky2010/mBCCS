@@ -43,7 +43,7 @@ public interface MBCSSApi {
     Observable<BaseResponse<List<SaleOrders>>> searchSellOrders(
             @Body BaseRequest<GetListOrderRequest> request);
 
-    @GET("/login")
+    @POST("/login")
     Observable<BaseResponse<List<ChannelInfo>>> getListChannelByOwnerTypeId(
             @Body BaseRequest<GetListChannelByOwnerTypeIdRequest> request);
 
@@ -69,4 +69,5 @@ public interface MBCSSApi {
     @POST("/savetransaction")
     Observable<BaseResponse<SaleTrans>> createSaleTransRetail(
             @Body BaseRequest<GetInfoSaleTranRequest> request);
+
 }
