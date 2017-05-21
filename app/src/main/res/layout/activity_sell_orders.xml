@@ -148,7 +148,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_40"
                     android:background="@drawable/bg_order"
-                    bind:spinnerAdapter="@{ presenter.spinnerAdapterChannel }"
+                    bind:setSpinnerAdapter="@{ presenter.spinnerAdapterChannel }"
                     />
                 <Button
                     android:layout_width="@dimen/dp_150"

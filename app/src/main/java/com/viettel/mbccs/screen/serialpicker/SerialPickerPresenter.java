@@ -48,7 +48,7 @@ public class SerialPickerPresenter
     private List<String> mSerials = new ArrayList<>();
     private Context mContext;
     private SerialPickerContract.ViewModel mViewModel;
-    private List<SerialBO> mSerialSelected = new ArrayList<>();
+    private Set<String> mSerialSelected = new HashSet<>();
     private SerialBO currentSerialBlock = new SerialBO();
     private BaseRequest<GetSerialRequest> mBaseRequest;
     private UserRepository mUserRepository;
@@ -121,10 +121,11 @@ public class SerialPickerPresenter
         if (mSerialPickerModel == null) {
             return;
         }
-        mSerialSelected.addAll(mSerialPickerModel.getLstSerial());
+        mSerialSelected.addAll(
+                Common.getSerialsByListSerialBlock(mSerialPickerModel.getLstSerial()));
         mSerials.removeAll(Common.getSerialsByListSerialBlock(mSerialPickerModel.getLstSerial()));
         mSerialAdapter.refresh();
-        mSerialSelectedAdapter.notifyDataSetChanged();
+        mSerialSelectedAdapter.refreshData();
         refreshProgressSerial();
     }
 
@@ -198,26 +199,39 @@ public class SerialPickerPresenter
     @Override
     public void chooseSerial() {
 
-        if (!chooseAble.get()) {
+        if (chooseAble == null || !chooseAble.get()) {
             return;
         }
 
         if (validate()) {
-            SerialBO serialBlock = new SerialBO();
-            serialBlock.setFromSerial((serialFrom.get()));
-            int remain = (int) (mSerialPickerModel.getQuantity() - getSerialCountByListSerialBlock(
-                    mSerialSelected));
-            if (remain >= currentSerialBlock.toSerialList().size()) {
-                serialBlock.setToSerial((serialTo.get()));
+            //SerialBO serialBlock = new SerialBO();
+            //serialBlock.setFromSerial((serialFrom.get()));
+            List<String> result = new ArrayList<>();
+            int remain = (int) (mSerialPickerModel.getQuantity() - mSerialSelected.size());
+            List<String> commonSerial = new ArrayList<>(mSerials);
+            commonSerial.retainAll(currentSerialBlock.toSerialList());
+
+            if (remain >= commonSerial.size()) {
+                result.addAll(commonSerial);
             } else {
-                serialBlock.setToSerial(
-                        String.valueOf(Long.parseLong(serialFrom.get()) + remain - 1));
+                for (int i = 0; i < remain; i++) {
+                    result.add(commonSerial.get(i));
+                }
             }
 
-            mSerialSelected.add(serialBlock);
-            mSerialAdapter.removeSerial(serialBlock.toSerialList());
+            //if (remain >= currentSerialBlock.toSerialList().size()) {
+            //    serialBlock.setToSerial((serialTo.get()));
+            //} else {
+            //    serialBlock.setToSerial(
+            //            String.valueOf(Long.parseLong(serialFrom.get()) + remain - 1));
+            //}
+            //
+            //mSerialSelected.add(serialBlock);
+            //mSerialAdapter.removeSerial(serialBlock.toSerialList());
+            mSerialSelected.addAll(result);
+            mSerialAdapter.removeSerial(result);
             mSerialAdapter.clearSelectedPosition();
-            mSerialSelectedAdapter.notifyDataSetChanged();
+            mSerialSelectedAdapter.refreshData();
             serialFrom.set("");
             serialTo.set("");
             refreshProgressSerial();
@@ -232,20 +246,30 @@ public class SerialPickerPresenter
                     Toast.LENGTH_SHORT).show();
             return false;
         }
-        if (mSerials.size() < currentSerialBlock.getQuantity()) {
+
+        if (mSerials.size() == 0) {
+            Toast.makeText(mContext, mContext.getResources().getString(R.string.not_enought_serial),
+                    Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (Long.parseLong(currentSerialBlock.getFromSerial()) < Long.valueOf(mSerials.get(0))) {
+            currentSerialBlock.setFromSerial(mSerials.get(0));
+        }
+
+        if (Long.parseLong(currentSerialBlock.getToSerial()) > Long.valueOf(
+                mSerials.get(mSerials.size() - 1))) {
+            currentSerialBlock.setToSerial(mSerials.get(mSerials.size() - 1));
+        }
+
+        List<String> commonSerial = new ArrayList<>(mSerials);
+        commonSerial.retainAll(currentSerialBlock.toSerialList());
+        if (commonSerial.size() <= 0) {
             Toast.makeText(mContext, mContext.getResources().getString(R.string.invalid_serial),
                     Toast.LENGTH_SHORT).show();
             return false;
-        } else {
-            if (!mSerials.containsAll(currentSerialBlock.toSerialList())) {
-                Toast.makeText(mContext, mContext.getResources().getString(R.string.invalid_serial),
-                        Toast.LENGTH_SHORT).show();
-                return false;
-            }
         }
 
-        int remain = (int) (mSerialPickerModel.getQuantity() - getSerialCountByListSerialBlock(
-                mSerialSelected));
+        int remain = (int) (mSerialPickerModel.getQuantity() - mSerialSelected.size());
         if (remain == 0) {
             Toast.makeText(mContext, mContext.getResources().getString(R.string.full_serial),
                     Toast.LENGTH_SHORT).show();
@@ -264,15 +288,15 @@ public class SerialPickerPresenter
 
     private void refreshProgressSerial() {
         summary.set(String.format(mContext.getResources().getString(R.string.count_serial_selected),
-                Common.getSerialCountByListSerialBlock(mSerialSelected),
+                mSerialSelected.size(),
                 mSerialPickerModel.getQuantity(), mSerialPickerModel.getStockMoldeName()));
-        quantity.set(String.valueOf(getSerialCountByListSerialBlock(mSerialSelected)));
+        quantity.set(String.valueOf(mSerialSelected.size()));
     }
 
     @Override
     public void onDeleteSerial(SerialBO serialBlock) {
-        mSerialSelected.remove(serialBlock);
-        mSerialSelectedAdapter.notifyDataSetChanged();
+        mSerialSelected.removeAll(serialBlock.toSerialList());
+        mSerialSelectedAdapter.refreshData();
         mSerials.addAll(serialBlock.toSerialList());
         mSerialAdapter.refresh();
         refreshProgressSerial();
@@ -286,7 +310,7 @@ public class SerialPickerPresenter
 
     public void onSubmit() {
         Activity activity = (Activity) mContext;
-        String json = GsonUtils.Object2String(Common.getSerialsByListSerialBlock(mSerialSelected));
+        String json = GsonUtils.Object2String((mSerialSelected));
         Intent intent = new Intent();
         intent.putExtra(Constants.BundleConstant.LIST_SERIAL, json);
         activity.setResult(Activity.RESULT_OK, intent);

@@ -67,6 +67,7 @@
                 android:layout_width="@dimen/dp_20"
                 android:layout_height="@dimen/dp_20"
                 android:layout_gravity="end|center"
+                android:gravity="center"
                 android:layout_marginRight="@dimen/dp_10"
                 android:background="@drawable/ic_close"
                 android:onClick="@{clearInputClick}"

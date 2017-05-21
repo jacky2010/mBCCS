@@ -152,7 +152,7 @@
                 android:layout_height="@dimen/dp_40"
                 android:layout_marginTop="@dimen/dp_10"
                 android:background="@drawable/bg_order"
-                bind:spinnerAdapter="@{ presenter.spinnerReasonCancelAdapter }"
+                bind:setSpinnerAdapter="@{ presenter.spinnerReasonCancelAdapter }"
                 />
         </LinearLayout>
         <LinearLayout

@@ -3,7 +3,7 @@
     <data>
         <variable
             name="presenter"
-            type="com.viettel.mbccs.screen.sellretail.savetransconfirm.SaveTransConfirmPresenter"
+            type="com.viettel.mbccs.screen.sell.retail.savetransconfirm.SaveTransConfirmPresenter"
             />
     </data>
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"

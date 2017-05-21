@@ -325,7 +325,8 @@
                         android:id="@+id/spinner_time_sync_bccs"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        bind:spinnerAdapter="@{ presenter.spinnerAdapterTimeSyncBCCS }"
+                        bind:setSpinnerAdapter="@{ presenter.spinnerAdapterTimeSyncBCCS }"
+                        bind:setSpinnerSelection="@{ presenter.positionSpinner }"
                         />
                 </LinearLayout>
             </LinearLayout>

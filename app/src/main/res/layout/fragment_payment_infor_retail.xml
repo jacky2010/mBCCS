@@ -6,7 +6,7 @@
     <data>
         <variable
             name="presenter"
-            type="com.viettel.mbccs.screen.sellretail.payment.PaymentInfoPresenter"
+            type="com.viettel.mbccs.screen.sell.retail.payment.PaymentInfoPresenter"
             />
         />
         <import type="android.view.View"/>

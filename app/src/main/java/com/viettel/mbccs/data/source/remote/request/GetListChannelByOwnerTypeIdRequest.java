@@ -10,6 +10,7 @@ public class GetListChannelByOwnerTypeIdRequest implements Serializable {
     public long shopId;
     public long staffId;
     public long channelTypeId;
+    public String language;
 
     public long getShopId() {
         return shopId;
@@ -33,5 +34,13 @@ public class GetListChannelByOwnerTypeIdRequest implements Serializable {
 
     public void setChannelTypeId(long channelTypeId) {
         this.channelTypeId = channelTypeId;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
     }
 }
