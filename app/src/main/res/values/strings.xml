@@ -192,4 +192,5 @@ Từ <b>%s</b><br>
     <string name="branches_add_contract">Hợp đồng</string>
     <string name="branches_add">Thêm Mới</string>
     <string name="branches_add_image">Ảnh</string>
+    <string name="branches_search_isdn">Isdn</string>
 </resources>
