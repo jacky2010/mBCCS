@@ -1,8 +1,10 @@
 package com.viettel.mbccs.data.source;
 
+import com.viettel.mbccs.data.model.Area;
 import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.Reason;
 import com.viettel.mbccs.data.model.SaleOrders;
+import com.viettel.mbccs.data.model.Shop;
 import com.viettel.mbccs.data.model.StockSerial;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.source.local.IBanHangKhoTaiChinhLocalDataSource;
@@ -12,7 +14,10 @@ import com.viettel.mbccs.data.source.remote.datasource.BanHangKhoTaiChinhRemoteD
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListChannelByOwnerTypeIdRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListOrderRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListProvinceRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListShopRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListStockModelRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListTTKDRequest;
 import com.viettel.mbccs.data.source.remote.request.GetOrderInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.GetResonRequest;
 import com.viettel.mbccs.data.source.remote.request.ViewInfoSerialRequest;
@@ -77,5 +82,20 @@ public class BanHangKhoTaiChinhRepository
     public Observable<List<StockSerial>> viewInfoSerial(
             BaseRequest<ViewInfoSerialRequest> request) {
         return banHangKhoTaiChinhRemoteDataSource.viewInfoSerial(request);
+    }
+
+    @Override
+    public Observable<List<Area>> getListProvince(BaseRequest<GetListProvinceRequest> request) {
+        return banHangKhoTaiChinhRemoteDataSource.getListProvince(request);
+    }
+
+    @Override
+    public Observable<List<Shop>> getListTTKD(BaseRequest<GetListTTKDRequest> request) {
+        return banHangKhoTaiChinhRemoteDataSource.getListTTKD(request);
+    }
+
+    @Override
+    public Observable<List<Shop>> getListShop(BaseRequest<GetListShopRequest> request) {
+        return banHangKhoTaiChinhRemoteDataSource.getListShop(request);
     }
 }

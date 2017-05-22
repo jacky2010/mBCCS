@@ -36,6 +36,15 @@ public class ViewWarehouseActivity
     }
 
     @Override
+    public void onBackPressed() {
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportFragmentManager().popBackStackImmediate();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
     public void setPresenter(ViewWarehouseContract.Presenter presenter) {
 
     }
