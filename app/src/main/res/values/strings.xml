@@ -238,4 +238,5 @@ Từ <b>%s</b><br>
     <string name="change_sim_service_fee">Phí dịch vụ:</string>
     <string name="change_sim_sim_fee">Phí Sim:</string>
     <string name="change_sim_total_fee">Tổng:</string>
+    <string name="no_data">Không tìm thấy thông tin tương ứng</string>
 </resources>
