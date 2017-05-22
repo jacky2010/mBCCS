@@ -223,6 +223,7 @@ Từ <b>%s</b><br>
     <string name="channel_code">Mã kênh</string>
     <string name="channel_name">Tên kênh</string>
     <string name="tax_code">Mã số thuế</string>
+    <string name="change_sim_document_no">Số giấy tờ</string>
     <string name="change_sim_select_sim">Chọn thông tin</string>
     <string name="change_sim_select_sim_error_debit">Thuê bao còn đang nợ cước, đề nghị vào thanh toán cước trước khi đổi sim!</string>
     <string name="change_sim_select_sim_error_bar1">Thuê bao đang ở trạng thái chặn %s chiều do KHYC, thực hiện mở trước khi thay !</string>
