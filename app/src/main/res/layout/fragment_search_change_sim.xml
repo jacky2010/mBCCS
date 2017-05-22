@@ -7,7 +7,7 @@
 
         <variable
             name="presenter"
-            type="com.viettel.mbccs.screen.branches.fragments.SearchBranchPresenter" />
+            type="com.viettel.mbccs.screen.changesim.fragments.SearchChangeSimPresenter" />
         <import name="View" type="android.view.View"/>
     </data>
 
@@ -23,7 +23,7 @@
             android:paddingLeft="@dimen/dp_16"
             android:paddingRight="@dimen/dp_16">
 
-            <TextView android:visibility="gone"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_8"
@@ -31,7 +31,8 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_16" />
 
-            <EditText android:visibility="gone"
+            <EditText
+                android:inputType="phone"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_40"
                 android:background="@drawable/bg_order"
@@ -41,7 +42,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_8"
-                android:text="@string/branches_search_document_no"
+                android:text="@string/branches_add_document_type"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16" />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:background="@drawable/bg_order" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:text="@string/change_sim_document_id"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_16" />
 
@@ -59,7 +73,7 @@
                 android:layout_marginTop="@dimen/dp_6"
                 android:background="@color/blue"
                 android:gravity="center"
-                android:onClick="@{ v -> presenter.searchDocument() }"
+                android:onClick="@{ v -> presenter.searchSim() }"
                 android:text="@string/sell_orders_search"
                 android:textColor="@color/white" />
         </LinearLayout>
@@ -87,7 +101,7 @@
                 <android.support.v7.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:adapter="@{presenter.branchesListAdapter}"></android.support.v7.widget.RecyclerView>
+                    android:adapter="@{presenter.changeSimListAdapter}"></android.support.v7.widget.RecyclerView>
             </LinearLayout>
         </ScrollView>
         <LinearLayout
@@ -101,7 +115,7 @@
                 android:gravity="center_horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/branches_search_not_found"
+                android:text="@string/no_data"
                 app:layout_marginLeftPercent="10%"
                 app:layout_marginRightPercent="10%"
                 android:background="@color/blue_trans"
@@ -113,20 +127,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"/>
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_40"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/dp_6"
-                android:background="@color/blue"
-                android:gravity="center"
-                android:onClick="@{ v -> presenter.addNewDocument() }"
-                android:text="@string/branches_add"
-                android:textColor="@color/white"
-                android:paddingEnd="@dimen/dp_8"
-                android:paddingStart="@dimen/dp_8"
-                app:layout_marginLeftPercent="10%"
-                app:layout_marginRightPercent="10%"/>
         </LinearLayout>
     </LinearLayout>
 </layout>

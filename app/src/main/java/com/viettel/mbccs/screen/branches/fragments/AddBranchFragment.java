@@ -9,6 +9,7 @@ import com.viettel.mbccs.base.BaseDataBindFragment;
 import com.viettel.mbccs.data.model.BranchItem;
 import com.viettel.mbccs.databinding.FragmentAddBranchBinding;
 import com.viettel.mbccs.utils.ActivityUtils;
+import com.viettel.mbccs.variable.Constants;
 
 /**
  * Created by minhnx on 5/20/17.
@@ -50,7 +51,7 @@ public class AddBranchFragment extends BaseDataBindFragment<FragmentAddBranchBin
         initListeners();
 
         Bundle args = getArguments();
-        formType = args.getInt("In.formType");
+        formType = args.getInt(Constants.BundleConstant.FORM_TYPE);
     }
 
     @Override

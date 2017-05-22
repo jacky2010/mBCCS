@@ -67,5 +67,7 @@ public class Constants {
         public static final String SALE_TRANS = "sale_trans";
         public static final String CHANNEL = "channel";
         public static final String CHANNEL_LIST = "channel_list";
+        public static final String FORM_TYPE = "form_type";
+        public static final String CHANGE_SIM_ITEM = "change_sim_item";
     }
 }
