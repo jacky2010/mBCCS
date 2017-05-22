@@ -4,7 +4,9 @@ import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.model.SaleOrders;
 import com.viettel.mbccs.data.model.SaleTrans;
+import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListStockModelRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsReponse;
@@ -39,7 +41,7 @@ public interface MBCSSApi {
     @POST("/send_code_password")
     Observable<BaseResponse<Object>> sendCodeChangePass(@Field("phone") String phone);
 
-    @GET("/login")
+    @POST("/login")
     Observable<BaseResponse<List<SaleOrders>>> searchSellOrders(
             @Body BaseRequest<GetListOrderRequest> request);
 
@@ -69,5 +71,10 @@ public interface MBCSSApi {
     @POST("/savetransaction")
     Observable<BaseResponse<SaleTrans>> createSaleTransRetail(
             @Body BaseRequest<GetInfoSaleTranRequest> request);
+
+    @POST("/getliststockmodel")
+    Observable<BaseResponse<List<StockTotal>>> getListStockModel(
+            @Body BaseRequest<GetListStockModelRequest> request);
+
 
 }

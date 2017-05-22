@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <data>
+        <variable
+            name="presenter"
+            type="com.viettel.mbccs.screen.viewwarehouse.adapter.ViewWarehouseListOrderAdapter.ViewHolder"
+            />
+    </data>
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_marginTop="@dimen/dp_4"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/dp_16"
+            android:paddingRight="@dimen/dp_16"
+            >
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:text="@{ @string/item_view_ware_house_code_stock(presenter.stockTotal.getStockModelCode(), presenter.stockTotal.getStockModelName())}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_18"
+                android:textStyle="bold"
+                />
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_4"
+                android:text="@{ @string/item_view_ware_house_number_responses(presenter.stockTotal.getQuantityIssue())}"
+                android:textColor="@color/black"
+                />
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_4"
+                android:text="@{ @string/item_view_ware_house_number_actual(presenter.stockTotal.getQuantity())}"
+                android:textColor="@color/black"
+                />
+
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:onClick="@{ v -> presenter.onClickViewSerial() }"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/sp_12"
+                app:textUnderLine="@{@string/item_view_ware_house_view_serial}"
+                android:layout_marginBottom="@dimen/dp_4"
+                />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</layout>
