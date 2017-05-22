@@ -15,7 +15,7 @@ import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.SaleOrders;
 import com.viettel.mbccs.data.model.Session;
 import com.viettel.mbccs.data.model.StaffInfo;
-import com.viettel.mbccs.data.source.SellOrdersRepository;
+import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListChannelByOwnerTypeIdRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListOrderRequest;
@@ -24,6 +24,7 @@ import com.viettel.mbccs.screen.sell.orders.adapter.SellOrdersFragmentAdapter;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.ArrayList;
 import java.util.List;
+import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
 /**
@@ -33,7 +34,7 @@ import rx.subscriptions.CompositeSubscription;
 public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
     private Context context;
     private SellOrdersContract.View sellOrdersView;
-    private SellOrdersRepository sellOrdersRepository;
+    private BanHangKhoTaiChinhRepository banHangKhoTaiChinhRepository;
     private CompositeSubscription subscriptions;
     private List<ChannelInfo> channelInfoList;
     private List<String> dataSpinnerChannel;
@@ -49,7 +50,7 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
     public SellOrdersPresenter(Context context, SellOrdersContract.View sellOrdersView) {
         this.context = context;
         this.sellOrdersView = sellOrdersView;
-        sellOrdersRepository = SellOrdersRepository.getInstance();
+        banHangKhoTaiChinhRepository = BanHangKhoTaiChinhRepository.getInstance();
         subscriptions = new CompositeSubscription();
         dataSpinnerChannel = new ArrayList<>();
         channelInfoList = new ArrayList<>();
@@ -80,7 +81,7 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
         request.setSession(new Session());
         request.setWsCode(WsCode.GetListChannelByOwnerTypeId);
 
-        sellOrdersRepository.getListChannelByOwnerTypeId(request)
+        Subscription subscription = banHangKhoTaiChinhRepository.getListChannelByOwnerTypeId(request)
                 .subscribe(new MBCCSSubscribe<List<ChannelInfo>>() {
                     @Override
                     public void onSuccess(List<ChannelInfo> object) {
@@ -105,6 +106,7 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
                         sellOrdersView.getListChannelByOwnerTypeIdError(error);
                     }
                 });
+        subscriptions.add(subscription);
     }
 
     public void unSubscribe() {
@@ -151,7 +153,7 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
         baseRequest.setApiKey("demo");
         baseRequest.setSession(new Session());
 
-        sellOrdersRepository.searchSellOrders(baseRequest)
+        banHangKhoTaiChinhRepository.searchSellOrders(baseRequest)
                 .subscribe(new MBCCSSubscribe<List<SaleOrders>>() {
                     @Override
                     public void onSuccess(List<SaleOrders> object) {

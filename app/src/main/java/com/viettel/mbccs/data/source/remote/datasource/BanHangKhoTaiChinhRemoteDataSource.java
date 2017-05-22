@@ -1,12 +1,14 @@
-package com.viettel.mbccs.data.source;
+package com.viettel.mbccs.data.source.remote.datasource;
 
 import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.Reason;
 import com.viettel.mbccs.data.model.SaleOrders;
-import com.viettel.mbccs.data.source.remote.ISellOrdersRemoteDataSource;
+import com.viettel.mbccs.data.model.StockTotal;
+import com.viettel.mbccs.data.source.remote.IBanHangKhoTaiChinhRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListChannelByOwnerTypeIdRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListOrderRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListStockModelRequest;
 import com.viettel.mbccs.data.source.remote.request.GetOrderInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.GetResonRequest;
 import com.viettel.mbccs.data.source.remote.response.OrderInfoResponse;
@@ -16,20 +18,21 @@ import java.util.List;
 import rx.Observable;
 
 /**
- * Created by HuyQuyet on 5/16/17.
+ * Created by HuyQuyet on 5/22/17.
  */
 
-public class SellOrdersRepository implements ISellOrdersRemoteDataSource {
-    private volatile static SellOrdersRepository instance;
+public class BanHangKhoTaiChinhRemoteDataSource implements IBanHangKhoTaiChinhRemoteDataSource {
 
-    public static SellOrdersRepository getInstance() {
-        if (instance == null) {
-            instance = new SellOrdersRepository();
-        }
-        return instance;
+    private volatile static BanHangKhoTaiChinhRemoteDataSource instance;
+
+    private BanHangKhoTaiChinhRemoteDataSource() {
     }
 
-    private SellOrdersRepository() {
+    public static BanHangKhoTaiChinhRemoteDataSource getInstance() {
+        if (instance == null) {
+            instance = new BanHangKhoTaiChinhRemoteDataSource();
+        }
+        return instance;
     }
 
     @Override
@@ -60,5 +63,14 @@ public class SellOrdersRepository implements ISellOrdersRemoteDataSource {
     @Override
     public Observable<List<Reason>> getListReason(BaseRequest<GetResonRequest> request) {
         return null;
+    }
+
+    @Override
+    public Observable<List<StockTotal>> getListStockModel(
+            BaseRequest<GetListStockModelRequest> request) {
+        return RequestHelper.getRequest()
+                .getListStockModel(request)
+                .flatMap(SchedulerUtils.<List<StockTotal>>convertDataFlatMap())
+                .compose(SchedulerUtils.<List<StockTotal>>applyAsyncSchedulers());
     }
 }

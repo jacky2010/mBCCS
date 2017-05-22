@@ -1,10 +1,7 @@
 package com.viettel.mbccs.screen.sell.orders.fragment.orderdetail;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.databinding.ObservableField;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.constance.WsCode;
@@ -12,15 +9,16 @@ import com.viettel.mbccs.data.model.SaleOrdersDetail;
 import com.viettel.mbccs.data.model.SaleTrans;
 import com.viettel.mbccs.data.model.SerialBO;
 import com.viettel.mbccs.data.model.Session;
-import com.viettel.mbccs.data.source.SellOrdersRepository;
+import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.GetOrderInfoRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.OrderInfoResponse;
 import com.viettel.mbccs.screen.sell.orders.adapter.OrderDetailAdapter;
-import com.viettel.mbccs.screen.serialpicker.SerialPickerActivity;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.List;
+import rx.Subscription;
+import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by HuyQuyet on 5/16/17.
@@ -30,7 +28,8 @@ public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract
     private Context context;
     private OrderDetailFragmentContract.View view;
     private List<ModelSale> goodItemList;
-    private SellOrdersRepository sellOrdersRepository;
+    private BanHangKhoTaiChinhRepository banHangKhoTaiChinhRepository;
+    private CompositeSubscription subscriptions;
     private List<SaleOrdersDetail> saleOrdersDetailList;
     private SaleTrans saleTrans;
 
@@ -45,7 +44,8 @@ public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract
     public OrderDetailFragmentPresenter(Context context, OrderDetailFragmentContract.View view) {
         this.context = context;
         this.view = view;
-        sellOrdersRepository = SellOrdersRepository.getInstance();
+        banHangKhoTaiChinhRepository = BanHangKhoTaiChinhRepository.getInstance();
+        subscriptions = new CompositeSubscription();
 
         adapterOrderDetail = new ObservableField<>();
         idOrder = new ObservableField<>();
@@ -63,7 +63,7 @@ public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract
 
     @Override
     public void unSubscribe() {
-
+        subscriptions.clear();
     }
 
     public void setAdapterOrderDetail(OrderDetailAdapter adapterOrderDetail) {
@@ -100,8 +100,8 @@ public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract
         request.setApiKey("demo");
         request.setSession(new Session());
 
-        sellOrdersRepository.getOrderInfo(request)
-                .subscribe(new MBCCSSubscribe<OrderInfoResponse>() {
+        Subscription subscription =
+                banHangKhoTaiChinhRepository.getOrderInfo(request).subscribe(new MBCCSSubscribe<OrderInfoResponse>() {
                     @Override
                     public void onSuccess(OrderInfoResponse object) {
                         saleOrdersDetailList = object.getSaleOrdersDetailList();
@@ -117,6 +117,7 @@ public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract
                         view.getOrderInfoError(error);
                     }
                 });
+        subscriptions.add(subscription);
     }
 
     private void setDataDisplayMoney() {
