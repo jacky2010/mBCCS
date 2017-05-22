@@ -2,12 +2,10 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     >
     <data>
         <variable
-            name="presneter"
+            name="presenter"
             type="com.viettel.mbccs.screen.viewwarehouse.fragment.ViewSerialFragment"
             />
     </data>
@@ -34,16 +32,34 @@
             android:layout_marginTop="@dimen/dp_16"
             android:paddingLeft="@dimen/dp_16"
             android:paddingRight="@dimen/dp_16"
-            android:text="@{ @string/fragment_view_ware_house_view_serial_detail_serial(hskfhskf)}"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_18"
+            app:textHtml="@{ @string/fragment_view_ware_house_view_serial_detail_serial( presenter.codeStock)}"
             />
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_marginTop="@dimen/dp_8"
+            android:layout_weight="1"
             android:adapter="@{ presenter.adapterViewSerial }"
+            />
+        <com.viettel.mbccs.widget.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:paddingRight="@dimen/dp_16"
+            android:text="@{ @string/fragment_view_ware_house_view_serial_total( presenter.totalSerial) }"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_46"
+            android:onClick="@{ v -> presenter.onCancel() }"
+            android:text="@string/fragment_view_ware_house_view_serial_btn_close"
+            style="@style/button_nagative"
             />
     </LinearLayout>
 </layout>
