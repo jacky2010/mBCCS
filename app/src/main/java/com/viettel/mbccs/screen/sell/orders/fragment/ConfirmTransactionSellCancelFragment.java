@@ -15,7 +15,7 @@ import com.viettel.mbccs.base.BaseFragment;
 import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.Reason;
 import com.viettel.mbccs.data.model.SaleTrans;
-import com.viettel.mbccs.data.source.SellOrdersRepository;
+import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.GetResonRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
@@ -33,7 +33,7 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
     private static final String ARG_SALE_TRANS = "SALE_TRANS";
     private static final String ARG_CHANGE_INFO = "CHANGE_INFO";
     private FragmentConfirmTransactionSellCancelBinding binding;
-    private SellOrdersRepository sellOrdersRepository;
+    private BanHangKhoTaiChinhRepository banHangKhoTaiChinhRepository;
     private List<Reason> reasonList;
     private Reason reason;
     private List<String> dataSpinnerReason;
@@ -69,7 +69,7 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sellOrdersRepository = SellOrdersRepository.getInstance();
+        banHangKhoTaiChinhRepository = BanHangKhoTaiChinhRepository.getInstance();
         isSell = getArguments().getBoolean(ARG_IS_SELL);
         saleTrans = getArguments().getParcelable(ARG_SALE_TRANS);
         channelInfoSell = getArguments().getParcelable(ARG_CHANGE_INFO);
@@ -105,7 +105,7 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
 
     private void getListReason() {
         showLoadingDialog();
-        sellOrdersRepository.getListReason(new BaseRequest<GetResonRequest>())
+        banHangKhoTaiChinhRepository.getListReason(new BaseRequest<GetResonRequest>())
                 .subscribe(new MBCCSSubscribe<List<Reason>>() {
                     @Override
                     public void onSuccess(List<Reason> object) {

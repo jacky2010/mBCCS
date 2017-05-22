@@ -3,8 +3,6 @@ package com.viettel.mbccs.utils;
 import android.content.Context;
 import android.security.KeyPairGeneratorSpec;
 import android.util.Base64;
-import android.util.Log;
-import android.widget.Toast;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -30,7 +28,7 @@ import javax.security.auth.x500.X500Principal;
 
 public class SecureUtils {
 
-    public static KeyStore keyStore;
+    public volatile static KeyStore keyStore;
 
     public static KeyStore getKeyStore()
             throws KeyStoreException, CertificateException, NoSuchAlgorithmException, IOException {

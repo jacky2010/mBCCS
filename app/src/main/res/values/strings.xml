@@ -248,4 +248,20 @@ Từ <b>%s</b><br>
     <string name="sim_serial2">Số serial:</string>
     <string name="cust_name2">Tên khách hàng:</string>
     <string name="change_sim">Thực Hiện Đổi Sim</string>
+
+
+    <string name="view_ware_house_title">Chi tiết kho</string>
+    <string name="view_ware_house_list_stock">Danh sách mặt hàng (%1$d)</string>
+    <string name="item_view_ware_house_code_stock">Mã hàng: %1$s - %2$s</string>
+    <string name="item_view_ware_house_number_actual">Số lượng thực tế: %1$d</string>
+    <string name="item_view_ware_house_number_responses">Số lượng đáp ứng: %1$d</string>
+    <string name="item_view_ware_house_view_serial">Xem serial</string>
+    <string name="fragment_view_ware_house_view_serial_title">Xem serial</string>
+    <string name="fragment_view_ware_house_view_serial_detail_serial">
+        <![CDATA[
+         Chi tiết serial cho mặt hàng font color="#317BE1"><u>%s</u></font>
+        ]]>
+    </string>
+    <string name="fragment_view_ware_house_view_serial_total">Tổng số: %1$d</string>
+    <string name="fragment_view_ware_house_view_serial_btn_close">Đóng</string>
 </resources>

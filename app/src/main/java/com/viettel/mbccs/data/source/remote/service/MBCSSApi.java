@@ -5,6 +5,15 @@ import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.model.SaleOrders;
 import com.viettel.mbccs.data.model.SaleTrans;
+import com.viettel.mbccs.data.model.StockSerial;
+import com.viettel.mbccs.data.model.StockTotal;
+import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListStockModelRequest;
+import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
+import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
+import com.viettel.mbccs.data.source.remote.request.ViewInfoSerialRequest;
+import com.viettel.mbccs.data.source.remote.response.GetSerialsReponse;
+import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import com.viettel.mbccs.data.source.remote.request.AddBranchRequest;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
@@ -44,7 +53,7 @@ public interface MBCSSApi {
     @POST("/send_code_password")
     Observable<BaseResponse<Object>> sendCodeChangePass(@Field("phone") String phone);
 
-    @GET("/login")
+    @POST("/login")
     Observable<BaseResponse<List<SaleOrders>>> searchSellOrders(
             @Body BaseRequest<GetListOrderRequest> request);
 
@@ -63,6 +72,7 @@ public interface MBCSSApi {
     @GET("/login")
     Observable<BaseResponse<OrderInfoResponse>> getOrderInfo(
             @Body BaseRequest<GetOrderInfoRequest> request);
+
     @POST("/getsalemodel")
     Observable<BaseResponse<List<ModelSale>>> getModelSales(
             @Body BaseRequest<GetTotalStockRequest> request);
@@ -82,4 +92,11 @@ public interface MBCSSApi {
     @POST("/createDistributtedChannel")
     Observable<BaseResponse<BranchItem>> createDistributtedChannel(
             @Body AddBranchRequest request);
+    @POST("/getliststockmodel")
+    Observable<BaseResponse<List<StockTotal>>> getListStockModel(
+            @Body BaseRequest<GetListStockModelRequest> request);
+
+    @POST("/viewinfoserial")
+    Observable<BaseResponse<List<StockSerial>>> viewInfoSerial(
+            @Body BaseRequest<ViewInfoSerialRequest> request);
 }

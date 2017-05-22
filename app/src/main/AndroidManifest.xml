@@ -18,7 +18,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="ManifestResource">
-
         <activity
             android:name=".screen.splash.SplashActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
@@ -28,9 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
         <activity android:name=".screen.billing.BillingActivity"/>
-
         <activity
             android:name=".screen.resetpass.ResetPasswordActivity"
             android:screenOrientation="portrait"/>
@@ -65,7 +62,6 @@
         <activity
             android:name=".screen.sell.retail.CreateSaleActivity"
             android:screenOrientation="portrait"/>
-
         <activity
             android:name=".screen.sell.channel.SaleChannelActivity"
             android:screenOrientation="portrait"/>

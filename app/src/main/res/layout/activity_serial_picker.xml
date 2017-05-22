@@ -139,7 +139,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:adapter="@{presenter.serialAdapter}"
-                            ></com.viettel.mbccs.widget.MaxHeightRecyclerView>
+                            />
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
@@ -337,7 +337,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:adapter="@{presenter.serialSelectedAdapter}"
-                            ></android.support.v7.widget.RecyclerView>
+                            />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"

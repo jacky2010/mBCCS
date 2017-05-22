@@ -10,7 +10,7 @@ import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.model.SaleChannelInitData;
 import com.viettel.mbccs.data.model.SaleProgram;
 import com.viettel.mbccs.data.model.TeleComService;
-import com.viettel.mbccs.data.source.SellOrdersRepository;
+import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListChannelByOwnerTypeIdRequest;
@@ -52,7 +52,7 @@ public class SaleChannelPresenter
     private ChannelInfo currentChannel = new ChannelInfo();
     private int currentStockPosition = -1;
     private UserRepository mUserRepository;
-    private SellOrdersRepository mSellOrdersRepository;
+    private BanHangKhoTaiChinhRepository banHangKhoTaiChinhRepository;
     private BaseRequest<GetTelecomServiceAndSaleProgramRequest>
             mGetTelecomServiceAndSaleProgramRequest;
     private BaseRequest<GetListChannelByOwnerTypeIdRequest> mGetListChannelByOwnerTypeIdRequest;
@@ -64,7 +64,7 @@ public class SaleChannelPresenter
         mViewModel = viewModel;
         mSubscription = new CompositeSubscription();
         mUserRepository = UserRepository.getInstance();
-        mSellOrdersRepository = SellOrdersRepository.getInstance();
+        banHangKhoTaiChinhRepository = BanHangKhoTaiChinhRepository.getInstance();
         init();
         initialData();
     }
@@ -191,7 +191,7 @@ public class SaleChannelPresenter
         request.setStaffId(1);
         request.setLanguage("en");
         mGetListChannelByOwnerTypeIdRequest.setRequest(request);
-        return mSellOrdersRepository.getListChannelByOwnerTypeId(
+        return banHangKhoTaiChinhRepository.getListChannelByOwnerTypeId(
                 mGetListChannelByOwnerTypeIdRequest);
     }
 

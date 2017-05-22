@@ -1,7 +1,8 @@
-package com.viettel.mbccs.data.source.remote;
+package com.viettel.mbccs.data.source.remote.datasource;
 
 import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.model.SaleTrans;
+import com.viettel.mbccs.data.source.remote.IUserRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
