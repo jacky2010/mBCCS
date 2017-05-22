@@ -220,5 +220,6 @@ Từ <b>%s</b><br>
          Chi tiết serial cho mặt hàng font color="#317BE1"><u>%s</u></font>
         ]]>
     </string>
-
+    <string name="fragment_view_ware_house_view_serial_total">Tổng số: %1$d</string>
+    <string name="fragment_view_ware_house_view_serial_btn_close">Đóng</string>
 </resources>

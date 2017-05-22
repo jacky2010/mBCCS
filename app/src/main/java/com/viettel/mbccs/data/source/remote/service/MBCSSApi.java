@@ -4,11 +4,13 @@ import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.model.SaleOrders;
 import com.viettel.mbccs.data.model.SaleTrans;
+import com.viettel.mbccs.data.model.StockSerial;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListStockModelRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
+import com.viettel.mbccs.data.source.remote.request.ViewInfoSerialRequest;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsReponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
@@ -60,6 +62,7 @@ public interface MBCSSApi {
     @GET("/login")
     Observable<BaseResponse<OrderInfoResponse>> getOrderInfo(
             @Body BaseRequest<GetOrderInfoRequest> request);
+
     @POST("/getsalemodel")
     Observable<BaseResponse<List<ModelSale>>> getModelSales(
             @Body BaseRequest<GetTotalStockRequest> request);
@@ -76,5 +79,7 @@ public interface MBCSSApi {
     Observable<BaseResponse<List<StockTotal>>> getListStockModel(
             @Body BaseRequest<GetListStockModelRequest> request);
 
-
+    @POST("/viewinfoserial")
+    Observable<BaseResponse<List<StockSerial>>> viewInfoSerial(
+            @Body BaseRequest<ViewInfoSerialRequest> request);
 }

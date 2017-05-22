@@ -13,6 +13,7 @@ import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListStockModelRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.screen.viewwarehouse.adapter.ViewWarehouseListOrderAdapter;
+import com.viettel.mbccs.screen.viewwarehouse.fragment.ViewSerialFragment;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.List;
 import rx.Subscription;
@@ -23,11 +24,12 @@ import rx.subscriptions.CompositeSubscription;
  */
 
 public class ViewWarehousePresenter implements ViewWarehouseContract.Presenter,
-        ViewWarehouseListOrderAdapter.ViewWarehouseListOrderAdapterCallback{
+        ViewWarehouseListOrderAdapter.ViewWarehouseListOrderAdapterCallback {
     private Context context;
     private ViewWarehouseContract.View view;
     private BanHangKhoTaiChinhRepository banHangKhoTaiChinhRepository;
     private CompositeSubscription subscriptions;
+    private List<StockTotal> stockTotalList;
 
     public ObservableBoolean showRightIcon;
     public ObservableField<ViewWarehouseListOrderAdapter> adapterOrders;
@@ -66,8 +68,9 @@ public class ViewWarehousePresenter implements ViewWarehouseContract.Presenter,
                 .subscribe(new MBCCSSubscribe<List<StockTotal>>() {
                     @Override
                     public void onSuccess(List<StockTotal> object) {
-                        view.setData(object);
-                        totalStock.set(object.size());
+                        stockTotalList = object;
+                        view.setData(stockTotalList);
+                        totalStock.set(stockTotalList.size());
                     }
 
                     @Override
@@ -101,6 +104,6 @@ public class ViewWarehousePresenter implements ViewWarehouseContract.Presenter,
 
     @Override
     public void onClickViewSerial(int position) {
-
+        ViewSerialFragment fragment = ViewSerialFragment.newInstance(stockTotalList.get(position));
     }
 }
