@@ -129,4 +129,13 @@
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">@dimen/sp_14</item>
     </style>
+
+    <style name="styleTextHelp">
+        <item name="android:minHeight">@dimen/dp_50</item>
+        <item name="android:paddingBottom">@dimen/dp_10</item>
+        <item name="android:paddingTop">@dimen/dp_10</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/sp_18</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
 </resources>

@@ -1,6 +1,7 @@
 package com.viettel.mbccs.screen.sell.orders;
 
 import android.support.design.widget.TabLayout;
+import android.widget.Toast;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.constance.OrderStatus;
@@ -150,5 +151,20 @@ public class SellOrdersActivity
     @Override
     public void getListChannelByOwnerTypeIdError(BaseException error) {
         // TODO: 5/18/17 show error
+    }
+
+    @Override
+    public long getDateTo() {
+        return mBinding.dateTo.getDateInMilis();
+    }
+
+    @Override
+    public long getDateFrom() {
+        return mBinding.dateTo.getDateInMilis();
+    }
+
+    @Override
+    public void showErrorDate() {
+        Toast.makeText(this, "Thoi gian toi da 1 thang ", Toast.LENGTH_SHORT).show();
     }
 }

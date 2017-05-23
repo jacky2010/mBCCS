@@ -81,31 +81,31 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
         request.setSession(new Session());
         request.setWsCode(WsCode.GetListChannelByOwnerTypeId);
 
-        Subscription subscription = banHangKhoTaiChinhRepository.getListChannelByOwnerTypeId(request)
-                .subscribe(new MBCCSSubscribe<List<ChannelInfo>>() {
-                    @Override
-                    public void onSuccess(List<ChannelInfo> object) {
-                        channelInfoList = object;
-                        for (ChannelInfo c : channelInfoList) {
-                            dataSpinnerChannel.add(c.getManagementName());
-                        }
-                        spinnerAdapterChannel.set(
-                                new ArrayAdapter<>(context, android.R.layout.simple_spinner_item,
-                                        dataSpinnerChannel));
-                        spinnerAdapterChannel.get()
-                                .setDropDownViewResource(
-                                        android.R.layout.simple_spinner_dropdown_item);
+        Subscription subscription =
+                banHangKhoTaiChinhRepository.getListChannelByOwnerTypeId(request)
+                        .subscribe(new MBCCSSubscribe<List<ChannelInfo>>() {
+                            @Override
+                            public void onSuccess(List<ChannelInfo> object) {
+                                channelInfoList = object;
+                                for (ChannelInfo c : channelInfoList) {
+                                    dataSpinnerChannel.add(c.getManagementName());
+                                }
+                                spinnerAdapterChannel.set(new ArrayAdapter<>(context,
+                                        android.R.layout.simple_spinner_item, dataSpinnerChannel));
+                                spinnerAdapterChannel.get()
+                                        .setDropDownViewResource(
+                                                android.R.layout.simple_spinner_dropdown_item);
 
-                        sellOrdersView.hideLoading();
-                    }
+                                sellOrdersView.hideLoading();
+                            }
 
-                    @Override
-                    public void onError(BaseException error) {
-                        // TODO: 5/18/17 show error
-                        sellOrdersView.hideLoading();
-                        sellOrdersView.getListChannelByOwnerTypeIdError(error);
-                    }
-                });
+                            @Override
+                            public void onError(BaseException error) {
+                                // TODO: 5/18/17 show error
+                                sellOrdersView.hideLoading();
+                                sellOrdersView.getListChannelByOwnerTypeIdError(error);
+                            }
+                        });
         subscriptions.add(subscription);
     }
 
@@ -134,15 +134,20 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
     }
 
     public void clickSearch() {
-        String dateFrom = "";
-        String dateTo = "";
+        long dateFrom = sellOrdersView.getDateFrom();
+        long dateTo = sellOrdersView.getDateTo();
+
+        if (dateTo - dateFrom > 10000000) {
+            sellOrdersView.showErrorDate();
+            return;
+        }
 
         GetListOrderRequest getListOrderRequest = new GetListOrderRequest();
         getListOrderRequest.setShopId(staffInfo.get().getShopId());
         getListOrderRequest.setStaffId(staffInfo.get().getStaffId());
         getListOrderRequest.setIsdnChannel(channelInfoSelect.getChannelId());
-        getListOrderRequest.setToDate(dateTo);
-        getListOrderRequest.setFromDate(dateFrom);
+        getListOrderRequest.setToDate(String.valueOf(dateTo));
+        getListOrderRequest.setFromDate(String.valueOf(dateFrom));
         getListOrderRequest.setOrderStatus(1);
 
         BaseRequest<GetListOrderRequest> baseRequest = new BaseRequest<>();

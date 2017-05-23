@@ -23,6 +23,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
@@ -88,6 +89,9 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.assignjob.arising.CreateArisingJobActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screen.help.HelpActivity"
             android:screenOrientation="portrait"/>
     </application>
 

@@ -2,6 +2,7 @@ package com.viettel.mbccs.utils;
 
 import android.content.Context;
 import android.databinding.BindingAdapter;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.DimenRes;
 import android.support.annotation.StringRes;
@@ -31,7 +32,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import com.bumptech.glide.DrawableRequestBuilder;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -40,14 +40,12 @@ import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.MenuItem;
 import com.viettel.mbccs.widget.BottomNavigationView;
 import com.viettel.mbccs.widget.EndlessRecyclerOnScrollListener;
-
-import java.util.List;
-
 import de.codecrafters.tableview.TableDataAdapter;
 import de.codecrafters.tableview.TableHeaderAdapter;
 import de.codecrafters.tableview.TableView;
 import de.codecrafters.tableview.listeners.SwipeToRefreshListener;
 import de.codecrafters.tableview.model.TableColumnModel;
+import java.util.List;
 
 /**
  * Created by FRAMGIA\bui.dinh.viet on 09/02/2017.
@@ -314,7 +312,6 @@ public class BindingUtils {
     @BindingAdapter({ "setSpinnerAdapter" })
     public static void setSpinnerAdapter(Spinner view, ArrayAdapter adapter) {
         view.setAdapter(adapter);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     }
 
     @BindingAdapter({ "spinnerClickItem" })
@@ -373,5 +370,16 @@ public class BindingUtils {
     @BindingAdapter("error")
     public static void setTextError(EditText textView, String error) {
         textView.setError(error);
+    }
+
+    @BindingAdapter({ "loadUrlWebView" })
+    public static void loadUrl(WebView view, String url) {
+        view.loadUrl(url);
+    }
+
+    @BindingAdapter({ "contentHtmlGray" })
+    public static void setContentHtml(WebView view, String content) {
+        view.setBackgroundColor(Color.TRANSPARENT);
+        view.loadData(content, "text/html; charset=utf-8", "utf-8");
     }
 }
