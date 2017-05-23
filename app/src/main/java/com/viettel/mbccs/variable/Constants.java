@@ -67,5 +67,6 @@ public class Constants {
         public static final String SALE_TRANS = "sale_trans";
         public static final String CHANNEL = "channel";
         public static final String CHANNEL_LIST = "channel_list";
+        public static final String LIST_STOCK_TOTAL = "list_stock_total";
     }
 }

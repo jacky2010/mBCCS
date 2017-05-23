@@ -5,8 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.MenuItem;
-import com.viettel.mbccs.screen.sell.channel.SaleChannelActivity;
-import com.viettel.mbccs.screen.sell.retail.SaleRetailActivity;
+import com.viettel.mbccs.screen.kpp.order.KPPOrderActivity;
 import com.viettel.mbccs.widget.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -66,6 +65,7 @@ public class MainPresenter implements MainContract.Presenter {
                 // TODO: Handle menu item clicked later. Should use menu Id instead of position.
                 //mContext.startActivity(new Intent(mContext, SaleRetailActivity.class));
                 //mContext.startActivity(new Intent(mContext, SaleChannelActivity.class));
+              //  mContext.startActivity(new Intent(mContext, KPPOrderActivity.class));
                 switch (position) {
                     case 0:
                         mViewModel.backToMain();

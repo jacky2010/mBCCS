@@ -92,6 +92,7 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="select_serial">Chọn serial</string>
     <string name="next">next</string>
     <string name="sale_retail">Bán lẻ</string>
+    <string name="sale_channel">Bán cho kênh</string>
     <string name="all">Tất cả</string>
     <string name="all_">-Tất cả-</string>
     <string name="customer_info">Thông tin khách hàng</string>
@@ -207,7 +208,6 @@ Từ <b>%s</b><br>
     <string name="channel_name">Tên kênh</string>
     <string name="tax_code">Mã số thuế</string>
 
-
     <string name="view_ware_house_title">Chi tiết kho</string>
     <string name="view_ware_house_list_stock">Danh sách mặt hàng (%1$d)</string>
     <string name="item_view_ware_house_code_stock">Mã hàng: %1$s - %2$s</string>
@@ -232,4 +232,42 @@ Từ <b>%s</b><br>
     <string name="view_ware_house_search_close">Đóng</string>
     <string name="view_ware_house_search_filter">Lọc</string>
     <string name="view_ware_house_search_all">-Tất cả-</string>
+    <!--kpp-->
+    <string name="kpp_order">KPP Đặt hàng</string>
+    <string name="order_approval">Đã được phê duyệt</string>
+    <string name="order_reject">Đã từ chối</string>
+    <string name="order_pending">Đang chờ phê duyệt</string>
+    <string-array name="order_status_name">
+        <item>Đã được phê duyệt</item>
+        <item>Đang chờ phê duyệt</item>
+        <item>Đã từ chối</item>
+    </string-array>
+    <string name="order_title_list">Danh sách đơn hàng (%s)</string>
+    <string name="order_amout_list">Tổng tiền:  (%s) đồng</string>
+    <string name="order_from_kpp"><![CDATA[
+Đặt hàng từ KPP: <b>%s</b>
+    ]]></string>
+    <string name="add_new_sale_model">Thêm hàng hóa</string>
+    <string name="order">Đặt</string>
+    <string name="order2">Đặt hàng</string>
+    <string name="model_type">Loại mặt hàng</string>
+    <string name="mode_code">Mã mặt hàng *</string>
+    <string name="model_name">Tên mặt hàng</string>
+    <string name="search1">Tìm kiếm</string>
+    <string name="export_per_response">Số lượng xuất/ Số lượng đáp ứng</string>
+    <string name="add_stock_total">Thêm hàng hóa</string>
+    <string name="notice">Thông báo</string>
+    <string name="mode_code1">Mã hàng</string>
+    <string name="quantity">Số lượng</string>
+    <string name="sum_money">Tổng tiền</string>
+    <string name="confirm_kpp_order">Bạn có chắc muốn đặt hàng</string>
+    <string name="status">Trạng thái</string>
+    <string name="time_invalid">Thời gian nhập vào không hợp lệ</string>
+    <string name="time_out_of_month">Chọn thời gian trong khoảng 1 tháng</string>
+    <array name="stock_type">
+        <item>-Tất cả -</item>
+        <item>Hàng mới</item>
+        <item>Hàng cũ</item>
+    </array>
+
 </resources>

@@ -20,7 +20,9 @@
     <color name="default_text_color">#ffffff</color>
     <color name="red">#DF0101</color>
     <color name="transparent">#00ffffff</color>
-
+    <color name="orange">#FD9827</color>
     <color name="bg_config">#e6e6e6</color>
+    <color name="yellow">#FBD036</color>
+
 
 </resources>

@@ -8,7 +8,7 @@ import android.support.annotation.IntDef;
 
 @IntDef({ OrderStatus.APPROVALS, OrderStatus.PENDING, OrderStatus.REJECT })
 public @interface OrderStatus {
-    int APPROVALS = 0;
+    int APPROVALS = 2;
     int PENDING = 1;
-    int REJECT = 2;
+    int REJECT = 3;
 }

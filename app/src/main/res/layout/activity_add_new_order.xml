@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+        <variable
+            name="presenter"
+            type="com.viettel.mbccs.screen.kpp.order.addnew.AddNewOrderPresenter"
+            />
+    </data>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <include
+            layout="@layout/toolbar"
+            app:background="@{@color/grey}"
+            app:isShow="@{true}"
+            app:leftIcon="@{@drawable/ic_arrow_left_24dp}"
+            app:leftIconClick="@{()->presenter.onCancel()}"
+            app:title="@{@string/kpp_order}"
+            app:titleColor="@{@color/white}"
+            app:titleTextSize="@{@dimen/sp_17}"
+            />
+        <com.viettel.mbccs.widget.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_5"
+            android:text="@{presenter.titleOrder}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_18"
+            tools:text="@string/order_from_kpp"
+            />
+
+        <com.viettel.mbccs.widget.CustomButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_margin="@dimen/dp_10"
+            android:onClick="@{()->presenter.addNewStock()}"
+            android:padding="@dimen/dp_5"
+            android:text="@string/add_new_sale_model"
+            style="@style/button_positive"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <LinearLayout
+                android:id="@+id/layout_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_70"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_5"
+                >
+                <com.viettel.mbccs.widget.CustomButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_3"
+                    android:layout_weight="1"
+                    android:onClick="@{()->presenter.cancelClick()}"
+                    android:text="@string/cancel"
+                    style="@style/button_cancel"
+                    />
+                <com.viettel.mbccs.widget.CustomButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_3"
+                    android:layout_weight="1"
+                    android:onClick="@{()->presenter.orderClick()}"
+                    android:text="@string/order2"
+                    style="@style/button_positive"
+                    />
+            </LinearLayout>
+
+            <com.viettel.mbccs.widget.CustomTextView
+                android:id="@+id/layout_money"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/layout_bottom"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/dp_70"
+                android:background="@color/orange"
+                android:padding="@dimen/dp_10"
+                android:text="@{presenter.amount}"
+                android:textColor="@color/black"
+                />
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/layout_money"
+                android:adapter="@{presenter.adapter}"
+                ></android.support.v7.widget.RecyclerView>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</layout>

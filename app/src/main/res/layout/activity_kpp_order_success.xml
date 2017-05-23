@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="presenter"
+            type="com.viettel.mbccs.screen.kpp.order.ordersuccess.OrderSuccessPresenter"
+            />
+    </data>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        >
+        <com.viettel.mbccs.widget.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/grey"
+            android:gravity="center"
+            android:text="@string/notice"
+            android:textColor="@color/white"
+            />
+
+        <com.viettel.mbccs.widget.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_5"
+            android:gravity="center"
+            android:text="asdfasdfsadfsadfsadf"
+            android:textSize="@dimen/sp_13"
+            />
+        <com.viettel.mbccs.widget.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_5"
+            android:gravity="center"
+            android:text="asdfasdfsadfsadfsadf"
+            android:textSize="@dimen/sp_13"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <com.viettel.mbccs.widget.CustomButton
+                android:id="@+id/btn_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="@dimen/dp_10"
+                android:onClick="@{()->presenter.closeClick()}"
+                android:paddingBottom="@dimen/dp_5"
+                android:paddingLeft="@dimen/dp_20"
+                android:paddingRight="@dimen/dp_20"
+                android:paddingTop="@dimen/dp_5"
+                android:text="@string/close"
+                style="@style/button_nagative"
+                />
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/btn_close"
+                android:layout_marginTop="@dimen/dp_10"
+                android:adapter="@{presenter.adapter}"
+                ></android.support.v7.widget.RecyclerView>
+        </RelativeLayout>
+
+
+    </LinearLayout>
+</layout>

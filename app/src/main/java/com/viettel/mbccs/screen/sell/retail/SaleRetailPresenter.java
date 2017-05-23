@@ -1,5 +1,6 @@
 package com.viettel.mbccs.screen.sell.retail;
 
+import android.app.Activity;
 import android.content.Context;
 import android.databinding.ObservableField;
 import android.widget.ArrayAdapter;
@@ -319,5 +320,9 @@ public class SaleRetailPresenter
 
     public void onNext() {
         mViewModel.onNext(mModelSales, currentTelecomService, currentSaleProgram);
+    }
+
+    public void onCancel() {
+        ((Activity) mContext).finish();
     }
 }

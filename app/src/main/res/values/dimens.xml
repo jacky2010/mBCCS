@@ -55,4 +55,6 @@
     <!--Billing-->
     <dimen name="image_loading_width">30dp</dimen>
     <dimen name="margin_default">10dp</dimen>
+    <dimen name="dp_70">70dp</dimen>
+    <dimen name="sp_40">40sp</dimen>
 </resources>

@@ -12,6 +12,7 @@ import com.viettel.mbccs.data.source.remote.request.GetListStockModelRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
 import com.viettel.mbccs.data.source.remote.request.ViewInfoSerialRequest;
+import com.viettel.mbccs.data.source.remote.request.KPPOrderRequest;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsReponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import com.viettel.mbccs.data.model.Shop;
@@ -102,10 +103,12 @@ public interface MBCSSApi {
             @Body BaseRequest<GetListProvinceRequest> request);
 
     @POST("/getListTTKD")
-    Observable<BaseResponse<List<Shop>>> getListTTKD(
-            @Body BaseRequest<GetListTTKDRequest> request);
+    Observable<BaseResponse<List<Shop>>> getListTTKD(@Body BaseRequest<GetListTTKDRequest> request);
 
     @POST("/getListTTKD")
-    Observable<BaseResponse<List<Shop>>> getListShop(
-            @Body BaseRequest<GetListShopRequest> request);
+    Observable<BaseResponse<List<Shop>>> getListShop(@Body BaseRequest<GetListShopRequest> request);
+
+    @POST("/createSaleOrder")
+    Observable<BaseResponse> createSaleOrders(
+            @Body BaseRequest<KPPOrderRequest> requestBaseResponse);
 }

@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.viettel.mbccs.constance.OrderStatus;
 
 /**
  * Created by HuyQuyet on 5/17/17.
@@ -108,6 +109,8 @@ public class SaleOrders implements Parcelable {
         return saleOrdersId;
     }
 
+
+
     public void setSaleOrdersId(long saleOrdersId) {
         this.saleOrdersId = saleOrdersId;
     }
@@ -191,4 +194,8 @@ public class SaleOrders implements Parcelable {
     public void setActionDate(String actionDate) {
         this.actionDate = actionDate;
     }
+
+
+
+
 }
