@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import com.viettel.mbccs.base.BaseFragment;
 import com.viettel.mbccs.constance.WsCode;
+import com.viettel.mbccs.data.model.SerialBO;
 import com.viettel.mbccs.data.model.Session;
 import com.viettel.mbccs.data.model.StockSerial;
 import com.viettel.mbccs.data.model.StockTotal;
@@ -18,8 +19,9 @@ import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.ViewInfoSerialRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.databinding.FragmentWareHouseViewSerialBinding;
-import com.viettel.mbccs.screen.viewwarehouse.adapter.ViewSerialAdapter;
+import com.viettel.mbccs.screen.viewwarehouse.adapter.ViewWarehouseViewSerialAdapter;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
+import java.util.ArrayList;
 import java.util.List;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
@@ -38,7 +40,7 @@ public class ViewSerialFragment extends BaseFragment {
 
     public ObservableField<String> codeStock;
     public ObservableInt totalSerial;
-    public ObservableField<ViewSerialAdapter> adapterViewSerial;
+    public ObservableField<ViewWarehouseViewSerialAdapter> adapterViewSerial;
 
     public static ViewSerialFragment newInstance(StockTotal stockTotal) {
         Bundle bundle = new Bundle();
@@ -89,9 +91,7 @@ public class ViewSerialFragment extends BaseFragment {
                 .subscribe(new MBCCSSubscribe<List<StockSerial>>() {
                     @Override
                     public void onSuccess(List<StockSerial> object) {
-                        stockSerialList = object;
-                        adapterViewSerial.set(new ViewSerialAdapter(stockSerialList));
-                        hideLoadingDialog();
+                        setData(object);
                     }
 
                     @Override
@@ -111,6 +111,16 @@ public class ViewSerialFragment extends BaseFragment {
     }
 
     public void onCancel() {
+        getActivity().getSupportFragmentManager().popBackStackImmediate();
+    }
 
+    public void setData(List<StockSerial> data) {
+        stockSerialList = data;
+        // TODO: 5/22/17 data error
+        List<SerialBO> serialBOList = new ArrayList<>();
+        adapterViewSerial.set(new ViewWarehouseViewSerialAdapter(serialBOList));
+        totalSerial.set(stockSerialList.size());
+        codeStock.set(stockTotal.getStockModelCode());
+        hideLoadingDialog();
     }
 }

@@ -313,6 +313,7 @@ public class BindingUtils {
     @BindingAdapter({ "setSpinnerAdapter" })
     public static void setSpinnerAdapter(Spinner view, ArrayAdapter adapter) {
         view.setAdapter(adapter);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     }
 
     @BindingAdapter({ "spinnerClickItem" })

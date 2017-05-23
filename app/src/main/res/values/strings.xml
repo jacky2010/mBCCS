@@ -222,4 +222,14 @@ Từ <b>%s</b><br>
     </string>
     <string name="fragment_view_ware_house_view_serial_total">Tổng số: %1$d</string>
     <string name="fragment_view_ware_house_view_serial_btn_close">Đóng</string>
+    <string name="view_ware_house_search_filter_information">Lọc thông tin</string>
+    <string name="view_ware_house_search_code_province">Mã tỉnh</string>
+    <string name="view_ware_house_search_code_business_center">Mã TTKD</string>
+    <string name="view_ware_house_search_code_store">Mã cửa hàng</string>
+    <string name="view_ware_house_search_code_ware_house">Mã kho *</string>
+    <string name="view_ware_house_search_code_stock">Mã hàng hóa</string>
+    <string name="view_ware_house_search_code_status">Trạng thái *</string>
+    <string name="view_ware_house_search_close">Đóng</string>
+    <string name="view_ware_house_search_filter">Lọc</string>
+    <string name="view_ware_house_search_all">-Tất cả-</string>
 </resources>
