@@ -1,6 +1,7 @@
 package com.viettel.mbccs.data.source.remote.service;
 
 import com.viettel.mbccs.data.model.BranchItem;
+import com.viettel.mbccs.data.model.Area;
 import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.model.SaleOrders;
@@ -15,22 +16,31 @@ import com.viettel.mbccs.data.source.remote.request.ViewInfoSerialRequest;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsReponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import com.viettel.mbccs.data.source.remote.request.AddBranchRequest;
+import com.viettel.mbccs.data.model.Shop;
+import com.viettel.mbccs.data.model.StockSerial;
+import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListChannelByOwnerTypeIdRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListOrderRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListProvinceRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListShopRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListStockModelRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListTTKDRequest;
 import com.viettel.mbccs.data.source.remote.request.GetOrderInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
 import com.viettel.mbccs.data.source.remote.request.LoginRequest;
 import com.viettel.mbccs.data.source.remote.request.SearchBranchRequest;
+import com.viettel.mbccs.data.source.remote.request.ViewInfoSerialRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsReponse;
 import com.viettel.mbccs.data.source.remote.response.LoginResponse;
 import com.viettel.mbccs.data.source.remote.response.OrderInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 
+import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import java.util.List;
 
 import retrofit2.http.Body;
@@ -99,4 +109,16 @@ public interface MBCSSApi {
     @POST("/viewinfoserial")
     Observable<BaseResponse<List<StockSerial>>> viewInfoSerial(
             @Body BaseRequest<ViewInfoSerialRequest> request);
+
+    @POST("/getListProvince")
+    Observable<BaseResponse<List<Area>>> getListProvince(
+            @Body BaseRequest<GetListProvinceRequest> request);
+
+    @POST("/getListTTKD")
+    Observable<BaseResponse<List<Shop>>> getListTTKD(
+            @Body BaseRequest<GetListTTKDRequest> request);
+
+    @POST("/getListTTKD")
+    Observable<BaseResponse<List<Shop>>> getListShop(
+            @Body BaseRequest<GetListShopRequest> request);
 }
