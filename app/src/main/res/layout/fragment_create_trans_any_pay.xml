@@ -33,10 +33,16 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_16" />
 
-            <Spinner
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_40"
-                android:background="@drawable/bg_order" />
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_border">
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:adapter="@{presenter.custTypeAdapter}" />
+            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -76,10 +82,16 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_16" />
 
-            <Spinner
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_40"
-                android:background="@drawable/bg_order" />
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_border">
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:adapter="@{presenter.payMethodAdapter}" />
+            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -114,6 +126,7 @@
                 </RadioGroup>
 
                 <EditText
+                    android:id="@+id/txtBankPlusValue"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_40"
                     android:background="@drawable/bg_order"
@@ -139,14 +152,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_8"
-                android:text="@string/sell_anypay_pay_amount"
+                android:text="@string/sell_anypay_amount_default"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_16" />
 
-            <Spinner
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_40"
-                android:background="@drawable/bg_order" />
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_border">
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:adapter="@{presenter.payAmountAdapter}" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/txtOtherAmount"

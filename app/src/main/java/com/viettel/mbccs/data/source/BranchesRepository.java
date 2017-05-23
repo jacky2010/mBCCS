@@ -4,7 +4,7 @@ import com.viettel.mbccs.data.model.BranchItem;
 import com.viettel.mbccs.data.model.KeyValue;
 import com.viettel.mbccs.data.source.local.BranchesLocalDataSource;
 import com.viettel.mbccs.data.source.local.IBranchesLocalDataSource;
-import com.viettel.mbccs.data.source.remote.BranchesRemoteDataSource;
+import com.viettel.mbccs.data.source.remote.datasource.BranchesRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.IBranchesRemoteDataSource;
 
 import java.util.List;

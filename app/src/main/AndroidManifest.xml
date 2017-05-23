@@ -78,6 +78,10 @@
             android:screenOrientation="portrait"/>
 
         <activity
+            android:name=".screen.sellanypay.SellAnyPayActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
             android:name=".screen.branches.staffpicker.StaffPickerActivity"
             android:screenOrientation="portrait"/>
 
