@@ -39,6 +39,7 @@
                 android:background="@drawable/bg_border">
 
                 <Spinner
+                    android:id="@+id/spCustType"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_40"
                     android:adapter="@{presenter.custTypeAdapter}" />
@@ -88,6 +89,7 @@
                 android:background="@drawable/bg_border">
 
                 <Spinner
+                    android:id="@+id/spPayMethod"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_40"
                     android:adapter="@{presenter.payMethodAdapter}" />

@@ -2,6 +2,8 @@ package com.viettel.mbccs.screen.sellanypay.fragments;
 
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.viettel.mbccs.R;
@@ -65,6 +67,21 @@ public class CreateTransAnyPayFragment extends BaseDataBindFragment<FragmentCrea
 //                        hideSoftInput();
 //                }
 //            });
+
+            mBinding.spCustType.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    mPresenter.onCustomerTypeChanged(i);
+                }
+            });
+
+            mBinding.spPayMethod.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    mPresenter.onPaymentMethodChanged(i);
+                }
+            });
+
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -93,5 +110,15 @@ public class CreateTransAnyPayFragment extends BaseDataBindFragment<FragmentCrea
     @Override
     public void showError(String message) {
         Toast.makeText(mActivity, message, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onCustomerTypeChanged(CreateTransAnyPayContract.CustomerType type) {
+
+    }
+
+    @Override
+    public void onPayMethodChanged(CreateTransAnyPayContract.PayMethod method) {
+
     }
 }
