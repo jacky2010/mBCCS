@@ -264,4 +264,25 @@ Từ <b>%s</b><br>
     </string>
     <string name="fragment_view_ware_house_view_serial_total">Tổng số: %1$d</string>
     <string name="fragment_view_ware_house_view_serial_btn_close">Đóng</string>
+
+    <string name="sell_anypay_cust_type">Loại khách hàng</string>
+    <string name="sell_anypay_isdn">Số ISDN</string>
+    <string name="sell_anypay_pay_method">Hình thức thanh toán</string>
+    <string name="sell_anypay_amount_default">Số tiền</string>
+    <string name="sell_anypay_amount_other">Số khác</string>
+    <string name="sell_anypay_amount_other_hint">Nhập số tiền</string>
+    <string name="sell_anypay_channel_code">Mã kênh</string>
+    <string name="sell_anypay_isdn_wallet">Số điện thoại ví</string>
+    <string name="sell_anypay_total_amount">Tổng tiền:</string>
+    <string name="sell_anypay_discount">Chiết khấu:</string>
+    <string name="sell_anypay_bankplus">Bank Plus</string>
+    <string name="sell_anypay_phone_no">Số điện thoại</string>
+    <string name="sell_anypay_acc_no">Số tài khoản</string>
+    <string name="sell_anypay_pay_amount">Số tiền phải thanh toán:</string>
+    <string name="sell_anypay">Bán AnyPay</string>
+    <string name="sell_anypay_confirm_sell">Bạn có muốn bán AnyPay cho khách hàng %s?</string>
+    <string name="sell_anypay_confirm_pre_tax">Trước thuế:</string>
+    <string name="sell_anypay_confirm_tax">Tiền thuế:</string>
+    <string name="sell_anypay_confirm_discount">Chiết khấu:</string>
+    <string name="sell_anypay_confirm_total">Tổng tiền phải trả:</string>
 </resources>
