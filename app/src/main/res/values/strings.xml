@@ -285,4 +285,6 @@ Từ <b>%s</b><br>
     <string name="sell_anypay_confirm_tax">Tiền thuế:</string>
     <string name="sell_anypay_confirm_discount">Chiết khấu:</string>
     <string name="sell_anypay_confirm_total">Tổng tiền phải trả:</string>
+    <string name="choose_staff">Chọn nhân viên</string>
+    <string name="choose_bts">Chọn BTS</string>
 </resources>

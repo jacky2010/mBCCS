@@ -38,12 +38,17 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
-                <Spinner
-                    android:id="@+id/spChannelType"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_40"
-                    android:background="@drawable/bg_order"
-                    bind:setSpinnerAdapter="@{ presenter.channelTypeAdapter }"/>
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_border">
+
+                    <Spinner
+                        android:id="@+id/spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_40"
+                        android:adapter="@{presenter.channelTypeAdapter}" />
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -68,12 +73,16 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
-                <Spinner
-                    android:id="@+id/spDocumentType"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_40"
-                    android:background="@drawable/bg_order"
-                    bind:setSpinnerAdapter="@{ presenter.documentTypeAdapter }" />
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_border">
+
+                    <Spinner
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_40"
+                        android:adapter="@{presenter.documentTypeAdapter}" />
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -107,7 +116,8 @@
 
                 <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_40"
+                    android:layout_height="@dimen/dp_60"
+                    android:inputType="textMultiLine"
                     android:background="@drawable/bg_order"
                     android:text="@={ presenter.address }" />
 
@@ -133,12 +143,36 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
-                <Spinner
-                    android:id="@+id/spManager"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_40"
-                    android:background="@drawable/bg_order"
-                    bind:setSpinnerAdapter="@{ presenter.managerAdapter }" />
+                    android:background="@drawable/bg_input_tranparent"
+                    android:onClick="@{()->presenter.chooseManager()}">
+
+                    <ImageView
+                        android:id="@+id/icon_right_1"
+                        android:layout_width="@dimen/dp_12"
+                        android:layout_height="@dimen/dp_12"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dp"
+                        android:src="@drawable/triangle" />
+
+                    <com.viettel.mbccs.widget.CustomEdittext
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_toLeftOf="@id/icon_right_1"
+                        android:background="@color/transparent"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:gravity="center_vertical"
+                        android:lines="1"
+                        android:onClick="@{()->presenter.chooseManager()}"
+                        android:padding="@dimen/dp_10"
+                        android:text="@={presenter.manager}"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_13" />
+                </RelativeLayout>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -148,12 +182,34 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
-                <Spinner
-                    android:id="@+id/spBts"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_40"
-                    android:background="@drawable/bg_order"
-                    bind:setSpinnerAdapter="@{ presenter.btsAdapter }" />
+                    android:background="@drawable/bg_input_tranparent"
+                    android:onClick="@{()->presenter.chooseBTS()}">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_12"
+                        android:layout_height="@dimen/dp_12"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dp"
+                        android:src="@drawable/triangle" />
+
+                    <com.viettel.mbccs.widget.CustomEdittext
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/transparent"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:gravity="center_vertical"
+                        android:lines="1"
+                        android:onClick="@{()->presenter.chooseBTS()}"
+                        android:padding="@dimen/dp_10"
+                        android:text="@={presenter.bts}"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_13" />
+                </RelativeLayout>
 
                 <TextView
                     android:layout_width="match_parent"

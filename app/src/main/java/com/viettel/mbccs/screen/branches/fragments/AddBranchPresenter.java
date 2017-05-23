@@ -30,19 +30,20 @@ public class AddBranchPresenter implements AddBranchContract.Presenter {
     public ObservableField<String> manager;
     public ObservableField<String> bts;
 
-    public ObservableField<ArrayAdapter<String>> channelTypeAdapter;
-    public ObservableField<ArrayAdapter<String>> documentTypeAdapter;
-    public ObservableField<ArrayAdapter<String>> managerAdapter;
-    public ObservableField<ArrayAdapter<String>> btsAdapter;
+    private ArrayAdapter<String> channelTypeAdapter;
+    private ArrayAdapter<String> documentTypeAdapter;
 
     private List<String> channelTypesList;
     private List<String> documentTypesList;
-    private List<String> managersList;
-    private List<String> btsesList;
+    private List<KeyValue> managersList;
+    private List<KeyValue> btsesList;
+
+    private KeyValue managerObj;
+    private KeyValue btsObj;
 
     private BranchesRepository repository;
 
-    public AddBranchPresenter(Context context, AddBranchContract.ViewModel viewModel){
+    public AddBranchPresenter(Context context, AddBranchContract.ViewModel viewModel) {
         this.context = context;
         this.viewModel = viewModel;
 
@@ -55,68 +56,56 @@ public class AddBranchPresenter implements AddBranchContract.Presenter {
         manager = new ObservableField<>();
         bts = new ObservableField<>();
 
-        channelTypeAdapter = new ObservableField<>();
-        documentTypeAdapter = new ObservableField<>();
-        managerAdapter = new ObservableField<>();
-        btsAdapter = new ObservableField<>();
-
         channelTypesList = new ArrayList<>();
         documentTypesList = new ArrayList<>();
-        managersList = new ArrayList<>();
-        btsesList = new ArrayList<>();
+
+        channelTypeAdapter = new ArrayAdapter<>(context, R.layout.item_spinner, R.id.text,
+                channelTypesList);
+        documentTypeAdapter = new ArrayAdapter<>(context, R.layout.item_spinner, R.id.text,
+                documentTypesList);
 
         initListeners();
+        initData();
     }
 
-    private void initListeners(){
-        try{
+    private void initListeners() {
+        try {
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void initData(){
-        try{
+    private void initData() {
+        try {
             repository = BranchesRepository.getInstance();
 
-            channelTypesList.clear();
-            documentTypesList.clear();
-            managersList.clear();
-            btsesList.clear();
+//            channelTypesList.clear();
+//            documentTypesList.clear();
+//            managersList.clear();
+//            btsesList.clear();
 
-            for(KeyValue item : repository.getChannelTypes()){
+            for (KeyValue item : repository.getChannelTypes()) {
                 channelTypesList.add(item.getValue());
             }
 
-            for(KeyValue item : repository.getDocumentTypes()){
+            for (KeyValue item : repository.getDocumentTypes()) {
                 documentTypesList.add(item.getValue());
             }
 
-            for(KeyValue item : repository.getStaffs()){
-                managersList.add(item.getValue());
-            }
+            managersList = repository.getStaffs();
+            btsesList = repository.getBtses();
 
-            for(KeyValue item : repository.getBtses()){
-                btsesList.add(item.getValue());
-            }
+            channelTypeAdapter.notifyDataSetChanged();
+            documentTypeAdapter.notifyDataSetChanged();
 
-            channelTypeAdapter.set(new ArrayAdapter<>(context, R.layout.item_spinner,
-                    channelTypesList));
-            documentTypeAdapter.set(new ArrayAdapter<>(context, R.layout.item_spinner,
-                    documentTypesList));
-            managerAdapter.set(new ArrayAdapter<>(context, R.layout.item_spinner,
-                    managersList));
-            btsAdapter.set(new ArrayAdapter<>(context, R.layout.item_spinner,
-                    btsesList));
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @Override
     public void subscribe() {
-        initData();
     }
 
     @Override
@@ -124,8 +113,8 @@ public class AddBranchPresenter implements AddBranchContract.Presenter {
 
     }
 
-    public void addNewDocument(){
-        try{
+    public void addNewDocument() {
+        try {
 
             BranchItem item = new BranchItem();
             item.setChannelType(channelType.get());
@@ -136,16 +125,58 @@ public class AddBranchPresenter implements AddBranchContract.Presenter {
             item.setAddress(address.get());
             item.setLatitude(0);
             item.setLongitude(0);
-            item.setStaffCode(manager.get());
-            item.setBtsCode(bts.get());
+            item.setStaffCode(managerObj.getKey());
+            item.setBtsCode(btsObj.getKey());
             item.setDocumentImagePath("");
 
             viewModel.onBranchAdded(item);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
 
             viewModel.onBranchAddFailed();
         }
+    }
+
+    public void chooseManager(){
+        try{
+            viewModel.onChooseManager(managersList);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void chooseBTS(){
+        try{
+            viewModel.onChooseBTS(btsesList);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onGetManagerSuccess(KeyValue item) {
+        if (item == null) {
+            return;
+        }
+        managerObj = item;
+        manager.set(item.getValue());
+    }
+
+    @Override
+    public void onGetBTSSuccess(KeyValue item) {
+        if (item == null) {
+            return;
+        }
+        btsObj = item;
+        bts.set(item.getValue());
+    }
+
+    public ArrayAdapter<String> getChannelTypeAdapter() {
+        return channelTypeAdapter;
+    }
+
+    public ArrayAdapter<String> getDocumentTypeAdapter() {
+        return documentTypeAdapter;
     }
 }

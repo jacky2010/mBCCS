@@ -76,6 +76,14 @@
         <activity
             android:name=".screen.changesim.ChangeSimActivity"
             android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screen.branches.staffpicker.StaffPickerActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screen.branches.btspicker.BTSPickerActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

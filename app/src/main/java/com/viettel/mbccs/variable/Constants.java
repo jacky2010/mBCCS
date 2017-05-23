@@ -69,5 +69,7 @@ public class Constants {
         public static final String CHANNEL_LIST = "channel_list";
         public static final String FORM_TYPE = "form_type";
         public static final String CHANGE_SIM_ITEM = "change_sim_item";
+        public static final String ITEM_LIST = "item_list";
+        public static final String RESULT = "result";
     }
 }
