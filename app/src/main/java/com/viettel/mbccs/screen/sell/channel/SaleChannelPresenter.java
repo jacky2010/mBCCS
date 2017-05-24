@@ -465,8 +465,25 @@ public class SaleChannelPresenter
         mViewModel.onSerialPicker(item);
     }
 
+    @Override
+    public void onItemFocus() {
+        isCollapse.set(true);
+        changeSearchFilter();
+    }
+
     public void onNext() {
+        if (!validate()) {
+            return;
+        }
         mViewModel.onNext(mModelSales, currentTelecomService, currentSaleProgram, currentChannel);
+    }
+
+    private boolean validate() {
+        if (currentChannel.getChannelId() == -1) {
+            DialogUtils.showDialogError(mContext, R.string.no_channel);
+            return false;
+        }
+        return true;
     }
 
     public void onCancel() {

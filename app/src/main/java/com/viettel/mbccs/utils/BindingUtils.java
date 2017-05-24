@@ -110,7 +110,8 @@ public class BindingUtils {
                 .load(url)
                 .diskCacheStrategy(
                         isCacheSource ? DiskCacheStrategy.SOURCE : DiskCacheStrategy.RESULT)
-                .placeholder(placeHolder);
+                .placeholder(placeHolder == null ? imageView.getResources()
+                        .getDrawable(R.drawable.no_image) : placeHolder);
         if (centerCrop) {
             requestBuilder.centerCrop();
         }

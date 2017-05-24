@@ -73,6 +73,9 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
 
     @Override
     public void onFocusChange(View view, boolean b) {
+        if (b && mOnStockListener!=null){
+            mOnStockListener.onItemFocus();
+        }
         if (!b) {
             new Handler().post(new Runnable() {
                 @Override
@@ -193,5 +196,6 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
 
     public interface OnStockListener {
         void onSerialClick(ModelSale item, int position);
+        void onItemFocus();
     }
 }

@@ -264,6 +264,7 @@ Từ <b>%s</b><br>
     <string name="status">Trạng thái</string>
     <string name="time_invalid">Thời gian nhập vào không hợp lệ</string>
     <string name="time_out_of_month">Chọn thời gian trong khoảng 1 tháng</string>
+    <string name="no_channel">Chưa chọn kênh</string>
     <array name="stock_type">
         <item>-Tất cả -</item>
         <item>Hàng mới</item>

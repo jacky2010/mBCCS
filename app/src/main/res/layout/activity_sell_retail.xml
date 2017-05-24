@@ -51,7 +51,7 @@
                     <include
                         layout="@layout/item_text_filter"
                         app:isShow="@{presenter.isCollapse}"
-                        app:onClick="@{()->presenter.onExpand()}"
+                        app:onClick="@{()->presenter.toogleExpand()}"
                         app:text="@{presenter.filterText}"
                         ></include>
                     <LinearLayout
@@ -67,7 +67,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginTop="@dimen/dp_5"
-                            android:onClick="@{()->presenter.onCollapse()}"
+                            android:onClick="@{()->presenter.toogleExpand()}"
                             android:src="@drawable/collapse"
                             />
 

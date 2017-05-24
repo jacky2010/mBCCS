@@ -132,9 +132,12 @@
                         />
 
                     <com.viettel.mbccs.widget.CustomEdittext
+                        android:id="@+id/customEdittext"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_input_tranparent"
+                        android:lines="1"
+                        android:maxLines="1"
                         android:padding="5dp"
                         android:text="@={presenter.tin}"
                         android:textColor="#000"
@@ -156,11 +159,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_input_tranparent"
+                        android:editable="false"
                         android:padding="5dp"
                         android:text="@={presenter.channelInfo.address}"
                         android:textColor="#000"
                         android:textSize="18sp"
-                        android:editable="false"
                         />
 
                 </LinearLayout>
@@ -207,7 +210,7 @@
                     android:padding="5dp"
                     android:visibility="@{presenter.isExpandPaymentInfo?View.VISIBLE:View.GONE}"
                     >
-                    <TextView
+                    <com.viettel.mbccs.widget.CustomTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -300,7 +303,7 @@
                                 />
                         </LinearLayout>
                     </RadioGroup>
-                    <TextView
+                    <com.viettel.mbccs.widget.CustomTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_10"
@@ -313,12 +316,14 @@
                     <com.viettel.mbccs.widget.CustomEdittext
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:layout_marginRight="@dimen/dp_10"
                         android:background="@drawable/bg_input_tranparent"
+                        android:lines="1"
+                        android:maxLines="1"
                         android:padding="@dimen/dp_5"
                         android:text="@={presenter.coupon}"
-                        android:textSize="18sp"
+                        android:textSize="@dimen/sp_13"
                         />
                 </LinearLayout>
 
@@ -358,7 +363,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         >
-                        <TextView
+                        <com.viettel.mbccs.widget.CustomTextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -366,7 +371,7 @@
                             android:textColor="@color/black"
                             android:textSize="13sp"
                             />
-                        <TextView
+                        <com.viettel.mbccs.widget.CustomTextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.7"
