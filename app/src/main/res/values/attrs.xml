@@ -23,6 +23,10 @@
         <attr name="progressBgColor" format="integer|reference" />
         <attr name="progressColor" format="integer|reference" />
     </declare-styleable>
+    <!--Bordered Spinner-->
+    <declare-styleable name="SpinnerWithBorder">
+        <attr format="color" name="spinnerTintColor"/>
+    </declare-styleable>
 
     <declare-styleable name="AppButton">
         <attr name="type" format="string" />

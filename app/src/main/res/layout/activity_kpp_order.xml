@@ -36,12 +36,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 >
+
                 <include
                     layout="@layout/item_text_filter"
                     app:isShow="@{presenter.isCollapse}"
                     app:onClick="@{()->presenter.toogleExpand()}"
-                    app:text="@{presenter.filterText}"
-                    ></include>
+                    app:text="@{presenter.filterText}" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -160,7 +160,7 @@
             android:layout_gravity="bottom|right"
             android:layout_margin="@dimen/dp_20"
             android:onClick="@{()->presenter.addNew()}"
-            android:src="@drawable/ic_add_24dp"
+            android:src="@drawable/ic_add_black_24dp"
             android:tint="@color/white"
             />
 

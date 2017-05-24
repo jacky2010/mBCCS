@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class LoginRequest extends BaseRequest {
 
-    @SerializedName("user_name")
+    @SerializedName("username")
     private String username;
 
     @SerializedName("password")

@@ -1,18 +1,16 @@
 package com.viettel.mbccs.data.source.remote;
 
+import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.model.SaleTrans;
+import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
+import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
-import com.viettel.mbccs.data.source.remote.request.KPPOrderRequest;
-import com.viettel.mbccs.data.source.remote.response.BaseResponse;
+import com.viettel.mbccs.data.source.remote.request.LoginRequest;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsReponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
-import com.viettel.mbccs.data.source.remote.request.BaseRequest;
-import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
-import com.viettel.mbccs.data.source.remote.request.LoginRequest;
-import com.viettel.mbccs.data.source.remote.response.LoginResponse;
 import java.util.List;
 import rx.Observable;
 
@@ -22,7 +20,7 @@ import rx.Observable;
 
 public interface IUserRemoteDataSource {
 
-    Observable<LoginResponse> login(LoginRequest loginRequest);
+    Observable<LoginInfo> login(LoginRequest loginRequest);
 
     Observable<Object> sendCodeChangePass(String phone);
 

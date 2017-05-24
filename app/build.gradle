@@ -83,6 +83,8 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile project(path: ':countrypicker')
 
+    // Circle image view
+    compile 'de.hdodenhof:circleimageview:2.1.0'
 
     // Butter Knife
     compile "com.jakewharton:butterknife:$rootProject.ext.butterknifeVersion"

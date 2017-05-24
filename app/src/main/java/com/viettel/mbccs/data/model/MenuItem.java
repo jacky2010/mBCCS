@@ -16,13 +16,22 @@ public class MenuItem implements Parcelable {
      * Do not use Id 0, it's a placeholder for mock menu
      */
     @IntDef({
-            MenuId.MENU_PLACEHOLDER, MenuId.MENU_DASHBOARD, MenuId.MENU_HELP, MenuId.MENU_SETTING
+            MenuId.MENU_PLACEHOLDER, MenuId.MENU_DASHBOARD, MenuId.MENU_HELP, MenuId.MENU_SETTING,
+            MenuId.MENU_QLKH, MenuId.MENU_QLTC, MenuId.MENU_BH_KHO_TC, MenuId.MENU_BH_CSKH,
+            MenuId.MENU_BAO_CAO, MenuId.MENU_QLDB
     })
     public @interface MenuId {
         int MENU_PLACEHOLDER = 0;
         int MENU_DASHBOARD = 1;
         int MENU_HELP = 2;
         int MENU_SETTING = 3;
+
+        int MENU_QLKH = 4;
+        int MENU_QLTC = 5;
+        int MENU_BH_KHO_TC = 6;
+        int MENU_BH_CSKH = 7;
+        int MENU_BAO_CAO = 8;
+        int MENU_QLDB = 9;
     }
 
     @MenuId

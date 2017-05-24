@@ -83,6 +83,12 @@
         <activity
             android:name=".screen.kpp.order.ordersuccess.OrderSuccessActivity"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screen.assignjob.ListAssignJobActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screen.assignjob.arising.CreateArisingJobActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

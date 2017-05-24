@@ -1,5 +1,7 @@
 package com.viettel.mbccs.variable;
 
+import com.viettel.mbccs.data.model.LoginInfo;
+
 /**
  * Created by eo_cuong on 5/10/17.
  */
@@ -53,6 +55,12 @@ public class Constants {
          * put when set in config
          */
         public static final String TIME_SYNC_BCCS = "TIME_SYNC_BCCS";
+
+        /**
+         * key put get LOGIN INFO in app (value instanceOf {@link LoginInfo})
+         * put when log in
+         */
+        public static final String LOGIN_INFO = "LOGIN_INFO";
     }
 
     public class BundleConstant {
