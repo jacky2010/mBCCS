@@ -61,15 +61,15 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="sell_orders_gone_search">Đơn vị: %1$s - Nhân viên: %2$s - Kênh: %3$s</string>
 
     <string name="order_detail_title">Chi tiết đơn hàng %1$s</string>
-    <string name="order_detail_total_money">Tổng tiền: %1$s</string>
-    <string name="order_detail_pay_money">Số tiền phải thanh toán: %1$s</string>
-    <string name="order_detail_discount_money">Chiết khấu: %1$s</string>
-    <string name="order_detail_tax_percent">Thuế suất: %1$s</string>
-    <string name="order_detail_tax_money">Tiền thuế: %1$s</string>
+    <string name="order_detail_total_money">Tổng tiền: %1$.0f</string>
+    <string name="order_detail_pay_money">Số tiền phải thanh toán: %1$.0f</string>
+    <string name="order_detail_discount_money">Chiết khấu: %1$.0f</string>
+    <string name="order_detail_tax_percent">Thuế suất: %1$.0f</string>
+    <string name="order_detail_tax_money">Tiền thuế: %1$.0f</string>
     <string name="order_detail_cancel">Hủy Giao Dịch</string>
     <string name="order_detail_ok">Bán hàng</string>
 
-    <string name="item_order_detail_price_item">%1$f VNĐ</string>
+    <string name="item_order_detail_price_item">%1$s VNĐ</string>
     <string name="item_orders_id">Mã đơn hàng: %1$s</string>
     <string name="item_orders_date">Đặt ngày: %1$s</string>
     <string name="item_orders_change_code_name">%1$s - %2$s</string>
@@ -232,6 +232,7 @@ Từ <b>%s</b><br>
     <string name="view_ware_house_search_close">Đóng</string>
     <string name="view_ware_house_search_filter">Lọc</string>
     <string name="view_ware_house_search_all">-Tất cả-</string>
+
     <!--kpp-->
     <string name="kpp_order">KPP Đặt hàng</string>
     <string name="order_approval">Đã được phê duyệt</string>
@@ -295,4 +296,24 @@ Từ <b>%s</b><br>
     <string name="menu_bh_cskh">Bảo hành và QL CSKH</string>
     <string name="menu_bao_cao">Báo cáo</string>
     <string name="menu_quan_ly_dia_ban">Quản lý địa bàn</string>
+
+    <string name="help_title">Trợ giúp</string>
+    <string name="help_quan_ly_ban_hang">Làm thế nào để có thể quản lý bán hàng?</string>
+    <string name="help_dau_noi_thue_bao_moi">Làm thế nào để có thể đấu nối cho thuê bao mới?</string>
+    <string name="help_khach_hang_yeu_cau_bao_hanh">Làm thế nào khi có khách hàng yêu cầu bảo hành?</string>
+    <string name="help_chinh_sach_moi">Làm thế nào khi có chính sách mới?</string>
+    <string name="help_cong_viec_duoc_giao">Làm thế nào khi có công việc được giao?</string>
+    <string name="help_theo_doi_kpi_ban_hang">Làm thế nào để theo dõi KPI bán hàng?</string>
+
+    <string name="help_vao_chuc_nang_quan_ly_ban_hang">Vào chức năng quản lý bán hàng</string>
+    <string name="help_vao_chuc_nang_dau_noi_thue_bao_moi">Vào chức năng đấu nối cho thuê bao mới</string>
+    <string name="help_vao_chuc_nang_khach_hang_yeu_cau_bao_hanh">Vào chức năng khách hàng yêu cầu bảo hành</string>
+    <string name="help_vao_chuc_nang_chinh_sach_moi">Vào chức năng chính sách mới</string>
+    <string name="help_vao_chuc_nang_cong_viec_duoc_giao">Vào chức năng công việc được giao</string>
+    <string name="help_vao_chuc_nang_theo_doi_kpi_ban_hang">Vào chức năng theo dõi KPI bán hàng</string>
+
+    <string name="item_order_detail_selected">Đã chọn %1$s/%2$s</string>
+    <string name="item_order_detail_select_serial">Chọn serial</string>
+    <string name="item_order_detail_product">sản phẩm</string>
+    <string name="item_order_detail_warehouse_exists">Kho còn</string>
 </resources>

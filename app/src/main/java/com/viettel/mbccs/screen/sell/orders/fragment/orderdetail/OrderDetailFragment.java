@@ -7,10 +7,10 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.google.gson.reflect.TypeToken;
+import android.widget.Toast;
 import com.viettel.mbccs.base.BaseFragment;
-import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.model.SaleOrdersDetail;
+import com.viettel.mbccs.data.model.SerialBO;
 import com.viettel.mbccs.data.model.SerialPickerModel;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.databinding.FragmentOrderDetailBinding;
@@ -19,7 +19,7 @@ import com.viettel.mbccs.screen.serialpicker.SerialPickerActivity;
 import com.viettel.mbccs.utils.Common;
 import com.viettel.mbccs.utils.GsonUtils;
 import com.viettel.mbccs.variable.Constants;
-import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,9 +31,9 @@ public class OrderDetailFragment extends BaseFragment implements OrderDetailFrag
     private static final int GET_SERIAL = 12345;
     private FragmentOrderDetailBinding binding;
     private OrderDetailFragmentPresenter presenter;
-    private List<ModelSale> goodItemList;
     private List<SaleOrdersDetail> saleOrdersDetailList;
     private OrderDetailAdapter orderDetailAdapter;
+    private SaleOrdersDetail saleOrdersDetailSelect;
 
     public static OrderDetailFragment newInstance(long idOrder) {
         Bundle bundle = new Bundle();
@@ -81,7 +81,24 @@ public class OrderDetailFragment extends BaseFragment implements OrderDetailFrag
 
     @Override
     public void setData(List<SaleOrdersDetail> items) {
+        //        saleOrdersDetailList = items;
+        //        orderDetailAdapter = new OrderDetailAdapter(saleOrdersDetailList);
+        //        presenter.setAdapterOrderDetail(orderDetailAdapter);
+        //        orderDetailAdapter.setOrderDetailAdapterCallback(presenter);
+        // TODO: 5/24/17 fake data
         saleOrdersDetailList = items;
+        for (int i = 0; i < 10; i++) {
+            SaleOrdersDetail data = new SaleOrdersDetail();
+            data.setPrice(300000);
+            data.setQuantity(10);
+            data.setStockMoldeName("Nokia E71");
+            data.setImageUrl(
+                    "http://didongthongminh.vn/images/products/2017/03/31/resized/samsung-galaxy-s8-plus-_1490956081.jpg");
+            data.setCount(10);
+            data.setSelect(0);
+            data.setLstSerial(new ArrayList<SerialBO>());
+            saleOrdersDetailList.add(data);
+        }
         orderDetailAdapter = new OrderDetailAdapter(saleOrdersDetailList);
         presenter.setAdapterOrderDetail(orderDetailAdapter);
         orderDetailAdapter.setOrderDetailAdapterCallback(presenter);
@@ -89,17 +106,19 @@ public class OrderDetailFragment extends BaseFragment implements OrderDetailFrag
 
     @Override
     public void getOrderInfoError(BaseException error) {
-
+        Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void pickSerial(ModelSale stockItem) {
+    public void pickSerial(SaleOrdersDetail saleOrdersDetail) {
+        saleOrdersDetailSelect = saleOrdersDetail;
         Intent intent = new Intent(getActivity(), SerialPickerActivity.class);
         SerialPickerModel serialPickerModel = new SerialPickerModel();
-        serialPickerModel.setStockModelId(stockItem.getStockModelId());
-        serialPickerModel.setStockMoldeName(stockItem.getStockMoldeName());
-        serialPickerModel.setQuantity(stockItem.getChoiceCount());
-        serialPickerModel.setLstSerial(stockItem.getSerialBlocks());
+        serialPickerModel.setStockModelId(saleOrdersDetail.getStockModelId());
+        serialPickerModel.setStockMoldeName(saleOrdersDetail.getStockMoldeName());
+        serialPickerModel.setQuantity(saleOrdersDetail.getQuantity());
+        serialPickerModel.setLstSerial(saleOrdersDetail.getLstSerial());
+
         Bundle bundle = new Bundle();
         bundle.putSerializable(Constants.BundleConstant.SERIAL_PICKER_MODEL, serialPickerModel);
         intent.putExtras(bundle);
@@ -108,12 +127,18 @@ public class OrderDetailFragment extends BaseFragment implements OrderDetailFrag
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == GET_SERIAL && resultCode == Activity.RESULT_OK) {
             List<String> serials = GsonUtils.String2ListObject(
                     data.getExtras().getString(Constants.BundleConstant.LIST_SERIAL),
                     String[].class);
-            presenter.onSerialPickerSuccess(Common.getSerialBlockBySerials(serials));
+            if (serials.size() < saleOrdersDetailSelect.getQuantity()) {
+                // TODO: 5/24/17 show error select serial
+                Toast.makeText(getActivity(), "Bạn chưa chọn đủ số lượn serial", Toast.LENGTH_SHORT).show();
+            }
+            saleOrdersDetailSelect.setLstSerial(Common.getSerialBlockBySerials(serials));
+            saleOrdersDetailSelect.setSelect(serials.size());
+            orderDetailAdapter.notifyDataSetChanged();
+            //            presenter.onSerialPickerSuccess(Common.getSerialBlockBySerials(serials));
         }
     }
 }

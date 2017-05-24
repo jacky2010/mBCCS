@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -49,12 +48,16 @@ public class SaleOrdersDetail implements Parcelable {
     @Expose
     private List<SerialBO> lstSerial;
 
+    // TODO: 5/24/17 data fake
+
+    private int count;
+    private String imageUrl;
+    private int select;
+
     public SaleOrdersDetail() {
     }
 
     protected SaleOrdersDetail(Parcel in) {
-        lstSerial = new ArrayList<>();
-
         saleOrdersId = in.readLong();
         saleOrdersDetailId = in.readLong();
         stockModelId = in.readLong();
@@ -63,7 +66,10 @@ public class SaleOrdersDetail implements Parcelable {
         quantity = in.readLong();
         price = in.readDouble();
         vat = in.readDouble();
-        in.readList(lstSerial, SaleOrdersDetail.class.getClassLoader());
+        lstSerial = in.createTypedArrayList(SerialBO.CREATOR);
+        count = in.readInt();
+        imageUrl = in.readString();
+        select = in.readInt();
     }
 
     public static final Creator<SaleOrdersDetail> CREATOR = new Creator<SaleOrdersDetail>() {
@@ -93,7 +99,10 @@ public class SaleOrdersDetail implements Parcelable {
         dest.writeLong(quantity);
         dest.writeDouble(price);
         dest.writeDouble(vat);
-        dest.writeList(lstSerial);
+        dest.writeTypedList(lstSerial);
+        dest.writeInt(count);
+        dest.writeString(imageUrl);
+        dest.writeInt(select);
     }
 
     public long getSaleOrdersId() {
@@ -166,5 +175,29 @@ public class SaleOrdersDetail implements Parcelable {
 
     public void setLstSerial(List<SerialBO> lstSerial) {
         this.lstSerial = lstSerial;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public int getSelect() {
+        return select;
+    }
+
+    public void setSelect(int select) {
+        this.select = select;
     }
 }

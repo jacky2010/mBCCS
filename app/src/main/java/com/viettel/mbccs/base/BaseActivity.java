@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
+import android.util.Log;
 import com.viettel.mbccs.dialog.LoadingDialog;
 
 import java.util.Stack;
@@ -67,7 +68,6 @@ public abstract class BaseActivity extends AppCompatActivity {
                 if (isFinishing() || mLoadingDialog == null || !mLoadingDialog.isAdded()) {
                     return;
                 }
-
                 mLoadingDialog.dismiss();
             }
         });
