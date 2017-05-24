@@ -41,7 +41,8 @@
                     layout="@layout/item_text_filter"
                     app:isShow="@{presenter.isCollapse}"
                     app:onClick="@{()->presenter.toogleExpand()}"
-                    app:text="@{presenter.filterText}" />
+                    app:text="@{presenter.filterText}"
+                    />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -93,15 +94,21 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16"
                         />
-                    <Spinner
-                        android:id="@+id/spinner_status"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/dp_40"
-                        app:position="@{presenter.adapterPosition}"
-                        android:background="@drawable/bg_order"
-                        app:adapter="@{presenter.adapterStatus}"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_input_tranparent"
+                        >
+                        <Spinner
+                            android:id="@+id/spinner_status"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp_40"
+                            app:adapter="@{presenter.adapterStatus}"
+                            app:position="@{presenter.adapterPosition}"
 
-                        />
+                            />
+                    </LinearLayout>
+
                     <com.viettel.mbccs.widget.CustomButton
                         android:layout_width="@dimen/dp_150"
                         android:layout_height="@dimen/dp_40"

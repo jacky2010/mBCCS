@@ -149,6 +149,10 @@ public class FindStockPresenter
         stock2.setStockModelId(33);
         stock2.setStockModelCode("CCC-42423");
 
+        stock.setStockModelName("Iphone 7");
+        stock1.setStockModelName("Galaxy s8");
+        stock2.setStockModelName("Oppo F1s");
+
         mStockTotals.add(stock);
         mStockTotals.add(stock1);
         mStockTotals.add(stock2);

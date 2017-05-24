@@ -3,6 +3,7 @@ package com.viettel.mbccs.screen.kpp.order.addnew;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.databinding.DataBindingUtil;
 import android.databinding.ObservableField;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.WsCode;
@@ -47,6 +48,7 @@ public class AddNewOrderPresenter implements AddNewOrderContract.Presenter {
 
     private void init() {
         titleOrder = new ObservableField<>();
+        titleOrder.set("Đặt hàng từ KPP : POS_1233");
         amount = new ObservableField<>();
         mAdapter = new StockTotalAdapter(mContext, mStockTotals);
     }
@@ -57,9 +59,13 @@ public class AddNewOrderPresenter implements AddNewOrderContract.Presenter {
 
     private void fakeData() {
         StockTotal stock1 = new StockTotal();
+        stock1.setStockModelName("Iphone 7");
         StockTotal stock2 = new StockTotal();
+        stock2.setStockModelName("Galaxy s8");
         StockTotal stock3 = new StockTotal();
+        stock3.setStockModelName("Oppo F1s");
         StockTotal stock4 = new StockTotal();
+        stock4.setStockModelName("LG G5");
         mStockTotals.add(stock1);
         mStockTotals.add(stock2);
         mStockTotals.add(stock3);
@@ -72,6 +78,9 @@ public class AddNewOrderPresenter implements AddNewOrderContract.Presenter {
     }
 
     public void orderClick() {
+        if (!isValidate()) {
+            return;
+        }
         DialogUtils.showDialog(mContext, R.string.confirm, R.string.confirm_kpp_order,
                 R.string.order2, new DialogInterface.OnClickListener() {
                     @Override
@@ -82,6 +91,7 @@ public class AddNewOrderPresenter implements AddNewOrderContract.Presenter {
     }
 
     private void createOrder() {
+
         mViewModel.showLoading();
         mKPPOrderRequestBaseRequest = new BaseRequest<>();
         mKPPOrderRequestBaseRequest.setWsCode(WsCode.CreateSaleOrders);
@@ -99,8 +109,8 @@ public class AddNewOrderPresenter implements AddNewOrderContract.Presenter {
 
                             @Override
                             public void onError(BaseException error) {
-//                                DialogUtils.showDialogError(mContext, null, error.getMessage(),
-//                                        null);
+                                //                                DialogUtils.showDialogError(mContext, null, error.getMessage(),
+                                //                                        null);
                                 mViewModel.gotoSuccessScreen(mStockTotals);
                             }
 
@@ -157,5 +167,22 @@ public class AddNewOrderPresenter implements AddNewOrderContract.Presenter {
         }
         mAdapter.notifyDataSetChanged();
         //TODO add list stock total
+    }
+
+    public boolean isValidate() {
+
+        int count = 0;
+        for (StockTotal item : mStockTotals) {
+            if (item.getCountChoice() > 0) {
+                count++;
+                break;
+            }
+        }
+        if (count == 0) {
+            DialogUtils.showDialogError(mContext, R.string.no_item_order);
+            return false;
+        }
+
+        return true;
     }
 }

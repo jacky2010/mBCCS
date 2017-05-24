@@ -93,7 +93,7 @@ public class OrderSuccessAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
 
         public void bind() {
-            data = "xxxx";
+            data = "Tổng tiền : 3460000 VND";
             mBinding.setData(data);
         }
     }
