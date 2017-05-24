@@ -5,6 +5,7 @@ import android.os.Handler;
 
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseActivity;
+import com.viettel.mbccs.screen.change.installation.InstallationAddressActivity;
 import com.viettel.mbccs.screen.login.LoginActivity;
 
 /**
@@ -34,7 +35,7 @@ public class SplashActivity extends BaseActivity {
         mRunnable = new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                startActivity(new Intent(SplashActivity.this, InstallationAddressActivity.class));
                 finish();
             }
         };

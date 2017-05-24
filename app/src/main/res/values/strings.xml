@@ -11,7 +11,7 @@
     <string name="select_serials_step3">3. Xác nhận các serial đã chọn</string>
     <string name="input_empty">Hãy nhập thông tin</string>
     <string name="not_phone">Số điện thoai không hợp lệ</string>
-    <string formatted="false" name="count_serial_selected">
+    <string name="count_serial_selected" formatted="false">
         <![CDATA[
 Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt hàng <font color="#317BE1"><u> %s</u></font>
         ]]>
@@ -138,10 +138,10 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="title_search">Tìm kiếm</string>
     <string name="title_confirm">Xác Nhận</string>
     <string name="msg_title_confirm_trans">Bạn đã lập hóa đơn cho các giao dịch sau:</string>
-    <string formatted="false" name="msg_before_tax">Trước thuế: %f</string>
-    <string formatted="false" name="msg_rent">Tiền thuế: %f</string>
-    <string formatted="false" name="msg_discount">Chiết khấu: %f</string>
-    <string formatted="false" name="msg_total_amount_payable">Tổng tiền phải trả: %f</string>
+    <string name="msg_before_tax" formatted="false">Trước thuế: %f</string>
+    <string name="msg_rent" formatted="false">Tiền thuế: %f</string>
+    <string name="msg_discount" formatted="false">Chiết khấu: %f</string>
+    <string name="msg_total_amount_payable" formatted="false">Tổng tiền phải trả: %f</string>
     <string name="msg_choose_transaction">Chọn giao dịch</string>
     <string name="msg_list_trans">Danh sách giao dịch (%d)</string>
     <string name="title_channel">Kênh</string>
@@ -158,7 +158,7 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="amount_no_tax">Tổng tiền : %s đồng</string>
     <string name="amount">Số tiền phải thanh toán : %s đồng</string>
     <string name="tax">Tiền thuế : %s đồng</string>
-    <string formatted="false" name="confirm_before_save_trans_msg"><![CDATA[
+    <string name="confirm_before_save_trans_msg" formatted="false"><![CDATA[
 Bán cho khách hàng <b>%s</b> :<br>
  · Số điện thoại : <b>%s</b><br>
  · Số tiền thanh toán : <b>%s</b>(%s)<br>
@@ -170,7 +170,7 @@ Từ <b>%s</b><br>
 Theo mã chương trình bán hàng %s
     ]]></string>
 
-    <string formatted="false" name="confirm_before_save_trans_msg_channel"><![CDATA[
+    <string name="confirm_before_save_trans_msg_channel" formatted="false"><![CDATA[
 Bán cho kênh <b>%s</b> :<br>
  · Số điện thoại : <b>%s</b><br>
  · Số tiền thanh toán : <b>%s</b>(%s)<br>
@@ -181,7 +181,7 @@ Từ <b>%s</b><br>
 · Số điện thoại : <b>%s</b><br>
 Theo mã chương trình bán hàng %s
     ]]></string>
-    <string formatted="false" name="confirm_before_save_trans_msg_no_saleprogram"><![CDATA[
+    <string name="confirm_before_save_trans_msg_no_saleprogram" formatted="false"><![CDATA[
 Bán cho khách hàng <b>%s</b> :<br>
  · Số điện thoại : <b>%s</b><br>
  · Số tiền thanh toán : <b>%s</b>(%s đồng)<br>
@@ -192,7 +192,7 @@ Từ <b>%s</b><br>
 · Số điện thoại : <b>%s</b><br>
     ]]></string>
 
-    <string formatted="false" name="confirm_before_save_trans_msg_no_saleprogram_channel"><![CDATA[
+    <string name="confirm_before_save_trans_msg_no_saleprogram_channel" formatted="false"><![CDATA[
 Bán cho kênh <b>%s</b> :<br>
  · Số điện thoại : <b>%s</b><br>
  · Số tiền thanh toán : <b>%s</b>(%s đồng)<br>
@@ -371,4 +371,13 @@ Từ <b>%s</b><br>
     <string name="menu_quan_ly_thong_tin_kpp">Quản lý thông tin KPP</string>
     <string name="menu_quan_ly_van_ban_chinh_sach">Quản lý văn bản chính sách</string>
     <string name="quan_ly_giao_viec">Quản lý giao việc</string>
+
+    <!--InstallationAddress -->
+    <string name="title_install_address">Thay đổi địa chỉ lắp đặt</string>
+    <string name="title_phone_number">Số thuê bao/ account</string>
+    <string name="title_type_page">Loại giấy tờ</string>
+    <string name="title_total_page">Số giấy tờ</string>
+    <string name="title_info_customer"><u>Thông tin khách hàng</u></string>
+
+
 </resources>
