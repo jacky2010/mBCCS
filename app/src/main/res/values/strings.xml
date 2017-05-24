@@ -316,4 +316,5 @@ Từ <b>%s</b><br>
     <string name="item_order_detail_select_serial">Chọn serial</string>
     <string name="item_order_detail_product">sản phẩm</string>
     <string name="item_order_detail_warehouse_exists">Kho còn</string>
+    <string name="no_item_order">Hãy nhập số lượng cho các mặt hàng</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.viettel.mbccs.screen.main;
 
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.ObservableInt;
 
 import com.viettel.mbccs.R;
@@ -84,7 +85,7 @@ public class MainPresenter implements MainContract.Presenter {
                 // TODO: Handle menu item clicked later. Should use menu Id instead of position.
                 //mContext.startActivity(new Intent(mContext, SaleRetailActivity.class));
                 // mContext.startActivity(new Intent(mContext, SaleChannelActivity.class));
-                //  mContext.startActivity(new Intent(mContext, KPPOrderActivity.class));
+                //mContext.startActivity(new Intent(mContext, KPPOrderActivity.class));
                 switch (position) {
                     case 0:
                         mViewModel.backToMain();

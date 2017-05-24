@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dp_5"
             android:gravity="center"
-            android:text="asdfasdfsadfsadfsadf"
+            android:text="Đặt thành công mã đơn hàng là b123124123"
             android:textSize="@dimen/sp_13"
             />
         <com.viettel.mbccs.widget.CustomTextView
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dp_5"
             android:gravity="center"
-            android:text="asdfasdfsadfsadfsadf"
+            android:text="Đầu mối tiếp nhận là KPP-123"
             android:textSize="@dimen/sp_13"
             />
 
