@@ -31,21 +31,13 @@
                 app:titleColor="@{@color/white}"
                 app:titleTextSize="@{@dimen/sp_17}"
                 />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="@{ v -> presenter.expandSearch() }"
-                android:orientation="vertical"
-                android:visibility="@{ presenter.isHideSearch ? View.VISIBLE : View.GONE }"
-                >
-                <com.viettel.mbccs.widget.CustomTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_6"
-                    android:paddingLeft="@dimen/dp_10"
-                    android:text="@{ presenter.textSearch }"
-                    />
-            </LinearLayout>
+
+            <include
+                layout="@layout/item_text_filter"
+                app:isShow="@{presenter.isHideSearch}"
+                app:onClick="@{()->presenter.expandSearch()}"
+                app:text="@{presenter.textSearch}"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"

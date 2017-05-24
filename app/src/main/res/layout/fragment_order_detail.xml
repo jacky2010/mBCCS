@@ -10,7 +10,7 @@
             type="com.viettel.mbccs.screen.sell.orders.fragment.orderdetail.OrderDetailFragmentPresenter"
             />
     </data>
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -31,20 +31,20 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/toolbar"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:adapter="@{ presenter.adapterOrderDetail }"
+            android:padding="@dimen/dp_10"
             />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/layout_button"
             android:background="#fd9827"
             android:orientation="horizontal"
             android:paddingBottom="@dimen/dp_10"
             android:paddingLeft="@dimen/dp_6"
             android:paddingRight="@dimen/dp_6"
-            android:paddingTop="@dimen/dp_10"
+            android:paddingTop="@dimen/dp_6"
             >
             <LinearLayout
                 android:layout_width="0dp"
@@ -55,13 +55,13 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{ @string/order_detail_total_money(presenter.totalMoney) }"
+                    android:text="@{ @string/order_detail_total_money(presenter.saleTransField.getAmountTax()) }"
                     />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_10"
-                    android:text="@{ @string/order_detail_pay_money(presenter.payMoney) }"
+                    android:text="@{ @string/order_detail_pay_money(presenter.saleTransField.getAmountNotTax()) }"
                     />
             </LinearLayout>
             <LinearLayout
@@ -73,19 +73,19 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{ @string/order_detail_discount_money(presenter.discountMoney) }"
+                    android:text="@{ @string/order_detail_discount_money(presenter.saleTransField.getDiscount()) }"
                     />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:text="@{ @string/order_detail_tax_percent(presenter.taxPercent) }"
+                    android:layout_marginTop="@dimen/dp_6"
+                    android:text="@{ @string/order_detail_tax_percent(presenter.saleTransField.getVAT()) }"
                     />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:text="@{ @string/order_detail_tax_money(presenter.taxMoney) }"
+                    android:layout_marginTop="@dimen/dp_6"
+                    android:text="@{ @string/order_detail_tax_money(presenter.saleTransField.getTax()) }"
                     />
             </LinearLayout>
         </LinearLayout>
@@ -93,9 +93,8 @@
             android:id="@+id/layout_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_marginBottom="@dimen/dp_6"
-            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_8"
             android:orientation="horizontal"
             android:paddingLeft="@dimen/dp_2"
             android:paddingRight="@dimen/dp_2"
@@ -121,5 +120,5 @@
                 android:textColor="@color/white"
                 />
         </LinearLayout>
-    </RelativeLayout>
+    </LinearLayout>
 </layout>

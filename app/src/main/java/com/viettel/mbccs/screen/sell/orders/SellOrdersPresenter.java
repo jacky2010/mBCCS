@@ -8,7 +8,6 @@ import android.databinding.ObservableInt;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Toast;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.ChannelInfo;
@@ -21,6 +20,7 @@ import com.viettel.mbccs.data.source.remote.request.GetListChannelByOwnerTypeIdR
 import com.viettel.mbccs.data.source.remote.request.GetListOrderRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.screen.sell.orders.adapter.SellOrdersFragmentAdapter;
+import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +54,7 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
         subscriptions = new CompositeSubscription();
         dataSpinnerChannel = new ArrayList<>();
         channelInfoList = new ArrayList<>();
+        channelInfoSelect = new ChannelInfo();
 
         sellOrdersFragmentAdapter = new ObservableField<>();
         staffInfo = new ObservableField<>();
@@ -168,7 +169,7 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
                     @Override
                     public void onError(BaseException error) {
                         // TODO: 5/16/17 error
-                        Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+                        DialogUtils.showDialogError(context, null, error.getMessage(), null);
                         sellOrdersView.getDataError();
                     }
                 });

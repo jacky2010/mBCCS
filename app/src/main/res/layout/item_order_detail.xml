@@ -2,6 +2,7 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:bind="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     >
     <data>
         <variable
@@ -11,7 +12,7 @@
     </data>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_150"
+        android:layout_height="@dimen/dp_130"
         android:background="@drawable/bg_order"
         android:orientation="horizontal"
         >
@@ -24,7 +25,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                bind:loadCircleImage="@{ presenter.stockSerial.getImageUrl() } "
+                bind:loadCircleImage="@{ presenter.imageUrl }"
                 />
         </LinearLayout>
         <View
@@ -37,7 +38,10 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:padding="@dimen/dp_14"
+            android:paddingBottom="@dimen/dp_10"
+            android:paddingLeft="@dimen/dp_14"
+            android:paddingRight="@dimen/dp_10"
+            android:paddingTop="@dimen/dp_10"
             >
             <TextView
                 android:layout_width="match_parent"
@@ -49,33 +53,30 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:text="Handset Nokia"
+                android:layout_marginTop="@dimen/dp_4"
+                android:text="@{ presenter.nameStock }"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_14"
                 />
-            <!--android:text="@{ presenter.stockSerial.getName()}"-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:text="300 000 VNĐ"
+                android:layout_marginTop="@dimen/dp_4"
+                android:text="@{ @string/item_order_detail_price_item(presenter.priceStock) }"
                 android:textColor="@color/red_button"
                 android:textSize="@dimen/sp_14"
                 />
-            <!--android:text="@{ @string/item_order_detail_price_item(presenter.stockSerial.getPrice()) }"-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_4"
                 android:gravity="center"
-                android:text="02"
+                android:text="@{ presenter.quantityStock }"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_18"
                 android:textStyle="bold"
                 />
 
-            <!--android:text="@{ presenter.stockSerial.getChoiceCount() }"-->
         </LinearLayout>
         <View
             android:layout_width="@dimen/dp_1"
@@ -87,12 +88,15 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:padding="@dimen/dp_14"
+            android:paddingBottom="@dimen/dp_10"
+            android:paddingLeft="@dimen/dp_14"
+            android:paddingRight="@dimen/dp_10"
+            android:paddingTop="@dimen/dp_10"
             >
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Kho còn"
+                android:text="@string/item_order_detail_warehouse_exists"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_14"
                 />
@@ -104,18 +108,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:text="01"
+                    android:layout_marginTop="@dimen/dp_4"
+                    android:text="@{ presenter.countStock }"
                     android:textColor="@color/grey"
-                    android:textSize="@dimen/sp_28"
+                    android:textSize="@dimen/sp_20"
                     />
-                <!--android:text="@{ presenter.stockSerial.getRemainGoodCount() }"-->
+
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:text="sản phẩm"
+                    android:layout_height="match_parent"
+                    android:text="@string/item_order_detail_product"
                     android:textColor="@color/grey"
+                    android:gravity="bottom"
                     android:textSize="@dimen/sp_14"
                     />
             </LinearLayout>
@@ -123,10 +127,10 @@
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_6"
                 android:gravity="center"
                 android:onClick="@{v -> presenter.selectSerial()}"
-                android:text="Chọn serial"
+                app:textUnderLine="@{@string/item_order_detail_select_serial}"
                 android:textColor="@color/blue"
                 android:textSize="@dimen/sp_14"
                 android:textStyle="italic"
@@ -134,8 +138,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:text="Đã chọn 0/2"
+                android:layout_marginTop="@dimen/dp_6"
+                android:text="@{ @string/item_order_detail_selected(presenter.selectStock, presenter.countStock)}"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_14"
                 />

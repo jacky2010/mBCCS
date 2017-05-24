@@ -3,7 +3,6 @@ package com.viettel.mbccs.screen.sell.orders.fragment.orderdetail;
 import android.content.Context;
 import android.databinding.ObservableField;
 import android.support.v7.app.AppCompatActivity;
-import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.SaleOrdersDetail;
 import com.viettel.mbccs.data.model.SaleTrans;
@@ -12,12 +11,9 @@ import com.viettel.mbccs.data.model.Session;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.GetOrderInfoRequest;
-import com.viettel.mbccs.data.source.remote.response.BaseException;
-import com.viettel.mbccs.data.source.remote.response.OrderInfoResponse;
 import com.viettel.mbccs.screen.sell.orders.adapter.OrderDetailAdapter;
-import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
+import java.util.ArrayList;
 import java.util.List;
-import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
 /**
@@ -27,19 +23,14 @@ import rx.subscriptions.CompositeSubscription;
 public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract.Presenter {
     private Context context;
     private OrderDetailFragmentContract.View view;
-    private List<ModelSale> goodItemList;
     private BanHangKhoTaiChinhRepository banHangKhoTaiChinhRepository;
     private CompositeSubscription subscriptions;
     private List<SaleOrdersDetail> saleOrdersDetailList;
     private SaleTrans saleTrans;
 
     public ObservableField<OrderDetailAdapter> adapterOrderDetail;
+    public ObservableField<SaleTrans> saleTransField;
     public ObservableField<String> idOrder;
-    public ObservableField<String> totalMoney;
-    public ObservableField<String> payMoney;
-    public ObservableField<String> discountMoney;
-    public ObservableField<String> taxPercent;
-    public ObservableField<String> taxMoney;
 
     public OrderDetailFragmentPresenter(Context context, OrderDetailFragmentContract.View view) {
         this.context = context;
@@ -49,11 +40,7 @@ public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract
 
         adapterOrderDetail = new ObservableField<>();
         idOrder = new ObservableField<>();
-        totalMoney = new ObservableField<>();
-        payMoney = new ObservableField<>();
-        discountMoney = new ObservableField<>();
-        taxPercent = new ObservableField<>();
-        taxMoney = new ObservableField<>();
+        saleTransField = new ObservableField<>();
     }
 
     @Override
@@ -78,17 +65,17 @@ public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract
     @Override
     public void selectSerialClick(int position) {
 
-        if (goodItemList == null) {
+        if (saleOrdersDetailList == null) {
             return;
         }
 
-        ModelSale modelSale = goodItemList.get(position);
+        SaleOrdersDetail saleOrdersDetail = saleOrdersDetailList.get(position);
 
-        view.pickSerial(modelSale);
+        view.pickSerial(saleOrdersDetail);
     }
 
     public void getDetailOrder(long idOrder) {
-        view.showLoading();
+//        view.showLoading();
         // TODO: 5/16/17 get Detail Order from API
         this.idOrder.set(String.valueOf(idOrder));
         GetOrderInfoRequest g = new GetOrderInfoRequest();
@@ -100,32 +87,39 @@ public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract
         request.setApiKey("demo");
         request.setSession(new Session());
 
-        Subscription subscription =
-                banHangKhoTaiChinhRepository.getOrderInfo(request).subscribe(new MBCCSSubscribe<OrderInfoResponse>() {
-                    @Override
-                    public void onSuccess(OrderInfoResponse object) {
-                        saleOrdersDetailList = object.getSaleOrdersDetailList();
-                        saleTrans = object.getSaleTrans();
-                        view.setData(saleOrdersDetailList);
-                        setDataDisplayMoney();
-                        view.hideLoading();
-                    }
+        //        Subscription subscription =
+        //                banHangKhoTaiChinhRepository.getOrderInfo(request).subscribe(new MBCCSSubscribe<OrderInfoResponse>() {
+        //                    @Override
+        //                    public void onSuccess(OrderInfoResponse object) {
+        //                        saleOrdersDetailList = object.getSaleOrdersDetailList();
+        //                        saleTrans = object.getSaleTrans();
+        //                        view.setData(saleOrdersDetailList);
+        //                        setDataDisplayMoney();
+        //                        view.hideLoading();
+        //                    }
+        //
+        //                    @Override
+        //                    public void onError(BaseException error) {
+        //                        view.hideLoading();
+        //                        view.getOrderInfoError(error);
+        //                    }
+        //                });
+        //        subscriptions.add(subscription);
 
-                    @Override
-                    public void onError(BaseException error) {
-                        view.hideLoading();
-                        view.getOrderInfoError(error);
-                    }
-                });
-        subscriptions.add(subscription);
+        saleTrans = new SaleTrans();
+        saleTrans.setAmountNotTax(100000);
+        saleTrans.setAmountTax(100000);
+        saleTrans.setDiscount(100000);
+        saleTrans.setVAT(100000);
+        saleTrans.setTax(100000);
+
+        saleOrdersDetailList = new ArrayList<>();
+        view.setData(saleOrdersDetailList);
+        setDataDisplayMoney();
     }
 
     private void setDataDisplayMoney() {
-        this.totalMoney.set(String.valueOf(saleTrans.getAmountTax()));
-        this.payMoney.set(String.valueOf(saleTrans.getAmountNotTax()));
-        this.discountMoney.set(String.valueOf(saleTrans.getDiscount()));
-        this.taxPercent.set(String.valueOf(saleTrans.getVAT()));
-        this.taxMoney.set(String.valueOf(saleTrans.getTax()));
+        saleTransField.set(saleTrans);
     }
 
     public void onCancel() {
