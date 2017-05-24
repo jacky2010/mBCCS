@@ -39,6 +39,9 @@
             android:name=".screen.main.MainActivity"
             android:screenOrientation="portrait"/>
         <activity
+            android:name=".base.BaseSubMenuActivity"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".screen.serialpicker.SerialPickerActivity"
             android:screenOrientation="portrait"/>
         <activity

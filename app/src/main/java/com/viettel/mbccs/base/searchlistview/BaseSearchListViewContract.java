@@ -11,6 +11,8 @@ public interface BaseSearchListViewContract {
 
     interface ViewModel<T extends Presenter> extends BaseView<Presenter> {
         void onAddClick();
+
+        void onBackPressed();
     }
 
     interface Presenter extends BasePresenter {

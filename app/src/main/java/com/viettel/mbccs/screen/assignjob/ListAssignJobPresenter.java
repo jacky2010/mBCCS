@@ -95,6 +95,16 @@ public class ListAssignJobPresenter extends BaseSearchListViewPresenter<JobModel
     }
 
     @Override
+    public String getToolbarTitle() {
+        return mContext.getString(R.string.quan_ly_giao_viec);
+    }
+
+    @Override
+    public void onBackPressed() {
+        mViewModel.onBackPressed();
+    }
+
+    @Override
     protected RecyclerView.Adapter getListAdapter() {
         return new AssignJobAdapter(mContext, listData);
     }
