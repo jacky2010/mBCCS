@@ -17,7 +17,7 @@
             layout="@layout/toolbar"
             app:background="@{@color/grey}"
             app:isShow="@{true}"
-            app:leftIcon="@{@drawable/back}"
+            app:leftIcon="@{@drawable/ic_arrow_left_24dp}"
             app:leftIconClick="@{()->presenter.onBack()}"
             app:title="@{@string/sale_retail}"
             app:titleColor="@{@color/black}"

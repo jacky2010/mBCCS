@@ -64,7 +64,7 @@ public class SimpleProgressChart extends PercentRelativeLayout {
                             getResources().getDimension(R.dimen.sp_14)),
                     getResources().getDisplayMetrics()));
             textColor.set(typedArray.getColor(R.styleable.SimpleProgressChart_progressTextColor,
-                    Color.BLACK));
+                    Color.WHITE));
 
             progressBgColor.set(typedArray.getResourceId(R.styleable.SimpleProgressChart_progressBgColor,
                             android.R.color.darker_gray));

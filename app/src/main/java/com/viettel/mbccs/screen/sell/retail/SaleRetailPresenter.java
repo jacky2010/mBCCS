@@ -131,7 +131,7 @@ public class SaleRetailPresenter
 
                     @Override
                     public void onError(BaseException error) {
-                        DialogUtils.showDialogError(mContext, null, error.getMessage(), null);
+                        //DialogUtils.showDialogError(mContext, null, error.getMessage(), null);
                         fakeData();
                         loadModelSale();
                     }
@@ -221,13 +221,8 @@ public class SaleRetailPresenter
         stockAdapter.setOnStockListener(this);
     }
 
-    public void onCollapse() {
+    public void toogleExpand() {
         isCollapse.set(!isCollapse.get());
-        changeSearchFilter();
-    }
-
-    public void onExpand() {
-        isCollapse.set(false);
         changeSearchFilter();
     }
 
@@ -316,6 +311,12 @@ public class SaleRetailPresenter
     public void onSerialClick(ModelSale item, int position) {
         currentStockPosition = position;
         mViewModel.onSerialPicker(item);
+    }
+
+    @Override
+    public void onItemFocus() {
+        isCollapse.set(true);
+        changeSearchFilter();
     }
 
     public void onNext() {

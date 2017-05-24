@@ -32,12 +32,12 @@ public class MainFragmentPresenter implements MainFragmentContract.Presenter {
         mContext = context;
         mViewModel = viewModel;
         List<HomeModel> list = new ArrayList<>();
-        list.add(new HomeModel("abcd", "tile2", 20, 0));
-        list.add(new HomeModel("abc", "tile3", 30, 1));
-        list.add(new HomeModel("abcd12", "tile4", 50, 2));
-        list.add(new HomeModel("abcd131", "tile6", 90, 2));
-        list.add(new HomeModel("abcd41", "tile5", 40, 3));
-        list.add(new HomeModel("abcd515", "tile7", 100, 3));
+        list.add(new HomeModel("Đơn đặt hàng mới", "20", 20, 0));
+        list.add(new HomeModel("Tiến độ thu cước", "tile3", 30, 1));
+        list.add(new HomeModel("Chỉ tiêu đấu nối", "tile4", 50, 2));
+        list.add(new HomeModel("Chỉ tiêu bán hàng", "tile6", 90, 2));
+        list.add(new HomeModel("4500$", "3700$", 40, 3));
+        list.add(new HomeModel("1000$", "3000$", 100, 3));
         mRecyclerAdapter = new MainRecyclerAdapter(mContext, list);
     }
 
