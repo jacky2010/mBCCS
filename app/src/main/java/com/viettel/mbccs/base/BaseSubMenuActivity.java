@@ -11,20 +11,20 @@ import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.MenuItem;
 import com.viettel.mbccs.databinding.ActivitySubMenuBinding;
 import com.viettel.mbccs.databinding.ItemImageGridBinding;
 import com.viettel.mbccs.databinding.ItemMenuBinding;
 import com.viettel.mbccs.screen.assignjob.ListAssignJobActivity;
+import com.viettel.mbccs.screen.inputorder.InputOrderActivity;
 import com.viettel.mbccs.screen.change.installation.InstallationAddressActivity;
 import com.viettel.mbccs.screen.kpp.order.KPPOrderActivity;
 import com.viettel.mbccs.screen.main.fragments.menu.MenuPresenter;
-import com.viettel.mbccs.screen.sell.orders.SellOrdersActivity;
-import com.viettel.mbccs.screen.viewwarehouse.ViewWarehouseActivity;
 import com.viettel.mbccs.screen.sell.channel.SaleChannelActivity;
+import com.viettel.mbccs.screen.sell.orders.SellOrdersActivity;
 import com.viettel.mbccs.screen.sell.retail.SaleRetailActivity;
+import com.viettel.mbccs.screen.viewwarehouse.ViewWarehouseActivity;
 import com.viettel.mbccs.widget.SpacesItemDecoration;
 import java.util.ArrayList;
 import java.util.List;
@@ -155,7 +155,7 @@ public class BaseSubMenuActivity
                         0));
                 mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_XEM_KHO,
                         getString(R.string.menu_xem_kho), R.drawable.ic_add_black_24dp, 0, 0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_NHAP_HOA_DON,
                         getString(R.string.menu_nhap_hoa_don), R.drawable.ic_add_black_24dp, 0, 0));
                 mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
                         getString(R.string.menu_xuat_kho_cap_duoi), R.drawable.ic_add_black_24dp, 0,
@@ -281,6 +281,10 @@ public class BaseSubMenuActivity
                         case MenuItem.MenuId.MENU_SALE_RETAIL:
                             startActivity(
                                     new Intent(BaseSubMenuActivity.this, SaleRetailActivity.class));
+                            break;
+                        case MenuItem.MenuId.MENU_NHAP_HOA_DON:
+                            startActivity(
+                                    new Intent(BaseSubMenuActivity.this, InputOrderActivity.class));
                             break;
                         case MenuItem.MenuId.MENU_SALE_CHANNEL:
                             startActivity(new Intent(BaseSubMenuActivity.this,

@@ -54,12 +54,10 @@ import java.util.List;
 public class BindingUtils {
 
     @BindingAdapter(value = {
-            "android:recyclerAdapter", "columns", "orientation", "space", "includeEdge",
-            "haveDivider"
+            "android:recyclerAdapter", "columns", "orientation", "space"
     }, requireAll = false)
     public static void setRecyclerViewData(RecyclerView recyclerView, RecyclerView.Adapter adapter,
-            int columns, int orientation, @DimenRes int space, boolean includeEdge,
-            boolean haveDivider) {
+            int columns, int orientation, @DimenRes int space) {
         boolean isGrid = columns > 1;
         recyclerView.setAdapter(adapter);
         RecyclerView.LayoutManager layoutManager;
