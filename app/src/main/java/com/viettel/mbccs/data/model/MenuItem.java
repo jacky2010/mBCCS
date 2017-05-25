@@ -18,8 +18,9 @@ public class MenuItem implements Parcelable {
     @IntDef({
             MenuId.MENU_PLACEHOLDER, MenuId.MENU_DASHBOARD, MenuId.MENU_HELP, MenuId.MENU_SETTING,
             MenuId.MENU_QLKH, MenuId.MENU_QLTC, MenuId.MENU_BH_KHO_TC, MenuId.MENU_BH_CSKH,
-            MenuId.MENU_BAO_CAO, MenuId.MENU_QLDB,
-            MenuId.MENU_GIAO_VIEC_PHAT_SINH, MenuId.MENU_GIAO_VIEC_CS_KPP
+            MenuId.MENU_BAO_CAO, MenuId.MENU_QLDB, MenuId.MENU_GIAO_VIEC_PHAT_SINH,
+            MenuId.MENU_GIAO_VIEC_CS_KPP, MenuId.MENU_BAN_HANG_THEO_DON_PHE_DUYET_DON_HANG,
+            MenuId.MENU_XEM_KHO
     })
     public @interface MenuId {
         int MENU_PLACEHOLDER = 0;
@@ -36,6 +37,9 @@ public class MenuItem implements Parcelable {
 
         int MENU_GIAO_VIEC_PHAT_SINH = 10;
         int MENU_GIAO_VIEC_CS_KPP = 11;
+
+        int MENU_BAN_HANG_THEO_DON_PHE_DUYET_DON_HANG = 12;
+        int MENU_XEM_KHO = 13;
     }
 
     @MenuId

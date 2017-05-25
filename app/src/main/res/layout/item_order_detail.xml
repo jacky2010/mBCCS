@@ -64,6 +64,7 @@
                 android:layout_marginTop="@dimen/dp_4"
                 android:text="@{ @string/item_order_detail_price_item(presenter.priceStock) }"
                 android:textColor="@color/red_button"
+                android:textStyle="bold"
                 android:textSize="@dimen/sp_14"
                 />
             <TextView
