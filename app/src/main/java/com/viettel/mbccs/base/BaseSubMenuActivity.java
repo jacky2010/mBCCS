@@ -18,11 +18,13 @@ import com.viettel.mbccs.databinding.ActivitySubMenuBinding;
 import com.viettel.mbccs.databinding.ItemImageGridBinding;
 import com.viettel.mbccs.databinding.ItemMenuBinding;
 import com.viettel.mbccs.screen.assignjob.ListAssignJobActivity;
+import com.viettel.mbccs.screen.kpp.order.KPPOrderActivity;
 import com.viettel.mbccs.screen.main.fragments.menu.MenuPresenter;
 import com.viettel.mbccs.screen.sell.orders.SellOrdersActivity;
 import com.viettel.mbccs.screen.viewwarehouse.ViewWarehouseActivity;
+import com.viettel.mbccs.screen.sell.channel.SaleChannelActivity;
+import com.viettel.mbccs.screen.sell.retail.SaleRetailActivity;
 import com.viettel.mbccs.widget.SpacesItemDecoration;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -119,14 +121,27 @@ public class BaseSubMenuActivity
                         R.drawable.ic_add_black_24dp, 0, 0));
                 break;
             case MenuItem.MenuId.MENU_BH_KHO_TC:
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_SALE_RETAIL,
                         getString(R.string.menu_ban_le), R.drawable.ic_add_black_24dp, 0, 0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_SALE_CHANNEL,
                         getString(R.string.menu_ban_cho_kenh), R.drawable.ic_add_black_24dp, 0, 0));
                 mMenuItemList.add(
                         new MenuItem(MenuItem.MenuId.MENU_BAN_HANG_THEO_DON_PHE_DUYET_DON_HANG,
                                 getString(R.string.menu_ban_hang_theo_don),
                                 R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_ban_dich_vu_vas), R.drawable.ic_add_black_24dp, 0,
+                        0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_lap_hoa_don), R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_ban_anypay), R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_nap_chuyen_anypay), R.drawable.ic_add_black_24dp, 0,
+                        0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_BAN_HANG_THEO_DON_PHE_DUYET_DON_HANG,
+                        getString(R.string.menu_ban_hang_theo_don), R.drawable.ic_add_black_24dp, 0,
+                        0));
                 mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
                         getString(R.string.menu_ban_dich_vu_vas), R.drawable.ic_add_black_24dp, 0,
                         0));
@@ -165,7 +180,7 @@ public class BaseSubMenuActivity
                 mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
                         getString(R.string.menu_nhap_kho_tu_nhan_vien),
                         R.drawable.ic_add_black_24dp, 0, 0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_CHANNEL_ORDER,
                         getString(R.string.menu_kenh_order_hang), R.drawable.ic_add_black_24dp, 0,
                         0));
                 mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
@@ -255,8 +270,20 @@ public class BaseSubMenuActivity
                                     new Intent(BaseSubMenuActivity.this, SellOrdersActivity.class));
                             break;
                         case MenuItem.MenuId.MENU_XEM_KHO:
+                            startActivity(new Intent(BaseSubMenuActivity.this,
+                                    ViewWarehouseActivity.class));
+                            break;
+                        case MenuItem.MenuId.MENU_SALE_RETAIL:
                             startActivity(
-                                    new Intent(BaseSubMenuActivity.this, ViewWarehouseActivity.class));
+                                    new Intent(BaseSubMenuActivity.this, SaleRetailActivity.class));
+                            break;
+                        case MenuItem.MenuId.MENU_SALE_CHANNEL:
+                            startActivity(new Intent(BaseSubMenuActivity.this,
+                                    SaleChannelActivity.class));
+                            break;
+                        case MenuItem.MenuId.MENU_CHANNEL_ORDER:
+                            startActivity(
+                                    new Intent(BaseSubMenuActivity.this, KPPOrderActivity.class));
                             break;
                     }
                 }
