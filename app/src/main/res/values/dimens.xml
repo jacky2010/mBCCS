@@ -49,6 +49,9 @@
     <dimen name="sp_12">12sp</dimen>
     <dimen name="dp_12">12dp</dimen>
 
+    <dimen name="dp_70">70dp</dimen>
+    <dimen name="sp_40">40sp</dimen>
+
     <!-- App Toolbar -->
     <dimen name="default_toolbar_text_size">16sp</dimen>
     <dimen name="default_toolbar_icon">24dp</dimen>
@@ -56,6 +59,12 @@
     <!--Billing-->
     <dimen name="image_loading_width">30dp</dimen>
     <dimen name="margin_default">10dp</dimen>
-    <dimen name="dp_70">70dp</dimen>
-    <dimen name="sp_40">40sp</dimen>
+
+
+    <!-- ItemSpinText -->
+    <dimen name="size_item_spin_text">35dp</dimen>
+    <dimen name="default_item_spinner_text_size">16sp</dimen>
+
+    <!-- ItemSpinText -->
+    <dimen name="default_item_top_bar_text_size">12sp</dimen>
 </resources>

@@ -11,9 +11,9 @@
         <attr format="color|reference" name="dateTextColor"/>
     </declare-styleable>
     <declare-styleable name="BottomNavigationView">
-        <attr format="color|reference" name="bottomBarBgColor"/>
-        <attr format="dimension" name="bottomBarTextSize"/>
-        <attr format="reference" name="bottomBarTextColor"/>
+        <attr name="bottomBarBgColor" format="color|reference" />
+        <attr name="bottomBarTextSize" format="dimension" />
+        <attr name="bottomBarTextColor" format="reference" />
     </declare-styleable>
     <declare-styleable name="SimpleProgressChart">
         <attr format="color|reference" name="progressTextColor"/>
@@ -86,5 +86,28 @@
         <attr format="reference" name="tbIconLeft"/>
         <attr format="reference" name="tbIconRight"/>
         <attr format="dimension" name="ibIconSize"/>
+    </declare-styleable>
+
+    <!-- ItemSpinText -->
+    <declare-styleable name="ItemSpinText">
+        <attr name="istTextView" format="boolean"/>
+        <attr name="istTextViewSize" format="dimension"/>
+        <attr name="istTextViewTitle" format="string"/>
+        <attr name="istTextViewColor" format="color" />
+        <attr name="istSpinner" format="boolean"/>
+        <attr name="istIconLeft" format="boolean"/>
+        <attr name="istIconLeftBg" format="reference" />
+        <attr name="istIconRight" format="boolean"/>
+        <attr name="istIconRightBg" format="reference" />
+    </declare-styleable>
+
+    <!-- TopBarView -->
+    <declare-styleable name="TopBarView">
+        <attr name="tbvTextView" format="boolean"/>
+        <attr name="tbvIconRight" format="boolean"/>
+        <attr name="tbvIconRightBg" format="reference" />
+        <attr name="tbvTitle" format="string"/>
+        <attr name="tbvTitleSize" format="dimension"/>
+        <attr name="tbvTitleColor" format="color" />
     </declare-styleable>
 </resources>

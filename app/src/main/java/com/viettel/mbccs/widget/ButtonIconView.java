@@ -256,6 +256,12 @@ public class ButtonIconView extends RelativeLayout {
         }
     }
 
+    public void setButtonText(int idText) {
+        if (getContext() != null) {
+            setButtonText(getContext().getString(idText));
+        }
+    }
+
     public void changeBackground(Drawable drawable) {
         setBackground(drawable);
     }
