@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <data>
+        <variable
+            name="presenter"
+            type="com.viettel.mbccs.screen.inputorder.fragment.adapter.BillRangePresenter"
+            />
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingEnd="@dimen/dp_10"
+        android:paddingStart="@dimen/dp_10"
+        >
+
+        <com.viettel.mbccs.widget.CustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="@{presenter.isReceived ? @string/input_order_received : @string/input_order_not_receive}"
+            android:textColor="@{presenter.isReceived ? @color/green : @color/orange}"
+            android:textSize="@dimen/sp_15"
+            android:textStyle="bold"
+            tools:text="@string/input_order_received"
+            />
+
+        <com.viettel.mbccs.widget.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{String.format(@string/bill_range_text, presenter.codeFrom, presenter.codeTo)}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_15"
+            android:textStyle="bold"
+            tools:text="@string/bill_range_text"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp_5"
+                android:layout_weight="1"
+                android:text="@{String.format(@string/input_order_count, presenter.count)}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_15"
+                tools:text="@string/input_order_count"
+                />
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp_5"
+                android:layout_weight="2"
+                android:text="@{String.format(@string/input_order_date, presenter.date)}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_15"
+                tools:text="@string/input_order_date"
+                />
+
+        </LinearLayout>
+        <com.viettel.mbccs.widget.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_5"
+            android:text="@{String.format(@string/input_order_store_name, presenter.nameStore)}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_15"
+            tools:text="@string/input_order_store_name"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@color/grey"
+            />
+
+    </LinearLayout>
+</layout>

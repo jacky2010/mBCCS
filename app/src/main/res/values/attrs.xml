@@ -110,4 +110,9 @@
         <attr name="tbvTitleSize" format="dimension"/>
         <attr name="tbvTitleColor" format="color" />
     </declare-styleable>
+
+    <!--MyViewPager-->
+    <declare-styleable name="MyViewPager">
+        <attr format="boolean" name="isDisableSwipe"/>
+    </declare-styleable>
 </resources>

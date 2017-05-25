@@ -86,7 +86,6 @@
         <activity
             android:name=".screen.sell.channel.channelpicker.ChannelPickerActivity"
             android:screenOrientation="portrait"/>
-
         <activity
             android:name=".screen.viewwarehouse.ViewWarehouseActivity"
             android:screenOrientation="portrait"/>
@@ -123,6 +122,8 @@
 
         <activity android:name=".permission.PermissionActivity"
             android:theme="@style/AppThemeStyleDialog"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".screen.inputorder.InputOrderActivity"
             android:screenOrientation="portrait"/>
     </application>
 

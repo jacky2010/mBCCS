@@ -397,4 +397,18 @@ Từ <b>%s</b><br>
     <string name="title_facility_cable">Dây cáp OT04 (m)</string>
     <string name="title_facility_converter">Converter (cái)</string>
 
+    <!--Input Order screen-->
+    <string name="title_input_order_screen">Quản lý nhập hoá đơn</string>
+    <string name="move_product_high">Chuyển hàng cấp trên</string>
+    <string name="move_product_slow">Chuyển cấp dưới</string>
+    <string name="btn_input_order">Nhập hoá đơn</string>
+    <string name="input_order_received">Đã nhận</string>
+    <string name="input_order_not_receive">Chưa nhận</string>
+    <string name="bill_range_text">Dải hóa đơn: %1$s - %2$s</string>
+    <string name="input_order_count">Số lượng: %d</string>
+    <string name="input_order_date">Ngày chuyển: %s</string>
+    <string name="input_order_store_name">Kho nhận: %s</string>
+    <string name="input_order_dialog_success_title">Nhập hóa đơn thành công</string>
+    <string name="input_order_dialog_sucess_description">Dải hóa đơn bạn nhập đã được ghi lại thành công.</string>
+
 </resources>

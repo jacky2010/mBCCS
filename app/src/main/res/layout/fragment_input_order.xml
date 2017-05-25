@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <data>
+        <variable
+            name="presenter"
+            type="com.viettel.mbccs.screen.inputorder.fragment.OrderPresenter"/>
+    </data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/btn_input_order"
+            android:recyclerAdapter="@{ presenter.adapter }"
+            />
+
+        <com.viettel.mbccs.widget.AppButton
+            android:id="@+id/btn_input_order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_alignParentBottom="true"
+            android:onClick="@{() -> presenter.onInputOrderClick()}"
+            android:text="@string/btn_input_order"
+            android:textAllCaps="false"
+            app:type="default"
+            />
+
+    </RelativeLayout>
+</layout>
