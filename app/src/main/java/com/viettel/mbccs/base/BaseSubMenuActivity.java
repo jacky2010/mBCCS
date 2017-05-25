@@ -18,6 +18,7 @@ import com.viettel.mbccs.databinding.ItemImageGridBinding;
 import com.viettel.mbccs.databinding.ItemMenuBinding;
 import com.viettel.mbccs.screen.assignjob.ListAssignJobActivity;
 import com.viettel.mbccs.screen.inputorder.InputOrderActivity;
+import com.viettel.mbccs.screen.billing.BillingActivity;
 import com.viettel.mbccs.screen.change.installation.InstallationAddressActivity;
 import com.viettel.mbccs.screen.kpp.order.KPPOrderActivity;
 import com.viettel.mbccs.screen.main.fragments.menu.MenuPresenter;
@@ -94,7 +95,7 @@ public class BaseSubMenuActivity
                         0, 0));
                 mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
                         getString(R.string.menu_doi_sim), R.drawable.ic_add_black_24dp, 0, 0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_TD_DCLD,
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_TD_LAP_DAT,
                         getString(R.string.menu_thay_doi_dia_chi_lap_dat),
                         R.drawable.ic_add_black_24dp, 0, 0));
                 mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
@@ -146,7 +147,7 @@ public class BaseSubMenuActivity
                 mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
                         getString(R.string.menu_ban_dich_vu_vas), R.drawable.ic_add_black_24dp, 0,
                         0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_LAP_HOA_DON,
                         getString(R.string.menu_lap_hoa_don), R.drawable.ic_add_black_24dp, 0, 0));
                 mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
                         getString(R.string.menu_ban_anypay), R.drawable.ic_add_black_24dp, 0, 0));
@@ -261,7 +262,11 @@ public class BaseSubMenuActivity
                 public void onMenuClick(MenuItem item) {
                     // FIXME: Static method for ALL CASE
                     switch (item.getId()) {
-                        case MenuItem.MenuId.MENU_TD_DCLD:
+                        case MenuItem.MenuId.MENU_LAP_HOA_DON:
+                            startActivity(new Intent(BaseSubMenuActivity.this,
+                                    BillingActivity.class));
+                            break;
+                        case MenuItem.MenuId.MENU_TD_LAP_DAT:
                             startActivity(new Intent(BaseSubMenuActivity.this,
                                     InstallationAddressActivity.class));
                             break;

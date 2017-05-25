@@ -21,7 +21,8 @@ public class MenuItem implements Parcelable {
             MenuId.MENU_BAO_CAO, MenuId.MENU_QLDB, MenuId.MENU_GIAO_VIEC_PHAT_SINH,
             MenuId.MENU_GIAO_VIEC_CS_KPP, MenuId.MENU_BAN_HANG_THEO_DON_PHE_DUYET_DON_HANG,
             MenuId.MENU_XEM_KHO, MenuId.MENU_SALE_RETAIL, MenuId.MENU_SALE_CHANNEL,
-            MenuId.MENU_CHANNEL_ORDER, MenuId.MENU_NHAP_HOA_DON
+            MenuId.MENU_CHANNEL_ORDER, MenuId.MENU_NHAP_HOA_DON, MenuId.MENU_TD_LAP_DAT, MenuId.MENU_LAP_HOA_DON
+
     })
     public @interface MenuId {
         int MENU_PLACEHOLDER = 0;
@@ -46,7 +47,8 @@ public class MenuItem implements Parcelable {
         int MENU_SALE_CHANNEL = 21;
         int MENU_CHANNEL_ORDER = 22;
 
-        int MENU_TD_DCLD =23;
+        int MENU_TD_LAP_DAT = 23;
+        int MENU_LAP_HOA_DON = 24;
     }
 
     @MenuId
