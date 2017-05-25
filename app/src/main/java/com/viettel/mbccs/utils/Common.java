@@ -6,13 +6,17 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import com.viettel.mbccs.MBCCSApplication;
 import com.viettel.mbccs.data.model.SerialBO;
+import com.viettel.mbccs.data.model.StockModel;
+import com.viettel.mbccs.data.model.StockTotal;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -110,7 +114,6 @@ public class Common {
     public static String convertMoneyToString(double money) {
         return numberToString(money);
     }
-
 
     public static String formatNumberForRead(double number) {
         NumberFormat nf = NumberFormat.getInstance();
@@ -281,5 +284,23 @@ public class Common {
             sb.append(s);
         }
         return sb.toString();
+    }
+
+    public static String getDayByLong(long time) {
+        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+        return format.format(new Date(time));
+    }
+
+    public static List<StockModel> convertStockTotalsToStockModels(List<StockTotal> stockTotals){
+        List<StockModel> stockModels=new ArrayList<>();
+        for (StockTotal stockTotal: stockTotals){
+            StockModel stockModel=new StockModel();
+            stockModel.setStockModelId(stockTotal.getStockModelId());
+            stockModel.setStockModelCode(stockTotal.getStockModelCode());
+            stockModel.setStockModelName(stockTotal.getStockModelName());
+            stockModel.setQuantity(stockTotal.getCountChoice());
+            stockModels.add(stockModel);
+        }
+        return stockModels;
     }
 }

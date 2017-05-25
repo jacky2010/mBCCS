@@ -37,6 +37,14 @@ public class DialogUtils {
                 .show();
     }
 
+    public static void showDialogError(Context context, String message) {
+        showDialogError(context, null, message, null);
+    }
+
+    public static void showDialogError(Context context, int message) {
+        showDialogError(context, null, context.getString(message), null);
+    }
+
     public static void showDialog(Context context, @StringRes int title, @StringRes int message,
             @StringRes int yesTitle, @Nullable DialogInterface.OnClickListener yesListener,
             @StringRes int cancelTitle, @Nullable DialogInterface.OnClickListener cancelListener) {

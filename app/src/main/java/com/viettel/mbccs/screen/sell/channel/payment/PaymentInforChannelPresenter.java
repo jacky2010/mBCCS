@@ -133,8 +133,8 @@ public class PaymentInforChannelPresenter implements PaymentInforChannelContract
 
                             @Override
                             public void onError(BaseException error) {
-                                DialogUtils.showDialogError(mContext, null, error.getMessage(),
-                                        null);
+                                //DialogUtils.showDialogError(mContext, null, error.getMessage(),
+                                //        null);
                                 //fake
                                 isGetTransInfo.set(true);
                                 SaleTrans sale = new SaleTrans();

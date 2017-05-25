@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.viettel.mbccs.widget.CustomTextView
+            style="@style/TextViewItem"
+            android:background="#A1C692"
+            android:text="Vật tư dự kiến" />
+
+        <com.viettel.mbccs.widget.ItemSpinText
+            style="@style/ItemSpinText"
+            app:istIconLeft="true"
+            app:istIconLeftBg="@drawable/ic_add_black_24dp"
+            app:istIconRight="true"
+            app:istIconRightBg="@drawable/ic_add_black_24dp"
+            app:istTextView="true"
+            app:istTextViewTitle="@string/title_facility_choose_change" />
+
+        <com.viettel.mbccs.widget.ItemSpinText
+            style="@style/ItemSpinText"
+            app:istIconLeft="true"
+            app:istIconLeftBg="@drawable/ic_add_black_24dp"
+            app:istIconRight="true"
+            app:istIconRightBg="@drawable/ic_add_black_24dp"
+            app:istTextView="true"
+            app:istTextViewTitle="@string/title_facility_kind_of_item" />
+
+        <com.viettel.mbccs.widget.ItemSpinText
+            style="@style/ItemSpinText"
+            app:istIconLeft="true"
+            app:istIconLeftBg="@drawable/ic_add_black_24dp"
+            app:istIconRight="true"
+            app:istIconRightBg="@drawable/ic_add_black_24dp"
+            app:istTextView="true"
+            app:istTextViewTitle="@string/title_facility_items" />
+
+        <com.viettel.mbccs.widget.ItemSpinText
+            style="@style/ItemSpinText"
+            app:istIconLeft="true"
+            app:istIconLeftBg="@drawable/ic_add_black_24dp"
+            app:istIconRight="true"
+            app:istIconRightBg="@drawable/ic_add_black_24dp"
+            app:istTextView="true"
+            app:istTextViewTitle="@string/title_facility_cable" />
+
+        <com.viettel.mbccs.widget.ItemSpinText
+            style="@style/ItemSpinText"
+            app:istIconLeft="true"
+            app:istIconLeftBg="@drawable/ic_add_black_24dp"
+            app:istIconRight="true"
+            app:istIconRightBg="@drawable/ic_add_black_24dp"
+            app:istTextView="true"
+            app:istTextViewTitle="@string/title_facility_converter" />
+
+
+        <com.viettel.mbccs.widget.CustomTextView
+            style="@style/TextViewItem"
+            android:background="#A1C692"
+            android:text="Thông tin giao dịch" />
+
+    </LinearLayout>
+</ScrollView>

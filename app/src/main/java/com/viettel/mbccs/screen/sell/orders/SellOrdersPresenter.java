@@ -8,7 +8,6 @@ import android.databinding.ObservableInt;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Toast;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.ChannelInfo;
@@ -21,6 +20,7 @@ import com.viettel.mbccs.data.source.remote.request.GetListChannelByOwnerTypeIdR
 import com.viettel.mbccs.data.source.remote.request.GetListOrderRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.screen.sell.orders.adapter.SellOrdersFragmentAdapter;
+import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +54,7 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
         subscriptions = new CompositeSubscription();
         dataSpinnerChannel = new ArrayList<>();
         channelInfoList = new ArrayList<>();
+        channelInfoSelect = new ChannelInfo();
 
         sellOrdersFragmentAdapter = new ObservableField<>();
         staffInfo = new ObservableField<>();
@@ -81,31 +82,31 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
         request.setSession(new Session());
         request.setWsCode(WsCode.GetListChannelByOwnerTypeId);
 
-        Subscription subscription = banHangKhoTaiChinhRepository.getListChannelByOwnerTypeId(request)
-                .subscribe(new MBCCSSubscribe<List<ChannelInfo>>() {
-                    @Override
-                    public void onSuccess(List<ChannelInfo> object) {
-                        channelInfoList = object;
-                        for (ChannelInfo c : channelInfoList) {
-                            dataSpinnerChannel.add(c.getManagementName());
-                        }
-                        spinnerAdapterChannel.set(
-                                new ArrayAdapter<>(context, android.R.layout.simple_spinner_item,
-                                        dataSpinnerChannel));
-                        spinnerAdapterChannel.get()
-                                .setDropDownViewResource(
-                                        android.R.layout.simple_spinner_dropdown_item);
+        Subscription subscription =
+                banHangKhoTaiChinhRepository.getListChannelByOwnerTypeId(request)
+                        .subscribe(new MBCCSSubscribe<List<ChannelInfo>>() {
+                            @Override
+                            public void onSuccess(List<ChannelInfo> object) {
+                                channelInfoList = object;
+                                for (ChannelInfo c : channelInfoList) {
+                                    dataSpinnerChannel.add(c.getManagementName());
+                                }
+                                spinnerAdapterChannel.set(new ArrayAdapter<>(context,
+                                        android.R.layout.simple_spinner_item, dataSpinnerChannel));
+                                spinnerAdapterChannel.get()
+                                        .setDropDownViewResource(
+                                                android.R.layout.simple_spinner_dropdown_item);
 
-                        sellOrdersView.hideLoading();
-                    }
+                                sellOrdersView.hideLoading();
+                            }
 
-                    @Override
-                    public void onError(BaseException error) {
-                        // TODO: 5/18/17 show error
-                        sellOrdersView.hideLoading();
-                        sellOrdersView.getListChannelByOwnerTypeIdError(error);
-                    }
-                });
+                            @Override
+                            public void onError(BaseException error) {
+                                // TODO: 5/18/17 show error
+                                sellOrdersView.hideLoading();
+                                sellOrdersView.getListChannelByOwnerTypeIdError(error);
+                            }
+                        });
         subscriptions.add(subscription);
     }
 
@@ -134,15 +135,20 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
     }
 
     public void clickSearch() {
-        String dateFrom = "";
-        String dateTo = "";
+        long dateFrom = sellOrdersView.getDateFrom();
+        long dateTo = sellOrdersView.getDateTo();
+
+        if (dateTo - dateFrom > 10000000) {
+            sellOrdersView.showErrorDate();
+            return;
+        }
 
         GetListOrderRequest getListOrderRequest = new GetListOrderRequest();
         getListOrderRequest.setShopId(staffInfo.get().getShopId());
         getListOrderRequest.setStaffId(staffInfo.get().getStaffId());
         getListOrderRequest.setIsdnChannel(channelInfoSelect.getChannelId());
-        getListOrderRequest.setToDate(dateTo);
-        getListOrderRequest.setFromDate(dateFrom);
+        getListOrderRequest.setToDate(String.valueOf(dateTo));
+        getListOrderRequest.setFromDate(String.valueOf(dateFrom));
         getListOrderRequest.setOrderStatus(1);
 
         BaseRequest<GetListOrderRequest> baseRequest = new BaseRequest<>();
@@ -163,7 +169,7 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
                     @Override
                     public void onError(BaseException error) {
                         // TODO: 5/16/17 error
-                        Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+                        DialogUtils.showDialogError(context, null, error.getMessage(), null);
                         sellOrdersView.getDataError();
                     }
                 });

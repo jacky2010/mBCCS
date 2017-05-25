@@ -53,8 +53,8 @@ public class DateUtils {
         return date.getTime();
     }
 
-    public static String timestampToString(long timestamp, String format, Locale locale) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format, locale);
+    public static String timestampToString(long timestamp, String format, @Nullable Locale locale) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format, locale == null ? Locale.getDefault() : locale);
         Date date = new Date(timestamp);
         return simpleDateFormat.format(date);
     }

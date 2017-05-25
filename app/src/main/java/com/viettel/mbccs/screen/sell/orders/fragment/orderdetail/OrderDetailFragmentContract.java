@@ -2,7 +2,6 @@ package com.viettel.mbccs.screen.sell.orders.fragment.orderdetail;
 
 import com.viettel.mbccs.base.BasePresenter;
 import com.viettel.mbccs.base.BaseView;
-import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.model.SaleOrdersDetail;
 import com.viettel.mbccs.data.model.SerialBO;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
@@ -24,6 +23,6 @@ public class OrderDetailFragmentContract {
 
         void getOrderInfoError(BaseException error);
 
-        void pickSerial(ModelSale modelSale);
+        void pickSerial(SaleOrdersDetail saleOrdersDetail);
     }
 }

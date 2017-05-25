@@ -1,23 +1,25 @@
 package com.viettel.mbccs.data.source;
 
+import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.model.LoginResult;
-import com.viettel.mbccs.data.model.StaffInfo;
 import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.model.SaleTrans;
-import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
-import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
-import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
-import com.viettel.mbccs.data.source.remote.response.GetSerialsReponse;
-import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
+import com.viettel.mbccs.data.model.StaffInfo;
 import com.viettel.mbccs.data.source.local.IUserLocalDataSource;
 import com.viettel.mbccs.data.source.local.UserLocalDataSource;
 import com.viettel.mbccs.data.source.remote.IUserRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.datasource.UserRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
+import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
+import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
+import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
 import com.viettel.mbccs.data.source.remote.request.LoginRequest;
-import com.viettel.mbccs.data.source.remote.response.LoginResponse;
+import com.viettel.mbccs.data.source.remote.response.GetSerialsReponse;
+import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
+
 import java.util.List;
+
 import rx.Observable;
 
 /**
@@ -31,7 +33,7 @@ public class UserRepository implements IUserLocalDataSource, IUserRemoteDataSour
     private UserRemoteDataSource mUserRemoteDataSource;
 
     public UserRepository(UserLocalDataSource userLocalDataSource,
-            UserRemoteDataSource userRemoteDataSource) {
+                          UserRemoteDataSource userRemoteDataSource) {
         this.mUserLocalDataSource = userLocalDataSource;
         mUserRemoteDataSource = userRemoteDataSource;
     }
@@ -125,7 +127,7 @@ public class UserRepository implements IUserLocalDataSource, IUserRemoteDataSour
     }
 
     @Override
-    public Observable<LoginResponse> login(LoginRequest loginRequest) {
+    public Observable<LoginInfo> login(LoginRequest loginRequest) {
         return mUserRemoteDataSource.login(loginRequest);
     }
 

@@ -54,53 +54,29 @@ public class StockTotal implements Parcelable {
     @SerializedName("StateName")
     private String stateName;
 
+    private int countChoice;
+
+    public void addChoice() {
+        if (countChoice < quantity) {
+            countChoice++;
+        }
+    }
+
+    public void subtract() {
+        if (countChoice > 0) {
+            countChoice--;
+        }
+    }
+
+    public int getCountChoice() {
+        return countChoice;
+    }
+
+    public void setCountChoice(int countChoice) {
+        this.countChoice = countChoice;
+    }
+
     public StockTotal() {
-    }
-
-    protected StockTotal(Parcel in) {
-        ownerId = in.readLong();
-        ownerType = in.readLong();
-        stockModelId = in.readLong();
-        stockModelCode = in.readString();
-        stockModelName = in.readString();
-        stockTypeId = in.readLong();
-        stockTypeName = in.readString();
-        quantity = in.readLong();
-        quantityIssue = in.readLong();
-        stateId = in.readLong();
-        stateName = in.readString();
-    }
-
-    public static final Creator<StockTotal> CREATOR = new Creator<StockTotal>() {
-        @Override
-        public StockTotal createFromParcel(Parcel in) {
-            return new StockTotal(in);
-        }
-
-        @Override
-        public StockTotal[] newArray(int size) {
-            return new StockTotal[size];
-        }
-    };
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(ownerId);
-        dest.writeLong(ownerType);
-        dest.writeLong(stockModelId);
-        dest.writeString(stockModelCode);
-        dest.writeString(stockModelName);
-        dest.writeLong(stockTypeId);
-        dest.writeString(stockTypeName);
-        dest.writeLong(quantity);
-        dest.writeLong(quantityIssue);
-        dest.writeLong(stateId);
-        dest.writeString(stateName);
     }
 
     public long getOwnerId() {
@@ -190,4 +166,58 @@ public class StockTotal implements Parcelable {
     public void setStateName(String stateName) {
         this.stateName = stateName;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return (this.stockModelId == ((StockTotal) obj).getStockModelId()
+                && this.stockModelCode.equals(((StockTotal) obj).getStockModelCode()));
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(this.ownerId);
+        dest.writeLong(this.ownerType);
+        dest.writeLong(this.stockModelId);
+        dest.writeString(this.stockModelCode);
+        dest.writeString(this.stockModelName);
+        dest.writeLong(this.stockTypeId);
+        dest.writeString(this.stockTypeName);
+        dest.writeLong(this.quantity);
+        dest.writeLong(this.quantityIssue);
+        dest.writeLong(this.stateId);
+        dest.writeString(this.stateName);
+        dest.writeInt(this.countChoice);
+    }
+
+    protected StockTotal(Parcel in) {
+        this.ownerId = in.readLong();
+        this.ownerType = in.readLong();
+        this.stockModelId = in.readLong();
+        this.stockModelCode = in.readString();
+        this.stockModelName = in.readString();
+        this.stockTypeId = in.readLong();
+        this.stockTypeName = in.readString();
+        this.quantity = in.readLong();
+        this.quantityIssue = in.readLong();
+        this.stateId = in.readLong();
+        this.stateName = in.readString();
+        this.countChoice = in.readInt();
+    }
+
+    public static final Creator<StockTotal> CREATOR = new Creator<StockTotal>() {
+        @Override
+        public StockTotal createFromParcel(Parcel source) {
+            return new StockTotal(source);
+        }
+
+        @Override
+        public StockTotal[] newArray(int size) {
+            return new StockTotal[size];
+        }
+    };
 }

@@ -11,7 +11,7 @@
     <string name="select_serials_step3">3. Xác nhận các serial đã chọn</string>
     <string name="input_empty">Hãy nhập thông tin</string>
     <string name="not_phone">Số điện thoai không hợp lệ</string>
-    <string formatted="false" name="count_serial_selected">
+    <string name="count_serial_selected" formatted="false">
         <![CDATA[
 Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt hàng <font color="#317BE1"><u> %s</u></font>
         ]]>
@@ -61,15 +61,15 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="sell_orders_gone_search">Đơn vị: %1$s - Nhân viên: %2$s - Kênh: %3$s</string>
 
     <string name="order_detail_title">Chi tiết đơn hàng %1$s</string>
-    <string name="order_detail_total_money">Tổng tiền: %1$s</string>
-    <string name="order_detail_pay_money">Số tiền phải thanh toán: %1$s</string>
-    <string name="order_detail_discount_money">Chiết khấu: %1$s</string>
-    <string name="order_detail_tax_percent">Thuế suất: %1$s</string>
-    <string name="order_detail_tax_money">Tiền thuế: %1$s</string>
+    <string name="order_detail_total_money">Tổng tiền: %1$.0f</string>
+    <string name="order_detail_pay_money">Số tiền phải thanh toán: %1$.0f</string>
+    <string name="order_detail_discount_money">Chiết khấu: %1$.0f</string>
+    <string name="order_detail_tax_percent">Thuế suất: %1$.0f</string>
+    <string name="order_detail_tax_money">Tiền thuế: %1$.0f</string>
     <string name="order_detail_cancel">Hủy Giao Dịch</string>
     <string name="order_detail_ok">Bán hàng</string>
 
-    <string name="item_order_detail_price_item">%1$f VNĐ</string>
+    <string name="item_order_detail_price_item">%1$s VNĐ</string>
     <string name="item_orders_id">Mã đơn hàng: %1$s</string>
     <string name="item_orders_date">Đặt ngày: %1$s</string>
     <string name="item_orders_change_code_name">%1$s - %2$s</string>
@@ -90,8 +90,9 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
                 Đã chọn %d serial
                 </string>
     <string name="select_serial">Chọn serial</string>
-    <string name="next">next</string>
+    <string name="next">Next</string>
     <string name="sale_retail">Bán lẻ</string>
+    <string name="sale_channel">Bán cho kênh</string>
     <string name="all">Tất cả</string>
     <string name="all_">-Tất cả-</string>
     <string name="customer_info">Thông tin khách hàng</string>
@@ -137,10 +138,10 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="title_search">Tìm kiếm</string>
     <string name="title_confirm">Xác Nhận</string>
     <string name="msg_title_confirm_trans">Bạn đã lập hóa đơn cho các giao dịch sau:</string>
-    <string formatted="false" name="msg_before_tax">Trước thuế: %f</string>
-    <string formatted="false" name="msg_rent">Tiền thuế: %f</string>
-    <string formatted="false" name="msg_discount">Chiết khấu: %f</string>
-    <string formatted="false" name="msg_total_amount_payable">Tổng tiền phải trả: %f</string>
+    <string name="msg_before_tax" formatted="false">Trước thuế: %f</string>
+    <string name="msg_rent" formatted="false">Tiền thuế: %f</string>
+    <string name="msg_discount" formatted="false">Chiết khấu: %f</string>
+    <string name="msg_total_amount_payable" formatted="false">Tổng tiền phải trả: %f</string>
     <string name="msg_choose_transaction">Chọn giao dịch</string>
     <string name="msg_list_trans">Danh sách giao dịch (%d)</string>
     <string name="title_channel">Kênh</string>
@@ -157,7 +158,7 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="amount_no_tax">Tổng tiền : %s đồng</string>
     <string name="amount">Số tiền phải thanh toán : %s đồng</string>
     <string name="tax">Tiền thuế : %s đồng</string>
-    <string formatted="false" name="confirm_before_save_trans_msg"><![CDATA[
+    <string name="confirm_before_save_trans_msg" formatted="false"><![CDATA[
 Bán cho khách hàng <b>%s</b> :<br>
  · Số điện thoại : <b>%s</b><br>
  · Số tiền thanh toán : <b>%s</b>(%s)<br>
@@ -169,7 +170,7 @@ Từ <b>%s</b><br>
 Theo mã chương trình bán hàng %s
     ]]></string>
 
-    <string formatted="false" name="confirm_before_save_trans_msg_channel"><![CDATA[
+    <string name="confirm_before_save_trans_msg_channel" formatted="false"><![CDATA[
 Bán cho kênh <b>%s</b> :<br>
  · Số điện thoại : <b>%s</b><br>
  · Số tiền thanh toán : <b>%s</b>(%s)<br>
@@ -180,7 +181,7 @@ Từ <b>%s</b><br>
 · Số điện thoại : <b>%s</b><br>
 Theo mã chương trình bán hàng %s
     ]]></string>
-    <string formatted="false" name="confirm_before_save_trans_msg_no_saleprogram"><![CDATA[
+    <string name="confirm_before_save_trans_msg_no_saleprogram" formatted="false"><![CDATA[
 Bán cho khách hàng <b>%s</b> :<br>
  · Số điện thoại : <b>%s</b><br>
  · Số tiền thanh toán : <b>%s</b>(%s đồng)<br>
@@ -191,7 +192,7 @@ Từ <b>%s</b><br>
 · Số điện thoại : <b>%s</b><br>
     ]]></string>
 
-    <string formatted="false" name="confirm_before_save_trans_msg_no_saleprogram_channel"><![CDATA[
+    <string name="confirm_before_save_trans_msg_no_saleprogram_channel" formatted="false"><![CDATA[
 Bán cho kênh <b>%s</b> :<br>
  · Số điện thoại : <b>%s</b><br>
  · Số tiền thanh toán : <b>%s</b>(%s đồng)<br>
@@ -249,7 +250,6 @@ Từ <b>%s</b><br>
     <string name="cust_name2">Tên khách hàng:</string>
     <string name="change_sim">Thực Hiện Đổi Sim</string>
 
-
     <string name="view_ware_house_title">Chi tiết kho</string>
     <string name="view_ware_house_list_stock">Danh sách mặt hàng (%1$d)</string>
     <string name="item_view_ware_house_code_stock">Mã hàng: %1$s - %2$s</string>
@@ -259,7 +259,7 @@ Từ <b>%s</b><br>
     <string name="fragment_view_ware_house_view_serial_title">Xem serial</string>
     <string name="fragment_view_ware_house_view_serial_detail_serial">
         <![CDATA[
-         Chi tiết serial cho mặt hàng font color="#317BE1"><u>%s</u></font>
+         Chi tiết serial cho mặt hàng <font color="#317BE1"><u>%s</u></font>
         ]]>
     </string>
     <string name="fragment_view_ware_house_view_serial_total">Tổng số: %1$d</string>
@@ -297,4 +297,183 @@ Từ <b>%s</b><br>
     <string name="sell_anypay_confirm_total">Tổng tiền phải trả:</string>
     <string name="choose_staff">Chọn nhân viên</string>
     <string name="choose_bts">Chọn BTS</string>
+
+    <!--kpp-->
+    <string name="kpp_order">KPP Đặt hàng</string>
+    <string name="order_approval">Đã được phê duyệt</string>
+    <string name="order_reject">Đã từ chối</string>
+    <string name="order_pending">Đang chờ phê duyệt</string>
+    <string-array name="order_status_name">
+        <item>Đã được phê duyệt</item>
+        <item>Đang chờ phê duyệt</item>
+        <item>Đã từ chối</item>
+    </string-array>
+    <string name="order_title_list">Danh sách đơn hàng (%s)</string>
+    <string name="order_amout_list">Tổng tiền:  (%s) đồng</string>
+    <string name="order_from_kpp"><![CDATA[
+Đặt hàng từ KPP: <b>%s</b>
+    ]]></string>
+    <string name="add_new_sale_model">Thêm hàng hóa</string>
+    <string name="order">Đặt</string>
+    <string name="order2">Đặt hàng</string>
+    <string name="model_type">Loại mặt hàng</string>
+    <string name="mode_code">Mã mặt hàng *</string>
+    <string name="model_name">Tên mặt hàng</string>
+    <string name="search1">Tìm kiếm</string>
+    <string name="export_per_response">Số lượng xuất/ Số lượng đáp ứng</string>
+    <string name="add_stock_total">Thêm hàng hóa</string>
+    <string name="notice">Thông báo</string>
+    <string name="mode_code1">Mã hàng</string>
+    <string name="quantity">Số lượng</string>
+    <string name="sum_money">Tổng tiền</string>
+    <string name="confirm_kpp_order">Bạn có chắc muốn đặt hàng</string>
+    <string name="status">Trạng thái</string>
+    <string name="time_invalid">Thời gian nhập vào không hợp lệ</string>
+    <string name="time_out_of_month">Chọn thời gian trong khoảng 1 tháng</string>
+    <string name="no_channel">Chưa chọn kênh</string>
+    <array name="stock_type">
+        <item>-Tất cả -</item>
+        <item>Hàng mới</item>
+        <item>Hàng cũ</item>
+    </array>
+    <string name="job_cskpp">Chăm sóc kênh phân phối</string>
+    <string name="job_arising">Việc phát sinh</string>
+    <string name="job_team">Việc tổ đội</string>
+    <string name="reject">Từ chối</string>
+    <string name="not_accepted">Chưa nhận</string>
+    <string name="inprogress">Đang thực hiện</string>
+    <string name="finished">Hoàn thành</string>
+    <string name="search_job_hint">Lọc công việc</string>
+    <string name="job_type">Loại công việc</string>
+    <string name="job_status">Trạng thái công việc</string>
+    <string name="date_assign_job">Ngày giao việc</string>
+    <string name="select_assign_job_type">Chọn loại công việc giao</string>
+    <string name="text_continue">Tiếp</string>
+    <string name="job_duration">Thời gian thực hiện*</string>
+    <string name="staff">Nhân viên</string>
+    <string name="job_title">Tên công việc</string>
+    <string name="description">Mô tả</string>
+    <string name="assign_job">Giao việc</string>
+
+    <string name="help_title">Trợ giúp</string>
+    <string name="help_quan_ly_ban_hang">Làm thế nào để có thể quản lý bán hàng?</string>
+    <string name="help_dau_noi_thue_bao_moi">Làm thế nào để có thể đấu nối cho thuê bao mới?</string>
+    <string name="help_khach_hang_yeu_cau_bao_hanh">Làm thế nào khi có khách hàng yêu cầu bảo hành?</string>
+    <string name="help_chinh_sach_moi">Làm thế nào khi có chính sách mới?</string>
+    <string name="help_cong_viec_duoc_giao">Làm thế nào khi có công việc được giao?</string>
+    <string name="help_theo_doi_kpi_ban_hang">Làm thế nào để theo dõi KPI bán hàng?</string>
+
+    <string name="help_vao_chuc_nang_quan_ly_ban_hang">Vào chức năng quản lý bán hàng</string>
+    <string name="help_vao_chuc_nang_dau_noi_thue_bao_moi">Vào chức năng đấu nối cho thuê bao mới</string>
+    <string name="help_vao_chuc_nang_khach_hang_yeu_cau_bao_hanh">Vào chức năng khách hàng yêu cầu bảo hành</string>
+    <string name="help_vao_chuc_nang_chinh_sach_moi">Vào chức năng chính sách mới</string>
+    <string name="help_vao_chuc_nang_cong_viec_duoc_giao">Vào chức năng công việc được giao</string>
+    <string name="help_vao_chuc_nang_theo_doi_kpi_ban_hang">Vào chức năng theo dõi KPI bán hàng</string>
+
+    <string name="item_order_detail_selected">Đã chọn %1$s/%2$s</string>
+    <string name="item_order_detail_select_serial">Chọn serial</string>
+    <string name="item_order_detail_product">sản phẩm</string>
+    <string name="item_order_detail_warehouse_exists">Kho còn</string>
+    <string name="no_item_order">Hãy nhập số lượng cho các mặt hàng</string>
+
+    <string name="menu_qlkh"><![CDATA[Đấu nối & Quản lý khách hàng]]></string>
+    <string name="menu_quan_ly_thu_cuoc">Quản lý thu cước</string>
+    <string name="menu_bh_kho_tc">Bán hàng - Kho - Tài chính</string>
+    <string name="menu_bh_cskh">Bảo hành và QL CSKH</string>
+    <string name="menu_bao_cao">Báo cáo</string>
+    <string name="menu_quan_ly_dia_ban">Quản lý địa bàn</string>
+
+    <string name="menu_dau_noi_di_dong">Đấu nối di động</string>
+    <string name="menu_dau_noi_co_dinh">Đấu nối cố định</string>
+    <string name="menu_dang_ky_thong_tin">Đăng ký thông tin</string>
+    <string name="menu_cap_nhat_thong_tin">Cập nhật thông tin</string>
+    <string name="menu_doi_sim">Đổi sim</string>
+    <string name="menu_thay_doi_dia_chi_lap_dat">Thay đổi địa chỉ lắp đặt</string>
+    <string name="menu_quan_ly_cong_viec">Quản lý công việc</string>
+    <string name="menu_giao_viec_phat_sinh">Giao việc phát sinh</string>
+    <string name="menu_giao_viec_cs_kpp">Giao việc CS KPP</string>
+    <string name="menu_chuc_nang_xac_minh">Chức năng XÁC MINH</string>
+    <string name="menu_chuc_nang_gach_no">Chức năng GẠCH NỢ</string>
+    <string name="menu_chuc_nang_tra_cuoc_nong">Chức năng TRA CƯỚC NÓNG</string>
+    <string name="menu_chuc_nang_quan_ly_tien_do_thu_cuoc">Chức năng QUẢN LÝ TIẾN ĐỘ THU CƯỚC</string>
+    <string name="menu_ban_le">BÁN LẺ</string>
+    <string name="menu_ban_cho_kenh">BÁN CHO KÊNH</string>
+    <string name="menu_ban_hang_theo_don">BÁN HÀNG THEO ĐƠN/PHÊ DUYỆT ĐƠN HÀNG</string>
+    <string name="menu_ban_dich_vu_vas">BÁN DỊCH VỤ VAS</string>
+    <string name="menu_lap_hoa_don">LẬP HÓA ĐƠN</string>
+    <string name="menu_ban_anypay">BÁN ANYPAY</string>
+    <string name="menu_nap_chuyen_anypay">NẠP CHUYỂN ANYPAY</string>
+    <string name="menu_xem_kho">XEM KHO</string>
+    <string name="menu_nhap_hoa_don">NHẬP HÓA ĐƠN</string>
+    <string name="menu_xuat_kho_cap_duoi">XUẤT KHO CẤP DƯỚI</string>
+    <string name="menu_nhap_kho_cap_tren">NHẬP KHO CẤP TRÊN</string>
+    <string name="menu_tra_hang_cap_tren">TRẢ HÀNG CẤP TRÊN</string>
+    <string name="menu_nhap_kho_cap_duoi">NHẬP KHO CẤP DƯỚI</string>
+    <string name="menu_xuat_kho_cho_nhan_vien">XUẤT KHO CHO NHÂN VIÊN</string>
+    <string name="menu_nv_xac_nhan_hang">NV XÁC NHẬN HÀNG</string>
+    <string name="menu_nv_tra_hang_cap_tren">NHÂN VIÊN TRẢ HÀNG CẤP TRÊN</string>
+    <string name="menu_nhap_kho_tu_nhan_vien">NHẬP KHO TỪ NHÂN VIÊN</string>
+    <string name="menu_kenh_order_hang">KÊNH ORDER HÀNG</string>
+    <string name="menu_tao_giay_nop_tien">TẠO GIẤY NỘP TIỀN</string>
+    <string name="menu_phe_duyet_giay_nop_tien">PHÊ DUYỆT GIẤY NỘP TIỀN</string>
+    <string name="menu_doi_soat_cong_no_giay_nop_tien">ĐỐI SOÁT CÔNG NỢ GIẤY NỘP TIỀN</string>
+    <string name="menu_tra_cuu_bao_hanh">Tra cứu bảo hành</string>
+    <string name="menu_tiep_nhan_bao_hanh">TIẾP NHẬN BẢO HÀNH</string>
+    <string name="menu_chuyen_muc_bao_hanh">CHUYỂN MỨC BẢO HÀNH/TRẢ BẢO HÀNH</string>
+    <string name="menu_survey_kpp">SURVEY KPP</string>
+    <string name="menu_hotnew_cs_kpp">HOTNEW CS KPP</string>
+    <string name="menu_kpp_feedback">KPP FEEDBACK</string>
+    <string name="menu_khai_bao_gia_kenh_chan_ret">Khai báo giá kênh chân rết</string>
+    <string name="menu_bao_cao_phat_trien_thue_bao">Báo cáo phát triển thuê bao</string>
+    <string name="menu_cham_soc_kenh">Chăm sóc kênh</string>
+    <string name="menu_bao_cao_tan_suat_cham_soc_kenh">Báo cáo tần suất chăm sóc kênh</string>
+    <string name="menu_bao_cao_ton_kho">Báo cáo tồn kho</string>
+    <string name="menu_bao_cao_giao_chi_tieu_ban_hang">Báo cáo giao chỉ tiêu bán hàng</string>
+    <string name="menu_giao_chi_tieu_ban_hang">Giao chỉ tiêu bán hàng</string>
+    <string name="menu_tao_kpp">Tạo kênh phân phối</string>
+    <string name="menu_quan_ly_dia_ban_hanh_chinh">Quản lý địa bàn hành chính tọa độ BTS/Kênh</string>
+    <string name="menu_quan_ly_kpi_kpp">Quản lý KPI KPP</string>
+    <string name="menu_quan_ly_thong_tin_kpp">Quản lý thông tin KPP</string>
+    <string name="menu_quan_ly_van_ban_chinh_sach">Quản lý văn bản chính sách</string>
+    <string name="quan_ly_giao_viec">Quản lý giao việc</string>
+
+    <!--InstallationAddress -->
+    <string name="title_install_address">Thay đổi địa chỉ lắp đặt</string>
+    <string name="title_phone_number">Số thuê bao/ account</string>
+    <string name="title_type_page">Loại giấy tờ</string>
+    <string name="title_total_page">Số giấy tờ</string>
+    <string name="title_info_customer"><u>Thông tin khách hàng</u></string>
+
+    <string name="title_change_add">Đổi địa chỉ</string>
+    <string name="title_add_new">1. Địa chỉ mới</string>
+    <string name="title_survey">2. Khảo sát</string>
+    <string name="title_facility">3. Vật tư</string>
+    <string name="back_item"><![CDATA[<< Quay lại]]></string>
+    <string name="title_change_add_city">Tỉnh/TP</string>
+    <string name="title_change_add_district">Quận/Huyện</string>
+    <string name="title_change_add_commune">Phường/xã</string>
+    <string name="title_survey_teams">Tổ đội</string>
+    <string name="title_survey_bts_station">Trạm BTS</string>
+    <string name="title_survey_port">Port</string>
+    <string name="title_select_station">Chọn trạm</string>
+    <string name="title_facility_choose_change">Chọn lý do thay đổi</string>
+    <string name="title_facility_kind_of_item">Loại mặt hàng</string>
+    <string name="title_facility_items">Mặt hàng</string>
+    <string name="title_facility_cable">Dây cáp OT04 (m)</string>
+    <string name="title_facility_converter">Converter (cái)</string>
+
+    <!--Input Order screen-->
+    <string name="title_input_order_screen">Quản lý nhập hoá đơn</string>
+    <string name="move_product_high">Chuyển hàng cấp trên</string>
+    <string name="move_product_slow">Chuyển cấp dưới</string>
+    <string name="btn_input_order">Nhập hoá đơn</string>
+    <string name="input_order_received">Đã nhận</string>
+    <string name="input_order_not_receive">Chưa nhận</string>
+    <string name="bill_range_text">Dải hóa đơn: %1$s - %2$s</string>
+    <string name="input_order_count">Số lượng: %d</string>
+    <string name="input_order_date">Ngày chuyển: %s</string>
+    <string name="input_order_store_name">Kho nhận: %s</string>
+    <string name="input_order_dialog_success_title">Nhập hóa đơn thành công</string>
+    <string name="input_order_dialog_sucess_description">Dải hóa đơn bạn nhập đã được ghi lại thành công.</string>
+
 </resources>

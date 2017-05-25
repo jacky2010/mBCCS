@@ -17,6 +17,20 @@ public class GetListStockModelRequest implements Serializable {
     @SerializedName("ownerType")
     private long ownerType;
 
+    @Expose
+    @SerializedName("stockTypeId")
+    private long stockTypeId;
+
+    @Expose
+    @SerializedName("stockModelId")
+    private String stockModelId;
+
+    @Expose
+    @SerializedName("stateId")
+    private long stateId;
+
+    private String languate;
+
     public long getOwnerId() {
         return ownerId;
     }
@@ -31,5 +45,37 @@ public class GetListStockModelRequest implements Serializable {
 
     public void setOwnerType(long ownerType) {
         this.ownerType = ownerType;
+    }
+
+    public long getStockTypeId() {
+        return stockTypeId;
+    }
+
+    public void setStockTypeId(long stockTypeId) {
+        this.stockTypeId = stockTypeId;
+    }
+
+    public String getStockModelId() {
+        return stockModelId;
+    }
+
+    public void setStockModelId(String stockModelId) {
+        this.stockModelId = stockModelId;
+    }
+
+    public long getStateId() {
+        return stateId;
+    }
+
+    public void setStateId(long stateId) {
+        this.stateId = stateId;
+    }
+
+    public String getLanguate() {
+        return languate;
+    }
+
+    public void setLanguate(String languate) {
+        this.languate = languate;
     }
 }

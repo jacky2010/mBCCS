@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.viettel.mbccs.screen.help.HelpActivity"
+    >
+    <data>
+        <variable
+            name="presenter"
+            type="com.viettel.mbccs.screen.help.HelpActivity"
+            />
+    </data>
+    <FrameLayout
+        android:id="@+id/frame_help"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <include
+                layout="@layout/toolbar"
+                app:background="@{@color/grey}"
+                app:isShow="@{true}"
+                app:leftIcon="@{@drawable/ic_arrow_left_24dp}"
+                app:leftIconClick="@{()->presenter.onCancel()}"
+                app:rightIcon="@{@drawable/ic_search_white_24dp}"
+                app:showRightIcon="@{presenter.showRightIcon}"
+                app:title="@{@string/help_title}"
+                app:titleColor="@{@color/white}"
+                app:titleTextSize="@{@dimen/sp_17}"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingEnd="@dimen/dp_16"
+                android:paddingLeft="@dimen/dp_16"
+                android:paddingRight="@dimen/dp_16"
+                android:paddingStart="@dimen/dp_16"
+                >
+                <com.viettel.mbccs.widget.CustomTextView
+                    android:id="@+id/text_help_qlbh"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{ v -> presenter.onClick(v) }"
+                    android:text="@string/help_quan_ly_ban_hang"
+                    style="@style/styleTextHelp"
+                    />
+
+                <include
+                    layout="@layout/layout_decoration"/>
+
+                <com.viettel.mbccs.widget.CustomTextView
+                    android:id="@+id/text_help_dntbm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{ v -> presenter.onClick(v) }"
+                    android:text="@string/help_dau_noi_thue_bao_moi"
+                    style="@style/styleTextHelp"
+                    />
+
+                <include
+                    layout="@layout/layout_decoration"/>
+
+                <com.viettel.mbccs.widget.CustomTextView
+                    android:id="@+id/text_help_khycbh"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{ v -> presenter.onClick(v) }"
+                    android:text="@string/help_khach_hang_yeu_cau_bao_hanh"
+                    style="@style/styleTextHelp"
+                    />
+
+                <include
+                    layout="@layout/layout_decoration"/>
+
+                <com.viettel.mbccs.widget.CustomTextView
+                    android:id="@+id/text_help_csm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{ v -> presenter.onClick(v) }"
+                    android:text="@string/help_chinh_sach_moi"
+                    style="@style/styleTextHelp"
+                    />
+
+                <include
+                    layout="@layout/layout_decoration"/>
+
+                <com.viettel.mbccs.widget.CustomTextView
+                    android:id="@+id/text_help_cvdg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{ v -> presenter.onClick(v) }"
+                    android:text="@string/help_cong_viec_duoc_giao"
+                    style="@style/styleTextHelp"
+                    />
+
+                <include
+                    layout="@layout/layout_decoration"/>
+
+                <com.viettel.mbccs.widget.CustomTextView
+                    android:id="@+id/text_help_tdkpibh"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{ v -> presenter.onClick(v) }"
+                    android:text="@string/help_theo_doi_kpi_ban_hang"
+                    style="@style/styleTextHelp"
+                    />
+                <include
+                    layout="@layout/layout_decoration"/>
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+</layout>
+

@@ -2,85 +2,117 @@
 <resources>
     <!-- InputText -->
     <declare-styleable name="IncDecInputText">
-        <attr name="maxLength" format="integer" />
-        <attr name="inputTextSize" format="dimension" />
-        <attr name="inputTextColor" format="color|reference" />
+        <attr format="integer" name="maxLength"/>
+        <attr format="dimension" name="inputTextSize"/>
+        <attr format="color|reference" name="inputTextColor"/>
     </declare-styleable>
     <declare-styleable name="CustomDatePicker">
-        <attr name="dateTextSize" format="dimension" />
-        <attr name="dateTextColor" format="color|reference" />
+        <attr format="dimension" name="dateTextSize"/>
+        <attr format="color|reference" name="dateTextColor"/>
     </declare-styleable>
     <declare-styleable name="BottomNavigationView">
-        <attr format="color|reference" name="bottomBarBgColor"/>
-        <attr format="dimension" name="bottomBarTextSize"/>
-        <attr format="reference" name="bottomBarTextColor"/>
+        <attr name="bottomBarBgColor" format="color|reference" />
+        <attr name="bottomBarTextSize" format="dimension" />
+        <attr name="bottomBarTextColor" format="reference" />
     </declare-styleable>
     <declare-styleable name="SimpleProgressChart">
-        <attr name="progressTextColor" format="color|reference" />
-        <attr name="progressTextSize" format="dimension" />
-        <attr name="progressSize" format="dimension" />
-        <attr name="progressDone" format="float" />
-        <attr name="progressBgColor" format="integer|reference" />
-        <attr name="progressColor" format="integer|reference" />
+        <attr format="color|reference" name="progressTextColor"/>
+        <attr format="dimension" name="progressTextSize"/>
+        <attr format="dimension" name="progressSize"/>
+        <attr format="float" name="progressDone"/>
+        <attr format="integer|reference" name="progressBgColor"/>
+        <attr format="integer|reference" name="progressColor"/>
+    </declare-styleable>
+    <!--Bordered Spinner-->
+    <declare-styleable name="SpinnerWithBorder">
+        <attr format="color" name="spinnerTintColor"/>
     </declare-styleable>
 
     <declare-styleable name="AppButton">
-        <attr name="type" format="string" />
-        <attr name="bgColor" format="color" />
-        <attr name="bgColorSelected" format="color" />
-        <attr name="bgColorDisabled" format="color" />
-        <attr name="textSizeButton" format="dimension" />
-        <attr name="textColorButton" format="color" />
-        <attr name="textColorSelected" format="color" />
-        <attr name="textColorDisabled" format="color" />
-        <attr name="corner" format="dimension" />
-        <attr name="selected" format="boolean" />
-        <attr name="cornerStrokeWidth" format="dimension" />
-        <attr name="cornerStrokeColor" format="color" />
-        <attr name="bgDrawable" format="integer" />
+        <attr format="string" name="type"/>
+        <attr format="color" name="bgColor"/>
+        <attr format="color" name="bgColorSelected"/>
+        <attr format="color" name="bgColorDisabled"/>
+        <attr format="dimension" name="textSizeButton"/>
+        <attr format="color" name="textColorButton"/>
+        <attr format="color" name="textColorSelected"/>
+        <attr format="color" name="textColorDisabled"/>
+        <attr format="dimension" name="corner"/>
+        <attr format="boolean" name="selected"/>
+        <attr format="dimension" name="cornerStrokeWidth"/>
+        <attr format="color" name="cornerStrokeColor"/>
+        <attr format="integer" name="bgDrawable"/>
     </declare-styleable>
 
     <!-- Button Image Custom -->
     <declare-styleable name="ImageTextButton">
-        <attr name="itb_icon" format="reference" />
-        <attr name="itb_icon_size" format="dimension" />
-        <attr name="itb_text" format="string" />
-        <attr name="itb_text_color" format="color" />
-        <attr name="itb_text_size" format="dimension" />
-        <attr name="itb_icon_text_margin" format="dimension" />
-        <attr name="itb_icon_position" format="enum">
-            <enum name="left" value="0" />
-            <enum name="top" value="1" />
-            <enum name="right" value="2" />
-            <enum name="bottom" value="3" />
+        <attr format="reference" name="itb_icon"/>
+        <attr format="dimension" name="itb_icon_size"/>
+        <attr format="string" name="itb_text"/>
+        <attr format="color" name="itb_text_color"/>
+        <attr format="dimension" name="itb_text_size"/>
+        <attr format="dimension" name="itb_icon_text_margin"/>
+        <attr format="enum" name="itb_icon_position">
+            <enum name="left" value="0"/>
+            <enum name="top" value="1"/>
+            <enum name="right" value="2"/>
+            <enum name="bottom" value="3"/>
         </attr>
-        <attr name="itb_bg" format="color" />
-        <attr name="itb_bg_pressed" format="color" />
-        <attr name="itb_bg_disabled" format="color" />
-        <attr name="itb_radius" format="dimension" />
-        <attr name="itb_padding_bottom" format="dimension" />
-        <attr name="itb_padding_top" format="dimension" />
-        <attr name="itb_padding_right" format="dimension" />
-        <attr name="itb_padding_left" format="dimension" />
+        <attr format="color" name="itb_bg"/>
+        <attr format="color" name="itb_bg_pressed"/>
+        <attr format="color" name="itb_bg_disabled"/>
+        <attr format="dimension" name="itb_radius"/>
+        <attr format="dimension" name="itb_padding_bottom"/>
+        <attr format="dimension" name="itb_padding_top"/>
+        <attr format="dimension" name="itb_padding_right"/>
+        <attr format="dimension" name="itb_padding_left"/>
     </declare-styleable>
 
     <!-- RangeSliderView Custom -->
     <declare-styleable name="RangeSliderView">
-        <attr name="rangeCount" format="integer" />
-        <attr name="filledColor" format="color" />
-        <attr name="emptyColor" format="color" />
-        <attr name="barHeightPercent" format="float" />
-        <attr name="slotRadiusPercent" format="float" />
-        <attr name="sliderRadiusPercent" format="float" />
+        <attr format="integer" name="rangeCount"/>
+        <attr format="color" name="filledColor"/>
+        <attr format="color" name="emptyColor"/>
+        <attr format="float" name="barHeightPercent"/>
+        <attr format="float" name="slotRadiusPercent"/>
+        <attr format="float" name="sliderRadiusPercent"/>
     </declare-styleable>
 
     <!-- Toolbar View style -->
     <declare-styleable name="ToolbarView">
-        <attr name="tbTitle" format="string" />
-        <attr name="tbColorTitle" format="color" />
-        <attr name="ibSizeTitle" format="dimension" />
-        <attr name="tbIconLeft" format="reference" />
-        <attr name="tbIconRight" format="reference" />
-        <attr name="ibIconSize" format="dimension" />
+        <attr format="string" name="tbTitle"/>
+        <attr format="color" name="tbColorTitle"/>
+        <attr format="dimension" name="ibSizeTitle"/>
+        <attr format="reference" name="tbIconLeft"/>
+        <attr format="reference" name="tbIconRight"/>
+        <attr format="dimension" name="ibIconSize"/>
+    </declare-styleable>
+
+    <!-- ItemSpinText -->
+    <declare-styleable name="ItemSpinText">
+        <attr name="istTextView" format="boolean"/>
+        <attr name="istTextViewSize" format="dimension"/>
+        <attr name="istTextViewTitle" format="string"/>
+        <attr name="istTextViewColor" format="color" />
+        <attr name="istSpinner" format="boolean"/>
+        <attr name="istIconLeft" format="boolean"/>
+        <attr name="istIconLeftBg" format="reference" />
+        <attr name="istIconRight" format="boolean"/>
+        <attr name="istIconRightBg" format="reference" />
+    </declare-styleable>
+
+    <!-- TopBarView -->
+    <declare-styleable name="TopBarView">
+        <attr name="tbvTextView" format="boolean"/>
+        <attr name="tbvIconRight" format="boolean"/>
+        <attr name="tbvIconRightBg" format="reference" />
+        <attr name="tbvTitle" format="string"/>
+        <attr name="tbvTitleSize" format="dimension"/>
+        <attr name="tbvTitleColor" format="color" />
+    </declare-styleable>
+
+    <!--MyViewPager-->
+    <declare-styleable name="MyViewPager">
+        <attr format="boolean" name="isDisableSwipe"/>
     </declare-styleable>
 </resources>

@@ -7,7 +7,6 @@ import android.databinding.ObservableField;
 import android.text.TextUtils;
 import android.widget.Toast;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.model.SerialBO;
 import com.viettel.mbccs.data.model.SerialPickerModel;
 import com.viettel.mbccs.data.source.UserRepository;
@@ -23,7 +22,6 @@ import com.viettel.mbccs.utils.GsonUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import com.viettel.mbccs.variable.Constants;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -105,7 +103,7 @@ public class SerialPickerPresenter
                     @Override
                     public void onError(BaseException error) {
                         fakeData();
-                        DialogUtils.showDialogError(mContext, null, error.getMessage(), null);
+                        //  DialogUtils.showDialogError(mContext, null, error.getMessage(), null);
                     }
 
                     @Override
@@ -239,57 +237,52 @@ public class SerialPickerPresenter
     }
 
     private boolean validate() {
-        currentSerialBlock.setFromSerial((serialFrom.get()));
-        currentSerialBlock.setToSerial((serialTo.get()));
-        if (currentSerialBlock.getQuantity() < 1) {
-            Toast.makeText(mContext, mContext.getResources().getString(R.string.invalid_serial),
-                    Toast.LENGTH_SHORT).show();
+        try {
+            currentSerialBlock.setFromSerial((serialFrom.get()));
+            currentSerialBlock.setToSerial((serialTo.get()));
+            if (currentSerialBlock.getQuantity() < 1) {
+                DialogUtils.showDialogError(mContext, R.string.invalid_serial);
+                return false;
+            }
+
+            if (mSerials.size() == 0) {
+                DialogUtils.showDialogError(mContext, R.string.not_enought_serial);
+                return false;
+            }
+            if (Long.parseLong(currentSerialBlock.getFromSerial()) < Long.valueOf(
+                    mSerials.get(0))) {
+                currentSerialBlock.setFromSerial(mSerials.get(0));
+            }
+
+            if (Long.parseLong(currentSerialBlock.getToSerial()) > Long.valueOf(
+                    mSerials.get(mSerials.size() - 1))) {
+                currentSerialBlock.setToSerial(mSerials.get(mSerials.size() - 1));
+            }
+
+            List<String> commonSerial = new ArrayList<>(mSerials);
+            commonSerial.retainAll(currentSerialBlock.toSerialList());
+            if (commonSerial.size() <= 0) {
+                DialogUtils.showDialogError(mContext, R.string.invalid_serial);
+                return false;
+            }
+
+            int remain = (int) (mSerialPickerModel.getQuantity() - mSerialSelected.size());
+            if (remain == 0) {
+                DialogUtils.showDialogError(mContext, R.string.full_serial);
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
 
-        if (mSerials.size() == 0) {
-            Toast.makeText(mContext, mContext.getResources().getString(R.string.not_enought_serial),
-                    Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if (Long.parseLong(currentSerialBlock.getFromSerial()) < Long.valueOf(mSerials.get(0))) {
-            currentSerialBlock.setFromSerial(mSerials.get(0));
-        }
-
-        if (Long.parseLong(currentSerialBlock.getToSerial()) > Long.valueOf(
-                mSerials.get(mSerials.size() - 1))) {
-            currentSerialBlock.setToSerial(mSerials.get(mSerials.size() - 1));
-        }
-
-        List<String> commonSerial = new ArrayList<>(mSerials);
-        commonSerial.retainAll(currentSerialBlock.toSerialList());
-        if (commonSerial.size() <= 0) {
-            Toast.makeText(mContext, mContext.getResources().getString(R.string.invalid_serial),
-                    Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        int remain = (int) (mSerialPickerModel.getQuantity() - mSerialSelected.size());
-        if (remain == 0) {
-            Toast.makeText(mContext, mContext.getResources().getString(R.string.full_serial),
-                    Toast.LENGTH_SHORT).show();
-            return false;
-        }
         return true;
-    }
-
-    public int getSerialCountByListSerialBlock(List<SerialBO> serialBlock) {
-        Set<String> sets = new HashSet<>();
-        for (SerialBO s : serialBlock) {
-            sets.addAll(s.toSerialList());
-        }
-        return sets.size();
     }
 
     private void refreshProgressSerial() {
         summary.set(String.format(mContext.getResources().getString(R.string.count_serial_selected),
-                mSerialSelected.size(),
-                mSerialPickerModel.getQuantity(), mSerialPickerModel.getStockMoldeName()));
+                mSerialSelected.size(), mSerialPickerModel.getQuantity(),
+                mSerialPickerModel.getStockMoldeName()));
         quantity.set(String.valueOf(mSerialSelected.size()));
     }
 

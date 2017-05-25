@@ -1,11 +1,13 @@
 package com.viettel.mbccs.base;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
+import android.util.Log;
 import com.viettel.mbccs.dialog.LoadingDialog;
 
 import java.util.Stack;
@@ -67,11 +69,12 @@ public abstract class BaseActivity extends AppCompatActivity {
                 if (isFinishing() || mLoadingDialog == null || !mLoadingDialog.isAdded()) {
                     return;
                 }
-
                 mLoadingDialog.dismiss();
             }
         });
     }
+
+    //call fragment or dialog fragment
 
     public void goToDialogFragment(BaseDialog mBaseDialog, Bundle mBundle) {
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -117,6 +120,36 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void setTitleToolbar(int idTitle) {
 
     }
+
+    //call activity other
+
+    public void openActivityForResult(Class<?> pClass, Bundle pBundle, int requestCode) {
+        Intent intent = new Intent(this, pClass);
+        if (pBundle != null) {
+            intent.putExtras(pBundle);
+        }
+        startActivityForResult(intent, requestCode);
+    }
+
+    public void openActivity(Class<?> pClass) {
+        openActivity(pClass, null);
+    }
+
+    public void openActivity(Class<?> pClass, boolean isFinish) {
+        openActivity(pClass);
+        if (isFinish) {
+            finish();
+        }
+    }
+
+    public void openActivity(Class<?> pClass, Bundle pBundle) {
+        Intent intent = new Intent(this, pClass);
+        if (pBundle != null) {
+            intent.putExtras(pBundle);
+        }
+        startActivity(intent);
+    }
+
 
     @Override
     protected void onDestroy() {

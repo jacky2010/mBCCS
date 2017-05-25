@@ -23,6 +23,13 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        initDataBinder();
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         mHandler = new Handler();
         mRunnable = new Runnable() {
             @Override

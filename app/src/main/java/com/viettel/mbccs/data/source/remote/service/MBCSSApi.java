@@ -3,6 +3,7 @@ package com.viettel.mbccs.data.source.remote.service;
 import com.viettel.mbccs.data.model.BranchItem;
 import com.viettel.mbccs.data.model.Area;
 import com.viettel.mbccs.data.model.ChannelInfo;
+import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.model.SaleOrders;
 import com.viettel.mbccs.data.model.SaleTrans;
@@ -31,14 +32,15 @@ import com.viettel.mbccs.data.source.remote.request.GetOrderInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
+import com.viettel.mbccs.data.source.remote.request.KPPOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.LoginRequest;
 import com.viettel.mbccs.data.source.remote.request.SearchBranchRequest;
 import com.viettel.mbccs.data.source.remote.request.ViewInfoSerialRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsReponse;
-import com.viettel.mbccs.data.source.remote.response.LoginResponse;
 import com.viettel.mbccs.data.source.remote.response.OrderInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
+
 
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import java.util.List;
@@ -57,7 +59,7 @@ import rx.Observable;
 public interface MBCSSApi {
 
     @POST("/login")
-    Observable<BaseResponse<LoginResponse>> login(@Body LoginRequest loginRequest);
+    Observable<LoginInfo> login(@Body LoginRequest loginRequest);
 
     @FormUrlEncoded
     @POST("/send_code_password")
@@ -115,10 +117,12 @@ public interface MBCSSApi {
             @Body BaseRequest<GetListProvinceRequest> request);
 
     @POST("/getListTTKD")
-    Observable<BaseResponse<List<Shop>>> getListTTKD(
-            @Body BaseRequest<GetListTTKDRequest> request);
+    Observable<BaseResponse<List<Shop>>> getListTTKD(@Body BaseRequest<GetListTTKDRequest> request);
 
     @POST("/getListTTKD")
-    Observable<BaseResponse<List<Shop>>> getListShop(
-            @Body BaseRequest<GetListShopRequest> request);
+    Observable<BaseResponse<List<Shop>>> getListShop(@Body BaseRequest<GetListShopRequest> request);
+
+    @POST("/createSaleOrder")
+    Observable<BaseResponse> createSaleOrders(
+            @Body BaseRequest<KPPOrderRequest> requestBaseResponse);
 }

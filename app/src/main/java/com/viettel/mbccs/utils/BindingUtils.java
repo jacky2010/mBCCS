@@ -2,6 +2,7 @@ package com.viettel.mbccs.utils;
 
 import android.content.Context;
 import android.databinding.BindingAdapter;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.DimenRes;
 import android.support.annotation.StringRes;
@@ -31,7 +32,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import com.bumptech.glide.DrawableRequestBuilder;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -40,14 +40,12 @@ import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.MenuItem;
 import com.viettel.mbccs.widget.BottomNavigationView;
 import com.viettel.mbccs.widget.EndlessRecyclerOnScrollListener;
-
-import java.util.List;
-
 import de.codecrafters.tableview.TableDataAdapter;
 import de.codecrafters.tableview.TableHeaderAdapter;
 import de.codecrafters.tableview.TableView;
 import de.codecrafters.tableview.listeners.SwipeToRefreshListener;
 import de.codecrafters.tableview.model.TableColumnModel;
+import java.util.List;
 
 /**
  * Created by FRAMGIA\bui.dinh.viet on 09/02/2017.
@@ -56,12 +54,10 @@ import de.codecrafters.tableview.model.TableColumnModel;
 public class BindingUtils {
 
     @BindingAdapter(value = {
-            "android:recyclerAdapter", "columns", "orientation", "space", "includeEdge",
-            "haveDivider"
+            "android:recyclerAdapter", "columns", "orientation", "space"
     }, requireAll = false)
     public static void setRecyclerViewData(RecyclerView recyclerView, RecyclerView.Adapter adapter,
-            int columns, int orientation, @DimenRes int space, boolean includeEdge,
-            boolean haveDivider) {
+            int columns, int orientation, @DimenRes int space) {
         boolean isGrid = columns > 1;
         recyclerView.setAdapter(adapter);
         RecyclerView.LayoutManager layoutManager;
@@ -110,7 +106,8 @@ public class BindingUtils {
                 .load(url)
                 .diskCacheStrategy(
                         isCacheSource ? DiskCacheStrategy.SOURCE : DiskCacheStrategy.RESULT)
-                .placeholder(placeHolder);
+                .placeholder(placeHolder == null ? imageView.getResources()
+                        .getDrawable(R.drawable.no_image) : placeHolder);
         if (centerCrop) {
             requestBuilder.centerCrop();
         }
@@ -313,7 +310,6 @@ public class BindingUtils {
     @BindingAdapter({ "setSpinnerAdapter" })
     public static void setSpinnerAdapter(Spinner view, ArrayAdapter adapter) {
         view.setAdapter(adapter);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     }
 
     @BindingAdapter({ "spinnerClickItem" })
@@ -358,8 +354,30 @@ public class BindingUtils {
         v.setOnCheckedChangeListener(listener);
     }
 
+    @BindingAdapter("selected")
+    public static void setTextSelected(TextView textView, boolean isSelected) {
+        textView.setSelected(isSelected);
+    }
+
+    @BindingAdapter("position")
+    public static void setPosition(Spinner spinner, int position) {
+
+        spinner.setSelection(position);
+    }
+
     @BindingAdapter("error")
     public static void setTextError(EditText textView, String error) {
         textView.setError(error);
+    }
+
+    @BindingAdapter({ "loadUrlWebView" })
+    public static void loadUrl(WebView view, String url) {
+        view.loadUrl(url);
+    }
+
+    @BindingAdapter({ "contentHtmlGray" })
+    public static void setContentHtml(WebView view, String content) {
+        view.setBackgroundColor(Color.TRANSPARENT);
+        view.loadData(content, "text/html; charset=utf-8", "utf-8");
     }
 }

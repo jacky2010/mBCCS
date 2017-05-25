@@ -1,5 +1,6 @@
 package com.viettel.mbccs.screen.sell.retail;
 
+import android.app.Activity;
 import android.content.Context;
 import android.databinding.ObservableField;
 import android.widget.ArrayAdapter;
@@ -130,7 +131,7 @@ public class SaleRetailPresenter
 
                     @Override
                     public void onError(BaseException error) {
-                        DialogUtils.showDialogError(mContext, null, error.getMessage(), null);
+                        //DialogUtils.showDialogError(mContext, null, error.getMessage(), null);
                         fakeData();
                         loadModelSale();
                     }
@@ -220,13 +221,8 @@ public class SaleRetailPresenter
         stockAdapter.setOnStockListener(this);
     }
 
-    public void onCollapse() {
+    public void toogleExpand() {
         isCollapse.set(!isCollapse.get());
-        changeSearchFilter();
-    }
-
-    public void onExpand() {
-        isCollapse.set(false);
         changeSearchFilter();
     }
 
@@ -317,7 +313,17 @@ public class SaleRetailPresenter
         mViewModel.onSerialPicker(item);
     }
 
+    @Override
+    public void onItemFocus() {
+        isCollapse.set(true);
+        changeSearchFilter();
+    }
+
     public void onNext() {
         mViewModel.onNext(mModelSales, currentTelecomService, currentSaleProgram);
+    }
+
+    public void onCancel() {
+        ((Activity) mContext).finish();
     }
 }

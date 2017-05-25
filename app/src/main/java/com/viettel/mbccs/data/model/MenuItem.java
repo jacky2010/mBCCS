@@ -16,13 +16,39 @@ public class MenuItem implements Parcelable {
      * Do not use Id 0, it's a placeholder for mock menu
      */
     @IntDef({
-            MenuId.MENU_PLACEHOLDER, MenuId.MENU_DASHBOARD, MenuId.MENU_HELP, MenuId.MENU_SETTING
+            MenuId.MENU_PLACEHOLDER, MenuId.MENU_DASHBOARD, MenuId.MENU_HELP, MenuId.MENU_SETTING,
+            MenuId.MENU_QLKH, MenuId.MENU_QLTC, MenuId.MENU_BH_KHO_TC, MenuId.MENU_BH_CSKH,
+            MenuId.MENU_BAO_CAO, MenuId.MENU_QLDB, MenuId.MENU_GIAO_VIEC_PHAT_SINH,
+            MenuId.MENU_GIAO_VIEC_CS_KPP, MenuId.MENU_BAN_HANG_THEO_DON_PHE_DUYET_DON_HANG,
+            MenuId.MENU_XEM_KHO, MenuId.MENU_SALE_RETAIL, MenuId.MENU_SALE_CHANNEL,
+            MenuId.MENU_CHANNEL_ORDER, MenuId.MENU_NHAP_HOA_DON, MenuId.MENU_TD_LAP_DAT, MenuId.MENU_LAP_HOA_DON
+
     })
     public @interface MenuId {
         int MENU_PLACEHOLDER = 0;
         int MENU_DASHBOARD = 1;
         int MENU_HELP = 2;
         int MENU_SETTING = 3;
+
+        int MENU_QLKH = 4;
+        int MENU_QLTC = 5;
+        int MENU_BH_KHO_TC = 6;
+        int MENU_BH_CSKH = 7;
+        int MENU_BAO_CAO = 8;
+        int MENU_QLDB = 9;
+
+        int MENU_GIAO_VIEC_PHAT_SINH = 10;
+        int MENU_GIAO_VIEC_CS_KPP = 11;
+
+        int MENU_BAN_HANG_THEO_DON_PHE_DUYET_DON_HANG = 12;
+        int MENU_XEM_KHO = 13;
+        int MENU_NHAP_HOA_DON = 14;
+        int MENU_SALE_RETAIL = 20;
+        int MENU_SALE_CHANNEL = 21;
+        int MENU_CHANNEL_ORDER = 22;
+
+        int MENU_TD_LAP_DAT = 23;
+        int MENU_LAP_HOA_DON = 24;
     }
 
     @MenuId

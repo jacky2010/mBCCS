@@ -9,6 +9,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -72,19 +73,31 @@ dependencies {
     //Glide library load image
     compile "com.github.bumptech.glide:glide:$rootProject.ext.glideVersion"
 
-  //Zbar
-  compile 'me.dm7.barcodescanner:zbar:1.9.1'
-  //TableView
-  compile 'de.codecrafters.tableview:tableview:2.6.0'
+    //Zbar
+    //TableView
 
     //Chart
-    compile 'org.jetbrains:annotations-java5:15.0'
-    compile 'com.txusballesteros:FitChart:1.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile project(path: ':countrypicker')
 
+    // Circle image view
+    compile 'de.hdodenhof:circleimageview:2.1.0'
 
     // Butter Knife
     compile "com.jakewharton:butterknife:$rootProject.ext.butterknifeVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknifeVersion"
+    compile 'me.dm7.barcodescanner:zbar:1.9.1'
+    compile 'de.codecrafters.tableview:tableview:2.6.0'
+    compile 'org.jetbrains:annotations-java5:15.0'
+    compile 'com.txusballesteros:FitChart:1.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+
+    // Butter Knife
+    compile "com.jakewharton:butterknife:$rootProject.ext.butterknifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknifeVersion"
+
+    //map
+    compile "com.google.android.gms:play-services-maps:$rootProject.ext.mapVersion"
+    compile "com.google.android.gms:play-services-location:$rootProject.ext.mapVersion"
+    compile "com.google.android.gms:play-services-places:$rootProject.ext.mapVersion"
+
 }
