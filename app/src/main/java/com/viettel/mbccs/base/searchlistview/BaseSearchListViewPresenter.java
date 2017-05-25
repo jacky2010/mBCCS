@@ -62,6 +62,10 @@ public abstract class BaseSearchListViewPresenter<T>
 
     public abstract String getSearchHint();
 
+    public abstract String getToolbarTitle();
+
+    public abstract void onBackPressed();
+
     public int getSearchTextColor() {
         return 0;
     }

@@ -1,12 +1,14 @@
 package com.viettel.mbccs.screen.main.fragments.menu;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.viettel.mbccs.base.BaseSubMenuActivity;
 import com.viettel.mbccs.data.model.MenuItem;
 import com.viettel.mbccs.databinding.ItemMenuBinding;
 
@@ -64,15 +66,10 @@ public class MenuPresenter implements MenuContract.Presenter {
                 protected OnMenuClickListener getOnMenuClickListener() {
                     return new OnMenuClickListener() {
                         @Override
-                        public void onMenuClick(int id) {
-                            switch (id) {
-                                case MenuItem.MenuId.MENU_HELP:
-                                    break;
-                                case MenuItem.MenuId.MENU_SETTING:
-                                    break;
-                                default:
-                                    break;
-                            }
+                        public void onMenuClick(MenuItem item) {
+                            Intent intent = new Intent(mContext, BaseSubMenuActivity.class);
+                            intent.putExtra(BaseSubMenuActivity.EXTRA_MENU_ITEM, item);
+                            mContext.startActivity(intent);
                         }
                     };
                 }
@@ -116,7 +113,7 @@ public class MenuPresenter implements MenuContract.Presenter {
                     @Override
                     public void onClick(View v) {
                         if (onMenuClickListener != null) {
-                            onMenuClickListener.onMenuClick(item.getId());
+                            onMenuClickListener.onMenuClick(item);
                         }
                     }
                 });
@@ -125,6 +122,6 @@ public class MenuPresenter implements MenuContract.Presenter {
     }
 
     public interface OnMenuClickListener {
-        void onMenuClick(int id);
+        void onMenuClick(MenuItem item);
     }
 }

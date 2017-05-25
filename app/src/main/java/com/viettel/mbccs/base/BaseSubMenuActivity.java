@@ -1,12 +1,10 @@
 package com.viettel.mbccs.base;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
-import android.databinding.DataBindingUtil;
 import android.databinding.ObservableBoolean;
 import android.os.Build;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +17,7 @@ import com.viettel.mbccs.data.model.MenuItem;
 import com.viettel.mbccs.databinding.ActivitySubMenuBinding;
 import com.viettel.mbccs.databinding.ItemImageGridBinding;
 import com.viettel.mbccs.databinding.ItemMenuBinding;
+import com.viettel.mbccs.screen.assignjob.ListAssignJobActivity;
 import com.viettel.mbccs.screen.main.fragments.menu.MenuPresenter;
 import com.viettel.mbccs.widget.SpacesItemDecoration;
 
@@ -29,9 +28,11 @@ import java.util.List;
  * Created by Anh Vu Viet on 5/19/2017.
  */
 
-public abstract class BaseSubMenuActivity extends BaseActivity {
+public class BaseSubMenuActivity extends BaseDataBindActivity<ActivitySubMenuBinding, BaseSubMenuActivity> {
 
-    protected ActivitySubMenuBinding mBinding;
+    public static final String EXTRA_MENU_ITEM = "EXTRA_MENU_ITEM";
+
+    protected MenuItem mMenuItem;
 
     protected List<MenuItem> mMenuItemList = new ArrayList<>();
 
@@ -43,12 +44,18 @@ public abstract class BaseSubMenuActivity extends BaseActivity {
 
     protected MenuPresenter.MenuAdapter mMenuAdapter;
 
+    protected MenuPresenter.OnMenuClickListener mOnMenuClickListener;
+
     public ObservableBoolean isGrid;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_sub_menu);
+    protected int getIdLayout() {
+        return R.layout.activity_sub_menu;
+    }
+
+    @Override
+    protected void initData() {
+        mMenuItem = getIntent().getParcelableExtra(EXTRA_MENU_ITEM);
         isGrid = new ObservableBoolean();
         isGrid.set(false);
         mGridLayoutManager = new GridLayoutManager(this, 3);
@@ -62,11 +69,201 @@ public abstract class BaseSubMenuActivity extends BaseActivity {
         mBinding.executePendingBindings();
     }
 
-    public abstract void initMenuList();
+    public void initMenuList() {
+        // FIXME: Fake data
+        switch (mMenuItem.getId()) {
+            case MenuItem.MenuId.MENU_QLKH:
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_dau_noi_di_dong),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_dau_noi_co_dinh),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_dang_ky_thong_tin),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_cap_nhat_thong_tin),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_doi_sim),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_thay_doi_dia_chi_lap_dat),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_quan_ly_cong_viec),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_GIAO_VIEC_PHAT_SINH,
+                        getString(R.string.menu_giao_viec_phat_sinh),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_GIAO_VIEC_CS_KPP,
+                        getString(R.string.menu_giao_viec_cs_kpp),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                break;
+            case MenuItem.MenuId.MENU_QLTC:
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_chuc_nang_xac_minh),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_chuc_nang_gach_no),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_chuc_nang_tra_cuoc_nong),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_chuc_nang_quan_ly_tien_do_thu_cuoc),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                break;
+            case MenuItem.MenuId.MENU_BH_KHO_TC:
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_ban_le),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_ban_cho_kenh),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_ban_hang_theo_don),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_ban_dich_vu_vas),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_lap_hoa_don),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_ban_anypay),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_nap_chuyen_anypay),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_xem_kho),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_nhap_hoa_don),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_xuat_kho_cap_duoi),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_nhap_kho_cap_tren),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_tra_hang_cap_tren),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_nhap_kho_cap_duoi),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_xuat_kho_cho_nhan_vien),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_nv_xac_nhan_hang),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_nv_tra_hang_cap_tren),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_nhap_kho_tu_nhan_vien),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_kenh_order_hang),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_tao_giay_nop_tien),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_phe_duyet_giay_nop_tien),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_doi_soat_cong_no_giay_nop_tien),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                break;
+            case MenuItem.MenuId.MENU_BH_CSKH:
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_tra_cuu_bao_hanh),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_tiep_nhan_bao_hanh),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_chuyen_muc_bao_hanh),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_survey_kpp),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_hotnew_cs_kpp),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_kpp_feedback),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                break;
+            case MenuItem.MenuId.MENU_BAO_CAO:
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_khai_bao_gia_kenh_chan_ret),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_bao_cao_phat_trien_thue_bao),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_cham_soc_kenh),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_bao_cao_tan_suat_cham_soc_kenh),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_bao_cao_ton_kho),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_bao_cao_giao_chi_tieu_ban_hang),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_giao_chi_tieu_ban_hang),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                break;
+            case MenuItem.MenuId.MENU_QLDB:
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_tao_kpp),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_quan_ly_dia_ban_hanh_chinh),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_quan_ly_kpi_kpp),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_quan_ly_thong_tin_kpp),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                        getString(R.string.menu_quan_ly_van_ban_chinh_sach),
+                        R.drawable.ic_add_black_24dp, 0, 0));
+                break;
+        }
+    }
 
-    public abstract MenuPresenter.OnMenuClickListener getOnMenuClickListener();
+    public MenuPresenter.OnMenuClickListener getOnMenuClickListener() {
+        if (mOnMenuClickListener == null) {
+            mOnMenuClickListener = new MenuPresenter.OnMenuClickListener() {
+                @Override
+                public void onMenuClick(MenuItem item) {
+                    // FIXME: Static method for ALL CASE
+                    switch (item.getId()) {
+                        case MenuItem.MenuId.MENU_GIAO_VIEC_PHAT_SINH:
+                        case MenuItem.MenuId.MENU_GIAO_VIEC_CS_KPP:
+                            startActivity(new Intent(BaseSubMenuActivity.this, ListAssignJobActivity.class));
+                            break;
+                    }
+                }
+            };
+        }
+        return mOnMenuClickListener;
+    }
 
-    public abstract String getToolbarTitle();
+    public String getToolbarTitle() {
+        return mMenuItem.getTitle();
+    }
 
     public void switchView() {
         isGrid.set(!isGrid.get());
@@ -161,7 +358,7 @@ public abstract class BaseSubMenuActivity extends BaseActivity {
                 @Override
                 public void onClick(View v) {
                     if (onMenuClickListener != null) {
-                        onMenuClickListener.onMenuClick(item.getId());
+                        onMenuClickListener.onMenuClick(item);
                     }
                 }
             });
