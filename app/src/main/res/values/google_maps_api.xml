@@ -1,5 +1,5 @@
 <resources>
     <string name="google_maps_key" templateMergeStrategy="preserve"
-        translatable="false">AIzaSyBo7obVZs3EMmYtSnO9R-mtvkIuS1LXu4E</string>
+        translatable="false">AIzaSyDu39dC4oXm4z1zp49wdWyeGYVL6_LGj38</string>
     <string name="map_geo_location_link" formatted="false">https://maps.googleapis.com/maps/api/geocode/json?latlng=%s&amp;language=vi&amp;region=VI</string>
 </resources>

@@ -18,6 +18,7 @@ import com.viettel.mbccs.databinding.ActivitySubMenuBinding;
 import com.viettel.mbccs.databinding.ItemImageGridBinding;
 import com.viettel.mbccs.databinding.ItemMenuBinding;
 import com.viettel.mbccs.screen.assignjob.ListAssignJobActivity;
+import com.viettel.mbccs.screen.change.installation.InstallationAddressActivity;
 import com.viettel.mbccs.screen.kpp.order.KPPOrderActivity;
 import com.viettel.mbccs.screen.main.fragments.menu.MenuPresenter;
 import com.viettel.mbccs.screen.sell.orders.SellOrdersActivity;
@@ -93,7 +94,7 @@ public class BaseSubMenuActivity
                         0, 0));
                 mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
                         getString(R.string.menu_doi_sim), R.drawable.ic_add_black_24dp, 0, 0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_TD_DCLD,
                         getString(R.string.menu_thay_doi_dia_chi_lap_dat),
                         R.drawable.ic_add_black_24dp, 0, 0));
                 mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
@@ -260,6 +261,10 @@ public class BaseSubMenuActivity
                 public void onMenuClick(MenuItem item) {
                     // FIXME: Static method for ALL CASE
                     switch (item.getId()) {
+                        case MenuItem.MenuId.MENU_TD_DCLD:
+                            startActivity(new Intent(BaseSubMenuActivity.this,
+                                    InstallationAddressActivity.class));
+                            break;
                         case MenuItem.MenuId.MENU_GIAO_VIEC_PHAT_SINH:
                         case MenuItem.MenuId.MENU_GIAO_VIEC_CS_KPP:
                             startActivity(new Intent(BaseSubMenuActivity.this,
