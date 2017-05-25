@@ -13,7 +13,6 @@ import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListStockModelRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.screen.viewwarehouse.adapter.ViewWarehouseListOrderAdapter;
-import com.viettel.mbccs.screen.viewwarehouse.fragment.ViewSerialFragment;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.List;
 import rx.Subscription;
@@ -91,7 +90,7 @@ public class ViewWarehousePresenter implements ViewWarehouseContract.Presenter,
     }
 
     public void onSearch() {
-
+        view.onSearch();
     }
 
     public void setItemDecoration(RecyclerView.ItemDecoration itemDecoration) {
@@ -104,6 +103,6 @@ public class ViewWarehousePresenter implements ViewWarehouseContract.Presenter,
 
     @Override
     public void onClickViewSerial(int position) {
-        ViewSerialFragment fragment = ViewSerialFragment.newInstance(stockTotalList.get(position));
+        view.onClickViewSerial(position);
     }
 }

@@ -1,5 +1,6 @@
 package com.viettel.mbccs.screen.viewwarehouse;
 
+import android.support.v4.app.FragmentTransaction;
 import android.widget.Toast;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
@@ -7,6 +8,8 @@ import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.databinding.ActivityViewWarehouseBinding;
 import com.viettel.mbccs.screen.viewwarehouse.adapter.ViewWarehouseListOrderAdapter;
+import com.viettel.mbccs.screen.viewwarehouse.fragment.ViewSerialFragment;
+import com.viettel.mbccs.screen.viewwarehouse.fragment.ViewWarehouseSearchFragment;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -98,5 +101,23 @@ public class ViewWarehouseActivity
     @Override
     public void onCancel() {
         finish();
+    }
+
+    @Override
+    public void onClickViewSerial(int position) {
+        ViewSerialFragment fragment = ViewSerialFragment.newInstance(new StockTotal());
+        FragmentTransaction transition = getSupportFragmentManager().beginTransaction();
+        transition.replace(R.id.frame_view_ware_house, fragment);
+        transition.addToBackStack(null);
+        transition.commitAllowingStateLoss();
+    }
+
+    @Override
+    public void onSearch() {
+        ViewWarehouseSearchFragment fragment = ViewWarehouseSearchFragment.newInstance();
+        FragmentTransaction transition = getSupportFragmentManager().beginTransaction();
+        transition.replace(R.id.frame_view_ware_house, fragment);
+        transition.addToBackStack(null);
+        transition.commitAllowingStateLoss();
     }
 }

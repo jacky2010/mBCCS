@@ -21,5 +21,9 @@ public class ViewWarehouseContract {
         void onError(BaseException error);
 
         void onCancel();
+
+        void onClickViewSerial(int position);
+
+        void onSearch();
     }
 }

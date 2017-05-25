@@ -217,7 +217,7 @@ Từ <b>%s</b><br>
     <string name="fragment_view_ware_house_view_serial_title">Xem serial</string>
     <string name="fragment_view_ware_house_view_serial_detail_serial">
         <![CDATA[
-         Chi tiết serial cho mặt hàng font color="#317BE1"><u>%s</u></font>
+         Chi tiết serial cho mặt hàng <font color="#317BE1"><u>%s</u></font>
         ]]>
     </string>
     <string name="fragment_view_ware_house_view_serial_total">Tổng số: %1$d</string>

@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 import com.viettel.mbccs.base.BaseFragment;
 import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.SerialBO;
@@ -17,13 +16,10 @@ import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.ViewInfoSerialRequest;
-import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.databinding.FragmentWareHouseViewSerialBinding;
 import com.viettel.mbccs.screen.viewwarehouse.adapter.ViewWarehouseViewSerialAdapter;
-import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.ArrayList;
 import java.util.List;
-import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
 /**
@@ -74,7 +70,7 @@ public class ViewSerialFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        showLoadingDialog();
+//        showLoadingDialog();
         ViewInfoSerialRequest v = new ViewInfoSerialRequest();
         v.setOwnerId(stockTotal.getOwnerId());
         v.setOwnerType(stockTotal.getOwnerType());
@@ -87,21 +83,21 @@ public class ViewSerialFragment extends BaseFragment {
         request.setApiKey("demo");
         request.setSession(new Session());
 
-        Subscription subscription = banHangKhoTaiChinhRepository.viewInfoSerial(request)
-                .subscribe(new MBCCSSubscribe<List<StockSerial>>() {
-                    @Override
-                    public void onSuccess(List<StockSerial> object) {
-                        setData(object);
-                    }
-
-                    @Override
-                    public void onError(BaseException error) {
-                        hideLoadingDialog();
-                        Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT)
-                                .show();
-                    }
-                });
-        subscriptions.add(subscription);
+//        Subscription subscription = banHangKhoTaiChinhRepository.viewInfoSerial(request)
+//                .subscribe(new MBCCSSubscribe<List<StockSerial>>() {
+//                    @Override
+//                    public void onSuccess(List<StockSerial> object) {
+//                        setData(object);
+//                    }
+//
+//                    @Override
+//                    public void onError(BaseException error) {
+//                        hideLoadingDialog();
+//                        Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT)
+//                                .show();
+//                    }
+//                });
+//        subscriptions.add(subscription);
     }
 
     @Override
