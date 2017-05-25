@@ -54,7 +54,7 @@ public class UserLocalDataSource implements IUserLocalDataSource {
 
     @Override
     public String getLanguageFromSharePrefs() {
-        return sharedPrefs.get(Constants.SharePref.LANGUAGE, "VN");
+        return sharedPrefs.get(Constants.SharePref.LANGUAGE, "vi");
     }
 
     @Override
