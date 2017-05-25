@@ -29,7 +29,7 @@
                 app:isShow="@{true}"
                 app:leftIcon="@{@drawable/ic_arrow_left_24dp}"
                 app:leftIconClick="@{()->presenter.onCancel()}"
-                app:rightIcon="@{@drawable/ic_arrow_left_24dp}"
+                app:rightIcon="@{@drawable/ic_search_white_16dp}"
                 app:rightIconClick="@{()->presenter.onSearch()}"
                 app:showRightIcon="@{presenter.showRightIcon}"
                 app:title="@{@string/view_ware_house_title}"
