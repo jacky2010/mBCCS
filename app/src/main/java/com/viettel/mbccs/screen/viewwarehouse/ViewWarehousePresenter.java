@@ -87,7 +87,7 @@ public class ViewWarehousePresenter implements ViewWarehouseContract.Presenter,
     }
 
     public void onCancel() {
-
+        view.onCancel();
     }
 
     public void onSearch() {

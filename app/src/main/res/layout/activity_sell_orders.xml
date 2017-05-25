@@ -112,7 +112,6 @@
                     android:background="@drawable/bg_order"
                     android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
                     android:paddingLeft="@dimen/dp_10"
-                    android:paddingRight="@dimen/dp_16"
                     android:text="@{ presenter.staffInfo.getShopName() }"
                     />
 
@@ -131,7 +130,6 @@
                     android:background="@drawable/bg_order"
                     android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
                     android:paddingLeft="@dimen/dp_10"
-                    android:paddingRight="@dimen/dp_16"
                     android:text="@{ presenter.staffInfo.getStaffName() }"
                     />
                 <com.viettel.mbccs.widget.CustomTextView

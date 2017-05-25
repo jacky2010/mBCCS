@@ -94,4 +94,9 @@ public class ViewWarehouseActivity
         hideLoadingDialog();
         Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void onCancel() {
+        finish();
+    }
 }

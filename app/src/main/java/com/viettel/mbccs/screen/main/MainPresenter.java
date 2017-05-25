@@ -1,16 +1,10 @@
 package com.viettel.mbccs.screen.main;
 
 import android.content.Context;
-import android.content.Intent;
 import android.databinding.ObservableInt;
-
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.MenuItem;
-import com.viettel.mbccs.screen.kpp.order.KPPOrderActivity;
-import com.viettel.mbccs.screen.sell.channel.SaleChannelActivity;
-import com.viettel.mbccs.screen.sell.retail.SaleRetailActivity;
 import com.viettel.mbccs.widget.BottomNavigationView;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,9 +55,9 @@ public class MainPresenter implements MainContract.Presenter {
         mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_QLDB,
                 mContext.getString(R.string.menu_quan_ly_dia_ban), R.drawable.ic_add_black_24dp, 0,
                 0));
-        mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+        mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_HELP,
                 mContext.getString(R.string.menu_help), R.drawable.ic_help_outline_24dp, 0, 0));
-        mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+        mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_SETTING,
                 mContext.getString(R.string.menu_settings), R.drawable.ic_settings_black_24dp, 0,
                 0));
     }

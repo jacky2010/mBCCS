@@ -12,6 +12,8 @@ import com.viettel.mbccs.base.BaseSubMenuActivity;
 import com.viettel.mbccs.data.model.MenuItem;
 import com.viettel.mbccs.databinding.ItemMenuBinding;
 
+import com.viettel.mbccs.screen.config.ConfigActivity;
+import com.viettel.mbccs.screen.help.HelpActivity;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,11 +67,24 @@ public class MenuPresenter implements MenuContract.Presenter {
                 @Override
                 protected OnMenuClickListener getOnMenuClickListener() {
                     return new OnMenuClickListener() {
+                        Intent intent;
+
                         @Override
                         public void onMenuClick(MenuItem item) {
-                            Intent intent = new Intent(mContext, BaseSubMenuActivity.class);
-                            intent.putExtra(BaseSubMenuActivity.EXTRA_MENU_ITEM, item);
-                            mContext.startActivity(intent);
+                            switch (item.getId()) {
+                                case MenuItem.MenuId.MENU_SETTING:
+                                    intent = new Intent(mContext, ConfigActivity.class);
+                                    mContext.startActivity(intent);
+                                    break;
+                                case MenuItem.MenuId.MENU_HELP:
+                                    intent = new Intent(mContext, HelpActivity.class);
+                                    mContext.startActivity(intent);
+                                    break;
+                                default:
+                                    intent = new Intent(mContext, BaseSubMenuActivity.class);
+                                    intent.putExtra(BaseSubMenuActivity.EXTRA_MENU_ITEM, item);
+                                    mContext.startActivity(intent);
+                            }
                         }
                     };
                 }

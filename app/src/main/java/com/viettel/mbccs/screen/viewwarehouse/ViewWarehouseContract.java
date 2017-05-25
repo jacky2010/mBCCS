@@ -19,5 +19,7 @@ public class ViewWarehouseContract {
         void setData(List<StockTotal> stockTotalList);
 
         void onError(BaseException error);
+
+        void onCancel();
     }
 }
