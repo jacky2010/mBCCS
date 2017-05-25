@@ -26,14 +26,11 @@ import butterknife.Unbinder;
 public class ToolBarView extends RelativeLayout {
 
     private Context mContext;
-    private Unbinder mUnbinder;
+    private Unbinder mBinder;
 
-    @BindView(R.id.image_left)
-    ImageView mIconLeft;
-    @BindView(R.id.image_right)
-    ImageView mIconRight;
-    @BindView(R.id.title)
-    TextView mTitle;
+    @BindView(R.id.image_left) ImageView mIconLeft;
+    @BindView(R.id.image_right) ImageView mIconRight;
+    @BindView(R.id.title) TextView mTitle;
 
     private OnClickIconListener mOnClickIconListener;
 
@@ -60,7 +57,7 @@ public class ToolBarView extends RelativeLayout {
         LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.custom_toolbar_app, this);
-        mUnbinder = ButterKnife.bind(this);
+        mBinder = ButterKnife.bind(this);
         TypedArray mTypedArray = context.obtainStyledAttributes(attrs, R.styleable.ToolbarView);
 
         initTitle(mTypedArray, mTitle);
@@ -73,7 +70,7 @@ public class ToolBarView extends RelativeLayout {
         int size = typedArray.getDimensionPixelSize(R.styleable.ToolbarView_ibSizeTitle,
                 getResources().getDimensionPixelSize(R.dimen.default_toolbar_text_size));
         int color = typedArray.getColor(R.styleable.ToolbarView_tbColorTitle,
-                getResources().getColor(R.color.default_text_color));
+                getResources().getColor(R.color.default_item_tool_bar_text_color));
         if (TextUtils.isEmpty(title)) {
             mTitle.setVisibility(GONE);
         } else {
@@ -140,8 +137,8 @@ public class ToolBarView extends RelativeLayout {
 
     @Override
     protected void onDetachedFromWindow() {
-        if (mUnbinder != null) {
-            mUnbinder.unbind();
+        if (mBinder != null) {
+            mBinder.unbind();
         }
         super.onDetachedFromWindow();
     }

@@ -27,4 +27,10 @@
 
     <!-- ItemSpinText -->
     <color name="default_item_spinner_text_color">#000000</color>
+
+    <!-- Item Top bar -->
+    <color name="default_item_top_bar_text_color">#000000</color>
+
+    <!-- Tool bar -->
+    <color name="default_item_tool_bar_text_color">#ffffff</color>
 </resources>

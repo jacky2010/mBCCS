@@ -1,29 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <com.viettel.mbccs.widget.ToolBarView
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:tbIconLeft="@drawable/ic_arrow_back_black_24dp" />
+        android:layout_height="wrap_content" />
 
     <LinearLayout
+        android:id="@+id/top_bar_header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginTop="@dimen/dp_5"
+        android:orientation="horizontal">
 
         <com.viettel.mbccs.widget.TopBarView
+            android:id="@+id/tbv_add_new"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tbvTitle="@string/address"/>
+            android:layout_weight="0.3"
+            app:tbvIconRight="true"
+            app:tbvIconRightBg="@drawable/ic_right_arrow"
+            app:tbvTitle="@string/title_add_new" />
+
+        <com.viettel.mbccs.widget.TopBarView
+            android:id="@+id/tbv_survey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            app:tbvIconRight="true"
+            app:tbvIconRightBg="@drawable/ic_right_arrow"
+            app:tbvTitle="@string/title_survey" />
+
+        <com.viettel.mbccs.widget.TopBarView
+            android:id="@+id/tbv_facility"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            app:tbvTitle="@string/title_facility" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/view_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <com.viettel.mbccs.widget.ButtonIconView
+            android:id="@+id/bt_back"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view_header"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="5dp"
+            android:layout_marginTop="@dimen/dp_100"
+            android:layout_weight="0.5"
+            app:itb_bg="@color/blue"
+            app:itb_bg_pressed="@color/blue_trans"
+            app:itb_padding_left="@dimen/dp_10"
+            app:itb_padding_right="@dimen/dp_10"
+            app:itb_radius="3dp"
+            app:itb_text="@string/close" />
+
+
+        <com.viettel.mbccs.widget.ButtonIconView
+            android:id="@+id/bt_next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view_header"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="5dp"
+            android:layout_marginTop="@dimen/dp_100"
+            android:layout_weight="0.5"
+            app:itb_bg="@color/blue"
+            app:itb_bg_pressed="@color/blue_trans"
+            app:itb_padding_left="@dimen/dp_10"
+            app:itb_padding_right="@dimen/dp_10"
+            app:itb_radius="3dp"
+            app:itb_text="@string/next" />
     </LinearLayout>
 
     <FrameLayout
         android:id="@+id/layout_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_above="@+id/view_bottom"
+        android:layout_below="@+id/top_bar_header" />
+</RelativeLayout>
 
-</LinearLayout>

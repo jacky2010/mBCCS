@@ -90,7 +90,7 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
                 Đã chọn %d serial
                 </string>
     <string name="select_serial">Chọn serial</string>
-    <string name="next">next</string>
+    <string name="next">Next</string>
     <string name="sale_retail">Bán lẻ</string>
     <string name="sale_channel">Bán cho kênh</string>
     <string name="all">Tất cả</string>
@@ -379,5 +379,22 @@ Từ <b>%s</b><br>
     <string name="title_total_page">Số giấy tờ</string>
     <string name="title_info_customer"><u>Thông tin khách hàng</u></string>
 
+    <string name="title_change_add">Đổi địa chỉ</string>
+    <string name="title_add_new">1. Địa chỉ mới</string>
+    <string name="title_survey">2. Khảo sát</string>
+    <string name="title_facility">3. Vật tư</string>
+    <string name="back_item"><![CDATA[<< Quay lại]]></string>
+    <string name="title_change_add_city">Tỉnh/TP</string>
+    <string name="title_change_add_district">Quận/Huyện</string>
+    <string name="title_change_add_commune">Phường/xã</string>
+    <string name="title_survey_teams">Tổ đội</string>
+    <string name="title_survey_bts_station">Trạm BTS</string>
+    <string name="title_survey_port">Port</string>
+    <string name="title_select_station">Chọn trạm</string>
+    <string name="title_facility_choose_change">Chọn lý do thay đổi</string>
+    <string name="title_facility_kind_of_item">Loại mặt hàng</string>
+    <string name="title_facility_items">Mặt hàng</string>
+    <string name="title_facility_cable">Dây cáp OT04 (m)</string>
+    <string name="title_facility_converter">Converter (cái)</string>
 
 </resources>

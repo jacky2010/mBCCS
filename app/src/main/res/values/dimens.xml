@@ -65,4 +65,6 @@
     <dimen name="size_item_spin_text">35dp</dimen>
     <dimen name="default_item_spinner_text_size">16sp</dimen>
 
+    <!-- ItemSpinText -->
+    <dimen name="default_item_top_bar_text_size">12sp</dimen>
 </resources>

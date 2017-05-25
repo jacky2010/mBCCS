@@ -101,8 +101,11 @@
         <attr name="istIconRightBg" format="reference" />
     </declare-styleable>
 
-    <!-- ItemSpinText -->
+    <!-- TopBarView -->
     <declare-styleable name="TopBarView">
+        <attr name="tbvTextView" format="boolean"/>
+        <attr name="tbvIconRight" format="boolean"/>
+        <attr name="tbvIconRightBg" format="reference" />
         <attr name="tbvTitle" format="string"/>
         <attr name="tbvTitleSize" format="dimension"/>
         <attr name="tbvTitleColor" format="color" />

@@ -139,6 +139,16 @@
         <item name="android:gravity">center_vertical</item>
     </style>
 
+    <style name="TextViewItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">@dimen/dp_8</item>
+        <item name="android:paddingBottom">@dimen/dp_8</item>
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">@dimen/dp_5</item>
+    </style>
+
     <!-- ItemSpinText -->
     <style name="InstallAddressTv">
         <item name="android:layout_width">wrap_content</item>
@@ -151,5 +161,10 @@
         <item name="android:layout_margin">@dimen/dp_5</item>
     </style>
 
+    <style name="AppThemeStyleDialog" parent="Theme.AppCompat.Light.NoActionBar.FullScreen" >
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
 
 </resources>

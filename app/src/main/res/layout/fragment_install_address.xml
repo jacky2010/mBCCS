@@ -9,27 +9,27 @@
     <com.viettel.mbccs.widget.ItemSpinText
         style="@style/ItemSpinText"
         app:istIconLeft="true"
-        app:istIconLeftBg="@drawable/ic_add_24dp"
+        app:istIconLeftBg="@drawable/ic_add_black_24dp"
         app:istIconRight="true"
-        app:istIconRightBg="@drawable/ic_add_24dp"
+        app:istIconRightBg="@drawable/ic_add_black_24dp"
         app:istTextView="true"
         app:istTextViewTitle="@string/title_phone_number" />
 
     <com.viettel.mbccs.widget.ItemSpinText
         style="@style/ItemSpinText"
         app:istIconLeft="true"
-        app:istIconLeftBg="@drawable/ic_add_24dp"
+        app:istIconLeftBg="@drawable/ic_add_black_24dp"
         app:istIconRight="true"
-        app:istIconRightBg="@drawable/ic_add_24dp"
+        app:istIconRightBg="@drawable/ic_add_black_24dp"
         app:istTextView="true"
         app:istTextViewTitle="@string/title_type_page" />
 
     <com.viettel.mbccs.widget.ItemSpinText
         style="@style/ItemSpinText"
         app:istIconLeft="true"
-        app:istIconLeftBg="@drawable/ic_add_24dp"
+        app:istIconLeftBg="@drawable/ic_add_black_24dp"
         app:istIconRight="true"
-        app:istIconRightBg="@drawable/ic_add_24dp"
+        app:istIconRightBg="@drawable/ic_add_black_24dp"
         app:istTextView="true"
         app:istTextViewTitle="@string/title_total_page" />
 

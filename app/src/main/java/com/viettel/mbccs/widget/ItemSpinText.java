@@ -30,7 +30,7 @@ public class ItemSpinText extends LinearLayout {
     @BindView(R.id.iv_icon_left) ImageView mIconLeft;
     @BindView(R.id.iv_icon_right) ImageView mIconRight;
     @BindView(R.id.tv_title) TextView mText;
-    @BindView(R.id.tv_title) EditText mEdittext;
+    //@BindView(R.id.tv_title) EditText mEdittext;
 
     public ItemSpinText(Context context) {
         super(context);
@@ -92,12 +92,16 @@ public class ItemSpinText extends LinearLayout {
         return (int) (pxValue / scale + 0.5f);
     }
 
-    public void setIconLeft(){
-
+    public void setIconLeft(int icon) {
+        if (icon > 0) {
+            mIconLeft.setBackgroundResource(icon);
+        }
     }
 
-    public void setIconRight(){
-
+    public void setIconRight(int icon) {
+        if (icon > 0) {
+            mIconRight.setBackgroundResource(icon);
+        }
     }
 
     @Override
