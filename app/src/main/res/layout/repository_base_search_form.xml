@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tool="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <data>
+        <variable
+            name="titleTime"
+            type="String"
+            />
+
+        <variable
+            name="searchClick"
+            type="android.view.View.OnClickListener"
+            />
+
+        <variable
+            name="adapter"
+            type="android.widget.ArrayAdapter"
+            />
+
+        <variable
+            name="titleSpinner"
+            type="String"/>
+
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/dp_10"
+        >
+        <com.viettel.mbccs.widget.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/dp_5"
+            android:text="@{titleTime}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_13"
+            tool:text="Ngay lap phieu"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                >
+                <com.viettel.mbccs.widget.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/base_search_lable_from"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_13"
+                    />
+                <com.viettel.mbccs.widget.CustomDatePicker
+                    android:id="@+id/from_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/dp_10"
+                    android:gravity="center"
+                    ></com.viettel.mbccs.widget.CustomDatePicker>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                >
+                <com.viettel.mbccs.widget.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/base_search_lable_to"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_13"
+                    />
+                <com.viettel.mbccs.widget.CustomDatePicker
+                    android:id="@+id/to_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_10"
+                    android:gravity="center"
+                    ></com.viettel.mbccs.widget.CustomDatePicker>
+            </LinearLayout>
+
+        </LinearLayout>
+        <com.viettel.mbccs.widget.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/dp_5"
+            android:text="@{titleSpinner}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_13"
+            />
+        <com.viettel.mbccs.widget.SpinnerWithBorder
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:adapter="@{adapter}"
+            />
+
+        <com.viettel.mbccs.widget.CustomButton
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/dp_10"
+            android:onClick="@{searchClick}"
+            android:text="@string/common_lable_search"
+            style="@style/button_positive"
+            />
+
+
+    </LinearLayout>
+</layout>

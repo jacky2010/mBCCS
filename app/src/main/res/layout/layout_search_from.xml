@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="data"
+            type="com.viettel.mbccs.widget.LayoutSearchFrom"
+            />
+        <import type="android.view.View"/>
+    </data>
+    <RelativeLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <include
+            layout="@layout/item_text_filter"
+            app:isShow="@{data.isCollapse}"
+            app:onClick="@{()->data.toogleExpand()}"
+            app:text="@{data.filterText}"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_20"
+            android:orientation="vertical"
+            android:visibility="@{data.isCollapse?View.GONE:View.VISIBLE}"
+            >
+            <ImageView
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dp_5"
+                android:onClick="@{()->data.toogleExpand()}"
+                android:src="@drawable/collapse"
+                />
+
+            <LinearLayout
+                android:id="@+id/layout_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>

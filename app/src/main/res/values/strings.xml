@@ -411,4 +411,9 @@ Từ <b>%s</b><br>
     <string name="input_order_dialog_success_title">Nhập hóa đơn thành công</string>
     <string name="input_order_dialog_sucess_description">Dải hóa đơn bạn nhập đã được ghi lại thành công.</string>
 
+    <!--Base search input reposotory-->
+    <string name="base_search_lable_from">Từ</string>
+    <string name="base_search_lable_to">Đến</string>
+    <string name="common_lable_search">Tìm kiếm</string>
+
 </resources>

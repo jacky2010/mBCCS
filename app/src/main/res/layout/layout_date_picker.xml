@@ -19,6 +19,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:minWidth="@dimen/dp_32"
+            android:layout_marginRight="@dimen/dp_5"
+            android:padding="@dimen/dp_5"
+            android:background="@drawable/bg_transparent_black_border"
             android:text="@={input.date }" />
 
         <ImageView
