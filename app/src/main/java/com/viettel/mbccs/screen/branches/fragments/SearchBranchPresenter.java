@@ -100,7 +100,7 @@ public class SearchBranchPresenter implements SearchBranchContract.Presenter {
 
             branchesListAdapter.set(brachesAdapter);
 
-            searchFound.set(false); //TODO minhnx
+//            searchFound.set(false); //TODO minhnx
         }catch (Exception e){
             e.printStackTrace();
         }

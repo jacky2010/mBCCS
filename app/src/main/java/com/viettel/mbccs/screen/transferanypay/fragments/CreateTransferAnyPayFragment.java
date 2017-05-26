@@ -1,6 +1,7 @@
-package com.viettel.mbccs.screen.sellanypay.fragments;
+package com.viettel.mbccs.screen.transferanypay.fragments;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -9,24 +10,26 @@ import android.widget.Toast;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindFragment;
 import com.viettel.mbccs.data.model.ChangeSimItem;
-import com.viettel.mbccs.databinding.FragmentCreateTransAnyPayBinding;
+import com.viettel.mbccs.databinding.FragmentCreateTransferAnyPayBinding;
+import com.viettel.mbccs.screen.transferanypay.DialogConfirmRefillFragment;
+import com.viettel.mbccs.screen.transferanypay.DialogConfirmTransferFragment;
 import com.viettel.mbccs.utils.ActivityUtils;
 
 /**
  * Created by minhnx on 5/20/17.
  */
 
-public class CreateTransAnyPayFragment extends BaseDataBindFragment<FragmentCreateTransAnyPayBinding, CreateTransAnyPayPresenter>
-        implements CreateTransAnyPayContract.ViewModel{
+public class CreateTransferAnyPayFragment extends BaseDataBindFragment<FragmentCreateTransferAnyPayBinding, CreateTransferAnyPayPresenter>
+        implements CreateTransferAnyPayContract.ViewModel{
 
     private AppCompatActivity mActivity;
 
-    public static CreateTransAnyPayFragment newInstance() {
-        return new CreateTransAnyPayFragment();
+    public static CreateTransferAnyPayFragment newInstance() {
+        return new CreateTransferAnyPayFragment();
     }
 
     @Override
-    public void setPresenter(CreateTransAnyPayContract.Presenter presenter) {
+    public void setPresenter(CreateTransferAnyPayContract.Presenter presenter) {
 
     }
 
@@ -42,7 +45,7 @@ public class CreateTransAnyPayFragment extends BaseDataBindFragment<FragmentCrea
 
     @Override
     protected void initData() {
-        mPresenter = new CreateTransAnyPayPresenter(getContext(), this);
+        mPresenter = new CreateTransferAnyPayPresenter(getContext(), this);
         mBinding.setPresenter(mPresenter);
 
         initListeners();
@@ -50,7 +53,7 @@ public class CreateTransAnyPayFragment extends BaseDataBindFragment<FragmentCrea
 
     @Override
     protected int getIdLayoutRes() {
-        return R.layout.fragment_create_trans_any_pay;
+        return R.layout.fragment_create_transfer_any_pay;
     }
 
     @Override
@@ -60,18 +63,11 @@ public class CreateTransAnyPayFragment extends BaseDataBindFragment<FragmentCrea
 
     private void initListeners(){
         try{
-//            mBinding.txtDocumentId.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//                @Override
-//                public void onFocusChange(View view, boolean b) {
-//                    if(!b)
-//                        hideSoftInput();
-//                }
-//            });
 
-            mBinding.spCustType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            mBinding.spTransType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    mPresenter.onCustomerTypeChanged(i);
+                    mPresenter.onTransTypeChanged(i);
                 }
 
                 @Override
@@ -80,10 +76,10 @@ public class CreateTransAnyPayFragment extends BaseDataBindFragment<FragmentCrea
                 }
             });
 
-            mBinding.spPayMethod.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            mBinding.spDefaultAmountList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    mPresenter.onPaymentMethodChanged(i);
+                    mPresenter.onDefaultAmountChanged(i);
                 }
 
                 @Override
@@ -138,12 +134,20 @@ public class CreateTransAnyPayFragment extends BaseDataBindFragment<FragmentCrea
     }
 
     @Override
-    public void onCustomerTypeChanged(CreateTransAnyPayContract.CustomerType type) {
-
+    public void onTransferTypeChanged(CreateTransferAnyPayContract.TransferType method) {
+        try{
+            if(method == CreateTransferAnyPayContract.TransferType.TRANSFER){
+                mBinding.btnExecute.setText(getString(R.string.transfer_anypay_transfer));
+            }else if(method == CreateTransferAnyPayContract.TransferType.REFILL){
+                mBinding.btnExecute.setText(getString(R.string.transfer_anypay_refill));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public void onPayMethodChanged(CreateTransAnyPayContract.PayMethod method) {
-
+    public void goToDialogFragment(boolean isRefill, Bundle args) {
+        getBaseActivity().goToDialogFragment(isRefill ? new DialogConfirmRefillFragment() : new DialogConfirmTransferFragment(), args);
     }
 }

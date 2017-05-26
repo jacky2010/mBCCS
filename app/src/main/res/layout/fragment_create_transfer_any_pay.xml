@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="presenter"
+            type="com.viettel.mbccs.screen.transferanypay.fragments.CreateTransferAnyPayPresenter" />
+
+        <import
+            name="View"
+            type="android.view.View" />
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/dp_16"
+            android:paddingRight="@dimen/dp_16">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:text="@string/transfer_anypay_trans_type"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_border">
+
+                <Spinner
+                    android:id="@+id/spTransType"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:adapter="@{presenter.transTypesAdapter}" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:text="@string/sell_anypay_isdn"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:background="@drawable/bg_order"
+                android:inputType="phone"
+                android:text="@={ presenter.isdn }" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:text="@string/sell_anypay_amount_default"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="@{presenter.transferType == presenter.PAY_METHOD_REFILL ? View.VISIBLE : View.GONE}">
+
+                <RadioButton
+                    android:id="@+id/rbDefaultAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:checked="@{presenter.defaultAmountChecked}"
+                    android:onCheckedChanged="@{(cb, isChecked) -> presenter.onDefaultAmountCheckChanged(cb, isChecked)}"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_border">
+
+                    <Spinner
+                        android:id="@+id/spDefaultAmountList"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_40"
+                        android:adapter="@{presenter.payAmountAdapter}"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:orientation="horizontal"
+                android:visibility="@{presenter.transferType == presenter.PAY_METHOD_REFILL ? View.VISIBLE : View.GONE}">
+
+                <RadioButton
+                    android:id="@+id/rbOtherAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:checked="@{!presenter.defaultAmountChecked}"
+                    android:onCheckedChanged="@{(cb, isChecked) -> presenter.onOtherAmountCheckChanged(cb, isChecked)}"/>
+
+                <EditText
+                    android:id="@+id/txtOtherAmount"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_weight="1"
+                    android:text="@={presenter.refillAmount}"
+                    android:background="@drawable/bg_order"
+                    android:hint="@string/sell_anypay_amount_other_hint"
+                    android:inputType="number" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/txtTransferAmount"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:layout_weight="1"
+                android:background="@drawable/bg_order"
+                android:hint="@string/sell_anypay_amount_other_hint"
+                android:inputType="number"
+                android:text="@={presenter.transferAmount}"
+                android:visibility="@{presenter.transferType == presenter.PAY_METHOD_TRANSFER ? View.VISIBLE : View.GONE}" />
+
+            <Button
+                android:id="@+id/btnExecute"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dp_20"
+                android:background="@color/blue"
+                android:gravity="center"
+                android:onClick="@{ () -> presenter.createTransaction() }"
+                android:paddingEnd="@dimen/dp_8"
+                android:paddingStart="@dimen/dp_8"
+                android:textColor="@color/white"
+                app:layout_marginLeftPercent="10%"
+                app:layout_marginRightPercent="10%" />
+        </LinearLayout>
+    </ScrollView>
+</layout>

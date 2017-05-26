@@ -104,6 +104,10 @@
             android:screenOrientation="portrait"/>
 
         <activity
+            android:name=".screen.transferanypay.TransferAnyPayActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
             android:name=".screen.branches.btspicker.BTSPickerActivity"
             android:screenOrientation="portrait"/>
         <activity

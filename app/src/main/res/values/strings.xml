@@ -297,6 +297,11 @@ Từ <b>%s</b><br>
     <string name="sell_anypay_confirm_total">Tổng tiền phải trả:</string>
     <string name="choose_staff">Chọn nhân viên</string>
     <string name="choose_bts">Chọn BTS</string>
+    <string name="transfer_anypay_trans_type">Loại giao dịch</string>
+    <string name="transfer_anypay_isdn">Số ISDN</string>
+    <string name="transfer_anypay_amount">Số tiền</string>
+    <string name="transfer_anypay_transfer">Chuyển AnyPay</string>
+    <string name="transfer_anypay_refill">Nạp AnyPay</string>
 
     <!--kpp-->
     <string name="kpp_order">KPP Đặt hàng</string>
@@ -475,5 +480,12 @@ Từ <b>%s</b><br>
     <string name="input_order_store_name">Kho nhận: %s</string>
     <string name="input_order_dialog_success_title">Nhập hóa đơn thành công</string>
     <string name="input_order_dialog_sucess_description">Dải hóa đơn bạn nhập đã được ghi lại thành công.</string>
+
+    <string name="confirm_refill_label_cust">Bạn có muốn nạp AnyPay cho khách hàng %s?</string>
+    <string name="confirm_transfer_label_cust">Bạn có muốn chuyển AnyPay cho khách hàng %s?</string>
+    <string name="confirm_refill_label_pre_tax">Trước thuế:</string>
+    <string name="confirm_refill_label_tax">Tiền thuế:</string>
+    <string name="confirm_refill_label_discount">Chiết khấu:</string>
+    <string name="confirm_refill_label_total">Tổng tiền phải trả:</string>
 
 </resources>

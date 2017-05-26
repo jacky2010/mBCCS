@@ -1,8 +1,8 @@
-package com.viettel.mbccs.data.source.local;
+package com.viettel.mbccs.data.source.local.datasource;
 
 import com.google.gson.Gson;
 import com.viettel.mbccs.data.model.KeyValue;
-import com.viettel.mbccs.data.source.local.datasource.SharedPrefs;
+import com.viettel.mbccs.data.source.local.ISellAnyPayLocalDataSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,14 +24,11 @@ public class SellAnyPayLocalDataSource implements ISellAnyPayLocalDataSource {
     @Override
     public List<KeyValue> getCustTypes() {
         List<KeyValue> result = new ArrayList<>();
-        KeyValue item;
+        KeyValue item = new KeyValue("0", "Nạp khách hàng lẻ");
+        result.add(item);
 
-        for(int i = 0; i < 10; i++){
-
-            item = new KeyValue("CUST_TYPE_" + i+1, "Customer Type " + i+1);
-
-            result.add(item);
-        }
+        item = new KeyValue("1", "Kênh phân phối");
+        result.add(item);
 
         return result;
     }
@@ -39,14 +36,14 @@ public class SellAnyPayLocalDataSource implements ISellAnyPayLocalDataSource {
     @Override
     public List<KeyValue> getPayMethods() {
         List<KeyValue> result = new ArrayList<>();
-        KeyValue item;
+        KeyValue item = new KeyValue("0", "Tiền mặt");
+        result.add(item);
 
-        for(int i = 0; i < 10; i++){
+        item = new KeyValue("1", "Ví điện tử");
+        result.add(item);
 
-            item = new KeyValue("PAY_METHOD" + i+1, "Pay Method " + i+1);
-
-            result.add(item);
-        }
+        item = new KeyValue("2", "Bank Plus");
+        result.add(item);
 
         return result;
     }

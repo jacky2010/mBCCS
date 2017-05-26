@@ -8,7 +8,10 @@
         <variable
             name="presenter"
             type="com.viettel.mbccs.screen.branches.fragments.SearchBranchPresenter" />
-        <import name="View" type="android.view.View"/>
+
+        <import
+            name="View"
+            type="android.view.View" />
     </data>
 
     <LinearLayout
@@ -23,19 +26,21 @@
             android:paddingLeft="@dimen/dp_16"
             android:paddingRight="@dimen/dp_16">
 
-            <TextView android:visibility="gone"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_8"
                 android:text="@string/branches_search_isdn"
                 android:textColor="@color/black"
-                android:textSize="@dimen/sp_16" />
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone" />
 
-            <EditText android:visibility="gone"
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_40"
                 android:background="@drawable/bg_order"
-                android:text="@={ presenter.isdn }" />
+                android:text="@={ presenter.isdn }"
+                android:visibility="gone" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -63,16 +68,21 @@
                 android:text="@string/sell_orders_search"
                 android:textColor="@color/white" />
         </LinearLayout>
-        <View android:layout_width="match_parent"
+
+        <View
+            android:layout_width="match_parent"
             android:layout_height="@dimen/dp_6"
             android:layout_marginTop="@dimen/dp_6"
-            android:background="@color/grey"/>
+            android:background="@color/grey" />
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:paddingTop="@dimen/dp_6"
-            android:visibility="@{presenter.searchFound != true ? View.GONE : View.VISIBLE}">
+            android:visibility="@{presenter.searchFound != true ? View.GONE : View.VISIBLE}"
+            android:paddingLeft="@dimen/dp_16"
+            android:paddingRight="@dimen/dp_16">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -90,29 +100,41 @@
                     android:adapter="@{presenter.branchesListAdapter}"></android.support.v7.widget.RecyclerView>
             </LinearLayout>
         </ScrollView>
+
         <LinearLayout
-            android:visibility="@{presenter.searchFound == true ? View.GONE : View.VISIBLE}"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:orientation="vertical"
             android:paddingTop="@dimen/dp_6"
-            android:orientation="vertical">
-            <TextView
-                android:gravity="center_horizontal"
+            android:visibility="@{presenter.searchFound == true ? View.GONE : View.VISIBLE}">
+
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/branches_search_not_found"
-                app:layout_marginLeftPercent="10%"
-                app:layout_marginRightPercent="10%"
-                android:background="@color/blue_trans"
-                android:paddingEnd="@dimen/dp_8"
-                android:paddingStart="@dimen/dp_8"
-                android:layout_margin="@dimen/dp_10"
-                android:padding="@dimen/dp_10"/>
+                app:cardBackgroundColor="@color/blue_trans"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginRight="@dimen/dp_16">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_10"
+                    android:gravity="center_horizontal"
+                    android:padding="@dimen/dp_10"
+                    android:paddingEnd="@dimen/dp_8"
+                    android:paddingStart="@dimen/dp_8"
+                    android:text="@string/branches_search_not_found"
+                    app:layout_marginLeftPercent="10%"
+                    app:layout_marginRightPercent="10%" />
+            </android.support.v7.widget.CardView>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
+
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_40"
@@ -121,12 +143,12 @@
                 android:background="@color/blue"
                 android:gravity="center"
                 android:onClick="@{ v -> presenter.addNewDocument() }"
-                android:text="@string/branches_add"
-                android:textColor="@color/white"
                 android:paddingEnd="@dimen/dp_8"
                 android:paddingStart="@dimen/dp_8"
+                android:text="@string/branches_add"
+                android:textColor="@color/white"
                 app:layout_marginLeftPercent="10%"
-                app:layout_marginRightPercent="10%"/>
+                app:layout_marginRightPercent="10%" />
         </LinearLayout>
     </LinearLayout>
 </layout>

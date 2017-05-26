@@ -80,5 +80,15 @@ public class Constants {
         public static final String ITEM_LIST = "item_list";
         public static final String RESULT = "result";
         public static final String LIST_STOCK_TOTAL = "list_stock_total";
+        public static final String CUSTOMER_ITEM = "customer_item";
+        public static final String PRE_TAX = "pre_tax";
+        public static final String TAX = "tax";
+        public static final String DISCOUNT = "discount";
+        public static final String TOTAL = "total";
+    }
+
+    public class Tax{
+        public static final int DEFAULT_TAX_RATE = 10;
+        public static final int DEFAULT_TAX_CALC_BACK_RATE = 11;
     }
 }
