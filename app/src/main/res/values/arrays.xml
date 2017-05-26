@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="job_type_no_home">
+    <string-array name="task_type_no_home">
         <item>Chăm sóc kênh phân phối</item>
         <item>Việc phát sinh</item>
         <item>Việc tổ đội</item>
     </string-array>
 
-    <string-array name="job_type">
+    <string-array name="task_type">
         <item>Chăm sóc kênh phân phối</item>
         <item>Việc phát sinh</item>
         <item>Việc tổ đội</item>
         <item>-Chọn loại công việc-</item>
     </string-array>
 
-    <string-array name="job_status">
+    <string-array name="task_status">
         <item>Từ chối</item>
         <item>Chưa nhận</item>
         <item>Đang thực hiện</item>

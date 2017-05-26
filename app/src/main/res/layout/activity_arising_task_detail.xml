@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="presenter"
+            type="com.viettel.mbccs.screen.assigntask.arising.detail.ArisingTaskDetailActivity" />
+
+        <variable
+            name="item"
+            type="com.viettel.mbccs.data.model.TaskModel"/>
+    </data>
+
+    <LinearLayout
+        android:id="@+id/layout_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/toolbar"
+            app:background="@{ @color/grey }"
+            app:isShow="@{ true }"
+            app:leftIcon="@{ @drawable/ic_close_black_24dp }"
+            app:leftIconClick="@{ () -> presenter.onBackPressed() }"
+            app:title="{ @string/menu_giao_viec_phat_sinh }"
+            app:titleColor="@{ @color/white }"
+            app:titleTextSize="@{ @dimen/sp_16 }" />
+
+        <TextView
+            style="@style/TextTaskCSKPPDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:text="@string/thoi_gian_thuc_hien" />
+
+        <TextView
+            style="@style/TextTaskCSKPPDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:text="@{ item.startDate }" />
+
+        <TextView
+            style="@style/TextTaskCSKPPDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_16"
+            android:text="@string/trang_thai" />
+
+        <TextView
+            style="@style/TextTaskCSKPPDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:background="@{ presenter.statusBg }"
+            android:text="@{ item.status }" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_16"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TextTaskCSKPPDetail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:text="@string/nhan_vien" />
+
+            <TextView
+                style="@style/TextTaskCSKPPDetail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="@string/ngay_giao" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TextTaskCSKPPDetail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5" />
+
+            <TextView
+                style="@style/TextTaskCSKPPDetail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="@{ item.assignDate }" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/TextTaskCSKPPDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_16"
+            android:text="@string/ten_cong_viec" />
+
+        <TextView
+            style="@style/TextTaskCSKPPDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:text="@{ item.title }"
+            android:textSize="@dimen/sp_16" />
+
+        <TextView
+            style="@style/TextTaskCSKPPDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_16"
+            android:text="@string/description" />
+
+        <TextView
+            style="@style/TextTaskCSKPPDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:background="@drawable/bg_input"
+            android:lines="5"
+            android:paddingEnd="@dimen/dp_4"
+            android:paddingStart="@dimen/dp_4"
+            android:text="@{ item.description }" />
+    </LinearLayout>
+</layout>

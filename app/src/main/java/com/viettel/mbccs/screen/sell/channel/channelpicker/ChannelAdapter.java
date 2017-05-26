@@ -14,23 +14,23 @@ import java.util.List;
  * Created by eo_cuong on 5/20/17.
  */
 
-public class ChannelAdaper extends RecyclerView.Adapter<ChannelAdaper.ChannelViewHolder> {
+public class ChannelAdapter extends RecyclerView.Adapter<ChannelAdapter.ChannelViewHolder> {
     private List<ChannelInfo> mChannelInfos;
 
     private onChannelListener mOnChannelListener;
 
-    public ChannelAdaper(List<ChannelInfo> sellPrograms) {
+    public ChannelAdapter(List<ChannelInfo> sellPrograms) {
         mChannelInfos = sellPrograms;
     }
 
     @Override
-    public ChannelAdaper.ChannelViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ChannelAdaper.ChannelViewHolder((ItemChannelBinding) DataBindingUtil.inflate(
+    public ChannelAdapter.ChannelViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new ChannelAdapter.ChannelViewHolder((ItemChannelBinding) DataBindingUtil.inflate(
                 LayoutInflater.from(parent.getContext()), R.layout.item_channel, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(ChannelAdaper.ChannelViewHolder holder, int position) {
+    public void onBindViewHolder(ChannelAdapter.ChannelViewHolder holder, int position) {
         holder.bind(mChannelInfos.get(position));
     }
 

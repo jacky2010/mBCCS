@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <data>
+
+        <variable
+            name="presenter"
+            type="com.viettel.mbccs.screen.assigntask.cskpp.detail.TaskCSKPPDetailPresenter"
+            />
+
+        <import type="android.view.View"/>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/dp_16"
+        >
+
+        <include
+            layout="@layout/toolbar"
+            android:id="@+id/toolbar"
+            app:background="@{ @color/grey }"
+            app:isShow="@{ true }"
+            app:leftIcon="@{ @drawable/ic_arrow_left_24dp }"
+            app:leftIconClick="@{ () -> presenter.onBackPressed() }"
+            app:title="@{ @string/xac_nhan_tam_dung }"
+            app:titleColor="@{ @color/black }"
+            app:titleTextSize="@{ @dimen/sp_16 }"
+            />
+
+        <com.viettel.mbccs.widget.SpinnerWithBorder
+            android:id="@+id/pause_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            />
+
+        <TextView
+            android:id="@+id/reason"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/pause_spinner"
+            android:layout_marginBottom="@dimen/dp_8"
+            android:text="@string/ly_do_tam_dung"
+            style="@style/TextSearchTask"
+            />
+
+        <DatePicker
+            android:id="@+id/date_picker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/reason"
+            android:layout_marginBottom="@dimen/dp_16"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/date_picker"
+            android:layout_marginBottom="@dimen/dp_8"
+            android:text="@string/ngay_hen"
+            style="@style/TextSearchTask"
+            />
+
+        <TextView
+            android:id="@+id/text_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pause_spinner"
+            android:layout_marginTop="@dimen/dp_20"
+            android:text="@string/description"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_16"
+            />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_description"
+            android:layout_marginTop="@dimen/dp_8"
+            style="@style/TextSearchTask"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0.6"
+            android:layout_below="@+id/description"
+            android:background="@color/black"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            >
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp_4"
+                android:layout_weight="1"
+                android:background="@android:color/darker_gray"
+                android:text="@string/close"
+                android:textColor="@color/black"
+                />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_4"
+                android:layout_weight="1"
+                android:background="@color/blue"
+                android:text="@string/tam_dung"
+                android:textColor="@color/white"
+                />
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>

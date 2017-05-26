@@ -5,7 +5,7 @@
 
         <variable
             name="presenter"
-            type="com.viettel.mbccs.screen.assignjob.arising.CreateArisingJobPresenter" />
+            type="com.viettel.mbccs.screen.assigntask.arising.create.CreateArisingTaskPresenter" />
 
         <import type="android.view.View" />
     </data>
@@ -22,10 +22,10 @@
             android:padding="@dimen/dp_16">
 
             <TextView
-                style="@style/TextSearchJob"
+                style="@style/TextSearchTask"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/job_duration" />
+                android:text="@string/task_duration" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -54,7 +54,7 @@
             </LinearLayout>
 
             <TextView
-                style="@style/TextSearchJob"
+                style="@style/TextSearchTask"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_20"
@@ -69,34 +69,41 @@
                 android:onClick="@{ () -> presenter.onSelectStaffClick() }" />
 
             <TextView
-                style="@style/TextSearchJob"
+                style="@style/TextSearchTask"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_20"
-                android:text="@string/job_title" />
+                android:text="@string/task_title" />
 
             <EditText
-                style="@style/TextSearchJob"
+                style="@style/TextSearchTask"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_input_tranparent"
-                android:minHeight="@dimen/dp_28" />
+                android:background="@drawable/bg_input"
+                android:minHeight="@dimen/dp_28"
+                android:paddingEnd="@dimen/dp_4"
+                android:paddingStart="@dimen/dp_4"
+                android:text="@={ presenter.taskName }" />
 
             <TextView
-                style="@style/TextSearchJob"
+                style="@style/TextSearchTask"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_20"
                 android:text="@string/description" />
 
             <EditText
-                style="@style/TextSearchJob"
+                android:id="@+id/editText"
+                style="@style/TextSearchTask"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_20"
-                android:background="@drawable/bg_input_tranparent"
+                android:background="@drawable/bg_input"
                 android:inputType="textMultiLine"
-                android:lines="5" />
+                android:lines="5"
+                android:paddingEnd="@dimen/dp_4"
+                android:paddingStart="@dimen/dp_4"
+                android:text="@={ presenter.taskDescription }" />
         </LinearLayout>
 
         <LinearLayout
@@ -113,6 +120,7 @@
                 android:layout_marginEnd="@dimen/dp_4"
                 android:layout_weight="1"
                 android:background="@android:color/darker_gray"
+                android:onClick="@{ () -> presenter.close() }"
                 android:text="@string/close" />
 
             <Button
@@ -121,7 +129,8 @@
                 android:layout_marginStart="@dimen/dp_4"
                 android:layout_weight="1"
                 android:background="@color/blue"
-                android:text="@string/assign_job" />
+                android:onClick="@{ () -> presenter.assign() }"
+                android:text="@string/assign_task" />
         </LinearLayout>
     </RelativeLayout>
 </layout>

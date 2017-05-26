@@ -16,7 +16,7 @@ import com.viettel.mbccs.data.model.MenuItem;
 import com.viettel.mbccs.databinding.ActivitySubMenuBinding;
 import com.viettel.mbccs.databinding.ItemImageGridBinding;
 import com.viettel.mbccs.databinding.ItemMenuBinding;
-import com.viettel.mbccs.screen.assignjob.ListAssignJobActivity;
+import com.viettel.mbccs.screen.assigntask.ListAssignTaskActivity;
 import com.viettel.mbccs.screen.inputorder.InputOrderActivity;
 import com.viettel.mbccs.screen.billing.BillingActivity;
 import com.viettel.mbccs.screen.change.installation.InstallationAddressActivity;
@@ -273,7 +273,7 @@ public class BaseSubMenuActivity
                         case MenuItem.MenuId.MENU_GIAO_VIEC_PHAT_SINH:
                         case MenuItem.MenuId.MENU_GIAO_VIEC_CS_KPP:
                             startActivity(new Intent(BaseSubMenuActivity.this,
-                                    ListAssignJobActivity.class));
+                                    ListAssignTaskActivity.class));
                             break;
                         case MenuItem.MenuId.MENU_BAN_HANG_THEO_DON_PHE_DUYET_DON_HANG:
                             startActivity(

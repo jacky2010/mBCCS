@@ -7,7 +7,7 @@
 
         <variable
             name="presenter"
-            type="com.viettel.mbccs.screen.assignjob.ListAssignJobPresenter" />
+            type="com.viettel.mbccs.screen.assigntask.ListAssignTaskPresenter" />
 
         <import type="android.view.View" />
     </data>
@@ -46,7 +46,7 @@
                 bind:data="@{ presenter }" />
 
             <include
-                layout="@layout/layout_job_search"
+                layout="@layout/layout_task_search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="@{ presenter.isExpand ? View.VISIBLE : View.GONE }"

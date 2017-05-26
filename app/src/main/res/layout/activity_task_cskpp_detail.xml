@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools"
+    >
+
+    <data>
+
+        <variable
+            name="presenter"
+            type="com.viettel.mbccs.screen.assigntask.cskpp.detail.TaskCSKPPDetailPresenter"
+            />
+
+        <import type="android.view.View"/>
+    </data>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/dp_8"
+            >
+
+            <LinearLayout
+                android:id="@+id/layout_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <include
+                    layout="@layout/toolbar"
+                    app:background="@{@color/grey}"
+                    app:isShow="@{ true }"
+                    app:leftIcon="@{ @drawable/ic_arrow_left_24dp }"
+                    app:leftIconClick="@{ () -> presenter.onBackPressed() }"
+                    app:title="@{ presenter.title }"
+                    app:titleColor="@{ @color/white }"
+                    app:titleTextSize="@{ @dimen/sp_16 }"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:text="@string/thoi_gian_thuc_hien"
+                        style="@style/TextTaskCSKPPDetail"
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:paddingEnd="@dimen/dp_4"
+                        android:paddingStart="@dimen/dp_4"
+                        android:text="@string/trang_thai"
+                        style="@style/TextTaskCSKPPDetail"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:text="@{ presenter.duration }"
+                        style="@style/TextTaskCSKPPDetail"
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:background="@{ presenter.statusBg }"
+                        android:paddingEnd="@dimen/dp_4"
+                        android:paddingStart="@dimen/dp_4"
+                        android:text="@{ presenter.status }"
+                        style="@style/TextTaskCSKPPDetail"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:text="@string/nhan_vien"
+                        style="@style/TextTaskCSKPPDetail"
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="@string/ngay_giao"
+                        style="@style/TextTaskCSKPPDetail"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:text="@{ presenter.staffName }"
+                        style="@style/TextTaskCSKPPDetail"
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="@{ presenter.assignDate }"
+                        style="@style/TextTaskCSKPPDetail"
+                        />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:text="@string/loai_cong_viec"
+                    style="@style/TextTaskCSKPPDetail"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:text="@{ presenter.taskType }"
+                    style="@style/TextTaskCSKPPDetail"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:text="@string/ten_cong_viec"
+                    style="@style/TextTaskCSKPPDetail"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:text="@{ presenter.taskName }"
+                    style="@style/TextTaskCSKPPDetail"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:background="@color/default_bg_disabled"
+                    android:paddingBottom="@dimen/dp_4"
+                    android:paddingEnd="@dimen/dp_16"
+                    android:paddingStart="@dimen/dp_16"
+                    android:paddingTop="@dimen/dp_4"
+                    android:text="@string/tuyen_cham_soc"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_14"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:text="@{ presenter.channelType }"
+                    style="@style/TextTaskCSKPPDetail"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:text="@{ presenter.channelCount }"
+                    style="@style/TextTaskCSKPPDetail"
+                    />
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_100"
+                android:layout_below="@id/layout_text"
+                android:layout_marginBottom="@dimen/dp_8"
+                android:layout_marginEnd="@dimen/dp_16"
+                android:layout_marginStart="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_8"
+                android:adapter="@{ presenter.adapter }"
+                bind:addItemDecoration="@{ presenter.itemDecoration }"
+                />
+
+            <LinearLayout
+                android:id="@+id/layout_update"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/recyclerView"
+                android:orientation="vertical"
+                android:visibility="@{ presenter.update ? View.VISIBLE : View.GONE }"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/green"
+                    android:drawableStart="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="@dimen/dp_4"
+                    android:paddingTop="@dimen/dp_4"
+                    android:text="@string/cap_nhat_thong_tin_cong_viec"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_14"
+                    />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="@{ (v) -> presenter.onRadioButtonClicked(v) }"
+                        android:text="@string/dang_thuc_hien"
+                        />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="@{ (v) -> presenter.onRadioButtonClicked(v) }"
+                        android:text="@string/tam_dung"
+                        />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="@{ (v) -> presenter.onRadioButtonClicked(v) }"
+                        android:text="@string/hoan_thanh"
+                        />
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layout_update"
+                android:layout_marginEnd="@dimen/dp_16"
+                android:layout_marginStart="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_8"
+                android:orientation="horizontal"
+                >
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dp_4"
+                    android:layout_weight="1"
+                    android:background="@color/red_button"
+                    android:onClick="@{ () -> presenter.onReject() }"
+                    android:text="@string/reject"
+                    android:textColor="@color/white"
+                    android:visibility="@{ presenter.update ? View.GONE : View.VISIBLE }"
+                    />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_4"
+                    android:layout_weight="1"
+                    android:background="@color/blue"
+                    android:onClick="@{ () -> presenter.onAccept() }"
+                    android:text="@string/nhan_viec"
+                    android:textColor="@color/white"
+                    android:visibility="@{ presenter.update ? View.GONE : View.VISIBLE }"
+                    />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/blue"
+                    android:onClick="@{ () -> presenter.onUpdate() }"
+                    android:text="@string/cap_nhat"
+                    android:textColor="@color/white"
+                    android:visibility="@{ presenter.update ? View.VISIBLE : View.GONE }"
+                    />
+            </LinearLayout>
+        </RelativeLayout>
+    </android.support.v4.widget.NestedScrollView>
+</layout>

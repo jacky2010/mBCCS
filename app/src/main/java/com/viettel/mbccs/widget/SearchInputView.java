@@ -3,8 +3,6 @@ package com.viettel.mbccs.widget;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.databinding.BindingAdapter;
-import android.databinding.BindingMethod;
-import android.databinding.BindingMethods;
 import android.databinding.DataBindingUtil;
 import android.databinding.InverseBindingAdapter;
 import android.databinding.InverseBindingListener;
@@ -21,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.databinding.SearchViewBinding;
 
@@ -42,6 +41,7 @@ public class SearchInputView extends LinearLayout {
     private SearchViewBinding mBinding;
     private EditText mEditText;
     public ObservableField<String> text;
+    public ObservableField<String> hint;
     private float textSize;
     private int color;
     private String inputType = INPUT_TYPE_TEXT;
@@ -68,11 +68,14 @@ public class SearchInputView extends LinearLayout {
         mBinding.setData(this);
         mEditText = mBinding.textFiler;
         text = new ObservableField<>();
+        hint = new ObservableField<>();
         TypedArray typedArray =
                 getContext().obtainStyledAttributes(attributeSet, R.styleable.SearchInputView);
         try {
             String content = typedArray.getString(R.styleable.SearchInputView_text);
             text.set(content);
+            String hint = typedArray.getString(R.styleable.SearchInputView_text);
+            this.hint.set(hint);
             textSize = typedArray.getDimension(R.styleable.SearchInputView_textSize,
                     getResources().getDimension(R.dimen.sp_13));
             color = typedArray.getColor(R.styleable.SearchInputView_textColor,
@@ -91,16 +94,16 @@ public class SearchInputView extends LinearLayout {
     private void setAttribute() {
         mEditText.setText(text.get());
         setLines(lines);
-        mEditText.setFilters(new InputFilter[] { new InputFilter.LengthFilter(maxLength) });
+        mEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(maxLength)});
         setInputType(inputType);
         setImeOptions(imeOptions);
         setColor(color);
         setTextSize(textSize);
     }
 
-    @BindingAdapter(value = { "textAttrChanged" })
+    @BindingAdapter(value = {"textAttrChanged"})
     public static void setTextChangedListener(SearchInputView view,
-            final InverseBindingListener contentChanged) {
+                                              final InverseBindingListener contentChanged) {
         if (contentChanged == null) {
             view.getEditText().addTextChangedListener(null);
         } else {

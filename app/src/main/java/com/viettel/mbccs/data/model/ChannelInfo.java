@@ -79,6 +79,27 @@ public class ChannelInfo implements Parcelable, Serializable {
     public ChannelInfo() {
     }
 
+    public ChannelInfo(long channelId, String channelCode, String channelType, String channelName,
+            String address, String tel, long managementId, String managementCode,
+            String managementType, String managementName, long shopId, String shopCode,
+            String shopName, String pricePolicy, String discountPolicy) {
+        this.channelId = channelId;
+        this.channelCode = channelCode;
+        this.channelType = channelType;
+        this.channelName = channelName;
+        this.address = address;
+        this.tel = tel;
+        this.managementId = managementId;
+        this.managementCode = managementCode;
+        this.managementType = managementType;
+        this.managementName = managementName;
+        this.shopId = shopId;
+        this.shopCode = shopCode;
+        this.shopName = shopName;
+        this.pricePolicy = pricePolicy;
+        this.discountPolicy = discountPolicy;
+    }
+
     public ChannelInfo(long channelId, String channelName) {
         this.channelId = channelId;
         this.channelName = channelName;

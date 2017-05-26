@@ -34,7 +34,7 @@ public class MainPresenter implements MainContract.Presenter {
                 mContext.getResources().getString(R.string.menu_dashboard),
                 R.drawable.ic_menu_home_selector, 0, 0));
         mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
-                mContext.getResources().getString(R.string.menu_job),
+                mContext.getResources().getString(R.string.menu_task),
                 R.drawable.ic_menu_job_selector, 0, 0));
         mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
                 mContext.getResources().getString(R.string.menu_sale),

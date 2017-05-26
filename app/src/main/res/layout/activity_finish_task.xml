@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <data>
+
+        <variable
+            name="presenter"
+            type="com.viettel.mbccs.screen.assigntask.cskpp.detail.TaskCSKPPDetailPresenter"
+            />
+
+        <import type="android.view.View"/>
+    </data>
+
+    <android.support.percent.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/dp_16"
+        >
+
+        <include
+            layout="@layout/toolbar"
+            android:id="@+id/toolbar"
+            app:background="@{ @color/grey }"
+            app:isShow="@{ true }"
+            app:leftIcon="@{ @drawable/ic_arrow_left_24dp }"
+            app:leftIconClick="@{ () -> presenter.onBackPressed() }"
+            app:title="@{ @string/xac_nhan_hoan_thanh_cong_viec }"
+            app:titleColor="@{ @color/black }"
+            app:titleTextSize="@{ @dimen/sp_16 }"
+            />
+
+        <LinearLayout
+            android:id="@+id/layout_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_marginTopPercent="20%"
+            >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="Ngày hoàn thành"
+                style="@style/TextSearchTask"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Due date"
+                style="@style/TextSearchTask"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_label"
+            android:layout_marginTop="@dimen/dp_8"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:textSize="@dimen/sp_16"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_text"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_weight="2"
+            android:textSize="@dimen/sp_16"
+            />
+
+        <TextView
+            android:id="@+id/text_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/description"
+            android:layout_marginTop="@dimen/dp_20"
+            android:text="@string/description"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_16"
+            />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="@dimen/dp_8"
+            style="@style/TextSearchTask"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0.6"
+            android:layout_below="@+id/description"
+            android:background="@color/black"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            >
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp_4"
+                android:layout_weight="1"
+                android:background="@android:color/darker_gray"
+                android:text="@string/close"
+                android:textColor="@color/black"
+                />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_4"
+                android:layout_weight="1"
+                android:background="@color/blue"
+                android:text="@string/finished"
+                android:textColor="@color/white"
+                />
+        </LinearLayout>
+
+    </android.support.percent.PercentRelativeLayout>
+</layout>
