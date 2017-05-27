@@ -1,7 +1,7 @@
 package com.viettel.mbccs.data.model;
 
+import com.viettel.mbccs.data.source.remote.response.GetListChannelByOwnerTypeIdResponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
-import java.util.List;
 
 /**
  * Created by eo_cuong on 5/20/17.
@@ -10,13 +10,13 @@ import java.util.List;
 public class SaleChannelInitData {
 
     private TelecomServiceAndSaleProgramResponse mTelecomServiceAndSaleProgramResponse;
-    private List<ChannelInfo> mChannelInfos;
+    private GetListChannelByOwnerTypeIdResponse mGetListChannelByOwnerTypeIdResponse;
 
     public SaleChannelInitData(
             TelecomServiceAndSaleProgramResponse telecomServiceAndSaleProgramResponse,
-            List<ChannelInfo> channelInfos) {
+            GetListChannelByOwnerTypeIdResponse getListChannelByOwnerTypeIdResponse) {
         mTelecomServiceAndSaleProgramResponse = telecomServiceAndSaleProgramResponse;
-        mChannelInfos = channelInfos;
+        mGetListChannelByOwnerTypeIdResponse = getListChannelByOwnerTypeIdResponse;
     }
 
     public TelecomServiceAndSaleProgramResponse getTelecomServiceAndSaleProgramResponse() {
@@ -28,11 +28,12 @@ public class SaleChannelInitData {
         mTelecomServiceAndSaleProgramResponse = telecomServiceAndSaleProgramResponse;
     }
 
-    public List<ChannelInfo> getChannelInfos() {
-        return mChannelInfos;
+    public GetListChannelByOwnerTypeIdResponse getmGetListChannelByOwnerTypeIdResponse() {
+        return mGetListChannelByOwnerTypeIdResponse;
     }
 
-    public void setChannelInfos(List<ChannelInfo> channelInfos) {
-        mChannelInfos = channelInfos;
+    public void setGetListChannelByOwnerTypeIdResponse(
+            GetListChannelByOwnerTypeIdResponse mGetListChannelByOwnerTypeIdResponse) {
+        this.mGetListChannelByOwnerTypeIdResponse = mGetListChannelByOwnerTypeIdResponse;
     }
 }

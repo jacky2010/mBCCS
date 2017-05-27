@@ -2,13 +2,12 @@ package com.viettel.mbccs.data.source.remote.request;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import java.io.Serializable;
 
 /**
  * Created by eo_cuong on 5/18/17.
  */
 
-public class GetTotalStockRequest implements Serializable{
+public class GetTotalStockRequest extends DataRequest{
 
     public static final int SALE_TRAN_RETAIL = 1;
     public static final int SALE_TRAN_CHANNEL = 3;

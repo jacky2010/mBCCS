@@ -12,6 +12,7 @@ import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListStockModelRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.GetListStockModelResponse;
 import com.viettel.mbccs.screen.viewwarehouse.adapter.ViewWarehouseListOrderAdapter;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.List;
@@ -64,10 +65,10 @@ public class ViewWarehousePresenter implements ViewWarehouseContract.Presenter,
         request.setSession(new Session());
 
         Subscription subscription = banHangKhoTaiChinhRepository.getListStockModel(request)
-                .subscribe(new MBCCSSubscribe<List<StockTotal>>() {
+                .subscribe(new MBCCSSubscribe<GetListStockModelResponse>() {
                     @Override
-                    public void onSuccess(List<StockTotal> object) {
-                        stockTotalList = object;
+                    public void onSuccess(GetListStockModelResponse object) {
+                        stockTotalList = object.getStockTotalList();
                         view.setData(stockTotalList);
                         totalStock.set(stockTotalList.size());
                     }

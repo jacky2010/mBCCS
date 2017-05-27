@@ -2,8 +2,6 @@ package com.viettel.mbccs.data.source;
 
 import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.model.LoginResult;
-import com.viettel.mbccs.data.model.ModelSale;
-import com.viettel.mbccs.data.model.SaleTrans;
 import com.viettel.mbccs.data.model.StaffInfo;
 import com.viettel.mbccs.data.source.local.IUserLocalDataSource;
 import com.viettel.mbccs.data.source.local.UserLocalDataSource;
@@ -15,11 +13,11 @@ import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
 import com.viettel.mbccs.data.source.remote.request.LoginRequest;
-import com.viettel.mbccs.data.source.remote.response.GetSerialsReponse;
+import com.viettel.mbccs.data.source.remote.response.GetInfoSaleTranResponse;
+import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
+import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
+import com.viettel.mbccs.data.source.remote.response.SendCodeChangePassResponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
-
-import java.util.List;
-
 import rx.Observable;
 
 /**
@@ -132,7 +130,7 @@ public class UserRepository implements IUserLocalDataSource, IUserRemoteDataSour
     }
 
     @Override
-    public Observable<Object> sendCodeChangePass(String phone) {
+    public Observable<SendCodeChangePassResponse> sendCodeChangePass(String phone) {
         return mUserRemoteDataSource.sendCodeChangePass(phone);
     }
 
@@ -143,22 +141,22 @@ public class UserRepository implements IUserLocalDataSource, IUserRemoteDataSour
     }
 
     @Override
-    public Observable<GetSerialsReponse> getSerial(BaseRequest<GetSerialRequest> request) {
+    public Observable<GetSerialsResponse> getSerial(BaseRequest<GetSerialRequest> request) {
         return mUserRemoteDataSource.getSerial(request);
     }
 
     @Override
-    public Observable<List<ModelSale>> getModelSales(BaseRequest<GetTotalStockRequest> request) {
+    public Observable<GetTotalStockResponse> getModelSales(BaseRequest<GetTotalStockRequest> request) {
         return mUserRemoteDataSource.getModelSales(request);
     }
 
     @Override
-    public Observable<SaleTrans> getSaleTransInfo(BaseRequest<GetInfoSaleTranRequest> request) {
+    public Observable<GetInfoSaleTranResponse> getSaleTransInfo(BaseRequest<GetInfoSaleTranRequest> request) {
         return mUserRemoteDataSource.getSaleTransInfo(request);
     }
 
     @Override
-    public Observable<SaleTrans> createSaleTransRetail(
+    public Observable<GetInfoSaleTranResponse> createSaleTransRetail(
             BaseRequest<GetInfoSaleTranRequest> request) {
         return mUserRemoteDataSource.createSaleTransRetail(request);
     }

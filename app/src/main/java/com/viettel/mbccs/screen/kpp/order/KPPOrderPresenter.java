@@ -13,6 +13,7 @@ import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListOrderRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.GetListOrderResponse;
 import com.viettel.mbccs.screen.kpp.order.adaper.KPPOrderAdapter;
 import com.viettel.mbccs.utils.Common;
 import com.viettel.mbccs.utils.ValidateUtils;
@@ -97,12 +98,12 @@ public class KPPOrderPresenter implements KPPOrderContract.Presenter {
         request.setFromDate("");
         request.setToDate("");
         Subscription subscription = mBanHangKhoTaiChinhRepository.searchSellOrders(null)
-                .subscribe(new MBCCSSubscribe<List<SaleOrders>>() {
+                .subscribe(new MBCCSSubscribe<GetListOrderResponse>() {
                     @Override
-                    public void onSuccess(List<SaleOrders> object) {
+                    public void onSuccess(GetListOrderResponse object) {
 
                         mSaleOrderses.clear();
-                        mSaleOrderses.addAll(object);
+                        mSaleOrderses.addAll(object.getSaleOrdersList());
                         mKPPOrderAdapter.notifyDataSetChanged();
 
                         titleOrderList.set(
