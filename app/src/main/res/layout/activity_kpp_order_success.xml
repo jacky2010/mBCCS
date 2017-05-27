@@ -64,7 +64,7 @@
                 android:layout_above="@id/btn_close"
                 android:layout_marginTop="@dimen/dp_10"
                 android:adapter="@{presenter.adapter}"
-                ></android.support.v7.widget.RecyclerView>
+                />
         </RelativeLayout>
 
 

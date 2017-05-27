@@ -2,6 +2,7 @@ package com.viettel.mbccs.data.source.remote.datasource;
 
 import com.viettel.mbccs.data.source.remote.IQLKhachHangRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.request.ChecOTPRequest;
+import com.viettel.mbccs.data.source.remote.request.CheckIdNoRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetApDomainRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListBusTypeIdRequireRequest;
@@ -10,6 +11,7 @@ import com.viettel.mbccs.data.source.remote.request.GetRegiterSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.RegisterCustomerInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.UpdateAllSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.response.ChecOTPResponse;
+import com.viettel.mbccs.data.source.remote.response.CheckIdNoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetApDomainResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListBusTypeIdRequireResponse;
 import com.viettel.mbccs.data.source.remote.response.GetOTPResponse;
@@ -96,5 +98,13 @@ public class QLKhachHangRemoteDataSource implements IQLKhachHangRemoteDataSource
                 .updateAllSubInfo(request)
                 .flatMap(SchedulerUtils.<UpdateAllSubInfoResponse>convertDataFlatMap())
                 .compose(SchedulerUtils.<UpdateAllSubInfoResponse>applyAsyncSchedulers());
+    }
+
+    @Override
+    public Observable<CheckIdNoResponse> checkIdNo(DataRequest<CheckIdNoRequest> request) {
+        return RequestHelper.getRequest()
+                .checkIdNo(request)
+                .flatMap(SchedulerUtils.<CheckIdNoResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<CheckIdNoResponse>applyAsyncSchedulers());
     }
 }

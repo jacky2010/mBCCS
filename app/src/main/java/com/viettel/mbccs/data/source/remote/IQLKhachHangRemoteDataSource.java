@@ -1,6 +1,7 @@
 package com.viettel.mbccs.data.source.remote;
 
 import com.viettel.mbccs.data.source.remote.request.ChecOTPRequest;
+import com.viettel.mbccs.data.source.remote.request.CheckIdNoRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetApDomainRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListBusTypeIdRequireRequest;
@@ -9,6 +10,7 @@ import com.viettel.mbccs.data.source.remote.request.GetRegiterSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.RegisterCustomerInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.UpdateAllSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.response.ChecOTPResponse;
+import com.viettel.mbccs.data.source.remote.response.CheckIdNoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetApDomainResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListBusTypeIdRequireResponse;
 import com.viettel.mbccs.data.source.remote.response.GetOTPResponse;
@@ -40,4 +42,6 @@ public interface IQLKhachHangRemoteDataSource {
 
     Observable<UpdateAllSubInfoResponse> updateAllSubInfo(
             DataRequest<UpdateAllSubInfoRequest> request);
+
+    Observable<CheckIdNoResponse> checkIdNo(DataRequest<CheckIdNoRequest> request);
 }

@@ -2,6 +2,7 @@ package com.viettel.mbccs.data.source.remote.service;
 
 import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.source.remote.request.ChecOTPRequest;
+import com.viettel.mbccs.data.source.remote.request.CheckIdNoRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateSaleTransChannelRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateSaleTransFromOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
@@ -33,6 +34,7 @@ import com.viettel.mbccs.data.source.remote.request.UpdateSaleOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.ViewInfoSerialRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseResponse;
 import com.viettel.mbccs.data.source.remote.response.ChecOTPResponse;
+import com.viettel.mbccs.data.source.remote.response.CheckIdNoResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransChannelResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransFromOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransRetailResponse;
@@ -195,4 +197,9 @@ public interface MBCSSApi {
     @POST("vietdt/CM_mBCCS/1.0.0/WS_getPrecinct")
     Observable<BaseResponse<GetPrecinctResponse>> getPrecinct(
             @Body DataRequest<GetPrecinctRequest> request);
+
+
+    @POST("vietdt/CM_mBCCS/1.0.0/WS_checkIdNo")
+    Observable<BaseResponse<CheckIdNoResponse>> checkIdNo(
+            @Body DataRequest<CheckIdNoRequest> request);
 }
