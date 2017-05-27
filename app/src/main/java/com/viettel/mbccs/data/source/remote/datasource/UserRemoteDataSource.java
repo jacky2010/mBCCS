@@ -1,8 +1,6 @@
 package com.viettel.mbccs.data.source.remote.datasource;
 
 import com.viettel.mbccs.data.model.LoginInfo;
-import com.viettel.mbccs.data.model.ModelSale;
-import com.viettel.mbccs.data.model.SaleTrans;
 import com.viettel.mbccs.data.source.remote.IUserRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
@@ -12,11 +10,13 @@ import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
 import com.viettel.mbccs.data.source.remote.request.LoginRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseErrorResponse;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
-import com.viettel.mbccs.data.source.remote.response.GetSerialsReponse;
+import com.viettel.mbccs.data.source.remote.response.GetInfoSaleTranResponse;
+import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
+import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
+import com.viettel.mbccs.data.source.remote.response.SendCodeChangePassResponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import com.viettel.mbccs.data.source.remote.service.RequestHelper;
 import com.viettel.mbccs.utils.rx.SchedulerUtils;
-import java.util.List;
 import rx.Observable;
 import rx.functions.Func1;
 
@@ -60,11 +60,11 @@ public class UserRemoteDataSource implements IUserRemoteDataSource {
     }
 
     @Override
-    public Observable<Object> sendCodeChangePass(String phone) {
+    public Observable<SendCodeChangePassResponse> sendCodeChangePass(String phone) {
         return RequestHelper.getRequest()
                 .sendCodeChangePass(phone)
-                .flatMap(SchedulerUtils.<Object>convertDataFlatMap())
-                .compose(SchedulerUtils.<Object>applyAsyncSchedulers());
+                .flatMap(SchedulerUtils.<SendCodeChangePassResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<SendCodeChangePassResponse>applyAsyncSchedulers());
     }
 
     @Override
@@ -78,36 +78,36 @@ public class UserRemoteDataSource implements IUserRemoteDataSource {
     }
 
     @Override
-    public Observable<GetSerialsReponse> getSerial(BaseRequest<GetSerialRequest> request) {
+    public Observable<GetSerialsResponse> getSerial(BaseRequest<GetSerialRequest> request) {
         return RequestHelper.getRequest()
                 .getSerials(request)
-                .flatMap(SchedulerUtils.<GetSerialsReponse>convertDataFlatMap())
-                .compose(SchedulerUtils.<GetSerialsReponse>applyAsyncSchedulers());
+                .flatMap(SchedulerUtils.<GetSerialsResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<GetSerialsResponse>applyAsyncSchedulers());
     }
 
     @Override
-    public Observable<List<ModelSale>> getModelSales(BaseRequest<GetTotalStockRequest> request) {
+    public Observable<GetTotalStockResponse> getModelSales(BaseRequest<GetTotalStockRequest> request) {
         return RequestHelper.getRequest()
                 .getModelSales(request)
-                .flatMap(SchedulerUtils.<List<ModelSale>>convertDataFlatMap())
-                .compose(SchedulerUtils.<List<ModelSale>>applyAsyncSchedulers());
+                .flatMap(SchedulerUtils.<GetTotalStockResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<GetTotalStockResponse>applyAsyncSchedulers());
     }
 
     @Override
-    public Observable<SaleTrans> getSaleTransInfo(BaseRequest<GetInfoSaleTranRequest> request) {
+    public Observable<GetInfoSaleTranResponse> getSaleTransInfo(BaseRequest<GetInfoSaleTranRequest> request) {
         return RequestHelper.getRequest()
                 .getSaleTransInfo(request)
-                .flatMap(SchedulerUtils.<SaleTrans>convertDataFlatMap())
-                .compose(SchedulerUtils.<SaleTrans>applyAsyncSchedulers());
+                .flatMap(SchedulerUtils.<GetInfoSaleTranResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<GetInfoSaleTranResponse>applyAsyncSchedulers());
     }
 
     @Override
-    public Observable<SaleTrans> createSaleTransRetail(
+    public Observable<GetInfoSaleTranResponse> createSaleTransRetail(
             BaseRequest<GetInfoSaleTranRequest> request) {
         return RequestHelper.getRequest()
                 .createSaleTransRetail(request)
-                .flatMap(SchedulerUtils.<SaleTrans>convertDataFlatMap())
-                .compose(SchedulerUtils.<SaleTrans>applyAsyncSchedulers());
+                .flatMap(SchedulerUtils.<GetInfoSaleTranResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<GetInfoSaleTranResponse>applyAsyncSchedulers());
     }
 
 

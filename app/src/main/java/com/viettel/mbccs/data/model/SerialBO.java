@@ -19,15 +19,15 @@ public class SerialBO implements Parcelable, Serializable {
     @Expose
     private long stockModelId;
 
-    @SerializedName("Quantity")
+    @SerializedName("quantity")
     @Expose
     private long quantity;
 
-    @SerializedName("FromSerial")
+    @SerializedName("fromSerial")
     @Expose
     private String fromSerial;
 
-    @SerializedName("ToSerial")
+    @SerializedName("toSerial")
     @Expose
     private String toSerial;
 

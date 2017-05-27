@@ -9,14 +9,14 @@ import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.model.SaleProgram;
 import com.viettel.mbccs.data.model.TeleComService;
-import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
-import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
+import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
+import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import com.viettel.mbccs.screen.sell.retail.adapter.StockAdapter;
-import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.ArrayList;
 import java.util.List;
@@ -72,11 +72,11 @@ public class SaleRetailPresenter
         //TODO set attribute for request
         mGetTotalStockRequest.setRequest(request);
         Subscription subscription = mUserRepository.getModelSales(mGetTotalStockRequest)
-                .subscribe(new MBCCSSubscribe<List<ModelSale>>() {
+                .subscribe(new MBCCSSubscribe<GetTotalStockResponse>() {
                     @Override
-                    public void onSuccess(List<ModelSale> object) {
+                    public void onSuccess(GetTotalStockResponse object) {
                         mModelSales.clear();
-                        mModelSales.addAll(object);
+                        mModelSales.addAll(object.getModelSaleList());
                         mAdapter.notifyDataSetChanged();
                     }
 

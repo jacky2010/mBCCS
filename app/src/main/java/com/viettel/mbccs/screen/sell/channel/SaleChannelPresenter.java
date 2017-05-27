@@ -18,6 +18,8 @@ import com.viettel.mbccs.data.source.remote.request.GetListChannelByOwnerTypeIdR
 import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.GetListChannelByOwnerTypeIdResponse;
+import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import com.viettel.mbccs.screen.sell.retail.adapter.StockAdapter;
 import com.viettel.mbccs.utils.DialogUtils;
@@ -84,11 +86,11 @@ public class SaleChannelPresenter
         //TODO set attribute for request
         mGetTotalStockRequest.setRequest(request);
         Subscription subscription = mUserRepository.getModelSales(mGetTotalStockRequest)
-                .subscribe(new MBCCSSubscribe<List<ModelSale>>() {
+                .subscribe(new MBCCSSubscribe<GetTotalStockResponse>() {
                     @Override
-                    public void onSuccess(List<ModelSale> object) {
+                    public void onSuccess(GetTotalStockResponse object) {
                         mModelSales.clear();
-                        mModelSales.addAll(object);
+                        mModelSales.addAll(object.getModelSaleList());
                         mAdapter.notifyDataSetChanged();
                     }
 
@@ -111,16 +113,17 @@ public class SaleChannelPresenter
 
     private void initialData() {
         Observable.zip(getObservableTeleComserviceAndSaleProgram(), getObservaleChannelInfors(),
-                new Func2<TelecomServiceAndSaleProgramResponse, List<ChannelInfo>, SaleChannelInitData>() {
+                new Func2<TelecomServiceAndSaleProgramResponse, GetListChannelByOwnerTypeIdResponse, SaleChannelInitData>() {
                     @Override
                     public SaleChannelInitData call(
                             TelecomServiceAndSaleProgramResponse telecomServiceAndSaleProgramResponse,
-                            List<ChannelInfo> channelInfos) {
-                        if (telecomServiceAndSaleProgramResponse == null || channelInfos == null) {
+                            GetListChannelByOwnerTypeIdResponse getListChannelByOwnerTypeIdResponse) {
+                        if (telecomServiceAndSaleProgramResponse == null
+                                || getListChannelByOwnerTypeIdResponse == null) {
                             return null;
                         }
                         return new SaleChannelInitData(telecomServiceAndSaleProgramResponse,
-                                channelInfos);
+                                getListChannelByOwnerTypeIdResponse);
                     }
                 }).subscribe(new MBCCSSubscribe<SaleChannelInitData>() {
             @Override
@@ -148,7 +151,8 @@ public class SaleChannelPresenter
 
                     //channel
                     mChannelInfos.clear();
-                    mChannelInfos.addAll(object.getChannelInfos());
+                    mChannelInfos.addAll(
+                            object.getmGetListChannelByOwnerTypeIdResponse().getChannelInfoList());
                     ChannelInfo channel =
                             new ChannelInfo(-1, mContext.getResources().getString(R.string.all_));
                     mChannelInfos.add(0, channel);
@@ -183,7 +187,7 @@ public class SaleChannelPresenter
                 mGetTelecomServiceAndSaleProgramRequest);
     }
 
-    private Observable<List<ChannelInfo>> getObservaleChannelInfors() {
+    private Observable<GetListChannelByOwnerTypeIdResponse> getObservaleChannelInfors() {
         mGetListChannelByOwnerTypeIdRequest = new BaseRequest<>();
         mGetListChannelByOwnerTypeIdRequest.setWsCode(WsCode.GetListChannelByOwnerTypeId);
         GetListChannelByOwnerTypeIdRequest request = new GetListChannelByOwnerTypeIdRequest();

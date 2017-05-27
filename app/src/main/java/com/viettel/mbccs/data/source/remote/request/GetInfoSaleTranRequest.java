@@ -4,14 +4,13 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.viettel.mbccs.data.model.Customer;
 import com.viettel.mbccs.data.model.StockSerial;
-import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by eo_cuong on 5/19/17.
  */
 
-public class GetInfoSaleTranRequest implements Serializable{
+public class GetInfoSaleTranRequest extends DataRequest{
 
     @SerializedName("shopId")
     @Expose

@@ -30,7 +30,7 @@ public class SaveTransConfirmFragment extends BaseFragment
     public static SaveTransConfirmFragment newInstance(
             BaseRequest<GetInfoSaleTranRequest> getInfoSaleTranRequest, SaleTrans saleTrans,ChannelInfo channelInfo) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable(Constants.BundleConstant.INFOR_SALE_REQUEST, getInfoSaleTranRequest);
+//        bundle.putSerializable(Constants.BundleConstant.INFOR_SALE_REQUEST, getInfoSaleTranRequest);
         bundle.putSerializable(Constants.BundleConstant.SALE_TRANS, saleTrans);
         bundle.putSerializable(Constants.BundleConstant.CHANNEL, channelInfo);
         SaveTransConfirmFragment fragment = new SaveTransConfirmFragment();

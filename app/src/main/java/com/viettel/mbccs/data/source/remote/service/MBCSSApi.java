@@ -1,14 +1,6 @@
 package com.viettel.mbccs.data.source.remote.service;
 
-import com.viettel.mbccs.data.model.Area;
-import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.LoginInfo;
-import com.viettel.mbccs.data.model.ModelSale;
-import com.viettel.mbccs.data.model.SaleOrders;
-import com.viettel.mbccs.data.model.SaleTrans;
-import com.viettel.mbccs.data.model.Shop;
-import com.viettel.mbccs.data.model.StockSerial;
-import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListChannelByOwnerTypeIdRequest;
@@ -25,12 +17,19 @@ import com.viettel.mbccs.data.source.remote.request.KPPOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.LoginRequest;
 import com.viettel.mbccs.data.source.remote.request.ViewInfoSerialRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseResponse;
-import com.viettel.mbccs.data.source.remote.response.GetSerialsReponse;
-import com.viettel.mbccs.data.source.remote.response.OrderInfoResponse;
+import com.viettel.mbccs.data.source.remote.response.GetInfoSaleTranResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListChannelByOwnerTypeIdResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListOrderResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListProvinceResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListShopResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListStockModelResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListTTKDResponse;
+import com.viettel.mbccs.data.source.remote.response.GetOrderInfoResponse;
+import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
+import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
+import com.viettel.mbccs.data.source.remote.response.SendCodeChangePassResponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
-
-import java.util.List;
-
+import com.viettel.mbccs.data.source.remote.response.ViewInfoSerialResponse;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -49,14 +48,15 @@ public interface MBCSSApi {
 
     @FormUrlEncoded
     @POST("/send_code_password")
-    Observable<BaseResponse<Object>> sendCodeChangePass(@Field("phone") String phone);
+    Observable<BaseResponse<SendCodeChangePassResponse>> sendCodeChangePass(
+            @Field("phone") String phone);
 
     @POST("/login")
-    Observable<BaseResponse<List<SaleOrders>>> searchSellOrders(
+    Observable<BaseResponse<GetListOrderResponse>> getListOrder(
             @Body BaseRequest<GetListOrderRequest> request);
 
     @POST("/login")
-    Observable<BaseResponse<List<ChannelInfo>>> getListChannelByOwnerTypeId(
+    Observable<BaseResponse<GetListChannelByOwnerTypeIdResponse>> getListChannelByOwnerTypeId(
             @Body BaseRequest<GetListChannelByOwnerTypeIdRequest> request);
 
     @POST("/telecomservice_salproram")
@@ -64,42 +64,44 @@ public interface MBCSSApi {
             @Body BaseRequest<GetTelecomServiceAndSaleProgramRequest> request);
 
     @POST("/getserials")
-    Observable<BaseResponse<GetSerialsReponse>> getSerials(
+    Observable<BaseResponse<GetSerialsResponse>> getSerials(
             @Body BaseRequest<GetSerialRequest> request);
 
     @GET("/login")
-    Observable<BaseResponse<OrderInfoResponse>> getOrderInfo(
+    Observable<BaseResponse<GetOrderInfoResponse>> getOrderInfo(
             @Body BaseRequest<GetOrderInfoRequest> request);
 
     @POST("/getsalemodel")
-    Observable<BaseResponse<List<ModelSale>>> getModelSales(
+    Observable<BaseResponse<GetTotalStockResponse>> getModelSales(
             @Body BaseRequest<GetTotalStockRequest> request);
 
     @POST("/getinfortrans")
-    Observable<BaseResponse<SaleTrans>> getSaleTransInfo(
+    Observable<BaseResponse<GetInfoSaleTranResponse>> getSaleTransInfo(
             @Body BaseRequest<GetInfoSaleTranRequest> request);
 
     @POST("/savetransaction")
-    Observable<BaseResponse<SaleTrans>> createSaleTransRetail(
+    Observable<BaseResponse<GetInfoSaleTranResponse>> createSaleTransRetail(
             @Body BaseRequest<GetInfoSaleTranRequest> request);
 
     @POST("/getliststockmodel")
-    Observable<BaseResponse<List<StockTotal>>> getListStockModel(
+    Observable<BaseResponse<GetListStockModelResponse>> getListStockModel(
             @Body BaseRequest<GetListStockModelRequest> request);
 
     @POST("/viewinfoserial")
-    Observable<BaseResponse<List<StockSerial>>> viewInfoSerial(
+    Observable<BaseResponse<ViewInfoSerialResponse>> viewInfoSerial(
             @Body BaseRequest<ViewInfoSerialRequest> request);
 
     @POST("/getListProvince")
-    Observable<BaseResponse<List<Area>>> getListProvince(
+    Observable<BaseResponse<GetListProvinceResponse>> getListProvince(
             @Body BaseRequest<GetListProvinceRequest> request);
 
     @POST("/getListTTKD")
-    Observable<BaseResponse<List<Shop>>> getListTTKD(@Body BaseRequest<GetListTTKDRequest> request);
+    Observable<BaseResponse<GetListTTKDResponse>> getListTTKD(
+            @Body BaseRequest<GetListTTKDRequest> request);
 
     @POST("/getListTTKD")
-    Observable<BaseResponse<List<Shop>>> getListShop(@Body BaseRequest<GetListShopRequest> request);
+    Observable<BaseResponse<GetListShopResponse>> getListShop(
+            @Body BaseRequest<GetListShopRequest> request);
 
     @POST("/createSaleOrder")
     Observable<BaseResponse> createSaleOrders(

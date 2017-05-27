@@ -14,8 +14,8 @@ import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.GetInfoSaleTranResponse;
 import com.viettel.mbccs.utils.Common;
-import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.List;
 import rx.Subscription;
@@ -124,11 +124,11 @@ public class PaymentInforChannelPresenter implements PaymentInforChannelContract
 
         Subscription subscription =
                 mUserRepository.getSaleTransInfo(mGetInfoSaleTranRequestBaseRequest)
-                        .subscribe(new MBCCSSubscribe<SaleTrans>() {
+                        .subscribe(new MBCCSSubscribe<GetInfoSaleTranResponse>() {
                             @Override
-                            public void onSuccess(SaleTrans object) {
+                            public void onSuccess(GetInfoSaleTranResponse object) {
                                 isGetTransInfo.set(true);
-                                loadAmount(object);
+                                loadAmount(object.getSaleTrans());
                             }
 
                             @Override

@@ -11,6 +11,7 @@ import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.GetInfoSaleTranResponse;
 import com.viettel.mbccs.screen.common.success.DialogFullScreen;
 import com.viettel.mbccs.utils.Common;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
@@ -92,9 +93,9 @@ public class SaveTransConfirmPresenter implements SaveTransConfirmContract.Prese
     public void saveTransaction() {
         mViewModel.showLoading();
         Subscription subscription = mUserRepository.createSaleTransRetail(mGetInfoSaleTranRequest)
-                .subscribe(new MBCCSSubscribe<SaleTrans>() {
+                .subscribe(new MBCCSSubscribe<GetInfoSaleTranResponse>() {
                     @Override
-                    public void onSuccess(SaleTrans object) {
+                    public void onSuccess(GetInfoSaleTranResponse object) {
                         Dialog dialog =
                                 new DialogFullScreen.Builder(mContext).setCenterContent(true)
                                         .setAutoClose(true)

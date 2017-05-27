@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.viettel.mbccs.constance.OrderStatus;
 
 /**
  * Created by HuyQuyet on 5/17/17.
@@ -12,47 +11,47 @@ import com.viettel.mbccs.constance.OrderStatus;
 
 public class SaleOrders implements Parcelable {
 
-    @SerializedName("SaleOrdersId")
+    @SerializedName("saleOrdersId")
     @Expose
     private long saleOrdersId;
 
-    @SerializedName("OrderStatus")
+    @SerializedName("orderStatus")
     @Expose
     private long orderStatus;
 
-    @SerializedName("OrderName")
+    @SerializedName("orderName")
     @Expose
     private String oderName;
 
-    @SerializedName("ShopId")
+    @SerializedName("shopId")
     @Expose
     private long shopId;
 
-    @SerializedName("StaffId")
+    @SerializedName("staffId")
     @Expose
     private long staffId;
 
-    @SerializedName("StaffCode")
+    @SerializedName("staffCode")
     @Expose
     private String staffCode;
 
-    @SerializedName("ChannelId")
+    @SerializedName("channelId")
     @Expose
     private long channelId;
 
-    @SerializedName("ChannelCode")
+    @SerializedName("channelCode")
     @Expose
     private String channelCode;
 
-    @SerializedName("ChannelName")
+    @SerializedName("channelName")
     @Expose
     private String channelName;
 
-    @SerializedName("OrderDate")
+    @SerializedName("orderDate")
     @Expose
     private String orderDate;
 
-    @SerializedName("ActionDate")
+    @SerializedName("actionDate")
     @Expose
     private String actionDate;
 
@@ -108,8 +107,6 @@ public class SaleOrders implements Parcelable {
     public long getSaleOrdersId() {
         return saleOrdersId;
     }
-
-
 
     public void setSaleOrdersId(long saleOrdersId) {
         this.saleOrdersId = saleOrdersId;
@@ -194,8 +191,4 @@ public class SaleOrders implements Parcelable {
     public void setActionDate(String actionDate) {
         this.actionDate = actionDate;
     }
-
-
-
-
 }

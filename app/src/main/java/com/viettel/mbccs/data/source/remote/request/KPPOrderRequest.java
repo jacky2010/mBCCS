@@ -3,10 +3,9 @@ package com.viettel.mbccs.data.source.remote.request;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.viettel.mbccs.data.model.StockModel;
-import java.io.Serializable;
 import java.util.List;
 
-public class KPPOrderRequest implements Serializable {
+public class KPPOrderRequest extends DataRequest {
 
     @SerializedName("staffId")
     @Expose

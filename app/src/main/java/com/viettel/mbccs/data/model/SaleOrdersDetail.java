@@ -12,27 +12,27 @@ import java.util.List;
 
 public class SaleOrdersDetail implements Parcelable {
 
-    @SerializedName("SaleOrdersId")
+    @SerializedName("saleOrdersId")
     @Expose
     private long saleOrdersId;
 
-    @SerializedName("SaleOrdersDetailId")
+    @SerializedName("saleOrdersDetailId")
     @Expose
     private long saleOrdersDetailId;
 
-    @SerializedName("StockModelId")
+    @SerializedName("stockModelId")
     @Expose
     private long stockModelId;
 
-    @SerializedName("StockModelCode")
+    @SerializedName("stockModelCode")
     @Expose
     private String stockModelCode;
 
-    @SerializedName("StockMoldeName")
+    @SerializedName("stockMoldeName")
     @Expose
     private String stockMoldeName;
 
-    @SerializedName("Quantity")
+    @SerializedName("quantity")
     @Expose
     private long quantity;
 

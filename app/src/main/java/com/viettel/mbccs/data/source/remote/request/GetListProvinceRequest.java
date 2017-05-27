@@ -2,13 +2,12 @@ package com.viettel.mbccs.data.source.remote.request;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import java.io.Serializable;
 
 /**
  * Created by HuyQuyet on 5/23/17.
  */
 
-public class GetListProvinceRequest implements Serializable {
+public class GetListProvinceRequest extends DataRequest {
 
     @Expose
     @SerializedName("provinceCode")
