@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
+import com.lap.languagepicker.Language;
 import com.mukesh.countrypicker.Country;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.source.UserRepository;
@@ -92,7 +93,7 @@ public class ConfigPresenter
         nameCurrentCountry.set(String.format(context.getString(R.string.config_name_country),
                 Country.getCountryByISO(codeCurrentCountry).getName()));
 
-        nameCurrentLanguage.set(codeCurrentLanguage);
+        nameCurrentLanguage.set(Language.getLanguageByCode(codeCurrentLanguage).getName());
         statusNotification.set(userRepository.getStatusNotification());
         statusDisplayDashBoard.set(userRepository.getDisplayDashBoard());
         statusSyncBCCS.set(userRepository.getSyncBCCS());
@@ -132,18 +133,11 @@ public class ConfigPresenter
         userRepository.saveCountryToSharePrefs(codeCurrentCountry);
     }
 
-    public void setLanguage(Country country) {
-        Locale[] all = Locale.getAvailableLocales();
-        for (Locale locale : all) {
-            String c = locale.getCountry();
-            if (c.equalsIgnoreCase(country.getCode())) {
-                nameCurrentLanguage.set(locale.getDisplayLanguage());
-                codeCurrentLanguage = locale.getLanguage();
-                break;
-            }
-        }
-        codeCurrentLanguage = nameCurrentLanguage.get();
-        userRepository.saveLanguageToSharePrefs(nameCurrentLanguage.get());
+    public void setLanguage(Language language) {
+        codeCurrentLanguage = language.getCode();
+        nameCurrentLanguage.set(language.getName());
+        userRepository.saveLanguageToSharePrefs(codeCurrentLanguage);
+        configView.changeLanguage(language.getCode());
     }
 
     public List<Country> getListCountry() {
@@ -160,17 +154,20 @@ public class ConfigPresenter
         return countryList;
     }
 
-    public List<Country> getListLanguage() {
-        List<Country> languageList = new ArrayList<>();
-        Country countryVN = Country.getCountryByISO("VN");
-        Country countryUS = Country.getCountryByISO("US");
-        languageList.add(countryUS);
-        languageList.add(countryVN);
-        Country countryCurrent = Country.getCountryFromSIM(context);
-        if (countryCurrent != null
-                && !countryCurrent.getCode().equals(countryUS.getCode())
-                && !countryCurrent.getCode().equals(countryVN.getCode())) {
-            languageList.add(countryCurrent);
+    public List<Language> getListLanguage() {
+        List<Language> languageList = new ArrayList<>();
+        Language languageVn = Language.getLanguageByCode("vi");
+        Language languageEn = Language.getLanguageByCode("en");
+        languageList.add(languageVn);
+        languageList.add(languageEn);
+
+        Locale locale = Locale.getDefault();
+
+        if (locale != null
+                && !locale.getLanguage().equals(languageVn.getCode())
+                && !locale.getLanguage().equals(languageEn.getCode())) {
+
+            languageList.add(Language.getLanguageByCode(locale.getLanguage()));
         }
         return languageList;
     }

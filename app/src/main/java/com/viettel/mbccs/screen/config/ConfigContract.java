@@ -18,5 +18,7 @@ public class ConfigContract {
         void selectCountry();
 
         void selectLanguage();
+
+        void changeLanguage(String language);
     }
 }

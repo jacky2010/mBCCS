@@ -78,6 +78,7 @@ dependencies {
 
     //Chart
     compile project(path: ':countrypicker')
+    compile project(path: ':languagepicker')
 
     // Circle image view
     compile 'de.hdodenhof:circleimageview:2.1.0'
