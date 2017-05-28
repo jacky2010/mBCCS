@@ -5,5 +5,5 @@ package com.viettel.mbccs.config;
  */
 
 public class Config {
-    public static final String END_POINT = "https://mbccs/api/";
+    public static final String END_POINT = "http://virtserver.swaggerhub.com/";
 }

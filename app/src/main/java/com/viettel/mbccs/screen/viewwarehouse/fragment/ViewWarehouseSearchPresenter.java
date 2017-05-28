@@ -7,7 +7,7 @@ import android.widget.ArrayAdapter;
 import com.viettel.mbccs.BR;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.ShopLevel;
-import com.viettel.mbccs.constance.WsCode;
+import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListProvinceRequest;
@@ -79,7 +79,7 @@ public class ViewWarehouseSearchPresenter extends BaseObservable
 
         BaseRequest<GetListShopRequest> request = new BaseRequest<>();
         request.setRequest(getListShopRequest);
-        request.setWsCode(WsCode.GetListShop);
+        request.setApiCode(ApiCode.GetListShop);
         // TODO: 5/23/17 fake data
         Subscription subscription = banHangKhoTaiChinhRepository.getListShop(request)
                 .subscribe(new MBCCSSubscribe<GetListShopResponse>() {
@@ -105,7 +105,7 @@ public class ViewWarehouseSearchPresenter extends BaseObservable
 
         BaseRequest<GetListTTKDRequest> request = new BaseRequest<>();
         request.setRequest(getListTTKDRequest);
-        request.setWsCode(WsCode.GetListTTKD);
+        request.setApiCode(ApiCode.GetListTTKD);
         // TODO: 5/23/17 fake data
         Subscription subscription = banHangKhoTaiChinhRepository.getListTTKD(request)
                 .subscribe(new MBCCSSubscribe<GetListTTKDResponse>() {
@@ -126,7 +126,7 @@ public class ViewWarehouseSearchPresenter extends BaseObservable
     private void getDataProvince() {
         BaseRequest<GetListProvinceRequest> request = new BaseRequest<>();
         request.setRequest(new GetListProvinceRequest());
-        request.setWsCode(WsCode.GetListProvince);
+        request.setApiCode(ApiCode.GetListProvince);
         Subscription subscription = banHangKhoTaiChinhRepository.getListProvince(request)
                 .subscribe(new MBCCSSubscribe<GetListProvinceResponse>() {
                     @Override

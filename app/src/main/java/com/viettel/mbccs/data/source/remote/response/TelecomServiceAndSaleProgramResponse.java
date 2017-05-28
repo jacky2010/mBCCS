@@ -9,11 +9,11 @@ import java.util.List;
 
 public class TelecomServiceAndSaleProgramResponse extends DataResponse{
 
-    @SerializedName("telecomService")
+    @SerializedName("lstTelecomService")
     @Expose
     private List<TeleComService> mTeleComServices = new ArrayList<>();
 
-    @SerializedName("saleProgram")
+    @SerializedName("lstSaleProgram")
     @Expose
     private List<SaleProgram> mSalePrograms = new ArrayList<>();
 

@@ -28,11 +28,11 @@ public class GetInfoSaleTranRequest extends DataRequest{
     @Expose
     private Customer mCustomer;
 
-    @SerializedName("paymentMethod")
+    @SerializedName("payMethod")
     @Expose
     private String paymentMethod;
 
-    @SerializedName("IsdnPay")
+    @SerializedName("isdnPay")
     @Expose
     private String IsdnPay;
 
@@ -42,13 +42,13 @@ public class GetInfoSaleTranRequest extends DataRequest{
 
     @SerializedName("saleProgrameCode")
     @Expose
-    private long saleProgrameCode;
+    private String saleProgrameCode;
 
     @SerializedName("saleTransType")
     @Expose
     private String saleTransType;
 
-    @SerializedName("chanelId")
+    @SerializedName("channelId")
     @Expose
     private long chanelId;
 
@@ -124,11 +124,11 @@ public class GetInfoSaleTranRequest extends DataRequest{
         this.telecomserviceId = telecomserviceId;
     }
 
-    public long getSaleProgrameCode() {
+    public String getSaleProgrameCode() {
         return saleProgrameCode;
     }
 
-    public void setSaleProgrameCode(long saleProgrameCode) {
+    public void setSaleProgrameCode(String saleProgrameCode) {
         this.saleProgrameCode = saleProgrameCode;
     }
 

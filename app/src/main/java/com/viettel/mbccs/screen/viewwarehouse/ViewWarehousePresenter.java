@@ -5,7 +5,7 @@ import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
 import android.support.v7.widget.RecyclerView;
-import com.viettel.mbccs.constance.WsCode;
+import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.Session;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
@@ -60,7 +60,7 @@ public class ViewWarehousePresenter implements ViewWarehouseContract.Presenter,
 
         BaseRequest<GetListStockModelRequest> request = new BaseRequest<>();
         request.setRequest(g);
-        request.setWsCode(WsCode.GetListStockModel);
+        request.setApiCode(ApiCode.GetListStockModel);
         request.setApiKey("demo");
         request.setSession(new Session());
 

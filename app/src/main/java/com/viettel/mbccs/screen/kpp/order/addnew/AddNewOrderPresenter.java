@@ -3,10 +3,9 @@ package com.viettel.mbccs.screen.kpp.order.addnew;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.databinding.DataBindingUtil;
 import android.databinding.ObservableField;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.constance.WsCode;
+import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
@@ -94,7 +93,7 @@ public class AddNewOrderPresenter implements AddNewOrderContract.Presenter {
 
         mViewModel.showLoading();
         mKPPOrderRequestBaseRequest = new BaseRequest<>();
-        mKPPOrderRequestBaseRequest.setWsCode(WsCode.CreateSaleOrders);
+        mKPPOrderRequestBaseRequest.setApiCode(ApiCode.CreateSaleOrders);
         KPPOrderRequest request = new KPPOrderRequest();
         request.setStaffId(1);
         request.setChannelStaffId(1);

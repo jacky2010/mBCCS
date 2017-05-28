@@ -5,7 +5,7 @@ import android.content.Context;
 import android.databinding.ObservableField;
 import android.widget.ArrayAdapter;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.constance.WsCode;
+import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.model.SaleChannelInitData;
@@ -75,7 +75,7 @@ public class SaleChannelPresenter
     private void loadModelSale() {
         mViewModel.showLoading();
         mGetTotalStockRequest = new BaseRequest<>();
-        mGetTotalStockRequest.setWsCode(WsCode.GetStockTotal);
+        mGetTotalStockRequest.setApiCode(ApiCode.GetStockTotal);
         GetTotalStockRequest request = new GetTotalStockRequest();
         if (currentSaleProgram.getId() != -1) {
             request.setSaleProgameId(currentSaleProgram.getId());
@@ -179,7 +179,7 @@ public class SaleChannelPresenter
 
     private Observable<TelecomServiceAndSaleProgramResponse> getObservableTeleComserviceAndSaleProgram() {
         mGetTelecomServiceAndSaleProgramRequest = new BaseRequest<>();
-        mGetTelecomServiceAndSaleProgramRequest.setWsCode(WsCode.GetTelecomServiceAndSaleProgram);
+        mGetTelecomServiceAndSaleProgramRequest.setApiCode(ApiCode.GetTelecomServiceAndSaleProgram);
         GetTelecomServiceAndSaleProgramRequest request =
                 new GetTelecomServiceAndSaleProgramRequest();
         mGetTelecomServiceAndSaleProgramRequest.setRequest(request);
@@ -189,7 +189,7 @@ public class SaleChannelPresenter
 
     private Observable<GetListChannelByOwnerTypeIdResponse> getObservaleChannelInfors() {
         mGetListChannelByOwnerTypeIdRequest = new BaseRequest<>();
-        mGetListChannelByOwnerTypeIdRequest.setWsCode(WsCode.GetListChannelByOwnerTypeId);
+        mGetListChannelByOwnerTypeIdRequest.setApiCode(ApiCode.GetListChannelByOwnerTypeId);
         GetListChannelByOwnerTypeIdRequest request = new GetListChannelByOwnerTypeIdRequest();
         request.setChannelTypeId(1);
         request.setShopId(1);
@@ -203,7 +203,7 @@ public class SaleChannelPresenter
     private void loadServiceAndProgram() {
         mViewModel.showLoading();
         mGetTelecomServiceAndSaleProgramRequest = new BaseRequest<>();
-        mGetTelecomServiceAndSaleProgramRequest.setWsCode(WsCode.GetTelecomServiceAndSaleProgram);
+        mGetTelecomServiceAndSaleProgramRequest.setApiCode(ApiCode.GetTelecomServiceAndSaleProgram);
         GetTelecomServiceAndSaleProgramRequest request =
                 new GetTelecomServiceAndSaleProgramRequest();
         mGetTelecomServiceAndSaleProgramRequest.setRequest(request);

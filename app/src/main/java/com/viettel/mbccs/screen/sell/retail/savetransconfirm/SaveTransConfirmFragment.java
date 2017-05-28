@@ -21,18 +21,19 @@ public class SaveTransConfirmFragment extends BaseFragment
         implements SaveTransConfirmContract.ViewModel {
 
     private FragmentTransactionRetailConfirmBinding mBinding;
-    private BaseRequest<GetInfoSaleTranRequest> mGetInfoSaleTranRequest;
+    private GetInfoSaleTranRequest mGetInfoSaleTranRequest;
     private SaleTrans mSaleTrans;
     private ChannelInfo mChannelInfo;
     private SaveTransConfirmPresenter mPresenter;
     private AppCompatActivity mActivity;
 
     public static SaveTransConfirmFragment newInstance(
-            BaseRequest<GetInfoSaleTranRequest> getInfoSaleTranRequest, SaleTrans saleTrans,ChannelInfo channelInfo) {
+            GetInfoSaleTranRequest getInfoSaleTranRequest, SaleTrans saleTrans,
+            ChannelInfo channelInfo) {
         Bundle bundle = new Bundle();
-//        bundle.putSerializable(Constants.BundleConstant.INFOR_SALE_REQUEST, getInfoSaleTranRequest);
-        bundle.putSerializable(Constants.BundleConstant.SALE_TRANS, saleTrans);
-        bundle.putSerializable(Constants.BundleConstant.CHANNEL, channelInfo);
+        bundle.putParcelable(Constants.BundleConstant.INFOR_SALE_REQUEST, getInfoSaleTranRequest);
+        bundle.putParcelable(Constants.BundleConstant.SALE_TRANS, saleTrans);
+        bundle.putParcelable(Constants.BundleConstant.CHANNEL, channelInfo);
         SaveTransConfirmFragment fragment = new SaveTransConfirmFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -52,15 +53,14 @@ public class SaveTransConfirmFragment extends BaseFragment
         super.onViewCreated(view, savedInstanceState);
         Bundle bundle = getArguments();
         String s1 = bundle.getString(Constants.BundleConstant.INFOR_SALE_REQUEST);
-        mGetInfoSaleTranRequest = (BaseRequest<GetInfoSaleTranRequest>) bundle.getSerializable(
-                Constants.BundleConstant.INFOR_SALE_REQUEST);
-        mSaleTrans = (SaleTrans) bundle.getSerializable(Constants.BundleConstant.SALE_TRANS);
-        mChannelInfo = (ChannelInfo) bundle.getSerializable(Constants.BundleConstant.CHANNEL);
+        mGetInfoSaleTranRequest = bundle.getParcelable(Constants.BundleConstant.INFOR_SALE_REQUEST);
+        mSaleTrans = bundle.getParcelable(Constants.BundleConstant.SALE_TRANS);
+        mChannelInfo = bundle.getParcelable(Constants.BundleConstant.CHANNEL);
         if (mGetInfoSaleTranRequest == null || mSaleTrans == null) {
             return;
         }
         mPresenter = new SaveTransConfirmPresenter(getActivity(), this, mSaleTrans,
-                mGetInfoSaleTranRequest,mChannelInfo);
+                mGetInfoSaleTranRequest, mChannelInfo);
         mBinding.setPresenter(mPresenter);
     }
 

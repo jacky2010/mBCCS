@@ -95,12 +95,10 @@
                     <com.viettel.mbccs.widget.CustomEdittext
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/bg_input_tranparent"
-                        android:padding="5dp"
                         android:text="@={presenter.name}"
-                        android:textColor="#000"
-                        android:textSize="18sp"
                         app:error="@{presenter.nameError}"
+                        android:singleLine="true"
+                        style="@style/inputStyle"
                         />
 
                     <TextView
@@ -115,12 +113,10 @@
                     <com.viettel.mbccs.widget.CustomEdittext
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/bg_input_tranparent"
-                        android:padding="5dp"
                         android:text="@={presenter.tin}"
-                        android:textColor="#000"
-                        android:textSize="18sp"
+                        android:singleLine="true"
                         app:error="@{presenter.tinError}"
+                        style="@style/inputStyle"
                         />
 
 
@@ -137,11 +133,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_input_tranparent"
-                        android:padding="5dp"
                         android:text="@={presenter.address}"
-                        android:textColor="#000"
-                        android:textSize="18sp"
+                        android:lines="2"
+                        android:maxLines="3"
                         app:error="@{presenter.addressError}"
+                        style="@style/inputStyle"
                         />
 
                 </LinearLayout>
@@ -295,11 +291,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:background="@drawable/bg_input_tranparent"
+                        android:singleLine="true"
                         android:layout_marginRight="10dp"
+                        style="@style/inputStyle"
+                        android:background="@drawable/bg_input_tranparent"
                         android:text="@={presenter.coupon}"
-                        android:padding="@dimen/dp_5"
-                        android:textSize="18sp"
                         />
                 </LinearLayout>
 

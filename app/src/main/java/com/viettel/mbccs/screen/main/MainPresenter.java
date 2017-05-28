@@ -1,9 +1,11 @@
 package com.viettel.mbccs.screen.main;
 
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.ObservableInt;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.MenuItem;
+import com.viettel.mbccs.screen.sell.retail.SaleRetailActivity;
 import com.viettel.mbccs.widget.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.List;
@@ -77,7 +79,7 @@ public class MainPresenter implements MainContract.Presenter {
             @Override
             public void onBottomItemClick(int position) {
                 // TODO: Handle menu item clicked later. Should use menu Id instead of position.
-                //mContext.startActivity(new Intent(mContext, SaleRetailActivity.class));
+              //  mContext.startActivity(new Intent(mContext, SaleRetailActivity.class));
                 // mContext.startActivity(new Intent(mContext, SaleChannelActivity.class));
                 //mContext.startActivity(new Intent(mContext, KPPOrderActivity.class));
                 switch (position) {

@@ -3,7 +3,7 @@ package com.viettel.mbccs.screen.sell.orders.fragment.orderdetail;
 import android.content.Context;
 import android.databinding.ObservableField;
 import android.support.v7.app.AppCompatActivity;
-import com.viettel.mbccs.constance.WsCode;
+import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.SaleOrdersDetail;
 import com.viettel.mbccs.data.model.SaleTrans;
 import com.viettel.mbccs.data.model.SerialBO;
@@ -87,7 +87,7 @@ public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract
 
         BaseRequest<GetOrderInfoRequest> request = new BaseRequest<>();
         request.setRequest(g);
-        request.setWsCode(WsCode.GetOrderInfo);
+        request.setApiCode(ApiCode.GetOrderInfo);
         request.setApiKey("demo");
         request.setSession(new Session());
 

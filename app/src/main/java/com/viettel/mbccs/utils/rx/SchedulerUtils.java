@@ -48,14 +48,22 @@ public class SchedulerUtils {
         return new Func1<BaseResponse<T>, Observable<T>>() {
             @Override
             public Observable<T> call(BaseResponse<T> response) {
-                if (!response.getErrorCode().equals("0")) {
+                if (!response.getErrorCode().equals("200")) {
                     BaseErrorResponse baseErrorResponse = new BaseErrorResponse();
                     baseErrorResponse.setError(Integer.parseInt(response.getErrorCode()),
                             response.getErrorMessage());
                     return Observable.error(BaseException.toServerError(baseErrorResponse));
-                } else {
-                    return Observable.just(response.getData());
                 }
+
+                if (!response.getData().getErrorCode().equals("0")) {
+                    BaseErrorResponse baseErrorResponse = new BaseErrorResponse();
+                    baseErrorResponse.setError(Integer.parseInt(response.getData().getErrorCode()),
+                            response.getData().getErrorMessage());
+                    return Observable.error(BaseException.toServerError(baseErrorResponse));
+                }
+
+
+                return Observable.just(response.getData());
             }
         };
     }

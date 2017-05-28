@@ -2,6 +2,7 @@ package com.viettel.mbccs.data.source;
 
 import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.model.LoginResult;
+import com.viettel.mbccs.data.model.Session;
 import com.viettel.mbccs.data.model.StaffInfo;
 import com.viettel.mbccs.data.source.local.IUserLocalDataSource;
 import com.viettel.mbccs.data.source.local.UserLocalDataSource;
@@ -31,7 +32,7 @@ public class UserRepository implements IUserLocalDataSource, IUserRemoteDataSour
     private UserRemoteDataSource mUserRemoteDataSource;
 
     public UserRepository(UserLocalDataSource userLocalDataSource,
-                          UserRemoteDataSource userRemoteDataSource) {
+            UserRemoteDataSource userRemoteDataSource) {
         this.mUserLocalDataSource = userLocalDataSource;
         mUserRemoteDataSource = userRemoteDataSource;
     }
@@ -125,6 +126,47 @@ public class UserRepository implements IUserLocalDataSource, IUserRemoteDataSour
     }
 
     @Override
+    public void saveSession(Session session) {
+        mUserLocalDataSource.saveSession(session);
+    }
+
+    @Override
+    public Session getSession() {
+        return mUserLocalDataSource.getSession();
+    }
+
+    @Override
+    public void saveSessionVTG(Session session) {
+        mUserLocalDataSource.saveSessionVTG(session);
+    }
+
+    @Override
+    public Session getSessionVTG() {
+        return mUserLocalDataSource.getSessionVTG();
+    }
+
+    @Override
+    public void saveapiKey(String apikey) {
+
+        mUserLocalDataSource.saveapiKey(apikey);
+    }
+
+    @Override
+    public String getApiKey() {
+        return mUserLocalDataSource.getApiKey();
+    }
+
+    @Override
+    public void saveAPIKeyVTG(String apiKey) {
+        mUserLocalDataSource.saveAPIKeyVTG(apiKey);
+    }
+
+    @Override
+    public String getApiKeyVTG() {
+        return mUserLocalDataSource.getApiKeyVTG();
+    }
+
+    @Override
     public Observable<LoginInfo> login(LoginRequest loginRequest) {
         return mUserRemoteDataSource.login(loginRequest);
     }
@@ -146,12 +188,14 @@ public class UserRepository implements IUserLocalDataSource, IUserRemoteDataSour
     }
 
     @Override
-    public Observable<GetTotalStockResponse> getModelSales(BaseRequest<GetTotalStockRequest> request) {
+    public Observable<GetTotalStockResponse> getModelSales(
+            BaseRequest<GetTotalStockRequest> request) {
         return mUserRemoteDataSource.getModelSales(request);
     }
 
     @Override
-    public Observable<GetInfoSaleTranResponse> getSaleTransInfo(BaseRequest<GetInfoSaleTranRequest> request) {
+    public Observable<GetInfoSaleTranResponse> getSaleTransInfo(
+            BaseRequest<GetInfoSaleTranRequest> request) {
         return mUserRemoteDataSource.getSaleTransInfo(request);
     }
 

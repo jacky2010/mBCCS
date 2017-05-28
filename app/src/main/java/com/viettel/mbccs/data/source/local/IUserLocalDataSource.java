@@ -2,6 +2,7 @@ package com.viettel.mbccs.data.source.local;
 
 import com.mukesh.countrypicker.Country;
 import com.viettel.mbccs.data.model.LoginResult;
+import com.viettel.mbccs.data.model.Session;
 import com.viettel.mbccs.data.model.StaffInfo;
 
 /**
@@ -51,6 +52,7 @@ public interface IUserLocalDataSource {
 
     /**
      * get status notification from SharedPreferences
+     *
      * @return default true
      */
     boolean getStatusNotification();
@@ -62,6 +64,7 @@ public interface IUserLocalDataSource {
 
     /**
      * get status display dashboard from SharedPreferences
+     *
      * @return default true
      */
     boolean getDisplayDashBoard();
@@ -73,6 +76,7 @@ public interface IUserLocalDataSource {
 
     /**
      * get sync BCCS from SharedPreferences
+     *
      * @return default true
      */
     boolean getSyncBCCS();
@@ -84,7 +88,42 @@ public interface IUserLocalDataSource {
 
     /**
      * get time sync BCCS from SharedPreferences
+     *
      * @return default 0
      */
     int getTimeSyncBCCS();
+
+    /**
+     * save session
+     */
+    void saveSession(Session session);
+
+    /**
+     * get session
+     */
+    Session getSession();
+
+    /***
+     * Save session from api login VTG
+     * @param session
+     */
+    void saveSessionVTG(Session session);
+
+    /***
+     * get session VTG
+     * @return
+     */
+    Session getSessionVTG();
+
+    /***
+     * save api key from login VTG
+     * @param apikey
+     */
+    void saveapiKey(String apikey);
+
+    String getApiKey();
+
+    void saveAPIKeyVTG(String apiKey);
+
+    String getApiKeyVTG();
 }

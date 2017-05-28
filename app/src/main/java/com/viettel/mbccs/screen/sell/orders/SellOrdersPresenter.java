@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.constance.WsCode;
+import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.Session;
 import com.viettel.mbccs.data.model.StaffInfo;
@@ -81,7 +81,7 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
         // TODO: 5/18/17 get data
         request.setApiKey("demo");
         request.setSession(new Session());
-        request.setWsCode(WsCode.GetListChannelByOwnerTypeId);
+        request.setApiCode(ApiCode.GetListChannelByOwnerTypeId);
 
         Subscription subscription =
                 banHangKhoTaiChinhRepository.getListChannelByOwnerTypeId(request)
@@ -154,7 +154,7 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
 
         BaseRequest<GetListOrderRequest> baseRequest = new BaseRequest<>();
         baseRequest.setRequest(getListOrderRequest);
-        baseRequest.setWsCode(WsCode.GetListOrder);
+        baseRequest.setApiCode(ApiCode.GetListOrder);
 
         // TODO: 5/18/17 get data
         baseRequest.setApiKey("demo");
