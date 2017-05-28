@@ -3,7 +3,9 @@ package com.viettel.mbccs.utils;
 import android.content.Context;
 import android.databinding.BindingAdapter;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
 import android.support.annotation.StringRes;
 import android.support.design.widget.TabLayout;
@@ -379,5 +381,10 @@ public class BindingUtils {
     public static void setContentHtml(WebView view, String content) {
         view.setBackgroundColor(Color.TRANSPARENT);
         view.loadData(content, "text/html; charset=utf-8", "utf-8");
+    }
+
+    @BindingAdapter({ "setBackgroundColor" })
+    public static void setBackgroundColor(View v, @ColorRes int color) {
+        v.setBackground(new ColorDrawable(color));
     }
 }

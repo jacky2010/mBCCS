@@ -1,6 +1,5 @@
 package com.viettel.mbccs.data.source;
 
-import com.viettel.mbccs.data.model.Reason;
 import com.viettel.mbccs.data.source.local.IBanHangKhoTaiChinhLocalDataSource;
 import com.viettel.mbccs.data.source.local.datasource.BanHangKhoTaiChinhLocalDataSource;
 import com.viettel.mbccs.data.source.remote.IBanHangKhoTaiChinhRemoteDataSource;
@@ -24,8 +23,8 @@ import com.viettel.mbccs.data.source.remote.response.GetListShopResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListStockModelResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListTTKDResponse;
 import com.viettel.mbccs.data.source.remote.response.GetOrderInfoResponse;
+import com.viettel.mbccs.data.source.remote.response.GetReasonResponse;
 import com.viettel.mbccs.data.source.remote.response.ViewInfoSerialResponse;
-import java.util.List;
 import rx.Observable;
 
 /**
@@ -55,8 +54,8 @@ public class BanHangKhoTaiChinhRepository
     }
 
     @Override
-    public Observable<GetListOrderResponse> searchSellOrders(BaseRequest<GetListOrderRequest> request) {
-        return banHangKhoTaiChinhRemoteDataSource.searchSellOrders(request);
+    public Observable<GetListOrderResponse> getListOrder(BaseRequest<GetListOrderRequest> request) {
+        return banHangKhoTaiChinhRemoteDataSource.getListOrder(request);
     }
 
     @Override
@@ -71,7 +70,7 @@ public class BanHangKhoTaiChinhRepository
     }
 
     @Override
-    public Observable<List<Reason>> getListReason(BaseRequest<GetResonRequest> request) {
+    public Observable<GetReasonResponse> getListReason(BaseRequest<GetResonRequest> request) {
         return banHangKhoTaiChinhRemoteDataSource.getListReason(request);
     }
 

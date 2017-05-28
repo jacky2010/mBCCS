@@ -61,11 +61,11 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="sell_orders_gone_search">Đơn vị: %1$s - Nhân viên: %2$s - Kênh: %3$s</string>
 
     <string name="order_detail_title">Chi tiết đơn hàng %1$s</string>
-    <string name="order_detail_total_money">Tổng tiền: %1$.0f</string>
-    <string name="order_detail_pay_money">Số tiền phải thanh toán: %1$.0f</string>
-    <string name="order_detail_discount_money">Chiết khấu: %1$.0f</string>
-    <string name="order_detail_tax_percent">Thuế suất: %1$.0f</string>
-    <string name="order_detail_tax_money">Tiền thuế: %1$.0f</string>
+    <string name="order_detail_total_money">Tổng tiền: %1$s</string>
+    <string name="order_detail_pay_money">Số tiền phải thanh toán: %1$s</string>
+    <string name="order_detail_discount_money">Chiết khấu: %1$s</string>
+    <string name="order_detail_tax_percent">Thuế suất: %1$s</string>
+    <string name="order_detail_tax_money">Tiền thuế: %1$s</string>
     <string name="order_detail_cancel">Hủy Giao Dịch</string>
     <string name="order_detail_ok">Bán hàng</string>
 
@@ -214,13 +214,16 @@ Từ <b>%s</b><br>
     <string name="item_view_ware_house_number_actual">Số lượng thực tế: %1$d</string>
     <string name="item_view_ware_house_number_responses">Số lượng đáp ứng: %1$d</string>
     <string name="item_view_ware_house_view_serial">Xem serial</string>
-    <string name="fragment_view_ware_house_view_serial_title">Xem serial</string>
-    <string name="fragment_view_ware_house_view_serial_detail_serial">
+    <string name="view_ware_house_view_serial_title">Xem serial</string>
+    <string name="view_ware_house_view_serial_detail_serial">
         <![CDATA[
          Chi tiết serial cho mặt hàng <font color="#317BE1"><u>%s</u></font>
         ]]>
     </string>
-    <string name="fragment_view_ware_house_view_serial_total">Tổng số: %1$d</string>
+    <string name="view_ware_house_view_serial_total">Tổng số: %1$d</string>
+    <string name="view_ware_house_view_serial_from_serial">Từ serial</string>
+    <string name="view_ware_house_view_serial_to_serial">Đến serial</string>
+    <string name="view_ware_house_view_serial_count">Số lượng</string>
     <string name="fragment_view_ware_house_view_serial_btn_close">Đóng</string>
     <string name="view_ware_house_search_filter_information">Lọc thông tin</string>
     <string name="view_ware_house_search_code_province">Mã tỉnh</string>

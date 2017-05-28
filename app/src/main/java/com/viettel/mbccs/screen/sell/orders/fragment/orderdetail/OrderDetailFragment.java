@@ -4,17 +4,23 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseFragment;
+import com.viettel.mbccs.data.model.ChannelInfo;
+import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.model.SaleOrdersDetail;
+import com.viettel.mbccs.data.model.SaleTrans;
 import com.viettel.mbccs.data.model.SerialBO;
 import com.viettel.mbccs.data.model.SerialPickerModel;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.databinding.FragmentOrderDetailBinding;
 import com.viettel.mbccs.screen.sell.orders.adapter.OrderDetailAdapter;
+import com.viettel.mbccs.screen.sell.orders.fragment.ConfirmTransactionSellCancelFragment;
 import com.viettel.mbccs.screen.serialpicker.SerialPickerActivity;
 import com.viettel.mbccs.utils.Common;
 import com.viettel.mbccs.utils.GsonUtils;
@@ -28,16 +34,19 @@ import java.util.List;
 
 public class OrderDetailFragment extends BaseFragment implements OrderDetailFragmentContract.View {
     private static final String ARG_ID_ORDER = "ID_ORDER";
+    private static final String ARG_CHANGE_INFO = "CHANGE_INFO";
     private static final int GET_SERIAL = 12345;
     private FragmentOrderDetailBinding binding;
     private OrderDetailFragmentPresenter presenter;
     private List<SaleOrdersDetail> saleOrdersDetailList;
     private OrderDetailAdapter orderDetailAdapter;
     private SaleOrdersDetail saleOrdersDetailSelect;
+    private ChannelInfo channelInfo;
 
-    public static OrderDetailFragment newInstance(long idOrder) {
+    public static OrderDetailFragment newInstance(long idOrder, ChannelInfo channelInfo) {
         Bundle bundle = new Bundle();
         bundle.putLong(ARG_ID_ORDER, idOrder);
+        bundle.putParcelable(ARG_CHANGE_INFO, channelInfo);
         OrderDetailFragment fragment = new OrderDetailFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -61,6 +70,7 @@ public class OrderDetailFragment extends BaseFragment implements OrderDetailFrag
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        channelInfo = getArguments().getParcelable(ARG_CHANGE_INFO);
         presenter.getDetailOrder((long) getArguments().get(ARG_ID_ORDER));
     }
 
@@ -89,12 +99,14 @@ public class OrderDetailFragment extends BaseFragment implements OrderDetailFrag
         saleOrdersDetailList = items;
         for (int i = 0; i < 10; i++) {
             SaleOrdersDetail data = new SaleOrdersDetail();
-            data.setPrice(300000);
+            ModelSale modelSale = new ModelSale();
+            modelSale.setPrice(300000);
+            modelSale.setPathImage1(
+                    "http://didongthongminh.vn/images/products/2017/03/31/resized/samsung-galaxy-s8-plus-_1490956081.jpg");
+            modelSale.setChoiceCount(10);
+            data.setModelSale(modelSale);
             data.setQuantity(10);
             data.setStockMoldeName("Nokia E71");
-            data.setImageUrl(
-                    "http://didongthongminh.vn/images/products/2017/03/31/resized/samsung-galaxy-s8-plus-_1490956081.jpg");
-            data.setCount(10);
             data.setSelect(0);
             data.setLstSerial(new ArrayList<SerialBO>());
             saleOrdersDetailList.add(data);
@@ -126,6 +138,28 @@ public class OrderDetailFragment extends BaseFragment implements OrderDetailFrag
     }
 
     @Override
+    public void clickCancelSell(SaleTrans saleTrans) {
+        ConfirmTransactionSellCancelFragment fragment =
+                ConfirmTransactionSellCancelFragment.newInstance(false, saleTrans, channelInfo);
+        FragmentTransaction transaction =
+                getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_sell_orders, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    @Override
+    public void onClickSell(SaleTrans saleTrans) {
+        ConfirmTransactionSellCancelFragment fragment =
+                ConfirmTransactionSellCancelFragment.newInstance(true, saleTrans, channelInfo);
+        FragmentTransaction transaction =
+                getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_sell_orders, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == GET_SERIAL && resultCode == Activity.RESULT_OK) {
             List<String> serials = GsonUtils.String2ListObject(
@@ -133,7 +167,8 @@ public class OrderDetailFragment extends BaseFragment implements OrderDetailFrag
                     String[].class);
             if (serials.size() < saleOrdersDetailSelect.getQuantity()) {
                 // TODO: 5/24/17 show error select serial
-                Toast.makeText(getActivity(), "Bạn chưa chọn đủ số lượn serial", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Bạn chưa chọn đủ số lượn serial", Toast.LENGTH_SHORT)
+                        .show();
             }
             saleOrdersDetailSelect.setLstSerial(Common.getSerialBlockBySerials(serials));
             saleOrdersDetailSelect.setSelect(serials.size());

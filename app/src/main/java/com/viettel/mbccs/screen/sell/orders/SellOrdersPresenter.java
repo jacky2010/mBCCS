@@ -143,24 +143,37 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
             sellOrdersView.showErrorDate();
             return;
         }
-
         GetListOrderRequest getListOrderRequest = new GetListOrderRequest();
-        getListOrderRequest.setShopId(staffInfo.get().getShopId());
-        getListOrderRequest.setStaffId(staffInfo.get().getStaffId());
-        getListOrderRequest.setIsdnChannel(channelInfoSelect.getChannelId());
-        getListOrderRequest.setToDate(String.valueOf(dateTo));
-        getListOrderRequest.setFromDate(String.valueOf(dateFrom));
-        getListOrderRequest.setOrderStatus(1);
+        //        getListOrderRequest.setShopId(staffInfo.get().getShopId());
+        //        getListOrderRequest.setStaffId(staffInfo.get().getStaffId());
+        //        getListOrderRequest.setIsdnChannel(channelInfoSelect.getChannelId());
+        //        getListOrderRequest.setToDate(String.valueOf(dateTo));
+        //        getListOrderRequest.setFromDate(String.valueOf(dateFrom));
+        //        getListOrderRequest.setOrderStatus(1);
+
+        // TODO: 5/29/17 fake data
+        getListOrderRequest.setShopId(213);
+        getListOrderRequest.setStaffId(3243);
+        getListOrderRequest.setIsdnChannel(23);
+        getListOrderRequest.setToDate("02/08/2017 00:00:00");
+        getListOrderRequest.setFromDate("02/05/2017 00:00:00");
+        getListOrderRequest.setOrderStatus(54366);
+
+        Session session = new Session();
+        session.setSessionId("54578345638");
+        getListOrderRequest.setSession(session);
+        getListOrderRequest.setApiCode(ApiCode.GetListOrder);
+        getListOrderRequest.setApiKey("464564575676");
 
         BaseRequest<GetListOrderRequest> baseRequest = new BaseRequest<>();
-        baseRequest.setRequest(getListOrderRequest);
+        baseRequest.setSession(session);
+        baseRequest.setUserName("smac");
         baseRequest.setApiCode(ApiCode.GetListOrder);
+        baseRequest.setApiKey("464564575676");
+        baseRequest.setToken("54353-543346-65464564-6546");
+        baseRequest.setRequest(getListOrderRequest);
 
-        // TODO: 5/18/17 get data
-        baseRequest.setApiKey("demo");
-        baseRequest.setSession(new Session());
-
-        banHangKhoTaiChinhRepository.searchSellOrders(baseRequest)
+        banHangKhoTaiChinhRepository.getListOrder(baseRequest)
                 .subscribe(new MBCCSSubscribe<GetListOrderResponse>() {
                     @Override
                     public void onSuccess(GetListOrderResponse object) {
