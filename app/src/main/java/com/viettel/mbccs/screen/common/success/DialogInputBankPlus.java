@@ -17,9 +17,7 @@ public class DialogInputBankPlus extends Dialog {
     private DialogInputBankPlusBinding mBinding;
 
     public ObservableField<String> phone;
-    public ObservableField<String> secureCode;
     public ObservableField<String> phoneError;
-    public ObservableField<String> secureCodeError;
     public ObservableBoolean isPassStateHide;
     public DialogInputListener dialogInputListener;
 
@@ -50,9 +48,7 @@ public class DialogInputBankPlus extends Dialog {
 
     private void init() {
         phone = new ObservableField<>();
-        secureCode = new ObservableField<>();
         phoneError = new ObservableField<>();
-        secureCodeError = new ObservableField<>();
         isPassStateHide = new ObservableBoolean();
         isPassStateHide.set(true);
     }
@@ -60,17 +56,13 @@ public class DialogInputBankPlus extends Dialog {
     @Override
     protected void onStop() {
         if (dialogInputListener != null) {
-            dialogInputListener.onDialogDissmiss(phone.get(), secureCode.get());
+            dialogInputListener.onDialogDissmiss(phone.get());
         }
         super.onStop();
     }
 
     public void setDialogInputListener(DialogInputListener dialogInputListener) {
         this.dialogInputListener = dialogInputListener;
-    }
-
-    public void clearInputedPass() {
-        secureCode.set("");
     }
 
     public void eyeClick() {
@@ -82,21 +74,18 @@ public class DialogInputBankPlus extends Dialog {
             phoneError.set(getContext().getResources().getString(R.string.input_empty));
             return;
         }
-        if (TextUtils.isEmpty(secureCode.get())) {
-            secureCodeError.set(getContext().getResources().getString(R.string.input_empty));
-            return;
-        }
+
         if (!ValidateUtils.isPhoneNumber(phone.get())) {
             phoneError.set(getContext().getResources().getString(R.string.not_phone));
             return;
         }
         if (dialogInputListener != null) {
-            dialogInputListener.onDialogDissmiss(phone.get(), secureCode.get());
+            dialogInputListener.onDialogDissmiss(phone.get());
         }
         dismiss();
     }
 
     public interface DialogInputListener {
-        void onDialogDissmiss(String phone, String secureCode);
+        void onDialogDissmiss(String phone);
     }
 }

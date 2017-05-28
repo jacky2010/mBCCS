@@ -71,7 +71,6 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
         staffInfo.set(new StaffInfo());
 
         GetListChannelByOwnerTypeIdRequest g = new GetListChannelByOwnerTypeIdRequest();
-        g.setShopId(staffInfo.get().getShopId());
         g.setStaffId(staffInfo.get().getStaffId());
         g.setChannelTypeId(staffInfo.get().getChannelTypeId());
 

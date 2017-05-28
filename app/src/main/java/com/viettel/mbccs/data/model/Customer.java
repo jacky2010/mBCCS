@@ -11,6 +11,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class Customer implements Parcelable {
 
+    @SerializedName("customerId")
+    @Expose
+    private String customerId;
+
     @SerializedName("customerName")
     @Expose
     private String customerName;
@@ -22,6 +26,14 @@ public class Customer implements Parcelable {
     @SerializedName("tin")
     @Expose
     private String tin;
+
+    public String getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
+    }
 
     public String getCustomerName() {
         return customerName;
@@ -47,6 +59,9 @@ public class Customer implements Parcelable {
         this.tin = tin;
     }
 
+    public Customer() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -54,15 +69,14 @@ public class Customer implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.customerId);
         dest.writeString(this.customerName);
         dest.writeString(this.address);
         dest.writeString(this.tin);
     }
 
-    public Customer() {
-    }
-
     protected Customer(Parcel in) {
+        this.customerId = in.readString();
         this.customerName = in.readString();
         this.address = in.readString();
         this.tin = in.readString();

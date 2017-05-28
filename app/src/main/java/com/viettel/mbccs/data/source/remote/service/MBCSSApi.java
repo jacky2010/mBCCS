@@ -1,6 +1,7 @@
 package com.viettel.mbccs.data.source.remote.service;
 
 import com.viettel.mbccs.data.model.LoginInfo;
+import com.viettel.mbccs.data.source.remote.request.CreateSaleTransChannelRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListChannelByOwnerTypeIdRequest;
@@ -18,6 +19,8 @@ import com.viettel.mbccs.data.source.remote.request.KPPOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.LoginRequest;
 import com.viettel.mbccs.data.source.remote.request.ViewInfoSerialRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseResponse;
+import com.viettel.mbccs.data.source.remote.response.CreateSaleTransChannelResponse;
+import com.viettel.mbccs.data.source.remote.response.CreateSaleTransRetailResponse;
 import com.viettel.mbccs.data.source.remote.response.GetInfoSaleTranResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListChannelByOwnerTypeIdResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListOrderResponse;
@@ -56,7 +59,7 @@ public interface MBCSSApi {
     Observable<BaseResponse<GetListOrderResponse>> getListOrder(
             @Body DataRequest<GetListOrderRequest> request);
 
-    @POST("/login")
+    @POST("/thonguyen/Sale_mBCCS/1.0.0/WS_getListChannelByOwnerTypeId")
     Observable<BaseResponse<GetListChannelByOwnerTypeIdResponse>> getListChannelByOwnerTypeId(
             @Body DataRequest<GetListChannelByOwnerTypeIdRequest> request);
 
@@ -64,7 +67,7 @@ public interface MBCSSApi {
     Observable<BaseResponse<TelecomServiceAndSaleProgramResponse>> getTelecomserviceAndSaleProgram(
             @Body DataRequest<GetTelecomServiceAndSaleProgramRequest> request);
 
-    @POST("/getserials")
+    @POST("thonguyen/Sale_mBCCS/1.0.0/WS_GetListSerial")
     Observable<BaseResponse<GetSerialsResponse>> getSerials(
             @Body DataRequest<GetSerialRequest> request);
 
@@ -80,13 +83,17 @@ public interface MBCSSApi {
     Observable<BaseResponse<GetTotalStockResponse>> getModelSales(
             @Body DataRequest<GetTotalStockRequest> request);
 
-    @POST("/getinfortrans")
+    @POST("thonguyen/Sale_mBCCS/1.0.0/WS_getSaleTransInfo")
     Observable<BaseResponse<GetInfoSaleTranResponse>> getSaleTransInfo(
             @Body DataRequest<GetInfoSaleTranRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_CreateSaleTransRetail")
-    Observable<BaseResponse<GetInfoSaleTranResponse>> createSaleTransRetail(
+    Observable<BaseResponse<CreateSaleTransRetailResponse>> createSaleTransRetail(
             @Body DataRequest<GetInfoSaleTranRequest> request);
+
+    @POST("thonguyen/Sale_mBCCS/1.0.0/WS_CreateSaleTransChannel")
+    Observable<BaseResponse<CreateSaleTransChannelResponse>> createSaleTransChannel(
+            @Body DataRequest<CreateSaleTransChannelRequest> request);
 
     @POST("/getliststockmodel")
     Observable<BaseResponse<GetListStockModelResponse>> getListStockModel(

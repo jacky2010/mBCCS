@@ -11,6 +11,7 @@ import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.model.SaleProgram;
 import com.viettel.mbccs.data.model.TeleComService;
+import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
@@ -46,9 +47,11 @@ public class SaleRetailPresenter
     private SaleProgram currentSaleProgram = new SaleProgram();
     private TeleComService currentTelecomService = new TeleComService();
     private int currentStockPosition = -1;
-    private UserRepository mUserRepository;
+
     private DataRequest<GetTelecomServiceAndSaleProgramRequest>
             mGetTelecomServiceAndSaleProgramRequest;
+    private BanHangKhoTaiChinhRepository mBanHangKhoTaiChinhRepository;
+
     private DataRequest<GetTotalStockRequest> mGetTotalStockRequest;
     private CompositeSubscription mSubscription;
 
@@ -56,7 +59,7 @@ public class SaleRetailPresenter
         mContext = context;
         mViewModel = viewModel;
         mSubscription = new CompositeSubscription();
-        mUserRepository = UserRepository.getInstance();
+        mBanHangKhoTaiChinhRepository = BanHangKhoTaiChinhRepository.getInstance();
         init();
         loadServiceAndProgram();
     }
@@ -77,29 +80,32 @@ public class SaleRetailPresenter
         request.setStateId(StockTotalType.TYPE_NEW);
         request.setSaleTransType(SaleTranType.SALE_RETAIL);
         //TODO set attribute for request
+
         mGetTotalStockRequest.setParameterApi(request);
-        Subscription subscription = mUserRepository.getModelSales(mGetTotalStockRequest)
-                .subscribe(new MBCCSSubscribe<GetTotalStockResponse>() {
-                    @Override
-                    public void onSuccess(GetTotalStockResponse object) {
-                        mModelSales.clear();
-                        mModelSales.addAll(object.getModelSaleList());
-                        stockAdapter.notifyDataSetChanged();
-                    }
+        Subscription subscription =
+                mBanHangKhoTaiChinhRepository.getModelSales(mGetTotalStockRequest)
+                        .subscribe(new MBCCSSubscribe<GetTotalStockResponse>() {
+                            @Override
+                            public void onSuccess(GetTotalStockResponse object) {
+                                mModelSales.clear();
+                                mModelSales.addAll(object.getModelSaleList());
+                                stockAdapter.notifyDataSetChanged();
+                            }
 
-                    @Override
-                    public void onError(BaseException error) {
+                            @Override
+                            public void onError(BaseException error) {
 
-                        DialogUtils.showDialogError(mContext, null, error.getMessage(), null);
-                        //fakeModelSale();
-                    }
+                                DialogUtils.showDialogError(mContext, null, error.getMessage(),
+                                        null);
+                                //fakeModelSale();
+                            }
 
-                    @Override
-                    public void onRequestFinish() {
-                        super.onRequestFinish();
-                        mViewModel.hideLoading();
-                    }
-                });
+                            @Override
+                            public void onRequestFinish() {
+                                super.onRequestFinish();
+                                mViewModel.hideLoading();
+                            }
+                        });
 
         mSubscription.add(subscription);
     }
@@ -114,7 +120,7 @@ public class SaleRetailPresenter
         request.setShopId("123");
         mGetTelecomServiceAndSaleProgramRequest.setParameterApi(request);
 
-        Subscription subscription = mUserRepository.getTelecomserviceAndSaleProgram(
+        Subscription subscription = mBanHangKhoTaiChinhRepository.getTelecomserviceAndSaleProgram(
                 mGetTelecomServiceAndSaleProgramRequest)
                 .subscribe(new MBCCSSubscribe<TelecomServiceAndSaleProgramResponse>() {
                     @Override

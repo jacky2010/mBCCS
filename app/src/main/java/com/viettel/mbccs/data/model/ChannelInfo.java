@@ -16,70 +16,70 @@ public class ChannelInfo implements Parcelable, Serializable {
     public static final String CHANNEL_TYPE_SHOP = "1";
     public static final String CHANNEL_TYPE_STAFF = "2";
 
-    @SerializedName("ChannelId")
+    @SerializedName("channelId")
     @Expose
     private long channelId;
 
-    @SerializedName("ChannelCode")
+    @SerializedName("channelCode")
     @Expose
     private String channelCode;
 
-    @SerializedName("ChannelType")
+    @SerializedName("channelType")
     @Expose
-    private String channelType;
+    private long channelType;
 
-    @SerializedName("ChannelName")
+    @SerializedName("channelName")
     @Expose
     private String channelName;
 
-    @SerializedName("Address")
+    @SerializedName("address")
     @Expose
     private String address;
 
-    @SerializedName("Tel")
+    @SerializedName("tel")
     @Expose
     private String tel;
 
-    @SerializedName("ManagementId")
+    @SerializedName("managementId")
     @Expose
     private long managementId;
 
-    @SerializedName("ManagementCode")
+    @SerializedName("managementCode")
     @Expose
     private String managementCode;
 
-    @SerializedName("ManagementType")
+    @SerializedName("managementType")
     @Expose
     private String managementType;
 
-    @SerializedName("ManagementName")
+    @SerializedName("managementName")
     @Expose
     private String managementName;
 
-    @SerializedName("ShopId")
+    @SerializedName("shopId")
     @Expose
     private long shopId;
 
-    @SerializedName("ShopCode")
+    @SerializedName("shopCode")
     @Expose
     private String shopCode;
 
-    @SerializedName("ShopName")
+    @SerializedName("shopName")
     @Expose
     private String shopName;
 
-    @SerializedName("PricePolicy")
+    @SerializedName("pricePolicy")
     @Expose
     private String pricePolicy;
 
-    @SerializedName("DiscountPolicy")
+    @SerializedName("discountPolicy")
     @Expose
     private String discountPolicy;
 
     public ChannelInfo() {
     }
 
-    public ChannelInfo(long channelId, String channelCode, String channelType, String channelName,
+    public ChannelInfo(long channelId, String channelCode, long channelType, String channelName,
             String address, String tel, long managementId, String managementCode,
             String managementType, String managementName, long shopId, String shopCode,
             String shopName, String pricePolicy, String discountPolicy) {
@@ -108,7 +108,7 @@ public class ChannelInfo implements Parcelable, Serializable {
     protected ChannelInfo(Parcel in) {
         channelId = in.readLong();
         channelCode = in.readString();
-        channelType = in.readString();
+        channelType = in.readLong();
         channelName = in.readString();
         address = in.readString();
         tel = in.readString();
@@ -144,7 +144,7 @@ public class ChannelInfo implements Parcelable, Serializable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(channelId);
         dest.writeString(channelCode);
-        dest.writeString(channelType);
+        dest.writeLong(channelType);
         dest.writeString(channelName);
         dest.writeString(address);
         dest.writeString(tel);
@@ -175,14 +175,11 @@ public class ChannelInfo implements Parcelable, Serializable {
         this.channelCode = channelCode;
     }
 
-    public String getChannelType() {
-        if (TextUtils.isEmpty(channelType)) {
-            return "0";
-        }
+    public long getChannelType() {
         return channelType;
     }
 
-    public void setChannelType(String channelType) {
+    public void setChannelType(long channelType) {
         this.channelType = channelType;
     }
 

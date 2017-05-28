@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.databinding.ObservableField;
 import android.text.TextUtils;
 import com.viettel.mbccs.R;
+import com.viettel.mbccs.constance.SerialStateType;
 import com.viettel.mbccs.data.model.SerialBO;
 import com.viettel.mbccs.data.model.SerialPickerModel;
+import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
@@ -48,7 +50,7 @@ public class SerialPickerPresenter
     private Set<String> mSerialSelected = new HashSet<>();
     private SerialBO currentSerialBlock = new SerialBO();
     private DataRequest<GetSerialRequest> mBaseRequest;
-    private UserRepository mUserRepository;
+    private BanHangKhoTaiChinhRepository mBanHangKhoTaiChinhRepository;
     private CompositeSubscription mSubscription;
 
     private SerialPickerModel mSerialPickerModel;
@@ -59,7 +61,7 @@ public class SerialPickerPresenter
         mViewModel = viewModel;
         mSerialPickerModel = serialPickerModel;
         mSubscription = new CompositeSubscription();
-        mUserRepository = UserRepository.getInstance();
+        mBanHangKhoTaiChinhRepository = BanHangKhoTaiChinhRepository.getInstance();
         init();
         loadSerial();
     }
@@ -87,22 +89,29 @@ public class SerialPickerPresenter
     private void loadSerial() {
         mViewModel.showLoading();
         GetSerialRequest mSerialRequest = new GetSerialRequest();
+
+        mSerialRequest.setOwnerType(2);
+        mSerialRequest.setOwnerId(1);//TODO
+        mSerialRequest.setStateId(SerialStateType.TYPE_NEW);
         mBaseRequest = new DataRequest<>();
         mBaseRequest.setParameterApi(mSerialRequest);
 
-        Subscription subscription = mUserRepository.getSerial(mBaseRequest)
+        Subscription subscription = mBanHangKhoTaiChinhRepository.getSerial(mBaseRequest)
                 .subscribe(new MBCCSSubscribe<GetSerialsResponse>() {
                     @Override
                     public void onSuccess(GetSerialsResponse object) {
-                        List<SerialBO> serialBOs = object.getLstSerialInStock();
-                        mSerials.addAll(Common.getSerialsByListSerialBlock(serialBOs));
-                        reCaculateSerial();
+                        if (object.getSerialInStock() != null
+                                && object.getSerialInStock().getSerialBOs().size() > 0) {
+                            List<SerialBO> serialBOs = object.getSerialInStock().getSerialBOs();
+                            mSerials.addAll(Common.getSerialsByListSerialBlock(serialBOs));
+                            reCaculateSerial();
+                        }
                     }
 
                     @Override
                     public void onError(BaseException error) {
-                        fakeData();
-                        //  DialogUtils.showDialogError(mContext, null, error.getMessage(), null);
+                        //fakeData();
+                        DialogUtils.showDialogError(mContext, null, error.getMessage(), null);
                     }
 
                     @Override

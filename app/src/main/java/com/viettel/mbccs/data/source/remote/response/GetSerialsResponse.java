@@ -3,6 +3,7 @@ package com.viettel.mbccs.data.source.remote.response;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.viettel.mbccs.data.model.SerialBO;
+import com.viettel.mbccs.data.model.StockSerial;
 import java.util.List;
 
 /**
@@ -11,27 +12,27 @@ import java.util.List;
 
 public class GetSerialsResponse extends DataResponse {
 
-    @SerializedName("lstSerialInStock")
+    @SerializedName("serialInStock")
     @Expose
-    private List<SerialBO> lstSerialInStock;
+    private StockSerial serialInStock;
 
-    @SerializedName("lstSerialSale")
+    @SerializedName("serialSale")
     @Expose
-    private List<SerialBO> lstSerialSale;
+    private StockSerial serialSale;
 
-    public List<SerialBO> getLstSerialInStock() {
-        return lstSerialInStock;
+    public StockSerial getSerialInStock() {
+        return serialInStock;
     }
 
-    public void setLstSerialInStock(List<SerialBO> lstSerialInStock) {
-        this.lstSerialInStock = lstSerialInStock;
+    public void setSerialInStock(StockSerial serialInStock) {
+        this.serialInStock = serialInStock;
     }
 
-    public List<SerialBO> getLstSerialSale() {
-        return lstSerialSale;
+    public StockSerial getSerialSale() {
+        return serialSale;
     }
 
-    public void setLstSerialSale(List<SerialBO> lstSerialSale) {
-        this.lstSerialSale = lstSerialSale;
+    public void setSerialSale(StockSerial serialSale) {
+        this.serialSale = serialSale;
     }
 }

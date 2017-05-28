@@ -7,11 +7,14 @@ import com.google.gson.annotations.SerializedName;
 import com.viettel.mbccs.MBCCSApplication;
 import com.viettel.mbccs.data.model.Session;
 
+import static android.R.attr.value;
+
 /**
  * Created by HuyQuyet on 5/27/17.
  */
 
-public class DataRequest<T>  {
+public class DataRequest<T> {
+
     @Expose
     @SerializedName("session")
     private Session mSession;
@@ -39,6 +42,7 @@ public class DataRequest<T>  {
     public DataRequest() {
         mSession = MBCCSApplication.session;
         apiKey = MBCCSApplication.apiKey;
+        userName = MBCCSApplication.userName;
     }
 
     public Session getSession() {
@@ -88,6 +92,4 @@ public class DataRequest<T>  {
     public void setParameterApi(T parameterApi) {
         this.parameterApi = parameterApi;
     }
-
-
 }

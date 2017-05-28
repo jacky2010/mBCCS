@@ -12,7 +12,7 @@ import java.util.List;
 public class GetListChannelByOwnerTypeIdResponse extends DataResponse {
 
     @Expose
-    @SerializedName("channelInfoList")
+    @SerializedName("lstChannelInfo")
     private List<ChannelInfo> channelInfoList;
 
     public List<ChannelInfo> getChannelInfoList() {

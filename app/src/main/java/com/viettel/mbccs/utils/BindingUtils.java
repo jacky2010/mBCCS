@@ -369,6 +369,9 @@ public class BindingUtils {
 
     @BindingAdapter("error")
     public static void setTextError(EditText textView, String error) {
+        if (error != null) {
+            textView.requestFocus();
+        }
         textView.setError(error);
     }
 
@@ -386,5 +389,10 @@ public class BindingUtils {
     @BindingAdapter({ "setBackgroundColor" })
     public static void setBackgroundColor(View v, @ColorRes int color) {
         v.setBackground(new ColorDrawable(color));
+    }
+
+    @BindingAdapter("requestFocus")
+    public static void requestFocus(TextView textView, boolean isFocus) {
+        textView.requestFocus();
     }
 }
