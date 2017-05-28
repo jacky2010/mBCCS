@@ -13,39 +13,39 @@ import java.util.List;
 
 public class ModelSale implements Serializable {
 
-    @SerializedName("StockModelId")
+    @SerializedName("stockModelId")
     @Expose
     private long stockModelId;
 
-    @SerializedName("StockModelCode")
+    @SerializedName("stockModelCode")
     @Expose
     private String stockModelCode;
 
-    @SerializedName("StockMoldeName")
+    @SerializedName("stockMoldeName")
     @Expose
     private String stockMoldeName;
 
-    @SerializedName("Quantity")
+    @SerializedName("quantity")
     @Expose
     private long quantity;
 
-    @SerializedName("QuantityIssue")
+    @SerializedName("quantityIssue")
     @Expose
     private long quantityIssue;
 
-    @SerializedName("Path_image1")
+    @SerializedName("path_image1")
     @Expose
     private String pathImage1;
 
-    @SerializedName("pathImage2")
+    @SerializedName("path_image2")
     @Expose
     private String pathImage2;
 
-    @SerializedName("pathImage3")
+    @SerializedName("path_image3")
     @Expose
     private String pathImage3;
 
-    @SerializedName("Price")
+    @SerializedName("price")
     @Expose
     private double price;
 

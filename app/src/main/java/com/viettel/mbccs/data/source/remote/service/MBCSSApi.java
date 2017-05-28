@@ -59,7 +59,7 @@ public interface MBCSSApi {
     Observable<BaseResponse<GetListChannelByOwnerTypeIdResponse>> getListChannelByOwnerTypeId(
             @Body BaseRequest<GetListChannelByOwnerTypeIdRequest> request);
 
-    @POST("/telecomservice_salproram")
+    @POST("thonguyen/Sale_mBCCS/1.0.0/WS_GetTelecomServiceAndSaleProgram")
     Observable<BaseResponse<TelecomServiceAndSaleProgramResponse>> getTelecomserviceAndSaleProgram(
             @Body BaseRequest<GetTelecomServiceAndSaleProgramRequest> request);
 
@@ -71,7 +71,7 @@ public interface MBCSSApi {
     Observable<BaseResponse<GetOrderInfoResponse>> getOrderInfo(
             @Body BaseRequest<GetOrderInfoRequest> request);
 
-    @POST("/getsalemodel")
+    @POST("thonguyen/Sale_mBCCS/1.0.0/WS_GetStockTotal")
     Observable<BaseResponse<GetTotalStockResponse>> getModelSales(
             @Body BaseRequest<GetTotalStockRequest> request);
 
@@ -79,7 +79,7 @@ public interface MBCSSApi {
     Observable<BaseResponse<GetInfoSaleTranResponse>> getSaleTransInfo(
             @Body BaseRequest<GetInfoSaleTranRequest> request);
 
-    @POST("/savetransaction")
+    @POST("thonguyen/Sale_mBCCS/1.0.0/WS_CreateSaleTransRetail")
     Observable<BaseResponse<GetInfoSaleTranResponse>> createSaleTransRetail(
             @Body BaseRequest<GetInfoSaleTranRequest> request);
 

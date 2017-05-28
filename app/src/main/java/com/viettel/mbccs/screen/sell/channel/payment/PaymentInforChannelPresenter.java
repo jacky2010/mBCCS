@@ -109,9 +109,9 @@ public class PaymentInforChannelPresenter implements PaymentInforChannelContract
             request.setTelecomserviceId(mTeleComService.getId());
         }
         if (mSaleProgram.getId() != -1) {
-            request.setSaleProgrameCode(Long.parseLong(mSaleProgram.getCode()));
+            request.setSaleProgrameCode((mSaleProgram.getCode()));
         }
-        request.setSaleTransType(SaleTranType.SALE_RETAIL);
+        request.setSaleTransType(String.valueOf(SaleTranType.SALE_CHANNEL));
         //Customer customer = new Customer();
         //customer.setTin(tin.get());
         //customer.setAddress(address.get());

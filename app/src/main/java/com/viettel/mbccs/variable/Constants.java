@@ -1,6 +1,7 @@
 package com.viettel.mbccs.variable;
 
 import com.viettel.mbccs.data.model.LoginInfo;
+import com.viettel.mbccs.data.model.Session;
 
 /**
  * Created by eo_cuong on 5/10/17.
@@ -61,6 +62,15 @@ public class Constants {
          * put when log in
          */
         public static final String LOGIN_INFO = "LOGIN_INFO";
+
+        /**
+         * key to enscrypt and save to sharepreference (value instanceOf {@link Session})
+         */
+        public static final String SESSION = "session";
+
+        public static final String API_KEY = "api_key";
+        public static final String SESSION_VTG = "session_vtg";
+        public static final String API_KEY_VTG = "api_key_vtg";
     }
 
     public class BundleConstant {

@@ -6,11 +6,11 @@ import java.io.Serializable;
 
 public class TeleComService implements Serializable{
 
-    @SerializedName("TelecomServiceId")
+    @SerializedName("telecomServiceId")
     @Expose
     private long id;
 
-    @SerializedName("TelecomServiceName")
+    @SerializedName("telecomServiceName")
     @Expose
     private String name;
 

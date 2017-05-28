@@ -7,7 +7,7 @@ import android.text.TextUtils;
 import android.widget.ArrayAdapter;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.StockTotalType;
-import com.viettel.mbccs.constance.WsCode;
+import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
@@ -84,7 +84,7 @@ public class FindStockPresenter
         saveStockToList();
 
         mGetListStockModelRequestBaseRequest = new BaseRequest<>();
-        mGetListStockModelRequestBaseRequest.setWsCode(WsCode.GetStockTotal);
+        mGetListStockModelRequestBaseRequest.setApiCode(ApiCode.GetStockTotal);
         GetListStockModelRequest request = new GetListStockModelRequest();
         request.setStockModelId(code.get());
         if (stockType != -1) {

@@ -12,7 +12,7 @@ import java.util.List;
 public class GetTotalStockResponse extends DataResponse {
 
     @Expose
-    @SerializedName("modelSaleList")
+    @SerializedName("lstModelSale")
     private List<ModelSale> modelSaleList;
 
     public List<ModelSale> getModelSaleList() {

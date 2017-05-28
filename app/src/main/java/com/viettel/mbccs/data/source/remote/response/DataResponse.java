@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class DataResponse {
-    @SerializedName("error_code")
+    @SerializedName("errorCode")
     private String errorCode;
 
     @SerializedName("errorMessage")

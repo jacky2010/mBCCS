@@ -17,15 +17,15 @@ public class StockSerial implements Serializable {
     @Expose
     private long stockModelId;
 
-    @SerializedName("StockModelCode")
+    @SerializedName("stockModelCode")
     @Expose
     private String stockModelCode;
 
-    @SerializedName("StockMoldeName")
+    @SerializedName("stockMoldeName")
     @Expose
     private String stockMoldeName;
 
-    @SerializedName("Quantity")
+    @SerializedName("quantity")
     @Expose
     private long quantity;
 

@@ -14,10 +14,17 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RequestHelper {
-    private static final int CONNECTION_TIMEOUT = 1;
+
+    public static MBCSSApi instance1;
+    public static MBCSSApi instance2;
+
+    private static final int CONNECTION_TIMEOUT = 30;
 
     public static MBCSSApi getRequest() {
-        return getRequest(false, false);
+        if (instance1 == null) {
+            instance1 = getRequest(false, false);
+        }
+        return instance1;
     }
 
     public static MBCSSApi getRequestHeader() {
@@ -25,12 +32,14 @@ public class RequestHelper {
     }
 
     public static MBCSSApi getRequestMultipart() {
-        return getRequest(false, true);
+        if (instance2 == null) {
+            instance2 = getRequest(false, true);
+        }
+        return instance2;
     }
 
     public static MBCSSApi getRequest(boolean isHeader, boolean isMultiPart) {
         HttpLoggingInterceptor logging = getHttpLoggingInterceptor();
-
         OkHttpClient client;
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.connectTimeout(CONNECTION_TIMEOUT, TimeUnit.SECONDS);
@@ -91,6 +100,4 @@ public class RequestHelper {
             }
         };
     }
-
-
 }

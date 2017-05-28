@@ -7,7 +7,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Toast;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.OrderStatus;
-import com.viettel.mbccs.constance.WsCode;
+import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.SaleOrders;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
@@ -92,7 +92,7 @@ public class KPPOrderPresenter implements KPPOrderContract.Presenter {
         }
         mViewModel.showLoading();
         mGetListOrderRequestBaseRequest = new BaseRequest<>();
-        mGetListOrderRequestBaseRequest.setWsCode(WsCode.GetListOrder);
+        mGetListOrderRequestBaseRequest.setApiCode(ApiCode.GetListOrder);
         GetListOrderRequest request = new GetListOrderRequest();
         request.setOrderStatus(status);
         request.setFromDate("");
