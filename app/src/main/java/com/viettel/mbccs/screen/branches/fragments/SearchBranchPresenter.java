@@ -79,29 +79,29 @@ public class SearchBranchPresenter implements SearchBranchContract.Presenter {
 
             List<BranchItem> items = new ArrayList<>();
 
-            BranchItem branch = new BranchItem();
-            branch.setDocumentNo("1111111");
-            branch.setChannelCode("CH11");
-
-            items.add(branch);
-
-            branch = new BranchItem();
-            branch.setDocumentNo("1111112");
-            branch.setChannelCode("CH12");
-
-            items.add(branch);
-
-            branch = new BranchItem();
-            branch.setDocumentNo("1111113");
-            branch.setChannelCode("CH13");
-
-            items.add(branch);
-
-            branch = new BranchItem();
-            branch.setDocumentNo("1111114");
-            branch.setChannelCode("CH14");
-
-            items.add(branch);
+//            BranchItem branch = new BranchItem();
+//            branch.setDocumentNo("1111111");
+//            branch.setChannelCode("CH11");
+//
+//            items.add(branch);
+//
+//            branch = new BranchItem();
+//            branch.setDocumentNo("1111112");
+//            branch.setChannelCode("CH12");
+//
+//            items.add(branch);
+//
+//            branch = new BranchItem();
+//            branch.setDocumentNo("1111113");
+//            branch.setChannelCode("CH13");
+//
+//            items.add(branch);
+//
+//            branch = new BranchItem();
+//            branch.setDocumentNo("1111114");
+//            branch.setChannelCode("CH14");
+//
+//            items.add(branch);
 
             brachesAdapter.setBranchItems(items);
 

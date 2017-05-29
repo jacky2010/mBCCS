@@ -117,8 +117,8 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_60"
-                    android:inputType="textMultiLine"
                     android:background="@drawable/bg_order"
+                    android:inputType="textMultiLine"
                     android:text="@={ presenter.address }" />
 
                 <TextView
@@ -129,11 +129,17 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
-                <EditText
+                <LinearLayout
+                    android:background="@drawable/bg_border"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_40"
-                    android:background="@drawable/bg_order"
-                    android:text="@={ presenter.location }" />
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_40"
+                        android:background="@drawable/bg_order"
+                        android:text="@={ presenter.location }" />
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="match_parent"

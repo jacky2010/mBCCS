@@ -89,7 +89,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:padding="5dp"
-                        android:text="@string/channel_code"
+                        android:text="@string/channel_label_code"
                         android:textColor="#000"
                         />
 
@@ -108,7 +108,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:padding="5dp"
-                        android:text="@string/channel_name"
+                        android:text="@string/channel_label_name"
                         android:textColor="#000"
                         />
 
@@ -127,7 +127,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:padding="5dp"
-                        android:text="@string/tax_code"
+                        android:text="@string/common_label_tax_code"
                         android:textColor="#000"
                         />
 
