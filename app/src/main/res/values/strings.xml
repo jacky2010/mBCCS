@@ -204,51 +204,59 @@ Từ <b>%s</b><br>
     ]]></string>
     <string name="confirm_sale_retail">Xác nhận bán lẻ</string>
     <string name="no_serial">Chưa có sản phẩm nào được chọn</string>
-    <string name="branches_search_document_no">Số giấy tờ (*)</string>
-    <string name="branches_channel_code">Mã kênh:</string>
-    <string name="branches_customer_id">Số CMTND:</string>
-    <string name="branches_search_not_found">Chưa tồn tại kênh có số giấy tờ này, bạn có thể thêm mới</string>
-    <string name="branches_add_channel_type">Loại kênh</string>
-    <string name="branches_add_phone_no">Số điện thoại</string>
-    <string name="branches_add_document_type">Loại giấy tờ</string>
-    <string name="branches_add_document_id">Số giấy tờ</string>
-    <string name="branches_add_address">Địa chỉ</string>
-    <string name="branches_add_location">Toạ độ</string>
-    <string name="branches_add_manager">Nhân viên quản lý</string>
-    <string name="branches_add_bts">BTS</string>
-    <string name="branches_add_contract">Hợp đồng</string>
-    <string name="branches_add">Thêm Mới</string>
-    <string name="branches_add_image">Ảnh</string>
-    <string name="branches_search_isdn">Số thuê bao</string>
+
+
+    <!--Create Branch-->
+    <string name="branches_search_label_document_no">Số giấy tờ (*)</string>
+    <string name="branches_label_channel_code">Mã kênh:</string>
+    <string name="branches_label_customer_id">Số CMTND:</string>
+    <string name="branches_msg_error_search_not_found">Chưa tồn tại kênh có số giấy tờ này, bạn có thể thêm mới</string>
+    <string name="branches_add_label_channel_type">Loại kênh</string>
+    <string name="branches_add_label_phone_no">Số điện thoại</string>
+    <string name="branches_add_label_document_type">Loại giấy tờ</string>
+    <string name="branches_add_label_document_id">Số giấy tờ</string>
+    <string name="branches_add_label_address">Địa chỉ</string>
+    <string name="branches_add_label_location">Toạ độ</string>
+    <string name="branches_add_label_manager">Nhân viên quản lý</string>
+    <string name="branches_add_label_bts">BTS</string>
+    <string name="branches_add_label_contract">Hợp đồng</string>
+    <string name="branches_add_label_add">Thêm Mới</string>
+    <string name="branches_add_label_image">Ảnh</string>
+    <string name="branches_search_label_isdn">Số thuê bao</string>
     <string name="branches_error_search_key_required">Số Giấy Tờ không được để trống!</string>
-    <string name="channel_code">Mã kênh</string>
-    <string name="channel_name">Tên kênh</string>
-    <string name="tax_code">Mã số thuế</string>
-    <string name="change_sim_document_id">Số giấy tờ</string>
-    <string name="change_sim_select_sim">Chọn thông tin</string>
-    <string name="change_sim_select_sim_error_debit">Thuê bao còn đang nợ cước, đề nghị vào thanh toán cước trước khi đổi sim!</string>
-    <string name="change_sim_select_sim_error_bar1">Thuê bao đang ở trạng thái chặn %s chiều do KHYC, thực hiện mở trước khi thay !</string>
-    <string name="change_sim_cust_info">Thông tin khách hàng</string>
-    <string name="change_sim_cust_name">Tên khách hàng</string>
-    <string name="change_sim_address">Địa chỉ</string>
-    <string name="change_sim_sim_info">Thông tin đổi sim</string>
-    <string name="change_sim_old_serial">Serial cũ</string>
-    <string name="change_sim_new_serial">Serial mới</string>
-    <string name="change_sim_contact_info">Số thường xuyên liên lạc</string>
-    <string name="change_sim_contact_1">Số thường LL 1</string>
-    <string name="change_sim_contact_2">Số thường LL 2</string>
-    <string name="change_sim_contact_3">Số thường LL 3</string>
-    <string name="change_sim_contact_4">Số thường LL 4</string>
-    <string name="change_sim_contact_5">Số thường LL 5</string>
-    <string name="change_sim_trans_info">Thông tin giao dịch</string>
-    <string name="change_sim_service_fee">Phí dịch vụ:</string>
-    <string name="change_sim_sim_fee">Phí Sim:</string>
-    <string name="change_sim_total_fee">Tổng:</string>
-    <string name="no_data">Không tìm thấy thông tin tương ứng</string>
+    <!--Create Branch-->
+
+    <string name="channel_label_code">Mã kênh</string>
+    <string name="channel_label_name">Tên kênh</string>
+    <string name="common_label_tax_code">Mã số thuế</string>
+
+    <!--Change Sim-->
+    <string name="change_sim_label_document_id">Số giấy tờ</string>
+    <string name="change_sim_label_select_sim">Chọn thông tin</string>
+    <string name="change_sim_label_select_sim_error_debit">Thuê bao còn đang nợ cước, đề nghị vào thanh toán cước trước khi đổi sim!</string>
+    <string name="change_sim_label_select_sim_error_bar1">Thuê bao đang ở trạng thái chặn %s chiều do KHYC, thực hiện mở trước khi thay !</string>
+    <string name="change_sim_label_cust_info">Thông tin khách hàng</string>
+    <string name="change_sim_label_cust_name">Tên khách hàng</string>
+    <string name="change_sim_label_address">Địa chỉ</string>
+    <string name="change_sim_label_sim_info">Thông tin đổi sim</string>
+    <string name="change_sim_label_old_serial">Serial cũ</string>
+    <string name="change_sim_label_new_serial">Serial mới</string>
+    <string name="change_sim_label_contact_info">Số thường xuyên liên lạc</string>
+    <string name="change_sim_label_contact_1">Số thường LL 1</string>
+    <string name="change_sim_label_contact_2">Số thường LL 2</string>
+    <string name="change_sim_label_contact_3">Số thường LL 3</string>
+    <string name="change_sim_label_contact_4">Số thường LL 4</string>
+    <string name="change_sim_label_contact_5">Số thường LL 5</string>
+    <string name="change_sim_label_trans_info">Thông tin giao dịch</string>
+    <string name="change_sim_label_service_fee">Phí dịch vụ:</string>
+    <string name="change_sim_label_sim_fee">Phí Sim:</string>
+    <string name="change_sim_label_total_fee">Tổng:</string>
+    <string name="common_msg_error_no_data">Không tìm thấy thông tin tương ứng</string>
     <string name="change_sim_error_search_key_required">Bạn phải nhập thông tin tìm kiếm!</string>
-    <string name="sim_serial2">Số serial:</string>
-    <string name="cust_name2">Tên khách hàng:</string>
-    <string name="change_sim">Thực Hiện Đổi Sim</string>
+    <string name="change_sim_label_sim_serial2">Số serial:</string>
+    <string name="change_sim_label_cust_name2">Tên khách hàng:</string>
+    <string name="change_sim_label_change">Thực Hiện Đổi Sim</string>
+    <!--Change Sim-->
 
     <string name="view_ware_house_title">Chi tiết kho</string>
     <string name="view_ware_house_list_stock">Danh sách mặt hàng (%1$d)</string>
@@ -275,33 +283,45 @@ Từ <b>%s</b><br>
     <string name="view_ware_house_search_filter">Lọc</string>
     <string name="view_ware_house_search_all">-Tất cả-</string>
 
-    <string name="sell_anypay_cust_type">Loại khách hàng</string>
-    <string name="sell_anypay_isdn">Số ISDN</string>
-    <string name="sell_anypay_pay_method">Hình thức thanh toán</string>
-    <string name="sell_anypay_amount_default">Số tiền</string>
-    <string name="sell_anypay_amount_other">Số khác</string>
-    <string name="sell_anypay_amount_other_hint">Nhập số tiền</string>
-    <string name="sell_anypay_channel_code">Mã kênh</string>
-    <string name="sell_anypay_isdn_wallet">Số điện thoại ví</string>
-    <string name="sell_anypay_total_amount">Tổng tiền:</string>
-    <string name="sell_anypay_discount">Chiết khấu:</string>
-    <string name="sell_anypay_bankplus">Bank Plus</string>
-    <string name="sell_anypay_phone_no">Số điện thoại</string>
-    <string name="sell_anypay_acc_no">Số tài khoản</string>
-    <string name="sell_anypay_pay_amount">Số tiền phải thanh toán:</string>
-    <string name="sell_anypay">Bán AnyPay</string>
-    <string name="sell_anypay_confirm_sell">Bạn có muốn bán AnyPay cho khách hàng %s?</string>
-    <string name="sell_anypay_confirm_pre_tax">Trước thuế:</string>
-    <string name="sell_anypay_confirm_tax">Tiền thuế:</string>
-    <string name="sell_anypay_confirm_discount">Chiết khấu:</string>
-    <string name="sell_anypay_confirm_total">Tổng tiền phải trả:</string>
-    <string name="choose_staff">Chọn nhân viên</string>
-    <string name="choose_bts">Chọn BTS</string>
-    <string name="transfer_anypay_trans_type">Loại giao dịch</string>
-    <string name="transfer_anypay_isdn">Số ISDN</string>
-    <string name="transfer_anypay_amount">Số tiền</string>
-    <string name="transfer_anypay_transfer">Chuyển AnyPay</string>
-    <string name="transfer_anypay_refill">Nạp AnyPay</string>
+    <!--Sell AnyPay-->
+    <string name="sell_anypay_label_cust_type">Loại khách hàng</string>
+    <string name="sell_anypay_label_isdn">Số ISDN</string>
+    <string name="sell_anypay_label_pay_method">Hình thức thanh toán</string>
+    <string name="sell_anypay_label_amount_default">Số tiền</string>
+    <string name="sell_anypay_label_amount_other">Số khác</string>
+    <string name="sell_anypay_label_amount_other_hint">Nhập số tiền</string>
+    <string name="sell_anypay_label_channel_code">Mã kênh</string>
+    <string name="sell_anypay_label_isdn_wallet">Số điện thoại ví</string>
+    <string name="sell_anypay_label_total_amount">Tổng tiền:</string>
+    <string name="sell_anypay_label_discount">Chiết khấu:</string>
+    <string name="sell_anypay_label_bankplus">Bank Plus</string>
+    <string name="sell_anypay_label_phone_no">Số điện thoại</string>
+    <string name="sell_anypay_label_acc_no">Số tài khoản</string>
+    <string name="sell_anypay_label_pay_amount">Số tiền phải thanh toán:</string>
+    <string name="sell_anypay_label_sell">Bán AnyPay</string>
+    <string name="sell_anypay_msg_confirm_sell">Bạn có muốn bán AnyPay cho khách hàng %s?</string>
+    <string name="sell_anypay_label_confirm_pre_tax">Trước thuế:</string>
+    <string name="sell_anypay_label_confirm_tax">Tiền thuế:</string>
+    <string name="sell_anypay_label_confirm_discount">Chiết khấu:</string>
+    <string name="sell_anypay_label_confirm_total">Tổng tiền phải trả:</string>
+    <string name="sell_anypay_msg_confirm_refill_label_cust">Bạn có muốn nạp AnyPay cho khách hàng %s?</string>
+    <string name="sell_anypay_msg_confirm_transfer_label_cust">Bạn có muốn chuyển AnyPay cho khách hàng %s?</string>
+    <string name="sell_anypay_label_pre_tax">Trước thuế:</string>
+    <string name="sell_anypay_refill_label_tax">Tiền thuế:</string>
+    <string name="sell_anypay_label_discount2">Chiết khấu:</string>
+    <string name="sell_anypay_refill_label_total">Tổng tiền phải trả:</string>
+    <!--Sell AnyPay-->
+
+    <string name="common_label_choose_staff">Chọn nhân viên</string>
+    <string name="common_label_choose_bts">Chọn BTS</string>
+
+    <!--Transfer AnyPay-->
+    <string name="transfer_anypay_label_trans_type">Loại giao dịch</string>
+    <string name="transfer_anypay_label_isdn">Số ISDN</string>
+    <string name="transfer_anypay_label_amount">Số tiền</string>
+    <string name="transfer_anypay_label_transfer">Chuyển AnyPay</string>
+    <string name="transfer_anypay_label_refill">Nạp AnyPay</string>
+    <!--Transfer AnyPay-->
 
     <!--kpp-->
     <string name="kpp_order">KPP Đặt hàng</string>
@@ -481,16 +501,10 @@ Từ <b>%s</b><br>
     <string name="input_order_dialog_success_title">Nhập hóa đơn thành công</string>
     <string name="input_order_dialog_sucess_description">Dải hóa đơn bạn nhập đã được ghi lại thành công.</string>
 
-    <string name="confirm_refill_label_cust">Bạn có muốn nạp AnyPay cho khách hàng %s?</string>
-    <string name="confirm_transfer_label_cust">Bạn có muốn chuyển AnyPay cho khách hàng %s?</string>
-    <string name="confirm_refill_label_pre_tax">Trước thuế:</string>
-    <string name="confirm_refill_label_tax">Tiền thuế:</string>
-    <string name="confirm_refill_label_discount">Chiết khấu:</string>
-    <string name="confirm_refill_label_total">Tổng tiền phải trả:</string>
-
     <!--Base search input reposotory-->
     <string name="base_search_lable_from">Từ</string>
     <string name="base_search_lable_to">Đến</string>
     <string name="common_lable_search">Tìm kiếm</string>
+    <string name="common_label_update">Cập nhật</string>
 
 </resources>
