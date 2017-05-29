@@ -30,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_8"
-                android:text="@string/branches_search_isdn"
+                android:text="@string/branches_search_label_isdn"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_16"
                 android:visibility="gone" />
@@ -46,7 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_8"
-                android:text="@string/branches_search_document_no"
+                android:text="@string/branches_search_label_document_no"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_16" />
 
@@ -125,7 +125,7 @@
                     android:padding="@dimen/dp_10"
                     android:paddingEnd="@dimen/dp_8"
                     android:paddingStart="@dimen/dp_8"
-                    android:text="@string/branches_search_not_found"
+                    android:text="@string/branches_msg_error_search_not_found"
                     app:layout_marginLeftPercent="10%"
                     app:layout_marginRightPercent="10%" />
             </android.support.v7.widget.CardView>
@@ -145,7 +145,7 @@
                 android:onClick="@{ v -> presenter.addNewDocument() }"
                 android:paddingEnd="@dimen/dp_8"
                 android:paddingStart="@dimen/dp_8"
-                android:text="@string/branches_add"
+                android:text="@string/branches_add_label_add"
                 android:textColor="@color/white"
                 app:layout_marginLeftPercent="10%"
                 app:layout_marginRightPercent="10%" />

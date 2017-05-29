@@ -137,9 +137,9 @@ public class CreateTransferAnyPayFragment extends BaseDataBindFragment<FragmentC
     public void onTransferTypeChanged(CreateTransferAnyPayContract.TransferType method) {
         try{
             if(method == CreateTransferAnyPayContract.TransferType.TRANSFER){
-                mBinding.btnExecute.setText(getString(R.string.transfer_anypay_transfer));
+                mBinding.btnExecute.setText(getString(R.string.transfer_anypay_label_transfer));
             }else if(method == CreateTransferAnyPayContract.TransferType.REFILL){
-                mBinding.btnExecute.setText(getString(R.string.transfer_anypay_refill));
+                mBinding.btnExecute.setText(getString(R.string.transfer_anypay_label_refill));
             }
         }catch (Exception e){
             e.printStackTrace();

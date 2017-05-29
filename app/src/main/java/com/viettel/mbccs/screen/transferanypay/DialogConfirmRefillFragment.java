@@ -67,7 +67,7 @@ public class DialogConfirmRefillFragment extends BaseDialog {
             Bundle args = getArguments();
 
             if(args != null){
-                tvTrans.setText(getString(R.string.confirm_refill_label_cust, args.getString(Constants.BundleConstant.CUSTOMER_ITEM)));
+                tvTrans.setText(getString(R.string.sell_anypay_msg_confirm_refill_label_cust, args.getString(Constants.BundleConstant.CUSTOMER_ITEM)));
                 tvPreTax.setText(args.getString(Constants.BundleConstant.PRE_TAX));
                 tvTax.setText(args.getString(Constants.BundleConstant.TAX));
                 tvDiscount.setText(args.getString(Constants.BundleConstant.DISCOUNT));

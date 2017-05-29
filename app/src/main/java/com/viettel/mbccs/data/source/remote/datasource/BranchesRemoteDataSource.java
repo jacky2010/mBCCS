@@ -5,6 +5,8 @@ import com.viettel.mbccs.data.source.remote.IBranchesRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.request.AddBranchRequest;
 import com.viettel.mbccs.data.source.remote.request.SearchBranchKeyRequest;
 import com.viettel.mbccs.data.source.remote.request.SearchBranchRequest;
+import com.viettel.mbccs.data.source.remote.response.CreateDistributedChannelResponse;
+import com.viettel.mbccs.data.source.remote.response.GetDistributedChannelResponse;
 import com.viettel.mbccs.data.source.remote.service.RequestHelper;
 import com.viettel.mbccs.utils.rx.SchedulerUtils;
 
@@ -30,7 +32,7 @@ public class BranchesRemoteDataSource implements IBranchesRemoteDataSource {
     }
 
     @Override
-    public Observable<BranchItem> getDistributtedChannelInfo(String isdn, String documentId) {
+    public Observable<GetDistributedChannelResponse> getDistributtedChannelInfo(String isdn, String documentId) {
 
         SearchBranchKeyRequest key = new SearchBranchKeyRequest();
         key.setIsdn(isdn);
@@ -41,19 +43,19 @@ public class BranchesRemoteDataSource implements IBranchesRemoteDataSource {
 
         return RequestHelper.getRequest()
                 .getDistributtedChannelInfo(request)
-                .flatMap(SchedulerUtils.<BranchItem>convertDataFlatMap())
-                .compose(SchedulerUtils.<BranchItem>applyAsyncSchedulers());
+                .flatMap(SchedulerUtils.<GetDistributedChannelResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<GetDistributedChannelResponse>applyAsyncSchedulers());
     }
 
     @Override
-    public Observable<BranchItem> createDistributtedChannel(BranchItem item) {
+    public Observable<CreateDistributedChannelResponse> createDistributtedChannel(BranchItem item) {
 
         AddBranchRequest request = new AddBranchRequest();
         request.setObjectBO(item);
 
         return RequestHelper.getRequest()
                 .createDistributtedChannel(request)
-                .flatMap(SchedulerUtils.<BranchItem>convertDataFlatMap())
-                .compose(SchedulerUtils.<BranchItem>applyAsyncSchedulers());
+                .flatMap(SchedulerUtils.<CreateDistributedChannelResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<CreateDistributedChannelResponse>applyAsyncSchedulers());
     }
 }

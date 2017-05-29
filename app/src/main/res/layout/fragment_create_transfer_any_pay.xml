@@ -30,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_8"
-                android:text="@string/transfer_anypay_trans_type"
+                android:text="@string/transfer_anypay_label_trans_type"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_16" />
 
@@ -50,7 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_8"
-                android:text="@string/sell_anypay_isdn"
+                android:text="@string/sell_anypay_label_isdn"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_16" />
 
@@ -65,7 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_8"
-                android:text="@string/sell_anypay_amount_default"
+                android:text="@string/sell_anypay_label_amount_default"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_16" />
 
@@ -122,7 +122,7 @@
                     android:layout_weight="1"
                     android:text="@={presenter.refillAmount}"
                     android:background="@drawable/bg_order"
-                    android:hint="@string/sell_anypay_amount_other_hint"
+                    android:hint="@string/sell_anypay_label_amount_other_hint"
                     android:inputType="number" />
             </LinearLayout>
 
@@ -132,7 +132,7 @@
                 android:layout_height="@dimen/dp_40"
                 android:layout_weight="1"
                 android:background="@drawable/bg_order"
-                android:hint="@string/sell_anypay_amount_other_hint"
+                android:hint="@string/sell_anypay_label_amount_other_hint"
                 android:inputType="number"
                 android:text="@={presenter.transferAmount}"
                 android:visibility="@{presenter.transferType == presenter.PAY_METHOD_TRANSFER ? View.VISIBLE : View.GONE}" />

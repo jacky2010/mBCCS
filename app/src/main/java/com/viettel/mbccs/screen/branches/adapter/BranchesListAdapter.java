@@ -23,6 +23,7 @@ public class BranchesListAdapter extends RecyclerView.Adapter<BranchesListAdapte
 
     private Context mContext;
     private List<BranchItem> mBranchItems;
+    private OnItemClickListener listener;
 
     public BranchesListAdapter(Context context, List<BranchItem> branchItems) {
         mContext = context;
@@ -85,7 +86,8 @@ public class BranchesListAdapter extends RecyclerView.Adapter<BranchesListAdapte
             mBinding.btnUpdate.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    if(listener != null)
+                        listener.onClick(view, mBranchItem);
                 }
             });
         }
@@ -95,5 +97,13 @@ public class BranchesListAdapter extends RecyclerView.Adapter<BranchesListAdapte
             ItemBranchPresenter itemBranchPresenter = new ItemBranchPresenter(mContext, item);
             mBinding.setPresenter(itemBranchPresenter);
         }
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
+    public interface OnItemClickListener{
+        void onClick(View view, BranchItem item);
     }
 }

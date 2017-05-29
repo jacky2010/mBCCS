@@ -37,7 +37,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/branches_channel_code"
+                        android:text="@string/branches_label_channel_code"
                         android:textStyle="bold" />
 
                     <TextView
@@ -58,7 +58,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/branches_customer_id"
+                        android:text="@string/branches_label_customer_id"
                         android:textStyle="bold" />
 
                     <TextView
@@ -81,7 +81,7 @@
                     android:id="@+id/btnUpdate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Cap nhat"
+                    android:text="@string/common_label_update"
                     android:layout_gravity="center_vertical|center_horizontal" />
             </LinearLayout>
         </LinearLayout>

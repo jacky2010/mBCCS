@@ -34,7 +34,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
-                    android:text="@string/branches_add_channel_type"
+                    android:text="@string/branches_add_label_channel_type"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
@@ -54,7 +54,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
-                    android:text="@string/branches_add_phone_no"
+                    android:text="@string/branches_add_label_phone_no"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
@@ -69,7 +69,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
-                    android:text="@string/branches_add_document_type"
+                    android:text="@string/branches_add_label_document_type"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
@@ -88,7 +88,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
-                    android:text="@string/branches_add_document_id"
+                    android:text="@string/branches_add_label_document_id"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
@@ -102,7 +102,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
-                    android:text="@string/branches_add_image"
+                    android:text="@string/branches_add_label_image"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
@@ -110,7 +110,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
-                    android:text="@string/branches_add_address"
+                    android:text="@string/branches_add_label_address"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
@@ -125,7 +125,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
-                    android:text="@string/branches_add_location"
+                    android:text="@string/branches_add_label_location"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
@@ -139,7 +139,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
-                    android:text="@string/branches_add_manager"
+                    android:text="@string/branches_add_label_manager"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
@@ -178,7 +178,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
-                    android:text="@string/branches_add_bts"
+                    android:text="@string/branches_add_label_bts"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
@@ -215,7 +215,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
-                    android:text="@string/branches_add_contract"
+                    android:text="@string/branches_add_label_contract"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
@@ -231,7 +231,7 @@
                 android:onClick="@{ () -> presenter.addNewDocument() }"
                 android:paddingEnd="@dimen/dp_8"
                 android:paddingStart="@dimen/dp_8"
-                android:text="@string/branches_add"
+                android:text="@string/branches_add_label_add"
                 android:textColor="@color/white"
                 app:layout_marginLeftPercent="10%"
                 app:layout_marginRightPercent="10%" />

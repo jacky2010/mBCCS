@@ -1,7 +1,7 @@
 package com.viettel.mbccs.data.model;
 
 import com.google.gson.annotations.Expose;
-import com.viettel.mbccs.base.BaseModel;
+import com.viettel.mbccs.data.source.remote.response.DataResponse;
 
 import java.io.Serializable;
 
@@ -9,7 +9,7 @@ import java.io.Serializable;
  * Created by minhnx on 5/19/17.
  */
 
-public class BranchItem extends BaseModel implements Serializable{
+public class BranchItem extends DataResponse implements Serializable{
     @Expose
     private String channelType;
     @Expose

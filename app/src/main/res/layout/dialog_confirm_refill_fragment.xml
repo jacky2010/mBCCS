@@ -66,7 +66,7 @@
                     style="@style/ItemBilling"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/confirm_refill_label_pre_tax"/>
+                    android:text="@string/sell_anypay_label_pre_tax"/>
                 <com.viettel.mbccs.widget.CustomTextView
                     android:id="@+id/tv_pre_tax"
                     style="@style/ItemBilling"
@@ -78,7 +78,7 @@
                     style="@style/ItemBilling"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/confirm_refill_label_tax"/>
+                    android:text="@string/sell_anypay_refill_label_tax"/>
                 <com.viettel.mbccs.widget.CustomTextView
                     android:id="@+id/tv_tax"
                     style="@style/ItemBilling"
@@ -91,7 +91,7 @@
                     style="@style/ItemBilling"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/confirm_refill_label_discount"/>
+                    android:text="@string/sell_anypay_label_discount2"/>
                 <com.viettel.mbccs.widget.CustomTextView
                     android:id="@+id/tv_discount"
                     style="@style/ItemBilling"
@@ -103,7 +103,7 @@
                     style="@style/ItemBilling"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/confirm_refill_label_total"/>
+                    android:text="@string/sell_anypay_refill_label_total"/>
                 <com.viettel.mbccs.widget.CustomTextView
                     android:id="@+id/tv_total"
                     style="@style/ItemBilling"

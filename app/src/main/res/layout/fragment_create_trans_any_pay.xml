@@ -29,7 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_8"
-                android:text="@string/sell_anypay_cust_type"
+                android:text="@string/sell_anypay_label_cust_type"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_16" />
 
@@ -49,7 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_8"
-                android:text="@string/sell_anypay_channel_code"
+                android:text="@string/sell_anypay_label_channel_code"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_16"
                 android:visibility="@{presenter.customerType == presenter.CUST_TYPE_INDIVIDUAL ? View.GONE : View.VISIBLE}" />
@@ -66,7 +66,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_8"
-                android:text="@string/sell_anypay_isdn"
+                android:text="@string/sell_anypay_label_isdn"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_16" />
 
@@ -81,7 +81,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_8"
-                android:text="@string/sell_anypay_pay_method"
+                android:text="@string/sell_anypay_label_pay_method"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_16" />
 
@@ -101,7 +101,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_8"
-                android:text="@string/sell_anypay_bankplus"
+                android:text="@string/sell_anypay_label_bankplus"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_16"
                 android:visibility="@{presenter.payMethod == presenter.PAY_METHOD_BANK_PLUS ? View.VISIBLE : View.GONE}" />
@@ -122,7 +122,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/dp_10"
-                        android:text="@string/sell_anypay_phone_no"
+                        android:text="@string/sell_anypay_label_phone_no"
                         android:checked="@{presenter.defaultBankIsdnChecked}"
                         android:onCheckedChanged="@{(cb, isChecked) -> presenter.onBankIsdnCheckChanged(cb, isChecked)}"/>
 
@@ -130,7 +130,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_10"
-                        android:text="@string/sell_anypay_acc_no"
+                        android:text="@string/sell_anypay_label_acc_no"
                         android:checked="@{!presenter.defaultBankIsdnChecked}"
                         android:onCheckedChanged="@{(cb, isChecked) -> presenter.onBankAccountCheckChanged(cb, isChecked)}"/>
                 </RadioGroup>
@@ -147,7 +147,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_8"
-                android:text="@string/sell_anypay_isdn_wallet"
+                android:text="@string/sell_anypay_label_isdn_wallet"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_16"
                 android:visibility="@{presenter.payMethod == presenter.PAY_METHOD_E_WALLET ? View.VISIBLE : View.GONE}" />
@@ -164,7 +164,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_8"
-                android:text="@string/sell_anypay_amount_default"
+                android:text="@string/sell_anypay_label_amount_default"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_16"
                 android:visibility="@{presenter.payMethod == presenter.PAY_METHOD_CASH || presenter.payMethod == presenter.PAY_METHOD_E_WALLET || presenter.payMethod == presenter.PAY_METHOD_BANK_PLUS ? View.VISIBLE : View.GONE}" />
@@ -174,7 +174,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_40"
                 android:background="@drawable/bg_order"
-                android:hint="@string/sell_anypay_amount_other_hint"
+                android:hint="@string/sell_anypay_label_amount_other_hint"
                 android:inputType="number"
                 android:visibility="@{presenter.payMethod == presenter.PAY_METHOD_E_WALLET ? View.VISIBLE : View.GONE}" />
 
@@ -242,7 +242,7 @@
                     android:layout_height="@dimen/dp_40"
                     android:layout_weight="1"
                     android:background="@drawable/bg_order"
-                    android:hint="@string/sell_anypay_amount_other_hint"
+                    android:hint="@string/sell_anypay_label_amount_other_hint"
                     android:inputType="number" />
             </LinearLayout>
 
@@ -271,7 +271,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/sell_anypay_total_amount" />
+                            android:text="@string/sell_anypay_label_total_amount" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -287,7 +287,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/sell_anypay_discount" />
+                            android:text="@string/sell_anypay_label_discount" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -303,7 +303,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/sell_anypay_pay_amount" />
+                            android:text="@string/sell_anypay_label_pay_amount" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -324,7 +324,7 @@
                 android:onClick="@{ () -> presenter.createTransaction() }"
                 android:paddingEnd="@dimen/dp_8"
                 android:paddingStart="@dimen/dp_8"
-                android:text="@string/branches_add"
+                android:text="@string/branches_add_label_add"
                 android:textColor="@color/white"
                 app:layout_marginLeftPercent="10%"
                 app:layout_marginRightPercent="10%" />

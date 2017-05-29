@@ -47,7 +47,7 @@
                         android:layout_height="@dimen/dp_40"
                         android:layout_marginLeft="@dimen/dp_6"
                         android:gravity="center_vertical"
-                        android:text="@string/change_sim_cust_info"
+                        android:text="@string/change_sim_label_cust_info"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16"
                         android:textStyle="bold" />
@@ -57,7 +57,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
-                    android:text="@string/change_sim_cust_name"
+                    android:text="@string/change_sim_label_cust_name"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
@@ -71,7 +71,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
-                    android:text="@string/change_sim_document_id"
+                    android:text="@string/change_sim_label_document_id"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
@@ -85,7 +85,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
-                    android:text="@string/change_sim_address"
+                    android:text="@string/change_sim_label_address"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
@@ -116,7 +116,7 @@
                         android:layout_height="@dimen/dp_40"
                         android:layout_marginLeft="@dimen/dp_6"
                         android:gravity="center_vertical"
-                        android:text="@string/change_sim_sim_info"
+                        android:text="@string/change_sim_label_sim_info"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16"
                         android:textStyle="bold" />
@@ -126,7 +126,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
-                    android:text="@string/change_sim_old_serial"
+                    android:text="@string/change_sim_label_old_serial"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
@@ -144,7 +144,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
-                    android:text="@string/change_sim_new_serial"
+                    android:text="@string/change_sim_label_new_serial"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
@@ -179,7 +179,7 @@
                             android:layout_height="@dimen/dp_40"
                             android:layout_marginLeft="@dimen/dp_6"
                             android:gravity="center_vertical"
-                            android:text="@string/change_sim_contact_info"
+                            android:text="@string/change_sim_label_contact_info"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_16"
                             android:textStyle="bold" />
@@ -189,7 +189,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_8"
-                        android:text="@string/change_sim_contact_1"
+                        android:text="@string/change_sim_label_contact_1"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16" />
 
@@ -205,7 +205,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_8"
-                        android:text="@string/change_sim_contact_2"
+                        android:text="@string/change_sim_label_contact_2"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16" />
 
@@ -221,7 +221,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_8"
-                        android:text="@string/change_sim_contact_3"
+                        android:text="@string/change_sim_label_contact_3"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16" />
 
@@ -237,7 +237,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_8"
-                        android:text="@string/change_sim_contact_4"
+                        android:text="@string/change_sim_label_contact_4"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16" />
 
@@ -253,7 +253,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_8"
-                        android:text="@string/change_sim_contact_5"
+                        android:text="@string/change_sim_label_contact_5"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16" />
 
@@ -283,7 +283,7 @@
                         android:layout_height="@dimen/dp_40"
                         android:layout_marginLeft="@dimen/dp_6"
                         android:gravity="center_vertical"
-                        android:text="@string/change_sim_trans_info"
+                        android:text="@string/change_sim_label_trans_info"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16"
                         android:textStyle="bold" />
@@ -298,7 +298,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/change_sim_service_fee" />
+                        android:text="@string/change_sim_label_service_fee" />
 
                     <TextView
                         android:id="@+id/txtServiceFee"
@@ -314,7 +314,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/change_sim_sim_fee" />
+                        android:text="@string/change_sim_label_sim_fee" />
 
                     <TextView
                         android:id="@+id/txtSimFee"
@@ -330,7 +330,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/change_sim_total_fee"
+                        android:text="@string/change_sim_label_total_fee"
                         android:textStyle="bold" />
 
                     <TextView
@@ -352,7 +352,7 @@
                 android:onClick="@{ () -> presenter.changeSim() }"
                 android:paddingEnd="@dimen/dp_8"
                 android:paddingStart="@dimen/dp_8"
-                android:text="@string/change_sim"
+                android:text="@string/change_sim_label_change"
                 android:textColor="@color/white"
                 app:layout_marginLeftPercent="10%"
                 app:layout_marginRightPercent="10%" />

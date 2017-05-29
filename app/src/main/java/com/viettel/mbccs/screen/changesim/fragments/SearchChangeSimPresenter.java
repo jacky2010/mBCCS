@@ -95,7 +95,16 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
 
             changeSimListAdapter.set(changeSimAdapter);
 
-//            searchFound.set(false); //TODO minhnx
+            if(changeSimAdapter.getItemCount() > 0){
+                searchFound.set(true);
+
+                viewModel.onSimFound(isdn.get(), documentType.get(), documentId.get());
+            }else{
+                searchFound.set(false);
+
+                viewModel.onSimNotFound(isdn.get(), documentType.get(), documentId.get());
+            }
+
         }catch (Exception e){
             e.printStackTrace();
         }

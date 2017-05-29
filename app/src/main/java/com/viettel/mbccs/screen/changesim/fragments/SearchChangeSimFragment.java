@@ -86,12 +86,20 @@ public class SearchChangeSimFragment extends BaseDataBindFragment<FragmentSearch
 
     @Override
     public void onSimFound(String isdn, String documentType, String documentId) {
-
+        try{
+            hideSoftInput();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void onSimNotFound(String isdn, String documentType, String documentId) {
-
+        try{
+            hideSoftInput();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override

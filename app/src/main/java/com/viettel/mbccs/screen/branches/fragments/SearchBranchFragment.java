@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindFragment;
+import com.viettel.mbccs.data.model.BranchItem;
 import com.viettel.mbccs.databinding.FragmentSearchBranchBinding;
 import com.viettel.mbccs.utils.ActivityUtils;
 import com.viettel.mbccs.variable.Constants;
@@ -67,6 +68,11 @@ public class SearchBranchFragment extends BaseDataBindFragment<FragmentSearchBra
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onPrepareUpdateBranch(BranchItem item) {
+
     }
 
     @Override

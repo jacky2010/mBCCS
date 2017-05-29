@@ -37,7 +37,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/sim_serial2"
+                        android:text="@string/change_sim_label_sim_serial2"
                         android:textStyle="bold" />
 
                     <TextView
@@ -58,7 +58,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/cust_name2"
+                        android:text="@string/change_sim_label_cust_name2"
                         android:textStyle="bold" />
 
                     <TextView
@@ -81,7 +81,7 @@
                     android:id="@+id/btnUpdate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Cap nhat"
+                    android:text="@string/common_label_update"
                     android:layout_gravity="center_vertical|center_horizontal" />
             </LinearLayout>
         </LinearLayout>

@@ -1,25 +1,7 @@
 package com.viettel.mbccs.data.source.remote.service;
 
-import com.viettel.mbccs.data.model.BranchItem;
-import com.viettel.mbccs.data.model.Area;
-import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.LoginInfo;
-import com.viettel.mbccs.data.model.ModelSale;
-import com.viettel.mbccs.data.model.SaleOrders;
-import com.viettel.mbccs.data.model.SaleTrans;
-import com.viettel.mbccs.data.model.StockSerial;
-import com.viettel.mbccs.data.model.StockTotal;
-import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
-import com.viettel.mbccs.data.source.remote.request.GetListStockModelRequest;
-import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
-import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
-import com.viettel.mbccs.data.source.remote.request.ViewInfoSerialRequest;
-import com.viettel.mbccs.data.source.remote.response.GetSerialsReponse;
-import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import com.viettel.mbccs.data.source.remote.request.AddBranchRequest;
-import com.viettel.mbccs.data.model.Shop;
-import com.viettel.mbccs.data.model.StockSerial;
-import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListChannelByOwnerTypeIdRequest;
@@ -37,6 +19,8 @@ import com.viettel.mbccs.data.source.remote.request.LoginRequest;
 import com.viettel.mbccs.data.source.remote.request.SearchBranchRequest;
 import com.viettel.mbccs.data.source.remote.request.ViewInfoSerialRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseResponse;
+import com.viettel.mbccs.data.source.remote.response.CreateDistributedChannelResponse;
+import com.viettel.mbccs.data.source.remote.response.GetDistributedChannelResponse;
 import com.viettel.mbccs.data.source.remote.response.GetInfoSaleTranResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListChannelByOwnerTypeIdResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListOrderResponse;
@@ -50,10 +34,6 @@ import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
 import com.viettel.mbccs.data.source.remote.response.SendCodeChangePassResponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import com.viettel.mbccs.data.source.remote.response.ViewInfoSerialResponse;
-
-
-import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
-import java.util.List;
 
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -109,11 +89,11 @@ public interface MBCSSApi {
             @Body BaseRequest<GetInfoSaleTranRequest> request);
 
     @POST("/getDistributtedChannelInfo")
-    Observable<BaseResponse<BranchItem>> getDistributtedChannelInfo(
+    Observable<BaseResponse<GetDistributedChannelResponse>> getDistributtedChannelInfo(
             @Body SearchBranchRequest request);
 
     @POST("/createDistributtedChannel")
-    Observable<BaseResponse<BranchItem>> createDistributtedChannel(
+    Observable<BaseResponse<CreateDistributedChannelResponse>> createDistributtedChannel(
             @Body AddBranchRequest request);
     @POST("/getliststockmodel")
     Observable<BaseResponse<GetListStockModelResponse>> getListStockModel(
