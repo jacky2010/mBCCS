@@ -312,8 +312,8 @@ Từ <b>%s</b><br>
     <string name="sell_anypay_refill_label_total">Tổng tiền phải trả:</string>
     <!--Sell AnyPay-->
 
-    <string name="common_label_choose_staff">Chọn nhân viên</string>
-    <string name="common_label_choose_bts">Chọn BTS</string>
+    <string name="choose_staff">Chọn nhân viên</string>
+    <string name="choose_bts">Chọn BTS</string>
 
     <!--Transfer AnyPay-->
     <string name="transfer_anypay_label_trans_type">Loại giao dịch</string>
