@@ -13,7 +13,7 @@ import com.viettel.mbccs.data.model.Session;
 
 public class DataRequest implements Parcelable{
     @Expose
-    @SerializedName("sessionId")
+    @SerializedName("session")
     private Session mSession;
 
     @Expose

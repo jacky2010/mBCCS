@@ -1,6 +1,5 @@
 package com.viettel.mbccs.data.source.remote.datasource;
 
-import com.viettel.mbccs.data.model.Reason;
 import com.viettel.mbccs.data.source.remote.IBanHangKhoTaiChinhRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListChannelByOwnerTypeIdRequest;
@@ -21,10 +20,10 @@ import com.viettel.mbccs.data.source.remote.response.GetListShopResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListStockModelResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListTTKDResponse;
 import com.viettel.mbccs.data.source.remote.response.GetOrderInfoResponse;
+import com.viettel.mbccs.data.source.remote.response.GetReasonResponse;
 import com.viettel.mbccs.data.source.remote.response.ViewInfoSerialResponse;
 import com.viettel.mbccs.data.source.remote.service.RequestHelper;
 import com.viettel.mbccs.utils.rx.SchedulerUtils;
-import java.util.List;
 import rx.Observable;
 
 /**
@@ -46,7 +45,7 @@ public class BanHangKhoTaiChinhRemoteDataSource implements IBanHangKhoTaiChinhRe
     }
 
     @Override
-    public Observable<GetListOrderResponse> searchSellOrders(
+    public Observable<GetListOrderResponse> getListOrder(
             BaseRequest<GetListOrderRequest> request) {
         return RequestHelper.getRequest()
                 .getListOrder(request)
@@ -73,8 +72,11 @@ public class BanHangKhoTaiChinhRemoteDataSource implements IBanHangKhoTaiChinhRe
     }
 
     @Override
-    public Observable<List<Reason>> getListReason(BaseRequest<GetResonRequest> request) {
-        return null;
+    public Observable<GetReasonResponse> getListReason(BaseRequest<GetResonRequest> request) {
+        return RequestHelper.getRequest()
+                .getListReason(request)
+                .flatMap(SchedulerUtils.<GetReasonResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<GetReasonResponse>applyAsyncSchedulers());
     }
 
     @Override

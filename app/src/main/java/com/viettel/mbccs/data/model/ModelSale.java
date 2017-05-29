@@ -1,5 +1,7 @@
 package com.viettel.mbccs.data.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.viettel.mbccs.utils.Common;
@@ -11,7 +13,7 @@ import java.util.List;
  * Created by eo_cuong on 4/14/17.
  */
 
-public class ModelSale implements Serializable {
+public class ModelSale implements Serializable, Parcelable {
 
     @SerializedName("stockModelId")
     @Expose
@@ -61,6 +63,61 @@ public class ModelSale implements Serializable {
     private List<SerialBO> mSerialBlocks = new ArrayList<>();
     @Expose
     private List<String> mSerials = new ArrayList<>();
+
+    public ModelSale() {
+    }
+
+    protected ModelSale(Parcel in) {
+        stockModelId = in.readLong();
+        stockModelCode = in.readString();
+        stockMoldeName = in.readString();
+        quantity = in.readLong();
+        quantityIssue = in.readLong();
+        pathImage1 = in.readString();
+        pathImage2 = in.readString();
+        pathImage3 = in.readString();
+        price = in.readDouble();
+        vat = in.readDouble();
+        choiceCount = in.readInt();
+        serialCount = in.readInt();
+        mSerialBlocks = in.createTypedArrayList(SerialBO.CREATOR);
+        mSerials = in.createStringArrayList();
+    }
+
+    public static final Creator<ModelSale> CREATOR = new Creator<ModelSale>() {
+        @Override
+        public ModelSale createFromParcel(Parcel in) {
+            return new ModelSale(in);
+        }
+
+        @Override
+        public ModelSale[] newArray(int size) {
+            return new ModelSale[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(stockModelId);
+        dest.writeString(stockModelCode);
+        dest.writeString(stockMoldeName);
+        dest.writeLong(quantity);
+        dest.writeLong(quantityIssue);
+        dest.writeString(pathImage1);
+        dest.writeString(pathImage2);
+        dest.writeString(pathImage3);
+        dest.writeDouble(price);
+        dest.writeDouble(vat);
+        dest.writeInt(choiceCount);
+        dest.writeInt(serialCount);
+        dest.writeTypedList(mSerialBlocks);
+        dest.writeStringList(mSerials);
+    }
 
     public List<SerialBO> getSerialBlocks() {
         if (mSerialBlocks.size() == 0) {

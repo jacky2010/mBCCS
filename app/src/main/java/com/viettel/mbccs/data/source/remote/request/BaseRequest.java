@@ -14,6 +14,9 @@ public class BaseRequest<T extends DataRequest> extends DataVTGRequest {
     private String userName;
 
     @Expose
+    @SerializedName("token")
+    private String token;
+    @Expose
     @SerializedName("wsRequest")
     private T request;
 
@@ -27,6 +30,14 @@ public class BaseRequest<T extends DataRequest> extends DataVTGRequest {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public T getRequest() {

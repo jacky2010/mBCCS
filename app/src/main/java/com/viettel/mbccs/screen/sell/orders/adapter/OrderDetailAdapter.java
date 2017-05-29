@@ -71,11 +71,11 @@ public class OrderDetailAdapter
             }
             position = pos;
             saleOrdersDetail = item;
-            imageUrl.set(saleOrdersDetail.getImageUrl());
+            imageUrl.set(saleOrdersDetail.getModelSale().getPathImage1());
             nameStock.set(saleOrdersDetail.getStockMoldeName());
-            priceStock.set(Common.formatDouble(saleOrdersDetail.getPrice()));
+            priceStock.set(Common.formatDouble(saleOrdersDetail.getModelSale().getPrice()));
             quantityStock.set(String.valueOf(saleOrdersDetail.getQuantity()));
-            countStock.set(String.valueOf(saleOrdersDetail.getCount()));
+            countStock.set(String.valueOf(saleOrdersDetail.getModelSale().getChoiceCount()));
             selectStock.set(String.valueOf(saleOrdersDetail.getSelect()));
         }
 
