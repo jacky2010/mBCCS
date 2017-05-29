@@ -5,16 +5,19 @@ import android.content.Context;
 import android.databinding.ObservableField;
 import android.widget.ArrayAdapter;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.constance.WsCode;
+import com.viettel.mbccs.constance.SaleTranType;
+import com.viettel.mbccs.constance.StockTotalType;
+import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.model.SaleProgram;
 import com.viettel.mbccs.data.model.TeleComService;
-import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
-import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
+import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
+import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import com.viettel.mbccs.screen.sell.retail.adapter.StockAdapter;
 import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
@@ -61,7 +64,7 @@ public class SaleRetailPresenter
     private void loadModelSale() {
         mViewModel.showLoading();
         mGetTotalStockRequest = new BaseRequest<>();
-        mGetTotalStockRequest.setWsCode(WsCode.GetStockTotal);
+        mGetTotalStockRequest.setApiCode(ApiCode.GetStockTotal);
         GetTotalStockRequest request = new GetTotalStockRequest();
         if (currentSaleProgram.getId() != -1) {
             request.setSaleProgameId(currentSaleProgram.getId());
@@ -69,22 +72,26 @@ public class SaleRetailPresenter
         if (currentTelecomService.getId() != -1) {
             request.setTelecomServiceId(currentTelecomService.getId());
         }
+        request.setOwnerId(0);
+        request.setOwnerType(10);
+        request.setStateId(StockTotalType.TYPE_NEW);
+        request.setSaleTransType(SaleTranType.SALE_RETAIL);
         //TODO set attribute for request
         mGetTotalStockRequest.setRequest(request);
         Subscription subscription = mUserRepository.getModelSales(mGetTotalStockRequest)
-                .subscribe(new MBCCSSubscribe<List<ModelSale>>() {
+                .subscribe(new MBCCSSubscribe<GetTotalStockResponse>() {
                     @Override
-                    public void onSuccess(List<ModelSale> object) {
+                    public void onSuccess(GetTotalStockResponse object) {
                         mModelSales.clear();
-                        mModelSales.addAll(object);
-                        mAdapter.notifyDataSetChanged();
+                        mModelSales.addAll(object.getModelSaleList());
+                        stockAdapter.notifyDataSetChanged();
                     }
 
                     @Override
                     public void onError(BaseException error) {
 
-                        //DialogUtils.showDialogError(mContext, null, error.getMessage(), null);
-                        fakeModelSale();
+                        DialogUtils.showDialogError(mContext, null, error.getMessage(), null);
+                        //fakeModelSale();
                     }
 
                     @Override
@@ -100,9 +107,12 @@ public class SaleRetailPresenter
     private void loadServiceAndProgram() {
         mViewModel.showLoading();
         mGetTelecomServiceAndSaleProgramRequest = new BaseRequest<>();
-        mGetTelecomServiceAndSaleProgramRequest.setWsCode(WsCode.GetTelecomServiceAndSaleProgram);
+        mGetTelecomServiceAndSaleProgramRequest.setUserName("Cuong");
+        mGetTelecomServiceAndSaleProgramRequest.setApiCode(ApiCode.GetTelecomServiceAndSaleProgram);
         GetTelecomServiceAndSaleProgramRequest request =
                 new GetTelecomServiceAndSaleProgramRequest();
+        request.setShopId("123");
+        request.setApiCode(ApiCode.GetTelecomServiceAndSaleProgram);
         mGetTelecomServiceAndSaleProgramRequest.setRequest(request);
 
         Subscription subscription = mUserRepository.getTelecomserviceAndSaleProgram(
@@ -117,7 +127,7 @@ public class SaleRetailPresenter
                                 mContext.getResources().getString(R.string.all_));
                         mTeleComServices.add(0, defaultTelecomSercie);
 
-                        SaleProgram defaultSaleProgram = new SaleProgram(-1,
+                        SaleProgram defaultSaleProgram = new SaleProgram(-1, null,
                                 mContext.getResources().getString(R.string.all_));
                         mSalePrograms.add(0, defaultSaleProgram);
 
@@ -131,9 +141,9 @@ public class SaleRetailPresenter
 
                     @Override
                     public void onError(BaseException error) {
-                        //DialogUtils.showDialogError(mContext, null, error.getMessage(), null);
-                        fakeData();
-                        loadModelSale();
+                        DialogUtils.showDialogError(mContext, null, error.getMessage(), null);
+                        //fakeData();
+                        //loadModelSale();
                     }
 
                     @Override

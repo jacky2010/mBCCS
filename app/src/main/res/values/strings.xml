@@ -488,4 +488,9 @@ Từ <b>%s</b><br>
     <string name="confirm_refill_label_discount">Chiết khấu:</string>
     <string name="confirm_refill_label_total">Tổng tiền phải trả:</string>
 
+    <!--Base search input reposotory-->
+    <string name="base_search_lable_from">Từ</string>
+    <string name="base_search_lable_to">Đến</string>
+    <string name="common_lable_search">Tìm kiếm</string>
+
 </resources>

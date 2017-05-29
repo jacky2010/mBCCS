@@ -4,14 +4,13 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.viettel.mbccs.data.model.Customer;
 import com.viettel.mbccs.data.model.StockSerial;
-import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by eo_cuong on 5/19/17.
  */
 
-public class GetInfoSaleTranRequest implements Serializable{
+public class GetInfoSaleTranRequest extends DataRequest{
 
     @SerializedName("shopId")
     @Expose
@@ -29,11 +28,11 @@ public class GetInfoSaleTranRequest implements Serializable{
     @Expose
     private Customer mCustomer;
 
-    @SerializedName("paymentMethod")
+    @SerializedName("payMethod")
     @Expose
     private String paymentMethod;
 
-    @SerializedName("IsdnPay")
+    @SerializedName("isdnPay")
     @Expose
     private String IsdnPay;
 
@@ -43,13 +42,13 @@ public class GetInfoSaleTranRequest implements Serializable{
 
     @SerializedName("saleProgrameCode")
     @Expose
-    private long saleProgrameCode;
+    private String saleProgrameCode;
 
     @SerializedName("saleTransType")
     @Expose
     private String saleTransType;
 
-    @SerializedName("chanelId")
+    @SerializedName("channelId")
     @Expose
     private long chanelId;
 
@@ -125,11 +124,11 @@ public class GetInfoSaleTranRequest implements Serializable{
         this.telecomserviceId = telecomserviceId;
     }
 
-    public long getSaleProgrameCode() {
+    public String getSaleProgrameCode() {
         return saleProgrameCode;
     }
 
-    public void setSaleProgrameCode(long saleProgrameCode) {
+    public void setSaleProgrameCode(String saleProgrameCode) {
         this.saleProgrameCode = saleProgrameCode;
     }
 

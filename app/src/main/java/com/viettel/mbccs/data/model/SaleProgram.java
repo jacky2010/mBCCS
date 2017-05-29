@@ -22,17 +22,19 @@ public class SaleProgram implements Serializable {
     @Expose
     private String name;
 
-    @SerializedName("fromDate")
+    @SerializedName("from_Date")
     @Expose
     private String fromDate;
 
-    @SerializedName("toDate")
+    @SerializedName("to_Date")
     @Expose
     private String toDate;
 
     public SaleProgram() {
 
     }
+
+
 
     public SaleProgram(long id, String code, String name) {
         this.id = id;

@@ -73,7 +73,8 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.config.ConfigActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait">
+        </activity>
         <activity
             android:name=".screen.goodsconfirm.SaleReviewActivity"
             android:screenOrientation="portrait"/>

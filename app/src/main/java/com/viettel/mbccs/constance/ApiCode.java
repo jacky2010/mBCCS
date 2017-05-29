@@ -3,7 +3,7 @@ package com.viettel.mbccs.constance;
 /**
  * Created by HuyQuyet on 5/18/17.
  */
-public class WsCode {
+public class ApiCode {
 
     // 3.1.3.1
     public final static String CheckIdNo = "WS_checkIdNo";

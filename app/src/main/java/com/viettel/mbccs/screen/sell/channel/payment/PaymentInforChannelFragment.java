@@ -241,7 +241,7 @@ public class PaymentInforChannelFragment extends BaseFragment
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
                 .addToBackStack("SaveTransConfirmFragment")
-                .replace(R.id.container, SaveTransConfirmFragment.newInstance(request, saleTrans,channelInfo))
+                .replace(R.id.container, SaveTransConfirmFragment.newInstance(request.getRequest(), saleTrans,channelInfo))
                 .commit();
     }
 }

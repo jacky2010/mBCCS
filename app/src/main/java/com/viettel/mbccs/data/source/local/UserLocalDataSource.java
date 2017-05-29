@@ -1,9 +1,13 @@
 package com.viettel.mbccs.data.source.local;
 
 import com.google.gson.Gson;
+import com.viettel.mbccs.MBCCSApplication;
 import com.viettel.mbccs.data.model.LoginResult;
+import com.viettel.mbccs.data.model.Session;
 import com.viettel.mbccs.data.model.StaffInfo;
 import com.viettel.mbccs.data.source.local.datasource.SharedPrefs;
+import com.viettel.mbccs.utils.GsonUtils;
+import com.viettel.mbccs.utils.SecureUtils;
 import com.viettel.mbccs.variable.Constants;
 
 /**
@@ -54,7 +58,7 @@ public class UserLocalDataSource implements IUserLocalDataSource {
 
     @Override
     public String getLanguageFromSharePrefs() {
-        return sharedPrefs.get(Constants.SharePref.LANGUAGE, "VN");
+        return sharedPrefs.get(Constants.SharePref.LANGUAGE, "vi");
     }
 
     @Override
@@ -105,5 +109,79 @@ public class UserLocalDataSource implements IUserLocalDataSource {
     @Override
     public int getTimeSyncBCCS() {
         return sharedPrefs.get(Constants.SharePref.TIME_SYNC_BCCS, 0);
+    }
+
+    @Override
+    public void saveSession(Session session) {
+        String json = GsonUtils.Object2String(session);
+        String ensctypt =
+                SecureUtils.encryptString(MBCCSApplication.self(), Constants.SharePref.SESSION,
+                        json);
+        sharedPrefs.set(Constants.SharePref.SESSION, ensctypt);
+    }
+
+    @Override
+    public Session getSession() {
+        String encrypt = sharedPrefs.get(Constants.SharePref.SESSION, null);
+        if (encrypt == null) {
+            return null;
+        }
+        return GsonUtils.String2Object(
+                SecureUtils.decryptString(MBCCSApplication.self(), Constants.SharePref.SESSION,
+                        encrypt), Session.class);
+    }
+
+    @Override
+    public void saveSessionVTG(Session session) {
+        String json = GsonUtils.Object2String(session);
+        String ensctypt =
+                SecureUtils.encryptString(MBCCSApplication.self(), Constants.SharePref.SESSION_VTG,
+                        json);
+        sharedPrefs.set(Constants.SharePref.SESSION_VTG, ensctypt);
+    }
+
+    @Override
+    public Session getSessionVTG() {
+        String encrypt = sharedPrefs.get(Constants.SharePref.SESSION_VTG, null);
+        if (encrypt == null) {
+            return null;
+        }
+        return GsonUtils.String2Object(
+                SecureUtils.decryptString(MBCCSApplication.self(), Constants.SharePref.SESSION_VTG,
+                        encrypt), Session.class);
+    }
+
+    @Override
+    public void saveapiKey(String apikey) {
+        sharedPrefs.set(Constants.SharePref.API_KEY,
+                SecureUtils.encryptString(MBCCSApplication.self(), Constants.SharePref.API_KEY,
+                        apikey));
+    }
+
+    @Override
+    public String getApiKey() {
+        String s = sharedPrefs.get(Constants.SharePref.API_KEY, null);
+        if (s != null) {
+            return SecureUtils.decryptString(MBCCSApplication.self(), Constants.SharePref.API_KEY,
+                    s);
+        }
+        return null;
+    }
+
+    @Override
+    public void saveAPIKeyVTG(String apiKey) {
+        sharedPrefs.set(Constants.SharePref.API_KEY_VTG,
+                SecureUtils.encryptString(MBCCSApplication.self(), Constants.SharePref.API_KEY_VTG,
+                        apiKey));
+    }
+
+    @Override
+    public String getApiKeyVTG() {
+        String s = sharedPrefs.get(Constants.SharePref.API_KEY_VTG, null);
+        if (s != null) {
+            return SecureUtils.decryptString(MBCCSApplication.self(), Constants.SharePref.API_KEY_VTG,
+                    s);
+        }
+        return null;
     }
 }

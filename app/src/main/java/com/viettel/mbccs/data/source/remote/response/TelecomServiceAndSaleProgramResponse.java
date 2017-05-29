@@ -7,13 +7,13 @@ import com.viettel.mbccs.data.model.TeleComService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TelecomServiceAndSaleProgramResponse {
+public class TelecomServiceAndSaleProgramResponse extends DataResponse{
 
-    @SerializedName("TelecomService")
+    @SerializedName("lstTelecomService")
     @Expose
     private List<TeleComService> mTeleComServices = new ArrayList<>();
 
-    @SerializedName("SaleProgram")
+    @SerializedName("lstSaleProgram")
     @Expose
     private List<SaleProgram> mSalePrograms = new ArrayList<>();
 

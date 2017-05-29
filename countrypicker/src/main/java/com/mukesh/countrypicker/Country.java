@@ -3,8 +3,6 @@ package com.mukesh.countrypicker;
 import android.content.Context;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
-import android.util.Log;
-
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -282,8 +280,6 @@ public class Country {
 
   public Country() {
   }
-
-  ;
 
 
   public String getDialCode() {

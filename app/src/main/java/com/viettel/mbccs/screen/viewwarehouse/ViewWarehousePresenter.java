@@ -5,13 +5,14 @@ import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
 import android.support.v7.widget.RecyclerView;
-import com.viettel.mbccs.constance.WsCode;
+import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.Session;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListStockModelRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.GetListStockModelResponse;
 import com.viettel.mbccs.screen.viewwarehouse.adapter.ViewWarehouseListOrderAdapter;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.List;
@@ -59,15 +60,15 @@ public class ViewWarehousePresenter implements ViewWarehouseContract.Presenter,
 
         BaseRequest<GetListStockModelRequest> request = new BaseRequest<>();
         request.setRequest(g);
-        request.setWsCode(WsCode.GetListStockModel);
+        request.setApiCode(ApiCode.GetListStockModel);
         request.setApiKey("demo");
         request.setSession(new Session());
 
         Subscription subscription = banHangKhoTaiChinhRepository.getListStockModel(request)
-                .subscribe(new MBCCSSubscribe<List<StockTotal>>() {
+                .subscribe(new MBCCSSubscribe<GetListStockModelResponse>() {
                     @Override
-                    public void onSuccess(List<StockTotal> object) {
-                        stockTotalList = object;
+                    public void onSuccess(GetListStockModelResponse object) {
+                        stockTotalList = object.getStockTotalList();
                         view.setData(stockTotalList);
                         totalStock.set(stockTotalList.size());
                     }

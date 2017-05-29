@@ -1,52 +1,32 @@
 package com.viettel.mbccs.data.source.remote.request;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.viettel.mbccs.data.model.Session;
-import java.io.Serializable;
+import com.viettel.mbccs.MBCCSApplication;
 
 /**
  * Created by eo_cuong on 5/10/17.
  */
 
-public class BaseRequest<T extends Serializable> implements Serializable {
+public class BaseRequest<T extends DataRequest> extends DataVTGRequest {
+    @Expose
+    @SerializedName("username")
+    private String userName;
 
-    @SerializedName("sessionId")
-    private Session mSession;
-
-    @SerializedName("wsCode")
-    private String wsCode;
-
-    @SerializedName("apiKey")
-    private String apiKey;
-
+    @Expose
     @SerializedName("wsRequest")
     private T request;
 
     public BaseRequest() {
+        userName = MBCCSApplication.userName;
     }
 
-    public Session getSession() {
-        return mSession;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setSession(Session mSession) {
-        this.mSession = mSession;
-    }
-
-    public String getWsCode() {
-        return wsCode;
-    }
-
-    public void setWsCode(String wsCode) {
-        this.wsCode = wsCode;
-    }
-
-    public String getApiKey() {
-        return apiKey;
-    }
-
-    public void setApiKey(String apiKey) {
-        this.apiKey = apiKey;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public T getRequest() {

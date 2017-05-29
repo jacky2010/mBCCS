@@ -7,12 +7,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Toast;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.OrderStatus;
-import com.viettel.mbccs.constance.WsCode;
+import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.SaleOrders;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListOrderRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.GetListOrderResponse;
 import com.viettel.mbccs.screen.kpp.order.adaper.KPPOrderAdapter;
 import com.viettel.mbccs.utils.Common;
 import com.viettel.mbccs.utils.ValidateUtils;
@@ -91,18 +92,18 @@ public class KPPOrderPresenter implements KPPOrderContract.Presenter {
         }
         mViewModel.showLoading();
         mGetListOrderRequestBaseRequest = new BaseRequest<>();
-        mGetListOrderRequestBaseRequest.setWsCode(WsCode.GetListOrder);
+        mGetListOrderRequestBaseRequest.setApiCode(ApiCode.GetListOrder);
         GetListOrderRequest request = new GetListOrderRequest();
         request.setOrderStatus(status);
         request.setFromDate("");
         request.setToDate("");
         Subscription subscription = mBanHangKhoTaiChinhRepository.searchSellOrders(null)
-                .subscribe(new MBCCSSubscribe<List<SaleOrders>>() {
+                .subscribe(new MBCCSSubscribe<GetListOrderResponse>() {
                     @Override
-                    public void onSuccess(List<SaleOrders> object) {
+                    public void onSuccess(GetListOrderResponse object) {
 
                         mSaleOrderses.clear();
-                        mSaleOrderses.addAll(object);
+                        mSaleOrderses.addAll(object.getSaleOrdersList());
                         mKPPOrderAdapter.notifyDataSetChanged();
 
                         titleOrderList.set(

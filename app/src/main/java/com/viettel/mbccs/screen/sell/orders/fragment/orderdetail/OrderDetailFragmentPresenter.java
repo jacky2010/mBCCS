@@ -3,7 +3,7 @@ package com.viettel.mbccs.screen.sell.orders.fragment.orderdetail;
 import android.content.Context;
 import android.databinding.ObservableField;
 import android.support.v7.app.AppCompatActivity;
-import com.viettel.mbccs.constance.WsCode;
+import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.SaleOrdersDetail;
 import com.viettel.mbccs.data.model.SaleTrans;
 import com.viettel.mbccs.data.model.SerialBO;
@@ -11,9 +11,13 @@ import com.viettel.mbccs.data.model.Session;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.GetOrderInfoRequest;
+import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.GetOrderInfoResponse;
 import com.viettel.mbccs.screen.sell.orders.adapter.OrderDetailAdapter;
+import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.ArrayList;
 import java.util.List;
+import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
 /**
@@ -83,28 +87,28 @@ public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract
 
         BaseRequest<GetOrderInfoRequest> request = new BaseRequest<>();
         request.setRequest(g);
-        request.setWsCode(WsCode.GetOrderInfo);
+        request.setApiCode(ApiCode.GetOrderInfo);
         request.setApiKey("demo");
         request.setSession(new Session());
 
-        //        Subscription subscription =
-        //                banHangKhoTaiChinhRepository.getOrderInfo(request).subscribe(new MBCCSSubscribe<OrderInfoResponse>() {
-        //                    @Override
-        //                    public void onSuccess(OrderInfoResponse object) {
-        //                        saleOrdersDetailList = object.getSaleOrdersDetailList();
-        //                        saleTrans = object.getSaleTrans();
-        //                        view.setData(saleOrdersDetailList);
-        //                        setDataDisplayMoney();
-        //                        view.hideLoading();
-        //                    }
-        //
-        //                    @Override
-        //                    public void onError(BaseException error) {
-        //                        view.hideLoading();
-        //                        view.getOrderInfoError(error);
-        //                    }
-        //                });
-        //        subscriptions.add(subscription);
+                Subscription subscription =
+                        banHangKhoTaiChinhRepository.getOrderInfo(request).subscribe(new MBCCSSubscribe<GetOrderInfoResponse>() {
+                            @Override
+                            public void onSuccess(GetOrderInfoResponse object) {
+                                saleOrdersDetailList = object.getSaleOrdersDetailList();
+                                saleTrans = object.getSaleTrans();
+                                view.setData(saleOrdersDetailList);
+                                setDataDisplayMoney();
+                                view.hideLoading();
+                            }
+
+                            @Override
+                            public void onError(BaseException error) {
+                                view.hideLoading();
+                                view.getOrderInfoError(error);
+                            }
+                        });
+                subscriptions.add(subscription);
 
         saleTrans = new SaleTrans();
         saleTrans.setAmountNotTax(100000);

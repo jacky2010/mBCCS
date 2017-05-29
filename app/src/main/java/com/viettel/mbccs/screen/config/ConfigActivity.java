@@ -1,13 +1,21 @@
 package com.viettel.mbccs.screen.config;
 
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import com.google.gson.Gson;
+import com.lap.languagepicker.Language;
+import com.lap.languagepicker.LanguagePicker;
+import com.lap.languagepicker.LanguagePickerListener;
 import com.mukesh.countrypicker.Country;
 import com.mukesh.countrypicker.CountryPicker;
 import com.mukesh.countrypicker.CountryPickerListener;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.databinding.ActivityConfigBinding;
+import com.viettel.mbccs.screen.splash.SplashActivity;
 import java.util.List;
+import java.util.Locale;
 
 public class ConfigActivity extends BaseDataBindActivity<ActivityConfigBinding, ConfigPresenter>
         implements ConfigContract.View {
@@ -15,7 +23,7 @@ public class ConfigActivity extends BaseDataBindActivity<ActivityConfigBinding, 
     private static final String LANGUAGE_PICKER = "LANGUAGE_PICKER";
 
     private List<Country> countries;
-    private List<Country> languageList;
+    private List<Language> languageList;
 
     @Override
     public void onBackPressed() {
@@ -76,16 +84,30 @@ public class ConfigActivity extends BaseDataBindActivity<ActivityConfigBinding, 
     @Override
     public void selectLanguage() {
         languageList = mPresenter.getListLanguage();
-        final CountryPicker picker =
-                CountryPicker.newInstance(getString(R.string.config_select_language),
+        final LanguagePicker picker =
+                LanguagePicker.newInstance(getString(R.string.config_select_language),
                         new Gson().toJson(languageList));  // dialog title
-        picker.setListener(new CountryPickerListener() {
+        picker.setListener(new LanguagePickerListener() {
             @Override
-            public void onSelectCountry(Country country) {
-                mPresenter.setLanguage(country);
+            public void onSelectLanguage(Language language) {
+                mPresenter.setLanguage(language);
                 picker.dismiss();
             }
         });
         picker.show(getSupportFragmentManager(), LANGUAGE_PICKER);
+    }
+
+    @Override
+    public void changeLanguage(String language) {
+        Locale myLocale = new Locale(language);
+        Resources res = getResources();
+        //        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.setLocale(myLocale);
+        //        res.updateConfiguration(conf, dm);
+        createConfigurationContext(conf);
+        Intent refresh = new Intent(this, SplashActivity.class);
+        startActivity(refresh);
+        finishAffinity();
     }
 }

@@ -16,19 +16,20 @@
     </style>
 
     <declare-styleable name="SearchInputView">
-        <attr name="text" format="string" />
-        <attr name="textSize" format="dimension" />
-        <attr name="textColor" format="color" />
-        <attr name="inputType" format="string" />
-        <attr name="imeOptions" format="string" />
-        <attr name="length" format="integer" />
-        <attr name="lines" format="integer" />
+        <attr format="string" name="text"/>
+        <attr format="dimension" name="textSize"/>
+        <attr format="color" name="textColor"/>
+        <attr format="string" name="inputType"/>
+        <attr format="string" name="imeOptions"/>
+        <attr format="integer" name="length"/>
+        <attr format="integer" name="lines"/>
     </declare-styleable>
 
     <style name="button_positive">
         <item name="android:background">@drawable/bg_btn_positive</item>
         <item name="android:textColor">#fff</item>
         <item name="android:textSize">16sp</item>
+        <item name="android:gravity">center</item>
         <item name="android:padding">@dimen/dp_5</item>
     </style>
 
@@ -161,10 +162,18 @@
         <item name="android:layout_margin">@dimen/dp_5</item>
     </style>
 
-    <style name="AppThemeStyleDialog" parent="Theme.AppCompat.Light.NoActionBar.FullScreen" >
+    <style name="AppThemeStyleDialog" parent="Theme.AppCompat.Light.NoActionBar.FullScreen">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="inputStyle">
+        <item name="android:background">@drawable/bg_input_tranparent</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/sp_18</item>
+        <item name="android:padding">@dimen/dp_5</item>
+        <item name="android:gravity">start|top</item>
     </style>
 
 </resources>

@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.viettel.mbccs.base.BaseFragment;
-import com.viettel.mbccs.constance.WsCode;
+import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.SerialBO;
 import com.viettel.mbccs.data.model.Session;
 import com.viettel.mbccs.data.model.StockSerial;
@@ -78,7 +78,7 @@ public class ViewSerialFragment extends BaseFragment {
         v.setStateId(stockTotal.getStateId());
 
         BaseRequest<ViewInfoSerialRequest> request = new BaseRequest<>();
-        request.setWsCode(WsCode.ViewInfoSerial);
+        request.setApiCode(ApiCode.ViewInfoSerial);
         request.setRequest(v);
         request.setApiKey("demo");
         request.setSession(new Session());

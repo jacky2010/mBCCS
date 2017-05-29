@@ -1,9 +1,9 @@
 package com.viettel.mbccs.utils.rx;
 
-import com.viettel.mbccs.base.BaseModel;
 import com.viettel.mbccs.data.source.remote.response.BaseErrorResponse;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.BaseResponse;
+import com.viettel.mbccs.data.source.remote.response.DataResponse;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
@@ -44,23 +44,31 @@ public class SchedulerUtils {
         };
     }
 
-    public static <T> Func1<BaseResponse<T>, Observable<T>> convertDataFlatMap() {
+    public static <T extends DataResponse> Func1<BaseResponse<T>, Observable<T>> convertDataFlatMap() {
         return new Func1<BaseResponse<T>, Observable<T>>() {
             @Override
             public Observable<T> call(BaseResponse<T> response) {
-                if (!response.getErrorCode().equals("000")) {
+                if (!response.getErrorCode().equals("200")) {
                     BaseErrorResponse baseErrorResponse = new BaseErrorResponse();
                     baseErrorResponse.setError(Integer.parseInt(response.getErrorCode()),
-                            response.getErrorDescription());
+                            response.getErrorMessage());
                     return Observable.error(BaseException.toServerError(baseErrorResponse));
-                } else {
-                    return Observable.just(response.getData());
                 }
+
+                if (!response.getData().getErrorCode().equals("0")) {
+                    BaseErrorResponse baseErrorResponse = new BaseErrorResponse();
+                    baseErrorResponse.setError(Integer.parseInt(response.getData().getErrorCode()),
+                            response.getData().getErrorMessage());
+                    return Observable.error(BaseException.toServerError(baseErrorResponse));
+                }
+
+
+                return Observable.just(response.getData());
             }
         };
     }
 
-    public static <T extends BaseModel> Func1<BaseResponse<T>, T> convertData() {
+    public static <T extends DataResponse> Func1<BaseResponse<T>, T> convertData() {
         return new Func1<BaseResponse<T>, T>() {
             @Override
             public T call(BaseResponse<T> response) {

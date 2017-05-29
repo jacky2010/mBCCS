@@ -14,6 +14,7 @@ import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.GetInfoSaleTranResponse;
 import com.viettel.mbccs.utils.Common;
 import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
@@ -69,8 +70,11 @@ public class PaymentInfoPresenter implements PaymentInforContract.Presenter {
 
     private void init() {
         name = new ObservableField<>();
+        name.set("");
         tin = new ObservableField<>();
+        tin.set("");
         address = new ObservableField<>();
+        address.set("");
         nameError = new ObservableField<>();
         tinError = new ObservableField<>();
         addressError = new ObservableField<>();
@@ -115,9 +119,9 @@ public class PaymentInfoPresenter implements PaymentInforContract.Presenter {
             request.setTelecomserviceId(mTeleComService.getId());
         }
         if (mSaleProgram.getId() != -1) {
-            request.setSaleProgrameCode(Long.parseLong(mSaleProgram.getCode()));
+            request.setSaleProgrameCode((mSaleProgram.getCode()));
         }
-        request.setSaleTransType(SaleTranType.SALE_RETAIL);
+        request.setSaleTransType(String.valueOf(SaleTranType.SALE_RETAIL));
         Customer customer = new Customer();
         customer.setTin(tin.get());
         customer.setAddress(address.get());
@@ -128,11 +132,11 @@ public class PaymentInfoPresenter implements PaymentInforContract.Presenter {
 
         Subscription subscription =
                 mUserRepository.getSaleTransInfo(mGetInfoSaleTranRequestBaseRequest)
-                        .subscribe(new MBCCSSubscribe<SaleTrans>() {
+                        .subscribe(new MBCCSSubscribe<GetInfoSaleTranResponse>() {
                             @Override
-                            public void onSuccess(SaleTrans object) {
+                            public void onSuccess(GetInfoSaleTranResponse object) {
                                 isGetTransInfo.set(true);
-                                loadAmount(object);
+                                loadAmount(object.getSaleTrans());
                             }
 
                             @Override
@@ -171,15 +175,15 @@ public class PaymentInfoPresenter implements PaymentInforContract.Presenter {
         nameError.set(null);
         tinError.set(null);
         addressError.set(null);
-        if (TextUtils.isEmpty(name.get())) {
+        if (TextUtils.isEmpty(name.get().trim())) {
             nameError.set(mContext.getResources().getString(R.string.input_empty));
             return false;
         }
-        if (TextUtils.isEmpty(tin.get())) {
+        if (TextUtils.isEmpty(tin.get().trim())) {
             tinError.set(mContext.getResources().getString(R.string.input_empty));
             return false;
         }
-        if (TextUtils.isEmpty(address.get())) {
+        if (TextUtils.isEmpty(address.get().trim())) {
             addressError.set(mContext.getResources().getString(R.string.input_empty));
             return false;
         }

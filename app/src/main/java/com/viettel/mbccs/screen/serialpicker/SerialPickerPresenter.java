@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.ObservableField;
 import android.text.TextUtils;
-import android.widget.Toast;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.SerialBO;
 import com.viettel.mbccs.data.model.SerialPickerModel;
@@ -13,7 +12,7 @@ import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
-import com.viettel.mbccs.data.source.remote.response.GetSerialsReponse;
+import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
 import com.viettel.mbccs.screen.serialpicker.adapter.SerialAdapter;
 import com.viettel.mbccs.screen.serialpicker.adapter.SerialSelectedAdapter;
 import com.viettel.mbccs.utils.Common;
@@ -92,9 +91,9 @@ public class SerialPickerPresenter
         mBaseRequest.setRequest(mSerialRequest);
 
         Subscription subscription = mUserRepository.getSerial(mBaseRequest)
-                .subscribe(new MBCCSSubscribe<GetSerialsReponse>() {
+                .subscribe(new MBCCSSubscribe<GetSerialsResponse>() {
                     @Override
-                    public void onSuccess(GetSerialsReponse object) {
+                    public void onSuccess(GetSerialsResponse object) {
                         List<SerialBO> serialBOs = object.getLstSerialInStock();
                         mSerials.addAll(Common.getSerialsByListSerialBlock(serialBOs));
                         reCaculateSerial();

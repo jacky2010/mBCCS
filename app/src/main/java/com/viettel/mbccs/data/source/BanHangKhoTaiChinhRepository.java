@@ -1,12 +1,6 @@
 package com.viettel.mbccs.data.source;
 
-import com.viettel.mbccs.data.model.Area;
-import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.Reason;
-import com.viettel.mbccs.data.model.SaleOrders;
-import com.viettel.mbccs.data.model.Shop;
-import com.viettel.mbccs.data.model.StockSerial;
-import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.source.local.IBanHangKhoTaiChinhLocalDataSource;
 import com.viettel.mbccs.data.source.local.datasource.BanHangKhoTaiChinhLocalDataSource;
 import com.viettel.mbccs.data.source.remote.IBanHangKhoTaiChinhRemoteDataSource;
@@ -23,7 +17,14 @@ import com.viettel.mbccs.data.source.remote.request.GetResonRequest;
 import com.viettel.mbccs.data.source.remote.request.KPPOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.ViewInfoSerialRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseResponse;
-import com.viettel.mbccs.data.source.remote.response.OrderInfoResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListChannelByOwnerTypeIdResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListOrderResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListProvinceResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListShopResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListStockModelResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListTTKDResponse;
+import com.viettel.mbccs.data.source.remote.response.GetOrderInfoResponse;
+import com.viettel.mbccs.data.source.remote.response.ViewInfoSerialResponse;
 import java.util.List;
 import rx.Observable;
 
@@ -54,18 +55,18 @@ public class BanHangKhoTaiChinhRepository
     }
 
     @Override
-    public Observable<List<SaleOrders>> searchSellOrders(BaseRequest<GetListOrderRequest> request) {
+    public Observable<GetListOrderResponse> searchSellOrders(BaseRequest<GetListOrderRequest> request) {
         return banHangKhoTaiChinhRemoteDataSource.searchSellOrders(request);
     }
 
     @Override
-    public Observable<List<ChannelInfo>> getListChannelByOwnerTypeId(
+    public Observable<GetListChannelByOwnerTypeIdResponse> getListChannelByOwnerTypeId(
             BaseRequest<GetListChannelByOwnerTypeIdRequest> request) {
         return banHangKhoTaiChinhRemoteDataSource.getListChannelByOwnerTypeId(request);
     }
 
     @Override
-    public Observable<OrderInfoResponse> getOrderInfo(BaseRequest<GetOrderInfoRequest> request) {
+    public Observable<GetOrderInfoResponse> getOrderInfo(BaseRequest<GetOrderInfoRequest> request) {
         return banHangKhoTaiChinhRemoteDataSource.getOrderInfo(request);
     }
 
@@ -75,29 +76,29 @@ public class BanHangKhoTaiChinhRepository
     }
 
     @Override
-    public Observable<List<StockTotal>> getListStockModel(
+    public Observable<GetListStockModelResponse> getListStockModel(
             BaseRequest<GetListStockModelRequest> request) {
         return banHangKhoTaiChinhRemoteDataSource.getListStockModel(request);
     }
 
     @Override
-    public Observable<List<StockSerial>> viewInfoSerial(
+    public Observable<ViewInfoSerialResponse> viewInfoSerial(
             BaseRequest<ViewInfoSerialRequest> request) {
         return banHangKhoTaiChinhRemoteDataSource.viewInfoSerial(request);
     }
 
     @Override
-    public Observable<List<Area>> getListProvince(BaseRequest<GetListProvinceRequest> request) {
+    public Observable<GetListProvinceResponse> getListProvince(BaseRequest<GetListProvinceRequest> request) {
         return banHangKhoTaiChinhRemoteDataSource.getListProvince(request);
     }
 
     @Override
-    public Observable<List<Shop>> getListTTKD(BaseRequest<GetListTTKDRequest> request) {
+    public Observable<GetListTTKDResponse> getListTTKD(BaseRequest<GetListTTKDRequest> request) {
         return banHangKhoTaiChinhRemoteDataSource.getListTTKD(request);
     }
 
     @Override
-    public Observable<List<Shop>> getListShop(BaseRequest<GetListShopRequest> request) {
+    public Observable<GetListShopResponse> getListShop(BaseRequest<GetListShopRequest> request) {
         return banHangKhoTaiChinhRemoteDataSource.getListShop(request);
     }
 

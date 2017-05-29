@@ -3,13 +3,12 @@ package com.viettel.mbccs.data.source.remote.request;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.viettel.mbccs.constance.ShopLevel;
-import java.io.Serializable;
 
 /**
  * Created by HuyQuyet on 5/23/17.
  */
 
-public class GetListTTKDRequest implements Serializable {
+public class GetListTTKDRequest extends DataRequest {
     @Expose
     @SerializedName("shopId")
     private long shopId;

@@ -37,9 +37,19 @@ import com.viettel.mbccs.data.source.remote.request.LoginRequest;
 import com.viettel.mbccs.data.source.remote.request.SearchBranchRequest;
 import com.viettel.mbccs.data.source.remote.request.ViewInfoSerialRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseResponse;
-import com.viettel.mbccs.data.source.remote.response.GetSerialsReponse;
-import com.viettel.mbccs.data.source.remote.response.OrderInfoResponse;
+import com.viettel.mbccs.data.source.remote.response.GetInfoSaleTranResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListChannelByOwnerTypeIdResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListOrderResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListProvinceResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListShopResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListStockModelResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListTTKDResponse;
+import com.viettel.mbccs.data.source.remote.response.GetOrderInfoResponse;
+import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
+import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
+import com.viettel.mbccs.data.source.remote.response.SendCodeChangePassResponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
+import com.viettel.mbccs.data.source.remote.response.ViewInfoSerialResponse;
 
 
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
@@ -63,38 +73,39 @@ public interface MBCSSApi {
 
     @FormUrlEncoded
     @POST("/send_code_password")
-    Observable<BaseResponse<Object>> sendCodeChangePass(@Field("phone") String phone);
+    Observable<BaseResponse<SendCodeChangePassResponse>> sendCodeChangePass(
+            @Field("phone") String phone);
 
     @POST("/login")
-    Observable<BaseResponse<List<SaleOrders>>> searchSellOrders(
+    Observable<BaseResponse<GetListOrderResponse>> getListOrder(
             @Body BaseRequest<GetListOrderRequest> request);
 
     @POST("/login")
-    Observable<BaseResponse<List<ChannelInfo>>> getListChannelByOwnerTypeId(
+    Observable<BaseResponse<GetListChannelByOwnerTypeIdResponse>> getListChannelByOwnerTypeId(
             @Body BaseRequest<GetListChannelByOwnerTypeIdRequest> request);
 
-    @POST("/telecomservice_salproram")
+    @POST("thonguyen/Sale_mBCCS/1.0.0/WS_GetTelecomServiceAndSaleProgram")
     Observable<BaseResponse<TelecomServiceAndSaleProgramResponse>> getTelecomserviceAndSaleProgram(
             @Body BaseRequest<GetTelecomServiceAndSaleProgramRequest> request);
 
     @POST("/getserials")
-    Observable<BaseResponse<GetSerialsReponse>> getSerials(
+    Observable<BaseResponse<GetSerialsResponse>> getSerials(
             @Body BaseRequest<GetSerialRequest> request);
 
     @GET("/login")
-    Observable<BaseResponse<OrderInfoResponse>> getOrderInfo(
+    Observable<BaseResponse<GetOrderInfoResponse>> getOrderInfo(
             @Body BaseRequest<GetOrderInfoRequest> request);
 
-    @POST("/getsalemodel")
-    Observable<BaseResponse<List<ModelSale>>> getModelSales(
+    @POST("thonguyen/Sale_mBCCS/1.0.0/WS_GetStockTotal")
+    Observable<BaseResponse<GetTotalStockResponse>> getModelSales(
             @Body BaseRequest<GetTotalStockRequest> request);
 
     @POST("/getinfortrans")
-    Observable<BaseResponse<SaleTrans>> getSaleTransInfo(
+    Observable<BaseResponse<GetInfoSaleTranResponse>> getSaleTransInfo(
             @Body BaseRequest<GetInfoSaleTranRequest> request);
 
-    @POST("/savetransaction")
-    Observable<BaseResponse<SaleTrans>> createSaleTransRetail(
+    @POST("thonguyen/Sale_mBCCS/1.0.0/WS_CreateSaleTransRetail")
+    Observable<BaseResponse<GetInfoSaleTranResponse>> createSaleTransRetail(
             @Body BaseRequest<GetInfoSaleTranRequest> request);
 
     @POST("/getDistributtedChannelInfo")
@@ -105,22 +116,24 @@ public interface MBCSSApi {
     Observable<BaseResponse<BranchItem>> createDistributtedChannel(
             @Body AddBranchRequest request);
     @POST("/getliststockmodel")
-    Observable<BaseResponse<List<StockTotal>>> getListStockModel(
+    Observable<BaseResponse<GetListStockModelResponse>> getListStockModel(
             @Body BaseRequest<GetListStockModelRequest> request);
 
     @POST("/viewinfoserial")
-    Observable<BaseResponse<List<StockSerial>>> viewInfoSerial(
+    Observable<BaseResponse<ViewInfoSerialResponse>> viewInfoSerial(
             @Body BaseRequest<ViewInfoSerialRequest> request);
 
     @POST("/getListProvince")
-    Observable<BaseResponse<List<Area>>> getListProvince(
+    Observable<BaseResponse<GetListProvinceResponse>> getListProvince(
             @Body BaseRequest<GetListProvinceRequest> request);
 
     @POST("/getListTTKD")
-    Observable<BaseResponse<List<Shop>>> getListTTKD(@Body BaseRequest<GetListTTKDRequest> request);
+    Observable<BaseResponse<GetListTTKDResponse>> getListTTKD(
+            @Body BaseRequest<GetListTTKDRequest> request);
 
     @POST("/getListTTKD")
-    Observable<BaseResponse<List<Shop>>> getListShop(@Body BaseRequest<GetListShopRequest> request);
+    Observable<BaseResponse<GetListShopResponse>> getListShop(
+            @Body BaseRequest<GetListShopRequest> request);
 
     @POST("/createSaleOrder")
     Observable<BaseResponse> createSaleOrders(

@@ -3,25 +3,21 @@ package com.viettel.mbccs.screen.kpp.order.findstock;
 import android.app.Activity;
 import android.content.Context;
 import android.databinding.ObservableField;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.widget.ArrayAdapter;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.StockTotalType;
-import com.viettel.mbccs.constance.WsCode;
-import com.viettel.mbccs.data.model.StockModel;
+import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListStockModelRequest;
-import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.GetListStockModelResponse;
 import com.viettel.mbccs.screen.kpp.order.findstock.adapter.StockTotalPickerAdapter;
 import com.viettel.mbccs.utils.ActivityUtils;
-import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.ArrayList;
-import java.util.List;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
@@ -88,7 +84,7 @@ public class FindStockPresenter
         saveStockToList();
 
         mGetListStockModelRequestBaseRequest = new BaseRequest<>();
-        mGetListStockModelRequestBaseRequest.setWsCode(WsCode.GetStockTotal);
+        mGetListStockModelRequestBaseRequest.setApiCode(ApiCode.GetStockTotal);
         GetListStockModelRequest request = new GetListStockModelRequest();
         request.setStockModelId(code.get());
         if (stockType != -1) {
@@ -98,11 +94,11 @@ public class FindStockPresenter
         mViewModel.showLoading();
         Subscription subscription = mBanHangKhoTaiChinhRepository.getListStockModel(
                 mGetListStockModelRequestBaseRequest)
-                .subscribe(new MBCCSSubscribe<List<StockTotal>>() {
+                .subscribe(new MBCCSSubscribe<GetListStockModelResponse>() {
                     @Override
-                    public void onSuccess(List<StockTotal> object) {
+                    public void onSuccess(GetListStockModelResponse object) {
                         mStockTotals.clear();
-                        mStockTotals.addAll(object);
+                        mStockTotals.addAll(object.getStockTotalList());
                         stockTotalAdapter.notifyDataSetChanged();
                     }
 

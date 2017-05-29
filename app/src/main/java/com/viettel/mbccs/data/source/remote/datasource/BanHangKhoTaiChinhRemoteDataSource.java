@@ -1,12 +1,6 @@
 package com.viettel.mbccs.data.source.remote.datasource;
 
-import com.viettel.mbccs.data.model.Area;
-import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.Reason;
-import com.viettel.mbccs.data.model.SaleOrders;
-import com.viettel.mbccs.data.model.Shop;
-import com.viettel.mbccs.data.model.StockSerial;
-import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.source.remote.IBanHangKhoTaiChinhRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListChannelByOwnerTypeIdRequest;
@@ -20,7 +14,14 @@ import com.viettel.mbccs.data.source.remote.request.GetResonRequest;
 import com.viettel.mbccs.data.source.remote.request.KPPOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.ViewInfoSerialRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseResponse;
-import com.viettel.mbccs.data.source.remote.response.OrderInfoResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListChannelByOwnerTypeIdResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListOrderResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListProvinceResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListShopResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListStockModelResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListTTKDResponse;
+import com.viettel.mbccs.data.source.remote.response.GetOrderInfoResponse;
+import com.viettel.mbccs.data.source.remote.response.ViewInfoSerialResponse;
 import com.viettel.mbccs.data.source.remote.service.RequestHelper;
 import com.viettel.mbccs.utils.rx.SchedulerUtils;
 import java.util.List;
@@ -45,28 +46,30 @@ public class BanHangKhoTaiChinhRemoteDataSource implements IBanHangKhoTaiChinhRe
     }
 
     @Override
-    public Observable<List<SaleOrders>> searchSellOrders(BaseRequest<GetListOrderRequest> request) {
+    public Observable<GetListOrderResponse> searchSellOrders(
+            BaseRequest<GetListOrderRequest> request) {
         return RequestHelper.getRequest()
-                .searchSellOrders(request)
-                .flatMap(SchedulerUtils.<List<SaleOrders>>convertDataFlatMap())
-                .compose(SchedulerUtils.<List<SaleOrders>>applyAsyncSchedulers());
+                .getListOrder(request)
+                .flatMap(SchedulerUtils.<GetListOrderResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<GetListOrderResponse>applyAsyncSchedulers());
     }
 
     @Override
-    public Observable<List<ChannelInfo>> getListChannelByOwnerTypeId(
+    public Observable<GetListChannelByOwnerTypeIdResponse> getListChannelByOwnerTypeId(
             BaseRequest<GetListChannelByOwnerTypeIdRequest> request) {
         return RequestHelper.getRequest()
                 .getListChannelByOwnerTypeId(request)
-                .flatMap(SchedulerUtils.<List<ChannelInfo>>convertDataFlatMap())
-                .compose(SchedulerUtils.<List<ChannelInfo>>applyAsyncSchedulers());
+                .flatMap(SchedulerUtils.<GetListChannelByOwnerTypeIdResponse>convertDataFlatMap())
+                .compose(
+                        SchedulerUtils.<GetListChannelByOwnerTypeIdResponse>applyAsyncSchedulers());
     }
 
     @Override
-    public Observable<OrderInfoResponse> getOrderInfo(BaseRequest<GetOrderInfoRequest> request) {
+    public Observable<GetOrderInfoResponse> getOrderInfo(BaseRequest<GetOrderInfoRequest> request) {
         return RequestHelper.getRequest()
                 .getOrderInfo(request)
-                .flatMap(SchedulerUtils.<OrderInfoResponse>convertDataFlatMap())
-                .compose(SchedulerUtils.<OrderInfoResponse>applyAsyncSchedulers());
+                .flatMap(SchedulerUtils.<GetOrderInfoResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<GetOrderInfoResponse>applyAsyncSchedulers());
     }
 
     @Override
@@ -75,45 +78,46 @@ public class BanHangKhoTaiChinhRemoteDataSource implements IBanHangKhoTaiChinhRe
     }
 
     @Override
-    public Observable<List<StockTotal>> getListStockModel(
+    public Observable<GetListStockModelResponse> getListStockModel(
             BaseRequest<GetListStockModelRequest> request) {
         return RequestHelper.getRequest()
                 .getListStockModel(request)
-                .flatMap(SchedulerUtils.<List<StockTotal>>convertDataFlatMap())
-                .compose(SchedulerUtils.<List<StockTotal>>applyAsyncSchedulers());
+                .flatMap(SchedulerUtils.<GetListStockModelResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<GetListStockModelResponse>applyAsyncSchedulers());
     }
 
     @Override
-    public Observable<List<StockSerial>> viewInfoSerial(
+    public Observable<ViewInfoSerialResponse> viewInfoSerial(
             BaseRequest<ViewInfoSerialRequest> request) {
         return RequestHelper.getRequest()
                 .viewInfoSerial(request)
-                .flatMap(SchedulerUtils.<List<StockSerial>>convertDataFlatMap())
-                .compose(SchedulerUtils.<List<StockSerial>>applyAsyncSchedulers());
+                .flatMap(SchedulerUtils.<ViewInfoSerialResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<ViewInfoSerialResponse>applyAsyncSchedulers());
     }
 
     @Override
-    public Observable<List<Area>> getListProvince(BaseRequest<GetListProvinceRequest> request) {
+    public Observable<GetListProvinceResponse> getListProvince(
+            BaseRequest<GetListProvinceRequest> request) {
         return RequestHelper.getRequest()
                 .getListProvince(request)
-                .flatMap(SchedulerUtils.<List<Area>>convertDataFlatMap())
-                .compose(SchedulerUtils.<List<Area>>applyAsyncSchedulers());
+                .flatMap(SchedulerUtils.<GetListProvinceResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<GetListProvinceResponse>applyAsyncSchedulers());
     }
 
     @Override
-    public Observable<List<Shop>> getListTTKD(BaseRequest<GetListTTKDRequest> request) {
+    public Observable<GetListTTKDResponse> getListTTKD(BaseRequest<GetListTTKDRequest> request) {
         return RequestHelper.getRequest()
                 .getListTTKD(request)
-                .flatMap(SchedulerUtils.<List<Shop>>convertDataFlatMap())
-                .compose(SchedulerUtils.<List<Shop>>applyAsyncSchedulers());
+                .flatMap(SchedulerUtils.<GetListTTKDResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<GetListTTKDResponse>applyAsyncSchedulers());
     }
 
     @Override
-    public Observable<List<Shop>> getListShop(BaseRequest<GetListShopRequest> request) {
+    public Observable<GetListShopResponse> getListShop(BaseRequest<GetListShopRequest> request) {
         return RequestHelper.getRequest()
                 .getListShop(request)
-                .flatMap(SchedulerUtils.<List<Shop>>convertDataFlatMap())
-                .compose(SchedulerUtils.<List<Shop>>applyAsyncSchedulers());
+                .flatMap(SchedulerUtils.<GetListShopResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<GetListShopResponse>applyAsyncSchedulers());
     }
 
     public Observable<BaseResponse> createSaleOrders(

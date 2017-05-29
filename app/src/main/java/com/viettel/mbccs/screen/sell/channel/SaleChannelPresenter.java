@@ -5,7 +5,7 @@ import android.content.Context;
 import android.databinding.ObservableField;
 import android.widget.ArrayAdapter;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.constance.WsCode;
+import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.model.SaleChannelInitData;
@@ -18,6 +18,8 @@ import com.viettel.mbccs.data.source.remote.request.GetListChannelByOwnerTypeIdR
 import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.GetListChannelByOwnerTypeIdResponse;
+import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import com.viettel.mbccs.screen.sell.retail.adapter.StockAdapter;
 import com.viettel.mbccs.utils.DialogUtils;
@@ -73,7 +75,7 @@ public class SaleChannelPresenter
     private void loadModelSale() {
         mViewModel.showLoading();
         mGetTotalStockRequest = new BaseRequest<>();
-        mGetTotalStockRequest.setWsCode(WsCode.GetStockTotal);
+        mGetTotalStockRequest.setApiCode(ApiCode.GetStockTotal);
         GetTotalStockRequest request = new GetTotalStockRequest();
         if (currentSaleProgram.getId() != -1) {
             request.setSaleProgameId(currentSaleProgram.getId());
@@ -84,11 +86,11 @@ public class SaleChannelPresenter
         //TODO set attribute for request
         mGetTotalStockRequest.setRequest(request);
         Subscription subscription = mUserRepository.getModelSales(mGetTotalStockRequest)
-                .subscribe(new MBCCSSubscribe<List<ModelSale>>() {
+                .subscribe(new MBCCSSubscribe<GetTotalStockResponse>() {
                     @Override
-                    public void onSuccess(List<ModelSale> object) {
+                    public void onSuccess(GetTotalStockResponse object) {
                         mModelSales.clear();
-                        mModelSales.addAll(object);
+                        mModelSales.addAll(object.getModelSaleList());
                         mAdapter.notifyDataSetChanged();
                     }
 
@@ -111,16 +113,17 @@ public class SaleChannelPresenter
 
     private void initialData() {
         Observable.zip(getObservableTeleComserviceAndSaleProgram(), getObservaleChannelInfors(),
-                new Func2<TelecomServiceAndSaleProgramResponse, List<ChannelInfo>, SaleChannelInitData>() {
+                new Func2<TelecomServiceAndSaleProgramResponse, GetListChannelByOwnerTypeIdResponse, SaleChannelInitData>() {
                     @Override
                     public SaleChannelInitData call(
                             TelecomServiceAndSaleProgramResponse telecomServiceAndSaleProgramResponse,
-                            List<ChannelInfo> channelInfos) {
-                        if (telecomServiceAndSaleProgramResponse == null || channelInfos == null) {
+                            GetListChannelByOwnerTypeIdResponse getListChannelByOwnerTypeIdResponse) {
+                        if (telecomServiceAndSaleProgramResponse == null
+                                || getListChannelByOwnerTypeIdResponse == null) {
                             return null;
                         }
                         return new SaleChannelInitData(telecomServiceAndSaleProgramResponse,
-                                channelInfos);
+                                getListChannelByOwnerTypeIdResponse);
                     }
                 }).subscribe(new MBCCSSubscribe<SaleChannelInitData>() {
             @Override
@@ -148,7 +151,8 @@ public class SaleChannelPresenter
 
                     //channel
                     mChannelInfos.clear();
-                    mChannelInfos.addAll(object.getChannelInfos());
+                    mChannelInfos.addAll(
+                            object.getmGetListChannelByOwnerTypeIdResponse().getChannelInfoList());
                     ChannelInfo channel =
                             new ChannelInfo(-1, mContext.getResources().getString(R.string.all_));
                     mChannelInfos.add(0, channel);
@@ -175,7 +179,7 @@ public class SaleChannelPresenter
 
     private Observable<TelecomServiceAndSaleProgramResponse> getObservableTeleComserviceAndSaleProgram() {
         mGetTelecomServiceAndSaleProgramRequest = new BaseRequest<>();
-        mGetTelecomServiceAndSaleProgramRequest.setWsCode(WsCode.GetTelecomServiceAndSaleProgram);
+        mGetTelecomServiceAndSaleProgramRequest.setApiCode(ApiCode.GetTelecomServiceAndSaleProgram);
         GetTelecomServiceAndSaleProgramRequest request =
                 new GetTelecomServiceAndSaleProgramRequest();
         mGetTelecomServiceAndSaleProgramRequest.setRequest(request);
@@ -183,9 +187,9 @@ public class SaleChannelPresenter
                 mGetTelecomServiceAndSaleProgramRequest);
     }
 
-    private Observable<List<ChannelInfo>> getObservaleChannelInfors() {
+    private Observable<GetListChannelByOwnerTypeIdResponse> getObservaleChannelInfors() {
         mGetListChannelByOwnerTypeIdRequest = new BaseRequest<>();
-        mGetListChannelByOwnerTypeIdRequest.setWsCode(WsCode.GetListChannelByOwnerTypeId);
+        mGetListChannelByOwnerTypeIdRequest.setApiCode(ApiCode.GetListChannelByOwnerTypeId);
         GetListChannelByOwnerTypeIdRequest request = new GetListChannelByOwnerTypeIdRequest();
         request.setChannelTypeId(1);
         request.setShopId(1);
@@ -199,7 +203,7 @@ public class SaleChannelPresenter
     private void loadServiceAndProgram() {
         mViewModel.showLoading();
         mGetTelecomServiceAndSaleProgramRequest = new BaseRequest<>();
-        mGetTelecomServiceAndSaleProgramRequest.setWsCode(WsCode.GetTelecomServiceAndSaleProgram);
+        mGetTelecomServiceAndSaleProgramRequest.setApiCode(ApiCode.GetTelecomServiceAndSaleProgram);
         GetTelecomServiceAndSaleProgramRequest request =
                 new GetTelecomServiceAndSaleProgramRequest();
         mGetTelecomServiceAndSaleProgramRequest.setRequest(request);

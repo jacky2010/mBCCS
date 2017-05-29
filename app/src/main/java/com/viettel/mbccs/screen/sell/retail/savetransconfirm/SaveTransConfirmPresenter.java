@@ -11,8 +11,10 @@ import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.GetInfoSaleTranResponse;
 import com.viettel.mbccs.screen.common.success.DialogFullScreen;
 import com.viettel.mbccs.utils.Common;
+import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
@@ -20,7 +22,7 @@ import rx.subscriptions.CompositeSubscription;
 public class SaveTransConfirmPresenter implements SaveTransConfirmContract.Presenter {
     private Context mContext;
     private SaleTrans mSaleTrans;
-    private BaseRequest<GetInfoSaleTranRequest> mGetInfoSaleTranRequest;
+    private GetInfoSaleTranRequest mGetInfoSaleTranRequest;
     private SaveTransConfirmContract.ViewModel mViewModel;
     private ChannelInfo mChannelInfo;
     public ObservableField<String> content;
@@ -28,7 +30,7 @@ public class SaveTransConfirmPresenter implements SaveTransConfirmContract.Prese
     private UserRepository mUserRepository;
 
     public SaveTransConfirmPresenter(Context context, SaveTransConfirmContract.ViewModel mViewModel,
-            SaleTrans saleTrans, BaseRequest<GetInfoSaleTranRequest> getInfoSaleTranRequest,
+            SaleTrans saleTrans, GetInfoSaleTranRequest getInfoSaleTranRequest,
             ChannelInfo channelInfo) {
         mContext = context;
         mSubscription = new CompositeSubscription();
@@ -42,12 +44,12 @@ public class SaveTransConfirmPresenter implements SaveTransConfirmContract.Prese
 
     private void init() {
         content = new ObservableField<>();
-        if (mGetInfoSaleTranRequest.getRequest() == null) {
+        if (mGetInfoSaleTranRequest == null) {
             return;
         }
         String text;
         if (mChannelInfo != null) {
-            if (mGetInfoSaleTranRequest.getRequest().getSaleProgrameCode() == -1) {
+            if (mGetInfoSaleTranRequest.getSaleProgrameCode() == null) {
                 text = String.format(mContext.getResources()
                                 .getString(R.string.confirm_before_save_trans_msg_no_saleprogram_channel),
                         mChannelInfo.getChannelName(), mChannelInfo.getChannelCode(),
@@ -61,29 +63,28 @@ public class SaveTransConfirmPresenter implements SaveTransConfirmContract.Prese
                         Common.formatDouble(mSaleTrans.getAmountTax()),
                         Common.convertMoneyToString(mSaleTrans.getAmountTax()), "Hoang Van Cuong",
                         "01656738962",
-                        String.valueOf(mGetInfoSaleTranRequest.getRequest().getSaleProgrameCode()));
+                        String.valueOf(mGetInfoSaleTranRequest.getSaleProgrameCode()));
             }
             content.set(text);
             return;
         }
 
-        if (mGetInfoSaleTranRequest.getRequest().getSaleProgrameCode() == -1) {
+        if (mGetInfoSaleTranRequest.getSaleProgrameCode() == null) {
             text = String.format(mContext.getResources()
                             .getString(R.string.confirm_before_save_trans_msg_no_saleprogram),
-                    mGetInfoSaleTranRequest.getRequest().getCustomer().getCustomerName(),
-                    mGetInfoSaleTranRequest.getRequest().getCustomer().getTin(),
+                    mGetInfoSaleTranRequest.getCustomer().getCustomerName(),
+                    mGetInfoSaleTranRequest.getCustomer().getTin(),
                     Common.formatDouble(mSaleTrans.getAmountTax()),
                     Common.convertMoneyToString(mSaleTrans.getAmountTax()), "Hoang Van Cuong",
                     "01656738962");
         } else {
             text = String.format(
                     mContext.getResources().getString(R.string.confirm_before_save_trans_msg),
-                    mGetInfoSaleTranRequest.getRequest().getCustomer().getCustomerName(),
-                    mGetInfoSaleTranRequest.getRequest().getCustomer().getTin(),
+                    mGetInfoSaleTranRequest.getCustomer().getCustomerName(),
+                    mGetInfoSaleTranRequest.getCustomer().getTin(),
                     Common.formatDouble(mSaleTrans.getAmountTax()),
                     Common.convertMoneyToString(mSaleTrans.getAmountTax()), "Hoang Van Cuong",
-                    "01656738962",
-                    String.valueOf(mGetInfoSaleTranRequest.getRequest().getSaleProgrameCode()));
+                    "01656738962", String.valueOf(mGetInfoSaleTranRequest.getSaleProgrameCode()));
         }
         content.set(text);
     }
@@ -91,10 +92,12 @@ public class SaveTransConfirmPresenter implements SaveTransConfirmContract.Prese
     @Override
     public void saveTransaction() {
         mViewModel.showLoading();
-        Subscription subscription = mUserRepository.createSaleTransRetail(mGetInfoSaleTranRequest)
-                .subscribe(new MBCCSSubscribe<SaleTrans>() {
+        BaseRequest<GetInfoSaleTranRequest> baseRequest = new BaseRequest<>();
+        baseRequest.setRequest(mGetInfoSaleTranRequest);
+        Subscription subscription = mUserRepository.createSaleTransRetail(baseRequest)
+                .subscribe(new MBCCSSubscribe<GetInfoSaleTranResponse>() {
                     @Override
-                    public void onSuccess(SaleTrans object) {
+                    public void onSuccess(GetInfoSaleTranResponse object) {
                         Dialog dialog =
                                 new DialogFullScreen.Builder(mContext).setCenterContent(true)
                                         .setAutoClose(true)
@@ -120,9 +123,9 @@ public class SaveTransConfirmPresenter implements SaveTransConfirmContract.Prese
                     @Override
                     public void onError(BaseException error) {
                         //fake
-                        onSuccess(null);
+                        //onSuccess(null);
 
-                        // DialogUtils.showDialogError(mContext, null, error.getMessage(), null);
+                        DialogUtils.showDialogError(mContext, null, error.getMessage(), null);
                     }
 
                     @Override

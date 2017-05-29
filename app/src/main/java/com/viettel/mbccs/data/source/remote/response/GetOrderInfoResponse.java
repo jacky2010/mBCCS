@@ -10,7 +10,7 @@ import java.util.List;
  * Created by HuyQuyet on 5/18/17.
  */
 
-public class OrderInfoResponse {
+public class GetOrderInfoResponse extends DataResponse{
     @Expose
     @SerializedName("saleOrdersDetailList")
     private List<SaleOrdersDetail> saleOrdersDetailList;
