@@ -9,22 +9,22 @@ import com.viettel.mbccs.data.source.remote.IQLKhachHangRemoteDataSource;
  * Created by HuyQuyet on 5/22/17.
  */
 
-public class QLKhachHangtRepository
+public class QLKhachHangRepository
         implements IQLKhachHangLocalDataSource, IQLKhachHangRemoteDataSource {
-    private volatile static QLKhachHangtRepository instance;
+    private volatile static QLKhachHangRepository instance;
     private IQLKhachHangLocalDataSource qLKhachHangLocalDataSource;
     private IQLKhachHangRemoteDataSource qLKhachHangRemoteDataSource;
 
-    public static QLKhachHangtRepository getInstance() {
+    public static QLKhachHangRepository getInstance() {
         if (instance == null) {
-            instance = new QLKhachHangtRepository(
+            instance = new QLKhachHangRepository(
                     QLKhachHangLocalDataSource.getInstance(),
                     QLKhachHangRemoteDataSource.getInstance());
         }
         return instance;
     }
 
-    public QLKhachHangtRepository(
+    public QLKhachHangRepository(
             QLKhachHangLocalDataSource qLKhachHangLocalDataSource,
             QLKhachHangRemoteDataSource qLKhachHangRemoteDataSource) {
         this.qLKhachHangLocalDataSource = qLKhachHangLocalDataSource;

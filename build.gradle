@@ -55,5 +55,5 @@ ext {
     glideVersion = '3.7.0'
     constraintVersion = '1.0.2'
     butterknifeVersion = '8.5.1'
-    mapVersion = "10.2.1"
+    mapVersion = "10.2.6"
 }
