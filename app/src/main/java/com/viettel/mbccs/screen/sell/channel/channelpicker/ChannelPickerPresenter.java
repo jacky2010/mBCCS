@@ -1,9 +1,10 @@
 package com.viettel.mbccs.screen.sell.channel.channelpicker;
 
-import android.app.Activity;
 import android.content.Context;
-import android.databinding.ObservableField;
 import android.os.Handler;
+import android.support.v7.widget.RecyclerView;
+import com.viettel.mbccs.R;
+import com.viettel.mbccs.base.BaseSearchListPickerPresenter;
 import com.viettel.mbccs.data.model.ChannelInfo;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,33 +13,56 @@ import java.util.List;
  * Created by eo_cuong on 5/20/17.
  */
 
-public class ChannelPickerPresenter
-        implements ChannelPickerContract.Presenter, ChannelAdaper.onChannelListener {
-    private Context mContext;
-    private ChannelPickerContract.ViewModel mViewModel;
-    public ObservableField<String> text;
-    private ChannelAdaper mAdapter;
-    private List<ChannelInfo> mChannelInfos = new ArrayList<>();
-    private List<ChannelInfo> mChannelFilter = new ArrayList<>();
+public class ChannelPickerPresenter extends BaseSearchListPickerPresenter<ChannelInfo>
+        implements ChannelPickerContract.Presenter, ChannelAdapter.onChannelListener {
+
+    private List<ChannelInfo> mChannelFilter;
     private Handler handler = new Handler();
 
     public ChannelPickerPresenter(Context context, ChannelPickerContract.ViewModel viewModel,
             List<ChannelInfo> salePrograms) {
-        mContext = context;
-        mViewModel = viewModel;
-        mChannelInfos.addAll(salePrograms);
-        mChannelFilter.addAll(mChannelInfos);
-        init();
+        super(context, viewModel);
+        listData.addAll(salePrograms);
+        mChannelFilter.addAll(listData);
     }
 
     @Override
-    public void subscribe() {
+    public void doSearch() {
 
     }
 
     @Override
-    public void unSubscribe() {
+    public void onSearchSuccess() {
 
+    }
+
+    @Override
+    public void onSearchFail() {
+
+    }
+
+    @Override
+    public String getSearchHint() {
+        return null;
+    }
+
+    @Override
+    public String getToolbarTitle() {
+        return mContext.getString(R.string.choose_channel);
+    }
+
+    @Override
+    public void onBackPressed() {
+        mViewModel.onBackPressed();
+    }
+
+    @Override
+    protected RecyclerView.Adapter getListAdapter() {
+        if (mChannelFilter == null)
+            mChannelFilter = new ArrayList<>();
+        ChannelAdapter adapter = new ChannelAdapter(mChannelFilter);
+        adapter.setOnChannelListener(this);
+        return adapter;
     }
 
     Runnable filter = new Runnable() {
@@ -46,21 +70,14 @@ public class ChannelPickerPresenter
         public void run() {
             mChannelFilter.clear();
             String searchKey = text.get();
-            for (ChannelInfo item : mChannelInfos) {
+            for (ChannelInfo item : listData) {
                 if (item.getChannelName().toLowerCase().contains(searchKey.toLowerCase())) {
                     mChannelFilter.add(item);
                 }
             }
-            mAdapter.notifyDataSetChanged();
+            adapter.get().notifyDataSetChanged();
         }
     };
-
-    @Override
-    public void init() {
-        text = new ObservableField<String>();
-        mAdapter = new ChannelAdaper(mChannelFilter);
-        mAdapter.setOnChannelListener(this);
-    }
 
     @Override
     public void onTextChange(String s) {
@@ -68,20 +85,8 @@ public class ChannelPickerPresenter
         handler.postDelayed(filter, 500);
     }
 
-    public void onCancel() {
-        ((Activity) mContext).finish();
-    }
-
-    public ChannelAdaper getAdapter() {
-        return mAdapter;
-    }
-
-    public void setAdapter(ChannelAdaper adapter) {
-        mAdapter = adapter;
-    }
-
     @Override
     public void onItemClick(ChannelInfo channelInfo) {
-        mViewModel.onPickChannelPick(channelInfo);
+        ((ChannelPickerContract.ViewModel) mViewModel).onPickChannelPick(channelInfo);
     }
 }

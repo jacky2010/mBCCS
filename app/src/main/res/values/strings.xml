@@ -23,7 +23,7 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="confirm_goods">Xác nhận mặt hàng bán</string>
     <string name="confirm">Xác nhận</string>
     <string name="menu_dashboard">Dashboard</string>
-    <string name="menu_job">Công việc</string>
+    <string name="menu_task">Công việc</string>
     <string name="menu_sale">Bán hàng</string>
     <string name="menu_customer">Khách hàng</string>
     <string name="menu_more">more</string>
@@ -274,24 +274,24 @@ Từ <b>%s</b><br>
         <item>Hàng mới</item>
         <item>Hàng cũ</item>
     </array>
-    <string name="job_cskpp">Chăm sóc kênh phân phối</string>
-    <string name="job_arising">Việc phát sinh</string>
-    <string name="job_team">Việc tổ đội</string>
+    <string name="task_cskpp">Chăm sóc kênh phân phối</string>
+    <string name="task_arising">Việc phát sinh</string>
+    <string name="task_team">Việc tổ đội</string>
     <string name="reject">Từ chối</string>
     <string name="not_accepted">Chưa nhận</string>
     <string name="inprogress">Đang thực hiện</string>
     <string name="finished">Hoàn thành</string>
-    <string name="search_job_hint">Lọc công việc</string>
-    <string name="job_type">Loại công việc</string>
-    <string name="job_status">Trạng thái công việc</string>
-    <string name="date_assign_job">Ngày giao việc</string>
-    <string name="select_assign_job_type">Chọn loại công việc giao</string>
+    <string name="search_task_hint">Lọc công việc</string>
+    <string name="task_type">Loại công việc</string>
+    <string name="task_status">Trạng thái công việc</string>
+    <string name="date_assign_task">Ngày giao việc</string>
+    <string name="select_assign_task_type">Chọn loại công việc giao</string>
     <string name="text_continue">Tiếp</string>
-    <string name="job_duration">Thời gian thực hiện*</string>
+    <string name="task_duration">Thời gian thực hiện*</string>
     <string name="staff">Nhân viên</string>
-    <string name="job_title">Tên công việc</string>
+    <string name="task_title">Tên công việc</string>
     <string name="description">Mô tả</string>
-    <string name="assign_job">Giao việc</string>
+    <string name="assign_task">Giao việc</string>
 
     <string name="help_title">Trợ giúp</string>
     <string name="help_quan_ly_ban_hang">Làm thế nào để có thể quản lý bán hàng?</string>
@@ -413,6 +413,32 @@ Từ <b>%s</b><br>
     <string name="input_order_store_name">Kho nhận: %s</string>
     <string name="input_order_dialog_success_title">Nhập hóa đơn thành công</string>
     <string name="input_order_dialog_sucess_description">Dải hóa đơn bạn nhập đã được ghi lại thành công.</string>
+    <string name="chon_nhan_vien">Chọn nhân viên</string>
+    <string name="assign">Giao</string>
+    <string name="ban_co_chac_muon_giao_viec_phat_sinh">Bạn có chắc muốn giao việc phát sinh?</string>
+    <string name="thoi_gian_thuc_hien">Thời gian thực hiện</string>
+    <string name="trang_thai">Trạng thái</string>
+    <string name="nhan_vien">Nhân viên</string>
+    <string name="ngay_giao">Ngày giao</string>
+    <string name="loai_cong_viec">Loại công việc</string>
+    <string name="ten_cong_viec">Tên công việc</string>
+    <string name="tuyen_cham_soc">Tuyến chăm sóc</string>
+    <string name="nhan_viec">Nhận việc</string>
+    <string name="chi_tiet_cong_viec">Chi tiết %1$s</string>
+    <string name="ban_co_chac_muon_tu_choi">Bạn có chắc muốn từ chối?</string>
+    <string name="ban_co_chac_muon_nhan_viec">Bạn có chắc muốn nhận việc?</string>
+    <string name="cap_nhat_thong_tin_cong_viec">Cập nhật thông tin công việc</string>
+    <string name="dang_thuc_hien">Đang thực hiện</string>
+    <string name="tam_dung">Tạm dừng</string>
+    <string name="hoan_thanh">Hoàn thành</string>
+    <string name="cap_nhat">Cập nhật</string>
+    <string name="ghi_chu_cham_soc">Ghi chú chăm sóc</string>
+    <string name="chap_nhan">Accept</string>
+    <string name="ly_do_tam_dung">Lý do tạm dừng</string>
+    <string name="ngay_hen">Ngày hẹn</string>
+    <string name="cap_nhat_trang_thai_cham_soc">Cập nhật trạng thái chăm sóc</string>
+    <string name="xac_nhan_tam_dung">Xác nhận tạm dừng</string>
+    <string name="xac_nhan_hoan_thanh_cong_viec">Xác nhận hoàn thành công việc</string>
 
     <!--Base search input reposotory-->
     <string name="base_search_lable_from">Từ</string>

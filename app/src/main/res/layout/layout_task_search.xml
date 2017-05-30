@@ -6,7 +6,7 @@
     <data>
         <variable
             name="presenter"
-            type="com.viettel.mbccs.screen.assignjob.ListAssignJobPresenter"
+            type="com.viettel.mbccs.screen.assigntask.ListAssignTaskPresenter"
             />
 
         <import type="android.view.View"/>
@@ -33,40 +33,40 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_12"
-            android:text="@string/job_type"
-            style="@style/TextSearchJob"
+            android:text="@string/task_type"
+            style="@style/TextSearchTask"
             />
 
         <com.viettel.mbccs.widget.SpinnerWithBorder
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_4"
-            app:adapter="@{ presenter.jobTypeAdapter }"
-            app:selectedPosition="@={ presenter.jobTypePosition }"
+            app:adapter="@{ presenter.taskTypeAdapter }"
+            app:selectedPosition="@={ presenter.taskTypePosition }"
             />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_12"
-            android:text="@string/job_status"
-            style="@style/TextSearchJob"
+            android:text="@string/task_status"
+            style="@style/TextSearchTask"
             />
 
         <com.viettel.mbccs.widget.SpinnerWithBorder
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_4"
-            app:adapter="@{ presenter.jobStatusAdapter }"
-            app:selectedPosition="@={ presenter.jobStatusPosition }"
+            app:adapter="@{ presenter.taskStatusAdapter }"
+            app:selectedPosition="@={ presenter.taskStatusPosition }"
             />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_12"
-            android:text="@string/date_assign_job"
-            style="@style/TextSearchJob"
+            android:text="@string/date_assign_task"
+            style="@style/TextSearchTask"
             />
 
         <LinearLayout

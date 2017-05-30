@@ -1,13 +1,13 @@
-package com.viettel.mbccs.screen.sell.channel.channelpicker;
+package com.viettel.mbccs.screen.assigntask.staffpicker;
 
 import com.viettel.mbccs.base.searchlistview.BaseSearchListViewContract;
-import com.viettel.mbccs.data.model.ChannelInfo;
+import com.viettel.mbccs.data.model.StaffInfo;
 
 /**
- * Created by eo_cuong on 5/20/17.
+ * Created by Anh Vu Viet on 5/27/2017.
  */
 
-public interface ChannelPickerContract {
+public class StaffPickerContract {
 
     interface Presenter extends BaseSearchListViewContract.Presenter {
 
@@ -16,6 +16,6 @@ public interface ChannelPickerContract {
 
     interface ViewModel extends BaseSearchListViewContract.ViewModel {
 
-        void onPickChannelPick(ChannelInfo channelInfo);
+        void onStaffPicked(StaffInfo channelInfo);
     }
 }

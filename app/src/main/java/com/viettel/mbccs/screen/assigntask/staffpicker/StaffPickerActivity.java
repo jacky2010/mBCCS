@@ -1,38 +1,33 @@
-package com.viettel.mbccs.screen.sell.channel.channelpicker;
+package com.viettel.mbccs.screen.assigntask.staffpicker;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+
 import com.viettel.mbccs.base.BaseSearchListPickerActivity;
-import com.viettel.mbccs.data.model.ChannelInfo;
-import com.viettel.mbccs.utils.GsonUtils;
+import com.viettel.mbccs.data.model.StaffInfo;
 import com.viettel.mbccs.variable.Constants;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by eo_cuong on 5/20/17.
+ * Created by Anh Vu Viet on 5/27/2017.
  */
 
-public class ChannelPickerActivity extends BaseSearchListPickerActivity
-        implements ChannelPickerContract.ViewModel {
+public class StaffPickerActivity extends BaseSearchListPickerActivity
+        implements StaffPickerContract.ViewModel {
 
-    private List<ChannelInfo> mChannelInfos;
+    private List<StaffInfo> mStaffInfo;
 
     @Override
     protected void initData() {
-        Bundle bundle = getIntent().getExtras();
-        if (bundle == null) {
-            return;
-        }
-        mChannelInfos =
-                GsonUtils.String2ListObject(bundle.getString(Constants.BundleConstant.CHANNEL_LIST),
-                        ChannelInfo[].class);
+        mStaffInfo = new ArrayList<>();
+        mStaffInfo.add(new StaffInfo(123, "155", "Nguyen Van A", 122, "154", "Shop", 0, "0125846",
+                "Nhan vien ban hang", "Ha Noi"));
 
-        if (mChannelInfos == null) {
-            return;
-        }
-        mPresenter = new ChannelPickerPresenter(this, this, mChannelInfos);
+        mPresenter = new StaffPickerPresenter(this, this, mStaffInfo);
         mBinding.setPresenter(mPresenter);
         mBinding.searchInput.addOnTextChange(new TextWatcher() {
             @Override
@@ -42,7 +37,7 @@ public class ChannelPickerActivity extends BaseSearchListPickerActivity
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                ((ChannelPickerPresenter) mPresenter).onTextChange(s.toString());
+                ((StaffPickerPresenter) mPresenter).onTextChange(s.toString());
             }
 
             @Override
@@ -63,10 +58,10 @@ public class ChannelPickerActivity extends BaseSearchListPickerActivity
     }
 
     @Override
-    public void onPickChannelPick(ChannelInfo channelInfo) {
+    public void onStaffPicked(StaffInfo staffInfo) {
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
-        bundle.putSerializable(Constants.BundleConstant.CHANNEL, channelInfo);
+        bundle.putParcelable(Constants.BundleConstant.STAFF_INFO, staffInfo);
         intent.putExtras(bundle);
         setResult(RESULT_OK, intent);
         finish();

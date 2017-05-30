@@ -5,11 +5,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.base.BaseActivity;
 import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.databinding.TestBinding;
 import com.viettel.mbccs.widget.SpinnerWithBorder;
-import java.util.ArrayList;
 
 public class Test extends BaseDataBindActivity<TestBinding, Void> {
 
@@ -28,7 +26,7 @@ public class Test extends BaseDataBindActivity<TestBinding, Void> {
         text.set("231321");
 
         adapter = new SpinnerWithBorder.HintAdapter<>(this, android.R.layout.simple_spinner_item,
-                android.R.id.text1, getResources().getStringArray(R.array.job_type));
+                android.R.id.text1, getResources().getStringArray(R.array.task_type));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         mBinding.setData(this);

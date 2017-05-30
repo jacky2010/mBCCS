@@ -27,6 +27,7 @@
             android:layout_height="wrap_content"
             android:background="#00ffffff"
             android:focusable="true"
+            android:hint="@{data.hint}"
             android:lines="@{data.lines}"
             android:padding="@dimen/dp_3"
             android:text="@={data.text}"
