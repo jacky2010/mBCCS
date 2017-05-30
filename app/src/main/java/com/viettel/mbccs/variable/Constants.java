@@ -101,4 +101,8 @@ public class Constants {
         public static final int DEFAULT_TAX_RATE = 10;
         public static final int DEFAULT_TAX_CALC_BACK_RATE = 11;
     }
+
+    public class View{
+        public static final String HINT = "hint";
+    }
 }

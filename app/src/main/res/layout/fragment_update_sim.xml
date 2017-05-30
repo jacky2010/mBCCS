@@ -145,6 +145,7 @@
                     android:text="@{ presenter.changeSimItem.changeSimInfo.oldSerial }" />
 
                 <TextView
+                    android:id="@+id/txtNewSerial"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
@@ -311,7 +312,8 @@
                     <TextView
                         android:id="@+id/txtServiceFee"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:text="@{presenter.serviceFee}"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -327,7 +329,8 @@
                     <TextView
                         android:id="@+id/txtSimFee"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:text="@{presenter.changeSimFee}"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -345,7 +348,8 @@
                         android:id="@+id/txtTotalFee"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:text="@{presenter.totalFee}"/>
                 </LinearLayout>
 
             </LinearLayout>

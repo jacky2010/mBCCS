@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.viettel.mbccs.R;
@@ -19,7 +20,7 @@ import com.viettel.mbccs.variable.Constants;
  */
 
 public class SearchChangeSimFragment extends BaseDataBindFragment<FragmentSearchChangeSimBinding, SearchChangeSimPresenter>
-        implements SearchChangeSimContract.ViewModel{
+        implements SearchChangeSimContract.ViewModel {
 
     private AppCompatActivity mActivity;
 
@@ -60,21 +61,34 @@ public class SearchChangeSimFragment extends BaseDataBindFragment<FragmentSearch
 
     }
 
-    private void initListeners(){
-        try{
+    private void initListeners() {
+        try {
             mBinding.txtDocumentId.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View view, boolean b) {
-                    if(!b)
+                    if (!b)
                         hideSoftInput();
                 }
             });
-        }catch (Exception e){
+
+            mBinding.spDocumentType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if (!Constants.View.HINT.equals(view.getTag()))
+                        mPresenter.onDocumentTypeChanged(i);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void hideSoftInput(){
+    private void hideSoftInput() {
         ActivityUtils.hideKeyboard(getBaseActivity());
     }
 
@@ -86,18 +100,18 @@ public class SearchChangeSimFragment extends BaseDataBindFragment<FragmentSearch
 
     @Override
     public void onSimFound(String isdn, String documentType, String documentId) {
-        try{
+        try {
             hideSoftInput();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @Override
     public void onSimNotFound(String isdn, String documentType, String documentId) {
-        try{
+        try {
             hideSoftInput();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

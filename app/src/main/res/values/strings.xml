@@ -258,7 +258,13 @@ Từ <b>%s</b><br>
     <string name="change_sim_label_sim_fee">Phí Sim:</string>
     <string name="change_sim_label_total_fee">Tổng:</string>
     <string name="common_msg_error_no_data">Không tìm thấy thông tin tương ứng</string>
-    <string name="change_sim_error_search_key_required">Bạn phải nhập thông tin tìm kiếm!</string>
+    <string name="change_sim_error_search_isdn_required">Bạn phải nhập ISDN!</string>
+    <string name="change_sim_error_search_documentId_required">Bạn phải nhập Số giấy tờ!</string>
+    <string name="change_sim_error_search_documentType_required">Bạn phải chọn Loại giấy tờ!</string>
+    <string name="change_sim_error_serial_required">Số Serial Mới không được để trống!</string>
+    <string name="change_sim_error_serial_not_valid">Số Serial Mới không hợp lệ!</string>
+    <string name="change_sim_error_recent_call_required">Số thường liên lạc %s không được để trống!</string>
+    <string name="change_sim_error_recent_call_not_valid">Số thường liên lạc %s không hợp lệ!</string>
     <string name="change_sim_label_sim_serial2">Số serial:</string>
     <string name="change_sim_label_cust_name2">Tên khách hàng:</string>
     <string name="change_sim_label_change">Thực Hiện Đổi Sim</string>
@@ -515,7 +521,7 @@ Từ <b>%s</b><br>
     <string name="base_search_lable_to">Đến</string>
     <string name="common_lable_search">Tìm kiếm</string>
     <string name="common_label_update">Cập nhật</string>
-
+    <string name="common_label_currency_suffix">đồng</string>
 
     <!-- Create Update information -->
     <string name="create_update_information_create_title">Đăng ký thông tin thuê bao</string>

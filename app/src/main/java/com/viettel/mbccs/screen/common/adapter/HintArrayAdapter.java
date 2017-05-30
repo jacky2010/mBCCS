@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.viettel.mbccs.R;
+import com.viettel.mbccs.variable.Constants;
 
 import java.util.List;
 
@@ -56,6 +57,7 @@ public class HintArrayAdapter<T> extends ArrayAdapter<T> {
         if(position == 0) {
             texview.setText("");
             texview.setHint(getItem(position).toString()); //"Hint to be displayed"
+            view.setTag(Constants.View.HINT);
         } else {
             texview.setText(getItem(position).toString());
         }

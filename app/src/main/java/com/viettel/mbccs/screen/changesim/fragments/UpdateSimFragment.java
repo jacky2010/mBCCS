@@ -44,6 +44,15 @@ public class UpdateSimFragment extends BaseDataBindFragment<FragmentUpdateSimBin
         mBinding.setPresenter(mPresenter);
 
         initListeners();
+        initWindow();
+    }
+
+    private void initWindow(){
+        try{
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override

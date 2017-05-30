@@ -46,10 +46,17 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_16" />
 
-            <Spinner
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_40"
-                android:background="@drawable/bg_order" />
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_border">
+
+                <Spinner
+                    android:id="@+id/spDocumentType"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:adapter="@{presenter.documentTypeAdapter}" />
+            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"

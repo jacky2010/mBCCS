@@ -8,7 +8,10 @@ import android.view.View;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.ChangeSimInfo;
 import com.viettel.mbccs.data.model.ChangeSimItem;
+import com.viettel.mbccs.data.model.KeyValue;
+import com.viettel.mbccs.data.source.ChangeSimRepository;
 import com.viettel.mbccs.screen.changesim.adapter.ChangeSimListAdapter;
+import com.viettel.mbccs.screen.common.adapter.HintArrayAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +32,19 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
     public ObservableBoolean searchFound;
     public ObservableField<ChangeSimListAdapter> changeSimListAdapter;
 
-    public SearchChangeSimPresenter(Context context, final SearchChangeSimContract.ViewModel viewModel){
+    private HintArrayAdapter<String> documentTypeAdapter;
+
+    private List<String> documentTypesList;
+    private List<KeyValue> documentTypes;
+
+    private ChangeSimRepository repository;
+
+    public SearchChangeSimPresenter(Context context, final SearchChangeSimContract.ViewModel viewModel) {
         this.context = context;
         this.viewModel = viewModel;
 
         documentId = new ObservableField<>();
+        documentType = new ObservableField<>();
         isdn = new ObservableField<>();
         changeSimListAdapter = new ObservableField<>();
         searchFound = new ObservableBoolean(true);
@@ -45,13 +56,36 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
             }
         });
 
+        documentTypesList = new ArrayList<>();
+        documentTypeAdapter = new HintArrayAdapter<>(context, R.layout.item_spinner, R.id.text,
+                documentTypesList);
+
         initListeners();
+        initData();
     }
 
-    private void initListeners(){
-        try{
+    private void initListeners() {
+        try {
 
-        }catch (Exception e){
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initData() {
+        try {
+            repository = ChangeSimRepository.getInstance();
+
+            documentTypes = repository.getDocumentTypes();
+
+            documentTypesList.add(context.getString(R.string.branches_add_hint_document_type));
+            for (KeyValue item : documentTypes) {
+                documentTypesList.add(item.getValue());
+            }
+
+            documentTypeAdapter.notifyDataSetChanged();
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -71,11 +105,14 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
 
         try {
 
-            if((documentId.get() == null || "".equals(documentId.get().trim()))
-                    && (isdn.get() == null || "".equals(isdn.get().trim()))){
-
-                viewModel.showError(context.getString(R.string.change_sim_error_search_key_required));
-
+            if (isdn.get() == null || "".equals(isdn.get().trim())) {
+                viewModel.showError(context.getString(R.string.change_sim_error_search_isdn_required));
+                return;
+            } else if (documentType.get() == null || "".equals(documentType.get().trim())) {
+                viewModel.showError(context.getString(R.string.change_sim_error_search_documentType_required));
+                return;
+            } else if (documentId.get() == null || "".equals(documentId.get().trim())) {
+                viewModel.showError(context.getString(R.string.change_sim_error_search_documentId_required));
                 return;
             }
 
@@ -95,18 +132,31 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
 
             changeSimListAdapter.set(changeSimAdapter);
 
-            if(changeSimAdapter.getItemCount() > 0){
+            if (changeSimAdapter.getItemCount() > 0) {
                 searchFound.set(true);
 
                 viewModel.onSimFound(isdn.get(), documentType.get(), documentId.get());
-            }else{
+            } else {
                 searchFound.set(false);
 
                 viewModel.onSimNotFound(isdn.get(), documentType.get(), documentId.get());
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onDocumentTypeChanged(int index) {
+        try {
+            documentType.set(documentTypes.get(index).getKey());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public HintArrayAdapter<String> getDocumentTypeAdapter() {
+        return documentTypeAdapter;
     }
 }

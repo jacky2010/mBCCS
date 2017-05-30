@@ -18,5 +18,6 @@ public class SearchChangeSimContract {
 
     interface Presenter extends BasePresenter {
         void searchSim();
+        void onDocumentTypeChanged(int index);
     }
 }
