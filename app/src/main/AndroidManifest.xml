@@ -29,89 +29,101 @@
             android:value="@integer/google_play_services_version"/>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="@string/google_maps_key"/>
+
+        <meta-data
+            android:name="AA_DB_NAME"
+            android:value="mbccs_db"/>
+        <meta-data
+            android:name="AA_DB_VERSION"
+            android:value="2"/>
+
+        <meta-data
+            android:name="AA_MODELS"
+            android:value="com.viettel.mbccs.data.model.Precinct,com.viettel.mbccs.data.model.Province,com.viettel.mbccs.data.model.District"/>
+
 
         <activity
             android:name=".screen.splash.SplashActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".screen.billing.BillingActivity" />
+        <activity android:name=".screen.billing.BillingActivity"/>
         <activity
             android:name=".screen.resetpass.ResetPasswordActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.login.LoginActivity"
             android:configChanges="screenLayout|screenSize"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".screen.main.MainActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".base.BaseSubMenuActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.serialpicker.SerialPickerActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.common.success.ScanbarCodeActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.sell.orders.SellOrdersActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.sell.retail.SaleRetailActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.sell.retail.sellprogrampicker.SaleProgramPickerActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.config.ConfigActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.goodsconfirm.SaleReviewActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.sell.retail.CreateSaleActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.sell.channel.SaleChannelActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.sell.channel.channelpicker.ChannelPickerActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.viewwarehouse.ViewWarehouseActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.kpp.order.KPPOrderActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.kpp.order.addnew.AddNewOrderActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.kpp.order.findstock.FindStockActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".screen.kpp.order.ordersuccess.OrderSuccessActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.assigntask.ListAssignTaskActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.assigntask.arising.create.CreateArisingTaskActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.assigntask.staffpicker.StaffPickerActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.assigntask.cskpp.detail.TaskCSKPPDetailActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.help.HelpActivity"
             android:screenOrientation="portrait"/>
@@ -128,7 +140,8 @@
         <activity
             android:name=".screen.inputorder.InputOrderActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".screen.information.CreateUpdateInformationActivity"
+        <activity
+            android:name=".screen.information.CreateUpdateInformationActivity"
             android:screenOrientation="portrait"/>
     </application>
 

@@ -1,14 +1,19 @@
 package com.viettel.mbccs.data.source.local;
 
+import com.activeandroid.query.Select;
 import com.google.gson.Gson;
 import com.viettel.mbccs.MBCCSApplication;
+import com.viettel.mbccs.data.model.District;
 import com.viettel.mbccs.data.model.LoginResult;
+import com.viettel.mbccs.data.model.Precinct;
+import com.viettel.mbccs.data.model.Province;
 import com.viettel.mbccs.data.model.Session;
 import com.viettel.mbccs.data.model.StaffInfo;
 import com.viettel.mbccs.data.source.local.datasource.SharedPrefs;
 import com.viettel.mbccs.utils.GsonUtils;
 import com.viettel.mbccs.utils.SecureUtils;
 import com.viettel.mbccs.variable.Constants;
+import java.util.List;
 
 /**
  * Created by eo_cuong on 5/10/17.
@@ -148,5 +153,32 @@ public class UserLocalDataSource implements IUserLocalDataSource {
         return null;
     }
 
+    @Override
+    public List<Province> getListProvince() {
+        return new Select().from(Province.class).orderBy("province_id asc").execute();
+    }
 
+    @Override
+    public List<District> getListDistrictByProvinceId(long provinceId) {
+        return new Select().from(District.class)
+                .where("province_id = ?", provinceId)
+                .orderBy("district_id asc")
+                .execute();
+    }
+
+    @Override
+    public List<Precinct> getListPrecintByDistrictId(long districtId) {
+        return new Select().from(Precinct.class)
+                .where("district_id = ?", districtId)
+                .orderBy("precint_id asc")
+                .execute();
+    }
+
+    @Override
+    public List<Precinct> getListPrecintByProvinceAndDistrictId(long provinceId, long districtId) {
+        return new Select().from(Precinct.class)
+                .where("district_id = ?", districtId)
+                .and("province_id = ?", provinceId)
+                .execute();
+    }
 }
