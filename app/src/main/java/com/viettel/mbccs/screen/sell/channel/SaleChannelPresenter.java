@@ -54,8 +54,7 @@ public class SaleChannelPresenter
     private TeleComService currentTelecomService = new TeleComService();
     private ChannelInfo currentChannel = new ChannelInfo();
     private int currentStockPosition = -1;
-    private UserRepository mUserRepository;
-    private BanHangKhoTaiChinhRepository banHangKhoTaiChinhRepository;
+    private BanHangKhoTaiChinhRepository mBanHangKhoTaiChinhRepository;
     private DataRequest<GetTelecomServiceAndSaleProgramRequest>
             mGetTelecomServiceAndSaleProgramRequest;
     private DataRequest<GetListChannelByOwnerTypeIdRequest> mGetListChannelByOwnerTypeIdRequest;
@@ -66,8 +65,7 @@ public class SaleChannelPresenter
         mContext = context;
         mViewModel = viewModel;
         mSubscription = new CompositeSubscription();
-        mUserRepository = UserRepository.getInstance();
-        banHangKhoTaiChinhRepository = BanHangKhoTaiChinhRepository.getInstance();
+        mBanHangKhoTaiChinhRepository = BanHangKhoTaiChinhRepository.getInstance();
         init();
         initialData();
     }
@@ -84,34 +82,38 @@ public class SaleChannelPresenter
             request.setTelecomServiceId(currentTelecomService.getId());
         }
         //TODO set attribute for request
+
         mGetTotalStockRequest.setParameterApi(request);
-        Subscription subscription = mUserRepository.getModelSales(mGetTotalStockRequest)
-                .subscribe(new MBCCSSubscribe<GetTotalStockResponse>() {
-                    @Override
-                    public void onSuccess(GetTotalStockResponse object) {
-                        mModelSales.clear();
-                        mModelSales.addAll(object.getModelSaleList());
-                        mAdapter.notifyDataSetChanged();
-                    }
+        Subscription subscription =
+                mBanHangKhoTaiChinhRepository.getModelSales(mGetTotalStockRequest)
+                        .subscribe(new MBCCSSubscribe<GetTotalStockResponse>() {
+                            @Override
+                            public void onSuccess(GetTotalStockResponse object) {
+                                mModelSales.clear();
+                                mModelSales.addAll(object.getModelSaleList());
+                                stockAdapter.notifyDataSetChanged();
+                            }
 
-                    @Override
-                    public void onError(BaseException error) {
+                            @Override
+                            public void onError(BaseException error) {
 
-                        //DialogUtils.showDialogError(mContext, null, error.getMessage(), null);
-                        fakeModelSale();
-                    }
+                                DialogUtils.showDialogError(mContext, null, error.getMessage(),
+                                        null);
+                                //fakeModelSale();
+                            }
 
-                    @Override
-                    public void onRequestFinish() {
-                        super.onRequestFinish();
-                        mViewModel.hideLoading();
-                    }
-                });
+                            @Override
+                            public void onRequestFinish() {
+                                super.onRequestFinish();
+                                mViewModel.hideLoading();
+                            }
+                        });
 
         mSubscription.add(subscription);
     }
 
     private void initialData() {
+        mViewModel.showLoading();
         Observable.zip(getObservableTeleComserviceAndSaleProgram(), getObservaleChannelInfors(),
                 new Func2<TelecomServiceAndSaleProgramResponse, GetListChannelByOwnerTypeIdResponse, SaleChannelInitData>() {
                     @Override
@@ -166,13 +168,18 @@ public class SaleChannelPresenter
             @Override
             public void onError(BaseException error) {
 
-                fakeLoadChannel();
+                //fakeLoadChannel();
                 //fake
-                fakeData();
-                loadModelSale();
+                //fakeData();
+                //loadModelSale();
 
-                //DialogUtils.showDialogError(mContext, null, error.getMessage(), null);
+                DialogUtils.showDialogError(mContext, null, error.getMessage(), null);
+            }
 
+            @Override
+            public void onRequestFinish() {
+                super.onRequestFinish();
+                mViewModel.hideLoading();
             }
         });
     }
@@ -182,8 +189,9 @@ public class SaleChannelPresenter
         mGetTelecomServiceAndSaleProgramRequest.setApiCode(ApiCode.GetTelecomServiceAndSaleProgram);
         GetTelecomServiceAndSaleProgramRequest request =
                 new GetTelecomServiceAndSaleProgramRequest();
+
         mGetTelecomServiceAndSaleProgramRequest.setParameterApi(request);
-        return mUserRepository.getTelecomserviceAndSaleProgram(
+        return mBanHangKhoTaiChinhRepository.getTelecomserviceAndSaleProgram(
                 mGetTelecomServiceAndSaleProgramRequest);
     }
 
@@ -191,12 +199,10 @@ public class SaleChannelPresenter
         mGetListChannelByOwnerTypeIdRequest = new DataRequest<>();
         mGetListChannelByOwnerTypeIdRequest.setApiCode(ApiCode.GetListChannelByOwnerTypeId);
         GetListChannelByOwnerTypeIdRequest request = new GetListChannelByOwnerTypeIdRequest();
-        request.setChannelTypeId(1);
-        request.setShopId(1);
         request.setStaffId(1);
         request.setLanguage("en");
         mGetListChannelByOwnerTypeIdRequest.setParameterApi(request);
-        return banHangKhoTaiChinhRepository.getListChannelByOwnerTypeId(
+        return mBanHangKhoTaiChinhRepository.getListChannelByOwnerTypeId(
                 mGetListChannelByOwnerTypeIdRequest);
     }
 
@@ -208,7 +214,7 @@ public class SaleChannelPresenter
                 new GetTelecomServiceAndSaleProgramRequest();
         mGetTelecomServiceAndSaleProgramRequest.setParameterApi(request);
 
-        Subscription subscription = mUserRepository.getTelecomserviceAndSaleProgram(
+        Subscription subscription = mBanHangKhoTaiChinhRepository.getTelecomserviceAndSaleProgram(
                 mGetTelecomServiceAndSaleProgramRequest)
                 .subscribe(new MBCCSSubscribe<TelecomServiceAndSaleProgramResponse>() {
                     @Override
@@ -235,8 +241,8 @@ public class SaleChannelPresenter
                     @Override
                     public void onError(BaseException error) {
                         DialogUtils.showDialogError(mContext, null, error.getMessage(), null);
-                        fakeData();
-                        loadModelSale();
+                        // fakeData();
+                        //loadModelSale();
                     }
 
                     @Override
@@ -414,7 +420,6 @@ public class SaleChannelPresenter
         }
         currentChannel = channelInfo;
         channelText.set(currentChannel.getChannelName());
-        loadModelSale();
     }
 
     @Override

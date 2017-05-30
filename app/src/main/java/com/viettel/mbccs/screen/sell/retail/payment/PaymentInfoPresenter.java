@@ -10,6 +10,7 @@ import com.viettel.mbccs.data.model.SaleProgram;
 import com.viettel.mbccs.data.model.SaleTrans;
 import com.viettel.mbccs.data.model.StockSerial;
 import com.viettel.mbccs.data.model.TeleComService;
+import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
@@ -47,12 +48,14 @@ public class PaymentInfoPresenter implements PaymentInforContract.Presenter {
     private String paymentMethod;
     private String phone;
     private String secureCode;
-    private UserRepository mUserRepository;
+
+    private BanHangKhoTaiChinhRepository mBanHangKhoTaiChinhRepository;
     private DataRequest<GetInfoSaleTranRequest> mGetInfoSaleTranRequestBaseRequest;
     private CompositeSubscription mSubscriptions;
     private SaleTrans mSaleTrans;
     private TeleComService mTeleComService;
     private SaleProgram mSaleProgram;
+    private String currentPayment;
 
     public PaymentInfoPresenter(PaymentInforContract.ViewModel viewModel, Context context,
             List<StockSerial> stockSerials, TeleComService teleComService,
@@ -62,7 +65,7 @@ public class PaymentInfoPresenter implements PaymentInforContract.Presenter {
         this.mStockSerials = stockSerials;
         this.mTeleComService = teleComService;
         this.mSaleProgram = saleProgram;
-        mUserRepository = UserRepository.getInstance();
+        mBanHangKhoTaiChinhRepository = BanHangKhoTaiChinhRepository.getInstance();
         mSubscriptions = new CompositeSubscription();
         mSaleTrans = new SaleTrans();
         init();
@@ -131,7 +134,7 @@ public class PaymentInfoPresenter implements PaymentInforContract.Presenter {
         mGetInfoSaleTranRequestBaseRequest.setParameterApi(request);
 
         Subscription subscription =
-                mUserRepository.getSaleTransInfo(mGetInfoSaleTranRequestBaseRequest)
+                mBanHangKhoTaiChinhRepository.getSaleTransInfo(mGetInfoSaleTranRequestBaseRequest)
                         .subscribe(new MBCCSSubscribe<GetInfoSaleTranResponse>() {
                             @Override
                             public void onSuccess(GetInfoSaleTranResponse object) {
@@ -225,7 +228,12 @@ public class PaymentInfoPresenter implements PaymentInforContract.Presenter {
     }
 
     public void setPaymentMethod(String paymentMethod) {
+        if (currentPayment != null && currentPayment.equals(paymentMethod)) {
+            return;
+        }
         this.paymentMethod = paymentMethod;
+        currentPayment = paymentMethod;
+        isGetTransInfo.set(false);
     }
 
     public void setPhone(String phone) {

@@ -10,6 +10,8 @@ import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
 import com.viettel.mbccs.data.source.remote.request.LoginRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseErrorResponse;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.CreateSaleTransChannelResponse;
+import com.viettel.mbccs.data.source.remote.response.CreateSaleTransRetailResponse;
 import com.viettel.mbccs.data.source.remote.response.GetInfoSaleTranResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
 import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
@@ -104,11 +106,6 @@ public class UserRemoteDataSource implements IUserRemoteDataSource {
     @Override
     public Observable<GetInfoSaleTranResponse> createSaleTransRetail(
             DataRequest<GetInfoSaleTranRequest> request) {
-        return RequestHelper.getRequest()
-                .createSaleTransRetail(request)
-                .flatMap(SchedulerUtils.<GetInfoSaleTranResponse>convertDataFlatMap())
-                .compose(SchedulerUtils.<GetInfoSaleTranResponse>applyAsyncSchedulers());
+        return null;
     }
-
-
 }

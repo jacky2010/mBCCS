@@ -23,6 +23,7 @@ public class ChannelPickerPresenter extends BaseSearchListPickerPresenter<Channe
             List<ChannelInfo> salePrograms) {
         super(context, viewModel);
         listData.addAll(salePrograms);
+        listData.remove(0);
         mChannelFilter.addAll(listData);
     }
 

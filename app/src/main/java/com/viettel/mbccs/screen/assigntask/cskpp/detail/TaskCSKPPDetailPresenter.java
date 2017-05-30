@@ -108,7 +108,7 @@ public class TaskCSKPPDetailPresenter implements TaskCSKPPDetailContract.Present
     public RecyclerView.Adapter getAdapter() {
         // TODO: 29/05/2017 Fake empty data
         List<ChannelInfo> list = new ArrayList<>();
-        list.add(new ChannelInfo(123, "channelCode", "channelType", "Kenh A",
+        list.add(new ChannelInfo(123, "channelCode",1, "Kenh A",
                 "Ha Noi", "012145253", 2424, "managementCode",
                 "managementType", "managementName", 1241, "shopCode",
                 "shopName", "pricePolicy", "discountPolicy"));

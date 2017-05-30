@@ -17,6 +17,7 @@ import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
 import com.viettel.mbccs.data.source.remote.request.LoginRequest;
+import com.viettel.mbccs.data.source.remote.response.CreateSaleTransRetailResponse;
 import com.viettel.mbccs.data.source.remote.response.GetInfoSaleTranResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
 import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
@@ -208,4 +209,5 @@ public class UserRepository implements IUserLocalDataSource, IUserRemoteDataSour
             DataRequest<GetInfoSaleTranRequest> request) {
         return mUserRemoteDataSource.createSaleTransRetail(request);
     }
+
 }

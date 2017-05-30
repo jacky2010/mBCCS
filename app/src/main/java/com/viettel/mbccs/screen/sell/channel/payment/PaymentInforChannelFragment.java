@@ -122,7 +122,7 @@ public class PaymentInforChannelFragment extends BaseFragment
 
         if (mPresenter == null) {
             mPresenter = new PaymentInforChannelPresenter(this, getActivity(), mStockSerials,
-                    mTeleComService, mSaleProgram,mChannelInfo);
+                    mTeleComService, mSaleProgram, mChannelInfo);
         }
 
         mBinding.setPresenter((PaymentInforChannelPresenter) mPresenter);
@@ -174,10 +174,8 @@ public class PaymentInforChannelFragment extends BaseFragment
                 dialogInputBankPlus.setDialogInputListener(
                         new DialogInputBankPlus.DialogInputListener() {
                             @Override
-                            public void onDialogDissmiss(String phone, String secureCode) {
+                            public void onDialogDissmiss(String phone) {
                                 ((PaymentInforChannelPresenter) mPresenter).setPhone(phone);
-                                ((PaymentInforChannelPresenter) mPresenter).setSecureCode(
-                                        secureCode);
                             }
                         });
                 dialogInputBankPlus.show();
@@ -241,7 +239,8 @@ public class PaymentInforChannelFragment extends BaseFragment
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
                 .addToBackStack("SaveTransConfirmFragment")
-                .replace(R.id.container, SaveTransConfirmFragment.newInstance(request.getParameterApi(), saleTrans,channelInfo))
-                .commit();
+                .replace(R.id.container,
+                        SaveTransConfirmFragment.newInstance(request.getParameterApi(), saleTrans,
+                                channelInfo)).commit();
     }
 }
