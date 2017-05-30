@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    >
+    <data>
+        <variable
+            name="presenter"
+            type="com.viettel.mbccs.screen.information.CreateUpdateInformationPresenter"
+            />
+        <import type="android.view.View"/>
+    </data>
+    <FrameLayout
+        android:id="@+id/frame_create_update_information"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusableInTouchMode="true"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <include
+                layout="@layout/toolbar"
+                android:id="@+id/toolbar_update_information"
+                app:background="@{@color/grey}"
+                app:isShow="@{true}"
+                app:leftIcon="@{@drawable/ic_arrow_left_24dp}"
+                app:leftIconClick="@{()->presenter.onCancel()}"
+                app:title="@{ presenter.title }"
+                app:titleColor="@{@color/white}"
+                app:titleTextSize="@{@dimen/sp_17}"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                android:paddingTop="@dimen/dp_16"
+                >
+                <com.viettel.mbccs.widget.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/create_update_information_create_phone_number"
+                    />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_marginTop="@dimen/dp_6"
+                    android:background="@drawable/bg_border"
+                    android:drawableLeft="@drawable/ic_phone_black_16dp"
+                    android:drawableRight="@drawable/ic_cancel_grey_24dp"
+                    android:paddingLeft="@dimen/dp_6"
+                    android:paddingRight="@dimen/dp_10"
+                    />
+
+                <com.viettel.mbccs.widget.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="@string/create_update_information_create_type_passport"
+                    />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_marginTop="@dimen/dp_6"
+                    android:background="@drawable/bg_order"
+                    >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/dp_6"
+                        android:src="@drawable/ic_folder_black_16dp"
+
+                        />
+
+                    <Spinner
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/dp_30"
+                        />
+                    <!--android:adapter="@{ presenter.adapterStock }"-->
+                </RelativeLayout>
+
+                <com.viettel.mbccs.widget.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="@string/create_update_information_create_number_passport"
+                    />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_marginTop="@dimen/dp_6"
+                    android:background="@drawable/bg_border"
+                    android:drawableLeft="@drawable/ic_folder_black_16dp"
+                    android:drawableRight="@drawable/ic_cancel_grey_24dp"
+                    android:paddingLeft="@dimen/dp_8"
+                    android:paddingRight="@dimen/dp_10"
+                    />
+
+                <Button
+                    android:layout_width="300dp"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:onClick="@{ v -> presenter.onSearch() }"
+                    android:text="@string/create_update_information_create_btn_search"
+                    android:textAllCaps="false"
+                    style="@style/button_positive"
+                    />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_1"
+                    android:layout_marginTop="@dimen/dp_18"
+                    android:background="@color/grey_three"
+                    />
+                <com.viettel.mbccs.widget.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="@string/create_update_information_create_customer_information"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_18"
+                    android:textStyle="bold"
+                    />
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="@{ presenter.isHideData ? View.GONE : View.VISIBLE }"
+                    bind:recyclerAdapter="@{ presenter.informationCustomerAdapter }"
+                    />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="@{ presenter.isHideBtnCreate ? View.GONE : View.VISIBLE }"
+                    >
+                    <com.viettel.mbccs.widget.CustomTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:gravity="center"
+                        android:text="@string/create_update_information_create_no_information"
+                        android:textColor="@color/red"
+                        android:textSize="@dimen/sp_18"
+                        />
+                    <Button
+                        android:layout_width="@dimen/dp_300"
+                        android:layout_height="@dimen/dp_40"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="@dimen/dp_30"
+                        android:layout_marginTop="@dimen/dp_16"
+                        android:gravity="center"
+                        android:onClick="@{ v -> presenter.onRegisterNewPayment() }"
+                        android:text="@string/create_update_information_register_new_payment"
+                        android:textAllCaps="false"
+                        style="@style/button_positive"
+                        />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+</layout>
+

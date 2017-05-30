@@ -22,7 +22,7 @@
             app:isShow="@{true}"
             app:leftIcon="@{@drawable/ic_arrow_left_24dp}"
             app:leftIconClick="@{()->presenter.onCancel()}"
-            app:title="@{@string/fragment_view_ware_house_view_serial_title}"
+            app:title="@{@string/view_ware_house_view_serial_title}"
             app:titleColor="@{@color/white}"
             app:titleTextSize="@{@dimen/sp_17}"
             />
@@ -35,7 +35,7 @@
             android:paddingRight="@dimen/dp_16"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_18"
-            app:textHtml="@{ @string/fragment_view_ware_house_view_serial_detail_serial( presenter.codeStock) }"
+            app:textHtml="@{ @string/view_ware_house_view_serial_detail_serial( presenter.codeStock) }"
             />
         <LinearLayout
             android:layout_width="match_parent"
@@ -80,7 +80,7 @@
             android:layout_marginTop="@dimen/dp_10"
             android:gravity="right"
             android:paddingRight="@dimen/dp_16"
-            android:text="@{ @string/fragment_view_ware_house_view_serial_total( presenter.totalSerial) }"
+            android:text="@{ @string/view_ware_house_view_serial_total( presenter.totalSerial) }"
             />
         <Button
             android:layout_width="wrap_content"

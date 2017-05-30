@@ -419,4 +419,46 @@ Từ <b>%s</b><br>
     <string name="base_search_lable_to">Đến</string>
     <string name="common_lable_search">Tìm kiếm</string>
 
+
+    <!-- Create Update information -->
+    <string name="create_update_information_create_title">Đăng ký thông tin thuê bao</string>
+    <string name="create_update_information_create_phone_number">Số thuê bao</string>
+    <string name="create_update_information_create_type_passport">Loại giấy tờ</string>
+    <string name="create_update_information_create_number_passport">Số giấy tờ</string>
+    <string name="create_update_information_create_btn_search">Tìm kiếm</string>
+    <string name="create_update_information_create_customer_information">Thông tin khách hàng</string>
+    <string name="create_update_information_create_no_information">Không tìm thấy số thuê bao!</string>
+    <string name="create_update_information_register_new_payment">Đăng ký trả trước mới</string>
+    <string name="create_update_information_update_title">Cập nhật thông tin thuê bao</string>
+    <string name="fragment_create_update_information_create_title">Đăng ký thông tin</string>
+    <string name="fragment_create_update_information_create_clone_title">Đăng ký thông tin (clone)</string>
+    <string name="fragment_create_update_information_create_tttb">Thông tin thuê bao</string>
+    <string name="fragment_create_update_information_create_thue_bao">Thuê bao</string>
+    <string name="fragment_create_update_information_create_goi_cuoc">Gói cước</string>
+    <string name="fragment_create_update_information_create_serial">Serial</string>
+    <string name="fragment_create_update_information_create_tt_khach_hang">Thông tin khách hàng</string>
+    <string name="fragment_create_update_information_create_ten_khach_hang">Tên khách hàng*</string>
+    <string name="fragment_create_update_information_create_gioi_tinh">Giới tính</string>
+    <string name="fragment_create_update_information_create_gioi_tinh_nam">Nam</string>
+    <string name="fragment_create_update_information_create_gioi_tinh_nu">Nữ</string>
+    <string name="fragment_create_update_information_create_ngay_sinh">Ngày sinh</string>
+    <string name="fragment_create_update_information_create_province">Tỉnh*</string>
+    <string name="fragment_create_update_information_create_district">Quận/Huyện*</string>
+    <string name="fragment_create_update_information_create_wards">Phường/xã</string>
+    <string name="fragment_create_update_information_create_address">Địa chỉ chi tiết (số nhà, tên đường, phố)</string>
+    <string name="fragment_create_update_information_create_loai_giay_to">Loại giấy tờ</string>
+    <string name="fragment_create_update_information_create_so_giay_to">Số giấy tờ</string>
+    <string name="fragment_create_update_information_create_anh_giay_to">Ảnh giấy tờ</string>
+    <string name="fragment_create_update_information_create_anh_mat_truoc">Ảnh mặt trước</string>
+    <string name="fragment_create_update_information_create_anh_mat_sau">Ảnh mặt sau</string>
+    <string name="fragment_create_update_information_create_anh_chan_dung">Ảnh chân dung</string>
+    <string name="fragment_create_update_information_create_tt_hop_dong">Thông tin hợp đồng</string>
+    <string name="fragment_create_update_information_create_ht_nhan_thong_bao_cuoc">Hình thức nhận Thông báo cước</string>
+    <string name="fragment_create_update_information_create_qua_sms">Qua SMS</string>
+    <string name="fragment_create_update_information_create_qua_email">Qua Email</string>
+    <string name="fragment_create_update_information_create_truc_tiep">Trực tiếp</string>
+    <string name="fragment_create_update_information_create_ht_thanh_toan_cuoc">Hình thức thanh toán cước</string>
+    <string name="fragment_create_update_information_create_get_otp">Get OTP</string>
+    <string name="fragment_create_update_information_create_dang_ky">Đăng ký</string>
+    <string name="fragment_create_update_information_create_cap_nhat">Cập nhật</string>
 </resources>
