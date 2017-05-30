@@ -25,7 +25,7 @@ import static android.app.Activity.RESULT_OK;
  */
 
 public class AddBranchFragment extends BaseDataBindFragment<FragmentAddBranchBinding, AddBranchPresenter>
-        implements AddBranchContract.ViewModel{
+        implements AddBranchContract.ViewModel {
 
     private static final int GET_MANAGER = 1001;
     private static final int GET_BTS = GET_MANAGER + 1;
@@ -76,11 +76,11 @@ public class AddBranchFragment extends BaseDataBindFragment<FragmentAddBranchBin
 
     }
 
-    private void initListeners(){
+    private void initListeners() {
 
     }
 
-    private void hideSoftInput(){
+    private void hideSoftInput() {
         ActivityUtils.hideKeyboard(getBaseActivity());
     }
 
@@ -112,10 +112,28 @@ public class AddBranchFragment extends BaseDataBindFragment<FragmentAddBranchBin
     }
 
     @Override
+    public void showHintChannelType() {
+        try {
+            mBinding.spChannelType.setSelection(mBinding.spChannelType.getAdapter().getCount());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void showHintDocumentType() {
+        try {
+            mBinding.spDocumentType.setSelection(mBinding.spDocumentType.getAdapter().getCount());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        try{
+        try {
             if (requestCode == GET_MANAGER && resultCode == RESULT_OK) {
                 KeyValue item = (KeyValue) data.getExtras()
                         .getSerializable(Constants.BundleConstant.RESULT);
@@ -126,7 +144,7 @@ public class AddBranchFragment extends BaseDataBindFragment<FragmentAddBranchBin
                         .getSerializable(Constants.BundleConstant.RESULT);
                 mPresenter.onGetBTSSuccess(item);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

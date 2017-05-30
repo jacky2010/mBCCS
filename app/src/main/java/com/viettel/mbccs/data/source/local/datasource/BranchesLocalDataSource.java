@@ -1,8 +1,8 @@
-package com.viettel.mbccs.data.source.local;
+package com.viettel.mbccs.data.source.local.datasource;
 
 import com.google.gson.Gson;
 import com.viettel.mbccs.data.model.KeyValue;
-import com.viettel.mbccs.data.source.local.datasource.SharedPrefs;
+import com.viettel.mbccs.data.source.local.IBranchesLocalDataSource;
 
 import java.util.ArrayList;
 import java.util.List;

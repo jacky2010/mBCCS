@@ -44,10 +44,11 @@
                     android:background="@drawable/bg_border">
 
                     <Spinner
-                        android:id="@+id/spinner"
+                        android:id="@+id/spChannelType"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_40"
-                        android:adapter="@{presenter.channelTypeAdapter}" />
+                        android:adapter="@{presenter.channelTypeAdapter}"
+                        android:prompt="@string/branches_add_hint_channel_type" />
                 </LinearLayout>
 
                 <TextView
@@ -62,6 +63,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_40"
                     android:background="@drawable/bg_order"
+                    android:hint="@string/branches_add_hint_phone_no"
                     android:inputType="phone"
                     android:text="@={ presenter.phoneNo }" />
 
@@ -79,9 +81,11 @@
                     android:background="@drawable/bg_border">
 
                     <Spinner
+                        android:id="@+id/spDocumentType"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_40"
-                        android:adapter="@{presenter.documentTypeAdapter}" />
+                        android:adapter="@{presenter.documentTypeAdapter}"
+                        android:prompt="@string/branches_add_hint_document_type" />
                 </LinearLayout>
 
                 <TextView
@@ -96,15 +100,35 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_40"
                     android:background="@drawable/bg_order"
+                    android:hint="@string/branches_add_hint_document_id"
                     android:text="@={ presenter.documentNo }" />
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_8"
-                    android:text="@string/branches_add_label_image"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="@dimen/dp_6"
+                        android:text="@string/branches_add_label_image"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right">
+
+                        <ImageView
+                            android:layout_width="@dimen/dp_60"
+                            android:layout_height="@dimen/dp_60"
+                            android:src="@drawable/ic_camera" />
+                    </LinearLayout>
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -130,9 +154,9 @@
                     android:textSize="@dimen/sp_16" />
 
                 <LinearLayout
-                    android:background="@drawable/bg_border"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_border">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -172,6 +196,7 @@
                         android:focusable="false"
                         android:focusableInTouchMode="false"
                         android:gravity="center_vertical"
+                        android:hint="@string/branches_add_hint_manager"
                         android:lines="1"
                         android:onClick="@{()->presenter.chooseManager()}"
                         android:padding="@dimen/dp_10"
@@ -209,6 +234,7 @@
                         android:focusable="false"
                         android:focusableInTouchMode="false"
                         android:gravity="center_vertical"
+                        android:hint="@string/branches_add_hint_bts"
                         android:lines="1"
                         android:onClick="@{()->presenter.chooseBTS()}"
                         android:padding="@dimen/dp_10"
@@ -217,13 +243,32 @@
                         android:textSize="@dimen/sp_13" />
                 </RelativeLayout>
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_8"
-                    android:text="@string/branches_add_label_contract"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="@dimen/dp_6"
+                        android:text="@string/branches_add_label_contract"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right">
+
+                        <ImageView
+                            android:layout_width="@dimen/dp_60"
+                            android:layout_height="@dimen/dp_60"
+                            android:src="@drawable/ic_camera" />
+                    </LinearLayout>
+                </LinearLayout>
 
             </LinearLayout>
 

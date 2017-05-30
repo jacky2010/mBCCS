@@ -222,6 +222,12 @@ Từ <b>%s</b><br>
     <string name="branches_add_label_contract">Hợp đồng</string>
     <string name="branches_add_label_add">Thêm Mới</string>
     <string name="branches_add_label_image">Ảnh</string>
+    <string name="branches_add_hint_channel_type">- Chọn loại kênh -</string>
+    <string name="branches_add_hint_phone_no">- Mobile -</string>
+    <string name="branches_add_hint_document_type">- Chọn loại giấy tờ -</string>
+    <string name="branches_add_hint_document_id">- Số giấy tờ -</string>
+    <string name="branches_add_hint_manager">- Chọn hân viên quản lý -</string>
+    <string name="branches_add_hint_bts">- Chọn trạm BTS -</string>
     <string name="branches_search_label_isdn">Số thuê bao</string>
     <string name="branches_error_search_key_required">Số Giấy Tờ không được để trống!</string>
     <!--Create Branch-->

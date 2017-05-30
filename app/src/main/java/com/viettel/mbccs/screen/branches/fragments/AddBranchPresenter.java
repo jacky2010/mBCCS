@@ -8,6 +8,7 @@ import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.BranchItem;
 import com.viettel.mbccs.data.model.KeyValue;
 import com.viettel.mbccs.data.source.BranchesRepository;
+import com.viettel.mbccs.screen.common.adapter.HintArrayAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,8 +31,8 @@ public class AddBranchPresenter implements AddBranchContract.Presenter {
     public ObservableField<String> manager;
     public ObservableField<String> bts;
 
-    private ArrayAdapter<String> channelTypeAdapter;
-    private ArrayAdapter<String> documentTypeAdapter;
+    private HintArrayAdapter<String> channelTypeAdapter;
+    private HintArrayAdapter<String> documentTypeAdapter;
 
     private List<String> channelTypesList;
     private List<String> documentTypesList;
@@ -59,9 +60,9 @@ public class AddBranchPresenter implements AddBranchContract.Presenter {
         channelTypesList = new ArrayList<>();
         documentTypesList = new ArrayList<>();
 
-        channelTypeAdapter = new ArrayAdapter<>(context, R.layout.item_spinner, R.id.text,
+        channelTypeAdapter = new HintArrayAdapter<>(context, R.layout.item_spinner, R.id.text,
                 channelTypesList);
-        documentTypeAdapter = new ArrayAdapter<>(context, R.layout.item_spinner, R.id.text,
+        documentTypeAdapter = new HintArrayAdapter<>(context, R.layout.item_spinner, R.id.text,
                 documentTypesList);
 
         initListeners();
@@ -85,10 +86,12 @@ public class AddBranchPresenter implements AddBranchContract.Presenter {
 //            managersList.clear();
 //            btsesList.clear();
 
+            channelTypesList.add(context.getString(R.string.branches_add_hint_channel_type));
             for (KeyValue item : repository.getChannelTypes()) {
                 channelTypesList.add(item.getValue());
             }
 
+            documentTypesList.add(context.getString(R.string.branches_add_hint_document_type));
             for (KeyValue item : repository.getDocumentTypes()) {
                 documentTypesList.add(item.getValue());
             }
@@ -98,6 +101,9 @@ public class AddBranchPresenter implements AddBranchContract.Presenter {
 
             channelTypeAdapter.notifyDataSetChanged();
             documentTypeAdapter.notifyDataSetChanged();
+
+            viewModel.showHintChannelType();
+            viewModel.showHintDocumentType();
 
         } catch (Exception e) {
             e.printStackTrace();

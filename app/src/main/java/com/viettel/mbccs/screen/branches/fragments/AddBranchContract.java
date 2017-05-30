@@ -17,6 +17,8 @@ public class AddBranchContract {
         void onBranchAddFailed();
         void onChooseManager(List<KeyValue> items);
         void onChooseBTS(List<KeyValue> items);
+        void showHintChannelType();
+        void showHintDocumentType();
     }
 
     interface Presenter extends BasePresenter {

@@ -2,7 +2,7 @@ package com.viettel.mbccs.data.source;
 
 import com.viettel.mbccs.data.model.BranchItem;
 import com.viettel.mbccs.data.model.KeyValue;
-import com.viettel.mbccs.data.source.local.BranchesLocalDataSource;
+import com.viettel.mbccs.data.source.local.datasource.BranchesLocalDataSource;
 import com.viettel.mbccs.data.source.local.IBranchesLocalDataSource;
 import com.viettel.mbccs.data.source.remote.IBranchesRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.datasource.BranchesRemoteDataSource;
