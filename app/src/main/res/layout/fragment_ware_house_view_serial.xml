@@ -14,6 +14,7 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         android:orientation="vertical"
+        android:clickable="true"
         >
         <include
             layout="@layout/toolbar"
@@ -21,7 +22,7 @@
             app:isShow="@{true}"
             app:leftIcon="@{@drawable/ic_arrow_left_24dp}"
             app:leftIconClick="@{()->presenter.onCancel()}"
-            app:title="@{@string/fragment_view_ware_house_view_serial_title}"
+            app:title="@{@string/view_ware_house_view_serial_title}"
             app:titleColor="@{@color/white}"
             app:titleTextSize="@{@dimen/sp_17}"
             />
@@ -34,45 +35,35 @@
             android:paddingRight="@dimen/dp_16"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_18"
-            app:textHtml="@{ @string/fragment_view_ware_house_view_serial_detail_serial( presenter.codeStock)}"
+            app:textHtml="@{ @string/view_ware_house_view_serial_detail_serial( presenter.codeStock) }"
             />
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#F1F1F1"
+            android:layout_height="@dimen/dp_40"
+            android:background="@color/grey_two"
             >
             <TextView
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Từ serial"
+                android:text="@string/view_ware_house_view_serial_from_serial"
                 android:textColor="@color/black"
-                />
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/grey"
                 />
             <TextView
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Đến serial"
+                android:text="@string/view_ware_house_view_serial_to_serial"
                 android:textColor="@color/black"
-                />
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/grey"
                 />
             <TextView
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="0.7"
                 android:gravity="center"
-                android:text="Số lượng"
+                android:text="@string/view_ware_house_view_serial_count"
                 android:textColor="@color/black"
                 />
         </LinearLayout>
@@ -80,23 +71,23 @@
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/dp_8"
             android:layout_weight="1"
             android:adapter="@{ presenter.adapterViewSerial }"
             />
         <com.viettel.mbccs.widget.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
             android:gravity="right"
             android:paddingRight="@dimen/dp_16"
-            android:text="@{ @string/fragment_view_ware_house_view_serial_total( presenter.totalSerial) }"
+            android:text="@{ @string/view_ware_house_view_serial_total( presenter.totalSerial) }"
             />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="@dimen/dp_16"
-            android:layout_marginTop="@dimen/dp_46"
+            android:layout_marginTop="@dimen/dp_16"
             android:onClick="@{ v -> presenter.onCancel() }"
             android:text="@string/fragment_view_ware_house_view_serial_btn_close"
             style="@style/button_nagative"

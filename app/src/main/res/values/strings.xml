@@ -61,11 +61,11 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="sell_orders_gone_search">Đơn vị: %1$s - Nhân viên: %2$s - Kênh: %3$s</string>
 
     <string name="order_detail_title">Chi tiết đơn hàng %1$s</string>
-    <string name="order_detail_total_money">Tổng tiền: %1$.0f</string>
-    <string name="order_detail_pay_money">Số tiền phải thanh toán: %1$.0f</string>
-    <string name="order_detail_discount_money">Chiết khấu: %1$.0f</string>
-    <string name="order_detail_tax_percent">Thuế suất: %1$.0f</string>
-    <string name="order_detail_tax_money">Tiền thuế: %1$.0f</string>
+    <string name="order_detail_total_money">Tổng tiền: %1$s</string>
+    <string name="order_detail_pay_money">Số tiền phải thanh toán: %1$s</string>
+    <string name="order_detail_discount_money">Chiết khấu: %1$s</string>
+    <string name="order_detail_tax_percent">Thuế suất: %1$s</string>
+    <string name="order_detail_tax_money">Tiền thuế: %1$s</string>
     <string name="order_detail_cancel">Hủy Giao Dịch</string>
     <string name="order_detail_ok">Bán hàng</string>
 
@@ -270,13 +270,16 @@ Từ <b>%s</b><br>
     <string name="item_view_ware_house_number_actual">Số lượng thực tế: %1$d</string>
     <string name="item_view_ware_house_number_responses">Số lượng đáp ứng: %1$d</string>
     <string name="item_view_ware_house_view_serial">Xem serial</string>
-    <string name="fragment_view_ware_house_view_serial_title">Xem serial</string>
-    <string name="fragment_view_ware_house_view_serial_detail_serial">
+    <string name="view_ware_house_view_serial_title">Xem serial</string>
+    <string name="view_ware_house_view_serial_detail_serial">
         <![CDATA[
          Chi tiết serial cho mặt hàng <font color="#317BE1"><u>%s</u></font>
         ]]>
     </string>
-    <string name="fragment_view_ware_house_view_serial_total">Tổng số: %1$d</string>
+    <string name="view_ware_house_view_serial_total">Tổng số: %1$d</string>
+    <string name="view_ware_house_view_serial_from_serial">Từ serial</string>
+    <string name="view_ware_house_view_serial_to_serial">Đến serial</string>
+    <string name="view_ware_house_view_serial_count">Số lượng</string>
     <string name="fragment_view_ware_house_view_serial_btn_close">Đóng</string>
     <string name="view_ware_house_search_filter_information">Lọc thông tin</string>
     <string name="view_ware_house_search_code_province">Mã tỉnh</string>
@@ -513,4 +516,46 @@ Từ <b>%s</b><br>
     <string name="common_lable_search">Tìm kiếm</string>
     <string name="common_label_update">Cập nhật</string>
 
+
+    <!-- Create Update information -->
+    <string name="create_update_information_create_title">Đăng ký thông tin thuê bao</string>
+    <string name="create_update_information_create_phone_number">Số thuê bao</string>
+    <string name="create_update_information_create_type_passport">Loại giấy tờ</string>
+    <string name="create_update_information_create_number_passport">Số giấy tờ</string>
+    <string name="create_update_information_create_btn_search">Tìm kiếm</string>
+    <string name="create_update_information_create_customer_information">Thông tin khách hàng</string>
+    <string name="create_update_information_create_no_information">Không tìm thấy số thuê bao!</string>
+    <string name="create_update_information_register_new_payment">Đăng ký trả trước mới</string>
+    <string name="create_update_information_update_title">Cập nhật thông tin thuê bao</string>
+    <string name="fragment_create_update_information_create_title">Đăng ký thông tin</string>
+    <string name="fragment_create_update_information_create_clone_title">Đăng ký thông tin (clone)</string>
+    <string name="fragment_create_update_information_create_tttb">Thông tin thuê bao</string>
+    <string name="fragment_create_update_information_create_thue_bao">Thuê bao</string>
+    <string name="fragment_create_update_information_create_goi_cuoc">Gói cước</string>
+    <string name="fragment_create_update_information_create_serial">Serial</string>
+    <string name="fragment_create_update_information_create_tt_khach_hang">Thông tin khách hàng</string>
+    <string name="fragment_create_update_information_create_ten_khach_hang">Tên khách hàng*</string>
+    <string name="fragment_create_update_information_create_gioi_tinh">Giới tính</string>
+    <string name="fragment_create_update_information_create_gioi_tinh_nam">Nam</string>
+    <string name="fragment_create_update_information_create_gioi_tinh_nu">Nữ</string>
+    <string name="fragment_create_update_information_create_ngay_sinh">Ngày sinh</string>
+    <string name="fragment_create_update_information_create_province">Tỉnh*</string>
+    <string name="fragment_create_update_information_create_district">Quận/Huyện*</string>
+    <string name="fragment_create_update_information_create_wards">Phường/xã</string>
+    <string name="fragment_create_update_information_create_address">Địa chỉ chi tiết (số nhà, tên đường, phố)</string>
+    <string name="fragment_create_update_information_create_loai_giay_to">Loại giấy tờ</string>
+    <string name="fragment_create_update_information_create_so_giay_to">Số giấy tờ</string>
+    <string name="fragment_create_update_information_create_anh_giay_to">Ảnh giấy tờ</string>
+    <string name="fragment_create_update_information_create_anh_mat_truoc">Ảnh mặt trước</string>
+    <string name="fragment_create_update_information_create_anh_mat_sau">Ảnh mặt sau</string>
+    <string name="fragment_create_update_information_create_anh_chan_dung">Ảnh chân dung</string>
+    <string name="fragment_create_update_information_create_tt_hop_dong">Thông tin hợp đồng</string>
+    <string name="fragment_create_update_information_create_ht_nhan_thong_bao_cuoc">Hình thức nhận Thông báo cước</string>
+    <string name="fragment_create_update_information_create_qua_sms">Qua SMS</string>
+    <string name="fragment_create_update_information_create_qua_email">Qua Email</string>
+    <string name="fragment_create_update_information_create_truc_tiep">Trực tiếp</string>
+    <string name="fragment_create_update_information_create_ht_thanh_toan_cuoc">Hình thức thanh toán cước</string>
+    <string name="fragment_create_update_information_create_get_otp">Get OTP</string>
+    <string name="fragment_create_update_information_create_dang_ky">Đăng ký</string>
+    <string name="fragment_create_update_information_create_cap_nhat">Cập nhật</string>
 </resources>

@@ -1,6 +1,5 @@
 package com.viettel.mbccs.data.source.remote;
 
-import com.viettel.mbccs.data.model.Reason;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListChannelByOwnerTypeIdRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListOrderRequest;
@@ -20,8 +19,8 @@ import com.viettel.mbccs.data.source.remote.response.GetListShopResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListStockModelResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListTTKDResponse;
 import com.viettel.mbccs.data.source.remote.response.GetOrderInfoResponse;
+import com.viettel.mbccs.data.source.remote.response.GetReasonResponse;
 import com.viettel.mbccs.data.source.remote.response.ViewInfoSerialResponse;
-import java.util.List;
 import rx.Observable;
 
 /**
@@ -29,14 +28,14 @@ import rx.Observable;
  */
 
 public interface IBanHangKhoTaiChinhRemoteDataSource {
-    Observable<GetListOrderResponse> searchSellOrders(BaseRequest<GetListOrderRequest> request);
+    Observable<GetListOrderResponse> getListOrder(BaseRequest<GetListOrderRequest> request);
 
     Observable<GetListChannelByOwnerTypeIdResponse> getListChannelByOwnerTypeId(
             BaseRequest<GetListChannelByOwnerTypeIdRequest> request);
 
     Observable<GetOrderInfoResponse> getOrderInfo(BaseRequest<GetOrderInfoRequest> request);
 
-    Observable<List<Reason>> getListReason(BaseRequest<GetResonRequest> request);
+    Observable<GetReasonResponse> getListReason(BaseRequest<GetResonRequest> request);
 
     Observable<GetListStockModelResponse> getListStockModel(BaseRequest<GetListStockModelRequest> request);
 

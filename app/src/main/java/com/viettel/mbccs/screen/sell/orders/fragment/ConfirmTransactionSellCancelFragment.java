@@ -19,7 +19,9 @@ import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.GetResonRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.GetReasonResponse;
 import com.viettel.mbccs.databinding.FragmentConfirmTransactionSellCancelBinding;
+import com.viettel.mbccs.utils.Common;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.ArrayList;
 import java.util.List;
@@ -93,6 +95,7 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
         binding = FragmentConfirmTransactionSellCancelBinding.inflate(inflater, container, false);
+        binding.setPresenter(this);
         return binding.getRoot();
     }
 
@@ -106,10 +109,10 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
     private void getListReason() {
         showLoadingDialog();
         banHangKhoTaiChinhRepository.getListReason(new BaseRequest<GetResonRequest>())
-                .subscribe(new MBCCSSubscribe<List<Reason>>() {
+                .subscribe(new MBCCSSubscribe<GetReasonResponse>() {
                     @Override
-                    public void onSuccess(List<Reason> object) {
-                        reasonList = object;
+                    public void onSuccess(GetReasonResponse object) {
+                        reasonList = object.getReasonList();
                         setUpSpinner();
                     }
 
@@ -158,7 +161,7 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
         idSaleTrans.set("Mã đơn hàng: " + saleTrans.getSaleTransId());
         phoneNumberChange.set(channelInfoSell.getTel());
         nameChange.set(channelInfoSell.getChannelName());
-        sumMoneyTransaction.set(String.valueOf(saleTrans.getAmountTax()));
+        sumMoneyTransaction.set(Common.formatDouble(saleTrans.getAmountTax()));
     }
 
     public void onClose() {
@@ -170,6 +173,7 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
             // TODO: 5/19/17 Sell order
         } else {
             // TODO: 5/19/17 Cancel order
+
         }
     }
 }

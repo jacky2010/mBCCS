@@ -26,8 +26,10 @@ import java.util.List;
 
 public class OrdersFragment extends BaseFragment implements OrdersAdapter.OrdersAdapterCallback {
     private static final String ARG_DATA = "DATA";
+    private static final String ARG_CHANGE_INFO = "CHANGE_INFO";
     private FragmentOrdersBinding binding;
     private List<SaleOrders> saleOrdersList;
+    private ChannelInfo channelInfoSale;
 
     public ObservableField<OrdersAdapter> adapterOrders;
     public ObservableField<RecyclerView.ItemDecoration> itemDecoration;
@@ -35,6 +37,7 @@ public class OrdersFragment extends BaseFragment implements OrdersAdapter.Orders
     public static OrdersFragment newInstance(List<SaleOrders> saleOrdersList, ChannelInfo channelInfoSale) {
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList(ARG_DATA, (ArrayList<? extends Parcelable>) saleOrdersList);
+        bundle.putParcelable(ARG_CHANGE_INFO, channelInfoSale);
         OrdersFragment fragment = new OrdersFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -44,6 +47,7 @@ public class OrdersFragment extends BaseFragment implements OrdersAdapter.Orders
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         saleOrdersList = getArguments().getParcelableArrayList(ARG_DATA);
+        channelInfoSale = getArguments().getParcelable(ARG_CHANGE_INFO);
         adapterOrders = new ObservableField<>();
         itemDecoration = new ObservableField<>();
     }
@@ -71,7 +75,7 @@ public class OrdersFragment extends BaseFragment implements OrdersAdapter.Orders
                 getActivity().getSupportFragmentManager().beginTransaction();
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.replace(R.id.frame_sell_orders,
-                OrderDetailFragment.newInstance(saleOrdersList.get(position).getSaleOrdersId()))
+                OrderDetailFragment.newInstance(saleOrdersList.get(position).getSaleOrdersId(), channelInfoSale))
                 .commit();
     }
 }

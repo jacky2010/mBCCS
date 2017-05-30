@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 import com.viettel.mbccs.base.BaseFragment;
 import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.SerialBO;
@@ -16,10 +17,14 @@ import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.ViewInfoSerialRequest;
+import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.ViewInfoSerialResponse;
 import com.viettel.mbccs.databinding.FragmentWareHouseViewSerialBinding;
 import com.viettel.mbccs.screen.viewwarehouse.adapter.ViewWarehouseViewSerialAdapter;
+import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.ArrayList;
 import java.util.List;
+import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
 /**
@@ -32,7 +37,7 @@ public class ViewSerialFragment extends BaseFragment {
     private BanHangKhoTaiChinhRepository banHangKhoTaiChinhRepository;
     private CompositeSubscription subscriptions;
     private StockTotal stockTotal;
-    private List<StockSerial> stockSerialList;
+    private StockSerial stockSerial;
 
     public ObservableField<String> codeStock;
     public ObservableInt totalSerial;
@@ -83,21 +88,22 @@ public class ViewSerialFragment extends BaseFragment {
         request.setApiKey("demo");
         request.setSession(new Session());
 
-//        Subscription subscription = banHangKhoTaiChinhRepository.viewInfoSerial(request)
-//                .subscribe(new MBCCSSubscribe<List<StockSerial>>() {
-//                    @Override
-//                    public void onSuccess(List<StockSerial> object) {
-//                        setData(object);
-//                    }
-//
-//                    @Override
-//                    public void onError(BaseException error) {
-//                        hideLoadingDialog();
-//                        Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT)
-//                                .show();
-//                    }
-//                });
-//        subscriptions.add(subscription);
+        Subscription subscription = banHangKhoTaiChinhRepository.viewInfoSerial(request)
+                .subscribe(new MBCCSSubscribe<ViewInfoSerialResponse>() {
+                    @Override
+                    public void onSuccess(ViewInfoSerialResponse object) {
+                        setData(object.getStockSerial());
+                    }
+
+                    @Override
+                    public void onError(BaseException error) {
+                        setData(new StockSerial());
+                        hideLoadingDialog();
+                        Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT)
+                                .show();
+                    }
+                });
+        subscriptions.add(subscription);
     }
 
     @Override
@@ -110,13 +116,22 @@ public class ViewSerialFragment extends BaseFragment {
         getActivity().getSupportFragmentManager().popBackStackImmediate();
     }
 
-    public void setData(List<StockSerial> data) {
-        stockSerialList = data;
+    public void setData(StockSerial data) {
+        stockSerial = data;
         // TODO: 5/22/17 data error
         List<SerialBO> serialBOList = new ArrayList<>();
-        adapterViewSerial.set(new ViewWarehouseViewSerialAdapter(serialBOList));
-        totalSerial.set(stockSerialList.size());
-        codeStock.set(stockTotal.getStockModelCode());
+        for (int i = 0; i < 10; i++) {
+            SerialBO serialBO = new SerialBO();
+            serialBO.setFromSerial("1000000");
+            serialBO.setToSerial("2000000");
+            serialBO.setQuantity(12345);
+            serialBOList.add(serialBO);
+        }
+        stockSerial.setSerialBOs(serialBOList);
+        stockSerial.setStockModelCode("sdfsdfsf");
+        adapterViewSerial.set(new ViewWarehouseViewSerialAdapter(serialBOList, getActivity()));
+        totalSerial.set(stockSerial.getSerialBOs().size());
+        codeStock.set(stockSerial.getStockModelCode());
         hideLoadingDialog();
     }
 }

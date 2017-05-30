@@ -97,7 +97,7 @@ public class KPPOrderPresenter implements KPPOrderContract.Presenter {
         request.setOrderStatus(status);
         request.setFromDate("");
         request.setToDate("");
-        Subscription subscription = mBanHangKhoTaiChinhRepository.searchSellOrders(null)
+        Subscription subscription = mBanHangKhoTaiChinhRepository.getListOrder(null)
                 .subscribe(new MBCCSSubscribe<GetListOrderResponse>() {
                     @Override
                     public void onSuccess(GetListOrderResponse object) {

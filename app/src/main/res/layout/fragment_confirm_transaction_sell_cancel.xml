@@ -146,14 +146,19 @@
                 android:text="LÝ DO HỦY"
                 android:textColor="@color/black"
                 />
-            <Spinner
-                android:id="@+id/spinner_reason_cancel"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_40"
-                android:layout_marginTop="@dimen/dp_10"
+                android:layout_height="wrap_content"
                 android:background="@drawable/bg_order"
-                bind:setSpinnerAdapter="@{ presenter.spinnerReasonCancelAdapter }"
-                />
+                >
+                <Spinner
+                    android:id="@+id/spinner_reason_cancel"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_marginTop="@dimen/dp_10"
+                    bind:setSpinnerAdapter="@{ presenter.spinnerReasonCancelAdapter }"
+                    />
+            </LinearLayout>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/layout_button"
@@ -171,20 +176,38 @@
                 android:layout_width="@dimen/dp_150"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/dp_16"
-                android:background="@color/default_bg_disabled"
                 android:onClick="@{ v -> presenter.onClose() }"
                 android:text="@string/close"
                 android:textColor="@color/black"
+                style="@style/button_nagative"
                 />
-            <Button
+
+            <RelativeLayout
                 android:layout_width="@dimen/dp_150"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_16"
-                android:background="@color/red_button"
-                android:onClick="@{ v -> presenter.onSellOrCancel() }"
-                android:text="@{ presenter.textButton }"
-                android:textColor="@{ presenter.colorButton }"
-                />
+                >
+                <Button
+                    android:layout_width="@dimen/dp_150"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:onClick="@{ v -> presenter.onSellOrCancel() }"
+                    android:text="@{ presenter.textButton }"
+                    android:textColor="@color/white"
+                    style="@style/button_positive_red"
+                    android:visibility="@{ presenter.isShow ? View.VISIBLE : View.GONE }"
+                    />
+
+                <Button
+                    android:layout_width="@dimen/dp_150"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:onClick="@{ v -> presenter.onSellOrCancel() }"
+                    android:text="@{ presenter.textButton }"
+                    android:textColor="@color/white"
+                    style="@style/button_positive"
+                    android:visibility="@{ presenter.isShow ? View.GONE : View.VISIBLE }"
+                    />
+            </RelativeLayout>
         </LinearLayout>
     </RelativeLayout>
 </layout>
