@@ -16,7 +16,7 @@ import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.Reason;
 import com.viettel.mbccs.data.model.SaleTrans;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
-import com.viettel.mbccs.data.source.remote.request.BaseRequest;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetResonRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetReasonResponse;
@@ -108,8 +108,9 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
 
     private void getListReason() {
         showLoadingDialog();
-        banHangKhoTaiChinhRepository.getListReason(new BaseRequest<GetResonRequest>())
+        banHangKhoTaiChinhRepository.getListReason(new DataRequest<GetResonRequest>())
                 .subscribe(new MBCCSSubscribe<GetReasonResponse>() {
+
                     @Override
                     public void onSuccess(GetReasonResponse object) {
                         reasonList = object.getReasonList();

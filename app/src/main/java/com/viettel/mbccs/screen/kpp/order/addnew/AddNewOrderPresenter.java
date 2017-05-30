@@ -8,7 +8,7 @@ import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
-import com.viettel.mbccs.data.source.remote.request.BaseRequest;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.KPPOrderRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.BaseResponse;
@@ -34,7 +34,7 @@ public class AddNewOrderPresenter implements AddNewOrderContract.Presenter {
     private CompositeSubscription mCompositeSubscription;
     private ArrayList<StockTotal> mStockTotals = new ArrayList<>();
     private BanHangKhoTaiChinhRepository mBanHangKhoTaiChinhRepository;
-    private BaseRequest<KPPOrderRequest> mKPPOrderRequestBaseRequest;
+    private DataRequest<KPPOrderRequest> mKPPOrderRequestBaseRequest;
 
     public AddNewOrderPresenter(Context context, AddNewOrderContract.ViewModel viewModel) {
         mContext = context;
@@ -92,7 +92,7 @@ public class AddNewOrderPresenter implements AddNewOrderContract.Presenter {
     private void createOrder() {
 
         mViewModel.showLoading();
-        mKPPOrderRequestBaseRequest = new BaseRequest<>();
+        mKPPOrderRequestBaseRequest = new DataRequest<>();
         mKPPOrderRequestBaseRequest.setApiCode(ApiCode.CreateSaleOrders);
         KPPOrderRequest request = new KPPOrderRequest();
         request.setStaffId(1);

@@ -4,7 +4,7 @@ import com.viettel.mbccs.data.source.local.IBanHangKhoTaiChinhLocalDataSource;
 import com.viettel.mbccs.data.source.local.datasource.BanHangKhoTaiChinhLocalDataSource;
 import com.viettel.mbccs.data.source.remote.IBanHangKhoTaiChinhRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.datasource.BanHangKhoTaiChinhRemoteDataSource;
-import com.viettel.mbccs.data.source.remote.request.BaseRequest;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListChannelByOwnerTypeIdRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListProvinceRequest;
@@ -54,55 +54,57 @@ public class BanHangKhoTaiChinhRepository
     }
 
     @Override
-    public Observable<GetListOrderResponse> getListOrder(BaseRequest<GetListOrderRequest> request) {
+    public Observable<GetListOrderResponse> getListOrder(DataRequest<GetListOrderRequest> request) {
         return banHangKhoTaiChinhRemoteDataSource.getListOrder(request);
+
     }
 
     @Override
     public Observable<GetListChannelByOwnerTypeIdResponse> getListChannelByOwnerTypeId(
-            BaseRequest<GetListChannelByOwnerTypeIdRequest> request) {
+            DataRequest<GetListChannelByOwnerTypeIdRequest> request) {
         return banHangKhoTaiChinhRemoteDataSource.getListChannelByOwnerTypeId(request);
     }
 
     @Override
-    public Observable<GetOrderInfoResponse> getOrderInfo(BaseRequest<GetOrderInfoRequest> request) {
+    public Observable<GetOrderInfoResponse> getOrderInfo(DataRequest<GetOrderInfoRequest> request) {
         return banHangKhoTaiChinhRemoteDataSource.getOrderInfo(request);
     }
 
     @Override
-    public Observable<GetReasonResponse> getListReason(BaseRequest<GetResonRequest> request) {
+    public Observable<GetReasonResponse> getListReason(DataRequest<GetResonRequest> request) {
+
         return banHangKhoTaiChinhRemoteDataSource.getListReason(request);
     }
 
     @Override
     public Observable<GetListStockModelResponse> getListStockModel(
-            BaseRequest<GetListStockModelRequest> request) {
+            DataRequest<GetListStockModelRequest> request) {
         return banHangKhoTaiChinhRemoteDataSource.getListStockModel(request);
     }
 
     @Override
     public Observable<ViewInfoSerialResponse> viewInfoSerial(
-            BaseRequest<ViewInfoSerialRequest> request) {
+            DataRequest<ViewInfoSerialRequest> request) {
         return banHangKhoTaiChinhRemoteDataSource.viewInfoSerial(request);
     }
 
     @Override
-    public Observable<GetListProvinceResponse> getListProvince(BaseRequest<GetListProvinceRequest> request) {
+    public Observable<GetListProvinceResponse> getListProvince(DataRequest<GetListProvinceRequest> request) {
         return banHangKhoTaiChinhRemoteDataSource.getListProvince(request);
     }
 
     @Override
-    public Observable<GetListTTKDResponse> getListTTKD(BaseRequest<GetListTTKDRequest> request) {
+    public Observable<GetListTTKDResponse> getListTTKD(DataRequest<GetListTTKDRequest> request) {
         return banHangKhoTaiChinhRemoteDataSource.getListTTKD(request);
     }
 
     @Override
-    public Observable<GetListShopResponse> getListShop(BaseRequest<GetListShopRequest> request) {
+    public Observable<GetListShopResponse> getListShop(DataRequest<GetListShopRequest> request) {
         return banHangKhoTaiChinhRemoteDataSource.getListShop(request);
     }
 
     public Observable<BaseResponse> createSaleOrders(
-            BaseRequest<KPPOrderRequest> requestBaseRequest) {
-        return banHangKhoTaiChinhRemoteDataSource.createSaleOrders(requestBaseRequest);
+            DataRequest<KPPOrderRequest> requestDataRequest) {
+        return banHangKhoTaiChinhRemoteDataSource.createSaleOrders(requestDataRequest);
     }
 }

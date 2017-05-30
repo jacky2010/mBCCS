@@ -19,7 +19,7 @@ import com.viettel.mbccs.data.model.SaleProgram;
 import com.viettel.mbccs.data.model.SaleTrans;
 import com.viettel.mbccs.data.model.StockSerial;
 import com.viettel.mbccs.data.model.TeleComService;
-import com.viettel.mbccs.data.source.remote.request.BaseRequest;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
 import com.viettel.mbccs.databinding.FragmentPaymentInforChannelBinding;
 import com.viettel.mbccs.screen.common.success.DialogInputBankPlus;
@@ -236,12 +236,12 @@ public class PaymentInforChannelFragment extends BaseFragment
     }
 
     @Override
-    public void goToSaveTransConfirm(BaseRequest<GetInfoSaleTranRequest> request,
+    public void goToSaveTransConfirm(DataRequest<GetInfoSaleTranRequest> request,
             SaleTrans saleTrans, ChannelInfo channelInfo) {
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
                 .addToBackStack("SaveTransConfirmFragment")
-                .replace(R.id.container, SaveTransConfirmFragment.newInstance(request.getRequest(), saleTrans,channelInfo))
+                .replace(R.id.container, SaveTransConfirmFragment.newInstance(request.getParameterApi(), saleTrans,channelInfo))
                 .commit();
     }
 }

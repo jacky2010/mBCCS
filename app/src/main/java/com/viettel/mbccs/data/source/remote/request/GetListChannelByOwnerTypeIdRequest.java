@@ -4,7 +4,7 @@ package com.viettel.mbccs.data.source.remote.request;
  * Created by HuyQuyet on 5/18/17.
  */
 
-public class GetListChannelByOwnerTypeIdRequest extends DataRequest {
+public class GetListChannelByOwnerTypeIdRequest  {
     public long shopId;
     public long staffId;
     public long channelTypeId;

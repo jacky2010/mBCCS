@@ -9,7 +9,7 @@ import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.Session;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
-import com.viettel.mbccs.data.source.remote.request.BaseRequest;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListStockModelRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetListStockModelResponse;
@@ -58,8 +58,8 @@ public class ViewWarehousePresenter implements ViewWarehouseContract.Presenter,
         g.setOwnerId(1);
         g.setOwnerType(1);
 
-        BaseRequest<GetListStockModelRequest> request = new BaseRequest<>();
-        request.setRequest(g);
+        DataRequest<GetListStockModelRequest> request = new DataRequest<>();
+        request.setParameterApi(g);
         request.setApiCode(ApiCode.GetListStockModel);
         request.setApiKey("demo");
         request.setSession(new Session());

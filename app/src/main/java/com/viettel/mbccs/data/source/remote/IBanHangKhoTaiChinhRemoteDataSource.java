@@ -1,6 +1,7 @@
 package com.viettel.mbccs.data.source.remote;
 
-import com.viettel.mbccs.data.source.remote.request.BaseRequest;
+
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListChannelByOwnerTypeIdRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListProvinceRequest;
@@ -28,24 +29,26 @@ import rx.Observable;
  */
 
 public interface IBanHangKhoTaiChinhRemoteDataSource {
-    Observable<GetListOrderResponse> getListOrder(BaseRequest<GetListOrderRequest> request);
+    Observable<GetListOrderResponse> getListOrder(DataRequest<GetListOrderRequest> request);
+
 
     Observable<GetListChannelByOwnerTypeIdResponse> getListChannelByOwnerTypeId(
-            BaseRequest<GetListChannelByOwnerTypeIdRequest> request);
+            DataRequest<GetListChannelByOwnerTypeIdRequest> request);
 
-    Observable<GetOrderInfoResponse> getOrderInfo(BaseRequest<GetOrderInfoRequest> request);
+    Observable<GetOrderInfoResponse> getOrderInfo(DataRequest<GetOrderInfoRequest> request);
 
-    Observable<GetReasonResponse> getListReason(BaseRequest<GetResonRequest> request);
+    Observable<GetReasonResponse> getListReason(DataRequest<GetResonRequest> request);
 
-    Observable<GetListStockModelResponse> getListStockModel(BaseRequest<GetListStockModelRequest> request);
 
-    Observable<ViewInfoSerialResponse> viewInfoSerial(BaseRequest<ViewInfoSerialRequest> request);
+    Observable<GetListStockModelResponse> getListStockModel(DataRequest<GetListStockModelRequest> request);
 
-    Observable<GetListProvinceResponse> getListProvince(BaseRequest<GetListProvinceRequest> request);
+    Observable<ViewInfoSerialResponse> viewInfoSerial(DataRequest<ViewInfoSerialRequest> request);
 
-    Observable<GetListTTKDResponse> getListTTKD(BaseRequest<GetListTTKDRequest> request);
+    Observable<GetListProvinceResponse> getListProvince(DataRequest<GetListProvinceRequest> request);
 
-    Observable<GetListShopResponse> getListShop(BaseRequest<GetListShopRequest> request);
+    Observable<GetListTTKDResponse> getListTTKD(DataRequest<GetListTTKDRequest> request);
 
-    Observable<BaseResponse> createSaleOrders(BaseRequest<KPPOrderRequest> requestBaseRequest);
+    Observable<GetListShopResponse> getListShop(DataRequest<GetListShopRequest> request);
+
+    Observable<BaseResponse> createSaleOrders(DataRequest<KPPOrderRequest> requestDataRequest);
 }

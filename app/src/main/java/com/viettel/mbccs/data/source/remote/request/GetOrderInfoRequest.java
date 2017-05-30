@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by HuyQuyet on 5/18/17.
  */
 
-public class GetOrderInfoRequest extends DataRequest{
+public class GetOrderInfoRequest {
     @Expose
     @SerializedName("saleOrderId")
     private long saleOrderId;

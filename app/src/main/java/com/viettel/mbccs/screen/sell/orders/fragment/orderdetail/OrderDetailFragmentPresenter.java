@@ -9,7 +9,7 @@ import com.viettel.mbccs.data.model.SaleTrans;
 import com.viettel.mbccs.data.model.SerialBO;
 import com.viettel.mbccs.data.model.Session;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
-import com.viettel.mbccs.data.source.remote.request.BaseRequest;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetOrderInfoRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetOrderInfoResponse;
@@ -96,8 +96,8 @@ public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract
         GetOrderInfoRequest g = new GetOrderInfoRequest();
         g.setSaleOrderId(idOrder);
 
-        BaseRequest<GetOrderInfoRequest> request = new BaseRequest<>();
-        request.setRequest(g);
+        DataRequest<GetOrderInfoRequest> request = new DataRequest<>();
+        request.setParameterApi(g);
         request.setApiCode(ApiCode.GetOrderInfo);
         request.setApiKey("demo");
         request.setSession(new Session());
@@ -120,7 +120,6 @@ public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract
                     }
                 });
         subscriptions.add(subscription);
-
         saleTrans = new SaleTrans();
         saleTrans.setAmountNotTax(100000);
         saleTrans.setAmountTax(100000);

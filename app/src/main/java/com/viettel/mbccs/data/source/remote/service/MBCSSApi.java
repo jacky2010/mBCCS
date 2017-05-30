@@ -1,7 +1,7 @@
 package com.viettel.mbccs.data.source.remote.service;
 
 import com.viettel.mbccs.data.model.LoginInfo;
-import com.viettel.mbccs.data.source.remote.request.BaseRequest;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListChannelByOwnerTypeIdRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListOrderRequest;
@@ -54,61 +54,61 @@ public interface MBCSSApi {
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_GetListOrder")
     Observable<BaseResponse<GetListOrderResponse>> getListOrder(
-            @Body BaseRequest<GetListOrderRequest> request);
+            @Body DataRequest<GetListOrderRequest> request);
 
     @POST("/login")
     Observable<BaseResponse<GetListChannelByOwnerTypeIdResponse>> getListChannelByOwnerTypeId(
-            @Body BaseRequest<GetListChannelByOwnerTypeIdRequest> request);
+            @Body DataRequest<GetListChannelByOwnerTypeIdRequest> request);
 
-
+    @POST("thonguyen/Sale_mBCCS/1.0.0/WS_GetTelecomServiceAndSaleProgram")
     Observable<BaseResponse<TelecomServiceAndSaleProgramResponse>> getTelecomserviceAndSaleProgram(
-            @Body BaseRequest<GetTelecomServiceAndSaleProgramRequest> request);
+            @Body DataRequest<GetTelecomServiceAndSaleProgramRequest> request);
 
     @POST("/getserials")
     Observable<BaseResponse<GetSerialsResponse>> getSerials(
-            @Body BaseRequest<GetSerialRequest> request);
+            @Body DataRequest<GetSerialRequest> request);
 
     @POST("/login")
     Observable<BaseResponse<GetOrderInfoResponse>> getOrderInfo(
-            @Body BaseRequest<GetOrderInfoRequest> request);
+            @Body DataRequest<GetOrderInfoRequest> request);
 
     @POST("/login")
     Observable<BaseResponse<GetReasonResponse>> getListReason(
-            @Body BaseRequest<GetResonRequest> request);
+            @Body DataRequest<GetResonRequest> request);
 
-    @POST("/getsalemodel")
+    @POST("thonguyen/Sale_mBCCS/1.0.0/WS_GetStockTotal")
     Observable<BaseResponse<GetTotalStockResponse>> getModelSales(
-            @Body BaseRequest<GetTotalStockRequest> request);
+            @Body DataRequest<GetTotalStockRequest> request);
 
     @POST("/getinfortrans")
     Observable<BaseResponse<GetInfoSaleTranResponse>> getSaleTransInfo(
-            @Body BaseRequest<GetInfoSaleTranRequest> request);
+            @Body DataRequest<GetInfoSaleTranRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_CreateSaleTransRetail")
     Observable<BaseResponse<GetInfoSaleTranResponse>> createSaleTransRetail(
-            @Body BaseRequest<GetInfoSaleTranRequest> request);
+            @Body DataRequest<GetInfoSaleTranRequest> request);
 
     @POST("/getliststockmodel")
     Observable<BaseResponse<GetListStockModelResponse>> getListStockModel(
-            @Body BaseRequest<GetListStockModelRequest> request);
+            @Body DataRequest<GetListStockModelRequest> request);
 
     @POST("/viewinfoserial")
     Observable<BaseResponse<ViewInfoSerialResponse>> viewInfoSerial(
-            @Body BaseRequest<ViewInfoSerialRequest> request);
+            @Body DataRequest<ViewInfoSerialRequest> request);
 
     @POST("/getListProvince")
     Observable<BaseResponse<GetListProvinceResponse>> getListProvince(
-            @Body BaseRequest<GetListProvinceRequest> request);
+            @Body DataRequest<GetListProvinceRequest> request);
 
     @POST("/getListTTKD")
     Observable<BaseResponse<GetListTTKDResponse>> getListTTKD(
-            @Body BaseRequest<GetListTTKDRequest> request);
+            @Body DataRequest<GetListTTKDRequest> request);
 
     @POST("/getListTTKD")
     Observable<BaseResponse<GetListShopResponse>> getListShop(
-            @Body BaseRequest<GetListShopRequest> request);
+            @Body DataRequest<GetListShopRequest> request);
 
     @POST("/createSaleOrder")
     Observable<BaseResponse> createSaleOrders(
-            @Body BaseRequest<KPPOrderRequest> requestBaseResponse);
+            @Body DataRequest<KPPOrderRequest> requestBaseResponse);
 }

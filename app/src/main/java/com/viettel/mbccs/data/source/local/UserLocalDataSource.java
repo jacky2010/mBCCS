@@ -132,26 +132,6 @@ public class UserLocalDataSource implements IUserLocalDataSource {
     }
 
     @Override
-    public void saveSessionVTG(Session session) {
-        String json = GsonUtils.Object2String(session);
-        String ensctypt =
-                SecureUtils.encryptString(MBCCSApplication.self(), Constants.SharePref.SESSION_VTG,
-                        json);
-        sharedPrefs.set(Constants.SharePref.SESSION_VTG, ensctypt);
-    }
-
-    @Override
-    public Session getSessionVTG() {
-        String encrypt = sharedPrefs.get(Constants.SharePref.SESSION_VTG, null);
-        if (encrypt == null) {
-            return null;
-        }
-        return GsonUtils.String2Object(
-                SecureUtils.decryptString(MBCCSApplication.self(), Constants.SharePref.SESSION_VTG,
-                        encrypt), Session.class);
-    }
-
-    @Override
     public void saveapiKey(String apikey) {
         sharedPrefs.set(Constants.SharePref.API_KEY,
                 SecureUtils.encryptString(MBCCSApplication.self(), Constants.SharePref.API_KEY,
@@ -168,20 +148,5 @@ public class UserLocalDataSource implements IUserLocalDataSource {
         return null;
     }
 
-    @Override
-    public void saveAPIKeyVTG(String apiKey) {
-        sharedPrefs.set(Constants.SharePref.API_KEY_VTG,
-                SecureUtils.encryptString(MBCCSApplication.self(), Constants.SharePref.API_KEY_VTG,
-                        apiKey));
-    }
 
-    @Override
-    public String getApiKeyVTG() {
-        String s = sharedPrefs.get(Constants.SharePref.API_KEY_VTG, null);
-        if (s != null) {
-            return SecureUtils.decryptString(MBCCSApplication.self(), Constants.SharePref.API_KEY_VTG,
-                    s);
-        }
-        return null;
-    }
 }

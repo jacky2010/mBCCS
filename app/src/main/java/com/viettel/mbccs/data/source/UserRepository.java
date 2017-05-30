@@ -8,7 +8,7 @@ import com.viettel.mbccs.data.source.local.IUserLocalDataSource;
 import com.viettel.mbccs.data.source.local.UserLocalDataSource;
 import com.viettel.mbccs.data.source.remote.IUserRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.datasource.UserRemoteDataSource;
-import com.viettel.mbccs.data.source.remote.request.BaseRequest;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
@@ -136,16 +136,6 @@ public class UserRepository implements IUserLocalDataSource, IUserRemoteDataSour
     }
 
     @Override
-    public void saveSessionVTG(Session session) {
-        mUserLocalDataSource.saveSessionVTG(session);
-    }
-
-    @Override
-    public Session getSessionVTG() {
-        return mUserLocalDataSource.getSessionVTG();
-    }
-
-    @Override
     public void saveapiKey(String apikey) {
 
         mUserLocalDataSource.saveapiKey(apikey);
@@ -154,16 +144,6 @@ public class UserRepository implements IUserLocalDataSource, IUserRemoteDataSour
     @Override
     public String getApiKey() {
         return mUserLocalDataSource.getApiKey();
-    }
-
-    @Override
-    public void saveAPIKeyVTG(String apiKey) {
-        mUserLocalDataSource.saveAPIKeyVTG(apiKey);
-    }
-
-    @Override
-    public String getApiKeyVTG() {
-        return mUserLocalDataSource.getApiKeyVTG();
     }
 
     @Override
@@ -178,30 +158,30 @@ public class UserRepository implements IUserLocalDataSource, IUserRemoteDataSour
 
     @Override
     public Observable<TelecomServiceAndSaleProgramResponse> getTelecomserviceAndSaleProgram(
-            BaseRequest<GetTelecomServiceAndSaleProgramRequest> request) {
+            DataRequest<GetTelecomServiceAndSaleProgramRequest> request) {
         return mUserRemoteDataSource.getTelecomserviceAndSaleProgram(request);
     }
 
     @Override
-    public Observable<GetSerialsResponse> getSerial(BaseRequest<GetSerialRequest> request) {
+    public Observable<GetSerialsResponse> getSerial(DataRequest<GetSerialRequest> request) {
         return mUserRemoteDataSource.getSerial(request);
     }
 
     @Override
     public Observable<GetTotalStockResponse> getModelSales(
-            BaseRequest<GetTotalStockRequest> request) {
+            DataRequest<GetTotalStockRequest> request) {
         return mUserRemoteDataSource.getModelSales(request);
     }
 
     @Override
     public Observable<GetInfoSaleTranResponse> getSaleTransInfo(
-            BaseRequest<GetInfoSaleTranRequest> request) {
+            DataRequest<GetInfoSaleTranRequest> request) {
         return mUserRemoteDataSource.getSaleTransInfo(request);
     }
 
     @Override
     public Observable<GetInfoSaleTranResponse> createSaleTransRetail(
-            BaseRequest<GetInfoSaleTranRequest> request) {
+            DataRequest<GetInfoSaleTranRequest> request) {
         return mUserRemoteDataSource.createSaleTransRetail(request);
     }
 }

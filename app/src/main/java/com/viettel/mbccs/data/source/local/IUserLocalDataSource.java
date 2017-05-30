@@ -103,17 +103,6 @@ public interface IUserLocalDataSource {
      */
     Session getSession();
 
-    /***
-     * Save session from api login VTG
-     * @param session
-     */
-    void saveSessionVTG(Session session);
-
-    /***
-     * get session VTG
-     * @return
-     */
-    Session getSessionVTG();
 
     /***
      * save api key from login VTG
@@ -123,7 +112,5 @@ public interface IUserLocalDataSource {
 
     String getApiKey();
 
-    void saveAPIKeyVTG(String apiKey);
 
-    String getApiKeyVTG();
 }
