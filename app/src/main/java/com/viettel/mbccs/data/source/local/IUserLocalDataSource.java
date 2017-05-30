@@ -1,9 +1,13 @@
 package com.viettel.mbccs.data.source.local;
 
 import com.mukesh.countrypicker.Country;
+import com.viettel.mbccs.data.model.District;
 import com.viettel.mbccs.data.model.LoginResult;
+import com.viettel.mbccs.data.model.Precinct;
+import com.viettel.mbccs.data.model.Province;
 import com.viettel.mbccs.data.model.Session;
 import com.viettel.mbccs.data.model.StaffInfo;
+import java.util.List;
 
 /**
  * Created by eo_cuong on 5/11/17.
@@ -103,7 +107,6 @@ public interface IUserLocalDataSource {
      */
     Session getSession();
 
-
     /***
      * save api key from login VTG
      * @param apikey
@@ -112,5 +115,11 @@ public interface IUserLocalDataSource {
 
     String getApiKey();
 
+    List<Province> getListProvince();
 
+    List<District> getListDistrictByProvinceId(long provinceId);
+
+    List<Precinct> getListPrecintByDistrictId(long districtId);
+
+    List<Precinct> getListPrecintByProvinceAndDistrictId(long provinceId, long districtId);
 }

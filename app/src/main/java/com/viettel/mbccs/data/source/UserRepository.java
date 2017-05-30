@@ -1,7 +1,10 @@
 package com.viettel.mbccs.data.source;
 
+import com.viettel.mbccs.data.model.District;
 import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.model.LoginResult;
+import com.viettel.mbccs.data.model.Precinct;
+import com.viettel.mbccs.data.model.Province;
 import com.viettel.mbccs.data.model.Session;
 import com.viettel.mbccs.data.model.StaffInfo;
 import com.viettel.mbccs.data.source.local.IUserLocalDataSource;
@@ -19,6 +22,7 @@ import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
 import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
 import com.viettel.mbccs.data.source.remote.response.SendCodeChangePassResponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
+import java.util.List;
 import rx.Observable;
 
 /**
@@ -144,6 +148,26 @@ public class UserRepository implements IUserLocalDataSource, IUserRemoteDataSour
     @Override
     public String getApiKey() {
         return mUserLocalDataSource.getApiKey();
+    }
+
+    @Override
+    public List<Province> getListProvince() {
+        return mUserLocalDataSource.getListProvince();
+    }
+
+    @Override
+    public List<District> getListDistrictByProvinceId(long provinceId) {
+        return mUserLocalDataSource.getListDistrictByProvinceId(provinceId);
+    }
+
+    @Override
+    public List<Precinct> getListPrecintByDistrictId(long districtId) {
+        return mUserLocalDataSource.getListPrecintByDistrictId(districtId);
+    }
+
+    @Override
+    public List<Precinct> getListPrecintByProvinceAndDistrictId(long provinceId, long districtId) {
+        return mUserLocalDataSource.getListPrecintByProvinceAndDistrictId(provinceId, districtId);
     }
 
     @Override
