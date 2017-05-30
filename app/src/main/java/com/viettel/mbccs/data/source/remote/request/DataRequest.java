@@ -1,13 +1,9 @@
 package com.viettel.mbccs.data.source.remote.request;
 
-import android.os.Parcel;
-import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.viettel.mbccs.MBCCSApplication;
 import com.viettel.mbccs.data.model.Session;
-
-import static android.R.attr.value;
 
 /**
  * Created by HuyQuyet on 5/27/17.

@@ -3,6 +3,7 @@
     <string name="ok">ok</string>
     <string name="OK">OK</string>
     <string name="cancel">Hủy</string>
+    <string name="permission_guide">Please go to System Settings and turn on permissions in order to use the app.</string>
     <string name="serial_step1">1. Chọn dải serial</string>
     <string name="or">Hoặc</string>
     <string name="close">Đóng</string>
@@ -474,6 +475,9 @@ Từ <b>%s</b><br>
     <string name="create_update_information_create_no_information">Không tìm thấy số thuê bao!</string>
     <string name="create_update_information_register_new_payment">Đăng ký trả trước mới</string>
     <string name="create_update_information_update_title">Cập nhật thông tin thuê bao</string>
+    <string name="create_update_information_create_validate_field">
+        Số thuê bao và số giấy tờ không thể bỏ trống
+    </string>
     <string name="fragment_create_update_information_create_title">Đăng ký thông tin</string>
     <string name="fragment_create_update_information_create_clone_title">Đăng ký thông tin (clone)</string>
     <string name="fragment_create_update_information_create_tttb">Thông tin thuê bao</string>
@@ -505,6 +509,7 @@ Từ <b>%s</b><br>
     <string name="fragment_create_update_information_create_get_otp">Get OTP</string>
     <string name="fragment_create_update_information_create_dang_ky">Đăng ký</string>
     <string name="fragment_create_update_information_create_cap_nhat">Cập nhật</string>
+    <string name="fragment_create_update_information_create_dk_thanh_cong">Đăng ký thành công</string>
 
 
     <string name="confirm_transaction_sell_cancel_don_dat_hang_tu_kenh">Đơn đặt hàng từ kênh</string>
@@ -516,4 +521,14 @@ Từ <b>%s</b><br>
     <string name="confirm_transaction_sell_cancel_gui_tin_nhan">
         Tin nhắn thông báo đã gửi tới SĐT của kênh phân phối đặt hàng và kênh bán
     </string>
+
+    <string name="picker_photo_take_photo">Lấy ảnh từ Camera</string>
+    <string name="picker_photo_chooose_library">Chọn từ bộ sưu tập</string>
+    <string name="picker_photo_cancel">Hủy</string>
+    <string name="picker_photo_add_photo">Chọn ảnh</string>
+
+    <string name="layout_select_address_province">Tỉnh*</string>
+    <string name="layout_select_address_district">Quận/Huyện*</string>
+    <string name="layout_select_address_wards">Phường/xã</string>
+    <string name="layout_select_address_address">Địa chỉ chi tiết (số nhà, tên đường, phố)</string>
 </resources>

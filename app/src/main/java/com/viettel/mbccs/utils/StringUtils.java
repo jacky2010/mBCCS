@@ -99,6 +99,10 @@ public class StringUtils {
     }
 
     public static String changeTextToBold(String word) {
-        return "<b>"+word+"</b>";
+        return "<b>" + word + "</b>";
+    }
+
+    public static boolean isEmpty(String data) {
+        return data == null || data.trim().length() == 0;
     }
 }

@@ -3,6 +3,8 @@ package com.viettel.mbccs.data.model;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by eo_cuong on 5/30/17.
@@ -11,24 +13,30 @@ import com.activeandroid.annotation.Table;
 @Table(name = "District")
 public class District extends Model {
 
+    @SerializedName("id")
+    @Expose
     @Column(name = "district_id")
-    private long districtId;
+    private String districtId;
 
+    @SerializedName("districtName")
+    @Expose
     @Column(name = "name")
     private String name;
 
+    @SerializedName("parentId")
+    @Expose
     @Column(name = "province_id")
-    private long provinceId;
+    private String provinceId;
 
     public District() {
         super();
     }
 
-    public long getDistrictId() {
+    public String getDistrictId() {
         return districtId;
     }
 
-    public void setDistrictId(long districtId) {
+    public void setDistrictId(String districtId) {
         this.districtId = districtId;
     }
 
@@ -40,11 +48,11 @@ public class District extends Model {
         this.name = name;
     }
 
-    public long getProvinceId() {
+    public String getProvinceId() {
         return provinceId;
     }
 
-    public void setProvinceId(long provinceId) {
+    public void setProvinceId(String provinceId) {
         this.provinceId = provinceId;
     }
 }

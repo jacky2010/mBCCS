@@ -16,12 +16,12 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.databinding.LayoutDatePickerBinding;
 import com.viettel.mbccs.utils.DateUtils;
-
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by Anh Vu Viet on 5/13/2017.
@@ -88,11 +88,23 @@ public class CustomDatePicker extends LinearLayout {
     }
 
     private void setDate() {
-        date.set(DateUtils.convertToString(mCalendar.getTime(), DateUtils.CALENDAR_DATE_FORMAT,
+        date.set(DateUtils.convertToString(mCalendar.getTime(), DateUtils.CALENDAR_DATE_FORMAT_DD_MM_YY,
                 null));
     }
 
     public long getDateInMilis() {
         return mCalendar.getTimeInMillis();
+    }
+
+    public String getStringDate() {
+        return DateUtils.timestampToString(mCalendar.getTimeInMillis(),
+                DateUtils.CALENDAR_DATE_FORMAT_DD_MM_YY_HH, null);
+    }
+
+    public void setDateString(String dateString) {
+        Date date = DateUtils.stringToDate(dateString, DateUtils.CALENDAR_DATE_FORMAT_DD_MM_YY,
+                Locale.getDefault());
+        mCalendar.setTime(date);
+        setDate();
     }
 }

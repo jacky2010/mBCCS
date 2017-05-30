@@ -1,13 +1,19 @@
 package com.viettel.mbccs.utils;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.util.Base64;
+import java.io.ByteArrayOutputStream;
 
 /**
  * Created by FRAMGIA\bui.dinh.viet on 07/03/2017.
@@ -46,5 +52,22 @@ public class ImageUtils {
                 cursor.close();
             }
         }
+    }
+
+    public static String encodeBitmapToBase64(Bitmap image, Bitmap.CompressFormat compressFormat, int quality)
+    {
+        ByteArrayOutputStream byteArrayOS = new ByteArrayOutputStream();
+        image.compress(compressFormat, quality, byteArrayOS);
+        return Base64.encodeToString(byteArrayOS.toByteArray(), Base64.DEFAULT);
+    }
+
+    public static Bitmap decodeBase64ToBitmap(String input)
+    {
+        byte[] decodedBytes = Base64.decode(input, 0);
+        return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
+    }
+
+    public static Drawable bitmapToDrawable(Resources resources, Bitmap b){
+        return new BitmapDrawable(resources, b);
     }
 }

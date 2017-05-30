@@ -16,39 +16,58 @@ public class MenuItem implements Parcelable {
      * Do not use Id 0, it's a placeholder for mock menu
      */
     @IntDef({
-            MenuId.MENU_PLACEHOLDER, MenuId.MENU_DASHBOARD, MenuId.MENU_HELP, MenuId.MENU_SETTING,
-            MenuId.MENU_QLKH, MenuId.MENU_QLTC, MenuId.MENU_BH_KHO_TC, MenuId.MENU_BH_CSKH,
-            MenuId.MENU_BAO_CAO, MenuId.MENU_QLDB, MenuId.MENU_GIAO_VIEC_PHAT_SINH,
+            MenuId.MENU_PLACEHOLDER, MenuId.MENU_DASHBOARD, MenuId.MENU_CONG_VIEC,
+            MenuId.MENU_BAN_HANG, MenuId.MENU_KHACH_HANG, MenuId.MENU_HELP, MenuId.MENU_SETTING,
+            MenuId.MENU_DAU_NOI_QUAN_LY_KHACH_HANG, MenuId.MENU_QUAN_LY_THU_CUOC,
+            MenuId.MENU_BAN_HANG_KHO_TAI_CHINH, MenuId.MENU_BH_CHAM_SOC_KHACH_HANG,
+            MenuId.MENU_BAO_CAO, MenuId.MENU_QUAN_LY_DIA_BAN, MenuId.MENU_GIAO_VIEC_PHAT_SINH,
             MenuId.MENU_GIAO_VIEC_CS_KPP, MenuId.MENU_BAN_HANG_THEO_DON_PHE_DUYET_DON_HANG,
             MenuId.MENU_XEM_KHO, MenuId.MENU_SALE_RETAIL, MenuId.MENU_SALE_CHANNEL,
-            MenuId.MENU_CHANNEL_ORDER, MenuId.MENU_NHAP_HOA_DON, MenuId.MENU_TD_LAP_DAT, MenuId.MENU_LAP_HOA_DON
-
+            MenuId.MENU_CHANNEL_ORDER, MenuId.MENU_NHAP_HOA_DON, MenuId.MENU_TD_LAP_DAT,
+            MenuId.MENU_LAP_HOA_DON, MenuId.MENU_DANG_KY_THONG_TIN, MenuId.MENU_CAP_NHAT_THONG_TIN,
     })
     public @interface MenuId {
         int MENU_PLACEHOLDER = 0;
         int MENU_DASHBOARD = 1;
-        int MENU_HELP = 2;
-        int MENU_SETTING = 3;
+        int MENU_CONG_VIEC = 2;
+        int MENU_BAN_HANG = 3;
+        int MENU_KHACH_HANG = 4;
+        int MENU_DAU_NOI_QUAN_LY_KHACH_HANG = 5;
+        int MENU_QUAN_LY_THU_CUOC = 6;
+        int MENU_BAN_HANG_KHO_TAI_CHINH = 7;
+        int MENU_BH_CHAM_SOC_KHACH_HANG = 8;
+        int MENU_BAO_CAO = 9;
+        int MENU_QUAN_LY_DIA_BAN = 10;
+        int MENU_HELP = 11;
+        int MENU_SETTING = 12;
 
-        int MENU_QLKH = 4;
-        int MENU_QLTC = 5;
-        int MENU_BH_KHO_TC = 6;
-        int MENU_BH_CSKH = 7;
-        int MENU_BAO_CAO = 8;
-        int MENU_QLDB = 9;
+        int MENU_DANG_KY_THONG_TIN = 503;
+        int MENU_CAP_NHAT_THONG_TIN = 504;
+        int MENU_TD_LAP_DAT = 506;
+        int MENU_GIAO_VIEC_PHAT_SINH = 508;
+        int MENU_GIAO_VIEC_CS_KPP = 509;
 
-        int MENU_GIAO_VIEC_PHAT_SINH = 10;
-        int MENU_GIAO_VIEC_CS_KPP = 11;
-
-        int MENU_BAN_HANG_THEO_DON_PHE_DUYET_DON_HANG = 12;
-        int MENU_XEM_KHO = 13;
-        int MENU_NHAP_HOA_DON = 14;
-        int MENU_SALE_RETAIL = 20;
-        int MENU_SALE_CHANNEL = 21;
-        int MENU_CHANNEL_ORDER = 22;
-
-        int MENU_TD_LAP_DAT = 23;
-        int MENU_LAP_HOA_DON = 24;
+        int MENU_SALE_RETAIL = 701;
+        int MENU_SALE_CHANNEL = 702;
+        int MENU_BAN_HANG_THEO_DON_PHE_DUYET_DON_HANG = 703;
+        int MENU_BAN_DICH_VU_VAS = 704;
+        int MENU_LAP_HOA_DON = 705;
+        int MENU_BAN_ANYPAY = 706;
+        int MENU_NAP_CHUYEN_ANYPAY = 707;
+        int MENU_XEM_KHO = 708;
+        int MENU_NHAP_HOA_DON = 709;
+        int MENU_XUAT_KHO_CAP_DUOI = 710;
+        int MENU_NHAP_KHO_CAP_TREN = 711;
+        int MENU_TRA_HANG_CAP_TREN = 712;
+        int MENU_NHAP_KHO_CAP_DUOI = 713;
+        int MENU_XUAT_KHO_CHO_NHAN_VIEN = 714;
+        int MENU_NV_XAC_NHAN_HANG = 715;
+        int MENU_NHAN_VIEN_TRA_HANG_CAP_TREN = 716;
+        int MENU_NHAP_KHO_TU_NHAN_VIEN = 717;
+        int MENU_CHANNEL_ORDER = 718;
+        int MENU_TAO_GIAY_NOP_TIEN = 719;
+        int MENU_PHE_DYUET_GIAY_NOP_TIEN = 720;
+        int MENU_DOI_SOAT_CONG_NO_GIAY_NOP_TIEN = 721;
     }
 
     @MenuId

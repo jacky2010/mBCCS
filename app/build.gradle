@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply from: '../autodimension.gradle'
+
 android {
   compileSdkVersion rootProject.ext.compileSdkVersion
   buildToolsVersion rootProject.ext.buildToolsVersion
@@ -11,6 +12,8 @@ android {
     versionName "1.0"
     multiDexEnabled true
   }
+
+  flavorDimensions "mbccs"
   buildTypes {
     release {
       minifyEnabled false
@@ -27,12 +30,14 @@ android {
       versionCode rootProject.ext.versionCode_dev
       versionName rootProject.ext.versionName_dev
       versionNameSuffix "-dev"
+      dimension "mbccs"
     }
 
     product {
       applicationId "com.viettel.mbccs"
       versionCode rootProject.ext.versionCode_product
       versionName rootProject.ext.versionName_product
+      dimension "mbccs"
     }
   }
 }
@@ -100,3 +105,5 @@ dependencies {
   compile project(path: ':languagepicker')
   compile 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
 }
+apply plugin: 'maven'
+apply plugin: 'announce'

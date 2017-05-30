@@ -2,8 +2,9 @@ package com.viettel.mbccs.screen.information;
 
 import com.viettel.mbccs.base.BasePresenter;
 import com.viettel.mbccs.base.BaseView;
-import com.viettel.mbccs.data.model.Customer;
+import com.viettel.mbccs.data.model.ApDomain;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.GetRegiterSubInfoResponse;
 import java.util.List;
 
 /**
@@ -20,10 +21,16 @@ public interface CreateUpdateInformationContract {
 
         void onCancel();
 
-        void onSearchSuccess(List<Customer> customerList);
+        void onSearchSuccess(GetRegiterSubInfoResponse data);
 
         void onSearchError(BaseException error);
 
         void onRegisterNewPayment();
+
+        void getDataSpinnerPassportSuccess(List<ApDomain> dataPassportType);
+
+        void getDataSpinnerPassportError(BaseException error);
+
+        void showDialogValidate();
     }
 }

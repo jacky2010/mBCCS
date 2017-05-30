@@ -1,5 +1,6 @@
 package com.viettel.mbccs.utils.rx;
 
+import android.util.Log;
 import com.viettel.mbccs.data.source.remote.response.BaseErrorResponse;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.BaseResponse;
@@ -52,6 +53,7 @@ public class SchedulerUtils {
                     BaseErrorResponse baseErrorResponse = new BaseErrorResponse();
                     baseErrorResponse.setError(Integer.parseInt(response.getErrorCode()),
                             response.getErrorMessage());
+                    Log.i("SchedulerUtils", " -> call: ----------------: equals(\"200\") " );
                     return Observable.error(BaseException.toServerError(baseErrorResponse));
                 }
 
@@ -59,9 +61,9 @@ public class SchedulerUtils {
                     BaseErrorResponse baseErrorResponse = new BaseErrorResponse();
                     baseErrorResponse.setError(Integer.parseInt(response.getData().getErrorCode()),
                             response.getData().getErrorMessage());
+                    Log.i("SchedulerUtils", " -> call: ----------------: equals(\"0\")");
                     return Observable.error(BaseException.toServerError(baseErrorResponse));
                 }
-
 
                 return Observable.just(response.getData());
             }
