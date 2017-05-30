@@ -14,7 +14,7 @@ import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.Session;
 import com.viettel.mbccs.data.model.StaffInfo;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
-import com.viettel.mbccs.data.source.remote.request.BaseRequest;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListChannelByOwnerTypeIdRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListOrderRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
@@ -75,8 +75,8 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
         g.setStaffId(staffInfo.get().getStaffId());
         g.setChannelTypeId(staffInfo.get().getChannelTypeId());
 
-        BaseRequest<GetListChannelByOwnerTypeIdRequest> request = new BaseRequest<>();
-        request.setRequest(g);
+        DataRequest<GetListChannelByOwnerTypeIdRequest> request = new DataRequest<>();
+        request.setParameterApi(g);
 
         // TODO: 5/18/17 get data
         request.setApiKey("demo");
@@ -158,20 +158,13 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
         getListOrderRequest.setToDate("02/08/2017 00:00:00");
         getListOrderRequest.setFromDate("02/05/2017 00:00:00");
         getListOrderRequest.setOrderStatus(54366);
-
-        Session session = new Session();
-        session.setSessionId("54578345638");
-        getListOrderRequest.setSession(session);
-        getListOrderRequest.setApiCode(ApiCode.GetListOrder);
-        getListOrderRequest.setApiKey("464564575676");
-
-        BaseRequest<GetListOrderRequest> baseRequest = new BaseRequest<>();
-        baseRequest.setSession(session);
+        DataRequest<GetListOrderRequest> baseRequest = new DataRequest<>();
         baseRequest.setUserName("smac");
+
         baseRequest.setApiCode(ApiCode.GetListOrder);
         baseRequest.setApiKey("464564575676");
         baseRequest.setToken("54353-543346-65464564-6546");
-        baseRequest.setRequest(getListOrderRequest);
+        baseRequest.setParameterApi(getListOrderRequest);
 
         banHangKhoTaiChinhRepository.getListOrder(baseRequest)
                 .subscribe(new MBCCSSubscribe<GetListOrderResponse>() {

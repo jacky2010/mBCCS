@@ -2,7 +2,7 @@ package com.viettel.mbccs.data.source.remote.datasource;
 
 import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.source.remote.IUserRemoteDataSource;
-import com.viettel.mbccs.data.source.remote.request.BaseRequest;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
@@ -69,7 +69,7 @@ public class UserRemoteDataSource implements IUserRemoteDataSource {
 
     @Override
     public Observable<TelecomServiceAndSaleProgramResponse> getTelecomserviceAndSaleProgram(
-            BaseRequest<GetTelecomServiceAndSaleProgramRequest> request) {
+            DataRequest<GetTelecomServiceAndSaleProgramRequest> request) {
         return RequestHelper.getRequest()
                 .getTelecomserviceAndSaleProgram(request)
                 .flatMap(SchedulerUtils.<TelecomServiceAndSaleProgramResponse>convertDataFlatMap())
@@ -78,7 +78,7 @@ public class UserRemoteDataSource implements IUserRemoteDataSource {
     }
 
     @Override
-    public Observable<GetSerialsResponse> getSerial(BaseRequest<GetSerialRequest> request) {
+    public Observable<GetSerialsResponse> getSerial(DataRequest<GetSerialRequest> request) {
         return RequestHelper.getRequest()
                 .getSerials(request)
                 .flatMap(SchedulerUtils.<GetSerialsResponse>convertDataFlatMap())
@@ -86,7 +86,7 @@ public class UserRemoteDataSource implements IUserRemoteDataSource {
     }
 
     @Override
-    public Observable<GetTotalStockResponse> getModelSales(BaseRequest<GetTotalStockRequest> request) {
+    public Observable<GetTotalStockResponse> getModelSales(DataRequest<GetTotalStockRequest> request) {
         return RequestHelper.getRequest()
                 .getModelSales(request)
                 .flatMap(SchedulerUtils.<GetTotalStockResponse>convertDataFlatMap())
@@ -94,7 +94,7 @@ public class UserRemoteDataSource implements IUserRemoteDataSource {
     }
 
     @Override
-    public Observable<GetInfoSaleTranResponse> getSaleTransInfo(BaseRequest<GetInfoSaleTranRequest> request) {
+    public Observable<GetInfoSaleTranResponse> getSaleTransInfo(DataRequest<GetInfoSaleTranRequest> request) {
         return RequestHelper.getRequest()
                 .getSaleTransInfo(request)
                 .flatMap(SchedulerUtils.<GetInfoSaleTranResponse>convertDataFlatMap())
@@ -103,7 +103,7 @@ public class UserRemoteDataSource implements IUserRemoteDataSource {
 
     @Override
     public Observable<GetInfoSaleTranResponse> createSaleTransRetail(
-            BaseRequest<GetInfoSaleTranRequest> request) {
+            DataRequest<GetInfoSaleTranRequest> request) {
         return RequestHelper.getRequest()
                 .createSaleTransRetail(request)
                 .flatMap(SchedulerUtils.<GetInfoSaleTranResponse>convertDataFlatMap())

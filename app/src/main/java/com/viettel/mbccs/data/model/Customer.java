@@ -1,5 +1,7 @@
 package com.viettel.mbccs.data.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -7,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by eo_cuong on 5/19/17.
  */
 
-public class Customer {
+public class Customer implements Parcelable {
 
     @SerializedName("customerName")
     @Expose
@@ -44,4 +46,37 @@ public class Customer {
     public void setTin(String tin) {
         this.tin = tin;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.customerName);
+        dest.writeString(this.address);
+        dest.writeString(this.tin);
+    }
+
+    public Customer() {
+    }
+
+    protected Customer(Parcel in) {
+        this.customerName = in.readString();
+        this.address = in.readString();
+        this.tin = in.readString();
+    }
+
+    public static final Creator<Customer> CREATOR = new Creator<Customer>() {
+        @Override
+        public Customer createFromParcel(Parcel source) {
+            return new Customer(source);
+        }
+
+        @Override
+        public Customer[] newArray(int size) {
+            return new Customer[size];
+        }
+    };
 }

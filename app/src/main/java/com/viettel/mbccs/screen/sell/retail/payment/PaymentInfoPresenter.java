@@ -11,7 +11,7 @@ import com.viettel.mbccs.data.model.SaleTrans;
 import com.viettel.mbccs.data.model.StockSerial;
 import com.viettel.mbccs.data.model.TeleComService;
 import com.viettel.mbccs.data.source.UserRepository;
-import com.viettel.mbccs.data.source.remote.request.BaseRequest;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetInfoSaleTranResponse;
@@ -48,7 +48,7 @@ public class PaymentInfoPresenter implements PaymentInforContract.Presenter {
     private String phone;
     private String secureCode;
     private UserRepository mUserRepository;
-    private BaseRequest<GetInfoSaleTranRequest> mGetInfoSaleTranRequestBaseRequest;
+    private DataRequest<GetInfoSaleTranRequest> mGetInfoSaleTranRequestBaseRequest;
     private CompositeSubscription mSubscriptions;
     private SaleTrans mSaleTrans;
     private TeleComService mTeleComService;
@@ -109,7 +109,7 @@ public class PaymentInfoPresenter implements PaymentInforContract.Presenter {
         mViewModel.showLoading();
         isGetTransInfo.set(false);
 
-        mGetInfoSaleTranRequestBaseRequest = new BaseRequest<>();
+        mGetInfoSaleTranRequestBaseRequest = new DataRequest<>();
         GetInfoSaleTranRequest request = new GetInfoSaleTranRequest();
         request.setPaymentMethod(paymentMethod);
         request.setCouponCode(coupon.get());
@@ -128,7 +128,7 @@ public class PaymentInfoPresenter implements PaymentInforContract.Presenter {
         customer.setCustomerName(name.get());
         request.setCustomer(customer);
 
-        mGetInfoSaleTranRequestBaseRequest.setRequest(request);
+        mGetInfoSaleTranRequestBaseRequest.setParameterApi(request);
 
         Subscription subscription =
                 mUserRepository.getSaleTransInfo(mGetInfoSaleTranRequestBaseRequest)

@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by HuyQuyet on 5/22/17.
  */
 
-public class GetListStockModelRequest  extends DataRequest{
+public class GetListStockModelRequest  {
     @Expose
     @SerializedName("ownerId")
     private long ownerId;

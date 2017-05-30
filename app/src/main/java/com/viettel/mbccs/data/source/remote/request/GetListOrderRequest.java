@@ -4,7 +4,7 @@ package com.viettel.mbccs.data.source.remote.request;
  * Created by HuyQuyet on 5/17/17.
  */
 
-public class GetListOrderRequest extends DataRequest {
+public class GetListOrderRequest  {
 
     private long shopId;
     private long staffId;

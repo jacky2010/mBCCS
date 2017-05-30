@@ -13,7 +13,7 @@ import com.viettel.mbccs.data.model.SaleProgram;
 import com.viettel.mbccs.data.model.TeleComService;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.UserRepository;
-import com.viettel.mbccs.data.source.remote.request.BaseRequest;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListChannelByOwnerTypeIdRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
@@ -56,10 +56,10 @@ public class SaleChannelPresenter
     private int currentStockPosition = -1;
     private UserRepository mUserRepository;
     private BanHangKhoTaiChinhRepository banHangKhoTaiChinhRepository;
-    private BaseRequest<GetTelecomServiceAndSaleProgramRequest>
+    private DataRequest<GetTelecomServiceAndSaleProgramRequest>
             mGetTelecomServiceAndSaleProgramRequest;
-    private BaseRequest<GetListChannelByOwnerTypeIdRequest> mGetListChannelByOwnerTypeIdRequest;
-    private BaseRequest<GetTotalStockRequest> mGetTotalStockRequest;
+    private DataRequest<GetListChannelByOwnerTypeIdRequest> mGetListChannelByOwnerTypeIdRequest;
+    private DataRequest<GetTotalStockRequest> mGetTotalStockRequest;
     private CompositeSubscription mSubscription;
 
     public SaleChannelPresenter(Context context, SaleChannelContract.ViewModel viewModel) {
@@ -74,7 +74,7 @@ public class SaleChannelPresenter
 
     private void loadModelSale() {
         mViewModel.showLoading();
-        mGetTotalStockRequest = new BaseRequest<>();
+        mGetTotalStockRequest = new DataRequest<>();
         mGetTotalStockRequest.setApiCode(ApiCode.GetStockTotal);
         GetTotalStockRequest request = new GetTotalStockRequest();
         if (currentSaleProgram.getId() != -1) {
@@ -84,7 +84,7 @@ public class SaleChannelPresenter
             request.setTelecomServiceId(currentTelecomService.getId());
         }
         //TODO set attribute for request
-        mGetTotalStockRequest.setRequest(request);
+        mGetTotalStockRequest.setParameterApi(request);
         Subscription subscription = mUserRepository.getModelSales(mGetTotalStockRequest)
                 .subscribe(new MBCCSSubscribe<GetTotalStockResponse>() {
                     @Override
@@ -178,35 +178,35 @@ public class SaleChannelPresenter
     }
 
     private Observable<TelecomServiceAndSaleProgramResponse> getObservableTeleComserviceAndSaleProgram() {
-        mGetTelecomServiceAndSaleProgramRequest = new BaseRequest<>();
+        mGetTelecomServiceAndSaleProgramRequest = new DataRequest<>();
         mGetTelecomServiceAndSaleProgramRequest.setApiCode(ApiCode.GetTelecomServiceAndSaleProgram);
         GetTelecomServiceAndSaleProgramRequest request =
                 new GetTelecomServiceAndSaleProgramRequest();
-        mGetTelecomServiceAndSaleProgramRequest.setRequest(request);
+        mGetTelecomServiceAndSaleProgramRequest.setParameterApi(request);
         return mUserRepository.getTelecomserviceAndSaleProgram(
                 mGetTelecomServiceAndSaleProgramRequest);
     }
 
     private Observable<GetListChannelByOwnerTypeIdResponse> getObservaleChannelInfors() {
-        mGetListChannelByOwnerTypeIdRequest = new BaseRequest<>();
+        mGetListChannelByOwnerTypeIdRequest = new DataRequest<>();
         mGetListChannelByOwnerTypeIdRequest.setApiCode(ApiCode.GetListChannelByOwnerTypeId);
         GetListChannelByOwnerTypeIdRequest request = new GetListChannelByOwnerTypeIdRequest();
         request.setChannelTypeId(1);
         request.setShopId(1);
         request.setStaffId(1);
         request.setLanguage("en");
-        mGetListChannelByOwnerTypeIdRequest.setRequest(request);
+        mGetListChannelByOwnerTypeIdRequest.setParameterApi(request);
         return banHangKhoTaiChinhRepository.getListChannelByOwnerTypeId(
                 mGetListChannelByOwnerTypeIdRequest);
     }
 
     private void loadServiceAndProgram() {
         mViewModel.showLoading();
-        mGetTelecomServiceAndSaleProgramRequest = new BaseRequest<>();
+        mGetTelecomServiceAndSaleProgramRequest = new DataRequest<>();
         mGetTelecomServiceAndSaleProgramRequest.setApiCode(ApiCode.GetTelecomServiceAndSaleProgram);
         GetTelecomServiceAndSaleProgramRequest request =
                 new GetTelecomServiceAndSaleProgramRequest();
-        mGetTelecomServiceAndSaleProgramRequest.setRequest(request);
+        mGetTelecomServiceAndSaleProgramRequest.setParameterApi(request);
 
         Subscription subscription = mUserRepository.getTelecomserviceAndSaleProgram(
                 mGetTelecomServiceAndSaleProgramRequest)

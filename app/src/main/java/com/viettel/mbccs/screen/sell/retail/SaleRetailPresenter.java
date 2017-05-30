@@ -12,7 +12,7 @@ import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.model.SaleProgram;
 import com.viettel.mbccs.data.model.TeleComService;
 import com.viettel.mbccs.data.source.UserRepository;
-import com.viettel.mbccs.data.source.remote.request.BaseRequest;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
@@ -47,9 +47,9 @@ public class SaleRetailPresenter
     private TeleComService currentTelecomService = new TeleComService();
     private int currentStockPosition = -1;
     private UserRepository mUserRepository;
-    private BaseRequest<GetTelecomServiceAndSaleProgramRequest>
+    private DataRequest<GetTelecomServiceAndSaleProgramRequest>
             mGetTelecomServiceAndSaleProgramRequest;
-    private BaseRequest<GetTotalStockRequest> mGetTotalStockRequest;
+    private DataRequest<GetTotalStockRequest> mGetTotalStockRequest;
     private CompositeSubscription mSubscription;
 
     public SaleRetailPresenter(Context context, SaleRetailContract.ViewModel viewModel) {
@@ -63,7 +63,7 @@ public class SaleRetailPresenter
 
     private void loadModelSale() {
         mViewModel.showLoading();
-        mGetTotalStockRequest = new BaseRequest<>();
+        mGetTotalStockRequest = new DataRequest<>();
         mGetTotalStockRequest.setApiCode(ApiCode.GetStockTotal);
         GetTotalStockRequest request = new GetTotalStockRequest();
         if (currentSaleProgram.getId() != -1) {
@@ -77,7 +77,7 @@ public class SaleRetailPresenter
         request.setStateId(StockTotalType.TYPE_NEW);
         request.setSaleTransType(SaleTranType.SALE_RETAIL);
         //TODO set attribute for request
-        mGetTotalStockRequest.setRequest(request);
+        mGetTotalStockRequest.setParameterApi(request);
         Subscription subscription = mUserRepository.getModelSales(mGetTotalStockRequest)
                 .subscribe(new MBCCSSubscribe<GetTotalStockResponse>() {
                     @Override
@@ -106,14 +106,13 @@ public class SaleRetailPresenter
 
     private void loadServiceAndProgram() {
         mViewModel.showLoading();
-        mGetTelecomServiceAndSaleProgramRequest = new BaseRequest<>();
+        mGetTelecomServiceAndSaleProgramRequest = new DataRequest<>();
         mGetTelecomServiceAndSaleProgramRequest.setUserName("Cuong");
         mGetTelecomServiceAndSaleProgramRequest.setApiCode(ApiCode.GetTelecomServiceAndSaleProgram);
         GetTelecomServiceAndSaleProgramRequest request =
                 new GetTelecomServiceAndSaleProgramRequest();
         request.setShopId("123");
-        request.setApiCode(ApiCode.GetTelecomServiceAndSaleProgram);
-        mGetTelecomServiceAndSaleProgramRequest.setRequest(request);
+        mGetTelecomServiceAndSaleProgramRequest.setParameterApi(request);
 
         Subscription subscription = mUserRepository.getTelecomserviceAndSaleProgram(
                 mGetTelecomServiceAndSaleProgramRequest)

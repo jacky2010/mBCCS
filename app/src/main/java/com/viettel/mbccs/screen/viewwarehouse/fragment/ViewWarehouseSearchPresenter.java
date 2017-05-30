@@ -9,7 +9,7 @@ import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.ShopLevel;
 import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
-import com.viettel.mbccs.data.source.remote.request.BaseRequest;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListProvinceRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListShopRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListTTKDRequest;
@@ -77,8 +77,8 @@ public class ViewWarehouseSearchPresenter extends BaseObservable
         GetListShopRequest getListShopRequest = new GetListShopRequest();
         getListShopRequest.setParentShopId(1);
 
-        BaseRequest<GetListShopRequest> request = new BaseRequest<>();
-        request.setRequest(getListShopRequest);
+        DataRequest<GetListShopRequest> request = new DataRequest<>();
+        request.setParameterApi(getListShopRequest);
         request.setApiCode(ApiCode.GetListShop);
         // TODO: 5/23/17 fake data
         Subscription subscription = banHangKhoTaiChinhRepository.getListShop(request)
@@ -103,8 +103,8 @@ public class ViewWarehouseSearchPresenter extends BaseObservable
         //        getListTTKDRequest.setShopId(1);
         getListTTKDRequest.setShopLevel(ShopLevel.TTKD);
 
-        BaseRequest<GetListTTKDRequest> request = new BaseRequest<>();
-        request.setRequest(getListTTKDRequest);
+        DataRequest<GetListTTKDRequest> request = new DataRequest<>();
+        request.setParameterApi(getListTTKDRequest);
         request.setApiCode(ApiCode.GetListTTKD);
         // TODO: 5/23/17 fake data
         Subscription subscription = banHangKhoTaiChinhRepository.getListTTKD(request)
@@ -124,8 +124,8 @@ public class ViewWarehouseSearchPresenter extends BaseObservable
     }
 
     private void getDataProvince() {
-        BaseRequest<GetListProvinceRequest> request = new BaseRequest<>();
-        request.setRequest(new GetListProvinceRequest());
+        DataRequest<GetListProvinceRequest> request = new DataRequest<>();
+        request.setParameterApi(new GetListProvinceRequest());
         request.setApiCode(ApiCode.GetListProvince);
         Subscription subscription = banHangKhoTaiChinhRepository.getListProvince(request)
                 .subscribe(new MBCCSSubscribe<GetListProvinceResponse>() {

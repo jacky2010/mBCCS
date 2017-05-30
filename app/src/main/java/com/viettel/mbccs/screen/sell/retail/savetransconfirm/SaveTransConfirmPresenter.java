@@ -8,7 +8,7 @@ import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.SaleTrans;
 import com.viettel.mbccs.data.source.UserRepository;
-import com.viettel.mbccs.data.source.remote.request.BaseRequest;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetInfoSaleTranResponse;
@@ -92,8 +92,8 @@ public class SaveTransConfirmPresenter implements SaveTransConfirmContract.Prese
     @Override
     public void saveTransaction() {
         mViewModel.showLoading();
-        BaseRequest<GetInfoSaleTranRequest> baseRequest = new BaseRequest<>();
-        baseRequest.setRequest(mGetInfoSaleTranRequest);
+        DataRequest<GetInfoSaleTranRequest> baseRequest = new DataRequest<>();
+        baseRequest.setParameterApi(mGetInfoSaleTranRequest);
         Subscription subscription = mUserRepository.createSaleTransRetail(baseRequest)
                 .subscribe(new MBCCSSubscribe<GetInfoSaleTranResponse>() {
                     @Override

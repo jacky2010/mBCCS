@@ -11,8 +11,6 @@ import com.viettel.mbccs.data.source.UserRepository;
 
 public class MBCCSApplication extends Application {
 
-    public static Session sessionVTG;
-    public static String apiKeyVTG;
     public static Session session;
     public static String apiKey;
     public static String userName = "cuong";
@@ -27,15 +25,11 @@ public class MBCCSApplication extends Application {
         mUserRepository = UserRepository.getInstance();
         session = mUserRepository.getSession();
         apiKey = mUserRepository.getApiKey();
-        sessionVTG = mUserRepository.getSessionVTG();
-        apiKeyVTG = mUserRepository.getApiKeyVTG();
     }
 
     public static void clearCache() {
-        sessionVTG = null;
         session = null;
         apiKey = null;
-        apiKeyVTG = null;
     }
 
     public static Context self() {

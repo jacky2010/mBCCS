@@ -1,7 +1,7 @@
 package com.viettel.mbccs.data.source.remote.datasource;
 
 import com.viettel.mbccs.data.source.remote.IBanHangKhoTaiChinhRemoteDataSource;
-import com.viettel.mbccs.data.source.remote.request.BaseRequest;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListChannelByOwnerTypeIdRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListProvinceRequest;
@@ -46,7 +46,8 @@ public class BanHangKhoTaiChinhRemoteDataSource implements IBanHangKhoTaiChinhRe
 
     @Override
     public Observable<GetListOrderResponse> getListOrder(
-            BaseRequest<GetListOrderRequest> request) {
+            DataRequest<GetListOrderRequest> request) {
+
         return RequestHelper.getRequest()
                 .getListOrder(request)
                 .flatMap(SchedulerUtils.<GetListOrderResponse>convertDataFlatMap())
@@ -55,7 +56,7 @@ public class BanHangKhoTaiChinhRemoteDataSource implements IBanHangKhoTaiChinhRe
 
     @Override
     public Observable<GetListChannelByOwnerTypeIdResponse> getListChannelByOwnerTypeId(
-            BaseRequest<GetListChannelByOwnerTypeIdRequest> request) {
+            DataRequest<GetListChannelByOwnerTypeIdRequest> request) {
         return RequestHelper.getRequest()
                 .getListChannelByOwnerTypeId(request)
                 .flatMap(SchedulerUtils.<GetListChannelByOwnerTypeIdResponse>convertDataFlatMap())
@@ -64,7 +65,7 @@ public class BanHangKhoTaiChinhRemoteDataSource implements IBanHangKhoTaiChinhRe
     }
 
     @Override
-    public Observable<GetOrderInfoResponse> getOrderInfo(BaseRequest<GetOrderInfoRequest> request) {
+    public Observable<GetOrderInfoResponse> getOrderInfo(DataRequest<GetOrderInfoRequest> request) {
         return RequestHelper.getRequest()
                 .getOrderInfo(request)
                 .flatMap(SchedulerUtils.<GetOrderInfoResponse>convertDataFlatMap())
@@ -72,16 +73,17 @@ public class BanHangKhoTaiChinhRemoteDataSource implements IBanHangKhoTaiChinhRe
     }
 
     @Override
-    public Observable<GetReasonResponse> getListReason(BaseRequest<GetResonRequest> request) {
+    public Observable<GetReasonResponse> getListReason(DataRequest<GetResonRequest> request) {
         return RequestHelper.getRequest()
                 .getListReason(request)
                 .flatMap(SchedulerUtils.<GetReasonResponse>convertDataFlatMap())
                 .compose(SchedulerUtils.<GetReasonResponse>applyAsyncSchedulers());
+
     }
 
     @Override
     public Observable<GetListStockModelResponse> getListStockModel(
-            BaseRequest<GetListStockModelRequest> request) {
+            DataRequest<GetListStockModelRequest> request) {
         return RequestHelper.getRequest()
                 .getListStockModel(request)
                 .flatMap(SchedulerUtils.<GetListStockModelResponse>convertDataFlatMap())
@@ -90,7 +92,7 @@ public class BanHangKhoTaiChinhRemoteDataSource implements IBanHangKhoTaiChinhRe
 
     @Override
     public Observable<ViewInfoSerialResponse> viewInfoSerial(
-            BaseRequest<ViewInfoSerialRequest> request) {
+            DataRequest<ViewInfoSerialRequest> request) {
         return RequestHelper.getRequest()
                 .viewInfoSerial(request)
                 .flatMap(SchedulerUtils.<ViewInfoSerialResponse>convertDataFlatMap())
@@ -99,7 +101,7 @@ public class BanHangKhoTaiChinhRemoteDataSource implements IBanHangKhoTaiChinhRe
 
     @Override
     public Observable<GetListProvinceResponse> getListProvince(
-            BaseRequest<GetListProvinceRequest> request) {
+            DataRequest<GetListProvinceRequest> request) {
         return RequestHelper.getRequest()
                 .getListProvince(request)
                 .flatMap(SchedulerUtils.<GetListProvinceResponse>convertDataFlatMap())
@@ -107,7 +109,7 @@ public class BanHangKhoTaiChinhRemoteDataSource implements IBanHangKhoTaiChinhRe
     }
 
     @Override
-    public Observable<GetListTTKDResponse> getListTTKD(BaseRequest<GetListTTKDRequest> request) {
+    public Observable<GetListTTKDResponse> getListTTKD(DataRequest<GetListTTKDRequest> request) {
         return RequestHelper.getRequest()
                 .getListTTKD(request)
                 .flatMap(SchedulerUtils.<GetListTTKDResponse>convertDataFlatMap())
@@ -115,7 +117,7 @@ public class BanHangKhoTaiChinhRemoteDataSource implements IBanHangKhoTaiChinhRe
     }
 
     @Override
-    public Observable<GetListShopResponse> getListShop(BaseRequest<GetListShopRequest> request) {
+    public Observable<GetListShopResponse> getListShop(DataRequest<GetListShopRequest> request) {
         return RequestHelper.getRequest()
                 .getListShop(request)
                 .flatMap(SchedulerUtils.<GetListShopResponse>convertDataFlatMap())
@@ -123,7 +125,7 @@ public class BanHangKhoTaiChinhRemoteDataSource implements IBanHangKhoTaiChinhRe
     }
 
     public Observable<BaseResponse> createSaleOrders(
-            BaseRequest<KPPOrderRequest> requestBaseRequest) {
+            DataRequest<KPPOrderRequest> requestBaseRequest) {
         return RequestHelper.getRequest()
                 .createSaleOrders(requestBaseRequest)
                 .compose(SchedulerUtils.<BaseResponse>applyAsyncSchedulers());

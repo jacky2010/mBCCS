@@ -11,10 +11,14 @@ import com.viettel.mbccs.data.model.Session;
  * Created by HuyQuyet on 5/27/17.
  */
 
-public class DataRequest implements Parcelable{
+public class DataRequest<T>  {
     @Expose
     @SerializedName("session")
     private Session mSession;
+
+    @SerializedName("username")
+    @Expose
+    private String userName;
 
     @Expose
     @SerializedName("apiCode")
@@ -23,6 +27,14 @@ public class DataRequest implements Parcelable{
     @Expose
     @SerializedName("apiKey")
     private String apiKey;
+
+    @SerializedName("token")
+    @Expose
+    private String token;
+
+    @SerializedName("parameterApi")
+    @Expose
+    private T parameterApi;
 
     public DataRequest() {
         mSession = MBCCSApplication.session;
@@ -53,33 +65,29 @@ public class DataRequest implements Parcelable{
         this.apiKey = apiKey;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public String getUserName() {
+        return userName;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeParcelable(this.mSession, flags);
-        dest.writeString(this.apiCode);
-        dest.writeString(this.apiKey);
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    protected DataRequest(Parcel in) {
-        this.mSession = in.readParcelable(Session.class.getClassLoader());
-        this.apiCode = in.readString();
-        this.apiKey = in.readString();
+    public String getToken() {
+        return token;
     }
 
-    public static final Creator<DataRequest> CREATOR = new Creator<DataRequest>() {
-        @Override
-        public DataRequest createFromParcel(Parcel source) {
-            return new DataRequest(source);
-        }
+    public void setToken(String token) {
+        this.token = token;
+    }
 
-        @Override
-        public DataRequest[] newArray(int size) {
-            return new DataRequest[size];
-        }
-    };
+    public T getParameterApi() {
+        return parameterApi;
+    }
+
+    public void setParameterApi(T parameterApi) {
+        this.parameterApi = parameterApi;
+    }
+
+
 }

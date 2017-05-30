@@ -10,7 +10,7 @@ import com.viettel.mbccs.constance.OrderStatus;
 import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.SaleOrders;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
-import com.viettel.mbccs.data.source.remote.request.BaseRequest;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListOrderRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetListOrderResponse;
@@ -43,7 +43,7 @@ public class KPPOrderPresenter implements KPPOrderContract.Presenter {
     private CompositeSubscription mSubscriptions;
     private long status = OrderStatus.PENDING;
 
-    private BaseRequest<GetListOrderRequest> mGetListOrderRequestBaseRequest;
+    private DataRequest<GetListOrderRequest> mGetListOrderRequestBaseRequest;
 
     public KPPOrderPresenter(Context context, KPPOrderContract.ViewModel viewModel) {
         mContext = context;
@@ -91,7 +91,7 @@ public class KPPOrderPresenter implements KPPOrderContract.Presenter {
             return;
         }
         mViewModel.showLoading();
-        mGetListOrderRequestBaseRequest = new BaseRequest<>();
+        mGetListOrderRequestBaseRequest = new DataRequest<>();
         mGetListOrderRequestBaseRequest.setApiCode(ApiCode.GetListOrder);
         GetListOrderRequest request = new GetListOrderRequest();
         request.setOrderStatus(status);

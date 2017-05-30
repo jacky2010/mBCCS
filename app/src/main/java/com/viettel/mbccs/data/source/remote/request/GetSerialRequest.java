@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by eo_cuong on 5/18/17.
  */
 
-public class GetSerialRequest extends DataRequest{
+public class GetSerialRequest {
 
     @SerializedName("ownerId")
     @Expose

@@ -10,7 +10,7 @@ import com.viettel.mbccs.constance.StockTotalType;
 import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
-import com.viettel.mbccs.data.source.remote.request.BaseRequest;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListStockModelRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetListStockModelResponse;
@@ -36,7 +36,7 @@ public class FindStockPresenter
     private StockTotalPickerAdapter stockTotalAdapter;
     private ArrayList<StockTotal> mStockTotals = new ArrayList<>();
     private ArrayList<StockTotal> mStockTotalsSaved = new ArrayList<>();
-    private BaseRequest<GetListStockModelRequest> mGetListStockModelRequestBaseRequest;
+    private DataRequest<GetListStockModelRequest> mGetListStockModelRequestBaseRequest;
     private CompositeSubscription mSubscription;
     private long stockType = -1;
     private BanHangKhoTaiChinhRepository mBanHangKhoTaiChinhRepository;
@@ -83,7 +83,7 @@ public class FindStockPresenter
 
         saveStockToList();
 
-        mGetListStockModelRequestBaseRequest = new BaseRequest<>();
+        mGetListStockModelRequestBaseRequest = new DataRequest<>();
         mGetListStockModelRequestBaseRequest.setApiCode(ApiCode.GetStockTotal);
         GetListStockModelRequest request = new GetListStockModelRequest();
         request.setStockModelId(code.get());

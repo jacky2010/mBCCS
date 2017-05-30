@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.viettel.mbccs.data.model.StockModel;
 import java.util.List;
 
-public class KPPOrderRequest extends DataRequest {
+public class KPPOrderRequest  {
 
     @SerializedName("staffId")
     @Expose

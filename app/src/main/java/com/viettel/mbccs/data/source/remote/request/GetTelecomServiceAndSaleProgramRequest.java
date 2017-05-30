@@ -3,7 +3,7 @@ package com.viettel.mbccs.data.source.remote.request;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class GetTelecomServiceAndSaleProgramRequest extends DataRequest{
+public class GetTelecomServiceAndSaleProgramRequest {
     @Expose
     @SerializedName("shop_id")
     private String shopId;

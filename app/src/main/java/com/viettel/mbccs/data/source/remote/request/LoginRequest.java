@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by eo_cuong on 5/10/17.
  */
 
-public class LoginRequest extends BaseRequest {
+public class LoginRequest  {
 
     @SerializedName("username")
     private String username;

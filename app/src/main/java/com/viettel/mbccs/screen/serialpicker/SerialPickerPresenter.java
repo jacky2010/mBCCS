@@ -9,7 +9,7 @@ import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.SerialBO;
 import com.viettel.mbccs.data.model.SerialPickerModel;
 import com.viettel.mbccs.data.source.UserRepository;
-import com.viettel.mbccs.data.source.remote.request.BaseRequest;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
@@ -47,7 +47,7 @@ public class SerialPickerPresenter
     private SerialPickerContract.ViewModel mViewModel;
     private Set<String> mSerialSelected = new HashSet<>();
     private SerialBO currentSerialBlock = new SerialBO();
-    private BaseRequest<GetSerialRequest> mBaseRequest;
+    private DataRequest<GetSerialRequest> mBaseRequest;
     private UserRepository mUserRepository;
     private CompositeSubscription mSubscription;
 
@@ -87,8 +87,8 @@ public class SerialPickerPresenter
     private void loadSerial() {
         mViewModel.showLoading();
         GetSerialRequest mSerialRequest = new GetSerialRequest();
-        mBaseRequest = new BaseRequest<>();
-        mBaseRequest.setRequest(mSerialRequest);
+        mBaseRequest = new DataRequest<>();
+        mBaseRequest.setParameterApi(mSerialRequest);
 
         Subscription subscription = mUserRepository.getSerial(mBaseRequest)
                 .subscribe(new MBCCSSubscribe<GetSerialsResponse>() {
