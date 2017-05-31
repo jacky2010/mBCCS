@@ -75,6 +75,11 @@ public class StaffPickerPresenter extends BaseSearchListPickerPresenter<StaffInf
         return adapter;
     }
 
+    @Override
+    public String getListCount() {
+        return null;
+    }
+
     Runnable filter = new Runnable() {
         @Override
         public void run() {

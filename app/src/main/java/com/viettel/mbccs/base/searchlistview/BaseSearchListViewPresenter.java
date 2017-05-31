@@ -79,6 +79,8 @@ public abstract class BaseSearchListViewPresenter<T>
 
     public abstract void onAddClick();
 
+    public abstract String getListCount();
+
     public RecyclerView.ItemDecoration getItemDecoration() {
         return new SpacesItemDecoration((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX,
                 mContext.getResources().getDimension(R.dimen.dp_6),
