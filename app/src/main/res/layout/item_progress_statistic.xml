@@ -39,7 +39,7 @@
             android:padding="@dimen/dp_8"
             >
 
-            <TextView
+            <com.viettel.mbccs.widget.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"

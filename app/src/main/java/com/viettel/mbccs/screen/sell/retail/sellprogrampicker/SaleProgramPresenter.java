@@ -78,11 +78,6 @@ public class SaleProgramPresenter extends BaseSearchListPickerPresenter<SaleProg
         return adapter;
     }
 
-    @Override
-    public String getListCount() {
-        return null;
-    }
-
     Runnable filter = new Runnable() {
         @Override
         public void run() {
@@ -105,6 +100,6 @@ public class SaleProgramPresenter extends BaseSearchListPickerPresenter<SaleProg
 
     @Override
     public void onItemClick(SaleProgram sellProgram) {
-        ((SaleProgramContract.ViewModel) mViewModel).onPickSellProgram(sellProgram);
+        mViewModel.onItemClicked(sellProgram);
     }
 }

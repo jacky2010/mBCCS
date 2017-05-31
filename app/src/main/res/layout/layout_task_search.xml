@@ -29,7 +29,7 @@
             android:src="@drawable/ic_expand_less_black_24dp"
             />
 
-        <TextView
+        <com.viettel.mbccs.widget.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_12"
@@ -45,7 +45,7 @@
             app:selectedPosition="@={ presenter.taskTypePosition }"
             />
 
-        <TextView
+        <com.viettel.mbccs.widget.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_12"
@@ -61,7 +61,7 @@
             app:selectedPosition="@={ presenter.taskStatusPosition }"
             />
 
-        <TextView
+        <com.viettel.mbccs.widget.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_12"

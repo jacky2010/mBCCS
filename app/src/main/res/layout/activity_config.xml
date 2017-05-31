@@ -59,7 +59,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_14"
                     />
-                <TextView
+                <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:drawableRight="@drawable/ic_expand_more_black_24dp"
@@ -157,7 +157,7 @@
                         android:layout_gravity="center"
                         android:src="@{ presenter.imageCurrentCountry }"
                         />
-                    <TextView
+                    <com.viettel.mbccs.widget.CustomTextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:drawableRight="@drawable/ic_expand_more_black_24dp"
@@ -352,7 +352,7 @@
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_enter_red_24dp"
                     />
-                <TextView
+                <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"

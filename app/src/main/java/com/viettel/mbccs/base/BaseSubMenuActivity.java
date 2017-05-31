@@ -23,6 +23,7 @@ import com.viettel.mbccs.screen.information.CreateUpdateInformationActivity;
 import com.viettel.mbccs.screen.inputorder.InputOrderActivity;
 import com.viettel.mbccs.screen.kpp.order.KPPOrderActivity;
 import com.viettel.mbccs.screen.main.fragments.menu.MenuPresenter;
+import com.viettel.mbccs.screen.nhapkhocapduoi.ListOrderActivity;
 import com.viettel.mbccs.screen.sell.channel.SaleChannelActivity;
 import com.viettel.mbccs.screen.sell.orders.SellOrdersActivity;
 import com.viettel.mbccs.screen.sell.retail.SaleRetailActivity;
@@ -156,7 +157,7 @@ public class BaseSubMenuActivity
                 mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
                         getString(R.string.menu_tra_hang_cap_tren), R.drawable.ic_add_black_24dp, 0,
                         0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_NHAP_KHO_CAP_DUOI,
                         getString(R.string.menu_nhap_kho_cap_duoi), R.drawable.ic_add_black_24dp, 0,
                         0));
                 mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
@@ -299,6 +300,10 @@ public class BaseSubMenuActivity
                                     CreateUpdateInformationActivity.class);
                             intentCNTT.putExtra(CreateUpdateInformationActivity.ARG_TYPE, false);
                             startActivity(intentCNTT);
+                            break;
+                        case MenuItem.MenuId.MENU_NHAP_KHO_CAP_DUOI:
+                            startActivity(
+                                    new Intent(BaseSubMenuActivity.this, ListOrderActivity.class));
                             break;
                     }
                 }

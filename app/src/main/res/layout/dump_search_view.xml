@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
+
     <data>
+
         <variable
             name="data"
-            type="com.viettel.mbccs.base.searchlistview.BaseSearchListViewPresenter"
-            />
+            type="com.viettel.mbccs.base.searchlistview.BaseSearchListViewPresenter" />
     </data>
 
     <LinearLayout
@@ -14,8 +15,7 @@
         android:background="@drawable/bg_filter_input"
         android:onClick="@{ () -> data.toggleSearchForm() }"
         android:orientation="horizontal"
-        android:padding="@dimen/dp_4"
-        >
+        android:padding="@dimen/dp_4">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -24,7 +24,7 @@
             android:src="@drawable/ic_search_black_24dp"
             />
 
-        <TextView
+        <com.viettel.mbccs.widget.CustomTextView
             android:id="@+id/text_filer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,9 +33,6 @@
             android:singleLine="true"
             android:text="@{ data.searchHint }"
             android:textColor="@{ data.searchTextColor == 0 ? @android:color/darker_gray : data.searchTextColor }"
-            android:textSize="@{ data.searchTextSize == 0 ? @dimen/sp_14 : data.searchTextSize }"
-            >
-            <requestFocus/>
-        </TextView>
+            android:textSize="@{ data.searchTextSize == 0 ? @dimen/sp_14 : data.searchTextSize }" />
     </LinearLayout>
 </layout>

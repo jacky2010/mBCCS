@@ -1,6 +1,7 @@
 package com.viettel.mbccs.screen.assigntask.cskpp.create;
 
 import android.content.Context;
+import com.viettel.mbccs.R;
 
 /**
  * Created by Anh Vu Viet on 5/23/2017.
@@ -12,7 +13,8 @@ public class CreateCSKPPTaskPresenter implements CreatingCSKPPTaskContract.Prese
 
     private CreatingCSKPPTaskContract.ViewModel mViewModel;
 
-    public CreateCSKPPTaskPresenter(Context context, CreatingCSKPPTaskContract.ViewModel viewModel) {
+    public CreateCSKPPTaskPresenter(Context context,
+            CreatingCSKPPTaskContract.ViewModel viewModel) {
         mContext = context;
         mViewModel = viewModel;
     }
@@ -25,6 +27,10 @@ public class CreateCSKPPTaskPresenter implements CreatingCSKPPTaskContract.Prese
     @Override
     public void unSubscribe() {
 
+    }
+
+    public String getToolbarTitle() {
+        return mContext.getString(R.string.create_CSKPP_task_presenter_giao_viec_cskpp);
     }
 
     public void onSelectStaffClick() {

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.viettel.mbccs.data.model.StockTotal"
+            />
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <com.viettel.mbccs.widget.CustomTextView
+            android:id="@+id/text1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:text="@{ @string/item_nhap_kho_cap_duoi_mat_hang_ma_hang(item.stockModelId) }"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold"
+            />
+
+        <com.viettel.mbccs.widget.CustomTextView
+            android:id="@+id/text2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text1"
+            android:layout_marginTop="@dimen/dp_4"
+            android:layout_toStartOf="@+id/text3"
+            android:text="@{ @string/item_nhap_kho_cap_duoi_mat_hang_so_luong_nhap(item.quantity) }"
+            style="@style/TextSearchTask"
+            />
+
+        <com.viettel.mbccs.widget.CustomTextView
+            android:id="@+id/text3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@id/text2"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/sp_14"
+            bind:textUnderLine="@{ @string/item_nhap_kho_cap_duoi_mat_hang_xem_serial }"
+            />
+    </RelativeLayout>
+</layout>

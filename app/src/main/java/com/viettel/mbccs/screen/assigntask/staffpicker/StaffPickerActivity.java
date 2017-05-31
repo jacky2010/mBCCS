@@ -58,10 +58,10 @@ public class StaffPickerActivity extends BaseSearchListPickerActivity
     }
 
     @Override
-    public void onStaffPicked(StaffInfo staffInfo) {
+    public void onItemClicked(Object object) {
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
-        bundle.putParcelable(Constants.BundleConstant.STAFF_INFO, staffInfo);
+        bundle.putParcelable(Constants.BundleConstant.STAFF_INFO, (StaffInfo) object);
         intent.putExtras(bundle);
         setResult(RESULT_OK, intent);
         finish();

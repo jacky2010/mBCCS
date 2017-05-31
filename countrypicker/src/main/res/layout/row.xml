@@ -13,7 +13,7 @@
         android:padding="10dp"
         />
 
-    <TextView
+    <com.viettel.mbccs.widget.CustomTextView
         android:id="@+id/row_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

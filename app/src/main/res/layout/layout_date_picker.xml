@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <TextView
+        <com.viettel.mbccs.widget.CustomTextView
             android:id="@+id/text_date"
             android:layout_width="0dp"
             android:layout_height="match_parent"

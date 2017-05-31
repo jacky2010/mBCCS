@@ -45,7 +45,7 @@
             android:onClick="@{ onClicked }"
             android:padding="@dimen/dp_8">
 
-            <TextView
+            <com.viettel.mbccs.widget.CustomTextView
                 android:id="@+id/text1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_22" />
 
-            <TextView
+            <com.viettel.mbccs.widget.CustomTextView
                 android:id="@+id/text2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_14" />
 
-            <TextView
+            <com.viettel.mbccs.widget.CustomTextView
                 android:id="@+id/text3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -75,7 +75,7 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_14" />
 
-            <TextView
+            <com.viettel.mbccs.widget.CustomTextView
                 android:id="@+id/text4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

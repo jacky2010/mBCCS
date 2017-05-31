@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     >
 
-    <TextView
+    <com.viettel.mbccs.widget.CustomTextView
         android:id="@+id/row_language_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

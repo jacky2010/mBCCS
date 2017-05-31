@@ -251,6 +251,7 @@
                         android:gravity="center"
                         android:orientation="horizontal"
                         >
+
                         <LinearLayout
                             android:id="@+id/image_front"
                             android:layout_width="0dp"

@@ -13,6 +13,8 @@ public interface BaseSearchListViewContract {
         void onAddClick();
 
         void onBackPressed();
+
+        void onItemClicked(Object object);
     }
 
     interface Presenter extends BasePresenter {
