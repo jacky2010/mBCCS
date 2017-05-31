@@ -7,7 +7,7 @@ import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListChannelByOwnerTypeIdRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.GetOrderInfoRequest;
-import com.viettel.mbccs.data.source.remote.request.GetResonRequest;
+import com.viettel.mbccs.data.source.remote.request.GetReasonRequest;
 import com.viettel.mbccs.data.source.remote.response.GetOrderInfoResponse;
 import java.util.List;
 import rx.Observable;
@@ -24,5 +24,5 @@ public interface ISellOrdersRemoteDataSource {
 
     Observable<GetOrderInfoResponse> getOrderInfo(DataRequest<GetOrderInfoRequest> request);
 
-    Observable<List<Reason>> getListReason(DataRequest<GetResonRequest> request);
+    Observable<List<Reason>> getListReason(DataRequest<GetReasonRequest> request);
 }

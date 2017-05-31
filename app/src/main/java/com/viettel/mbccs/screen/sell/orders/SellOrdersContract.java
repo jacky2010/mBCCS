@@ -22,7 +22,7 @@ public class SellOrdersContract {
 
         void setDataResult(List<SaleOrders> orders, ChannelInfo channelInfoSelect);
 
-        void getDataError();
+        void getDataError(BaseException error);
 
         void getListChannelByOwnerTypeIdError(BaseException error);
 

@@ -12,7 +12,7 @@ import java.util.List;
 public class GetReasonResponse extends DataResponse {
 
     @Expose
-    @SerializedName("reasonList")
+    @SerializedName("lstReason")
     private List<Reason> reasonList;
 
     public List<Reason> getReasonList() {

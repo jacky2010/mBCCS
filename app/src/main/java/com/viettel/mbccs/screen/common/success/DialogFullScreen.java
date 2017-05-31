@@ -240,7 +240,7 @@ public class DialogFullScreen extends Dialog {
 
     public void positiveClick() {
         if (mListener != null) {
-            mListener.onPosotiveButtonClick(this);
+            mListener.onPositiveButtonClick(this);
         }
     }
 
@@ -251,7 +251,7 @@ public class DialogFullScreen extends Dialog {
     }
 
     public interface SuccessDialogListener {
-        void onPosotiveButtonClick(Dialog dialog);
+        void onPositiveButtonClick(Dialog dialog);
 
         void onNegativeButtonClick(Dialog dialog);
 

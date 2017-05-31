@@ -88,7 +88,8 @@ public class UserRemoteDataSource implements IUserRemoteDataSource {
     }
 
     @Override
-    public Observable<GetTotalStockResponse> getModelSales(DataRequest<GetTotalStockRequest> request) {
+    public Observable<GetTotalStockResponse> getModelSales(
+            DataRequest<GetTotalStockRequest> request) {
         return RequestHelper.getRequest()
                 .getModelSales(request)
                 .flatMap(SchedulerUtils.<GetTotalStockResponse>convertDataFlatMap())
@@ -96,7 +97,8 @@ public class UserRemoteDataSource implements IUserRemoteDataSource {
     }
 
     @Override
-    public Observable<GetInfoSaleTranResponse> getSaleTransInfo(DataRequest<GetInfoSaleTranRequest> request) {
+    public Observable<GetInfoSaleTranResponse> getSaleTransInfo(
+            DataRequest<GetInfoSaleTranRequest> request) {
         return RequestHelper.getRequest()
                 .getSaleTransInfo(request)
                 .flatMap(SchedulerUtils.<GetInfoSaleTranResponse>convertDataFlatMap())

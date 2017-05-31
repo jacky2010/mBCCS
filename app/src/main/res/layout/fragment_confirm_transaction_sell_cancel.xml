@@ -60,7 +60,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Đơn đặt hàng từ kênh"
+                    android:text="@string/confirm_transaction_sell_cancel_don_dat_hang_tu_kenh"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_14"
                     />
@@ -83,7 +83,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="- Số điện thoại: "
+                    android:text="@string/confirm_transaction_sell_cancel_sdt"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_14"
                     />
@@ -106,7 +106,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="- Số tiền thanh toán: "
+                    android:text="@string/confirm_transaction_sell_cancel_so_tien_thanh_toan"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_14"
                     />
@@ -120,15 +120,15 @@
                     android:textStyle="bold"
                     />
             </LinearLayout>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/dp_100"
-                android:text="(Một triệu đồng)"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp_16"
-                android:textStyle="bold"
-                />
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:paddingLeft="@dimen/dp_100"-->
+                <!--android:text="(Một triệu đồng)"-->
+                <!--android:textColor="@color/black"-->
+                <!--android:textSize="@dimen/sp_16"-->
+                <!--android:textStyle="bold"-->
+                <!--/>-->
         </LinearLayout>
         <LinearLayout
             android:id="@+id/layout_spinner"
@@ -143,20 +143,21 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="LÝ DO HỦY"
+                android:text="@string/confirm_transaction_sell_cancel_ly_do_huy"
                 android:textColor="@color/black"
                 />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_4"
                 android:background="@drawable/bg_order"
                 >
                 <Spinner
                     android:id="@+id/spinner_reason_cancel"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_40"
-                    android:layout_marginTop="@dimen/dp_10"
                     bind:setSpinnerAdapter="@{ presenter.spinnerReasonCancelAdapter }"
+                    android:layout_gravity="center"
                     />
             </LinearLayout>
         </LinearLayout>
@@ -193,8 +194,8 @@
                     android:onClick="@{ v -> presenter.onSellOrCancel() }"
                     android:text="@{ presenter.textButton }"
                     android:textColor="@color/white"
-                    style="@style/button_positive_red"
                     android:visibility="@{ presenter.isShow ? View.VISIBLE : View.GONE }"
+                    style="@style/button_positive_red"
                     />
 
                 <Button
@@ -204,8 +205,8 @@
                     android:onClick="@{ v -> presenter.onSellOrCancel() }"
                     android:text="@{ presenter.textButton }"
                     android:textColor="@color/white"
-                    style="@style/button_positive"
                     android:visibility="@{ presenter.isShow ? View.GONE : View.VISIBLE }"
+                    style="@style/button_positive"
                     />
             </RelativeLayout>
         </LinearLayout>
