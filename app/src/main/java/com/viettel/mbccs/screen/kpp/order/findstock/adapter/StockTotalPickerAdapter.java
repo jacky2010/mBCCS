@@ -112,7 +112,7 @@ public class StockTotalPickerAdapter
         public void bind(StockTotal stockTotal) {
             mStockTotal = stockTotal;
             ItemStockTotalPresenter itemStockTotalPresenter =
-                    new ItemStockTotalPresenter(stockTotal);
+                    new ItemStockTotalPresenter(mContext, stockTotal);
             mBinding.setData(itemStockTotalPresenter);
         }
     }

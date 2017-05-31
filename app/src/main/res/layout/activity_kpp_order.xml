@@ -141,16 +141,6 @@
                     android:textStyle="bold"
                     tools:text="asdfasf"
                     />
-                <com.viettel.mbccs.widget.CustomTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:text="@{presenter.amountOrderList}"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_15"
-                    android:textStyle="bold"
-                    tools:text="Tổng tiền"
-                    />
 
                 <android.support.v7.widget.RecyclerView
                     android:layout_width="match_parent"

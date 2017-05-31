@@ -25,6 +25,7 @@ import com.viettel.mbccs.data.source.remote.response.BaseResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransChannelResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransRetailResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransFromOrderResponse;
+import com.viettel.mbccs.data.source.remote.response.DataResponse;
 import com.viettel.mbccs.data.source.remote.response.GetAllInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetInfoSaleTranResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListChannelByOwnerTypeIdResponse;
@@ -113,7 +114,7 @@ public interface MBCSSApi {
     Observable<BaseResponse<CreateSaleTransChannelResponse>> createSaleTransChannel(
             @Body DataRequest<CreateSaleTransChannelRequest> request);
 
-    @POST("/getliststockmodel")
+    @POST("thonguyen/Sale_mBCCS/1.0.0/WS_getListStockModel")
     Observable<BaseResponse<GetListStockModelResponse>> getListStockModel(
             @Body DataRequest<GetListStockModelRequest> request);
 
@@ -133,7 +134,7 @@ public interface MBCSSApi {
     Observable<BaseResponse<GetListShopResponse>> getListShop(
             @Body DataRequest<GetListShopRequest> request);
 
-    @POST("/createSaleOrder")
-    Observable<BaseResponse> createSaleOrders(
+    @POST("thonguyen/Sale_mBCCS/1.0.0/WS_createSaleOrders")
+    Observable<BaseResponse<DataResponse>> createSaleOrders(
             @Body DataRequest<KPPOrderRequest> requestBaseResponse);
 }

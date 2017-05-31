@@ -12,6 +12,7 @@ import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.KPPOrderRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.BaseResponse;
+import com.viettel.mbccs.data.source.remote.response.DataResponse;
 import com.viettel.mbccs.utils.Common;
 import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
@@ -49,7 +50,23 @@ public class AddNewOrderPresenter implements AddNewOrderContract.Presenter {
         titleOrder = new ObservableField<>();
         titleOrder.set("Đặt hàng từ KPP : POS_1233");
         amount = new ObservableField<>();
+        caculatePrice();
         mAdapter = new StockTotalAdapter(mContext, mStockTotals);
+        mAdapter.setStockTotalListener(new StockTotalAdapter.StockTotalListener() {
+            @Override
+            public void onStockQuantityChange() {
+                caculatePrice();
+            }
+        });
+    }
+
+    private void caculatePrice() {
+        float totalMoney = 0;
+        for (StockTotal stockTotal : mStockTotals) {
+            totalMoney += stockTotal.getCountChoice() * stockTotal.getPrice();
+        }
+        amount.set(String.format(mContext.getString(R.string.kpp_order_label_amount),
+                Common.formatDouble(totalMoney)));
     }
 
     private void loadData() {
@@ -98,19 +115,20 @@ public class AddNewOrderPresenter implements AddNewOrderContract.Presenter {
         request.setStaffId(1);
         request.setChannelStaffId(1);
         request.setListStockModel(Common.convertStockTotalsToStockModels(mStockTotals));
+        mKPPOrderRequestBaseRequest.setParameterApi(request);
         Subscription subscription =
                 mBanHangKhoTaiChinhRepository.createSaleOrders(mKPPOrderRequestBaseRequest)
-                        .subscribe(new MBCCSSubscribe<BaseResponse>() {
+                        .subscribe(new MBCCSSubscribe<DataResponse>() {
                             @Override
-                            public void onSuccess(BaseResponse object) {
+                            public void onSuccess(DataResponse object) {
                                 mViewModel.gotoSuccessScreen(mStockTotals);
                             }
 
                             @Override
                             public void onError(BaseException error) {
-                                //                                DialogUtils.showDialogError(mContext, null, error.getMessage(),
-                                //                                        null);
-                                mViewModel.gotoSuccessScreen(mStockTotals);
+                                DialogUtils.showDialogError(mContext, null, error.getMessage(),
+                                        null);
+                                //mViewModel.gotoSuccessScreen(mStockTotals);
                             }
 
                             @Override
@@ -119,9 +137,7 @@ public class AddNewOrderPresenter implements AddNewOrderContract.Presenter {
                                 mViewModel.hideLoading();
                             }
                         });
-
-        //TODO fake
-
+        mCompositeSubscription.add(subscription);
     }
 
     public void addNewStock() {
@@ -165,6 +181,7 @@ public class AddNewOrderPresenter implements AddNewOrderContract.Presenter {
             mergeStockTotalList(stockTotal);
         }
         mAdapter.notifyDataSetChanged();
+        caculatePrice();
         //TODO add list stock total
     }
 

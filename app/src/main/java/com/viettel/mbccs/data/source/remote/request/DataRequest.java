@@ -43,6 +43,7 @@ public class DataRequest<T> {
         mSession = MBCCSApplication.session;
         apiKey = MBCCSApplication.apiKey;
         userName = MBCCSApplication.userName;
+        token = MBCCSApplication.token;
     }
 
     public Session getSession() {
