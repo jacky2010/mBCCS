@@ -78,6 +78,11 @@ public class SaleProgramPresenter extends BaseSearchListPickerPresenter<SaleProg
         return adapter;
     }
 
+    @Override
+    public String getListCount() {
+        return null;
+    }
+
     Runnable filter = new Runnable() {
         @Override
         public void run() {

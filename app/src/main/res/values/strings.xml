@@ -439,6 +439,18 @@ Từ <b>%s</b><br>
     <string name="cap_nhat_trang_thai_cham_soc">Cập nhật trạng thái chăm sóc</string>
     <string name="xac_nhan_tam_dung">Xác nhận tạm dừng</string>
     <string name="xac_nhan_hoan_thanh_cong_viec">Xác nhận hoàn thành công việc</string>
+    <string name="list_assign_task_activity_cong_viec_duoc_giao">Công việc được giao (%1$d)</string>
+    <string name="activity_create_cskpp_task_thoi_gian_thuc_hien">1. Thời gian thực hiện</string>
+    <string name="activity_create_cskpp_task_den">Đến</string>
+    <string name="activity_create_cskpp_task_nhan_vien">2. Nhân viên</string>
+    <string name="activity_create_cskpp_task_ten_cong_viec">3. Tên công việc</string>
+    <string name="activity_create_cskpp_task_loai_kenh">4. Loại kênh</string>
+    <string name="activity_create_cskpp_task_tuyen_cham_soc">5. Tuyến chăm sóc</string>
+    <string name="activity_create_cskpp_task_giao_cham_soc_kpp">Giao chăm sóc KPP</string>
+    <string name="create_arising_task_activity_giao_viec_thanh_cong">Giao chỉ tiêu/việc thành công!</string>
+    <string name="tin_nhan_thong_bao_da_gui_toi_nhan_vien">Tin nhắn thông báo đã gửi tới SĐT của nhân viên</string>
+    <string name="create_CSKPP_task_activity_giao_viec_thanh_cong">Giao chăm sóc Kênh phân phối thành công!</string>
+    <string name="create_CSKPP_task_activity_ban_co_chac_muon_giao_viec">Bạn có chắc muốn giao chăm sóc Kênh phân phối trên Tuyến \"%1$s\"</string>
 
     <!--Base search input reposotory-->
     <string name="base_search_lable_from">Từ</string>

@@ -12,6 +12,7 @@ import com.viettel.mbccs.data.model.TaskModel;
 import com.viettel.mbccs.databinding.ActivityTaskSearchListBinding;
 import com.viettel.mbccs.databinding.LayoutPopupSpinnerBinding;
 import com.viettel.mbccs.screen.assigntask.arising.create.CreateArisingTaskActivity;
+import com.viettel.mbccs.screen.assigntask.cskpp.create.CreateCSKPPTaskActivity;
 import com.viettel.mbccs.screen.assigntask.cskpp.detail.TaskCSKPPDetailActivity;
 import com.viettel.mbccs.variable.Constants;
 
@@ -67,6 +68,8 @@ public class ListAssignTaskActivity
                     public void onClick(DialogInterface dialog, int which) {
                         switch (binding.spinner.getSpinner().getSelectedItemPosition()) {
                             case TaskModel.TaskType.TYPE_CSKPP:
+                                startActivity(new Intent(ListAssignTaskActivity.this,
+                                        CreateCSKPPTaskActivity.class));
                                 break;
                             case TaskModel.TaskType.TYPE_ARISING:
                                 startActivity(new Intent(ListAssignTaskActivity.this,

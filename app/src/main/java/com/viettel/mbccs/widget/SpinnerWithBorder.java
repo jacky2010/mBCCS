@@ -2,6 +2,7 @@ package com.viettel.mbccs.widget;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
@@ -21,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import com.viettel.mbccs.R;
+import com.viettel.mbccs.databinding.LayoutSpinnerWithBorderBinding;
 
 /**
  * Created by FRAMGIA\vu.viet.anh on 07/12/2016.
@@ -82,9 +84,8 @@ public class SpinnerWithBorder extends FrameLayout {
     }
 
     protected void initView(AttributeSet attributeSet) {
-        ((com.viettel.mbccs.databinding.LayoutSpinnerWithBorderBinding) DataBindingUtil.inflate(
-                LayoutInflater.from(getContext()), R.layout.layout_spinner_with_border, this, true))
-                .setInput(this);
+        ((LayoutSpinnerWithBorderBinding) DataBindingUtil.inflate(LayoutInflater.from(getContext()),
+                R.layout.layout_spinner_with_border, this, true)).setInput(this);
 
         mSpinner = (AppCompatSpinner) findViewById(R.id.spinner_border);
 
@@ -92,12 +93,19 @@ public class SpinnerWithBorder extends FrameLayout {
                 getContext().obtainStyledAttributes(attributeSet, R.styleable.SpinnerWithBorder);
 
         try {
+            ColorStateList color =
+                    typedArray.getColorStateList(R.styleable.SpinnerWithBorder_spinnerTintColor);
+            if (color == null) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    color = ColorStateList.valueOf(getResources().getColor(R.color.black, null));
+                } else {
+                    color = ColorStateList.valueOf(getResources().getColor(R.color.black));
+                }
+            }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                mSpinner.setBackgroundTintList(typedArray.getColorStateList(
-                        R.styleable.SpinnerWithBorder_spinnerTintColor));
+                mSpinner.setBackgroundTintList(color);
             } else {
-                ViewCompat.setBackgroundTintList(mSpinner, typedArray.getColorStateList(
-                        R.styleable.SpinnerWithBorder_spinnerTintColor));
+                ViewCompat.setBackgroundTintList(mSpinner, color);
             }
         } finally {
             typedArray.recycle();

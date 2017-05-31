@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    >
+
+    <data>
+
+        <variable
+            name="presenter"
+            type="com.viettel.mbccs.screen.assigntask.cskpp.create.CreateCSKPPTaskPresenter"
+            />
+
+        <import type="android.view.View"/>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/dp_16"
+        >
+
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            bind:textUnderLine="@{ @string/activity_create_cskpp_task_thoi_gian_thuc_hien }"
+            style="@style/TextSearchTask"
+            />
+
+        <LinearLayout
+            android:id="@+id/layout_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text1"
+            android:layout_marginTop="@dimen/dp_8"
+            android:orientation="horizontal"
+            >
+
+            <com.viettel.mbccs.widget.CustomDatePicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/dp_8"
+                android:layout_marginStart="@dimen/dp_8"
+                android:text="@string/activity_create_cskpp_task_den"
+                style="@style/TextSearchTask"
+                />
+
+            <com.viettel.mbccs.widget.CustomDatePicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/text2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_date"
+            android:layout_marginTop="@dimen/dp_16"
+            bind:textUnderLine="@{ @string/activity_create_cskpp_task_nhan_vien }"
+            style="@style/TextSearchTask"
+            />
+
+        <TextView
+            android:id="@+id/text_nhan_vien"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text2"
+            android:layout_marginTop="@dimen/dp_8"
+            android:background="@drawable/bg_input"
+            android:drawableEnd="@drawable/ic_arrow_drop_down_black_24dp"
+            android:minHeight="@dimen/dp_32"
+            android:onClick="@{ () -> presenter.onSelectStaffClick() }"
+            />
+
+        <TextView
+            android:id="@+id/text3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_nhan_vien"
+            android:layout_marginTop="@dimen/dp_16"
+            bind:textUnderLine="@{ @string/activity_create_cskpp_task_ten_cong_viec }"
+            style="@style/TextSearchTask"
+            />
+
+        <com.viettel.mbccs.widget.SpinnerWithBorder
+            android:id="@+id/text_ten_cong_viec"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text3"
+            android:layout_marginTop="@dimen/dp_8"
+            />
+
+        <TextView
+            android:id="@+id/text4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_ten_cong_viec"
+            android:layout_marginTop="@dimen/dp_16"
+            bind:textUnderLine="@{ @string/activity_create_cskpp_task_loai_kenh }"
+            style="@style/TextSearchTask"
+            />
+
+        <com.viettel.mbccs.widget.SpinnerWithBorder
+            android:id="@+id/text_loai_kenh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text4"
+            android:layout_marginTop="@dimen/dp_8"
+            />
+
+        <TextView
+            android:id="@+id/text5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_loai_kenh"
+            android:layout_marginTop="@dimen/dp_16"
+            bind:textUnderLine="@{ @string/activity_create_cskpp_task_tuyen_cham_soc }"
+            style="@style/TextSearchTask"
+            />
+
+        <com.viettel.mbccs.widget.SpinnerWithBorder
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text5"
+            android:layout_marginTop="@dimen/dp_8"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            >
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp_2"
+                android:layout_weight="1"
+                android:background="@drawable/bg_input"
+                android:onClick="@{ () -> presenter.close() }"
+                android:text="@string/close"
+                />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_2"
+                android:layout_weight="1"
+                android:background="@color/blue"
+                android:onClick="@{ () -> presenter.assign() }"
+                android:text="@string/activity_create_cskpp_task_giao_cham_soc_kpp"
+                android:textColor="@color/white"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/tools">
+    xmlns:bind="http://schemas.android.com/tools"
+    >
 
     <data>
 
         <variable
             name="presenter"
-            type="com.viettel.mbccs.screen.assigntask.ListAssignTaskPresenter" />
+            type="com.viettel.mbccs.screen.assigntask.ListAssignTaskPresenter"
+            />
 
-        <import type="android.view.View" />
+        <import type="android.view.View"/>
     </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
         <include
-            android:id="@+id/toolbar"
             layout="@layout/toolbar"
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:background="@{ @android:color/darker_gray }"
@@ -27,7 +30,8 @@
             app:leftIconClick="@{ () -> presenter.onBackPressed() }"
             app:title="@{ presenter.toolbarTitle }"
             app:titleColor="@{ @color/white }"
-            app:titleTextSize="@{ @dimen/sp_18 }" />
+            app:titleTextSize="@{ @dimen/sp_18 }"
+            />
 
         <android.support.v7.widget.CardView
             android:id="@+id/search_form"
@@ -35,7 +39,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/toolbar"
             android:padding="@dimen/dp_4"
-            app:cardElevation="@dimen/dp_2">
+            app:cardElevation="@dimen/dp_2"
+            >
 
             <include
                 layout="@layout/dump_search_view"
@@ -43,31 +48,48 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_8"
                 android:visibility="@{ presenter.isExpand ? View.GONE : View.VISIBLE }"
-                bind:data="@{ presenter }" />
+                bind:data="@{ presenter }"
+                />
 
             <include
                 layout="@layout/layout_task_search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="@{ presenter.isExpand ? View.VISIBLE : View.GONE }"
-                bind:presenter="@{ presenter }" />
+                bind:presenter="@{ presenter }"
+                />
         </android.support.v7.widget.CardView>
+
+        <TextView
+            android:id="@+id/text_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/search_form"
+            android:layout_marginBottom="@dimen/dp_16"
+            android:layout_marginStart="@dimen/dp_4"
+            android:layout_marginTop="@dimen/dp_4"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_18"
+            bind:textUnderLine="@{ presenter.listCount }"
+            />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/search_form"
+            android:layout_below="@id/text_count"
             android:adapter="@{ presenter.adapter }"
             android:visibility="@{ presenter.isEmpty ? View.GONE : View.VISIBLE }"
-            bind:addItemDecoration="@{ presenter.itemDecoration }" />
+            bind:addItemDecoration="@{ presenter.itemDecoration }"
+            />
 
         <View
             android:id="@+id/empty"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/search_form"
-            android:visibility="@{ presenter.isEmpty ? View.VISIBLE : View.GONE }" />
+            android:layout_below="@id/text_count"
+            android:visibility="@{ presenter.isEmpty ? View.VISIBLE : View.GONE }"
+            />
 
         <android.support.design.widget.FloatingActionButton
             android:layout_width="wrap_content"
@@ -79,7 +101,8 @@
             android:src="@drawable/ic_add_white_24dp"
             app:fabSize="auto"
             app:layout_anchor="@id/recyclerView"
-            app:layout_anchorGravity="bottom|right|end" />
+            app:layout_anchorGravity="bottom|right|end"
+            />
 
     </RelativeLayout>
 </layout>

@@ -60,12 +60,13 @@
                 android:layout_marginTop="@dimen/dp_20"
                 android:text="@string/staff" />
 
-            <Button
+            <TextView
+                style="@style/TextSearchTask"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_28"
                 android:layout_marginTop="@dimen/dp_4"
                 android:background="@drawable/bg_input"
-                android:minHeight="0dp"
+                android:drawableEnd="@drawable/ic_arrow_drop_down_black_24dp"
                 android:onClick="@{ () -> presenter.onSelectStaffClick() }" />
 
             <TextView
