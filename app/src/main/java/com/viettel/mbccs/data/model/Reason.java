@@ -11,16 +11,19 @@ import com.google.gson.annotations.SerializedName;
 
 public class Reason implements Parcelable {
 
+    // mã lý do
     @Expose
-    @SerializedName("ReasonId")
-    private long reasonId;
+    @SerializedName("reasonId")
+    private String reasonId;
 
+    // code lý do
     @Expose
-    @SerializedName("ReasonCode")
+    @SerializedName("reasonCode")
     private String reasonCode;
 
+    // tên lý do
     @Expose
-    @SerializedName("ReasonName")
+    @SerializedName("reasonName")
     private String reasonName;
 
     public Reason() {
@@ -28,9 +31,21 @@ public class Reason implements Parcelable {
     }
 
     protected Reason(Parcel in) {
-        reasonId = in.readLong();
+        reasonId = in.readString();
         reasonCode = in.readString();
         reasonName = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(reasonId);
+        dest.writeString(reasonCode);
+        dest.writeString(reasonName);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<Reason> CREATOR = new Creator<Reason>() {
@@ -45,23 +60,11 @@ public class Reason implements Parcelable {
         }
     };
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(reasonId);
-        dest.writeString(reasonCode);
-        dest.writeString(reasonName);
-    }
-
-    public long getReasonId() {
+    public String getReasonId() {
         return reasonId;
     }
 
-    public void setReasonId(long reasonId) {
+    public void setReasonId(String reasonId) {
         this.reasonId = reasonId;
     }
 

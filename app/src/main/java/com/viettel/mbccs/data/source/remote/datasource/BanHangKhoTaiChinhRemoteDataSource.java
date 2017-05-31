@@ -1,6 +1,7 @@
 package com.viettel.mbccs.data.source.remote.datasource;
 
 import com.viettel.mbccs.data.source.remote.IBanHangKhoTaiChinhRemoteDataSource;
+import com.viettel.mbccs.data.source.remote.request.CreateSaleTransFromOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateSaleTransChannelRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
@@ -11,16 +12,18 @@ import com.viettel.mbccs.data.source.remote.request.GetListShopRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListStockModelRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListTTKDRequest;
 import com.viettel.mbccs.data.source.remote.request.GetOrderInfoRequest;
-import com.viettel.mbccs.data.source.remote.request.GetResonRequest;
+import com.viettel.mbccs.data.source.remote.request.GetReasonRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
 import com.viettel.mbccs.data.source.remote.request.KPPOrderRequest;
+import com.viettel.mbccs.data.source.remote.request.UpdateSaleOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.ViewInfoSerialRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransChannelResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransRetailResponse;
 import com.viettel.mbccs.data.source.remote.response.GetInfoSaleTranResponse;
+import com.viettel.mbccs.data.source.remote.response.CreateSaleTransFromOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListChannelByOwnerTypeIdResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListProvinceResponse;
@@ -32,6 +35,7 @@ import com.viettel.mbccs.data.source.remote.response.GetReasonResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
 import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
+import com.viettel.mbccs.data.source.remote.response.UpdateSaleOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.ViewInfoSerialResponse;
 import com.viettel.mbccs.data.source.remote.service.RequestHelper;
 import com.viettel.mbccs.utils.rx.SchedulerUtils;
@@ -56,9 +60,7 @@ public class BanHangKhoTaiChinhRemoteDataSource implements IBanHangKhoTaiChinhRe
     }
 
     @Override
-    public Observable<GetListOrderResponse> getListOrder(
-            DataRequest<GetListOrderRequest> request) {
-
+    public Observable<GetListOrderResponse> getListOrder(DataRequest<GetListOrderRequest> request) {
         return RequestHelper.getRequest()
                 .getListOrder(request)
                 .flatMap(SchedulerUtils.<GetListOrderResponse>convertDataFlatMap())
@@ -84,12 +86,29 @@ public class BanHangKhoTaiChinhRemoteDataSource implements IBanHangKhoTaiChinhRe
     }
 
     @Override
-    public Observable<GetReasonResponse> getListReason(DataRequest<GetResonRequest> request) {
+    public Observable<GetReasonResponse> getReason(DataRequest<GetReasonRequest> request) {
         return RequestHelper.getRequest()
-                .getListReason(request)
+                .getReason(request)
                 .flatMap(SchedulerUtils.<GetReasonResponse>convertDataFlatMap())
                 .compose(SchedulerUtils.<GetReasonResponse>applyAsyncSchedulers());
+    }
 
+    @Override
+    public Observable<UpdateSaleOrderResponse> updateSaleOrder(
+            DataRequest<UpdateSaleOrderRequest> request) {
+        return RequestHelper.getRequest()
+                .updateSaleOrder(request)
+                .flatMap(SchedulerUtils.<UpdateSaleOrderResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<UpdateSaleOrderResponse>applyAsyncSchedulers());
+    }
+
+    @Override
+    public Observable<CreateSaleTransFromOrderResponse> createSaleTransFromOrder(
+            DataRequest<CreateSaleTransFromOrderRequest> request) {
+        return RequestHelper.getRequest()
+                .createSaleTransFromOrder(request)
+                .flatMap(SchedulerUtils.<CreateSaleTransFromOrderResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<CreateSaleTransFromOrderResponse>applyAsyncSchedulers());
     }
 
     @Override

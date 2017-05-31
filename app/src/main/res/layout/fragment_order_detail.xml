@@ -55,13 +55,13 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{ @string/order_detail_total_money(presenter.amountTax) }"
+                    android:text="@{ @string/order_detail_total_money(presenter.amountNotTax) }"
                     />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_10"
-                    android:text="@{ @string/order_detail_pay_money(presenter.amountNotTax) }"
+                    android:text="@{ @string/order_detail_pay_money(presenter.amountTax) }"
                     />
             </LinearLayout>
             <LinearLayout

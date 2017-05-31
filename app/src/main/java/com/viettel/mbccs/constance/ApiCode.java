@@ -198,6 +198,9 @@ public class ApiCode {
     // 5.3.3.5
     public final static String UpdateSaleOrder = "WS_UpdateSaleOrder";
 
+    // 5.3.3.6
+    public final static String GetReason = "WS_GetReason";
+
     // 5.4.3.1
     public final static String GetVasForISDN = "WS_GetVasForISDN";
 

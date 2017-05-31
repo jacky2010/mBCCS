@@ -4,6 +4,7 @@ import com.viettel.mbccs.data.source.local.IBanHangKhoTaiChinhLocalDataSource;
 import com.viettel.mbccs.data.source.local.datasource.BanHangKhoTaiChinhLocalDataSource;
 import com.viettel.mbccs.data.source.remote.IBanHangKhoTaiChinhRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.datasource.BanHangKhoTaiChinhRemoteDataSource;
+import com.viettel.mbccs.data.source.remote.request.CreateSaleTransFromOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateSaleTransChannelRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
@@ -14,16 +15,18 @@ import com.viettel.mbccs.data.source.remote.request.GetListShopRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListStockModelRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListTTKDRequest;
 import com.viettel.mbccs.data.source.remote.request.GetOrderInfoRequest;
-import com.viettel.mbccs.data.source.remote.request.GetResonRequest;
+import com.viettel.mbccs.data.source.remote.request.GetReasonRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
 import com.viettel.mbccs.data.source.remote.request.KPPOrderRequest;
+import com.viettel.mbccs.data.source.remote.request.UpdateSaleOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.ViewInfoSerialRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransChannelResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransRetailResponse;
 import com.viettel.mbccs.data.source.remote.response.GetInfoSaleTranResponse;
+import com.viettel.mbccs.data.source.remote.response.CreateSaleTransFromOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListChannelByOwnerTypeIdResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListProvinceResponse;
@@ -35,6 +38,7 @@ import com.viettel.mbccs.data.source.remote.response.GetReasonResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
 import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
+import com.viettel.mbccs.data.source.remote.response.UpdateSaleOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.ViewInfoSerialResponse;
 import rx.Observable;
 
@@ -81,9 +85,20 @@ public class BanHangKhoTaiChinhRepository
     }
 
     @Override
-    public Observable<GetReasonResponse> getListReason(DataRequest<GetResonRequest> request) {
+    public Observable<GetReasonResponse> getReason(DataRequest<GetReasonRequest> request) {
+        return banHangKhoTaiChinhRemoteDataSource.getReason(request);
+    }
 
-        return banHangKhoTaiChinhRemoteDataSource.getListReason(request);
+    @Override
+    public Observable<UpdateSaleOrderResponse> updateSaleOrder(
+            DataRequest<UpdateSaleOrderRequest> request) {
+        return banHangKhoTaiChinhRemoteDataSource.updateSaleOrder(request);
+    }
+
+    @Override
+    public Observable<CreateSaleTransFromOrderResponse> createSaleTransFromOrder(
+            DataRequest<CreateSaleTransFromOrderRequest> request) {
+        return banHangKhoTaiChinhRemoteDataSource.createSaleTransFromOrder(request);
     }
 
     @Override
@@ -99,7 +114,6 @@ public class BanHangKhoTaiChinhRepository
     }
 
     @Override
-
     public Observable<GetListProvinceResponse> getListProvince(
             DataRequest<GetListProvinceRequest> request) {
         return banHangKhoTaiChinhRemoteDataSource.getListProvince(request);

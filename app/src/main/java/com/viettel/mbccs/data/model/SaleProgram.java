@@ -1,5 +1,7 @@
 package com.viettel.mbccs.data.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
@@ -8,7 +10,7 @@ import java.io.Serializable;
  * Created by eo_cuong on 5/15/17.
  */
 
-public class SaleProgram implements Serializable {
+public class SaleProgram implements Serializable, Parcelable {
 
     @SerializedName("programId")
     @Expose
@@ -34,8 +36,6 @@ public class SaleProgram implements Serializable {
 
     }
 
-
-
     public SaleProgram(long id, String code, String name) {
         this.id = id;
         this.name = name;
@@ -45,6 +45,40 @@ public class SaleProgram implements Serializable {
     public SaleProgram(long id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    protected SaleProgram(Parcel in) {
+        id = in.readLong();
+        code = in.readString();
+        name = in.readString();
+        fromDate = in.readString();
+        toDate = in.readString();
+    }
+
+    public static final Creator<SaleProgram> CREATOR = new Creator<SaleProgram>() {
+        @Override
+        public SaleProgram createFromParcel(Parcel in) {
+            return new SaleProgram(in);
+        }
+
+        @Override
+        public SaleProgram[] newArray(int size) {
+            return new SaleProgram[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(id);
+        dest.writeString(code);
+        dest.writeString(name);
+        dest.writeString(fromDate);
+        dest.writeString(toDate);
     }
 
     public long getId() {

@@ -3,9 +3,9 @@ package com.viettel.mbccs.screen.sell.orders.fragment.orderdetail;
 import com.viettel.mbccs.base.BasePresenter;
 import com.viettel.mbccs.base.BaseView;
 import com.viettel.mbccs.data.model.SaleOrdersDetail;
-import com.viettel.mbccs.data.model.SaleTrans;
 import com.viettel.mbccs.data.model.SerialBO;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.GetOrderInfoResponse;
 import com.viettel.mbccs.screen.sell.orders.adapter.OrderDetailAdapter;
 import java.util.List;
 
@@ -19,15 +19,14 @@ public class OrderDetailFragmentContract {
     }
 
     interface View extends BaseView<Presenter> {
-//        void setData(List<ModelSale> items);
-        void setData(List<SaleOrdersDetail> items);
+        void setData(GetOrderInfoResponse data);
 
         void getOrderInfoError(BaseException error);
 
         void pickSerial(SaleOrdersDetail saleOrdersDetail);
 
-        void clickCancelSell(SaleTrans saleTrans);
+        void clickCancelSell();
 
-        void onClickSell(SaleTrans saleTrans);
+        void onClickSell();
     }
 }

@@ -36,14 +36,6 @@ public class SaleOrdersDetail implements Parcelable {
     @Expose
     private long quantity;
 
-    //    @SerializedName("Price")
-    //    @Expose
-    //    private double price;
-    //
-    //    @SerializedName("VAT")
-    //    @Expose
-    //    private double vat;
-
     @SerializedName("modelSale")
     @Expose
     private ModelSale modelSale;
@@ -52,42 +44,10 @@ public class SaleOrdersDetail implements Parcelable {
     @Expose
     private List<SerialBO> lstSerial;
 
-    // TODO: 5/24/17 data fake
-
-//    private int count;
-    //    private String imageUrl;
     private int select;
 
     public SaleOrdersDetail() {
     }
-
-    //    protected SaleOrdersDetail(Parcel in) {
-    //        saleOrdersId = in.readLong();
-    //        saleOrdersDetailId = in.readLong();
-    //        stockModelId = in.readLong();
-    //        stockModelCode = in.readString();
-    //        stockMoldeName = in.readString();
-    //        quantity = in.readLong();
-    ////        price = in.readDouble();
-    ////        vat = in.readDouble();
-    //        lstSerial = in.createTypedArrayList(SerialBO.CREATOR);
-    //        modelSale = in.readT
-    //        count = in.readInt();
-    ////        imageUrl = in.readString();
-    //        select = in.readInt();
-    //    }
-
-    //    public static final Creator<SaleOrdersDetail> CREATOR = new Creator<SaleOrdersDetail>() {
-    //        @Override
-    //        public SaleOrdersDetail createFromParcel(Parcel in) {
-    //            return new SaleOrdersDetail(in);
-    //        }
-    //
-    //        @Override
-    //        public SaleOrdersDetail[] newArray(int size) {
-    //            return new SaleOrdersDetail[size];
-    //        }
-    //    };
 
     protected SaleOrdersDetail(Parcel in) {
         this();
@@ -99,7 +59,6 @@ public class SaleOrdersDetail implements Parcelable {
         quantity = in.readLong();
         lstSerial = in.createTypedArrayList(SerialBO.CREATOR);
         modelSale = in.readParcelable(ModelSale.class.getClassLoader());
-//        count = in.readInt();
         select = in.readInt();
     }
 
@@ -128,11 +87,7 @@ public class SaleOrdersDetail implements Parcelable {
         dest.writeString(stockModelCode);
         dest.writeString(stockMoldeName);
         dest.writeLong(quantity);
-        //        dest.writeDouble(price);
-        //        dest.writeDouble(vat);
         dest.writeTypedList(lstSerial);
-//        dest.writeInt(count);
-        //        dest.writeString(imageUrl);
         dest.writeInt(select);
         dest.writeParcelable(modelSale, flags);
     }
@@ -185,22 +140,6 @@ public class SaleOrdersDetail implements Parcelable {
         this.quantity = quantity;
     }
 
-    //    public double getPrice() {
-    //        return price;
-    //    }
-    //
-    //    public void setPrice(double price) {
-    //        this.price = price;
-    //    }
-    //
-    //    public double getVat() {
-    //        return vat;
-    //    }
-    //
-    //    public void setVat(double vat) {
-    //        this.vat = vat;
-    //    }
-
     public List<SerialBO> getLstSerial() {
         return lstSerial;
     }
@@ -208,22 +147,6 @@ public class SaleOrdersDetail implements Parcelable {
     public void setLstSerial(List<SerialBO> lstSerial) {
         this.lstSerial = lstSerial;
     }
-
-//    public int getCount() {
-//        return count;
-//    }
-//
-//    public void setCount(int count) {
-//        this.count = count;
-//    }
-
-    //    public String getImageUrl() {
-    //        return imageUrl;
-    //    }
-    //
-    //    public void setImageUrl(String imageUrl) {
-    //        this.imageUrl = imageUrl;
-    //    }
 
     public ModelSale getModelSale() {
         return modelSale;
