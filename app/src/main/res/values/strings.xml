@@ -270,6 +270,10 @@ Từ <b>%s</b><br>
     <string name="time_invalid">Thời gian nhập vào không hợp lệ</string>
     <string name="time_out_of_month">Chọn thời gian trong khoảng 1 tháng</string>
     <string name="no_channel">Chưa chọn kênh</string>
+    <string name="kpp_order_label_amount">
+        Tổng tiền : %s đồng
+    </string>
+    <string name="kpp_order_label_price">%s VND</string>
     <array name="stock_type">
         <item>-Tất cả -</item>
         <item>Hàng mới</item>

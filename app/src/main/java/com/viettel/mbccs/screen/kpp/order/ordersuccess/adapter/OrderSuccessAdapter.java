@@ -12,6 +12,7 @@ import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.databinding.ItemFooterKppOrderSuccessBinding;
 import com.viettel.mbccs.databinding.ItemHeaderKppOrderSuccessBinding;
 import com.viettel.mbccs.databinding.ItemKppOrderSuccessBinding;
+import com.viettel.mbccs.utils.Common;
 import java.util.List;
 
 public class OrderSuccessAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -93,7 +94,12 @@ public class OrderSuccessAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
 
         public void bind() {
-            data = "Tổng tiền : 3460000 VND";
+            float totalMoney = 0;
+            for (StockTotal stockTotal : mList) {
+                totalMoney += stockTotal.getCountChoice() * stockTotal.getPrice();
+            }
+            data = (String.format(mContext.getString(R.string.kpp_order_label_amount),
+                    Common.formatDouble(totalMoney)));
             mBinding.setData(data);
         }
     }

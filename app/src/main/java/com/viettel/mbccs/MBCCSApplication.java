@@ -19,6 +19,7 @@ public class MBCCSApplication extends Application {
 
     public static Session session;
     public static String apiKey;
+    public static String token;
     public static String userName = "cuong";
     public UserRepository mUserRepository;
 
@@ -32,6 +33,7 @@ public class MBCCSApplication extends Application {
         mUserRepository = UserRepository.getInstance();
         session = mUserRepository.getSession();
         apiKey = mUserRepository.getApiKey();
+        token = mUserRepository.getAccessToken();
 
         //Province province = new Province();
         //province.setProvinceId(1);

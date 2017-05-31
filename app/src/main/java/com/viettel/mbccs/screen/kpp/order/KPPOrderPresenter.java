@@ -16,6 +16,8 @@ import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetListOrderResponse;
 import com.viettel.mbccs.screen.kpp.order.adaper.KPPOrderAdapter;
 import com.viettel.mbccs.utils.Common;
+import com.viettel.mbccs.utils.DateUtils;
+import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.ValidateUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.ArrayList;
@@ -32,7 +34,6 @@ public class KPPOrderPresenter implements KPPOrderContract.Presenter {
     public ObservableField<String> filterText;
     public ObservableField<Boolean> isCollapse;
     public ObservableField<String> titleOrderList;
-    public ObservableField<String> amountOrderList;
     public ObservableField<Integer> adapterPosition;
     private Context mContext;
     private KPPOrderContract.ViewModel mViewModel;
@@ -58,7 +59,6 @@ public class KPPOrderPresenter implements KPPOrderContract.Presenter {
         isCollapse = new ObservableField<>();
         isCollapse.set(false);
         titleOrderList = new ObservableField<>();
-        amountOrderList = new ObservableField<>();
         adapterPosition = new ObservableField<>();
         adapterPosition.set(1);
 
@@ -95,38 +95,37 @@ public class KPPOrderPresenter implements KPPOrderContract.Presenter {
         mGetListOrderRequestBaseRequest.setApiCode(ApiCode.GetListOrder);
         GetListOrderRequest request = new GetListOrderRequest();
         request.setOrderStatus(status);
-        request.setFromDate("");
-        request.setToDate("");
-        Subscription subscription = mBanHangKhoTaiChinhRepository.getListOrder(null)
-                .subscribe(new MBCCSSubscribe<GetListOrderResponse>() {
-                    @Override
-                    public void onSuccess(GetListOrderResponse object) {
+        request.setFromDate(DateUtils.convertDateToString(mViewModel.getFromDate(),
+                DateUtils.DATE_TIME_FORMAT));
+        request.setToDate(DateUtils.convertDateToString(mViewModel.getFromDate(),
+                DateUtils.DATE_TIME_FORMAT));
+        mGetListOrderRequestBaseRequest.setParameterApi(request);
+        Subscription subscription =
+                mBanHangKhoTaiChinhRepository.getListOrder(mGetListOrderRequestBaseRequest)
+                        .subscribe(new MBCCSSubscribe<GetListOrderResponse>() {
+                            @Override
+                            public void onSuccess(GetListOrderResponse object) {
+                                mSaleOrderses.clear();
+                                mSaleOrderses.addAll(object.getSaleOrdersList());
+                                mKPPOrderAdapter.notifyDataSetChanged();
+                                titleOrderList.set(
+                                        String.format(mContext.getString(R.string.order_title_list),
+                                                String.valueOf(mSaleOrderses.size())));
+                            }
 
-                        mSaleOrderses.clear();
-                        mSaleOrderses.addAll(object.getSaleOrdersList());
-                        mKPPOrderAdapter.notifyDataSetChanged();
+                            @Override
+                            public void onError(BaseException error) {
+                                DialogUtils.showDialogError(mContext, null, error.getMessage(),
+                                        null);
+                                //fakeOrder();
+                            }
 
-                        titleOrderList.set(
-                                String.format(mContext.getString(R.string.order_title_list),
-                                        String.valueOf(mSaleOrderses.size())));
-                        amountOrderList.set(
-                                String.format(mContext.getString(R.string.order_amout_list),
-                                        String.valueOf(1000000)));
-                    }
-
-                    @Override
-                    public void onError(BaseException error) {
-
-                        //DialogUtils.showDialogError(mContext, null, error.getMessage(), null);
-                        fakeOrder();
-                    }
-
-                    @Override
-                    public void onRequestFinish() {
-                        super.onRequestFinish();
-                        mViewModel.hideLoading();
-                    }
-                });
+                            @Override
+                            public void onRequestFinish() {
+                                super.onRequestFinish();
+                                mViewModel.hideLoading();
+                            }
+                        });
 
         mSubscriptions.add(subscription);
     }
@@ -156,8 +155,6 @@ public class KPPOrderPresenter implements KPPOrderContract.Presenter {
 
         titleOrderList.set(String.format(mContext.getString(R.string.order_title_list),
                 String.valueOf(mSaleOrderses.size())));
-        amountOrderList.set(String.format(mContext.getString(R.string.order_amout_list),
-                String.valueOf(1000000)));
     }
 
     public void clickSearch() {

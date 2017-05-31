@@ -4,6 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.viettel.mbccs.utils.DateUtils;
+import java.util.Locale;
 
 /**
  * Created by HuyQuyet on 5/17/17.
@@ -178,6 +180,12 @@ public class SaleOrders implements Parcelable {
 
     public String getOrderDate() {
         return orderDate;
+    }
+
+    public String getFormatOrderDate() {
+        return DateUtils.convertDateToString(
+                DateUtils.timeToLong(orderDate, DateUtils.DATE_TIME_FORMAT, Locale.getDefault()),
+                DateUtils.DATE_FORMAT1);
     }
 
     public void setOrderDate(String orderDate) {
