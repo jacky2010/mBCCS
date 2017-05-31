@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 import com.activeandroid.ActiveAndroid;
+import com.viettel.mbccs.data.model.District;
+import com.viettel.mbccs.data.model.Precinct;
 import com.viettel.mbccs.data.model.Province;
 import com.viettel.mbccs.data.model.Session;
 import com.viettel.mbccs.data.source.UserRepository;
@@ -35,6 +37,17 @@ public class MBCCSApplication extends Application {
         //province.setProvinceId(1);
         //province.setName("Cuong");
         //province.save();
+        //
+        //District district = new District();
+        //district.setProvinceId(1);
+        //district.setDistrictId(1);
+        //district.setName("Binh giang");
+        //district.save();
+        //
+        //Precinct precinct=new Precinct();
+        //precinct.setDistrictId(1);
+        //precinct.setPrecintId(1);
+        //precinct.setName("Binh xuyen");
         //
         //List<Province> list = mUserRepository.getListProvince();
         //Log.e("Province", list.toString());
