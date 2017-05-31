@@ -273,6 +273,7 @@ Từ <b>%s</b><br>
     <string name="kpp_order_label_amount">
         Tổng tiền : %s đồng
     </string>
+    <string name="kpp_order_label_stock_id">Mã hàng: %s</string>
     <string name="kpp_order_label_price">%s VND</string>
     <array name="stock_type">
         <item>-Tất cả -</item>

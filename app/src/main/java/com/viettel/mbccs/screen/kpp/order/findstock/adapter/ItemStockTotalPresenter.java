@@ -41,6 +41,11 @@ public class ItemStockTotalPresenter {
                 Common.formatDouble(mStockTotal.getPrice()));
     }
 
+    public String getStockModelId() {
+        return String.format(mContext.getString(R.string.kpp_order_label_stock_id),
+                String.valueOf(mStockTotal.getStockModelCode()));
+    }
+
     public StockTotal getStockTotal() {
         return mStockTotal;
     }

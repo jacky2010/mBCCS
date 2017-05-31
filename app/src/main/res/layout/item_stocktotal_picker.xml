@@ -28,7 +28,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/dp_5"
-                    android:text="@{data.mStockTotal.stockModelCode}"
+                    android:text="@{data.stockModelId}"
                     android:textSize="@dimen/sp_20"
                     android:textStyle="bold"
                     />
