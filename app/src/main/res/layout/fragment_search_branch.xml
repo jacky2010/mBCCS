@@ -26,7 +26,7 @@
             android:paddingLeft="@dimen/dp_16"
             android:paddingRight="@dimen/dp_16">
 
-            <TextView
+            <com.viettel.mbccs.widget.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_8"
@@ -35,14 +35,14 @@
                 android:textSize="@dimen/sp_16"
                 android:visibility="gone" />
 
-            <EditText
+            <com.viettel.mbccs.widget.CustomEdittext
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_40"
                 android:background="@drawable/bg_order"
                 android:text="@={ presenter.isdn }"
                 android:visibility="gone" />
 
-            <TextView
+            <com.viettel.mbccs.widget.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_8"
@@ -50,12 +50,13 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_16" />
 
-            <EditText
+            <com.viettel.mbccs.widget.CustomEdittext
                 android:id="@+id/txtDocumentId"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_40"
                 android:background="@drawable/bg_order"
-                android:text="@={ presenter.documentId }" />
+                android:text="@={ presenter.documentId }"
+                app:error="@{presenter.documentIdError}"/>
 
             <Button
                 android:layout_width="@dimen/dp_150"

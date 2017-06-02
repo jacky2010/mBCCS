@@ -3,6 +3,7 @@ package com.viettel.mbccs.screen.branches.fragments;
 import android.content.Context;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.viettel.mbccs.R;
@@ -23,6 +24,7 @@ public class SearchBranchPresenter implements SearchBranchContract.Presenter {
     private BranchesListAdapter brachesAdapter;
 
     public ObservableField<String> documentId;
+    public ObservableField<String> documentIdError;
     public ObservableField<String> isdn;
     public ObservableBoolean searchFound;
     public ObservableField<BranchesListAdapter> branchesListAdapter;
@@ -32,6 +34,7 @@ public class SearchBranchPresenter implements SearchBranchContract.Presenter {
         this.viewModel = viewModel;
 
         documentId = new ObservableField<>();
+        documentIdError = new ObservableField<>();
         isdn = new ObservableField<>();
         branchesListAdapter = new ObservableField<>();
         searchFound = new ObservableBoolean(true);
@@ -69,11 +72,9 @@ public class SearchBranchPresenter implements SearchBranchContract.Presenter {
 
         try {
 
-            if((documentId.get() == null || "".equals(documentId.get().trim()))
-                    && (isdn.get() == null || "".equals(isdn.get().trim()))){
-
-                viewModel.showError(context.getString(R.string.branches_error_search_key_required));
-
+            documentIdError.set(null);
+            if (TextUtils.isEmpty(documentId.get())) {
+                documentIdError.set(context.getString(R.string.input_empty));
                 return;
             }
 
