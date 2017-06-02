@@ -5,6 +5,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import com.viettel.mbccs.MBCCSApplication;
+import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.model.SerialBO;
 import com.viettel.mbccs.data.model.StockModel;
 import com.viettel.mbccs.data.model.StockTotal;
@@ -66,6 +67,41 @@ public class Common {
         List result = new ArrayList();
         result.addAll(sets);
         return result;
+    }
+
+    public static List<SerialBO> getSerialBlockBySerials(List<String> integers,
+            ModelSale modelSale) {
+        if (integers == null) {
+            integers = new ArrayList<>();
+        }
+        List<SerialBO> serialBlocks = new ArrayList<>();
+        Collections.sort(integers, new Comparator<String>() {
+            @Override
+            public int compare(String integer, String t1) {
+                return integer.compareTo(t1);
+            }
+        });
+        SerialBO serialBlock = new SerialBO();
+        serialBlock.setStockModelId(modelSale.getStockModelId());
+        for (String serial : integers) {
+            if (serialBlock.getFromSerial().equals("-1")) {
+                serialBlock.setFromSerial(serial);
+                serialBlock.setToSerial(serial);
+            } else {
+                if (Long.parseLong(serial) - Long.parseLong(serialBlock.getToSerial()) == 1) {
+                    serialBlock.setToSerial(serial);
+                } else {
+                    serialBlocks.add(
+                            new SerialBO(serialBlock.getFromSerial(), serialBlock.getToSerial()));
+                    serialBlock.setFromSerial(serial);
+                    serialBlock.setToSerial(serial);
+                }
+            }
+        }
+        if (!serialBlock.getFromSerial().equals("-1")) {
+            serialBlocks.add(serialBlock);
+        }
+        return serialBlocks;
     }
 
     public static List<SerialBO> getSerialBlockBySerials(List<String> integers) {
@@ -291,10 +327,10 @@ public class Common {
         return format.format(new Date(time));
     }
 
-    public static List<StockModel> convertStockTotalsToStockModels(List<StockTotal> stockTotals){
-        List<StockModel> stockModels=new ArrayList<>();
-        for (StockTotal stockTotal: stockTotals){
-            StockModel stockModel=new StockModel();
+    public static List<StockModel> convertStockTotalsToStockModels(List<StockTotal> stockTotals) {
+        List<StockModel> stockModels = new ArrayList<>();
+        for (StockTotal stockTotal : stockTotals) {
+            StockModel stockModel = new StockModel();
             stockModel.setStockModelId(stockTotal.getStockModelId());
             stockModel.setStockModelCode(stockTotal.getStockModelCode());
             stockModel.setStockModelName(stockTotal.getStockModelName());

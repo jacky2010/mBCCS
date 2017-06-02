@@ -24,6 +24,7 @@ public class StockTotalAdapter
 
     private Context mContext;
     private List<StockTotal> mStockTotals;
+    private StockTotalListener mStockTotalListener;
 
     public StockTotalAdapter(Context context, List<StockTotal> stockTotals) {
         mContext = context;
@@ -40,6 +41,10 @@ public class StockTotalAdapter
     @Override
     public void onBindViewHolder(StockTotalViewHolder holder, int position) {
         holder.bind(mStockTotals.get(position));
+    }
+
+    public void setStockTotalListener(StockTotalListener stockTotalListener) {
+        mStockTotalListener = stockTotalListener;
     }
 
     @Override
@@ -60,6 +65,9 @@ public class StockTotalAdapter
                 public void onClick(View v) {
                     mStockTotals.remove(mStockTotal);
                     notifyDataSetChanged();
+                    if (mStockTotalListener != null) {
+                        mStockTotalListener.onStockQuantityChange();
+                    }
                 }
             });
             mBinding.inputQuantityChoice.addTextChangedListener(new TextWatcher() {
@@ -70,6 +78,10 @@ public class StockTotalAdapter
 
                 @Override
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    if (mStockTotalListener != null) {
+                        mStockTotalListener.onStockQuantityChange();
+                    }
 
                     try {
                         if (charSequence.toString().equals("")) {
@@ -107,8 +119,12 @@ public class StockTotalAdapter
         public void bind(StockTotal stockTotal) {
             mStockTotal = stockTotal;
             ItemStockTotalPresenter itemStockTotalPresenter =
-                    new ItemStockTotalPresenter(stockTotal);
+                    new ItemStockTotalPresenter(mContext, stockTotal);
             mBinding.setItem(itemStockTotalPresenter);
         }
+    }
+
+    public interface StockTotalListener {
+        void onStockQuantityChange();
     }
 }

@@ -11,8 +11,9 @@ import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.model.SaleProgram;
 import com.viettel.mbccs.data.model.TeleComService;
+import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.UserRepository;
-import com.viettel.mbccs.data.source.remote.request.BaseRequest;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
@@ -46,24 +47,26 @@ public class SaleRetailPresenter
     private SaleProgram currentSaleProgram = new SaleProgram();
     private TeleComService currentTelecomService = new TeleComService();
     private int currentStockPosition = -1;
-    private UserRepository mUserRepository;
-    private BaseRequest<GetTelecomServiceAndSaleProgramRequest>
+
+    private DataRequest<GetTelecomServiceAndSaleProgramRequest>
             mGetTelecomServiceAndSaleProgramRequest;
-    private BaseRequest<GetTotalStockRequest> mGetTotalStockRequest;
+    private BanHangKhoTaiChinhRepository mBanHangKhoTaiChinhRepository;
+
+    private DataRequest<GetTotalStockRequest> mGetTotalStockRequest;
     private CompositeSubscription mSubscription;
 
     public SaleRetailPresenter(Context context, SaleRetailContract.ViewModel viewModel) {
         mContext = context;
         mViewModel = viewModel;
         mSubscription = new CompositeSubscription();
-        mUserRepository = UserRepository.getInstance();
+        mBanHangKhoTaiChinhRepository = BanHangKhoTaiChinhRepository.getInstance();
         init();
         loadServiceAndProgram();
     }
 
     private void loadModelSale() {
         mViewModel.showLoading();
-        mGetTotalStockRequest = new BaseRequest<>();
+        mGetTotalStockRequest = new DataRequest<>();
         mGetTotalStockRequest.setApiCode(ApiCode.GetStockTotal);
         GetTotalStockRequest request = new GetTotalStockRequest();
         if (currentSaleProgram.getId() != -1) {
@@ -77,45 +80,47 @@ public class SaleRetailPresenter
         request.setStateId(StockTotalType.TYPE_NEW);
         request.setSaleTransType(SaleTranType.SALE_RETAIL);
         //TODO set attribute for request
-        mGetTotalStockRequest.setRequest(request);
-        Subscription subscription = mUserRepository.getModelSales(mGetTotalStockRequest)
-                .subscribe(new MBCCSSubscribe<GetTotalStockResponse>() {
-                    @Override
-                    public void onSuccess(GetTotalStockResponse object) {
-                        mModelSales.clear();
-                        mModelSales.addAll(object.getModelSaleList());
-                        stockAdapter.notifyDataSetChanged();
-                    }
 
-                    @Override
-                    public void onError(BaseException error) {
+        mGetTotalStockRequest.setParameterApi(request);
+        Subscription subscription =
+                mBanHangKhoTaiChinhRepository.getModelSales(mGetTotalStockRequest)
+                        .subscribe(new MBCCSSubscribe<GetTotalStockResponse>() {
+                            @Override
+                            public void onSuccess(GetTotalStockResponse object) {
+                                mModelSales.clear();
+                                mModelSales.addAll(object.getModelSaleList());
+                                stockAdapter.notifyDataSetChanged();
+                            }
 
-                        DialogUtils.showDialogError(mContext, null, error.getMessage(), null);
-                        //fakeModelSale();
-                    }
+                            @Override
+                            public void onError(BaseException error) {
 
-                    @Override
-                    public void onRequestFinish() {
-                        super.onRequestFinish();
-                        mViewModel.hideLoading();
-                    }
-                });
+                                DialogUtils.showDialogError(mContext, null, error.getMessage(),
+                                        null);
+                                //fakeModelSale();
+                            }
+
+                            @Override
+                            public void onRequestFinish() {
+                                super.onRequestFinish();
+                                mViewModel.hideLoading();
+                            }
+                        });
 
         mSubscription.add(subscription);
     }
 
     private void loadServiceAndProgram() {
         mViewModel.showLoading();
-        mGetTelecomServiceAndSaleProgramRequest = new BaseRequest<>();
+        mGetTelecomServiceAndSaleProgramRequest = new DataRequest<>();
         mGetTelecomServiceAndSaleProgramRequest.setUserName("Cuong");
         mGetTelecomServiceAndSaleProgramRequest.setApiCode(ApiCode.GetTelecomServiceAndSaleProgram);
         GetTelecomServiceAndSaleProgramRequest request =
                 new GetTelecomServiceAndSaleProgramRequest();
         request.setShopId("123");
-        request.setApiCode(ApiCode.GetTelecomServiceAndSaleProgram);
-        mGetTelecomServiceAndSaleProgramRequest.setRequest(request);
+        mGetTelecomServiceAndSaleProgramRequest.setParameterApi(request);
 
-        Subscription subscription = mUserRepository.getTelecomserviceAndSaleProgram(
+        Subscription subscription = mBanHangKhoTaiChinhRepository.getTelecomserviceAndSaleProgram(
                 mGetTelecomServiceAndSaleProgramRequest)
                 .subscribe(new MBCCSSubscribe<TelecomServiceAndSaleProgramResponse>() {
                     @Override

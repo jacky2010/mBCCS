@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="presenter"
+            type="com.viettel.mbccs.widget.CustomSelectAddress"
+            />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <com.viettel.mbccs.widget.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:text="@string/layout_select_address_province"
+            android:textColor="@color/black"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_4"
+            android:background="@drawable/bg_order"
+            >
+            <Spinner
+                android:id="@+id/spinner_layout_select_province"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:adapter="@{ presenter.adapterProvince }"
+                android:paddingLeft="@dimen/dp_10"
+                />
+        </LinearLayout>
+
+        <com.viettel.mbccs.widget.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:text="@string/layout_select_address_district"
+            android:textColor="@color/black"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_4"
+            android:background="@drawable/bg_order"
+            >
+            <Spinner
+                android:id="@+id/spinner_layout_select_district"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:adapter="@{ presenter.adapterDistrict }"
+                android:paddingLeft="@dimen/dp_10"
+                />
+        </LinearLayout>
+
+        <com.viettel.mbccs.widget.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:text="@string/layout_select_address_wards"
+            android:textColor="@color/black"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_4"
+            android:background="@drawable/bg_order"
+            >
+            <Spinner
+                android:id="@+id/spinner_layout_select_precinct"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:adapter="@{ presenter.adapterPrecinct }"
+                android:paddingLeft="@dimen/dp_10"
+                />
+        </LinearLayout>
+
+        <com.viettel.mbccs.widget.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:text="@string/layout_select_address_address"
+            android:textColor="@color/black"
+            />
+
+        <com.viettel.mbccs.widget.CustomEdittext
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_4"
+            android:background="@drawable/bg_order"
+            android:text="@={ presenter.txtAddressDetail }"
+            android:paddingLeft="@dimen/dp_10"
+            />
+
+    </LinearLayout>
+</layout>

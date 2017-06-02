@@ -9,14 +9,13 @@ import com.viettel.mbccs.data.model.SaleTrans;
 import com.viettel.mbccs.data.model.SerialBO;
 import com.viettel.mbccs.data.model.Session;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
-import com.viettel.mbccs.data.source.remote.request.BaseRequest;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetOrderInfoRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetOrderInfoResponse;
 import com.viettel.mbccs.screen.sell.orders.adapter.OrderDetailAdapter;
 import com.viettel.mbccs.utils.Common;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
-import java.util.ArrayList;
 import java.util.List;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
@@ -73,19 +72,11 @@ public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract
     }
 
     @Override
-    public void itemOrderDetailClick(int position) {
-
-    }
-
-    @Override
     public void selectSerialClick(int position) {
-
         if (saleOrdersDetailList == null) {
             return;
         }
-
         SaleOrdersDetail saleOrdersDetail = saleOrdersDetailList.get(position);
-
         view.pickSerial(saleOrdersDetail);
     }
 
@@ -93,14 +84,21 @@ public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract
         //        view.showLoading();
         // TODO: 5/16/17 get Detail Order from API
         this.idOrder.set(String.valueOf(idOrder));
-        GetOrderInfoRequest g = new GetOrderInfoRequest();
-        g.setSaleOrderId(idOrder);
 
-        BaseRequest<GetOrderInfoRequest> request = new BaseRequest<>();
-        request.setRequest(g);
+        // TODO: 5/30/17 fake data
+        GetOrderInfoRequest g = new GetOrderInfoRequest();
+        g.setSaleOrderId(3253243);
+
+        DataRequest<GetOrderInfoRequest> request = new DataRequest<>();
+        Session session = new Session();
+        session.setSessionId("54578345638");
+
+        request.setSession(session);
+        request.setUserName("smac");
         request.setApiCode(ApiCode.GetOrderInfo);
-        request.setApiKey("demo");
-        request.setSession(new Session());
+        request.setApiKey("123456");
+        request.setToken("54353-543346-65464564-6546");
+        request.setParameterApi(g);
 
         Subscription subscription = banHangKhoTaiChinhRepository.getOrderInfo(request)
                 .subscribe(new MBCCSSubscribe<GetOrderInfoResponse>() {
@@ -108,7 +106,7 @@ public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract
                     public void onSuccess(GetOrderInfoResponse object) {
                         saleOrdersDetailList = object.getSaleOrdersDetailList();
                         saleTrans = object.getSaleTrans();
-                        view.setData(saleOrdersDetailList);
+                        view.setData(object);
                         setDataDisplayMoney();
                         view.hideLoading();
                     }
@@ -120,17 +118,6 @@ public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract
                     }
                 });
         subscriptions.add(subscription);
-
-        saleTrans = new SaleTrans();
-        saleTrans.setAmountNotTax(100000);
-        saleTrans.setAmountTax(100000);
-        saleTrans.setDiscount(100000);
-        saleTrans.setVAT(100000);
-        saleTrans.setTax(100000);
-
-        saleOrdersDetailList = new ArrayList<>();
-        view.setData(saleOrdersDetailList);
-        setDataDisplayMoney();
     }
 
     private void setDataDisplayMoney() {
@@ -147,11 +134,11 @@ public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract
     }
 
     public void onCancelSell() {
-        view.clickCancelSell(saleTrans);
+        view.clickCancelSell();
     }
 
     public void onClickSell() {
-        view.onClickSell(saleTrans);
+        view.onClickSell();
     }
 
     public void setSerialBlockList(List<Integer> list) {

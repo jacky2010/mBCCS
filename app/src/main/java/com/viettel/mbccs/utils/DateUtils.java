@@ -16,6 +16,8 @@ public class DateUtils {
 
     public static final String DATE_FORMAT_YYYY_MM_DD = "yyyy-MM-dd";
     public static final String CALENDAR_DATE_FORMAT = "MM/dd/yyyy";
+    public static final String CALENDAR_DATE_FORMAT_DD_MM_YY_HH = "dd/MM/yyyy HH:mm:ss";
+    public static final String CALENDAR_DATE_FORMAT_DD_MM_YY = "dd/MM/yyyy";
     public static final String TIMEZONE_FORMAT = "yyyy-MM-dd'T'HH:mm:ssZ";
     public static final String REVIEW_TIME_FORMAT = "yyyy年MM月dd日";
     public static final String BIRTHDAY_TIME_FORMAT = "yyyy/MM/dd";
@@ -24,6 +26,8 @@ public class DateUtils {
     public static final String DATE_FORMAT = "yyyy-MM-dd";
     public static final String DATE_PICKER_FORMAT = "MMM dd, yyyy";
     public static final long INVALID_TIME = -1;
+    public static final String DATE_TIME_FORMAT = "dd/MM/yyyy HH:mm:ss";
+    public static final String DATE_FORMAT1 = "dd/MM/yyyy";
 
     public static Date stringToDate(String time, String format, Locale locale) {
         if (TextUtils.isEmpty(time) || TextUtils.isEmpty(format)) {
@@ -54,7 +58,8 @@ public class DateUtils {
     }
 
     public static String timestampToString(long timestamp, String format, @Nullable Locale locale) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format, locale == null ? Locale.getDefault() : locale);
+        SimpleDateFormat simpleDateFormat =
+                new SimpleDateFormat(format, locale == null ? Locale.getDefault() : locale);
         Date date = new Date(timestamp);
         return simpleDateFormat.format(date);
     }
@@ -81,7 +86,7 @@ public class DateUtils {
     }
 
     public static String changeTimeFormat(@NonNull String oldTime, @NonNull String oldFormat,
-                                          @NonNull String newFormat) {
+            @NonNull String newFormat) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(oldFormat, Locale.JAPAN);
         Date date;
         try {
@@ -112,6 +117,11 @@ public class DateUtils {
 
         }
         return null;
+    }
+
+    public static String convertDateToString(long time, String format) {
+        DateFormat dateFormat = new SimpleDateFormat(format);
+        return dateFormat.format(new Date(time));
     }
 
     public static String convertToString(Date source, String format, @Nullable Locale locale) {

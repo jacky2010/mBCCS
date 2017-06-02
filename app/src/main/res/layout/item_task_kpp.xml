@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.viettel.mbccs.data.model.ChannelInfo" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/layout_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/icon"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{ item.getChannelName() }"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_18" />
+
+            <TextView
+                style="@style/TextSearchTask"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_4"
+                android:drawableStart="@drawable/ic_phone_black_24dp"
+                android:gravity="center_vertical"
+                android:text="@{ item.getTel() }" />
+
+            <TextView
+                style="@style/TextSearchTask"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_4"
+                android:drawableStart="@drawable/ic_location_on_black_24dp"
+                android:gravity="center_vertical"
+                android:text="@{ item.getAddress() }" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_arrow_right_black_24dp" />
+    </RelativeLayout>
+</layout>

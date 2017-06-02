@@ -97,11 +97,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_input_tranparent"
-                        android:editable="false"
                         android:padding="5dp"
-                        android:text="@{String.valueOf(presenter.channelInfo.channelId)}"
+                        android:singleLine="true"
+                        android:text="@={presenter.channelId}"
                         android:textColor="#000"
                         android:textSize="18sp"
+                        app:error="@{presenter.channelIdError}"
                         />
                     <TextView
                         android:layout_width="match_parent"
@@ -117,9 +118,11 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_input_tranparent"
                         android:padding="5dp"
-                        android:text="@={presenter.channelInfo.channelName}"
+                        android:singleLine="true"
+                        android:text="@={presenter.channelName}"
                         android:textColor="#000"
                         android:textSize="18sp"
+                        app:error="@{presenter.channelNameError}"
                         />
 
                     <TextView
@@ -139,6 +142,7 @@
                         android:lines="1"
                         android:maxLines="1"
                         android:padding="5dp"
+                        android:singleLine="true"
                         android:text="@={presenter.tin}"
                         android:textColor="#000"
                         android:textSize="18sp"
@@ -156,14 +160,18 @@
                         />
 
                     <com.viettel.mbccs.widget.CustomEdittext
+                        android:id="@+id/customEdittext2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_input_tranparent"
-                        android:editable="false"
+                        android:gravity="top|start"
+                        android:lines="2"
+                        android:maxLines="3"
                         android:padding="5dp"
-                        android:text="@={presenter.channelInfo.address}"
+                        android:text="@={presenter.channelAddress}"
                         android:textColor="#000"
                         android:textSize="18sp"
+                        app:error="@{presenter.channelAddressError}"
                         />
 
                 </LinearLayout>

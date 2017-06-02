@@ -10,8 +10,7 @@ public class ApiCode {
 
     // TODO: 5/18/17 Error WsCode
     // 3.1.3.2 - 4.3.3.1
-    // public final static String GetContractInfo = "WS_getContractInfo";
-    public final static String GetContractInfo = "WS_checkIdNo";
+    public final static String GetContractInfo = "WS_getContractInfo";
 
     // 3.1.3.3
     public final static String GetStockType = "WS_getStockType";
@@ -198,6 +197,9 @@ public class ApiCode {
     // 5.3.3.5
     public final static String UpdateSaleOrder = "WS_UpdateSaleOrder";
 
+    // 5.3.3.6
+    public final static String GetReason = "WS_GetReason";
+
     // 5.4.3.1
     public final static String GetVasForISDN = "WS_GetVasForISDN";
 
@@ -335,7 +337,6 @@ public class ApiCode {
     // 6.1.3.4
     // public final static String GetWarrantyRequest = "WS_GetWarrantyRequest";
     // public final static String GetHistoryDeviceDetail  = "WS_GetHistoryDeviceDetail";
-
 
     // 6.2.3.1
     public final static String GetWarrantyRequest = "WS_GetWarrantyRequest";

@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by HuyQuyet on 5/23/17.
  */
 
-public class GetListShopRequest extends DataRequest {
+public class GetListShopRequest  {
 
     @Expose
     @SerializedName("parentShopId")

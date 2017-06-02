@@ -18,7 +18,7 @@ import com.viettel.mbccs.data.model.SaleProgram;
 import com.viettel.mbccs.data.model.SaleTrans;
 import com.viettel.mbccs.data.model.StockSerial;
 import com.viettel.mbccs.data.model.TeleComService;
-import com.viettel.mbccs.data.source.remote.request.BaseRequest;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
 import com.viettel.mbccs.databinding.FragmentPaymentInforRetailBinding;
 import com.viettel.mbccs.screen.common.success.DialogInputBankPlus;
@@ -95,9 +95,6 @@ public class PaymentInforRetailFragment extends BaseFragment
         if (!TextUtils.isEmpty(saleProgramString)) {
             mSaleProgram = GsonUtils.String2Object(saleProgramString, SaleProgram.class);
         }
-
-
-
     }
 
     @Nullable
@@ -114,9 +111,10 @@ public class PaymentInforRetailFragment extends BaseFragment
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if (mPresenter==null){
-            mPresenter = new PaymentInfoPresenter(this, getActivity(), mStockSerials, mTeleComService,
-                    mSaleProgram);
+        if (mPresenter == null) {
+            mPresenter =
+                    new PaymentInfoPresenter(this, getActivity(), mStockSerials, mTeleComService,
+                            mSaleProgram);
         }
 
         mBinding.setPresenter((PaymentInfoPresenter) mPresenter);
@@ -167,9 +165,8 @@ public class PaymentInforRetailFragment extends BaseFragment
                 dialogInputBankPlus.setDialogInputListener(
                         new DialogInputBankPlus.DialogInputListener() {
                             @Override
-                            public void onDialogDissmiss(String phone, String secureCode) {
+                            public void onDialogDissmiss(String phone) {
                                 ((PaymentInfoPresenter) mPresenter).setPhone(phone);
-                                ((PaymentInfoPresenter) mPresenter).setSecureCode(secureCode);
                             }
                         });
                 dialogInputBankPlus.show();
@@ -202,7 +199,6 @@ public class PaymentInforRetailFragment extends BaseFragment
                 ((PaymentInfoPresenter) mPresenter).setPaymentMethod(PaymentMethod.PAYMENT_CASH);
             }
         });
-
     }
 
     @Override
@@ -227,11 +223,14 @@ public class PaymentInforRetailFragment extends BaseFragment
     }
 
     @Override
-    public void goToSaveTransConfirm(BaseRequest<GetInfoSaleTranRequest> request, SaleTrans saleTrans) {
+    public void goToSaveTransConfirm(DataRequest<GetInfoSaleTranRequest> request,
+            SaleTrans saleTrans) {
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
                 .addToBackStack("SaveTransConfirmFragment")
-                .replace(R.id.container, SaveTransConfirmFragment.newInstance(request.getRequest(), saleTrans,null))
+                .replace(R.id.container,
+                        SaveTransConfirmFragment.newInstance(request.getParameterApi(), saleTrans,
+                                null))
                 .commit();
     }
 }

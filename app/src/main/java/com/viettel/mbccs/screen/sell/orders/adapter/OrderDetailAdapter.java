@@ -87,8 +87,6 @@ public class OrderDetailAdapter
     }
 
     public interface OrderDetailAdapterCallback {
-        void itemOrderDetailClick(int position);
-
         void selectSerialClick(int position);
     }
 

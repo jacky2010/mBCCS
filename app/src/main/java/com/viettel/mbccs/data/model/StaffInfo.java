@@ -2,6 +2,7 @@ package com.viettel.mbccs.data.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -39,11 +40,31 @@ public class StaffInfo implements Parcelable {
     @Expose
     private long channelTypeId;
 
-    public StaffInfo() {
+    private String tel;
 
+    private String staffJobTitle;
+
+    private String staffAddress;
+
+    public StaffInfo() {
     }
 
-    protected StaffInfo(Parcel in) {
+    public StaffInfo(long staffId, String staffCode, String staffName, long shopId, String shopCode,
+                     String shopName, long channelTypeId, String tel, String staffJobTitle,
+                     String staffAddress) {
+        this.staffId = staffId;
+        this.staffCode = staffCode;
+        this.staffName = staffName;
+        this.shopId = shopId;
+        this.shopCode = shopCode;
+        this.shopName = shopName;
+        this.channelTypeId = channelTypeId;
+        this.tel = tel;
+        this.staffJobTitle = staffJobTitle;
+        this.staffAddress = staffAddress;
+    }
+
+    public StaffInfo(Parcel in) {
         staffId = in.readLong();
         staffCode = in.readString();
         staffName = in.readString();
@@ -51,6 +72,9 @@ public class StaffInfo implements Parcelable {
         shopCode = in.readString();
         shopName = in.readString();
         channelTypeId = in.readLong();
+        tel = in.readString();
+        staffJobTitle = in.readString();
+        staffAddress = in.readString();
     }
 
     public static final Creator<StaffInfo> CREATOR = new Creator<StaffInfo>() {
@@ -79,6 +103,9 @@ public class StaffInfo implements Parcelable {
         dest.writeString(shopCode);
         dest.writeString(shopName);
         dest.writeLong(channelTypeId);
+        dest.writeString(tel);
+        dest.writeString(staffJobTitle);
+        dest.writeString(staffAddress);
     }
 
     public long getStaffId() {
@@ -135,5 +162,29 @@ public class StaffInfo implements Parcelable {
 
     public void setChannelTypeId(long channelTypeId) {
         this.channelTypeId = channelTypeId;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public String getStaffJobTitle() {
+        return staffJobTitle;
+    }
+
+    public void setStaffJobTitle(String staffJobTitle) {
+        this.staffJobTitle = staffJobTitle;
+    }
+
+    public String getStaffAddress() {
+        return staffAddress;
+    }
+
+    public void setStaffAddress(String staffAddress) {
+        this.staffAddress = staffAddress;
     }
 }

@@ -1,12 +1,12 @@
 package com.viettel.mbccs.utils;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
 import com.viettel.mbccs.R;
+import com.viettel.mbccs.data.source.remote.response.BaseException;
 
 /**
  * Created by eo_cuong on 5/17/17.
@@ -35,6 +35,10 @@ public class DialogUtils {
                 .setPositiveButton(yesTitle, yesListener)
                 .setNegativeButton(cancelTitle, cancelListener)
                 .show();
+    }
+
+    public static void showDialogError(Context context, BaseException error) {
+        showDialogError(context, null, error.getMessage(), null);
     }
 
     public static void showDialogError(Context context, String message) {

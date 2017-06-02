@@ -1,9 +1,13 @@
 package com.viettel.mbccs.screen.information.adapter;
 
+import android.content.Context;
 import android.databinding.ObservableField;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import com.viettel.mbccs.data.model.Customer;
+import com.viettel.mbccs.R;
+import com.viettel.mbccs.data.source.remote.response.GetRegiterSubInfoResponse;
 import com.viettel.mbccs.databinding.ItemInformationCustomerBinding;
 import java.util.List;
 
@@ -15,20 +19,26 @@ public class InformationCustomerAdapter
         extends RecyclerView.Adapter<InformationCustomerAdapter.ViewHolder> {
     private ItemInformationCustomerBinding binding;
     private ItemClick listener;
-    private List<Customer> dataList;
+    private Context context;
+    private List<GetRegiterSubInfoResponse> dataList;
+    private boolean isCreate;
 
-    public InformationCustomerAdapter(List<Customer> data) {
+    public InformationCustomerAdapter(Context context, List<GetRegiterSubInfoResponse> data, boolean isCreate) {
+        this.context = context;
         this.dataList = data;
+        this.isCreate = isCreate;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+        binding = ItemInformationCustomerBinding.inflate(LayoutInflater.from(parent.getContext()),
+                parent, false);
+        return new ViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
+        holder.bind(dataList.get(position), position);
     }
 
     @Override
@@ -37,28 +47,33 @@ public class InformationCustomerAdapter
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private ItemInformationCustomerBinding view;
+        private ItemInformationCustomerBinding viewBinding;
         private int position;
 
         public ObservableField<String> name;
         public ObservableField<String> phone;
         public ObservableField<String> type;
+        public ObservableField<Drawable> icon;
 
         public ViewHolder(ItemInformationCustomerBinding itemView) {
             super(itemView.getRoot());
-            view = itemView;
+            viewBinding = itemView;
 
             name = new ObservableField<>();
             phone = new ObservableField<>();
             type = new ObservableField<>();
+            icon = new ObservableField<>();
         }
 
-        public void bind(Customer customer, int position) {
-            if (view.getPresenter() == null){
-                view.setPresenter(this);
+        public void bind(GetRegiterSubInfoResponse data, int position) {
+            if (viewBinding.getPresenter() == null) {
+                viewBinding.setPresenter(this);
             }
-            name.set(customer.getCustomerName());
-            phone.set(customer.getTin());
+            name.set(data.getCustomer().getName());
+            phone.set(data.getSubscriber().getIsdn());
+            icon.set(isCreate ? context.getResources().getDrawable(R.drawable.ic_file_black_24dp)
+                    : context.getResources().getDrawable(R.drawable.ic_edit_black));
+            type.set(data.getSubscriber().getSubType());
             this.position = position;
         }
 

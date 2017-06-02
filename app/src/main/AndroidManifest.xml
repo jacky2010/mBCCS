@@ -31,6 +31,18 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key"/>
 
+        <meta-data
+            android:name="AA_DB_NAME"
+            android:value="mbccs_db"/>
+        <meta-data
+            android:name="AA_DB_VERSION"
+            android:value="2"/>
+
+        <meta-data
+            android:name="AA_MODELS"
+            android:value="com.viettel.mbccs.data.model.Precinct,com.viettel.mbccs.data.model.Province,com.viettel.mbccs.data.model.District"/>
+
+
         <activity
             android:name=".screen.splash.SplashActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
@@ -122,10 +134,19 @@
             android:name=".screen.kpp.order.ordersuccess.OrderSuccessActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".screen.assignjob.ListAssignJobActivity"
+            android:name=".screen.assigntask.ListAssignTaskActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".screen.assignjob.arising.CreateArisingJobActivity"
+            android:name=".screen.assigntask.arising.create.CreateArisingTaskActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screen.assigntask.staffpicker.StaffPickerActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screen.assigntask.cskpp.detail.TaskCSKPPDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screen.assigntask.cskpp.create.CreateCSKPPTaskActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.help.HelpActivity"
@@ -144,7 +165,8 @@
             android:name=".screen.inputorder.InputOrderActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".screen.information.CreateUpdateInformationActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>

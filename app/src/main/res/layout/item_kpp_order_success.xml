@@ -59,7 +59,7 @@
             android:paddingLeft="@dimen/dp_5"
             android:paddingRight="@dimen/dp_5"
             android:paddingTop="@dimen/dp_10"
-            android:text="10000000"
+            android:text="@{item.totalMoney}"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_13"
             />

@@ -6,23 +6,23 @@ import java.io.Serializable;
 
 public class StockModel implements Serializable {
 
-    @SerializedName("stockModelId")
+    @SerializedName("StockModelId")
     @Expose
     private long stockModelId;
 
-    @SerializedName("stockModelCode")
+    @SerializedName("StockModelCode")
     @Expose
     private String stockModelCode;
 
-    @SerializedName("stockModelName")
+    @SerializedName("StockMoldeName")
     @Expose
     private String stockModelName;
 
-    @SerializedName("stateId")
+    @SerializedName("StateId")
     @Expose
     private long stateId;
 
-    @SerializedName("quantity")
+    @SerializedName("Quantity")
     @Expose
     private long quantity;
 

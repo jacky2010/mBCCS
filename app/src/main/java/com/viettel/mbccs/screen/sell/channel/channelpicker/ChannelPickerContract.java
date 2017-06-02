@@ -1,7 +1,6 @@
 package com.viettel.mbccs.screen.sell.channel.channelpicker;
 
-import com.viettel.mbccs.base.BasePresenter;
-import com.viettel.mbccs.base.BaseView;
+import com.viettel.mbccs.base.searchlistview.BaseSearchListViewContract;
 import com.viettel.mbccs.data.model.ChannelInfo;
 
 /**
@@ -10,13 +9,12 @@ import com.viettel.mbccs.data.model.ChannelInfo;
 
 public interface ChannelPickerContract {
 
-    interface Presenter extends BasePresenter {
-        void init();
+    interface Presenter extends BaseSearchListViewContract.Presenter {
 
         void onTextChange(String s);
     }
 
-    interface ViewModel extends BaseView<Presenter> {
+    interface ViewModel extends BaseSearchListViewContract.ViewModel {
 
         void onPickChannelPick(ChannelInfo channelInfo);
     }

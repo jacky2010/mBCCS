@@ -10,12 +10,13 @@ import com.viettel.mbccs.constance.StockTotalType;
 import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
-import com.viettel.mbccs.data.source.remote.request.BaseRequest;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListStockModelRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetListStockModelResponse;
 import com.viettel.mbccs.screen.kpp.order.findstock.adapter.StockTotalPickerAdapter;
 import com.viettel.mbccs.utils.ActivityUtils;
+import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.ArrayList;
 import rx.Subscription;
@@ -36,7 +37,7 @@ public class FindStockPresenter
     private StockTotalPickerAdapter stockTotalAdapter;
     private ArrayList<StockTotal> mStockTotals = new ArrayList<>();
     private ArrayList<StockTotal> mStockTotalsSaved = new ArrayList<>();
-    private BaseRequest<GetListStockModelRequest> mGetListStockModelRequestBaseRequest;
+    private DataRequest<GetListStockModelRequest> mGetListStockModelRequestBaseRequest;
     private CompositeSubscription mSubscription;
     private long stockType = -1;
     private BanHangKhoTaiChinhRepository mBanHangKhoTaiChinhRepository;
@@ -83,13 +84,15 @@ public class FindStockPresenter
 
         saveStockToList();
 
-        mGetListStockModelRequestBaseRequest = new BaseRequest<>();
-        mGetListStockModelRequestBaseRequest.setApiCode(ApiCode.GetStockTotal);
+        mGetListStockModelRequestBaseRequest = new DataRequest<>();
+        mGetListStockModelRequestBaseRequest.setApiCode(ApiCode.GetListStockModel);
         GetListStockModelRequest request = new GetListStockModelRequest();
         request.setStockModelId(code.get());
         if (stockType != -1) {
             request.setStockTypeId(stockType);
         }
+        request.setStockModelId(code.get());
+        mGetListStockModelRequestBaseRequest.setParameterApi(request);
 
         mViewModel.showLoading();
         Subscription subscription = mBanHangKhoTaiChinhRepository.getListStockModel(
@@ -104,9 +107,8 @@ public class FindStockPresenter
 
                     @Override
                     public void onError(BaseException error) {
-
-                        //DialogUtils.showDialogError(mContext, null, error.getMessage(), null);
-                        fake();
+                        DialogUtils.showDialogError(mContext, null, error.getMessage(), null);
+                        //fake();
                     }
 
                     @Override
@@ -121,11 +123,11 @@ public class FindStockPresenter
     }
 
     private boolean isValidate() {
-        codeError.set(null);
-        if (TextUtils.isEmpty(code.get())) {
-            codeError.set(mContext.getString(R.string.input_empty));
-            return false;
-        }
+        //codeError.set(null);
+        //if (TextUtils.isEmpty(code.get())) {
+        //    codeError.set(mContext.getString(R.string.input_empty));
+        //    return false;
+        //}
 
         return true;
     }

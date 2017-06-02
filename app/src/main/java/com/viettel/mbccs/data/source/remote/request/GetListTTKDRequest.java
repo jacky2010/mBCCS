@@ -8,7 +8,7 @@ import com.viettel.mbccs.constance.ShopLevel;
  * Created by HuyQuyet on 5/23/17.
  */
 
-public class GetListTTKDRequest extends DataRequest {
+public class GetListTTKDRequest  {
     @Expose
     @SerializedName("shopId")
     private long shopId;

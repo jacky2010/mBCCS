@@ -89,6 +89,9 @@ public class Constants {
         public static final String CHANGE_SIM_ITEM = "change_sim_item";
         public static final String ITEM_LIST = "item_list";
         public static final String RESULT = "result";
+        public static final String STAFF_INFO = "staff_info";
+        public static final String STAFF_LIST = "staff_list";
+        public static final String TASK_INFO = "task_info";
         public static final String LIST_STOCK_TOTAL = "list_stock_total";
         public static final String CUSTOMER_ITEM = "customer_item";
         public static final String PRE_TAX = "pre_tax";

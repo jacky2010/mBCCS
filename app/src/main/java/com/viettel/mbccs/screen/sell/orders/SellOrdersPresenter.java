@@ -14,7 +14,7 @@ import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.Session;
 import com.viettel.mbccs.data.model.StaffInfo;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
-import com.viettel.mbccs.data.source.remote.request.BaseRequest;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListChannelByOwnerTypeIdRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListOrderRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
@@ -22,6 +22,7 @@ import com.viettel.mbccs.data.source.remote.response.GetListChannelByOwnerTypeId
 import com.viettel.mbccs.data.source.remote.response.GetListOrderResponse;
 import com.viettel.mbccs.screen.sell.orders.adapter.SellOrdersFragmentAdapter;
 import com.viettel.mbccs.utils.DialogUtils;
+import com.viettel.mbccs.utils.ValidateUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.ArrayList;
 import java.util.List;
@@ -71,17 +72,25 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
         staffInfo.set(new StaffInfo());
 
         GetListChannelByOwnerTypeIdRequest g = new GetListChannelByOwnerTypeIdRequest();
-        g.setShopId(staffInfo.get().getShopId());
-        g.setStaffId(staffInfo.get().getStaffId());
-        g.setChannelTypeId(staffInfo.get().getChannelTypeId());
+//        g.setShopId(staffInfo.get().getShopId());
+//        g.setStaffId(staffInfo.get().getStaffId());
+//        g.setChannelTypeId(staffInfo.get().getChannelTypeId());
 
-        BaseRequest<GetListChannelByOwnerTypeIdRequest> request = new BaseRequest<>();
-        request.setRequest(g);
+        g.setChannelTypeId(213);
+        g.setStaffId(54366);
+
+        DataRequest<GetListChannelByOwnerTypeIdRequest> request = new DataRequest<>();
+        request.setParameterApi(g);
 
         // TODO: 5/18/17 get data
-        request.setApiKey("demo");
-        request.setSession(new Session());
+        Session session = new Session();
+        session.setSessionId("54578345638");
+
+        request.setUserName("smac");
         request.setApiCode(ApiCode.GetListChannelByOwnerTypeId);
+        request.setToken("54353-543346-65464564-6546");
+        request.setApiKey("123456");
+        request.setSession(session);
 
         Subscription subscription =
                 banHangKhoTaiChinhRepository.getListChannelByOwnerTypeId(request)
@@ -139,10 +148,11 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
         long dateFrom = sellOrdersView.getDateFrom();
         long dateTo = sellOrdersView.getDateTo();
 
-        if (dateTo - dateFrom > 10000000) {
+        if (!ValidateUtils.isTimeForDay(dateFrom, dateTo, 30)) {
             sellOrdersView.showErrorDate();
             return;
         }
+
         GetListOrderRequest getListOrderRequest = new GetListOrderRequest();
         //        getListOrderRequest.setShopId(staffInfo.get().getShopId());
         //        getListOrderRequest.setStaffId(staffInfo.get().getStaffId());
@@ -154,24 +164,21 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
         // TODO: 5/29/17 fake data
         getListOrderRequest.setShopId(213);
         getListOrderRequest.setStaffId(3243);
-        getListOrderRequest.setIsdnChannel(23);
-        getListOrderRequest.setToDate("02/08/2017 00:00:00");
-        getListOrderRequest.setFromDate("02/05/2017 00:00:00");
         getListOrderRequest.setOrderStatus(54366);
+        getListOrderRequest.setIsdnChannel(23);
+        getListOrderRequest.setFromDate("02/05/2017 00:00:00");
+        getListOrderRequest.setToDate("02/08/2017 00:00:00");
 
+        DataRequest<GetListOrderRequest> baseRequest = new DataRequest<>();
         Session session = new Session();
         session.setSessionId("54578345638");
-        getListOrderRequest.setSession(session);
-        getListOrderRequest.setApiCode(ApiCode.GetListOrder);
-        getListOrderRequest.setApiKey("464564575676");
 
-        BaseRequest<GetListOrderRequest> baseRequest = new BaseRequest<>();
         baseRequest.setSession(session);
         baseRequest.setUserName("smac");
         baseRequest.setApiCode(ApiCode.GetListOrder);
-        baseRequest.setApiKey("464564575676");
+        baseRequest.setApiKey("123456");
         baseRequest.setToken("54353-543346-65464564-6546");
-        baseRequest.setRequest(getListOrderRequest);
+        baseRequest.setParameterApi(getListOrderRequest);
 
         banHangKhoTaiChinhRepository.getListOrder(baseRequest)
                 .subscribe(new MBCCSSubscribe<GetListOrderResponse>() {
@@ -184,7 +191,7 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
                     public void onError(BaseException error) {
                         // TODO: 5/16/17 error
                         DialogUtils.showDialogError(context, null, error.getMessage(), null);
-                        sellOrdersView.getDataError();
+                        sellOrdersView.getDataError(error);
                     }
                 });
     }

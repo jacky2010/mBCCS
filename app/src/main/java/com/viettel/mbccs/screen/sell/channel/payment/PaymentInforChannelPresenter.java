@@ -6,12 +6,14 @@ import android.text.TextUtils;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.SaleTranType;
 import com.viettel.mbccs.data.model.ChannelInfo;
+import com.viettel.mbccs.data.model.Customer;
 import com.viettel.mbccs.data.model.SaleProgram;
 import com.viettel.mbccs.data.model.SaleTrans;
 import com.viettel.mbccs.data.model.StockSerial;
 import com.viettel.mbccs.data.model.TeleComService;
+import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.UserRepository;
-import com.viettel.mbccs.data.source.remote.request.BaseRequest;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetInfoSaleTranResponse;
@@ -36,14 +38,24 @@ public class PaymentInforChannelPresenter implements PaymentInforChannelContract
     public ObservableField<Boolean> isGetTransInfo;
     public ObservableField<Boolean> isExpandCustomerInfo;
     public ObservableField<Boolean> isExpandPaymentInfo;
+    public ObservableField<String> channelId;
+    public ObservableField<String> channelIdError;
+    public ObservableField<String> channelAddress;
+    public ObservableField<String> channelAddressError;
+    public ObservableField<String> channelName;
+    public ObservableField<String> channelNameError;
+    public String currentPayment;
+
     private PaymentInforChannelContract.ViewModel mViewModel;
     private Context mContext;
     private List<StockSerial> mStockSerials;
     private String paymentMethod;
     private String phone;
     private String secureCode;
-    private UserRepository mUserRepository;
-    private BaseRequest<GetInfoSaleTranRequest> mGetInfoSaleTranRequestBaseRequest;
+
+    private DataRequest<GetInfoSaleTranRequest> mGetInfoSaleTranRequestBaseRequest;
+    private BanHangKhoTaiChinhRepository mBanHangKhoTaiChinhRepository;
+
     private CompositeSubscription mSubscriptions;
     private SaleTrans mSaleTrans;
     private TeleComService mTeleComService;
@@ -59,7 +71,7 @@ public class PaymentInforChannelPresenter implements PaymentInforChannelContract
         this.mTeleComService = teleComService;
         this.mSaleProgram = saleProgram;
         this.mChannelInfo = channelInfo;
-        mUserRepository = UserRepository.getInstance();
+        mBanHangKhoTaiChinhRepository = BanHangKhoTaiChinhRepository.getInstance();
         mSubscriptions = new CompositeSubscription();
         mSaleTrans = new SaleTrans();
         init();
@@ -78,6 +90,13 @@ public class PaymentInforChannelPresenter implements PaymentInforChannelContract
         isExpandCustomerInfo.set(true);
         isExpandPaymentInfo = new ObservableField<>();
         isExpandPaymentInfo.set(true);
+
+        channelId = new ObservableField<>();
+        channelAddress = new ObservableField<>();
+        channelName = new ObservableField<>();
+        channelIdError = new ObservableField<>();
+        channelAddressError = new ObservableField<>();
+        channelNameError = new ObservableField<>();
     }
 
     public void paymentClick() {
@@ -88,7 +107,8 @@ public class PaymentInforChannelPresenter implements PaymentInforChannelContract
         if (!isGetTransInfo.get()) {
             getTranInfo();
         } else {
-            mViewModel.goToSaveTransConfirm(mGetInfoSaleTranRequestBaseRequest, mSaleTrans,mChannelInfo);
+            mViewModel.goToSaveTransConfirm(mGetInfoSaleTranRequestBaseRequest, mSaleTrans,
+                    mChannelInfo);
         }
     }
 
@@ -99,7 +119,7 @@ public class PaymentInforChannelPresenter implements PaymentInforChannelContract
         mViewModel.showLoading();
         isGetTransInfo.set(false);
 
-        mGetInfoSaleTranRequestBaseRequest = new BaseRequest<>();
+        mGetInfoSaleTranRequestBaseRequest = new DataRequest<>();
         GetInfoSaleTranRequest request = new GetInfoSaleTranRequest();
         request.setPaymentMethod(paymentMethod);
         request.setCouponCode(coupon.get());
@@ -112,18 +132,23 @@ public class PaymentInforChannelPresenter implements PaymentInforChannelContract
             request.setSaleProgrameCode((mSaleProgram.getCode()));
         }
         request.setSaleTransType(String.valueOf(SaleTranType.SALE_CHANNEL));
-        //Customer customer = new Customer();
-        //customer.setTin(tin.get());
-        //customer.setAddress(address.get());
-        //customer.setCustomerName(name.get());
-        //request.setCustomer(customer);
+        Customer customer = new Customer();
+        customer.setTin(tin.get());
+        customer.setAddress(channelAddress.get());
+        customer.setCustomerName(channelName.get());
+        customer.setCustomerId(channelId.get());
+        request.setCustomer(customer);
         request.setChanelId(mChannelInfo.getChannelId());
-        request.setChannelType(Long.parseLong(mChannelInfo.getChannelType()));
+        request.setChannelType((mChannelInfo.getChannelType()));
+        request.setDiscountPolicy(mChannelInfo.getDiscountPolicy());
+        request.setPricePolicy(mChannelInfo.getPricePolicy());
+        request.setChanelId(mChannelInfo.getChannelId());
+        request.setChannelType(mChannelInfo.getChannelType());
 
-        mGetInfoSaleTranRequestBaseRequest.setRequest(request);
+        mGetInfoSaleTranRequestBaseRequest.setParameterApi(request);
 
         Subscription subscription =
-                mUserRepository.getSaleTransInfo(mGetInfoSaleTranRequestBaseRequest)
+                mBanHangKhoTaiChinhRepository.getSaleTransInfo(mGetInfoSaleTranRequestBaseRequest)
                         .subscribe(new MBCCSSubscribe<GetInfoSaleTranResponse>() {
                             @Override
                             public void onSuccess(GetInfoSaleTranResponse object) {
@@ -165,9 +190,27 @@ public class PaymentInforChannelPresenter implements PaymentInforChannelContract
 
     private boolean validate() {
         tinError.set(null);
+        channelIdError.set(null);
+        channelNameError.set(null);
+        channelAddressError.set(null);
+
+        if (TextUtils.isEmpty(channelId.get())) {
+            channelIdError.set(mContext.getResources().getString(R.string.input_empty));
+            return false;
+        }
+
+        if (TextUtils.isEmpty(channelName.get())) {
+            channelNameError.set(mContext.getResources().getString(R.string.input_empty));
+            return false;
+        }
 
         if (TextUtils.isEmpty(tin.get())) {
             tinError.set(mContext.getResources().getString(R.string.input_empty));
+            return false;
+        }
+
+        if (TextUtils.isEmpty(channelAddress.get())) {
+            channelAddressError.set(mContext.getResources().getString(R.string.input_empty));
             return false;
         }
 
@@ -209,7 +252,12 @@ public class PaymentInforChannelPresenter implements PaymentInforChannelContract
     }
 
     public void setPaymentMethod(String paymentMethod) {
+        if (currentPayment != null && currentPayment.equals(paymentMethod)) {
+            return;
+        }
         this.paymentMethod = paymentMethod;
+        currentPayment = paymentMethod;
+        isGetTransInfo.set(false);
     }
 
     public void setPhone(String phone) {

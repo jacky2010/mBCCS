@@ -1,11 +1,9 @@
 package com.viettel.mbccs.screen.main;
 
 import android.content.Context;
-import android.content.Intent;
 import android.databinding.ObservableInt;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.MenuItem;
-import com.viettel.mbccs.screen.sell.retail.SaleRetailActivity;
 import com.viettel.mbccs.widget.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +32,7 @@ public class MainPresenter implements MainContract.Presenter {
                 mContext.getResources().getString(R.string.menu_dashboard),
                 R.drawable.ic_menu_home_selector, 0, 0));
         mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
-                mContext.getResources().getString(R.string.menu_job),
+                mContext.getResources().getString(R.string.menu_task),
                 R.drawable.ic_menu_job_selector, 0, 0));
         mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
                 mContext.getResources().getString(R.string.menu_sale),
@@ -43,18 +41,18 @@ public class MainPresenter implements MainContract.Presenter {
                 mContext.getResources().getString(R.string.menu_customer),
                 R.drawable.ic_menu_customer_selector, 0, 0));
         mMenuItemList.add(
-                new MenuItem(MenuItem.MenuId.MENU_QLKH, mContext.getString(R.string.menu_qlkh),
+                new MenuItem(MenuItem.MenuId.MENU_DAU_NOI_QUAN_LY_KHACH_HANG, mContext.getString(R.string.menu_qlkh),
                         R.drawable.ic_add_black_24dp, 0, 0));
-        mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_QLTC,
+        mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_QUAN_LY_THU_CUOC,
                 mContext.getString(R.string.menu_quan_ly_thu_cuoc), R.drawable.ic_add_black_24dp, 0,
                 0));
-        mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_BH_KHO_TC,
+        mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_BAN_HANG_KHO_TAI_CHINH,
                 mContext.getString(R.string.menu_bh_kho_tc), R.drawable.ic_add_black_24dp, 0, 0));
-        mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_BH_CSKH,
+        mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_BH_CHAM_SOC_KHACH_HANG,
                 mContext.getString(R.string.menu_bh_cskh), R.drawable.ic_add_black_24dp, 0, 0));
         mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_BAO_CAO,
                 mContext.getString(R.string.menu_bao_cao), R.drawable.ic_add_black_24dp, 0, 0));
-        mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_QLDB,
+        mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_QUAN_LY_DIA_BAN,
                 mContext.getString(R.string.menu_quan_ly_dia_ban), R.drawable.ic_add_black_24dp, 0,
                 0));
         mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_HELP,

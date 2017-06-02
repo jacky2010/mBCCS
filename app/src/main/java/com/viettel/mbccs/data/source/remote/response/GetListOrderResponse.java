@@ -11,7 +11,7 @@ import java.util.List;
 
 public class GetListOrderResponse extends DataResponse {
     @Expose
-    @SerializedName("saleOrdersList")
+    @SerializedName("lstSaleOrders")
     private List<SaleOrders> saleOrdersList;
 
     public List<SaleOrders> getSaleOrdersList() {

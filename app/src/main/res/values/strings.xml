@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">MBCCS</string>
     <string name="ok">ok</string>
+    <string name="OK">OK</string>
     <string name="cancel">Hủy</string>
+    <string name="permission_guide">Please go to System Settings and turn on permissions in order to use the app.</string>
     <string name="serial_step1">1. Chọn dải serial</string>
     <string name="or">Hoặc</string>
     <string name="close">Đóng</string>
@@ -11,7 +13,7 @@
     <string name="select_serials_step3">3. Xác nhận các serial đã chọn</string>
     <string name="input_empty">Hãy nhập thông tin</string>
     <string name="not_phone">Số điện thoai không hợp lệ</string>
-    <string name="count_serial_selected" formatted="false">
+    <string formatted="false" name="count_serial_selected">
         <![CDATA[
 Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt hàng <font color="#317BE1"><u> %s</u></font>
         ]]>
@@ -23,7 +25,7 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="confirm_goods">Xác nhận mặt hàng bán</string>
     <string name="confirm">Xác nhận</string>
     <string name="menu_dashboard">Dashboard</string>
-    <string name="menu_job">Công việc</string>
+    <string name="menu_task">Công việc</string>
     <string name="menu_sale">Bán hàng</string>
     <string name="menu_customer">Khách hàng</string>
     <string name="menu_more">more</string>
@@ -138,10 +140,10 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="title_search">Tìm kiếm</string>
     <string name="title_confirm">Xác Nhận</string>
     <string name="msg_title_confirm_trans">Bạn đã lập hóa đơn cho các giao dịch sau:</string>
-    <string name="msg_before_tax" formatted="false">Trước thuế: %f</string>
-    <string name="msg_rent" formatted="false">Tiền thuế: %f</string>
-    <string name="msg_discount" formatted="false">Chiết khấu: %f</string>
-    <string name="msg_total_amount_payable" formatted="false">Tổng tiền phải trả: %f</string>
+    <string formatted="false" name="msg_before_tax">Trước thuế: %f</string>
+    <string formatted="false" name="msg_rent">Tiền thuế: %f</string>
+    <string formatted="false" name="msg_discount">Chiết khấu: %f</string>
+    <string formatted="false" name="msg_total_amount_payable">Tổng tiền phải trả: %f</string>
     <string name="msg_choose_transaction">Chọn giao dịch</string>
     <string name="msg_list_trans">Danh sách giao dịch (%d)</string>
     <string name="title_channel">Kênh</string>
@@ -158,7 +160,7 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="amount_no_tax">Tổng tiền : %s đồng</string>
     <string name="amount">Số tiền phải thanh toán : %s đồng</string>
     <string name="tax">Tiền thuế : %s đồng</string>
-    <string name="confirm_before_save_trans_msg" formatted="false"><![CDATA[
+    <string formatted="false" name="confirm_before_save_trans_msg"><![CDATA[
 Bán cho khách hàng <b>%s</b> :<br>
  · Số điện thoại : <b>%s</b><br>
  · Số tiền thanh toán : <b>%s</b>(%s)<br>
@@ -170,7 +172,7 @@ Từ <b>%s</b><br>
 Theo mã chương trình bán hàng %s
     ]]></string>
 
-    <string name="confirm_before_save_trans_msg_channel" formatted="false"><![CDATA[
+    <string formatted="false" name="confirm_before_save_trans_msg_channel"><![CDATA[
 Bán cho kênh <b>%s</b> :<br>
  · Số điện thoại : <b>%s</b><br>
  · Số tiền thanh toán : <b>%s</b>(%s)<br>
@@ -181,7 +183,7 @@ Từ <b>%s</b><br>
 · Số điện thoại : <b>%s</b><br>
 Theo mã chương trình bán hàng %s
     ]]></string>
-    <string name="confirm_before_save_trans_msg_no_saleprogram" formatted="false"><![CDATA[
+    <string formatted="false" name="confirm_before_save_trans_msg_no_saleprogram"><![CDATA[
 Bán cho khách hàng <b>%s</b> :<br>
  · Số điện thoại : <b>%s</b><br>
  · Số tiền thanh toán : <b>%s</b>(%s đồng)<br>
@@ -192,7 +194,7 @@ Từ <b>%s</b><br>
 · Số điện thoại : <b>%s</b><br>
     ]]></string>
 
-    <string name="confirm_before_save_trans_msg_no_saleprogram_channel" formatted="false"><![CDATA[
+    <string formatted="false" name="confirm_before_save_trans_msg_no_saleprogram_channel"><![CDATA[
 Bán cho kênh <b>%s</b> :<br>
  · Số điện thoại : <b>%s</b><br>
  · Số tiền thanh toán : <b>%s</b>(%s đồng)<br>
@@ -371,29 +373,34 @@ Từ <b>%s</b><br>
     <string name="time_invalid">Thời gian nhập vào không hợp lệ</string>
     <string name="time_out_of_month">Chọn thời gian trong khoảng 1 tháng</string>
     <string name="no_channel">Chưa chọn kênh</string>
+    <string name="kpp_order_label_amount">
+        Tổng tiền : %s đồng
+    </string>
+    <string name="kpp_order_label_stock_id">Mã hàng: %s</string>
+    <string name="kpp_order_label_price">%s VND</string>
     <array name="stock_type">
         <item>-Tất cả -</item>
         <item>Hàng mới</item>
         <item>Hàng cũ</item>
     </array>
-    <string name="job_cskpp">Chăm sóc kênh phân phối</string>
-    <string name="job_arising">Việc phát sinh</string>
-    <string name="job_team">Việc tổ đội</string>
+    <string name="task_cskpp">Chăm sóc kênh phân phối</string>
+    <string name="task_arising">Việc phát sinh</string>
+    <string name="task_team">Việc tổ đội</string>
     <string name="reject">Từ chối</string>
     <string name="not_accepted">Chưa nhận</string>
     <string name="inprogress">Đang thực hiện</string>
     <string name="finished">Hoàn thành</string>
-    <string name="search_job_hint">Lọc công việc</string>
-    <string name="job_type">Loại công việc</string>
-    <string name="job_status">Trạng thái công việc</string>
-    <string name="date_assign_job">Ngày giao việc</string>
-    <string name="select_assign_job_type">Chọn loại công việc giao</string>
+    <string name="search_task_hint">Lọc công việc</string>
+    <string name="task_type">Loại công việc</string>
+    <string name="task_status">Trạng thái công việc</string>
+    <string name="date_assign_task">Ngày giao việc</string>
+    <string name="select_assign_task_type">Chọn loại công việc giao</string>
     <string name="text_continue">Tiếp</string>
-    <string name="job_duration">Thời gian thực hiện*</string>
+    <string name="task_duration">Thời gian thực hiện*</string>
     <string name="staff">Nhân viên</string>
-    <string name="job_title">Tên công việc</string>
+    <string name="task_title">Tên công việc</string>
     <string name="description">Mô tả</string>
-    <string name="assign_job">Giao việc</string>
+    <string name="assign_task">Giao việc</string>
 
     <string name="help_title">Trợ giúp</string>
     <string name="help_quan_ly_ban_hang">Làm thế nào để có thể quản lý bán hàng?</string>
@@ -515,6 +522,44 @@ Từ <b>%s</b><br>
     <string name="input_order_store_name">Kho nhận: %s</string>
     <string name="input_order_dialog_success_title">Nhập hóa đơn thành công</string>
     <string name="input_order_dialog_sucess_description">Dải hóa đơn bạn nhập đã được ghi lại thành công.</string>
+    <string name="chon_nhan_vien">Chọn nhân viên</string>
+    <string name="assign">Giao</string>
+    <string name="ban_co_chac_muon_giao_viec_phat_sinh">Bạn có chắc muốn giao việc phát sinh?</string>
+    <string name="thoi_gian_thuc_hien">Thời gian thực hiện</string>
+    <string name="trang_thai">Trạng thái</string>
+    <string name="nhan_vien">Nhân viên</string>
+    <string name="ngay_giao">Ngày giao</string>
+    <string name="loai_cong_viec">Loại công việc</string>
+    <string name="ten_cong_viec">Tên công việc</string>
+    <string name="tuyen_cham_soc">Tuyến chăm sóc</string>
+    <string name="nhan_viec">Nhận việc</string>
+    <string name="chi_tiet_cong_viec">Chi tiết %1$s</string>
+    <string name="ban_co_chac_muon_tu_choi">Bạn có chắc muốn từ chối?</string>
+    <string name="ban_co_chac_muon_nhan_viec">Bạn có chắc muốn nhận việc?</string>
+    <string name="cap_nhat_thong_tin_cong_viec">Cập nhật thông tin công việc</string>
+    <string name="dang_thuc_hien">Đang thực hiện</string>
+    <string name="tam_dung">Tạm dừng</string>
+    <string name="hoan_thanh">Hoàn thành</string>
+    <string name="cap_nhat">Cập nhật</string>
+    <string name="ghi_chu_cham_soc">Ghi chú chăm sóc</string>
+    <string name="chap_nhan">Accept</string>
+    <string name="ly_do_tam_dung">Lý do tạm dừng</string>
+    <string name="ngay_hen">Ngày hẹn</string>
+    <string name="cap_nhat_trang_thai_cham_soc">Cập nhật trạng thái chăm sóc</string>
+    <string name="xac_nhan_tam_dung">Xác nhận tạm dừng</string>
+    <string name="xac_nhan_hoan_thanh_cong_viec">Xác nhận hoàn thành công việc</string>
+    <string name="list_assign_task_activity_cong_viec_duoc_giao">Công việc được giao (%1$d)</string>
+    <string name="activity_create_cskpp_task_thoi_gian_thuc_hien">1. Thời gian thực hiện</string>
+    <string name="activity_create_cskpp_task_den">Đến</string>
+    <string name="activity_create_cskpp_task_nhan_vien">2. Nhân viên</string>
+    <string name="activity_create_cskpp_task_ten_cong_viec">3. Tên công việc</string>
+    <string name="activity_create_cskpp_task_loai_kenh">4. Loại kênh</string>
+    <string name="activity_create_cskpp_task_tuyen_cham_soc">5. Tuyến chăm sóc</string>
+    <string name="activity_create_cskpp_task_giao_cham_soc_kpp">Giao chăm sóc KPP</string>
+    <string name="create_arising_task_activity_giao_viec_thanh_cong">Giao chỉ tiêu/việc thành công!</string>
+    <string name="tin_nhan_thong_bao_da_gui_toi_nhan_vien">Tin nhắn thông báo đã gửi tới SĐT của nhân viên</string>
+    <string name="create_CSKPP_task_activity_giao_viec_thanh_cong">Giao chăm sóc Kênh phân phối thành công!</string>
+    <string name="create_CSKPP_task_activity_ban_co_chac_muon_giao_viec">Bạn có chắc muốn giao chăm sóc Kênh phân phối trên Tuyến \"%1$s\"</string>
 
     <!--Base search input reposotory-->
     <string name="base_search_lable_from">Từ</string>
@@ -533,6 +578,9 @@ Từ <b>%s</b><br>
     <string name="create_update_information_create_no_information">Không tìm thấy số thuê bao!</string>
     <string name="create_update_information_register_new_payment">Đăng ký trả trước mới</string>
     <string name="create_update_information_update_title">Cập nhật thông tin thuê bao</string>
+    <string name="create_update_information_create_validate_field">
+        Số thuê bao và số giấy tờ không thể bỏ trống
+    </string>
     <string name="fragment_create_update_information_create_title">Đăng ký thông tin</string>
     <string name="fragment_create_update_information_create_clone_title">Đăng ký thông tin (clone)</string>
     <string name="fragment_create_update_information_create_tttb">Thông tin thuê bao</string>
@@ -564,4 +612,26 @@ Từ <b>%s</b><br>
     <string name="fragment_create_update_information_create_get_otp">Get OTP</string>
     <string name="fragment_create_update_information_create_dang_ky">Đăng ký</string>
     <string name="fragment_create_update_information_create_cap_nhat">Cập nhật</string>
+    <string name="fragment_create_update_information_create_dk_thanh_cong">Đăng ký thành công</string>
+
+
+    <string name="confirm_transaction_sell_cancel_don_dat_hang_tu_kenh">Đơn đặt hàng từ kênh</string>
+    <string name="confirm_transaction_sell_cancel_sdt">- Số điện thoại: </string>
+    <string name="confirm_transaction_sell_cancel_so_tien_thanh_toan">- Số tiền thanh toán: </string>
+    <string name="confirm_transaction_sell_cancel_ly_do_huy">LÝ DO HỦY</string>
+    <string name="confirm_transaction_sell_cancel_huy_giao_dich_thanh_cong">Hủy giao dịch thành công!</string>
+    <string name="confirm_transaction_sell_cancel_ban_giao_dich_thanh_cong">Bán giao dịch thành công!</string>
+    <string name="confirm_transaction_sell_cancel_gui_tin_nhan">
+        Tin nhắn thông báo đã gửi tới SĐT của kênh phân phối đặt hàng và kênh bán
+    </string>
+
+    <string name="picker_photo_take_photo">Lấy ảnh từ Camera</string>
+    <string name="picker_photo_chooose_library">Chọn từ bộ sưu tập</string>
+    <string name="picker_photo_cancel">Hủy</string>
+    <string name="picker_photo_add_photo">Chọn ảnh</string>
+
+    <string name="layout_select_address_province">Tỉnh*</string>
+    <string name="layout_select_address_district">Quận/Huyện*</string>
+    <string name="layout_select_address_wards">Phường/xã</string>
+    <string name="layout_select_address_address">Địa chỉ chi tiết (số nhà, tên đường, phố)</string>
 </resources>

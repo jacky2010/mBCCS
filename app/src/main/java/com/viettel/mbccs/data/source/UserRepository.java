@@ -1,24 +1,38 @@
 package com.viettel.mbccs.data.source;
 
+import com.viettel.mbccs.data.model.District;
+import com.viettel.mbccs.data.model.DistrictResponse;
 import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.model.LoginResult;
+import com.viettel.mbccs.data.model.Precinct;
+import com.viettel.mbccs.data.model.PrecinctResponse;
+import com.viettel.mbccs.data.model.Province;
+import com.viettel.mbccs.data.model.ProvinceResponse;
 import com.viettel.mbccs.data.model.Session;
 import com.viettel.mbccs.data.model.StaffInfo;
 import com.viettel.mbccs.data.source.local.IUserLocalDataSource;
 import com.viettel.mbccs.data.source.local.UserLocalDataSource;
 import com.viettel.mbccs.data.source.remote.IUserRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.datasource.UserRemoteDataSource;
-import com.viettel.mbccs.data.source.remote.request.BaseRequest;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
+import com.viettel.mbccs.data.source.remote.request.GetDistrictRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
+import com.viettel.mbccs.data.source.remote.request.GetPrecinctRequest;
+import com.viettel.mbccs.data.source.remote.request.GetProvinceRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
 import com.viettel.mbccs.data.source.remote.request.LoginRequest;
+import com.viettel.mbccs.data.source.remote.response.GetDistrictResponse;
 import com.viettel.mbccs.data.source.remote.response.GetInfoSaleTranResponse;
+import com.viettel.mbccs.data.source.remote.response.GetPrecinctResponse;
+import com.viettel.mbccs.data.source.remote.response.GetProvinceResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
 import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
 import com.viettel.mbccs.data.source.remote.response.SendCodeChangePassResponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
+import java.util.ArrayList;
+import java.util.List;
 import rx.Observable;
 
 /**
@@ -28,8 +42,8 @@ import rx.Observable;
 public class UserRepository implements IUserLocalDataSource, IUserRemoteDataSource {
 
     private volatile static UserRepository instance;
-    private UserLocalDataSource mUserLocalDataSource;
-    private UserRemoteDataSource mUserRemoteDataSource;
+    private IUserLocalDataSource mUserLocalDataSource;
+    private IUserRemoteDataSource mUserRemoteDataSource;
 
     public UserRepository(UserLocalDataSource userLocalDataSource,
             UserRemoteDataSource userRemoteDataSource) {
@@ -136,16 +150,6 @@ public class UserRepository implements IUserLocalDataSource, IUserRemoteDataSour
     }
 
     @Override
-    public void saveSessionVTG(Session session) {
-        mUserLocalDataSource.saveSessionVTG(session);
-    }
-
-    @Override
-    public Session getSessionVTG() {
-        return mUserLocalDataSource.getSessionVTG();
-    }
-
-    @Override
     public void saveapiKey(String apikey) {
 
         mUserLocalDataSource.saveapiKey(apikey);
@@ -157,13 +161,59 @@ public class UserRepository implements IUserLocalDataSource, IUserRemoteDataSour
     }
 
     @Override
-    public void saveAPIKeyVTG(String apiKey) {
-        mUserLocalDataSource.saveAPIKeyVTG(apiKey);
+    public List<Province> getListProvince() {
+        List<Province> list = mUserLocalDataSource.getListProvince();
+        if (list == null) {
+            list = new ArrayList<>();
+        }
+        return list;
     }
 
     @Override
-    public String getApiKeyVTG() {
-        return mUserLocalDataSource.getApiKeyVTG();
+    public List<District> getListDistrictByProvinceId(String provinceId) {
+        List<District> list = mUserLocalDataSource.getListDistrictByProvinceId(provinceId);
+        if (list == null) {
+            list = new ArrayList<>();
+        }
+        return list;
+    }
+
+    @Override
+    public List<Precinct> getListPrecinctByDistrictId(String districtId) {
+        List<Precinct> list = mUserLocalDataSource.getListPrecinctByDistrictId(districtId);
+        if (list == null) {
+            list = new ArrayList<>();
+        }
+        return list;
+    }
+
+    @Override
+    public List<Precinct> getListPrecinctByProvinceAndDistrictId(String provinceId,
+            String districtId) {
+        List<Precinct> list =
+                mUserLocalDataSource.getListPrecinctByProvinceAndDistrictId(provinceId, districtId);
+        if (list == null) {
+            list = new ArrayList<>();
+        }
+        return list;
+    }
+
+    @Override
+    public void setListProvince(List<ProvinceResponse> data) {
+        if (data == null || data.size() == 0) return;
+        mUserLocalDataSource.setListProvince(data);
+    }
+
+    @Override
+    public void setListDistrict(List<DistrictResponse> data) {
+        if (data == null || data.size() == 0) return;
+        mUserLocalDataSource.setListDistrict(data);
+    }
+
+    @Override
+    public void setListPrecinct(List<PrecinctResponse> data) {
+        if (data == null || data.size() == 0) return;
+        mUserLocalDataSource.setListPrecinct(data);
     }
 
     @Override
@@ -178,30 +228,45 @@ public class UserRepository implements IUserLocalDataSource, IUserRemoteDataSour
 
     @Override
     public Observable<TelecomServiceAndSaleProgramResponse> getTelecomserviceAndSaleProgram(
-            BaseRequest<GetTelecomServiceAndSaleProgramRequest> request) {
+            DataRequest<GetTelecomServiceAndSaleProgramRequest> request) {
         return mUserRemoteDataSource.getTelecomserviceAndSaleProgram(request);
     }
 
     @Override
-    public Observable<GetSerialsResponse> getSerial(BaseRequest<GetSerialRequest> request) {
+    public Observable<GetSerialsResponse> getSerial(DataRequest<GetSerialRequest> request) {
         return mUserRemoteDataSource.getSerial(request);
     }
 
     @Override
     public Observable<GetTotalStockResponse> getModelSales(
-            BaseRequest<GetTotalStockRequest> request) {
+            DataRequest<GetTotalStockRequest> request) {
         return mUserRemoteDataSource.getModelSales(request);
     }
 
     @Override
     public Observable<GetInfoSaleTranResponse> getSaleTransInfo(
-            BaseRequest<GetInfoSaleTranRequest> request) {
+            DataRequest<GetInfoSaleTranRequest> request) {
         return mUserRemoteDataSource.getSaleTransInfo(request);
     }
 
     @Override
     public Observable<GetInfoSaleTranResponse> createSaleTransRetail(
-            BaseRequest<GetInfoSaleTranRequest> request) {
+            DataRequest<GetInfoSaleTranRequest> request) {
         return mUserRemoteDataSource.createSaleTransRetail(request);
+    }
+
+    @Override
+    public Observable<GetProvinceResponse> getProvince(DataRequest<GetProvinceRequest> request) {
+        return mUserRemoteDataSource.getProvince(request);
+    }
+
+    @Override
+    public Observable<GetDistrictResponse> getDistrict(DataRequest<GetDistrictRequest> request) {
+        return mUserRemoteDataSource.getDistrict(request);
+    }
+
+    @Override
+    public Observable<GetPrecinctResponse> getPrecinct(DataRequest<GetPrecinctRequest> request) {
+        return mUserRemoteDataSource.getPrecinct(request);
     }
 }

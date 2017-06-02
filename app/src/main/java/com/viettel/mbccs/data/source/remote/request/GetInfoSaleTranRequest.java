@@ -1,16 +1,19 @@
 package com.viettel.mbccs.data.source.remote.request;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.viettel.mbccs.data.model.Customer;
 import com.viettel.mbccs.data.model.StockSerial;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by eo_cuong on 5/19/17.
  */
 
-public class GetInfoSaleTranRequest extends DataRequest{
+public class GetInfoSaleTranRequest implements Parcelable {
 
     @SerializedName("shopId")
     @Expose
@@ -202,5 +205,87 @@ public class GetInfoSaleTranRequest extends DataRequest{
 
     public void setCustomer(Customer customer) {
         mCustomer = customer;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(this.shopId);
+        dest.writeLong(this.staffId);
+        dest.writeList(this.lstSerialSale);
+        dest.writeParcelable(this.mCustomer, flags);
+        dest.writeString(this.paymentMethod);
+        dest.writeString(this.IsdnPay);
+        dest.writeLong(this.telecomserviceId);
+        dest.writeString(this.saleProgrameCode);
+        dest.writeString(this.saleTransType);
+        dest.writeLong(this.chanelId);
+        dest.writeLong(this.channelType);
+        dest.writeString(this.priceType);
+        dest.writeString(this.pricePolicy);
+        dest.writeString(this.discountPolicy);
+        dest.writeString(this.couponCode);
+        dest.writeString(this.language);
+    }
+
+    public GetInfoSaleTranRequest() {
+    }
+
+    protected GetInfoSaleTranRequest(Parcel in) {
+        this.shopId = in.readLong();
+        this.staffId = in.readLong();
+        this.lstSerialSale = new ArrayList<StockSerial>();
+        in.readList(this.lstSerialSale, StockSerial.class.getClassLoader());
+        this.mCustomer = in.readParcelable(Customer.class.getClassLoader());
+        this.paymentMethod = in.readString();
+        this.IsdnPay = in.readString();
+        this.telecomserviceId = in.readLong();
+        this.saleProgrameCode = in.readString();
+        this.saleTransType = in.readString();
+        this.chanelId = in.readLong();
+        this.channelType = in.readLong();
+        this.priceType = in.readString();
+        this.pricePolicy = in.readString();
+        this.discountPolicy = in.readString();
+        this.couponCode = in.readString();
+        this.language = in.readString();
+    }
+
+    public static final Creator<GetInfoSaleTranRequest> CREATOR =
+            new Creator<GetInfoSaleTranRequest>() {
+                @Override
+                public GetInfoSaleTranRequest createFromParcel(Parcel source) {
+                    return new GetInfoSaleTranRequest(source);
+                }
+
+                @Override
+                public GetInfoSaleTranRequest[] newArray(int size) {
+                    return new GetInfoSaleTranRequest[size];
+                }
+            };
+
+    public CreateSaleTransChannelRequest clone() {
+        CreateSaleTransChannelRequest request = new CreateSaleTransChannelRequest();
+        request.setChanelId(getChanelId());
+        request.setChannelType(getChannelType());
+        request.setCouponCode(getCouponCode());
+        request.setCustomer(getCustomer());
+        request.setDiscountPolicy(getDiscountPolicy());
+        request.setIsdnPay(getIsdnPay());
+        request.setLanguage(getLanguage());
+        request.setLstSerialSale(getLstSerialSale());
+        request.setPaymentMethod(getPaymentMethod());
+        request.setPricePolicy(getPricePolicy());
+        request.setPriceType(getPriceType());
+        request.setStaffId(getStaffId());
+        request.setShopId(getShopId());
+        request.setSaleProgrameCode(getSaleProgrameCode());
+        request.setSaleTransType(getSaleTransType());
+        request.setTelecomserviceId(getTelecomserviceId());
+        return request;
     }
 }

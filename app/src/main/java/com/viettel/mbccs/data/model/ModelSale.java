@@ -122,7 +122,7 @@ public class ModelSale implements Serializable, Parcelable {
     public List<SerialBO> getSerialBlocks() {
         if (mSerialBlocks.size() == 0) {
             if (mSerials.size() > 0) {
-                return Common.getSerialBlockBySerials(mSerials);
+                return Common.getSerialBlockBySerials(mSerials, this);
             }
         }
         return mSerialBlocks;

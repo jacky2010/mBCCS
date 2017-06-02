@@ -20,8 +20,11 @@ import com.viettel.mbccs.screen.assignjob.ListAssignJobActivity;
 import com.viettel.mbccs.screen.branches.BranchesActivity;
 import com.viettel.mbccs.screen.changesim.ChangeSimActivity;
 import com.viettel.mbccs.screen.inputorder.InputOrderActivity;
+import com.viettel.mbccs.screen.assigntask.ListAssignTaskActivity;
 import com.viettel.mbccs.screen.billing.BillingActivity;
 import com.viettel.mbccs.screen.change.installation.InstallationAddressActivity;
+import com.viettel.mbccs.screen.information.CreateUpdateInformationActivity;
+import com.viettel.mbccs.screen.inputorder.InputOrderActivity;
 import com.viettel.mbccs.screen.kpp.order.KPPOrderActivity;
 import com.viettel.mbccs.screen.main.fragments.menu.MenuPresenter;
 import com.viettel.mbccs.screen.sell.channel.SaleChannelActivity;
@@ -84,17 +87,17 @@ public class BaseSubMenuActivity
     public void initMenuList() {
         // FIXME: Fake data
         switch (mMenuItem.getId()) {
-            case MenuItem.MenuId.MENU_QLKH:
+            case MenuItem.MenuId.MENU_DAU_NOI_QUAN_LY_KHACH_HANG:
                 mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
                         getString(R.string.menu_dau_noi_di_dong), R.drawable.ic_add_black_24dp, 0,
                         0));
                 mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
                         getString(R.string.menu_dau_noi_co_dinh), R.drawable.ic_add_black_24dp, 0,
                         0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_DANG_KY_THONG_TIN,
                         getString(R.string.menu_dang_ky_thong_tin), R.drawable.ic_add_black_24dp, 0,
                         0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_CAP_NHAT_THONG_TIN,
                         getString(R.string.menu_cap_nhat_thong_tin), R.drawable.ic_add_black_24dp,
                         0, 0));
                 mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_CHANGE_SIM,
@@ -112,7 +115,7 @@ public class BaseSubMenuActivity
                         getString(R.string.menu_giao_viec_cs_kpp), R.drawable.ic_add_black_24dp, 0,
                         0));
                 break;
-            case MenuItem.MenuId.MENU_QLTC:
+            case MenuItem.MenuId.MENU_QUAN_LY_THU_CUOC:
                 mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
                         getString(R.string.menu_chuc_nang_xac_minh), R.drawable.ic_add_black_24dp,
                         0, 0));
@@ -126,7 +129,7 @@ public class BaseSubMenuActivity
                         getString(R.string.menu_chuc_nang_quan_ly_tien_do_thu_cuoc),
                         R.drawable.ic_add_black_24dp, 0, 0));
                 break;
-            case MenuItem.MenuId.MENU_BH_KHO_TC:
+            case MenuItem.MenuId.MENU_BAN_HANG_KHO_TAI_CHINH:
                 mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_SALE_RETAIL,
                         getString(R.string.menu_ban_le), R.drawable.ic_add_black_24dp, 0, 0));
                 mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_SALE_CHANNEL,
@@ -160,6 +163,9 @@ public class BaseSubMenuActivity
                         0));
                 mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_XEM_KHO,
                         getString(R.string.menu_xem_kho), R.drawable.ic_add_black_24dp, 0, 0));
+                mMenuItemList.add(
+                        new MenuItem(MenuItem.MenuId.MENU_XEM_KHO, getString(R.string.menu_xem_kho),
+                                R.drawable.ic_add_black_24dp, 0, 0));
                 mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_NHAP_HOA_DON,
                         getString(R.string.menu_nhap_hoa_don), R.drawable.ic_add_black_24dp, 0, 0));
                 mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
@@ -199,7 +205,7 @@ public class BaseSubMenuActivity
                         getString(R.string.menu_doi_soat_cong_no_giay_nop_tien),
                         R.drawable.ic_add_black_24dp, 0, 0));
                 break;
-            case MenuItem.MenuId.MENU_BH_CSKH:
+            case MenuItem.MenuId.MENU_BH_CHAM_SOC_KHACH_HANG:
                 mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
                         getString(R.string.menu_tra_cuu_bao_hanh), R.drawable.ic_add_black_24dp, 0,
                         0));
@@ -242,6 +248,8 @@ public class BaseSubMenuActivity
                 break;
             case MenuItem.MenuId.MENU_QLDB:
                 mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_CREATE_BRANCH,
+            case MenuItem.MenuId.MENU_QUAN_LY_DIA_BAN:
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
                         getString(R.string.menu_tao_kpp), R.drawable.ic_add_black_24dp, 0, 0));
                 mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
                         getString(R.string.menu_quan_ly_dia_ban_hanh_chinh),
@@ -267,8 +275,8 @@ public class BaseSubMenuActivity
                     // FIXME: Static method for ALL CASE
                     switch (item.getId()) {
                         case MenuItem.MenuId.MENU_LAP_HOA_DON:
-                            startActivity(new Intent(BaseSubMenuActivity.this,
-                                    BillingActivity.class));
+                            startActivity(
+                                    new Intent(BaseSubMenuActivity.this, BillingActivity.class));
                             break;
                         case MenuItem.MenuId.MENU_TD_LAP_DAT:
                             startActivity(new Intent(BaseSubMenuActivity.this,
@@ -277,7 +285,7 @@ public class BaseSubMenuActivity
                         case MenuItem.MenuId.MENU_GIAO_VIEC_PHAT_SINH:
                         case MenuItem.MenuId.MENU_GIAO_VIEC_CS_KPP:
                             startActivity(new Intent(BaseSubMenuActivity.this,
-                                    ListAssignJobActivity.class));
+                                    ListAssignTaskActivity.class));
                             break;
                         case MenuItem.MenuId.MENU_BAN_HANG_THEO_DON_PHE_DUYET_DON_HANG:
                             startActivity(
@@ -319,6 +327,18 @@ public class BaseSubMenuActivity
                         case MenuItem.MenuId.MENU_TRANSFER_ANYPAY:
                             startActivity(
                                     new Intent(BaseSubMenuActivity.this, TransferAnyPayActivity.class));
+                            break;
+                        case MenuItem.MenuId.MENU_DANG_KY_THONG_TIN:
+                            Intent intentDKTT = new Intent(BaseSubMenuActivity.this,
+                                    CreateUpdateInformationActivity.class);
+                            intentDKTT.putExtra(CreateUpdateInformationActivity.ARG_TYPE, true);
+                            startActivity(intentDKTT);
+                            break;
+                        case MenuItem.MenuId.MENU_CAP_NHAT_THONG_TIN:
+                            Intent intentCNTT = new Intent(BaseSubMenuActivity.this,
+                                    CreateUpdateInformationActivity.class);
+                            intentCNTT.putExtra(CreateUpdateInformationActivity.ARG_TYPE, false);
+                            startActivity(intentCNTT);
                             break;
                     }
                 }

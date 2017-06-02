@@ -1,7 +1,6 @@
 package com.viettel.mbccs.screen.sell.orders;
 
 import android.support.design.widget.TabLayout;
-import android.widget.Toast;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.constance.OrderStatus;
@@ -10,7 +9,7 @@ import com.viettel.mbccs.data.model.SaleOrders;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.databinding.ActivitySellOrdersBinding;
 import com.viettel.mbccs.screen.sell.orders.adapter.SellOrdersFragmentAdapter;
-import java.util.ArrayList;
+import com.viettel.mbccs.utils.DialogUtils;
 import java.util.List;
 
 /**
@@ -23,7 +22,6 @@ public class SellOrdersActivity
 
     private SellOrdersPresenter presenter;
     private SellOrdersFragmentAdapter sellOrdersFragmentAdapter;
-
 
     @Override
     protected int getIdLayout() {
@@ -104,9 +102,9 @@ public class SellOrdersActivity
             }
         }
         mBinding.tabLayout.getTabAt(0)
-                .setText(getString(R.string.sell_orders_title_pending, countApp));
+                .setText(getString(R.string.sell_orders_title_pending, countPen));
         mBinding.tabLayout.getTabAt(1)
-                .setText(getString(R.string.sell_orders_title_approvals, countPen));
+                .setText(getString(R.string.sell_orders_title_approvals, countApp));
         mBinding.tabLayout.getTabAt(2)
                 .setText(getString(R.string.sell_orders_title_reject, countRe));
         sellOrdersFragmentAdapter =
@@ -117,40 +115,41 @@ public class SellOrdersActivity
     }
 
     @Override
-    public void getDataError() {
-        // TODO: 5/18/17 show error
+    public void getDataError(BaseException error) {
+        DialogUtils.showDialogError(this, error.getMessage());
         // Fake data
-        List<SaleOrders> saleOrdersList = new ArrayList<>();
-        mBinding.tabLayout.getTabAt(0).setText(getString(R.string.sell_orders_title_pending, 10));
-        mBinding.tabLayout.getTabAt(1).setText(getString(R.string.sell_orders_title_approvals, 10));
-        mBinding.tabLayout.getTabAt(2).setText(getString(R.string.sell_orders_title_reject, 10));
-        presenter.setTotalOrders(30);
-        for (int i = 0; i < 30; i++) {
-            SaleOrders order = new SaleOrders();
-            order.setOrderDate("17/05/2017");
-            order.setSaleOrdersId(10000000);
-            order.setChannelCode("10000000");
-            order.setChannelName("kenh cua bo may");
-            if (i < 10) {
-                order.setOrderStatus(OrderStatus.APPROVALS);
-                order.setOderName("APPROVALS");
-            } else if (10 < i && i < 20) {
-                order.setOrderStatus(OrderStatus.PENDING);
-                order.setOderName("PENDING");
-            } else {
-                order.setOrderStatus(OrderStatus.REJECT);
-                order.setOderName("REJECT");
-            }
-            saleOrdersList.add(order);
-        }
-        sellOrdersFragmentAdapter =
-                new SellOrdersFragmentAdapter(getSupportFragmentManager(), saleOrdersList, new ChannelInfo());
-        presenter.setSellOrdersFragmentAdapter(sellOrdersFragmentAdapter);
+        //        List<SaleOrders> saleOrdersList = new ArrayList<>();
+        //        mBinding.tabLayout.getTabAt(0).setText(getString(R.string.sell_orders_title_pending, 10));
+        //        mBinding.tabLayout.getTabAt(1).setText(getString(R.string.sell_orders_title_approvals, 10));
+        //        mBinding.tabLayout.getTabAt(2).setText(getString(R.string.sell_orders_title_reject, 10));
+        //        presenter.setTotalOrders(30);
+        //        for (int i = 0; i < 30; i++) {
+        //            SaleOrders order = new SaleOrders();
+        //            order.setOrderDate("17/05/2017");
+        //            order.setSaleOrdersId(10000000);
+        //            order.setChannelCode("10000000");
+        //            order.setChannelName("kenh cua bo may");
+        //            if (i < 10) {
+        //                order.setOrderStatus(OrderStatus.APPROVALS);
+        //                order.setOderName("APPROVALS");
+        //            } else if (10 < i && i < 20) {
+        //                order.setOrderStatus(OrderStatus.PENDING);
+        //                order.setOderName("PENDING");
+        //            } else {
+        //                order.setOrderStatus(OrderStatus.REJECT);
+        //                order.setOderName("REJECT");
+        //            }
+        //            saleOrdersList.add(order);
+        //        }
+        //        sellOrdersFragmentAdapter =
+        //                new SellOrdersFragmentAdapter(getSupportFragmentManager(), saleOrdersList,
+        //                        new ChannelInfo());
+        //        presenter.setSellOrdersFragmentAdapter(sellOrdersFragmentAdapter);
     }
 
     @Override
     public void getListChannelByOwnerTypeIdError(BaseException error) {
-        // TODO: 5/18/17 show error
+        DialogUtils.showDialogError(this, error.getMessage());
     }
 
     @Override
@@ -160,11 +159,11 @@ public class SellOrdersActivity
 
     @Override
     public long getDateFrom() {
-        return mBinding.dateTo.getDateInMilis();
+        return mBinding.dateFrom.getDateInMilis();
     }
 
     @Override
     public void showErrorDate() {
-        Toast.makeText(this, "Thoi gian toi da 1 thang ", Toast.LENGTH_SHORT).show();
+        DialogUtils.showDialogError(this, "Thoi gian toi da 1 thang ");
     }
 }

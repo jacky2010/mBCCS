@@ -25,6 +25,7 @@ import java.util.List;
  */
 
 public class OrdersFragment extends BaseFragment implements OrdersAdapter.OrdersAdapterCallback {
+    public static final String STRING_NAME = "OrdersFragment";
     private static final String ARG_DATA = "DATA";
     private static final String ARG_CHANGE_INFO = "CHANGE_INFO";
     private FragmentOrdersBinding binding;
@@ -34,7 +35,8 @@ public class OrdersFragment extends BaseFragment implements OrdersAdapter.Orders
     public ObservableField<OrdersAdapter> adapterOrders;
     public ObservableField<RecyclerView.ItemDecoration> itemDecoration;
 
-    public static OrdersFragment newInstance(List<SaleOrders> saleOrdersList, ChannelInfo channelInfoSale) {
+    public static OrdersFragment newInstance(List<SaleOrders> saleOrdersList,
+            ChannelInfo channelInfoSale) {
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList(ARG_DATA, (ArrayList<? extends Parcelable>) saleOrdersList);
         bundle.putParcelable(ARG_CHANGE_INFO, channelInfoSale);
@@ -73,9 +75,9 @@ public class OrdersFragment extends BaseFragment implements OrdersAdapter.Orders
     public void itemOrderClick(int position) {
         FragmentTransaction fragmentTransaction =
                 getActivity().getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.addToBackStack(OrderDetailFragment.STRING_NAME);
         fragmentTransaction.replace(R.id.frame_sell_orders,
-                OrderDetailFragment.newInstance(saleOrdersList.get(position).getSaleOrdersId(), channelInfoSale))
-                .commit();
+                OrderDetailFragment.newInstance(saleOrdersList.get(position).getSaleOrdersId(),
+                        channelInfoSale)).commit();
     }
 }

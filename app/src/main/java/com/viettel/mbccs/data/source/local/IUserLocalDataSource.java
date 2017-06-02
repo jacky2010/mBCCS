@@ -1,9 +1,16 @@
 package com.viettel.mbccs.data.source.local;
 
 import com.mukesh.countrypicker.Country;
+import com.viettel.mbccs.data.model.District;
+import com.viettel.mbccs.data.model.DistrictResponse;
 import com.viettel.mbccs.data.model.LoginResult;
+import com.viettel.mbccs.data.model.Precinct;
+import com.viettel.mbccs.data.model.PrecinctResponse;
+import com.viettel.mbccs.data.model.Province;
+import com.viettel.mbccs.data.model.ProvinceResponse;
 import com.viettel.mbccs.data.model.Session;
 import com.viettel.mbccs.data.model.StaffInfo;
+import java.util.List;
 
 /**
  * Created by eo_cuong on 5/11/17.
@@ -103,27 +110,47 @@ public interface IUserLocalDataSource {
      */
     Session getSession();
 
-    /***
-     * Save session from api login VTG
-     * @param session
-     */
-    void saveSessionVTG(Session session);
-
-    /***
-     * get session VTG
-     * @return
-     */
-    Session getSessionVTG();
-
-    /***
+    /**
      * save api key from login VTG
-     * @param apikey
      */
     void saveapiKey(String apikey);
 
     String getApiKey();
 
-    void saveAPIKeyVTG(String apiKey);
+    List<Province> getListProvince();
 
-    String getApiKeyVTG();
+    List<District> getListDistrictByProvinceId(String provinceId);
+
+    List<Precinct> getListPrecinctByDistrictId(String districtId);
+
+    List<Precinct> getListPrecinctByProvinceAndDistrictId(String provinceId, String districtId);
+
+    void setListProvince(List<ProvinceResponse> data);
+
+    void setListDistrict(List<DistrictResponse> data);
+
+    void setListPrecinct(List<PrecinctResponse> data);
+
+    //    /**
+    //     * Get data {@link Province} in database
+    //     *
+    //     * @return {@link List<Province>}
+    //     */
+    //    List<Province> getProvinceList();
+    //
+    //    /**
+    //     * Get data {@link District} via {@link Province#id} in database
+    //     *
+    //     * @param idProvince: {@link Province#id}
+    //     * @return: {@link List<District>}
+    //     */
+    //    List<District> getDistrictList(int idProvince);
+    //
+    //    /**
+    //     * Get data {@link Wards} via {@link District#id} in database
+    //     *
+    //     * @param idDistrict: {@link District#id}
+    //     * @return: {@link List<Wards>}
+    //     */
+    //    List<Wards> getWardsList(int idDistrict);
 }

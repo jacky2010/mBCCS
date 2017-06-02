@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.viettel.mbccs.utils.Common;
 
 /**
  * Created by HuyQuyet on 5/21/17.
@@ -11,48 +12,56 @@ import com.google.gson.annotations.SerializedName;
 
 public class StockTotal implements Parcelable {
     @Expose
-    @SerializedName("OwnerId")
+    @SerializedName("ownerId")
     private long ownerId;
 
     @Expose
-    @SerializedName("OwnerType")
+    @SerializedName("ownerType")
     private long ownerType;
 
     @Expose
-    @SerializedName("StockModelId")
+    @SerializedName("stockModelId")
     private long stockModelId;
 
     @Expose
-    @SerializedName("StockModelCode")
+    @SerializedName("stockModelCode")
     private String stockModelCode;
 
     @Expose
-    @SerializedName("StockModelName")
+    @SerializedName("stockModelName")
     private String stockModelName;
 
     @Expose
-    @SerializedName("StockTypeId")
+    @SerializedName("stockTypeId")
     private long stockTypeId;
 
     @Expose
-    @SerializedName("StockTypeName")
+    @SerializedName("stockTypeName")
     private String stockTypeName;
 
     @Expose
-    @SerializedName("Quantity")
+    @SerializedName("quantity")
     private long quantity;
 
     @Expose
-    @SerializedName("QuantityIssue")
+    @SerializedName("quantityIssue")
     private long quantityIssue;
 
     @Expose
-    @SerializedName("StateId")
+    @SerializedName("stateId")
     private long stateId;
 
     @Expose
-    @SerializedName("StateName")
+    @SerializedName("stateName")
     private String stateName;
+
+    @Expose
+    @SerializedName("price")
+    private float price;
+
+    @Expose
+    @SerializedName("image")
+    private String image;
 
     private int countChoice;
 
@@ -167,6 +176,22 @@ public class StockTotal implements Parcelable {
         this.stateName = stateName;
     }
 
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @Override
     public boolean equals(Object obj) {
         return (this.stockModelId == ((StockTotal) obj).getStockModelId()
@@ -191,6 +216,8 @@ public class StockTotal implements Parcelable {
         dest.writeLong(this.quantityIssue);
         dest.writeLong(this.stateId);
         dest.writeString(this.stateName);
+        dest.writeFloat(this.price);
+        dest.writeString(this.image);
         dest.writeInt(this.countChoice);
     }
 
@@ -206,7 +233,13 @@ public class StockTotal implements Parcelable {
         this.quantityIssue = in.readLong();
         this.stateId = in.readLong();
         this.stateName = in.readString();
+        this.price = in.readFloat();
+        this.image = in.readString();
         this.countChoice = in.readInt();
+    }
+
+    public String getTotalMoney() {
+        return Common.formatDouble(getCountChoice() * price);
     }
 
     public static final Creator<StockTotal> CREATOR = new Creator<StockTotal>() {

@@ -1,11 +1,14 @@
 package com.viettel.mbccs.screen.sell.retail.sellprogrampicker;
 
-import android.app.Activity;
 import android.content.Context;
-import android.databinding.ObservableField;
 import android.os.Handler;
+import android.support.v7.widget.RecyclerView;
+
+import com.viettel.mbccs.R;
+import com.viettel.mbccs.base.BaseSearchListPickerPresenter;
 import com.viettel.mbccs.data.model.SaleProgram;
 import com.viettel.mbccs.screen.sell.retail.sellprogrampicker.adapter.SellProgramAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,24 +16,17 @@ import java.util.List;
  * Created by eo_cuong on 5/16/17.
  */
 
-public class SaleProgramPresenter
+public class SaleProgramPresenter extends BaseSearchListPickerPresenter<SaleProgram>
         implements SaleProgramContract.Presenter, SellProgramAdapter.OnSellProgramListener {
 
-    private Context mContext;
-    private SaleProgramContract.ViewModel mViewModel;
-    public ObservableField<String> text;
-    private SellProgramAdapter mAdapter;
-    private List<SaleProgram> mSalePrograms = new ArrayList<>();
-    private List<SaleProgram> mSaleProgramFilter = new ArrayList<>();
+    private List<SaleProgram> mSaleProgramFilter;
     private Handler handler = new Handler();
 
     public SaleProgramPresenter(Context context, SaleProgramContract.ViewModel viewModel,
-            List<SaleProgram> salePrograms) {
-        mContext = context;
-        mViewModel = viewModel;
-        mSalePrograms.addAll(salePrograms);
-        mSaleProgramFilter.addAll(mSalePrograms);
-        init();
+                                List<SaleProgram> salePrograms) {
+        super(context, viewModel);
+        listData.addAll(salePrograms);
+        mSaleProgramFilter.addAll(listData);
     }
 
     @Override
@@ -43,26 +39,63 @@ public class SaleProgramPresenter
 
     }
 
+    @Override
+    public void doSearch() {
+
+    }
+
+    @Override
+    public void onSearchSuccess() {
+
+    }
+
+    @Override
+    public void onSearchFail() {
+
+    }
+
+    @Override
+    public String getSearchHint() {
+        return null;
+    }
+
+    @Override
+    public String getToolbarTitle() {
+        return mContext.getString(R.string.sale_program);
+    }
+
+    @Override
+    public void onBackPressed() {
+        mViewModel.onBackPressed();
+    }
+
+    @Override
+    protected RecyclerView.Adapter getListAdapter() {
+        if (mSaleProgramFilter == null)
+            mSaleProgramFilter = new ArrayList<>();
+        SellProgramAdapter adapter = new SellProgramAdapter(mSaleProgramFilter);
+        adapter.setOnSellProgramListener(this);
+        return adapter;
+    }
+
+    @Override
+    public String getListCount() {
+        return null;
+    }
+
     Runnable filter = new Runnable() {
         @Override
         public void run() {
             mSaleProgramFilter.clear();
             String searchKey = text.get();
-            for (SaleProgram item : mSalePrograms) {
+            for (SaleProgram item : listData) {
                 if (item.getName().toLowerCase().contains(searchKey.toLowerCase())) {
                     mSaleProgramFilter.add(item);
                 }
             }
-            mAdapter.notifyDataSetChanged();
+            adapter.get().notifyDataSetChanged();
         }
     };
-
-    @Override
-    public void init() {
-        text = new ObservableField<String>() ;
-        mAdapter = new SellProgramAdapter(mSaleProgramFilter);
-        mAdapter.setOnSellProgramListener(this);
-    }
 
     @Override
     public void onTextChange(String s) {
@@ -70,20 +103,8 @@ public class SaleProgramPresenter
         handler.postDelayed(filter, 500);
     }
 
-    public void onCancel() {
-        ((Activity) mContext).finish();
-    }
-
-    public SellProgramAdapter getAdapter() {
-        return mAdapter;
-    }
-
-    public void setAdapter(SellProgramAdapter adapter) {
-        mAdapter = adapter;
-    }
-
     @Override
     public void onItemClick(SaleProgram sellProgram) {
-        mViewModel.onPickSellProgram(sellProgram);
+        ((SaleProgramContract.ViewModel) mViewModel).onPickSellProgram(sellProgram);
     }
 }

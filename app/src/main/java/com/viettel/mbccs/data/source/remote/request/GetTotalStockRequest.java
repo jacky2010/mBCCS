@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by eo_cuong on 5/18/17.
  */
 
-public class GetTotalStockRequest extends DataRequest{
+public class GetTotalStockRequest {
 
     public static final int SALE_TRAN_RETAIL = 1;
     public static final int SALE_TRAN_CHANNEL = 3;

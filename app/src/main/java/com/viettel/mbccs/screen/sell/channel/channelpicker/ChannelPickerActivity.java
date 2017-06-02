@@ -4,10 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import com.viettel.mbccs.R;
-import com.viettel.mbccs.base.BaseDataBindActivity;
+import com.viettel.mbccs.base.BaseSearchListPickerActivity;
 import com.viettel.mbccs.data.model.ChannelInfo;
-import com.viettel.mbccs.databinding.ActivityChannelPickerBinding;
 import com.viettel.mbccs.utils.GsonUtils;
 import com.viettel.mbccs.variable.Constants;
 import java.util.List;
@@ -16,32 +14,26 @@ import java.util.List;
  * Created by eo_cuong on 5/20/17.
  */
 
-public class ChannelPickerActivity
-        extends BaseDataBindActivity<ActivityChannelPickerBinding, ChannelPickerPresenter>
+public class ChannelPickerActivity extends BaseSearchListPickerActivity
         implements ChannelPickerContract.ViewModel {
 
     private List<ChannelInfo> mChannelInfos;
 
     @Override
-    protected int getIdLayout() {
-        return R.layout.activity_channel_picker;
-    }
-
-    @Override
     protected void initData() {
-
         Bundle bundle = getIntent().getExtras();
         if (bundle == null) {
             return;
         }
-        mChannelInfos = GsonUtils.String2ListObject(
-                bundle.getString(Constants.BundleConstant.CHANNEL_LIST), ChannelInfo[].class);
+        mChannelInfos =
+                GsonUtils.String2ListObject(bundle.getString(Constants.BundleConstant.CHANNEL_LIST),
+                        ChannelInfo[].class);
 
         if (mChannelInfos == null) {
             return;
         }
         mPresenter = new ChannelPickerPresenter(this, this, mChannelInfos);
-        mBinding.setPresenter((ChannelPickerPresenter) mPresenter);
+        mBinding.setPresenter(mPresenter);
         mBinding.searchInput.addOnTextChange(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -50,7 +42,7 @@ public class ChannelPickerActivity
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mPresenter.onTextChange(s.toString());
+                ((ChannelPickerPresenter) mPresenter).onTextChange(s.toString());
             }
 
             @Override
@@ -58,11 +50,6 @@ public class ChannelPickerActivity
 
             }
         });
-    }
-
-    @Override
-    public void setPresenter(ChannelPickerContract.Presenter presenter) {
-
     }
 
     @Override

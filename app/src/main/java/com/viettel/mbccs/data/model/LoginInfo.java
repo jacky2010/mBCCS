@@ -1,99 +1,43 @@
 
 package com.viettel.mbccs.data.model;
 
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class LoginInfo {
 
-    @SerializedName("sesssionId")
+    @SerializedName("errorCode")
     @Expose
-    private String sesssionId;
-    @SerializedName("username")
+    private String errorCode;
+    @SerializedName("errorMessage")
     @Expose
-    private String username;
-    @SerializedName("domain")
+    private String errorMessage;
+    @SerializedName("result")
     @Expose
-    private Domain domain;
-    @SerializedName("application")
-    @Expose
-    private List<Application> application = null;
-    @SerializedName("function")
-    @Expose
-    private List<Function> function = null;
-    @SerializedName("role")
-    @Expose
-    private List<Role> role = null;
-    @SerializedName("api")
-    @Expose
-    private List<Apis> api = null;
-    @SerializedName("token")
-    @Expose
-    private String token;
+    private Result result;
 
-    public String getSesssionId() {
-        return sesssionId;
+    public String getErrorCode() {
+        return errorCode;
     }
 
-    public void setSesssionId(String sesssionId) {
-        this.sesssionId = sesssionId;
+    public void setErrorCode(String errorCode) {
+        this.errorCode = errorCode;
     }
 
-    public String getUsername() {
-        return username;
+    public String getErrorMessage() {
+        return errorMessage;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 
-    public Domain getDomain() {
-        return domain;
+    public Result getResult() {
+        return result;
     }
 
-    public void setDomain(Domain domain) {
-        this.domain = domain;
-    }
-
-    public List<Application> getApplication() {
-        return application;
-    }
-
-    public void setApplication(List<Application> application) {
-        this.application = application;
-    }
-
-    public List<Function> getFunction() {
-        return function;
-    }
-
-    public void setFunction(List<Function> function) {
-        this.function = function;
-    }
-
-    public List<Role> getRole() {
-        return role;
-    }
-
-    public void setRole(List<Role> role) {
-        this.role = role;
-    }
-
-    public List<Apis> getApi() {
-        return api;
-    }
-
-    public void setApi(List<Apis> api) {
-        this.api = api;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
+    public void setResult(Result result) {
+        this.result = result;
     }
 
 }

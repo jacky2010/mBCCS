@@ -12,7 +12,6 @@ import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseFragment;
 import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.SaleTrans;
-import com.viettel.mbccs.data.source.remote.request.BaseRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
 import com.viettel.mbccs.databinding.FragmentTransactionRetailConfirmBinding;
 import com.viettel.mbccs.variable.Constants;
@@ -52,7 +51,6 @@ public class SaveTransConfirmFragment extends BaseFragment
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Bundle bundle = getArguments();
-        String s1 = bundle.getString(Constants.BundleConstant.INFOR_SALE_REQUEST);
         mGetInfoSaleTranRequest = bundle.getParcelable(Constants.BundleConstant.INFOR_SALE_REQUEST);
         mSaleTrans = bundle.getParcelable(Constants.BundleConstant.SALE_TRANS);
         mChannelInfo = bundle.getParcelable(Constants.BundleConstant.CHANNEL);
@@ -76,7 +74,7 @@ public class SaveTransConfirmFragment extends BaseFragment
 
     @Override
     public void hideLoading() {
-        hideLoading();
+        hideLoadingDialog();
     }
 
     @Override

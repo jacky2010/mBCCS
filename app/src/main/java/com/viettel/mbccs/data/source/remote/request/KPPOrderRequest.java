@@ -5,17 +5,17 @@ import com.google.gson.annotations.SerializedName;
 import com.viettel.mbccs.data.model.StockModel;
 import java.util.List;
 
-public class KPPOrderRequest extends DataRequest {
+public class KPPOrderRequest  {
 
-    @SerializedName("staffId")
+    @SerializedName("StaffId")
     @Expose
     private long staffId;
 
-    @SerializedName("channelStaffId")
+    @SerializedName("ChannelStaffId")
     @Expose
     private long channelStaffId;
 
-    @SerializedName("listStockModel")
+    @SerializedName("lstStockModel")
     @Expose
     private List<StockModel> listStockModel;
 

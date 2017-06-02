@@ -15,7 +15,7 @@ import com.viettel.mbccs.data.model.Session;
 import com.viettel.mbccs.data.model.StockSerial;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
-import com.viettel.mbccs.data.source.remote.request.BaseRequest;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.ViewInfoSerialRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.ViewInfoSerialResponse;
@@ -82,11 +82,10 @@ public class ViewSerialFragment extends BaseFragment {
         v.setStockModelId(stockTotal.getStockModelId());
         v.setStateId(stockTotal.getStateId());
 
-        BaseRequest<ViewInfoSerialRequest> request = new BaseRequest<>();
+        DataRequest<ViewInfoSerialRequest> request = new DataRequest<>();
         request.setApiCode(ApiCode.ViewInfoSerial);
-        request.setRequest(v);
+        request.setParameterApi(v);
         request.setApiKey("demo");
-        request.setSession(new Session());
 
         Subscription subscription = banHangKhoTaiChinhRepository.viewInfoSerial(request)
                 .subscribe(new MBCCSSubscribe<ViewInfoSerialResponse>() {

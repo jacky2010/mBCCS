@@ -3,7 +3,7 @@ package com.viettel.mbccs.screen.sell.retail.payment;
 import com.viettel.mbccs.base.BasePresenter;
 import com.viettel.mbccs.base.BaseView;
 import com.viettel.mbccs.data.model.SaleTrans;
-import com.viettel.mbccs.data.source.remote.request.BaseRequest;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
 
 /**
@@ -20,6 +20,6 @@ public interface PaymentInforContract {
 
         void onBack();
 
-        void goToSaveTransConfirm(BaseRequest<GetInfoSaleTranRequest> request, SaleTrans saleTrans);
+        void goToSaveTransConfirm(DataRequest<GetInfoSaleTranRequest> request, SaleTrans saleTrans);
     }
 }

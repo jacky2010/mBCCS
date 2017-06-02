@@ -21,7 +21,7 @@ public abstract class BaseSearchListViewPresenter<T>
 
     protected BaseSearchListViewContract.ViewModel mViewModel;
 
-    public List<T> listData = new ArrayList<>();
+    protected List<T> listData;
 
     public ObservableField<RecyclerView.Adapter> adapter = new ObservableField<>();
 
@@ -33,6 +33,7 @@ public abstract class BaseSearchListViewPresenter<T>
             BaseSearchListViewContract.ViewModel viewModel) {
         mContext = context;
         mViewModel = viewModel;
+        listData = new ArrayList<>();
         adapter.set(getListAdapter());
         adapter.get().registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
@@ -77,6 +78,8 @@ public abstract class BaseSearchListViewPresenter<T>
     protected abstract RecyclerView.Adapter getListAdapter();
 
     public abstract void onAddClick();
+
+    public abstract String getListCount();
 
     public RecyclerView.ItemDecoration getItemDecoration() {
         return new SpacesItemDecoration((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX,
