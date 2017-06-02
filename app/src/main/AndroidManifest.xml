@@ -143,9 +143,9 @@
         <activity
             android:name=".screen.inputorder.InputOrderActivity"
             android:screenOrientation="portrait"/>
-        <activity
-            android:name=".screen.information.CreateUpdateInformationActivity"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".screen.information.CreateUpdateInformationActivity"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>

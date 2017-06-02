@@ -3,42 +3,64 @@ package com.viettel.mbccs.screen.information;
 import android.content.Context;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.data.model.Customer;
+import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.data.model.ApDomain;
 import com.viettel.mbccs.data.source.QLKhachHangRepository;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListBusTypeIdRequireRequest;
+import com.viettel.mbccs.data.source.remote.request.GetRegiterSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.GetListBusTypeIdRequireResponse;
+import com.viettel.mbccs.data.source.remote.response.GetRegiterSubInfoResponse;
 import com.viettel.mbccs.screen.information.adapter.InformationCustomerAdapter;
-import java.util.ArrayList;
+import com.viettel.mbccs.utils.StringUtils;
+import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.List;
+import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by HuyQuyet on 5/29/17.
  */
 
-public class CreateUpdateInformationPresenter implements CreateUpdateInformationContract.Presenter {
+public class CreateUpdateInformationPresenter
+        implements CreateUpdateInformationContract.Presenter, AdapterView.OnItemSelectedListener {
     private Context context;
     private CreateUpdateInformationContract.View view;
-    private QLKhachHangRepository qlKhachHangtRepository;
+    private QLKhachHangRepository qlKhachHangRepository;
     private CompositeSubscription subscriptions;
     private boolean typeCreate;
-    private List<Customer> customerList;
+    private List<ApDomain> dataPassportType;
+    private int positionPassportType;
 
     public ObservableField<InformationCustomerAdapter> informationCustomerAdapter;
     public ObservableField<String> title;
     public ObservableBoolean isHideData;
     public ObservableBoolean isHideBtnCreate;
 
+    public ObservableField<String> isdn;
+    public ObservableField<String> idNo;
+    public ObservableField<ArrayAdapter<String>> adapterPassportType;
+
     public CreateUpdateInformationPresenter(Context context,
             CreateUpdateInformationContract.View view) {
         this.context = context;
         this.view = view;
-        qlKhachHangtRepository = QLKhachHangRepository.getInstance();
+        qlKhachHangRepository = QLKhachHangRepository.getInstance();
         subscriptions = new CompositeSubscription();
+
         informationCustomerAdapter = new ObservableField<>();
         title = new ObservableField<>();
         isHideData = new ObservableBoolean();
         isHideBtnCreate = new ObservableBoolean();
+
+        isdn = new ObservableField<>();
+        idNo = new ObservableField<>();
+        adapterPassportType = new ObservableField<>();
     }
 
     @Override
@@ -56,24 +78,45 @@ public class CreateUpdateInformationPresenter implements CreateUpdateInformation
     }
 
     public void onSearch() {
-        if (customerList == null) {
-            customerList = new ArrayList<>();
+        if (StringUtils.isEmpty(isdn.get()) || StringUtils.isEmpty(idNo.get())) {
+            view.showDialogValidate();
+            return;
         }
+        view.showLoading();
+        GetRegiterSubInfoRequest getRegiterSubInfoRequest = new GetRegiterSubInfoRequest();
+        getRegiterSubInfoRequest.setIsdn(isdn.get());
+        getRegiterSubInfoRequest.setIdNo(idNo.get());
+        getRegiterSubInfoRequest.setIdType(dataPassportType.get(positionPassportType).getType());
 
-        if (true) {
-            if (customerList.size() == 0) {
-                if (typeCreate) {
-                    isHideData.set(true);
-                    isHideBtnCreate.set(false);
-                } else {
-                    isHideData.set(true);
-                    isHideBtnCreate.set(false);
-                }
-            }
-            view.onSearchSuccess(customerList);
-        } else {
-            view.onSearchError(BaseException.toUnexpectedError(new Exception()));
-        }
+        DataRequest<GetRegiterSubInfoRequest> request = new DataRequest<>();
+        request.setApiCode(ApiCode.GetRegiterSubInfo);
+        request.setParameterApi(getRegiterSubInfoRequest);
+        //
+        Subscription subscription = qlKhachHangRepository.getRegiterSubInfo(request)
+                .subscribe(new MBCCSSubscribe<GetRegiterSubInfoResponse>() {
+                    @Override
+                    public void onSuccess(GetRegiterSubInfoResponse object) {
+                        if (object.getCustomer() == null) {
+                            isHideData.set(true);
+                            isHideBtnCreate.set(false);
+                        } else {
+                            view.onSearchSuccess(object);
+                            isHideData.set(false);
+                            isHideBtnCreate.set(true);
+                        }
+                        view.hideLoading();
+                    }
+
+                    @Override
+                    public void onError(BaseException error) {
+                        view.hideLoading();
+                        view.onSearchError(error);
+                    }
+                });
+        subscriptions.add(subscription);
+
+        //        isHideData.set(true);
+        //        isHideBtnCreate.set(false);
     }
 
     public void onRegisterNewPayment() {
@@ -86,7 +129,53 @@ public class CreateUpdateInformationPresenter implements CreateUpdateInformation
 
     public void setTypeCreate(boolean typeCreate) {
         this.typeCreate = typeCreate;
-        title.set(typeCreate ? context.getString(R.string.create_update_information_create_title)
-                : context.getString(R.string.create_update_information_update_title));
+        title.set(
+                this.typeCreate ? context.getString(R.string.create_update_information_create_title)
+                        : context.getString(R.string.create_update_information_update_title));
+    }
+
+    public void setAdapterPassportType(ArrayAdapter<String> adapter) {
+        adapterPassportType.set(adapter);
+    }
+
+    public void getDataSpinnerPassport() {
+        view.showLoading();
+        DataRequest<GetListBusTypeIdRequireRequest> request = new DataRequest<>();
+        request.setParameterApi(new GetListBusTypeIdRequireRequest());
+        request.setApiCode(ApiCode.GetListBusTypeIdRequire);
+
+        Subscription subscription = qlKhachHangRepository.getListBusTypeIdRequire(request)
+                .subscribe(new MBCCSSubscribe<GetListBusTypeIdRequireResponse>() {
+                    @Override
+                    public void onSuccess(GetListBusTypeIdRequireResponse object) {
+                        if (dataPassportType != null && dataPassportType.size() != 0) {
+                            dataPassportType.clear();
+                        }
+                        dataPassportType = object.getApDomainList();
+                        view.getDataSpinnerPassportSuccess(dataPassportType);
+                        view.hideLoading();
+                    }
+
+                    @Override
+                    public void onError(BaseException error) {
+                        view.getDataSpinnerPassportError(error);
+                        view.hideLoading();
+                    }
+                });
+        subscriptions.add(subscription);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        switch (parent.getId()) {
+            case R.id.spinner_select_passport_type:
+                positionPassportType = position;
+                break;
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

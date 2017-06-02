@@ -3,16 +3,20 @@ package com.viettel.mbccs.data.source.remote.datasource;
 import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.source.remote.IUserRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
+import com.viettel.mbccs.data.source.remote.request.GetDistrictRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
+import com.viettel.mbccs.data.source.remote.request.GetPrecinctRequest;
+import com.viettel.mbccs.data.source.remote.request.GetProvinceRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
 import com.viettel.mbccs.data.source.remote.request.LoginRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseErrorResponse;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
-import com.viettel.mbccs.data.source.remote.response.CreateSaleTransChannelResponse;
-import com.viettel.mbccs.data.source.remote.response.CreateSaleTransRetailResponse;
+import com.viettel.mbccs.data.source.remote.response.GetDistrictResponse;
 import com.viettel.mbccs.data.source.remote.response.GetInfoSaleTranResponse;
+import com.viettel.mbccs.data.source.remote.response.GetPrecinctResponse;
+import com.viettel.mbccs.data.source.remote.response.GetProvinceResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
 import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
 import com.viettel.mbccs.data.source.remote.response.SendCodeChangePassResponse;
@@ -109,5 +113,29 @@ public class UserRemoteDataSource implements IUserRemoteDataSource {
     public Observable<GetInfoSaleTranResponse> createSaleTransRetail(
             DataRequest<GetInfoSaleTranRequest> request) {
         return null;
+    }
+
+    @Override
+    public Observable<GetProvinceResponse> getProvince(DataRequest<GetProvinceRequest> request) {
+        return RequestHelper.getRequest()
+                .getProvince(request)
+                .flatMap(SchedulerUtils.<GetProvinceResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<GetProvinceResponse>applyAsyncSchedulers());
+    }
+
+    @Override
+    public Observable<GetDistrictResponse> getDistrict(DataRequest<GetDistrictRequest> request) {
+        return RequestHelper.getRequest()
+                .getDistrict(request)
+                .flatMap(SchedulerUtils.<GetDistrictResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<GetDistrictResponse>applyAsyncSchedulers());
+    }
+
+    @Override
+    public Observable<GetPrecinctResponse> getPrecinct(DataRequest<GetPrecinctRequest> request) {
+        return RequestHelper.getRequest()
+                .getPrecinct(request)
+                .flatMap(SchedulerUtils.<GetPrecinctResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<GetPrecinctResponse>applyAsyncSchedulers());
     }
 }
