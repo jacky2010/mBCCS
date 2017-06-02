@@ -40,10 +40,11 @@ public class CreateUpdateInformationFragment extends BaseFragment
         implements CreateUpdateInformationFragmentContract.View {
     public static final String STRING_NAME = "CreateUpdateInformationFragment";
 
-    @IntDef({ Type.CREATE_INFORMATION, Type.CREATE_INFORMATION_CLONE })
+    @IntDef({ Type.CREATE_INFORMATION, Type.CREATE_INFORMATION_CLONE, Type.UPDATE_INFORMATION })
     public @interface Type {
         int CREATE_INFORMATION = 1;
         int CREATE_INFORMATION_CLONE = 2;
+        int UPDATE_INFORMATION = 3;
     }
 
     private static final String ARG_TYPE_FRAGMENT = "TYPE_FRAGMENT";
@@ -63,8 +64,11 @@ public class CreateUpdateInformationFragment extends BaseFragment
     private GetRegiterSubInfoResponse data;
 
     private List<String> dataPassportType;
-    private List<ApDomain> apDomainList;
+    private List<String> dataHTTT;
+    private List<ApDomain> passportTypeList;
+    private List<ApDomain> hTTTList;
     private ArrayAdapter<String> adapterPassportType;
+    private ArrayAdapter<String> adapterHTThanhToan;
 
     public static CreateUpdateInformationFragment newInstance(@Type int typeFragment,
             @Nullable GetRegiterSubInfoResponse data) {
@@ -104,15 +108,22 @@ public class CreateUpdateInformationFragment extends BaseFragment
         presenter.setAdapterPassportType(adapterPassportType);
         binding.spinnerSelectTypePassport.setOnItemSelectedListener(presenter);
 
+        dataHTTT = new ArrayList<>();
+        adapterHTThanhToan =
+                new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, dataHTTT);
+        adapterHTThanhToan.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        presenter.setadapterHTThanhToan(adapterHTThanhToan);
+        binding.spinnerSelectHttt.setOnItemSelectedListener(presenter);
+
         presenter.setTypeFragment(typeFragment, data);
-        presenter.getDataSpinnerPassport();
+        presenter.getDataSpinner();
         binding.setPresenter(presenter);
     }
 
     @Override
-    public void onStop() {
+    public void onDestroy() {
         presenter.unSubscribe();
-        super.onStop();
+        super.onDestroy();
     }
 
     @Override
@@ -210,17 +221,19 @@ public class CreateUpdateInformationFragment extends BaseFragment
     public void setBirthDate(String birthDate) {
         binding.dateBirthday.setDateString(birthDate);
     }
-    
+
     @Override
     public void registerCustomerInfoError(BaseException error) {
         DialogUtils.showDialogError(getActivity(), error);
     }
 
     @Override
-    public void registerCustomerInfoSuccess(String result) {
+    public void registerUpdateCustomerInfoSuccess(String result, boolean isRegister) {
         Dialog dia = new DialogFullScreen.Builder(getActivity()).setCenterContent(true)
-                .setTitle(
-                        getString(R.string.fragment_create_update_information_create_dk_thanh_cong))
+                .setTitle(isRegister ? getString(
+                        R.string.fragment_create_update_information_create_dk_thanh_cong)
+                        : getString(
+                                R.string.fragment_create_update_information_update_thanh_cong))
                 .setContent(result)
                 .setPositiveButton(getString(R.string.OK))
                 .setListener(new DialogFullScreen.SuccessDialogListener() {
@@ -248,16 +261,68 @@ public class CreateUpdateInformationFragment extends BaseFragment
 
     @Override
     public void getDataSpinnerPassportSuccess(List<ApDomain> type) {
-        apDomainList = type;
-        for (ApDomain a : apDomainList) {
+        passportTypeList = type;
+        for (ApDomain a : passportTypeList) {
             dataPassportType.add(a.getName());
         }
         adapterPassportType.notifyDataSetChanged();
     }
 
     @Override
-    public void getDataSpinnerPassportError(BaseException error) {
-        // TODO: 6/1/17 handler error
+    public void getDataHTTTSuccess(List<ApDomain> type) {
+        hTTTList = type;
+        for (ApDomain a : hTTTList) {
+            dataHTTT.add(a.getName());
+        }
+        adapterHTThanhToan.notifyDataSetChanged();
+    }
+
+    @Override
+    public void getDataSpinnerError(BaseException error) {
+        DialogUtils.showDialogError(getActivity(), error, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                getActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
+    }
+
+    @Override
+    public void getOTPError(BaseException error) {
+        DialogUtils.showDialogError(getActivity(), error);
+    }
+
+    @Override
+    public void checkOTPError(BaseException error) {
+        DialogUtils.showDialogError(getActivity(), error);
+    }
+
+    @Override
+    public void isOTPEmpty() {
+        DialogUtils.showDialogError(getActivity(),
+                getString(R.string.fragment_create_update_information_update_opt_is_empty));
+    }
+
+    @Override
+    public void selectNoticeChargeError() {
+        DialogUtils.showDialogError(getActivity(),
+                getString(R.string.fragment_create_update_information_update_notice_charge_empty));
+    }
+
+    @Override
+    public void customerError() {
+        DialogUtils.showDialogError(getActivity(), getString(
+                R.string.fragment_create_update_information_update_information_customer_empty));
+    }
+
+    @Override
+    public void IsdnImsiError() {
+        DialogUtils.showDialogError(getActivity(),
+                getString(R.string.fragment_create_update_information_update_isdn_serial_empty));
+    }
+
+    @Override
+    public void updateAllSubInfoError(BaseException error) {
         DialogUtils.showDialogError(getActivity(), error);
     }
 

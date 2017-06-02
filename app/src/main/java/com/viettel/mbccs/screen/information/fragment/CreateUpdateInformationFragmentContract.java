@@ -39,10 +39,26 @@ public interface CreateUpdateInformationFragmentContract {
 
         void registerCustomerInfoError(BaseException error);
 
-        void registerCustomerInfoSuccess(String result);
+        void registerUpdateCustomerInfoSuccess(String result, boolean isRegister);
 
         void getDataSpinnerPassportSuccess(List<ApDomain> type);
 
-        void getDataSpinnerPassportError(BaseException error);
+        void getDataHTTTSuccess(List<ApDomain> type);
+
+        void getDataSpinnerError(BaseException error);
+
+        void getOTPError(BaseException error);
+
+        void checkOTPError(BaseException error);
+
+        void isOTPEmpty();
+
+        void selectNoticeChargeError();
+
+        void customerError();
+
+        void IsdnImsiError();
+
+        void updateAllSubInfoError(BaseException error);
     }
 }

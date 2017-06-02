@@ -301,6 +301,10 @@ public class Subscriber implements Parcelable {
     @Expose
     private String syncLastUpdateTime;
 
+    @SerializedName("package_name")
+    @Expose
+    private String packageName;
+
     public Subscriber() {
 
     }
@@ -364,6 +368,7 @@ public class Subscriber implements Parcelable {
         operation = in.readInt();
         syncStatus = in.readInt();
         syncLastUpdateTime = in.readString();
+        packageName = in.readString();
     }
 
     @Override
@@ -426,6 +431,7 @@ public class Subscriber implements Parcelable {
         dest.writeInt(operation);
         dest.writeInt(syncStatus);
         dest.writeString(syncLastUpdateTime);
+        dest.writeString(packageName);
     }
 
     @Override
@@ -907,5 +913,13 @@ public class Subscriber implements Parcelable {
 
     public void setSyncLastUpdateTime(String syncLastUpdateTime) {
         this.syncLastUpdateTime = syncLastUpdateTime;
+    }
+
+    public String getPackageName() {
+        return packageName;
+    }
+
+    public void setPackageName(String packageName) {
+        this.packageName = packageName;
     }
 }

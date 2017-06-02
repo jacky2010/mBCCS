@@ -1,10 +1,12 @@
 package com.viettel.mbccs.data.source.remote.service;
 
 import com.viettel.mbccs.data.model.LoginInfo;
+import com.viettel.mbccs.data.source.remote.request.ChecOTPRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateSaleTransChannelRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateSaleTransFromOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetAllInfoRequest;
+import com.viettel.mbccs.data.source.remote.request.GetApDomainRequest;
 import com.viettel.mbccs.data.source.remote.request.GetDistrictRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListBusTypeIdRequireRequest;
@@ -14,6 +16,7 @@ import com.viettel.mbccs.data.source.remote.request.GetListProvinceRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListShopRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListStockModelRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListTTKDRequest;
+import com.viettel.mbccs.data.source.remote.request.GetOTPRequest;
 import com.viettel.mbccs.data.source.remote.request.GetOrderInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.GetPrecinctRequest;
 import com.viettel.mbccs.data.source.remote.request.GetProvinceRequest;
@@ -25,14 +28,17 @@ import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
 import com.viettel.mbccs.data.source.remote.request.KPPOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.LoginRequest;
 import com.viettel.mbccs.data.source.remote.request.RegisterCustomerInfoRequest;
+import com.viettel.mbccs.data.source.remote.request.UpdateAllSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.UpdateSaleOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.ViewInfoSerialRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseResponse;
+import com.viettel.mbccs.data.source.remote.response.ChecOTPResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransChannelResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransFromOrderResponse;
-import com.viettel.mbccs.data.source.remote.response.DataResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransRetailResponse;
+import com.viettel.mbccs.data.source.remote.response.DataResponse;
 import com.viettel.mbccs.data.source.remote.response.GetAllInfoResponse;
+import com.viettel.mbccs.data.source.remote.response.GetApDomainResponse;
 import com.viettel.mbccs.data.source.remote.response.GetDistrictResponse;
 import com.viettel.mbccs.data.source.remote.response.GetInfoSaleTranResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListBusTypeIdRequireResponse;
@@ -42,6 +48,7 @@ import com.viettel.mbccs.data.source.remote.response.GetListProvinceResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListShopResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListStockModelResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListTTKDResponse;
+import com.viettel.mbccs.data.source.remote.response.GetOTPResponse;
 import com.viettel.mbccs.data.source.remote.response.GetOrderInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetPrecinctResponse;
 import com.viettel.mbccs.data.source.remote.response.GetProvinceResponse;
@@ -52,6 +59,7 @@ import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
 import com.viettel.mbccs.data.source.remote.response.RegisterCustomerInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.SendCodeChangePassResponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
+import com.viettel.mbccs.data.source.remote.response.UpdateAllSubInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.UpdateSaleOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.ViewInfoSerialResponse;
 import retrofit2.http.Body;
@@ -161,6 +169,20 @@ public interface MBCSSApi {
     @POST("vietdt/CM_mBCCS/1.0.0/WS_getListBusTypeIdRequire")
     Observable<BaseResponse<GetListBusTypeIdRequireResponse>> getListBusTypeIdRequire(
             @Body DataRequest<GetListBusTypeIdRequireRequest> request);
+
+    @POST("vietdt/CM_mBCCS/1.0.0/WS_getApDomain")
+    Observable<BaseResponse<GetApDomainResponse>> getApDomain(
+            @Body DataRequest<GetApDomainRequest> request);
+
+    @POST("vietdt/CM_mBCCS/1.0.0/WS_getOTP")
+    Observable<BaseResponse<GetOTPResponse>> getOTP(@Body DataRequest<GetOTPRequest> request);
+
+    @POST("vietdt/CM_mBCCS/1.0.0/WS_checOTP")
+    Observable<BaseResponse<ChecOTPResponse>> checOTP(@Body DataRequest<ChecOTPRequest> request);
+
+    @POST("vietdt/CM_mBCCS/1.0.0/WS_updateAllSubInfo")
+    Observable<BaseResponse<UpdateAllSubInfoResponse>> updateAllSubInfo(
+            @Body DataRequest<UpdateAllSubInfoRequest> request);
 
     @POST("vietdt/CM_mBCCS/1.0.0/WS_getProvince")
     Observable<BaseResponse<GetProvinceResponse>> getProvince(

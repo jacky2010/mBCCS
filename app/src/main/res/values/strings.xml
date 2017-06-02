@@ -510,6 +510,18 @@ Từ <b>%s</b><br>
     <string name="fragment_create_update_information_create_dang_ky">Đăng ký</string>
     <string name="fragment_create_update_information_create_cap_nhat">Cập nhật</string>
     <string name="fragment_create_update_information_create_dk_thanh_cong">Đăng ký thành công</string>
+    <string name="fragment_create_update_information_update_thanh_cong">Cập nhật thông tin thành công</string>
+    <string name="fragment_create_update_information_update_title">Cập nhật thông tin thuê bao</string>
+    <string name="fragment_create_update_information_update_opt_is_empty">OTP không thể bỏ trống</string>
+    <string name="fragment_create_update_information_update_notice_charge_empty">
+        Chưa lựa chọn hình thức nhận thông báo cước
+    </string>
+    <string name="fragment_create_update_information_update_information_customer_empty">
+        Các trường trong mục thông tin khách hàng không thể bỏ trống
+    </string>
+    <string name="fragment_create_update_information_update_isdn_serial_empty">
+        Số điện thoại và Serail không thể bỏ trống
+    </string>
 
 
     <string name="confirm_transaction_sell_cancel_don_dat_hang_tu_kenh">Đơn đặt hàng từ kênh</string>
@@ -531,4 +543,6 @@ Từ <b>%s</b><br>
     <string name="layout_select_address_district">Quận/Huyện*</string>
     <string name="layout_select_address_wards">Phường/xã</string>
     <string name="layout_select_address_address">Địa chỉ chi tiết (số nhà, tên đường, phố)</string>
+    <string name="dialog_input_address_title">Nhập địa chỉ</string>
+    <string name="dialog_input_address_address">Address:</string>
 </resources>

@@ -87,13 +87,17 @@
             android:textColor="@color/black"
             />
 
-        <com.viettel.mbccs.widget.CustomEdittext
+        <com.viettel.mbccs.widget.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_40"
             android:layout_marginTop="@dimen/dp_4"
             android:background="@drawable/bg_order"
-            android:text="@={ presenter.txtAddressDetail }"
+            android:text="@{ presenter.txtAddressDetail }"
             android:paddingLeft="@dimen/dp_10"
+            android:onClick="@{ v -> presenter.enterAddress() }"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_14"
+            android:gravity="center_vertical"
             />
 
     </LinearLayout>
