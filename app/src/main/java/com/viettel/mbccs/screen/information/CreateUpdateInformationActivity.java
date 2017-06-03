@@ -126,15 +126,17 @@ public class CreateUpdateInformationActivity extends
 
     @Override
     public void showDialogValidate() {
-        DialogUtils.showDialogError(this, getString(R.string.create_update_information_create_validate_field) );
+        DialogUtils.showDialogError(this,
+                getString(R.string.create_update_information_create_validate_field));
     }
 
     @Override
     public void onItemClick(int position) {
         if (position != 0) return;
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         CreateUpdateInformationFragment fragment = CreateUpdateInformationFragment.newInstance(
-                CreateUpdateInformationFragment.Type.CREATE_INFORMATION_CLONE, data);
+                typeCreate ? CreateUpdateInformationFragment.Type.CREATE_INFORMATION_CLONE
+                        : CreateUpdateInformationFragment.Type.UPDATE_INFORMATION, data);
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_create_update_information, fragment);
         transaction.addToBackStack(CreateUpdateInformationFragment.STRING_NAME);
         transaction.commit();

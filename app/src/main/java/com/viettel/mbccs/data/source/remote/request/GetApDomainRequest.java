@@ -4,10 +4,10 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by HuyQuyet on 6/1/17.
+ * Created by HuyQuyet on 6/2/17.
  */
 
-public class GetListBusTypeIdRequireRequest {
+public class GetApDomainRequest {
 
     @SerializedName("type")
     @Expose

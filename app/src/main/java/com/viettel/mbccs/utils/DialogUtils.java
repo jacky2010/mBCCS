@@ -37,6 +37,11 @@ public class DialogUtils {
                 .show();
     }
 
+    public static void showDialogError(Context context, BaseException error,
+            DialogInterface.OnClickListener yesListener) {
+        showDialogError(context, null, error.getMessage(), yesListener);
+    }
+
     public static void showDialogError(Context context, BaseException error) {
         showDialogError(context, null, error.getMessage(), null);
     }

@@ -11,10 +11,10 @@ import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.ApDomain;
 import com.viettel.mbccs.data.source.QLKhachHangRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
-import com.viettel.mbccs.data.source.remote.request.GetListBusTypeIdRequireRequest;
+import com.viettel.mbccs.data.source.remote.request.GetApDomainRequest;
 import com.viettel.mbccs.data.source.remote.request.GetRegiterSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
-import com.viettel.mbccs.data.source.remote.response.GetListBusTypeIdRequireResponse;
+import com.viettel.mbccs.data.source.remote.response.GetApDomainResponse;
 import com.viettel.mbccs.data.source.remote.response.GetRegiterSubInfoResponse;
 import com.viettel.mbccs.screen.information.adapter.InformationCustomerAdapter;
 import com.viettel.mbccs.utils.StringUtils;
@@ -86,7 +86,7 @@ public class CreateUpdateInformationPresenter
         GetRegiterSubInfoRequest getRegiterSubInfoRequest = new GetRegiterSubInfoRequest();
         getRegiterSubInfoRequest.setIsdn(isdn.get());
         getRegiterSubInfoRequest.setIdNo(idNo.get());
-        getRegiterSubInfoRequest.setIdType(dataPassportType.get(positionPassportType).getType());
+        getRegiterSubInfoRequest.setIdType(dataPassportType.get(positionPassportType).getCode());
 
         DataRequest<GetRegiterSubInfoRequest> request = new DataRequest<>();
         request.setApiCode(ApiCode.GetRegiterSubInfo);
@@ -140,14 +140,17 @@ public class CreateUpdateInformationPresenter
 
     public void getDataSpinnerPassport() {
         view.showLoading();
-        DataRequest<GetListBusTypeIdRequireRequest> request = new DataRequest<>();
-        request.setParameterApi(new GetListBusTypeIdRequireRequest());
+        DataRequest<GetApDomainRequest> request = new DataRequest<>();
+        GetApDomainRequest getApDomainRequest = new GetApDomainRequest();
+        getApDomainRequest.setType(ApDomain.Type.LOAI_GIAY_TO);
+
+        request.setParameterApi(getApDomainRequest);
         request.setApiCode(ApiCode.GetListBusTypeIdRequire);
 
-        Subscription subscription = qlKhachHangRepository.getListBusTypeIdRequire(request)
-                .subscribe(new MBCCSSubscribe<GetListBusTypeIdRequireResponse>() {
+        Subscription subscription = qlKhachHangRepository.getApDomain(request)
+                .subscribe(new MBCCSSubscribe<GetApDomainResponse>() {
                     @Override
-                    public void onSuccess(GetListBusTypeIdRequireResponse object) {
+                    public void onSuccess(GetApDomainResponse object) {
                         if (dataPassportType != null && dataPassportType.size() != 0) {
                             dataPassportType.clear();
                         }
