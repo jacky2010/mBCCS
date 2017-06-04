@@ -74,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="@{ presenter.loading ? @android:color/darker_gray : @color/green }"
-            android:drawableStart="@drawable/ic_enter_24dp"
+            android:drawableStart="@drawable/ic_enter_white_24dp"
             android:enabled="@{ !presenter.loading }"
             android:onClick="@{()-> presenter.login()}"
             android:paddingEnd="@dimen/dp_8"

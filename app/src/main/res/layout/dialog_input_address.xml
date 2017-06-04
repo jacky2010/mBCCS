@@ -31,7 +31,7 @@
             />
 
         <LinearLayout
-            android:layout_width="@dimen/dp_380"
+            android:layout_width="@dimen/dp_300"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="@dimen/dp_10"
@@ -44,7 +44,6 @@
                 <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginRight="@dimen/dp_10"
                     android:gravity="center"
                     android:text="@string/dialog_input_address_address"
                     android:textColor="@color/black"
@@ -57,7 +56,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/bg_order"
                     android:minHeight="@dimen/dp_40"
-                    android:paddingLeft="@dimen/dp_6"
+                    android:padding="@dimen/dp_6"
                     android:text="@={ presenter.textAddress }"
                     />
             </LinearLayout>

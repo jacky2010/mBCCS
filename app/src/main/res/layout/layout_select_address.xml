@@ -89,11 +89,12 @@
 
         <com.viettel.mbccs.widget.CustomTextView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_40"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/dp_40"
             android:layout_marginTop="@dimen/dp_4"
             android:background="@drawable/bg_order"
             android:text="@{ presenter.txtAddressDetail }"
-            android:paddingLeft="@dimen/dp_10"
+            android:padding="@dimen/dp_8"
             android:onClick="@{ v -> presenter.enterAddress() }"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_14"
