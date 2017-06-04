@@ -178,7 +178,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/dp_16"
                 android:onClick="@{ v -> presenter.onClose() }"
-                android:text="@string/close"
+                android:text="@string/common_label_close"
                 android:textColor="@color/black"
                 style="@style/button_nagative"
                 />
@@ -195,7 +195,7 @@
                     android:text="@{ presenter.textButton }"
                     android:textColor="@color/white"
                     android:visibility="@{ presenter.isShow ? View.VISIBLE : View.GONE }"
-                    style="@style/button_positive_red"
+                    style="@style/button_negative_red"
                     />
 
                 <Button

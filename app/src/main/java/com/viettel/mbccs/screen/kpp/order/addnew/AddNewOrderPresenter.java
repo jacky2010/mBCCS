@@ -103,7 +103,7 @@ public class AddNewOrderPresenter implements AddNewOrderContract.Presenter {
                     public void onClick(DialogInterface dialog, int which) {
                         createOrder();
                     }
-                }, R.string.close, null);
+                }, R.string.common_label_close, null);
     }
 
     private void createOrder() {

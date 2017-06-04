@@ -64,7 +64,7 @@
             app:itb_padding_left="@dimen/dp_10"
             app:itb_padding_right="@dimen/dp_10"
             app:itb_radius="3dp"
-            app:itb_text="@string/close" />
+            app:itb_text="@string/common_label_close" />
 
 
         <com.viettel.mbccs.widget.ButtonIconView

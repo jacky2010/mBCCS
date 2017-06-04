@@ -15,6 +15,8 @@ public class ItemStockTotalPresenter {
 
     public ObservableField<Integer> countChoice;
 
+    public ObservableField<Boolean> deleteAble;
+
     public StockTotal mStockTotal;
 
     public Context mContext;
@@ -22,8 +24,14 @@ public class ItemStockTotalPresenter {
     public ItemStockTotalPresenter(Context context, StockTotal stockTotal) {
         mStockTotal = stockTotal;
         countChoice = new ObservableField<>();
+        deleteAble = new ObservableField<>();
+        deleteAble.set(false);
         countChoice.set(mStockTotal.getCountChoice());
         mContext = context;
+    }
+
+    public void setDeleteAble(boolean deleteAble) {
+        this.deleteAble.set(deleteAble);
     }
 
     public void addChoice() {

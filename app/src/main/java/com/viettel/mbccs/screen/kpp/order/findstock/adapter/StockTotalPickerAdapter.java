@@ -107,6 +107,14 @@ public class StockTotalPickerAdapter
 
                 }
             });
+
+            mBinding.buttonDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mStockTotals.remove(mStockTotals.get(getAdapterPosition()));
+                    notifyDataSetChanged();
+                }
+            });
         }
 
         public void bind(StockTotal stockTotal) {

@@ -130,7 +130,7 @@
                 android:layout_marginEnd="@dimen/dp_4"
                 android:layout_weight="1"
                 android:background="@android:color/darker_gray"
-                android:text="@string/close"
+                android:text="@string/common_label_close"
                 android:textColor="@color/black"
                 />
 

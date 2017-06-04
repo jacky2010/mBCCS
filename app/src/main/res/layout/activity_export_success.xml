@@ -3,7 +3,7 @@
     <data>
         <variable
             name="presenter"
-            type="com.viettel.mbccs.screen.kpp.order.ordersuccess.OrderSuccessPresenter"
+            type="com.viettel.mbccs.screen.nvtrahangcaptren.exportsuccess.ExportSuccessPresenter"
             />
     </data>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -11,31 +11,37 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
-        >
-        <com.viettel.mbccs.widget.CustomTextView
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/grey"
-            android:gravity="center"
-            android:text="@string/notice"
-            android:textColor="@color/white"
+        <include
+            layout="@layout/toolbar"
+            app:background="@{@color/grey}"
+            app:isShow="@{true}"
+            app:leftIcon="@{@drawable/ic_close_white}"
+            app:leftIconClick="@{()->presenter.onCancel()}"
+            app:title="@{@string/nv_trahangcaptren_lap_phieu_title}"
+            app:titleColor="@{@color/white}"
+            app:titleTextSize="@{@dimen/sp_17}"
             />
 
         <com.viettel.mbccs.widget.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dp_5"
-            android:gravity="center"
-            android:text="Đặt thành công mã đơn hàng là b123124123"
-            android:textSize="@dimen/sp_13"
+            android:text="asdfasdfasdfsafda"
+            style="@style/textLablel"
             />
         <com.viettel.mbccs.widget.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dp_5"
-            android:gravity="center"
-            android:text="Đầu mối tiếp nhận là KPP-123"
-            android:textSize="@dimen/sp_13"
+            android:text="kho nhan asdfasdfasdfasfd"
+            style="@style/textLablel"
+            />
+
+        <com.viettel.mbccs.widget.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Danh sach mat hang"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            style="@style/textLablel"
             />
 
         <RelativeLayout
@@ -49,11 +55,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:layout_margin="@dimen/dp_10"
-                android:onClick="@{()->presenter.closeClick()}"
-                android:paddingBottom="@dimen/dp_5"
-                android:paddingLeft="@dimen/dp_20"
-                android:paddingRight="@dimen/dp_20"
-                android:paddingTop="@dimen/dp_5"
+                android:onClick="@{()->presenter.onCancel()}"
                 android:text="@string/common_label_close"
                 style="@style/button_nagative"
                 />
@@ -62,11 +64,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_above="@id/btn_close"
-                android:layout_marginTop="@dimen/dp_10"
-                android:adapter="@{presenter.adapter}"
                 />
         </RelativeLayout>
 
-
     </LinearLayout>
+
 </layout>

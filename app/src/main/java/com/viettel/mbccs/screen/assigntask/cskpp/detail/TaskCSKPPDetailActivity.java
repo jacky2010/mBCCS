@@ -55,7 +55,7 @@ public class TaskCSKPPDetailActivity extends
 
                     }
                 })
-                .setNegativeButton(R.string.close, null)
+                .setNegativeButton(R.string.common_label_close, null)
                 .create().show();
     }
 
@@ -70,7 +70,7 @@ public class TaskCSKPPDetailActivity extends
 
                     }
                 })
-                .setNegativeButton(R.string.close, null)
+                .setNegativeButton(R.string.common_label_close, null)
                 .create().show();
     }
 

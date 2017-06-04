@@ -41,7 +41,7 @@
                 android:layout_marginRight="20dp"
                 android:gravity="center"
                 android:onClick="@{()->presenter.onClose()}"
-                android:text="@string/close"
+                android:text="@string/common_label_close"
                 android:textAllCaps="true"
                 style="@style/button_nagative"
                 />
