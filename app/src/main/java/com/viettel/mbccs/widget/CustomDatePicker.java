@@ -4,6 +4,8 @@ import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.databinding.BindingMethod;
+import android.databinding.BindingMethods;
 import android.databinding.DataBindingUtil;
 import android.databinding.ObservableField;
 import android.graphics.Color;
@@ -27,6 +29,9 @@ import java.util.Locale;
  * Created by Anh Vu Viet on 5/13/2017.
  */
 
+@BindingMethods({
+        @BindingMethod(type = CustomDatePicker.class, attribute = "setDate", method = "setDateString")
+})
 public class CustomDatePicker extends LinearLayout {
 
     private Calendar mCalendar;

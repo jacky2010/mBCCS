@@ -545,4 +545,43 @@ Từ <b>%s</b><br>
     <string name="layout_select_address_address">Địa chỉ chi tiết (số nhà, tên đường, phố)</string>
     <string name="dialog_input_address_title">Nhập địa chỉ</string>
     <string name="dialog_input_address_address">Address:</string>
+
+
+    <string name="connector_mobile_title">Đấu nối di động</string>
+    <string name="connector_mobile_loai_thue_bao">Loại thuê bao</string>
+    <string name="connector_mobile_tra_truoc">Trả trước</string>
+    <string name="connector_mobile_tra_sau">Trả sau</string>
+    <string name="connector_mobile_dich_vu">Dịch vụ</string>
+    <string name="connector_mobile_so_giay_to">Số giấy tờ*</string>
+    <string name="connector_mobile_tim_kiem">Tìm kiếm</string>
+    <string name="connector_mobile_danh_sach_yeu_cau">Danh sach yêu cầu (%1$d)</string>
+    <string name="connector_mobile_nhap_moi_thong_tin_dau_noi">Nhập mới thông tin đấu nối</string>
+    <string name="item_connector_mobile_ma_yeu_cau">Mã yêu cầu: %1$s</string>
+    <string name="item_connector_mobile_dich_vu">Dịch vụ: %1$s</string>
+    <string name="item_connector_mobile_isdn">Isdn: %1$s</string>
+    <string name="item_connector_mobile_ngay_tiep_nhan">Ngày tiếp nhận: %1$s</string>
+    <string name="item_connector_mobile_trang_thai">Trạng thái: %1$s</string>
+    <string name="create_new_connector_information_title">Nhập mới thông tin đấu nối</string>
+    <string name="create_new_connector_information_khach_hang">1.Khách hàng</string>
+    <string name="create_new_connector_information_thue_bao">2.Thuê bao</string>
+    <string name="create_new_connector_information_loai_khach_hang">Loai KH*</string>
+    <string name="create_new_connector_information_ten_khach_hang">Tên KH*</string>
+    <string name="create_new_connector_information_ngay_sinh">Ngày sinh/Ngày thành lập</string>
+    <string name="create_new_connector_information_so_giay_to">Số giấy tờ (CMND/Hộ chiếu/Giấy phép kinh doanh)</string>
+    <string name="create_new_connector_information_ngay_cap">Ngày cấp</string>
+    <string name="create_new_connector_information_ngay_het_han">Ngày hết hạn</string>
+    <string name="create_new_connector_information_noi_cap">Nơi cấp</string>
+    <string name="create_new_connector_information_dich_vu">Dịch vụ*</string>
+    <string name="create_new_connector_information_goi_cuoc">Gói cước*</string>
+    <string name="create_new_connector_information_loai_thue_bao">Loại thuê bao*</string>
+    <string name="create_new_connector_information_hinh_thuc_hoa_mang">Hình thức hòa mạng*</string>
+    <string name="create_new_connector_information_khuyen_mai">Khuyến mãi</string>
+    <string name="create_new_connector_information_so_isdn">Số ISDN*</string>
+    <string name="create_new_connector_information_serial">Serial*</string>
+    <string name="create_new_connector_information_ma_nhan_vien">Mã NV</string>
+    <string name="create_new_connector_information_thong_tin_hang_hoa_di_kem">Thông tin hàng hóa đi kèm</string>
+    <string name="create_new_connector_information_dong">Đóng</string>
+    <string name="create_new_connector_information_next">Next</string>
+    <string name="create_new_connector_information_back">Quay lại</string>
+    <string name="create_new_connector_information_enter">Đấu nối</string>
 </resources>
