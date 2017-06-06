@@ -13,7 +13,7 @@
         android:background="@color/white"
         android:orientation="vertical">
 
-        <TextView
+        <com.viettel.mbccs.widget.CustomTextView
             style="@style/ItemBilling"
             android:text="@string/msg_date_create_trans"
             android:textSize="@dimen/sp_12" />

@@ -63,10 +63,10 @@ public class ChannelPickerActivity extends BaseSearchListPickerActivity
     }
 
     @Override
-    public void onPickChannelPick(ChannelInfo channelInfo) {
+    public void onItemClicked(Object object) {
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
-        bundle.putSerializable(Constants.BundleConstant.CHANNEL, channelInfo);
+        bundle.putSerializable(Constants.BundleConstant.CHANNEL, (ChannelInfo) object);
         intent.putExtras(bundle);
         setResult(RESULT_OK, intent);
         finish();

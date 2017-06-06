@@ -30,7 +30,7 @@
             app:titleColor="@{@color/white}"
             app:titleTextSize="@{@dimen/sp_17}"
             />
-        <TextView
+        <com.viettel.mbccs.widget.CustomTextView
             android:id="@+id/idOrder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -57,14 +57,14 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 >
-                <TextView
+                <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/confirm_transaction_sell_cancel_don_dat_hang_tu_kenh"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_14"
                     />
-                <TextView
+                <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_8"
@@ -80,14 +80,14 @@
                 android:layout_marginLeft="@dimen/dp_30"
                 android:orientation="horizontal"
                 >
-                <TextView
+                <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/confirm_transaction_sell_cancel_sdt"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_14"
                     />
-                <TextView
+                <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_8"
@@ -103,14 +103,14 @@
                 android:layout_marginLeft="@dimen/dp_30"
                 android:orientation="horizontal"
                 >
-                <TextView
+                <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/confirm_transaction_sell_cancel_so_tien_thanh_toan"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_14"
                     />
-                <TextView
+                <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_8"
@@ -120,7 +120,7 @@
                     android:textStyle="bold"
                     />
             </LinearLayout>
-            <!--<TextView-->
+            <!--<com.viettel.mbccs.widget.CustomTextView-->
                 <!--android:layout_width="match_parent"-->
                 <!--android:layout_height="wrap_content"-->
                 <!--android:paddingLeft="@dimen/dp_100"-->
@@ -140,7 +140,7 @@
             android:padding="@dimen/dp_16"
             android:visibility="@{ presenter.isShow ? View.VISIBLE : View.GONE }"
             >
-            <TextView
+            <com.viettel.mbccs.widget.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/confirm_transaction_sell_cancel_ly_do_huy"

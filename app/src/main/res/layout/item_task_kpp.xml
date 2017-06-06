@@ -19,14 +19,14 @@
             android:layout_toStartOf="@+id/icon"
             android:orientation="vertical">
 
-            <TextView
+            <com.viettel.mbccs.widget.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@{ item.getChannelName() }"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_18" />
 
-            <TextView
+            <com.viettel.mbccs.widget.CustomTextView
                 style="@style/TextSearchTask"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
                 android:gravity="center_vertical"
                 android:text="@{ item.getTel() }" />
 
-            <TextView
+            <com.viettel.mbccs.widget.CustomTextView
                 style="@style/TextSearchTask"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

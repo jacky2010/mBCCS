@@ -88,6 +88,23 @@ public class StockTotal implements Parcelable {
     public StockTotal() {
     }
 
+    public StockTotal(long ownerId, long ownerType, long stockModelId, String stockModelCode,
+                      String stockModelName, long stockTypeId, String stockTypeName, long quantity,
+                      long quantityIssue, long stateId, String stateName, int countChoice) {
+        this.ownerId = ownerId;
+        this.ownerType = ownerType;
+        this.stockModelId = stockModelId;
+        this.stockModelCode = stockModelCode;
+        this.stockModelName = stockModelName;
+        this.stockTypeId = stockTypeId;
+        this.stockTypeName = stockTypeName;
+        this.quantity = quantity;
+        this.quantityIssue = quantityIssue;
+        this.stateId = stateId;
+        this.stateName = stateName;
+        this.countChoice = countChoice;
+    }
+
     public long getOwnerId() {
         return ownerId;
     }

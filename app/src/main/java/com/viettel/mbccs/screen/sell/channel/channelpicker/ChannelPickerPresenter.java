@@ -66,11 +66,6 @@ public class ChannelPickerPresenter extends BaseSearchListPickerPresenter<Channe
         return adapter;
     }
 
-    @Override
-    public String getListCount() {
-        return null;
-    }
-
     Runnable filter = new Runnable() {
         @Override
         public void run() {
@@ -93,6 +88,6 @@ public class ChannelPickerPresenter extends BaseSearchListPickerPresenter<Channe
 
     @Override
     public void onItemClick(ChannelInfo channelInfo) {
-        ((ChannelPickerContract.ViewModel) mViewModel).onPickChannelPick(channelInfo);
+        mViewModel.onItemClicked(channelInfo);
     }
 }

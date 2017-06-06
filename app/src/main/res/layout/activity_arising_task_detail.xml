@@ -29,28 +29,28 @@
             app:titleColor="@{ @color/white }"
             app:titleTextSize="@{ @dimen/sp_16 }" />
 
-        <TextView
+        <com.viettel.mbccs.widget.CustomTextView
             style="@style/TextTaskCSKPPDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_8"
             android:text="@string/thoi_gian_thuc_hien" />
 
-        <TextView
+        <com.viettel.mbccs.widget.CustomTextView
             style="@style/TextTaskCSKPPDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_8"
             android:text="@{ item.startDate }" />
 
-        <TextView
+        <com.viettel.mbccs.widget.CustomTextView
             style="@style/TextTaskCSKPPDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_16"
             android:text="@string/trang_thai" />
 
-        <TextView
+        <com.viettel.mbccs.widget.CustomTextView
             style="@style/TextTaskCSKPPDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -64,14 +64,14 @@
             android:layout_marginTop="@dimen/dp_16"
             android:orientation="horizontal">
 
-            <TextView
+            <com.viettel.mbccs.widget.CustomTextView
                 style="@style/TextTaskCSKPPDetail"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
                 android:text="@string/nhan_vien" />
 
-            <TextView
+            <com.viettel.mbccs.widget.CustomTextView
                 style="@style/TextTaskCSKPPDetail"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -85,13 +85,13 @@
             android:layout_marginTop="@dimen/dp_8"
             android:orientation="horizontal">
 
-            <TextView
+            <com.viettel.mbccs.widget.CustomTextView
                 style="@style/TextTaskCSKPPDetail"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5" />
 
-            <TextView
+            <com.viettel.mbccs.widget.CustomTextView
                 style="@style/TextTaskCSKPPDetail"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -99,14 +99,14 @@
                 android:text="@{ item.assignDate }" />
         </LinearLayout>
 
-        <TextView
+        <com.viettel.mbccs.widget.CustomTextView
             style="@style/TextTaskCSKPPDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_16"
             android:text="@string/ten_cong_viec" />
 
-        <TextView
+        <com.viettel.mbccs.widget.CustomTextView
             style="@style/TextTaskCSKPPDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -114,14 +114,14 @@
             android:text="@{ item.title }"
             android:textSize="@dimen/sp_16" />
 
-        <TextView
+        <com.viettel.mbccs.widget.CustomTextView
             style="@style/TextTaskCSKPPDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_16"
             android:text="@string/description" />
 
-        <TextView
+        <com.viettel.mbccs.widget.CustomTextView
             style="@style/TextTaskCSKPPDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

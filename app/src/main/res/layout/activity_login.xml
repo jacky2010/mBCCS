@@ -56,7 +56,7 @@
 
         </android.support.design.widget.TextInputLayout>
 
-        <TextView
+        <com.viettel.mbccs.widget.CustomTextView
             android:id="@+id/forgot_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -85,7 +85,7 @@
             app:layout_marginLeftPercent="10%"
             app:layout_marginRightPercent="10%" />
 
-        <TextView
+        <com.viettel.mbccs.widget.CustomTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

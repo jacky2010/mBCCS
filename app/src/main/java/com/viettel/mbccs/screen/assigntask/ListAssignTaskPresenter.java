@@ -115,14 +115,7 @@ public class ListAssignTaskPresenter extends BaseSearchListViewPresenter<TaskMod
     }
 
     @Override
-    public String getListCount() {
-        // TODO: 31/05/2017 Phần quyền được giao/cần giao?
-        return mContext.getString(R.string.list_assign_task_activity_cong_viec_duoc_giao,
-                listData.size());
-    }
-
-    @Override
     public void onTaskClick(TaskModel task) {
-        ((ListAssignTaskContract.ViewModel) mViewModel).onTaskClicked(task);
+        mViewModel.onItemClicked(task);
     }
 }

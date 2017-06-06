@@ -107,7 +107,7 @@
                                 android:textSize="@dimen/sp_13"
                                 />
                         </RelativeLayout>
-                        <TextView
+                        <com.viettel.mbccs.widget.CustomTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/service"
@@ -164,7 +164,7 @@
                     </LinearLayout>
                 </RelativeLayout>
 
-                <TextView
+                <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dp_10"

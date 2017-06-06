@@ -65,10 +65,10 @@ public class SaleProgramPickerActivity extends BaseSearchListPickerActivity
     }
 
     @Override
-    public void onPickSellProgram(SaleProgram sellProgram) {
+    public void onItemClicked(Object object) {
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
-        bundle.putSerializable(Constants.BundleConstant.SALE_PROGRAM, sellProgram);
+        bundle.putSerializable(Constants.BundleConstant.SALE_PROGRAM, (SaleProgram) object);
         intent.putExtras(bundle);
         setResult(RESULT_OK, intent);
         ActivityUtils.hideKeyboard(this);

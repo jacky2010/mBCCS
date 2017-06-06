@@ -3,6 +3,7 @@ package com.viettel.mbccs.base.searchlistview;
 import android.content.Context;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
+import android.databinding.ObservableInt;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import com.viettel.mbccs.R;
@@ -29,6 +30,8 @@ public abstract class BaseSearchListViewPresenter<T>
 
     public ObservableBoolean isExpand = new ObservableBoolean();
 
+    public ObservableInt itemCount = new ObservableInt();
+
     public BaseSearchListViewPresenter(Context context,
             BaseSearchListViewContract.ViewModel viewModel) {
         mContext = context;
@@ -39,6 +42,7 @@ public abstract class BaseSearchListViewPresenter<T>
             @Override
             public void onChanged() {
                 super.onChanged();
+                itemCount.set(listData.size());
                 isEmpty.set(listData.isEmpty());
             }
         });
@@ -78,8 +82,6 @@ public abstract class BaseSearchListViewPresenter<T>
     protected abstract RecyclerView.Adapter getListAdapter();
 
     public abstract void onAddClick();
-
-    public abstract String getListCount();
 
     public RecyclerView.ItemDecoration getItemDecoration() {
         return new SpacesItemDecoration((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX,

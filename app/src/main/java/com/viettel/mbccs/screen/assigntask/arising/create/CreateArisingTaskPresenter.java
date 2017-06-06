@@ -2,6 +2,7 @@ package com.viettel.mbccs.screen.assigntask.arising.create;
 
 import android.content.Context;
 import android.databinding.ObservableField;
+import com.viettel.mbccs.R;
 
 /**
  * Created by Anh Vu Viet on 5/23/2017.
@@ -17,7 +18,8 @@ public class CreateArisingTaskPresenter implements CreatingArisingTaskContract.P
 
     private CreatingArisingTaskContract.ViewModel mViewModel;
 
-    public CreateArisingTaskPresenter(Context context, CreatingArisingTaskContract.ViewModel viewModel) {
+    public CreateArisingTaskPresenter(Context context,
+            CreatingArisingTaskContract.ViewModel viewModel) {
         mContext = context;
         mViewModel = viewModel;
         taskName = new ObservableField<>();
@@ -32,6 +34,10 @@ public class CreateArisingTaskPresenter implements CreatingArisingTaskContract.P
     @Override
     public void unSubscribe() {
 
+    }
+
+    public String getToolbarTitle() {
+        return mContext.getString(R.string.create_arising_task_presenter_giao_viec_phat_sinh);
     }
 
     public void onSelectStaffClick() {

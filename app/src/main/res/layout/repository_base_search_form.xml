@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tool="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
+
     <data>
         <variable
             name="titleTime"
@@ -20,103 +21,112 @@
 
         <variable
             name="titleSpinner"
-            type="String"/>
+            type="String"
+            />
 
+        <variable
+            name="isShowFrom"
+            type="boolean"
+            />
+
+        <import type="android.view.View"/>
     </data>
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_8"
+        android:paddingEnd="@dimen/dp_16"
+        android:paddingStart="@dimen/dp_16"
+        android:paddingTop="@dimen/dp_4"
         >
+
         <com.viettel.mbccs.widget.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/dp_5"
-            android:text="@{titleTime}"
-            android:textColor="@color/black"
-            android:textSize="@dimen/sp_13"
-            tool:text="Ngay lap phieu"
+            android:layout_marginTop="@dimen/dp_12"
+            android:text="@{ titleTime }"
+            style="@style/TextSearchTask"
             />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_12"
             android:orientation="horizontal"
             >
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                >
-                <com.viettel.mbccs.widget.CustomTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/base_search_lable_from"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_13"
-                    />
-                <com.viettel.mbccs.widget.CustomDatePicker
-                    android:id="@+id/from_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="@dimen/dp_10"
-                    android:gravity="center"
-                    ></com.viettel.mbccs.widget.CustomDatePicker>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                >
-                <com.viettel.mbccs.widget.CustomTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/base_search_lable_to"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_13"
-                    />
-                <com.viettel.mbccs.widget.CustomDatePicker
-                    android:id="@+id/to_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dp_10"
-                    android:gravity="center"
-                    ></com.viettel.mbccs.widget.CustomDatePicker>
-            </LinearLayout>
 
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/base_search_lable_from"
+                android:visibility="@{ isShowFrom ? View.VISIBLE : View.GONE }"
+                style="@style/TextSearchTask"
+                />
+
+            <com.viettel.mbccs.widget.CustomDatePicker
+                android:id="@+id/from_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp_8"
+                android:layout_marginStart="@dimen/dp_8"
+                android:src="@drawable/ic_play_arrow_black_24dp"
+                android:visibility="@{ isShowFrom ? View.GONE : View.VISIBLE }"
+                />
+
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/base_search_lable_to"
+                android:visibility="@{ isShowFrom ? View.VISIBLE : View.GONE }"
+                style="@style/TextSearchTask"
+                />
+
+            <com.viettel.mbccs.widget.CustomDatePicker
+                android:id="@+id/to_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                />
         </LinearLayout>
+
         <com.viettel.mbccs.widget.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/dp_5"
-            android:text="@{titleSpinner}"
-            android:textColor="@color/black"
-            android:textSize="@dimen/sp_13"
+            android:layout_marginTop="@dimen/dp_12"
+            android:text="@{ titleSpinner }"
+            style="@style/TextSearchTask"
             />
+
         <com.viettel.mbccs.widget.SpinnerWithBorder
             android:id="@+id/spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:adapter="@{adapter}"
+            android:layout_marginTop="@dimen/dp_4"
+            app:adapter="@{ adapter }"
             />
 
-        <com.viettel.mbccs.widget.CustomButton
-            android:layout_width="@dimen/dp_100"
+        <Button
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/dp_10"
-            android:onClick="@{searchClick}"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dp_12"
+            android:background="@color/blue"
+            android:onClick="@{ () -> searchClick }"
+            android:paddingEnd="@dimen/dp_32"
+            android:paddingStart="@dimen/dp_32"
             android:text="@string/common_lable_search"
-            style="@style/button_positive"
+            android:textColor="@color/white"
             />
-
-
     </LinearLayout>
 </layout>
