@@ -9,6 +9,7 @@ import com.viettel.mbccs.base.BaseView;
 
 public class BranchesContract {
     interface ViewModel extends BaseView<Presenter> {
+        void onCancel();
     }
 
     interface Presenter extends BasePresenter {

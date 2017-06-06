@@ -209,6 +209,8 @@ Từ <b>%s</b><br>
 
 
     <!--Create Branch-->
+    <string name="branches_add_title">Tạo kênh phân phối</string>
+    <string name="branches_update_title">Cập nhật kênh phân phối</string>
     <string name="branches_search_label_document_no">Số giấy tờ (*)</string>
     <string name="branches_label_channel_code">Mã kênh:</string>
     <string name="branches_label_customer_id">Số CMTND:</string>

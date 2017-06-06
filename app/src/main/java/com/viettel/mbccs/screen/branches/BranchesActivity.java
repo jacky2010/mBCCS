@@ -40,6 +40,12 @@ public class BranchesActivity extends BaseDataBindActivity<ActivityBranchesBindi
         initView();
     }
 
+    @Override
+    public void onCancel() {
+//        getSupportFragmentManager().popBackStackImmediate();
+        onBackPressed();
+    }
+
     private void initView() {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frame_main, SearchBranchFragment.newInstance())
