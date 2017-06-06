@@ -11,18 +11,17 @@ import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.MenuItem;
 import com.viettel.mbccs.databinding.ActivitySubMenuBinding;
 import com.viettel.mbccs.databinding.ItemImageGridBinding;
 import com.viettel.mbccs.databinding.ItemMenuBinding;
-import com.viettel.mbccs.screen.assignjob.ListAssignJobActivity;
-import com.viettel.mbccs.screen.branches.BranchesActivity;
-import com.viettel.mbccs.screen.changesim.ChangeSimActivity;
-import com.viettel.mbccs.screen.inputorder.InputOrderActivity;
 import com.viettel.mbccs.screen.assigntask.ListAssignTaskActivity;
 import com.viettel.mbccs.screen.billing.BillingActivity;
+import com.viettel.mbccs.screen.branches.BranchesActivity;
 import com.viettel.mbccs.screen.change.installation.InstallationAddressActivity;
+import com.viettel.mbccs.screen.changesim.ChangeSimActivity;
 import com.viettel.mbccs.screen.information.CreateUpdateInformationActivity;
 import com.viettel.mbccs.screen.inputorder.InputOrderActivity;
 import com.viettel.mbccs.screen.kpp.order.KPPOrderActivity;
@@ -34,6 +33,7 @@ import com.viettel.mbccs.screen.sellanypay.SellAnyPayActivity;
 import com.viettel.mbccs.screen.transferanypay.TransferAnyPayActivity;
 import com.viettel.mbccs.screen.viewwarehouse.ViewWarehouseActivity;
 import com.viettel.mbccs.widget.SpacesItemDecoration;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -246,10 +246,8 @@ public class BaseSubMenuActivity
                         getString(R.string.menu_giao_chi_tieu_ban_hang),
                         R.drawable.ic_add_black_24dp, 0, 0));
                 break;
-            case MenuItem.MenuId.MENU_QLDB:
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_CREATE_BRANCH,
             case MenuItem.MenuId.MENU_QUAN_LY_DIA_BAN:
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_CREATE_BRANCH,
                         getString(R.string.menu_tao_kpp), R.drawable.ic_add_black_24dp, 0, 0));
                 mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
                         getString(R.string.menu_quan_ly_dia_ban_hanh_chinh),
