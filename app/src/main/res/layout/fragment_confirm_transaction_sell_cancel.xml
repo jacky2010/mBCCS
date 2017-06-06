@@ -22,9 +22,9 @@
         <include
             layout="@layout/toolbar"
             android:id="@+id/toolbar"
-            app:background="@{@color/grey}"
+            app:background="@{@color/colorAccent}"
             app:isShow="@{true}"
-            app:leftIcon="@{@drawable/ic_arrow_left_24dp}"
+            app:leftIcon="@{@drawable/ic_arrow_left_white_24dp}"
             app:leftIconClick="@{()->presenter.onClose()}"
             app:title="@{ presenter.title }"
             app:titleColor="@{@color/white}"
@@ -173,7 +173,7 @@
             android:paddingLeft="@dimen/dp_2"
             android:paddingRight="@dimen/dp_2"
             >
-            <Button
+            <com.viettel.mbccs.widget.CustomButton
                 android:layout_width="@dimen/dp_150"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/dp_16"
@@ -187,7 +187,7 @@
                 android:layout_width="@dimen/dp_150"
                 android:layout_height="wrap_content"
                 >
-                <Button
+                <com.viettel.mbccs.widget.CustomButton
                     android:layout_width="@dimen/dp_150"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_16"
@@ -198,7 +198,7 @@
                     style="@style/button_negative_red"
                     />
 
-                <Button
+                <com.viettel.mbccs.widget.CustomButton
                     android:layout_width="@dimen/dp_150"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_16"

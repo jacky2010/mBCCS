@@ -11,7 +11,7 @@
     <item>
         <shape android:shape="rectangle">
             <corners android:radius="@dimen/dp_5"></corners>
-            <stroke android:dashGap="@dimen/dp_10" android:dashWidth="@dimen/dp_10" android:width="@dimen/dp_1"></stroke>
+            <stroke android:dashGap="@dimen/dp_2" android:dashWidth="@dimen/dp_2" android:width="@dimen/dp_0_5"></stroke>
         </shape>
     </item>
 </selector>

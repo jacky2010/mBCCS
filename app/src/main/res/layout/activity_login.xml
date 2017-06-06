@@ -68,7 +68,7 @@
             app:layout_marginRightPercent="10%"
             bind:movementMethod="@{ presenter.movementMethod }" />
 
-        <Button
+        <com.viettel.mbccs.widget.CustomButton
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

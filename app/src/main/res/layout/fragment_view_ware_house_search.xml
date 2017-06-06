@@ -19,9 +19,9 @@
         >
         <include
             layout="@layout/toolbar"
-            app:background="@{@color/grey}"
+            app:background="@{@color/colorAccent}"
             app:isShow="@{true}"
-            app:leftIcon="@{@drawable/ic_arrow_left_24dp}"
+            app:leftIcon="@{@drawable/ic_arrow_left_white_24dp}"
             app:leftIconClick="@{()->presenter.onCancel()}"
             app:title="@{@string/view_ware_house_search_filter_information}"
             app:titleColor="@{@color/white}"
@@ -167,7 +167,7 @@
                 android:gravity="center"
                 android:orientation="horizontal"
                 >
-                <Button
+                <com.viettel.mbccs.widget.CustomButton
                     android:layout_width="@dimen/dp_150"
                     android:layout_height="@dimen/dp_40"
                     android:layout_margin="@dimen/dp_5"
@@ -176,7 +176,7 @@
                     style="@style/button_nagative"
                     />
 
-                <Button
+                <com.viettel.mbccs.widget.CustomButton
                     android:layout_width="@dimen/dp_150"
                     android:layout_height="@dimen/dp_40"
                     android:layout_margin="@dimen/dp_5"

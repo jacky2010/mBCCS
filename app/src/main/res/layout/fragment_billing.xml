@@ -95,7 +95,7 @@
             android:layout_gravity="center"
             android:src="@drawable/ic_search" />
 
-        <EditText
+        <com.viettel.mbccs.widget.CustomEdittext
             android:id="@+id/text_filer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

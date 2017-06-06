@@ -23,9 +23,9 @@
             >
             <include
                 layout="@layout/toolbar"
-                app:background="@{@color/grey}"
+                app:background="@{@color/colorAccent}"
                 app:isShow="@{true}"
-                app:leftIcon="@{@drawable/ic_arrow_left_24dp}"
+                app:leftIcon="@{@drawable/ic_arrow_left_white_24dp}"
                 app:leftIconClick="@{()->presenter.onCancel()}"
                 app:title="@{@string/sell_orders_title}"
                 app:titleColor="@{@color/white}"
@@ -153,7 +153,7 @@
                         />
                 </LinearLayout>
 
-                <Button
+                <com.viettel.mbccs.widget.CustomButton
                     android:layout_width="@dimen/dp_150"
                     android:layout_height="@dimen/dp_40"
                     android:layout_gravity="center"

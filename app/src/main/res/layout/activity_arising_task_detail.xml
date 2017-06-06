@@ -23,7 +23,7 @@
             layout="@layout/toolbar"
             app:background="@{ @color/grey }"
             app:isShow="@{ true }"
-            app:leftIcon="@{ @drawable/ic_close_black_24dp }"
+            app:leftIcon="@{ @drawable/ic_arrow_left_white_24dp }"
             app:leftIconClick="@{ () -> presenter.onBackPressed() }"
             app:title="{ @string/menu_giao_viec_phat_sinh }"
             app:titleColor="@{ @color/white }"
