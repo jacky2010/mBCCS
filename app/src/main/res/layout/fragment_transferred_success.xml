@@ -1,60 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical">
 
-    <com.viettel.mbccs.widget.ToolBarView
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:tbIconLeft="@drawable/ic_close"
-        app:tbTitle="Thông báo" />
+    <!--<LinearLayout-->
+        <!--android:orientation="vertical"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
 
-    <LinearLayout
-        android:id="@+id/view_header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:orientation="vertical">
-
-        <ImageView
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
+        <com.viettel.mbccs.widget.ToolBarView
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_done"
-            android:layout_marginBottom="@dimen/dp_20"/>
+            app:tbIconLeft="@drawable/ic_close"
+            app:tbTitle="Thông báo" />
 
-        <com.viettel.mbccs.widget.CustomTextView
+        <LinearLayout
+            android:id="@+id/view_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:gravity="center"
-            android:text="Chuyen anypay thanh cong!" />
+            android:orientation="vertical">
 
-        <com.viettel.mbccs.widget.CustomTextView
-            android:layout_width="match_parent"
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:background="@drawable/ic_done" />
+
+            <com.viettel.mbccs.widget.CustomTextView
+                android:id="@+id/txtMessageDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center" />
+
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_20"
+                android:gravity="center"
+                android:text="" />
+        </LinearLayout>
+
+
+        <com.viettel.mbccs.widget.ButtonIconView
+            android:id="@+id/biv_done"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dp_20"
-            android:gravity="center"
-            android:text="" />
-    </LinearLayout>
-
-
-    <com.viettel.mbccs.widget.ButtonIconView
-        android:id="@+id/biv_done"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/view_header"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/dp_100"
-        app:itb_bg="@color/blue"
-        app:itb_bg_pressed="@color/blue_trans"
-        app:itb_padding_left="@dimen/dp_50"
-        app:itb_padding_right="@dimen/dp_50"
-        app:itb_radius="3dp"
-        app:itb_text="OK" />
-
-</RelativeLayout>
+            android:layout_below="@+id/view_header"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_100"
+            app:itb_bg="@color/blue"
+            app:itb_bg_pressed="@color/blue_trans"
+            app:itb_padding_left="@dimen/dp_50"
+            app:itb_padding_right="@dimen/dp_50"
+            app:itb_radius="3dp"
+            app:itb_text="OK" />
+    <!--</LinearLayout>-->
+</LinearLayout>

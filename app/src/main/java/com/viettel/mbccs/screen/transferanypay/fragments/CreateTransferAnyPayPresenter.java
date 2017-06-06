@@ -4,13 +4,16 @@ import android.content.Context;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.KeyValue;
 import com.viettel.mbccs.data.source.TransferAnyPayRepository;
+import com.viettel.mbccs.screen.common.adapter.HintArrayAdapter;
 import com.viettel.mbccs.utils.Common;
+import com.viettel.mbccs.utils.ValidateUtils;
 import com.viettel.mbccs.variable.Constants;
 
 import java.util.ArrayList;
@@ -29,12 +32,15 @@ public class CreateTransferAnyPayPresenter implements CreateTransferAnyPayContra
     private CreateTransferAnyPayContract.ViewModel viewModel;
 
     private ArrayAdapter<String> transTypesAdapter;
-    private ArrayAdapter<String> payAmountAdapter;
+    private HintArrayAdapter<String> payAmountAdapter;
 
     public ObservableField<String> transferType;
     public ObservableField<String> isdn;
+    public ObservableField<String> isdnError;
     public ObservableField<String> refillAmount;
+    public ObservableField<String> refillAmountError;
     public ObservableField<String> transferAmount;
+    public ObservableField<String> transferAmountError;
 
     public ObservableBoolean defaultAmountChecked;
 
@@ -46,7 +52,7 @@ public class CreateTransferAnyPayPresenter implements CreateTransferAnyPayContra
     private TransferAnyPayRepository repository;
     private String selectedDefaultAmount;
 
-    public CreateTransferAnyPayPresenter(Context context, final CreateTransferAnyPayContract.ViewModel viewModel){
+    public CreateTransferAnyPayPresenter(Context context, final CreateTransferAnyPayContract.ViewModel viewModel) {
         this.context = context;
         this.viewModel = viewModel;
 
@@ -55,13 +61,16 @@ public class CreateTransferAnyPayPresenter implements CreateTransferAnyPayContra
         transferAmount = new ObservableField<>();
         refillAmount = new ObservableField<>();
         defaultAmountChecked = new ObservableBoolean(true);
+        isdnError = new ObservableField<>();
+        transferAmountError = new ObservableField<>();
+        refillAmountError = new ObservableField<>();
 
         transTypesList = new ArrayList<>();
         payAmountList = new ArrayList<>();
 
         transTypesAdapter = new ArrayAdapter<>(context, R.layout.item_spinner, R.id.text,
                 transTypesList);
-        payAmountAdapter = new ArrayAdapter<>(context, R.layout.item_spinner, R.id.text,
+        payAmountAdapter = new HintArrayAdapter<>(context, R.layout.item_spinner, R.id.text,
                 payAmountList);
 
         initListeners();
@@ -72,40 +81,30 @@ public class CreateTransferAnyPayPresenter implements CreateTransferAnyPayContra
         try {
             repository = TransferAnyPayRepository.getInstance();
 
-//            custTypes = repository.getCustTypes();
             transTypes = repository.getTransferTypes();
             payAmounts = repository.getDefaultAmounts();
-//
-//            for (KeyValue item : custTypes) {
-//                custTypesList.add(item.getValue());
-//            }
-//
+
             for (KeyValue item : transTypes) {
                 transTypesList.add(item.getValue());
             }
-//
+
+            payAmountList.add(context.getString(R.string.sell_anypay_hint_pay_amount));
             for (KeyValue item : payAmounts) {
                 payAmountList.add(item.getValue());
             }
-//
-//            for (KeyValue item : repository.getBankPlusAmounts()) {
-//                bankPlusAmountList.add(item.getValue());
-//            }
-//
-//            custTypeAdapter.notifyDataSetChanged();
+
             transTypesAdapter.notifyDataSetChanged();
             payAmountAdapter.notifyDataSetChanged();
-//            bankPlusAmountAdapter.notifyDataSetChanged();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void initListeners(){
-        try{
+    private void initListeners() {
+        try {
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -122,52 +121,64 @@ public class CreateTransferAnyPayPresenter implements CreateTransferAnyPayContra
 
     @Override
     public void createTransaction() {
-        try{
+        try {
 
             double preTax = 0;
             double tax = 0;
             double discount = 0;
             double total = 0;
 
-            if(isdn.get() == null || "".equals(isdn.get().trim())){
-                viewModel.showError("So isdn khong duoc de trong");
+            boolean isValid = true;
+
+            if (TextUtils.isEmpty(isdn.get())) {
+                isdnError.set(context.getString(R.string.input_empty));
+                isValid = false;
+            } else if (!TextUtils.isEmpty(isdn.get()) && !ValidateUtils.isPhoneNumber(isdn.get())) {
+                isdnError.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.transfer_anypay_label_isdn)));
+                isValid = false;
+            }
+
+            if (PAY_METHOD_REFILL.equals(transferType.get())) {
+                if (defaultAmountChecked.get()) {
+
+                    if (TextUtils.isEmpty(selectedDefaultAmount)) {
+                        viewModel.showError(context.getString(R.string.common_msg_error_required_field, context.getString(R.string.transfer_anypay_label_amount)));
+                        isValid = false;
+                    }
+
+                } else {
+                    if (TextUtils.isEmpty(refillAmount.get())) {
+                        refillAmountError.set(context.getString(R.string.input_empty));
+                        isValid = false;
+                    } else if (!TextUtils.isEmpty(refillAmount.get()) && !ValidateUtils.isAmountValid(refillAmount.get())) {
+                        refillAmountError.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.transfer_anypay_label_amount)));
+                        isValid = false;
+                    }
+                }
+            } else if (PAY_METHOD_TRANSFER.equals(transferType.get())) {
+
+                if (TextUtils.isEmpty(transferAmount.get())) {
+                    transferAmountError.set(context.getString(R.string.input_empty));
+                    isValid = false;
+                } else if (!TextUtils.isEmpty(transferAmount.get()) && !ValidateUtils.isAmountValid(transferAmount.get())) {
+                    transferAmountError.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.sell_anypay_label_amount_default)));
+                    isValid = false;
+                }
+            }
+
+            if (!isValid)
                 return;
-            }
 
-            if(PAY_METHOD_REFILL.equals(transferType.get())){
-                if(defaultAmountChecked.get()){
-
-                    if(selectedDefaultAmount == null || "".equals(selectedDefaultAmount.trim())){
-                        viewModel.showError("So tien khong duoc de trong");
-
-                        return;
-                    }
-
+            if (PAY_METHOD_REFILL.equals(transferType.get())) {
+                if (defaultAmountChecked.get())
                     total = Double.parseDouble(selectedDefaultAmount.trim());
-
-                }else {
-                    if(refillAmount.get() == null || "".equals(refillAmount.get().trim())){
-                        viewModel.showError("So tien khong duoc de trong");
-
-                        return;
-                    }
-
+                else
                     total = Double.parseDouble(refillAmount.get().trim());
-                }
-            }else if(PAY_METHOD_TRANSFER.equals(transferType.get())){
-
-                if(transferAmount.get() == null || "".equals(transferAmount.get().trim())){
-                    viewModel.showError("So tien khong duoc de trong");
-
-                    return;
-                }
-
+            } else if (PAY_METHOD_TRANSFER.equals(transferType.get()))
                 total = Double.parseDouble(transferAmount.get().trim());
-            }
 
-            if(total <= 0){
-                viewModel.showError("So tien phai lon hon 0");
-
+            if (total <= 0) {
+                viewModel.showError(context.getString(R.string.common_msg_error_greater_fields, context.getString(R.string.transfer_anypay_label_amount), "0"));
                 return;
             }
 
@@ -183,44 +194,44 @@ public class CreateTransferAnyPayPresenter implements CreateTransferAnyPayContra
 
             viewModel.goToDialogFragment(PAY_METHOD_REFILL.equals(transferType.get()), args);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @Override
     public void onDefaultAmountChanged(int index) {
-        try{
+        try {
             selectedDefaultAmount = payAmounts.get(index).getKey();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @Override
     public void onTransTypeChanged(int index) {
-        try{
+        try {
             KeyValue item = transTypes.get(index);
 
-            if(item != null){
-                if(PAY_METHOD_REFILL.equals(item.getKey())) {
+            if (item != null) {
+                if (PAY_METHOD_REFILL.equals(item.getKey())) {
                     viewModel.onTransferTypeChanged(CreateTransferAnyPayContract.TransferType.REFILL);
 
                     transferType.set(PAY_METHOD_REFILL);
-                }else if(PAY_METHOD_TRANSFER.equals(item.getKey())) {
+                } else if (PAY_METHOD_TRANSFER.equals(item.getKey())) {
                     viewModel.onTransferTypeChanged(CreateTransferAnyPayContract.TransferType.TRANSFER);
 
                     transferType.set(PAY_METHOD_TRANSFER);
                 }
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void onDefaultAmountCheckChanged(CompoundButton button, boolean checked){
-        if(checked)
+    public void onDefaultAmountCheckChanged(CompoundButton button, boolean checked) {
+        if (checked)
             defaultAmountChecked.set(true);
         else
             defaultAmountChecked.set(false);
@@ -228,8 +239,8 @@ public class CreateTransferAnyPayPresenter implements CreateTransferAnyPayContra
         viewModel.onDefaultAmountChanged(defaultAmountChecked.get());
     }
 
-    public void onOtherAmountCheckChanged(CompoundButton button, boolean checked){
-        if(checked)
+    public void onOtherAmountCheckChanged(CompoundButton button, boolean checked) {
+        if (checked)
             defaultAmountChecked.set(false);
         else
             defaultAmountChecked.set(true);

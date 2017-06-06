@@ -54,12 +54,13 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_16" />
 
-            <EditText
+            <com.viettel.mbccs.widget.CustomEdittext
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_40"
                 android:background="@drawable/bg_order"
                 android:inputType="phone"
-                android:text="@={ presenter.isdn }" />
+                android:text="@={ presenter.isdn }"
+                app:error="@{presenter.isdnError}"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -123,7 +124,8 @@
                     android:text="@={presenter.refillAmount}"
                     android:background="@drawable/bg_order"
                     android:hint="@string/sell_anypay_label_amount_other_hint"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    app:error="@{presenter.refillAmountError}"/>
             </LinearLayout>
 
             <EditText
@@ -135,6 +137,7 @@
                 android:hint="@string/sell_anypay_label_amount_other_hint"
                 android:inputType="number"
                 android:text="@={presenter.transferAmount}"
+                app:error="@{presenter.transferAmountError}"
                 android:visibility="@{presenter.transferType == presenter.PAY_METHOD_TRANSFER ? View.VISIBLE : View.GONE}" />
 
             <Button

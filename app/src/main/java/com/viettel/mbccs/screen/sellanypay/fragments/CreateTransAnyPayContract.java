@@ -26,5 +26,7 @@ public class CreateTransAnyPayContract {
         void createTransaction();
         void onCustomerTypeChanged(int index);
         void onPaymentMethodChanged(int index);
+        void onBankPlusAmountChanged(int index);
+        void onDefaultAmountChanged(int index);
     }
 }

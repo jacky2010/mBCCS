@@ -54,13 +54,14 @@
                 android:textSize="@dimen/sp_16"
                 android:visibility="@{presenter.customerType == presenter.CUST_TYPE_INDIVIDUAL ? View.GONE : View.VISIBLE}" />
 
-            <EditText
+            <com.viettel.mbccs.widget.CustomEdittext
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_40"
                 android:background="@drawable/bg_order"
                 android:inputType="text"
                 android:text="@={ presenter.channelCode }"
-                android:visibility="@{presenter.customerType == presenter.CUST_TYPE_INDIVIDUAL ? View.GONE : View.VISIBLE}" />
+                android:visibility="@{presenter.customerType == presenter.CUST_TYPE_INDIVIDUAL ? View.GONE : View.VISIBLE}"
+                app:error="@{presenter.channelCodeError}"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -70,12 +71,13 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_16" />
 
-            <EditText
+            <com.viettel.mbccs.widget.CustomEdittext
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_40"
                 android:background="@drawable/bg_order"
                 android:inputType="phone"
-                android:text="@={ presenter.isdn }" />
+                android:text="@={ presenter.isdn }"
+                app:error="@{presenter.isdnError}"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -135,12 +137,14 @@
                         android:onCheckedChanged="@{(cb, isChecked) -> presenter.onBankAccountCheckChanged(cb, isChecked)}"/>
                 </RadioGroup>
 
-                <EditText
+                <com.viettel.mbccs.widget.CustomEdittext
                     android:id="@+id/txtBankPlusValue"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_40"
                     android:background="@drawable/bg_order"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:text="@={presenter.bankPlusValue}"
+                    app:error="@{presenter.bankPlusValueError}"/>
             </LinearLayout>
 
             <TextView
@@ -152,13 +156,14 @@
                 android:textSize="@dimen/sp_16"
                 android:visibility="@{presenter.payMethod == presenter.PAY_METHOD_E_WALLET ? View.VISIBLE : View.GONE}" />
 
-            <EditText
+            <com.viettel.mbccs.widget.CustomEdittext
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_40"
                 android:background="@drawable/bg_order"
                 android:inputType="phone"
                 android:text="@={ presenter.walletIsdn }"
-                android:visibility="@{presenter.payMethod == presenter.PAY_METHOD_E_WALLET ? View.VISIBLE : View.GONE}" />
+                android:visibility="@{presenter.payMethod == presenter.PAY_METHOD_E_WALLET ? View.VISIBLE : View.GONE}"
+                app:error="@{presenter.walletIsdnError}"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -169,14 +174,16 @@
                 android:textSize="@dimen/sp_16"
                 android:visibility="@{presenter.payMethod == presenter.PAY_METHOD_CASH || presenter.payMethod == presenter.PAY_METHOD_E_WALLET || presenter.payMethod == presenter.PAY_METHOD_BANK_PLUS ? View.VISIBLE : View.GONE}" />
 
-            <EditText
+            <com.viettel.mbccs.widget.CustomEdittext
                 android:id="@+id/txtEWalletAmount"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_40"
                 android:background="@drawable/bg_order"
                 android:hint="@string/sell_anypay_label_amount_other_hint"
                 android:inputType="number"
-                android:visibility="@{presenter.payMethod == presenter.PAY_METHOD_E_WALLET ? View.VISIBLE : View.GONE}" />
+                android:text="@={presenter.ewalletAmount}"
+                android:visibility="@{presenter.payMethod == presenter.PAY_METHOD_E_WALLET ? View.VISIBLE : View.GONE}"
+                app:error="@{presenter.ewalletAmountError}"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -236,14 +243,16 @@
                     android:checked="@{!presenter.defaultAmountChecked}"
                     android:onCheckedChanged="@{(cb, isChecked) -> presenter.onOtherAmountCheckChanged(cb, isChecked)}"/>
 
-                <EditText
+                <com.viettel.mbccs.widget.CustomEdittext
                     android:id="@+id/txtOtherAmount"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/dp_40"
                     android:layout_weight="1"
                     android:background="@drawable/bg_order"
                     android:hint="@string/sell_anypay_label_amount_other_hint"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:text="@={presenter.otherAmount}"
+                    app:error="@{presenter.otherAmountError}"/>
             </LinearLayout>
 
             <View

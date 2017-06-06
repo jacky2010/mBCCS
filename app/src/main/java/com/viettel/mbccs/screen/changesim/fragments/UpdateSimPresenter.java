@@ -7,8 +7,8 @@ import android.databinding.ObservableField;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.ChangeSimItem;
 import com.viettel.mbccs.data.source.ChangeSimRepository;
-import com.viettel.mbccs.screen.common.Validator;
 import com.viettel.mbccs.utils.Common;
+import com.viettel.mbccs.utils.ValidateUtils;
 
 /**
  * Created by minhnx on 5/19/17.
@@ -98,7 +98,7 @@ public class UpdateSimPresenter implements UpdateSimContract.Presenter {
                 return;
             }
 
-            if (!Validator.isSerialValid(newSerial.get())) {
+            if (!ValidateUtils.isSerialValid(newSerial.get())) {
                 viewModel.showError(context.getString(R.string.change_sim_error_serial_not_valid));
                 return;
             }
@@ -108,7 +108,7 @@ public class UpdateSimPresenter implements UpdateSimContract.Presenter {
                     viewModel.showError(context.getString(R.string.change_sim_error_recent_call_required, "1"));
                     return;
                 }
-                if (Validator.isPhoneNumberValid(contact1.get())) {
+                if (ValidateUtils.isPhoneNumberValid(contact1.get())) {
                     viewModel.showError(context.getString(R.string.change_sim_error_recent_call_not_valid, "1"));
                     return;
                 }
@@ -117,7 +117,7 @@ public class UpdateSimPresenter implements UpdateSimContract.Presenter {
                     viewModel.showError(context.getString(R.string.change_sim_error_recent_call_required, "2"));
                     return;
                 }
-                if (Validator.isPhoneNumberValid(contact2.get())) {
+                if (ValidateUtils.isPhoneNumberValid(contact2.get())) {
                     viewModel.showError(context.getString(R.string.change_sim_error_recent_call_not_valid, "2"));
                     return;
                 }
@@ -126,7 +126,7 @@ public class UpdateSimPresenter implements UpdateSimContract.Presenter {
                     viewModel.showError(context.getString(R.string.change_sim_error_recent_call_required, "3"));
                     return;
                 }
-                if (Validator.isPhoneNumberValid(contact3.get())) {
+                if (ValidateUtils.isPhoneNumberValid(contact3.get())) {
                     viewModel.showError(context.getString(R.string.change_sim_error_recent_call_not_valid, "3"));
                     return;
                 }
@@ -135,7 +135,7 @@ public class UpdateSimPresenter implements UpdateSimContract.Presenter {
                     viewModel.showError(context.getString(R.string.change_sim_error_recent_call_required, "4"));
                     return;
                 }
-                if (Validator.isPhoneNumberValid(contact4.get())) {
+                if (ValidateUtils.isPhoneNumberValid(contact4.get())) {
                     viewModel.showError(context.getString(R.string.change_sim_error_recent_call_not_valid, "4"));
                     return;
                 }
@@ -144,7 +144,7 @@ public class UpdateSimPresenter implements UpdateSimContract.Presenter {
                     viewModel.showError(context.getString(R.string.change_sim_error_recent_call_required, "5"));
                     return;
                 }
-                if (Validator.isPhoneNumberValid(contact5.get())) {
+                if (ValidateUtils.isPhoneNumberValid(contact5.get())) {
                     viewModel.showError(context.getString(R.string.change_sim_error_recent_call_not_valid, "5"));
                     return;
                 }

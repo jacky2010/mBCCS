@@ -240,6 +240,9 @@ Từ <b>%s</b><br>
     <string name="channel_label_name">Tên kênh</string>
     <string name="common_label_tax_code">Mã số thuế</string>
     <string name="common_msg_error_required_field">Bạn phải nhập %s!</string>
+    <string name="common_msg_error_incorrect_format_field">%s không đúng định dạng!</string>
+    <string name="common_msg_error_invalid_field">%s không hợp lệ!</string>
+    <string name="common_msg_error_greater_fields">%1$s phải lớn hơn %2$s!</string>
 
     <!--Change Sim-->
     <string name="change_sim_label_document_id">Số giấy tờ</string>
@@ -321,6 +324,7 @@ Từ <b>%s</b><br>
     <string name="sell_anypay_label_pay_amount">Số tiền phải thanh toán:</string>
     <string name="sell_anypay_label_sell">Bán AnyPay</string>
     <string name="sell_anypay_msg_confirm_sell">Bạn có muốn bán AnyPay cho khách hàng %s?</string>
+    <string name="sell_anypay_msg_success">Nạp AnyPay thành công cho khách hàng %1$s với số tiền %2$s!</string>
     <string name="sell_anypay_label_confirm_pre_tax">Trước thuế:</string>
     <string name="sell_anypay_label_confirm_tax">Tiền thuế:</string>
     <string name="sell_anypay_label_confirm_discount">Chiết khấu:</string>
@@ -331,6 +335,10 @@ Từ <b>%s</b><br>
     <string name="sell_anypay_refill_label_tax">Tiền thuế:</string>
     <string name="sell_anypay_label_discount2">Chiết khấu:</string>
     <string name="sell_anypay_refill_label_total">Tổng tiền phải trả:</string>
+    <string name="sell_anypay_hint_cust_type">- Chọn loại khách hàng -</string>
+    <string name="sell_anypay_hint_pay_method">- Chọn hình thức thanh toán -</string>
+    <string name="sell_anypay_hint_pay_amount">- Chọn số tiền thanh toán -</string>
+    <string name="sell_anypay_hint_bank_plus_amount">- Chọn số tiền thanh toán -</string>
     <!--Sell AnyPay-->
 
     <string name="choose_staff">Chọn nhân viên</string>
@@ -343,6 +351,7 @@ Từ <b>%s</b><br>
     <string name="transfer_anypay_label_amount">Số tiền</string>
     <string name="transfer_anypay_label_transfer">Chuyển AnyPay</string>
     <string name="transfer_anypay_label_refill">Nạp AnyPay</string>
+    <string name="transfer_anypay_msg_success">Chuyển AnyPay thành công cho khách hàng %1$s với số tiền %2$s!</string>
     <!--Transfer AnyPay-->
 
     <!--kpp-->

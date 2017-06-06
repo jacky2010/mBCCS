@@ -11,6 +11,7 @@ import com.viettel.mbccs.base.BaseDataBindFragment;
 import com.viettel.mbccs.data.model.ChangeSimItem;
 import com.viettel.mbccs.databinding.FragmentCreateTransAnyPayBinding;
 import com.viettel.mbccs.utils.ActivityUtils;
+import com.viettel.mbccs.variable.Constants;
 
 /**
  * Created by minhnx on 5/20/17.
@@ -71,7 +72,8 @@ public class CreateTransAnyPayFragment extends BaseDataBindFragment<FragmentCrea
             mBinding.spCustType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    mPresenter.onCustomerTypeChanged(i);
+                    if (!Constants.View.HINT.equals(view.getTag()))
+                        mPresenter.onCustomerTypeChanged(i);
                 }
 
                 @Override
@@ -83,7 +85,34 @@ public class CreateTransAnyPayFragment extends BaseDataBindFragment<FragmentCrea
             mBinding.spPayMethod.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    mPresenter.onPaymentMethodChanged(i);
+                    if (!Constants.View.HINT.equals(view.getTag()))
+                        mPresenter.onPaymentMethodChanged(i);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+
+            mBinding.spBankPlusAmount.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if (!Constants.View.HINT.equals(view.getTag()))
+                        mPresenter.onBankPlusAmountChanged(i);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+
+            mBinding.spDefaultAmountList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if (!Constants.View.HINT.equals(view.getTag()))
+                        mPresenter.onDefaultAmountChanged(i);
                 }
 
                 @Override

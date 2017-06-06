@@ -14,6 +14,7 @@ import com.viettel.mbccs.databinding.FragmentCreateTransferAnyPayBinding;
 import com.viettel.mbccs.screen.transferanypay.DialogConfirmRefillFragment;
 import com.viettel.mbccs.screen.transferanypay.DialogConfirmTransferFragment;
 import com.viettel.mbccs.utils.ActivityUtils;
+import com.viettel.mbccs.variable.Constants;
 
 /**
  * Created by minhnx on 5/20/17.
@@ -79,7 +80,8 @@ public class CreateTransferAnyPayFragment extends BaseDataBindFragment<FragmentC
             mBinding.spDefaultAmountList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    mPresenter.onDefaultAmountChanged(i);
+                    if (!Constants.View.HINT.equals(view.getTag()))
+                        mPresenter.onDefaultAmountChanged(i);
                 }
 
                 @Override

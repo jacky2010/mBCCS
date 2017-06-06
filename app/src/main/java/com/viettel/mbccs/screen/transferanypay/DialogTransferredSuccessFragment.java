@@ -1,14 +1,20 @@
 package com.viettel.mbccs.screen.transferanypay;
 
+import android.databinding.ObservableField;
+import android.os.Bundle;
+
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDialog;
 import com.viettel.mbccs.constance.IconType;
+import com.viettel.mbccs.variable.Constants;
 import com.viettel.mbccs.widget.ToolBarView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
 public class DialogTransferredSuccessFragment extends BaseDialog {
+
+    public ObservableField<String> messageDetail;
 
     @BindView(R.id.toolbar) ToolBarView mToolBar;
 
@@ -19,7 +25,23 @@ public class DialogTransferredSuccessFragment extends BaseDialog {
 
     @Override
     protected void initData() {
+        try {
 
+            messageDetail = new ObservableField<>();
+
+            Bundle args = getArguments();
+
+            String isdn = args.getString(Constants.BundleConstant.CUSTOMER_ITEM);
+            String preTax = args.getString(Constants.BundleConstant.PRE_TAX);
+            String tax = args.getString(Constants.BundleConstant.TAX);
+            String discount = args.getString(Constants.BundleConstant.DISCOUNT);
+            String total = args.getString(Constants.BundleConstant.TOTAL);
+
+            messageDetail.set(getString(R.string.transfer_anypay_msg_success, isdn, total));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
