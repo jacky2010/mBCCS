@@ -66,6 +66,11 @@ public class ChannelPickerPresenter extends BaseSearchListPickerPresenter<Channe
         return adapter;
     }
 
+    @Override
+    public String getItemCountString() {
+        return null;
+    }
+
     Runnable filter = new Runnable() {
         @Override
         public void run() {
