@@ -149,11 +149,20 @@
         <activity
             android:name=".screen.information.CreateUpdateInformationActivity"
             android:screenOrientation="portrait"/>
+
         <activity
             android:name=".screen.nhapkhocapduoi.ListOrderActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.nhapkhocapduoi.createorder.CreateOrderSuccessActivity"
+            android:screenOrientation="portrait"/>
+
+        <!-- Area Channel -->
+        <activity
+            android:name=".screen.manager.area.AreaChanelActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screen.manager.area.AdministrativeAreaDetailActivity"
             android:screenOrientation="portrait"/>
     </application>
 
