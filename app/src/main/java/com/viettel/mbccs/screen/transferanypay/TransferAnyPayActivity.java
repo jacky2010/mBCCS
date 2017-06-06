@@ -40,6 +40,11 @@ public class TransferAnyPayActivity extends BaseDataBindActivity<ActivityTransfe
         initView();
     }
 
+    @Override
+    public void onCancel() {
+        onBackPressed();
+    }
+
     private void initView() {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frame_main, CreateTransferAnyPayFragment.newInstance())

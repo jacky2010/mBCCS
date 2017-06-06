@@ -337,6 +337,7 @@ Từ <b>%s</b><br>
     <string name="choose_bts">Chọn BTS</string>
 
     <!--Transfer AnyPay-->
+    <string name="transfer_anypay_title">Nạp chuyển AnyPay</string>
     <string name="transfer_anypay_label_trans_type">Loại giao dịch</string>
     <string name="transfer_anypay_label_isdn">Số ISDN</string>
     <string name="transfer_anypay_label_amount">Số tiền</string>
