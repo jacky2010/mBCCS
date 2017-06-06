@@ -91,7 +91,7 @@ public class InstallationAddressDetailActivity extends BaseActivity {
             default:
                 break;
         }
-        mButtonBack.setButtonText(mType == TypeChangeAddress.CHANGE_ADDRESS_NEW ? R.string.close : R.string.back_item);
+        mButtonBack.setButtonText(mType == TypeChangeAddress.CHANGE_ADDRESS_NEW ? R.string.common_label_close : R.string.back_item);
         mButtonNext.setButtonText(mType == TypeChangeAddress.CHANGE_FACILITY ? R.string.title_change_add : R.string.next);
         setBgTopBar(mType);
     }

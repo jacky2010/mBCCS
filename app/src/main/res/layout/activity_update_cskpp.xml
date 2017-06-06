@@ -58,7 +58,7 @@
                 android:layout_weight="1"
                 android:background="@android:color/darker_gray"
                 android:onClick="@{ () -> presenter.onBackPressed() }"
-                android:text="@string/close"
+                android:text="@string/common_label_close"
                 android:textColor="@color/black"
                 />
 

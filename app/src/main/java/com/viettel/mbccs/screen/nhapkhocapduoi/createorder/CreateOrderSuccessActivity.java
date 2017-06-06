@@ -102,7 +102,7 @@ public class CreateOrderSuccessActivity extends
     public void create() {
         new CustomDialog(this, R.string.confirm,
                 R.string.activity_create_order_success_ban_co_chac_muon_lap_phieu,
-                false, R.string.close, R.string.activity_create_order_success_lap_phieu, null,
+                false, R.string.common_label_close, R.string.activity_create_order_success_lap_phieu, null,
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -119,7 +119,7 @@ public class CreateOrderSuccessActivity extends
     public void reject() {
         new CustomDialog(this, R.string.activity_create_order_success_tu_choi_lap_phieu,
                 R.string.activity_create_order_success_ly_do_tu_choi,
-                true, R.string.close, R.string.activity_create_order_success_tu_choi, null,
+                true, R.string.common_label_close, R.string.activity_create_order_success_tu_choi, null,
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
