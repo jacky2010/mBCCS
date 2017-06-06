@@ -40,6 +40,11 @@ public class SellAnyPayActivity extends BaseDataBindActivity<ActivitySellAnyPayB
         initView();
     }
 
+    @Override
+    public void onCancel() {
+        onBackPressed();
+    }
+
     private void initView() {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frame_main, CreateTransAnyPayFragment.newInstance())

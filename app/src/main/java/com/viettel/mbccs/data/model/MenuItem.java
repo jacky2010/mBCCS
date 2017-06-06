@@ -25,7 +25,7 @@ public class MenuItem implements Parcelable {
             MenuId.MENU_XEM_KHO, MenuId.MENU_SALE_RETAIL, MenuId.MENU_SALE_CHANNEL,
             MenuId.MENU_CHANNEL_ORDER, MenuId.MENU_NHAP_HOA_DON, MenuId.MENU_TD_LAP_DAT,
             MenuId.MENU_LAP_HOA_DON, MenuId.MENU_DANG_KY_THONG_TIN, MenuId.MENU_CAP_NHAT_THONG_TIN,
-            MenuId.MENU_NHAP_KHO_CAP_DUOI
+            MenuId.MENU_NHAP_KHO_CAP_DUOI, MenuId.MENU_CREATE_BRANCH, MenuId.MENU_CHANGE_SIM, MenuId.MENU_SELL_ANYPAY, MenuId.MENU_TRANSFER_ANYPAY
     })
     public @interface MenuId {
         int MENU_PLACEHOLDER = 0;
@@ -69,6 +69,11 @@ public class MenuItem implements Parcelable {
         int MENU_TAO_GIAY_NOP_TIEN = 719;
         int MENU_PHE_DYUET_GIAY_NOP_TIEN = 720;
         int MENU_DOI_SOAT_CONG_NO_GIAY_NOP_TIEN = 721;
+
+        int MENU_CREATE_BRANCH = 25;
+        int MENU_CHANGE_SIM = 26;
+        int MENU_SELL_ANYPAY = 27;
+        int MENU_TRANSFER_ANYPAY = 28;
     }
 
     @MenuId
