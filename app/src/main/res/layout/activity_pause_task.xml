@@ -38,7 +38,7 @@
             android:layout_centerInParent="true"
             />
 
-        <TextView
+        <com.viettel.mbccs.widget.CustomTextView
             android:id="@+id/reason"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
             android:layout_marginBottom="@dimen/dp_16"
             />
 
-        <TextView
+        <com.viettel.mbccs.widget.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/date_picker"
@@ -65,7 +65,7 @@
             style="@style/TextSearchTask"
             />
 
-        <TextView
+        <com.viettel.mbccs.widget.CustomTextView
             android:id="@+id/text_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
             android:textSize="@dimen/sp_16"
             />
 
-        <TextView
+        <com.viettel.mbccs.widget.CustomTextView
             android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

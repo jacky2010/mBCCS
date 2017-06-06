@@ -36,7 +36,7 @@
             android:paddingRight="@dimen/dp_16"
             >
 
-            <TextView
+            <com.viettel.mbccs.widget.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
@@ -57,7 +57,7 @@
                 android:textSize="@dimen/sp_13"
                 />
 
-            <TextView
+            <com.viettel.mbccs.widget.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
@@ -78,7 +78,7 @@
                 android:textSize="@dimen/sp_13"
                 />
 
-            <TextView
+            <com.viettel.mbccs.widget.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
@@ -99,7 +99,7 @@
                 android:textSize="@dimen/sp_13"
                 />
 
-            <TextView
+            <com.viettel.mbccs.widget.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
@@ -120,7 +120,7 @@
                 android:textSize="@dimen/sp_13"
                 />
 
-            <TextView
+            <com.viettel.mbccs.widget.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
@@ -140,7 +140,7 @@
                     />
             </LinearLayout>
 
-            <TextView
+            <com.viettel.mbccs.widget.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"

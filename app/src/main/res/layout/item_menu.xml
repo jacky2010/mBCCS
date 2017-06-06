@@ -31,7 +31,7 @@
         android:layout_marginTop="@dimen/dp_8"
         android:orientation="vertical">
 
-        <TextView
+        <com.viettel.mbccs.widget.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"

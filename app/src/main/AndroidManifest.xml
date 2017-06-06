@@ -149,6 +149,12 @@
         <activity
             android:name=".screen.information.CreateUpdateInformationActivity"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screen.nhapkhocapduoi.ListOrderActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screen.nhapkhocapduoi.createorder.CreateOrderSuccessActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

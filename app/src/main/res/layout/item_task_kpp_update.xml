@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             >
-            <TextView
+            <com.viettel.mbccs.widget.CustomTextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -36,7 +36,7 @@
                 android:layout_weight="1"
                 />
 
-            <TextView
+            <com.viettel.mbccs.widget.CustomTextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -46,7 +46,7 @@
                 />
         </LinearLayout>
 
-        <TextView
+        <com.viettel.mbccs.widget.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="end"

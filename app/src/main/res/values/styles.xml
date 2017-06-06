@@ -113,7 +113,7 @@
 
     <style name="inputText">
         <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">@dimen/sp_13</item>
+        <item name="android:textSize">@dimen/sp_14</item>
         <item name="android:background">@drawable/bg_input_tranparent</item>
         <item name="android:padding">@dimen/dp_10</item>
     </style>

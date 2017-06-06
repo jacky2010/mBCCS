@@ -75,11 +75,6 @@ public class StaffPickerPresenter extends BaseSearchListPickerPresenter<StaffInf
         return adapter;
     }
 
-    @Override
-    public String getListCount() {
-        return null;
-    }
-
     Runnable filter = new Runnable() {
         @Override
         public void run() {
@@ -96,6 +91,6 @@ public class StaffPickerPresenter extends BaseSearchListPickerPresenter<StaffInf
 
     @Override
     public void onItemPicked(StaffInfo staffInfo) {
-        ((StaffPickerContract.ViewModel) mViewModel).onStaffPicked(staffInfo);
+        mViewModel.onItemClicked(staffInfo);
     }
 }

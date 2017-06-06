@@ -87,12 +87,12 @@ public class ListAssignTaskActivity
     }
 
     @Override
-    public void onTaskClicked(TaskModel task) {
+    public void onItemClicked(Object object) {
         // TODO: 5/28/2017 Phan quyen user nguoi giao/duoc giao
-        switch (task.getStatus()) {
+        switch (((TaskModel) object).getStatus()) {
             case TaskModel.TaskStatus.NOT_ACCEPTED:
                 Intent intent = new Intent(this, TaskCSKPPDetailActivity.class);
-                intent.putExtra(Constants.BundleConstant.TASK_INFO, task);
+                intent.putExtra(Constants.BundleConstant.TASK_INFO, (TaskModel) object);
                 startActivityForResult(intent, REQUEST_CODE_TASK_INFO);
                 break;
             case TaskModel.TaskStatus.INPROGRESS:

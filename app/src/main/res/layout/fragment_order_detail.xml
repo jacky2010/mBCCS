@@ -52,12 +52,12 @@
                 android:layout_weight="1"
                 android:orientation="vertical"
                 >
-                <TextView
+                <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@{ @string/order_detail_total_money(presenter.amountNotTax) }"
                     />
-                <TextView
+                <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_10"
@@ -70,18 +70,18 @@
                 android:layout_weight="1"
                 android:orientation="vertical"
                 >
-                <TextView
+                <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@{ @string/order_detail_discount_money(presenter.discount) }"
                     />
-                <TextView
+                <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_6"
                     android:text="@{ @string/order_detail_tax_percent(presenter.vAT) }"
                     />
-                <TextView
+                <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_6"

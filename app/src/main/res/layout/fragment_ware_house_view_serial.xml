@@ -42,7 +42,7 @@
             android:layout_height="@dimen/dp_40"
             android:background="@color/grey_two"
             >
-            <TextView
+            <com.viettel.mbccs.widget.CustomTextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -50,7 +50,7 @@
                 android:text="@string/view_ware_house_view_serial_from_serial"
                 android:textColor="@color/black"
                 />
-            <TextView
+            <com.viettel.mbccs.widget.CustomTextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -58,7 +58,7 @@
                 android:text="@string/view_ware_house_view_serial_to_serial"
                 android:textColor="@color/black"
                 />
-            <TextView
+            <com.viettel.mbccs.widget.CustomTextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.7"
