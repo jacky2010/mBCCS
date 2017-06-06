@@ -21,7 +21,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@color/white">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -65,7 +66,8 @@
                     android:background="@drawable/bg_order"
                     android:hint="@string/branches_add_hint_phone_no"
                     android:inputType="phone"
-                    android:text="@={ presenter.phoneNo }" />
+                    android:text="@={ presenter.phoneNo }"
+                    app:error="@{presenter.phoneNoError}" />
 
                 <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="match_parent"
@@ -101,7 +103,8 @@
                     android:layout_height="@dimen/dp_40"
                     android:background="@drawable/bg_order"
                     android:hint="@string/branches_add_hint_document_id"
-                    android:text="@={ presenter.documentNo }" />
+                    android:text="@={ presenter.documentNo }"
+                    app:error="@{presenter.documentNoError}" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -124,10 +127,25 @@
                         android:layout_weight="1"
                         android:gravity="right">
 
-                        <ImageView
-                            android:layout_width="@dimen/dp_40"
-                            android:layout_height="@dimen/dp_40"
-                            android:src="@drawable/ic_camera" />
+                        <LinearLayout
+                            android:id="@+id/image_document"
+                            android:layout_width="@dimen/dp_160"
+                            android:layout_height="@dimen/dp_160"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:gravity="center"
+                            android:onClick="@{ v -> presenter.onSelectImage(v) }"
+                            android:orientation="vertical">
+
+                            <android.support.v7.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1">
+                                <ImageView
+                                    android:layout_width="@dimen/dp_160"
+                                    android:layout_height="match_parent"
+                                    bind:imageBitmap="@{ presenter.imageDocument }" />
+                            </android.support.v7.widget.CardView>
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -144,7 +162,8 @@
                     android:layout_height="@dimen/dp_60"
                     android:background="@drawable/bg_order"
                     android:inputType="textMultiLine"
-                    android:text="@={ presenter.address }" />
+                    android:text="@={ presenter.address }"
+                    app:error="@{presenter.addressError}" />
 
                 <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="match_parent"
@@ -161,15 +180,16 @@
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:background="@drawable/bg_border">
 
                         <com.viettel.mbccs.widget.CustomTextView
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/dp_40"
                             android:background="@drawable/bg_order"
-                            android:text="@={ presenter.location }" />
+                            android:text="@={ presenter.location }"
+                            app:error="@{presenter.locationError}" />
                     </LinearLayout>
 
                     <ImageView
@@ -278,10 +298,25 @@
                         android:layout_weight="1"
                         android:gravity="right">
 
-                        <ImageView
-                            android:layout_width="@dimen/dp_40"
-                            android:layout_height="@dimen/dp_40"
-                            android:src="@drawable/ic_camera" />
+                        <LinearLayout
+                            android:id="@+id/image_contract"
+                            android:layout_width="@dimen/dp_160"
+                            android:layout_height="@dimen/dp_160"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:gravity="center"
+                            android:onClick="@{ v -> presenter.onSelectImage(v) }"
+                            android:orientation="vertical">
+
+                            <android.support.v7.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1">
+                                <ImageView
+                                    android:layout_width="@dimen/dp_160"
+                                    android:layout_height="match_parent"
+                                    bind:imageBitmap="@{ presenter.imageContract }" />
+                            </android.support.v7.widget.CardView>
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
 

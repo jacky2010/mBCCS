@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by minhnx on 5/21/17.
  */
 
-public class SearchBranchRequest extends BaseRequest {
+public class SearchBranchRequest {
     @SerializedName("objectBO")
     @Expose
     private SearchBranchKeyRequest objectBO;

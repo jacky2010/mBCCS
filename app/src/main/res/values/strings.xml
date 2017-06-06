@@ -237,6 +237,7 @@ Từ <b>%s</b><br>
     <string name="channel_label_code">Mã kênh</string>
     <string name="channel_label_name">Tên kênh</string>
     <string name="common_label_tax_code">Mã số thuế</string>
+    <string name="common_msg_error_required_field">Bạn phải nhập %s!</string>
 
     <!--Change Sim-->
     <string name="change_sim_label_document_id">Số giấy tờ</string>

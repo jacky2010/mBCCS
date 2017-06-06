@@ -23,9 +23,9 @@ public class MenuItem implements Parcelable {
             MenuId.MENU_BAO_CAO, MenuId.MENU_QUAN_LY_DIA_BAN, MenuId.MENU_GIAO_VIEC_PHAT_SINH,
             MenuId.MENU_GIAO_VIEC_CS_KPP, MenuId.MENU_BAN_HANG_THEO_DON_PHE_DUYET_DON_HANG,
             MenuId.MENU_XEM_KHO, MenuId.MENU_SALE_RETAIL, MenuId.MENU_SALE_CHANNEL,
-            MenuId.MENU_CHANNEL_ORDER, MenuId.MENU_NHAP_HOA_DON, MenuId.MENU_TD_LAP_DAT,
+            MenuId.MENU_NHAP_HOA_DON, MenuId.MENU_TD_LAP_DAT,
             MenuId.MENU_LAP_HOA_DON, MenuId.MENU_DANG_KY_THONG_TIN, MenuId.MENU_CAP_NHAT_THONG_TIN,
-            MenuId.MENU_CHANNEL_ORDER, MenuId.MENU_NHAP_HOA_DON, MenuId.MENU_TD_LAP_DAT, MenuId.MENU_LAP_HOA_DON,
+            MenuId.MENU_CHANNEL_ORDER,
             MenuId.MENU_CREATE_BRANCH, MenuId.MENU_CHANGE_SIM, MenuId.MENU_SELL_ANYPAY, MenuId.MENU_TRANSFER_ANYPAY
 
     })
@@ -50,18 +50,6 @@ public class MenuItem implements Parcelable {
         int MENU_GIAO_VIEC_PHAT_SINH = 508;
         int MENU_GIAO_VIEC_CS_KPP = 509;
 
-        int MENU_GIAO_VIEC_PHAT_SINH = 10;
-        int MENU_GIAO_VIEC_CS_KPP = 11;
-
-        int MENU_BAN_HANG_THEO_DON_PHE_DUYET_DON_HANG = 12;
-        int MENU_XEM_KHO = 13;
-        int MENU_NHAP_HOA_DON = 14;
-        int MENU_SALE_RETAIL = 20;
-        int MENU_SALE_CHANNEL = 21;
-        int MENU_CHANNEL_ORDER = 22;
-
-        int MENU_TD_LAP_DAT = 23;
-        int MENU_LAP_HOA_DON = 24;
         int MENU_CREATE_BRANCH = 25;
         int MENU_CHANGE_SIM = 26;
         int MENU_SELL_ANYPAY = 27;

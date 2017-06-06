@@ -8,7 +8,7 @@ import com.viettel.mbccs.data.model.BranchItem;
  * Created by minhnx on 5/21/17.
  */
 
-public class AddBranchRequest extends BaseRequest {
+public class AddBranchRequest {
     @SerializedName("objectBO")
     @Expose
     private BranchItem objectBO;
