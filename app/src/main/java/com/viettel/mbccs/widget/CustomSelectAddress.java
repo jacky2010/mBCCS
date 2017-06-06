@@ -8,6 +8,7 @@ import android.databinding.ObservableField;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.viettel.mbccs.data.model.Province;
 import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.databinding.LayoutSelectAddressBinding;
 import com.viettel.mbccs.utils.StringUtils;
+import com.viettel.mbccs.widget.fragment.DialogInputAddress;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +52,7 @@ public class CustomSelectAddress extends LinearLayout
     private String setDistrictId;
     private String setPrecinctId;
     private String setAddress;
+    private String txtAddress;
 
     private int positionProvince;
     private int positionDistrict;
@@ -62,7 +65,6 @@ public class CustomSelectAddress extends LinearLayout
 
     public CustomSelectAddress(@NonNull Context context) {
         this(context, null);
-        this.context = context;
     }
 
     public CustomSelectAddress(@NonNull Context context, @Nullable AttributeSet attrs) {
@@ -73,6 +75,7 @@ public class CustomSelectAddress extends LinearLayout
             @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         repository = UserRepository.getInstance();
+        this.context = context;
         initView(context, attrs);
     }
 
@@ -122,7 +125,10 @@ public class CustomSelectAddress extends LinearLayout
             dataProvince.add(p.getName());
         }
         adapterProvince.get().notifyDataSetChanged();
-        if (StringUtils.isEmpty(setProvinceId)) return;
+        if (StringUtils.isEmpty(setProvinceId)) {
+            binding.spinnerLayoutSelectProvince.setSelection(0);
+            return;
+        }
 
         int position = 0;
         for (int i = 0; i < provinceList.size(); i++) {
@@ -140,7 +146,10 @@ public class CustomSelectAddress extends LinearLayout
         }
         adapterDistrict.get().notifyDataSetChanged();
 
-        if (StringUtils.isEmpty(setDistrictId)) return;
+        if (StringUtils.isEmpty(setDistrictId)) {
+            binding.spinnerLayoutSelectDistrict.setSelection(0);
+            return;
+        }
 
         int position = 0;
         for (int i = 0; i < districtList.size(); i++) {
@@ -158,8 +167,8 @@ public class CustomSelectAddress extends LinearLayout
         }
         adapterPrecinct.get().notifyDataSetChanged();
 
+        int position = 0;
         if (!StringUtils.isEmpty(setPrecinctId)) {
-            int position = 0;
             for (int i = 0; i < precinctList.size(); i++) {
                 if (!setPrecinctId.equals(precinctList.get(i).getProvinceId())) continue;
                 position = i;
@@ -167,25 +176,22 @@ public class CustomSelectAddress extends LinearLayout
             }
             binding.spinnerLayoutSelectPrecinct.setSelection(position);
         }
+        binding.spinnerLayoutSelectPrecinct.setSelection(position);
 
-        if (StringUtils.isEmpty(setAddress)) {
-            txtAddressDetail.set(setAddress
-                    + " - "
-                    + precinctList.get(positionPrecinct).getName()
-                    + " - "
-                    + districtList.get(positionDistrict).getName()
-                    + " - "
-                    + provinceList.get(positionProvince).getName());
+        if (!StringUtils.isEmpty(setAddress)) {
+            txtAddressDetail.set(setAddress);
         }
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String address = StringUtils.isEmpty(txtAddress) ? "" : txtAddress + ", ";
         switch (parent.getId()) {
             case R.id.spinner_layout_select_province:
-                if (positionProvince == position) return;
+                if (positionProvince == position && positionProvince != 0) return;
 
                 positionProvince = position;
+                txtAddressDetail.set(address + provinceList.get(position).getName());
 
                 districtList.clear();
                 adapterDistrict.get().notifyDataSetChanged();
@@ -196,9 +202,14 @@ public class CustomSelectAddress extends LinearLayout
 
                 break;
             case R.id.spinner_layout_select_district:
-                if (positionDistrict == position) return;
+                if (positionDistrict == position && positionDistrict != 0) return;
 
                 positionDistrict = position;
+                txtAddressDetail.set(address
+                        + ", "
+                        + districtList.get(position).getName()
+                        + ", "
+                        + provinceList.get(positionProvince).getName());
 
                 precinctList.clear();
                 adapterPrecinct.get().notifyDataSetChanged();
@@ -206,8 +217,16 @@ public class CustomSelectAddress extends LinearLayout
                 getDataPrecinct(districtList.get(position).getDistrictId());
                 break;
             case R.id.spinner_layout_select_precinct:
-                if (positionPrecinct == position) return;
+                if (positionPrecinct == position && positionPrecinct != 0) return;
                 positionPrecinct = position;
+                txtAddressDetail.set(address
+                        + ", "
+                        + precinctList.get(position).getName()
+                        + ", "
+                        + districtList.get(positionDistrict).getName()
+                        + ", "
+                        + provinceList.get(positionProvince).getName());
+
                 break;
         }
     }
@@ -231,6 +250,12 @@ public class CustomSelectAddress extends LinearLayout
 
     public void setCurrentAddress(String address) {
         setAddress = address;
+        if (StringUtils.isEmpty(setAddress)) return;
+        String[] arr = setAddress.trim().split(",");
+        if (arr.length < 3) return;
+        for (int i = 0; i < arr.length - 3; i++) {
+            txtAddress = txtAddress + arr[i] + ", ";
+        }
     }
 
     public Province getProvince() {
@@ -242,10 +267,33 @@ public class CustomSelectAddress extends LinearLayout
     }
 
     public Precinct getPrecinct() {
-        return districtList.size() != 0 ? precinctList.get(positionPrecinct) : null;
+        return precinctList.size() != 0 ? precinctList.get(positionPrecinct) : null;
     }
 
     public String getAddress() {
         return txtAddressDetail.get();
+    }
+
+    public void enterAddress() {
+        String province = getProvince() == null ? "" : (", " + getProvince().getName());
+        String district = getDistrict() == null ? "" : (", " + getDistrict().getName());
+        String precinct = getPrecinct() == null ? "" : (", " + getPrecinct().getName());
+
+        final DialogInputAddress dialog =
+                DialogInputAddress.newInstance(txtAddress, precinct, district, province);
+        dialog.setDialogInputAddressCallback(new DialogInputAddress.DialogInputAddressCallback() {
+            @Override
+            public void onResultCallback(String address, String precinct, String district,
+                    String province) {
+                txtAddress = address;
+                txtAddressDetail.set(
+                        address + (StringUtils.isEmpty(precinct) ? "" : precinct) + (
+                                StringUtils.isEmpty(district) ? "" : district) + (
+                                StringUtils.isEmpty(province) ? "" : province));
+                dialog.dismiss();
+            }
+        });
+        dialog.setCancelable(false);
+        dialog.show(((AppCompatActivity) context).getSupportFragmentManager(), "");
     }
 }

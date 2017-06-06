@@ -42,6 +42,9 @@
         <variable
             name="isShow"
             type="boolean" />
+        <variable
+            name="isAllCaps"
+            type="boolean" />
 
         <import type="android.view.View" />
     </data>
@@ -79,6 +82,7 @@
             android:paddingRight="@dimen/dp_40"
             android:text="@{ title }"
             android:textColor="@{ titleColor }"
-            android:textSize="@{ titleTextSize }" />
+            android:textSize="@{ titleTextSize }"
+            android:textAllCaps="@{isAllCaps}"/>
     </RelativeLayout>
 </layout>

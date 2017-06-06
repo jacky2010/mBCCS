@@ -1,5 +1,6 @@
 package com.viettel.mbccs.data.model;
 
+import android.support.annotation.StringDef;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -8,20 +9,27 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class ApDomain {
-    @SerializedName("type")
+    @StringDef({ Type.LOAI_GIAY_TO, Type.HINH_THUC_THANH_TOAN, Type.HINH_THUC_NHAN_THONG_BAO_CUOC })
+    public @interface Type {
+        String LOAI_GIAY_TO = "301";
+        String HINH_THUC_THANH_TOAN = "303";
+        String HINH_THUC_NHAN_THONG_BAO_CUOC = "308";
+    }
+
+    @SerializedName("code")
     @Expose
-    private String type;
+    private String code;
 
     @SerializedName("name")
     @Expose
     private String name;
 
-    public String getType() {
-        return type;
+    public String getCode() {
+        return code;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getName() {
@@ -30,10 +38,5 @@ public class ApDomain {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return name;
     }
 }

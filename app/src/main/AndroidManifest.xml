@@ -164,9 +164,12 @@
         <activity
             android:name=".screen.inputorder.InputOrderActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".screen.information.CreateUpdateInformationActivity"
-            android:screenOrientation="portrait">
-        </activity>
+        <activity
+            android:name=".screen.connector.mobile.ConnectorMobileActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screen.information.CreateUpdateInformationActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

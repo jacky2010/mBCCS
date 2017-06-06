@@ -14,6 +14,10 @@ public class RegisterCustomerInfoRequest {
     @Expose
     private String isdn;
 
+    @SerializedName("serial")
+    @Expose
+    private String serial;
+
     @SerializedName("customer")
     @Expose
     private Customer customer;
@@ -32,5 +36,13 @@ public class RegisterCustomerInfoRequest {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public String getSerial() {
+        return serial;
+    }
+
+    public void setSerial(String serial) {
+        this.serial = serial;
     }
 }

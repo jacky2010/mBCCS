@@ -5,8 +5,9 @@
     <color name="colorAccent">#FF4081</color>
     <color name="black_opacity_30">#4D000000</color>
     <color name="grey">#585858</color>
-    <color name="grey_two">#F1F1F1</color>
+    <color name="grey_two">#f1f1f1</color>
     <color name="grey_three">#b9b8b8</color>
+    <color name="grey_four">#efefef</color>
     <color name="black">#000000</color>
     <color name="blue_trans">#5f9cef</color>
     <color name="blue">#317BE1</color>
