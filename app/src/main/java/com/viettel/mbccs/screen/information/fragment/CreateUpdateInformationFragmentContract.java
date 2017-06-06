@@ -1,5 +1,6 @@
 package com.viettel.mbccs.screen.information.fragment;
 
+import android.graphics.Bitmap;
 import com.viettel.mbccs.base.BasePresenter;
 import com.viettel.mbccs.base.BaseView;
 import com.viettel.mbccs.data.model.ApDomain;
@@ -23,8 +24,6 @@ public interface CreateUpdateInformationFragmentContract {
 
         void onCancel();
 
-        void onSelectImage(android.view.View v);
-
         Province getProvince();
 
         District getDistrict();
@@ -34,6 +33,12 @@ public interface CreateUpdateInformationFragmentContract {
         String getAddress();
 
         String getBirthDate();
+
+        Bitmap imageFront();
+
+        Bitmap imageBackside();
+
+        Bitmap imagePortrait();
 
         void setBirthDate(String birthDate);
 

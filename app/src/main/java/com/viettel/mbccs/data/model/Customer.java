@@ -406,6 +406,9 @@ public class Customer implements Parcelable {
         this.idIssuePlace = idIssuePlace;
     }
 
+    /**
+     * @return Ngày cấp giấy tờ
+     */
     public String getIdIssueDate() {
         return idIssueDate;
     }
@@ -414,6 +417,9 @@ public class Customer implements Parcelable {
         this.idIssueDate = idIssueDate;
     }
 
+    /**
+     * @return Ngày hêt hạn giấy tờ
+     */
     public String getIdExpireDate() {
         return idExpireDate;
     }

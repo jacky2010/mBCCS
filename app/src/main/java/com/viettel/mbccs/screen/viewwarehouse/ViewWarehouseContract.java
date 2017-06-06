@@ -22,7 +22,7 @@ public class ViewWarehouseContract {
 
         void onCancel();
 
-        void onClickViewSerial(int position);
+        void onClickViewSerial(StockTotal stockTotal);
 
         void onSearch();
     }

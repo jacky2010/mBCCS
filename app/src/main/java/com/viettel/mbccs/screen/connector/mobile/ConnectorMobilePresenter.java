@@ -3,9 +3,13 @@ package com.viettel.mbccs.screen.connector.mobile;
 import android.content.Context;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import com.viettel.mbccs.BR;
+import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.Data;
 import com.viettel.mbccs.data.model.Contract;
 import com.viettel.mbccs.data.model.Customer;
 import com.viettel.mbccs.data.source.QLKhachHangRepository;
@@ -27,7 +31,7 @@ import rx.subscriptions.CompositeSubscription;
 
 public class ConnectorMobilePresenter extends BaseObservable
         implements ConnectorMobileContract.Presenter,
-        ConnectorMobileAdapter.ConnectorMobileAdapterCallback {
+        ConnectorMobileAdapter.ConnectorMobileAdapterCallback, AdapterView.OnItemSelectedListener {
     private Context context;
     private ConnectorMobileContract.View viewConnectorMobile;
     private QLKhachHangRepository qlKhachHangRepository;
@@ -42,11 +46,13 @@ public class ConnectorMobilePresenter extends BaseObservable
 
     private int countResult;
 
-    private ArrayAdapter<String> adapterSpinnerMobileService;
+    private ArrayAdapter<Data.DataField> adapterSpinnerMobileService;
     private ConnectorMobileAdapter connectorMobileAdapter;
 
     private List<Contract> contractList;
+    private List<Data.DataField> mobileServiceList;
     private Customer customer;
+    private int positionMobileService;
 
     public ConnectorMobilePresenter(Context context,
             ConnectorMobileContract.View viewConnectorMobile) {
@@ -59,7 +65,15 @@ public class ConnectorMobilePresenter extends BaseObservable
         qlKhachHangRepository = QLKhachHangRepository.getInstance();
         subscriptions = new CompositeSubscription();
         contractList = new ArrayList<>();
-        //        viewConnectorMobile.showLoading();
+        mobileServiceList = Data.connectorMobileService();
+        adapterSpinnerMobileService =
+                new ArrayAdapter<>(context, android.R.layout.simple_spinner_item,
+                        mobileServiceList);
+        adapterSpinnerMobileService.setDropDownViewResource(
+                android.R.layout.simple_spinner_dropdown_item);
+        adapterSpinnerMobileService.notifyDataSetChanged();
+        setSelectBefore(true);
+        setSelectAfter(false);
     }
 
     @Override
@@ -130,11 +144,12 @@ public class ConnectorMobilePresenter extends BaseObservable
     }
 
     @Bindable
-    public ArrayAdapter<String> getAdapterSpinnerMobileService() {
+    public ArrayAdapter<Data.DataField> getAdapterSpinnerMobileService() {
         return adapterSpinnerMobileService;
     }
 
-    public void setAdapterSpinnerMobileService(ArrayAdapter<String> adapterSpinnerMobileService) {
+    public void setAdapterSpinnerMobileService(
+            ArrayAdapter<Data.DataField> adapterSpinnerMobileService) {
         this.adapterSpinnerMobileService = adapterSpinnerMobileService;
         notifyPropertyChanged(BR.adapterSpinnerMobileService);
     }
@@ -168,13 +183,12 @@ public class ConnectorMobilePresenter extends BaseObservable
     }
 
     public void expandSearch() {
-        isHideSearch = !isHideSearch;
-        if (isHideSearch) {
-            textSearch = (isSelectBefore ? "Thuê bao trả trước" : "Thuê bao trả sau")
+        setHideSearch(!isHideSearch());
+        if (!isHideSearch()) {
+            setTextSearch((isSelectBefore ? "Thuê bao trả trước" : "Thuê bao trả sau")
                     + " - "
-                    + "Mobile"
-                    + " - "
-                    + (StringUtils.isEmpty(txtPassport) ? "Trống" : txtPassport);
+                    + "Mobile" + " - " + (StringUtils.isEmpty(txtPassport) ? "Trống"
+                    : txtPassport));
         }
     }
 
@@ -188,7 +202,7 @@ public class ConnectorMobilePresenter extends BaseObservable
         CheckIdNoRequest checkIdNoRequest = new CheckIdNoRequest();
         checkIdNoRequest.setIdNo(txtPassport);
         // TODO: 6/4/17 fake data
-        checkIdNoRequest.setServiceType("1");
+        checkIdNoRequest.setServiceType(mobileServiceList.get(positionMobileService).getCode());
         checkIdNoRequest.setSubType("1");
         DataRequest<CheckIdNoRequest> request = new DataRequest<>();
         request.setApiCode(ApiCode.CheckIdNo);
@@ -218,12 +232,26 @@ public class ConnectorMobilePresenter extends BaseObservable
     }
 
     public void onClickCreateNew() {
-
+        viewConnectorMobile.onItemClick(-1);
     }
     /* --------------------------- End onClick View ---------------------------------- */
 
     @Override
     public void onItemClick(int position) {
         viewConnectorMobile.onItemClick(position);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        switch (parent.getId()) {
+            case R.id.spinner_connector_mobile_service:
+                positionMobileService = position;
+                break;
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

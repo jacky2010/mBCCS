@@ -52,7 +52,7 @@
 
                 <include
                     layout="@layout/item_text_filter"
-                    app:isShow="@{presenter.isHideSearch}"
+                    app:isShow="@{!presenter.hideSearch}"
                     app:onClick="@{ v -> presenter.expandSearch() }"
                     app:text="@{presenter.textSearch}"
                     />
@@ -61,13 +61,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="@{ presenter.isHideSearch ? View.VISIBLE : View.GONE }"
+                    android:visibility="@{ presenter.hideSearch ? View.VISIBLE : View.GONE }"
                     >
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/dp_10"
+                        android:layout_marginBottom="@dimen/dp_4"
                         android:onClick="@{ v -> presenter.expandSearch() }"
                         android:src="@drawable/collapse"
                         />
@@ -92,7 +92,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:checked="@{ presenter.isSelectBefore }"
+                            android:checked="@{ presenter.selectBefore }"
                             android:text="@string/connector_mobile_tra_truoc"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_14"
@@ -102,7 +102,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:checked="@{ presenter.isSelectAfter }"
+                            android:checked="@{ presenter.selectAfter }"
                             android:text="@string/connector_mobile_tra_sau"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_14"
@@ -149,13 +149,14 @@
                         android:layout_marginTop="@dimen/dp_6"
                         android:background="@drawable/bg_order"
                         android:text="@={ presenter.txtPassport }"
+                        android:paddingLeft="@dimen/dp_10"
                         />
 
                     <Button
                         android:layout_width="@dimen/dp_150"
                         android:layout_height="@dimen/dp_40"
                         android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/dp_6"
+                        android:layout_marginTop="@dimen/dp_10"
                         android:drawableLeft="@drawable/ic_search_black_24dp"
                         android:onClick="@{ v -> presenter.onSearch() }"
                         android:text="@string/connector_mobile_tim_kiem"
@@ -168,14 +169,14 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_0.6"
-                    android:layout_marginTop="@dimen/dp_6"
+                    android:layout_marginTop="@dimen/dp_10"
                     android:background="@color/grey"
                     />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/dp_6"
+                    android:layout_marginTop="@dimen/dp_10"
                     android:orientation="vertical"
                     >
 
