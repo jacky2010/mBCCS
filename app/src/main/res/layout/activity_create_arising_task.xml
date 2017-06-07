@@ -22,7 +22,7 @@
             android:layout_height="?attr/actionBarSize"
             app:background="@{ @android:color/darker_gray }"
             app:isShow="@{ true }"
-            app:leftIcon="@{ @drawable/ic_arrow_left_24dp }"
+            app:leftIcon="@{ @drawable/ic_arrow_left_white_24dp }"
             app:leftIconClick="@{ () -> presenter.close() }"
             app:title="@{ presenter.toolbarTitle }"
             app:titleColor="@{ @color/white }"
@@ -91,7 +91,7 @@
                 android:layout_marginTop="@dimen/dp_20"
                 android:text="@string/task_title" />
 
-            <EditText
+            <com.viettel.mbccs.widget.CustomEdittext
                 style="@style/TextSearchTask"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -108,7 +108,7 @@
                 android:layout_marginTop="@dimen/dp_20"
                 android:text="@string/description" />
 
-            <EditText
+            <com.viettel.mbccs.widget.CustomEdittext
                 android:id="@+id/editText"
                 style="@style/TextSearchTask"
                 android:layout_width="match_parent"
@@ -130,7 +130,7 @@
             android:layout_margin="@dimen/dp_16"
             android:orientation="horizontal">
 
-            <Button
+            <com.viettel.mbccs.widget.CustomButton
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/dp_4"
@@ -139,7 +139,7 @@
                 android:onClick="@{ () -> presenter.close() }"
                 android:text="@string/common_label_close" />
 
-            <Button
+            <com.viettel.mbccs.widget.CustomButton
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_4"

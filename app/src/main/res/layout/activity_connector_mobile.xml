@@ -35,10 +35,10 @@
                 android:layout_height="?attr/actionBarSize"
                 app:background="@{ @android:color/darker_gray }"
                 app:isShow="@{ true }"
-                app:leftIcon="@{ @drawable/ic_arrow_left_24dp }"
+                app:leftIcon="@{ @drawable/ic_arrow_left_white_24dp }"
                 app:leftIconClick="@{ () -> presenter.onCancel() }"
                 app:title="@{ @string/connector_mobile_title }"
-                app:titleColor="@{ @color/black }"
+                app:titleColor="@{ @color/white }"
                 app:titleTextSize="@{ @dimen/sp_18 }"
                 />
 
@@ -143,7 +143,7 @@
                         android:textSize="@dimen/sp_14"
                         />
 
-                    <EditText
+                    <com.viettel.mbccs.widget.CustomEdittext
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_40"
                         android:layout_marginTop="@dimen/dp_6"
@@ -152,7 +152,7 @@
                         android:paddingLeft="@dimen/dp_10"
                         />
 
-                    <Button
+                    <com.viettel.mbccs.widget.CustomButton
                         android:layout_width="@dimen/dp_150"
                         android:layout_height="@dimen/dp_40"
                         android:layout_gravity="center"
@@ -197,7 +197,7 @@
                         bind:recyclerAdapter="@{ presenter.connectorMobileAdapter }"
                         />
 
-                    <Button
+                    <com.viettel.mbccs.widget.CustomButton
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/dp_40"
                         android:layout_alignParentBottom="true"

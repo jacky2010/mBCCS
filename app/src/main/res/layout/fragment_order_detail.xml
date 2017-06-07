@@ -20,9 +20,9 @@
         <include
             layout="@layout/toolbar"
             android:id="@+id/toolbar"
-            app:background="@{@color/grey}"
+            app:background="@{@color/colorAccent}"
             app:isShow="@{true}"
-            app:leftIcon="@{@drawable/ic_arrow_left_24dp}"
+            app:leftIcon="@{@drawable/ic_arrow_left_white_24dp}"
             app:leftIconClick="@{()->presenter.onCancel()}"
             app:title="@{ @string/order_detail_title(presenter.idOrder) }"
             app:titleColor="@{@color/white}"
@@ -99,7 +99,7 @@
             android:paddingLeft="@dimen/dp_2"
             android:paddingRight="@dimen/dp_2"
             >
-            <Button
+            <com.viettel.mbccs.widget.CustomButton
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/dp_1"
@@ -109,7 +109,7 @@
                 android:text="@string/order_detail_cancel"
                 android:textColor="@color/white"
                 />
-            <Button
+            <com.viettel.mbccs.widget.CustomButton
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_1"

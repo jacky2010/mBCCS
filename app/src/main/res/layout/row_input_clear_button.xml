@@ -62,7 +62,7 @@
                 app:eyeClickActive="@{isChangeStatePass}"
                 />
 
-            <Button
+            <com.viettel.mbccs.widget.CustomButton
                 android:id="@+id/calc_clear_txt_Prise"
                 android:layout_width="@dimen/dp_20"
                 android:layout_height="@dimen/dp_20"
@@ -75,7 +75,7 @@
                 />
 
         </FrameLayout>
-        <Button
+        <com.viettel.mbccs.widget.CustomButton
             android:layout_width="@dimen/dp_20"
             android:layout_height="@dimen/dp_20"
             android:layout_gravity="end|center"

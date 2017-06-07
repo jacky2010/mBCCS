@@ -18,9 +18,9 @@
         >
         <include
             layout="@layout/toolbar"
-            app:background="@{@color/grey}"
+            app:background="@{@color/colorAccent}"
             app:isShow="@{true}"
-            app:leftIcon="@{@drawable/ic_arrow_left_24dp}"
+            app:leftIcon="@{@drawable/ic_arrow_left_white_24dp}"
             app:leftIconClick="@{()->presenter.onCancel()}"
             app:title="@{@string/kpp_order}"
             app:titleColor="@{@color/white}"

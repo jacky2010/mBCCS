@@ -34,9 +34,9 @@
 
                 <include
                     layout="@layout/toolbar"
-                    app:background="@{@color/grey}"
+                    app:background="@{@color/colorAccent}"
                     app:isShow="@{ true }"
-                    app:leftIcon="@{ @drawable/ic_arrow_left_24dp }"
+                    app:leftIcon="@{ @drawable/ic_arrow_left_white_24dp }"
                     app:leftIconClick="@{ () -> presenter.onBackPressed() }"
                     app:title="@{ presenter.title }"
                     app:titleColor="@{ @color/white }"
@@ -282,7 +282,7 @@
                 android:orientation="horizontal"
                 >
 
-                <Button
+                <com.viettel.mbccs.widget.CustomButton
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/dp_4"
@@ -294,7 +294,7 @@
                     android:visibility="@{ presenter.update ? View.GONE : View.VISIBLE }"
                     />
 
-                <Button
+                <com.viettel.mbccs.widget.CustomButton
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_4"
@@ -306,7 +306,7 @@
                     android:visibility="@{ presenter.update ? View.GONE : View.VISIBLE }"
                     />
 
-                <Button
+                <com.viettel.mbccs.widget.CustomButton
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

@@ -23,10 +23,10 @@
             android:layout_height="?attr/actionBarSize"
             app:background="@{ @android:color/darker_gray }"
             app:isShow="@{ true }"
-            app:leftIcon="@{ @drawable/ic_arrow_left_24dp }"
+            app:leftIcon="@{ @drawable/ic_arrow_left_white_24dp }"
             app:leftIconClick="@{ () -> presenter.onBackPressed() }"
             app:title="@{ @string/dialog_input_address_title }"
-            app:titleColor="@{ @color/black }"
+            app:titleColor="@{ @color/white }"
             app:titleTextSize="@{ @dimen/sp_18 }"
             />
 
@@ -49,7 +49,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_14"
                     />
-                <EditText
+                <com.viettel.mbccs.widget.CustomEdittext
                     android:id="@+id/edit_text_address"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

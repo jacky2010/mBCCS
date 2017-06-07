@@ -36,16 +36,17 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:padding="5dp"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="@dimen/dp_3"
+                        android:paddingRight="@dimen/dp_3"
+                        android:paddingTop="10dp"
+                        android:text="@{item.serialBlock.fromSerial}"
                         android:textColor="@color/blue"
-                        app:textUnderLine="@{item.serialBlock.fromSerial}"
                         />
                 </LinearLayout>
 
                 <View
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/grey"
+                    style="@style/dividerVerticalStyle"
                     />
                 <LinearLayout
                     android:layout_width="0dp"
@@ -58,15 +59,16 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:padding="5dp"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="@dimen/dp_3"
+                        android:paddingRight="@dimen/dp_3"
+                        android:paddingTop="10dp"
                         android:textColor="@color/blue"
-                        app:textUnderLine="@{item.serialBlock.toSerial}"
+                        android:text="@{item.serialBlock.toSerial}"
                         />
                 </LinearLayout>
                 <View
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/grey"
+                    style="@style/dividerVerticalStyle"
                     />
                 <LinearLayout
                     android:layout_width="0dp"
@@ -78,15 +80,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:padding="5dp"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="@dimen/dp_3"
+                        android:paddingRight="@dimen/dp_3"
+                        android:paddingTop="10dp"
                         android:text="@{item.serialBlock.quantityString}"
                         android:textColor="@color/black"
                         />
                 </LinearLayout>
                 <View
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/grey"
+                    style="@style/dividerVerticalStyle"
                     />
                 <LinearLayout
                     android:id="@+id/layout_delete"
