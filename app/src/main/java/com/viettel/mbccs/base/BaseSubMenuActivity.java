@@ -28,6 +28,7 @@ import com.viettel.mbccs.screen.nhapkhocapduoi.ListOrderActivity;
 import com.viettel.mbccs.screen.sell.channel.SaleChannelActivity;
 import com.viettel.mbccs.screen.sell.orders.SellOrdersActivity;
 import com.viettel.mbccs.screen.sell.retail.SaleRetailActivity;
+import com.viettel.mbccs.screen.trahangcaptren.ListOrderReturnUpperActivity;
 import com.viettel.mbccs.screen.viewwarehouse.ViewWarehouseActivity;
 import com.viettel.mbccs.widget.SpacesItemDecoration;
 import java.util.ArrayList;
@@ -155,7 +156,7 @@ public class BaseSubMenuActivity
                 mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
                         getString(R.string.menu_nhap_kho_cap_tren), R.drawable.ic_add_black_24dp, 0,
                         0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_TRA_HANG_CAP_TREN,
                         getString(R.string.menu_tra_hang_cap_tren), R.drawable.ic_add_black_24dp, 0,
                         0));
                 mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_NHAP_KHO_CAP_DUOI,
@@ -313,6 +314,10 @@ public class BaseSubMenuActivity
                         case MenuItem.MenuId.MENU_DAU_NOI_CO_DINH:
                             startActivity(
                                     new Intent(BaseSubMenuActivity.this, ConnectorMobileActivity.class));
+                            break;
+                        case MenuItem.MenuId.MENU_TRA_HANG_CAP_TREN:
+                            startActivity(new Intent(BaseSubMenuActivity.this,
+                                    ListOrderReturnUpperActivity.class));
                             break;
                     }
                 }

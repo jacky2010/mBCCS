@@ -1,4 +1,4 @@
-package com.viettel.mbccs.screen.nhapkhocapduoi;
+package com.viettel.mbccs.screen.trahangcaptren;
 
 import android.content.Context;
 import android.databinding.ObservableField;
@@ -15,14 +15,14 @@ import com.viettel.mbccs.screen.nhapkhocapduoi.adapters.ListOrderAdapter;
  * Created by Anh Vu Viet on 5/31/2017.
  */
 
-public class ListOrderPresenter extends BaseSearchListViewPresenter<WarehouseOrder>
-        implements ListOrderContract.Presenter {
+public class ListOrderReturnUpperPresenter extends BaseSearchListViewPresenter<WarehouseOrder>
+        implements ListOrderReturnUpperContract.Presenter {
 
     public ObservableInt warehousePosition = new ObservableInt();
 
     public ObservableField<ArrayAdapter<String>> warehouseAdapter = new ObservableField<>();
 
-    public ListOrderPresenter(Context context, BaseSearchListViewContract.ViewModel viewModel) {
+    public ListOrderReturnUpperPresenter(Context context, BaseSearchListViewContract.ViewModel viewModel) {
         super(context, viewModel);
         // TODO: 06/06/2017 Phân quyền
 
@@ -31,6 +31,7 @@ public class ListOrderPresenter extends BaseSearchListViewPresenter<WarehouseOrd
         ArrayAdapter<String> adapter =
                 new ArrayAdapter<>(mContext, android.R.layout.simple_spinner_item, array);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        warehouseAdapter.set(adapter);
 
         listData.add(
                 new WarehouseOrder("order id", "warehouse id", "Kho 1", "channel id", "Kenh 1", 0));
@@ -39,8 +40,6 @@ public class ListOrderPresenter extends BaseSearchListViewPresenter<WarehouseOrd
         listData.add(
                 new WarehouseOrder("order id", "warehouse id", "Kho 3", "channel id", "Kenh 3", 0));
         this.adapter.get().notifyDataSetChanged();
-
-        warehouseAdapter.set(adapter);
     }
 
     @Override
@@ -65,7 +64,8 @@ public class ListOrderPresenter extends BaseSearchListViewPresenter<WarehouseOrd
 
     @Override
     public String getToolbarTitle() {
-        return mContext.getString(R.string.list_order_presenter_nhap_kho_cap_duoi);
+        return mContext.getString(
+                R.string.activity_list_order_return_upper_xuat_kho_tra_hang_cap_tren);
     }
 
     @Override
@@ -89,12 +89,19 @@ public class ListOrderPresenter extends BaseSearchListViewPresenter<WarehouseOrd
     @Override
     public String getItemCountString() {
         // TODO: 06/06/2017 Phân quyền
-        return mContext.getString(R.string.activity_list_order_warehouse_lenh_chua_lap_phieu,
+        return mContext.getString(R.string.activity_list_order_return_upper_co_phieu_chua_nhan,
                 itemCount.get());
+        //return mContext.getString(R.string.activity_list_order_warehouse_lenh_chua_lap_phieu,
+        //        itemCount.get());
     }
 
     @Override
     public void onAddClick() {
         mViewModel.onAddClick();
+    }
+
+    public boolean getShouldShowAddButton() {
+        // TODO: 06/06/2017 Phân quyền
+        return true;
     }
 }

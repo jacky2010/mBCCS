@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools"
+    >
+
+    <data>
+        <variable
+            name="presenter"
+            type="com.viettel.mbccs.screen.trahangcaptren.create.CreateTicketPresenter"
+            />
+
+        <import type="android.view.View"/>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <include
+            layout="@layout/toolbar"
+            android:id="@+id/toolbar"
+            app:background="@{ @android:color/darker_gray }"
+            app:isShow="@{ true }"
+            app:leftIcon="@{ @drawable/ic_arrow_left_24dp }"
+            app:leftIconClick="@{ () -> presenter.onBackPressed() }"
+            app:title="@{ presenter.toolbarTitle }"
+            app:titleColor="@{ @color/white }"
+            app:titleTextSize="@{ @dimen/sp_14 }"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/layout_button"
+            android:layout_below="@+id/toolbar"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:layout_marginStart="@dimen/dp_16"
+            android:orientation="vertical"
+            >
+
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_16"
+                android:text="@{ presenter.textFromWarehouse }"
+                style="@style/TextSearchTask"
+                />
+
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_12"
+                android:text="@{ presenter.titleSpinnerWarehouse }"
+                style="@style/TextSearchTask"
+                />
+
+            <com.viettel.mbccs.widget.SpinnerWithBorder
+                android:id="@+id/spinner_warehouse_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_4"
+                app:adapter="@{ presenter.warehouseAdapter }"
+                />
+
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_12"
+                android:text="@{ presenter.titleSpinnerGoodsStatus }"
+                style="@style/TextSearchTask"
+                />
+
+            <com.viettel.mbccs.widget.SpinnerWithBorder
+                android:id="@+id/spinner_goods_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_4"
+                app:adapter="@{ presenter.goodsAdapter }"
+                />
+
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_16"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_18"
+                bind:textUnderLine="@{ presenter.itemCountString }"
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="@dimen/dp_8"
+                android:background="@color/blue"
+                android:onClick="@{ () -> presenter.addGoods() }"
+                android:text="@string/activity_create_ticket_return_upper_them"
+                android:textColor="@color/white"
+                />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/dp_8"
+                android:adapter="@{ presenter.adapter }"
+                bind:addItemDecoration="@{ presenter.itemDecoration }"
+                />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/layout_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_12"
+            android:background="@color/blue"
+            android:onClick="@{ () -> presenter.createTicket() }"
+            android:text="@string/activity_create_ticket_return_upper_lap_phieu"
+            android:textColor="@color/white"
+            />
+    </RelativeLayout>
+</layout>

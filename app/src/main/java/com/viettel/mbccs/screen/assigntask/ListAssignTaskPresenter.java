@@ -110,6 +110,11 @@ public class ListAssignTaskPresenter extends BaseSearchListViewPresenter<TaskMod
     }
 
     @Override
+    public String getItemCountString() {
+        return null;
+    }
+
+    @Override
     public void onAddClick() {
         mViewModel.onAddClick();
     }
