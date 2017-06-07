@@ -27,8 +27,8 @@ public class CreateTransAnyPayPresenter implements CreateTransAnyPayContract.Pre
 
     public static final String CUST_TYPE_INDIVIDUAL = "0";
     public static final String CUST_TYPE_CORPORATE = "1";
-    public static final String PAY_METHOD_CASH = "0";
-    public static final String PAY_METHOD_E_WALLET = "1";
+    public static final String PAY_METHOD_CASH = "1";
+    public static final String PAY_METHOD_E_WALLET = "10";
     public static final String PAY_METHOD_BANK_PLUS = "2";
 
     private static double DISCOUNT_AMOUNT = 0;
@@ -204,7 +204,7 @@ public class CreateTransAnyPayPresenter implements CreateTransAnyPayContract.Pre
             if (TextUtils.isEmpty(isdn.get())) {
                 isdnError.set(context.getString(R.string.input_empty));
                 isValid = false;
-            } else if (!TextUtils.isEmpty(isdn.get()) && !ValidateUtils.isPhoneNumber(isdn.get())) {
+            } else if (!TextUtils.isEmpty(isdn.get()) && !ValidateUtils.isPhoneNumberValid(isdn.get())) {
                 isdnError.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.sell_anypay_label_isdn)));
                 isValid = false;
             }
@@ -233,7 +233,7 @@ public class CreateTransAnyPayPresenter implements CreateTransAnyPayContract.Pre
                 if (TextUtils.isEmpty(walletIsdn.get())) {
                     walletIsdnError.set(context.getString(R.string.input_empty));
                     isValid = false;
-                } else if (!TextUtils.isEmpty(walletIsdn.get()) && !ValidateUtils.isPhoneNumber(walletIsdn.get())) {
+                } else if (!TextUtils.isEmpty(walletIsdn.get()) && !ValidateUtils.isPhoneNumberValid(walletIsdn.get())) {
                     walletIsdnError.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.sell_anypay_label_isdn_wallet)));
                     isValid = false;
                 }
@@ -251,7 +251,7 @@ public class CreateTransAnyPayPresenter implements CreateTransAnyPayContract.Pre
                     isValid = false;
                 } else if (!TextUtils.isEmpty(bankPlusValue.get())) {
                     if (defaultBankIsdnChecked.get() == true) {
-                        if (!ValidateUtils.isPhoneNumber(bankPlusValue.get())) {
+                        if (!ValidateUtils.isPhoneNumberValid(bankPlusValue.get())) {
                             bankPlusValueError.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.sell_anypay_label_phone_no)));
                             isValid = false;
                         }
@@ -284,10 +284,19 @@ public class CreateTransAnyPayPresenter implements CreateTransAnyPayContract.Pre
 
             Bundle args = new Bundle();
             args.putString(Constants.BundleConstant.CUSTOMER_ITEM, isdn.get().trim());
-            args.putString(Constants.BundleConstant.PRE_TAX, Common.formatDouble(preTax));
-            args.putString(Constants.BundleConstant.TAX, Common.formatDouble(tax));
-            args.putString(Constants.BundleConstant.DISCOUNT, Common.formatDouble(DISCOUNT_AMOUNT));
-            args.putString(Constants.BundleConstant.TOTAL, Common.formatDouble(total-DISCOUNT_AMOUNT));
+            args.putDouble(Constants.BundleConstant.PRE_TAX, preTax);
+            args.putDouble(Constants.BundleConstant.TAX, tax);
+            args.putDouble(Constants.BundleConstant.DISCOUNT, DISCOUNT_AMOUNT);
+            args.putDouble(Constants.BundleConstant.TOTAL, (total - DISCOUNT_AMOUNT));
+            args.putString(Constants.BundleConstant.TRANS_TYPE, customerType.get().equals(CUST_TYPE_CORPORATE) ? CUST_TYPE_CORPORATE : CUST_TYPE_INDIVIDUAL);
+            args.putString(Constants.BundleConstant.ISDN_WALLET, walletIsdn.get());
+            args.putString(Constants.BundleConstant.ISDN, isdn.get());
+            args.putString(Constants.BundleConstant.PAY_METHOD, payMethod.get());
+
+            //TODO minhnx test
+            args.putString(Constants.BundleConstant.CHANNEL, "0");
+            args.putString(Constants.BundleConstant.STAFF, "0");
+            //minhnx test
 
             viewModel.goToDialogFragment(args);
 
@@ -318,23 +327,23 @@ public class CreateTransAnyPayPresenter implements CreateTransAnyPayContract.Pre
         }
     }
 
-    private double getTransactionAmount(){
+    private double getTransactionAmount() {
 
         double total = 0;
 
-        try{
+        try {
             if (PAY_METHOD_CASH.equals(payMethod.get())) {
                 if (defaultAmountChecked.get() == true) {
-                    total = Double.parseDouble(defaultAmount.get().trim());
+                    total = Double.parseDouble(defaultAmount.get() != null ? defaultAmount.get().trim() : "0");
                 } else {
-                    total = Double.parseDouble(otherAmount.get().trim());
+                    total = Double.parseDouble(otherAmount.get() != null ? otherAmount.get().trim() : "0");
                 }
             } else if (PAY_METHOD_E_WALLET.equals(payMethod.get())) {
-                total = Double.parseDouble(ewalletAmount.get().trim());
+                total = Double.parseDouble(ewalletAmount.get() != null ? ewalletAmount.get().trim() : "0");
             } else if (PAY_METHOD_BANK_PLUS.equals(payMethod.get())) {
-                total = Double.parseDouble(bankPlusAmount.get().trim());
+                total = Double.parseDouble(bankPlusAmount.get() != null ? bankPlusAmount.get().trim() : "0");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -387,16 +396,16 @@ public class CreateTransAnyPayPresenter implements CreateTransAnyPayContract.Pre
 
     @Override
     public void onAmountChanged() {
-        try{
+        try {
             double total = getTransactionAmount();
 
-            if(total <=0)
-                return;
+            if (total <= 0)
+                total = 0;
 
             totalAmount.set(Common.formatDouble(total));
             discountAmount.set(Common.formatDouble(DISCOUNT_AMOUNT));
-            payAmount.set(Common.formatDouble(total-DISCOUNT_AMOUNT));
-        }catch (Exception e){
+            payAmount.set(Common.formatDouble(total - DISCOUNT_AMOUNT));
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

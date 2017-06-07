@@ -3,9 +3,11 @@ package com.viettel.mbccs.data.source.remote.datasource;
 import com.viettel.mbccs.data.source.remote.ITransferAnyPayRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetAnypayAuthorizeRequest;
-import com.viettel.mbccs.data.source.remote.request.PayTransferAnypayRequest;
+import com.viettel.mbccs.data.source.remote.request.RefillAnyPayRequest;
+import com.viettel.mbccs.data.source.remote.request.TransferAnyPayRequest;
 import com.viettel.mbccs.data.source.remote.response.GetAnypayAuthorizeResponse;
-import com.viettel.mbccs.data.source.remote.response.PayTransferAnypayResponse;
+import com.viettel.mbccs.data.source.remote.response.RefillAnyPayResponse;
+import com.viettel.mbccs.data.source.remote.response.TransferAnyPayResponse;
 import com.viettel.mbccs.data.source.remote.service.RequestHelper;
 import com.viettel.mbccs.utils.rx.SchedulerUtils;
 
@@ -32,11 +34,19 @@ public class TransferAnyPayRemoteDataSource implements ITransferAnyPayRemoteData
     }
 
     @Override
-    public Observable<PayTransferAnypayResponse> payTransferAnypay(DataRequest<PayTransferAnypayRequest> request) {
+    public Observable<TransferAnyPayResponse> transferAnyPay(DataRequest<TransferAnyPayRequest> request) {
         return RequestHelper.getRequest()
-                .payTransferAnypay(request)
-                .flatMap(SchedulerUtils.<PayTransferAnypayResponse>convertDataFlatMap())
-                .compose(SchedulerUtils.<PayTransferAnypayResponse>applyAsyncSchedulers());
+                .transferAnyPay(request)
+                .flatMap(SchedulerUtils.<TransferAnyPayResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<TransferAnyPayResponse>applyAsyncSchedulers());
+    }
+
+    @Override
+    public Observable<RefillAnyPayResponse> refillAnyPay(DataRequest<RefillAnyPayRequest> request) {
+        return RequestHelper.getRequest()
+                .refillAnyPay(request)
+                .flatMap(SchedulerUtils.<RefillAnyPayResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<RefillAnyPayResponse>applyAsyncSchedulers());
     }
 
     public static TransferAnyPayRemoteDataSource getInstance() {

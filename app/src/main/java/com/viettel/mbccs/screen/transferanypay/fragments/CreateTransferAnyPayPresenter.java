@@ -12,7 +12,6 @@ import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.KeyValue;
 import com.viettel.mbccs.data.source.TransferAnyPayRepository;
 import com.viettel.mbccs.screen.common.adapter.HintArrayAdapter;
-import com.viettel.mbccs.utils.Common;
 import com.viettel.mbccs.utils.ValidateUtils;
 import com.viettel.mbccs.variable.Constants;
 
@@ -27,6 +26,8 @@ public class CreateTransferAnyPayPresenter implements CreateTransferAnyPayContra
 
     public static final String PAY_METHOD_REFILL = "0";
     public static final String PAY_METHOD_TRANSFER = "1";
+
+    private static double DISCOUNT_AMOUNT = 0;
 
     private Context context;
     private CreateTransferAnyPayContract.ViewModel viewModel;
@@ -125,7 +126,6 @@ public class CreateTransferAnyPayPresenter implements CreateTransferAnyPayContra
 
             double preTax = 0;
             double tax = 0;
-            double discount = 0;
             double total = 0;
 
             boolean isValid = true;
@@ -133,7 +133,7 @@ public class CreateTransferAnyPayPresenter implements CreateTransferAnyPayContra
             if (TextUtils.isEmpty(isdn.get())) {
                 isdnError.set(context.getString(R.string.input_empty));
                 isValid = false;
-            } else if (!TextUtils.isEmpty(isdn.get()) && !ValidateUtils.isPhoneNumber(isdn.get())) {
+            } else if (!TextUtils.isEmpty(isdn.get()) && !ValidateUtils.isPhoneNumberValid(isdn.get())) {
                 isdnError.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.transfer_anypay_label_isdn)));
                 isValid = false;
             }
@@ -187,10 +187,17 @@ public class CreateTransferAnyPayPresenter implements CreateTransferAnyPayContra
 
             Bundle args = new Bundle();
             args.putString(Constants.BundleConstant.CUSTOMER_ITEM, isdn.get().trim());
-            args.putString(Constants.BundleConstant.PRE_TAX, Common.formatDouble(preTax));
-            args.putString(Constants.BundleConstant.TAX, Common.formatDouble(tax));
-            args.putString(Constants.BundleConstant.DISCOUNT, Common.formatDouble(discount));
-            args.putString(Constants.BundleConstant.TOTAL, Common.formatDouble(total));
+            args.putDouble(Constants.BundleConstant.PRE_TAX, preTax);
+            args.putDouble(Constants.BundleConstant.TAX, tax);
+            args.putDouble(Constants.BundleConstant.DISCOUNT, DISCOUNT_AMOUNT);
+            args.putDouble(Constants.BundleConstant.TOTAL, (total - DISCOUNT_AMOUNT));
+            args.putString(Constants.BundleConstant.ISDN, isdn.get());
+
+            //TODO minhnx test
+            args.putString(Constants.BundleConstant.CHANNEL, "0");
+            args.putString(Constants.BundleConstant.FROM_CHANNEL, "0");
+            args.putString(Constants.BundleConstant.TO_CHANNEL, "0");
+            //minhnx test
 
             viewModel.goToDialogFragment(PAY_METHOD_REFILL.equals(transferType.get()), args);
 

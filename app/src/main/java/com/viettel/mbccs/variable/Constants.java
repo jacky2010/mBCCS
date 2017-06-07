@@ -98,6 +98,13 @@ public class Constants {
         public static final String TAX = "tax";
         public static final String DISCOUNT = "discount";
         public static final String TOTAL = "total";
+        public static final String TRANS_TYPE = "trans_type";
+        public static final String ISDN = "isdn";
+        public static final String PAY_METHOD = "pay_method";
+        public static final String STAFF = "staff";
+        public static final String ISDN_WALLET = "isdn_wallet";
+        public static final String FROM_CHANNEL = "from_channel";
+        public static final String TO_CHANNEL = "to_channel";
     }
 
     public class Tax{
@@ -107,5 +114,9 @@ public class Constants {
 
     public class View{
         public static final String HINT = "hint";
+    }
+
+    public class Service{
+        public static final String RESPONSE_OK = "0";
     }
 }

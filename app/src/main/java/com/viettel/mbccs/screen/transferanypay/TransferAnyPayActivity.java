@@ -19,12 +19,12 @@ public class TransferAnyPayActivity extends BaseDataBindActivity<ActivityTransfe
 
     @Override
     public void showLoading() {
-
+        showLoadingDialog();
     }
 
     @Override
     public void hideLoading() {
-
+        hideLoadingDialog();
     }
 
     @Override
@@ -36,8 +36,6 @@ public class TransferAnyPayActivity extends BaseDataBindActivity<ActivityTransfe
     protected void initData() {
         mPresenter = new TransferAnyPayPresenter(this, this);
         mBinding.setPresenter(mPresenter);
-
-        initView();
     }
 
     @Override
@@ -45,7 +43,8 @@ public class TransferAnyPayActivity extends BaseDataBindActivity<ActivityTransfe
         onBackPressed();
     }
 
-    private void initView() {
+    @Override
+    public void changeToSearchTab() {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frame_main, CreateTransferAnyPayFragment.newInstance())
                 .addToBackStack(null)

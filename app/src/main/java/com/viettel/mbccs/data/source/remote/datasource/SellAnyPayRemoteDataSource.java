@@ -3,9 +3,11 @@ package com.viettel.mbccs.data.source.remote.datasource;
 import com.viettel.mbccs.data.source.remote.ISellAnyPayRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetAnypayAuthorizeRequest;
-import com.viettel.mbccs.data.source.remote.request.SaleAnypayRequest;
+import com.viettel.mbccs.data.source.remote.request.SellAnypayToChannelRequest;
+import com.viettel.mbccs.data.source.remote.request.SellAnypayToCustomerRequest;
 import com.viettel.mbccs.data.source.remote.response.GetAnypayAuthorizeResponse;
-import com.viettel.mbccs.data.source.remote.response.SaleAnypayResponse;
+import com.viettel.mbccs.data.source.remote.response.SellAnypayToChannelResponse;
+import com.viettel.mbccs.data.source.remote.response.SellAnypayToCustomerResponse;
 import com.viettel.mbccs.data.source.remote.service.RequestHelper;
 import com.viettel.mbccs.utils.rx.SchedulerUtils;
 
@@ -32,11 +34,19 @@ public class SellAnyPayRemoteDataSource implements ISellAnyPayRemoteDataSource {
     }
 
     @Override
-    public Observable<SaleAnypayResponse> saleAnypay(DataRequest<SaleAnypayRequest> request) {
+    public Observable<SellAnypayToCustomerResponse> sellAnypayToCustomer(DataRequest<SellAnypayToCustomerRequest> request) {
         return RequestHelper.getRequest()
-                .saleAnypay(request)
-                .flatMap(SchedulerUtils.<SaleAnypayResponse>convertDataFlatMap())
-                .compose(SchedulerUtils.<SaleAnypayResponse>applyAsyncSchedulers());
+                .saleAnypayToCustomer(request)
+                .flatMap(SchedulerUtils.<SellAnypayToCustomerResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<SellAnypayToCustomerResponse>applyAsyncSchedulers());
+    }
+
+    @Override
+    public Observable<SellAnypayToChannelResponse> sellAnypayToChannel(DataRequest<SellAnypayToChannelRequest> request) {
+        return RequestHelper.getRequest()
+                .saleAnypayToChannel(request)
+                .flatMap(SchedulerUtils.<SellAnypayToChannelResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<SellAnypayToChannelResponse>applyAsyncSchedulers());
     }
 
     public static SellAnyPayRemoteDataSource getInstance() {

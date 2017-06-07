@@ -10,7 +10,7 @@ import com.viettel.mbccs.screen.sellanypay.fragments.CreateTransAnyPayFragment;
  */
 
 public class SellAnyPayActivity extends BaseDataBindActivity<ActivitySellAnyPayBinding, SellAnyPayPresenter>
-        implements SellAnyPayContract.ViewModel{
+        implements SellAnyPayContract.ViewModel {
 
     @Override
     public void setPresenter(SellAnyPayContract.Presenter presenter) {
@@ -19,12 +19,12 @@ public class SellAnyPayActivity extends BaseDataBindActivity<ActivitySellAnyPayB
 
     @Override
     public void showLoading() {
-
+        showLoadingDialog();
     }
 
     @Override
     public void hideLoading() {
-
+        hideLoadingDialog();
     }
 
     @Override
@@ -36,8 +36,6 @@ public class SellAnyPayActivity extends BaseDataBindActivity<ActivitySellAnyPayB
     protected void initData() {
         mPresenter = new SellAnyPayPresenter(this, this);
         mBinding.setPresenter(mPresenter);
-
-        initView();
     }
 
     @Override
@@ -45,7 +43,8 @@ public class SellAnyPayActivity extends BaseDataBindActivity<ActivitySellAnyPayB
         onBackPressed();
     }
 
-    private void initView() {
+    @Override
+    public void changeToSearchTab() {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frame_main, CreateTransAnyPayFragment.newInstance())
                 .addToBackStack(null)

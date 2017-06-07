@@ -246,6 +246,8 @@ Từ <b>%s</b><br>
     <string name="common_msg_error_incorrect_format_field">%s không đúng định dạng!</string>
     <string name="common_msg_error_invalid_field">%s không hợp lệ!</string>
     <string name="common_msg_error_greater_fields">%1$s phải lớn hơn %2$s!</string>
+    <string name="common_msg_error_dont_have_permission">Bạn không có quyền truy cập chức năng này!</string>
+    <string name="common_msg_error_general">Có lỗi xảy ra trong quá trình xử lý, vui lòng thử lại sau!</string>
 
     <!--Change Sim-->
     <string name="change_sim_label_document_id">Số giấy tờ</string>

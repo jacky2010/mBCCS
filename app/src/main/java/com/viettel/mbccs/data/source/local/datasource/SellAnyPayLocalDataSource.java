@@ -36,10 +36,10 @@ public class SellAnyPayLocalDataSource implements ISellAnyPayLocalDataSource {
     @Override
     public List<KeyValue> getPayMethods() {
         List<KeyValue> result = new ArrayList<>();
-        KeyValue item = new KeyValue("0", "Tiền mặt");
+        KeyValue item = new KeyValue("1", "Tiền mặt");
         result.add(item);
 
-        item = new KeyValue("1", "Ví điện tử");
+        item = new KeyValue("10", "Ví điện tử");
         result.add(item);
 
         item = new KeyValue("2", "Bank Plus");

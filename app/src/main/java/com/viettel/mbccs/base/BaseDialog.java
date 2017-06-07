@@ -7,10 +7,13 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+
+import com.viettel.mbccs.dialog.LoadingDialog;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -19,6 +22,7 @@ public abstract class BaseDialog extends DialogFragment {
 
     protected boolean isFullScreen;
     protected Unbinder mUnbinder;
+    private LoadingDialog mLoadingDialog;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -82,5 +86,39 @@ public abstract class BaseDialog extends DialogFragment {
             result = getResources().getDimensionPixelSize(resourceId);
         }
         return result;
+    }
+
+    public void showLoadingDialog() {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (getActivity().isFinishing() || (mLoadingDialog != null && mLoadingDialog.isAdded())) {
+                    return;
+                }
+
+                if (mLoadingDialog == null) {
+                    mLoadingDialog = new LoadingDialog();
+                    mLoadingDialog.setCancelable(true);
+                }
+
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                mLoadingDialog.show(fragmentManager, "loading");
+            }
+        });
+    }
+
+    /**
+     * Hide loading dialog, with check activity working or not
+     */
+    public void hideLoadingDialog() {
+         getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (getActivity().isFinishing() || mLoadingDialog == null || !mLoadingDialog.isAdded()) {
+                    return;
+                }
+                mLoadingDialog.dismiss();
+            }
+        });
     }
 }

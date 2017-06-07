@@ -2,9 +2,11 @@ package com.viettel.mbccs.data.source.remote;
 
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetAnypayAuthorizeRequest;
-import com.viettel.mbccs.data.source.remote.request.SaleAnypayRequest;
+import com.viettel.mbccs.data.source.remote.request.SellAnypayToChannelRequest;
+import com.viettel.mbccs.data.source.remote.request.SellAnypayToCustomerRequest;
 import com.viettel.mbccs.data.source.remote.response.GetAnypayAuthorizeResponse;
-import com.viettel.mbccs.data.source.remote.response.SaleAnypayResponse;
+import com.viettel.mbccs.data.source.remote.response.SellAnypayToChannelResponse;
+import com.viettel.mbccs.data.source.remote.response.SellAnypayToCustomerResponse;
 
 import rx.Observable;
 
@@ -14,5 +16,6 @@ import rx.Observable;
 
 public interface ISellAnyPayRemoteDataSource {
     Observable<GetAnypayAuthorizeResponse> getAnypayAuthorize(DataRequest<GetAnypayAuthorizeRequest> request);
-    Observable<SaleAnypayResponse> saleAnypay(DataRequest<SaleAnypayRequest> request);
+    Observable<SellAnypayToCustomerResponse> sellAnypayToCustomer(DataRequest<SellAnypayToCustomerRequest> request);
+    Observable<SellAnypayToChannelResponse> sellAnypayToChannel(DataRequest<SellAnypayToChannelRequest> request);
 }

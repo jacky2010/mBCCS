@@ -30,10 +30,12 @@ import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProg
 import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
 import com.viettel.mbccs.data.source.remote.request.KPPOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.LoginRequest;
-import com.viettel.mbccs.data.source.remote.request.PayTransferAnypayRequest;
+import com.viettel.mbccs.data.source.remote.request.RefillAnyPayRequest;
 import com.viettel.mbccs.data.source.remote.request.RegisterCustomerInfoRequest;
-import com.viettel.mbccs.data.source.remote.request.SaleAnypayRequest;
 import com.viettel.mbccs.data.source.remote.request.SearchBranchRequest;
+import com.viettel.mbccs.data.source.remote.request.SellAnypayToChannelRequest;
+import com.viettel.mbccs.data.source.remote.request.SellAnypayToCustomerRequest;
+import com.viettel.mbccs.data.source.remote.request.TransferAnyPayRequest;
 import com.viettel.mbccs.data.source.remote.request.UpdateAllSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.UpdateSaleOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.ViewInfoSerialRequest;
@@ -66,11 +68,13 @@ import com.viettel.mbccs.data.source.remote.response.GetReasonResponse;
 import com.viettel.mbccs.data.source.remote.response.GetRegiterSubInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
 import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
-import com.viettel.mbccs.data.source.remote.response.PayTransferAnypayResponse;
+import com.viettel.mbccs.data.source.remote.response.RefillAnyPayResponse;
 import com.viettel.mbccs.data.source.remote.response.RegisterCustomerInfoResponse;
-import com.viettel.mbccs.data.source.remote.response.SaleAnypayResponse;
+import com.viettel.mbccs.data.source.remote.response.SellAnypayToChannelResponse;
+import com.viettel.mbccs.data.source.remote.response.SellAnypayToCustomerResponse;
 import com.viettel.mbccs.data.source.remote.response.SendCodeChangePassResponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
+import com.viettel.mbccs.data.source.remote.response.TransferAnyPayResponse;
 import com.viettel.mbccs.data.source.remote.response.UpdateAllSubInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.UpdateSaleOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.ViewInfoSerialResponse;
@@ -222,15 +226,23 @@ public interface MBCSSApi {
     Observable<BaseResponse<CheckIdNoResponse>> checkIdNo(
             @Body DataRequest<CheckIdNoRequest> request);
 
-    @POST("vietdt/CM_mBCCS/1.0.0/WS_CHECK_ANYPAY")
+    @POST("thonguyen/Sale_mBCCS/1.0.0/WS_CheckAuthenticate")
     Observable<BaseResponse<GetAnypayAuthorizeResponse>> getAnypayAuthorize(
             @Body DataRequest<GetAnypayAuthorizeRequest> request);
 
-    @POST("vietdt/CM_mBCCS/1.0.0/WS_BAN_ANYPAY")
-    Observable<BaseResponse<SaleAnypayResponse>> saleAnypay(
-            @Body DataRequest<SaleAnypayRequest> request);
+    @POST("thonguyen/Sale_mBCCS/1.0.0/WS_SaleAnyPayToCustomer")
+    Observable<BaseResponse<SellAnypayToCustomerResponse>> saleAnypayToCustomer(
+            @Body DataRequest<SellAnypayToCustomerRequest> request);
 
-    @POST("vietdt/CM_mBCCS/1.0.0/WS_NAP_CHUYEN_ANYPAY")
-    Observable<BaseResponse<PayTransferAnypayResponse>> payTransferAnypay(
-            @Body DataRequest<PayTransferAnypayRequest> request);
+    @POST("thonguyen/Sale_mBCCS/1.0.0/WS_SaleAnyPayToChannel")
+    Observable<BaseResponse<SellAnypayToChannelResponse>> saleAnypayToChannel(
+            @Body DataRequest<SellAnypayToChannelRequest> request);
+
+    @POST("thonguyen/Sale_mBCCS/1.0.0/WS_TransferAnypay")
+    Observable<BaseResponse<TransferAnyPayResponse>> transferAnyPay(
+            @Body DataRequest<TransferAnyPayRequest> request);
+
+    @POST("thonguyen/Sale_mBCCS/1.0.0/WS_TransReloadAnypay")
+    Observable<BaseResponse<RefillAnyPayResponse>> refillAnyPay(
+            @Body DataRequest<RefillAnyPayRequest> request);
 }

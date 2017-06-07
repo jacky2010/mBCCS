@@ -7,9 +7,11 @@ import com.viettel.mbccs.data.source.remote.ITransferAnyPayRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.datasource.TransferAnyPayRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetAnypayAuthorizeRequest;
-import com.viettel.mbccs.data.source.remote.request.PayTransferAnypayRequest;
+import com.viettel.mbccs.data.source.remote.request.RefillAnyPayRequest;
+import com.viettel.mbccs.data.source.remote.request.TransferAnyPayRequest;
 import com.viettel.mbccs.data.source.remote.response.GetAnypayAuthorizeResponse;
-import com.viettel.mbccs.data.source.remote.response.PayTransferAnypayResponse;
+import com.viettel.mbccs.data.source.remote.response.RefillAnyPayResponse;
+import com.viettel.mbccs.data.source.remote.response.TransferAnyPayResponse;
 
 import java.util.List;
 
@@ -56,7 +58,12 @@ public class TransferAnyPayRepository implements ITransferAnyPayLocalDataSource,
     }
 
     @Override
-    public Observable<PayTransferAnypayResponse> payTransferAnypay(DataRequest<PayTransferAnypayRequest> request) {
-        return remoteDataSource.payTransferAnypay(request);
+    public Observable<TransferAnyPayResponse> transferAnyPay(DataRequest<TransferAnyPayRequest> request) {
+        return remoteDataSource.transferAnyPay(request);
+    }
+
+    @Override
+    public Observable<RefillAnyPayResponse> refillAnyPay(DataRequest<RefillAnyPayRequest> request) {
+        return remoteDataSource.refillAnyPay(request);
     }
 }

@@ -3,7 +3,8 @@ package com.viettel.mbccs.screen.sellanypay.fragments;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.KeyEvent;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
@@ -126,20 +127,78 @@ public class CreateTransAnyPayFragment extends BaseDataBindFragment<FragmentCrea
 
                 }
             });
-
-            mBinding.txtOtherAmount.setOnKeyListener(new View.OnKeyListener() {
+            mBinding.txtOtherAmount.addTextChangedListener(new TextWatcher() {
                 @Override
-                public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
                     mPresenter.onAmountChanged();
-                    return false;
                 }
             });
 
-            mBinding.txtEWalletAmount.setOnKeyListener(new View.OnKeyListener() {
+            mBinding.txtEWalletAmount.addTextChangedListener(new TextWatcher() {
                 @Override
-                public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
                     mPresenter.onAmountChanged();
-                    return false;
+                }
+            });
+
+//            mBinding.txtOtherAmount.setOnKeyListener(new View.OnKeyListener() {
+//                @Override
+//                public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
+//                    if (keyEvent.getAction() == KeyEvent.ACTION_UP) {
+//                        if (keyCode == KeyEvent.KEYCODE_ENTER) {
+//                            mPresenter.onAmountChanged();
+//                            return true;
+//                        }
+//                        mPresenter.onAmountChanged();
+//                    }
+//                    return false;
+//                }
+//            });
+
+//            mBinding.txtEWalletAmount.setOnKeyListener(new View.OnKeyListener() {
+//                @Override
+//                public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
+//                    if (keyEvent.getAction() == KeyEvent.ACTION_UP) {
+//                        if (keyCode == KeyEvent.KEYCODE_ENTER) {
+//                            mPresenter.onAmountChanged();
+//                            return true;
+//                        }
+//                        mPresenter.onAmountChanged();
+//                    }
+//                    return false;
+//                }
+//            });
+
+            mBinding.rbPayByCashDefaultAmount.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mPresenter.onAmountChanged();
+                }
+            });
+
+            mBinding.rbPayByCashOtherAmount.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mPresenter.onAmountChanged();
                 }
             });
 

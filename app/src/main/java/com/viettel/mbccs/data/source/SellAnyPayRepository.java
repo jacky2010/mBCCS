@@ -7,9 +7,11 @@ import com.viettel.mbccs.data.source.remote.ISellAnyPayRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.datasource.SellAnyPayRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetAnypayAuthorizeRequest;
-import com.viettel.mbccs.data.source.remote.request.SaleAnypayRequest;
+import com.viettel.mbccs.data.source.remote.request.SellAnypayToChannelRequest;
+import com.viettel.mbccs.data.source.remote.request.SellAnypayToCustomerRequest;
 import com.viettel.mbccs.data.source.remote.response.GetAnypayAuthorizeResponse;
-import com.viettel.mbccs.data.source.remote.response.SaleAnypayResponse;
+import com.viettel.mbccs.data.source.remote.response.SellAnypayToChannelResponse;
+import com.viettel.mbccs.data.source.remote.response.SellAnypayToCustomerResponse;
 
 import java.util.List;
 
@@ -66,7 +68,12 @@ public class SellAnyPayRepository implements ISellAnyPayLocalDataSource, ISellAn
     }
 
     @Override
-    public Observable<SaleAnypayResponse> saleAnypay(DataRequest<SaleAnypayRequest> request) {
-        return remoteDataSource.saleAnypay(request);
+    public Observable<SellAnypayToCustomerResponse> sellAnypayToCustomer(DataRequest<SellAnypayToCustomerRequest> request) {
+        return remoteDataSource.sellAnypayToCustomer(request);
+    }
+
+    @Override
+    public Observable<SellAnypayToChannelResponse> sellAnypayToChannel(DataRequest<SellAnypayToChannelRequest> request) {
+        return remoteDataSource.sellAnypayToChannel(request);
     }
 }
