@@ -55,7 +55,7 @@ public class SellAnyPayLocalDataSource implements ISellAnyPayLocalDataSource {
 
         for(int i = 0; i < 10; i++){
 
-            item = new KeyValue("DEF_AMOUNT" + i+1, (i+1) + "$");
+            item = new KeyValue(String.valueOf(i+1), (i+1) + "$");
 
             result.add(item);
         }
@@ -70,7 +70,7 @@ public class SellAnyPayLocalDataSource implements ISellAnyPayLocalDataSource {
 
         for(int i = 0; i < 10; i++){
 
-            item = new KeyValue("BANK_AMOUNT" + i+1, ((i+1) * 10) + "$");
+            item = new KeyValue(String.valueOf((i+1) * 10), ((i+1) * 10) + "$");
 
             result.add(item);
         }

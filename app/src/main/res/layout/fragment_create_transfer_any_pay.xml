@@ -60,7 +60,8 @@
                 android:background="@drawable/bg_order"
                 android:inputType="phone"
                 android:text="@={ presenter.isdn }"
-                app:error="@{presenter.isdnError}"/>
+                app:error="@{presenter.isdnError}"
+                android:maxLength="@integer/max_length_isdn"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -125,7 +126,8 @@
                     android:background="@drawable/bg_order"
                     android:hint="@string/sell_anypay_label_amount_other_hint"
                     android:inputType="number"
-                    app:error="@{presenter.refillAmountError}"/>
+                    app:error="@{presenter.refillAmountError}"
+                    android:maxLength="@integer/max_length_payment_amount"/>
             </LinearLayout>
 
             <EditText
@@ -138,7 +140,8 @@
                 android:inputType="number"
                 android:text="@={presenter.transferAmount}"
                 app:error="@{presenter.transferAmountError}"
-                android:visibility="@{presenter.transferType == presenter.PAY_METHOD_TRANSFER ? View.VISIBLE : View.GONE}" />
+                android:visibility="@{presenter.transferType == presenter.PAY_METHOD_TRANSFER ? View.VISIBLE : View.GONE}"
+                android:maxLength="@integer/max_length_payment_amount"/>
 
             <Button
                 android:id="@+id/btnExecute"

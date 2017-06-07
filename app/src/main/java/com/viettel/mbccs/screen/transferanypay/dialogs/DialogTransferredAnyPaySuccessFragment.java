@@ -1,7 +1,7 @@
-package com.viettel.mbccs.screen.transferanypay;
+package com.viettel.mbccs.screen.transferanypay.dialogs;
 
-import android.databinding.ObservableField;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDialog;
@@ -12,14 +12,16 @@ import com.viettel.mbccs.widget.ToolBarView;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class DialogTransferredSuccessFragment extends BaseDialog {
+public class DialogTransferredAnyPaySuccessFragment extends BaseDialog {
 
-    public ObservableField<String> messageDetail;
+    @BindView(R.id.toolbar)
+    ToolBarView mToolBar;
 
-    @BindView(R.id.toolbar) ToolBarView mToolBar;
+    @BindView(R.id.txtMessageDetail)
+    TextView txtMessageDetail;
 
     @OnClick(R.id.biv_done)
-    public void onDone(){
+    public void onDone() {
         dismiss();
     }
 
@@ -27,17 +29,17 @@ public class DialogTransferredSuccessFragment extends BaseDialog {
     protected void initData() {
         try {
 
-            messageDetail = new ObservableField<>();
-
             Bundle args = getArguments();
 
-            String isdn = args.getString(Constants.BundleConstant.CUSTOMER_ITEM);
-            String preTax = args.getString(Constants.BundleConstant.PRE_TAX);
-            String tax = args.getString(Constants.BundleConstant.TAX);
-            String discount = args.getString(Constants.BundleConstant.DISCOUNT);
-            String total = args.getString(Constants.BundleConstant.TOTAL);
+            if (args != null) {
+                String isdn = args.getString(Constants.BundleConstant.CUSTOMER_ITEM);
+                String preTax = args.getString(Constants.BundleConstant.PRE_TAX);
+                String tax = args.getString(Constants.BundleConstant.TAX);
+                String discount = args.getString(Constants.BundleConstant.DISCOUNT);
+                String total = args.getString(Constants.BundleConstant.TOTAL);
 
-            messageDetail.set(getString(R.string.transfer_anypay_msg_success, isdn, total));
+                txtMessageDetail.setText(getString(R.string.transfer_anypay_msg_success, isdn, total));
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -54,7 +56,7 @@ public class DialogTransferredSuccessFragment extends BaseDialog {
         mToolBar.setOnClickIconListener(new ToolBarView.OnClickIconListener() {
             @Override
             public void onClickIconLeft(int mIconType) {
-                switch (mIconType){
+                switch (mIconType) {
                     case IconType.LEFT:
                         dismiss();
                         break;
@@ -67,7 +69,7 @@ public class DialogTransferredSuccessFragment extends BaseDialog {
 
     @Override
     protected int idLayoutRes() {
-        return R.layout.fragment_transferred_success;
+        return R.layout.fragment_transferred_any_pay_success;
     }
 
     @Override

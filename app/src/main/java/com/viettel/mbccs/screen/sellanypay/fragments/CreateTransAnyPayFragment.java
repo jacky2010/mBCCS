@@ -1,7 +1,9 @@
 package com.viettel.mbccs.screen.sellanypay.fragments;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
@@ -10,6 +12,7 @@ import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindFragment;
 import com.viettel.mbccs.data.model.ChangeSimItem;
 import com.viettel.mbccs.databinding.FragmentCreateTransAnyPayBinding;
+import com.viettel.mbccs.screen.sellanypay.dialogs.DialogConfirmSellAnyPayFragment;
 import com.viettel.mbccs.utils.ActivityUtils;
 import com.viettel.mbccs.variable.Constants;
 
@@ -87,6 +90,7 @@ public class CreateTransAnyPayFragment extends BaseDataBindFragment<FragmentCrea
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     if (!Constants.View.HINT.equals(view.getTag()))
                         mPresenter.onPaymentMethodChanged(i);
+                    mPresenter.onAmountChanged();
                 }
 
                 @Override
@@ -100,6 +104,7 @@ public class CreateTransAnyPayFragment extends BaseDataBindFragment<FragmentCrea
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     if (!Constants.View.HINT.equals(view.getTag()))
                         mPresenter.onBankPlusAmountChanged(i);
+                    mPresenter.onAmountChanged();
                 }
 
                 @Override
@@ -113,11 +118,28 @@ public class CreateTransAnyPayFragment extends BaseDataBindFragment<FragmentCrea
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     if (!Constants.View.HINT.equals(view.getTag()))
                         mPresenter.onDefaultAmountChanged(i);
+                    mPresenter.onAmountChanged();
                 }
 
                 @Override
                 public void onNothingSelected(AdapterView<?> adapterView) {
 
+                }
+            });
+
+            mBinding.txtOtherAmount.setOnKeyListener(new View.OnKeyListener() {
+                @Override
+                public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                    mPresenter.onAmountChanged();
+                    return false;
+                }
+            });
+
+            mBinding.txtEWalletAmount.setOnKeyListener(new View.OnKeyListener() {
+                @Override
+                public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                    mPresenter.onAmountChanged();
+                    return false;
                 }
             });
 
@@ -174,5 +196,10 @@ public class CreateTransAnyPayFragment extends BaseDataBindFragment<FragmentCrea
     @Override
     public void onPayMethodChanged(CreateTransAnyPayContract.PayMethod method) {
 
+    }
+
+    @Override
+    public void goToDialogFragment(Bundle args) {
+        getBaseActivity().goToDialogFragment(new DialogConfirmSellAnyPayFragment(), args);
     }
 }

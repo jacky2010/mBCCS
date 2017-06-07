@@ -5,8 +5,15 @@ import com.viettel.mbccs.data.source.local.ISellAnyPayLocalDataSource;
 import com.viettel.mbccs.data.source.local.datasource.SellAnyPayLocalDataSource;
 import com.viettel.mbccs.data.source.remote.ISellAnyPayRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.datasource.SellAnyPayRemoteDataSource;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
+import com.viettel.mbccs.data.source.remote.request.GetAnypayAuthorizeRequest;
+import com.viettel.mbccs.data.source.remote.request.SaleAnypayRequest;
+import com.viettel.mbccs.data.source.remote.response.GetAnypayAuthorizeResponse;
+import com.viettel.mbccs.data.source.remote.response.SaleAnypayResponse;
 
 import java.util.List;
+
+import rx.Observable;
 
 /**
  * Created by eo_cuong on 5/10/17.
@@ -51,5 +58,15 @@ public class SellAnyPayRepository implements ISellAnyPayLocalDataSource, ISellAn
     @Override
     public List<KeyValue> getBankPlusAmounts() {
         return localDataSource.getBankPlusAmounts();
+    }
+
+    @Override
+    public Observable<GetAnypayAuthorizeResponse> getAnypayAuthorize(DataRequest<GetAnypayAuthorizeRequest> request) {
+        return remoteDataSource.getAnypayAuthorize(request);
+    }
+
+    @Override
+    public Observable<SaleAnypayResponse> saleAnypay(DataRequest<SaleAnypayRequest> request) {
+        return remoteDataSource.saleAnypay(request);
     }
 }

@@ -11,8 +11,8 @@ import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindFragment;
 import com.viettel.mbccs.data.model.ChangeSimItem;
 import com.viettel.mbccs.databinding.FragmentCreateTransferAnyPayBinding;
-import com.viettel.mbccs.screen.transferanypay.DialogConfirmRefillFragment;
-import com.viettel.mbccs.screen.transferanypay.DialogConfirmTransferFragment;
+import com.viettel.mbccs.screen.transferanypay.dialogs.DialogConfirmRefillAnyPayFragment;
+import com.viettel.mbccs.screen.transferanypay.dialogs.DialogConfirmTransferAnyPayFragment;
 import com.viettel.mbccs.utils.ActivityUtils;
 import com.viettel.mbccs.variable.Constants;
 
@@ -150,6 +150,6 @@ public class CreateTransferAnyPayFragment extends BaseDataBindFragment<FragmentC
 
     @Override
     public void goToDialogFragment(boolean isRefill, Bundle args) {
-        getBaseActivity().goToDialogFragment(isRefill ? new DialogConfirmRefillFragment() : new DialogConfirmTransferFragment(), args);
+        getBaseActivity().goToDialogFragment(isRefill ? new DialogConfirmRefillAnyPayFragment() : new DialogConfirmTransferAnyPayFragment(), args);
     }
 }

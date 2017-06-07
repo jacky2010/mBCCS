@@ -1,5 +1,7 @@
 package com.viettel.mbccs.screen.sellanypay.fragments;
 
+import android.os.Bundle;
+
 import com.viettel.mbccs.base.BasePresenter;
 import com.viettel.mbccs.base.BaseView;
 import com.viettel.mbccs.data.model.ChangeSimItem;
@@ -20,6 +22,7 @@ public class CreateTransAnyPayContract {
         void onPayMethodChanged(PayMethod method);
         void showError(String message);
         void onDefaultAmountChanged(boolean selectedDefault);
+        void goToDialogFragment(Bundle args);
     }
 
     interface Presenter extends BasePresenter {
@@ -28,5 +31,6 @@ public class CreateTransAnyPayContract {
         void onPaymentMethodChanged(int index);
         void onBankPlusAmountChanged(int index);
         void onDefaultAmountChanged(int index);
+        void onAmountChanged();
     }
 }

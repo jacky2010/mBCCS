@@ -88,7 +88,7 @@ public class CreateTransferAnyPayPresenter implements CreateTransferAnyPayContra
                 transTypesList.add(item.getValue());
             }
 
-            payAmountList.add(context.getString(R.string.sell_anypay_hint_pay_amount));
+            payAmounts.add(0, new KeyValue(null, context.getString(R.string.sell_anypay_hint_pay_amount)));
             for (KeyValue item : payAmounts) {
                 payAmountList.add(item.getValue());
             }

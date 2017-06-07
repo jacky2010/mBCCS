@@ -6,13 +6,6 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <!--<data>-->
-
-        <!--<variable-->
-            <!--name="presenter"-->
-            <!--type="com.viettel.mbccs.screen.transferanypay.DialogRefilledSuccessFragment" />-->
-    <!--</data>-->
-
     <!--<LinearLayout-->
         <!--android:orientation="vertical"-->
         <!--android:layout_width="match_parent"-->
@@ -55,18 +48,23 @@
         </LinearLayout>
 
 
-        <com.viettel.mbccs.widget.ButtonIconView
-            android:id="@+id/biv_done"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/view_header"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/dp_100"
-            app:itb_bg="@color/blue"
-            app:itb_bg_pressed="@color/blue_trans"
-            app:itb_padding_left="@dimen/dp_50"
-            app:itb_padding_right="@dimen/dp_50"
-            app:itb_radius="3dp"
-            app:itb_text="OK" />
+            android:gravity="center_horizontal">
+            <com.viettel.mbccs.widget.ButtonIconView
+                android:id="@+id/biv_done"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view_header"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dp_100"
+                app:itb_bg="@color/blue"
+                app:itb_bg_pressed="@color/blue_trans"
+                app:itb_padding_left="@dimen/dp_50"
+                app:itb_padding_right="@dimen/dp_50"
+                app:itb_radius="3dp"
+                app:itb_text="OK" />
+        </LinearLayout>
     <!--</LinearLayout>-->
 </LinearLayout>

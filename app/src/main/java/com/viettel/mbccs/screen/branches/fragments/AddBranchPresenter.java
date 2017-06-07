@@ -111,12 +111,12 @@ public class AddBranchPresenter implements AddBranchContract.Presenter {
             channelTypes = repository.getChannelTypes();
             documentTypes = repository.getDocumentTypes();
 
-            channelTypesList.add(context.getString(R.string.branches_add_hint_channel_type));
+            channelTypes.add(0, new KeyValue(null, context.getString(R.string.branches_add_hint_channel_type)));
             for (KeyValue item : channelTypes) {
                 channelTypesList.add(item.getValue());
             }
 
-            documentTypesList.add(context.getString(R.string.branches_add_hint_document_type));
+            documentTypes.add(0, new KeyValue(null, context.getString(R.string.branches_add_hint_document_type)));
             for (KeyValue item : documentTypes) {
                 documentTypesList.add(item.getValue());
             }

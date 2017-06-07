@@ -1,4 +1,4 @@
-package com.viettel.mbccs.screen.transferanypay;
+package com.viettel.mbccs.screen.transferanypay.dialogs;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,7 +18,7 @@ import butterknife.OnClick;
  * Created by jacky on 5/20/17.
  */
 
-public class DialogConfirmTransferFragment extends BaseDialog {
+public class DialogConfirmRefillAnyPayFragment extends BaseDialog {
 
     @BindView(R.id.toolbar)
     ToolBarView mToolBar;
@@ -58,7 +58,7 @@ public class DialogConfirmTransferFragment extends BaseDialog {
 
     @Override
     protected int idLayoutRes() {
-        return R.layout.dialog_confirm_transfer_fragment;
+        return R.layout.dialog_confirm_refill_any_pay_fragment;
     }
 
     @Override
@@ -67,7 +67,7 @@ public class DialogConfirmTransferFragment extends BaseDialog {
             Bundle args = getArguments();
 
             if(args != null){
-                tvTrans.setText(getString(R.string.sell_anypay_msg_confirm_transfer_label_cust, args.getString(Constants.BundleConstant.CUSTOMER_ITEM)));
+                tvTrans.setText(getString(R.string.sell_anypay_msg_confirm_refill_label_cust, args.getString(Constants.BundleConstant.CUSTOMER_ITEM)));
                 tvPreTax.setText(args.getString(Constants.BundleConstant.PRE_TAX));
                 tvTax.setText(args.getString(Constants.BundleConstant.TAX));
                 tvDiscount.setText(args.getString(Constants.BundleConstant.DISCOUNT));
@@ -90,7 +90,19 @@ public class DialogConfirmTransferFragment extends BaseDialog {
                 dismiss();
                 break;
             case R.id.biv_done:
-                getBaseActivity().goToDialogFragment(new DialogRefilledSuccessFragment(), null);
+
+                DialogRefilledAnyPaySuccessFragment fragment = new DialogRefilledAnyPaySuccessFragment();
+
+                Bundle currentArgs = getArguments();
+
+                Bundle args = new Bundle();
+                args.putString(Constants.BundleConstant.CUSTOMER_ITEM, currentArgs.getString(Constants.BundleConstant.CUSTOMER_ITEM));
+                args.putString(Constants.BundleConstant.PRE_TAX, currentArgs.getString(Constants.BundleConstant.PRE_TAX));
+                args.putString(Constants.BundleConstant.TAX, currentArgs.getString(Constants.BundleConstant.TAX));
+                args.putString(Constants.BundleConstant.DISCOUNT, currentArgs.getString(Constants.BundleConstant.DISCOUNT));
+                args.putString(Constants.BundleConstant.TOTAL, currentArgs.getString(Constants.BundleConstant.TOTAL));
+
+                getBaseActivity().goToDialogFragment(fragment, args);
                 dismiss();
                 break;
             default:

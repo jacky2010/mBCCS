@@ -327,11 +327,13 @@ Từ <b>%s</b><br>
     <string name="sell_anypay_label_pay_amount">Số tiền phải thanh toán:</string>
     <string name="sell_anypay_label_sell">Bán AnyPay</string>
     <string name="sell_anypay_msg_confirm_sell">Bạn có muốn bán AnyPay cho khách hàng %s?</string>
-    <string name="sell_anypay_msg_success">Nạp AnyPay thành công cho khách hàng %1$s với số tiền %2$s!</string>
+    <string name="sell_anypay_msg_refilled_success">Nạp AnyPay thành công cho khách hàng %1$s với số tiền %2$s!</string>
+    <string name="sell_anypay_msg_sold_success">Bán AnyPay thành công cho khách hàng %1$s với số tiền %2$s!</string>
     <string name="sell_anypay_label_confirm_pre_tax">Trước thuế:</string>
     <string name="sell_anypay_label_confirm_tax">Tiền thuế:</string>
     <string name="sell_anypay_label_confirm_discount">Chiết khấu:</string>
     <string name="sell_anypay_label_confirm_total">Tổng tiền phải trả:</string>
+    <string name="sell_anypay_msg_confirm_sell_label_cust">Bạn có muốn bán AnyPay cho khách hàng %s?</string>
     <string name="sell_anypay_msg_confirm_refill_label_cust">Bạn có muốn nạp AnyPay cho khách hàng %s?</string>
     <string name="sell_anypay_msg_confirm_transfer_label_cust">Bạn có muốn chuyển AnyPay cho khách hàng %s?</string>
     <string name="sell_anypay_label_pre_tax">Trước thuế:</string>

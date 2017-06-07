@@ -5,8 +5,15 @@ import com.viettel.mbccs.data.source.local.ITransferAnyPayLocalDataSource;
 import com.viettel.mbccs.data.source.local.datasource.TransferAnyPayLocalDataSource;
 import com.viettel.mbccs.data.source.remote.ITransferAnyPayRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.datasource.TransferAnyPayRemoteDataSource;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
+import com.viettel.mbccs.data.source.remote.request.GetAnypayAuthorizeRequest;
+import com.viettel.mbccs.data.source.remote.request.PayTransferAnypayRequest;
+import com.viettel.mbccs.data.source.remote.response.GetAnypayAuthorizeResponse;
+import com.viettel.mbccs.data.source.remote.response.PayTransferAnypayResponse;
 
 import java.util.List;
+
+import rx.Observable;
 
 /**
  * Created by eo_cuong on 5/10/17.
@@ -41,5 +48,15 @@ public class TransferAnyPayRepository implements ITransferAnyPayLocalDataSource,
     @Override
     public List<KeyValue> getTransferTypes() {
         return localDataSource.getTransferTypes();
+    }
+
+    @Override
+    public Observable<GetAnypayAuthorizeResponse> getAnypayAuthorize(DataRequest<GetAnypayAuthorizeRequest> request) {
+        return remoteDataSource.getAnypayAuthorize(request);
+    }
+
+    @Override
+    public Observable<PayTransferAnypayResponse> payTransferAnypay(DataRequest<PayTransferAnypayRequest> request) {
+        return remoteDataSource.payTransferAnypay(request);
     }
 }

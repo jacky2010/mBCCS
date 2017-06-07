@@ -3,6 +3,7 @@ package com.viettel.mbccs.screen.sellanypay.fragments;
 import android.content.Context;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
@@ -11,7 +12,9 @@ import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.KeyValue;
 import com.viettel.mbccs.data.source.SellAnyPayRepository;
 import com.viettel.mbccs.screen.common.adapter.HintArrayAdapter;
+import com.viettel.mbccs.utils.Common;
 import com.viettel.mbccs.utils.ValidateUtils;
+import com.viettel.mbccs.variable.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +30,8 @@ public class CreateTransAnyPayPresenter implements CreateTransAnyPayContract.Pre
     public static final String PAY_METHOD_CASH = "0";
     public static final String PAY_METHOD_E_WALLET = "1";
     public static final String PAY_METHOD_BANK_PLUS = "2";
+
+    private static double DISCOUNT_AMOUNT = 0;
 
     private Context context;
     private CreateTransAnyPayContract.ViewModel viewModel;
@@ -71,7 +76,7 @@ public class CreateTransAnyPayPresenter implements CreateTransAnyPayContract.Pre
 
     private SellAnyPayRepository repository;
 
-    public CreateTransAnyPayPresenter(Context context, final CreateTransAnyPayContract.ViewModel viewModel){
+    public CreateTransAnyPayPresenter(Context context, final CreateTransAnyPayContract.ViewModel viewModel) {
         this.context = context;
         this.viewModel = viewModel;
 
@@ -94,6 +99,7 @@ public class CreateTransAnyPayPresenter implements CreateTransAnyPayContract.Pre
         otherAmountError = new ObservableField<>();
         bankPlusAmount = new ObservableField<>();
         defaultAmount = new ObservableField<>();
+        payAmount = new ObservableField<>();
 
         defaultAmountChecked = new ObservableBoolean(true);
         defaultBankIsdnChecked = new ObservableBoolean(true);
@@ -133,12 +139,12 @@ public class CreateTransAnyPayPresenter implements CreateTransAnyPayContract.Pre
                 payMethodsList.add(item.getValue());
             }
 
-            payAmountList.add(context.getString(R.string.sell_anypay_hint_pay_amount));
+            defaultAmountList.add(0, new KeyValue(null, context.getString(R.string.sell_anypay_hint_pay_amount)));
             for (KeyValue item : defaultAmountList) {
                 payAmountList.add(item.getValue());
             }
 
-            bankPlusAmountList.add(context.getString(R.string.sell_anypay_hint_bank_plus_amount));
+            bankPluses.add(0, new KeyValue(null, context.getString(R.string.sell_anypay_hint_bank_plus_amount)));
             for (KeyValue item : bankPluses) {
                 bankPlusAmountList.add(item.getValue());
             }
@@ -153,10 +159,10 @@ public class CreateTransAnyPayPresenter implements CreateTransAnyPayContract.Pre
         }
     }
 
-    private void initListeners(){
-        try{
+    private void initListeners() {
+        try {
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -173,7 +179,11 @@ public class CreateTransAnyPayPresenter implements CreateTransAnyPayContract.Pre
 
     @Override
     public void createTransaction() {
-        try{
+        try {
+            double preTax = 0;
+            double tax = 0;
+            double total = 0;
+
             boolean isValid = true;
 
             channelCodeError.set(null);
@@ -183,10 +193,10 @@ public class CreateTransAnyPayPresenter implements CreateTransAnyPayContract.Pre
             ewalletAmountError.set(null);
             otherAmountError.set(null);
 
-            if(customerType.get().equals(CUST_TYPE_CORPORATE) && TextUtils.isEmpty(channelCode.get())){
+            if (customerType.get().equals(CUST_TYPE_CORPORATE) && TextUtils.isEmpty(channelCode.get())) {
                 channelCodeError.set(context.getString(R.string.input_empty));
                 isValid = false;
-            } else if(customerType.get().equals(CUST_TYPE_CORPORATE) && !TextUtils.isEmpty(channelCode.get()) && !ValidateUtils.isChannelValid(channelCode.get())){
+            } else if (customerType.get().equals(CUST_TYPE_CORPORATE) && !TextUtils.isEmpty(channelCode.get()) && !ValidateUtils.isChannelValid(channelCode.get())) {
                 channelCodeError.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.sell_anypay_label_channel_code)));
                 isValid = false;
             }
@@ -199,27 +209,27 @@ public class CreateTransAnyPayPresenter implements CreateTransAnyPayContract.Pre
                 isValid = false;
             }
 
-            if(TextUtils.isEmpty(payMethod.get())) {
+            if (TextUtils.isEmpty(payMethod.get())) {
                 viewModel.showError(context.getString(R.string.common_msg_error_required_field, context.getString(R.string.sell_anypay_label_pay_method)));
                 isValid = false;
             }
 
-            if(PAY_METHOD_CASH.equals(payMethod.get())){
-                if(defaultAmountChecked.get() == true){
-                    if(TextUtils.isEmpty(defaultAmount.get())) {
+            if (PAY_METHOD_CASH.equals(payMethod.get())) {
+                if (defaultAmountChecked.get() == true) {
+                    if (TextUtils.isEmpty(defaultAmount.get())) {
                         viewModel.showError(context.getString(R.string.common_msg_error_required_field, context.getString(R.string.sell_anypay_label_amount_default)));
                         isValid = false;
                     }
-                }else{
+                } else {
                     if (TextUtils.isEmpty(otherAmount.get())) {
                         otherAmountError.set(context.getString(R.string.input_empty));
                         isValid = false;
-                    } else if(!TextUtils.isEmpty(otherAmount.get()) && !ValidateUtils.isAmountValid(otherAmount.get())){
+                    } else if (!TextUtils.isEmpty(otherAmount.get()) && !ValidateUtils.isAmountValid(otherAmount.get())) {
                         otherAmountError.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.sell_anypay_label_amount_default)));
                         isValid = false;
                     }
                 }
-            }else if(PAY_METHOD_E_WALLET.equals(payMethod.get())){
+            } else if (PAY_METHOD_E_WALLET.equals(payMethod.get())) {
                 if (TextUtils.isEmpty(walletIsdn.get())) {
                     walletIsdnError.set(context.getString(R.string.input_empty));
                     isValid = false;
@@ -231,21 +241,21 @@ public class CreateTransAnyPayPresenter implements CreateTransAnyPayContract.Pre
                 if (TextUtils.isEmpty(ewalletAmount.get())) {
                     ewalletAmountError.set(context.getString(R.string.input_empty));
                     isValid = false;
-                }else if(!TextUtils.isEmpty(ewalletAmount.get()) && !ValidateUtils.isAmountValid(ewalletAmount.get())){
+                } else if (!TextUtils.isEmpty(ewalletAmount.get()) && !ValidateUtils.isAmountValid(ewalletAmount.get())) {
                     ewalletAmountError.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.sell_anypay_label_amount_default)));
                     isValid = false;
                 }
-            }else if(PAY_METHOD_BANK_PLUS.equals(payMethod.get())){
+            } else if (PAY_METHOD_BANK_PLUS.equals(payMethod.get())) {
                 if (TextUtils.isEmpty(bankPlusValue.get())) {
                     bankPlusValueError.set(context.getString(R.string.input_empty));
                     isValid = false;
                 } else if (!TextUtils.isEmpty(bankPlusValue.get())) {
-                    if(defaultBankIsdnChecked.get() == true){
+                    if (defaultBankIsdnChecked.get() == true) {
                         if (!ValidateUtils.isPhoneNumber(bankPlusValue.get())) {
                             bankPlusValueError.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.sell_anypay_label_phone_no)));
                             isValid = false;
                         }
-                    }else {
+                    } else {
                         if (!ValidateUtils.isBankAccountValid(bankPlusValue.get())) {
                             bankPlusValueError.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.sell_anypay_label_acc_no)));
                             isValid = false;
@@ -253,90 +263,146 @@ public class CreateTransAnyPayPresenter implements CreateTransAnyPayContract.Pre
                     }
                 }
 
-                if(TextUtils.isEmpty(bankPlusAmount.get())) {
+                if (TextUtils.isEmpty(bankPlusAmount.get())) {
                     viewModel.showError(context.getString(R.string.common_msg_error_required_field, context.getString(R.string.sell_anypay_label_amount_default)));
                     isValid = false;
                 }
             }
 
-            if(!isValid)
+            if (!isValid)
                 return;
 
+            total = getTransactionAmount();
 
+            if (total <= 0) {
+                viewModel.showError(context.getString(R.string.common_msg_error_greater_fields, context.getString(R.string.transfer_anypay_label_amount), "0"));
+                return;
+            }
 
-        }catch (Exception e){
+            tax = Math.floor(total / Constants.Tax.DEFAULT_TAX_CALC_BACK_RATE);
+            preTax = total - tax;
+
+            Bundle args = new Bundle();
+            args.putString(Constants.BundleConstant.CUSTOMER_ITEM, isdn.get().trim());
+            args.putString(Constants.BundleConstant.PRE_TAX, Common.formatDouble(preTax));
+            args.putString(Constants.BundleConstant.TAX, Common.formatDouble(tax));
+            args.putString(Constants.BundleConstant.DISCOUNT, Common.formatDouble(DISCOUNT_AMOUNT));
+            args.putString(Constants.BundleConstant.TOTAL, Common.formatDouble(total-DISCOUNT_AMOUNT));
+
+            viewModel.goToDialogFragment(args);
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @Override
     public void onCustomerTypeChanged(int index) {
-        try{
+        try {
             KeyValue item = custTypes.get(index);
 
-            if(item != null){
-                if(CUST_TYPE_INDIVIDUAL.equals(item.getKey())) {
+            if (item != null) {
+                if (CUST_TYPE_INDIVIDUAL.equals(item.getKey())) {
                     viewModel.onCustomerTypeChanged(CreateTransAnyPayContract.CustomerType.INDIVIDUAL);
 
                     customerType.set(CUST_TYPE_INDIVIDUAL);
-                }else if(CUST_TYPE_CORPORATE.equals(item.getKey())) {
+                } else if (CUST_TYPE_CORPORATE.equals(item.getKey())) {
                     viewModel.onCustomerTypeChanged(CreateTransAnyPayContract.CustomerType.CORPORATE);
 
                     customerType.set(CUST_TYPE_CORPORATE);
                 }
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    private double getTransactionAmount(){
+
+        double total = 0;
+
+        try{
+            if (PAY_METHOD_CASH.equals(payMethod.get())) {
+                if (defaultAmountChecked.get() == true) {
+                    total = Double.parseDouble(defaultAmount.get().trim());
+                } else {
+                    total = Double.parseDouble(otherAmount.get().trim());
+                }
+            } else if (PAY_METHOD_E_WALLET.equals(payMethod.get())) {
+                total = Double.parseDouble(ewalletAmount.get().trim());
+            } else if (PAY_METHOD_BANK_PLUS.equals(payMethod.get())) {
+                total = Double.parseDouble(bankPlusAmount.get().trim());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return total;
+    }
+
     @Override
     public void onPaymentMethodChanged(int index) {
-        try{
+        try {
             KeyValue item = payMethods.get(index);
 
-            if(item != null){
-                if(PAY_METHOD_BANK_PLUS.equals(item.getKey())) {
+            if (item != null) {
+                if (PAY_METHOD_BANK_PLUS.equals(item.getKey())) {
                     viewModel.onPayMethodChanged(CreateTransAnyPayContract.PayMethod.BANK_PLUS);
 
                     payMethod.set(PAY_METHOD_BANK_PLUS);
-                }else if(PAY_METHOD_CASH.equals(item.getKey())) {
+                } else if (PAY_METHOD_CASH.equals(item.getKey())) {
                     viewModel.onPayMethodChanged(CreateTransAnyPayContract.PayMethod.CASH);
 
                     payMethod.set(PAY_METHOD_CASH);
-                }else if(PAY_METHOD_E_WALLET.equals(item.getKey())) {
+                } else if (PAY_METHOD_E_WALLET.equals(item.getKey())) {
                     viewModel.onPayMethodChanged(CreateTransAnyPayContract.PayMethod.E_WALLET);
 
                     payMethod.set(PAY_METHOD_E_WALLET);
                 }
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @Override
     public void onBankPlusAmountChanged(int index) {
-        try{
+        try {
             bankPlusAmount.set(bankPluses.get(index).getKey());
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @Override
     public void onDefaultAmountChanged(int index) {
-        try{
+        try {
             defaultAmount.set(defaultAmountList.get(index).getKey());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onAmountChanged() {
+        try{
+            double total = getTransactionAmount();
+
+            if(total <=0)
+                return;
+
+            totalAmount.set(Common.formatDouble(total));
+            discountAmount.set(Common.formatDouble(DISCOUNT_AMOUNT));
+            payAmount.set(Common.formatDouble(total-DISCOUNT_AMOUNT));
         }catch (Exception e){
             e.printStackTrace();
         }
     }
 
-    public void onDefaultAmountCheckChanged(CompoundButton button, boolean checked){
-        if(checked)
+    public void onDefaultAmountCheckChanged(CompoundButton button, boolean checked) {
+        if (checked)
             defaultAmountChecked.set(true);
         else
             defaultAmountChecked.set(false);
@@ -344,8 +410,8 @@ public class CreateTransAnyPayPresenter implements CreateTransAnyPayContract.Pre
         viewModel.onDefaultAmountChanged(defaultAmountChecked.get());
     }
 
-    public void onOtherAmountCheckChanged(CompoundButton button, boolean checked){
-        if(checked)
+    public void onOtherAmountCheckChanged(CompoundButton button, boolean checked) {
+        if (checked)
             defaultAmountChecked.set(false);
         else
             defaultAmountChecked.set(true);
@@ -353,15 +419,15 @@ public class CreateTransAnyPayPresenter implements CreateTransAnyPayContract.Pre
         viewModel.onDefaultAmountChanged(defaultAmountChecked.get());
     }
 
-    public void onBankIsdnCheckChanged(CompoundButton button, boolean checked){
-        if(checked)
+    public void onBankIsdnCheckChanged(CompoundButton button, boolean checked) {
+        if (checked)
             defaultBankIsdnChecked.set(true);
         else
             defaultBankIsdnChecked.set(false);
     }
 
-    public void onBankAccountCheckChanged(CompoundButton button, boolean checked){
-        if(checked)
+    public void onBankAccountCheckChanged(CompoundButton button, boolean checked) {
+        if (checked)
             defaultBankIsdnChecked.set(false);
         else
             defaultBankIsdnChecked.set(true);

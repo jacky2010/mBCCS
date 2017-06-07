@@ -19,4 +19,7 @@
     <integer name="min_price">5000</integer>
     <integer name="max_price">999999</integer>
     <item format="float" name="rating_step_size" type="dimen">0.5</item>
+    <integer name="max_length_isdn">15</integer>
+    <integer name="max_length_channel_code">15</integer>
+    <integer name="max_length_payment_amount">15</integer>
 </resources>

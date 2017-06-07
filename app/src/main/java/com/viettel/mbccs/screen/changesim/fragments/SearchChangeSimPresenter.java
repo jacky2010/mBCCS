@@ -78,7 +78,7 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
 
             documentTypes = repository.getDocumentTypes();
 
-            documentTypesList.add(context.getString(R.string.branches_add_hint_document_type));
+            documentTypesList.add(0, context.getString(R.string.branches_add_hint_document_type));
             for (KeyValue item : documentTypes) {
                 documentTypesList.add(item.getValue());
             }
