@@ -146,7 +146,7 @@ public class CreateUpdateInformationFragment extends BaseFragment
     }
 
     @Override
-    public void registerUpdateCustomerInfoSuccess(String result, boolean isRegister) {
+    public void registerUpdateCustomerInfoSuccess(String result, final boolean isRegister) {
         Dialog dia = new DialogFullScreen.Builder(getActivity()).setCenterContent(true)
                 .setTitle(isRegister ? getString(
                         R.string.fragment_create_update_information_create_dk_thanh_cong)
@@ -161,8 +161,7 @@ public class CreateUpdateInformationFragment extends BaseFragment
                     @Override
                     public void onPositiveButtonClick(Dialog dialog) {
                         dialog.dismiss();
-                        //                        getActivity().getSupportFragmentManager().popBackStack();
-                        backActivity();
+                        backActivity(isRegister);
 
                     }
 
@@ -182,9 +181,9 @@ public class CreateUpdateInformationFragment extends BaseFragment
         dia.show();
     }
 
-    private void backActivity() {
+    private void backActivity(boolean isRegister) {
         Intent intentDKTT = new Intent(getActivity(), CreateUpdateInformationActivity.class);
-        intentDKTT.putExtra(CreateUpdateInformationActivity.ARG_TYPE, typeFragment);
+        intentDKTT.putExtra(CreateUpdateInformationActivity.ARG_TYPE, isRegister);
         startActivity(intentDKTT);
         getActivity().finish();
     }

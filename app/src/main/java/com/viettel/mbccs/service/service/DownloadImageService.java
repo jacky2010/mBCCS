@@ -41,7 +41,8 @@ public class DownloadImageService extends IntentService {
     private UserRepository userRepository;
     private CompositeSubscription subscriptions;
     private List<Observable<DownloadImageResponse>> observableList;
-    private int countImageDownload;
+    private int countImage;
+    private int countImageDownloaded;
     private int currentImageDownload;
     private int currentProcess;
     //    private Intent currentIntent;
@@ -65,14 +66,18 @@ public class DownloadImageService extends IntentService {
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
-
         List<Image> imageList = userRepository.getImageFromDatabase(ImageDataBase.Status.NO_DATA);
         if (imageList == null || imageList.size() == 0) {
             LocalBroadcastManager.getInstance(DownloadImageService.this)
                     .sendBroadcast(new Intent(ACTION_DOWNLOAD_COMPLETE));
             return;
         }
-        countImageDownload = imageList.size();
+        List<Image> imageCount = userRepository.getImageFromDatabase();
+        if (imageCount == null || imageCount.size() == 0) {
+            return;
+        }
+        countImage = imageCount.size();
+        countImageDownloaded = countImage - imageList.size();
         List<List<Image>> smallerList = Lists.partition(imageList, Constants.NUM_IMAGE_DOWNLOAD);
         for (int i = 0; i < smallerList.size(); i++) {
             observableList.add(createDownloadImage(smallerList.get(i)));
@@ -156,7 +161,8 @@ public class DownloadImageService extends IntentService {
 
             currentImageDownload += 1;
             intentSuccess.putExtra(DATA_DOWNLOAD_SUCCESS,
-                    (int) (((float) currentImageDownload / countImageDownload) * 100));
+                    (int) (((float) (currentImageDownload + countImageDownloaded) / countImage)
+                            * 100));
             LocalBroadcastManager.getInstance(this).sendBroadcast(intentSuccess);
         }
     }
