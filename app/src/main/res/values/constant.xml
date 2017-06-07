@@ -22,4 +22,5 @@
     <integer name="max_length_isdn">15</integer>
     <integer name="max_length_channel_code">15</integer>
     <integer name="max_length_payment_amount">15</integer>
+    <integer name="max_length_document_no">20</integer>
 </resources>

@@ -5,8 +5,17 @@ import com.viettel.mbccs.data.source.local.IChangeSimLocalDataSource;
 import com.viettel.mbccs.data.source.local.datasource.ChangeSimLocalDataSource;
 import com.viettel.mbccs.data.source.remote.IChangeSimRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.datasource.ChangeSimRemoteDataSource;
+import com.viettel.mbccs.data.source.remote.request.CheckCalledIsdnRequest;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
+import com.viettel.mbccs.data.source.remote.request.GetRegisterSubRequest;
+import com.viettel.mbccs.data.source.remote.request.UpdateRegisterSubRequest;
+import com.viettel.mbccs.data.source.remote.response.CheckCalledIsdnResponse;
+import com.viettel.mbccs.data.source.remote.response.GetRegisterSubResponse;
+import com.viettel.mbccs.data.source.remote.response.UpdateRegisterSubResponse;
 
 import java.util.List;
+
+import rx.Observable;
 
 /**
  * Created by eo_cuong on 5/10/17.
@@ -45,5 +54,20 @@ public class ChangeSimRepository implements IChangeSimLocalDataSource, IChangeSi
     @Override
     public double getChangeSimServiceFee() {
         return localDataSource.getChangeSimServiceFee();
+    }
+
+    @Override
+    public Observable<GetRegisterSubResponse> getRegisterSub(DataRequest<GetRegisterSubRequest> request) {
+        return remoteDataSource.getRegisterSub(request);
+    }
+
+    @Override
+    public Observable<CheckCalledIsdnResponse> checkCalledIsdn(DataRequest<CheckCalledIsdnRequest> request) {
+        return remoteDataSource.checkCalledIsdn(request);
+    }
+
+    @Override
+    public Observable<UpdateRegisterSubResponse> updateRegisterSub(DataRequest<UpdateRegisterSubRequest> request) {
+        return remoteDataSource.updateRegisterSub(request);
     }
 }

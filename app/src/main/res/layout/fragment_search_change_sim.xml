@@ -31,12 +31,14 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_16" />
 
-            <EditText
+            <com.viettel.mbccs.widget.CustomEdittext
                 android:inputType="phone"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_40"
                 android:background="@drawable/bg_order"
-                android:text="@={ presenter.isdn }" />
+                android:text="@={ presenter.isdn }"
+                app:error="@{presenter.isdnError}"
+                android:maxLength="@integer/max_length_isdn"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -71,7 +73,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_40"
                 android:background="@drawable/bg_order"
-                android:text="@={ presenter.documentId }" />
+                android:text="@={ presenter.documentId }"
+                app:error="@{presenter.documentIdError}"
+                android:maxLength="@integer/max_length_document_no"/>
 
             <Button
                 android:layout_width="@dimen/dp_150"

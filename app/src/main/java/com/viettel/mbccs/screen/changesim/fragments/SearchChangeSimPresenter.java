@@ -3,6 +3,7 @@ package com.viettel.mbccs.screen.changesim.fragments;
 import android.content.Context;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.viettel.mbccs.R;
@@ -28,7 +29,9 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
 
     public ObservableField<String> documentType;
     public ObservableField<String> documentId;
+    public ObservableField<String> documentIdError;
     public ObservableField<String> isdn;
+    public ObservableField<String> isdnError;
     public ObservableBoolean searchFound;
     public ObservableField<ChangeSimListAdapter> changeSimListAdapter;
 
@@ -44,10 +47,14 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
         this.viewModel = viewModel;
 
         documentId = new ObservableField<>();
+        documentIdError = new ObservableField<>();
         documentType = new ObservableField<>();
         isdn = new ObservableField<>();
+        isdnError = new ObservableField<>();
         changeSimListAdapter = new ObservableField<>();
+
         searchFound = new ObservableBoolean(true);
+
         changeSimAdapter = new ChangeSimListAdapter(context, new ArrayList<ChangeSimItem>());
         changeSimAdapter.setOnItemClickListener(new ChangeSimListAdapter.OnItemClickListener() {
             @Override
@@ -105,16 +112,25 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
 
         try {
 
-            if (isdn.get() == null || "".equals(isdn.get().trim())) {
-                viewModel.showError(context.getString(R.string.change_sim_error_search_isdn_required));
-                return;
-            } else if (documentType.get() == null || "".equals(documentType.get().trim())) {
-                viewModel.showError(context.getString(R.string.change_sim_error_search_documentType_required));
-                return;
-            } else if (documentId.get() == null || "".equals(documentId.get().trim())) {
-                viewModel.showError(context.getString(R.string.change_sim_error_search_documentId_required));
-                return;
+            boolean isValid = true;
+
+            if (TextUtils.isEmpty(isdn.get())) {
+                isdnError.set(context.getString(R.string.input_empty));
+                isValid = false;
             }
+
+            if (documentType.get() == null || "".equals(documentType.get().trim())) {
+                viewModel.showError(context.getString(R.string.change_sim_error_search_documentType_required));
+                isValid = false;
+            }
+
+            if (TextUtils.isEmpty(documentId.get())) {
+                documentIdError.set(context.getString(R.string.input_empty));
+                isValid = false;
+            }
+
+            if(!isValid)
+                return;
 
             List<ChangeSimItem> items = new ArrayList<>();
 

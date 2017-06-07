@@ -3,6 +3,7 @@ package com.viettel.mbccs.data.source.remote.service;
 import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.source.remote.request.AddBranchRequest;
 import com.viettel.mbccs.data.source.remote.request.ChecOTPRequest;
+import com.viettel.mbccs.data.source.remote.request.CheckCalledIsdnRequest;
 import com.viettel.mbccs.data.source.remote.request.CheckIdNoRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateSaleTransChannelRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateSaleTransFromOrderRequest;
@@ -24,6 +25,7 @@ import com.viettel.mbccs.data.source.remote.request.GetOrderInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.GetPrecinctRequest;
 import com.viettel.mbccs.data.source.remote.request.GetProvinceRequest;
 import com.viettel.mbccs.data.source.remote.request.GetReasonRequest;
+import com.viettel.mbccs.data.source.remote.request.GetRegisterSubRequest;
 import com.viettel.mbccs.data.source.remote.request.GetRegiterSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
@@ -37,10 +39,12 @@ import com.viettel.mbccs.data.source.remote.request.SellAnypayToChannelRequest;
 import com.viettel.mbccs.data.source.remote.request.SellAnypayToCustomerRequest;
 import com.viettel.mbccs.data.source.remote.request.TransferAnyPayRequest;
 import com.viettel.mbccs.data.source.remote.request.UpdateAllSubInfoRequest;
+import com.viettel.mbccs.data.source.remote.request.UpdateRegisterSubRequest;
 import com.viettel.mbccs.data.source.remote.request.UpdateSaleOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.ViewInfoSerialRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseResponse;
 import com.viettel.mbccs.data.source.remote.response.ChecOTPResponse;
+import com.viettel.mbccs.data.source.remote.response.CheckCalledIsdnResponse;
 import com.viettel.mbccs.data.source.remote.response.CheckIdNoResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateDistributedChannelResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransChannelResponse;
@@ -65,6 +69,7 @@ import com.viettel.mbccs.data.source.remote.response.GetOrderInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetPrecinctResponse;
 import com.viettel.mbccs.data.source.remote.response.GetProvinceResponse;
 import com.viettel.mbccs.data.source.remote.response.GetReasonResponse;
+import com.viettel.mbccs.data.source.remote.response.GetRegisterSubResponse;
 import com.viettel.mbccs.data.source.remote.response.GetRegiterSubInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
 import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
@@ -76,6 +81,7 @@ import com.viettel.mbccs.data.source.remote.response.SendCodeChangePassResponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import com.viettel.mbccs.data.source.remote.response.TransferAnyPayResponse;
 import com.viettel.mbccs.data.source.remote.response.UpdateAllSubInfoResponse;
+import com.viettel.mbccs.data.source.remote.response.UpdateRegisterSubResponse;
 import com.viettel.mbccs.data.source.remote.response.UpdateSaleOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.ViewInfoSerialResponse;
 
@@ -245,4 +251,16 @@ public interface MBCSSApi {
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_TransReloadAnypay")
     Observable<BaseResponse<RefillAnyPayResponse>> refillAnyPay(
             @Body DataRequest<RefillAnyPayRequest> request);
+
+    @POST("thonguyen/Sale_mBCCS/1.0.0/WS_TransReloadAnypay")
+    Observable<BaseResponse<GetRegisterSubResponse>> getRegisterSub(
+            @Body DataRequest<GetRegisterSubRequest> request);
+
+    @POST("thonguyen/Sale_mBCCS/1.0.0/WS_TransReloadAnypay")
+    Observable<BaseResponse<CheckCalledIsdnResponse>> checkCalledIsdn(
+            @Body DataRequest<CheckCalledIsdnRequest> request);
+
+    @POST("thonguyen/Sale_mBCCS/1.0.0/WS_TransReloadAnypay")
+    Observable<BaseResponse<UpdateRegisterSubResponse>> updateRegisterSub(
+            @Body DataRequest<UpdateRegisterSubRequest> request);
 }

@@ -27,7 +27,7 @@ public class ChangeSimLocalDataSource implements IChangeSimLocalDataSource {
         KeyValue item = new KeyValue("0", "Số chứng minh thư");
         result.add(item);
 
-        item = new KeyValue("0", "Số hợp đồng");
+        item = new KeyValue("1", "Số hợp đồng");
         result.add(item);
 
         return result;
