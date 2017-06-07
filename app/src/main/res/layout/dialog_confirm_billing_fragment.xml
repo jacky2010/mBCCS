@@ -31,7 +31,7 @@
             android:layout_weight="0.5"
             app:itb_bg="@color/blue"
             app:itb_radius="@dimen/default_radius"
-            app:itb_text="@string/close" />
+            app:itb_text="@string/common_label_close" />
 
         <com.viettel.mbccs.widget.ButtonIconView
             android:id="@+id/biv_done"

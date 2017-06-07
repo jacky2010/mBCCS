@@ -5,6 +5,7 @@
             name="data"
             type="com.viettel.mbccs.screen.kpp.order.findstock.adapter.ItemStockTotalPresenter"
             />
+        <import type="android.view.View"/>
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -85,6 +86,15 @@
                         android:onClick="@{()->data.addChoice()}"
                         android:text="+"
                         style="@style/button_add_subtract"
+                        />
+
+                    <ImageView
+                        android:id="@+id/button_delete"
+                        android:layout_width="@dimen/dp_50"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/dp_20"
+                        android:src="@drawable/ic_delete"
+                        android:visibility="@{data.deleteAble? View.VISIBLE: View.GONE}"
                         />
                 </LinearLayout>
 

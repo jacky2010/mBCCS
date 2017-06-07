@@ -151,7 +151,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/bg_input"
                     android:onClick="@{ () -> presenter.close() }"
-                    android:text="@string/close" />
+                    android:text="@string/common_label_close" />
 
                 <Button
                     android:layout_width="0dp"

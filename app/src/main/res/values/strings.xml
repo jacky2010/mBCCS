@@ -6,14 +6,17 @@
     <string name="permission_guide">Please go to System Settings and turn on permissions in order to use the app.</string>
     <string name="serial_step1">1. Chọn dải serial</string>
     <string name="or">Hoặc</string>
-    <string name="close">Đóng</string>
+    <string name="common_label_close">Đóng</string>
     <string name="complete">Hoàn thành</string>
     <string name="select_serials">Chọn serials</string>
     <string name="select_serials_step2">2. Sửa dải serial đã chọn ở b1</string>
     <string name="select_serials_step3">3. Xác nhận các serial đã chọn</string>
     <string name="input_empty">Hãy nhập thông tin</string>
     <string name="not_phone">Số điện thoai không hợp lệ</string>
-    <string name="count_serial_selected" formatted="false">
+    <string name="common_label_add">Thêm</string>
+    <string name="common_label_reject">Từ chối</string>
+    <string name="common_label_export">Xuất kho</string>
+    <string formatted="false" name="count_serial_selected">
         <![CDATA[
 Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt hàng <font color="#317BE1"><u> %s</u></font>
         ]]>
@@ -665,7 +668,6 @@ Từ <b>%s</b><br>
     <string name="dialog_input_address_title">Nhập địa chỉ</string>
     <string name="dialog_input_address_address">Address:</string>
 
-
     <string name="connector_mobile_title">Đấu nối di động</string>
     <string name="connector_mobile_loai_thue_bao">Loại thuê bao</string>
     <string name="connector_mobile_tra_truoc">Trả trước</string>
@@ -724,4 +726,13 @@ Từ <b>%s</b><br>
     <string name="activity_create_order_success_ban_co_chac_muon_lap_phieu">Bạn có chắc muốn lập phiếu nhập kho?</string>
     <string name="activity_create_order_success_tu_choi_lap_phieu">Từ chối lập phiếu</string>
     <string name="activity_create_order_success_ly_do_tu_choi">Lý do từ chối</string>
+    <!--Nhan vien tra hang cap tren-->
+    <string name="nv_trahangcaptren_title">Xuất kho trả hàng cấp trên</string>
+    <string name="nv_trahangcaptren_lap_phieu_title">Lập phiếu xuất kho trả hàng cấp trên</string>
+    <string name="nv_trahangcaptren_label_ware_code">Mã kho</string>
+    <string name="nv_trahangcaptren_label_export_status">Trạng thái xuất *</string>
+    <string name="nv_trahangcaptren_lap_phieu_lablel_lapphieu">Lập phiếu</string>
+    <string name="nv_trahangcaptren_chitiet_title">Chi tiết xuất cho trả hàng cấp trên</string>
+    <string name="nv_trahangcaptren_export_success_labal_amount_response">Số lượng xuất/ Số lượng đáp ứng</string>
+
 </resources>

@@ -2,6 +2,7 @@ package com.viettel.mbccs;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.multidex.MultiDex;
 import android.util.Log;
 import com.activeandroid.ActiveAndroid;
 import com.viettel.mbccs.data.model.District;
@@ -29,6 +30,7 @@ public class MBCCSApplication extends Application {
     public void onCreate() {
         super.onCreate();
         ActiveAndroid.initialize(this);
+        MultiDex.install(this);
         mSelf = this;
         mUserRepository = UserRepository.getInstance();
         session = mUserRepository.getSession();

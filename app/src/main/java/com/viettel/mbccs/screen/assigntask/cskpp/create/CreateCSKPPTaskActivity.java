@@ -82,7 +82,7 @@ public class CreateCSKPPTaskActivity
                         dia.show();
                     }
                 })
-                .setNegativeButton(R.string.close, null)
+                .setNegativeButton(R.string.common_label_close, null)
                 .setCancelable(false)
                 .create()
                 .show();
