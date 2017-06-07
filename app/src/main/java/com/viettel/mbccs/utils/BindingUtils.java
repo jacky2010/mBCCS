@@ -381,7 +381,6 @@ public class BindingUtils {
 
     @BindingAdapter("position")
     public static void setPosition(Spinner spinner, int position) {
-
         spinner.setSelection(position);
     }
 

@@ -31,7 +31,7 @@ public class KPPOrderActivity
     protected void initData() {
         mPresenter = new KPPOrderPresenter(this, this);
         mBinding.setPresenter(mPresenter);
-        mBinding.spinnerStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        mBinding.spinnerStatus.getSpinner().setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 mPresenter.onChannelSelectedChagne(position);

@@ -58,7 +58,7 @@ public class CreateUpdateInformationActivity extends
                 new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, dataPassportType);
         adapterPassportType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mPresenter.setAdapterPassportType(adapterPassportType);
-        mBinding.spinnerSelectPassportType.setOnItemSelectedListener(mPresenter);
+        mBinding.spinner.setOnItemSelectedListener(mPresenter);
 
         mBinding.setPresenter(mPresenter);
         mPresenter.setTypeCreate(typeCreate);
