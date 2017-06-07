@@ -20,10 +20,6 @@ public class ConnectorMobileActivity
     private Customer customer;
     private List<Contract> contractList;
 
-    @Override
-    public void onBackPressed() {
-        onCancel();
-    }
 
     @Override
     protected int getIdLayout() {
@@ -35,6 +31,7 @@ public class ConnectorMobileActivity
         mPresenter = new ConnectorMobilePresenter(this, this);
         mPresenter.subscribe();
         mBinding.setPresenter(mPresenter);
+        mBinding.spinnerConnectorMobileService.setOnItemSelectedListener(mPresenter);
     }
 
     @Override
@@ -60,7 +57,7 @@ public class ConnectorMobileActivity
 
     @Override
     public void onCancel() {
-        finish();
+        onBackPressed();
     }
 
     @Override
@@ -84,9 +81,13 @@ public class ConnectorMobileActivity
 
     @Override
     public void onItemClick(int position) {
-        CreateNewConnectorInformation1Fragment fragment =
-                CreateNewConnectorInformation1Fragment.newInstance(customer,
-                        contractList.get(position));
+        CreateNewConnectorInformation1Fragment fragment;
+        if (position == -1) {
+            fragment = CreateNewConnectorInformation1Fragment.newInstance(null, null);
+        } else {
+            fragment = CreateNewConnectorInformation1Fragment.newInstance(customer,
+                    contractList.get(position));
+        }
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_connector_mobile, fragment);
         transaction.addToBackStack(CreateNewConnectorInformation1Fragment.STRING_NAME);

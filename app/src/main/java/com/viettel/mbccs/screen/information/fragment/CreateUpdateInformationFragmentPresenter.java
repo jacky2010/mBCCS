@@ -63,10 +63,6 @@ public class CreateUpdateInformationFragmentPresenter
     private Customer customerResponse;
     private Subscriber subscriberResponse;
 
-    private Bitmap imageBitmapFront;
-    private Bitmap imageBitmapBackside;
-    private Bitmap imageBitmapPortrait;
-
     private List<ApDomain> dataPassportType;
     private List<ApDomain> dataHTTT;
     private int positionSelectionPassportType;
@@ -86,6 +82,10 @@ public class CreateUpdateInformationFragmentPresenter
     public ObservableField<Bitmap> imageFront;
     public ObservableField<Bitmap> imageBackside;
     public ObservableField<Bitmap> imagePortrait;
+
+    public ObservableField<String> imageUrlFront;
+    public ObservableField<String> imageUrlBackside;
+    public ObservableField<String> imageUrlPortrait;
     public ObservableField<String> idProvince;
     public ObservableField<String> idDistrict;
     public ObservableField<String> idPrecinct;
@@ -155,19 +155,6 @@ public class CreateUpdateInformationFragmentPresenter
     @Override
     public void unSubscribe() {
         subscriptions.clear();
-        if (imageBitmapFront != null) {
-            imageBitmapFront.recycle();
-        }
-        if (imageBitmapBackside != null) {
-            imageBitmapBackside.recycle();
-        }
-
-        if (imageBitmapPortrait != null) {
-            imageBitmapPortrait.recycle();
-        }
-        imageBitmapFront = null;
-        imageBitmapBackside = null;
-        imageBitmapPortrait = null;
     }
 
     public void getDataSpinner() {
@@ -456,10 +443,6 @@ public class CreateUpdateInformationFragmentPresenter
         }
     }
 
-    public void onSelectImage(View v) {
-        view.onSelectImage(v);
-    }
-
     /*---------------------- End on Click in View -----------------------------*/
 
     /*----------------------- Set - Get ---------------------------------------*/
@@ -533,17 +516,14 @@ public class CreateUpdateInformationFragmentPresenter
     }
 
     public void setImageFront(Bitmap bitmap) {
-        imageBitmapFront = bitmap;
         imageFront.set(bitmap);
     }
 
     public void setImageBackside(Bitmap bitmap) {
-        imageBitmapBackside = bitmap;
         imageBackside.set(bitmap);
     }
 
     public void setImagePortrait(Bitmap bitmap) {
-        imageBitmapPortrait = bitmap;
         imagePortrait.set(bitmap);
     }
 

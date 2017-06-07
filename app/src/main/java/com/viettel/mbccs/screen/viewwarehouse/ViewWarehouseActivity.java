@@ -7,8 +7,8 @@ import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.databinding.ActivityViewWarehouseBinding;
+import com.viettel.mbccs.screen.common.success.DialogViewSerial;
 import com.viettel.mbccs.screen.viewwarehouse.adapter.ViewWarehouseListOrderAdapter;
-import com.viettel.mbccs.screen.viewwarehouse.fragment.ViewSerialFragment;
 import com.viettel.mbccs.screen.viewwarehouse.fragment.ViewWarehouseSearchFragment;
 import java.util.ArrayList;
 import java.util.List;
@@ -104,12 +104,9 @@ public class ViewWarehouseActivity
     }
 
     @Override
-    public void onClickViewSerial(int position) {
-        ViewSerialFragment fragment = ViewSerialFragment.newInstance(new StockTotal());
-        FragmentTransaction transition = getSupportFragmentManager().beginTransaction();
-        transition.replace(R.id.frame_view_ware_house, fragment);
-        transition.addToBackStack(null);
-        transition.commitAllowingStateLoss();
+    public void onClickViewSerial(StockTotal stockTotal) {
+        DialogViewSerial dialog = DialogViewSerial.newInstance(stockTotal);  // dialog title
+        dialog.show(getSupportFragmentManager(), "");
     }
 
     @Override

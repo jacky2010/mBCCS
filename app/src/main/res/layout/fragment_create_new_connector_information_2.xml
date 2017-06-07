@@ -38,6 +38,7 @@
             android:paddingBottom="@dimen/dp_10"
             android:paddingLeft="@dimen/dp_4"
             android:paddingRight="@dimen/dp_4"
+            android:layout_marginTop="@dimen/dp_10"
             >
             <TextView
                 android:layout_width="0dp"
@@ -194,31 +195,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_6"
-                    android:text="@string/create_new_connector_information_khuyen_mai"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_14"
-                    />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_40"
-                    android:layout_marginTop="@dimen/dp_6"
-                    android:background="@drawable/bg_order"
-                    >
-
-                    <Spinner
-                        android:id="@+id/spinner_create_connector_2_khuyen_mai"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        bind:setSpinnerAdapter="@{ presenter.adapterSpinner2KhuyenMai}"
-                        />
-                </LinearLayout>
-
-                <com.viettel.mbccs.widget.CustomTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_6"
                     android:text="@string/create_new_connector_information_so_isdn"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_14"
@@ -253,23 +229,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_6"
-                    android:text="@string/create_new_connector_information_ma_nhan_vien"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_14"
-                    />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_40"
-                    android:layout_marginTop="@dimen/dp_6"
-                    android:background="@drawable/bg_order"
-                    android:text="@={ presenter.idNoNhanVien }"
-                    />
-
-                <com.viettel.mbccs.widget.CustomTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_6"
                     android:text="@string/create_new_connector_information_thong_tin_hang_hoa_di_kem"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_14"
@@ -291,6 +250,7 @@
                         android:orientation="horizontal"
                         android:paddingLeft="@dimen/dp_4"
                         android:paddingRight="@dimen/dp_4"
+                        android:layout_marginBottom="@dimen/dp_10"
                         >
                         <Button
                             android:layout_width="0dp"

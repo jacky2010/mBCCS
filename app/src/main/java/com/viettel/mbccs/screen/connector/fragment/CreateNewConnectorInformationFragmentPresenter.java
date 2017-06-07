@@ -7,6 +7,9 @@ import android.graphics.Bitmap;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import com.viettel.mbccs.BR;
+import com.viettel.mbccs.constance.Data;
+import com.viettel.mbccs.data.model.Contract;
+import com.viettel.mbccs.data.model.Customer;
 
 /**
  * Created by HuyQuyet on 6/4/17.
@@ -19,6 +22,9 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
     private CreateNewConnectorInformationFragmentContract.ViewFragment1 createNewView1;
     private CreateNewConnectorInformationFragmentContract.ViewFragment2 createNewView2;
 
+    private Customer customer;
+    private Contract contract;
+
     private String nameCustomer;
     private String dateBirthday;
     private String txtNumberPassport;
@@ -30,13 +36,16 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
     private String idPrecinct;
     private String idProvince;
 
-    private boolean isCheckMale;
+    private boolean isCheckMale = true;
     private boolean isCheckFemale;
     private int selectionPassport;
 
     private Bitmap imageFront;
     private Bitmap imageBackside;
     private Bitmap imagePortrait;
+    private String imageUrlFront;
+    private String imageUrlBackside;
+    private String imageUrlPortrait;
 
     private ArrayAdapter<String> adapterSpinnerTypeCustomer;
     private ArrayAdapter<String> adapterTypePassport;
@@ -47,14 +56,12 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
     private String idProvince2;
     private String noIsdn;
     private String serial;
-    private String idNoNhanVien;
     private String informationStock;
 
     private ArrayAdapter<String> adapterSpinner2DichVu;
     private ArrayAdapter<String> adapterSpinner2GoiCuoc;
     private ArrayAdapter<String> adapterSpinner2LoaiThueBao;
     private ArrayAdapter<String> adapterSpinner2HTHoaMang;
-    private ArrayAdapter<String> adapterSpinner2KhuyenMai;
 
 
 
@@ -82,15 +89,19 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
 
     /*---------------------------------- onClick View ---------------------------------------*/
     public void onCancel() {
-        createNewView1.onCancel();
+        if (createNewView1 != null) createNewView1.onCancel();
+        if (createNewView2 != null) createNewView2.onCancel();
     }
 
     public void onNext() {
-
+        imageFront = createNewView1.imageFront();
+        imageBackside = createNewView1.imageBackside();
+        imageBackside = createNewView1.imagePortrait();
+        createNewView1.onNext();
     }
 
     public void onEnter() {
-
+        createNewView2.onEnter();
     }
 
     public void onSelectImage(View view) {
@@ -261,6 +272,36 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
     }
 
     @Bindable
+    public String getImageUrlFront() {
+        return imageUrlFront;
+    }
+
+    public void setImageUrlFront(String imageUrlFront) {
+        this.imageUrlFront = imageUrlFront;
+        notifyPropertyChanged(BR.imageUrlFront);
+    }
+
+    @Bindable
+    public String getImageUrlBackside() {
+        return imageUrlBackside;
+    }
+
+    public void setImageUrlBackside(String imageUrlBackside) {
+        this.imageUrlBackside = imageUrlBackside;
+        notifyPropertyChanged(BR.imageUrlBackside);
+    }
+
+    @Bindable
+    public String getImageUrlPortrait() {
+        return imageUrlPortrait;
+    }
+
+    public void setImageUrlPortrait(String imageUrlPortrait) {
+        this.imageUrlPortrait = imageUrlPortrait;
+        notifyPropertyChanged(BR.imageUrlPortrait);
+    }
+
+    @Bindable
     public ArrayAdapter<String> getAdapterSpinnerTypeCustomer() {
         return adapterSpinnerTypeCustomer;
     }
@@ -344,16 +385,6 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
     }
 
     @Bindable
-    public String getIdNoNhanVien() {
-        return idNoNhanVien;
-    }
-
-    public void setIdNoNhanVien(String idNoNhanVien) {
-        this.idNoNhanVien = idNoNhanVien;
-        notifyPropertyChanged(BR.idNoNhanVien);
-    }
-
-    @Bindable
     public String getInformationStock() {
         return informationStock;
     }
@@ -402,16 +433,32 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
         this.adapterSpinner2HTHoaMang = adapterSpinner2HTHoaMang;
         notifyPropertyChanged(BR.adapterSpinner2HTHoaMang);
     }
-
-    @Bindable
-    public ArrayAdapter<String> getAdapterSpinner2KhuyenMai() {
-        return adapterSpinner2KhuyenMai;
-    }
-
-    public void setAdapterSpinner2KhuyenMai(ArrayAdapter<String> adapterSpinner2KhuyenMai) {
-        this.adapterSpinner2KhuyenMai = adapterSpinner2KhuyenMai;
-        notifyPropertyChanged(BR.adapterSpinner2KhuyenMai);
-    }
-
     /*---------------------------------- End Set - Get ---------------------------------------*/
+
+    public void setData(Customer customer, Contract contract) {
+        this.customer = customer;
+        this.contract = contract;
+//        if (imageFront != null) setImageFront(imageFront);
+        if (customer == null || contract == null) return;
+        setDataToView();
+    }
+
+    private void setDataToView() {
+        setNameCustomer(customer.getCustomerName());
+        setDateBirthday(customer.getBirthDate());
+        if (customer.getSex().equals(Data.Gender.MALE)) {
+            setCheckMale(true);
+            setCheckFemale(false);
+        } else {
+            setCheckMale(false);
+            setCheckFemale(true);
+        }
+        setTxtNumberPassport(customer.getIdNo());
+        setDateCreatePassport(customer.getIdIssueDate());
+        setOutDatePassport(customer.getIdExpireDate());
+        setIdProvince(customer.getProvince());
+        setIdDistrict(customer.getDistrict());
+        setIdPrecinct(customer.getPrecinct());
+        setAddress(customer.getAddress());
+    }
 }

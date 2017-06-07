@@ -6,7 +6,6 @@ import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
 import android.support.v7.widget.RecyclerView;
 import com.viettel.mbccs.constance.ApiCode;
-import com.viettel.mbccs.data.model.Session;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
@@ -61,8 +60,6 @@ public class ViewWarehousePresenter implements ViewWarehouseContract.Presenter,
         DataRequest<GetListStockModelRequest> request = new DataRequest<>();
         request.setParameterApi(g);
         request.setApiCode(ApiCode.GetListStockModel);
-        request.setApiKey("demo");
-        request.setSession(new Session());
 
         Subscription subscription = banHangKhoTaiChinhRepository.getListStockModel(request)
                 .subscribe(new MBCCSSubscribe<GetListStockModelResponse>() {
@@ -104,6 +101,6 @@ public class ViewWarehousePresenter implements ViewWarehouseContract.Presenter,
 
     @Override
     public void onClickViewSerial(int position) {
-        view.onClickViewSerial(position);
+        view.onClickViewSerial(stockTotalList.get(position));
     }
 }

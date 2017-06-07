@@ -5,16 +5,14 @@ import android.content.Intent;
 import android.databinding.ObservableInt;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
-
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.databinding.ActivityCreateOrderSuccessBinding;
+import com.viettel.mbccs.screen.common.success.DialogViewSerial;
 import com.viettel.mbccs.screen.nhapkhocapduoi.adapters.ListGoodsDetailAdapter;
-import com.viettel.mbccs.screen.viewwarehouse.fragment.ViewSerialFragment;
 import com.viettel.mbccs.utils.DateUtils;
 import com.viettel.mbccs.widget.CustomDialog;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -131,9 +129,7 @@ public class CreateOrderSuccessActivity extends
 
     @Override
     public void onViewSerialClickListener(StockTotal item) {
-        ViewSerialFragment fragment = ViewSerialFragment.newInstance(item);
-        getSupportFragmentManager().beginTransaction()
-                .replace(android.R.id.content, fragment)
-                .addToBackStack(null).commitAllowingStateLoss();
+        DialogViewSerial dialog = DialogViewSerial.newInstance(item);  // dialog title
+        dialog.show(getSupportFragmentManager(), "");
     }
 }

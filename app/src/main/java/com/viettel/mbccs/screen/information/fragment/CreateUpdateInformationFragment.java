@@ -1,16 +1,12 @@
 package com.viettel.mbccs.screen.information.fragment;
 
-import android.Manifest;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.IntDef;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,8 +23,7 @@ import com.viettel.mbccs.data.source.remote.response.GetRegiterSubInfoResponse;
 import com.viettel.mbccs.databinding.FragmentCreateUpdateInformationBinding;
 import com.viettel.mbccs.screen.common.success.DialogFullScreen;
 import com.viettel.mbccs.utils.DialogUtils;
-import com.viettel.mbccs.utils.PermissionUtils;
-import java.io.IOException;
+import com.viettel.mbccs.widget.CustomSelectImageNo;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +32,8 @@ import java.util.List;
  */
 
 public class CreateUpdateInformationFragment extends BaseFragment
-        implements CreateUpdateInformationFragmentContract.View {
+        implements CreateUpdateInformationFragmentContract.View,
+        CustomSelectImageNo.SelectImageCallback {
     public static final String STRING_NAME = "CreateUpdateInformationFragment";
 
     @IntDef({ Type.CREATE_INFORMATION, Type.CREATE_INFORMATION_CLONE, Type.UPDATE_INFORMATION })
@@ -49,18 +45,11 @@ public class CreateUpdateInformationFragment extends BaseFragment
 
     private static final String ARG_TYPE_FRAGMENT = "TYPE_FRAGMENT";
     private static final String ARG_DATA = "DATA";
-    private static final int REQUEST_CAMERA = 101;
-    private static final int SELECT_FILE = 102;
-
-    private static final int IMAGE_FRONT = 1;
-    private static final int IMAGE_BACKSIDE = 2;
-    private static final int IMAGE_PORTRAIT = 3;
 
     private FragmentCreateUpdateInformationBinding binding;
     private CreateUpdateInformationFragmentPresenter presenter;
     @Type
     private int typeFragment;
-    private int imageSelect;
     private GetRegiterSubInfoResponse data;
 
     private List<String> dataPassportType;
@@ -117,6 +106,7 @@ public class CreateUpdateInformationFragment extends BaseFragment
 
         presenter.setTypeFragment(typeFragment, data);
         presenter.getDataSpinner();
+        binding.imageSelect.setSelectImageCallback(this);
         binding.setPresenter(presenter);
     }
 
@@ -144,52 +134,6 @@ public class CreateUpdateInformationFragment extends BaseFragment
     @Override
     public void onCancel() {
         getActivity().getSupportFragmentManager().popBackStackImmediate();
-    }
-
-    @Override
-    public void onSelectImage(View v) {
-        switch (v.getId()) {
-            case R.id.image_front:
-                imageSelect = IMAGE_FRONT;
-                break;
-            case R.id.image_backside:
-                imageSelect = IMAGE_BACKSIDE;
-                break;
-            case R.id.image_portrait:
-                imageSelect = IMAGE_PORTRAIT;
-                break;
-        }
-
-        final CharSequence[] items = {
-                getString(R.string.picker_photo_take_photo),
-                getString(R.string.picker_photo_chooose_library),
-                getString(R.string.picker_photo_cancel)
-        };
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(getString(R.string.picker_photo_add_photo));
-        builder.setItems(items, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int item) {
-                if (items[item].equals(getString(R.string.picker_photo_take_photo))) {
-                    if (PermissionUtils.checkPermissions(CreateUpdateInformationFragment.this,
-                            PermissionUtils.REQUEST_CODE_CAMERA_PERMISSIONS,
-                            Manifest.permission.CAMERA)) {
-                        cameraIntent();
-                    }
-                    dialog.dismiss();
-                } else if (items[item].equals(getString(R.string.picker_photo_chooose_library))) {
-                    if (PermissionUtils.checkPermissions(CreateUpdateInformationFragment.this,
-                            PermissionUtils.REQUEST_CODE_WRITE_EXTERNAL_STORAGE_PERMISSIONS,
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                        galleryIntent();
-                    }
-                    dialog.dismiss();
-                } else if (items[item].equals(getString(R.string.picker_photo_cancel))) {
-                    dialog.dismiss();
-                }
-            }
-        });
-        builder.show();
     }
 
     @Override
@@ -327,106 +271,30 @@ public class CreateUpdateInformationFragment extends BaseFragment
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-            @NonNull int[] grantResults) {
-
-        switch (requestCode) {
-            case PermissionUtils.REQUEST_CODE_CAMERA_PERMISSIONS:
-                PermissionUtils.onRequestResult(getActivity(), permissions, grantResults,
-                        new PermissionUtils.OnPermissionGranted() {
-                            @Override
-                            public void onGranted() {
-                                cameraIntent();
-                            }
-                        }, null, true);
-                break;
-            case PermissionUtils.REQUEST_CODE_WRITE_EXTERNAL_STORAGE_PERMISSIONS:
-                PermissionUtils.onRequestResult(getActivity(), permissions, grantResults,
-                        new PermissionUtils.OnPermissionGranted() {
-                            @Override
-                            public void onGranted() {
-                                galleryIntent();
-                            }
-                        }, null, true);
-                break;
-            default:
-                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
+    public Bitmap imageFront() {
+        return binding.imageSelect.getBitmapImageFront();
     }
 
-    private void cameraIntent() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent, REQUEST_CAMERA);
+    @Override
+    public Bitmap imageBackside() {
+        return binding.imageSelect.getBitmapImageBackside();
     }
 
-    private void galleryIntent() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select File"), SELECT_FILE);
+    @Override
+    public Bitmap imagePortrait() {
+        return binding.imageSelect.getBitmapImagePortrait();
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
-            switch (requestCode) {
-                case SELECT_FILE:
-                    onSelectFromGalleryResult(data);
-                    break;
-                case REQUEST_CAMERA:
-                    onCaptureImageResult(data);
-                    break;
-            }
+            binding.imageSelect.setResultIntent(data, requestCode);
         }
     }
 
-    @SuppressWarnings("deprecation")
-    private void onSelectFromGalleryResult(Intent data) {
-        Bitmap bm = null;
-        if (data != null) {
-            try {
-                bm = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(),
-                        data.getData());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        setImageView(bm);
-    }
-
-    private void onCaptureImageResult(Intent data) {
-        Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-        //        data.getData();
-        //        try {
-        //            Bitmap bm = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(),
-        //                    data.getData());
-        //            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        //            bm.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
-        //            File destination = new File(Environment.getExternalStorageDirectory(),
-        //                    System.currentTimeMillis() + ".jpg");
-        //            FileOutputStream fo;
-        //            destination.createNewFile();
-        //            fo = new FileOutputStream(destination);
-        //            fo.write(bytes.toByteArray());
-        //            fo.close();
-        //        } catch (IOException e) {
-        //            e.printStackTrace();
-        //        }
-        setImageView(thumbnail);
-    }
-
-    private void setImageView(Bitmap bitmap) {
-        switch (imageSelect) {
-            case IMAGE_FRONT:
-                presenter.setImageFront(bitmap);
-                break;
-            case IMAGE_BACKSIDE:
-                presenter.setImageBackside(bitmap);
-                break;
-            case IMAGE_PORTRAIT:
-                presenter.setImagePortrait(bitmap);
-                break;
-        }
+    @Override
+    public void onSelectImage(Intent intent, int type) {
+        startActivityForResult(intent, type);
     }
 }
