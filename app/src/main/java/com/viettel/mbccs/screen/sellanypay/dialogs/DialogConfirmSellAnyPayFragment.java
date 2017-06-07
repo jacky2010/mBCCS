@@ -130,11 +130,11 @@ public class DialogConfirmSellAnyPayFragment extends BaseDialog {
 
                 SellAnypayToChannelRequest request = new SellAnypayToChannelRequest();
 
-                request.setAmount(Double.parseDouble(currentArgs.getString(Constants.BundleConstant.TOTAL)));
-                request.setChannelId(Integer.parseInt(currentArgs.getString(Constants.BundleConstant.CHANNEL)));
+                request.setAmount(currentArgs.getDouble(Constants.BundleConstant.TOTAL));
+                request.setChannelId(currentArgs.getInt(Constants.BundleConstant.CHANNEL));
                 request.setIsdnVi(currentArgs.getString(Constants.BundleConstant.ISDN_WALLET));
                 request.setPayMethod(currentArgs.getString(Constants.BundleConstant.PAY_METHOD));
-                request.setStaffId(Integer.parseInt(currentArgs.getString(Constants.BundleConstant.STAFF)));
+                request.setStaffId(currentArgs.getInt(Constants.BundleConstant.STAFF));
 
                 sellToChannelBaseRequest = new DataRequest<>();
                 sellToChannelBaseRequest.setApiCode(ApiCode.SellAnyPayToChannel);
@@ -177,11 +177,11 @@ public class DialogConfirmSellAnyPayFragment extends BaseDialog {
             } else {
                 SellAnypayToCustomerRequest request = new SellAnypayToCustomerRequest();
 
-                request.setAmount(Double.parseDouble(currentArgs.getString(Constants.BundleConstant.TOTAL)));
+                request.setAmount(currentArgs.getDouble(Constants.BundleConstant.TOTAL));
                 request.setIsdn(currentArgs.getString(Constants.BundleConstant.ISDN));
                 request.setIsdnVi(currentArgs.getString(Constants.BundleConstant.ISDN_WALLET));
                 request.setPayMethod(currentArgs.getString(Constants.BundleConstant.PAY_METHOD));
-                request.setStaffId(Integer.parseInt(currentArgs.getString(Constants.BundleConstant.STAFF)));
+                request.setStaffId(currentArgs.getInt(Constants.BundleConstant.STAFF));
 
                 sellToCustomerBaseRequest = new DataRequest<>();
                 sellToCustomerBaseRequest.setApiCode(ApiCode.SellAnyPayToCustomer);
@@ -232,10 +232,10 @@ public class DialogConfirmSellAnyPayFragment extends BaseDialog {
 
             Bundle args = new Bundle();
             args.putString(Constants.BundleConstant.CUSTOMER_ITEM, currentArgs.getString(Constants.BundleConstant.CUSTOMER_ITEM));
-            args.putString(Constants.BundleConstant.PRE_TAX, currentArgs.getString(Constants.BundleConstant.PRE_TAX));
-            args.putString(Constants.BundleConstant.TAX, currentArgs.getString(Constants.BundleConstant.TAX));
-            args.putString(Constants.BundleConstant.DISCOUNT, currentArgs.getString(Constants.BundleConstant.DISCOUNT));
-            args.putString(Constants.BundleConstant.TOTAL, currentArgs.getString(Constants.BundleConstant.TOTAL));
+            args.putString(Constants.BundleConstant.PRE_TAX, Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.PRE_TAX)));
+            args.putString(Constants.BundleConstant.TAX, Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.TAX)));
+            args.putString(Constants.BundleConstant.DISCOUNT, Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.DISCOUNT)));
+            args.putString(Constants.BundleConstant.TOTAL, Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.TOTAL)));
 
             getBaseActivity().goToDialogFragment(fragment, args);
             dismiss();

@@ -294,8 +294,8 @@ public class CreateTransAnyPayPresenter implements CreateTransAnyPayContract.Pre
             args.putString(Constants.BundleConstant.PAY_METHOD, payMethod.get());
 
             //TODO minhnx test
-            args.putString(Constants.BundleConstant.CHANNEL, "0");
-            args.putString(Constants.BundleConstant.STAFF, "0");
+            args.putInt(Constants.BundleConstant.CHANNEL, 0);
+            args.putInt(Constants.BundleConstant.STAFF, 0);
             //minhnx test
 
             viewModel.goToDialogFragment(args);
