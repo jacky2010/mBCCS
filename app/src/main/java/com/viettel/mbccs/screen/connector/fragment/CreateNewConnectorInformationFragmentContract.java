@@ -1,5 +1,6 @@
 package com.viettel.mbccs.screen.connector.fragment;
 
+import android.graphics.Bitmap;
 import com.viettel.mbccs.base.BasePresenter;
 import com.viettel.mbccs.base.BaseView;
 
@@ -10,6 +11,7 @@ import com.viettel.mbccs.base.BaseView;
 public interface CreateNewConnectorInformationFragmentContract {
 
     interface Presenter extends BasePresenter {
+
     }
 
     interface View extends BaseView<Presenter> {
@@ -19,9 +21,17 @@ public interface CreateNewConnectorInformationFragmentContract {
 
     interface ViewFragment1 extends View {
 
+        void onNext();
+
+        Bitmap imageFront();
+
+        Bitmap imageBackside();
+
+        Bitmap imagePortrait();
     }
 
     interface ViewFragment2 extends View {
 
+        void onEnter();
     }
 }

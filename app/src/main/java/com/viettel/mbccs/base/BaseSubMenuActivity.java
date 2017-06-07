@@ -22,6 +22,7 @@ import com.viettel.mbccs.screen.billing.BillingActivity;
 import com.viettel.mbccs.screen.branches.BranchesActivity;
 import com.viettel.mbccs.screen.change.installation.InstallationAddressActivity;
 import com.viettel.mbccs.screen.changesim.ChangeSimActivity;
+import com.viettel.mbccs.screen.connector.mobile.ConnectorMobileActivity;
 import com.viettel.mbccs.screen.information.CreateUpdateInformationActivity;
 import com.viettel.mbccs.screen.inputorder.InputOrderActivity;
 import com.viettel.mbccs.screen.kpp.order.KPPOrderActivity;
@@ -89,10 +90,10 @@ public class BaseSubMenuActivity
         // FIXME: Fake data
         switch (mMenuItem.getId()) {
             case MenuItem.MenuId.MENU_DAU_NOI_QUAN_LY_KHACH_HANG:
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_DAU_NOI_DI_DONG,
                         getString(R.string.menu_dau_noi_di_dong), R.drawable.ic_add_black_24dp, 0,
                         0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_DAU_NOI_CO_DINH,
                         getString(R.string.menu_dau_noi_co_dinh), R.drawable.ic_add_black_24dp, 0,
                         0));
                 mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_DANG_KY_THONG_TIN,
@@ -342,6 +343,14 @@ public class BaseSubMenuActivity
                         case MenuItem.MenuId.MENU_NHAP_KHO_CAP_DUOI:
                             startActivity(
                                     new Intent(BaseSubMenuActivity.this, ListOrderActivity.class));
+                            break;
+                        case MenuItem.MenuId.MENU_DAU_NOI_DI_DONG:
+                            startActivity(
+                                    new Intent(BaseSubMenuActivity.this, ConnectorMobileActivity.class));
+                            break;
+                        case MenuItem.MenuId.MENU_DAU_NOI_CO_DINH:
+                            startActivity(
+                                    new Intent(BaseSubMenuActivity.this, ConnectorMobileActivity.class));
                             break;
                     }
                 }

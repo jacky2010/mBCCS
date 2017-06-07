@@ -13,8 +13,8 @@ import com.viettel.mbccs.databinding.FragmentCreateNewConnectorInformation2Bindi
  */
 
 public class CreateNewConnectorInformation2Fragment extends Fragment
-        implements CreateNewConnectorInformationFragmentContract.ViewFragment1 {
-
+        implements CreateNewConnectorInformationFragmentContract.ViewFragment2 {
+    public static final String STRING_NAME = "CreateNewConnectorInformation2Fragment";
     private FragmentCreateNewConnectorInformation2Binding binding;
     private CreateNewConnectorInformationFragmentPresenter presenter;
     public static CreateNewConnectorInformation2Fragment newInstance() {
@@ -51,6 +51,7 @@ public class CreateNewConnectorInformation2Fragment extends Fragment
         presenter.unSubscribe();
         super.onDestroy();
     }
+
     @Override
     public void setPresenter(CreateNewConnectorInformationFragmentContract.Presenter presenter) {
 
@@ -68,6 +69,11 @@ public class CreateNewConnectorInformation2Fragment extends Fragment
 
     @Override
     public void onCancel() {
+        getActivity().getSupportFragmentManager().popBackStack();
+    }
 
+    @Override
+    public void onEnter() {
+        getActivity().finish();
     }
 }

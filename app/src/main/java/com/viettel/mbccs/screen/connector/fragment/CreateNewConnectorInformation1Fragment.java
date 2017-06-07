@@ -1,22 +1,29 @@
 package com.viettel.mbccs.screen.connector.fragment;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.Contract;
 import com.viettel.mbccs.data.model.Customer;
 import com.viettel.mbccs.databinding.FragmentCreateNewConnectorInformation1Binding;
+import com.viettel.mbccs.widget.CustomSelectImageNo;
 
 /**
  * Created by HuyQuyet on 6/4/17.
  */
 
 public class CreateNewConnectorInformation1Fragment extends Fragment
-        implements CreateNewConnectorInformationFragmentContract.ViewFragment1 {
-    public static final String STRING_NAME = "CreateNewConnectorInformationFragment";
+        implements CreateNewConnectorInformationFragmentContract.ViewFragment1,
+        CustomSelectImageNo.SelectImageCallback {
+    public static final String STRING_NAME = "CreateNewConnectorInformation1Fragment";
     private static final String ARG_CUSTOMER = "CUSTOMER";
     private static final String ARG_CONTRACT = "CONTRACT";
 
@@ -26,8 +33,8 @@ public class CreateNewConnectorInformation1Fragment extends Fragment
     private Customer customer;
     private Contract contract;
 
-    public static CreateNewConnectorInformation1Fragment newInstance(Customer customer,
-            Contract contract) {
+    public static CreateNewConnectorInformation1Fragment newInstance(@Nullable Customer customer,
+            @Nullable Contract contract) {
         Bundle bundle = new Bundle();
         bundle.putParcelable(ARG_CUSTOMER, customer);
         bundle.putParcelable(ARG_CONTRACT, contract);
@@ -58,10 +65,15 @@ public class CreateNewConnectorInformation1Fragment extends Fragment
         presenter = new CreateNewConnectorInformationFragmentPresenter(getActivity(), this);
         presenter.subscribe();
         binding.setPresenter(presenter);
+        binding.imageSelect.setSelectImageCallback(this);
+        presenter.setData(customer, contract);
     }
 
     @Override
     public void onDestroy() {
+        if (binding != null) {
+            binding.imageSelect.recycleBitmap();
+        }
         presenter.unSubscribe();
         super.onDestroy();
     }
@@ -84,5 +96,44 @@ public class CreateNewConnectorInformation1Fragment extends Fragment
     @Override
     public void onCancel() {
         getActivity().getSupportFragmentManager().popBackStack();
+    }
+
+    @Override
+    public void onNext() {
+        CreateNewConnectorInformation2Fragment fragment;
+        fragment = CreateNewConnectorInformation2Fragment.newInstance();
+        FragmentTransaction transaction =
+                getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.frame_connector_mobile, fragment);
+        transaction.addToBackStack(CreateNewConnectorInformation2Fragment.STRING_NAME);
+        transaction.commit();
+    }
+
+    @Override
+    public Bitmap imageFront() {
+        return binding.imageSelect.getBitmapImageFront();
+    }
+
+    @Override
+    public Bitmap imageBackside() {
+        return binding.imageSelect.getBitmapImageBackside();
+    }
+
+    @Override
+    public Bitmap imagePortrait() {
+        return binding.imageSelect.getBitmapImagePortrait();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            binding.imageSelect.setResultIntent(data, requestCode);
+        }
+    }
+
+    @Override
+    public void onSelectImage(Intent intent, int type) {
+        startActivityForResult(intent, type);
     }
 }

@@ -289,17 +289,17 @@ Từ <b>%s</b><br>
     <string name="item_view_ware_house_number_actual">Số lượng thực tế: %1$d</string>
     <string name="item_view_ware_house_number_responses">Số lượng đáp ứng: %1$d</string>
     <string name="item_view_ware_house_view_serial">Xem serial</string>
-    <string name="view_ware_house_view_serial_title">Xem serial</string>
-    <string name="view_ware_house_view_serial_detail_serial">
+    <string name="dialog_view_serial_title">Xem serial</string>
+    <string name="dialog_view_serial_detail_serial">
         <![CDATA[
          Chi tiết serial cho mặt hàng <font color="#317BE1"><u>%s</u></font>
         ]]>
     </string>
-    <string name="view_ware_house_view_serial_total">Tổng số: %1$d</string>
-    <string name="view_ware_house_view_serial_from_serial">Từ serial</string>
-    <string name="view_ware_house_view_serial_to_serial">Đến serial</string>
-    <string name="view_ware_house_view_serial_count">Số lượng</string>
-    <string name="fragment_view_ware_house_view_serial_btn_close">Đóng</string>
+    <string name="dialog_view_serial_total">Tổng số: %1$d</string>
+    <string name="dialog_view_serial_from_serial">Từ serial</string>
+    <string name="dialog_view_serial_to_serial">Đến serial</string>
+    <string name="dialog_view_serial_count">Số lượng</string>
+    <string name="dialog_view_serial_btn_close">Đóng</string>
     <string name="view_ware_house_search_filter_information">Lọc thông tin</string>
     <string name="view_ware_house_search_code_province">Mã tỉnh</string>
     <string name="view_ware_house_search_code_business_center">Mã TTKD</string>
@@ -700,10 +700,8 @@ Từ <b>%s</b><br>
     <string name="create_new_connector_information_goi_cuoc">Gói cước*</string>
     <string name="create_new_connector_information_loai_thue_bao">Loại thuê bao*</string>
     <string name="create_new_connector_information_hinh_thuc_hoa_mang">Hình thức hòa mạng*</string>
-    <string name="create_new_connector_information_khuyen_mai">Khuyến mãi</string>
     <string name="create_new_connector_information_so_isdn">Số ISDN*</string>
     <string name="create_new_connector_information_serial">Serial*</string>
-    <string name="create_new_connector_information_ma_nhan_vien">Mã NV</string>
     <string name="create_new_connector_information_thong_tin_hang_hoa_di_kem">Thông tin hàng hóa đi kèm</string>
     <string name="create_new_connector_information_dong">Đóng</string>
     <string name="create_new_connector_information_next">Next</string>
@@ -738,5 +736,16 @@ Từ <b>%s</b><br>
     <string name="nv_trahangcaptren_lap_phieu_lablel_lapphieu">Lập phiếu</string>
     <string name="nv_trahangcaptren_chitiet_title">Chi tiết xuất cho trả hàng cấp trên</string>
     <string name="nv_trahangcaptren_export_success_labal_amount_response">Số lượng xuất/ Số lượng đáp ứng</string>
+
+    <!-- Area channel -->
+    <string name="title_area">Quản lý địa bàn</string>
+    <string name="msg_empty_text" />
+    <string name="title_province">Tỉnh</string>
+    <string name="title_district">Huyện</string>
+
+    <string name="title_tab_province"> Tỉnh/Huyện</string>
+    <string name="title_tab_ttkd">TTKD</string>
+    <string name="title_tab_bts">BTS</string>
+    <string name="title_tab_clh">Chợ/Lễ hội</string>
 
 </resources>

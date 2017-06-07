@@ -1,5 +1,6 @@
 package com.viettel.mbccs.screen.information;
 
+import android.content.DialogInterface;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.ArrayAdapter;
 import com.viettel.mbccs.R;
@@ -120,8 +121,12 @@ public class CreateUpdateInformationActivity extends
 
     @Override
     public void getDataSpinnerPassportError(BaseException error) {
-        // TODO: 6/1/17 hanlder error
-        DialogUtils.showDialogError(this, error);
+        DialogUtils.showDialogError(this, error, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
     }
 
     @Override

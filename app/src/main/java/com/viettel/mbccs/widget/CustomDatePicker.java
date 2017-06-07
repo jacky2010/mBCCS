@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.databinding.LayoutDatePickerBinding;
 import com.viettel.mbccs.utils.DateUtils;
+import com.viettel.mbccs.utils.StringUtils;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -107,6 +108,8 @@ public class CustomDatePicker extends LinearLayout {
     }
 
     public void setDateString(String dateString) {
+        if (StringUtils.isEmpty(dateString)) return;
+
         Date date = DateUtils.stringToDate(dateString, DateUtils.CALENDAR_DATE_FORMAT_DD_MM_YY,
                 Locale.getDefault());
         mCalendar.setTime(date);
