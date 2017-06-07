@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/view_search"
+    android:layout_width="match_parent"
+    android:layout_height="35dp"
+    android:background="@drawable/bg_item_search"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/iv_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/dp_5"
+        android:layout_marginRight="@dimen/dp_5"
+        android:rotation="90"
+        android:src="@drawable/ic_search" />
+
+    <com.viettel.mbccs.widget.CustomEdittext
+        android:id="@+id/ed_search"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/dp_5"
+        android:imeOptions="actionDone"
+        android:layout_toRightOf="@+id/iv_search"
+        android:background="@null"
+        android:singleLine="true" />
+
+    <ImageView
+        android:id="@+id/iv_remove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/dp_5"
+        android:layout_marginRight="@dimen/dp_5"
+        android:src="@drawable/ic_close" />
+
+</RelativeLayout>
