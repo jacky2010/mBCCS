@@ -18,7 +18,9 @@ import com.viettel.mbccs.databinding.ItemImageGridBinding;
 import com.viettel.mbccs.databinding.ItemMenuBinding;
 import com.viettel.mbccs.screen.assigntask.ListAssignTaskActivity;
 import com.viettel.mbccs.screen.billing.BillingActivity;
+import com.viettel.mbccs.screen.branches.BranchesActivity;
 import com.viettel.mbccs.screen.change.installation.InstallationAddressActivity;
+import com.viettel.mbccs.screen.changesim.ChangeSimActivity;
 import com.viettel.mbccs.screen.connector.mobile.ConnectorMobileActivity;
 import com.viettel.mbccs.screen.information.CreateUpdateInformationActivity;
 import com.viettel.mbccs.screen.inputorder.InputOrderActivity;
@@ -28,7 +30,9 @@ import com.viettel.mbccs.screen.nhapkhocapduoi.ListOrderActivity;
 import com.viettel.mbccs.screen.sell.channel.SaleChannelActivity;
 import com.viettel.mbccs.screen.sell.orders.SellOrdersActivity;
 import com.viettel.mbccs.screen.sell.retail.SaleRetailActivity;
+import com.viettel.mbccs.screen.sellanypay.SellAnyPayActivity;
 import com.viettel.mbccs.screen.trahangcaptren.ListOrderReturnUpperActivity;
+import com.viettel.mbccs.screen.transferanypay.TransferAnyPayActivity;
 import com.viettel.mbccs.screen.viewwarehouse.ViewWarehouseActivity;
 import com.viettel.mbccs.widget.SpacesItemDecoration;
 import java.lang.reflect.Field;
@@ -147,8 +151,12 @@ public class BaseSubMenuActivity
                                     ConnectorMobileActivity.class));
                             break;
                         case Function.MenuId.MENU_BAN_ANYPAY:
+                            startActivity(
+                                    new Intent(BaseSubMenuActivity.this, SellAnyPayActivity.class));
                             break;
                         case Function.MenuId.MENU_NAP_CHUYEN_ANYPAY:
+                            startActivity(
+                                    new Intent(BaseSubMenuActivity.this, TransferAnyPayActivity.class));
                             break;
                         case Function.MenuId.MENU_DANG_KY_THONG_TIN:
                             Intent intentDKTT = new Intent(BaseSubMenuActivity.this,
@@ -163,6 +171,8 @@ public class BaseSubMenuActivity
                             startActivity(intentCNTT);
                             break;
                         case Function.MenuId.MENU_DOI_SIM:
+                            startActivity(
+                                    new Intent(BaseSubMenuActivity.this, ChangeSimActivity.class));
                             break;
                         case Function.MenuId.MENU_THAY_DOI_DIA_CHI_LAP_DAT:
                             startActivity(new Intent(BaseSubMenuActivity.this,
@@ -170,6 +180,8 @@ public class BaseSubMenuActivity
                             break;
 
                         case Function.MenuId.MENU_TAO_KENH_PHAN_PHOI:
+                            startActivity(
+                                    new Intent(BaseSubMenuActivity.this, BranchesActivity.class));
                             break;
                         case Function.MenuId.MENU_QUAN_LY_DBHC_BTS_KENH:
                             break;
