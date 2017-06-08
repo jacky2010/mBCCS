@@ -105,12 +105,16 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:paddingLeft="@dimen/dp_16"
+                    android:paddingRight="@dimen/dp_16"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/change_sim_label_select_sim"
                     android:paddingBottom="@dimen/dp_6"/>
 
                 <View
+                    android:layout_marginLeft="@dimen/dp_16"
+                    android:layout_marginRight="@dimen/dp_16"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_0.6"
                     android:background="@color/grey" />
