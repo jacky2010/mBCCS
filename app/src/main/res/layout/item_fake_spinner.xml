@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="fake"
+            type="com.viettel.mbccs.widget.FakeSpinner"
+            />
+    </data>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/layout_root"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        style="@style/inputStyle"
+        >
+        <ImageView
+            android:id="@+id/icon_right"
+            android:layout_width="@dimen/dp_12"
+            android:layout_height="@dimen/dp_12"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/triangle"
+            />
+        <com.viettel.mbccs.widget.CustomEdittext
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/icon_right"
+            android:background="@color/transparent"
+            android:editable="false"
+            android:lines="1"
+            style="@style/inputStyleTranparent"
+            />
+    </RelativeLayout>
+</layout>

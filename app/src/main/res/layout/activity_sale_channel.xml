@@ -112,19 +112,12 @@
                             android:layout_height="wrap_content"
                             android:text="@string/service"
                             />
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="@dimen/dp_3"
-                            android:background="@drawable/bg_border"
-                            >
-                            <Spinner
+                            <com.viettel.mbccs.widget.SpinnerWithBorder
                                 android:id="@+id/spinner"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:adapter="@{presenter.adapter}"
                                 />
-                        </LinearLayout>
                         <com.viettel.mbccs.widget.CustomTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

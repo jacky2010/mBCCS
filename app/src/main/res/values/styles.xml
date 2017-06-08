@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlNormal">@color/grey_bright</item>
     </style>
 
     <style name="Theme.AppCompat.Light.NoActionBar.FullScreen" parent="AppTheme">
@@ -16,14 +17,14 @@
     </style>
 
     <declare-styleable name="SearchInputView">
-        <attr name="text" format="string" />
-        <attr name="textSize" format="dimension" />
-        <attr name="textColor" format="color" />
-        <attr name="inputType" format="string" />
-        <attr name="imeOptions" format="string" />
-        <attr name="length" format="integer" />
-        <attr name="lines" format="integer" />
-        <attr name="hint" format="string" />
+        <attr format="string" name="text"/>
+        <attr format="dimension" name="textSize"/>
+        <attr format="color" name="textColor"/>
+        <attr format="string" name="inputType"/>
+        <attr format="string" name="imeOptions"/>
+        <attr format="integer" name="length"/>
+        <attr format="integer" name="lines"/>
+        <attr format="string" name="hint"/>
     </declare-styleable>
 
     <style name="button_positive">
@@ -111,12 +112,6 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
-    <style name="inputText">
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">@dimen/sp_14</item>
-        <item name="android:background">@drawable/bg_input_tranparent</item>
-        <item name="android:padding">@dimen/dp_10</item>
-    </style>
 
     <style name="button_add_subtract">
         <item name="android:textSize">@dimen/sp_20</item>
@@ -129,8 +124,9 @@
     </style>
 
     <!--Style for spinner-->
-    <style name="SpinnerStyle" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="SpinnerStyle" parent="@style/ThemeOverlay.AppCompat.Light">
         <item name="colorControlNormal">@color/white</item>
+        <item name="android:background">@drawable/bg_input_tranparent</item>
     </style>
 
     <!--Task-->
@@ -186,7 +182,15 @@
     <style name="inputStyle">
         <item name="android:background">@drawable/bg_input_tranparent</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">@dimen/sp_18</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:padding">@dimen/dp_5</item>
+        <item name="android:gravity">start|top</item>
+    </style>
+
+    <style name="inputStyleTranparent">
+        <item name="android:background">@color/transparent</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/sp_14</item>
         <item name="android:padding">@dimen/dp_5</item>
         <item name="android:gravity">start|top</item>
     </style>
@@ -243,4 +247,5 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_width">@dimen/dp_0_5</item>
     </style>
+
 </resources>
