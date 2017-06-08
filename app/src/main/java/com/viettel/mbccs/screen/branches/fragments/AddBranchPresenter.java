@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
+import com.google.android.gms.location.places.Place;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.BranchItem;
 import com.viettel.mbccs.data.model.KeyValue;
@@ -127,9 +128,6 @@ public class AddBranchPresenter implements AddBranchContract.Presenter {
             channelTypeAdapter.notifyDataSetChanged();
             documentTypeAdapter.notifyDataSetChanged();
 
-            viewModel.showHintChannelType();
-            viewModel.showHintDocumentType();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -194,7 +192,7 @@ public class AddBranchPresenter implements AddBranchContract.Presenter {
                 isValid = false;
             }
 
-            if(!isValid)
+            if (!isValid)
                 return;
 
             BranchItem item = new BranchItem();
@@ -223,18 +221,18 @@ public class AddBranchPresenter implements AddBranchContract.Presenter {
         viewModel.onSelectImage(v);
     }
 
-    public void chooseManager(){
-        try{
+    public void chooseManager() {
+        try {
             viewModel.onChooseManager(managersList);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void chooseBTS(){
-        try{
+    public void chooseBTS() {
+        try {
             viewModel.onChooseBTS(btsesList);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -285,6 +283,16 @@ public class AddBranchPresenter implements AddBranchContract.Presenter {
     public void setContractImage(Bitmap bitmap) {
         contractImage = bitmap;
         imageContract.set(bitmap);
+    }
+
+    @Override
+    public void onPlaceSelected(Place place) {
+        try {
+            if (place != null)
+                location.set(place.getLatLng().latitude + ", " + place.getLatLng().longitude);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public ArrayAdapter<String> getChannelTypeAdapter() {

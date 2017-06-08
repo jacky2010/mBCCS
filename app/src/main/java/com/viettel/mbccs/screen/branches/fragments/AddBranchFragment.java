@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
+import com.google.android.gms.location.places.ui.PlacePicker;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindFragment;
 import com.viettel.mbccs.data.model.BranchItem;
@@ -41,6 +42,7 @@ public class AddBranchFragment extends BaseDataBindFragment<FragmentAddBranchBin
     private static final int GET_BTS = GET_MANAGER + 1;
     private static final int REQUEST_CAMERA = 101;
     private static final int SELECT_FILE = 102;
+    private static final int PLACE_PICKER_REQUEST = 103;
 
     public static final int FORM_ADD = 1;
     public static final int FORM_EDIT = 2;
@@ -118,6 +120,18 @@ public class AddBranchFragment extends BaseDataBindFragment<FragmentAddBranchBin
 
                 }
             });
+
+            mBinding.ivLocationPicker.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    try{
+                        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+                        startActivityForResult(builder.build(getActivity()), PLACE_PICKER_REQUEST);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            });
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -152,24 +166,6 @@ public class AddBranchFragment extends BaseDataBindFragment<FragmentAddBranchBin
         intent.putExtra(Constants.BundleConstant.ITEM_LIST,
                 GsonUtils.Object2String(items));
         startActivityForResult(intent, GET_BTS);
-    }
-
-    @Override
-    public void showHintChannelType() {
-        try {
-            mBinding.spChannelType.setSelection(mBinding.spChannelType.getAdapter().getCount());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void showHintDocumentType() {
-        try {
-            mBinding.spDocumentType.setSelection(mBinding.spDocumentType.getAdapter().getCount());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
@@ -245,6 +241,8 @@ public class AddBranchFragment extends BaseDataBindFragment<FragmentAddBranchBin
                         onCaptureImageResult(data);
                         break;
                 }
+            } else if(requestCode == PLACE_PICKER_REQUEST && resultCode == RESULT_OK){
+                mPresenter.onPlaceSelected(PlacePicker.getPlace(getContext(), data));
             }
         } catch (Exception e) {
             e.printStackTrace();

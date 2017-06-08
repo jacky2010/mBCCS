@@ -2,6 +2,7 @@ package com.viettel.mbccs.screen.branches.fragments;
 
 import android.graphics.Bitmap;
 
+import com.google.android.gms.location.places.Place;
 import com.viettel.mbccs.base.BasePresenter;
 import com.viettel.mbccs.base.BaseView;
 import com.viettel.mbccs.data.model.BranchItem;
@@ -19,8 +20,6 @@ public class AddBranchContract {
         void onBranchAddFailed();
         void onChooseManager(List<KeyValue> items);
         void onChooseBTS(List<KeyValue> items);
-        void showHintChannelType();
-        void showHintDocumentType();
         void showError(String message);
         void onSelectImage(android.view.View v);
     }
@@ -32,5 +31,6 @@ public class AddBranchContract {
         void onDocumentTypeChanged(int index);
         void setDocumentImage(Bitmap bitmap);
         void setContractImage(Bitmap bitmap);
+        void onPlaceSelected(Place place);
     }
 }
