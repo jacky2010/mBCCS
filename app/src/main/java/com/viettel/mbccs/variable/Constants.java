@@ -105,6 +105,8 @@ public class Constants {
         public static final String ISDN_WALLET = "isdn_wallet";
         public static final String FROM_CHANNEL = "from_channel";
         public static final String TO_CHANNEL = "to_channel";
+        public static final String SERVICE_FEE = "service_fee";
+        public static final String SIM_FEE = "sim_fee";
     }
 
     public class Tax{

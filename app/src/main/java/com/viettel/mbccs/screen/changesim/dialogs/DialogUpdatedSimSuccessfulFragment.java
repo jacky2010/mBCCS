@@ -6,6 +6,8 @@ import android.widget.TextView;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDialog;
 import com.viettel.mbccs.constance.IconType;
+import com.viettel.mbccs.data.model.ChangeSimItem;
+import com.viettel.mbccs.utils.GsonUtils;
 import com.viettel.mbccs.variable.Constants;
 import com.viettel.mbccs.widget.ToolBarView;
 
@@ -32,13 +34,10 @@ public class DialogUpdatedSimSuccessfulFragment extends BaseDialog {
             Bundle args = getArguments();
 
             if (args != null) {
-                String isdn = args.getString(Constants.BundleConstant.CUSTOMER_ITEM);
-                String preTax = args.getString(Constants.BundleConstant.PRE_TAX);
-                String tax = args.getString(Constants.BundleConstant.TAX);
-                String discount = args.getString(Constants.BundleConstant.DISCOUNT);
+                ChangeSimItem changeSimItem = GsonUtils.String2Object(args.getString(Constants.BundleConstant.CUSTOMER_ITEM), ChangeSimItem.class);
                 String total = args.getString(Constants.BundleConstant.TOTAL);
-
-                txtMessageDetail.setText(getString(R.string.sell_anypay_msg_sold_success, isdn, total));
+                if(changeSimItem!= null)
+                    txtMessageDetail.setText(getString(R.string.change_sim_msg_updated_sim, changeSimItem.getCustomer().getCustomerName()));
             }
 
         } catch (Exception e) {
@@ -69,7 +68,7 @@ public class DialogUpdatedSimSuccessfulFragment extends BaseDialog {
 
     @Override
     protected int idLayoutRes() {
-        return R.layout.fragment_refilled_any_pay_success;
+        return R.layout.fragment_updated_sim_success;
     }
 
     @Override

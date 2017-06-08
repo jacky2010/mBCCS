@@ -248,12 +248,13 @@ Từ <b>%s</b><br>
     <string name="common_msg_error_greater_fields">%1$s phải lớn hơn %2$s!</string>
     <string name="common_msg_error_dont_have_permission">Bạn không có quyền truy cập chức năng này!</string>
     <string name="common_msg_error_general">Có lỗi xảy ra trong quá trình xử lý, vui lòng thử lại sau!</string>
+    <string name="common_msg_confirm_general_title">Thông báo</string>
 
     <!--Change Sim-->
     <string name="change_sim_label_document_id">Số giấy tờ</string>
     <string name="change_sim_label_select_sim">Chọn thông tin</string>
     <string name="change_sim_label_select_sim_error_debit">Thuê bao còn đang nợ cước, đề nghị vào thanh toán cước trước khi đổi sim!</string>
-    <string name="change_sim_label_select_sim_error_bar1">Thuê bao đang ở trạng thái chặn %s chiều do KHYC, thực hiện mở trước khi thay !</string>
+    <string name="change_sim_label_select_sim_error_bar1">Thuê bao đang ở trạng thái chặn %s chiều do KHYC, thực hiện mở trước khi thay đổi sim!</string>
     <string name="change_sim_label_cust_info">Thông tin khách hàng</string>
     <string name="change_sim_label_cust_name">Tên khách hàng</string>
     <string name="change_sim_label_address">Địa chỉ</string>
@@ -281,6 +282,10 @@ Từ <b>%s</b><br>
     <string name="change_sim_label_sim_serial2">Số serial:</string>
     <string name="change_sim_label_cust_name2">Tên khách hàng:</string>
     <string name="change_sim_label_change">Thực Hiện Đổi Sim</string>
+    <string name="change_sim_pay_debit">Thanh toán cước</string>
+    <string name="change_sim_unbar">Mở chặn</string>
+    <string name="common_msg_confirm_change_sim">Bạn có muốn đổi sim cho khách hàng %1$s từ số serial %2$s sang số serial %3$s?</string>
+    <string name="change_sim_msg_updated_sim">SIM cho khách hàng %s đã được thay đổi thành công!</string>
     <!--Change Sim-->
 
     <string name="view_ware_house_title">Chi tiết kho</string>

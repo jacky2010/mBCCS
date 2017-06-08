@@ -1,5 +1,7 @@
 package com.viettel.mbccs.screen.changesim.fragments;
 
+import android.os.Bundle;
+
 import com.viettel.mbccs.base.BasePresenter;
 import com.viettel.mbccs.base.BaseView;
 import com.viettel.mbccs.data.model.ChangeSimItem;
@@ -13,6 +15,7 @@ public class SearchChangeSimContract {
         void onSimFound(String isdn, String documentType, String documentId);
         void onSimNotFound(String isdn, String documentType, String documentId);
         void onPrepareChangeSim(ChangeSimItem item);
+        void goToPreAction(Bundle bundle);
         void showError(String message);
     }
 

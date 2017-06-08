@@ -3,12 +3,18 @@ package com.viettel.mbccs.screen.changesim.fragments;
 import android.content.Context;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
+import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.viettel.mbccs.R;
+import com.viettel.mbccs.data.model.ChangeSimInfo;
+import com.viettel.mbccs.data.model.ChangeSimItem;
+import com.viettel.mbccs.data.model.Customer;
 import com.viettel.mbccs.data.source.ChangeSimRepository;
 import com.viettel.mbccs.utils.Common;
+import com.viettel.mbccs.utils.GsonUtils;
 import com.viettel.mbccs.utils.ValidateUtils;
+import com.viettel.mbccs.variable.Constants;
 
 /**
  * Created by minhnx on 5/19/17.
@@ -45,6 +51,8 @@ public class UpdateSimPresenter implements UpdateSimContract.Presenter {
     public ObservableBoolean isPrepaid;
 
     private ChangeSimRepository repository;
+    private double changeSimPrice;
+    private double servicePrice;
 
     public UpdateSimPresenter(Context context, final UpdateSimContract.ViewModel viewModel) {
         this.context = context;
@@ -91,8 +99,8 @@ public class UpdateSimPresenter implements UpdateSimContract.Presenter {
         try {
             repository = ChangeSimRepository.getInstance();
 
-            double changeSimPrice = repository.getChangeSimPrice();
-            double servicePrice = repository.getChangeSimServiceFee();
+            changeSimPrice = repository.getChangeSimPrice();
+            servicePrice = repository.getChangeSimServiceFee();
 
             serviceFee.set(Common.formatDouble(servicePrice) + " " + context.getString(R.string.common_label_currency_suffix));
             changeSimFee.set(Common.formatDouble(changeSimPrice) + " " + context.getString(R.string.common_label_currency_suffix));
@@ -208,6 +216,25 @@ public class UpdateSimPresenter implements UpdateSimContract.Presenter {
 
             if(!isValid)
                 return;
+
+            Customer customer = new Customer();
+            customer.setCustomerName(customerName.get());
+
+            ChangeSimInfo changeSimInfo = new ChangeSimInfo();
+            changeSimInfo.setOldSerial(oldSimSerial.get());
+            changeSimInfo.setNewSerial(newSimSerial.get());
+
+            ChangeSimItem item = new ChangeSimItem();
+            item.setCustomer(customer);
+            item.setChangeSimInfo(changeSimInfo);
+
+            Bundle args = new Bundle();
+            args.putString(Constants.BundleConstant.CUSTOMER_ITEM, GsonUtils.Object2String(item));
+            args.putDouble(Constants.BundleConstant.SERVICE_FEE, servicePrice);
+            args.putDouble(Constants.BundleConstant.SIM_FEE, changeSimPrice);
+            args.putDouble(Constants.BundleConstant.TOTAL, (servicePrice + changeSimPrice));
+
+            viewModel.goToDialogFragment(args);
 
         } catch (Exception e) {
             e.printStackTrace();

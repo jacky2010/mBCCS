@@ -69,6 +69,7 @@
                     android:background="@drawable/bg_order"
                     android:text="@={ presenter.customerName }"
                     android:error="@{presenter.customerNameError}"
+                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                     android:maxLength="@integer/max_length_customer_name"/>
 
                 <TextView
@@ -85,6 +86,7 @@
                     android:background="@drawable/bg_order"
                     android:text="@={ presenter.documentId }"
                     android:error="@{ presenter.documentIdError }"
+                    android:inputType="number"
                     android:maxLength="@integer/max_length_document_no"/>
 
                 <TextView
@@ -147,6 +149,7 @@
                     android:lines="3"
                     android:maxLines="3"
                     android:minLines="3"
+                    android:inputType="number"
                     android:scrollbars="vertical"
                     android:text="@={ presenter.oldSimSerial }"
                     android:error="@{ presenter.oldSimSerialError }"

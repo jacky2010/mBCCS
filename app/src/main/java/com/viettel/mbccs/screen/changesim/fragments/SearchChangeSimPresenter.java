@@ -3,6 +3,7 @@ package com.viettel.mbccs.screen.changesim.fragments;
 import android.content.Context;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 
@@ -13,6 +14,8 @@ import com.viettel.mbccs.data.model.KeyValue;
 import com.viettel.mbccs.data.source.ChangeSimRepository;
 import com.viettel.mbccs.screen.changesim.adapter.ChangeSimListAdapter;
 import com.viettel.mbccs.screen.common.adapter.HintArrayAdapter;
+import com.viettel.mbccs.utils.GsonUtils;
+import com.viettel.mbccs.variable.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +25,10 @@ import java.util.List;
  */
 
 public class SearchChangeSimPresenter implements SearchChangeSimContract.Presenter {
+
+    public static final String ACTION_PAY_DEBIT = "1";
+    public static final String ACTION_UNBAR_ONE_WAY = "2";
+    public static final String ACTION_UNBAR_TWO_WAY = "3";
 
     private Context context;
     private SearchChangeSimContract.ViewModel viewModel;
@@ -59,7 +66,13 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
         changeSimAdapter.setOnItemClickListener(new ChangeSimListAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, ChangeSimItem item) {
-                viewModel.onPrepareChangeSim(item);
+
+                String preAction = getPreAction(item);
+
+                if (preAction != null) {
+                    goToPreAction(preAction, item);
+                } else
+                    viewModel.onPrepareChangeSim(item);
             }
         });
 
@@ -69,6 +82,37 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
 
         initListeners();
         initData();
+    }
+
+    private String getPreAction(ChangeSimItem item) {
+        return null;
+        //TODO return preaction
+    }
+
+    private void goToPreAction(String action, ChangeSimItem item) {
+        try {
+
+            Bundle args = new Bundle();
+
+            switch (action) {
+                case ACTION_PAY_DEBIT:
+                    args.putString(Constants.BundleConstant.FORM_TYPE, ACTION_PAY_DEBIT);
+                    break;
+                case ACTION_UNBAR_ONE_WAY:
+                    args.putString(Constants.BundleConstant.FORM_TYPE, ACTION_UNBAR_ONE_WAY);
+                    break;
+                case ACTION_UNBAR_TWO_WAY:
+                    args.putString(Constants.BundleConstant.FORM_TYPE, ACTION_UNBAR_TWO_WAY);
+                    break;
+            }
+
+            args.putString(Constants.BundleConstant.CUSTOMER_ITEM, GsonUtils.Object2String(item));
+
+            viewModel.goToPreAction(args);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void initListeners() {
@@ -129,7 +173,7 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
                 isValid = false;
             }
 
-            if(!isValid)
+            if (!isValid)
                 return;
 
             List<ChangeSimItem> items = new ArrayList<>();

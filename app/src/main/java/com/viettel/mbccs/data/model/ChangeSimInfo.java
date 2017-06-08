@@ -14,6 +14,7 @@ public class ChangeSimInfo implements Serializable{
     @Expose
     private String oldSerial;
     @SerializedName("new_serial")
+    @Expose
     private String newSerial;
 
     public String getOldSerial() {

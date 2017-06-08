@@ -1,5 +1,7 @@
 package com.viettel.mbccs.screen.changesim.fragments;
 
+import android.os.Bundle;
+
 import com.viettel.mbccs.base.BasePresenter;
 import com.viettel.mbccs.base.BaseView;
 import com.viettel.mbccs.data.model.ChangeSimItem;
@@ -13,6 +15,7 @@ public class UpdateSimContract {
         void onChangeSimSuccessful(ChangeSimItem item);
         void onChangeSimFailed();
         void showError(String message);
+        void goToDialogFragment(Bundle args);
     }
 
     interface Presenter extends BasePresenter {

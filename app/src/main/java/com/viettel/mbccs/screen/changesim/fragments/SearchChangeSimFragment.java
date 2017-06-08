@@ -11,6 +11,7 @@ import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindFragment;
 import com.viettel.mbccs.data.model.ChangeSimItem;
 import com.viettel.mbccs.databinding.FragmentSearchChangeSimBinding;
+import com.viettel.mbccs.screen.changesim.dialogs.DialogActionBeforeUpdateSimFragment;
 import com.viettel.mbccs.utils.ActivityUtils;
 import com.viettel.mbccs.utils.GsonUtils;
 import com.viettel.mbccs.variable.Constants;
@@ -118,17 +119,29 @@ public class SearchChangeSimFragment extends BaseDataBindFragment<FragmentSearch
 
     @Override
     public void onPrepareChangeSim(ChangeSimItem item) {
+        try{
+            Bundle args = new Bundle();
+            args.putString(Constants.BundleConstant.CHANGE_SIM_ITEM, GsonUtils.Object2String(item));
 
-        Bundle args = new Bundle();
-        args.putString(Constants.BundleConstant.CHANGE_SIM_ITEM, GsonUtils.Object2String(item));
+            UpdateSimFragment fragment = UpdateSimFragment.newInstance();
+            fragment.setArguments(args);
 
-        UpdateSimFragment fragment = UpdateSimFragment.newInstance();
-        fragment.setArguments(args);
+            mActivity.getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.frame_main, fragment)
+                    .addToBackStack(null)
+                    .commit();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
-        mActivity.getSupportFragmentManager().beginTransaction()
-                .replace(R.id.frame_main, fragment)
-                .addToBackStack(null)
-                .commit();
+    @Override
+    public void goToPreAction(Bundle args) {
+        try{
+            getBaseActivity().goToDialogFragment(new DialogActionBeforeUpdateSimFragment(), args);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override

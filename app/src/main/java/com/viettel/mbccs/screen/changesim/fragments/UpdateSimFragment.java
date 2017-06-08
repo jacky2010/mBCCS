@@ -1,6 +1,7 @@
 package com.viettel.mbccs.screen.changesim.fragments;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
@@ -8,6 +9,7 @@ import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindFragment;
 import com.viettel.mbccs.data.model.ChangeSimItem;
 import com.viettel.mbccs.databinding.FragmentUpdateSimBinding;
+import com.viettel.mbccs.screen.changesim.dialogs.DialogConfirmUpdateSimFragment;
 import com.viettel.mbccs.utils.ActivityUtils;
 
 /**
@@ -97,6 +99,11 @@ public class UpdateSimFragment extends BaseDataBindFragment<FragmentUpdateSimBin
     @Override
     public void onChangeSimFailed() {
 
+    }
+
+    @Override
+    public void goToDialogFragment(Bundle args) {
+        getBaseActivity().goToDialogFragment(new DialogConfirmUpdateSimFragment(), args);
     }
 
     @Override
