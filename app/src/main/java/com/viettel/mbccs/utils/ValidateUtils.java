@@ -29,6 +29,19 @@ public class ValidateUtils {
         }
     }
 
+    public static boolean isDocumentIdValid(String channelCode){
+        try{
+
+            if(channelCode == null || channelCode.trim().length() < 5 || channelCode.trim().length() > 30)
+                return false;
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+
+            return false;
+        }
+    }
+
     public static boolean isBankAccountValid(String channelCode){
         try{
 
@@ -54,10 +67,23 @@ public class ValidateUtils {
         }
     }
 
-    public static boolean isSerialValid(String serial){
+    public static boolean isProductSerialValid(String serial){
         try{
 
             if(serial == null || serial.trim().length() < 5 || serial.trim().length() > 30)
+                return false;
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+
+            return false;
+        }
+    }
+
+    public static boolean isSimSerialValid(String serial){
+        try{
+
+            if(serial == null || serial.trim().length() < 8 || serial.trim().length() > 30)
                 return false;
             return true;
         }catch (Exception e){

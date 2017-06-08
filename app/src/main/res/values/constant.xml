@@ -23,4 +23,7 @@
     <integer name="max_length_channel_code">15</integer>
     <integer name="max_length_payment_amount">15</integer>
     <integer name="max_length_document_no">20</integer>
+    <integer name="max_length_customer_name">50</integer>
+    <integer name="max_length_address">256</integer>
+    <integer name="max_length_sim_serial">20</integer>
 </resources>

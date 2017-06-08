@@ -402,9 +402,9 @@ public class CreateTransAnyPayPresenter implements CreateTransAnyPayContract.Pre
             if (total <= 0)
                 total = 0;
 
-            totalAmount.set(Common.formatDouble(total));
-            discountAmount.set(Common.formatDouble(DISCOUNT_AMOUNT));
-            payAmount.set(Common.formatDouble(total - DISCOUNT_AMOUNT));
+            totalAmount.set(Common.formatDouble(total)+ " " + context.getString(R.string.common_label_currency_suffix));
+            discountAmount.set(Common.formatDouble(DISCOUNT_AMOUNT)+ " " + context.getString(R.string.common_label_currency_suffix));
+            payAmount.set(Common.formatDouble(total - DISCOUNT_AMOUNT)+ " " + context.getString(R.string.common_label_currency_suffix));
         } catch (Exception e) {
             e.printStackTrace();
         }

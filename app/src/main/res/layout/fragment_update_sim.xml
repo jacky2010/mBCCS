@@ -63,11 +63,13 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
-                <TextView
+                <com.viettel.mbccs.widget.CustomEdittext
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_40"
                     android:background="@drawable/bg_order"
-                    android:text="@{ presenter.changeSimItem.customer.customerName }" />
+                    android:text="@={ presenter.customerName }"
+                    android:error="@{presenter.customerNameError}"
+                    android:maxLength="@integer/max_length_customer_name"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -77,11 +79,13 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
-                <TextView
+                <com.viettel.mbccs.widget.CustomEdittext
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_40"
                     android:background="@drawable/bg_order"
-                    android:text="@{ presenter.documentId }" />
+                    android:text="@={ presenter.documentId }"
+                    android:error="@{ presenter.documentIdError }"
+                    android:maxLength="@integer/max_length_document_no"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -91,7 +95,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
-                <TextView
+                <com.viettel.mbccs.widget.CustomEdittext
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_60"
                     android:background="@drawable/bg_order"
@@ -99,7 +103,9 @@
                     android:maxLines="3"
                     android:minLines="3"
                     android:scrollbars="vertical"
-                    android:text="@{ presenter.changeSimItem.customer.address }" />
+                    android:text="@={ presenter.customerAddress }"
+                    android:error="@{presenter.customerAddressError}"
+                    android:maxLength="@integer/max_length_address"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -134,7 +140,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
-                <TextView
+                <com.viettel.mbccs.widget.CustomEdittext
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_40"
                     android:background="@drawable/bg_order"
@@ -142,7 +148,9 @@
                     android:maxLines="3"
                     android:minLines="3"
                     android:scrollbars="vertical"
-                    android:text="@{ presenter.changeSimItem.changeSimInfo.oldSerial }" />
+                    android:text="@={ presenter.oldSimSerial }"
+                    android:error="@{ presenter.oldSimSerialError }"
+                    android:maxLength="@integer/max_length_sim_serial"/>
 
                 <TextView
                     android:id="@+id/txtNewSerial"
@@ -153,13 +161,15 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
-                <EditText
+                <com.viettel.mbccs.widget.CustomEdittext
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_40"
                     android:background="@drawable/bg_order"
                     android:inputType="number"
                     android:scrollbars="vertical"
-                    android:text="@{ presenter.newSerial }" />
+                    android:text="@={ presenter.newSimSerial }"
+                    android:error="@{ presenter.newSimSerialError }"
+                    android:maxLength="@integer/max_length_sim_serial"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -200,13 +210,15 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16" />
 
-                    <EditText
+                    <com.viettel.mbccs.widget.CustomEdittext
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_40"
                         android:background="@drawable/bg_order"
                         android:inputType="phone"
                         android:scrollbars="vertical"
-                        android:text="@{ presenter.contact1 }" />
+                        android:text="@={ presenter.contact1 }"
+                        android:error="@{ presenter.contact1Error }"
+                        android:maxLength="@integer/max_length_isdn"/>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -216,13 +228,15 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16" />
 
-                    <EditText
+                    <com.viettel.mbccs.widget.CustomEdittext
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_40"
                         android:background="@drawable/bg_order"
                         android:inputType="phone"
                         android:scrollbars="vertical"
-                        android:text="@{ presenter.contact2 }" />
+                        android:text="@={ presenter.contact2 }"
+                        android:error="@{ presenter.contact2Error }"
+                        android:maxLength="@integer/max_length_isdn"/>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -232,13 +246,15 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16" />
 
-                    <EditText
+                    <com.viettel.mbccs.widget.CustomEdittext
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_40"
                         android:background="@drawable/bg_order"
                         android:inputType="phone"
                         android:scrollbars="vertical"
-                        android:text="@{ presenter.contact3 }" />
+                        android:text="@={ presenter.contact3 }"
+                        android:error="@{ presenter.contact3Error }"
+                        android:maxLength="@integer/max_length_isdn"/>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -248,13 +264,15 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16" />
 
-                    <EditText
+                    <com.viettel.mbccs.widget.CustomEdittext
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_40"
                         android:background="@drawable/bg_order"
                         android:inputType="phone"
                         android:scrollbars="vertical"
-                        android:text="@{ presenter.contact4 }" />
+                        android:text="@={ presenter.contact4 }"
+                        android:error="@{ presenter.contact4Error }"
+                        android:maxLength="@integer/max_length_isdn"/>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -264,13 +282,15 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16" />
 
-                    <EditText
+                    <com.viettel.mbccs.widget.CustomEdittext
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_40"
                         android:background="@drawable/bg_order"
                         android:inputType="phone"
                         android:scrollbars="vertical"
-                        android:text="@{ presenter.contact5 }" />
+                        android:text="@={ presenter.contact5 }"
+                        android:error="@{ presenter.contact5Error }"
+                        android:maxLength="@integer/max_length_isdn"/>
                 </LinearLayout>
 
                 <LinearLayout

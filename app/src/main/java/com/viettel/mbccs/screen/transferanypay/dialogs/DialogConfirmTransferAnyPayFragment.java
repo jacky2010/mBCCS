@@ -84,10 +84,10 @@ public class DialogConfirmTransferAnyPayFragment extends BaseDialog {
 
             if (currentArgs != null) {
                 tvTrans.setText(getString(R.string.sell_anypay_msg_confirm_transfer_label_cust, currentArgs.getString(Constants.BundleConstant.CUSTOMER_ITEM)));
-                tvPreTax.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.PRE_TAX)));
-                tvTax.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.TAX)));
-                tvDiscount.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.DISCOUNT)));
-                tvTotal.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.TOTAL)));
+                tvPreTax.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.PRE_TAX))+ " " + getString(R.string.common_label_currency_suffix));
+                tvTax.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.TAX))+ " " + getString(R.string.common_label_currency_suffix));
+                tvDiscount.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.DISCOUNT))+ " " + getString(R.string.common_label_currency_suffix));
+                tvTotal.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.TOTAL))+ " " + getString(R.string.common_label_currency_suffix));
             }
 
             transferAnyPayRepository = TransferAnyPayRepository.getInstance();

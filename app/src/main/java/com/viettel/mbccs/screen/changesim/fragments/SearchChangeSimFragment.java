@@ -35,12 +35,12 @@ public class SearchChangeSimFragment extends BaseDataBindFragment<FragmentSearch
 
     @Override
     public void showLoading() {
-
+        showLoadingDialog();
     }
 
     @Override
     public void hideLoading() {
-
+        hideLoadingDialog();
     }
 
     @Override

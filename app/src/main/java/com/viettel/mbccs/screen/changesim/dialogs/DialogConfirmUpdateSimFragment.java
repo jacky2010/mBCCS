@@ -1,4 +1,4 @@
-package com.viettel.mbccs.screen.sellanypay.dialogs;
+package com.viettel.mbccs.screen.changesim.dialogs;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +15,7 @@ import com.viettel.mbccs.data.source.remote.request.SellAnypayToCustomerRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.SellAnypayToChannelResponse;
 import com.viettel.mbccs.data.source.remote.response.SellAnypayToCustomerResponse;
+import com.viettel.mbccs.screen.sellanypay.dialogs.DialogSoldAnyPaySuccessFragment;
 import com.viettel.mbccs.screen.sellanypay.fragments.CreateTransAnyPayPresenter;
 import com.viettel.mbccs.utils.Common;
 import com.viettel.mbccs.utils.DialogUtils;
@@ -32,7 +33,7 @@ import rx.subscriptions.CompositeSubscription;
  * Created by jacky on 5/20/17.
  */
 
-public class DialogConfirmSellAnyPayFragment extends BaseDialog {
+public class DialogConfirmUpdateSimFragment extends BaseDialog {
 
     @BindView(R.id.toolbar)
     ToolBarView mToolBar;
@@ -88,10 +89,10 @@ public class DialogConfirmSellAnyPayFragment extends BaseDialog {
 
             if (currentArgs != null) {
                 tvTrans.setText(getString(R.string.sell_anypay_msg_confirm_sell_label_cust, currentArgs.getString(Constants.BundleConstant.CUSTOMER_ITEM)));
-                tvPreTax.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.PRE_TAX))+ " " + getString(R.string.common_label_currency_suffix));
-                tvTax.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.TAX))+ " " + getString(R.string.common_label_currency_suffix));
-                tvDiscount.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.DISCOUNT))+ " " + getString(R.string.common_label_currency_suffix));
-                tvTotal.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.TOTAL))+ " " + getString(R.string.common_label_currency_suffix));
+                tvPreTax.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.PRE_TAX)));
+                tvTax.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.TAX)));
+                tvDiscount.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.DISCOUNT)));
+                tvTotal.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.TOTAL)));
             }
 
             sellAnyPayRepository = SellAnyPayRepository.getInstance();
