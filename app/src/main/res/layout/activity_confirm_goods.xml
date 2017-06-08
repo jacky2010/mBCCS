@@ -12,6 +12,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white_grey"
         android:orientation="vertical"
         >
         <RelativeLayout
@@ -23,10 +24,10 @@
                 layout="@layout/toolbar"
                 app:background="@{@color/colorAccent}"
                 app:isShow="@{true}"
-                app:leftIcon="@{@drawable/ic_close}"
+                app:leftIcon="@{@drawable/ic_close_white}"
                 app:leftIconClick="@{()->presenter.onCancel()}"
                 app:title="@{@string/confirm_goods}"
-                app:titleColor="@{@color/black}"
+                app:titleColor="@{@color/white}"
                 app:titleTextSize="@{@dimen/sp_17}"
                 />
         </RelativeLayout>
@@ -36,6 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_50"
             android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/dp_20"
             android:onClick="@{()->presenter.onConfirm()}"
             android:text="@string/confirm"
             style="@style/button_positive"

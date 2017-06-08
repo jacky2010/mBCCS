@@ -34,6 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
+                android:layout_margin="@dimen/dp_20"
                 android:onClick="@{()->presenter.onNext()}"
                 android:text="@string/next"
                 style="@style/button_positive"
@@ -77,83 +78,36 @@
                             android:layout_marginTop="@dimen/dp_5"
                             android:text="@string/channel_title"
                             />
-                        <RelativeLayout
+
+                        <com.viettel.mbccs.widget.FakeSpinner
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/bg_input_tranparent"
                             android:onClick="@{()->presenter.chooseChannel()}"
-                            >
-                            <ImageView
-                                android:id="@+id/icon_right_1"
-                                android:layout_width="@dimen/dp_12"
-                                android:layout_height="@dimen/dp_12"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginRight="@dimen/dp_10"
-                                android:src="@drawable/triangle"
-                                />
-                            <com.viettel.mbccs.widget.CustomEdittext
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_toLeftOf="@id/icon_right_1"
-                                android:background="@color/transparent"
-                                android:editable="false"
-                                android:gravity="center_vertical"
-                                android:lines="1"
-                                android:onClick="@{()->presenter.chooseChannel()}"
-                                android:padding="@dimen/dp_10"
-                                android:text="@={presenter.channelText}"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_13"
-                                />
-                        </RelativeLayout>
+                            android:text="@{presenter.channelText}"
+                            />
                         <com.viettel.mbccs.widget.CustomTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/service"
                             />
-                            <com.viettel.mbccs.widget.SpinnerWithBorder
-                                android:id="@+id/spinner"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:adapter="@{presenter.adapter}"
-                                />
+                        <com.viettel.mbccs.widget.SpinnerWithBorder
+                            android:id="@+id/spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:adapter="@{presenter.adapter}"
+                            />
                         <com.viettel.mbccs.widget.CustomTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_5"
                             android:text="@string/sell_program"
                             />
-                        <RelativeLayout
+                        <com.viettel.mbccs.widget.FakeSpinner
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/dp_40"
-                            android:background="@drawable/bg_input_tranparent"
+                            android:layout_height="wrap_content"
                             android:onClick="@{()->presenter.chooseSellProgram()}"
-                            >
-                            <ImageView
-                                android:id="@+id/icon_right"
-                                android:layout_width="@dimen/dp_12"
-                                android:layout_height="@dimen/dp_12"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginRight="@dimen/dp_10"
-                                android:src="@drawable/triangle"
-                                />
-                            <com.viettel.mbccs.widget.CustomTextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_toLeftOf="@id/icon_right"
-                                android:background="@color/transparent"
-                                android:editable="false"
-                                android:gravity="center_vertical"
-                                android:lines="1"
-                                android:onClick="@{()->presenter.chooseSellProgram()}"
-                                android:padding="@dimen/dp_10"
-                                android:text="@{presenter.sellProgram}"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/sp_13"
-                                />
-                        </RelativeLayout>
+                            android:text="@{presenter.sellProgram}"
+                            />
                     </LinearLayout>
                 </RelativeLayout>
 

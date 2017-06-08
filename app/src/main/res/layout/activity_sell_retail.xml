@@ -33,6 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
+                android:layout_margin="@dimen/dp_20"
                 android:onClick="@{()->presenter.onNext()}"
                 android:text="@string/next"
                 style="@style/button_positive"
@@ -94,31 +95,6 @@
                             android:layout_marginTop="@dimen/dp_5"
                             android:text="@string/sell_program"
                             />
-                        <!--<RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/dp_40"
-                            style="@style/inputStyle"
-                            >
-                            <ImageView
-                                android:id="@+id/icon_right"
-                                android:layout_width="@dimen/dp_12"
-                                android:layout_height="@dimen/dp_12"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:src="@drawable/triangle"
-                                />
-                            <com.viettel.mbccs.widget.CustomEdittext
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_toLeftOf="@id/icon_right"
-                                android:background="@color/transparent"
-                                android:editable="false"
-                                android:lines="1"
-                                android:onClick="@{()->presenter.chooseSellProgram()}"
-                                android:text="@{presenter.sellProgram}"
-                                style="@style/inputStyleTranparent"
-                                />
-                        </RelativeLayout>-->
                         <com.viettel.mbccs.widget.FakeSpinner
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

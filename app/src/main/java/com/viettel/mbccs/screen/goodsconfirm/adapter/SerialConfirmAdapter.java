@@ -86,6 +86,11 @@ public class SerialConfirmAdapter extends RecyclerView.Adapter<RecyclerView.View
         public SerialConfirmViewHolder(ItemSerialConfirmBinding binding) {
             super(binding.getRoot());
             mBinding = binding;
+            if (getAdapterPosition() % 2 == 0) {
+                mBinding.layoutSerial.setBackgroundResource(R.color.white);
+            } else {
+                mBinding.layoutSerial.setBackgroundResource(R.color.white_1);
+            }
         }
 
         public void bind(SerialBO serialBlock) {

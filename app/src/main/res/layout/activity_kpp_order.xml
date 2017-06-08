@@ -77,8 +77,8 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_margin="@dimen/dp_5"
-                            android:textStyle="bold"
                             android:text="-"
+                            android:textStyle="bold"
                             />
                         <com.viettel.mbccs.widget.CustomDatePicker
                             android:id="@+id/to_date"
@@ -98,13 +98,13 @@
                         android:textSize="@dimen/sp_16"
                         />
 
-                        <com.viettel.mbccs.widget.SpinnerWithBorder
-                            android:id="@+id/spinner_status"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/dp_40"
-                            app:adapter="@{presenter.adapterStatus}"
-                            app:position="@{presenter.adapterPosition}"
-                            />
+                    <com.viettel.mbccs.widget.SpinnerWithBorder
+                        android:id="@+id/spinner_status"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:adapter="@{presenter.adapterStatus}"
+                        app:position="@{presenter.adapterPosition}"
+                        />
 
                     <com.viettel.mbccs.widget.CustomButton
                         android:layout_width="@dimen/dp_150"
@@ -149,13 +149,15 @@
         </LinearLayout>
 
         <android.support.design.widget.FloatingActionButton
-            android:layout_width="@dimen/dp_50"
-            android:layout_height="@dimen/dp_50"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_margin="@dimen/dp_20"
             android:onClick="@{()->presenter.addNew()}"
-            android:src="@drawable/ic_add_black_24dp"
+            android:src="@drawable/ic_add_white_24dp"
             android:tint="@color/white"
+            app:fabSize="auto"
+
             />
 
     </FrameLayout>

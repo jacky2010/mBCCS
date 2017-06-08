@@ -352,8 +352,9 @@ public class SaleChannelPresenter
         channelText = new ObservableField<>();
         isCollapse = new ObservableField<>();
         isCollapse.set(false);
-        mAdapter = new ArrayAdapter<TeleComService>(mContext, R.layout.item_spinner, R.id.text,
+        mAdapter = new ArrayAdapter<TeleComService>(mContext, R.layout.item_spinner,
                 mTeleComServices);
+        mAdapter.setDropDownViewResource(R.layout.item_spinner);
         stockAdapter = new StockAdapter(mContext, mModelSales);
         stockAdapter.setOnStockListener(this);
     }
