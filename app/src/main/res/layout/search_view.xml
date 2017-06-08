@@ -16,8 +16,8 @@
         android:visibility="visible"
         >
         <ImageView
-            android:layout_width="@dimen/dp_20"
-            android:layout_height="@dimen/dp_20"
+            android:layout_width="@dimen/dp_25"
+            android:layout_height="@dimen/dp_25"
             android:layout_gravity="center"
             android:src="@drawable/ic_search_black_24dp"
             />
