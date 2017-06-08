@@ -27,9 +27,9 @@
             <include
                 layout="@layout/toolbar"
                 android:id="@+id/toolbar_update_information"
-                app:background="@{@color/grey}"
+                app:background="@{@color/colorAccent}"
                 app:isShow="@{true}"
-                app:leftIcon="@{@drawable/ic_arrow_left_24dp}"
+                app:leftIcon="@{@drawable/ic_arrow_left_white_24dp}"
                 app:leftIconClick="@{()->presenter.onCancel()}"
                 app:title="@{ presenter.title }"
                 app:titleColor="@{@color/white}"
@@ -49,7 +49,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/create_update_information_create_phone_number"
                     />
-                <EditText
+                <com.viettel.mbccs.widget.CustomEdittext
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_40"
                     android:layout_marginTop="@dimen/dp_6"
@@ -99,7 +99,7 @@
                     android:layout_marginTop="@dimen/dp_10"
                     android:text="@string/create_update_information_create_number_passport"
                     />
-                <EditText
+                <com.viettel.mbccs.widget.CustomEdittext
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_40"
                     android:layout_marginTop="@dimen/dp_6"
@@ -112,7 +112,7 @@
                     android:text="@={ presenter.idNo }"
                     />
 
-                <Button
+                <com.viettel.mbccs.widget.CustomButton
                     android:layout_width="300dp"
                     android:layout_height="@dimen/dp_40"
                     android:layout_gravity="center"
@@ -157,7 +157,7 @@
                         android:textColor="@color/red"
                         android:textSize="@dimen/sp_18"
                         />
-                    <Button
+                    <com.viettel.mbccs.widget.CustomButton
                         android:layout_width="@dimen/dp_300"
                         android:layout_height="@dimen/dp_40"
                         android:layout_alignParentBottom="true"

@@ -20,7 +20,7 @@
 
         <include
             layout="@layout/toolbar"
-            app:background="@{@color/grey}"
+            app:background="@{@color/colorAccent}"
             app:isShow="@{!TextUtils.isEmpty(presenter.titleToolbar)}"
             app:leftIcon="@{@drawable/ic_close}"
             app:leftIconClick="@{() -> presenter.closeClick()}"
@@ -45,7 +45,7 @@
                 android:layout_marginLeft="@dimen/dp_30"
                 android:layout_marginRight="@dimen/dp_30"
                 >
-                <Button
+                <com.viettel.mbccs.widget.CustomButton
                     android:id="@+id/btn_left"
                     android:layout_width="@dimen/dp_150"
                     android:layout_height="@dimen/dp_50"
@@ -57,7 +57,7 @@
                     android:visibility="@{presenter.showNegative? View.VISIBLE : View.GONE}"
                     style="@style/button_nagative"
                     />
-                <Button
+                <com.viettel.mbccs.widget.CustomButton
                     android:layout_width="@dimen/dp_150"
                     android:layout_height="@dimen/dp_50"
                     android:layout_gravity="center"

@@ -81,6 +81,8 @@ public abstract class BaseSearchListViewPresenter<T>
 
     protected abstract RecyclerView.Adapter getListAdapter();
 
+    public abstract String getItemCountString();
+
     public abstract void onAddClick();
 
     public RecyclerView.ItemDecoration getItemDecoration() {

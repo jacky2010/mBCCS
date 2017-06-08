@@ -22,10 +22,10 @@
             android:id="@+id/toolbar_update_information"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_40"
-            app:background="@{@color/grey}"
+            app:background="@{@color/colorAccent}"
             app:isAllCaps="@{true}"
             app:isShow="@{true}"
-            app:leftIcon="@{@drawable/ic_arrow_left_24dp}"
+            app:leftIcon="@{@drawable/ic_arrow_left_white_24dp}"
             app:leftIconClick="@{()->presenter.onCancel()}"
             app:title="@{ @string/create_new_connector_information_title }"
             app:titleColor="@{@color/white}"
@@ -40,7 +40,7 @@
             android:paddingRight="@dimen/dp_4"
             android:layout_marginTop="@dimen/dp_10"
             >
-            <TextView
+            <com.viettel.mbccs.widget.CustomTextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginRight="@dimen/dp_6"
@@ -56,7 +56,7 @@
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_arrow_right_grey_24_36dp"
                 />
-            <TextView
+            <com.viettel.mbccs.widget.CustomTextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/dp_6"
@@ -114,7 +114,7 @@
                     android:textSize="@dimen/sp_14"
                     />
 
-                <EditText
+                <com.viettel.mbccs.widget.CustomEdittext
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_40"
                     android:layout_marginTop="@dimen/dp_6"
@@ -196,7 +196,7 @@
                     android:textColor="@color/black"
                     />
 
-                <EditText
+                <com.viettel.mbccs.widget.CustomEdittext
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_40"
                     android:layout_marginTop="@dimen/dp_4"
@@ -257,7 +257,7 @@
                     android:textColor="@color/black"
                     />
 
-                <EditText
+                <com.viettel.mbccs.widget.CustomEdittext
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_40"
                     android:layout_marginTop="@dimen/dp_4"
@@ -295,7 +295,7 @@
                     android:paddingLeft="@dimen/dp_4"
                     android:paddingRight="@dimen/dp_4"
                     >
-                    <Button
+                    <com.viettel.mbccs.widget.CustomButton
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginRight="@dimen/dp_6"
@@ -304,7 +304,7 @@
                         android:text="@string/create_new_connector_information_dong"
                         style="@style/button_nagative"
                         />
-                    <Button
+                    <com.viettel.mbccs.widget.CustomButton
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginRight="@dimen/dp_6"

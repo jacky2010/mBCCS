@@ -59,14 +59,17 @@ public class CreateOrderSuccessActivity extends
     }
 
     public String getImportWarehouseCode() {
+        // TODO: 07/06/2017 Fake data
         return screenTypeSuccess ? "Import Warehouse" : "";
     }
 
     public String getExportWarehouseCode() {
+        // TODO: 07/06/2017 Fake data
         return "Export Warehouse";
     }
 
     public String getCreatedDate() {
+        // TODO: 07/06/2017 Fake data
         return screenTypeSuccess ? ""
                 : DateUtils.convertToString(new Date(), CALENDAR_DATE_FORMAT, null);
     }

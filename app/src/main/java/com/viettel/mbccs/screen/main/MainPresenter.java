@@ -3,7 +3,7 @@ package com.viettel.mbccs.screen.main;
 import android.content.Context;
 import android.databinding.ObservableInt;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.data.model.MenuItem;
+import com.viettel.mbccs.data.model.Function;
 import com.viettel.mbccs.widget.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ public class MainPresenter implements MainContract.Presenter {
 
     private MainContract.ViewModel mViewModel;
 
-    private List<MenuItem> mMenuItemList = new ArrayList<>();
+    private List<Function> mFunctionList = new ArrayList<>();
 
     public ObservableInt mLastIndex = new ObservableInt();
 
@@ -27,39 +27,48 @@ public class MainPresenter implements MainContract.Presenter {
         mViewModel = viewModel;
 
         // TODO: Query menu from api, currently just a fake data.
-        mMenuItemList = new ArrayList<>();
-        mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+        mFunctionList = new ArrayList<>();
+        mFunctionList.add(new Function(Function.MenuId.MENU_PLACEHOLDER,
                 mContext.getResources().getString(R.string.menu_dashboard),
-                R.drawable.ic_menu_home_selector, 0, 0));
-        mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                R.drawable.ic_menu_home_selector));
+        mFunctionList.add(new Function(Function.MenuId.MENU_PLACEHOLDER,
                 mContext.getResources().getString(R.string.menu_task),
-                R.drawable.ic_menu_job_selector, 0, 0));
-        mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                R.drawable.ic_menu_job_selector));
+        mFunctionList.add(new Function(Function.MenuId.MENU_PLACEHOLDER,
                 mContext.getResources().getString(R.string.menu_sale),
-                R.drawable.ic_menu_cart_selector, 0, 0));
-        mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+                R.drawable.ic_menu_cart_selector));
+        mFunctionList.add(new Function(Function.MenuId.MENU_PLACEHOLDER,
                 mContext.getResources().getString(R.string.menu_customer),
-                R.drawable.ic_menu_customer_selector, 0, 0));
-        mMenuItemList.add(
-                new MenuItem(MenuItem.MenuId.MENU_DAU_NOI_QUAN_LY_KHACH_HANG, mContext.getString(R.string.menu_qlkh),
-                        R.drawable.ic_add_black_24dp, 0, 0));
-        mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_QUAN_LY_THU_CUOC,
-                mContext.getString(R.string.menu_quan_ly_thu_cuoc), R.drawable.ic_add_black_24dp, 0,
-                0));
-        mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_BAN_HANG_KHO_TAI_CHINH,
-                mContext.getString(R.string.menu_bh_kho_tc), R.drawable.ic_add_black_24dp, 0, 0));
-        mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_BH_CHAM_SOC_KHACH_HANG,
-                mContext.getString(R.string.menu_bh_cskh), R.drawable.ic_add_black_24dp, 0, 0));
-        mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_BAO_CAO,
-                mContext.getString(R.string.menu_bao_cao), R.drawable.ic_add_black_24dp, 0, 0));
-        mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_QUAN_LY_DIA_BAN,
-                mContext.getString(R.string.menu_quan_ly_dia_ban), R.drawable.ic_add_black_24dp, 0,
-                0));
-        mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_HELP,
-                mContext.getString(R.string.menu_help), R.drawable.ic_help_outline_24dp, 0, 0));
-        mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_SETTING,
-                mContext.getString(R.string.menu_settings), R.drawable.ic_settings_black_24dp, 0,
-                0));
+                R.drawable.ic_menu_customer_selector));
+
+        mFunctionList.add(new Function(Function.MenuId.MENU_QUAN_LY_BAN_HANG,
+                mContext.getString(R.string.menu_quan_ly_ban_hang), R.drawable.ic_add_black_24dp));
+        mFunctionList.add(new Function(Function.MenuId.MENU_QUAN_LY_THONG_TIN_KH,
+                mContext.getString(R.string.menu_quan_ly_thong_tin_kh),
+                R.drawable.ic_add_black_24dp));
+        mFunctionList.add(new Function(Function.MenuId.MENU_QUAN_LY_DIA_BAN,
+                mContext.getString(R.string.menu_quan_ly_dia_ban), R.drawable.ic_add_black_24dp));
+        mFunctionList.add(new Function(Function.MenuId.MENU_QUAN_LY_THU_CUOC,
+                mContext.getString(R.string.menu_quan_ly_thu_cuoc), R.drawable.ic_add_black_24dp));
+        mFunctionList.add(new Function(Function.MenuId.MENU_QUAN_LY_CONG_VIEC,
+                mContext.getString(R.string.menu_quan_ly_cong_viec), R.drawable.ic_add_black_24dp));
+        mFunctionList.add(new Function(Function.MenuId.MENU_QUAN_LY_KHO,
+                mContext.getString(R.string.menu_quan_ly_kho), R.drawable.ic_add_black_24dp));
+        mFunctionList.add(new Function(Function.MenuId.MENU_QUAN_LY_BAO_HANH,
+                mContext.getString(R.string.menu_quan_ly_bao_hanh), R.drawable.ic_add_black_24dp));
+        mFunctionList.add(new Function(Function.MenuId.MENU_QUAN_LY_CSKH,
+                mContext.getString(R.string.menu_quan_ly_cham_soc_kh),
+                R.drawable.ic_add_black_24dp));
+        mFunctionList.add(new Function(Function.MenuId.MENU_QUAN_LY_TAI_CHINH,
+                mContext.getString(R.string.menu_quan_ly_tai_chinh), R.drawable.ic_add_black_24dp));
+        mFunctionList.add(new Function(Function.MenuId.MENU_BAO_CAO,
+                mContext.getString(R.string.menu_bao_cao), R.drawable.ic_add_black_24dp));
+
+        mFunctionList.add(
+                new Function(Function.MenuId.MENU_HELP, mContext.getString(R.string.menu_help),
+                        R.drawable.ic_help_outline_24dp));
+        mFunctionList.add(new Function(Function.MenuId.MENU_SETTING,
+                mContext.getString(R.string.menu_settings), R.drawable.ic_settings_black_24dp));
     }
 
     @Override
@@ -77,7 +86,7 @@ public class MainPresenter implements MainContract.Presenter {
             @Override
             public void onBottomItemClick(int position) {
                 // TODO: Handle menu item clicked later. Should use menu Id instead of position.
-              //  mContext.startActivity(new Intent(mContext, SaleRetailActivity.class));
+                //  mContext.startActivity(new Intent(mContext, SaleRetailActivity.class));
                 // mContext.startActivity(new Intent(mContext, SaleChannelActivity.class));
                 //mContext.startActivity(new Intent(mContext, KPPOrderActivity.class));
                 switch (position) {
@@ -94,18 +103,18 @@ public class MainPresenter implements MainContract.Presenter {
         };
     }
 
-    public List<MenuItem> getBottomListItem() {
-        if (mMenuItemList.size() <= 4) return mMenuItemList;
-        List<MenuItem> subMenu = mMenuItemList.subList(0, 4);
-        subMenu.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
+    public List<Function> getBottomListItem() {
+        if (mFunctionList.size() <= 4) return mFunctionList;
+        List<Function> subMenu = mFunctionList.subList(0, 4);
+        subMenu.add(new Function(Function.MenuId.MENU_PLACEHOLDER,
                 mContext.getResources().getString(R.string.menu_more),
-                R.drawable.ic_menu_more_selector, 0, 0));
+                R.drawable.ic_menu_more_selector));
         return subMenu;
     }
 
-    public ArrayList<MenuItem> getMenuItemList() {
-        if (mMenuItemList.size() > 5) {
-            return new ArrayList<>(mMenuItemList.subList(5, mMenuItemList.size()));
+    public ArrayList<Function> getFunctionList() {
+        if (mFunctionList.size() > 5) {
+            return new ArrayList<>(mFunctionList.subList(5, mFunctionList.size()));
         }
         return new ArrayList<>();
     }

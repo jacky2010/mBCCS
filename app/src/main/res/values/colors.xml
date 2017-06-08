@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#1484C0</color>
     <color name="black_opacity_30">#4D000000</color>
     <color name="grey">#585858</color>
     <color name="grey_two">#f1f1f1</color>
@@ -27,6 +27,9 @@
     <color name="orange">#FD9827</color>
     <color name="bg_config">#e6e6e6</color>
     <color name="yellow">#FBD036</color>
+    <color name="ice_berg">#DDEFF7</color>
+    <color name="grey_bright">#BFC5C7</color>
+    <color name="alto">#D9D9D9</color>
 
 
     <!-- ItemSpinText -->

@@ -11,17 +11,14 @@ import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.data.model.MenuItem;
+import com.viettel.mbccs.data.model.Function;
 import com.viettel.mbccs.databinding.ActivitySubMenuBinding;
 import com.viettel.mbccs.databinding.ItemImageGridBinding;
 import com.viettel.mbccs.databinding.ItemMenuBinding;
 import com.viettel.mbccs.screen.assigntask.ListAssignTaskActivity;
 import com.viettel.mbccs.screen.billing.BillingActivity;
-import com.viettel.mbccs.screen.branches.BranchesActivity;
 import com.viettel.mbccs.screen.change.installation.InstallationAddressActivity;
-import com.viettel.mbccs.screen.changesim.ChangeSimActivity;
 import com.viettel.mbccs.screen.connector.mobile.ConnectorMobileActivity;
 import com.viettel.mbccs.screen.information.CreateUpdateInformationActivity;
 import com.viettel.mbccs.screen.inputorder.InputOrderActivity;
@@ -31,12 +28,13 @@ import com.viettel.mbccs.screen.nhapkhocapduoi.ListOrderActivity;
 import com.viettel.mbccs.screen.sell.channel.SaleChannelActivity;
 import com.viettel.mbccs.screen.sell.orders.SellOrdersActivity;
 import com.viettel.mbccs.screen.sell.retail.SaleRetailActivity;
-import com.viettel.mbccs.screen.sellanypay.SellAnyPayActivity;
-import com.viettel.mbccs.screen.transferanypay.TransferAnyPayActivity;
+import com.viettel.mbccs.screen.trahangcaptren.ListOrderReturnUpperActivity;
 import com.viettel.mbccs.screen.viewwarehouse.ViewWarehouseActivity;
 import com.viettel.mbccs.widget.SpacesItemDecoration;
-
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -48,9 +46,9 @@ public class BaseSubMenuActivity
 
     public static final String EXTRA_MENU_ITEM = "EXTRA_MENU_ITEM";
 
-    protected MenuItem mMenuItem;
+    protected Function mFunction;
 
-    protected List<MenuItem> mMenuItemList = new ArrayList<>();
+    protected List<Function> mFunctionList = new ArrayList<>();
 
     protected GridLayoutManager mGridLayoutManager;
 
@@ -71,7 +69,7 @@ public class BaseSubMenuActivity
 
     @Override
     protected void initData() {
-        mMenuItem = getIntent().getParcelableExtra(EXTRA_MENU_ITEM);
+        mFunction = getIntent().getParcelableExtra(EXTRA_MENU_ITEM);
         isGrid = new ObservableBoolean();
         isGrid.set(false);
         mGridLayoutManager = new GridLayoutManager(this, 3);
@@ -81,276 +79,195 @@ public class BaseSubMenuActivity
                         getResources().getDimension(R.dimen.dp_6),
                         getResources().getDisplayMetrics()), mGridLayoutManager);
         initMenuList();
-        mMenuAdapter = new SubMenuAdapter(this, mMenuItemList);
+        mMenuAdapter = new SubMenuAdapter(this, mFunctionList);
         mBinding.setPresenter(this);
         mBinding.executePendingBindings();
     }
 
     public void initMenuList() {
         // FIXME: Fake data
-        switch (mMenuItem.getId()) {
-            case MenuItem.MenuId.MENU_DAU_NOI_QUAN_LY_KHACH_HANG:
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_DAU_NOI_DI_DONG,
-                        getString(R.string.menu_dau_noi_di_dong), R.drawable.ic_add_black_24dp, 0,
-                        0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_DAU_NOI_CO_DINH,
-                        getString(R.string.menu_dau_noi_co_dinh), R.drawable.ic_add_black_24dp, 0,
-                        0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_DANG_KY_THONG_TIN,
-                        getString(R.string.menu_dang_ky_thong_tin), R.drawable.ic_add_black_24dp, 0,
-                        0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_CAP_NHAT_THONG_TIN,
-                        getString(R.string.menu_cap_nhat_thong_tin), R.drawable.ic_add_black_24dp,
-                        0, 0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_CHANGE_SIM,
-                        getString(R.string.menu_doi_sim), R.drawable.ic_add_black_24dp, 0, 0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_TD_LAP_DAT,
-                        getString(R.string.menu_thay_doi_dia_chi_lap_dat),
-                        R.drawable.ic_add_black_24dp, 0, 0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
-                        getString(R.string.menu_quan_ly_cong_viec), R.drawable.ic_add_black_24dp, 0,
-                        0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_GIAO_VIEC_PHAT_SINH,
-                        getString(R.string.menu_giao_viec_phat_sinh), R.drawable.ic_add_black_24dp,
-                        0, 0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_GIAO_VIEC_CS_KPP,
-                        getString(R.string.menu_giao_viec_cs_kpp), R.drawable.ic_add_black_24dp, 0,
-                        0));
-                break;
-            case MenuItem.MenuId.MENU_QUAN_LY_THU_CUOC:
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
-                        getString(R.string.menu_chuc_nang_xac_minh), R.drawable.ic_add_black_24dp,
-                        0, 0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
-                        getString(R.string.menu_chuc_nang_gach_no), R.drawable.ic_add_black_24dp, 0,
-                        0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
-                        getString(R.string.menu_chuc_nang_tra_cuoc_nong),
-                        R.drawable.ic_add_black_24dp, 0, 0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
-                        getString(R.string.menu_chuc_nang_quan_ly_tien_do_thu_cuoc),
-                        R.drawable.ic_add_black_24dp, 0, 0));
-                break;
-            case MenuItem.MenuId.MENU_BAN_HANG_KHO_TAI_CHINH:
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_SALE_RETAIL,
-                        getString(R.string.menu_ban_le), R.drawable.ic_add_black_24dp, 0, 0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_SALE_CHANNEL,
-                        getString(R.string.menu_ban_cho_kenh), R.drawable.ic_add_black_24dp, 0, 0));
-                mMenuItemList.add(
-                        new MenuItem(MenuItem.MenuId.MENU_BAN_HANG_THEO_DON_PHE_DUYET_DON_HANG,
-                                getString(R.string.menu_ban_hang_theo_don),
-                                R.drawable.ic_add_black_24dp, 0, 0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
-                        getString(R.string.menu_ban_dich_vu_vas), R.drawable.ic_add_black_24dp, 0,
-                        0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
-                        getString(R.string.menu_lap_hoa_don), R.drawable.ic_add_black_24dp, 0, 0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_SELL_ANYPAY,
-                        getString(R.string.menu_ban_anypay), R.drawable.ic_add_black_24dp, 0, 0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_TRANSFER_ANYPAY,
-                        getString(R.string.menu_nap_chuyen_anypay), R.drawable.ic_add_black_24dp, 0,
-                        0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_BAN_HANG_THEO_DON_PHE_DUYET_DON_HANG,
-                        getString(R.string.menu_ban_hang_theo_don), R.drawable.ic_add_black_24dp, 0,
-                        0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
-                        getString(R.string.menu_ban_dich_vu_vas), R.drawable.ic_add_black_24dp, 0,
-                        0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_LAP_HOA_DON,
-                        getString(R.string.menu_lap_hoa_don), R.drawable.ic_add_black_24dp, 0, 0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_SELL_ANYPAY,
-                        getString(R.string.menu_ban_anypay), R.drawable.ic_add_black_24dp, 0, 0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_TRANSFER_ANYPAY,
-                        getString(R.string.menu_nap_chuyen_anypay), R.drawable.ic_add_black_24dp, 0,
-                        0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_XEM_KHO,
-                        getString(R.string.menu_xem_kho), R.drawable.ic_add_black_24dp, 0, 0));
-                mMenuItemList.add(
-                        new MenuItem(MenuItem.MenuId.MENU_XEM_KHO, getString(R.string.menu_xem_kho),
-                                R.drawable.ic_add_black_24dp, 0, 0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_NHAP_HOA_DON,
-                        getString(R.string.menu_nhap_hoa_don), R.drawable.ic_add_black_24dp, 0, 0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
-                        getString(R.string.menu_xuat_kho_cap_duoi), R.drawable.ic_add_black_24dp, 0,
-                        0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
-                        getString(R.string.menu_nhap_kho_cap_tren), R.drawable.ic_add_black_24dp, 0,
-                        0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
-                        getString(R.string.menu_tra_hang_cap_tren), R.drawable.ic_add_black_24dp, 0,
-                        0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_NHAP_KHO_CAP_DUOI,
-                        getString(R.string.menu_nhap_kho_cap_duoi), R.drawable.ic_add_black_24dp, 0,
-                        0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
-                        getString(R.string.menu_xuat_kho_cho_nhan_vien),
-                        R.drawable.ic_add_black_24dp, 0, 0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
-                        getString(R.string.menu_nv_xac_nhan_hang), R.drawable.ic_add_black_24dp, 0,
-                        0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
-                        getString(R.string.menu_nv_tra_hang_cap_tren), R.drawable.ic_add_black_24dp,
-                        0, 0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
-                        getString(R.string.menu_nhap_kho_tu_nhan_vien),
-                        R.drawable.ic_add_black_24dp, 0, 0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_CHANNEL_ORDER,
-                        getString(R.string.menu_kenh_order_hang), R.drawable.ic_add_black_24dp, 0,
-                        0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
-                        getString(R.string.menu_tao_giay_nop_tien), R.drawable.ic_add_black_24dp, 0,
-                        0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
-                        getString(R.string.menu_phe_duyet_giay_nop_tien),
-                        R.drawable.ic_add_black_24dp, 0, 0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
-                        getString(R.string.menu_doi_soat_cong_no_giay_nop_tien),
-                        R.drawable.ic_add_black_24dp, 0, 0));
-                break;
-            case MenuItem.MenuId.MENU_BH_CHAM_SOC_KHACH_HANG:
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
-                        getString(R.string.menu_tra_cuu_bao_hanh), R.drawable.ic_add_black_24dp, 0,
-                        0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
-                        getString(R.string.menu_tiep_nhan_bao_hanh), R.drawable.ic_add_black_24dp,
-                        0, 0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
-                        getString(R.string.menu_chuyen_muc_bao_hanh), R.drawable.ic_add_black_24dp,
-                        0, 0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
-                        getString(R.string.menu_survey_kpp), R.drawable.ic_add_black_24dp, 0, 0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
-                        getString(R.string.menu_hotnew_cs_kpp), R.drawable.ic_add_black_24dp, 0,
-                        0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
-                        getString(R.string.menu_kpp_feedback), R.drawable.ic_add_black_24dp, 0, 0));
-                break;
-            case MenuItem.MenuId.MENU_BAO_CAO:
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
-                        getString(R.string.menu_khai_bao_gia_kenh_chan_ret),
-                        R.drawable.ic_add_black_24dp, 0, 0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
-                        getString(R.string.menu_bao_cao_phat_trien_thue_bao),
-                        R.drawable.ic_add_black_24dp, 0, 0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
-                        getString(R.string.menu_cham_soc_kenh), R.drawable.ic_add_black_24dp, 0,
-                        0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
-                        getString(R.string.menu_bao_cao_tan_suat_cham_soc_kenh),
-                        R.drawable.ic_add_black_24dp, 0, 0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
-                        getString(R.string.menu_bao_cao_ton_kho), R.drawable.ic_add_black_24dp, 0,
-                        0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
-                        getString(R.string.menu_bao_cao_giao_chi_tieu_ban_hang),
-                        R.drawable.ic_add_black_24dp, 0, 0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
-                        getString(R.string.menu_giao_chi_tieu_ban_hang),
-                        R.drawable.ic_add_black_24dp, 0, 0));
-                break;
-            case MenuItem.MenuId.MENU_QUAN_LY_DIA_BAN:
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_CREATE_BRANCH,
-                        getString(R.string.menu_tao_kpp), R.drawable.ic_add_black_24dp, 0, 0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
-                        getString(R.string.menu_quan_ly_dia_ban_hanh_chinh),
-                        R.drawable.ic_add_black_24dp, 0, 0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
-                        getString(R.string.menu_quan_ly_kpi_kpp), R.drawable.ic_add_black_24dp, 0,
-                        0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
-                        getString(R.string.menu_quan_ly_thong_tin_kpp),
-                        R.drawable.ic_add_black_24dp, 0, 0));
-                mMenuItemList.add(new MenuItem(MenuItem.MenuId.MENU_PLACEHOLDER,
-                        getString(R.string.menu_quan_ly_van_ban_chinh_sach),
-                        R.drawable.ic_add_black_24dp, 0, 0));
-                break;
+        for (Field f : Function.MenuId.class.getFields()) {
+            if (f.getType() == int.class) {
+                try {
+                    int i = f.getInt(null);
+
+                    if (i < 100) continue;
+
+                    if (mFunction.getId() == (int) Math.floor(i / 100.0f)) {
+                        String name = f.getName().toLowerCase();
+                        int resId = getResources().getIdentifier(name, "string", getPackageName());
+                        mFunctionList.add(
+                                new Function(i, getString(resId), R.drawable.ic_add_black_24dp));
+                    }
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
         }
+        Collections.sort(mFunctionList, new Comparator<Function>() {
+            @Override
+            public int compare(Function o1, Function o2) {
+                return o1.getId() - o2.getId();
+            }
+        });
     }
 
     public MenuPresenter.OnMenuClickListener getOnMenuClickListener() {
         if (mOnMenuClickListener == null) {
             mOnMenuClickListener = new MenuPresenter.OnMenuClickListener() {
                 @Override
-                public void onMenuClick(MenuItem item) {
+                public void onMenuClick(Function item) {
                     // FIXME: Static method for ALL CASE
                     switch (item.getId()) {
-                        case MenuItem.MenuId.MENU_LAP_HOA_DON:
-                            startActivity(
-                                    new Intent(BaseSubMenuActivity.this, BillingActivity.class));
-                            break;
-                        case MenuItem.MenuId.MENU_TD_LAP_DAT:
-                            startActivity(new Intent(BaseSubMenuActivity.this,
-                                    InstallationAddressActivity.class));
-                            break;
-                        case MenuItem.MenuId.MENU_GIAO_VIEC_PHAT_SINH:
-                        case MenuItem.MenuId.MENU_GIAO_VIEC_CS_KPP:
-                            startActivity(new Intent(BaseSubMenuActivity.this,
-                                    ListAssignTaskActivity.class));
-                            break;
-                        case MenuItem.MenuId.MENU_BAN_HANG_THEO_DON_PHE_DUYET_DON_HANG:
-                            startActivity(
-                                    new Intent(BaseSubMenuActivity.this, SellOrdersActivity.class));
-                            break;
-                        case MenuItem.MenuId.MENU_XEM_KHO:
-                            startActivity(new Intent(BaseSubMenuActivity.this,
-                                    ViewWarehouseActivity.class));
-                            break;
-                        case MenuItem.MenuId.MENU_SALE_RETAIL:
+                        case Function.MenuId.MENU_BAN_LE:
                             startActivity(
                                     new Intent(BaseSubMenuActivity.this, SaleRetailActivity.class));
                             break;
-                        case MenuItem.MenuId.MENU_NHAP_HOA_DON:
-                            startActivity(
-                                    new Intent(BaseSubMenuActivity.this, InputOrderActivity.class));
-                            break;
-                        case MenuItem.MenuId.MENU_SALE_CHANNEL:
+                        case Function.MenuId.MENU_BAN_CHO_KENH:
                             startActivity(new Intent(BaseSubMenuActivity.this,
                                     SaleChannelActivity.class));
                             break;
-                        case MenuItem.MenuId.MENU_CHANNEL_ORDER:
+                        case Function.MenuId.MENU_BAN_HANG_THEO_DON_PHE_DUYET_DON_HANG:
                             startActivity(
-                                    new Intent(BaseSubMenuActivity.this, KPPOrderActivity.class));
+                                    new Intent(BaseSubMenuActivity.this, SellOrdersActivity.class));
                             break;
-                        case MenuItem.MenuId.MENU_CREATE_BRANCH:
+                        case Function.MenuId.MENU_BAN_DICH_VU_VAS:
+                            break;
+                        case Function.MenuId.MENU_LAP_HOA_DON:
                             startActivity(
-                                    new Intent(BaseSubMenuActivity.this, BranchesActivity.class));
+                                    new Intent(BaseSubMenuActivity.this, BillingActivity.class));
                             break;
-                        case MenuItem.MenuId.MENU_CHANGE_SIM:
-                            startActivity(
-                                    new Intent(BaseSubMenuActivity.this, ChangeSimActivity.class));
+                        case Function.MenuId.MENU_DAU_NOI_DI_DONG:
+                            startActivity(new Intent(BaseSubMenuActivity.this,
+                                    ConnectorMobileActivity.class));
                             break;
-                        case MenuItem.MenuId.MENU_SELL_ANYPAY:
-                            startActivity(
-                                    new Intent(BaseSubMenuActivity.this, SellAnyPayActivity.class));
+                        case Function.MenuId.MENU_DAU_NOI_CO_DINH:
+                            // TODO: 08/06/2017 Fake
+                            startActivity(new Intent(BaseSubMenuActivity.this,
+                                    ConnectorMobileActivity.class));
                             break;
-
-                        case MenuItem.MenuId.MENU_TRANSFER_ANYPAY:
-                            startActivity(
-                                    new Intent(BaseSubMenuActivity.this, TransferAnyPayActivity.class));
+                        case Function.MenuId.MENU_BAN_ANYPAY:
                             break;
-                        case MenuItem.MenuId.MENU_DANG_KY_THONG_TIN:
+                        case Function.MenuId.MENU_NAP_CHUYEN_ANYPAY:
+                            break;
+                        case Function.MenuId.MENU_DANG_KY_THONG_TIN:
                             Intent intentDKTT = new Intent(BaseSubMenuActivity.this,
                                     CreateUpdateInformationActivity.class);
                             intentDKTT.putExtra(CreateUpdateInformationActivity.ARG_TYPE, true);
                             startActivity(intentDKTT);
                             break;
-                        case MenuItem.MenuId.MENU_CAP_NHAT_THONG_TIN:
+                        case Function.MenuId.MENU_CAP_NHAT_THONG_TIN:
                             Intent intentCNTT = new Intent(BaseSubMenuActivity.this,
                                     CreateUpdateInformationActivity.class);
                             intentCNTT.putExtra(CreateUpdateInformationActivity.ARG_TYPE, false);
                             startActivity(intentCNTT);
                             break;
-                        case MenuItem.MenuId.MENU_NHAP_KHO_CAP_DUOI:
+                        case Function.MenuId.MENU_DOI_SIM:
+                            break;
+                        case Function.MenuId.MENU_THAY_DOI_DIA_CHI_LAP_DAT:
+                            startActivity(new Intent(BaseSubMenuActivity.this,
+                                    InstallationAddressActivity.class));
+                            break;
+
+                        case Function.MenuId.MENU_TAO_KENH_PHAN_PHOI:
+                            break;
+                        case Function.MenuId.MENU_QUAN_LY_DBHC_BTS_KENH:
+                            break;
+                        case Function.MenuId.MENU_QUAN_LY_KPI_KPP:
+                            break;
+                        case Function.MenuId.MENU_QUAN_LY_THONG_TIN_KPP:
+                            break;
+                        case Function.MenuId.MENU_QUAN_LY_VAN_BAN_CSTT:
+                            break;
+
+                        case Function.MenuId.MENU_XAC_MINH:
+                            break;
+                        case Function.MenuId.MENU_GACH_NO:
+                            break;
+                        case Function.MenuId.MENU_THU_CUOC_NONG:
+                            break;
+                        case Function.MenuId.MENU_QUAN_LY_TIEN_DO_THU_CUOC:
+                            break;
+
+                        case Function.MenuId.MENU_GIAO_VIEC_TO_DOI:
+                            break;
+                        case Function.MenuId.MENU_GIAO_VIEC_PHAT_SINH:
+                        case Function.MenuId.MENU_GIAO_VIEC_CS_KPP:
+                            startActivity(new Intent(BaseSubMenuActivity.this,
+                                    ListAssignTaskActivity.class));
+                            break;
+                        case Function.MenuId.MENU_DONG_VIEC:
+                            break;
+
+                        case Function.MenuId.MENU_XEM_KHO:
+                            startActivity(new Intent(BaseSubMenuActivity.this,
+                                    ViewWarehouseActivity.class));
+                            break;
+                        case Function.MenuId.MENU_NHAP_HOA_DON:
+                            startActivity(
+                                    new Intent(BaseSubMenuActivity.this, InputOrderActivity.class));
+                            break;
+                        case Function.MenuId.MENU_XUAT_KHO_CAP_DUOI:
+                            break;
+                        case Function.MenuId.MENU_NHAP_KHO_CAP_TREN:
+                            break;
+                        case Function.MenuId.MENU_TRA_HANG_CAP_TREN:
+                            startActivity(new Intent(BaseSubMenuActivity.this,
+                                    ListOrderReturnUpperActivity.class));
+                            break;
+                        case Function.MenuId.MENU_NHAP_KHO_CAP_DUOI:
                             startActivity(
                                     new Intent(BaseSubMenuActivity.this, ListOrderActivity.class));
                             break;
-                        case MenuItem.MenuId.MENU_DAU_NOI_DI_DONG:
-                            startActivity(
-                                    new Intent(BaseSubMenuActivity.this, ConnectorMobileActivity.class));
+                        case Function.MenuId.MENU_XUAT_KHO_CHO_NHAN_VIEN:
                             break;
-                        case MenuItem.MenuId.MENU_DAU_NOI_CO_DINH:
+                        case Function.MenuId.MENU_NV_XAC_NHAN_HANG:
+                            break;
+                        case Function.MenuId.MENU_NHAN_VIEN_TRA_HANG_CAP_TREN:
+                            break;
+                        case Function.MenuId.MENU_NHAP_KHO_TU_NHAN_VIEN:
+                            break;
+                        case Function.MenuId.MENU_KENH_ORDER_HANG:
                             startActivity(
-                                    new Intent(BaseSubMenuActivity.this, ConnectorMobileActivity.class));
+                                    new Intent(BaseSubMenuActivity.this, KPPOrderActivity.class));
+                            break;
+
+                        case Function.MenuId.MENU_TRA_CUU:
+                            break;
+                        case Function.MenuId.MENU_TIEP_NHAN_BH:
+                            break;
+                        case Function.MenuId.MENU_CHUYEN_MUC_BH:
+                            break;
+                        case Function.MenuId.MENU_TRA_BH:
+                            break;
+
+                        case Function.MenuId.MENU_SURVEY_KPP:
+                            break;
+                        case Function.MenuId.MENU_HOTNEW_CS_KPP:
+                            break;
+                        case Function.MenuId.MENU_KPP_FEEDBACK:
+                            break;
+                        case Function.MenuId.MENU_TRA_CUU_SP:
+                            break;
+
+                        case Function.MenuId.MENU_TAO_GIAY_NOP_TIEN:
+                            break;
+                        case Function.MenuId.MENU_PHE_DUYET_GIAY_NOP_TIEN:
+                            break;
+                        case Function.MenuId.MENU_DOI_SOAT_CONG_NO_GIAY_NOP_TIEN:
+                            break;
+                        case Function.MenuId.MENU_KHAI_BAO_GIA_KENH_CHAN_RET:
+                            break;
+
+                        case Function.MenuId.MENU_BAO_CAO_PHAT_TRIEN_THUE_BAO:
+                            break;
+                        case Function.MenuId.MENU_BAO_CAO_CHAM_SOC_KENH:
+                            break;
+                        case Function.MenuId.MENU_BAO_CAO_TAN_SUAT_CHAM_SOC_KENH:
+                            break;
+                        case Function.MenuId.MENU_BAO_CAO_TON_KHO:
+                            break;
+                        case Function.MenuId.MENU_BAO_CAO_GIAO_CHI_TIEU_BAN_HANG:
                             break;
                     }
                 }
@@ -360,7 +277,7 @@ public class BaseSubMenuActivity
     }
 
     public String getToolbarTitle() {
-        return mMenuItem.getTitle();
+        return mFunction.getFunctionName();
     }
 
     public void switchView() {
@@ -380,7 +297,7 @@ public class BaseSubMenuActivity
     }
 
     public class SubMenuAdapter extends MenuPresenter.MenuAdapter {
-        public SubMenuAdapter(Context context, List<MenuItem> list) {
+        public SubMenuAdapter(Context context, List<Function> list) {
             super(context, list);
         }
 
@@ -428,8 +345,8 @@ public class BaseSubMenuActivity
             onMenuClickListener = getOnMenuClickListener();
         }
 
-        public void bind(final MenuItem item) {
-            binding.setImageText(item.getTitle());
+        public void bind(final Function item) {
+            binding.setImageText(item.getFunctionName());
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 binding.setImage(
                         binding.getRoot().getResources().getDrawable(item.getIcon(), null));

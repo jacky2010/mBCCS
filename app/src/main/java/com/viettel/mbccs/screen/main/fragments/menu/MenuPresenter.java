@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.viettel.mbccs.base.BaseSubMenuActivity;
-import com.viettel.mbccs.data.model.MenuItem;
+import com.viettel.mbccs.data.model.Function;
 import com.viettel.mbccs.databinding.ItemMenuBinding;
 
 import com.viettel.mbccs.screen.config.ConfigActivity;
@@ -27,9 +27,9 @@ public class MenuPresenter implements MenuContract.Presenter {
 
     private MenuContract.ViewModel mViewModel;
 
-    private List<MenuItem> mMenuItemList = new ArrayList<>();
+    private List<Function> mMenuItemList = new ArrayList<>();
 
-    public MenuPresenter(Context context, MenuContract.ViewModel viewModel, List<MenuItem> list) {
+    public MenuPresenter(Context context, MenuContract.ViewModel viewModel, List<Function> list) {
         mContext = context;
         mViewModel = viewModel;
         mMenuItemList = list;
@@ -53,9 +53,9 @@ public class MenuPresenter implements MenuContract.Presenter {
 
         protected Context mContext;
 
-        protected List<MenuItem> mList;
+        protected List<Function> mList;
 
-        public MenuAdapter(Context context, List<MenuItem> list) {
+        public MenuAdapter(Context context, List<Function> list) {
             mContext = context;
             mList = list;
         }
@@ -70,13 +70,13 @@ public class MenuPresenter implements MenuContract.Presenter {
                         Intent intent;
 
                         @Override
-                        public void onMenuClick(MenuItem item) {
+                        public void onMenuClick(Function item) {
                             switch (item.getId()) {
-                                case MenuItem.MenuId.MENU_SETTING:
+                                case Function.MenuId.MENU_SETTING:
                                     intent = new Intent(mContext, ConfigActivity.class);
                                     mContext.startActivity(intent);
                                     break;
-                                case MenuItem.MenuId.MENU_HELP:
+                                case Function.MenuId.MENU_HELP:
                                     intent = new Intent(mContext, HelpActivity.class);
                                     mContext.startActivity(intent);
                                     break;
@@ -114,8 +114,8 @@ public class MenuPresenter implements MenuContract.Presenter {
 
             protected abstract OnMenuClickListener getOnMenuClickListener();
 
-            public void bind(final MenuItem item) {
-                binding.setText(item.getTitle());
+            public void bind(final Function item) {
+                binding.setText(item.getFunctionName());
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     binding.setImage(
                             binding.getRoot().getResources().getDrawable(item.getIcon(), null));
@@ -137,6 +137,6 @@ public class MenuPresenter implements MenuContract.Presenter {
     }
 
     public interface OnMenuClickListener {
-        void onMenuClick(MenuItem item);
+        void onMenuClick(Function item);
     }
 }

@@ -16,6 +16,7 @@
     <string name="common_label_add">Thêm</string>
     <string name="common_label_reject">Từ chối</string>
     <string name="common_label_export">Xuất kho</string>
+
     <string formatted="false" name="count_serial_selected">
         <![CDATA[
 Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt hàng <font color="#317BE1"><u> %s</u></font>
@@ -143,10 +144,10 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="title_search">Tìm kiếm</string>
     <string name="title_confirm">Xác Nhận</string>
     <string name="msg_title_confirm_trans">Bạn đã lập hóa đơn cho các giao dịch sau:</string>
-    <string name="msg_before_tax" formatted="false">Trước thuế: %f</string>
-    <string name="msg_rent" formatted="false">Tiền thuế: %f</string>
-    <string name="msg_discount" formatted="false">Chiết khấu: %f</string>
-    <string name="msg_total_amount_payable" formatted="false">Tổng tiền phải trả: %f</string>
+    <string formatted="false" name="msg_before_tax">Trước thuế: %f</string>
+    <string formatted="false" name="msg_rent">Tiền thuế: %f</string>
+    <string formatted="false" name="msg_discount">Chiết khấu: %f</string>
+    <string formatted="false" name="msg_total_amount_payable">Tổng tiền phải trả: %f</string>
     <string name="msg_choose_transaction">Chọn giao dịch</string>
     <string name="msg_list_trans">Danh sách giao dịch (%d)</string>
     <string name="title_channel">Kênh</string>
@@ -163,7 +164,7 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="amount_no_tax">Tổng tiền : %s đồng</string>
     <string name="amount">Số tiền phải thanh toán : %s đồng</string>
     <string name="tax">Tiền thuế : %s đồng</string>
-    <string name="confirm_before_save_trans_msg" formatted="false"><![CDATA[
+    <string formatted="false" name="confirm_before_save_trans_msg"><![CDATA[
 Bán cho khách hàng <b>%s</b> :<br>
  · Số điện thoại : <b>%s</b><br>
  · Số tiền thanh toán : <b>%s</b>(%s)<br>
@@ -175,7 +176,7 @@ Từ <b>%s</b><br>
 Theo mã chương trình bán hàng %s
     ]]></string>
 
-    <string name="confirm_before_save_trans_msg_channel" formatted="false"><![CDATA[
+    <string formatted="false" name="confirm_before_save_trans_msg_channel"><![CDATA[
 Bán cho kênh <b>%s</b> :<br>
  · Số điện thoại : <b>%s</b><br>
  · Số tiền thanh toán : <b>%s</b>(%s)<br>
@@ -186,7 +187,7 @@ Từ <b>%s</b><br>
 · Số điện thoại : <b>%s</b><br>
 Theo mã chương trình bán hàng %s
     ]]></string>
-    <string name="confirm_before_save_trans_msg_no_saleprogram" formatted="false"><![CDATA[
+    <string formatted="false" name="confirm_before_save_trans_msg_no_saleprogram"><![CDATA[
 Bán cho khách hàng <b>%s</b> :<br>
  · Số điện thoại : <b>%s</b><br>
  · Số tiền thanh toán : <b>%s</b>(%s đồng)<br>
@@ -197,7 +198,7 @@ Từ <b>%s</b><br>
 · Số điện thoại : <b>%s</b><br>
     ]]></string>
 
-    <string name="confirm_before_save_trans_msg_no_saleprogram_channel" formatted="false"><![CDATA[
+    <string formatted="false" name="confirm_before_save_trans_msg_no_saleprogram_channel"><![CDATA[
 Bán cho kênh <b>%s</b> :<br>
  · Số điện thoại : <b>%s</b><br>
  · Số tiền thanh toán : <b>%s</b>(%s đồng)<br>
@@ -449,33 +450,48 @@ Từ <b>%s</b><br>
     <string name="item_order_detail_warehouse_exists">Kho còn</string>
     <string name="no_item_order">Hãy nhập số lượng cho các mặt hàng</string>
 
-    <string name="menu_qlkh"><![CDATA[Đấu nối & Quản lý khách hàng]]></string>
-    <string name="menu_quan_ly_thu_cuoc">Quản lý thu cước</string>
-    <string name="menu_bh_kho_tc">Bán hàng - Kho - Tài chính</string>
-    <string name="menu_bh_cskh">Bảo hành và QL CSKH</string>
-    <string name="menu_bao_cao">Báo cáo</string>
+    <string name="menu_quan_ly_ban_hang">Quản lý bán hàng</string>
+    <string name="menu_quan_ly_thong_tin_kh">Quản lý thông tin khách hàng</string>
     <string name="menu_quan_ly_dia_ban">Quản lý địa bàn</string>
-
-    <string name="menu_dau_noi_di_dong">Đấu nối di động</string>
-    <string name="menu_dau_noi_co_dinh">Đấu nối cố định</string>
-    <string name="menu_dang_ky_thong_tin">Đăng ký thông tin</string>
-    <string name="menu_cap_nhat_thong_tin">Cập nhật thông tin</string>
-    <string name="menu_doi_sim">Đổi sim</string>
-    <string name="menu_thay_doi_dia_chi_lap_dat">Thay đổi địa chỉ lắp đặt</string>
+    <string name="menu_quan_ly_thu_cuoc">Quản lý thu cước</string>
     <string name="menu_quan_ly_cong_viec">Quản lý công việc</string>
-    <string name="menu_giao_viec_phat_sinh">Giao việc phát sinh</string>
-    <string name="menu_giao_viec_cs_kpp">Giao việc CS KPP</string>
-    <string name="menu_chuc_nang_xac_minh">Chức năng XÁC MINH</string>
-    <string name="menu_chuc_nang_gach_no">Chức năng GẠCH NỢ</string>
-    <string name="menu_chuc_nang_tra_cuoc_nong">Chức năng TRA CƯỚC NÓNG</string>
-    <string name="menu_chuc_nang_quan_ly_tien_do_thu_cuoc">Chức năng QUẢN LÝ TIẾN ĐỘ THU CƯỚC</string>
+    <string name="menu_quan_ly_kho">Quản lý kho</string>
+    <string name="menu_quan_ly_bao_hanh">Quản lý bảo hành</string>
+    <string name="menu_quan_ly_cham_soc_kh">Quản lý Chăm sóc khách hàng</string>
+    <string name="menu_quan_ly_tai_chinh">Quản lý tài chính</string>
+    <string name="menu_bao_cao">Báo cáo</string>
+
     <string name="menu_ban_le">BÁN LẺ</string>
     <string name="menu_ban_cho_kenh">BÁN CHO KÊNH</string>
-    <string name="menu_ban_hang_theo_don">BÁN HÀNG THEO ĐƠN/PHÊ DUYỆT ĐƠN HÀNG</string>
+    <string name="menu_ban_hang_theo_don_phe_duyet_don_hang">BÁN HÀNG THEO ĐƠN/PHÊ DUYỆT ĐƠN HÀNG</string>
     <string name="menu_ban_dich_vu_vas">BÁN DỊCH VỤ VAS</string>
     <string name="menu_lap_hoa_don">LẬP HÓA ĐƠN</string>
+    <string name="menu_dau_noi_di_dong">ĐẤU NỐI DI ĐỘNG</string>
+    <string name="menu_dau_noi_co_dinh">ĐẤU NỐI CỐ ĐỊNH</string>
     <string name="menu_ban_anypay">BÁN ANYPAY</string>
     <string name="menu_nap_chuyen_anypay">NẠP CHUYỂN ANYPAY</string>
+
+    <string name="menu_dang_ky_thong_tin">ĐĂNG KÝ THÔNG TIN</string>
+    <string name="menu_cap_nhat_thong_tin">CẬP NHẬT THÔNG TIN</string>
+    <string name="menu_doi_sim">ĐỔI SIM</string>
+    <string name="menu_thay_doi_dia_chi_lap_dat">THAY ĐỔI ĐỊA CHỈ LẮP ĐẶT</string>
+
+    <string name="menu_tao_kenh_phan_phoi">TẠO KÊNH PHÂN PHỐI</string>
+    <string name="menu_quan_ly_dbhc_bts_kenh">QUẢN LÝ ĐỊA BÀN HÀNH CHÍNH TỌA ĐỘ BTS/K</string>
+    <string name="menu_quan_ly_kpi_kpp">QUẢN L KPI KPP</string>
+    <string name="menu_quan_ly_thong_tin_kpp">QUẢN LÝ THÔNG TIN KPP</string>
+    <string name="menu_quan_ly_van_ban_cstt">QUẢN LÝ VĂN BẢN CHÍNH SÁCH TRUYỀN THÔNG</string>
+
+    <string name="menu_xac_minh">XÁC MINH</string>
+    <string name="menu_gach_no">GẠCH NỢ</string>
+    <string name="menu_thu_cuoc_nong">THU CƯỚC NÓNG</string>
+    <string name="menu_quan_ly_tien_do_thu_cuoc">QUẢN LÝ TIẾN ĐỘ THU CƯỚC</string>
+
+    <string name="menu_giao_viec_to_doi">GIAO VIỆC TỔ ĐỘI</string>
+    <string name="menu_giao_viec_phat_sinh">GIAO VIỆC PHÁT SINH</string>
+    <string name="menu_giao_viec_cs_kpp">GIAO VIỆC CS KPP</string>
+    <string name="menu_dong_viec">ĐÓNG VIỆC</string>
+
     <string name="menu_xem_kho">XEM KHO</string>
     <string name="menu_nhap_hoa_don">NHẬP HÓA ĐƠN</string>
     <string name="menu_xuat_kho_cap_duoi">XUẤT KHO CẤP DƯỚI</string>
@@ -484,30 +500,31 @@ Từ <b>%s</b><br>
     <string name="menu_nhap_kho_cap_duoi">NHẬP KHO CẤP DƯỚI</string>
     <string name="menu_xuat_kho_cho_nhan_vien">XUẤT KHO CHO NHÂN VIÊN</string>
     <string name="menu_nv_xac_nhan_hang">NV XÁC NHẬN HÀNG</string>
-    <string name="menu_nv_tra_hang_cap_tren">NHÂN VIÊN TRẢ HÀNG CẤP TRÊN</string>
+    <string name="menu_nhan_vien_tra_hang_cap_tren">NHÂN VIÊN TRẢ HÀNG CẤP TRÊN</string>
     <string name="menu_nhap_kho_tu_nhan_vien">NHẬP KHO TỪ NHÂN VIÊN</string>
     <string name="menu_kenh_order_hang">KÊNH ORDER HÀNG</string>
-    <string name="menu_tao_giay_nop_tien">TẠO GIẤY NỘP TIỀN</string>
-    <string name="menu_phe_duyet_giay_nop_tien">PHÊ DUYỆT GIẤY NỘP TIỀN</string>
-    <string name="menu_doi_soat_cong_no_giay_nop_tien">ĐỐI SOÁT CÔNG NỢ GIẤY NỘP TIỀN</string>
-    <string name="menu_tra_cuu_bao_hanh">Tra cứu bảo hành</string>
-    <string name="menu_tiep_nhan_bao_hanh">TIẾP NHẬN BẢO HÀNH</string>
-    <string name="menu_chuyen_muc_bao_hanh">CHUYỂN MỨC BẢO HÀNH/TRẢ BẢO HÀNH</string>
+
+    <string name="menu_tra_cuu">TRA CỨU</string>
+    <string name="menu_tiep_nhan_bh">TIẾP NHẬN BẢO HÀNH</string>
+    <string name="menu_chuyen_muc_bh">CHUYỂN MỨC BẢO HÀNH</string>
+    <string name="menu_tra_bh">TRẢ BẢO HÀNH</string>
+
     <string name="menu_survey_kpp">SURVEY KPP</string>
     <string name="menu_hotnew_cs_kpp">HOTNEW CS KPP</string>
     <string name="menu_kpp_feedback">KPP FEEDBACK</string>
-    <string name="menu_khai_bao_gia_kenh_chan_ret">Khai báo giá kênh chân rết</string>
-    <string name="menu_bao_cao_phat_trien_thue_bao">Báo cáo phát triển thuê bao</string>
-    <string name="menu_cham_soc_kenh">Chăm sóc kênh</string>
-    <string name="menu_bao_cao_tan_suat_cham_soc_kenh">Báo cáo tần suất chăm sóc kênh</string>
-    <string name="menu_bao_cao_ton_kho">Báo cáo tồn kho</string>
-    <string name="menu_bao_cao_giao_chi_tieu_ban_hang">Báo cáo giao chỉ tiêu bán hàng</string>
-    <string name="menu_giao_chi_tieu_ban_hang">Giao chỉ tiêu bán hàng</string>
-    <string name="menu_tao_kpp">Tạo kênh phân phối</string>
-    <string name="menu_quan_ly_dia_ban_hanh_chinh">Quản lý địa bàn hành chính tọa độ BTS/Kênh</string>
-    <string name="menu_quan_ly_kpi_kpp">Quản lý KPI KPP</string>
-    <string name="menu_quan_ly_thong_tin_kpp">Quản lý thông tin KPP</string>
-    <string name="menu_quan_ly_van_ban_chinh_sach">Quản lý văn bản chính sách</string>
+    <string name="menu_tra_cuu_sp">TRA CỨU SẢN PHẨM</string>
+
+    <string name="menu_tao_giay_nop_tien">TẠO GIẤY NỘP TIỀN</string>
+    <string name="menu_phe_duyet_giay_nop_tien">PHÊ DUYỆT GIẤY NỘP TIỀN</string>
+    <string name="menu_doi_soat_cong_no_giay_nop_tien">ĐỐI SOÁT CÔNG NỢ GIẤY NỘP TIỀN</string>
+    <string name="menu_khai_bao_gia_kenh_chan_ret">KHAI BÁO GIÁ KÊNH CHÂN RẾT</string>
+
+    <string name="menu_bao_cao_phat_trien_thue_bao">BÁO CÁO PHÁT TRIỂN THUÊ BAO</string>
+    <string name="menu_bao_cao_cham_soc_kenh">BÁO CÁO CHĂM SÓC KÊNH</string>
+    <string name="menu_bao_cao_tan_suat_cham_soc_kenh">BÁO CÁO TẤN SUẤT CHĂM SÓC KÊNH</string>
+    <string name="menu_bao_cao_ton_kho">BÁO CÁO TỒN KHO</string>
+    <string name="menu_bao_cao_giao_chi_tieu_ban_hang">BÁO CÁO CHỈ TIÊU BÁN HÀNG</string>
+
     <string name="quan_ly_giao_viec">Quản lý giao việc</string>
 
     <!--InstallationAddress -->
@@ -733,6 +750,7 @@ Từ <b>%s</b><br>
     <string name="activity_create_order_success_ban_co_chac_muon_lap_phieu">Bạn có chắc muốn lập phiếu nhập kho?</string>
     <string name="activity_create_order_success_tu_choi_lap_phieu">Từ chối lập phiếu</string>
     <string name="activity_create_order_success_ly_do_tu_choi">Lý do từ chối</string>
+
     <!--Nhan vien tra hang cap tren-->
     <string name="nv_trahangcaptren_title">Xuất kho trả hàng cấp trên</string>
     <string name="nv_trahangcaptren_lap_phieu_title">Lập phiếu xuất kho trả hàng cấp trên</string>
@@ -744,7 +762,7 @@ Từ <b>%s</b><br>
 
     <!-- Area channel -->
     <string name="title_area">Quản lý địa bàn</string>
-    <string name="msg_empty_text" />
+    <string name="msg_empty_text"/>
     <string name="title_province">Tỉnh</string>
     <string name="title_district">Huyện</string>
 
@@ -753,4 +771,15 @@ Từ <b>%s</b><br>
     <string name="title_tab_bts">BTS</string>
     <string name="title_tab_clh">Chợ/Lễ hội</string>
 
+    <string name="activity_list_order_return_upper_ngay_lap_phieu">Ngày lập phiếu</string>
+    <string name="activity_list_order_return_upper_kho_nhan">Mã kho nhận</string>
+    <string name="activity_list_order_return_upper_xuat_kho_tra_hang_cap_tren">Xuất kho trả hàng cấp trên</string>
+    <string name="activity_list_order_return_upper_co_phieu_chua_nhan">Có %1$d phiếu chưa nhận</string>
+    <string name="activity_create_ticket_return_upper_lap_phieu_xuat_kho_tra_hang_cap_tren">Lập phiếu xuất kho trả hàng cấp trên</string>
+    <string name="activity_create_ticket_return_upper_danh_sach_mat_hang">Danh sách mặt hàng (%1$d)</string>
+    <string name="activity_create_ticket_return_upper_ma_kho_nhan">Mã kho nhận*</string>
+    <string name="activity_create_ticket_return_upper_trang_thai_hang_xuat">Trạng thái hàng xuất*</string>
+    <string name="activity_create_ticket_return_upper_lap_phieu_xuat_tu_kho">Lập phiếu xuất từ kho</string>
+    <string name="activity_create_ticket_return_upper_them">Thêm</string>
+    <string name="activity_create_ticket_return_upper_lap_phieu">Lập phiếu</string>
 </resources>

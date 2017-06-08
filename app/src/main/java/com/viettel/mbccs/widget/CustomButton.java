@@ -1,6 +1,7 @@
 package com.viettel.mbccs.widget;
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
 import android.widget.Button;
 
@@ -8,7 +9,7 @@ import android.widget.Button;
  * Created by FRAMGIA\hoang.van.cuong on 16/05/2017.
  */
 
-public class CustomButton extends Button {
+public class CustomButton extends AppCompatButton {
     public CustomButton(Context context) {
         super(context);
     }

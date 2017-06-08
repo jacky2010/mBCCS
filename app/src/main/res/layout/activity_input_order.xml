@@ -15,9 +15,9 @@
         >
         <include
             layout="@layout/toolbar"
-            app:background="@{@color/grey}"
+            app:background="@{@color/colorAccent}"
             app:isShow="@{true}"
-            app:leftIcon="@{@drawable/ic_arrow_back_black_24dp}"
+            app:leftIcon="@{@drawable/ic_arrow_left_white_24dp}"
             app:leftIconClick="@{()->presenter.onBackClick()}"
             app:title="@{@string/title_input_order_screen}"
             app:titleColor="@{@color/black}"

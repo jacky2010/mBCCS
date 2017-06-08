@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.viettel.mbccs.base.BaseFragment;
-import com.viettel.mbccs.data.model.MenuItem;
+import com.viettel.mbccs.data.model.Function;
 import com.viettel.mbccs.databinding.FragmentMenuBinding;
 import java.util.ArrayList;
 
@@ -18,7 +18,7 @@ public class MenuFragment extends BaseFragment implements MenuContract.ViewModel
 
     public static final String MENU_LIST_KEY = "MENU_LIST_KEY";
 
-    public static MenuFragment newInstance(ArrayList<MenuItem> itemList) {
+    public static MenuFragment newInstance(ArrayList<Function> itemList) {
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList(MENU_LIST_KEY, itemList);
         MenuFragment fragment = new MenuFragment();
@@ -31,7 +31,7 @@ public class MenuFragment extends BaseFragment implements MenuContract.ViewModel
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
         FragmentMenuBinding binding = FragmentMenuBinding.inflate(inflater, container, false);
-        ArrayList<MenuItem> list = getArguments().getParcelableArrayList(MENU_LIST_KEY);
+        ArrayList<Function> list = getArguments().getParcelableArrayList(MENU_LIST_KEY);
         binding.setPresenter(new MenuPresenter(getActivity(), this, list));
         return binding.getRoot();
     }

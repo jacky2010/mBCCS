@@ -21,7 +21,7 @@
             >
             <include
                 layout="@layout/toolbar"
-                app:background="@{@color/grey}"
+                app:background="@{@color/colorAccent}"
                 app:isShow="@{true}"
                 app:leftIcon="@{@drawable/ic_close}"
                 app:leftIconClick="@{()->presenter.onCancel()}"
@@ -31,7 +31,7 @@
                 />
         </RelativeLayout>
 
-        <Button
+        <com.viettel.mbccs.widget.CustomButton
             android:id="@+id/btn_confirm_good"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_50"

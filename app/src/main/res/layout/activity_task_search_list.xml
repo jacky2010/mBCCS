@@ -26,7 +26,7 @@
             android:layout_height="?attr/actionBarSize"
             app:background="@{ @android:color/darker_gray }"
             app:isShow="@{ true }"
-            app:leftIcon="@{ @drawable/ic_arrow_left_24dp }"
+            app:leftIcon="@{ @drawable/ic_arrow_left_white_24dp }"
             app:leftIconClick="@{ () -> presenter.onBackPressed() }"
             app:title="@{ presenter.toolbarTitle }"
             app:titleColor="@{ @color/white }"

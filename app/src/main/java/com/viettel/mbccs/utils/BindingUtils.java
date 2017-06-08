@@ -5,6 +5,7 @@ import android.databinding.BindingAdapter;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
 import android.support.annotation.StringRes;
@@ -39,7 +40,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.txusballesteros.widgets.FitChart;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.data.model.MenuItem;
+import com.viettel.mbccs.data.model.Function;
 import com.viettel.mbccs.widget.BottomNavigationView;
 import com.viettel.mbccs.widget.EndlessRecyclerOnScrollListener;
 import de.codecrafters.tableview.TableDataAdapter;
@@ -313,7 +314,7 @@ public class BindingUtils {
     }
 
     @BindingAdapter({ "bottomListItem" })
-    public static void setBottomListItem(BottomNavigationView view, List<MenuItem> list) {
+    public static void setBottomListItem(BottomNavigationView view, List<Function> list) {
         view.setBottomListItem(list);
     }
 
@@ -342,7 +343,11 @@ public class BindingUtils {
     }, requireAll = false)
     public static void setDrawableStart(TextView view, Drawable left, Drawable top, Drawable right,
             Drawable bottom) {
-        view.setCompoundDrawablesRelativeWithIntrinsicBounds(left, top, right, bottom);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            view.setCompoundDrawablesRelativeWithIntrinsicBounds(left, top, right, bottom);
+        } else {
+            view.setCompoundDrawablesWithIntrinsicBounds(left, top, right, bottom);
+        }
     }
 
     @BindingAdapter({ "addItemDecoration" })

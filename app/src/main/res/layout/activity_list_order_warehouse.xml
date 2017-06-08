@@ -25,7 +25,7 @@
             android:layout_height="?attr/actionBarSize"
             app:background="@{ @android:color/darker_gray }"
             app:isShow="@{ true }"
-            app:leftIcon="@{ @drawable/ic_arrow_left_24dp }"
+            app:leftIcon="@{ @drawable/ic_arrow_left_white_24dp }"
             app:leftIconClick="@{ () -> presenter.onBackPressed() }"
             app:title="@{ presenter.toolbarTitle }"
             app:titleColor="@{ @color/white }"
@@ -80,7 +80,7 @@
             android:layout_marginTop="@dimen/dp_8"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_18"
-            bind:textUnderLine="@{ @string/activity_list_order_warehouse_lenh_chua_lap_phieu(presenter.itemCount) }"
+            bind:textUnderLine="@{ presenter.itemCountString }"
             />
 
         <android.support.v7.widget.RecyclerView
@@ -101,18 +101,19 @@
             android:visibility="@{ presenter.isEmpty ? View.VISIBLE : View.GONE }"
             />
 
-        <!--<android.support.design.widget.FloatingActionButton-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_alignParentEnd="true"-->
-        <!--android:layout_margin="16dp"-->
-        <!--android:onClick="@{ () -> presenter.onAddClick() }"-->
-        <!--android:src="@drawable/ic_add_white_24dp"-->
-        <!--app:fabSize="auto"-->
-        <!--app:layout_anchor="@id/recyclerView"-->
-        <!--app:layout_anchorGravity="bottom|right|end"-->
-        <!--/>-->
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="16dp"
+            android:onClick="@{ () -> presenter.onAddClick() }"
+            android:src="@drawable/ic_add_white_24dp"
+            android:visibility="gone"
+            app:fabSize="auto"
+            app:layout_anchor="@id/recyclerView"
+            app:layout_anchorGravity="bottom|right|end"
+            />
 
     </RelativeLayout>
 </layout>

@@ -22,10 +22,10 @@
             android:id="@+id/toolbar"
             app:background="@{ @color/white }"
             app:isShow="@{ true }"
-            app:leftIcon="@{ @drawable/ic_close_black_24dp }"
+            app:leftIcon="@{ @drawable/ic_arrow_left_white_24dp }"
             app:leftIconClick="@{ () -> presenter.onBackPressed() }"
             app:title="@{ @string/cap_nhat_trang_thai_cham_soc }"
-            app:titleColor="@{ @color/black }"
+            app:titleColor="@{ @color/white }"
             app:titleTextSize="@{ @dimen/sp_16 }"
             />
 
@@ -51,7 +51,7 @@
             android:orientation="horizontal"
             >
 
-            <Button
+            <com.viettel.mbccs.widget.CustomButton
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/dp_4"
@@ -62,7 +62,7 @@
                 android:textColor="@color/black"
                 />
 
-            <Button
+            <com.viettel.mbccs.widget.CustomButton
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_4"

@@ -54,7 +54,7 @@ public class MainActivity extends BaseDataBindActivity<ActivityMainBinding, Main
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.frame_main);
         if (fragment != null && fragment instanceof MenuFragment) return;
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.frame_main, MenuFragment.newInstance(mPresenter.getMenuItemList()))
+                .replace(R.id.frame_main, MenuFragment.newInstance(mPresenter.getFunctionList()))
                 .addToBackStack(MenuFragment.class.getSimpleName())
                 .commit();
     }

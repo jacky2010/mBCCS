@@ -14,11 +14,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.data.model.MenuItem;
+import com.viettel.mbccs.data.model.Function;
 import com.viettel.mbccs.databinding.ItemImageGridBinding;
-
 import java.util.List;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
@@ -34,7 +32,7 @@ public class BottomNavigationView extends LinearLayout {
 
     private float mTextSize;
 
-    private List<MenuItem> mListItem;
+    private List<Function> mListItem;
 
     private OnBottomItemClick mOnBottomItemClick;
 
@@ -102,16 +100,16 @@ public class BottomNavigationView extends LinearLayout {
         void onBottomItemClick(int position);
     }
 
-    public void setBottomListItem(List<MenuItem> listItem) {
+    public void setBottomListItem(List<Function> listItem) {
         if (listItem.isEmpty()) return;
 
         mListItem = listItem;
         for (int i = 0; i < mListItem.size(); i++) {
-            MenuItem item = mListItem.get(i);
+            Function item = mListItem.get(i);
             ItemImageGridBinding binding =
                     DataBindingUtil.inflate(LayoutInflater.from(getContext()),
                             R.layout.item_image_grid, this, true);
-            binding.setImageText(item.getTitle());
+            binding.setImageText(item.getFunctionName());
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 binding.setImage(getResources().getDrawable(item.getIcon(), null));
             } else {

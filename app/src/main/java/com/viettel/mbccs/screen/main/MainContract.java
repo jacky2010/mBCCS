@@ -2,7 +2,8 @@ package com.viettel.mbccs.screen.main;
 
 import com.viettel.mbccs.base.BasePresenter;
 import com.viettel.mbccs.base.BaseView;
-import com.viettel.mbccs.data.model.MenuItem;
+import com.viettel.mbccs.data.model.Function;
+
 import java.util.List;
 
 /**
@@ -20,6 +21,6 @@ public interface MainContract {
 
     interface Presenter extends BasePresenter {
 
-        List<MenuItem> getMenuItemList();
+        List<Function> getFunctionList();
     }
 }

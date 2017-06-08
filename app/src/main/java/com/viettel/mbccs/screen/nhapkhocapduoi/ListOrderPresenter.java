@@ -24,6 +24,7 @@ public class ListOrderPresenter extends BaseSearchListViewPresenter<WarehouseOrd
 
     public ListOrderPresenter(Context context, BaseSearchListViewContract.ViewModel viewModel) {
         super(context, viewModel);
+        // TODO: 06/06/2017 Phân quyền
 
         // TODO: 5/31/2017 Fake data
         String[] array = new String[] { "Tất cả", "Kho 1", "Kho 2", "Kho 3", "Kho 4" };
@@ -74,6 +75,7 @@ public class ListOrderPresenter extends BaseSearchListViewPresenter<WarehouseOrd
 
     @Override
     protected RecyclerView.Adapter getListAdapter() {
+        // TODO: 06/06/2017 Phân quyền
         ListOrderAdapter adapter = new ListOrderAdapter(mContext, listData);
         adapter.setOnOrderClickListener(new ListOrderAdapter.OnOrderClickListener() {
             @Override
@@ -82,6 +84,13 @@ public class ListOrderPresenter extends BaseSearchListViewPresenter<WarehouseOrd
             }
         });
         return adapter;
+    }
+
+    @Override
+    public String getItemCountString() {
+        // TODO: 06/06/2017 Phân quyền
+        return mContext.getString(R.string.activity_list_order_warehouse_lenh_chua_lap_phieu,
+                itemCount.get());
     }
 
     @Override
