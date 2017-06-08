@@ -46,4 +46,9 @@ public class ChangeSimActivity extends BaseDataBindActivity<ActivityChangeSimBin
                 .addToBackStack(null)
                 .commit();
     }
+
+    @Override
+    public void onCancel() {
+        onBackPressed();
+    }
 }
