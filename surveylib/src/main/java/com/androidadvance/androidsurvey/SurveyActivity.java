@@ -144,4 +144,10 @@ public class SurveyActivity extends AppCompatActivity {
         setResult(Activity.RESULT_OK, returnIntent);
         finish();
     }
+
+    public void event_survey_exit() {
+        Intent returnIntent = new Intent();
+        setResult(Activity.RESULT_CANCELED, returnIntent);
+        finish();
+    }
 }

@@ -25,6 +25,7 @@ public class FragmentNumber extends Fragment {
 
     private FragmentActivity mContext;
     private Button button_continue;
+    private Button button_exit;
     private TextView textview_q_title;
     private EditText editText_answer;
 
@@ -35,6 +36,7 @@ public class FragmentNumber extends Fragment {
                 R.layout.fragment_text_simple, container, false);
 
         button_continue = (Button) rootView.findViewById(R.id.button_continue);
+        button_exit = (Button) rootView.findViewById(R.id.button_exit);
         textview_q_title = (TextView) rootView.findViewById(R.id.textview_q_title);
         editText_answer = (EditText) rootView.findViewById(R.id.editText_answer);
         editText_answer.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
@@ -42,6 +44,13 @@ public class FragmentNumber extends Fragment {
             @Override public void onClick(View v) {
                 Answers.getInstance().put_answer(textview_q_title.getText().toString(), editText_answer.getText().toString().trim());
                 ((SurveyActivity) mContext).go_to_next();
+            }
+        });
+
+        button_exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((SurveyActivity) mContext).event_survey_exit();
             }
         });
 

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.androidadvance.androidsurvey.SurveyActivity;
@@ -18,6 +17,7 @@ import com.viettel.mbccs.variable.Constants;
 import java.io.IOException;
 import java.io.InputStream;
 
+import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 
 /**
@@ -56,8 +56,6 @@ public class ProcessSurveyKPPFragment extends BaseDataBindFragment<FragmentProce
         mBinding.setPresenter(mPresenter);
 
         initListeners();
-
-        loadSurveyItem();
     }
 
     private void loadSurveyItem() {
@@ -103,7 +101,7 @@ public class ProcessSurveyKPPFragment extends BaseDataBindFragment<FragmentProce
 
     @Override
     protected void initView() {
-
+        loadSurveyItem();
     }
 
     private void initListeners() {
@@ -123,18 +121,22 @@ public class ProcessSurveyKPPFragment extends BaseDataBindFragment<FragmentProce
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        try{
+        try {
             if (requestCode == SURVEY_REQUEST) {
                 if (resultCode == RESULT_OK) {
-
                     String answers_json = data.getExtras().getString("answers");
-                    Log.d("****", "****************** WE HAVE ANSWERS ******************");
-                    Log.v("ANSWERS JSON", answers_json);
-                    Log.d("****", "*****************************************************");
+                    mPresenter.onSurveyCompleted(answers_json);
+                } else if (resultCode == RESULT_CANCELED) {
+                    mPresenter.onSurveyTerminated();
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        getActivity().onBackPressed();
     }
 }

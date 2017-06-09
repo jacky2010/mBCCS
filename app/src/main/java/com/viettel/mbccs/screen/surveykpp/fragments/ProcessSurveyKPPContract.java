@@ -10,8 +10,11 @@ import com.viettel.mbccs.base.BaseView;
 public class ProcessSurveyKPPContract {
     interface ViewModel extends BaseView<Presenter> {
         void showError(String message);
+        void onBackPressed();
     }
 
     interface Presenter extends BasePresenter {
+        void onSurveyCompleted(String answersJson);
+        void onSurveyTerminated();
     }
 }

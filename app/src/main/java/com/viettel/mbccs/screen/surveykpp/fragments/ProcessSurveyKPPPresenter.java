@@ -35,4 +35,14 @@ public class ProcessSurveyKPPPresenter implements ProcessSurveyKPPContract.Prese
     public void unSubscribe() {
 
     }
+
+    @Override
+    public void onSurveyCompleted(String answersJson) {
+        viewModel.onBackPressed();
+    }
+
+    @Override
+    public void onSurveyTerminated() {
+        viewModel.onBackPressed();
+    }
 }

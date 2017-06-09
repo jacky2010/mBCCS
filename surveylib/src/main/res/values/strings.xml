@@ -1,7 +1,8 @@
 <resources>
-    <string name="app_name">AndroidSurvey</string>
-    <string name="xcontinue">Continue</string>
-    <string name="start">Start</string>
-    <string name="close">Close</string>
-    <string name="finish">Finish</string>
+    <string name="app_name">Survey</string>
+    <string name="exit">Thoát</string>
+    <string name="xcontinue">Tiếp tục</string>
+    <string name="start">Bắt đầu</string>
+    <string name="close">Đóng</string>
+    <string name="finish">Kết thúc</string>
 </resources>

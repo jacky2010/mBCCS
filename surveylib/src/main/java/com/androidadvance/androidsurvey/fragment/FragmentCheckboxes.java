@@ -28,6 +28,7 @@ public class FragmentCheckboxes extends Fragment {
     private Question q_data;
     private FragmentActivity mContext;
     private Button button_continue;
+    private Button button_exit;
     private TextView textview_q_title;
     private LinearLayout linearLayout_checkboxes;
     private final ArrayList<CheckBox> allCb = new ArrayList<>();
@@ -39,12 +40,20 @@ public class FragmentCheckboxes extends Fragment {
                 R.layout.fragment_checkboxes, container, false);
 
         button_continue = (Button) rootView.findViewById(R.id.button_continue);
+        button_exit = (Button) rootView.findViewById(R.id.button_exit);
         textview_q_title = (TextView) rootView.findViewById(R.id.textview_q_title);
         linearLayout_checkboxes = (LinearLayout) rootView.findViewById(R.id.linearLayout_checkboxes);
         button_continue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ((SurveyActivity) mContext).go_to_next();
+            }
+        });
+
+        button_exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((SurveyActivity) mContext).event_survey_exit();
             }
         });
 
