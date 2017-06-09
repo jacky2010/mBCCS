@@ -62,8 +62,9 @@ public class KPPOrderPresenter implements KPPOrderContract.Presenter {
         adapterPosition = new ObservableField<>();
         adapterPosition.set(1);
 
-        adapterStatus = new ArrayAdapter<String>(mContext, R.layout.item_spinner, R.id.text,
+        adapterStatus = new ArrayAdapter<String>(mContext, R.layout.item_spinner,
                 mContext.getResources().getStringArray(R.array.order_status_name));
+        adapterStatus.setDropDownViewResource(R.layout.item_spinner);
 
         mKPPOrderAdapter = new KPPOrderAdapter(mContext, mSaleOrderses);
     }

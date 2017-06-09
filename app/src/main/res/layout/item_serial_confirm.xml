@@ -26,13 +26,11 @@
                 android:gravity="center"
                 android:paddingBottom="5dp"
                 android:paddingTop="5dp"
-                android:textColor="@color/blue"
-                app:textUnderLine="@{String.valueOf(serial.fromSerial)}"
+                android:text="@{String.valueOf(serial.fromSerial)}"
+                android:textColor="@color/black"
                 />
             <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/grey"
+                style="@style/dividerVerticalStyle"
                 />
             <com.viettel.mbccs.widget.CustomTextView
                 android:id="@+id/text_serial_to"
@@ -42,13 +40,11 @@
                 android:gravity="center"
                 android:paddingBottom="5dp"
                 android:paddingTop="5dp"
-                android:textColor="@color/blue"
-                app:textUnderLine="@{String.valueOf(serial.toSerial)}"
+                android:text="@{String.valueOf(serial.toSerial)}"
+                android:textColor="@color/black"
                 />
             <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/grey"
+                style="@style/dividerVerticalStyle"
                 />
             <com.viettel.mbccs.widget.CustomTextView
                 android:id="@+id/text_serial_quantity"

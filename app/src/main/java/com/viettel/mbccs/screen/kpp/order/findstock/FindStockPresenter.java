@@ -70,8 +70,9 @@ public class FindStockPresenter
         name = new ObservableField<>();
         nameError = new ObservableField<>();
 
-        stockTypeAdapter = new ArrayAdapter<>(mContext, R.layout.item_spinner, R.id.text,
+        stockTypeAdapter = new ArrayAdapter<>(mContext, R.layout.item_spinner,
                 mContext.getResources().getStringArray(R.array.stock_type));
+        stockTypeAdapter.setDropDownViewResource(R.layout.item_spinner);
         stockTotalAdapter = new StockTotalPickerAdapter(mContext, mStockTotals);
         stockTotalAdapter.setOnStockTotalPickListener(this);
     }
