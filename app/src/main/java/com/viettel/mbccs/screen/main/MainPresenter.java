@@ -1,8 +1,10 @@
 package com.viettel.mbccs.screen.main;
 
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.ObservableInt;
 import com.viettel.mbccs.R;
+import com.viettel.mbccs.base.BaseSubMenuActivity;
 import com.viettel.mbccs.data.model.Function;
 import com.viettel.mbccs.widget.BottomNavigationView;
 import java.util.ArrayList;
@@ -31,13 +33,13 @@ public class MainPresenter implements MainContract.Presenter {
         mFunctionList.add(new Function(Function.MenuId.MENU_PLACEHOLDER,
                 mContext.getResources().getString(R.string.menu_dashboard),
                 R.drawable.ic_menu_home_selector));
-        mFunctionList.add(new Function(Function.MenuId.MENU_PLACEHOLDER,
+        mFunctionList.add(new Function(Function.MenuId.MENU_QUAN_LY_CONG_VIEC,
                 mContext.getResources().getString(R.string.menu_task),
                 R.drawable.ic_menu_job_selector));
-        mFunctionList.add(new Function(Function.MenuId.MENU_PLACEHOLDER,
+        mFunctionList.add(new Function(Function.MenuId.MENU_QUAN_LY_BAN_HANG,
                 mContext.getResources().getString(R.string.menu_sale),
                 R.drawable.ic_menu_cart_selector));
-        mFunctionList.add(new Function(Function.MenuId.MENU_PLACEHOLDER,
+        mFunctionList.add(new Function(Function.MenuId.MENU_QUAN_LY_THONG_TIN_KH,
                 mContext.getResources().getString(R.string.menu_customer),
                 R.drawable.ic_menu_customer_selector));
 
@@ -93,6 +95,14 @@ public class MainPresenter implements MainContract.Presenter {
                     case 0:
                         mViewModel.backToMain();
                         mLastIndex.set(position);
+                        break;
+                    case 1:
+                    case 2:
+                    case 3:
+                        Intent intent = new Intent(mContext, BaseSubMenuActivity.class);
+                        intent.putExtra(BaseSubMenuActivity.EXTRA_MENU_ITEM,
+                                mFunctionList.get(position));
+                        mContext.startActivity(intent);
                         break;
                     case 4:
                         mViewModel.gotoMenu();
