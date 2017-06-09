@@ -238,6 +238,8 @@ Từ <b>%s</b><br>
     <string name="branches_add_hint_bts">- Chọn trạm BTS -</string>
     <string name="branches_search_label_isdn">Số thuê bao</string>
     <string name="branches_error_search_key_required">Số Giấy Tờ không được để trống!</string>
+    <string name="branches_msg_confirm_add">Bạn có muốn tạo kênh với các thông tin sau:</string>
+    <string name="branches_msg_added_branch">Tạo mới kênh thành công với các thông tin sau:</string>
     <!--Create Branch-->
 
     <string name="channel_label_code">Mã kênh</string>

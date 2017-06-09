@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <!--<data>-->
+
+    <!--<variable-->
+    <!--name="presenter"-->
+    <!--type="com.viettel.mbccs.screen.transferanypay.dialogs.DialogRefilledAnyPaySuccessFragmentagment" />-->
+    <!--</data>-->
+
+    <!--<LinearLayout-->
+    <!--android:orientation="vertical"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+
+    <com.viettel.mbccs.widget.ToolBarView
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tbIconLeft="@drawable/ic_close"
+        app:tbTitle="Thông báo" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/view_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="@dimen/dp_20"
+                        android:background="@drawable/ic_done" />
+
+                    <com.viettel.mbccs.widget.CustomTextView
+                        android:id="@+id/txtMessageDetail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center" />
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TableRow>
+
+                            <com.viettel.mbccs.widget.CustomTextView
+                                style="@style/ItemBilling"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/branches_add_label_channel_type" />
+
+                            <com.viettel.mbccs.widget.CustomTextView
+                                android:id="@+id/tv_channel_type"
+                                style="@style/ItemBilling"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                        </TableRow>
+
+                        <TableRow>
+
+                            <com.viettel.mbccs.widget.CustomTextView
+                                style="@style/ItemBilling"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/branches_add_label_phone_no" />
+
+                            <com.viettel.mbccs.widget.CustomTextView
+                                android:id="@+id/tv_phone_no"
+                                style="@style/ItemBilling"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                        </TableRow>
+
+                        <TableRow>
+
+                            <com.viettel.mbccs.widget.CustomTextView
+                                style="@style/ItemBilling"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/branches_add_label_document_type" />
+
+                            <com.viettel.mbccs.widget.CustomTextView
+                                android:id="@+id/tv_document_type"
+                                style="@style/ItemBilling"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                        </TableRow>
+
+                        <TableRow>
+
+                            <com.viettel.mbccs.widget.CustomTextView
+                                style="@style/ItemBilling"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/branches_add_label_address" />
+
+                            <com.viettel.mbccs.widget.CustomTextView
+                                android:id="@+id/tv_address"
+                                style="@style/ItemBilling"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                        </TableRow>
+
+                        <TableRow>
+
+                            <com.viettel.mbccs.widget.CustomTextView
+                                style="@style/ItemBilling"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/branches_add_label_location" />
+
+                            <com.viettel.mbccs.widget.CustomTextView
+                                android:id="@+id/tv_location"
+                                style="@style/ItemBilling"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                        </TableRow>
+
+                        <TableRow>
+
+                            <com.viettel.mbccs.widget.CustomTextView
+                                style="@style/ItemBilling"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/branches_add_label_manager" />
+
+                            <com.viettel.mbccs.widget.CustomTextView
+                                android:id="@+id/tv_manager"
+                                style="@style/ItemBilling"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                        </TableRow>
+
+                        <TableRow>
+
+                            <com.viettel.mbccs.widget.CustomTextView
+                                style="@style/ItemBilling"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/branches_add_label_bts" />
+
+                            <com.viettel.mbccs.widget.CustomTextView
+                                android:id="@+id/tv_bts"
+                                style="@style/ItemBilling"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                        </TableRow>
+                    </TableLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <com.viettel.mbccs.widget.ButtonIconView
+            android:id="@+id/biv_done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view_header"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_100"
+            app:itb_bg="@color/blue"
+            android:layout_marginBottom="@dimen/dp_6"
+            app:itb_bg_pressed="@color/blue_trans"
+            app:itb_padding_left="@dimen/dp_50"
+            app:itb_padding_right="@dimen/dp_50"
+            app:itb_radius="3dp"
+            app:itb_text="OK" />
+    </LinearLayout>
+    <!--</LinearLayout>-->
+</LinearLayout>

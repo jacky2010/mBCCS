@@ -1,10 +1,10 @@
 package com.viettel.mbccs.data.source.remote.service;
 
 import com.viettel.mbccs.data.model.LoginInfo;
-import com.viettel.mbccs.data.source.remote.request.AddBranchRequest;
 import com.viettel.mbccs.data.source.remote.request.ChecOTPRequest;
 import com.viettel.mbccs.data.source.remote.request.CheckCalledIsdnRequest;
 import com.viettel.mbccs.data.source.remote.request.CheckIdNoRequest;
+import com.viettel.mbccs.data.source.remote.request.CreateDistributedChannelRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateSaleTransChannelRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateSaleTransFromOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
@@ -159,7 +159,7 @@ public interface MBCSSApi {
 
     @POST("/createDistributtedChannel")
     Observable<BaseResponse<CreateDistributedChannelResponse>> createDistributtedChannel(
-            @Body AddBranchRequest request);
+            @Body DataRequest<CreateDistributedChannelRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_CreateSaleTransChannel")
     Observable<BaseResponse<CreateSaleTransChannelResponse>> createSaleTransChannel(

@@ -1,8 +1,8 @@
 package com.viettel.mbccs.data.source.remote.datasource;
 
-import com.viettel.mbccs.data.model.BranchItem;
 import com.viettel.mbccs.data.source.remote.IBranchesRemoteDataSource;
-import com.viettel.mbccs.data.source.remote.request.AddBranchRequest;
+import com.viettel.mbccs.data.source.remote.request.CreateDistributedChannelRequest;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.SearchBranchKeyRequest;
 import com.viettel.mbccs.data.source.remote.request.SearchBranchRequest;
 import com.viettel.mbccs.data.source.remote.response.CreateDistributedChannelResponse;
@@ -47,12 +47,21 @@ public class BranchesRemoteDataSource implements IBranchesRemoteDataSource {
                 .compose(SchedulerUtils.<GetDistributedChannelResponse>applyAsyncSchedulers());
     }
 
+//    @Override
+//    public Observable<CreateDistributedChannelResponse> createDistributtedChannel(BranchItem item) {
+//
+//        AddBranchRequest request = new AddBranchRequest();
+//        request.setObjectBO(item);
+//
+//        return RequestHelper.getRequest()
+//                .createDistributtedChannel(request)
+//                .flatMap(SchedulerUtils.<CreateDistributedChannelResponse>convertDataFlatMap())
+//                .compose(SchedulerUtils.<CreateDistributedChannelResponse>applyAsyncSchedulers());
+//    }
+
+
     @Override
-    public Observable<CreateDistributedChannelResponse> createDistributtedChannel(BranchItem item) {
-
-        AddBranchRequest request = new AddBranchRequest();
-        request.setObjectBO(item);
-
+    public Observable<CreateDistributedChannelResponse> createDistributtedChannel(DataRequest<CreateDistributedChannelRequest> request) {
         return RequestHelper.getRequest()
                 .createDistributtedChannel(request)
                 .flatMap(SchedulerUtils.<CreateDistributedChannelResponse>convertDataFlatMap())

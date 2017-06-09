@@ -4,16 +4,20 @@ import android.content.Context;
 import android.databinding.ObservableField;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
 import com.google.android.gms.location.places.Place;
+import com.google.android.gms.maps.model.LatLng;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.BranchItem;
 import com.viettel.mbccs.data.model.KeyValue;
 import com.viettel.mbccs.data.source.BranchesRepository;
 import com.viettel.mbccs.screen.common.adapter.HintArrayAdapter;
+import com.viettel.mbccs.utils.GsonUtils;
+import com.viettel.mbccs.variable.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,8 +58,11 @@ public class AddBranchPresenter implements AddBranchContract.Presenter {
 
     private KeyValue managerObj;
     private KeyValue btsObj;
+    private KeyValue channelTypeObj;
+    private KeyValue documentTypeObj;
     private Bitmap documentImage;
     private Bitmap contractImage;
+    private LatLng locationObj;
 
     private BranchesRepository repository;
 
@@ -202,19 +209,32 @@ public class AddBranchPresenter implements AddBranchContract.Presenter {
             item.setDocumentNo(documentNo.get());
             item.setImagePath("");
             item.setAddress(address.get());
-            item.setLatitude(0);
-            item.setLongitude(0);
+
+            if (locationObj != null) {
+                item.setLatitude(locationObj.latitude);
+                item.setLongitude(locationObj.longitude);
+            }
+
             item.setStaffCode(managerObj.getKey());
             item.setBtsCode(btsObj.getKey());
             item.setDocumentImagePath("");
+            item.setBtsName(btsObj.getValue());
+            item.setStaffName(managerObj.getValue());
+            item.setChannelTypeName(channelTypeObj.getValue());
+            item.setDocumentTypeName(documentTypeObj.getValue());
 
-            viewModel.onBranchAdded(item);
+            Bundle args = new Bundle();
+            args.putString(Constants.BundleConstant.ITEM_LIST, GsonUtils.Object2String(item));
 
-        } catch (Exception e) {
+            viewModel.goToDialogFragment(args);
+
+        } catch (
+                Exception e)
+
+        {
             e.printStackTrace();
-
-            viewModel.onBranchAddFailed();
         }
+
     }
 
     public void onSelectImage(View v) {
@@ -259,6 +279,7 @@ public class AddBranchPresenter implements AddBranchContract.Presenter {
     public void onChannelTypeChanged(int index) {
         try {
             channelType.set(channelTypes.get(index).getKey());
+            channelTypeObj = channelTypes.get(index);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -268,6 +289,7 @@ public class AddBranchPresenter implements AddBranchContract.Presenter {
     public void onDocumentTypeChanged(int index) {
         try {
             documentType.set(documentTypes.get(index).getKey());
+            documentTypeObj = documentTypes.get(index);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -288,8 +310,10 @@ public class AddBranchPresenter implements AddBranchContract.Presenter {
     @Override
     public void onPlaceSelected(Place place) {
         try {
-            if (place != null)
+            if (place != null) {
                 location.set(place.getLatLng().latitude + ", " + place.getLatLng().longitude);
+                locationObj = place.getLatLng();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

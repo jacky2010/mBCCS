@@ -1,6 +1,7 @@
 package com.viettel.mbccs.data.source.remote;
 
-import com.viettel.mbccs.data.model.BranchItem;
+import com.viettel.mbccs.data.source.remote.request.CreateDistributedChannelRequest;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.response.CreateDistributedChannelResponse;
 import com.viettel.mbccs.data.source.remote.response.GetDistributedChannelResponse;
 
@@ -14,5 +15,5 @@ public interface IBranchesRemoteDataSource {
 
     Observable<GetDistributedChannelResponse> getDistributtedChannelInfo(String isdn, String documentId);
 
-    Observable<CreateDistributedChannelResponse> createDistributtedChannel(BranchItem request);
+    Observable<CreateDistributedChannelResponse> createDistributtedChannel(DataRequest<CreateDistributedChannelRequest> request);
 }

@@ -16,10 +16,10 @@ import android.widget.Toast;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindFragment;
-import com.viettel.mbccs.data.model.BranchItem;
 import com.viettel.mbccs.data.model.KeyValue;
 import com.viettel.mbccs.databinding.FragmentAddBranchBinding;
 import com.viettel.mbccs.screen.branches.btspicker.BTSPickerActivity;
+import com.viettel.mbccs.screen.branches.dialogs.DialogConfirmAddBranchFragment;
 import com.viettel.mbccs.screen.branches.staffpicker.StaffPickerActivity;
 import com.viettel.mbccs.utils.ActivityUtils;
 import com.viettel.mbccs.utils.GsonUtils;
@@ -142,16 +142,6 @@ public class AddBranchFragment extends BaseDataBindFragment<FragmentAddBranchBin
     }
 
     @Override
-    public void onBranchAdded(BranchItem branchItem) {
-
-    }
-
-    @Override
-    public void onBranchAddFailed() {
-
-    }
-
-    @Override
     public void onChooseManager(List<KeyValue> items) {
         Intent intent = new Intent(getActivity(), StaffPickerActivity.class);
         intent.putExtra(Constants.BundleConstant.ITEM_LIST,
@@ -253,6 +243,11 @@ public class AddBranchFragment extends BaseDataBindFragment<FragmentAddBranchBin
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         mActivity = (AppCompatActivity) activity;
+    }
+
+    @Override
+    public void goToDialogFragment(Bundle args) {
+        getBaseActivity().goToDialogFragment(new DialogConfirmAddBranchFragment(), args);
     }
 
     private void cameraIntent() {

@@ -1,11 +1,12 @@
 package com.viettel.mbccs.data.source;
 
-import com.viettel.mbccs.data.model.BranchItem;
 import com.viettel.mbccs.data.model.KeyValue;
-import com.viettel.mbccs.data.source.local.datasource.BranchesLocalDataSource;
 import com.viettel.mbccs.data.source.local.IBranchesLocalDataSource;
+import com.viettel.mbccs.data.source.local.datasource.BranchesLocalDataSource;
 import com.viettel.mbccs.data.source.remote.IBranchesRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.datasource.BranchesRemoteDataSource;
+import com.viettel.mbccs.data.source.remote.request.CreateDistributedChannelRequest;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.response.CreateDistributedChannelResponse;
 import com.viettel.mbccs.data.source.remote.response.GetDistributedChannelResponse;
 
@@ -43,7 +44,7 @@ public class BranchesRepository implements IBranchesLocalDataSource, IBranchesRe
     }
 
     @Override
-    public Observable<CreateDistributedChannelResponse> createDistributtedChannel(BranchItem request) {
+    public Observable<CreateDistributedChannelResponse> createDistributtedChannel(DataRequest<CreateDistributedChannelRequest> request) {
         return remoteDataSource.createDistributtedChannel(request);
     }
 

@@ -1,11 +1,11 @@
 package com.viettel.mbccs.screen.branches.fragments;
 
 import android.graphics.Bitmap;
+import android.os.Bundle;
 
 import com.google.android.gms.location.places.Place;
 import com.viettel.mbccs.base.BasePresenter;
 import com.viettel.mbccs.base.BaseView;
-import com.viettel.mbccs.data.model.BranchItem;
 import com.viettel.mbccs.data.model.KeyValue;
 
 import java.util.List;
@@ -16,12 +16,11 @@ import java.util.List;
 
 public class AddBranchContract {
     interface ViewModel extends BaseView<Presenter> {
-        void onBranchAdded(BranchItem branchItem);
-        void onBranchAddFailed();
         void onChooseManager(List<KeyValue> items);
         void onChooseBTS(List<KeyValue> items);
         void showError(String message);
         void onSelectImage(android.view.View v);
+        void goToDialogFragment(Bundle args);
     }
 
     interface Presenter extends BasePresenter {
