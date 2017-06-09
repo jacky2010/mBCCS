@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="item"
+            type="com.viettel.mbccs.data.model.SurveyQuestion"
+            />
+        <variable
+            name="question"
+            type="com.viettel.mbccs.data.model.SurveyQuestion.Answer"
+            />
+        <import type="android.view.View"/>
+        <import type="com.viettel.mbccs.constance.SurveyType"/>
+    </data>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/layout_question"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_survey"
+        android:orientation="vertical"
+        android:padding="@dimen/dp_15"
+        >
+        <RelativeLayout
+            android:id="@+id/layout_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            >
+            <android.support.v7.widget.AppCompatRadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:drawableTint="@color/green"
+                android:checked="@{question.select}"
+                android:theme="@style/MyRadioCheckbox"
+                android:clickable="false"
+                android:visibility="@{item.type == SurveyType.SINGLE_CHOICE ? View.VISIBLE: View.GONE}"
+                />
+            <android.support.v7.widget.AppCompatCheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:drawableTint="@color/green"
+                android:theme="@style/MyRadioCheckbox"
+                android:checked="@{question.select}"
+                android:clickable="false"
+                android:visibility="@{item.type == SurveyType.MULTI_CHOICE ? View.VISIBLE: View.GONE}"
+                />
+        </RelativeLayout>
+
+        <com.viettel.mbccs.widget.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_margin="@dimen/dp_10"
+            android:layout_toRightOf="@id/layout_check"
+            android:text="@{question.content}"
+            />
+    </RelativeLayout>
+</layout>

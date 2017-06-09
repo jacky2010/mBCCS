@@ -9,176 +9,171 @@
         <import type="android.view.View"/>
     </data>
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         >
-        <android.support.v7.widget.CardView
+        <View style="@style/dividerHorizontalStyle"/>
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
             >
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:padding="3dp"
                 >
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:padding="3dp"
+                    android:layout_weight="0.7"
+                    android:gravity="center"
+                    android:padding="5dp"
                     >
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.7"
-                        android:gravity="center"
-                        android:padding="5dp"
-                        >
-                        <ImageView
-                            android:id="@+id/image_cover"
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:scaleType="fitCenter"
-                            app:loadImage="@{item.item.pathImage1}"
-                            />
-                    </LinearLayout>
+                    <ImageView
+                        android:id="@+id/image_cover"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:scaleType="fitCenter"
+                        app:loadImage="@{item.item.pathImage1}"
+                        />
+                </LinearLayout>
 
-                    <View
-                        style="@style/dividerVerticalStyle"
+                <View
+                    style="@style/dividerVerticalStyle"
+                    />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.3"
+                    android:orientation="vertical"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp"
+                    >
+
+                    <com.viettel.mbccs.widget.CustomTextView
+                        android:id="@+id/text_good_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@{item.item.stockMoldeName}"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        />
+
+                    <com.viettel.mbccs.widget.CustomTextView
+                        android:id="@+id/text_good_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:text="@{item.price}"
+                        android:textColor="@color/red"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
                         />
 
                     <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1.3"
-                        android:orientation="vertical"
-                        android:paddingBottom="5dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:paddingTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
                         >
-
                         <com.viettel.mbccs.widget.CustomTextView
-                            android:id="@+id/text_good_name"
-                            android:layout_width="match_parent"
+                            android:id="@+id/btn_subtracs"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="@{item.item.stockMoldeName}"
-                            android:textColor="@color/black"
-                            android:textSize="12sp"
-                            />
-
-                        <com.viettel.mbccs.widget.CustomTextView
-                            android:id="@+id/text_good_price"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:gravity="center"
-                            android:text="@{item.price}"
-                            android:textColor="@color/red"
-                            android:textSize="12sp"
+                            android:text="-"
+                            android:textColor="@color/grey_bright"
+                            android:textSize="40sp"
                             android:textStyle="bold"
                             />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                        <com.viettel.mbccs.widget.CustomEdittext
+                            android:id="@+id/input_quantity_choice"
+                            android:layout_width="50dp"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:background="@drawable/bg_input"
                             android:gravity="center"
-                            android:orientation="horizontal"
-                            >
-                            <com.viettel.mbccs.widget.CustomTextView
-                                android:id="@+id/btn_subtracs"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="-"
-                                android:textColor="@color/grey_bright"
-                                android:textSize="40sp"
-                                android:textStyle="bold"
-                                />
-                            <com.viettel.mbccs.widget.CustomEdittext
-                                android:id="@+id/input_quantity_choice"
-                                android:layout_width="50dp"
-                                android:layout_height="40dp"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"
-                                android:background="@drawable/bg_input"
-                                android:gravity="center"
-                                android:imeOptions="actionDone"
-                                android:inputType="numberSigned"
-                                android:padding="5dp"
-                                android:selectAllOnFocus="true"
-                                android:text="@{String.valueOf(item.item.choiceCount)}"
-                                android:textSize="16sp"
-                                />
-                            <com.viettel.mbccs.widget.CustomTextView
-                                android:id="@+id/btn_plus"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="+"
-                                android:textColor="@color/grey_bright"
-                                android:textSize="40sp"
-                                android:textStyle="bold"
-                                />
-                        </LinearLayout>
-
+                            android:imeOptions="actionDone"
+                            android:inputType="numberSigned"
+                            android:padding="5dp"
+                            android:selectAllOnFocus="true"
+                            android:text="@{String.valueOf(item.item.choiceCount)}"
+                            android:textSize="16sp"
+                            />
+                        <com.viettel.mbccs.widget.CustomTextView
+                            android:id="@+id/btn_plus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+"
+                            android:textColor="@color/grey_bright"
+                            android:textSize="40sp"
+                            android:textStyle="bold"
+                            />
                     </LinearLayout>
 
-                    <View
-                        style="@style/dividerVerticalStyle"
+                </LinearLayout>
+
+                <View
+                    style="@style/dividerVerticalStyle"
+                    />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="2dp"
+                    >
+                    <com.viettel.mbccs.widget.CustomTextView
+                        android:id="@+id/text_remain_goods_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Kho còn"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
                         />
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:padding="2dp"
-                        >
-                        <com.viettel.mbccs.widget.CustomTextView
-                            android:id="@+id/text_remain_goods_title"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Kho còn"
-                            android:gravity="center"
-                            android:textColor="@color/black"
-                            android:textSize="12sp"
-                            />
-                        <com.viettel.mbccs.widget.CustomTextView
-                            android:id="@+id/text_remain_goods_value"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:textColor="@color/black"
-                            android:textSize="12sp"
-                            android:gravity="center"
-                            app:textHtml="@{item.remainStock}"
-                            />
-                        <com.viettel.mbccs.widget.CustomTextView
-                            android:id="@+id/text_serial_count"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:text="@{item.selectedSerial}"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_12"
-                            android:visibility="@{item.item.choiceCount==0?View.GONE:View.VISIBLE}"
-                            />
-                        <com.viettel.mbccs.widget.CustomTextView
-                            android:id="@+id/text_serial"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="12sp"
-                            android:gravity="center"
-                            android:visibility="@{item.item.choiceCount==0?View.GONE:View.VISIBLE}"
-                            app:textUnderLine="@{@string/select_serial}"
-                            />
-                    </LinearLayout>
+                    <com.viettel.mbccs.widget.CustomTextView
+                        android:id="@+id/text_remain_goods_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        app:textHtml="@{item.remainStock}"
+                        />
+                    <com.viettel.mbccs.widget.CustomTextView
+                        android:id="@+id/text_serial_count"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="@{item.selectedSerial}"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_12"
+                        android:visibility="@{item.item.choiceCount==0?View.GONE:View.VISIBLE}"
+                        />
+                    <com.viettel.mbccs.widget.CustomTextView
+                        android:id="@+id/text_serial"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="12sp"
+                        android:visibility="@{item.item.choiceCount==0?View.GONE:View.VISIBLE}"
+                        app:textUnderLine="@{@string/select_serial}"
+                        />
                 </LinearLayout>
             </LinearLayout>
-        </android.support.v7.widget.CardView>
-    </RelativeLayout>
+        </LinearLayout>
+        <View style="@style/dividerHorizontalStyle"/>
+    </LinearLayout>
 </layout>
