@@ -171,7 +171,7 @@ public class CreateUpdateInformationPresenter
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         switch (parent.getId()) {
-            case R.id.spinner_select_passport_type:
+            case R.id.spinner:
                 positionPassportType = position;
                 break;
         }

@@ -9,6 +9,7 @@ import android.databinding.DataBindingUtil;
 import android.databinding.InverseBindingAdapter;
 import android.databinding.InverseBindingListener;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.view.ViewCompat;
@@ -19,7 +20,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.databinding.LayoutSpinnerWithBorderBinding;
@@ -31,6 +35,7 @@ import com.viettel.mbccs.databinding.LayoutSpinnerWithBorderBinding;
 public class SpinnerWithBorder extends FrameLayout {
 
     private AppCompatSpinner mSpinner;
+    private ImageView mImageView;
 
     public SpinnerWithBorder(Context context) {
         this(context, null);
@@ -51,9 +56,17 @@ public class SpinnerWithBorder extends FrameLayout {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    @BindingAdapter("adapter")
-    public static void bindData(SpinnerWithBorder spinnerWithBorder, ArrayAdapter<String> adapter) {
+    @BindingAdapter(value = { "adapter", "position", "leftIcon" }, requireAll = false)
+    public static void bindData(SpinnerWithBorder spinnerWithBorder, BaseAdapter adapter,
+            int position, Drawable drawable) {
         spinnerWithBorder.getSpinner().setAdapter(adapter);
+        spinnerWithBorder.getSpinner().setSelection(position);
+        if (drawable != null) {
+            spinnerWithBorder.getImageView().setVisibility(View.VISIBLE);
+            spinnerWithBorder.getImageView().setImageDrawable(drawable);
+        } else {
+            spinnerWithBorder.getImageView().setVisibility(View.GONE);
+        }
     }
 
     @BindingAdapter(value = {
@@ -77,8 +90,12 @@ public class SpinnerWithBorder extends FrameLayout {
         spinnerWithBorder.getSpinner().setSelection(seletedPosition);
     }
 
-    @InverseBindingAdapter(attribute = "selectedPosition",
-            event = "selectedValueAttrChanged")
+    public void setOnItemSelectedListener(
+            AdapterView.OnItemSelectedListener onItemSelectedListener) {
+        getSpinner().setOnItemSelectedListener(onItemSelectedListener);
+    }
+
+    @InverseBindingAdapter(attribute = "selectedPosition", event = "selectedValueAttrChanged")
     public static int captureSelectedPosition(SpinnerWithBorder spinnerWithBorder) {
         return spinnerWithBorder.getSpinner().getSelectedItemPosition();
     }
@@ -88,6 +105,7 @@ public class SpinnerWithBorder extends FrameLayout {
                 R.layout.layout_spinner_with_border, this, true)).setInput(this);
 
         mSpinner = (AppCompatSpinner) findViewById(R.id.spinner_border);
+        mImageView = (ImageView) findViewById(R.id.image_left);
 
         TypedArray typedArray =
                 getContext().obtainStyledAttributes(attributeSet, R.styleable.SpinnerWithBorder);
@@ -97,9 +115,10 @@ public class SpinnerWithBorder extends FrameLayout {
                     typedArray.getColorStateList(R.styleable.SpinnerWithBorder_spinnerTintColor);
             if (color == null) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    color = ColorStateList.valueOf(getResources().getColor(R.color.black, null));
+                    color = ColorStateList.valueOf(
+                            getResources().getColor(R.color.grey_bright, null));
                 } else {
-                    color = ColorStateList.valueOf(getResources().getColor(R.color.black));
+                    color = ColorStateList.valueOf(getResources().getColor(R.color.grey_bright));
                 }
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -122,6 +141,10 @@ public class SpinnerWithBorder extends FrameLayout {
 
     public void setSelectedPosition(int position) {
         mSpinner.setSelection(position);
+    }
+
+    public ImageView getImageView() {
+        return mImageView;
     }
 
     public static class HintAdapter<T> extends ArrayAdapter<T> {

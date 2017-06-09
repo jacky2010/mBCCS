@@ -77,4 +77,5 @@
     <dimen name="default_item_top_bar_text_size">12sp</dimen>
     <dimen name="all_btn_radius">5dp</dimen>
     <dimen name="dp_0_5">0.5dp</dimen>
+    <dimen name="dp_25">25dp</dimen>
 </resources>

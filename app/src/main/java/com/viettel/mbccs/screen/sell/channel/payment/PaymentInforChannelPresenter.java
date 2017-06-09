@@ -180,11 +180,11 @@ public class PaymentInforChannelPresenter implements PaymentInforChannelContract
 
     private void loadAmount(SaleTrans saleTran) {
         mSaleTrans = saleTran;
-        amountNotTax.set(String.format(mContext.getString(R.string.amount_no_tax),
+        amountNotTax.set(String.format(mContext.getString(R.string.common_format_money),
                 Common.formatDouble(saleTran.getAmountNotTax())));
-        amount.set(String.format(mContext.getString(R.string.amount),
+        amount.set(String.format(mContext.getString(R.string.common_format_money),
                 Common.formatDouble(mSaleTrans.getAmountTax())));
-        tax.set(String.format(mContext.getString(R.string.tax),
+        tax.set(String.format(mContext.getString(R.string.common_format_money),
                 Common.formatDouble(mSaleTrans.getTax())));
     }
 

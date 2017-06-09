@@ -20,7 +20,7 @@
             app:leftIcon="@{@drawable/ic_arrow_left_white_24dp}"
             app:leftIconClick="@{()->presenter.onBack()}"
             app:title="@{@string/sale_retail}"
-            app:titleColor="@{@color/black}"
+            app:titleColor="@{@color/white}"
             app:titleTextSize="@{@dimen/sp_17}"
             />
 

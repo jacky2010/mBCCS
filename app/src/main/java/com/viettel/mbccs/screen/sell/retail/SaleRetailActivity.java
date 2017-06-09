@@ -39,7 +39,7 @@ public class SaleRetailActivity
         super.onCreate(savedInstanceState);
         mPresenter = new SaleRetailPresenter(this, this);
         mBinding.setPresenter((SaleRetailPresenter) mPresenter);
-        mBinding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        mBinding.spinner.getSpinner().setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 mPresenter.onItemServiceClick(position);
@@ -158,6 +158,6 @@ public class SaleRetailActivity
 
     @Override
     public void refresh() {
-        mBinding.spinner.setSelection(0);
+        mBinding.spinner.getSpinner().setSelection(0);
     }
 }

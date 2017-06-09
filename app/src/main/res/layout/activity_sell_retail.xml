@@ -33,6 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
+                android:layout_margin="@dimen/dp_20"
                 android:onClick="@{()->presenter.onNext()}"
                 android:text="@string/next"
                 style="@style/button_positive"
@@ -64,7 +65,7 @@
                         >
                         <ImageView
                             android:layout_width="@dimen/dp_30"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginTop="@dimen/dp_5"
                             android:onClick="@{()->presenter.toogleExpand()}"
@@ -72,22 +73,21 @@
                             />
 
                         <com.viettel.mbccs.widget.CustomTextView
+                            android:id="@+id/customTextView2"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:text="@string/service"
                             />
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/bg_border"
-                            android:padding="@dimen/dp_5"
                             >
-                            <Spinner
+                            <com.viettel.mbccs.widget.SpinnerWithBorder
                                 android:id="@+id/spinner"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:adapter="@{presenter.adapter}"
-                                ></Spinner>
+                                app:adapter="@{presenter.adapter}"
+                                />
                         </LinearLayout>
                         <com.viettel.mbccs.widget.CustomTextView
                             android:layout_width="match_parent"
@@ -95,34 +95,12 @@
                             android:layout_marginTop="@dimen/dp_5"
                             android:text="@string/sell_program"
                             />
-                        <RelativeLayout
+                        <com.viettel.mbccs.widget.FakeSpinner
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/dp_40"
-                            android:background="@drawable/bg_input_tranparent"
-                            >
-                            <ImageView
-                                android:id="@+id/icon_right"
-                                android:layout_width="@dimen/dp_12"
-                                android:layout_height="@dimen/dp_12"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginRight="20dp"
-                                android:src="@drawable/triangle"
-                                />
-                            <com.viettel.mbccs.widget.CustomEdittext
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/dp_5"
-                                android:layout_toLeftOf="@id/icon_right"
-                                android:background="@color/transparent"
-                                android:editable="false"
-                                android:lines="1"
-                                android:onClick="@{()->presenter.chooseSellProgram()}"
-                                android:padding="@dimen/dp_10"
-                                android:text="@{presenter.sellProgram}"
-                                android:textSize="@dimen/sp_13"
-                                />
-                        </RelativeLayout>
+                            android:layout_height="wrap_content"
+                            android:onClick="@{()->presenter.chooseSellProgram()}"
+                            android:text="@{presenter.sellProgram}"
+                            />
                     </LinearLayout>
                 </RelativeLayout>
 
@@ -136,7 +114,6 @@
                 <android.support.v7.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="@dimen/dp_10"
                     android:adapter="@{presenter.stockAdapter}"
                     ></android.support.v7.widget.RecyclerView>
 

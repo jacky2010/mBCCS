@@ -15,10 +15,8 @@
         android:orientation="vertical"
         >
         <LinearLayout
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_input"
             android:orientation="vertical"
             >
             <LinearLayout
@@ -41,7 +39,7 @@
                         android:paddingRight="@dimen/dp_3"
                         android:paddingTop="10dp"
                         android:text="@{item.serialBlock.fromSerial}"
-                        android:textColor="@color/blue"
+                        android:textColor="@color/black"
                         />
                 </LinearLayout>
 
@@ -63,8 +61,8 @@
                         android:paddingLeft="@dimen/dp_3"
                         android:paddingRight="@dimen/dp_3"
                         android:paddingTop="10dp"
-                        android:textColor="@color/blue"
                         android:text="@{item.serialBlock.toSerial}"
+                        android:textColor="@color/black"
                         />
                 </LinearLayout>
                 <View

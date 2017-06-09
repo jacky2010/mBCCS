@@ -16,14 +16,14 @@
         <com.viettel.mbccs.widget.CustomTextView
             android:id="@+id/text_date"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center_vertical"
             android:layout_weight="1"
             android:minWidth="@dimen/dp_32"
             android:layout_marginRight="@dimen/dp_5"
             android:padding="@dimen/dp_5"
-            android:background="@drawable/bg_order"
+            android:background="@drawable/bg_input_tranparent"
             android:text="@={input.date }" />
 
         <ImageView

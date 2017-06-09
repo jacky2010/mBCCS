@@ -7,6 +7,7 @@
     <string name="serial_step1">1. Chọn dải serial</string>
     <string name="or">Hoặc</string>
     <string name="common_label_close">Đóng</string>
+    <string name="common_format_money">%s đ</string>
     <string name="complete">Hoàn thành</string>
     <string name="select_serials">Chọn serials</string>
     <string name="select_serials_step2">2. Sửa dải serial đã chọn ở b1</string>
@@ -785,4 +786,7 @@ Từ <b>%s</b><br>
     <string name="activity_create_ticket_return_upper_lap_phieu_xuat_tu_kho">Lập phiếu xuất từ kho</string>
     <string name="activity_create_ticket_return_upper_them">Thêm</string>
     <string name="activity_create_ticket_return_upper_lap_phieu">Lập phiếu</string>
+    <string name="common_label_total_money">Tổng tiền</string>
+    <string name="common_label_tax">Tiền thuế</string>
+    <string name="common_label_total_amount">Số tiền phải thanh toán</string>
 </resources>

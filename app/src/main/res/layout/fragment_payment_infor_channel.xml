@@ -34,23 +34,21 @@
             android:layout_height="match_parent"
             >
 
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:animateLayoutChanges="true"
                 android:orientation="vertical"
-                android:paddingBottom="10dp"
                 >
 
-
+                <View
+                    style="@style/dividerHorizontalStyle"/>
                 <LinearLayout
                     android:id="@+id/btn_expand_collapse_channelinfo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:background="#B7D6AA"
+                    android:background="@color/ice_berg"
                     android:onClick="@{()-> presenter.toogleCustomerInfo()}"
                     android:orientation="horizontal"
                     android:padding="5dp"
@@ -60,9 +58,10 @@
                         android:id="@+id/btnToogleChannel"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
+                        android:layout_gravity="center_vertical"
                         android:rotation="@{presenter.isExpandCustomerInfo?180:0}"
                         android:src="@drawable/triangle"
-                        ></ImageView>
+                        />
 
                     <com.viettel.mbccs.widget.CustomTextView
                         android:layout_width="match_parent"
@@ -73,6 +72,8 @@
                         android:textStyle="bold"
                         />
                 </LinearLayout>
+                <View
+                    style="@style/dividerHorizontalStyle"/>
                 <LinearLayout
                     android:id="@+id/layout_channel_info"
                     android:layout_width="match_parent"
@@ -175,15 +176,13 @@
                         />
 
                 </LinearLayout>
-
+                <View
+                    style="@style/dividerHorizontalStyle"/>
                 <LinearLayout
                     android:id="@+id/btn_expand_collapse_payment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="20dp"
-                    android:background="#B7D6AA"
+                    android:background="@color/ice_berg"
                     android:onClick="@{()-> presenter.tooglePaymentInfor()}"
                     android:orientation="horizontal"
                     android:padding="5dp"
@@ -193,6 +192,7 @@
                         android:id="@+id/btnTooglePayment"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
+                        android:layout_gravity="center_vertical"
                         android:rotation="@{presenter.isExpandPaymentInfo?180:0}"
                         android:src="@drawable/triangle"
                         />
@@ -207,6 +207,8 @@
                         android:textStyle="bold"
                         />
                 </LinearLayout>
+                <View
+                    style="@style/dividerHorizontalStyle"/>
 
                 <LinearLayout
                     android:id="@+id/layout_payment"
@@ -229,16 +231,17 @@
                     <RadioGroup
                         android:id="@+id/radio_payment"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/dp_100"
                         android:gravity="center_horizontal"
                         android:orientation="horizontal"
                         >
                         <LinearLayout
                             android:id="@+id/payment_cash"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_margin="@dimen/dp_5"
                             android:layout_weight="1"
-                            android:background="@drawable/bg_payment"
+                            android:background="@drawable/bg_border"
                             android:orientation="vertical"
                             >
                             <ImageView
@@ -256,15 +259,17 @@
                                 android:clickable="false"
                                 android:gravity="center"
                                 android:text="Tiền mặt"
+                                android:textSize="@dimen/sp_12"
                                 />
                         </LinearLayout>
 
                         <LinearLayout
                             android:id="@+id/payment_bank_plus"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_margin="@dimen/dp_5"
                             android:layout_weight="1"
-                            android:background="@drawable/bg_payment"
+                            android:background="@drawable/bg_border"
                             android:orientation="vertical"
                             >
                             <ImageView
@@ -282,15 +287,17 @@
                                 android:clickable="false"
                                 android:gravity="center"
                                 android:text="Bank plus"
+                                android:textSize="@dimen/sp_12"
                                 />
                         </LinearLayout>
 
                         <LinearLayout
                             android:id="@+id/payment_wellet"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_margin="@dimen/dp_5"
                             android:layout_weight="1"
-                            android:background="@drawable/bg_payment"
+                            android:background="@drawable/bg_border"
                             android:orientation="vertical"
                             >
                             <ImageView
@@ -308,6 +315,7 @@
                                 android:clickable="false"
                                 android:gravity="center"
                                 android:text="Ví điện tử"
+                                android:textSize="@dimen/sp_12"
                                 />
                         </LinearLayout>
                     </RadioGroup>
@@ -324,14 +332,12 @@
                     <com.viettel.mbccs.widget.CustomEdittext
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dp_10"
-                        android:layout_marginRight="@dimen/dp_10"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
                         android:background="@drawable/bg_input_tranparent"
-                        android:lines="1"
-                        android:maxLines="1"
-                        android:padding="@dimen/dp_5"
+                        android:singleLine="true"
                         android:text="@={presenter.coupon}"
-                        android:textSize="@dimen/sp_13"
+                        style="@style/inputStyle"
                         />
                 </LinearLayout>
 
@@ -339,7 +345,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:background="#FD9827"
+                    android:background="@color/orange"
                     android:orientation="vertical"
                     android:padding="10dp"
                     android:visibility="@{presenter.isGetTransInfo?View.VISIBLE:View.GONE}"
@@ -352,15 +358,16 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@={presenter.amountNotTax}"
+                            android:text="@string/common_label_total_money"
                             android:textColor="@color/black"
                             android:textSize="13sp"
                             />
                         <com.viettel.mbccs.widget.CustomTextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="0.7"
-                            android:text="@={presenter.tax}"
+                            android:layout_weight="1"
+                            android:gravity="right|center_vertical"
+                            android:text="@={presenter.amountNotTax}"
                             android:textColor="@color/black"
                             android:textSize="13sp"
                             />
@@ -375,17 +382,43 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@={presenter.amount}"
+                            android:text="@string/common_label_tax"
                             android:textColor="@color/black"
                             android:textSize="13sp"
                             />
                         <com.viettel.mbccs.widget.CustomTextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="0.7"
+                            android:layout_weight="1"
+                            android:gravity="right|center_vertical"
+                            android:text="@{presenter.tax}"
                             android:textColor="@color/black"
                             android:textSize="13sp"
-                            android:visibility="gone"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        >
+                        <com.viettel.mbccs.widget.CustomTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/common_label_total_amount"
+                            android:textColor="@color/black"
+                            android:textSize="13sp"
+                            />
+                        <com.viettel.mbccs.widget.CustomTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="right|center_vertical"
+                            android:text="@{presenter.amount}"
+                            android:textColor="@color/red"
+                            android:textSize="13sp"
                             />
                     </LinearLayout>
                 </LinearLayout>
@@ -394,36 +427,23 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal"
-                    android:padding="@dimen/dp_5"
+                    android:padding="@dimen/dp_20"
                     >
-                    <LinearLayout
+
+                    <com.viettel.mbccs.widget.CustomButton
                         android:layout_width="0dp"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
                         android:layout_weight="1"
-                        android:onClick="@{()-> presenter.onBack()}"
-                        android:padding="1dp"
+                        android:onClick="@{()->presenter.onBack()}"
+                        android:text="@string/common_label_close"
                         style="@style/button_nagative"
-                        >
-                        <com.viettel.mbccs.widget.ButtonIconView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_centerHorizontal="true"
-                            android:layout_weight="1"
-                            view:itb_bg="@color/white"
-                            view:itb_bg_pressed="#f3970606"
-                            view:itb_icon="@drawable/ic_back"
-                            view:itb_icon_position="left"
-                            view:itb_radius="3dp"
-                            view:itb_text="@string/back"
-                            view:itb_text_color="@color/black"
-                            style="@style/button_nagative"
-                            />
-                    </LinearLayout>
+                        />
 
                     <com.viettel.mbccs.widget.CustomButton
                         android:layout_width="0dp"
                         android:layout_height="50dp"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginLeft="@dimen/dp_10"
                         android:layout_weight="1"
                         android:onClick="@{()->presenter.paymentClick()}"
                         android:text="@string/payment"
