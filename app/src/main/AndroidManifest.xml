@@ -192,6 +192,14 @@
         <activity
             android:name=".screen.manager.area.AdministrativeAreaDetailActivity"
             android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screen.surveykpp.SurveyKPPActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name="com.androidadvance.androidsurvey.SurveyActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

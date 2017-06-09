@@ -789,4 +789,18 @@ Từ <b>%s</b><br>
     <string name="common_label_total_money">Tổng tiền</string>
     <string name="common_label_tax">Tiền thuế</string>
     <string name="common_label_total_amount">Số tiền phải thanh toán</string>
+
+    <!--survey kpp-->
+    <string name="survey_kpp_title">Survey</string>
+    <string name="survey_kpp_label_question_nav">Câu hỏi thứ %1$s/%2$s</string>
+    <string name="survey_kpp_label_select_survey">Chọn survey</string>
+    <string name="survey_kpp_label_survey_name">Tên survey:</string>
+    <string name="survey_kpp_process">Thực hiện</string>
+    <string name="survey_kpp_label_creator">Người tạo:</string>
+    <string name="survey_kpp_exit">Thoát</string>
+    <string name="survey_kpp_next_question">Câu hỏi tiếp theo</string>
+    <string name="survey_kpp_msg_info_no_survey_kpp">Hiện không có survey!</string>
+    <string name="survey_kpp_msg_info_completed_survey_kpp">Chúc mừng bạn đã hoàn thành survey %s!</string>
+    <string name="survey_kpp_msg_info_no_survey_creator">Hiện không có survey!</string>
+    <!--/survey kpp-->
 </resources>
