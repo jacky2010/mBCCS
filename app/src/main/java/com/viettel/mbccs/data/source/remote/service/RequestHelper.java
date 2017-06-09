@@ -2,7 +2,7 @@ package com.viettel.mbccs.data.source.remote.service;
 
 import com.viettel.mbccs.BuildConfig;
 import com.viettel.mbccs.config.Config;
-import com.viettel.mbccs.data.source.local.UserLocalDataSource;
+import com.viettel.mbccs.data.source.local.datasource.UserLocalDataSource;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 import okhttp3.Interceptor;

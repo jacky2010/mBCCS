@@ -71,12 +71,12 @@ public class MenuPresenter implements MenuContract.Presenter {
 
                         @Override
                         public void onMenuClick(Function item) {
-                            switch (item.getId()) {
-                                case Function.MenuId.MENU_SETTING:
+                            switch (item.getFunctionCode()) {
+                                case Function.TopMenu.MENU_SETTINGS:
                                     intent = new Intent(mContext, ConfigActivity.class);
                                     mContext.startActivity(intent);
                                     break;
-                                case Function.MenuId.MENU_HELP:
+                                case Function.TopMenu.MENU_HELP:
                                     intent = new Intent(mContext, HelpActivity.class);
                                     mContext.startActivity(intent);
                                     break;
@@ -122,8 +122,6 @@ public class MenuPresenter implements MenuContract.Presenter {
                 } else {
                     binding.setImage(binding.getRoot().getResources().getDrawable(item.getIcon()));
                 }
-                binding.setTextColor(item.getColor());
-                binding.setTextSize(item.getSize());
                 binding.setOnClicked(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

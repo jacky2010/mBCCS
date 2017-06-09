@@ -11,7 +11,6 @@
         <attr name="dateTextColor" format="color|reference" />
     </declare-styleable>
     <declare-styleable name="BottomNavigationView">
-        <attr name="bottomBarBgColor" format="color|reference" />
         <attr name="bottomBarTextSize" format="dimension" />
         <attr name="bottomBarTextColor" format="reference" />
     </declare-styleable>

@@ -1,10 +1,10 @@
 package com.viettel.mbccs.screen.splash;
 
 import android.content.Intent;
-import android.os.Handler;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseActivity;
 import com.viettel.mbccs.screen.login.LoginActivity;
+import com.viettel.mbccs.screen.main.MainActivity;
 
 /**
  * Created by Anh Vu Viet on 5/17/2017.
@@ -13,8 +13,6 @@ import com.viettel.mbccs.screen.login.LoginActivity;
 public class SplashActivity extends BaseActivity implements SplashContract.View {
 
     private SplashPresenter presenter;
-    private Handler mHandler;
-    private Runnable mRunnable;
 
     @Override
     protected int getIdLayout() {
@@ -27,21 +25,6 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
         presenter = new SplashPresenter(this, this);
         presenter.subscribe();
         presenter.checkDataProvince();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    protected void onStop() {
-        if (mHandler != null && mRunnable != null) {
-            mHandler.removeCallbacks(mRunnable);
-            mHandler = null;
-            mRunnable = null;
-        }
-        super.onStop();
     }
 
     @Override
@@ -60,15 +43,14 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
     }
 
     @Override
-    public void checkDataProvinceSuccess() {
-        mHandler = new Handler();
-        mRunnable = new Runnable() {
-            @Override
-            public void run() {
-                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-                finish();
-            }
-        };
-        mHandler.postDelayed(mRunnable, 2000);
+    public void gotoLogin() {
+        startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+        finish();
+    }
+
+    @Override
+    public void gotoMain() {
+        startActivity(new Intent(SplashActivity.this, MainActivity.class));
+        finish();
     }
 }

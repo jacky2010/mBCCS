@@ -12,9 +12,12 @@
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingLeft="@dimen/dp_8"
+        android:paddingRight="@dimen/dp_8"
+        android:paddingTop="@dimen/dp_8"
+        bind:decoration="@{ presenter.recyclerDecoration }"
         bind:layoutManager="@{ presenter.layoutManager }"
         bind:recyclerAdapter="@{ presenter.recyclerAdapter }"
         bind:spanSizeLookup="@{ presenter.spanSizeLookup }"
-        bind:decoration="@{ presenter.recyclerDecoration }"
         />
 </layout>

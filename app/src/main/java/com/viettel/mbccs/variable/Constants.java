@@ -64,6 +64,12 @@ public class Constants {
         public static final String LOGIN_INFO = "LOGIN_INFO";
 
         /**
+         * key put get LOGIN USER NAME in app
+         * put when log in
+         */
+        public static final String LOGIN_USER_NAME = "LOGIN_USER_NAME";
+
+        /**
          * key to enscrypt and save to sharepreference (value instanceOf {@link Session})
          */
         public static final String SESSION = "session";
