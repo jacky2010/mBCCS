@@ -12,6 +12,7 @@ public class SearchSurveyKPPContract {
     interface ViewModel extends BaseView<Presenter> {
         void showError(String message);
         void onPrepareSurvey(SurveyItem item);
+        void onSearchCompleted();
     }
 
     interface Presenter extends BasePresenter {

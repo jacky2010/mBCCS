@@ -2,6 +2,7 @@ package com.viettel.mbccs.screen.surveykpp.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
@@ -59,7 +60,16 @@ public class SearchSurveyKPPFragment extends BaseDataBindFragment<FragmentSearch
     }
 
     private void initListeners() {
-
+        try {
+            mBinding.srlSurveyList.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    mPresenter.searchSurveys();
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -90,5 +100,10 @@ public class SearchSurveyKPPFragment extends BaseDataBindFragment<FragmentSearch
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onSearchCompleted() {
+        mBinding.srlSurveyList.setRefreshing(false);
     }
 }

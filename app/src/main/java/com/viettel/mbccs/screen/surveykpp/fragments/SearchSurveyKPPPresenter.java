@@ -87,6 +87,8 @@ public class SearchSurveyKPPPresenter implements SearchSurveyKPPContract.Present
                 searchFound.set(false);
             }
 
+            viewModel.onSearchCompleted();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
