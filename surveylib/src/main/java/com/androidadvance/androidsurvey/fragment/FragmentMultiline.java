@@ -62,7 +62,7 @@ public class FragmentMultiline extends Fragment {
         Question q_data = (Question) getArguments().getSerializable("data");
 
         if (q_data.getRequired()) {
-            button_continue.setVisibility(View.GONE);
+            button_continue.setEnabled(false);
             editText_answer.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -75,9 +75,9 @@ public class FragmentMultiline extends Fragment {
                 @Override
                 public void afterTextChanged(Editable s) {
                     if (s.length() > 3) {
-                        button_continue.setVisibility(View.VISIBLE);
+                        button_continue.setEnabled(true);
                     } else {
-                        button_continue.setVisibility(View.GONE);
+                        button_continue.setEnabled(false);
                     }
                 }
             });

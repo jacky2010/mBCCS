@@ -57,7 +57,7 @@ public class SellAnyPayPresenter implements SellAnyPayContract.Presenter {
             viewModel.showLoading();
 
             baseRequest = new DataRequest<>();
-            baseRequest.setApiCode(ApiCode.GetAnyPayPermission);
+            baseRequest.setApiCode(ApiCode.GetAnyPay);
             GetAnypayAuthorizeRequest request = new GetAnypayAuthorizeRequest();
             baseRequest.setParameterApi(request);
 

@@ -75,5 +75,4 @@ public class SurveyProperties implements Serializable {
     public void setSkipIntro(Boolean skipIntro) {
         this.skipIntro = skipIntro;
     }
-
 }

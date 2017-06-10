@@ -7,6 +7,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.androidadvance.androidsurvey.adapters.AdapterFragmentQ;
 import com.androidadvance.androidsurvey.fragment.FragmentCheckboxes;
@@ -24,16 +27,16 @@ import java.util.ArrayList;
 
 public class SurveyActivity extends AppCompatActivity {
 
+    private Activity activity = this;
     private SurveyPojo mSurveyPojo;
     private ViewPager mPager;
     private String style_string = null;
+    private TextView mTitleTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_survey);
-
-
 
         if (getIntent().getExtras() != null) {
             Bundle bundle = getIntent().getExtras();
@@ -43,6 +46,16 @@ public class SurveyActivity extends AppCompatActivity {
             }
         }
 
+        mTitleTextView = (TextView) findViewById(R.id.txtTitle);
+        mTitleTextView.setText(mSurveyPojo.getSurveyProperties().getTitle());
+
+        ImageView btnBack = (ImageView) findViewById(R.id.image_left);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                activity.onBackPressed();
+            }
+        });
 
         Log.i("json Object = ", String.valueOf(mSurveyPojo.getQuestions()));
 
@@ -125,9 +138,27 @@ public class SurveyActivity extends AppCompatActivity {
     }
 
     public void go_to_next() {
+
+        refreshPageTitle(mPager.getCurrentItem() + 1);
+
         mPager.setCurrentItem(mPager.getCurrentItem() + 1);
     }
 
+    private void refreshPageTitle(int currentPage) {
+        try {
+            if (mTitleTextView != null) {
+
+                int totalPage = mPager.getAdapter().getCount() - 2;
+
+                if (currentPage > totalPage)
+                    mTitleTextView.setText(mSurveyPojo.getSurveyProperties().getTitle());
+                else
+                    mTitleTextView.setText(getString(R.string.question_item_per_list, String.valueOf(currentPage), String.valueOf(totalPage)));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void onBackPressed() {
@@ -135,6 +166,8 @@ public class SurveyActivity extends AppCompatActivity {
             super.onBackPressed();
         } else {
             mPager.setCurrentItem(mPager.getCurrentItem() - 1);
+
+            refreshPageTitle(mPager.getCurrentItem() - 1);
         }
     }
 

@@ -80,9 +80,9 @@ public class FragmentCheckboxes extends Fragment {
 
         if (q_data.getRequired()) {
             if (at_leaset_one_checked) {
-                button_continue.setVisibility(View.VISIBLE);
+                button_continue.setEnabled(true);
             } else {
-                button_continue.setVisibility(View.GONE);
+                button_continue.setEnabled(false);
             }
         }
 
@@ -99,7 +99,7 @@ public class FragmentCheckboxes extends Fragment {
         textview_q_title.setText(q_data != null ? q_data.getQuestionTitle() : "");
 
         if (q_data.getRequired()) {
-            button_continue.setVisibility(View.GONE);
+            button_continue.setEnabled(false);
         }
 
         List<String> qq_data = q_data.getChoices();

@@ -399,9 +399,11 @@ public class ApiCode {
     // 9.6.3.3
     public final static String GetUserInfo = "getUserInfo";
 
-    public final static String GetAnyPayPermission = "WS_CheckAuthenticate";
+    public final static String GetAnyPay = "WS_CheckAuthenticate";
     public final static String SellAnyPayToCustomer = "WS_SaleAnyPayToCustomer";
     public final static String SellAnyPayToChannel = "WS_SaleAnyPayToChannel";
     public final static String RefillAnyPay = "WS_TransReloadAnypay";
     public final static String TransferAnyPay = "WS_TransferAnypay";
+    public final static String SendSurveyKPP = "WS_GUI_TRA_LOI";
+    public final static String GetSurveyKPP = "WS_GET_SURVERY";
 }

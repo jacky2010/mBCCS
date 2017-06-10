@@ -82,9 +82,9 @@ public class FragmentRadioboxes extends Fragment {
 
         if (q_data.getRequired()) {
             if (at_leaset_one_checked) {
-                button_continue.setVisibility(View.VISIBLE);
+                button_continue.setEnabled(true);
             } else {
-                button_continue.setVisibility(View.GONE);
+                button_continue.setEnabled(false);
             }
         }
 
@@ -125,9 +125,9 @@ public class FragmentRadioboxes extends Fragment {
 
         if (q_data.getRequired()) {
             if (at_leaset_one_checked) {
-                button_continue.setVisibility(View.VISIBLE);
+                button_continue.setEnabled(true);
             } else {
-                button_continue.setVisibility(View.GONE);
+                button_continue.setEnabled(false);
             }
         }
 

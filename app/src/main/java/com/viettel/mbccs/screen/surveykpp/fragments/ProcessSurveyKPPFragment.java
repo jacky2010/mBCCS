@@ -42,12 +42,12 @@ public class ProcessSurveyKPPFragment extends BaseDataBindFragment<FragmentProce
 
     @Override
     public void showLoading() {
-
+        showLoadingDialog();
     }
 
     @Override
     public void hideLoading() {
-
+        hideLoadingDialog();
     }
 
     @Override

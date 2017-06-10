@@ -5,4 +5,5 @@
     <string name="start">Bắt đầu</string>
     <string name="close">Đóng</string>
     <string name="finish">Kết thúc</string>
+    <string name="question_item_per_list">Câu hỏi thứ %1$s/%2$s</string>
 </resources>
