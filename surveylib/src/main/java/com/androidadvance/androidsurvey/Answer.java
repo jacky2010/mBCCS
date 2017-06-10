@@ -30,4 +30,12 @@ public class Answer {
     public void setAnswerPercent(int answerPercent) {
         this.answerPercent = answerPercent;
     }
+
+    public Answer(String answer, int answerPercent) {
+        this.answer = answer;
+        this.answerPercent = answerPercent;
+    }
+
+    public Answer() {
+    }
 }

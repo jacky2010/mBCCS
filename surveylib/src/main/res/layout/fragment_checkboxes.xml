@@ -1,51 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
 
     <ScrollView
-                android:id="@+id/content"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="2">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <TextView style="?android:textAppearanceMedium"
-                      android:padding="16dp"
-                      android:id="@+id/textview_q_title"
-                      android:lineSpacingMultiplier="1.2"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:text="Title"
-                      android:textColor="#333"
-                      android:layout_marginBottom="20dp"
+            <TextView
+                android:id="@+id/textview_q_title"
+                style="?android:textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:lineSpacingMultiplier="1.2"
+                android:padding="16dp"
+                android:text="Title"
+                android:textColor="#333"
                 android:textSize="16sp" />
 
             <LinearLayout
-                android:orientation="vertical"
+                android:id="@+id/linearLayout_checkboxes"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:id="@+id/linearLayout_checkboxes"></LinearLayout>
+                android:orientation="vertical"></LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_20" />
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/bc_answers"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_170" />
         </LinearLayout>
 
 
     </ScrollView>
 
 
-
-    <include layout="@layout/footer"
-             android:layout_height="wrap_content"
-             android:layout_width="match_parent"></include>
+    <include
+        layout="@layout/footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></include>
 
 
 </LinearLayout>

@@ -14,10 +14,22 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.androidadvance.androidsurvey.Answer;
 import com.androidadvance.androidsurvey.Answers;
 import com.androidadvance.androidsurvey.R;
 import com.androidadvance.androidsurvey.SurveyActivity;
+import com.androidadvance.androidsurvey.formatters.AxisValueFormatter;
+import com.androidadvance.androidsurvey.formatters.XAxisValueFormatter;
 import com.androidadvance.androidsurvey.models.Question;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,6 +43,7 @@ public class FragmentCheckboxes extends Fragment {
     private Button button_exit;
     private TextView textview_q_title;
     private LinearLayout linearLayout_checkboxes;
+    private BarChart bc_answers;
     private final ArrayList<CheckBox> allCb = new ArrayList<>();
     private boolean isReadOnly = false;
 
@@ -46,6 +59,7 @@ public class FragmentCheckboxes extends Fragment {
         button_exit = (Button) rootView.findViewById(R.id.button_exit);
         textview_q_title = (TextView) rootView.findViewById(R.id.textview_q_title);
         linearLayout_checkboxes = (LinearLayout) rootView.findViewById(R.id.linearLayout_checkboxes);
+        bc_answers = (BarChart) rootView.findViewById(R.id.bc_answers);
         button_continue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,7 +142,71 @@ public class FragmentCheckboxes extends Fragment {
             });
         }
 
+        if (isReadOnly) {
+            bc_answers.setVisibility(View.VISIBLE);
+
+            List<BarEntry> xAxisEntries = new ArrayList<>();
+            List<String> xAxisValues = new ArrayList<>();
+            BarEntry entry;
+
+            for (int i = 0; i < q_data.getAnswers().size(); i++) {
+
+                Answer answer = q_data.getAnswers().get(i);
+
+                xAxisValues.add(answer.getAnswer());
+
+                entry = new BarEntry(i, answer.getAnswerPercent());
+                xAxisEntries.add(entry);
+            }
+
+            setChartData(xAxisEntries, xAxisValues);
+        } else
+            bc_answers.setVisibility(View.GONE);
     }
 
+    private void setChartData(List<BarEntry> xAxisEntries, List<String> xAxisValues) {
+        BarDataSet dataSet = new BarDataSet(xAxisEntries, "");
+        dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
 
+        ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
+        dataSets.add(dataSet);
+
+        BarData data = new BarData(dataSets);
+        data.setValueTextSize(10f);
+        data.setBarWidth(0.9f);
+
+        IAxisValueFormatter xAxisFormatter = new XAxisValueFormatter(bc_answers, xAxisValues);
+
+        XAxis xAxis = bc_answers.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setDrawGridLines(false);
+        xAxis.setGranularity(1f); // only intervals of 1 day
+        xAxis.setLabelCount(7);
+        xAxis.setValueFormatter(xAxisFormatter);
+
+        IAxisValueFormatter yAxisFormatter = new AxisValueFormatter();
+
+        YAxis leftAxis = bc_answers.getAxisLeft();
+        leftAxis.setLabelCount(8, false);
+        leftAxis.setValueFormatter(yAxisFormatter);
+        leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
+        leftAxis.setSpaceTop(15f);
+        leftAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
+
+        YAxis rightAxis = bc_answers.getAxisRight();
+        rightAxis.setDrawGridLines(false);
+        rightAxis.setLabelCount(8, false);
+        rightAxis.setValueFormatter(yAxisFormatter);
+        rightAxis.setSpaceTop(15f);
+        rightAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)
+
+        bc_answers.setData(data);
+        bc_answers.invalidate();
+        bc_answers.getDescription().setEnabled(false);
+        bc_answers.getLegend().setEnabled(false);
+        bc_answers.setDrawBarShadow(false);
+        bc_answers.setDrawValueAboveBar(true);
+        bc_answers.setPinchZoom(false);
+        bc_answers.setDrawGridBackground(false);
+    }
 }

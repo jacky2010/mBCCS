@@ -24,6 +24,7 @@ import com.androidadvance.androidsurvey.models.SurveyPojo;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SurveyActivity extends AppCompatActivity {
 
@@ -54,6 +55,19 @@ public class SurveyActivity extends AppCompatActivity {
             if (bundle.containsKey(DATA_IS_READ_ONLY))
                 isReadOnly = bundle.getBoolean(DATA_IS_READ_ONLY);
         }
+
+        //TODO minhnx test
+        List<Answer> answers1 = new ArrayList<>();
+        answers1.add(new Answer("Answer1", 80));
+        answers1.add(new Answer("Answer2", 20));
+        answers1.add(new Answer("Answer3", 140));
+        answers1.add(new Answer("Answer4", 170));
+        mSurveyPojo.getQuestions().get(0).setAnswers(answers1);
+        mSurveyPojo.getQuestions().get(1).setAnswers(answers1);
+        mSurveyPojo.getQuestions().get(2).setAnswers(answers1);
+        mSurveyPojo.getQuestions().get(3).setAnswers(answers1);
+        mSurveyPojo.getQuestions().get(4).setAnswers(answers1);
+        //minhnx test
 
         mTitleTextView = (TextView) findViewById(R.id.txtTitle);
         mTitleTextView.setText(mSurveyPojo.getSurveyProperties().getTitle());

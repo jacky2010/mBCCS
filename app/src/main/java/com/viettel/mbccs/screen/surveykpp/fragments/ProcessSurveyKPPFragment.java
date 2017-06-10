@@ -131,6 +131,8 @@ public class ProcessSurveyKPPFragment extends BaseDataBindFragment<FragmentProce
 
                     if (!isReadOnly)
                         mPresenter.onSurveyCompleted(answers_json);
+                    else
+                        onBackPressed();
 
                 } else if (resultCode == RESULT_CANCELED) {
                     mPresenter.onSurveyTerminated();

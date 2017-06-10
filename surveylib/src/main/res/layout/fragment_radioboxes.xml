@@ -36,6 +36,15 @@
                 android:layout_marginRight="16dp"
                 android:orientation="vertical"></RadioGroup>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_20" />
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/bc_answers"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_170" />
+
         </LinearLayout>
 
 
