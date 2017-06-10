@@ -1,1 +1,1 @@
-include ':app', ':countrypicker', ':languagepicker', ':surveylib'
+include ':app', ':countrypicker', ':languagepicker', ':surveylib', ':mpchart'
