@@ -22,6 +22,7 @@ import com.viettel.mbccs.screen.branches.BranchesActivity;
 import com.viettel.mbccs.screen.change.installation.InstallationAddressActivity;
 import com.viettel.mbccs.screen.changesim.ChangeSimActivity;
 import com.viettel.mbccs.screen.connector.mobile.ConnectorMobileActivity;
+import com.viettel.mbccs.screen.hotnewscskpp.HotNewsCSKPPActivity;
 import com.viettel.mbccs.screen.information.CreateUpdateInformationActivity;
 import com.viettel.mbccs.screen.inputorder.InputOrderActivity;
 import com.viettel.mbccs.screen.kpp.order.KPPOrderActivity;
@@ -259,6 +260,8 @@ public class BaseSubMenuActivity
                                     new Intent(BaseSubMenuActivity.this, SurveyKPPActivity.class));
                             break;
                         case Function.MenuId.MENU_HOTNEW_CS_KPP:
+                            startActivity(
+                                    new Intent(BaseSubMenuActivity.this, HotNewsCSKPPActivity.class));
                             break;
                         case Function.MenuId.MENU_KPP_FEEDBACK:
                             break;

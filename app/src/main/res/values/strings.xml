@@ -803,4 +803,9 @@ Từ <b>%s</b><br>
     <string name="survey_kpp_msg_info_completed_survey_kpp">Chúc mừng bạn đã hoàn thành survey %s!</string>
     <string name="survey_kpp_msg_info_no_survey_creator">Hiện không có survey!</string>
     <!--/survey kpp-->
+
+    <!--hot news kpp-->
+    <string name="hot_news_cs_kpp_title">Hotnews CS KPP</string>
+    <string name="hot_news_cs_kpp_msg_info_no_news">Hiện không có tin tức nào!</string>
+    <!--/hot news kpp-->
 </resources>
