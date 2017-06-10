@@ -34,6 +34,7 @@ public class FragmentRadioboxes extends Fragment {
     private RadioGroup radioGroup;
     private final ArrayList<RadioButton> allRb = new ArrayList<>();
     private boolean at_leaset_one_checked = false;
+    private boolean isReadOnly = false;
 
 
     @Override
@@ -41,6 +42,8 @@ public class FragmentRadioboxes extends Fragment {
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_radioboxes, container, false);
+
+        isReadOnly = getArguments().getBoolean("read_only", false);
 
         button_continue = (Button) rootView.findViewById(R.id.button_continue);
         button_exit = (Button) rootView.findViewById(R.id.button_exit);
@@ -81,7 +84,7 @@ public class FragmentRadioboxes extends Fragment {
 
 
         if (q_data.getRequired()) {
-            if (at_leaset_one_checked) {
+            if (at_leaset_one_checked || isReadOnly) {
                 button_continue.setEnabled(true);
             } else {
                 button_continue.setEnabled(false);
@@ -115,6 +118,8 @@ public class FragmentRadioboxes extends Fragment {
             radioGroup.addView(rb);
             allRb.add(rb);
 
+            rb.setEnabled(!isReadOnly);
+
             rb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -124,7 +129,7 @@ public class FragmentRadioboxes extends Fragment {
         }
 
         if (q_data.getRequired()) {
-            if (at_leaset_one_checked) {
+            if (at_leaset_one_checked || isReadOnly) {
                 button_continue.setEnabled(true);
             } else {
                 button_continue.setEnabled(false);

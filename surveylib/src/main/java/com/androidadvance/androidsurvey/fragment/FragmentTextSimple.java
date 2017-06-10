@@ -27,12 +27,15 @@ public class FragmentTextSimple extends Fragment {
     private Button button_exit;
     private TextView textview_q_title;
     private EditText editText_answer;
+    private boolean isReadOnly = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_text_simple, container, false);
+
+        isReadOnly = getArguments().getBoolean("read_only", false);
 
         button_continue = (Button) rootView.findViewById(R.id.button_continue);
         button_exit = (Button) rootView.findViewById(R.id.button_exit);
@@ -64,7 +67,7 @@ public class FragmentTextSimple extends Fragment {
         mContext = getActivity();
         Question q_data = (Question) getArguments().getSerializable("data");
 
-        if (q_data.getRequired()) {
+        if (q_data.getRequired() && !isReadOnly) {
             button_continue.setEnabled(false);
             editText_answer.addTextChangedListener(new TextWatcher() {
                 @Override
@@ -84,10 +87,19 @@ public class FragmentTextSimple extends Fragment {
                     }
                 }
             });
+        }else{
+            button_continue.setEnabled(true);
         }
 
         textview_q_title.setText(Html.fromHtml(q_data.getQuestionTitle()));
-        editText_answer.requestFocus();
+
+        if(isReadOnly){
+            editText_answer.setEnabled(false);
+        }else{
+            editText_answer.setEnabled(true);
+            editText_answer.requestFocus();
+        }
+
         InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Service.INPUT_METHOD_SERVICE);
         imm.showSoftInput(editText_answer, 0);
 

@@ -32,12 +32,15 @@ public class FragmentCheckboxes extends Fragment {
     private TextView textview_q_title;
     private LinearLayout linearLayout_checkboxes;
     private final ArrayList<CheckBox> allCb = new ArrayList<>();
+    private boolean isReadOnly = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_checkboxes, container, false);
+
+        isReadOnly = getArguments().getBoolean("read_only", false);
 
         button_continue = (Button) rootView.findViewById(R.id.button_continue);
         button_exit = (Button) rootView.findViewById(R.id.button_exit);
@@ -79,7 +82,7 @@ public class FragmentCheckboxes extends Fragment {
 
 
         if (q_data.getRequired()) {
-            if (at_leaset_one_checked) {
+            if (at_leaset_one_checked || isReadOnly) {
                 button_continue.setEnabled(true);
             } else {
                 button_continue.setEnabled(false);
@@ -98,7 +101,7 @@ public class FragmentCheckboxes extends Fragment {
 
         textview_q_title.setText(q_data != null ? q_data.getQuestionTitle() : "");
 
-        if (q_data.getRequired()) {
+        if (q_data.getRequired() && !isReadOnly) {
             button_continue.setEnabled(false);
         }
 
@@ -115,6 +118,7 @@ public class FragmentCheckboxes extends Fragment {
             linearLayout_checkboxes.addView(cb);
             allCb.add(cb);
 
+            cb.setEnabled(!isReadOnly);
 
             cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override

@@ -1,11 +1,12 @@
 package com.androidadvance.androidsurvey.models;
 
+import com.androidadvance.androidsurvey.Answer;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 
 
 public class Question implements Serializable {
@@ -37,6 +38,10 @@ public class Question implements Serializable {
     @SerializedName("number_of_lines")
     @Expose
     private Integer numberOfLines;
+
+    @SerializedName("answers")
+    @Expose
+    private List<Answer> answers = new ArrayList<>();
 
     /**
      *
@@ -200,4 +205,11 @@ public class Question implements Serializable {
         this.numberOfLines = numberOfLines;
     }
 
+    public List<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
+    }
 }

@@ -3,6 +3,7 @@
     <string name="exit">Thoát</string>
     <string name="xcontinue">Tiếp tục</string>
     <string name="start">Bắt đầu</string>
+    <string name="review">Xem trả lời</string>
     <string name="close">Đóng</string>
     <string name="finish">Kết thúc</string>
     <string name="question_item_per_list">Câu hỏi thứ %1$s/%2$s</string>

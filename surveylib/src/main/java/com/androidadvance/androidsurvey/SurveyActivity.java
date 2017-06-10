@@ -27,11 +27,17 @@ import java.util.ArrayList;
 
 public class SurveyActivity extends AppCompatActivity {
 
+    public static final String DATA_SURVEY_JSON = "json_survey";
+    public static final String DATA_IS_READ_ONLY = "is_read_only";
+    public static final String DATA_SURVEY_STYLE = "style";
+    public static final String DATA_ANSWERS = "answers";
+
     private Activity activity = this;
     private SurveyPojo mSurveyPojo;
     private ViewPager mPager;
     private String style_string = null;
     private TextView mTitleTextView;
+    private boolean isReadOnly = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +46,13 @@ public class SurveyActivity extends AppCompatActivity {
 
         if (getIntent().getExtras() != null) {
             Bundle bundle = getIntent().getExtras();
-            mSurveyPojo = new Gson().fromJson(bundle.getString("json_survey"), SurveyPojo.class);
-            if (bundle.containsKey("style")) {
-                style_string = bundle.getString("style");
+            mSurveyPojo = new Gson().fromJson(bundle.getString(DATA_SURVEY_JSON), SurveyPojo.class);
+            if (bundle.containsKey(DATA_SURVEY_STYLE)) {
+                style_string = bundle.getString(DATA_SURVEY_STYLE);
             }
+
+            if (bundle.containsKey(DATA_IS_READ_ONLY))
+                isReadOnly = bundle.getBoolean(DATA_IS_READ_ONLY);
         }
 
         mTitleTextView = (TextView) findViewById(R.id.txtTitle);
@@ -67,6 +76,7 @@ public class SurveyActivity extends AppCompatActivity {
             Bundle sBundle = new Bundle();
             sBundle.putSerializable("survery_properties", mSurveyPojo.getSurveyProperties());
             sBundle.putString("style", style_string);
+            sBundle.putBoolean("read_only", isReadOnly);
             frag_start.setArguments(sBundle);
             arraylist_fragments.add(frag_start);
         }
@@ -79,6 +89,7 @@ public class SurveyActivity extends AppCompatActivity {
                 Bundle xBundle = new Bundle();
                 xBundle.putSerializable("data", mQuestion);
                 xBundle.putString("style", style_string);
+                xBundle.putBoolean("read_only", isReadOnly);
                 frag.setArguments(xBundle);
                 arraylist_fragments.add(frag);
             }
@@ -88,6 +99,7 @@ public class SurveyActivity extends AppCompatActivity {
                 Bundle xBundle = new Bundle();
                 xBundle.putSerializable("data", mQuestion);
                 xBundle.putString("style", style_string);
+                xBundle.putBoolean("read_only", isReadOnly);
                 frag.setArguments(xBundle);
                 arraylist_fragments.add(frag);
             }
@@ -97,6 +109,7 @@ public class SurveyActivity extends AppCompatActivity {
                 Bundle xBundle = new Bundle();
                 xBundle.putSerializable("data", mQuestion);
                 xBundle.putString("style", style_string);
+                xBundle.putBoolean("read_only", isReadOnly);
                 frag.setArguments(xBundle);
                 arraylist_fragments.add(frag);
             }
@@ -106,6 +119,7 @@ public class SurveyActivity extends AppCompatActivity {
                 Bundle xBundle = new Bundle();
                 xBundle.putSerializable("data", mQuestion);
                 xBundle.putString("style", style_string);
+                xBundle.putBoolean("read_only", isReadOnly);
                 frag.setArguments(xBundle);
                 arraylist_fragments.add(frag);
             }
@@ -115,6 +129,7 @@ public class SurveyActivity extends AppCompatActivity {
                 Bundle xBundle = new Bundle();
                 xBundle.putSerializable("data", mQuestion);
                 xBundle.putString("style", style_string);
+                xBundle.putBoolean("read_only", isReadOnly);
                 frag.setArguments(xBundle);
                 arraylist_fragments.add(frag);
             }
@@ -126,6 +141,7 @@ public class SurveyActivity extends AppCompatActivity {
         Bundle eBundle = new Bundle();
         eBundle.putSerializable("survery_properties", mSurveyPojo.getSurveyProperties());
         eBundle.putString("style", style_string);
+        eBundle.putBoolean("read_only", isReadOnly);
         frag_end.setArguments(eBundle);
         arraylist_fragments.add(frag_end);
 
@@ -138,10 +154,8 @@ public class SurveyActivity extends AppCompatActivity {
     }
 
     public void go_to_next() {
-
-        refreshPageTitle(mPager.getCurrentItem() + 1);
-
         mPager.setCurrentItem(mPager.getCurrentItem() + 1);
+        refreshPageTitle(mPager.getCurrentItem());
     }
 
     private void refreshPageTitle(int currentPage) {
@@ -150,7 +164,7 @@ public class SurveyActivity extends AppCompatActivity {
 
                 int totalPage = mPager.getAdapter().getCount() - 2;
 
-                if (currentPage > totalPage)
+                if (currentPage > totalPage || currentPage == 0)
                     mTitleTextView.setText(mSurveyPojo.getSurveyProperties().getTitle());
                 else
                     mTitleTextView.setText(getString(R.string.question_item_per_list, String.valueOf(currentPage), String.valueOf(totalPage)));
@@ -167,19 +181,21 @@ public class SurveyActivity extends AppCompatActivity {
         } else {
             mPager.setCurrentItem(mPager.getCurrentItem() - 1);
 
-            refreshPageTitle(mPager.getCurrentItem() - 1);
+            refreshPageTitle(mPager.getCurrentItem());
         }
     }
 
     public void event_survey_completed(Answers instance) {
         Intent returnIntent = new Intent();
-        returnIntent.putExtra("answers", instance.get_json_object());
+        returnIntent.putExtra(DATA_ANSWERS, instance.get_json_object());
+        returnIntent.putExtra(DATA_IS_READ_ONLY, isReadOnly);
         setResult(Activity.RESULT_OK, returnIntent);
         finish();
     }
 
     public void event_survey_exit() {
         Intent returnIntent = new Intent();
+        returnIntent.putExtra(DATA_IS_READ_ONLY, isReadOnly);
         setResult(Activity.RESULT_CANCELED, returnIntent);
         finish();
     }

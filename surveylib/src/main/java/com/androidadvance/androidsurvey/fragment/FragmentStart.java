@@ -28,6 +28,12 @@ public class FragmentStart extends Fragment {
 
         textView_start = (TextView) rootView.findViewById(R.id.textView_start);
         Button button_continue = (Button) rootView.findViewById(R.id.button_continue);
+
+        if (getArguments().getBoolean("read_only", false)) {
+            button_continue.setText(getString(R.string.review));
+        } else
+            button_continue.setText(getString(R.string.start));
+
         button_continue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,8 +53,6 @@ public class FragmentStart extends Fragment {
 
         assert survery_properties != null;
         textView_start.setText(Html.fromHtml(survery_properties.getIntroMessage()));
-
-
 
 
     }

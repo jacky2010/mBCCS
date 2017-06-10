@@ -69,7 +69,8 @@ public class ProcessSurveyKPPFragment extends BaseDataBindFragment<FragmentProce
                 if (surveyItem != null) {
                     Intent surveyIntent = new Intent(getContext(), SurveyActivity.class);
                     //you have to pass as an extra the json string.
-                    surveyIntent.putExtra("json_survey", loadSurveyJson("example_survey_1.json"));
+                    surveyIntent.putExtra(SurveyActivity.DATA_SURVEY_JSON, loadSurveyJson("example_survey_1.json"));
+                    surveyIntent.putExtra(SurveyActivity.DATA_IS_READ_ONLY, true);
                     startActivityForResult(surveyIntent, SURVEY_REQUEST);
                 }
 
@@ -124,8 +125,13 @@ public class ProcessSurveyKPPFragment extends BaseDataBindFragment<FragmentProce
         try {
             if (requestCode == SURVEY_REQUEST) {
                 if (resultCode == RESULT_OK) {
-                    String answers_json = data.getExtras().getString("answers");
-                    mPresenter.onSurveyCompleted(answers_json);
+                    String answers_json = data.getExtras().getString(SurveyActivity.DATA_ANSWERS);
+
+                    boolean isReadOnly = data.getExtras().getBoolean(SurveyActivity.DATA_IS_READ_ONLY);
+
+                    if (!isReadOnly)
+                        mPresenter.onSurveyCompleted(answers_json);
+
                 } else if (resultCode == RESULT_CANCELED) {
                     mPresenter.onSurveyTerminated();
                 }
