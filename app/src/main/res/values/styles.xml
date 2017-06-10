@@ -248,4 +248,9 @@
         <item name="android:layout_width">@dimen/dp_0_5</item>
     </style>
 
+    <style name="MyRadioCheckbox" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/green</item>
+        <item name="colorControlActivated">@color/green</item>
+    </style>
+
 </resources>

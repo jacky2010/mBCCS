@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="data"
+            type="com.viettel.mbccs.screen.survey.SurveyFragment"
+            />
+    </data>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_border"
+        android:orientation="vertical"
+        android:padding="@dimen/dp_20"
+        >
+        <com.viettel.mbccs.widget.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:textSize="@dimen/sp_15"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:text="@{data.surveyQuestion.content}"
+            />
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adapter="@{data.adapter}"
+            android:divider="@{true}"
+            />
+
+    </LinearLayout>
+
+</layout>

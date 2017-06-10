@@ -89,5 +89,6 @@ public class Constants {
         public static final String STAFF_LIST = "staff_list";
         public static final String TASK_INFO = "task_info";
         public static final String LIST_STOCK_TOTAL = "list_stock_total";
+        public static final String SURVEY_QUESTION = "survey_question";
     }
 }
