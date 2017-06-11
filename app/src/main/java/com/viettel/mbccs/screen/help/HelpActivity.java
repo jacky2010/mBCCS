@@ -20,7 +20,7 @@ public class HelpActivity extends BaseDataBindActivity<ActivityHelpBinding, Help
     @Override
     protected void initData() {
         mBinding.setPresenter(this);
-        showRightIcon = new ObservableBoolean();
+        showRightIcon = new ObservableBoolean(true);
     }
 
     public void onCancel() {
