@@ -8,6 +8,9 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class HotNewsCSKPPItem {
+
+    private static final  int MAX_CONTENT_SHORTENED = 160;
+
     @Expose
     @SerializedName("title")
     private String title;
@@ -46,8 +49,8 @@ public class HotNewsCSKPPItem {
         try{
             if(content != null)
             {
-                if(content.length() > 50)
-                    return content.substring(0, 47) + "...";
+                if(content.length() > MAX_CONTENT_SHORTENED)
+                    return content.substring(0, MAX_CONTENT_SHORTENED - 3) + "...";
                 return content;
             }
         }catch (Exception e){
