@@ -48,6 +48,12 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="button_nagative_grey_seven">
+        <item name="android:background">@drawable/bg_btn_nagative_grey_seven</item>
+        <item name="android:textColor">#000</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
     <style name="button_cancel">
         <item name="android:background">@drawable/bg_btn_cancel</item>
         <item name="android:textColor">#fff</item>
@@ -76,6 +82,7 @@
     <style name="tablayoutStyle" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">12sp</item>
         <item name="textAllCaps">false</item>
+        <item name="android:textColor">#757575</item>
     </style>
 
     <style name="SCBSwitch" parent="Theme.AppCompat.Light">

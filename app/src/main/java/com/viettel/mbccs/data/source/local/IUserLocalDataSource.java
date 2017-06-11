@@ -10,6 +10,7 @@ import com.viettel.mbccs.data.model.Province;
 import com.viettel.mbccs.data.model.ProvinceResponse;
 import com.viettel.mbccs.data.model.Session;
 import com.viettel.mbccs.data.model.StaffInfo;
+import com.viettel.mbccs.data.model.UploadImage;
 import java.util.List;
 
 /**
@@ -131,26 +132,7 @@ public interface IUserLocalDataSource {
 
     void setListPrecinct(List<PrecinctResponse> data);
 
-    //    /**
-    //     * Get data {@link Province} in database
-    //     *
-    //     * @return {@link List<Province>}
-    //     */
-    //    List<Province> getProvinceList();
-    //
-    //    /**
-    //     * Get data {@link District} via {@link Province#id} in database
-    //     *
-    //     * @param idProvince: {@link Province#id}
-    //     * @return: {@link List<District>}
-    //     */
-    //    List<District> getDistrictList(int idProvince);
-    //
-    //    /**
-    //     * Get data {@link Wards} via {@link District#id} in database
-    //     *
-    //     * @param idDistrict: {@link District#id}
-    //     * @return: {@link List<Wards>}
-    //     */
-    //    List<Wards> getWardsList(int idDistrict);
+    List<UploadImage> getUploadImage();
+
+    void setUploadImage(List<UploadImage> data);
 }

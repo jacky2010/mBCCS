@@ -40,7 +40,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_40"
-            android:background="@color/grey_two"
+            android:layout_marginTop="@dimen/dp_6"
+            android:background="@drawable/bg_border_blue_there"
+            android:orientation="horizontal"
             >
             <com.viettel.mbccs.widget.CustomTextView
                 android:layout_width="0dp"
@@ -50,6 +52,11 @@
                 android:text="@string/dialog_view_serial_from_serial"
                 android:textColor="@color/black"
                 />
+            <View
+                android:layout_width="@dimen/dp_0.6"
+                android:layout_height="match_parent"
+                android:background="@color/grey_seven"
+                />
             <com.viettel.mbccs.widget.CustomTextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -57,6 +64,11 @@
                 android:gravity="center"
                 android:text="@string/dialog_view_serial_to_serial"
                 android:textColor="@color/black"
+                />
+            <View
+                android:layout_width="@dimen/dp_0.6"
+                android:layout_height="match_parent"
+                android:background="@color/grey_seven"
                 />
             <com.viettel.mbccs.widget.CustomTextView
                 android:layout_width="0dp"
@@ -78,19 +90,37 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginBottom="@dimen/dp_20"
             android:gravity="right"
             android:paddingRight="@dimen/dp_16"
-            android:text="@{ @string/dialog_view_serial_total( presenter.totalSerial) }"
+            app:textHtml="@{ @string/dialog_view_serial_total( presenter.totalSerial) }"
             />
-        <com.viettel.mbccs.widget.CustomButton
-            android:layout_width="wrap_content"
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0.6"
+            android:background="@color/grey_seven"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/dp_16"
-            android:layout_marginTop="@dimen/dp_16"
-            android:onClick="@{ v -> presenter.onCancel() }"
-            android:text="@string/dialog_view_serial_btn_close"
-            style="@style/button_nagative"
-            />
+            android:background="@color/grey_five"
+            android:gravity="center"
+            >
+
+            <com.viettel.mbccs.widget.CustomButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_16"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:layout_marginRight="@dimen/dp_30"
+                android:layout_marginTop="@dimen/dp_16"
+                android:onClick="@{ v -> presenter.onCancel() }"
+                android:text="@string/dialog_view_serial_btn_close"
+                android:textAllCaps="true"
+                style="@style/button_nagative_grey_seven"
+                />
+        </LinearLayout>
     </LinearLayout>
 </layout>

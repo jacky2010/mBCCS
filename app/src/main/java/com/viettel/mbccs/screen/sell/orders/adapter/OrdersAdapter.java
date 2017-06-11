@@ -2,7 +2,6 @@ package com.viettel.mbccs.screen.sell.orders.adapter;
 
 import android.content.Context;
 import android.databinding.ObservableField;
-import android.databinding.ObservableInt;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -52,8 +51,8 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrdersView
         public ObservableField<String> idOrder;
         public ObservableField<String> changeCodeName;
         public ObservableField<String> dateOrder;
-        public ObservableField<String> statusOrder;
-        public ObservableInt colorStatus;
+        //        public ObservableField<String> statusOrder;
+        //        public ObservableInt colorStatus;
 
         public OrdersViewHolder(ItemOrdersBinding itemView) {
             super(itemView.getRoot());
@@ -61,8 +60,8 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrdersView
             idOrder = new ObservableField<>();
             changeCodeName = new ObservableField<>();
             dateOrder = new ObservableField<>();
-            statusOrder = new ObservableField<>();
-            colorStatus = new ObservableInt();
+            //            statusOrder = new ObservableField<>();
+            //            colorStatus = new ObservableInt();
         }
 
         public void bind(SaleOrders saleOrders, int position) {
@@ -78,24 +77,24 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrdersView
             changeCodeName.set(context.getString(R.string.item_orders_change_code_name,
                     saleOrders.getChannelCode(), saleOrders.getChannelName()));
 
-            switch ((int) saleOrders.getOrderStatus()) {
-                case (OrderStatus.APPROVALS):
-                    statusOrder.set(saleOrders.getOderName());
-                    colorStatus.set(context.getResources().getColor(R.color.green));
-                    break;
-                case (OrderStatus.PENDING):
-                    statusOrder.set(saleOrders.getOderName());
-                    colorStatus.set(context.getResources().getColor(R.color.blue));
-                    break;
-                case (OrderStatus.REJECT):
-                    statusOrder.set(saleOrders.getOderName());
-                    colorStatus.set(context.getResources().getColor(R.color.red_button));
-                    break;
-                default:
-                    statusOrder.set(saleOrders.getOderName());
-                    colorStatus.set(context.getResources().getColor(R.color.green));
-                    break;
-            }
+            //            switch ((int) saleOrders.getOrderStatus()) {
+            //                case (OrderStatus.APPROVALS):
+            //                    statusOrder.set(saleOrders.getOderName());
+            //                    colorStatus.set(context.getResources().getColor(R.color.green));
+            //                    break;
+            //                case (OrderStatus.PENDING):
+            //                    statusOrder.set(saleOrders.getOderName());
+            //                    colorStatus.set(context.getResources().getColor(R.color.blue));
+            //                    break;
+            //                case (OrderStatus.REJECT):
+            //                    statusOrder.set(saleOrders.getOderName());
+            //                    colorStatus.set(context.getResources().getColor(R.color.red_button));
+            //                    break;
+            //                default:
+            //                    statusOrder.set(saleOrders.getOderName());
+            //                    colorStatus.set(context.getResources().getColor(R.color.green));
+            //                    break;
+            //            }
         }
 
         public void onClickItem() {

@@ -4,11 +4,16 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.databinding.BindingMethod;
 import android.databinding.BindingMethods;
 import android.databinding.ObservableField;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
+import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
@@ -21,7 +26,12 @@ import com.viettel.mbccs.R;
 import com.viettel.mbccs.databinding.LayoutSelectImageNoBinding;
 import com.viettel.mbccs.utils.CircleTransform;
 import com.viettel.mbccs.utils.StringUtils;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by HuyQuyet on 6/6/17.
@@ -59,9 +69,13 @@ public class CustomSelectImageNo extends LinearLayout {
     public ObservableField<Bitmap> imageBackside;
     public ObservableField<Bitmap> imagePortrait;
 
-    //    private Bitmap bitmapImageFront;
-    //    private Bitmap bitmapImageBackside;
-    //    private Bitmap bitmapImagePortrait;
+    //    private Uri uriImageFront;
+    //    private Uri uriImageBackside;
+    //    private Uri uriImagePortrait;
+
+    private Uri imageFileUri;
+    private String imageFilePath;
+    private String imageName;
 
     public CustomSelectImageNo(Context context) {
         this(context, null);
@@ -124,80 +138,140 @@ public class CustomSelectImageNo extends LinearLayout {
     }
 
     private void cameraIntent() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (callback != null) {
-            callback.onSelectImage(intent, TypeSelect.CAMERA);
+        Intent captureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (captureIntent.resolveActivity(context.getPackageManager()) != null) {
+            try {
+                // Create an image file name
+                String timeStamp =
+                        new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(new Date());
+                File storageDir =
+                        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
+                File image = File.createTempFile("JPEG_" + timeStamp, ".jpg", storageDir);
+                imageName = "JPEG_" + timeStamp;
+
+                imageFilePath = image.getAbsolutePath();
+                imageFileUri = Uri.fromFile(image);
+                captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            if (callback != null) {
+                callback.onSelectImage(captureIntent, TypeSelect.CAMERA);
+            }
         }
     }
 
+
     private void galleryIntent() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
+        Intent intent = new Intent(Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         if (callback != null) {
             callback.onSelectImage(intent, TypeSelect.GALLERY);
         }
     }
 
     public void setResultIntent(Intent intent, @TypeSelect int type) {
-        switch (type) {
-            case TypeSelect.CAMERA:
-                onCaptureImageResult(intent);
+        onSelectImageResult(intent);
+    }
+
+    private void onSelectImageResult(Intent intent) {
+        Uri selectedImage = null;
+        Bitmap thumbnail;
+        ExifInterface ei = null;
+        String picturePath;
+
+        if (intent == null || intent.getData() == null) {
+            selectedImage = imageFileUri;
+            picturePath = imageFilePath;
+        } else {
+            selectedImage = intent.getData();
+            String[] filePath = { MediaStore.Images.Media.DATA };
+            Cursor c =
+                    context.getContentResolver().query(selectedImage, filePath, null, null, null);
+            c.moveToFirst();
+            int columnIndex = c.getColumnIndex(filePath[0]);
+            picturePath = c.getString(columnIndex);
+            c.close();
+        }
+
+        thumbnail = decodeBitmapFromPathFile(picturePath, 200, 200);
+
+        try {
+            ei = new ExifInterface(picturePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION,
+                ExifInterface.ORIENTATION_UNDEFINED);
+
+        switch (orientation) {
+
+            case ExifInterface.ORIENTATION_ROTATE_90:
+                setImageView(rotateImage(thumbnail, 90), selectedImage);
                 break;
-            case TypeSelect.GALLERY:
-                onSelectFromGalleryResult(intent);
+
+            case ExifInterface.ORIENTATION_ROTATE_180:
+                setImageView(rotateImage(thumbnail, 180), selectedImage);
+                break;
+
+            case ExifInterface.ORIENTATION_ROTATE_270:
+                setImageView(rotateImage(thumbnail, 270), selectedImage);
+                break;
+
+            case ExifInterface.ORIENTATION_NORMAL:
+
+            default:
+                setImageView(thumbnail, selectedImage);
                 break;
         }
     }
 
-    private void onSelectFromGalleryResult(Intent data) {
-        Bitmap bm = null;
-        if (data != null) {
-            try {
-                bm = MediaStore.Images.Media.getBitmap(context.getContentResolver(),
-                        data.getData());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        setImageView(bm);
+    public static Bitmap rotateImage(Bitmap source, float angle) {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+        Bitmap result =
+                Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix,
+                        true);
+        source.recycle();
+        return result;
     }
 
-    private void onCaptureImageResult(Intent data) {
-        Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-        //        data.getData();
-        //        try {
-        //            Bitmap bm = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(),
-        //                    data.getData());
-        //            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        //            bm.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
-        //            File destination = new File(Environment.getExternalStorageDirectory(),
-        //                    System.currentTimeMillis() + ".jpg");
-        //            FileOutputStream fo;
-        //            destination.createNewFile();
-        //            fo = new FileOutputStream(destination);
-        //            fo.write(bytes.toByteArray());
-        //            fo.close();
-        //        } catch (IOException e) {
-        //            e.printStackTrace();
-        //        }
-        setImageView(thumbnail);
+
+    private String path(Uri selectedImage) {
+        String picturePath;
+        String[] filePath = { MediaStore.Images.Media.DATA };
+        Cursor c = context.getContentResolver().query(selectedImage, filePath, null, null, null);
+        c.moveToFirst();
+        int columnIndex = c.getColumnIndex(filePath[0]);
+        picturePath = c.getString(columnIndex);
+        c.close();
+        return picturePath;
     }
 
-    private void setImageView(Bitmap bitmap) {
+    public Uri getImageUri(Context inContext, Bitmap inImage, String nameImage,
+            @Nullable String description) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage,
+                nameImage, description);
+        Uri uri = Uri.parse(path);
+        return uri;
+    }
+
+    private void setImageView(Bitmap thumbnail, Uri selectedImage) {
         switch (imageSelect) {
             case IMAGE_FRONT:
-                //                bitmapImageFront = bitmap;
-                imageFront.set(bitmap);
-                checkFront = true;
+                //                uriImageFront = selectedImage;
+                imageFront.set(thumbnail);
                 break;
             case IMAGE_BACKSIDE:
-                //                bitmapImageBackside = bitmap;
-                imageBackside.set(bitmap);
+                //                uriImageBackside = selectedImage;
+                imageBackside.set(thumbnail);
                 break;
             case IMAGE_PORTRAIT:
-                //                bitmapImagePortrait = bitmap;
-                imagePortrait.set(bitmap);
+                //                uriImagePortrait = selectedImage;
+                imagePortrait.set(thumbnail);
                 break;
         }
     }
@@ -205,8 +279,11 @@ public class CustomSelectImageNo extends LinearLayout {
     public void setUrlImageFront(String url) {
         if (checkFront) return;
         if (StringUtils.isEmpty(url)) {
-            imageFront.set((BitmapFactory.decodeResource(context.getResources(),
-                    R.drawable.ic_select_image)));
+            Glide.with(context)
+                    .load(R.drawable.ic_select_image)
+                    .centerCrop()
+                    .bitmapTransform(new CircleTransform(context))
+                    .into(binding.imageFront);
             return;
         }
         Glide.with(context)
@@ -219,8 +296,11 @@ public class CustomSelectImageNo extends LinearLayout {
     public void setUrlImageBackside(String url) {
         if (checkBackside) return;
         if (StringUtils.isEmpty(url)) {
-            imageBackside.set((BitmapFactory.decodeResource(context.getResources(),
-                    R.drawable.ic_select_image)));
+            Glide.with(context)
+                    .load(R.drawable.ic_select_image)
+                    .centerCrop()
+                    .bitmapTransform(new CircleTransform(context))
+                    .into(binding.imageBackside);
             return;
         }
         Glide.with(context)
@@ -233,8 +313,11 @@ public class CustomSelectImageNo extends LinearLayout {
     public void setUrlImagePortrait(String url) {
         if (checkPortrait) return;
         if (StringUtils.isEmpty(url)) {
-            imagePortrait.set((BitmapFactory.decodeResource(context.getResources(),
-                    R.drawable.ic_select_image)));
+            Glide.with(context)
+                    .load(R.drawable.ic_select_image)
+                    .centerCrop()
+                    .bitmapTransform(new CircleTransform(context))
+                    .into(binding.imagePortrait);
             return;
         }
         Glide.with(context)
@@ -246,36 +329,27 @@ public class CustomSelectImageNo extends LinearLayout {
 
     public void setImageFront(Bitmap bitmap) {
         if (bitmap == null) {
-            //            imageFront.set(BitmapFactory.decodeResource(context.getResources(),
-            //                    R.drawable.ic_select_image));
             checkFront = false;
             return;
         }
-        //        bitmapImageFront = bitmap;
         imageFront.set(bitmap);
         checkFront = true;
     }
 
     public void setImageBackside(Bitmap bitmap) {
         if (bitmap == null) {
-            //            imageBackside.set(BitmapFactory.decodeResource(context.getResources(),
-            //                    R.drawable.ic_select_image));
             checkBackside = false;
             return;
         }
-        //        bitmapImageBackside = bitmap;
         imageBackside.set(bitmap);
         checkBackside = true;
     }
 
     public void setImagePortrait(Bitmap bitmap) {
         if (bitmap == null) {
-            //            imagePortrait.set(BitmapFactory.decodeResource(context.getResources(),
-            //                    R.drawable.ic_select_image));
             checkPortrait = false;
             return;
         }
-        //        bitmapImagePortrait = bitmap;
         imagePortrait.set(bitmap);
         checkPortrait = true;
     }
@@ -302,6 +376,43 @@ public class CustomSelectImageNo extends LinearLayout {
         imageFront.set(null);
         imageBackside.set(null);
         imagePortrait.set(null);
+    }
+
+    public int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        // Raw height and width of image
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (height > reqHeight || width > reqWidth) {
+
+            final int halfHeight = height / 2;
+            final int halfWidth = width / 2;
+
+            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
+            // height and width larger than the requested height and width.
+            while ((halfHeight / inSampleSize) >= reqHeight
+                    && (halfWidth / inSampleSize) >= reqWidth) {
+                inSampleSize *= 2;
+            }
+        }
+
+        return inSampleSize;
+    }
+
+    public Bitmap decodeBitmapFromPathFile(String pathName, int reqWidth, int reqHeight) {
+
+        // First decode with inJustDecodeBounds=true to check dimensions
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(pathName, options);
+
+        // Calculate inSampleSize
+        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
+
+        // Decode bitmap with inSampleSize set
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeFile(pathName, options);
     }
 
     public interface SelectImageCallback {

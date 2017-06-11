@@ -18,8 +18,7 @@ import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProg
 import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
 import com.viettel.mbccs.data.source.remote.request.KPPOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.UpdateSaleOrderRequest;
-import com.viettel.mbccs.data.source.remote.request.ViewInfoSerialRequest;
-import com.viettel.mbccs.data.source.remote.response.BaseResponse;
+import com.viettel.mbccs.data.source.remote.request.GetListSerialRequest;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransChannelResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransRetailResponse;
 import com.viettel.mbccs.data.source.remote.response.DataResponse;
@@ -37,7 +36,7 @@ import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
 import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import com.viettel.mbccs.data.source.remote.response.UpdateSaleOrderResponse;
-import com.viettel.mbccs.data.source.remote.response.ViewInfoSerialResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListSerialResponse;
 import com.viettel.mbccs.data.source.remote.service.RequestHelper;
 import com.viettel.mbccs.utils.rx.SchedulerUtils;
 import rx.Observable;
@@ -122,12 +121,12 @@ public class BanHangKhoTaiChinhRemoteDataSource implements IBanHangKhoTaiChinhRe
     }
 
     @Override
-    public Observable<ViewInfoSerialResponse> viewInfoSerial(
-            DataRequest<ViewInfoSerialRequest> request) {
+    public Observable<GetListSerialResponse> getListSerial(
+            DataRequest<GetListSerialRequest> request) {
         return RequestHelper.getRequest()
-                .viewInfoSerial(request)
-                .flatMap(SchedulerUtils.<ViewInfoSerialResponse>convertDataFlatMap())
-                .compose(SchedulerUtils.<ViewInfoSerialResponse>applyAsyncSchedulers());
+                .getListSerial(request)
+                .flatMap(SchedulerUtils.<GetListSerialResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<GetListSerialResponse>applyAsyncSchedulers());
     }
 
     @Override

@@ -35,7 +35,7 @@ public class CreateUpdateInformationActivity extends
 
     @Override
     public void onBackPressed() {
-        onCancel();
+        super.onBackPressed();
     }
 
     @Override
@@ -82,7 +82,7 @@ public class CreateUpdateInformationActivity extends
 
     @Override
     public void onCancel() {
-        finish();
+        onBackPressed();
     }
 
     @Override
@@ -126,7 +126,7 @@ public class CreateUpdateInformationActivity extends
             public void onClick(DialogInterface dialog, int which) {
                 finish();
             }
-        });
+        }, false);
     }
 
     @Override
