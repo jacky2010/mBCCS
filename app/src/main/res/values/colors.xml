@@ -8,14 +8,21 @@
     <color name="grey_two">#f1f1f1</color>
     <color name="grey_three">#b9b8b8</color>
     <color name="grey_four">#efefef</color>
+    <color name="grey_five">#ededed</color>
+    <color name="grey_six">#f7f7f7</color>
+    <color name="grey_seven">#b7b7b7</color>
     <color name="black">#000000</color>
     <color name="blue_trans">#5f9cef</color>
     <color name="blue">#317BE1</color>
+    <color name="blue_two">#0083c2</color>
+    <color name="blue_there">#dceff8</color>
     <color name="white">#ffffff</color>
     <color name="seafoam_blue">#2b66df</color>
     <color name="green">#20941a</color>
     <color name="green_two">#ccffca</color>
     <color name="red_button">#c42126</color>
+
+    <color name="orange_two">#ecd6ab</color>
 
     <!-- Button Image Custom -->
     <color name="default_bg">#ff3f83c4</color>

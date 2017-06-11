@@ -33,6 +33,7 @@ import android.widget.BaseAdapter;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import com.bumptech.glide.DrawableRequestBuilder;
@@ -420,5 +421,10 @@ public class BindingUtils {
     @BindingAdapter("requestFocus")
     public static void requestFocus(TextView textView, boolean isFocus) {
         textView.requestFocus();
+    }
+
+    @BindingAdapter({ "animatedProgress" })
+    public static void setAnimatedProgress(ProgressBar pb, int progress) {
+        AnimationUtils.startAnimatedProgress(pb, progress);
     }
 }

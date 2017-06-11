@@ -21,7 +21,6 @@ import com.viettel.mbccs.data.model.Customer;
 import com.viettel.mbccs.data.model.Reason;
 import com.viettel.mbccs.data.model.SaleOrdersDetail;
 import com.viettel.mbccs.data.model.SaleTrans;
-import com.viettel.mbccs.data.model.Session;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.remote.request.CreateSaleTransFromOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
@@ -146,14 +145,8 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
         reason.setReasonType("2");
 
         DataRequest<GetReasonRequest> request = new DataRequest<>();
-        Session session = new Session();
-        session.setSessionId("54578345638");
 
-        request.setSession(session);
-        request.setUserName("smac");
         request.setApiCode(ApiCode.GetReason);
-        request.setApiKey("123456");
-        request.setToken("54353-543346-65464564-6546");
         request.setParameterApi(reason);
 
         Subscription subscription = banHangKhoTaiChinhRepository.getReason(request)
@@ -227,26 +220,20 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
 
     private void sellOrder() {
         CreateSaleTransFromOrderRequest c = new CreateSaleTransFromOrderRequest();
-        c.setShopId(5235);
-        c.setStaffId(534534);
+        c.setShopId(channelInfoSell.getShopId());
+        c.setStaffId(channelInfoSell.getChannelId());
 
         Customer customer = new Customer();
         customer.setCustomerName(saleTrans.getCustName());
 
         c.setCustomer(customer);
         c.setLstSerialSale(saleOrdersDetailList);
+        // TODO: 6/11/17 fix
         c.setPayMethod("1");
         c.setPriceType("3");
 
         DataRequest<CreateSaleTransFromOrderRequest> request = new DataRequest<>();
-        Session session = new Session();
-        session.setSessionId("54578345638");
-
-        request.setSession(session);
-        request.setUserName("smac");
         request.setApiCode(ApiCode.CreateSaleTransFromOrder);
-        request.setApiKey("123456");
-        request.setToken("54353-543346-65464564-6546");
         request.setParameterApi(c);
 
         Subscription subscription = banHangKhoTaiChinhRepository.createSaleTransFromOrder(request)
@@ -266,19 +253,14 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
 
     private void cancelSell() {
         UpdateSaleOrderRequest u = new UpdateSaleOrderRequest();
-        u.setSaleOrderId("54353");
+        u.setSaleOrderId(String.valueOf(saleTrans.getSaleTransId()));
+        // TODO: 6/11/17 fix new status
         u.setNewStatus("2");
-        u.setReasonId("2");
+        u.setReasonId(reason.getReasonId());
 
         DataRequest<UpdateSaleOrderRequest> request = new DataRequest<>();
-        Session session = new Session();
-        session.setSessionId("54578345638");
 
-        request.setSession(session);
-        request.setUserName("smac");
         request.setApiCode(ApiCode.UpdateSaleOrder);
-        request.setApiKey("123456");
-        request.setToken("54353-543346-65464564-6546");
         request.setParameterApi(u);
 
         Subscription subscription = banHangKhoTaiChinhRepository.updateSaleOrder(request)

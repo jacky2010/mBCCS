@@ -12,6 +12,7 @@ import com.viettel.mbccs.data.model.Province;
 import com.viettel.mbccs.data.model.ProvinceResponse;
 import com.viettel.mbccs.data.model.Session;
 import com.viettel.mbccs.data.model.StaffInfo;
+import com.viettel.mbccs.data.model.UploadImage;
 import com.viettel.mbccs.data.source.local.datasource.SharedPrefs;
 import com.viettel.mbccs.utils.GsonUtils;
 import com.viettel.mbccs.utils.SecureUtils;
@@ -219,6 +220,18 @@ public class UserLocalDataSource implements IUserLocalDataSource {
             precinct.setPrecinctId(p.getPrecinctId());
             precinct.setDistrictId(p.getDistrictId());
             precinct.save();
+        }
+    }
+
+    @Override
+    public List<UploadImage> getUploadImage() {
+        return new Select().from(UploadImage.class).execute();
+    }
+
+    @Override
+    public void setUploadImage(List<UploadImage> data) {
+        for (UploadImage uploadImage : data) {
+            uploadImage.save();
         }
     }
 }

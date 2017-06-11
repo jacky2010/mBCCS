@@ -2,7 +2,6 @@ package com.viettel.mbccs.data.source.remote.datasource;
 
 import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.source.remote.IUserRemoteDataSource;
-import com.viettel.mbccs.data.source.remote.request.CheckIdNoRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetDistrictRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
@@ -12,9 +11,9 @@ import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
 import com.viettel.mbccs.data.source.remote.request.LoginRequest;
+import com.viettel.mbccs.data.source.remote.request.UploadImageRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseErrorResponse;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
-import com.viettel.mbccs.data.source.remote.response.CheckIdNoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetDistrictResponse;
 import com.viettel.mbccs.data.source.remote.response.GetInfoSaleTranResponse;
 import com.viettel.mbccs.data.source.remote.response.GetPrecinctResponse;
@@ -23,6 +22,7 @@ import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
 import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
 import com.viettel.mbccs.data.source.remote.response.SendCodeChangePassResponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
+import com.viettel.mbccs.data.source.remote.response.UploadImageResponse;
 import com.viettel.mbccs.data.source.remote.service.RequestHelper;
 import com.viettel.mbccs.utils.rx.SchedulerUtils;
 import rx.Observable;
@@ -139,5 +139,13 @@ public class UserRemoteDataSource implements IUserRemoteDataSource {
                 .getPrecinct(request)
                 .flatMap(SchedulerUtils.<GetPrecinctResponse>convertDataFlatMap())
                 .compose(SchedulerUtils.<GetPrecinctResponse>applyAsyncSchedulers());
+    }
+
+    @Override
+    public Observable<UploadImageResponse> uploadImage(DataRequest<UploadImageRequest> request) {
+        return RequestHelper.getRequest()
+                .uploadImage(request)
+                .flatMap(SchedulerUtils.<UploadImageResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<UploadImageResponse>applyAsyncSchedulers());
     }
 }

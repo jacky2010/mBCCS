@@ -2,7 +2,6 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/tools"
-    xmlns:bind="http://schemas.android.com/apk/res-auto"
     >
     <data>
         <variable
@@ -15,8 +14,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        android:clickable="false"
+        android:background="@color/grey_five"
+        android:clickable="true"
         android:orientation="vertical"
         >
         <include
@@ -30,113 +29,59 @@
             app:titleColor="@{@color/white}"
             app:titleTextSize="@{@dimen/sp_17}"
             />
-        <com.viettel.mbccs.widget.CustomTextView
-            android:id="@+id/idOrder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/toolbar"
-            android:layout_marginTop="@dimen/dp_50"
-            android:paddingLeft="@dimen/dp_16"
-            android:text="@{ presenter.idSaleTrans }"
-            android:textColor="@color/black"
-            android:textSize="@dimen/sp_20"
-            android:textStyle="bold"
-            />
-
         <LinearLayout
-            android:id="@+id/layout_detail"
+            android:id="@+id/layout_information"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/idOrder"
-            android:layout_marginTop="@dimen/dp_40"
             android:orientation="vertical"
+            android:layout_below="@+id/toolbar"
+            android:background="@color/white"
             android:padding="@dimen/dp_16"
             >
-            <LinearLayout
+            <com.viettel.mbccs.widget.CustomTextView
+                android:id="@+id/idOrder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
-                <com.viettel.mbccs.widget.CustomTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/confirm_transaction_sell_cancel_don_dat_hang_tu_kenh"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_14"
-                    />
-                <com.viettel.mbccs.widget.CustomTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_8"
-                    android:text="@{ presenter.nameChange }"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_18"
-                    android:textStyle="bold"
-                    />
-            </LinearLayout>
-            <LinearLayout
+                android:layout_marginTop="@dimen/dp_10"
+                android:text="@{ presenter.idSaleTrans }"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_20"
+                android:textStyle="bold"
+                />
+
+            <com.viettel.mbccs.widget.CustomTextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_30"
-                android:orientation="horizontal"
-                >
-                <com.viettel.mbccs.widget.CustomTextView
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/confirm_transaction_sell_cancel_sdt"
+                android:text="@{ @string/confirm_transaction_sell_cancel_don_dat_hang_tu_kenh(presenter.nameChange)}"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/sp_14"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:textSize="@dimen/sp_16"
                     />
                 <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_8"
-                    android:text="@{ presenter.phoneNumberChange }"
+                    android:layout_marginLeft="@dimen/dp_30"
+                    android:text="@{ @string/confirm_transaction_sell_cancel_sdt(presenter.phoneNumberChange)}"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16"
-                    android:textStyle="bold"
                     />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_30"
-                android:orientation="horizontal"
-                >
                 <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/confirm_transaction_sell_cancel_so_tien_thanh_toan"
+                    android:layout_marginLeft="@dimen/dp_30"
+                    android:text="@{@string/confirm_transaction_sell_cancel_so_tien_thanh_toan(presenter.sumMoneyTransaction)}"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_14"
                     />
-                <com.viettel.mbccs.widget.CustomTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_8"
-                    android:text="@{ presenter.sumMoneyTransaction }"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16"
-                    android:textStyle="bold"
-                    />
-            </LinearLayout>
-            <!--<com.viettel.mbccs.widget.CustomTextView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:paddingLeft="@dimen/dp_100"-->
-                <!--android:text="(Một triệu đồng)"-->
-                <!--android:textColor="@color/black"-->
-                <!--android:textSize="@dimen/sp_16"-->
-                <!--android:textStyle="bold"-->
-                <!--/>-->
         </LinearLayout>
         <LinearLayout
             android:id="@+id/layout_spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/layout_detail"
-            android:layout_marginTop="@dimen/dp_40"
+            android:layout_below="@+id/layout_information"
+            android:layout_marginTop="@dimen/dp_20"
             android:orientation="vertical"
+            android:background="@color/white"
             android:padding="@dimen/dp_16"
             android:visibility="@{ presenter.isShow ? View.VISIBLE : View.GONE }"
             >
@@ -145,22 +90,16 @@
                 android:layout_height="wrap_content"
                 android:text="@string/confirm_transaction_sell_cancel_ly_do_huy"
                 android:textColor="@color/black"
+                android:textStyle="bold"
                 />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_4"
-                android:background="@drawable/bg_order"
-                >
-                <Spinner
-                    android:id="@+id/spinner_reason_cancel"
+            <com.viettel.mbccs.widget.SpinnerWithBorder
+                android:id="@+id/spinner_reason_cancel"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_40"
-                    bind:setSpinnerAdapter="@{ presenter.spinnerReasonCancelAdapter }"
-                    android:layout_gravity="center"
+                app:adapter="@{ presenter.spinnerReasonCancelAdapter }"
                     />
-            </LinearLayout>
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/layout_button"
             android:layout_width="match_parent"

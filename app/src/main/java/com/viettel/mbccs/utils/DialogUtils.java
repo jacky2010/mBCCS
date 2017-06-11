@@ -37,9 +37,21 @@ public class DialogUtils {
                 .show();
     }
 
+    public static void showDialog(Context context, @Nullable String title, String message,
+            String yesTitle, @Nullable DialogInterface.OnClickListener yesListener,
+            @Nullable String cancelTitle,
+            @Nullable DialogInterface.OnClickListener cancelListener, boolean cancelable) {
+        new AlertDialog.Builder(context).setTitle(title)
+                .setMessage(message)
+                .setPositiveButton(yesTitle, yesListener)
+                .setNegativeButton(cancelTitle, cancelListener)
+                .setCancelable(cancelable)
+                .show();
+    }
+
     public static void showDialogError(Context context, BaseException error,
-            DialogInterface.OnClickListener yesListener) {
-        showDialogError(context, null, error.getMessage(), yesListener);
+            DialogInterface.OnClickListener yesListener, boolean cancelable) {
+        showDialogError(context, null, error.getMessage(), yesListener, cancelable);
     }
 
     public static void showDialogError(Context context, BaseException error) {
@@ -68,5 +80,11 @@ public class DialogUtils {
             @Nullable DialogInterface.OnClickListener yesListener) {
         showDialog(context, title, message, context.getString(R.string.ok), yesListener, null,
                 null);
+    }
+
+    public static void showDialogError(Context context, @Nullable String title, String message,
+            @Nullable DialogInterface.OnClickListener yesListener, boolean cancelable) {
+        showDialog(context, title, message, context.getString(R.string.ok), yesListener, null,
+                null, cancelable);
     }
 }

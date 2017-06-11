@@ -228,7 +228,7 @@ public class CreateUpdateInformationFragment extends BaseFragment
             public void onClick(DialogInterface dialog, int which) {
                 getActivity().getSupportFragmentManager().popBackStack();
             }
-        });
+        }, false);
     }
 
     @Override
@@ -268,6 +268,27 @@ public class CreateUpdateInformationFragment extends BaseFragment
     @Override
     public void updateAllSubInfoError(BaseException error) {
         DialogUtils.showDialogError(getActivity(), error);
+    }
+
+    @Override
+    public void isSendImage() {
+        // TODO: 6/10/17 fix download offline
+        //        if (presenter.isExistsImageUpload()) {
+        //            DialogUtils.showDialog(getActivity(), "Send Image", "Send image now", "OK",
+        //                    new DialogInterface.OnClickListener() {
+        //                        @Override
+        //                        public void onClick(DialogInterface dialog, int which) {
+        //                            presenter.clickSendData(true);
+        //                        }
+        //                    }, "Cancel", new DialogInterface.OnClickListener() {
+        //                        @Override
+        //                        public void onClick(DialogInterface dialog, int which) {
+        //                            presenter.clickSendData(false);
+        //                        }
+        //                    });
+        //        } else {
+        presenter.clickSendData(false);
+        //        }
     }
 
     @Override

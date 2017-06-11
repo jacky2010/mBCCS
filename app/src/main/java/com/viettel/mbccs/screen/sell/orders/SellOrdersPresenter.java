@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
-import android.databinding.ObservableInt;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -47,7 +46,6 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
     public ObservableField<SellOrdersFragmentAdapter> sellOrdersFragmentAdapter;
     public ObservableBoolean isHideSearch;
     public ObservableField<String> textSearch;
-    public ObservableInt totalOrders;
 
     public SellOrdersPresenter(Context context, SellOrdersContract.View sellOrdersView) {
         this.context = context;
@@ -63,7 +61,6 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
         spinnerAdapterChannel = new ObservableField<>();
         isHideSearch = new ObservableBoolean(false);
         textSearch = new ObservableField<>();
-        totalOrders = new ObservableInt();
     }
 
     public void subscribe() {
@@ -145,6 +142,7 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
     }
 
     public void clickSearch() {
+        sellOrdersView.showLoading();
         long dateFrom = sellOrdersView.getDateFrom();
         long dateTo = sellOrdersView.getDateTo();
 
@@ -185,6 +183,7 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
                     @Override
                     public void onSuccess(GetListOrderResponse object) {
                         sellOrdersView.setDataResult(object.getSaleOrdersList(), channelInfoSelect);
+                        sellOrdersView.hideLoading();
                     }
 
                     @Override
@@ -192,6 +191,7 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
                         // TODO: 5/16/17 error
                         DialogUtils.showDialogError(context, null, error.getMessage(), null);
                         sellOrdersView.getDataError(error);
+                        sellOrdersView.hideLoading();
                     }
                 });
     }
@@ -205,9 +205,5 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
 
     public void setSellOrdersFragmentAdapter(SellOrdersFragmentAdapter sellOrdersFragmentAdapter) {
         this.sellOrdersFragmentAdapter.set(sellOrdersFragmentAdapter);
-    }
-
-    public void setTotalOrders(int total) {
-        totalOrders.set(total);
     }
 }

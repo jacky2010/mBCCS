@@ -10,6 +10,7 @@ import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
 import com.viettel.mbccs.data.source.remote.request.LoginRequest;
+import com.viettel.mbccs.data.source.remote.request.UploadImageRequest;
 import com.viettel.mbccs.data.source.remote.response.GetDistrictResponse;
 import com.viettel.mbccs.data.source.remote.response.GetInfoSaleTranResponse;
 import com.viettel.mbccs.data.source.remote.response.GetPrecinctResponse;
@@ -18,6 +19,7 @@ import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
 import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
 import com.viettel.mbccs.data.source.remote.response.SendCodeChangePassResponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
+import com.viettel.mbccs.data.source.remote.response.UploadImageResponse;
 import rx.Observable;
 
 /**
@@ -48,4 +50,6 @@ public interface IUserRemoteDataSource {
     Observable<GetDistrictResponse> getDistrict(DataRequest<GetDistrictRequest> request);
 
     Observable<GetPrecinctResponse> getPrecinct(DataRequest<GetPrecinctRequest> request);
+
+    Observable<UploadImageResponse> uploadImage(DataRequest<UploadImageRequest> request);
 }

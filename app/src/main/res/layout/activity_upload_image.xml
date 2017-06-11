@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.viettel.mbccs.screen.uploadimage.UploadImageActivity"
+    >
+    <data>
+        <variable
+            name="presenter"
+            type="com.viettel.mbccs.screen.uploadimage.UploadImagePresenter"
+            />
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <include
+            layout="@layout/toolbar"
+            app:background="@{@color/colorAccent}"
+            app:isShow="@{true}"
+            app:leftIcon="@{@drawable/ic_arrow_left_white_24dp}"
+            app:leftIconClick="@{()->presenter.onCancel()}"
+            app:title="@{@string/activity_upload_image_title}"
+            app:titleColor="@{@color/white}"
+            app:titleTextSize="@{@dimen/sp_17}"
+            />
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:adapter="@{ presenter.recyclerAdapter }"
+            />
+        <com.viettel.mbccs.widget.CustomButton
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:onClick="@{ v -> presenter.onStartUpload() }"
+            android:text="Upload"
+            android:textAllCaps="false"
+            android:textSize="@dimen/sp_18"
+            style="@style/button_positive"
+            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_30"
+            android:layout_marginBottom="@dimen/dp_20"
+            >
+            <ProgressBar
+                android:id="@+id/progressbar_launch_app"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:indeterminate="false"
+                android:maxHeight="@dimen/dp_30"
+                android:minHeight="@dimen/dp_30"
+                android:progressDrawable="@drawable/launch_app_progressbar"
+                bind:animatedProgress="@{ presenter.progressValue }"
+                tools:progress="90"
+                style="?android:attr/progressBarStyleHorizontal"
+                />
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@{ @string/activity_upload_image_process(presenter.current, presenter.total, presenter.progressValue) }"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_17"
+                />
+        </RelativeLayout>
+
+        <Button
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="@dimen/dp_40"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/dp_14"
+            android:onClick="@{ v -> presenter.onCancelUpload() }"
+            android:text="Cancel"
+            android:textAllCaps="false"
+            style="@style/button_negative_red"
+            />
+    </LinearLayout>
+</layout>
+

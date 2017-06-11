@@ -24,9 +24,9 @@ import com.viettel.mbccs.data.model.StockSerial;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
-import com.viettel.mbccs.data.source.remote.request.ViewInfoSerialRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListSerialRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
-import com.viettel.mbccs.data.source.remote.response.ViewInfoSerialResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListSerialResponse;
 import com.viettel.mbccs.databinding.DialogViewSerialBinding;
 import com.viettel.mbccs.databinding.ItemViewSerialBinding;
 import com.viettel.mbccs.dialog.LoadingDialog;
@@ -87,27 +87,27 @@ public class DialogViewSerial extends DialogFragment {
         super.onViewCreated(view, savedInstanceState);
         if (loadingDialog == null) {
             loadingDialog = new LoadingDialog();
-            loadingDialog.setCancelable(true);
+            loadingDialog.setCancelable(false);
         }
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         loadingDialog.show(fragmentManager, "loading");
 
-        ViewInfoSerialRequest v = new ViewInfoSerialRequest();
+        GetListSerialRequest v = new GetListSerialRequest();
         v.setOwnerId(stockTotal.getOwnerId());
         v.setOwnerType(stockTotal.getOwnerType());
         v.setStockModelId(stockTotal.getStockModelId());
         v.setStateId(stockTotal.getStateId());
 
-        DataRequest<ViewInfoSerialRequest> request = new DataRequest<>();
-        request.setApiCode(ApiCode.ViewInfoSerial);
+        DataRequest<GetListSerialRequest> request = new DataRequest<>();
+        request.setApiCode(ApiCode.GetListSerial);
         request.setParameterApi(v);
 
-        Subscription subscription = banHangKhoTaiChinhRepository.viewInfoSerial(request)
-                .subscribe(new MBCCSSubscribe<ViewInfoSerialResponse>() {
+        Subscription subscription = banHangKhoTaiChinhRepository.getListSerial(request)
+                .subscribe(new MBCCSSubscribe<GetListSerialResponse>() {
                     @Override
-                    public void onSuccess(ViewInfoSerialResponse object) {
-                        setData(object.getStockSerial());
+                    public void onSuccess(GetListSerialResponse object) {
+                        setData(object.getSerialInStock());
                         if (loadingDialog != null) loadingDialog.dismiss();
                     }
 
@@ -120,7 +120,7 @@ public class DialogViewSerial extends DialogFragment {
                                     public void onClick(DialogInterface dialog, int which) {
                                         dismiss();
                                     }
-                                });
+                                },false);
                     }
                 });
         subscriptions.add(subscription);
@@ -219,7 +219,7 @@ public class DialogViewSerial extends DialogFragment {
                 if (position % 2 == 0) {
                     background.set(context.getResources().getColor(R.color.white));
                 } else {
-                    background.set(context.getResources().getColor(R.color.grey_two));
+                    background.set(context.getResources().getColor(R.color.grey_six));
                 }
             }
         }

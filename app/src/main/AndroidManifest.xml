@@ -30,18 +30,18 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key"/>
-
         <meta-data
             android:name="AA_DB_NAME"
             android:value="mbccs_db"/>
         <meta-data
             android:name="AA_DB_VERSION"
             android:value="2"/>
-
         <meta-data
             android:name="AA_MODELS"
-            android:value="com.viettel.mbccs.data.model.Precinct,com.viettel.mbccs.data.model.Province,com.viettel.mbccs.data.model.District"/>
-
+            android:value="com.viettel.mbccs.data.model.Precinct,
+            com.viettel.mbccs.data.model.Province,
+            com.viettel.mbccs.data.model.District,
+            com.viettel.mbccs.data.model.UploadImage"/>
 
         <activity
             android:name=".screen.splash.SplashActivity"
@@ -170,7 +170,6 @@
         <activity
             android:name=".screen.information.CreateUpdateInformationActivity"
             android:screenOrientation="portrait"/>
-
         <activity
             android:name=".screen.nhapkhocapduoi.ListOrderActivity"
             android:screenOrientation="portrait"/>
@@ -206,6 +205,21 @@
         <activity
             android:name=".screen.hotnewscskpp.HotNewsCSKPPActivity"
             android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screen.uploadimage.UploadImageActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screen.viewwarehouse.ViewWarehouseActivity"
+            android:screenOrientation="portrait"/>
+
+        <service
+            android:name=".service.service.UploadImageService"
+            android:exported="true"/>
+
+        <receiver android:name=".service.receiver.UploadImageReceiver"/>
+
     </application>
 
 </manifest>

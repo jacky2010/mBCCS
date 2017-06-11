@@ -64,6 +64,7 @@ public class Function implements Parcelable {
 
             MenuId.MENU_DANG_KY_THONG_TIN, MenuId.MENU_CAP_NHAT_THONG_TIN, MenuId.MENU_DOI_SIM,
             MenuId.MENU_THAY_DOI_DIA_CHI_LAP_DAT,
+            //            MenuId.MENU_UPLOAD_ANH,
 
             MenuId.MENU_TAO_KENH_PHAN_PHOI, MenuId.MENU_QUAN_LY_DBHC_BTS_KENH,
             MenuId.MENU_QUAN_LY_KPI_KPP, MenuId.MENU_QUAN_LY_THONG_TIN_KPP,
@@ -128,6 +129,7 @@ public class Function implements Parcelable {
         int MENU_CAP_NHAT_THONG_TIN = 602;
         int MENU_DOI_SIM = 603;
         int MENU_THAY_DOI_DIA_CHI_LAP_DAT = 604;
+        //        int MENU_UPLOAD_ANH = 605;
 
         int MENU_TAO_KENH_PHAN_PHOI = 701;
         int MENU_QUAN_LY_DBHC_BTS_KENH = 702;

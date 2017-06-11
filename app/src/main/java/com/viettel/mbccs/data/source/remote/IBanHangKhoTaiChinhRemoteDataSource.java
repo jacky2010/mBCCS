@@ -17,8 +17,7 @@ import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProg
 import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
 import com.viettel.mbccs.data.source.remote.request.KPPOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.UpdateSaleOrderRequest;
-import com.viettel.mbccs.data.source.remote.request.ViewInfoSerialRequest;
-import com.viettel.mbccs.data.source.remote.response.BaseResponse;
+import com.viettel.mbccs.data.source.remote.request.GetListSerialRequest;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransChannelResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransRetailResponse;
 import com.viettel.mbccs.data.source.remote.response.DataResponse;
@@ -36,7 +35,7 @@ import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
 import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import com.viettel.mbccs.data.source.remote.response.UpdateSaleOrderResponse;
-import com.viettel.mbccs.data.source.remote.response.ViewInfoSerialResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListSerialResponse;
 import rx.Observable;
 
 /**
@@ -62,7 +61,7 @@ public interface IBanHangKhoTaiChinhRemoteDataSource {
     Observable<GetListStockModelResponse> getListStockModel(
             DataRequest<GetListStockModelRequest> request);
 
-    Observable<ViewInfoSerialResponse> viewInfoSerial(DataRequest<ViewInfoSerialRequest> request);
+    Observable<GetListSerialResponse> getListSerial(DataRequest<GetListSerialRequest> request);
 
     Observable<GetListProvinceResponse> getListProvince(
             DataRequest<GetListProvinceRequest> request);
