@@ -1,25 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="presenter"
             type="com.viettel.mbccs.screen.sell.retail.savetransconfirm.SaveTransConfirmPresenter"
             />
+        <import type="android.text.TextUtils"/>
+        <import type="android.view.View"/>
     </data>
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white_2"
         android:orientation="vertical"
         >
 
         <include
             layout="@layout/toolbar"
+            android:id="@+id/top"
             app:background="@{@color/colorAccent}"
             app:isShow="@{true}"
             app:leftIcon="@{@drawable/ic_arrow_left_white_24dp}"
             app:leftIconClick="@{()->presenter.onBack()}"
-            app:title="@{@string/sale_retail}"
+            app:title="@{@string/sale_confirm_label_confirm_sell}"
             app:titleColor="@{@color/white}"
             app:titleTextSize="@{@dimen/sp_17}"
             />
@@ -61,17 +65,60 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@id/layout_button"
-            android:layout_below="@id/lyHeader"
+            android:layout_below="@id/top"
+            android:orientation="vertical"
             >
             <com.viettel.mbccs.widget.CustomTextView
-                android:id="@+id/text_confirm"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
                 android:gravity="center_vertical"
                 android:padding="20dp"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                app:textHtml="@{presenter.content}"
+                app:textHtml="@{presenter.customerInfor}"
+                />
+            <View style="@style/dividerHorizontalStyle"/>
+
+            <View
+                android:layout_marginTop="@dimen/dp_10"
+                style="@style/dividerHorizontalStyle"
+                />
+
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:padding="20dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:textHtml="@{presenter.salerInfor}"
+                />
+
+            <View style="@style/dividerHorizontalStyle"/>
+
+            <View
+                android:visibility="@{TextUtils.isEmpty(presenter.saleProgram)?View.GONE:View.VISIBLE}"
+                android:layout_marginTop="@dimen/dp_10"
+                style="@style/dividerHorizontalStyle"
+                />
+
+
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:padding="20dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:visibility="@{TextUtils.isEmpty(presenter.saleProgram)?View.GONE:View.VISIBLE}"
+                app:textHtml="@{presenter.saleProgram}"
+                />
+            <View
+                android:visibility="@{TextUtils.isEmpty(presenter.saleProgram)?View.GONE:View.VISIBLE}"
+                style="@style/dividerHorizontalStyle"
                 />
         </LinearLayout>
 

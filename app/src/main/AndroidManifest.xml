@@ -226,6 +226,9 @@
 
         <receiver android:name=".service.receiver.UploadImageReceiver"/>
 
+        <activity
+            android:name=".screen.Test"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

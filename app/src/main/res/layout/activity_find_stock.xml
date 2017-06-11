@@ -117,6 +117,7 @@
                 android:layout_height="@dimen/dp_50"
                 android:layout_alignParentBottom="true"
                 android:gravity="center"
+                android:layout_margin="@dimen/dp_10"
                 android:onClick="@{()->presenter.addStock()}"
                 android:text="@string/add_stock_total"
                 style="@style/button_positive"

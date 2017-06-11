@@ -28,7 +28,9 @@ public class SaveTransConfirmPresenter implements SaveTransConfirmContract.Prese
     private GetInfoSaleTranRequest mGetInfoSaleTranRequest;
     private SaveTransConfirmContract.ViewModel mViewModel;
     private ChannelInfo mChannelInfo;
-    public ObservableField<String> content;
+    public ObservableField<String> customerInfor;
+    public ObservableField<String> salerInfor;
+    public ObservableField<String> saleProgram;
     public CompositeSubscription mSubscription;
     private BanHangKhoTaiChinhRepository mBanHangKhoTaiChinhRepository;
 
@@ -46,51 +48,34 @@ public class SaveTransConfirmPresenter implements SaveTransConfirmContract.Prese
     }
 
     private void init() {
-        content = new ObservableField<>();
+        customerInfor = new ObservableField<>();
+        saleProgram = new ObservableField<>();
+        salerInfor = new ObservableField<>();
         if (mGetInfoSaleTranRequest == null) {
-            return;
-        }
-        String text;
-        if (mChannelInfo != null) {
-            if (mGetInfoSaleTranRequest.getSaleProgrameCode() == null) {
-                text = String.format(mContext.getResources()
-                                .getString(R.string.confirm_before_save_trans_msg_no_saleprogram_channel),
-                        mChannelInfo.getChannelName(), mChannelInfo.getChannelCode(),
-                        Common.formatDouble(mSaleTrans.getAmountTax()),
-                        Common.convertMoneyToString(mSaleTrans.getAmountTax()), "Hoang Van Cuong",
-                        "01656738962");
-            } else {
-                text = String.format(mContext.getResources()
-                                .getString(R.string.confirm_before_save_trans_msg_channel),
-                        mGetInfoSaleTranRequest.getCustomer().getCustomerName(),
-                        String.valueOf(mChannelInfo.getChannelId()),
-                        Common.formatDouble(mSaleTrans.getAmountTax()),
-                        Common.convertMoneyToString(mSaleTrans.getAmountTax()), "Hoang Van Cuong",
-                        "01656738962",
-                        String.valueOf(mGetInfoSaleTranRequest.getSaleProgrameCode()));
-            }
-            content.set(text);
             return;
         }
 
         if (mGetInfoSaleTranRequest.getSaleProgrameCode() == null) {
-            text = String.format(mContext.getResources()
-                            .getString(R.string.confirm_before_save_trans_msg_no_saleprogram),
-                    mGetInfoSaleTranRequest.getCustomer().getCustomerName(),
-                    mGetInfoSaleTranRequest.getCustomer().getTin(),
-                    Common.formatDouble(mSaleTrans.getAmountTax()),
-                    Common.convertMoneyToString(mSaleTrans.getAmountTax()), "Hoang Van Cuong",
-                    "01656738962");
+            saleProgram.set(null);
         } else {
-            text = String.format(
-                    mContext.getResources().getString(R.string.confirm_before_save_trans_msg),
-                    mGetInfoSaleTranRequest.getCustomer().getCustomerName(),
-                    mGetInfoSaleTranRequest.getCustomer().getTin(),
-                    Common.formatDouble(mSaleTrans.getAmountTax()),
-                    Common.convertMoneyToString(mSaleTrans.getAmountTax()), "Hoang Van Cuong",
-                    "01656738962", String.valueOf(mGetInfoSaleTranRequest.getSaleProgrameCode()));
+            saleProgram.set(String.format(mContext.getString(R.string.sale_confirm_sale_program),
+                    mGetInfoSaleTranRequest.getSaleProgrameCode()));
         }
-        content.set(text);
+        if (mChannelInfo != null) {
+            customerInfor.set(
+                    String.format(mContext.getString(R.string.sale_channel_confirm_customer_infor),
+                            mChannelInfo.getChannelName(), mChannelInfo.getChannelCode(),
+                            Common.formatDouble(mSaleTrans.getAmountTax()),
+                            Common.convertMoneyToString(mSaleTrans.getAmountTax())));
+        } else {
+            customerInfor.set(
+                    String.format(mContext.getString(R.string.sale_retail_confirm_customer_infor),
+                            mGetInfoSaleTranRequest.getCustomer().getCustomerName(),
+                            "0123513124123", Common.formatDouble(mSaleTrans.getAmountTax()),
+                            Common.convertMoneyToString(mSaleTrans.getAmountTax())));
+        }
+        salerInfor.set(String.format(mContext.getString(R.string.sale_retail_confirm_saler_infor),
+                "Hoang Van Cuong", "0123112312513"));
     }
 
     @Override
