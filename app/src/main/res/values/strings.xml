@@ -17,6 +17,12 @@
     <string name="common_label_add">Thêm</string>
     <string name="common_label_reject">Từ chối</string>
     <string name="common_label_export">Xuất kho</string>
+    <string name="common_label_total_money">Tổng tiền</string>
+    <string name="common_label_tax">Tiền thuế</string>
+    <string name="common_label_total_amount">Số tiền phải thanh toán</string>
+    <string name="common_label_continue">Tiếp tục</string>
+    <string name="common_label_complete">Hoàn thành</string>
+
 
     <string formatted="false" name="count_serial_selected">
         <![CDATA[
@@ -786,9 +792,6 @@ Từ <b>%s</b><br>
     <string name="activity_create_ticket_return_upper_lap_phieu_xuat_tu_kho">Lập phiếu xuất từ kho</string>
     <string name="activity_create_ticket_return_upper_them">Thêm</string>
     <string name="activity_create_ticket_return_upper_lap_phieu">Lập phiếu</string>
-    <string name="common_label_total_money">Tổng tiền</string>
-    <string name="common_label_tax">Tiền thuế</string>
-    <string name="common_label_total_amount">Số tiền phải thanh toán</string>
 
     <!--survey kpp-->
     <string name="survey_kpp_title">Survey</string>
@@ -808,4 +811,8 @@ Từ <b>%s</b><br>
     <string name="hot_news_cs_kpp_title">Hotnews CS KPP</string>
     <string name="hot_news_cs_kpp_msg_info_no_news">Hiện không có tin tức nào!</string>
     <!--/hot news kpp-->
+
+    <string name="survey_label_title">Survey</string>
+    <string name="survey_error_no_answer">Hãy chọn câu trả lời</string>
+    <string name="survey_label_no_survey">Không có survey nào!</string>
 </resources>

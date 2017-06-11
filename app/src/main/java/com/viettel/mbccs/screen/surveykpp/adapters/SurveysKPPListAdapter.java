@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.SurveyItem;
-import com.viettel.mbccs.databinding.ItemSurveyBinding;
+import com.viettel.mbccs.databinding.ItemSurveyKppBinding;
 
 import java.util.List;
 
@@ -18,14 +18,14 @@ import java.util.List;
  * Created by minhnx on 5/19/17.
  */
 
-public class SurveysListAdapter extends RecyclerView.Adapter<SurveysListAdapter.SurveyViewHolder>
+public class SurveysKPPListAdapter extends RecyclerView.Adapter<SurveysKPPListAdapter.SurveyViewHolder>
         implements View.OnFocusChangeListener {
 
     private Context mContext;
     private List<SurveyItem> mSurveyItems;
     private OnItemClickListener listener;
 
-    public SurveysListAdapter(Context context, List<SurveyItem> surveyItems) {
+    public SurveysKPPListAdapter(Context context, List<SurveyItem> surveyItems) {
         mContext = context;
         mSurveyItems = surveyItems;
     }
@@ -49,8 +49,8 @@ public class SurveysListAdapter extends RecyclerView.Adapter<SurveysListAdapter.
     @Override
     public SurveyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new SurveyViewHolder(
-                (ItemSurveyBinding) DataBindingUtil.inflate(LayoutInflater.from(mContext),
-                        R.layout.item_survey, parent, false));
+                (ItemSurveyKppBinding) DataBindingUtil.inflate(LayoutInflater.from(mContext),
+                        R.layout.item_survey_kpp, parent, false));
     }
 
     @Override
@@ -77,10 +77,10 @@ public class SurveysListAdapter extends RecyclerView.Adapter<SurveysListAdapter.
 
     class SurveyViewHolder extends RecyclerView.ViewHolder {
 
-        ItemSurveyBinding mBinding;
+        ItemSurveyKppBinding mBinding;
         SurveyItem mSurveyItem;
 
-        public SurveyViewHolder(final ItemSurveyBinding binding) {
+        public SurveyViewHolder(final ItemSurveyKppBinding binding) {
             super(binding.getRoot());
             mBinding = binding;
             mBinding.btnProcess.setOnClickListener(new View.OnClickListener() {
@@ -94,7 +94,7 @@ public class SurveysListAdapter extends RecyclerView.Adapter<SurveysListAdapter.
 
         public void bind(SurveyItem item) {
             mSurveyItem = item;
-            ItemSurveyPresenter itemSurveyPresenter = new ItemSurveyPresenter(mContext, item);
+            ItemSurveyKPPPresenter itemSurveyPresenter = new ItemSurveyKPPPresenter(mContext, item);
             mBinding.setPresenter(itemSurveyPresenter);
         }
     }

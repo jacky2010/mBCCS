@@ -107,6 +107,7 @@ public class Constants {
         public static final String TO_CHANNEL = "to_channel";
         public static final String SERVICE_FEE = "service_fee";
         public static final String SIM_FEE = "sim_fee";
+        public static final String SURVEY_QUESTION = "survey_question";
     }
 
     public class Tax{
@@ -120,5 +121,6 @@ public class Constants {
 
     public class Service{
         public static final String RESPONSE_OK = "0";
+        public static final String SURVEY_QUESTION = "survey_question";
     }
 }

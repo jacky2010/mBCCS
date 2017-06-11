@@ -184,7 +184,9 @@
         <activity
             android:name=".screen.nhapkhocapduoi.createorder.CreateOrderSuccessActivity"
             android:screenOrientation="portrait"/>
-
+        <activity
+            android:name=".screen.survey.SurveyActivity"
+            android:screenOrientation="portrait"/>
         <!-- Area Channel -->
         <activity
             android:name=".screen.manager.area.AreaChanelActivity"

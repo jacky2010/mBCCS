@@ -8,12 +8,12 @@ import com.viettel.mbccs.data.model.SurveyItem;
  * Created by eo_cuong on 5/15/17.
  */
 
-public class ItemSurveyPresenter {
+public class ItemSurveyKPPPresenter {
 
     private SurveyItem mItem;
     private Context mContext;
 
-    public ItemSurveyPresenter(Context context, SurveyItem item) {
+    public ItemSurveyKPPPresenter(Context context, SurveyItem item) {
         mItem = item;
         mContext = context;
     }

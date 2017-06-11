@@ -254,10 +254,14 @@ public class BindingUtils {
         textUnderLine.setText(content);
     }
 
-    @BindingAdapter({ "android:adapter" })
-    public static void setAdapter(RecyclerView recyclerView, RecyclerView.Adapter adapter) {
+    @BindingAdapter(value = { "android:adapter", "android:divider" }, requireAll = false)
+    public static void setAdapter(RecyclerView recyclerView, RecyclerView.Adapter adapter,
+            boolean divider) {
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
         recyclerView.setHasFixedSize(true);
+        if (divider) {
+            recyclerView.addItemDecoration(new VerticalSpaceItemDecoration(30));
+        }
         recyclerView.setAdapter(adapter);
     }
 

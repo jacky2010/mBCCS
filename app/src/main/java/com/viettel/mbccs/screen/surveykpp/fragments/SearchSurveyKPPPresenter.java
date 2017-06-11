@@ -6,7 +6,7 @@ import android.databinding.ObservableField;
 import android.view.View;
 
 import com.viettel.mbccs.data.model.SurveyItem;
-import com.viettel.mbccs.screen.surveykpp.adapters.SurveysListAdapter;
+import com.viettel.mbccs.screen.surveykpp.adapters.SurveysKPPListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +19,10 @@ public class SearchSurveyKPPPresenter implements SearchSurveyKPPContract.Present
 
     private Context context;
     private SearchSurveyKPPContract.ViewModel viewModel;
-    private SurveysListAdapter surveysAdapter;
+    private SurveysKPPListAdapter surveysAdapter;
 
     public ObservableBoolean searchFound;
-    public ObservableField<SurveysListAdapter> surveysListAdapter;
+    public ObservableField<SurveysKPPListAdapter> surveysListAdapter;
 
     public SearchSurveyKPPPresenter(Context context, final SearchSurveyKPPContract.ViewModel viewModel) {
         this.context = context;
@@ -30,8 +30,8 @@ public class SearchSurveyKPPPresenter implements SearchSurveyKPPContract.Present
 
         surveysListAdapter = new ObservableField<>();
         searchFound = new ObservableBoolean(true);
-        surveysAdapter = new SurveysListAdapter(context, new ArrayList<SurveyItem>());
-        surveysAdapter.setOnItemClickListener(new SurveysListAdapter.OnItemClickListener() {
+        surveysAdapter = new SurveysKPPListAdapter(context, new ArrayList<SurveyItem>());
+        surveysAdapter.setOnItemClickListener(new SurveysKPPListAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, SurveyItem item) {
                 viewModel.onPrepareSurvey(item);

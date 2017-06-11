@@ -33,6 +33,7 @@ import com.viettel.mbccs.screen.sell.orders.SellOrdersActivity;
 import com.viettel.mbccs.screen.sell.retail.SaleRetailActivity;
 import com.viettel.mbccs.screen.sellanypay.SellAnyPayActivity;
 import com.viettel.mbccs.screen.surveykpp.SurveyKPPActivity;
+import com.viettel.mbccs.screen.survey.SurveyActivity;
 import com.viettel.mbccs.screen.trahangcaptren.ListOrderReturnUpperActivity;
 import com.viettel.mbccs.screen.transferanypay.TransferAnyPayActivity;
 import com.viettel.mbccs.screen.viewwarehouse.ViewWarehouseActivity;
@@ -258,6 +259,8 @@ public class BaseSubMenuActivity
                         case Function.MenuId.MENU_SURVEY_KPP:
                             startActivity(
                                     new Intent(BaseSubMenuActivity.this, SurveyKPPActivity.class));
+                            startActivity(
+                                    new Intent(BaseSubMenuActivity.this, SurveyActivity.class));
                             break;
                         case Function.MenuId.MENU_HOTNEW_CS_KPP:
                             startActivity(
