@@ -2,7 +2,6 @@ package com.viettel.mbccs.data.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -12,35 +11,69 @@ import com.google.gson.annotations.SerializedName;
 
 public class StaffInfo implements Parcelable {
 
-    @SerializedName("StaffId")
+    @SerializedName("staffId")
     @Expose
     private long staffId;
 
-    @SerializedName("StaffCode")
+    @SerializedName("staffCode")
     @Expose
     private String staffCode;
 
-    @SerializedName("StaffName")
+    @SerializedName("name")
     @Expose
     private String staffName;
 
-    @SerializedName("ShopId")
+    @SerializedName("shopId")
     @Expose
     private long shopId;
 
-    @SerializedName("ShopCode")
-    @Expose
-    private String shopCode;
-
-    @SerializedName("ShopName")
-    @Expose
-    private String shopName;
-
-    @SerializedName("ChannelTypeId")
+    @SerializedName("channelTypeId")
     @Expose
     private long channelTypeId;
 
+    @SerializedName("birthday")
+    @Expose
+    private String birthday;
+
+    @SerializedName("address")
+    @Expose
+    private String address;
+
+    @SerializedName("idIssueDate")
+    @Expose
+    private String idIssueDate;
+
+    @SerializedName("pricePolicy")
+    @Expose
+    private String pricePolicy;
+
+    @SerializedName("idNo")
+    @Expose
+    private String idNo;
+
+    @SerializedName("province")
+    @Expose
+    private String province;
+
+    @SerializedName("staffOwnerId")
+    @Expose
+    private String staffOwnerId;
+
+    @SerializedName("discountPolicy")
+    @Expose
+    private String discountPolicy;
+
+    @SerializedName("tel")
+    @Expose
     private String tel;
+
+    @SerializedName("idIssuePlace")
+    @Expose
+    private String idIssuePlace;
+
+    @SerializedName("status")
+    @Expose
+    private String status;
 
     private String staffJobTitle;
 
@@ -49,32 +82,77 @@ public class StaffInfo implements Parcelable {
     public StaffInfo() {
     }
 
-    public StaffInfo(long staffId, String staffCode, String staffName, long shopId, String shopCode,
-                     String shopName, long channelTypeId, String tel, String staffJobTitle,
-                     String staffAddress) {
+    public StaffInfo(long staffId, String staffCode, String staffName, long shopId,
+            long channelTypeId, String birthday, String address, String idIssueDate,
+            String pricePolicy, String idNo, String province, String staffOwnerId,
+            String discountPolicy, String tel, String idIssuePlace, String status,
+            String staffJobTitle, String staffAddress) {
         this.staffId = staffId;
         this.staffCode = staffCode;
         this.staffName = staffName;
         this.shopId = shopId;
-        this.shopCode = shopCode;
-        this.shopName = shopName;
         this.channelTypeId = channelTypeId;
+        this.birthday = birthday;
+        this.address = address;
+        this.idIssueDate = idIssueDate;
+        this.pricePolicy = pricePolicy;
+        this.idNo = idNo;
+        this.province = province;
+        this.staffOwnerId = staffOwnerId;
+        this.discountPolicy = discountPolicy;
         this.tel = tel;
+        this.idIssuePlace = idIssuePlace;
+        this.status = status;
         this.staffJobTitle = staffJobTitle;
         this.staffAddress = staffAddress;
     }
 
-    public StaffInfo(Parcel in) {
+    protected StaffInfo(Parcel in) {
         staffId = in.readLong();
         staffCode = in.readString();
         staffName = in.readString();
         shopId = in.readLong();
-        shopCode = in.readString();
-        shopName = in.readString();
         channelTypeId = in.readLong();
+        birthday = in.readString();
+        address = in.readString();
+        idIssueDate = in.readString();
+        pricePolicy = in.readString();
+        idNo = in.readString();
+        province = in.readString();
+        staffOwnerId = in.readString();
+        discountPolicy = in.readString();
         tel = in.readString();
+        idIssuePlace = in.readString();
+        status = in.readString();
         staffJobTitle = in.readString();
         staffAddress = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(staffId);
+        dest.writeString(staffCode);
+        dest.writeString(staffName);
+        dest.writeLong(shopId);
+        dest.writeLong(channelTypeId);
+        dest.writeString(birthday);
+        dest.writeString(address);
+        dest.writeString(idIssueDate);
+        dest.writeString(pricePolicy);
+        dest.writeString(idNo);
+        dest.writeString(province);
+        dest.writeString(staffOwnerId);
+        dest.writeString(discountPolicy);
+        dest.writeString(tel);
+        dest.writeString(idIssuePlace);
+        dest.writeString(status);
+        dest.writeString(staffJobTitle);
+        dest.writeString(staffAddress);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<StaffInfo> CREATOR = new Creator<StaffInfo>() {
@@ -88,25 +166,6 @@ public class StaffInfo implements Parcelable {
             return new StaffInfo[size];
         }
     };
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(staffId);
-        dest.writeString(staffCode);
-        dest.writeString(staffName);
-        dest.writeLong(shopId);
-        dest.writeString(shopCode);
-        dest.writeString(shopName);
-        dest.writeLong(channelTypeId);
-        dest.writeString(tel);
-        dest.writeString(staffJobTitle);
-        dest.writeString(staffAddress);
-    }
 
     public long getStaffId() {
         return staffId;
@@ -140,22 +199,6 @@ public class StaffInfo implements Parcelable {
         this.shopId = shopId;
     }
 
-    public String getShopCode() {
-        return shopCode;
-    }
-
-    public void setShopCode(String shopCode) {
-        this.shopCode = shopCode;
-    }
-
-    public String getShopName() {
-        return shopName;
-    }
-
-    public void setShopName(String shopName) {
-        this.shopName = shopName;
-    }
-
     public long getChannelTypeId() {
         return channelTypeId;
     }
@@ -164,12 +207,92 @@ public class StaffInfo implements Parcelable {
         this.channelTypeId = channelTypeId;
     }
 
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getIdIssueDate() {
+        return idIssueDate;
+    }
+
+    public void setIdIssueDate(String idIssueDate) {
+        this.idIssueDate = idIssueDate;
+    }
+
+    public String getPricePolicy() {
+        return pricePolicy;
+    }
+
+    public void setPricePolicy(String pricePolicy) {
+        this.pricePolicy = pricePolicy;
+    }
+
+    public String getIdNo() {
+        return idNo;
+    }
+
+    public void setIdNo(String idNo) {
+        this.idNo = idNo;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getStaffOwnerId() {
+        return staffOwnerId;
+    }
+
+    public void setStaffOwnerId(String staffOwnerId) {
+        this.staffOwnerId = staffOwnerId;
+    }
+
+    public String getDiscountPolicy() {
+        return discountPolicy;
+    }
+
+    public void setDiscountPolicy(String discountPolicy) {
+        this.discountPolicy = discountPolicy;
+    }
+
     public String getTel() {
         return tel;
     }
 
     public void setTel(String tel) {
         this.tel = tel;
+    }
+
+    public String getIdIssuePlace() {
+        return idIssuePlace;
+    }
+
+    public void setIdIssuePlace(String idIssuePlace) {
+        this.idIssuePlace = idIssuePlace;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getStaffJobTitle() {
