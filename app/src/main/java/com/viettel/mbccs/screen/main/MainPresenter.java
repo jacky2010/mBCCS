@@ -123,4 +123,8 @@ public class MainPresenter implements MainContract.Presenter {
         }
         return new ArrayList<>();
     }
+
+    public void settingsClick() {
+        mViewModel.gotoSettings();
+    }
 }

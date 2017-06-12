@@ -17,6 +17,8 @@ public interface MainContract {
         void gotoMenu();
 
         void backToMain();
+
+        void gotoSettings();
     }
 
     interface Presenter extends BasePresenter {

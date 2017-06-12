@@ -1,9 +1,12 @@
 package com.viettel.mbccs.screen.main;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
+
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.databinding.ActivityMainBinding;
+import com.viettel.mbccs.screen.config.ConfigActivity;
 import com.viettel.mbccs.screen.main.fragments.main.MainFragment;
 import com.viettel.mbccs.screen.main.fragments.menu.MenuFragment;
 
@@ -64,6 +67,11 @@ public class MainActivity extends BaseDataBindActivity<ActivityMainBinding, Main
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.frame_main);
         if (fragment != null && fragment instanceof MainFragment) return;
         getSupportFragmentManager().popBackStack();
+    }
+
+    @Override
+    public void gotoSettings() {
+        startActivity(new Intent(this, ConfigActivity.class));
     }
 
     @Override
