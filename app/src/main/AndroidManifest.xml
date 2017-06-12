@@ -52,7 +52,13 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".screen.billing.BillingActivity"/>
+        <activity
+            android:name=".screen.TestActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".screen.billing.BillingActivity"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".screen.resetpass.ResetPasswordActivity"
             android:screenOrientation="portrait"/>
