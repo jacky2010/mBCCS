@@ -8,7 +8,7 @@ public class GetListOrderRequest  {
 
     private long shopId;
     private long staffId;
-    private long orderStatus;
+    private String orderStatus;
     private String isdnChannel;
     private String fromDate;
     private String toDate;
@@ -29,11 +29,11 @@ public class GetListOrderRequest  {
         this.staffId = staffId;
     }
 
-    public long getOrderStatus() {
+    public String getOrderStatus() {
         return orderStatus;
     }
 
-    public void setOrderStatus(long orderStatus) {
+    public void setOrderStatus(String orderStatus) {
         this.orderStatus = orderStatus;
     }
 

@@ -44,7 +44,7 @@ public class KPPOrderPresenter implements KPPOrderContract.Presenter {
     private BanHangKhoTaiChinhRepository mBanHangKhoTaiChinhRepository;
     private UserRepository mUserRepository;
     private CompositeSubscription mSubscriptions;
-    private long status = OrderStatus.PENDING;
+    private String status = OrderStatus.PENDING;
 
     private DataRequest<GetListOrderRequest> mGetListOrderRequestBaseRequest;
 
@@ -230,16 +230,13 @@ public class KPPOrderPresenter implements KPPOrderContract.Presenter {
         String text = Common.getDayByLong(mViewModel.getFromDate()) + " - " + Common.getDayByLong(
                 mViewModel.getToDate());
         String[] stringArray = mContext.getResources().getStringArray(R.array.order_status_name);
-        switch ((int) status) {
-            case OrderStatus.APPROVALS:
-                text += " - " + stringArray[0];
-                break;
-            case OrderStatus.PENDING:
-                text += " - " + stringArray[1];
-                break;
-            case OrderStatus.REJECT:
-                text += " - " + stringArray[2];
-                return;
+        if (status.equals(OrderStatus.APPROVALS)) {
+            text += " - " + stringArray[0];
+        } else if (status.equals(OrderStatus.PENDING)) {
+            text += " - " + stringArray[1];
+        } else {
+            text += " - " + stringArray[2];
+            return;
         }
 
         filterText.set(text);

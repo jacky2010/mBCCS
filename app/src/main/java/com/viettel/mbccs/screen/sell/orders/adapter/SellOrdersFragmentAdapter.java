@@ -39,16 +39,12 @@ public class SellOrdersFragmentAdapter extends FragmentStatePagerAdapter {
         this.channelInfoSell = channelInfoSell;
         this.listTitle = listTitle;
         for (SaleOrders o : saleOrderses) {
-            switch ((int) o.getOrderStatus()) {
-                case OrderStatus.APPROVALS:
-                    orderListApprovals.add(o);
-                    break;
-                case OrderStatus.PENDING:
-                    orderListPending.add(o);
-                    break;
-                case OrderStatus.REJECT:
-                    orderListReject.add(o);
-                    break;
+            if (o.getOrderStatus().equals(OrderStatus.APPROVALS)) {
+                orderListApprovals.add(o);
+            } else if (o.getOrderStatus().equals(OrderStatus.PENDING)) {
+                orderListPending.add(o);
+            } else {
+                orderListReject.add(o);
             }
         }
     }
@@ -66,16 +62,12 @@ public class SellOrdersFragmentAdapter extends FragmentStatePagerAdapter {
         orderListPending.clear();
         orderListReject.clear();
         for (SaleOrders o : saleOrderses) {
-            switch ((int) o.getOrderStatus()) {
-                case OrderStatus.APPROVALS:
-                    orderListApprovals.add(o);
-                    break;
-                case OrderStatus.PENDING:
-                    orderListPending.add(o);
-                    break;
-                case OrderStatus.REJECT:
-                    orderListReject.add(o);
-                    break;
+            if (o.getOrderStatus().equals(OrderStatus.APPROVALS)) {
+                orderListApprovals.add(o);
+            } else if (o.getOrderStatus().equals(OrderStatus.PENDING)) {
+                orderListPending.add(o);
+            } else {
+                orderListReject.add(o);
             }
         }
         notifyDataSetChanged();
