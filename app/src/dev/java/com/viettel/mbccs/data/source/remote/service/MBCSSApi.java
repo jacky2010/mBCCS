@@ -117,7 +117,8 @@ import rx.Observable;
 
 public interface MBCSSApi {
 
-    @POST("thonguyen/mBCCS/1.0.0/login")
+    // TODO: 12/06/2017 Fake request
+    @POST("/JsonAPI/webresources/CoreService/login")
     Observable<LoginInfo> login(@Body LoginRequest loginRequest);
 
     @FormUrlEncoded
@@ -320,7 +321,8 @@ public interface MBCSSApi {
     Observable<BaseResponse<UploadImageResponse>> uploadImage(
             @Body DataRequest<UploadImageRequest> request);
 
-    @POST("thonguyen/Sale_mBCCS/1.0.0/WS_GetListOrder")
+    // TODO: 12/06/2017 Fake request
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<BaseResponse<GetUserInfoResponse>> getUserInfo(
             @Body DataRequest<GetUserInfoRequest> request);
 }

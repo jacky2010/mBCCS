@@ -139,11 +139,12 @@
             bind:movementMethod="@{ presenter.movementMethod }"
             />
 
-        <ProgressBar
+        <android.support.v4.widget.ContentLoadingProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:visibility="@{ presenter.loading ? View.VISIBLE : View.GONE }"
+            style="?android:attr/progressBarStyleLarge"
             />
 
     </android.support.percent.PercentRelativeLayout>

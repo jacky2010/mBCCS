@@ -1,16 +1,15 @@
 package com.viettel.mbccs.screen.main.fragments.main;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-
 import com.viettel.mbccs.data.model.HomeModel;
 import com.viettel.mbccs.databinding.ItemProgressCircleStatisticBinding;
 import com.viettel.mbccs.databinding.ItemProgressStatisticBinding;
 import com.viettel.mbccs.databinding.ItemTextComplexStatisticBinding;
 import com.viettel.mbccs.databinding.ItemTextStatisticBinding;
-
 import java.util.List;
 
 /**
@@ -144,7 +143,9 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         public void bind(HomeModel item) {
             binding.setTextTop(item.getTitle());
+            binding.setTextTopColor(Color.BLUE);
             binding.setTextBottom(item.getSubTitle());
+            binding.setTextBottomColor(Color.RED);
         }
     }
 }

@@ -27,8 +27,21 @@ public class RequestHelper {
         return instance1;
     }
 
+    // TODO: 12/06/2017 Fake request
+    public static MBCSSApi getFakeRequest() {
+        if (instance1 == null) {
+            instance1 = getFakeRequest(false, false);
+        }
+        return instance1;
+    }
+
     public static MBCSSApi getRequestHeader() {
         return getRequest(true, false);
+    }
+
+    // TODO: 12/06/2017 Fake request
+    public static MBCSSApi getFakeRequestHeader() {
+        return getFakeRequest();
     }
 
     public static MBCSSApi getRequestMultipart() {
@@ -56,6 +69,30 @@ public class RequestHelper {
                 new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
                         .addCallAdapterFactory(ErrorHandlerFactory.create())
                         .baseUrl(Config.END_POINT)
+                        .client(httpClient.build())
+                        .build();
+        return retrofit.create(MBCSSApi.class);
+    }
+
+    // TODO: 12/06/2017 Fake request
+    public static MBCSSApi getFakeRequest(boolean isHeader, boolean isMultiPart) {
+        HttpLoggingInterceptor logging = getHttpLoggingInterceptor();
+        OkHttpClient client;
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        httpClient.connectTimeout(CONNECTION_TIMEOUT, TimeUnit.SECONDS);
+        httpClient.readTimeout(CONNECTION_TIMEOUT, TimeUnit.SECONDS);
+        httpClient.addInterceptor(logging);
+        if (isHeader) {
+            httpClient.addInterceptor(requestWithHeader());
+        }
+        if (isMultiPart) {
+            httpClient.addInterceptor(requestMultipart());
+        }
+
+        Retrofit retrofit =
+                new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
+                        .addCallAdapterFactory(ErrorHandlerFactory.create())
+                        .baseUrl("http://45.117.162.136:8855")
                         .client(httpClient.build())
                         .build();
         return retrofit.create(MBCSSApi.class);
