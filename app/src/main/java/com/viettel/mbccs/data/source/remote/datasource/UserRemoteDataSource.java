@@ -1,6 +1,7 @@
 package com.viettel.mbccs.data.source.remote.datasource;
 
 import com.viettel.mbccs.data.model.LoginInfo;
+import com.viettel.mbccs.data.model.UserInfo;
 import com.viettel.mbccs.data.source.remote.IUserRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetDistrictRequest;
@@ -70,11 +71,11 @@ public class UserRemoteDataSource implements IUserRemoteDataSource {
     }
 
     @Override
-    public Observable<GetUserInfoResponse> getUserInfo(DataRequest<GetUserInfoRequest> request) {
+    public Observable<UserInfo> getUserInfo(DataRequest<GetUserInfoRequest> request) {
         return RequestHelper.getFakeRequest()
                 .getUserInfo(request)
-                .flatMap(SchedulerUtils.<GetUserInfoResponse>convertDataFlatMap())
-                .compose(SchedulerUtils.<GetUserInfoResponse>applyAsyncSchedulers());
+                .flatMap(SchedulerUtils.<UserInfo>convertDataFlatMap())
+                .compose(SchedulerUtils.<UserInfo>applyAsyncSchedulers());
     }
 
     @Override

@@ -51,6 +51,7 @@ public class SaleRetailPresenter
     private DataRequest<GetTelecomServiceAndSaleProgramRequest>
             mGetTelecomServiceAndSaleProgramRequest;
     private BanHangKhoTaiChinhRepository mBanHangKhoTaiChinhRepository;
+    private UserRepository mUserRepository;
 
     private DataRequest<GetTotalStockRequest> mGetTotalStockRequest;
     private CompositeSubscription mSubscription;
@@ -60,6 +61,7 @@ public class SaleRetailPresenter
         mViewModel = viewModel;
         mSubscription = new CompositeSubscription();
         mBanHangKhoTaiChinhRepository = BanHangKhoTaiChinhRepository.getInstance();
+        mUserRepository = UserRepository.getInstance();
         init();
         loadServiceAndProgram();
     }
@@ -75,8 +77,9 @@ public class SaleRetailPresenter
         if (currentTelecomService.getId() != -1) {
             request.setTelecomServiceId(currentTelecomService.getId());
         }
-        request.setOwnerId(0);
-        request.setOwnerType(10);
+        request.setOwnerId(mUserRepository.getUserInfo().getStaffInfo().getStaffId());
+        //hard code 2
+        request.setOwnerType(2);
         request.setStateId(StockTotalType.TYPE_NEW);
         request.setSaleTransType(SaleTranType.SALE_RETAIL);
         //TODO set attribute for request
@@ -84,7 +87,7 @@ public class SaleRetailPresenter
         mGetTotalStockRequest.setParameterApi(request);
         Subscription subscription =
                 mBanHangKhoTaiChinhRepository.getModelSales(mGetTotalStockRequest)
-                        .subscribe(new MBCCSSubscribe<GetTotalStockResponse>() {
+                        .subscribe(new MBCCSSubscribe<GetTotalStockResponse>((Activity) mContext) {
                             @Override
                             public void onSuccess(GetTotalStockResponse object) {
                                 mModelSales.clear();
@@ -113,16 +116,15 @@ public class SaleRetailPresenter
     private void loadServiceAndProgram() {
         mViewModel.showLoading();
         mGetTelecomServiceAndSaleProgramRequest = new DataRequest<>();
-        mGetTelecomServiceAndSaleProgramRequest.setUserName("Cuong");
         mGetTelecomServiceAndSaleProgramRequest.setApiCode(ApiCode.GetTelecomServiceAndSaleProgram);
         GetTelecomServiceAndSaleProgramRequest request =
                 new GetTelecomServiceAndSaleProgramRequest();
-        request.setShopId("123");
+        request.setShopId(mUserRepository.getUserInfo().getShop().getShopId());
         mGetTelecomServiceAndSaleProgramRequest.setParameterApi(request);
 
         Subscription subscription = mBanHangKhoTaiChinhRepository.getTelecomserviceAndSaleProgram(
                 mGetTelecomServiceAndSaleProgramRequest)
-                .subscribe(new MBCCSSubscribe<TelecomServiceAndSaleProgramResponse>() {
+                .subscribe(new MBCCSSubscribe<TelecomServiceAndSaleProgramResponse>((Activity) mContext) {
                     @Override
                     public void onSuccess(TelecomServiceAndSaleProgramResponse object) {
                         mTeleComServices.addAll(object.getTeleComServices());
@@ -161,69 +163,6 @@ public class SaleRetailPresenter
         mSubscription.add(subscription);
     }
 
-    private void fakeModelSale() {
-
-        mModelSales.clear();
-
-        ModelSale good1 = new ModelSale();
-        good1.setStockMoldeName("Iphone 7 plus");
-        good1.setQuantity(12);
-        good1.setPrice(5000000);
-        good1.setPathImage1("http://didongthongminh"
-                + ".vn/images/products/2017/03/31/resized/samsung-galaxy-s8-plus"
-                + "-_1490956081.jpg");
-
-        ModelSale good2 = new ModelSale();
-        good2.setStockMoldeName("Samsung J5 Prime");
-        good2.setQuantity(10);
-        good2.setPrice(400000);
-        good2.setPathImage1(
-                "https://cdn1.viettelstore.vn/images/Product/ProductImage/small/J5-Prime-A.jpg");
-
-        ModelSale good3 = new ModelSale();
-        good3.setStockMoldeName("Oppo F1s");
-        good3.setQuantity(5);
-        good3.setPrice(7000000);
-        good3.setPathImage1(
-                "https://cdn1.viettelstore.vn/images/Product/ProductImage/small/3211396993674.jpg");
-        mModelSales.add(good1);
-        mModelSales.add(good2);
-        mModelSales.add(good3);
-        stockAdapter.notifyDataSetChanged();
-    }
-
-    private void fakeData() {
-
-        SaleProgram sell1 = new SaleProgram(1, "0", "khuyen mai 1");
-        SaleProgram sell2 = new SaleProgram(1, "1", "khuyen mai 2");
-        SaleProgram sell3 = new SaleProgram(1, "2", "khuyen mai 3");
-        mSalePrograms.add(sell1);
-        mSalePrograms.add(sell2);
-        mSalePrograms.add(sell3);
-
-        TeleComService service2 = new TeleComService(1, "Mobile");
-        TeleComService service3 = new TeleComService(2, "PC");
-        TeleComService service4 = new TeleComService(3, "OK");
-        TeleComService service5 = new TeleComService(4, "Phu kien");
-        mTeleComServices.add(service2);
-        mTeleComServices.add(service3);
-        mTeleComServices.add(service4);
-        mTeleComServices.add(service5);
-
-        TeleComService defaultTelecomSercie =
-                new TeleComService(-1, mContext.getResources().getString(R.string.all_));
-        mTeleComServices.add(0, defaultTelecomSercie);
-
-        SaleProgram defaultSaleProgram =
-                new SaleProgram(-1, mContext.getResources().getString(R.string.all_));
-        mSalePrograms.add(0, defaultSaleProgram);
-
-        currentSaleProgram = mSalePrograms.get(0);
-        currentTelecomService = mTeleComServices.get(0);
-
-        sellProgram.set(currentSaleProgram.getName());
-        mAdapter.notifyDataSetChanged();
-    }
 
     private void init() {
         filterText = new ObservableField<>();

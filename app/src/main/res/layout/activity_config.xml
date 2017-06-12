@@ -344,6 +344,7 @@
                 android:layout_height="@dimen/dp_56"
                 android:layout_gravity="center|top"
                 android:orientation="horizontal"
+                android:onClick="@{()->presenter.logout()}"
                 android:paddingLeft="@dimen/dp_16"
                 android:paddingRight="@dimen/dp_16"
                 >

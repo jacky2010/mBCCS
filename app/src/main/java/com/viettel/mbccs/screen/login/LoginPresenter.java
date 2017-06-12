@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.LoginInfo;
+import com.viettel.mbccs.data.model.UserInfo;
 import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetUserInfoRequest;
@@ -80,24 +81,24 @@ public class LoginPresenter implements LoginContract.Presenter {
         Subscription subscription = UserRepository.getInstance()
                 .login(loginRequest)
                 .subscribe(new MBCCSSubscribe<LoginInfo>() {
-            @Override
-            public void onSuccess(LoginInfo object) {
-                if (object == null || TextUtils.isEmpty(object.getToken())) {
-                    onError(new Throwable());
-                    return;
-                }
-                mUserRepository.saveLoginUserName(username);
-                mUserRepository.saveUser(object);
-                getUserInfo(object);
-            }
+                    @Override
+                    public void onSuccess(LoginInfo object) {
+                        if (object == null || TextUtils.isEmpty(object.getToken())) {
+                            onError(new Throwable());
+                            return;
+                        }
+                        mUserRepository.saveLoginUserName(username);
+                        mUserRepository.saveUser(object);
+                        getUserInfo(object);
+                    }
 
-            @Override
-            public void onError(BaseException error) {
-                Toast.makeText(mContext, "Login fail", Toast.LENGTH_SHORT).show();
-                //TODO
-                loading.set(false);
-            }
-        });
+                    @Override
+                    public void onError(BaseException error) {
+                        Toast.makeText(mContext, "Login fail", Toast.LENGTH_SHORT).show();
+                        //TODO
+                        loading.set(false);
+                    }
+                });
         subscriptions.add(subscription);
     }
 
@@ -110,11 +111,11 @@ public class LoginPresenter implements LoginContract.Presenter {
         request.setParameterApi(getUserInfoRequest);
         request.setApiCode(ApiCode.GetUserInfo);
 
-        Subscription subscription = mUserRepository.getUserInfo(request)
-                .subscribe(new MBCCSSubscribe<GetUserInfoResponse>() {
+        Subscription subscription =
+                mUserRepository.getUserInfo(request).subscribe(new MBCCSSubscribe<UserInfo>() {
                     @Override
-                    public void onSuccess(GetUserInfoResponse object) {
-                        mUserRepository.saveUserInfo(object.getUserInfo());
+                    public void onSuccess(UserInfo object) {
+                        mUserRepository.saveUserInfo(object);
                         mViewModel.onLoginSuccess();
                     }
 

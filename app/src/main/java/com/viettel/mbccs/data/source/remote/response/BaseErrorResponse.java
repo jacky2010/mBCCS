@@ -1,5 +1,6 @@
 package com.viettel.mbccs.data.source.remote.response;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BaseErrorResponse {
@@ -15,6 +16,7 @@ public class BaseErrorResponse {
     }
 
     public void setError(int code, String message) {
+        errors=new ArrayList<>();
         Error error = new Error();
         error.code = code;
         error.message = message;

@@ -250,7 +250,7 @@ public class UserRepository implements IUserLocalDataSource, IUserRemoteDataSour
     }
 
     @Override
-    public Observable<GetUserInfoResponse> getUserInfo(DataRequest<GetUserInfoRequest> request) {
+    public Observable<UserInfo> getUserInfo(DataRequest<GetUserInfoRequest> request) {
         return mUserRemoteDataSource.getUserInfo(request);
     }
 

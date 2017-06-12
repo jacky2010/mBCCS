@@ -1,5 +1,6 @@
 package com.viettel.mbccs.data.source;
 
+import com.viettel.mbccs.data.model.EmptyObject;
 import com.viettel.mbccs.data.source.local.IBanHangKhoTaiChinhLocalDataSource;
 import com.viettel.mbccs.data.source.local.datasource.BanHangKhoTaiChinhLocalDataSource;
 import com.viettel.mbccs.data.source.remote.IBanHangKhoTaiChinhRemoteDataSource;
@@ -129,7 +130,7 @@ public class BanHangKhoTaiChinhRepository
         return banHangKhoTaiChinhRemoteDataSource.getListShop(request);
     }
 
-    public Observable<DataResponse> createSaleOrders(
+    public Observable<EmptyObject> createSaleOrders(
             DataRequest<KPPOrderRequest> requestDataRequest) {
         return banHangKhoTaiChinhRemoteDataSource.createSaleOrders(requestDataRequest);
     }

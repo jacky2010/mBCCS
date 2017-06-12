@@ -6,5 +6,5 @@ package com.viettel.mbccs.constance;
 
 public @interface StockTotalType {
     int TYPE_NEW = 1;
-    int TYPE_OLD = 2;
+    int TYPE_FAIL = 3;
 }
