@@ -83,7 +83,7 @@ public class AppButton extends AppCompatButton {
     private void configDefault() {
         mTextSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, DEFAULT_TEXT_SIZE,
                 getContext().getResources().getDisplayMetrics());
-        setBorderButton();
+//        setBorderButton();
     }
 
     /**

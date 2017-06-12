@@ -195,6 +195,14 @@
         <item name="android:gravity">start|top</item>
     </style>
 
+    <style name="inputStyleIconLeft">
+        <item name="android:background">@drawable/bg_transparent_inputview</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:padding">@dimen/dp_5</item>
+        <item name="android:gravity">start|top</item>
+    </style>
+
     <style name="inputStyleTranparent">
         <item name="android:background">@color/transparent</item>
         <item name="android:textColor">@color/black</item>
