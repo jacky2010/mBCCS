@@ -1,43 +1,88 @@
 
 package com.viettel.mbccs.data.model;
 
+import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class LoginInfo {
 
-    @SerializedName("errorCode")
+    @SerializedName("api")
     @Expose
-    private String errorCode;
-    @SerializedName("errorMessage")
+    private List<Apis> api = null;
+    @SerializedName("application")
     @Expose
-    private String errorMessage;
-    @SerializedName("result")
+    private List<Application> application = null;
+    @SerializedName("function")
     @Expose
-    private Result result;
+    private List<Function> function = null;
+    @SerializedName("role")
+    @Expose
+    private List<Role> role = null;
+    @SerializedName("sessionId")
+    @Expose
+    private String sessionId;
+    @SerializedName("token")
+    @Expose
+    private String token;
+    @SerializedName("userName")
+    @Expose
+    private String userName;
 
-    public String getErrorCode() {
-        return errorCode;
+    public List<Apis> getApi() {
+        return api;
     }
 
-    public void setErrorCode(String errorCode) {
-        this.errorCode = errorCode;
+    public void setApi(List<Apis> api) {
+        this.api = api;
     }
 
-    public String getErrorMessage() {
-        return errorMessage;
+    public List<Application> getApplication() {
+        return application;
     }
 
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
+    public void setApplication(List<Application> application) {
+        this.application = application;
     }
 
-    public Result getResult() {
-        return result;
+    public List<Function> getFunction() {
+        return function;
     }
 
-    public void setResult(Result result) {
-        this.result = result;
+    public void setFunction(List<Function> function) {
+        this.function = function;
+    }
+
+    public List<Role> getRole() {
+        return role;
+    }
+
+    public void setRole(List<Role> role) {
+        this.role = role;
+    }
+
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
 }

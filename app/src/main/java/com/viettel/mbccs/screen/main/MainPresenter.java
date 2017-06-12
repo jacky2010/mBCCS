@@ -43,6 +43,29 @@ public class MainPresenter implements MainContract.Presenter {
                 mContext.getResources().getString(R.string.menu_customer),
                 R.drawable.ic_menu_customer_selector));
 
+        mFunctionList.add(new Function(Function.TopMenu.MENU_QUAN_LY_BAN_HANG,
+                mContext.getString(R.string.menu_quan_ly_ban_hang), R.drawable.ic_add_black_24dp));
+        mFunctionList.add(new Function(Function.TopMenu.MENU_QUAN_LY_THONG_TIN_KH,
+                mContext.getString(R.string.menu_quan_ly_thong_tin_kh),
+                R.drawable.ic_add_black_24dp));
+        mFunctionList.add(new Function(Function.TopMenu.MENU_QUAN_LY_DIA_BAN,
+                mContext.getString(R.string.menu_quan_ly_dia_ban), R.drawable.ic_add_black_24dp));
+        mFunctionList.add(new Function(Function.TopMenu.MENU_QUAN_LY_THU_CUOC,
+                mContext.getString(R.string.menu_quan_ly_thu_cuoc), R.drawable.ic_add_black_24dp));
+        mFunctionList.add(new Function(Function.TopMenu.MENU_QUAN_LY_CONG_VIEC,
+                mContext.getString(R.string.menu_quan_ly_cong_viec), R.drawable.ic_add_black_24dp));
+        mFunctionList.add(new Function(Function.TopMenu.MENU_QUAN_LY_KHO,
+                mContext.getString(R.string.menu_quan_ly_kho), R.drawable.ic_add_black_24dp));
+        mFunctionList.add(new Function(Function.TopMenu.MENU_QUAN_LY_BAO_HANH,
+                mContext.getString(R.string.menu_quan_ly_bao_hanh), R.drawable.ic_add_black_24dp));
+        mFunctionList.add(new Function(Function.TopMenu.MENU_QUAN_LY_CSKH,
+                mContext.getString(R.string.menu_quan_ly_cham_soc_kh),
+                R.drawable.ic_add_black_24dp));
+        mFunctionList.add(new Function(Function.TopMenu.MENU_QUAN_LY_TAI_CHINH,
+                mContext.getString(R.string.menu_quan_ly_tai_chinh), R.drawable.ic_add_black_24dp));
+        mFunctionList.add(new Function(Function.TopMenu.MENU_BAO_CAO,
+                mContext.getString(R.string.menu_bao_cao), R.drawable.ic_add_black_24dp));
+
         mFunctionList.add(
                 new Function(Function.TopMenu.MENU_HELP, mContext.getString(R.string.menu_help),
                         R.drawable.ic_help_outline_24dp));
