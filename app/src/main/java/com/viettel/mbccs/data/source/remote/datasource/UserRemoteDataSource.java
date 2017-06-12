@@ -51,7 +51,7 @@ public class UserRemoteDataSource implements IUserRemoteDataSource {
 
     @Override
     public Observable<LoginInfo> login(LoginRequest loginRequest) {
-        return RequestHelper.getRequest()
+        return RequestHelper.getFakeRequest()
                 .login(loginRequest)
                 .flatMap(new Func1<LoginInfo, Observable<LoginInfo>>() {
                     @Override
@@ -71,7 +71,7 @@ public class UserRemoteDataSource implements IUserRemoteDataSource {
 
     @Override
     public Observable<GetUserInfoResponse> getUserInfo(DataRequest<GetUserInfoRequest> request) {
-        return RequestHelper.getRequest()
+        return RequestHelper.getFakeRequest()
                 .getUserInfo(request)
                 .flatMap(SchedulerUtils.<GetUserInfoResponse>convertDataFlatMap())
                 .compose(SchedulerUtils.<GetUserInfoResponse>applyAsyncSchedulers());

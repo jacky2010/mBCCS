@@ -252,7 +252,119 @@ public class Function implements Parcelable {
 
     @DrawableRes
     public int getIcon() {
-        return mIcon == 0 ? R.drawable.ic_add_black_24dp : mIcon;
+        if (mIcon != 0) {
+            return mIcon;
+        }
+
+        switch (functionCode) {
+            case Function.MenuId.MENU_BAN_LE:
+                return R.drawable.ic_retail;
+            case Function.MenuId.MENU_BAN_CHO_KENH:
+                return R.drawable.ic_sales_tran;
+            case Function.MenuId.MENU_BAN_HANG_THEO_DON_PHE_DUYET_DON_HANG:
+                return R.drawable.ic_sales_channel;
+            case Function.MenuId.MENU_BAN_DICH_VU_VAS:
+                return R.drawable.ic_sales_vas;
+            case Function.MenuId.MENU_LAP_HOA_DON:
+                return R.drawable.ic_make_invoice;
+            case Function.MenuId.MENU_DAU_NOI_DI_DONG:
+                return R.drawable.ic_registermb_sub;
+            case Function.MenuId.MENU_DAU_NOI_CO_DINH:
+                return R.drawable.ic_register_fixed_broad_band;
+            case Function.MenuId.MENU_BAN_ANYPAY:
+                return R.drawable.ic_sales_anypay;
+            case Function.MenuId.MENU_NAP_CHUYEN_ANYPAY:
+                return R.drawable.ic_add_black_24dp;
+
+            case Function.MenuId.MENU_DANG_KY_THONG_TIN:
+            case Function.MenuId.MENU_CAP_NHAT_THONG_TIN:
+            case Function.MenuId.MENU_DOI_SIM:
+            case Function.MenuId.MENU_THAY_DOI_DIA_CHI_LAP_DAT:
+                return R.drawable.ic_add_black_24dp;
+
+            case Function.MenuId.MENU_TAO_KENH_PHAN_PHOI:
+            case Function.MenuId.MENU_QUAN_LY_DBHC_BTS_KENH:
+            case Function.MenuId.MENU_QUAN_LY_KPI_KPP:
+            case Function.MenuId.MENU_QUAN_LY_THONG_TIN_KPP:
+            case Function.MenuId.MENU_QUAN_LY_VAN_BAN_CSTT:
+                return R.drawable.ic_add_black_24dp;
+
+            case Function.MenuId.MENU_XAC_MINH:
+            case Function.MenuId.MENU_GACH_NO:
+            case Function.MenuId.MENU_THU_CUOC_NONG:
+            case Function.MenuId.MENU_QUAN_LY_TIEN_DO_THU_CUOC:
+                return R.drawable.ic_add_black_24dp;
+
+            //                        case Function.MenuId.MENU_GIAO_VIEC_TO_DOI:
+            //                            break;
+            case Function.MenuId.MENU_GIAO_VIEC_PHAT_SINH:
+            case Function.MenuId.MENU_GIAO_VIEC_CS_KPP:
+            case Function.MenuId.MENU_DONG_VIEC:
+                return R.drawable.ic_add_black_24dp;
+
+            case Function.MenuId.MENU_XEM_KHO:
+            case Function.MenuId.MENU_NHAP_HOA_DON:
+            case Function.MenuId.MENU_XUAT_KHO_CAP_DUOI:
+            case Function.MenuId.MENU_NHAP_KHO_CAP_TREN:
+            case Function.MenuId.MENU_TRA_HANG_CAP_TREN:
+            case Function.MenuId.MENU_NHAP_KHO_CAP_DUOI:
+            case Function.MenuId.MENU_XUAT_KHO_CHO_NHAN_VIEN:
+            case Function.MenuId.MENU_NV_XAC_NHAN_HANG:
+            case Function.MenuId.MENU_NHAN_VIEN_TRA_HANG_CAP_TREN:
+            case Function.MenuId.MENU_NHAP_KHO_TU_NHAN_VIEN:
+            case Function.MenuId.MENU_KENH_ORDER_HANG:
+                return R.drawable.ic_add_black_24dp;
+
+            case Function.MenuId.MENU_TRA_CUU:
+                //                        case Function.MenuId.MENU_TIEP_NHAN_BH:
+                //                            break;
+            case Function.MenuId.MENU_CHUYEN_MUC_BH:
+            case Function.MenuId.MENU_TRA_BH:
+                return R.drawable.ic_add_black_24dp;
+
+            case Function.MenuId.MENU_SURVEY_KPP:
+            case Function.MenuId.MENU_HOTNEW_CS_KPP:
+            case Function.MenuId.MENU_KPP_FEEDBACK:
+                return R.drawable.ic_add_black_24dp;
+            //                        case Function.MenuId.MENU_TRA_CUU_SP:
+            //                            break;
+
+            case Function.MenuId.MENU_TAO_GIAY_NOP_TIEN:
+            case Function.MenuId.MENU_PHE_DUYET_GIAY_NOP_TIEN:
+            case Function.MenuId.MENU_DOI_SOAT_CONG_NO_GIAY_NOP_TIEN:
+            case Function.MenuId.MENU_KHAI_BAO_GIA_KENH_CHAN_RET:
+                return R.drawable.ic_add_black_24dp;
+
+            //                        case Function.MenuId.MENU_BAO_CAO_PHAT_TRIEN_THUE_BAO:
+            //                            break;
+            case Function.MenuId.MENU_BAO_CAO_CHAM_SOC_KENH:
+            case Function.MenuId.MENU_BAO_CAO_TAN_SUAT_CHAM_SOC_KENH:
+            case Function.MenuId.MENU_BAO_CAO_TON_KHO:
+            case Function.MenuId.MENU_BAO_CAO_GIAO_CHI_TIEU_BAN_HANG:
+                return R.drawable.ic_add_black_24dp;
+
+            case TopMenu.MENU_QUAN_LY_BAN_HANG:
+                return R.drawable.ic_shoping_cart;
+            case TopMenu.MENU_QUAN_LY_THONG_TIN_KH:
+                break;
+            case TopMenu.MENU_QUAN_LY_DIA_BAN:
+                return R.drawable.ic_area;
+            case TopMenu.MENU_QUAN_LY_THU_CUOC:
+                return R.drawable.ic_billing;
+            case TopMenu.MENU_QUAN_LY_CONG_VIEC:
+                break;
+            case TopMenu.MENU_QUAN_LY_KHO:
+                return R.drawable.ic_stock;
+            case TopMenu.MENU_QUAN_LY_BAO_HANH:
+                break;
+            case TopMenu.MENU_QUAN_LY_CSKH:
+                return R.drawable.ic_call_center;
+            case TopMenu.MENU_QUAN_LY_TAI_CHINH:
+                return R.drawable.ic_finance;
+            case TopMenu.MENU_BAO_CAO:
+                return R.drawable.ic_report;
+        }
+        return R.drawable.ic_add_black_24dp;
     }
 
     public void setIcon(@DrawableRes int icon) {

@@ -42,8 +42,8 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="menu_more">more</string>
     <string name="percent">%1$.2f%%</string>
     <string name="doi_soat_cong_no">Đối soát công nợ</string>
-    <string name="total">Tổng số</string>
-    <string name="remain">Còn phải thu</string>
+    <string name="total">Tổng số:</string>
+    <string name="remain">Còn phải thu:</string>
 
     <!--Reset Password-->
     <string name="title_reset_password">Quên mật khẩu</string>
