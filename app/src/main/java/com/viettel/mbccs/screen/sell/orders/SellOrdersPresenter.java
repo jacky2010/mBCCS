@@ -9,6 +9,7 @@ import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.Session;
+import com.viettel.mbccs.data.model.Shop;
 import com.viettel.mbccs.data.model.StaffInfo;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
@@ -40,6 +41,7 @@ public class SellOrdersPresenter {
     private ChannelInfo channelInfoSelect;
 
     public ObservableField<StaffInfo> staffInfo;
+    public ObservableField<Shop> shop;
     public ObservableField<ArrayAdapter<String>> spinnerAdapterChannel;
     public ObservableField<SellOrdersFragmentAdapter> sellOrdersFragmentAdapter;
     public ObservableBoolean isHideSearch;
@@ -56,6 +58,7 @@ public class SellOrdersPresenter {
 
         sellOrdersFragmentAdapter = new ObservableField<>();
         staffInfo = new ObservableField<>();
+        shop = new ObservableField<>();
         spinnerAdapterChannel = new ObservableField<>();
         isHideSearch = new ObservableBoolean(false);
         textSearch = new ObservableField<>();
@@ -65,6 +68,7 @@ public class SellOrdersPresenter {
         // TODO: 5/18/17 get data StaffInfo from SharedPreferences
         sellOrdersView.showLoading();
         staffInfo.set(new StaffInfo());
+        shop.set(new Shop());
 
         GetListChannelByOwnerTypeIdRequest g = new GetListChannelByOwnerTypeIdRequest();
 //        g.setShopId(staffInfo.get().getShopId());
@@ -176,7 +180,7 @@ public class SellOrdersPresenter {
     public void expandSearch() {
         isHideSearch.set(!isHideSearch.get());
         textSearch.set(
-                context.getString(R.string.sell_orders_gone_search, staffInfo.get().getShopName(),
+                context.getString(R.string.sell_orders_gone_search, shop.get().getShopName(),
                         staffInfo.get().getStaffName(), channelInfoSelect.getManagementName()));
     }
 

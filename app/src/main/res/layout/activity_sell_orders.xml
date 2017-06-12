@@ -109,7 +109,7 @@
                 <com.viettel.mbccs.widget.FakeSpinner
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{ presenter.staffInfo.getShopName() }"
+                    android:text="@{ presenter.shop.getShopName() }"
                     />
 
                 <com.viettel.mbccs.widget.CustomTextView

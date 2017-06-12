@@ -24,8 +24,7 @@ public class StaffPickerActivity extends BaseSearchListPickerActivity
     @Override
     protected void initData() {
         mStaffInfo = new ArrayList<>();
-        mStaffInfo.add(new StaffInfo(123, "155", "Nguyen Van A", 122, "154", "Shop", 0, "0125846",
-                "Nhan vien ban hang", "Ha Noi"));
+        // TODO: 6/12/17 setdata
 
         mPresenter = new StaffPickerPresenter(this, this, mStaffInfo);
         mBinding.setPresenter(mPresenter);

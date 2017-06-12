@@ -10,31 +10,103 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class Shop implements Parcelable {
-    @SerializedName("ShopId")
-    @Expose
-    private long shopId;
 
-    @SerializedName("ShopCode")
+    @SerializedName("shopId")
+    @Expose
+    private String shopId;
+
+    @SerializedName("shopCode")
     @Expose
     private String shopCode;
 
-    @SerializedName("ShopName")
+    @SerializedName("shopPath")
+    @Expose
+    private String shopPath;
+
+    @SerializedName("address")
+    @Expose
+    private String address;
+
+    @SerializedName("discountPolicy")
+    @Expose
+    private String discountPolicy;
+
+    @SerializedName("province")
+    @Expose
+    private String province;
+
+    @SerializedName("name")
     @Expose
     private String shopName;
 
-    @SerializedName("ChannelTypeId")
+    @SerializedName("channelTypeId")
     @Expose
     private long channelTypeId;
+
+    @SerializedName("pricePolicy")
+    @Expose
+    private long pricePolicy;
+
+    @SerializedName("createDate")
+    @Expose
+    private String createDate;
+
+    @SerializedName("status")
+    @Expose
+    private String status;
 
     public Shop() {
 
     }
 
+    public Shop(String shopId, String shopCode, String shopPath, String address,
+            String discountPolicy, String province, String shopName, long channelTypeId,
+            long pricePolicy, String createDate, String status) {
+        this.shopId = shopId;
+        this.shopCode = shopCode;
+        this.shopPath = shopPath;
+        this.address = address;
+        this.discountPolicy = discountPolicy;
+        this.province = province;
+        this.shopName = shopName;
+        this.channelTypeId = channelTypeId;
+        this.pricePolicy = pricePolicy;
+        this.createDate = createDate;
+        this.status = status;
+    }
+
     protected Shop(Parcel in) {
-        shopId = in.readLong();
+        shopId = in.readString();
         shopCode = in.readString();
+        shopPath = in.readString();
+        address = in.readString();
+        discountPolicy = in.readString();
+        province = in.readString();
         shopName = in.readString();
         channelTypeId = in.readLong();
+        pricePolicy = in.readLong();
+        createDate = in.readString();
+        status = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(shopId);
+        dest.writeString(shopCode);
+        dest.writeString(shopPath);
+        dest.writeString(address);
+        dest.writeString(discountPolicy);
+        dest.writeString(province);
+        dest.writeString(shopName);
+        dest.writeLong(channelTypeId);
+        dest.writeLong(pricePolicy);
+        dest.writeString(createDate);
+        dest.writeString(status);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<Shop> CREATOR = new Creator<Shop>() {
@@ -49,24 +121,11 @@ public class Shop implements Parcelable {
         }
     };
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(shopId);
-        dest.writeString(shopCode);
-        dest.writeString(shopName);
-        dest.writeLong(channelTypeId);
-    }
-
-    public long getShopId() {
+    public String getShopId() {
         return shopId;
     }
 
-    public void setShopId(long shopId) {
+    public void setShopId(String shopId) {
         this.shopId = shopId;
     }
 
@@ -76,6 +135,38 @@ public class Shop implements Parcelable {
 
     public void setShopCode(String shopCode) {
         this.shopCode = shopCode;
+    }
+
+    public String getShopPath() {
+        return shopPath;
+    }
+
+    public void setShopPath(String shopPath) {
+        this.shopPath = shopPath;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getDiscountPolicy() {
+        return discountPolicy;
+    }
+
+    public void setDiscountPolicy(String discountPolicy) {
+        this.discountPolicy = discountPolicy;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
     }
 
     public String getShopName() {
@@ -92,5 +183,29 @@ public class Shop implements Parcelable {
 
     public void setChannelTypeId(long channelTypeId) {
         this.channelTypeId = channelTypeId;
+    }
+
+    public long getPricePolicy() {
+        return pricePolicy;
+    }
+
+    public void setPricePolicy(long pricePolicy) {
+        this.pricePolicy = pricePolicy;
+    }
+
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
