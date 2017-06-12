@@ -35,6 +35,7 @@ import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSurveyKPPRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
+import com.viettel.mbccs.data.source.remote.request.GetUserInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.KPPFeedbackRequest;
 import com.viettel.mbccs.data.source.remote.request.KPPOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.KPPResponseFeedbackRequest;
@@ -87,6 +88,7 @@ import com.viettel.mbccs.data.source.remote.response.GetRegiterSubInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSurveyKPPResponse;
 import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
+import com.viettel.mbccs.data.source.remote.response.GetUserInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.KPPFeedbackResponse;
 import com.viettel.mbccs.data.source.remote.response.KPPResponseFeedbackResponse;
 import com.viettel.mbccs.data.source.remote.response.RefillAnyPayResponse;
@@ -245,7 +247,6 @@ public interface MBCSSApi {
     Observable<BaseResponse<GetPrecinctResponse>> getPrecinct(
             @Body DataRequest<GetPrecinctRequest> request);
 
-
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<BaseResponse<CheckIdNoResponse>> checkIdNo(
             @Body DataRequest<CheckIdNoRequest> request);
@@ -317,4 +318,8 @@ public interface MBCSSApi {
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<BaseResponse<UploadImageResponse>> uploadImage(
             @Body DataRequest<UploadImageRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<BaseResponse<GetUserInfoResponse>> getUserInfo(
+            @Body DataRequest<GetUserInfoRequest> request);
 }

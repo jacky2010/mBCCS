@@ -1,5 +1,6 @@
 package com.viettel.mbccs.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -9,6 +10,8 @@ import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.model.SerialBO;
 import com.viettel.mbccs.data.model.StockModel;
 import com.viettel.mbccs.data.model.StockTotal;
+import com.viettel.mbccs.data.source.UserRepository;
+import com.viettel.mbccs.data.source.local.datasource.SharedPrefs;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -37,6 +40,11 @@ public class Common {
             }
         }
         return false;
+    }
+
+    public static void logout() {
+        SharedPrefs sharedPrefs = SharedPrefs.getInstance();
+        sharedPrefs.clear();
     }
 
     private static String md5(String s) {
