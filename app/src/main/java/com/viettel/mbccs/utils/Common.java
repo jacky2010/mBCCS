@@ -2,6 +2,7 @@ package com.viettel.mbccs.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -12,6 +13,7 @@ import com.viettel.mbccs.data.model.StockModel;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.local.datasource.SharedPrefs;
+import com.viettel.mbccs.screen.login.LoginActivity;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -42,9 +44,12 @@ public class Common {
         return false;
     }
 
-    public static void logout() {
+    public static void logout(Context mContext) {
         SharedPrefs sharedPrefs = SharedPrefs.getInstance();
         sharedPrefs.clear();
+        Intent intent = new Intent(mContext, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        mContext.startActivity(intent);
     }
 
     private static String md5(String s) {

@@ -1,10 +1,7 @@
 package com.viettel.mbccs.utils.rx;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
-import com.viettel.mbccs.screen.login.LoginActivity;
 import com.viettel.mbccs.utils.Common;
 import rx.Subscriber;
 
@@ -40,12 +37,11 @@ public abstract class MBCCSSubscribe<T> extends Subscriber<T> {
         }
         if (mContext != null && exception != null) {
             if (exception.getServerErrorCode() == 401) {
-                Common.logout();
-                Intent intent = new Intent(mContext, LoginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                mContext.startActivity(intent);
+                Common.logout(mContext);
+
             }
         }
+        onError(exception);
     }
 
     @Override
