@@ -11,6 +11,14 @@ import com.viettel.mbccs.data.model.UserInfo;
 public class GetUserInfoResponse extends DataResponse {
 
     @Expose
-    @SerializedName("data")
+    @SerializedName("object")
     private UserInfo mUserInfo;
+
+    public UserInfo getUserInfo() {
+        return mUserInfo;
+    }
+
+    public void setUserInfo(UserInfo userInfo) {
+        this.mUserInfo = userInfo;
+    }
 }

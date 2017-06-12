@@ -125,13 +125,23 @@ public class SellOrdersActivity
     }
 
     @Override
-    public long getDateTo() {
+    public long  getDateTo() {
         return mBinding.dateTo.getDateInMilis();
     }
 
     @Override
     public long getDateFrom() {
         return mBinding.dateFrom.getDateInMilis();
+    }
+
+    @Override
+    public String getStringDateTo() {
+        return mBinding.dateTo.getStringDate();
+    }
+
+    @Override
+    public String getStringDateFrom() {
+        return mBinding.dateFrom.getStringDate();
     }
 
     @Override

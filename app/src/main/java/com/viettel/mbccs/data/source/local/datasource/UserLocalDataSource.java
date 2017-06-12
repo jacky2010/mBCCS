@@ -14,6 +14,7 @@ import com.viettel.mbccs.data.model.ProvinceResponse;
 import com.viettel.mbccs.data.model.Session;
 import com.viettel.mbccs.data.model.StaffInfo;
 import com.viettel.mbccs.data.model.UploadImage;
+import com.viettel.mbccs.data.model.UserInfo;
 import com.viettel.mbccs.data.source.local.IUserLocalDataSource;
 import com.viettel.mbccs.utils.GsonUtils;
 import com.viettel.mbccs.utils.SecureUtils;
@@ -65,6 +66,18 @@ public class UserLocalDataSource implements IUserLocalDataSource {
     @Override
     public String getLoginUserName() {
         return sharedPrefs.get(Constants.SharePref.LOGIN_USER_NAME, "");
+    }
+
+    @Override
+    public void saveUserInfo(UserInfo userInfo) {
+        sharedPrefs.set(Constants.SharePref.USER_INFO, gson.toJson(userInfo));
+    }
+
+    @Override
+    public UserInfo getUserInfo() {
+        String data = sharedPrefs.get(Constants.SharePref.USER_INFO, "");
+        if (TextUtils.isEmpty(data)) return null;
+        return gson.fromJson(data, UserInfo.class);
     }
 
     @Override

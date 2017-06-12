@@ -7,7 +7,6 @@ import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.SaleOrdersDetail;
 import com.viettel.mbccs.data.model.SaleTrans;
 import com.viettel.mbccs.data.model.SerialBO;
-import com.viettel.mbccs.data.model.Session;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetOrderInfoRequest;
@@ -90,14 +89,7 @@ public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract
         g.setSaleOrderId(3253243);
 
         DataRequest<GetOrderInfoRequest> request = new DataRequest<>();
-        Session session = new Session();
-        session.setSessionId("54578345638");
-
-        request.setSession(session);
-        request.setUserName("smac");
         request.setApiCode(ApiCode.GetOrderInfo);
-        request.setApiKey("123456");
-        request.setToken("54353-543346-65464564-6546");
         request.setParameterApi(g);
 
         Subscription subscription = banHangKhoTaiChinhRepository.getOrderInfo(request)

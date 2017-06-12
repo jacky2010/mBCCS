@@ -15,11 +15,17 @@ import android.text.style.ClickableSpan;
 import android.view.View;
 import android.widget.Toast;
 import com.viettel.mbccs.R;
+import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.source.UserRepository;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
+import com.viettel.mbccs.data.source.remote.request.GetUserInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.LoginRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.GetUserInfoResponse;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
+import rx.Subscription;
+import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by eo_cuong on 5/10/17.
@@ -38,12 +44,14 @@ public class LoginPresenter implements LoginContract.Presenter {
     private LoginContract.ViewModel mViewModel;
     private Context mContext;
     private UserRepository mUserRepository;
+    private CompositeSubscription subscriptions;
 
     public LoginPresenter(Context context, LoginContract.ViewModel viewModel,
             UserRepository userRepository) {
         mViewModel = viewModel;
         mContext = context;
         mUserRepository = userRepository;
+        subscriptions = new CompositeSubscription();
         initData();
     }
 
@@ -61,16 +69,17 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     @Override
     public void unSubscribe() {
-
+        subscriptions.clear();
     }
 
-    @Override
-    public void login(final String username, String password) {
+    public void loginServer(final String username, String password) {
         //        mViewModel.onLoginSuccess();
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setUsername(username.trim());
         loginRequest.setPassword(password.trim());
-        UserRepository.getInstance().login(loginRequest).subscribe(new MBCCSSubscribe<LoginInfo>() {
+        Subscription subscription = UserRepository.getInstance()
+                .login(loginRequest)
+                .subscribe(new MBCCSSubscribe<LoginInfo>() {
             @Override
             public void onSuccess(LoginInfo object) {
                 if (object == null || TextUtils.isEmpty(object.getToken())) {
@@ -79,7 +88,7 @@ public class LoginPresenter implements LoginContract.Presenter {
                 }
                 mUserRepository.saveLoginUserName(username);
                 mUserRepository.saveUser(object);
-                mViewModel.onLoginSuccess();
+                getUserInfo(object);
             }
 
             @Override
@@ -89,6 +98,32 @@ public class LoginPresenter implements LoginContract.Presenter {
                 loading.set(false);
             }
         });
+        subscriptions.add(subscription);
+    }
+
+    private void getUserInfo(LoginInfo loginInfo) {
+        GetUserInfoRequest getUserInfoRequest = new GetUserInfoRequest();
+        getUserInfoRequest.setStaffCode(loginInfo.getUserName());
+        DataRequest<GetUserInfoRequest> request = new DataRequest<>();
+        request.setParameterApi(getUserInfoRequest);
+        request.setApiCode(ApiCode.GetUserInfo);
+
+        Subscription subscription = mUserRepository.getUserInfo(request)
+                .subscribe(new MBCCSSubscribe<GetUserInfoResponse>() {
+                    @Override
+                    public void onSuccess(GetUserInfoResponse object) {
+                        mUserRepository.saveUserInfo(object.getUserInfo());
+                        mViewModel.onLoginSuccess();
+                    }
+
+                    @Override
+                    public void onError(BaseException error) {
+                        Toast.makeText(mContext, "Login fail", Toast.LENGTH_SHORT).show();
+                        //TODO
+                        loading.set(false);
+                    }
+                });
+        subscriptions.add(subscription);
     }
 
     public void login() {
@@ -106,7 +141,7 @@ public class LoginPresenter implements LoginContract.Presenter {
             loading.set(false);
             return;
         }
-        login(userName.get(), password.get());
+        loginServer(userName.get(), password.get());
     }
 
     public Spannable getForgotPassword() {

@@ -17,7 +17,7 @@ public class Constants {
 
         /**
          * key put get language in app
-         * put when user login in app
+         * put when user loginServer in app
          */
         public static final String STAFF_INFO = "STAFF_INFO";
 
@@ -68,6 +68,12 @@ public class Constants {
          * put when log in
          */
         public static final String LOGIN_USER_NAME = "LOGIN_USER_NAME";
+
+        /**
+         * key put get USER INFO in app
+         * put when log in
+         */
+        public static final String USER_INFO = "USER_INFO";
 
         /**
          * key to enscrypt and save to sharepreference (value instanceOf {@link Session})

@@ -11,6 +11,7 @@ import com.viettel.mbccs.data.model.ProvinceResponse;
 import com.viettel.mbccs.data.model.Session;
 import com.viettel.mbccs.data.model.StaffInfo;
 import com.viettel.mbccs.data.model.UploadImage;
+import com.viettel.mbccs.data.model.UserInfo;
 import java.util.List;
 
 /**
@@ -29,8 +30,12 @@ public interface IUserLocalDataSource {
 
     String getLoginUserName();
 
+    void saveUserInfo(UserInfo userInfo);
+
+    UserInfo getUserInfo();
+
     /**
-     * Save data {@link StaffInfo} in SharedPreferences when user login
+     * Save data {@link StaffInfo} in SharedPreferences when user loginServer
      */
     void saveStaffInfoToSharePrefs(StaffInfo staffInfo);
 
@@ -118,7 +123,7 @@ public interface IUserLocalDataSource {
     Session getSession();
 
     /**
-     * save api key from login VTG
+     * save api key from loginServer VTG
      */
     void saveApiKey(String apiKey);
 

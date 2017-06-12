@@ -30,6 +30,10 @@ public class SellOrdersContract {
 
         long getDateFrom();
 
+        String getStringDateTo();
+
+        String getStringDateFrom();
+
         void showErrorDate();
     }
 }

@@ -10,6 +10,7 @@ import com.viettel.mbccs.data.source.remote.request.GetProvinceRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
+import com.viettel.mbccs.data.source.remote.request.GetUserInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.LoginRequest;
 import com.viettel.mbccs.data.source.remote.request.UploadImageRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseErrorResponse;
@@ -20,6 +21,7 @@ import com.viettel.mbccs.data.source.remote.response.GetPrecinctResponse;
 import com.viettel.mbccs.data.source.remote.response.GetProvinceResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
 import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
+import com.viettel.mbccs.data.source.remote.response.GetUserInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.SendCodeChangePassResponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import com.viettel.mbccs.data.source.remote.response.UploadImageResponse;
@@ -65,6 +67,14 @@ public class UserRemoteDataSource implements IUserRemoteDataSource {
                     }
                 })
                 .compose(SchedulerUtils.<LoginInfo>applyAsyncSchedulers());
+    }
+
+    @Override
+    public Observable<GetUserInfoResponse> getUserInfo(DataRequest<GetUserInfoRequest> request) {
+        return RequestHelper.getRequest()
+                .getUserInfo(request)
+                .flatMap(SchedulerUtils.<GetUserInfoResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<GetUserInfoResponse>applyAsyncSchedulers());
     }
 
     @Override
