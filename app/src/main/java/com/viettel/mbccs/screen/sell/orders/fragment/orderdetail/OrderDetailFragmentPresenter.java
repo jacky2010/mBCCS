@@ -50,11 +50,11 @@ public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract
         adapterOrderDetail = new ObservableField<>();
         idOrder = new ObservableField<>();
         saleTransField = new ObservableField<>();
-        amountNotTax = new ObservableField<>();
-        amountTax = new ObservableField<>();
-        discount = new ObservableField<>();
-        vAT = new ObservableField<>();
-        tax = new ObservableField<>();
+        amountNotTax = new ObservableField<>("");
+        amountTax = new ObservableField<>("");
+        discount = new ObservableField<>("");
+        vAT = new ObservableField<>("");
+        tax = new ObservableField<>("");
     }
 
     @Override
@@ -81,7 +81,7 @@ public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract
     }
 
     public void getDetailOrder(long idOrder) {
-        //        view.showLoading();
+        view.showLoading();
         // TODO: 5/16/17 get Detail Order from API
         this.idOrder.set(String.valueOf(idOrder));
 

@@ -1,6 +1,8 @@
 package com.viettel.mbccs.screen.sell.orders;
 
 import android.support.design.widget.TabLayout;
+import android.view.View;
+import android.widget.AdapterView;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.constance.OrderStatus;
@@ -48,7 +50,17 @@ public class SellOrdersActivity
     }
 
     private void initView() {
-        mBinding.spinnerChannel.setOnItemSelectedListener(presenter);
+        mBinding.spinnerChannelSellOrder.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                presenter.setPositionSelectChange(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         mBinding.tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         sellOrdersFragmentAdapter = new SellOrdersFragmentAdapter(getSupportFragmentManager());
