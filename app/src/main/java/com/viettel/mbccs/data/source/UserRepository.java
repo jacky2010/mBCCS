@@ -10,6 +10,7 @@ import com.viettel.mbccs.data.model.ProvinceResponse;
 import com.viettel.mbccs.data.model.Session;
 import com.viettel.mbccs.data.model.StaffInfo;
 import com.viettel.mbccs.data.model.UploadImage;
+import com.viettel.mbccs.data.model.UserInfo;
 import com.viettel.mbccs.data.source.local.IUserLocalDataSource;
 import com.viettel.mbccs.data.source.local.datasource.UserLocalDataSource;
 import com.viettel.mbccs.data.source.remote.IUserRemoteDataSource;
@@ -22,6 +23,7 @@ import com.viettel.mbccs.data.source.remote.request.GetProvinceRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
+import com.viettel.mbccs.data.source.remote.request.GetUserInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.LoginRequest;
 import com.viettel.mbccs.data.source.remote.request.UploadImageRequest;
 import com.viettel.mbccs.data.source.remote.response.GetDistrictResponse;
@@ -30,6 +32,7 @@ import com.viettel.mbccs.data.source.remote.response.GetPrecinctResponse;
 import com.viettel.mbccs.data.source.remote.response.GetProvinceResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
 import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
+import com.viettel.mbccs.data.source.remote.response.GetUserInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.SendCodeChangePassResponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import com.viettel.mbccs.data.source.remote.response.UploadImageResponse;
@@ -84,6 +87,16 @@ public class UserRepository implements IUserLocalDataSource, IUserRemoteDataSour
     @Override
     public String getLoginUserName() {
         return mUserLocalDataSource.getLoginUserName();
+    }
+
+    @Override
+    public void saveUserInfo(UserInfo userInfo) {
+        mUserLocalDataSource.saveUserInfo(userInfo);
+    }
+
+    @Override
+    public UserInfo getUserInfo() {
+        return mUserLocalDataSource.getUserInfo();
     }
 
     @Override
@@ -245,6 +258,11 @@ public class UserRepository implements IUserLocalDataSource, IUserRemoteDataSour
     @Override
     public Observable<LoginInfo> login(LoginRequest loginRequest) {
         return mUserRemoteDataSource.login(loginRequest);
+    }
+
+    @Override
+    public Observable<GetUserInfoResponse> getUserInfo(DataRequest<GetUserInfoRequest> request) {
+        return mUserRemoteDataSource.getUserInfo(request);
     }
 
     @Override

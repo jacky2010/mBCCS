@@ -1,7 +1,7 @@
 package com.viettel.mbccs.screen.viewwarehouse;
 
+import android.content.DialogInterface;
 import android.support.v4.app.FragmentTransaction;
-import android.widget.Toast;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.data.model.StockTotal;
@@ -10,7 +10,7 @@ import com.viettel.mbccs.databinding.ActivityViewWarehouseBinding;
 import com.viettel.mbccs.screen.common.success.DialogViewSerial;
 import com.viettel.mbccs.screen.viewwarehouse.adapter.ViewWarehouseListOrderAdapter;
 import com.viettel.mbccs.screen.viewwarehouse.fragment.ViewWarehouseSearchFragment;
-import java.util.ArrayList;
+import com.viettel.mbccs.utils.DialogUtils;
 import java.util.List;
 
 public class ViewWarehouseActivity
@@ -72,35 +72,18 @@ public class ViewWarehouseActivity
 
     @Override
     public void onError(BaseException error) {
-        // TODO: 5/22/17 fake data
-        List<StockTotal> stockTotals = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            StockTotal stockTotal = new StockTotal();
-            stockTotal.setOwnerId(1);
-            stockTotal.setOwnerType(1);
-            stockTotal.setStockModelId(1);
-            stockTotal.setStockModelCode("Quyet");
-            stockTotal.setStockModelName("Quyet");
-            stockTotal.setStockTypeId(1);
-            stockTotal.setStockTypeName("Quyet");
-            stockTotal.setQuantity(100);
-            stockTotal.setQuantityIssue(150);
-            stockTotal.setStateId(1);
-            stockTotal.setStateName("Quyet");
-            stockTotals.add(stockTotal);
-        }
-        adapter = new ViewWarehouseListOrderAdapter(stockTotals);
-
-        //        adapter = new ViewWarehouseListOrderAdapter(stockTotalList);
-        mPresenter.setAdapterOrders(adapter);
-        adapter.setViewWarehouseListOrderAdapterCallback(mPresenter);
         hideLoadingDialog();
-        Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
+        DialogUtils.showDialogError(this, error, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                onBackPressed();
+            }
+        }, false);
     }
 
     @Override
     public void onCancel() {
-        finish();
+        onBackPressed();
     }
 
     @Override

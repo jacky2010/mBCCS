@@ -8,10 +8,11 @@ import android.widget.ArrayAdapter;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.ChannelInfo;
-import com.viettel.mbccs.data.model.Session;
 import com.viettel.mbccs.data.model.Shop;
 import com.viettel.mbccs.data.model.StaffInfo;
+import com.viettel.mbccs.data.model.UserInfo;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
+import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListChannelByOwnerTypeIdRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListOrderRequest;
@@ -35,6 +36,7 @@ public class SellOrdersPresenter {
     private Context context;
     private SellOrdersContract.View sellOrdersView;
     private BanHangKhoTaiChinhRepository banHangKhoTaiChinhRepository;
+    private UserRepository userRepository;
     private CompositeSubscription subscriptions;
     private List<ChannelInfo> channelInfoList;
     private List<String> dataSpinnerChannel;
@@ -51,6 +53,7 @@ public class SellOrdersPresenter {
         this.context = context;
         this.sellOrdersView = sellOrdersView;
         banHangKhoTaiChinhRepository = BanHangKhoTaiChinhRepository.getInstance();
+        userRepository = UserRepository.getInstance();
         subscriptions = new CompositeSubscription();
         dataSpinnerChannel = new ArrayList<>();
         channelInfoList = new ArrayList<>();
@@ -65,31 +68,18 @@ public class SellOrdersPresenter {
     }
 
     public void subscribe() {
-        // TODO: 5/18/17 get data StaffInfo from SharedPreferences
         sellOrdersView.showLoading();
-        staffInfo.set(new StaffInfo());
-        shop.set(new Shop());
+        UserInfo userInfo = userRepository.getUserInfo();
+        staffInfo.set(userInfo.getStaffInfo());
+        shop.set(userInfo.getShop());
 
         GetListChannelByOwnerTypeIdRequest g = new GetListChannelByOwnerTypeIdRequest();
-//        g.setShopId(staffInfo.get().getShopId());
-//        g.setStaffId(staffInfo.get().getStaffId());
-//        g.setChannelTypeId(staffInfo.get().getChannelTypeId());
-
-        g.setChannelTypeId(213);
-        g.setStaffId(54366);
+        g.setStaffId(staffInfo.get().getStaffId());
+        g.setChannelTypeId(staffInfo.get().getChannelTypeId());
 
         DataRequest<GetListChannelByOwnerTypeIdRequest> request = new DataRequest<>();
         request.setParameterApi(g);
-
-        // TODO: 5/18/17 get data
-        Session session = new Session();
-        session.setSessionId("54578345638");
-
-        request.setUserName("smac");
         request.setApiCode(ApiCode.GetListChannelByOwnerTypeId);
-        request.setToken("54353-543346-65464564-6546");
-        request.setApiKey("123456");
-        request.setSession(session);
 
         Subscription subscription =
                 banHangKhoTaiChinhRepository.getListChannelByOwnerTypeId(request)
@@ -111,7 +101,6 @@ public class SellOrdersPresenter {
 
                             @Override
                             public void onError(BaseException error) {
-                                // TODO: 5/18/17 show error
                                 sellOrdersView.hideLoading();
                                 sellOrdersView.getListChannelByOwnerTypeIdError(error);
                             }
@@ -140,20 +129,15 @@ public class SellOrdersPresenter {
         }
 
         GetListOrderRequest getListOrderRequest = new GetListOrderRequest();
-        //        getListOrderRequest.setShopId(staffInfo.get().getShopId());
-        //        getListOrderRequest.setStaffId(staffInfo.get().getStaffId());
-        //        getListOrderRequest.setIsdnChannel(channelInfoSelect.getChannelId());
-        //        getListOrderRequest.setToDate(String.valueOf(dateTo));
-        //        getListOrderRequest.setFromDate(String.valueOf(dateFrom));
-        //        getListOrderRequest.setOrderStatus(1);
+        getListOrderRequest.setShopId(staffInfo.get().getShopId());
+        getListOrderRequest.setStaffId(staffInfo.get().getStaffId());
+        getListOrderRequest.setIsdnChannel(channelInfoSelect.getChannelId());
+        getListOrderRequest.setToDate(sellOrdersView.getStringDateTo());
+        getListOrderRequest.setFromDate(sellOrdersView.getStringDateFrom());
+        getListOrderRequest.setOrderStatus(1);
 
-        // TODO: 5/29/17 fake data
-        getListOrderRequest.setShopId(213);
-        getListOrderRequest.setStaffId(3243);
-        getListOrderRequest.setOrderStatus(54366);
-        getListOrderRequest.setIsdnChannel(23);
-        getListOrderRequest.setFromDate("02/05/2017 00:00:00");
-        getListOrderRequest.setToDate("02/08/2017 00:00:00");
+        // TODO: 6/12/17
+//        getListOrderRequest.setOrderStatus(54366);
 
         DataRequest<GetListOrderRequest> baseRequest = new DataRequest<>();
         baseRequest.setApiCode(ApiCode.GetListOrder);
