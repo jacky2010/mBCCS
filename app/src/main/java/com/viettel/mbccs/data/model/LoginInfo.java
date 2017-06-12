@@ -10,21 +10,27 @@ public class LoginInfo {
     @SerializedName("api")
     @Expose
     private List<Apis> api = null;
+
     @SerializedName("application")
     @Expose
     private List<Application> application = null;
+
     @SerializedName("function")
     @Expose
     private List<Function> function = null;
+
     @SerializedName("role")
     @Expose
     private List<Role> role = null;
+
     @SerializedName("sessionId")
     @Expose
     private String sessionId;
+
     @SerializedName("token")
     @Expose
     private String token;
+
     @SerializedName("userName")
     @Expose
     private String userName;

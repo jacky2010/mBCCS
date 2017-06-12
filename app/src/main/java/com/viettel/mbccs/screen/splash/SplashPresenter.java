@@ -17,6 +17,7 @@ import com.viettel.mbccs.data.source.remote.response.GetDistrictResponse;
 import com.viettel.mbccs.data.source.remote.response.GetPrecinctResponse;
 import com.viettel.mbccs.data.source.remote.response.GetProvinceResponse;
 import com.viettel.mbccs.data.source.remote.response.ProvinceDistrictPrecinctResponse;
+import com.viettel.mbccs.utils.StringUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.List;
 import rx.Observable;
@@ -63,7 +64,7 @@ public class SplashPresenter implements SplashContract.Presenter {
     }
 
     private void checkLogin() {
-        if (userRepository.getUser() == null) {
+        if (userRepository.getUser() == null || StringUtils.isEmpty(userRepository.getUser().getToken())) {
             splashView.gotoLogin();
         } else {
             splashView.gotoMain();

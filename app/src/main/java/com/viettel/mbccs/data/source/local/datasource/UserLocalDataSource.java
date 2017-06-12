@@ -11,7 +11,6 @@ import com.viettel.mbccs.data.model.Precinct;
 import com.viettel.mbccs.data.model.PrecinctResponse;
 import com.viettel.mbccs.data.model.Province;
 import com.viettel.mbccs.data.model.ProvinceResponse;
-import com.viettel.mbccs.data.model.Session;
 import com.viettel.mbccs.data.model.StaffInfo;
 import com.viettel.mbccs.data.model.UploadImage;
 import com.viettel.mbccs.data.model.UserInfo;
@@ -149,26 +148,6 @@ public class UserLocalDataSource implements IUserLocalDataSource {
     @Override
     public int getTimeSyncBCCS() {
         return sharedPrefs.get(Constants.SharePref.TIME_SYNC_BCCS, 0);
-    }
-
-    @Override
-    public void saveSession(Session session) {
-        String json = GsonUtils.Object2String(session);
-        String ensctypt =
-                SecureUtils.encryptString(MBCCSApplication.self(), Constants.SharePref.SESSION,
-                        json);
-        sharedPrefs.set(Constants.SharePref.SESSION, ensctypt);
-    }
-
-    @Override
-    public Session getSession() {
-        String encrypt = sharedPrefs.get(Constants.SharePref.SESSION, null);
-        if (encrypt == null) {
-            return null;
-        }
-        return GsonUtils.String2Object(
-                SecureUtils.decryptString(MBCCSApplication.self(), Constants.SharePref.SESSION,
-                        encrypt), Session.class);
     }
 
     @Override
