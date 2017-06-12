@@ -2,8 +2,8 @@ package com.viettel.mbccs.data.source.remote.request;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.viettel.mbccs.MBCCSApplication;
-import com.viettel.mbccs.data.model.Session;
+import com.viettel.mbccs.config.Config;
+import com.viettel.mbccs.data.source.UserRepository;
 
 /**
  * Created by HuyQuyet on 5/27/17.
@@ -13,7 +13,7 @@ public class DataRequest<T> {
 
     @Expose
     @SerializedName("session")
-    private Session mSession;
+    private String mSession;
 
     @SerializedName("username")
     @Expose
@@ -36,17 +36,18 @@ public class DataRequest<T> {
     private T parameterApi;
 
     public DataRequest() {
-        mSession = MBCCSApplication.session;
-        apiKey = MBCCSApplication.apiKey;
-        userName = MBCCSApplication.userName;
-        token = MBCCSApplication.token;
+
+        userName =  UserRepository.getInstance().getLoginUserName();
+        mSession =  UserRepository.getInstance().getUser().getSessionId();
+        apiKey = Config.API_KEY;
+        token =  UserRepository.getInstance().getUser().getToken();
     }
 
-    public Session getSession() {
+    public String getmSession() {
         return mSession;
     }
 
-    public void setSession(Session mSession) {
+    public void setmSession(String mSession) {
         this.mSession = mSession;
     }
 

@@ -30,6 +30,7 @@ android {
       versionCode rootProject.ext.versionCode_dev
       versionName rootProject.ext.versionName_dev
       versionNameSuffix "-dev"
+      manifestPlaceholders = [appName: "MBCCS-DEV"]
       dimension "mbccs"
     }
 
@@ -38,6 +39,7 @@ android {
       versionCode rootProject.ext.versionCode_dev
       versionName rootProject.ext.versionName_dev
       versionNameSuffix "-stg"
+      manifestPlaceholders = [appName: "MBCCS-STG"]
       dimension "mbccs"
     }
 
@@ -45,6 +47,7 @@ android {
       applicationId "com.viettel.mbccs"
       versionCode rootProject.ext.versionCode_product
       versionName rootProject.ext.versionName_product
+      manifestPlaceholders = [appName: "MBCCS-PRD"]
       dimension "mbccs"
     }
   }

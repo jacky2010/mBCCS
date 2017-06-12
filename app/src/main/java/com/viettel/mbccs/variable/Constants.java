@@ -1,7 +1,6 @@
 package com.viettel.mbccs.variable;
 
 import com.viettel.mbccs.data.model.LoginInfo;
-import com.viettel.mbccs.data.model.Session;
 
 /**
  * Created by eo_cuong on 5/10/17.

@@ -8,7 +8,6 @@ import com.viettel.mbccs.data.model.Precinct;
 import com.viettel.mbccs.data.model.PrecinctResponse;
 import com.viettel.mbccs.data.model.Province;
 import com.viettel.mbccs.data.model.ProvinceResponse;
-import com.viettel.mbccs.data.model.Session;
 import com.viettel.mbccs.data.model.StaffInfo;
 import com.viettel.mbccs.data.model.UploadImage;
 import com.viettel.mbccs.data.model.UserInfo;
@@ -111,16 +110,6 @@ public interface IUserLocalDataSource {
      * @return default 0
      */
     int getTimeSyncBCCS();
-
-    /**
-     * save session
-     */
-    void saveSession(Session session);
-
-    /**
-     * get session
-     */
-    Session getSession();
 
     /**
      * save api key from loginServer VTG

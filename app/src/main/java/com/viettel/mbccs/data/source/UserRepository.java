@@ -7,7 +7,6 @@ import com.viettel.mbccs.data.model.Precinct;
 import com.viettel.mbccs.data.model.PrecinctResponse;
 import com.viettel.mbccs.data.model.Province;
 import com.viettel.mbccs.data.model.ProvinceResponse;
-import com.viettel.mbccs.data.model.Session;
 import com.viettel.mbccs.data.model.StaffInfo;
 import com.viettel.mbccs.data.model.UploadImage;
 import com.viettel.mbccs.data.model.UserInfo;
@@ -167,16 +166,6 @@ public class UserRepository implements IUserLocalDataSource, IUserRemoteDataSour
     @Override
     public int getTimeSyncBCCS() {
         return mUserLocalDataSource.getTimeSyncBCCS();
-    }
-
-    @Override
-    public void saveSession(Session session) {
-        mUserLocalDataSource.saveSession(session);
-    }
-
-    @Override
-    public Session getSession() {
-        return mUserLocalDataSource.getSession();
     }
 
     @Override

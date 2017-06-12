@@ -102,8 +102,10 @@ public class LoginPresenter implements LoginContract.Presenter {
     }
 
     private void getUserInfo(LoginInfo loginInfo) {
+
         GetUserInfoRequest getUserInfoRequest = new GetUserInfoRequest();
         getUserInfoRequest.setStaffCode(loginInfo.getUserName());
+
         DataRequest<GetUserInfoRequest> request = new DataRequest<>();
         request.setParameterApi(getUserInfoRequest);
         request.setApiCode(ApiCode.GetUserInfo);
@@ -120,6 +122,8 @@ public class LoginPresenter implements LoginContract.Presenter {
                     public void onError(BaseException error) {
                         Toast.makeText(mContext, "Login fail", Toast.LENGTH_SHORT).show();
                         //TODO
+                        mUserRepository.saveLoginUserName("");
+                        mUserRepository.saveUser(new LoginInfo());
                         loading.set(false);
                     }
                 });
