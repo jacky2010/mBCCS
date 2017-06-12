@@ -13,6 +13,8 @@ public interface SplashContract {
     }
 
     interface View extends BaseView<Presenter> {
-        void checkDataProvinceSuccess();
+        void gotoLogin();
+
+        void gotoMain();
     }
 }

@@ -42,7 +42,10 @@
     <color name="white_1">#F7F7F7</color>
     <color name="white_2">#EDEDED</color>
     <color name="grey_1">#bdbdbd</color>
-
+    <color name="progress_gray">#88aaaaaa</color>
+    <color name="bg_dashboard_progress">#8367a6</color>
+    <color name="bg_dashboard_text">#ff8367</color>
+    <color name="default_text_color_gray">#6c6c6c</color>
 
     <!-- ItemSpinText -->
     <color name="default_item_spinner_text_color">#000000</color>

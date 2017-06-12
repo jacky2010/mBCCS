@@ -14,7 +14,13 @@ import android.text.method.MovementMethod;
 import android.text.style.ClickableSpan;
 import android.view.View;
 import android.widget.Toast;
+
 import com.viettel.mbccs.R;
+import com.viettel.mbccs.data.model.LoginInfo;
+import com.viettel.mbccs.data.source.UserRepository;
+import com.viettel.mbccs.data.source.remote.request.LoginRequest;
+import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 
 /**
  * Created by eo_cuong on 5/10/17.
@@ -24,7 +30,7 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     public static final int TYPE_ERROR_USERNAME = 0;
     public static final int TYPE_ERROR_PASSWORD = 1;
-    public static final String CUSTOMER_SERVICE_PHONE = "+84 XXXXXXXXXX";
+    public static final String CUSTOMER_SERVICE_PHONE = "1900 8198";
 
     public ObservableField<String> userName;
     public ObservableField<String> password;
@@ -32,10 +38,12 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     private LoginContract.ViewModel mViewModel;
     private Context mContext;
+    private UserRepository mUserRepository;
 
-    public LoginPresenter(Context context, LoginContract.ViewModel viewModel) {
+    public LoginPresenter(Context context, LoginContract.ViewModel viewModel, UserRepository userRepository) {
         mViewModel = viewModel;
         mContext = context;
+        mUserRepository = userRepository;
         initData();
     }
 
@@ -57,25 +65,27 @@ public class LoginPresenter implements LoginContract.Presenter {
     }
 
     @Override
-    public void login(String username, String password) {
-        mViewModel.onLoginSuccess();
-        //        LoginRequest loginRequest = new LoginRequest();
-        //        loginRequest.setUsername(username);
-        //        loginRequest.setPassword(password);
-        //        UserRepository.getInstance()
-        //                .login(loginRequest)
-        //                .subscribe(new MBCCSSubscribe<LoginResponse>() {
-        //                    @Override
-        //                    public void onSuccess(LoginResponse object) {
-        //                        mViewModel.onLoginSuccess();
-        //                    }
-        //
-        //                    @Override
-        //                    public void onError(BaseException error) {
-        //                        Toast.makeText(mContext, "Login fail", Toast.LENGTH_SHORT).show();
-        //                        //TODO
-        //                    }
-        //                });
+    public void login(final String username, String password) {
+//        mViewModel.onLoginSuccess();
+        LoginRequest loginRequest = new LoginRequest();
+        loginRequest.setUsername(username);
+        loginRequest.setPassword(password);
+        UserRepository.getInstance()
+                .login(loginRequest)
+                .subscribe(new MBCCSSubscribe<LoginInfo>() {
+                    @Override
+                    public void onSuccess(LoginInfo object) {
+                        mUserRepository.saveLoginUserName(username);
+                        mUserRepository.saveUser(object);
+                        mViewModel.onLoginSuccess();
+                    }
+
+                    @Override
+                    public void onError(BaseException error) {
+                        Toast.makeText(mContext, "Login fail", Toast.LENGTH_SHORT).show();
+                        //TODO
+                    }
+                });
     }
 
     public void login() {
@@ -110,9 +120,9 @@ public class LoginPresenter implements LoginContract.Presenter {
                 super.updateDrawState(ds);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     ds.setColor(mContext.getResources()
-                            .getColor(android.R.color.holo_blue_light, null));
+                            .getColor(R.color.black, null));
                 } else {
-                    ds.setColor(mContext.getResources().getColor(android.R.color.holo_blue_light));
+                    ds.setColor(mContext.getResources().getColor(R.color.black));
                 }
             }
         }, 0, content.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -126,7 +136,7 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     public Spannable getCallText() {
         SpannableStringBuilder content = new SpannableStringBuilder(
-                mContext.getString(R.string.customer_service, CUSTOMER_SERVICE_PHONE));
+                mContext.getString(R.string.login_presenter_customer_service, CUSTOMER_SERVICE_PHONE));
         content.setSpan(new ClickableSpan() {
                             @Override
                             public void onClick(View widget) {
@@ -138,11 +148,12 @@ public class LoginPresenter implements LoginContract.Presenter {
                             @Override
                             public void updateDrawState(TextPaint ds) {
                                 super.updateDrawState(ds);
+                                ds.setFakeBoldText(true);
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                                     ds.setColor(mContext.getResources()
-                                            .getColor(android.R.color.holo_blue_light, null));
+                                            .getColor(R.color.black, null));
                                 } else {
-                                    ds.setColor(mContext.getResources().getColor(android.R.color.holo_blue_light));
+                                    ds.setColor(mContext.getResources().getColor(R.color.black));
                                 }
                             }
                         }, content.length() - CUSTOMER_SERVICE_PHONE.length(), content.length(),

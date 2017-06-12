@@ -5,11 +5,9 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.databinding.DataBindingUtil;
-import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.ColorRes;
 import android.util.AttributeSet;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +16,6 @@ import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.Function;
 import com.viettel.mbccs.databinding.ItemImageGridBinding;
 import java.util.List;
-
-import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
 /**
  * Created by FRAMGIA\vu.viet.anh on 15/05/2017.
@@ -59,15 +55,8 @@ public class BottomNavigationView extends LinearLayout {
         setOrientation(HORIZONTAL);
         setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
-        int padding = (int) TypedValue.applyDimension(COMPLEX_UNIT_DIP,
-                getResources().getDimension(R.dimen.dp_4), getResources().getDisplayMetrics());
-        int paddingTop = (int) TypedValue.applyDimension(COMPLEX_UNIT_DIP,
-                getResources().getDimension(R.dimen.dp_8), getResources().getDisplayMetrics());
-        setPadding(padding, paddingTop, padding, padding);
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.BottomNavigationView);
         try {
-            setBackgroundColor(
-                    a.getColor(R.styleable.BottomNavigationView_bottomBarBgColor, Color.BLACK));
             mTextColor = a.getResourceId(R.styleable.BottomNavigationView_bottomBarTextColor,
                     android.R.color.white);
             mTextSize = a.getDimension(R.styleable.BottomNavigationView_bottomBarTextSize,

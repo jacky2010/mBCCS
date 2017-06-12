@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
+import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.databinding.ActivityLoginBinding;
 import com.viettel.mbccs.screen.main.MainActivity;
 import com.viettel.mbccs.screen.resetpass.ResetPasswordActivity;
@@ -25,7 +26,7 @@ public class LoginActivity extends BaseDataBindActivity<ActivityLoginBinding, Lo
 
     @Override
     protected void initData() {
-        mPresenter = new LoginPresenter(this, this);
+        mPresenter = new LoginPresenter(this, this, UserRepository.getInstance());
         mBinding.setPresenter(mPresenter);
     }
 

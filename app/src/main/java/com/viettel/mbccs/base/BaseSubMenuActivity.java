@@ -2,7 +2,6 @@ package com.viettel.mbccs.base;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.databinding.ObservableBoolean;
 import android.os.Build;
 import android.support.v7.widget.GridLayoutManager;
@@ -11,10 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.Function;
-import com.viettel.mbccs.data.model.KPPFeedback;
 import com.viettel.mbccs.databinding.ActivitySubMenuBinding;
 import com.viettel.mbccs.databinding.ItemImageGridBinding;
 import com.viettel.mbccs.databinding.ItemMenuBinding;
@@ -40,11 +37,7 @@ import com.viettel.mbccs.screen.trahangcaptren.ListOrderReturnUpperActivity;
 import com.viettel.mbccs.screen.transferanypay.TransferAnyPayActivity;
 import com.viettel.mbccs.screen.viewwarehouse.ViewWarehouseActivity;
 import com.viettel.mbccs.widget.SpacesItemDecoration;
-
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -95,31 +88,28 @@ public class BaseSubMenuActivity
     }
 
     public void initMenuList() {
-        // FIXME: Fake data
-        for (Field f : Function.MenuId.class.getFields()) {
-            if (f.getType() == int.class) {
-                try {
-                    int i = f.getInt(null);
-
-                    if (i < 100) continue;
-
-                    if (mFunction.getId() == (int) Math.floor(i / 100.0f)) {
-                        String name = f.getName().toLowerCase();
-                        int resId = getResources().getIdentifier(name, "string", getPackageName());
-                        mFunctionList.add(
-                                new Function(i, getString(resId), R.drawable.ic_add_black_24dp));
-                    }
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-            }
+        switch (mFunction.getFunctionCode()) {
+            case Function.TopMenu.MENU_QUAN_LY_BAN_HANG:
+                break;
+            case Function.TopMenu.MENU_QUAN_LY_THONG_TIN_KH:
+                break;
+            case Function.TopMenu.MENU_QUAN_LY_DIA_BAN:
+                break;
+            case Function.TopMenu.MENU_QUAN_LY_THU_CUOC:
+                break;
+            case Function.TopMenu.MENU_QUAN_LY_CONG_VIEC:
+                break;
+            case Function.TopMenu.MENU_QUAN_LY_KHO:
+                break;
+            case Function.TopMenu.MENU_QUAN_LY_BAO_HANH:
+                break;
+            case Function.TopMenu.MENU_QUAN_LY_CSKH:
+                break;
+            case Function.TopMenu.MENU_QUAN_LY_TAI_CHINH:
+                break;
+            case Function.TopMenu.MENU_BAO_CAO:
+                break;
         }
-        Collections.sort(mFunctionList, new Comparator<Function>() {
-            @Override
-            public int compare(Function o1, Function o2) {
-                return o1.getId() - o2.getId();
-            }
-        });
     }
 
     public MenuPresenter.OnMenuClickListener getOnMenuClickListener() {
@@ -128,7 +118,7 @@ public class BaseSubMenuActivity
                 @Override
                 public void onMenuClick(Function item) {
                     // FIXME: Static method for ALL CASE
-                    switch (item.getId()) {
+                    switch (item.getFunctionCode()) {
                         case Function.MenuId.MENU_BAN_LE:
                             startActivity(
                                     new Intent(BaseSubMenuActivity.this, SaleRetailActivity.class));
@@ -161,8 +151,8 @@ public class BaseSubMenuActivity
                                     new Intent(BaseSubMenuActivity.this, SellAnyPayActivity.class));
                             break;
                         case Function.MenuId.MENU_NAP_CHUYEN_ANYPAY:
-                            startActivity(
-                                    new Intent(BaseSubMenuActivity.this, TransferAnyPayActivity.class));
+                            startActivity(new Intent(BaseSubMenuActivity.this,
+                                    TransferAnyPayActivity.class));
                             break;
                         case Function.MenuId.MENU_DANG_KY_THONG_TIN:
                             Intent intentDKTT = new Intent(BaseSubMenuActivity.this,
@@ -212,8 +202,8 @@ public class BaseSubMenuActivity
                         case Function.MenuId.MENU_QUAN_LY_TIEN_DO_THU_CUOC:
                             break;
 
-                        case Function.MenuId.MENU_GIAO_VIEC_TO_DOI:
-                            break;
+                        //                        case Function.MenuId.MENU_GIAO_VIEC_TO_DOI:
+                        //                            break;
                         case Function.MenuId.MENU_GIAO_VIEC_PHAT_SINH:
                         case Function.MenuId.MENU_GIAO_VIEC_CS_KPP:
                             startActivity(new Intent(BaseSubMenuActivity.this,
@@ -257,8 +247,8 @@ public class BaseSubMenuActivity
 
                         case Function.MenuId.MENU_TRA_CUU:
                             break;
-                        case Function.MenuId.MENU_TIEP_NHAN_BH:
-                            break;
+                        //                        case Function.MenuId.MENU_TIEP_NHAN_BH:
+                        //                            break;
                         case Function.MenuId.MENU_CHUYEN_MUC_BH:
                             break;
                         case Function.MenuId.MENU_TRA_BH:
@@ -267,19 +257,19 @@ public class BaseSubMenuActivity
                         case Function.MenuId.MENU_SURVEY_KPP:
                             startActivity(
                                     new Intent(BaseSubMenuActivity.this, SurveyKPPActivity.class));
-//                            startActivity(
-//                                    new Intent(BaseSubMenuActivity.this, SurveyActivity.class));
+                            //                            startActivity(
+                            //                                    new Intent(BaseSubMenuActivity.this, SurveyActivity.class));
                             break;
                         case Function.MenuId.MENU_HOTNEW_CS_KPP:
-                            startActivity(
-                                    new Intent(BaseSubMenuActivity.this, HotNewsCSKPPActivity.class));
+                            startActivity(new Intent(BaseSubMenuActivity.this,
+                                    HotNewsCSKPPActivity.class));
                             break;
                         case Function.MenuId.MENU_KPP_FEEDBACK:
                             startActivity(new Intent(BaseSubMenuActivity.this,
                                     KPPFeedbackActivity.class));
                             break;
-                        case Function.MenuId.MENU_TRA_CUU_SP:
-                            break;
+                        //                        case Function.MenuId.MENU_TRA_CUU_SP:
+                        //                            break;
 
                         case Function.MenuId.MENU_TAO_GIAY_NOP_TIEN:
                             break;
@@ -290,8 +280,8 @@ public class BaseSubMenuActivity
                         case Function.MenuId.MENU_KHAI_BAO_GIA_KENH_CHAN_RET:
                             break;
 
-                        case Function.MenuId.MENU_BAO_CAO_PHAT_TRIEN_THUE_BAO:
-                            break;
+                        //                        case Function.MenuId.MENU_BAO_CAO_PHAT_TRIEN_THUE_BAO:
+                        //                            break;
                         case Function.MenuId.MENU_BAO_CAO_CHAM_SOC_KENH:
                             break;
                         case Function.MenuId.MENU_BAO_CAO_TAN_SUAT_CHAM_SOC_KENH:
@@ -384,23 +374,6 @@ public class BaseSubMenuActivity
             } else {
                 binding.setImage(binding.getRoot().getResources().getDrawable(item.getIcon()));
             }
-            try {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    binding.text.setTextColor(
-                            getResources().getColorStateList(item.getColor(), null));
-                } else {
-                    binding.text.setTextColor(getResources().getColorStateList(item.getColor()));
-                }
-            } catch (Resources.NotFoundException e) {
-                int colorRes = item.getColor();
-                if (item.getColor() == 0) colorRes = android.R.color.black;
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    binding.text.setTextColor(getResources().getColor(colorRes, null));
-                } else {
-                    binding.text.setTextColor(getResources().getColor(colorRes));
-                }
-            }
-            binding.setTextSize(item.getSize());
             binding.setOnClicked(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

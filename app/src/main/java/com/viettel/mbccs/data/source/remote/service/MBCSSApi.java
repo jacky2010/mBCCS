@@ -36,6 +36,7 @@ import com.viettel.mbccs.data.source.remote.request.GetSurveyKPPRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
 import com.viettel.mbccs.data.source.remote.request.KPPFeedbackRequest;
+import com.viettel.mbccs.data.source.remote.request.GetUserInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.KPPOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.KPPResponseFeedbackRequest;
 import com.viettel.mbccs.data.source.remote.request.LoginRequest;
@@ -89,6 +90,7 @@ import com.viettel.mbccs.data.source.remote.response.GetSurveyKPPResponse;
 import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
 import com.viettel.mbccs.data.source.remote.response.KPPFeedbackResponse;
 import com.viettel.mbccs.data.source.remote.response.KPPResponseFeedbackResponse;
+import com.viettel.mbccs.data.source.remote.response.GetUserInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.RefillAnyPayResponse;
 import com.viettel.mbccs.data.source.remote.response.RegisterCustomerInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.SellAnypayToChannelResponse;
@@ -115,7 +117,7 @@ import rx.Observable;
 
 public interface MBCSSApi {
 
-    @POST("/login")
+    @POST("thonguyen/mBCCS/1.0.0/login")
     Observable<LoginInfo> login(@Body LoginRequest loginRequest);
 
     @FormUrlEncoded
@@ -317,4 +319,8 @@ public interface MBCSSApi {
     @POST("vietdt/CM_mBCCS/1.0.0/WS_upLoad")
     Observable<BaseResponse<UploadImageResponse>> uploadImage(
             @Body DataRequest<UploadImageRequest> request);
+
+    @POST("thonguyen/Sale_mBCCS/1.0.0/WS_GetListOrder")
+    Observable<BaseResponse<GetUserInfoResponse>> getUserInfo(
+            @Body DataRequest<GetUserInfoRequest> request);
 }

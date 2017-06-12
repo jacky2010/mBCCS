@@ -3,7 +3,7 @@ package com.viettel.mbccs.data.source.local;
 import com.mukesh.countrypicker.Country;
 import com.viettel.mbccs.data.model.District;
 import com.viettel.mbccs.data.model.DistrictResponse;
-import com.viettel.mbccs.data.model.LoginResult;
+import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.model.Precinct;
 import com.viettel.mbccs.data.model.PrecinctResponse;
 import com.viettel.mbccs.data.model.Province;
@@ -21,7 +21,13 @@ public interface IUserLocalDataSource {
 
     String getAccessToken();
 
-    void saveUser(LoginResult loginResult);
+    void saveUser(LoginInfo loginResult);
+
+    LoginInfo getUser();
+
+    void saveLoginUserName(String name);
+
+    String getLoginUserName();
 
     /**
      * Save data {@link StaffInfo} in SharedPreferences when user login
@@ -114,7 +120,7 @@ public interface IUserLocalDataSource {
     /**
      * save api key from login VTG
      */
-    void saveapiKey(String apikey);
+    void saveApiKey(String apiKey);
 
     String getApiKey();
 

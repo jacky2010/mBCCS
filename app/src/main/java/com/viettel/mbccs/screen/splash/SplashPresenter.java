@@ -55,9 +55,17 @@ public class SplashPresenter implements SplashContract.Presenter {
 
     public void checkDataProvince() {
         if (userRepository.getListProvince().size() != 0) {
-            splashView.checkDataProvinceSuccess();
+            checkLogin();
         } else {
             getDataProvinceFromServer();
+        }
+    }
+
+    private void checkLogin() {
+        if (userRepository.getUser() == null) {
+            splashView.gotoLogin();
+        } else {
+            splashView.gotoMain();
         }
     }
 
@@ -110,7 +118,7 @@ public class SplashPresenter implements SplashContract.Presenter {
                                 userRepository.setListPrecinct(
                                         object.getGetPrecinctResponse().getPrecinctList());
 
-                                splashView.checkDataProvinceSuccess();
+                                checkLogin();
                             }
 
                             @Override

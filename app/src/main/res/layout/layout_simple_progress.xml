@@ -29,14 +29,14 @@
             bind:layout_widthPercent="@{ input.done }"
             />
 
-        <com.viettel.mbccs.widget.CustomTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@{ @string/percent(input.done) }"
-            android:textColor="@{ input.textColor }"
-            android:textSize="@{ input.textSize == 0 ? @dimen/sp_14 : input.textSize }"
-            />
+        <!--<com.viettel.mbccs.widget.CustomTextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:text="@{ @string/percent(input.done) }"-->
+            <!--android:textColor="@{ input.textColor }"-->
+            <!--android:textSize="@{ input.textSize == 0 ? @dimen/sp_14 : input.textSize }"-->
+            <!--/>-->
 
     </android.support.percent.PercentRelativeLayout>
 </layout>

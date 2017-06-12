@@ -3,7 +3,6 @@ package com.viettel.mbccs.data.source;
 import com.viettel.mbccs.data.model.District;
 import com.viettel.mbccs.data.model.DistrictResponse;
 import com.viettel.mbccs.data.model.LoginInfo;
-import com.viettel.mbccs.data.model.LoginResult;
 import com.viettel.mbccs.data.model.Precinct;
 import com.viettel.mbccs.data.model.PrecinctResponse;
 import com.viettel.mbccs.data.model.Province;
@@ -12,7 +11,7 @@ import com.viettel.mbccs.data.model.Session;
 import com.viettel.mbccs.data.model.StaffInfo;
 import com.viettel.mbccs.data.model.UploadImage;
 import com.viettel.mbccs.data.source.local.IUserLocalDataSource;
-import com.viettel.mbccs.data.source.local.UserLocalDataSource;
+import com.viettel.mbccs.data.source.local.datasource.UserLocalDataSource;
 import com.viettel.mbccs.data.source.remote.IUserRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.datasource.UserRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
@@ -68,8 +67,23 @@ public class UserRepository implements IUserLocalDataSource, IUserRemoteDataSour
     }
 
     @Override
-    public void saveUser(LoginResult loginResult) {
+    public void saveUser(LoginInfo loginResult) {
         mUserLocalDataSource.saveUser(loginResult);
+    }
+
+    @Override
+    public LoginInfo getUser() {
+        return mUserLocalDataSource.getUser();
+    }
+
+    @Override
+    public void saveLoginUserName(String name) {
+        mUserLocalDataSource.saveLoginUserName(name);
+    }
+
+    @Override
+    public String getLoginUserName() {
+        return mUserLocalDataSource.getLoginUserName();
     }
 
     @Override
@@ -153,9 +167,8 @@ public class UserRepository implements IUserLocalDataSource, IUserRemoteDataSour
     }
 
     @Override
-    public void saveapiKey(String apikey) {
-
-        mUserLocalDataSource.saveapiKey(apikey);
+    public void saveApiKey(String apiKey) {
+        mUserLocalDataSource.saveApiKey(apiKey);
     }
 
     @Override

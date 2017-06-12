@@ -1,11 +1,12 @@
-package com.viettel.mbccs.data.source.local;
+package com.viettel.mbccs.data.source.local.datasource;
 
+import android.text.TextUtils;
 import com.activeandroid.query.Select;
 import com.google.gson.Gson;
 import com.viettel.mbccs.MBCCSApplication;
 import com.viettel.mbccs.data.model.District;
 import com.viettel.mbccs.data.model.DistrictResponse;
-import com.viettel.mbccs.data.model.LoginResult;
+import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.model.Precinct;
 import com.viettel.mbccs.data.model.PrecinctResponse;
 import com.viettel.mbccs.data.model.Province;
@@ -13,7 +14,7 @@ import com.viettel.mbccs.data.model.ProvinceResponse;
 import com.viettel.mbccs.data.model.Session;
 import com.viettel.mbccs.data.model.StaffInfo;
 import com.viettel.mbccs.data.model.UploadImage;
-import com.viettel.mbccs.data.source.local.datasource.SharedPrefs;
+import com.viettel.mbccs.data.source.local.IUserLocalDataSource;
 import com.viettel.mbccs.utils.GsonUtils;
 import com.viettel.mbccs.utils.SecureUtils;
 import com.viettel.mbccs.variable.Constants;
@@ -45,8 +46,25 @@ public class UserLocalDataSource implements IUserLocalDataSource {
     }
 
     @Override
-    public void saveUser(LoginResult loginResult) {
+    public void saveUser(LoginInfo loginResult) {
+        sharedPrefs.set(Constants.SharePref.LOGIN_INFO, gson.toJson(loginResult));
+    }
 
+    @Override
+    public LoginInfo getUser() {
+        String data = sharedPrefs.get(Constants.SharePref.LOGIN_INFO, "");
+        if (TextUtils.isEmpty(data)) return null;
+        return gson.fromJson(data, LoginInfo.class);
+    }
+
+    @Override
+    public void saveLoginUserName(String name) {
+        sharedPrefs.set(Constants.SharePref.LOGIN_USER_NAME, name);
+    }
+
+    @Override
+    public String getLoginUserName() {
+        return sharedPrefs.get(Constants.SharePref.LOGIN_USER_NAME, "");
     }
 
     @Override
@@ -141,10 +159,10 @@ public class UserLocalDataSource implements IUserLocalDataSource {
     }
 
     @Override
-    public void saveapiKey(String apikey) {
+    public void saveApiKey(String apiKey) {
         sharedPrefs.set(Constants.SharePref.API_KEY,
                 SecureUtils.encryptString(MBCCSApplication.self(), Constants.SharePref.API_KEY,
-                        apikey));
+                        apiKey));
     }
 
     @Override
