@@ -180,7 +180,7 @@ public class ApiCode {
     public final static String CreateSaleTransChannel = "WS_CreateSaleTransChannel";
 
     // 5.2.3.3
-    public final static String GetListChannelByOwnerTypeId = "WS_ getListChannelByOwnerTypeId";
+    public final static String GetListChannelByOwnerTypeId = "WS_getListChannelByOwnerTypeId";
 
     // 5.3.3.1
     public final static String GetAllInfo = "WS_GetAllInfo";

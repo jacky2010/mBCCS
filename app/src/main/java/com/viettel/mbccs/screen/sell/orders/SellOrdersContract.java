@@ -26,6 +26,8 @@ public class SellOrdersContract {
 
         void getListChannelByOwnerTypeIdError(BaseException error);
 
+        void getListChannelByOwnerTypeIdError(String error);
+
         long getDateTo();
 
         long getDateFrom();
