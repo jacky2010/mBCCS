@@ -119,7 +119,7 @@
                 android:onClick="@{ v -> presenter.onClose() }"
                 android:text="@string/common_label_close"
                 android:textColor="@color/black"
-                style="@style/button_nagative"
+                style="@style/button_nagative_grey_seven"
                 />
 
             <RelativeLayout

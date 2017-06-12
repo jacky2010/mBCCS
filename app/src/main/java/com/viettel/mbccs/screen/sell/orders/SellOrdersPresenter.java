@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.ApiCode;
@@ -32,7 +30,7 @@ import rx.subscriptions.CompositeSubscription;
  * Created by HuyQuyet on 5/15/17.
  */
 
-public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
+public class SellOrdersPresenter {
     private Context context;
     private SellOrdersContract.View sellOrdersView;
     private BanHangKhoTaiChinhRepository banHangKhoTaiChinhRepository;
@@ -127,20 +125,6 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
         activity.finish();
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        switch (parent.getId()) {
-            case R.id.spinnerChannel:
-                channelInfoSelect = channelInfoList.get(position);
-                break;
-        }
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-
     public void clickSearch() {
         sellOrdersView.showLoading();
         long dateFrom = sellOrdersView.getDateFrom();
@@ -168,14 +152,7 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
         getListOrderRequest.setToDate("02/08/2017 00:00:00");
 
         DataRequest<GetListOrderRequest> baseRequest = new DataRequest<>();
-        Session session = new Session();
-        session.setSessionId("54578345638");
-
-        baseRequest.setSession(session);
-        baseRequest.setUserName("smac");
         baseRequest.setApiCode(ApiCode.GetListOrder);
-        baseRequest.setApiKey("123456");
-        baseRequest.setToken("54353-543346-65464564-6546");
         baseRequest.setParameterApi(getListOrderRequest);
 
         banHangKhoTaiChinhRepository.getListOrder(baseRequest)
@@ -205,5 +182,9 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
 
     public void setSellOrdersFragmentAdapter(SellOrdersFragmentAdapter sellOrdersFragmentAdapter) {
         this.sellOrdersFragmentAdapter.set(sellOrdersFragmentAdapter);
+    }
+
+    public void setPositionSelectChange(int position) {
+        channelInfoSelect = channelInfoList.get(position);
     }
 }

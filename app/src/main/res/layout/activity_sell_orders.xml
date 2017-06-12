@@ -106,12 +106,9 @@
                     android:textSize="@dimen/sp_16"
                     />
 
-                <com.viettel.mbccs.widget.CustomTextView
+                <com.viettel.mbccs.widget.FakeSpinner
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_40"
-                    android:background="@drawable/bg_order"
-                    android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
-                    android:paddingLeft="@dimen/dp_10"
+                    android:layout_height="wrap_content"
                     android:text="@{ presenter.staffInfo.getShopName() }"
                     />
 
@@ -124,14 +121,12 @@
                     android:textSize="@dimen/sp_16"
                     />
 
-                <com.viettel.mbccs.widget.CustomTextView
+                <com.viettel.mbccs.widget.FakeSpinner
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_40"
-                    android:background="@drawable/bg_order"
-                    android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
-                    android:paddingLeft="@dimen/dp_10"
+                    android:layout_height="wrap_content"
                     android:text="@{ presenter.staffInfo.getStaffName() }"
                     />
+
                 <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -142,7 +137,7 @@
                     />
 
                 <com.viettel.mbccs.widget.SpinnerWithBorder
-                    android:id="@+id/spinnerChannel"
+                    android:id="@+id/spinner_channel_sell_order"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_40"
                     app:adapter="@{ presenter.spinnerAdapterChannel }"
@@ -153,11 +148,10 @@
                     android:layout_height="@dimen/dp_40"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/dp_6"
-                    android:background="@color/blue"
                     android:gravity="center"
                     android:onClick="@{ v -> presenter.clickSearch() }"
                     android:text="@string/sell_orders_search"
-                    android:textColor="@color/white"
+                    style="@style/button_positive"
                     />
             </LinearLayout>
 

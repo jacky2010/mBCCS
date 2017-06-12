@@ -24,7 +24,6 @@ import android.widget.LinearLayout;
 import com.bumptech.glide.Glide;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.databinding.LayoutSelectImageNoBinding;
-import com.viettel.mbccs.utils.CircleTransform;
 import com.viettel.mbccs.utils.StringUtils;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -282,14 +281,12 @@ public class CustomSelectImageNo extends LinearLayout {
             Glide.with(context)
                     .load(R.drawable.ic_select_image)
                     .centerCrop()
-                    .bitmapTransform(new CircleTransform(context))
                     .into(binding.imageFront);
             return;
         }
         Glide.with(context)
                 .load(url)
-                .centerCrop()
-                .bitmapTransform(new CircleTransform(context))
+                .centerCrop().placeholder(R.drawable.ic_select_image)
                 .into(binding.imageBackside);
     }
 
@@ -299,14 +296,12 @@ public class CustomSelectImageNo extends LinearLayout {
             Glide.with(context)
                     .load(R.drawable.ic_select_image)
                     .centerCrop()
-                    .bitmapTransform(new CircleTransform(context))
                     .into(binding.imageBackside);
             return;
         }
         Glide.with(context)
                 .load(url)
-                .centerCrop()
-                .bitmapTransform(new CircleTransform(context))
+                .centerCrop().placeholder(R.drawable.ic_select_image)
                 .into(binding.imageFront);
     }
 
@@ -316,14 +311,12 @@ public class CustomSelectImageNo extends LinearLayout {
             Glide.with(context)
                     .load(R.drawable.ic_select_image)
                     .centerCrop()
-                    .bitmapTransform(new CircleTransform(context))
                     .into(binding.imagePortrait);
             return;
         }
         Glide.with(context)
                 .load(url)
-                .centerCrop()
-                .bitmapTransform(new CircleTransform(context))
+                .centerCrop().placeholder(R.drawable.ic_select_image)
                 .into(binding.imagePortrait);
     }
 
