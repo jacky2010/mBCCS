@@ -1,13 +1,13 @@
-package com.viettel.mbccs.screen.hotnewscskpp.fragments;
+package com.viettel.mbccs.screen.kppfeedback.fragments;
 
 import android.content.Context;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.view.View;
 
-import com.viettel.mbccs.data.model.HotNewsCSKPPItem;
-import com.viettel.mbccs.data.source.HotNewsCSKPPRepository;
-import com.viettel.mbccs.screen.hotnewscskpp.adapters.HotNewsCSKPPListAdapter;
+import com.viettel.mbccs.data.model.KPPFeedback;
+import com.viettel.mbccs.data.source.KPPFeedbackRepository;
+import com.viettel.mbccs.screen.kppfeedback.adapters.KPPFeedbackListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,34 +16,34 @@ import java.util.List;
  * Created by minhnx on 5/19/17.
  */
 
-public class SearchHotNewsCSKPPPresenter implements SearchHotNewsCSKPPContract.Presenter {
+public class SearchKPPFeedbackPresenter implements SearchKPPFeedbackContract.Presenter {
 
     private Context context;
-    private SearchHotNewsCSKPPContract.ViewModel viewModel;
-    private HotNewsCSKPPListAdapter newsAdapter;
+    private SearchKPPFeedbackContract.ViewModel viewModel;
+    private KPPFeedbackListAdapter feedbackAdapter;
 
     public ObservableBoolean searchFound;
-    public ObservableField<HotNewsCSKPPListAdapter> newsListAdapter;
-    private HotNewsCSKPPRepository hotNewsRepository;
+    public ObservableField<KPPFeedbackListAdapter> feedbacksListAdapter;
+    private KPPFeedbackRepository feedbackRepository;
 
-    public SearchHotNewsCSKPPPresenter(Context context, final SearchHotNewsCSKPPContract.ViewModel viewModel) {
+    public SearchKPPFeedbackPresenter(Context context, final SearchKPPFeedbackContract.ViewModel viewModel) {
         this.context = context;
         this.viewModel = viewModel;
 
-        newsListAdapter = new ObservableField<>();
+        feedbacksListAdapter = new ObservableField<>();
         searchFound = new ObservableBoolean(true);
-        newsAdapter = new HotNewsCSKPPListAdapter(context, new ArrayList<HotNewsCSKPPItem>());
-        newsAdapter.setOnItemClickListener(new HotNewsCSKPPListAdapter.OnItemClickListener() {
+        feedbackAdapter = new KPPFeedbackListAdapter(context, new ArrayList<KPPFeedback>());
+        feedbackAdapter.setOnItemClickListener(new KPPFeedbackListAdapter.OnItemClickListener() {
             @Override
-            public void onClick(View view, HotNewsCSKPPItem item) {
-                viewModel.openHotNewsDetail(item);
+            public void onClick(View view, KPPFeedback item) {
+                viewModel.openFeedbackDetail(item);
             }
         });
 
-        hotNewsRepository = HotNewsCSKPPRepository.getInstance();
+        feedbackRepository = KPPFeedbackRepository.getInstance();
 
         initListeners();
-        searchNews();
+        searchFeedbacks();
     }
 
     private void initListeners() {
@@ -65,11 +65,11 @@ public class SearchHotNewsCSKPPPresenter implements SearchHotNewsCSKPPContract.P
     }
 
     @Override
-    public void searchNews() {
+    public void searchFeedbacks() {
         try {
 
-            List<HotNewsCSKPPItem> items = new ArrayList<>();
-            HotNewsCSKPPItem item = new HotNewsCSKPPItem();
+            List<KPPFeedback> items = new ArrayList<>();
+            KPPFeedback item = new KPPFeedback();
             item.setTitle("[Video] Honda sẽ có xe tự hành hoàn toàn vào năm 2025");
             item.setContent("Trong kế hoạch trung hạn Vision 2030, Honda cho biết họ sẽ thúc đẩy sự phối hợp giữa các khâu Nghiên cứu & Phát triển, Thu mua và Sản xuất, vươn xa hơn những loại động cơ truyền thống và những chiếc xe vận hành theo cách thông thường.\n" +
                     "Theo CEO Honda, ông Takahiro Hachigo, Honda sẽ đặt ưu tiên cao nhất cho việc thúc đẩy phát triển nhanh công nghệ an toàn tiến tiến và xe điện.\n");
@@ -77,18 +77,18 @@ public class SearchHotNewsCSKPPPresenter implements SearchHotNewsCSKPPContract.P
 
             items.add(item);
 
-            item = new HotNewsCSKPPItem();
+            item = new KPPFeedback();
             item.setTitle("Demo 2");
             item.setContent("Survey 2");
             item.setCreateDate("1/2/2017");
 
             items.add(item);
 
-            newsAdapter.setHotNewsItems(items);
+            feedbackAdapter.setFeedbackItems(items);
 
-            newsListAdapter.set(newsAdapter);
+            feedbacksListAdapter.set(feedbackAdapter);
 
-            if (newsAdapter.getItemCount() > 0) {
+            if (feedbackAdapter.getItemCount() > 0) {
                 searchFound.set(true);
             } else {
                 searchFound.set(false);

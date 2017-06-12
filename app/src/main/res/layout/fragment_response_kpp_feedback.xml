@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="presenter"
+            type="com.viettel.mbccs.screen.kppfeedback.fragments.ResponseKPPFeedbackPresenter" />
+
+        <import
+            name="View"
+            type="android.view.View" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/dp_16"
+            android:paddingRight="@dimen/dp_16">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:text="@string/kpp_feedback_label_cust_feedback"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16" />
+
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_order"
+                android:gravity="top"
+                android:inputType="textMultiLine"
+                android:scrollHorizontally="false"
+                android:scrollbars="vertical"
+                android:padding="@dimen/dp_2"
+                android:text="@={ presenter.feedback }" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:paddingTop="@dimen/dp_10"
+                android:text="@string/kpp_feedback_label_response_feedback"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16" />
+
+            <com.viettel.mbccs.widget.CustomEdittext
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_order"
+                android:gravity="top"
+                android:inputType="textMultiLine"
+                android:maxLength="@integer/max_length_feedback_content"
+                android:padding="@dimen/dp_2"
+                android:text="@={ presenter.response }"
+                app:error="@{presenter.responseError}" />
+
+            <Button
+                android:layout_width="@dimen/dp_150"
+                android:layout_height="@dimen/dp_40"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dp_6"
+                android:background="@color/blue"
+                android:gravity="center"
+                android:onClick="@{ v -> presenter.sendResponse() }"
+                android:text="@string/kpp_feedback_response_feedback"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>

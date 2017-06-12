@@ -12,7 +12,11 @@ import com.viettel.mbccs.data.source.remote.request.GetAllInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.GetAnypayAuthorizeRequest;
 import com.viettel.mbccs.data.source.remote.request.GetApDomainRequest;
 import com.viettel.mbccs.data.source.remote.request.GetDistrictRequest;
+import com.viettel.mbccs.data.source.remote.request.GetHotNewsCSKPPRequest;
+import com.viettel.mbccs.data.source.remote.request.GetHotNewsInfoCSKPPRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
+import com.viettel.mbccs.data.source.remote.request.GetKPPFeedbackInfoRequest;
+import com.viettel.mbccs.data.source.remote.request.GetKPPFeedbackRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListBusTypeIdRequireRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListChannelByOwnerTypeIdRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListOrderRequest;
@@ -31,7 +35,9 @@ import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSurveyKPPRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
+import com.viettel.mbccs.data.source.remote.request.KPPFeedbackRequest;
 import com.viettel.mbccs.data.source.remote.request.KPPOrderRequest;
+import com.viettel.mbccs.data.source.remote.request.KPPResponseFeedbackRequest;
 import com.viettel.mbccs.data.source.remote.request.LoginRequest;
 import com.viettel.mbccs.data.source.remote.request.RefillAnyPayRequest;
 import com.viettel.mbccs.data.source.remote.request.RegisterCustomerInfoRequest;
@@ -58,7 +64,11 @@ import com.viettel.mbccs.data.source.remote.response.GetAnypayAuthorizeResponse;
 import com.viettel.mbccs.data.source.remote.response.GetApDomainResponse;
 import com.viettel.mbccs.data.source.remote.response.GetDistributedChannelResponse;
 import com.viettel.mbccs.data.source.remote.response.GetDistrictResponse;
+import com.viettel.mbccs.data.source.remote.response.GetHotNewsCSKPPResponse;
+import com.viettel.mbccs.data.source.remote.response.GetHotNewsInfoCSKPPResponse;
 import com.viettel.mbccs.data.source.remote.response.GetInfoSaleTranResponse;
+import com.viettel.mbccs.data.source.remote.response.GetKPPFeedbackInfoResponse;
+import com.viettel.mbccs.data.source.remote.response.GetKPPFeedbackResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListBusTypeIdRequireResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListChannelByOwnerTypeIdResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListOrderResponse;
@@ -76,6 +86,8 @@ import com.viettel.mbccs.data.source.remote.response.GetRegiterSubInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSurveyKPPResponse;
 import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
+import com.viettel.mbccs.data.source.remote.response.KPPFeedbackResponse;
+import com.viettel.mbccs.data.source.remote.response.KPPResponseFeedbackResponse;
 import com.viettel.mbccs.data.source.remote.response.RefillAnyPayResponse;
 import com.viettel.mbccs.data.source.remote.response.RegisterCustomerInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.SellAnypayToChannelResponse;
@@ -275,4 +287,28 @@ public interface MBCSSApi {
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_TransReloadAnypay")
     Observable<BaseResponse<SendSurveyKPPResponse>> sendSurveyKPP(
             @Body DataRequest<SendSurveyKPPRequest> request);
+
+    @POST("thonguyen/Sale_mBCCS/1.0.0/WS_TransReloadAnypay")
+    Observable<BaseResponse<GetHotNewsCSKPPResponse>> getHotNews(
+            @Body DataRequest<GetHotNewsCSKPPRequest> request);
+
+    @POST("thonguyen/Sale_mBCCS/1.0.0/WS_TransReloadAnypay")
+    Observable<BaseResponse<GetHotNewsInfoCSKPPResponse>> getHotNewsInfo(
+            @Body DataRequest<GetHotNewsInfoCSKPPRequest> request);
+
+    @POST("thonguyen/Sale_mBCCS/1.0.0/WS_TransReloadAnypay")
+    Observable<BaseResponse<GetKPPFeedbackResponse>> getKPPFeedback(
+            @Body DataRequest<GetKPPFeedbackRequest> request);
+
+    @POST("thonguyen/Sale_mBCCS/1.0.0/WS_TransReloadAnypay")
+    Observable<BaseResponse<GetKPPFeedbackInfoResponse>> getKPPFeedbackInfo(
+            @Body DataRequest<GetKPPFeedbackInfoRequest> request);
+
+    @POST("thonguyen/Sale_mBCCS/1.0.0/WS_TransReloadAnypay")
+    Observable<BaseResponse<KPPFeedbackResponse>> kppFeedback(
+            @Body DataRequest<KPPFeedbackRequest> request);
+
+    @POST("thonguyen/Sale_mBCCS/1.0.0/WS_TransReloadAnypay")
+    Observable<BaseResponse<KPPResponseFeedbackResponse>> kppResponseFeedback(
+            @Body DataRequest<KPPResponseFeedbackRequest> request);
 }

@@ -622,6 +622,7 @@ Từ <b>%s</b><br>
     <string name="common_lable_search">Tìm kiếm</string>
     <string name="common_label_update">Cập nhật</string>
     <string name="common_label_currency_suffix">đồng</string>
+    <string name="common_label_success">Thành công</string>
 
     <!-- Create Update information -->
     <string name="create_update_information_create_title">Đăng ký thông tin thuê bao</string>
@@ -815,4 +816,18 @@ Từ <b>%s</b><br>
     <string name="survey_label_title">Survey</string>
     <string name="survey_error_no_answer">Hãy chọn câu trả lời</string>
     <string name="survey_label_no_survey">Không có survey nào!</string>
+
+    <!--kpp feedback-->
+    <string name="kpp_feedback_title">Feedback</string>
+    <string name="kpp_feedback_label_content_desc">Nhập nội dung phản ánh tới ĐHBH</string>
+    <string name="kpp_feedback_label_content_desc2">Nội dung phản ánh tới ĐHBH</string>
+    <string name="kpp_feedback_send_feedback">Gửi phản ánh</string>
+    <string name="kpp_feedback_response_feedback">Cập nhật</string>
+    <string name="kpp_feedback_msg_info_sent_successful">Tin nhắn phản ánh đã gửi tới SĐT của ĐHBH!</string>
+    <string name="kpp_feedback_label_list_header">Tổng số %s phản ánh</string>
+    <string name="kpp_feedback_label_cust_feedback">Phản ánh của khách hàng</string>
+    <string name="kpp_feedback_label_response_feedback">Kết quả xử lý</string>
+    <string name="kpp_feedback_msg_info_sent_response_feedback">Cập nhật kết quả thành công!</string>
+    <string name="kpp_feedback_msg_info_empty_feedback">Không có phản ánh nào!</string>
+    <!--/kpp feedback-->
 </resources>

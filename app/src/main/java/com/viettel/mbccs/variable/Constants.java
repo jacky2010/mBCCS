@@ -108,6 +108,7 @@ public class Constants {
         public static final String SERVICE_FEE = "service_fee";
         public static final String SIM_FEE = "sim_fee";
         public static final String SURVEY_QUESTION = "survey_question";
+        public static final String MESSAGE = "message";
     }
 
     public class Tax{

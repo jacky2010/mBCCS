@@ -26,4 +26,5 @@
     <integer name="max_length_customer_name">100</integer>
     <integer name="max_length_address">256</integer>
     <integer name="max_length_sim_serial">20</integer>
+    <integer name="max_length_feedback_content">500</integer>
 </resources>

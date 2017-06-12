@@ -11,8 +11,10 @@ import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.Function;
+import com.viettel.mbccs.data.model.KPPFeedback;
 import com.viettel.mbccs.databinding.ActivitySubMenuBinding;
 import com.viettel.mbccs.databinding.ItemImageGridBinding;
 import com.viettel.mbccs.databinding.ItemMenuBinding;
@@ -26,6 +28,7 @@ import com.viettel.mbccs.screen.hotnewscskpp.HotNewsCSKPPActivity;
 import com.viettel.mbccs.screen.information.CreateUpdateInformationActivity;
 import com.viettel.mbccs.screen.inputorder.InputOrderActivity;
 import com.viettel.mbccs.screen.kpp.order.KPPOrderActivity;
+import com.viettel.mbccs.screen.kppfeedback.KPPFeedbackActivity;
 import com.viettel.mbccs.screen.main.fragments.menu.MenuPresenter;
 import com.viettel.mbccs.screen.nhapkhocapduoi.ListOrderActivity;
 import com.viettel.mbccs.screen.sell.channel.SaleChannelActivity;
@@ -33,11 +36,11 @@ import com.viettel.mbccs.screen.sell.orders.SellOrdersActivity;
 import com.viettel.mbccs.screen.sell.retail.SaleRetailActivity;
 import com.viettel.mbccs.screen.sellanypay.SellAnyPayActivity;
 import com.viettel.mbccs.screen.surveykpp.SurveyKPPActivity;
-import com.viettel.mbccs.screen.survey.SurveyActivity;
 import com.viettel.mbccs.screen.trahangcaptren.ListOrderReturnUpperActivity;
 import com.viettel.mbccs.screen.transferanypay.TransferAnyPayActivity;
 import com.viettel.mbccs.screen.viewwarehouse.ViewWarehouseActivity;
 import com.viettel.mbccs.widget.SpacesItemDecoration;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -259,14 +262,16 @@ public class BaseSubMenuActivity
                         case Function.MenuId.MENU_SURVEY_KPP:
                             startActivity(
                                     new Intent(BaseSubMenuActivity.this, SurveyKPPActivity.class));
-                            startActivity(
-                                    new Intent(BaseSubMenuActivity.this, SurveyActivity.class));
+//                            startActivity(
+//                                    new Intent(BaseSubMenuActivity.this, SurveyActivity.class));
                             break;
                         case Function.MenuId.MENU_HOTNEW_CS_KPP:
                             startActivity(
                                     new Intent(BaseSubMenuActivity.this, HotNewsCSKPPActivity.class));
                             break;
                         case Function.MenuId.MENU_KPP_FEEDBACK:
+                            startActivity(new Intent(BaseSubMenuActivity.this,
+                                    KPPFeedbackActivity.class));
                             break;
                         case Function.MenuId.MENU_TRA_CUU_SP:
                             break;
