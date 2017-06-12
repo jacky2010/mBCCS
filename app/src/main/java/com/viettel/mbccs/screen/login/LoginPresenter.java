@@ -12,8 +12,10 @@ import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.method.MovementMethod;
 import android.text.style.ClickableSpan;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
+
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.LoginInfo;
@@ -23,8 +25,8 @@ import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetUserInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.LoginRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
-import com.viettel.mbccs.data.source.remote.response.GetUserInfoResponse;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
+
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
@@ -40,6 +42,7 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     public ObservableField<String> userName;
     public ObservableField<String> password;
+    public ObservableField<String> error;
     public ObservableBoolean loading;
 
     private LoginContract.ViewModel mViewModel;
@@ -48,7 +51,7 @@ public class LoginPresenter implements LoginContract.Presenter {
     private CompositeSubscription subscriptions;
 
     public LoginPresenter(Context context, LoginContract.ViewModel viewModel,
-            UserRepository userRepository) {
+                          UserRepository userRepository) {
         mViewModel = viewModel;
         mContext = context;
         mUserRepository = userRepository;
@@ -59,6 +62,7 @@ public class LoginPresenter implements LoginContract.Presenter {
     private void initData() {
         userName = new ObservableField<>();
         password = new ObservableField<>();
+        error = new ObservableField<>();
         loading = new ObservableBoolean();
         loading.set(false);
     }
@@ -94,9 +98,9 @@ public class LoginPresenter implements LoginContract.Presenter {
 
                     @Override
                     public void onError(BaseException error) {
-                        Toast.makeText(mContext, "Login fail", Toast.LENGTH_SHORT).show();
                         //TODO
                         loading.set(false);
+                        LoginPresenter.this.error.set(mContext.getString(R.string.login_presenter_login_error));
                     }
                 });
         subscriptions.add(subscription);
@@ -121,8 +125,9 @@ public class LoginPresenter implements LoginContract.Presenter {
 
                     @Override
                     public void onError(BaseException error) {
-                        Toast.makeText(mContext, "Login fail", Toast.LENGTH_SHORT).show();
                         //TODO
+                        loading.set(false);
+                        LoginPresenter.this.error.set(mContext.getString(R.string.login_presenter_login_error));
                         mUserRepository.saveLoginUserName("");
                         mUserRepository.saveUser(new LoginInfo());
                         loading.set(false);
@@ -133,6 +138,7 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     public void login() {
         // TODO: Validate
+        error.set(null);
         loading.set(true);
         if (TextUtils.isEmpty(userName.get())) {
             mViewModel.showError(TYPE_ERROR_USERNAME,
@@ -202,5 +208,15 @@ public class LoginPresenter implements LoginContract.Presenter {
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         return content;
+    }
+
+    public View.OnTouchListener getTouchListener() {
+        return new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                error.set(null);
+                return false;
+            }
+        };
     }
 }

@@ -432,4 +432,9 @@ public class BindingUtils {
     public static void setAnimatedProgress(ProgressBar pb, int progress) {
         AnimationUtils.startAnimatedProgress(pb, progress);
     }
+
+    @BindingAdapter({ "touchListener" })
+    public static void setTouchListener(View view, View.OnTouchListener listener) {
+        view.setOnTouchListener(listener);
+    }
 }

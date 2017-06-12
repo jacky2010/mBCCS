@@ -7,9 +7,9 @@ import android.os.Build;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.Function;
 import com.viettel.mbccs.data.model.LoginInfo;
@@ -38,7 +38,7 @@ import com.viettel.mbccs.screen.surveykpp.SurveyKPPActivity;
 import com.viettel.mbccs.screen.trahangcaptren.ListOrderReturnUpperActivity;
 import com.viettel.mbccs.screen.transferanypay.TransferAnyPayActivity;
 import com.viettel.mbccs.screen.viewwarehouse.ViewWarehouseActivity;
-import com.viettel.mbccs.widget.SpacesItemDecoration;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,7 +59,7 @@ public class BaseSubMenuActivity
 
     protected LinearLayoutManager mLinearLayoutManager;
 
-    protected RecyclerView.ItemDecoration mItemDecoration;
+//    protected RecyclerView.ItemDecoration mItemDecoration;
 
     protected MenuPresenter.MenuAdapter mMenuAdapter;
 
@@ -79,10 +79,10 @@ public class BaseSubMenuActivity
         isGrid.set(false);
         mGridLayoutManager = new GridLayoutManager(this, 3);
         mLinearLayoutManager = new LinearLayoutManager(this);
-        mItemDecoration = new SpacesItemDecoration(
-                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX,
-                        getResources().getDimension(R.dimen.dp_6),
-                        getResources().getDisplayMetrics()), mGridLayoutManager);
+//        mItemDecoration = new SpacesItemDecoration(
+//                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX,
+//                        getResources().getDimension(R.dimen.dp_6),
+//                        getResources().getDisplayMetrics()), mGridLayoutManager);
         initMenuList();
         mMenuAdapter = new SubMenuAdapter(this, mFunctionList);
         mBinding.setPresenter(this);
@@ -291,10 +291,10 @@ public class BaseSubMenuActivity
         isGrid.set(!isGrid.get());
         if (isGrid.get()) {
             mBinding.subMenuView.setLayoutManager(mGridLayoutManager);
-            mBinding.subMenuView.addItemDecoration(mItemDecoration);
+//            mBinding.subMenuView.addItemDecoration(mItemDecoration);
         } else {
             mBinding.subMenuView.setLayoutManager(mLinearLayoutManager);
-            mBinding.subMenuView.removeItemDecoration(mItemDecoration);
+//            mBinding.subMenuView.removeItemDecoration(mItemDecoration);
         }
         mBinding.subMenuView.setAdapter(mMenuAdapter);
     }

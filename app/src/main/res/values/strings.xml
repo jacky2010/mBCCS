@@ -846,4 +846,5 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="upload_service_image_portrait">Ảnh chân dung</string>
     <string name="upload_service_finish">Finish</string>
     <string name="input_phone_hint">Nhập số điện thoại</string>
+    <string name="login_presenter_login_error">Tên đăng nhập hoặc Mật khẩu không đúng!</string>
 </resources>
