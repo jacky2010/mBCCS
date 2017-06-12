@@ -98,7 +98,7 @@
             android:paddingRight="@dimen/dp_40"
             android:text="@{ title }"
             android:textAllCaps="@{isAllCaps}"
-            android:textColor="@{ titleColor }"
+            android:textColor="@{ titleColor == 0 ? @color/white : titleColor}"
             android:textSize="@{ titleTextSize }"
             android:textStyle="bold"
             />

@@ -35,6 +35,9 @@
             name="error"
             type="String"
             />
+        <variable
+            name="drawableLeft"
+            type="android.graphics.drawable.Drawable"/>
         <import type="android.view.View"/>
     </data>
     <LinearLayout
@@ -53,13 +56,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_30"
                 android:layout_marginTop="@dimen/dp_5"
-                android:background="@drawable/bg_input"
-                android:paddingStart="@dimen/dp_10"
+                android:drawableLeft="@{ drawableLeft }"
+                android:drawablePadding="@dimen/dp_10"
                 android:text="@={ content }"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_15"
                 app:error="@{error}"
                 app:eyeClickActive="@{isChangeStatePass}"
+                style="@style/inputStyleIconLeft"
                 />
 
             <com.viettel.mbccs.widget.CustomButton
@@ -69,8 +73,9 @@
                 android:layout_gravity="end|center"
                 android:gravity="center"
                 android:layout_marginRight="@dimen/dp_10"
-                android:background="@drawable/ic_close"
+                android:background="@drawable/ic_close_circle"
                 android:onClick="@{clearInputClick}"
+                style="@style/inputStyle"
                 android:visibility="@{isShowClear ? View.VISIBLE : View.GONE}"
                 />
 

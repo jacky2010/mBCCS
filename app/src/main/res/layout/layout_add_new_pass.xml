@@ -37,6 +37,7 @@
             app:inputTyper="@{@string/input_type_text}"
             app:isShowClear="@{false}"
             app:isShowEyes="@{false}"
+            app:drawableLeft="@{@drawable/ic_edit_pen}"
             />
 
         <LinearLayout
@@ -57,6 +58,7 @@
                 android:layout_marginLeft="@dimen/dp_10"
                 android:onClick="@{() -> presenter.sendCodeClick()}"
                 android:text="@string/resend_code"
+                android:textStyle="bold"
                 android:textColor="@color/blue"
                 android:textSize="@dimen/sp_15"
                 />
@@ -82,20 +84,20 @@
             app:isChangeStatePass="@{presenter.isPassStateHide}"
             app:isShowClear="@{true}"
             app:isShowEyes="@{true}"
+            app:drawableLeft="@{@drawable/ic_lock}"
             />
 
-        <com.viettel.mbccs.widget.AppButton
-            android:layout_width="wrap_content"
+        <com.viettel.mbccs.widget.CustomButton
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginTop="@dimen/dp_10"
-            android:drawableLeft="@drawable/ic_change_pass"
             android:drawablePadding="@dimen/dp_10"
             android:onClick="@{() -> presenter.sendCodeClick()}"
             android:paddingEnd="@dimen/dp_10"
             android:paddingStart="@dimen/dp_10"
             android:text="@string/set_pass_again"
-            android:textAllCaps="false"
+            style="@style/button_positive"
             android:visibility="@{ presenter.isCodeSent ? View.VISIBLE : View.GONE }"
             app:type="green"
             />

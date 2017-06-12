@@ -47,6 +47,7 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
 
     <!--Reset Password-->
     <string name="title_reset_password">Quên mật khẩu</string>
+    <string name="title_input_password">Đặt lại mật khẩu</string>
     <string name="description_reset_password">Chúng tôi sẽ gửi mã xác nhận đổi mật khẩu tới số điện thoại: </string>
     <string name="get_code">Lấy mã xác nhận</string>
     <string name="we_sent_code">Đã gửi mã xác nhận đổi mật khẩu tới \n số điện thoại <b>%s</b></string>
@@ -844,4 +845,5 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="upload_service_image_backside">Ảnh sau</string>
     <string name="upload_service_image_portrait">Ảnh chân dung</string>
     <string name="upload_service_finish">Finish</string>
+    <string name="input_phone_hint">Nhập số điện thoại</string>
 </resources>

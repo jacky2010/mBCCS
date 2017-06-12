@@ -26,6 +26,7 @@ public class ResetPasswordPresenter implements ResetPasswordContract.Presenter {
     public ObservableField<String> phone;
     public ObservableField<String> password;
     public ObservableField<String> codeVerify;
+    public ObservableField<String> titleActivity;
     public ObservableBoolean isPassStateHide;
 
     public ResetPasswordPresenter(ResetPasswordContract.ViewModel viewModel, Context context) {
@@ -38,12 +39,14 @@ public class ResetPasswordPresenter implements ResetPasswordContract.Presenter {
         mSubscription = new CompositeSubscription();
         description = new ObservableField<>();
         codeVerify = new ObservableField<>();
+        titleActivity = new ObservableField<>();
         isCodeSent = new ObservableBoolean();
         isPassStateHide = new ObservableBoolean();
         isNeedVerify = new ObservableBoolean();
         phone = new ObservableField<>();
         password = new ObservableField<>();
         description.set(mContext.getString(R.string.description_reset_password));
+        titleActivity.set(mContext.getString(R.string.title_reset_password));
         isPassStateHide.set(true);
     }
 
@@ -65,6 +68,7 @@ public class ResetPasswordPresenter implements ResetPasswordContract.Presenter {
                     @Override
                     public void onSuccess(Object object) {
                         isCodeSent.set(true);
+                        titleActivity.set(mContext.getString(R.string.title_input_password));
                         description.set(String.format(mContext.getString(R.string.we_sent_code),
                                 StringUtils.changeTextToBold(phone.get())));
                         new Handler().postDelayed(new Runnable() {
@@ -83,6 +87,7 @@ public class ResetPasswordPresenter implements ResetPasswordContract.Presenter {
                         isCodeSent.set(true);
                         description.set(String.format(mContext.getString(R.string.we_sent_code),
                                 StringUtils.changeTextToBold(phone.get())));
+                        titleActivity.set(mContext.getString(R.string.title_input_password));
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
