@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.databinding.TestBinding;
+import com.viettel.mbccs.screen.common.success.DialogFullScreen;
 import com.viettel.mbccs.widget.SpinnerWithBorder;
 
 public class Test extends BaseDataBindActivity<TestBinding, Void> {
@@ -45,6 +46,10 @@ public class Test extends BaseDataBindActivity<TestBinding, Void> {
                 });
 
         mBinding.layoutSearch.fromDate.getDateInMilis();
+
+        new DialogFullScreen.Builder(Test.this).setPositiveButton("ok").setTitle("title").setTitleToolbar("hello")
+                .build()
+                .show();
     }
 
     public ArrayAdapter getAdapter() {

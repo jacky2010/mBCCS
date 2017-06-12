@@ -21,8 +21,7 @@ import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProg
 import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
 import com.viettel.mbccs.data.source.remote.request.KPPOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.UpdateSaleOrderRequest;
-import com.viettel.mbccs.data.source.remote.request.ViewInfoSerialRequest;
-import com.viettel.mbccs.data.source.remote.response.BaseResponse;
+import com.viettel.mbccs.data.source.remote.request.GetListSerialRequest;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransChannelResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransRetailResponse;
 import com.viettel.mbccs.data.source.remote.response.DataResponse;
@@ -40,7 +39,7 @@ import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
 import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import com.viettel.mbccs.data.source.remote.response.UpdateSaleOrderResponse;
-import com.viettel.mbccs.data.source.remote.response.ViewInfoSerialResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListSerialResponse;
 import rx.Observable;
 
 /**
@@ -109,9 +108,9 @@ public class BanHangKhoTaiChinhRepository
     }
 
     @Override
-    public Observable<ViewInfoSerialResponse> viewInfoSerial(
-            DataRequest<ViewInfoSerialRequest> request) {
-        return banHangKhoTaiChinhRemoteDataSource.viewInfoSerial(request);
+    public Observable<GetListSerialResponse> getListSerial(
+            DataRequest<GetListSerialRequest> request) {
+        return banHangKhoTaiChinhRemoteDataSource.getListSerial(request);
     }
 
     @Override

@@ -106,12 +106,9 @@
                     android:textSize="@dimen/sp_16"
                     />
 
-                <com.viettel.mbccs.widget.CustomTextView
+                <com.viettel.mbccs.widget.FakeSpinner
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_40"
-                    android:background="@drawable/bg_order"
-                    android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
-                    android:paddingLeft="@dimen/dp_10"
+                    android:layout_height="wrap_content"
                     android:text="@{ presenter.staffInfo.getShopName() }"
                     />
 
@@ -124,14 +121,12 @@
                     android:textSize="@dimen/sp_16"
                     />
 
-                <com.viettel.mbccs.widget.CustomTextView
+                <com.viettel.mbccs.widget.FakeSpinner
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_40"
-                    android:background="@drawable/bg_order"
-                    android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
-                    android:paddingLeft="@dimen/dp_10"
+                    android:layout_height="wrap_content"
                     android:text="@{ presenter.staffInfo.getStaffName() }"
                     />
+
                 <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -140,29 +135,23 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16"
                     />
-                <LinearLayout
+
+                <com.viettel.mbccs.widget.SpinnerWithBorder
+                    android:id="@+id/spinner_channel_sell_order"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_order"
-                    >
-                    <Spinner
-                        android:id="@+id/spinnerChannel"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/dp_40"
-                        bind:setSpinnerAdapter="@{ presenter.spinnerAdapterChannel }"
-                        />
-                </LinearLayout>
+                    android:layout_height="@dimen/dp_40"
+                    app:adapter="@{ presenter.spinnerAdapterChannel }"
+                    />
 
                 <com.viettel.mbccs.widget.CustomButton
                     android:layout_width="@dimen/dp_150"
                     android:layout_height="@dimen/dp_40"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/dp_6"
-                    android:background="@color/blue"
                     android:gravity="center"
                     android:onClick="@{ v -> presenter.clickSearch() }"
                     android:text="@string/sell_orders_search"
-                    android:textColor="@color/white"
+                    style="@style/button_positive"
                     />
             </LinearLayout>
 
@@ -172,28 +161,18 @@
                 android:layout_marginTop="@dimen/dp_6"
                 android:orientation="vertical"
                 >
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_0.6"
-                    android:background="@color/grey"
-                    />
-                <com.viettel.mbccs.widget.CustomTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/dp_8"
-                    android:layout_marginLeft="@dimen/dp_16"
-                    android:layout_marginTop="@dimen/dp_8"
-                    android:text="@{ @string/sell_orders_list_orders(presenter.totalOrders) }"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_20"
-                    />
 
                 <android.support.design.widget.TabLayout
                     android:id="@+id/tabLayout"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
+                    android:background="#b7b7b7"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_order"
+                    android:minWidth="360dp"
                     app:tabTextAppearance="@style/tablayoutStyle"
+                    android:padding="1dp"
+                    app:tabBackground="@drawable/bg_tab_layout"
+                    app:tabIndicatorHeight="0dp"
+                    app:tabSelectedTextColor="#0083c2"
                     />
                 <com.viettel.mbccs.widget.NonSwipeViewPager
                     android:id="@+id/vpPager"

@@ -4,9 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
-import android.databinding.ObservableInt;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.ApiCode;
@@ -33,7 +30,7 @@ import rx.subscriptions.CompositeSubscription;
  * Created by HuyQuyet on 5/15/17.
  */
 
-public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
+public class SellOrdersPresenter {
     private Context context;
     private SellOrdersContract.View sellOrdersView;
     private BanHangKhoTaiChinhRepository banHangKhoTaiChinhRepository;
@@ -47,7 +44,6 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
     public ObservableField<SellOrdersFragmentAdapter> sellOrdersFragmentAdapter;
     public ObservableBoolean isHideSearch;
     public ObservableField<String> textSearch;
-    public ObservableInt totalOrders;
 
     public SellOrdersPresenter(Context context, SellOrdersContract.View sellOrdersView) {
         this.context = context;
@@ -63,7 +59,6 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
         spinnerAdapterChannel = new ObservableField<>();
         isHideSearch = new ObservableBoolean(false);
         textSearch = new ObservableField<>();
-        totalOrders = new ObservableInt();
     }
 
     public void subscribe() {
@@ -130,21 +125,8 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
         activity.finish();
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        switch (parent.getId()) {
-            case R.id.spinnerChannel:
-                channelInfoSelect = channelInfoList.get(position);
-                break;
-        }
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-
     public void clickSearch() {
+        sellOrdersView.showLoading();
         long dateFrom = sellOrdersView.getDateFrom();
         long dateTo = sellOrdersView.getDateTo();
 
@@ -170,14 +152,7 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
         getListOrderRequest.setToDate("02/08/2017 00:00:00");
 
         DataRequest<GetListOrderRequest> baseRequest = new DataRequest<>();
-        Session session = new Session();
-        session.setSessionId("54578345638");
-
-        baseRequest.setSession(session);
-        baseRequest.setUserName("smac");
         baseRequest.setApiCode(ApiCode.GetListOrder);
-        baseRequest.setApiKey("123456");
-        baseRequest.setToken("54353-543346-65464564-6546");
         baseRequest.setParameterApi(getListOrderRequest);
 
         banHangKhoTaiChinhRepository.getListOrder(baseRequest)
@@ -185,6 +160,7 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
                     @Override
                     public void onSuccess(GetListOrderResponse object) {
                         sellOrdersView.setDataResult(object.getSaleOrdersList(), channelInfoSelect);
+                        sellOrdersView.hideLoading();
                     }
 
                     @Override
@@ -192,6 +168,7 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
                         // TODO: 5/16/17 error
                         DialogUtils.showDialogError(context, null, error.getMessage(), null);
                         sellOrdersView.getDataError(error);
+                        sellOrdersView.hideLoading();
                     }
                 });
     }
@@ -207,7 +184,7 @@ public class SellOrdersPresenter implements AdapterView.OnItemSelectedListener {
         this.sellOrdersFragmentAdapter.set(sellOrdersFragmentAdapter);
     }
 
-    public void setTotalOrders(int total) {
-        totalOrders.set(total);
+    public void setPositionSelectChange(int position) {
+        channelInfoSelect = channelInfoList.get(position);
     }
 }

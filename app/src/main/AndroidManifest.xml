@@ -40,8 +40,10 @@
 
         <meta-data
             android:name="AA_MODELS"
-            android:value="com.viettel.mbccs.data.model.Precinct,com.viettel.mbccs.data.model.Province,com.viettel.mbccs.data.model.District"/>
-
+            android:value="com.viettel.mbccs.data.model.Precinct,
+            com.viettel.mbccs.data.model.Province,
+            com.viettel.mbccs.data.model.District,
+            com.viettel.mbccs.data.model.UploadImage"/>
 
         <activity
             android:name=".screen.splash.SplashActivity"
@@ -52,7 +54,13 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".screen.billing.BillingActivity"/>
+        <activity
+            android:name=".screen.TestActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".screen.billing.BillingActivity"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".screen.resetpass.ResetPasswordActivity"
             android:screenOrientation="portrait"/>
@@ -209,6 +217,24 @@
 
         <activity
             android:name=".screen.kppfeedback.KPPFeedbackActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screen.uploadimage.UploadImageActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screen.viewwarehouse.ViewWarehouseActivity"
+            android:screenOrientation="portrait"/>
+
+        <service
+            android:name=".service.service.UploadImageService"
+            android:exported="true"/>
+
+        <receiver android:name=".service.receiver.UploadImageReceiver"/>
+
+        <activity
+            android:name=".screen.Test"
             android:screenOrientation="portrait"/>
     </application>
 

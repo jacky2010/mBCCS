@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.databinding.ObservableField;
+import android.view.View;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.StockTotal;
@@ -97,10 +98,10 @@ public class AddNewOrderPresenter implements AddNewOrderContract.Presenter {
         if (!isValidate()) {
             return;
         }
-        DialogUtils.showDialog(mContext, R.string.confirm, R.string.confirm_kpp_order,
-                R.string.order2, new DialogInterface.OnClickListener() {
+        DialogUtils.showDialogStyle(mContext, R.string.confirm, R.string.confirm_kpp_order,
+                R.string.order2, new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(View view) {
                         createOrder();
                     }
                 }, R.string.common_label_close, null);

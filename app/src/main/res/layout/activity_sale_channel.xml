@@ -54,7 +54,7 @@
                         app:isShow="@{presenter.isCollapse}"
                         app:onClick="@{()->presenter.onExpand()}"
                         app:text="@{presenter.filterText}"
-                        ></include>
+                        />
 
                     <LinearLayout
                         android:layout_width="match_parent"

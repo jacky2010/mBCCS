@@ -17,12 +17,11 @@
         android:orientation="vertical"
 
         >
-
         <include
             layout="@layout/toolbar"
             app:background="@{@color/colorAccent}"
             app:isShow="@{!TextUtils.isEmpty(presenter.titleToolbar)}"
-            app:leftIcon="@{@drawable/ic_close}"
+            app:leftIcon="@{@drawable/ic_close_white}"
             app:leftIconClick="@{() -> presenter.closeClick()}"
             app:title="@{presenter.titleToolbar}"
             app:titleColor="@{@color/white}"
@@ -44,6 +43,7 @@
                 android:layout_marginBottom="@dimen/dp_30"
                 android:layout_marginLeft="@dimen/dp_30"
                 android:layout_marginRight="@dimen/dp_30"
+                android:visibility="@{presenter.showPositive &amp;&amp; presenter.showNegative ?View.VISIBLE:View.GONE}"
                 >
                 <com.viettel.mbccs.widget.CustomButton
                     android:id="@+id/btn_left"
@@ -81,6 +81,7 @@
                 <ImageView
                     android:layout_width="@dimen/dp_50"
                     android:layout_height="@dimen/dp_50"
+                    android:layout_gravity="center"
                     android:src="@{presenter.icon}"
                     />
                 <com.viettel.mbccs.widget.CustomTextView
@@ -91,6 +92,7 @@
                     android:text="@{presenter.title}"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_17"
+                    android:textStyle="bold"
                     />
                 <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="match_parent"
@@ -98,11 +100,24 @@
                     android:layout_margin="@dimen/dp_20"
                     android:gravity="@{presenter.gravity}"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/sp_18"
+                    android:textSize="@dimen/sp_15"
                     app:textHtml="@{presenter.content}"
                     />
-            </LinearLayout>
 
+                <com.viettel.mbccs.widget.CustomButton
+                    android:id="@+id/btn_ok_above"
+                    android:layout_width="@dimen/dp_150"
+                    android:layout_height="@dimen/dp_50"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/dp_20"
+                    android:layout_toRightOf="@id/btn_left"
+                    android:gravity="center"
+                    android:onClick="@{() -> presenter.positiveClick()}"
+                    android:text="@{presenter.positiveButton}"
+                    android:visibility="@{presenter.showPositive &amp;&amp; !presenter.showNegative ?View.VISIBLE:View.GONE}"
+                    style="@style/button_positive"
+                    />
+            </LinearLayout>
 
         </RelativeLayout>
     </LinearLayout>

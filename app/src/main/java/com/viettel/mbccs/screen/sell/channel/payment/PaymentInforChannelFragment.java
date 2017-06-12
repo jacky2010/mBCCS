@@ -26,6 +26,7 @@ import com.viettel.mbccs.screen.common.success.DialogInputBankPlus;
 import com.viettel.mbccs.screen.common.success.DialogInputWellet;
 import com.viettel.mbccs.screen.sell.retail.payment.PaymentInforContract;
 import com.viettel.mbccs.screen.sell.retail.savetransconfirm.SaveTransConfirmFragment;
+import com.viettel.mbccs.utils.ActivityUtils;
 import com.viettel.mbccs.utils.GsonUtils;
 import com.viettel.mbccs.variable.Constants;
 import java.util.List;
@@ -175,6 +176,7 @@ public class PaymentInforChannelFragment extends BaseFragment
                         new DialogInputBankPlus.DialogInputListener() {
                             @Override
                             public void onDialogDissmiss(String phone) {
+                                ActivityUtils.hideKeyboard(getActivity());
                                 ((PaymentInforChannelPresenter) mPresenter).setPhone(phone);
                             }
                         });
@@ -241,6 +243,7 @@ public class PaymentInforChannelFragment extends BaseFragment
                 .addToBackStack("SaveTransConfirmFragment")
                 .replace(R.id.container,
                         SaveTransConfirmFragment.newInstance(request.getParameterApi(), saleTrans,
-                                channelInfo)).commit();
+                                channelInfo))
+                .commit();
     }
 }

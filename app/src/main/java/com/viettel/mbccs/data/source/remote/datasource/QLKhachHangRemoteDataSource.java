@@ -10,7 +10,7 @@ import com.viettel.mbccs.data.source.remote.request.GetOTPRequest;
 import com.viettel.mbccs.data.source.remote.request.GetRegiterSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.RegisterCustomerInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.UpdateAllSubInfoRequest;
-import com.viettel.mbccs.data.source.remote.response.ChecOTPResponse;
+import com.viettel.mbccs.data.source.remote.response.CheckOTPResponse;
 import com.viettel.mbccs.data.source.remote.response.CheckIdNoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetApDomainResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListBusTypeIdRequireResponse;
@@ -84,11 +84,11 @@ public class QLKhachHangRemoteDataSource implements IQLKhachHangRemoteDataSource
     }
 
     @Override
-    public Observable<ChecOTPResponse> checOTP(DataRequest<ChecOTPRequest> request) {
+    public Observable<CheckOTPResponse> checOTP(DataRequest<ChecOTPRequest> request) {
         return RequestHelper.getRequest()
                 .checOTP(request)
-                .flatMap(SchedulerUtils.<ChecOTPResponse>convertDataFlatMap())
-                .compose(SchedulerUtils.<ChecOTPResponse>applyAsyncSchedulers());
+                .flatMap(SchedulerUtils.<CheckOTPResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<CheckOTPResponse>applyAsyncSchedulers());
     }
 
     @Override

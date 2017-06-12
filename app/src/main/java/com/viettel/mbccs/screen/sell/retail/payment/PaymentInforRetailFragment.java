@@ -24,6 +24,7 @@ import com.viettel.mbccs.databinding.FragmentPaymentInforRetailBinding;
 import com.viettel.mbccs.screen.common.success.DialogInputBankPlus;
 import com.viettel.mbccs.screen.common.success.DialogInputWellet;
 import com.viettel.mbccs.screen.sell.retail.savetransconfirm.SaveTransConfirmFragment;
+import com.viettel.mbccs.utils.ActivityUtils;
 import com.viettel.mbccs.utils.GsonUtils;
 import com.viettel.mbccs.variable.Constants;
 import java.util.List;
@@ -142,9 +143,9 @@ public class PaymentInforRetailFragment extends BaseFragment
                 radioCash.setChecked(true);
                 radioBankplus.setChecked(false);
                 radioWellet.setChecked(false);
-                imageCash.setImageResource(R.drawable.tien_mat_select);
-                imagebankPlus.setImageResource(R.drawable.bank_plus);
-                imageWellet.setImageResource(R.drawable.vi_dien_tu);
+                //imageCash.setImageResource(R.drawable.tien_mat_select);
+                //imagebankPlus.setImageResource(R.drawable.bank_plus);
+                //imageWellet.setImageResource(R.drawable.vi_dien_tu);
                 ((PaymentInfoPresenter) mPresenter).setPaymentMethod(PaymentMethod.PAYMENT_CASH);
             }
         });
@@ -158,14 +159,15 @@ public class PaymentInforRetailFragment extends BaseFragment
                 radioCash.setChecked(false);
                 radioBankplus.setChecked(true);
                 radioWellet.setChecked(false);
-                imageCash.setImageResource(R.drawable.tien_mat);
-                imagebankPlus.setImageResource(R.drawable.bank_plus_select);
-                imageWellet.setImageResource(R.drawable.vi_dien_tu);
+                //imageCash.setImageResource(R.drawable.tien_mat);
+                //imagebankPlus.setImageResource(R.drawable.bank_plus_select);
+                //imageWellet.setImageResource(R.drawable.vi_dien_tu);
                 DialogInputBankPlus dialogInputBankPlus = new DialogInputBankPlus(getActivity());
                 dialogInputBankPlus.setDialogInputListener(
                         new DialogInputBankPlus.DialogInputListener() {
                             @Override
                             public void onDialogDissmiss(String phone) {
+                                ActivityUtils.hideKeyboard(getActivity());
                                 ((PaymentInfoPresenter) mPresenter).setPhone(phone);
                             }
                         });
@@ -183,9 +185,9 @@ public class PaymentInforRetailFragment extends BaseFragment
                 radioCash.setChecked(false);
                 radioBankplus.setChecked(false);
                 radioWellet.setChecked(true);
-                imageCash.setImageResource(R.drawable.tien_mat);
-                imagebankPlus.setImageResource(R.drawable.bank_plus);
-                imageWellet.setImageResource(R.drawable.vi_dien_tu_select);
+                //imageCash.setImageResource(R.drawable.tien_mat);
+                //imagebankPlus.setImageResource(R.drawable.bank_plus);
+                //imageWellet.setImageResource(R.drawable.vi_dien_tu_select);
 
                 DialogInputWellet dialogInPutWellet = new DialogInputWellet(getActivity());
                 dialogInPutWellet.setDialogInputListener(

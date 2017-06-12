@@ -184,6 +184,11 @@ public class BaseSubMenuActivity
                             startActivity(new Intent(BaseSubMenuActivity.this,
                                     InstallationAddressActivity.class));
                             break;
+                        // TODO: 6/10/17 upload image offline
+                        //                        case Function.MenuId.MENU_UPLOAD_ANH:
+                        //                            startActivity(new Intent(BaseSubMenuActivity.this,
+                        //                                    UploadImageActivity.class));
+                        //                            break;
 
                         case Function.MenuId.MENU_TAO_KENH_PHAN_PHOI:
                             startActivity(

@@ -49,9 +49,10 @@ import com.viettel.mbccs.data.source.remote.request.TransferAnyPayRequest;
 import com.viettel.mbccs.data.source.remote.request.UpdateAllSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.UpdateRegisterSubRequest;
 import com.viettel.mbccs.data.source.remote.request.UpdateSaleOrderRequest;
-import com.viettel.mbccs.data.source.remote.request.ViewInfoSerialRequest;
+import com.viettel.mbccs.data.source.remote.request.UploadImageRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListSerialRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseResponse;
-import com.viettel.mbccs.data.source.remote.response.ChecOTPResponse;
+import com.viettel.mbccs.data.source.remote.response.CheckOTPResponse;
 import com.viettel.mbccs.data.source.remote.response.CheckCalledIsdnResponse;
 import com.viettel.mbccs.data.source.remote.response.CheckIdNoResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateDistributedChannelResponse;
@@ -99,7 +100,8 @@ import com.viettel.mbccs.data.source.remote.response.TransferAnyPayResponse;
 import com.viettel.mbccs.data.source.remote.response.UpdateAllSubInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.UpdateRegisterSubResponse;
 import com.viettel.mbccs.data.source.remote.response.UpdateSaleOrderResponse;
-import com.viettel.mbccs.data.source.remote.response.ViewInfoSerialResponse;
+import com.viettel.mbccs.data.source.remote.response.UploadImageResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListSerialResponse;
 
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -185,9 +187,9 @@ public interface MBCSSApi {
     Observable<BaseResponse<GetListStockModelResponse>> getListStockModel(
             @Body DataRequest<GetListStockModelRequest> request);
 
-    @POST("/viewinfoserial")
-    Observable<BaseResponse<ViewInfoSerialResponse>> viewInfoSerial(
-            @Body DataRequest<ViewInfoSerialRequest> request);
+    @POST("thonguyen/Sale_mBCCS/1.0.0/WS_GetListSerial")
+    Observable<BaseResponse<GetListSerialResponse>> getListSerial(
+            @Body DataRequest<GetListSerialRequest> request);
 
     @POST("/getListProvince")
     Observable<BaseResponse<GetListProvinceResponse>> getListProvince(
@@ -225,7 +227,7 @@ public interface MBCSSApi {
     Observable<BaseResponse<GetOTPResponse>> getOTP(@Body DataRequest<GetOTPRequest> request);
 
     @POST("vietdt/CM_mBCCS/1.0.0/WS_checOTP")
-    Observable<BaseResponse<ChecOTPResponse>> checOTP(@Body DataRequest<ChecOTPRequest> request);
+    Observable<BaseResponse<CheckOTPResponse>> checOTP(@Body DataRequest<ChecOTPRequest> request);
 
     @POST("vietdt/CM_mBCCS/1.0.0/WS_updateAllSubInfo")
     Observable<BaseResponse<UpdateAllSubInfoResponse>> updateAllSubInfo(
@@ -311,4 +313,8 @@ public interface MBCSSApi {
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_TransReloadAnypay")
     Observable<BaseResponse<KPPResponseFeedbackResponse>> kppResponseFeedback(
             @Body DataRequest<KPPResponseFeedbackRequest> request);
+
+    @POST("vietdt/CM_mBCCS/1.0.0/WS_upLoad")
+    Observable<BaseResponse<UploadImageResponse>> uploadImage(
+            @Body DataRequest<UploadImageRequest> request);
 }

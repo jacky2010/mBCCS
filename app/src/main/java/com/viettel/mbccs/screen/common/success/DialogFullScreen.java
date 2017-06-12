@@ -20,17 +20,17 @@ public class DialogFullScreen extends Dialog {
 
     DialogFullscreenBinding mBinding;
 
-    private int icon = R.drawable.ic_done;
+    private int icon = R.drawable.ic_circle_check;
 
-    private String title;
+    private String title="";
 
-    private String content;
+    private String content = "";
 
-    private String positiveButton;
+    private String positiveButton = "";
 
-    private String negativeButton;
+    private String negativeButton = "";
 
-    private String titleToolbar;
+    private String titleToolbar="";
 
     private boolean isCenterContent = true;
 
@@ -62,7 +62,7 @@ public class DialogFullScreen extends Dialog {
 
         public Builder(Context context) {
             this.mContext = context;
-            icon = R.drawable.ic_done;
+            icon = R.drawable.ic_circle_check;
         }
 
         public Builder setIcon(int icon) {

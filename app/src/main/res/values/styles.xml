@@ -48,6 +48,12 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="button_nagative_grey_seven">
+        <item name="android:background">@drawable/bg_btn_nagative_grey_seven</item>
+        <item name="android:textColor">#000</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
     <style name="button_cancel">
         <item name="android:background">@drawable/bg_btn_cancel</item>
         <item name="android:textColor">#fff</item>
@@ -76,6 +82,7 @@
     <style name="tablayoutStyle" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">12sp</item>
         <item name="textAllCaps">false</item>
+        <item name="android:textColor">#757575</item>
     </style>
 
     <style name="SCBSwitch" parent="Theme.AppCompat.Light">
@@ -144,11 +151,12 @@
 
     <style name="styleTextHelp">
         <item name="android:minHeight">@dimen/dp_50</item>
-        <item name="android:paddingBottom">@dimen/dp_10</item>
-        <item name="android:paddingTop">@dimen/dp_10</item>
+        <item name="android:paddingBottom">@dimen/dp_16</item>
+        <item name="android:paddingTop">@dimen/dp_16</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">@dimen/sp_18</item>
         <item name="android:gravity">center_vertical</item>
+        <item name="android:background">@color/white</item>
     </style>
 
     <style name="TextViewItem">

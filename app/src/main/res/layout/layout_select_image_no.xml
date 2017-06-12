@@ -80,7 +80,7 @@
                         >
                         <ImageView
                             android:id="@+id/image_backside"
-                            android:layout_width="@dimen/dp_160"
+                            android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             bind:imageBitmap="@{ presenter.imageBackside }"
                             />

@@ -10,35 +10,62 @@
     </data>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_40"
-        android:layout_marginBottom="@dimen/dp_0.6"
-        android:background="@{ presenter.background }"
-        android:gravity="center"
-        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         >
-        <com.viettel.mbccs.widget.CustomTextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginBottom="@dimen/dp_0.6"
+            android:background="@{ presenter.background }"
             android:gravity="center"
-            android:text="@{ presenter.fromSerial }"
-            android:textColor="@color/black"
-            />
-        <com.viettel.mbccs.widget.CustomTextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@{ presenter.toSerial }"
-            android:textColor="@color/black"
-            />
-        <com.viettel.mbccs.widget.CustomTextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.7"
-            android:gravity="center"
-            android:text="@{ presenter.quantity }"
-            android:textColor="@color/black"
+            android:orientation="horizontal"
+            >
+
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@{ presenter.fromSerial }"
+                android:textColor="@color/black"
+                />
+
+            <View
+                android:layout_width="@dimen/dp_0.6"
+                android:layout_height="match_parent"
+                android:background="@color/grey_seven"
+                />
+
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@{ presenter.toSerial }"
+                android:textColor="@color/black"
+                />
+
+            <View
+                android:layout_width="@dimen/dp_0.6"
+                android:layout_height="match_parent"
+                android:background="@color/grey_seven"
+                />
+
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                android:gravity="center"
+                android:text="@{ presenter.quantity }"
+                android:textColor="@color/black"
+                />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0.6"
+            android:background="@color/grey_seven"
             />
     </LinearLayout>
 </layout>

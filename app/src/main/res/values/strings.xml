@@ -74,20 +74,21 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="sell_orders_gone_search">Đơn vị: %1$s - Nhân viên: %2$s - Kênh: %3$s</string>
 
     <string name="order_detail_title">Chi tiết đơn hàng %1$s</string>
-    <string name="order_detail_total_money">Tổng tiền: %1$s</string>
-    <string name="order_detail_pay_money">Số tiền phải thanh toán: %1$s</string>
-    <string name="order_detail_discount_money">Chiết khấu: %1$s</string>
-    <string name="order_detail_tax_percent">Thuế suất: %1$s</string>
-    <string name="order_detail_tax_money">Tiền thuế: %1$s</string>
+    <string name="order_detail_total_money">Tổng tiền: </string>
+    <string name="order_detail_pay_money">Số tiền phải thanh toán: </string>
+    <string name="order_detail_discount_money">Chiết khấu: </string>
+    <string name="order_detail_tax_percent">Thuế suất: </string>
+    <string name="order_detail_tax_money">Tiền thuế: </string>
+    <string name="order_detail_money">%1$s đ</string>
     <string name="order_detail_cancel">Hủy Giao Dịch</string>
     <string name="order_detail_ok">Bán hàng</string>
 
-    <string name="item_order_detail_price_item">%1$s VNĐ</string>
+    <string name="item_order_detail_price_item">%1$s đ</string>
     <string name="item_orders_id">Mã đơn hàng: %1$s</string>
     <string name="item_orders_date">Đặt ngày: %1$s</string>
     <string name="item_orders_change_code_name">%1$s - %2$s</string>
 
-    <string name="confirm_transaction_cancel_title">Xác nhận hủy đơn hàng</string>
+    <string name="confirm_transaction_cancel_title">Xác nhận hủy giao dịch</string>
     <string name="confirm_transaction_sell_title">Xác nhận bán hàng</string>
     <string name="confirm_transaction_btn_cancel">Hủy</string>
     <string name="confirm_transaction_btn_sell">Bán</string>
@@ -171,50 +172,8 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="amount_no_tax">Tổng tiền : %s đồng</string>
     <string name="amount">Số tiền phải thanh toán : %s đồng</string>
     <string name="tax">Tiền thuế : %s đồng</string>
-    <string formatted="false" name="confirm_before_save_trans_msg"><![CDATA[
-Bán cho khách hàng <b>%s</b> :<br>
- · Số điện thoại : <b>%s</b><br>
- · Số tiền thanh toán : <b>%s</b>(%s)<br>
-<br>
-<br>
-<br>
-Từ <b>%s</b><br>
-· Số điện thoại : <b>%s</b><br>
-Theo mã chương trình bán hàng %s
-    ]]></string>
 
-    <string formatted="false" name="confirm_before_save_trans_msg_channel"><![CDATA[
-Bán cho kênh <b>%s</b> :<br>
- · Số điện thoại : <b>%s</b><br>
- · Số tiền thanh toán : <b>%s</b>(%s)<br>
-<br>
-<br>
-<br>
-Từ <b>%s</b><br>
-· Số điện thoại : <b>%s</b><br>
-Theo mã chương trình bán hàng %s
-    ]]></string>
-    <string formatted="false" name="confirm_before_save_trans_msg_no_saleprogram"><![CDATA[
-Bán cho khách hàng <b>%s</b> :<br>
- · Số điện thoại : <b>%s</b><br>
- · Số tiền thanh toán : <b>%s</b>(%s đồng)<br>
-<br>
-<br>
-<br>
-Từ <b>%s</b><br>
-· Số điện thoại : <b>%s</b><br>
-    ]]></string>
-
-    <string formatted="false" name="confirm_before_save_trans_msg_no_saleprogram_channel"><![CDATA[
-Bán cho kênh <b>%s</b> :<br>
- · Số điện thoại : <b>%s</b><br>
- · Số tiền thanh toán : <b>%s</b>(%s đồng)<br>
-<br>
-<br>
-<br>
-Từ <b>%s</b><br>
-· Số điện thoại : <b>%s</b><br>
-    ]]></string>
+    <!--sale -->
     <string name="confirm_sale_retail">Xác nhận bán lẻ</string>
     <string name="no_serial">Chưa có sản phẩm nào được chọn</string>
 
@@ -298,6 +257,48 @@ Từ <b>%s</b><br>
     <string name="common_msg_confirm_change_sim">Bạn có muốn đổi sim cho khách hàng %1$s từ số serial %2$s sang số serial %3$s?</string>
     <string name="change_sim_msg_updated_sim">SIM cho khách hàng %s đã được thay đổi thành công!</string>
     <!--Change Sim-->
+    <string name="channel_code">Mã kênh</string>
+    <string name="channel_name">Tên kênh</string>
+    <string name="tax_code">Mã số thuế</string>
+    <string name="sale_confirm_label_confirm_sell">Xác nhận bán cho</string>
+    <string formatted="false" name="sale_retail_confirm_customer_infor">
+        <![CDATA[
+<b>Bán cho khách hàng %s</b> :<br>
+   Số điện thoại : <b>%s</b><br>
+   Số tiền thanh toán : <b>%s</b>
+   <br>%s
+        ]]>
+    </string>
+
+    <string formatted="false" name="sale_retail_confirm_saler_infor">
+        <![CDATA[
+<b>Từ %s</b><br>
+ Số điện thoại : <b>%s</b><br>
+        ]]>
+    </string>
+
+    <!--sale channel-->
+
+    <string formatted="false" name="sale_channel_confirm_customer_infor">
+        <![CDATA[
+<b>Bán cho kênh  %s</b> :<br>
+   Số điện thoại : <b>%s</b><br>
+   Số tiền thanh toán : <b>%s</b>
+   <br>%s
+        ]]>
+    </string>
+
+    <string formatted="false" name="sale_channel_confirm_saler_infor">
+        <![CDATA[
+<b>Từ %s</b><br>
+ Số điện thoại : <b>%s</b><br>
+        ]]>
+    </string>
+
+
+    <string formatted="false" name="sale_confirm_sale_program">
+        <b>Theo mã chương trình bán hàng %s</b>
+    </string>
 
     <string name="view_ware_house_title">Chi tiết kho</string>
     <string name="view_ware_house_list_stock">Danh sách mặt hàng (%1$d)</string>
@@ -305,13 +306,17 @@ Từ <b>%s</b><br>
     <string name="item_view_ware_house_number_actual">Số lượng thực tế: %1$d</string>
     <string name="item_view_ware_house_number_responses">Số lượng đáp ứng: %1$d</string>
     <string name="item_view_ware_house_view_serial">Xem serial</string>
-    <string name="dialog_view_serial_title">Xem serial</string>
+    <string name="dialog_view_serial_title">Xem serials</string>
     <string name="dialog_view_serial_detail_serial">
         <![CDATA[
-         Chi tiết serial cho mặt hàng <font color="#317BE1"><u>%s</u></font>
+         Chi tiết serial cho mặt hàng <font color="#0083c2"><u>%s</u></font>
         ]]>
     </string>
-    <string name="dialog_view_serial_total">Tổng số: %1$d</string>
+    <string name="dialog_view_serial_total">
+        <![CDATA[
+         Tổng số: <font color="#0083c2"><b>%d</b></font>
+        ]]>
+    </string>
     <string name="dialog_view_serial_from_serial">Từ serial</string>
     <string name="dialog_view_serial_to_serial">Đến serial</string>
     <string name="dialog_view_serial_count">Số lượng</string>
@@ -440,12 +445,12 @@ Từ <b>%s</b><br>
     <string name="assign_task">Giao việc</string>
 
     <string name="help_title">Trợ giúp</string>
-    <string name="help_quan_ly_ban_hang">Làm thế nào để có thể quản lý bán hàng?</string>
-    <string name="help_dau_noi_thue_bao_moi">Làm thế nào để có thể đấu nối cho thuê bao mới?</string>
-    <string name="help_khach_hang_yeu_cau_bao_hanh">Làm thế nào khi có khách hàng yêu cầu bảo hành?</string>
-    <string name="help_chinh_sach_moi">Làm thế nào khi có chính sách mới?</string>
-    <string name="help_cong_viec_duoc_giao">Làm thế nào khi có công việc được giao?</string>
-    <string name="help_theo_doi_kpi_ban_hang">Làm thế nào để theo dõi KPI bán hàng?</string>
+    <string name="help_quan_ly_ban_hang">1. Làm thế nào để có thể quản lý bán hàng?</string>
+    <string name="help_dau_noi_thue_bao_moi">2. Làm thế nào để có thể đấu nối cho thuê bao mới?</string>
+    <string name="help_khach_hang_yeu_cau_bao_hanh">3. Làm thế nào khi có khách hàng yêu cầu bảo hành?</string>
+    <string name="help_chinh_sach_moi">4. Làm thế nào khi có chính sách mới?</string>
+    <string name="help_cong_viec_duoc_giao">5. Làm thế nào khi có công việc được giao?</string>
+    <string name="help_theo_doi_kpi_ban_hang">6. Làm thế nào để theo dõi KPI bán hàng?</string>
 
     <string name="help_vao_chuc_nang_quan_ly_ban_hang">Vào chức năng quản lý bán hàng</string>
     <string name="help_vao_chuc_nang_dau_noi_thue_bao_moi">Vào chức năng đấu nối cho thuê bao mới</string>
@@ -456,7 +461,7 @@ Từ <b>%s</b><br>
 
     <string name="item_order_detail_selected">Đã chọn %1$s/%2$s</string>
     <string name="item_order_detail_select_serial">Chọn serial</string>
-    <string name="item_order_detail_product">sản phẩm</string>
+    <string name="item_order_detail_product">%1$s sản phẩm</string>
     <string name="item_order_detail_warehouse_exists">Kho còn</string>
     <string name="no_item_order">Hãy nhập số lượng cho các mặt hàng</string>
 
@@ -683,10 +688,10 @@ Từ <b>%s</b><br>
     </string>
 
 
-    <string name="confirm_transaction_sell_cancel_don_dat_hang_tu_kenh">Đơn đặt hàng từ kênh</string>
-    <string name="confirm_transaction_sell_cancel_sdt">- Số điện thoại: </string>
-    <string name="confirm_transaction_sell_cancel_so_tien_thanh_toan">- Số tiền thanh toán: </string>
-    <string name="confirm_transaction_sell_cancel_ly_do_huy">LÝ DO HỦY</string>
+    <string name="confirm_transaction_sell_cancel_don_dat_hang_tu_kenh">Đơn đặt hàng từ kênh %1$s</string>
+    <string name="confirm_transaction_sell_cancel_sdt">- Số điện thoại: %1$s</string>
+    <string name="confirm_transaction_sell_cancel_so_tien_thanh_toan">- Số tiền thanh toán: %1$s</string>
+    <string name="confirm_transaction_sell_cancel_ly_do_huy">Lý do hủy</string>
     <string name="confirm_transaction_sell_cancel_huy_giao_dich_thanh_cong">Hủy giao dịch thành công!</string>
     <string name="confirm_transaction_sell_cancel_ban_giao_dich_thanh_cong">Bán giao dịch thành công!</string>
     <string name="confirm_transaction_sell_cancel_gui_tin_nhan">
@@ -830,4 +835,13 @@ Từ <b>%s</b><br>
     <string name="kpp_feedback_msg_info_sent_response_feedback">Cập nhật kết quả thành công!</string>
     <string name="kpp_feedback_msg_info_empty_feedback">Không có phản ánh nào!</string>
     <!--/kpp feedback-->
+
+    <string name="activity_upload_image_title">Upload ảnh</string>
+    <string name="activity_upload_image_process">SuccessUpload: %1$d/%2$d  %3$d\%</string>
+
+    <string name="upload_service_title">Upload ảnh</string>
+    <string name="upload_service_image_front">Ảnh trước</string>
+    <string name="upload_service_image_backside">Ảnh sau</string>
+    <string name="upload_service_image_portrait">Ảnh chân dung</string>
+    <string name="upload_service_finish">Finish</string>
 </resources>

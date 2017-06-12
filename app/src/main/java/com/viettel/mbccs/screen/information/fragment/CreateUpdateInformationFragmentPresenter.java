@@ -1,17 +1,20 @@
 package com.viettel.mbccs.screen.information.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Handler;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.Data;
 import com.viettel.mbccs.data.model.ApDomain;
 import com.viettel.mbccs.data.model.Contract;
 import com.viettel.mbccs.data.model.Customer;
@@ -19,6 +22,7 @@ import com.viettel.mbccs.data.model.District;
 import com.viettel.mbccs.data.model.Precinct;
 import com.viettel.mbccs.data.model.Province;
 import com.viettel.mbccs.data.model.Subscriber;
+import com.viettel.mbccs.data.model.UploadImage;
 import com.viettel.mbccs.data.source.QLKhachHangRepository;
 import com.viettel.mbccs.data.source.remote.request.ChecOTPRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
@@ -28,13 +32,15 @@ import com.viettel.mbccs.data.source.remote.request.RegisterCustomerInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.UpdateAllSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseErrorResponse;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
-import com.viettel.mbccs.data.source.remote.response.ChecOTPResponse;
+import com.viettel.mbccs.data.source.remote.response.CheckOTPResponse;
 import com.viettel.mbccs.data.source.remote.response.GetApDomainResponse;
 import com.viettel.mbccs.data.source.remote.response.GetOTPResponse;
 import com.viettel.mbccs.data.source.remote.response.GetRegiterSubInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.RegisterCustomerInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.SpinnerApDomain;
 import com.viettel.mbccs.data.source.remote.response.UpdateAllSubInfoResponse;
+import com.viettel.mbccs.service.service.UploadImageService;
+import com.viettel.mbccs.utils.ImageUtils;
 import com.viettel.mbccs.utils.StringUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.ArrayList;
@@ -121,12 +127,9 @@ public class CreateUpdateInformationFragmentPresenter
 
         txtNameCustomer = new ObservableField<>();
         txtNumberPassport = new ObservableField<>();
-        imageFront = new ObservableField<>(
-                BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_select_image));
-        imageBackside = new ObservableField<>(
-                BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_select_image));
-        imagePortrait = new ObservableField<>(
-                BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_select_image));
+        //        imageFront = new ObservableField<>();
+        //        imageBackside = new ObservableField<>();
+        //        imagePortrait = new ObservableField<>();
 
         idProvince = new ObservableField<>();
         idDistrict = new ObservableField<>();
@@ -303,10 +306,17 @@ public class CreateUpdateInformationFragmentPresenter
             request.setParameterApi(checOTPRequest);
 
             Subscription subscription = qlKhachHangRepository.checOTP(request)
-                    .subscribe(new MBCCSSubscribe<ChecOTPResponse>() {
+                    .subscribe(new MBCCSSubscribe<CheckOTPResponse>() {
                         @Override
-                        public void onSuccess(ChecOTPResponse object) {
-                            clickSend();
+                        public void onSuccess(CheckOTPResponse object) {
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    view.isSendImage();
+                                    // TODO: 6/10/17 fix download offline
+                                    //                                    view.hideLoading();
+                                }
+                            }, 100);
                         }
 
                         @Override
@@ -316,7 +326,14 @@ public class CreateUpdateInformationFragmentPresenter
                     });
             subscriptions.add(subscription);
         } else {
-            clickSend();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    view.isSendImage();
+                    // TODO: 6/10/17 fix download offline
+                    //                    view.hideLoading();
+                }
+            }, 100);
         }
     }
 
@@ -337,6 +354,7 @@ public class CreateUpdateInformationFragmentPresenter
         customer.setPrecinct(district == null ? "0" : precinct.getPrecinctId());
         customer.setAddress(address);
         customer.setIdType(1);
+        //        customer.setIdType(dataPassportType.get(positionSelectionPassportType).getCode());
         customer.setIdNo(txtNumberPassport.get());
         return customer;
     }
@@ -366,7 +384,9 @@ public class CreateUpdateInformationFragmentPresenter
         return contract;
     }
 
-    private void clickSend() {
+    public void clickSendData(boolean isSendImage) {
+        // TODO: 6/10/17 fix download offline
+        //        view.showLoading();
 
         if (StringUtils.isEmpty(getDataCustomer().getProvince())) {
             view.hideLoading();
@@ -380,6 +400,16 @@ public class CreateUpdateInformationFragmentPresenter
             view.IsdnImsiError();
             return;
         }
+        //        if (isSendImage) {
+        Intent intent = new Intent(context, UploadImageService.class);
+        intent.putParcelableArrayListExtra(UploadImageService.ARG_DATA_INTENT,
+                (ArrayList<? extends Parcelable>) getBitmapAndSaveDatabase(getDataCustomer()));
+        context.startService(intent);
+        Log.i("CreateUpdateInformationFragmentPresenter",
+                " -> clickSendData: ----------------: startService");
+        //        } else {
+        //            getBitmapAndSaveDatabase(getDataCustomer());
+        //        }
 
         if (typeFragment == CreateUpdateInformationFragment.Type.UPDATE_INFORMATION) {
             if (getDataContract().getNoticeCharge().size() == 0) {
@@ -443,6 +473,57 @@ public class CreateUpdateInformationFragmentPresenter
         }
     }
 
+    public boolean isExistsImageUpload() {
+        return view.imageFront() != null
+                || view.imageBackside() != null
+                || view.imagePortrait() != null;
+    }
+
+    private List<UploadImage> getBitmapAndSaveDatabase(Customer customer) {
+        List<UploadImage> uploadImageList = new ArrayList<>();
+        Bitmap imageFront = view.imageFront();
+        Bitmap imageBackside = view.imageBackside();
+        Bitmap imagePortrait = view.imagePortrait();
+
+        if (imageFront != null) {
+            UploadImage uploadImage =
+                    setDataUploadImage(customer, imageFront, UploadImage.ImageType.FRONT);
+            uploadImage.save();
+            uploadImageList.add(uploadImage);
+        }
+
+        if (imageBackside != null) {
+            UploadImage uploadImage =
+                    setDataUploadImage(customer, imageBackside, UploadImage.ImageType.BACKSIDE);
+            uploadImage.save();
+            uploadImageList.add(uploadImage);
+        }
+
+        if (imagePortrait != null) {
+            UploadImage uploadImage =
+                    setDataUploadImage(customer, imagePortrait, UploadImage.ImageType.PORTRAIT);
+            uploadImage.save();
+            uploadImageList.add(uploadImage);
+        }
+        return uploadImageList;
+    }
+
+    private UploadImage setDataUploadImage(Customer customer, Bitmap bitmap,
+            @UploadImage.ImageType int imageType) {
+        String imageBase64 =
+                ImageUtils.encodeBitmapToBase64(bitmap, Bitmap.CompressFormat.JPEG, 100);
+        UploadImage uploadImage = new UploadImage();
+        uploadImage.setIdImage(System.currentTimeMillis());
+        uploadImage.setActionBusiness("");
+        uploadImage.setObjectId(customer.getCustomerId());
+        uploadImage.setOrder(imageType);
+        uploadImage.setDocType(1);
+        uploadImage.setFileName(String.valueOf(System.currentTimeMillis()));
+        uploadImage.setImageData(imageBase64);
+        uploadImage.setStatus(UploadImage.StatusUpload.WAITING);
+        return uploadImage;
+    }
+
     /*---------------------- End on Click in View -----------------------------*/
 
     /*----------------------- Set - Get ---------------------------------------*/
@@ -486,7 +567,7 @@ public class CreateUpdateInformationFragmentPresenter
 
         // set information customerResponse
         txtNameCustomer.set(customerResponse.getName());
-        if (customerResponse.getSex().equals("M")) {
+        if (customerResponse.getSex().equals(Data.Gender.MALE)) {
             isCheckMale.set(true);
             isCheckFemale.set(false);
         } else {
@@ -513,18 +594,6 @@ public class CreateUpdateInformationFragmentPresenter
             }
         }
         view.hideLoading();
-    }
-
-    public void setImageFront(Bitmap bitmap) {
-        imageFront.set(bitmap);
-    }
-
-    public void setImageBackside(Bitmap bitmap) {
-        imageBackside.set(bitmap);
-    }
-
-    public void setImagePortrait(Bitmap bitmap) {
-        imagePortrait.set(bitmap);
     }
 
     @Override
