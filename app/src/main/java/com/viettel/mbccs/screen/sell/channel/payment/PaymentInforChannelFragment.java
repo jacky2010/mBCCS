@@ -151,9 +151,9 @@ public class PaymentInforChannelFragment extends BaseFragment
                 radioCash.setChecked(true);
                 radioBankplus.setChecked(false);
                 radioWellet.setChecked(false);
-                imageCash.setImageResource(R.drawable.tien_mat_select);
-                imagebankPlus.setImageResource(R.drawable.bank_plus);
-                imageWellet.setImageResource(R.drawable.vi_dien_tu);
+                //imageCash.setImageResource(R.drawable.tien_mat_select);
+                //imagebankPlus.setImageResource(R.drawable.bank_plus);
+                //imageWellet.setImageResource(R.drawable.vi_dien_tu);
                 ((PaymentInforChannelPresenter) mPresenter).setPaymentMethod(
                         PaymentMethod.PAYMENT_CASH);
             }
@@ -168,9 +168,9 @@ public class PaymentInforChannelFragment extends BaseFragment
                 radioCash.setChecked(false);
                 radioBankplus.setChecked(true);
                 radioWellet.setChecked(false);
-                imageCash.setImageResource(R.drawable.tien_mat);
-                imagebankPlus.setImageResource(R.drawable.bank_plus_select);
-                imageWellet.setImageResource(R.drawable.vi_dien_tu);
+                //imageCash.setImageResource(R.drawable.tien_mat);
+                //imagebankPlus.setImageResource(R.drawable.bank_plus_select);
+                //imageWellet.setImageResource(R.drawable.vi_dien_tu);
                 DialogInputBankPlus dialogInputBankPlus = new DialogInputBankPlus(getActivity());
                 dialogInputBankPlus.setDialogInputListener(
                         new DialogInputBankPlus.DialogInputListener() {
@@ -195,9 +195,9 @@ public class PaymentInforChannelFragment extends BaseFragment
                 radioCash.setChecked(false);
                 radioBankplus.setChecked(false);
                 radioWellet.setChecked(true);
-                imageCash.setImageResource(R.drawable.tien_mat);
-                imagebankPlus.setImageResource(R.drawable.bank_plus);
-                imageWellet.setImageResource(R.drawable.vi_dien_tu_select);
+                //imageCash.setImageResource(R.drawable.tien_mat);
+                //imagebankPlus.setImageResource(R.drawable.bank_plus);
+                //imageWellet.setImageResource(R.drawable.vi_dien_tu_select);
 
                 DialogInputWellet dialogInPutWellet = new DialogInputWellet(getActivity());
                 dialogInPutWellet.setDialogInputListener(

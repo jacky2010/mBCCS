@@ -17,6 +17,7 @@ public class RequestHelper {
 
     public static MBCSSApi instance1;
     public static MBCSSApi instance2;
+    public static MBCSSApi instance3;
 
     private static final int CONNECTION_TIMEOUT = 30;
 
@@ -29,10 +30,10 @@ public class RequestHelper {
 
     // TODO: 12/06/2017 Fake request
     public static MBCSSApi getFakeRequest() {
-        if (instance1 == null) {
-            instance1 = getFakeRequest(false, false);
+        if (instance3 == null) {
+            instance3 = getFakeRequest(false, false);
         }
-        return instance1;
+        return instance3;
     }
 
     public static MBCSSApi getRequestHeader() {

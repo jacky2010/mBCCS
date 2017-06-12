@@ -101,6 +101,7 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
                     if (currentChoice > 0) {
                         currentChoice--;
                         mStockItem.setChoiceCount(currentChoice);
+                        mStockItem.decreaseSerial();
                         notifyDataSetChanged();
                     }
                 }
@@ -110,7 +111,7 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
                 @Override
                 public void onClick(View view) {
                     int currentChoice = mStockItem.getChoiceCount();
-                    if (currentChoice < mStockItem.getQuantity()) {
+                    if (currentChoice < mStockItem.getQuantityIssue()) {
                         currentChoice++;
                         mStockItem.setChoiceCount(currentChoice);
                         notifyDataSetChanged();
@@ -137,7 +138,7 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
                                 binding.inputQuantityChoice.setSelection(0,
                                         charSequence.toString().length());
                             } else {
-                                if (quantity <= mStockItem.getQuantity()) {
+                                if (quantity <= mStockItem.getQuantityIssue()) {
                                     mStockItem.setChoiceCount(quantity);
                                 } else {
                                     binding.inputQuantityChoice.setText(

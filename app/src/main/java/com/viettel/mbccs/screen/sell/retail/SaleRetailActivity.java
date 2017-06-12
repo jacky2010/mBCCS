@@ -20,6 +20,8 @@ import com.viettel.mbccs.utils.Common;
 import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.GsonUtils;
 import com.viettel.mbccs.variable.Constants;
+import com.viettel.mbccs.widget.MultiDirectionSlidingDrawer;
+import com.viettel.mbccs.widget.SpinnerWithBorder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,22 +36,34 @@ public class SaleRetailActivity
     public static final int GET_SALE_PROGRAM = 123;
     public static final int GET_SERIAL = 124;
 
+    private MultiDirectionSlidingDrawer mMultiDirectionSlidingDrawer;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPresenter = new SaleRetailPresenter(this, this);
         mBinding.setPresenter((SaleRetailPresenter) mPresenter);
-        mBinding.spinner.getSpinner().setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        ((SaleRetailPresenter) mPresenter).changeSearchFilter();
+        mMultiDirectionSlidingDrawer = (MultiDirectionSlidingDrawer) mBinding.getRoot().findViewById(R.id.drawer);
+        mMultiDirectionSlidingDrawer.setOnDrawerCloseListener(new MultiDirectionSlidingDrawer.OnDrawerCloseListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mPresenter.onItemServiceClick(position);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+            public void onDrawerClosed() {
+                ((SaleRetailPresenter) mPresenter).changeSearchFilter();
             }
         });
+        mBinding.spinner.getSpinner()
+                .setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position,
+                            long id) {
+                        mPresenter.onItemServiceClick(position);
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
     }
 
     @Override
@@ -131,14 +145,27 @@ public class SaleRetailActivity
             stockSerial.setStockModelId(modelSale.getStockModelId());
             stockSerial.setStockMoldeName(modelSale.getStockMoldeName());
             stockSerial.setStockModelCode(modelSale.getStockModelCode());
-            stockSerial.setQuantity(
-                    Common.getSerialCountByListSerialBlock(modelSale.getSerialBlocks()));
-            stockSerial.setSerialBOs(modelSale.getSerialBlocks());
-            stockSerials.add(stockSerial);
+            if (modelSale.getCheckSerial() == 1) {
+                stockSerial.setSerialBOs(modelSale.getSerialBlocks());
+                stockSerial.setQuantity(
+                        Common.getSerialCountByListSerialBlock(modelSale.getSerialBlocks()));
+            } else {
+                if (modelSale.getChoiceCount() > 0) {
+                    stockSerial.setQuantity(modelSale.getChoiceCount());
+                }
+            }
+
+            if (stockSerial.getQuantity() > 0) {
+                stockSerials.add(stockSerial);
+            }
         }
         int countSerial = 0;
         for (StockSerial serial : stockSerials) {
-            countSerial += Common.getSerialCountByListSerialBlock(serial.getSerialBOs());
+            if (serial.getSerialBOs() != null) {
+                countSerial += Common.getSerialCountByListSerialBlock(serial.getSerialBOs());
+            } else {
+                countSerial += serial.getQuantity();
+            }
         }
         if (countSerial == 0) {
             DialogUtils.showDialogError(SaleRetailActivity.this, null,

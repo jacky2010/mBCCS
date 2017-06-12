@@ -7,11 +7,11 @@ import java.util.List;
 
 public class KPPOrderRequest  {
 
-    @SerializedName("StaffId")
+    @SerializedName("staffId")
     @Expose
     private long staffId;
 
-    @SerializedName("ChannelStaffId")
+    @SerializedName("channelStaffId")
     @Expose
     private long channelStaffId;
 

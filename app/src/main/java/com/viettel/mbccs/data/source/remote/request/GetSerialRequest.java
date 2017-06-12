@@ -29,10 +29,6 @@ public class GetSerialRequest {
     @Expose
     private long quantity;
 
-    @SerializedName("channelTypeId")
-    @Expose
-    private long channelTypeId;
-
     @SerializedName("language")
     @Expose
     private String language;
@@ -77,13 +73,6 @@ public class GetSerialRequest {
         this.quantity = quantity;
     }
 
-    public long getChannelTypeId() {
-        return channelTypeId;
-    }
-
-    public void setChannelTypeId(long channelTypeId) {
-        this.channelTypeId = channelTypeId;
-    }
 
     public String getLanguage() {
         return language;

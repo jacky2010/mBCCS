@@ -113,7 +113,7 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="all_">-Tất cả-</string>
     <string name="customer_info">Thông tin khách hàng</string>
     <string name="customer_name">Tên khách hàng/Công ty</string>
-    <string name="customer_identity">Chứng minh thư/Mã số thuế</string>
+    <string name="customer_identity">Chứng minh thư</string>
     <string name="address">Địa chỉ</string>
     <string name="back">Quay lại</string>
     <string name="payment">Thanh toán</string>
@@ -266,7 +266,6 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string formatted="false" name="sale_retail_confirm_customer_infor">
         <![CDATA[
 <b>Bán cho khách hàng %s</b> :<br>
-   Số điện thoại : <b>%s</b><br>
    Số tiền thanh toán : <b>%s</b>
    <br>%s
         ]]>

@@ -53,11 +53,10 @@ public class KPPOrderAdapter extends RecyclerView.Adapter<KPPOrderAdapter.KPPOrd
 
         KPPOrderViewHolder(ItemKppOrderBinding binding) {
             super(binding.getRoot());
-            this.mBinding=binding;
+            this.mBinding = binding;
             binding.getRoot().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
                     if (mKPPOrderListener != null) {
                         mKPPOrderListener.onOrderItemClick(mSaleOrderses.get(getAdapterPosition()),
                                 mSaleOrderses.get(getAdapterPosition()).getOrderStatus());

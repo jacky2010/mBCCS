@@ -24,11 +24,11 @@ public class GetTotalStockRequest {
 
     @SerializedName("telecomServiceId")
     @Expose
-    private long telecomServiceId;
+    private Long telecomServiceId;
 
     @SerializedName("saleProgameId")
     @Expose
-    private long saleProgameId;
+    private Long saleProgameId;
 
     @SerializedName("saleTransType")
     @Expose

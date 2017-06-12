@@ -17,11 +17,11 @@ public class GetInfoSaleTranRequest implements Parcelable {
 
     @SerializedName("shopId")
     @Expose
-    private long shopId;
+    private Long shopId;
 
     @SerializedName("staffId")
     @Expose
-    private long staffId;
+    private Long staffId;
 
     @SerializedName("lstSerialSale")
     @Expose
@@ -41,7 +41,7 @@ public class GetInfoSaleTranRequest implements Parcelable {
 
     @SerializedName("telecomserviceId")
     @Expose
-    private long telecomserviceId;
+    private Long telecomserviceId;
 
     @SerializedName("saleProgrameCode")
     @Expose
@@ -53,11 +53,11 @@ public class GetInfoSaleTranRequest implements Parcelable {
 
     @SerializedName("channelId")
     @Expose
-    private long chanelId;
+    private Long chanelId;
 
     @SerializedName("channelType")
     @Expose
-    private long channelType;
+    private Long channelType;
 
     @SerializedName("priceType")
     @Expose
@@ -79,7 +79,7 @@ public class GetInfoSaleTranRequest implements Parcelable {
     @Expose
     private String language;
 
-    public long getShopId() {
+    public Long getShopId() {
         return shopId;
     }
 
@@ -87,7 +87,7 @@ public class GetInfoSaleTranRequest implements Parcelable {
         this.shopId = shopId;
     }
 
-    public long getStaffId() {
+    public Long getStaffId() {
         return staffId;
     }
 
@@ -270,22 +270,24 @@ public class GetInfoSaleTranRequest implements Parcelable {
 
     public CreateSaleTransChannelRequest clone() {
         CreateSaleTransChannelRequest request = new CreateSaleTransChannelRequest();
-        request.setChanelId(getChanelId());
-        request.setChannelType(getChannelType());
-        request.setCouponCode(getCouponCode());
-        request.setCustomer(getCustomer());
-        request.setDiscountPolicy(getDiscountPolicy());
-        request.setIsdnPay(getIsdnPay());
-        request.setLanguage(getLanguage());
-        request.setLstSerialSale(getLstSerialSale());
-        request.setPaymentMethod(getPaymentMethod());
-        request.setPricePolicy(getPricePolicy());
-        request.setPriceType(getPriceType());
-        request.setStaffId(getStaffId());
-        request.setShopId(getShopId());
-        request.setSaleProgrameCode(getSaleProgrameCode());
-        request.setSaleTransType(getSaleTransType());
-        request.setTelecomserviceId(getTelecomserviceId());
+        request.setChanelId(chanelId);
+        request.setChannelType(channelType);
+        request.setCouponCode(couponCode);
+        request.setCustomer(mCustomer);
+        request.setDiscountPolicy(discountPolicy);
+        request.setIsdnPay(IsdnPay);
+        request.setLanguage(language);
+        request.setLstSerialSale(lstSerialSale);
+        request.setPaymentMethod(paymentMethod);
+        request.setPricePolicy(pricePolicy);
+        request.setPriceType(priceType);
+        request.setStaffId(staffId);
+        request.setShopId(shopId);
+        request.setSaleProgrameCode(saleProgrameCode);
+        request.setSaleTransType(saleTransType);
+        if (telecomserviceId!=null){
+            request.setTelecomserviceId(telecomserviceId);
+        }
         return request;
     }
 }
