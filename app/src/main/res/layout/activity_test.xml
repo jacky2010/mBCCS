@@ -13,7 +13,83 @@
         app:tbIconLeft="@drawable/ic_arrow_back_black_24dp" />
 
 
-   <include layout="@layout/view_sliding_drawer"/>
+    <!--<com.viettel.mbccs.widget.SlidingDrawer xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:rotation="180"-->
+    <!--tools:context=".screen.TestActivity" >-->
+
+    <!--</com.viettel.mbccs.widget.SlidingDrawer>-->
+
+    <com.viettel.mbccs.widget.MultiDirectionSlidingDrawer
+        android:id="@+id/drawer"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="150dp"
+        app:content="@+id/content"
+        app:direction="topToBottom"
+        app:headerOne ="@+id/view_open"
+        app:handleTwo ="@+id/view_close"
+        app:handle="@+id/handle">
+
+        <RelativeLayout
+            android:id="@id/content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/white" >
+
+            </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@id/handle"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+
+            <LinearLayout
+                android:id="@+id/view_close"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/yellow">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/ic_arrow_drop_down_black_24dp"/>
+
+                <com.viettel.mbccs.widget.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="test01"/>
+
+                <com.viettel.mbccs.widget.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="test02"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/view_open"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:background="@color/blue_trans">
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/ic_arrow_drop_down_black_24dp"/>
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+    </com.viettel.mbccs.widget.MultiDirectionSlidingDrawer>
 
 
 </LinearLayout>
