@@ -1,14 +1,14 @@
 package com.viettel.mbccs.constance;
 
-import android.support.annotation.IntDef;
+import android.support.annotation.StringDef;
 
 /**
  * Created by HuyQuyet on 5/16/17.
  */
 
-@IntDef({ OrderStatus.APPROVALS, OrderStatus.PENDING, OrderStatus.REJECT })
+@StringDef({ OrderStatus.APPROVALS, OrderStatus.PENDING, OrderStatus.REJECT })
 public @interface OrderStatus {
-    int APPROVALS = 2;
-    int PENDING = 1;
-    int REJECT = 3;
+    String APPROVALS = "2";
+    String PENDING = "1";
+    String REJECT = "3";
 }

@@ -19,7 +19,7 @@ public class SaleOrders implements Parcelable {
 
     @SerializedName("orderStatus")
     @Expose
-    private long orderStatus;
+    private String orderStatus;
 
     @SerializedName("orderName")
     @Expose
@@ -62,7 +62,7 @@ public class SaleOrders implements Parcelable {
 
     protected SaleOrders(Parcel in) {
         saleOrdersId = in.readLong();
-        orderStatus = in.readLong();
+        orderStatus = in.readString();
         oderName = in.readString();
         shopId = in.readLong();
         staffId = in.readLong();
@@ -94,7 +94,7 @@ public class SaleOrders implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(saleOrdersId);
-        dest.writeLong(orderStatus);
+        dest.writeString(orderStatus);
         dest.writeString(oderName);
         dest.writeLong(shopId);
         dest.writeLong(staffId);
@@ -114,11 +114,11 @@ public class SaleOrders implements Parcelable {
         this.saleOrdersId = saleOrdersId;
     }
 
-    public long getOrderStatus() {
+    public String getOrderStatus() {
         return orderStatus;
     }
 
-    public void setOrderStatus(long orderStatus) {
+    public void setOrderStatus(String orderStatus) {
         this.orderStatus = orderStatus;
     }
 

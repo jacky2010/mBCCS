@@ -37,27 +37,22 @@ public class ItemOrderSalePresenter {
     }
 
     public String getStatus() {
-        switch ((int) mSaleOrders.getOrderStatus()) {
-            case OrderStatus.APPROVALS:
-                return mContext.getResources().getString(R.string.order_approval);
-            case OrderStatus.REJECT:
-                return mContext.getResources().getString(R.string.order_reject);
-            case OrderStatus.PENDING:
-                return mContext.getResources().getString(R.string.order_pending);
+        if (mSaleOrders.getOrderStatus().equals(OrderStatus.APPROVALS)) {
+            return mContext.getResources().getString(R.string.order_approval);
+        } else if (mSaleOrders.getOrderStatus().equals(OrderStatus.PENDING)) {
+            return mContext.getResources().getString(R.string.order_pending);
+        } else {
+            return mContext.getResources().getString(R.string.order_pending);
         }
-        return "";
     }
 
     public int getColorText() {
-        switch ((int) mSaleOrders.getOrderStatus()) {
-            case OrderStatus.APPROVALS:
-                return mContext.getResources().getColor(R.color.green);
-            case OrderStatus.REJECT:
-                return mContext.getResources().getColor(R.color.red);
-            case OrderStatus.PENDING:
-                return mContext.getResources().getColor(R.color.yellow);
-            default:
-                return mContext.getResources().getColor(R.color.black);
+        if (mSaleOrders.getOrderStatus().equals(OrderStatus.APPROVALS)) {
+            return mContext.getResources().getColor(R.color.green);
+        } else if (mSaleOrders.getOrderStatus().equals(OrderStatus.PENDING)) {
+            return mContext.getResources().getColor(R.color.yellow);
+        } else {
+            return mContext.getResources().getColor(R.color.red);
         }
     }
 

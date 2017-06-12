@@ -94,16 +94,12 @@ public class SellOrdersActivity
     public void setDataResult(List<SaleOrders> saleOrdersList, ChannelInfo channelInfoSelect) {
         int countApp = 0, countPen = 0, countRe = 0;
         for (SaleOrders saleOrders : saleOrdersList) {
-            switch ((int) saleOrders.getOrderStatus()) {
-                case OrderStatus.APPROVALS:
-                    countApp++;
-                    break;
-                case OrderStatus.PENDING:
-                    countPen++;
-                    break;
-                case OrderStatus.REJECT:
-                    countRe++;
-                    break;
+            if (saleOrders.getOrderStatus().equals(OrderStatus.APPROVALS)) {
+                countApp++;
+            } else if (saleOrders.getOrderStatus().equals(OrderStatus.PENDING)) {
+                countPen++;
+            } else {
+                countRe++;
             }
         }
 

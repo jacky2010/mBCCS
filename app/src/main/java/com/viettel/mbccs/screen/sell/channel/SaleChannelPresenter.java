@@ -206,7 +206,7 @@ public class SaleChannelPresenter
         mGetListChannelByOwnerTypeIdRequest = new DataRequest<>();
         mGetListChannelByOwnerTypeIdRequest.setApiCode(ApiCode.GetListChannelByOwnerTypeId);
         GetListChannelByOwnerTypeIdRequest request = new GetListChannelByOwnerTypeIdRequest();
-        request.setStaffId(mUserRepository.getUserInfo().getStaffInfo().getStaffId());
+        request.setStaffId(mUserRepository.getUserInfo().getStaffInfo().getStaffOwnerId());
         request.setLanguage("en");
         mGetListChannelByOwnerTypeIdRequest.setParameterApi(request);
         return mBanHangKhoTaiChinhRepository.getListChannelByOwnerTypeId(

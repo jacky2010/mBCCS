@@ -20,7 +20,6 @@ import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetListChannelByOwnerTypeIdResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListOrderResponse;
 import com.viettel.mbccs.screen.sell.orders.adapter.SellOrdersFragmentAdapter;
-import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.ValidateUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.ArrayList;
@@ -74,7 +73,7 @@ public class SellOrdersPresenter {
         shop.set(userInfo.getShop());
 
         GetListChannelByOwnerTypeIdRequest g = new GetListChannelByOwnerTypeIdRequest();
-        g.setStaffId(staffInfo.get().getStaffId());
+        g.setStaffId(staffInfo.get().getStaffOwnerId());
         g.setChannelTypeId(staffInfo.get().getChannelTypeId());
 
         DataRequest<GetListChannelByOwnerTypeIdRequest> request = new DataRequest<>();
@@ -88,7 +87,9 @@ public class SellOrdersPresenter {
                             public void onSuccess(GetListChannelByOwnerTypeIdResponse object) {
                                 if (object == null || object.getChannelInfoList() == null) {
                                     sellOrdersView.hideLoading();
-                                    sellOrdersView.getListChannelByOwnerTypeIdError("Không có dữ liệu về kênh");
+                                    sellOrdersView.getListChannelByOwnerTypeIdError(
+                                            context.getString(
+                                                    R.string.sell_orders_no_data_channel));
                                     return;
                                 }
                                 channelInfoList = object.getChannelInfoList();
@@ -139,10 +140,7 @@ public class SellOrdersPresenter {
         getListOrderRequest.setIsdnChannel(String.valueOf(channelInfoSelect.getChannelId()));
         getListOrderRequest.setToDate(sellOrdersView.getStringDateTo());
         getListOrderRequest.setFromDate(sellOrdersView.getStringDateFrom());
-        getListOrderRequest.setOrderStatus(1);
-
-        // TODO: 6/12/17
-//        getListOrderRequest.setOrderStatus(54366);
+        getListOrderRequest.setOrderStatus(staffInfo.get().getStatus());
 
         DataRequest<GetListOrderRequest> baseRequest = new DataRequest<>();
         baseRequest.setApiCode(ApiCode.GetListOrder);
@@ -158,8 +156,6 @@ public class SellOrdersPresenter {
 
                     @Override
                     public void onError(BaseException error) {
-                        // TODO: 5/16/17 error
-                        DialogUtils.showDialogError(context, null, error.getMessage(), null);
                         sellOrdersView.getDataError(error);
                         sellOrdersView.hideLoading();
                     }

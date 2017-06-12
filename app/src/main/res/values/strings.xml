@@ -73,6 +73,7 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="sell_orders_change">Kênh</string>
     <string name="sell_orders_search">Tìm kiếm</string>
     <string name="sell_orders_gone_search">Đơn vị: %1$s - Nhân viên: %2$s - Kênh: %3$s</string>
+    <string name="sell_orders_no_data_channel">Không có dữ liệu về kênh</string>
 
     <string name="order_detail_title">Chi tiết đơn hàng %1$s</string>
     <string name="order_detail_total_money">Tổng tiền: </string>

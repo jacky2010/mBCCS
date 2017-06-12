@@ -19,7 +19,7 @@ public class KPPOrderAdapter extends RecyclerView.Adapter<KPPOrderAdapter.KPPOrd
 
     private Context mContext;
     private List<SaleOrders> mSaleOrderses;
-    private KPPOrderListenter mKPPOrderListenter;
+    private KPPOrderListener mKPPOrderListener;
 
     public KPPOrderAdapter(Context context, List<SaleOrders> saleOrderses) {
         mContext = context;
@@ -43,8 +43,8 @@ public class KPPOrderAdapter extends RecyclerView.Adapter<KPPOrderAdapter.KPPOrd
         return mSaleOrderses.size();
     }
 
-    public void setKPPOrderListenter(KPPOrderListenter KPPOrderListenter) {
-        mKPPOrderListenter = KPPOrderListenter;
+    public void setKPPOrderListener(KPPOrderListener KPPOrderListener) {
+        mKPPOrderListener = KPPOrderListener;
     }
 
     class KPPOrderViewHolder extends RecyclerView.ViewHolder {
@@ -58,8 +58,8 @@ public class KPPOrderAdapter extends RecyclerView.Adapter<KPPOrderAdapter.KPPOrd
                 @Override
                 public void onClick(View view) {
 
-                    if (mKPPOrderListenter != null) {
-                        mKPPOrderListenter.onOrderItemClick(mSaleOrderses.get(getAdapterPosition()),
+                    if (mKPPOrderListener != null) {
+                        mKPPOrderListener.onOrderItemClick(mSaleOrderses.get(getAdapterPosition()),
                                 mSaleOrderses.get(getAdapterPosition()).getOrderStatus());
                     }
                 }
@@ -73,7 +73,7 @@ public class KPPOrderAdapter extends RecyclerView.Adapter<KPPOrderAdapter.KPPOrd
         }
     }
 
-    public interface KPPOrderListenter {
-        void onOrderItemClick(SaleOrders saleOrder, long status);
+    public interface KPPOrderListener {
+        void onOrderItemClick(SaleOrders saleOrder, String status);
     }
 }
