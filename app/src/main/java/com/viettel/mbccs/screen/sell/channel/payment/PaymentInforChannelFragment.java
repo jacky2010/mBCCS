@@ -182,7 +182,7 @@ public class PaymentInforChannelFragment extends BaseFragment
                         });
                 dialogInputBankPlus.show();
                 ((PaymentInforChannelPresenter) mPresenter).setPaymentMethod(
-                        PaymentMethod.PAYMENT_CASH);
+                        PaymentMethod.PAYMENT_BANK_PLUS);
             }
         });
 
@@ -209,7 +209,7 @@ public class PaymentInforChannelFragment extends BaseFragment
                         });
                 dialogInPutWellet.show();
                 ((PaymentInforChannelPresenter) mPresenter).setPaymentMethod(
-                        PaymentMethod.PAYMENT_CASH);
+                        PaymentMethod.PAYMENT_WELLET);
             }
         });
     }

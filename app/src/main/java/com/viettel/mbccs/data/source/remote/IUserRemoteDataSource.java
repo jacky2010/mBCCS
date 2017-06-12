@@ -1,6 +1,7 @@
 package com.viettel.mbccs.data.source.remote;
 
 import com.viettel.mbccs.data.model.LoginInfo;
+import com.viettel.mbccs.data.model.UserInfo;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetDistrictRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
@@ -32,7 +33,7 @@ public interface IUserRemoteDataSource {
 
     Observable<LoginInfo> login(LoginRequest loginRequest);
 
-    Observable<GetUserInfoResponse> getUserInfo(DataRequest<GetUserInfoRequest> request);
+    Observable<UserInfo> getUserInfo(DataRequest<GetUserInfoRequest> request);
 
     Observable<SendCodeChangePassResponse> sendCodeChangePass(String phone);
 

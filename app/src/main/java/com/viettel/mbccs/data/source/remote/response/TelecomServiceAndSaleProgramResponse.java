@@ -13,7 +13,7 @@ public class TelecomServiceAndSaleProgramResponse extends DataResponse{
     @Expose
     private List<TeleComService> mTeleComServices = new ArrayList<>();
 
-    @SerializedName("lstSaleProgram")
+    @SerializedName("lstSalesProgram")
     @Expose
     private List<SaleProgram> mSalePrograms = new ArrayList<>();
 

@@ -12,6 +12,7 @@ import com.lap.languagepicker.Language;
 import com.mukesh.countrypicker.Country;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.source.UserRepository;
+import com.viettel.mbccs.utils.Common;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -74,6 +75,10 @@ public class ConfigPresenter
                 statusSyncBCCS.set(isChecked);
                 break;
         }
+    }
+
+    public void logout() {
+        Common.logout(context);
     }
 
     public void clickSelectLanguage() {

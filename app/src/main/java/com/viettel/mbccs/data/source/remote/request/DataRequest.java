@@ -12,7 +12,7 @@ import com.viettel.mbccs.data.source.UserRepository;
 public class DataRequest<T> {
 
     @Expose
-    @SerializedName("session")
+    @SerializedName("sessionId")
     private String mSession;
 
     @SerializedName("username")

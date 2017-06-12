@@ -10,7 +10,7 @@ public class TeleComService implements Serializable{
     @Expose
     private long id;
 
-    @SerializedName("telecomServiceName")
+    @SerializedName("telServiceName")
     @Expose
     private String name;
 

@@ -4,6 +4,7 @@ import com.viettel.mbccs.data.source.remote.response.BaseErrorResponse;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.BaseResponse;
 import com.viettel.mbccs.data.source.remote.response.DataResponse;
+import com.viettel.mbccs.data.source.remote.response.ServerDataResponse;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
@@ -44,10 +45,10 @@ public class SchedulerUtils {
         };
     }
 
-    public static <T extends DataResponse> Func1<BaseResponse<T>, Observable<T>> convertDataFlatMap() {
-        return new Func1<BaseResponse<T>, Observable<T>>() {
+    public static <T> Func1<ServerDataResponse<BaseResponse<T>>, Observable<T>> convertDataFlatMap() {
+        return new Func1<ServerDataResponse<BaseResponse<T>>, Observable<T>>() {
             @Override
-            public Observable<T> call(BaseResponse<T> response) {
+            public Observable<T> call(ServerDataResponse<BaseResponse<T>> response) {
                 if (!response.getErrorCode().equals("200")) {
                     BaseErrorResponse baseErrorResponse = new BaseErrorResponse();
                     baseErrorResponse.setError(Integer.parseInt(response.getErrorCode()),
@@ -55,14 +56,16 @@ public class SchedulerUtils {
                     return Observable.error(BaseException.toServerError(baseErrorResponse));
                 }
 
-                if (!response.getData().getErrorCode().equals("0")) {
+                if (!response.getResult().getErrorCode().equals("0")) {
                     BaseErrorResponse baseErrorResponse = new BaseErrorResponse();
-                    baseErrorResponse.setError(Integer.parseInt(response.getData().getErrorCode()),
-                            response.getData().getErrorMessage());
-                    return Observable.error(BaseException.toServerError(baseErrorResponse));
+                    baseErrorResponse.setError(
+                            Integer.parseInt(response.getResult().getErrorCode()),
+                            response.getResult().getErrorMessage());
+                    BaseException baseException = BaseException.toServerError(baseErrorResponse);
+                    return Observable.error(baseException);
                 }
 
-                return Observable.just(response.getData());
+                return Observable.just(response.getResult().getData());
             }
         };
     }

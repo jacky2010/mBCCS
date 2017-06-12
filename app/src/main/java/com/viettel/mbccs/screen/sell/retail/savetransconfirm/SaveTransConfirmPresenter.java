@@ -9,6 +9,7 @@ import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.SaleTrans;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
+import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.CreateSaleTransChannelRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
@@ -33,6 +34,7 @@ public class SaveTransConfirmPresenter implements SaveTransConfirmContract.Prese
     public ObservableField<String> saleProgram;
     public CompositeSubscription mSubscription;
     private BanHangKhoTaiChinhRepository mBanHangKhoTaiChinhRepository;
+    private UserRepository mUserRepository;
 
     public SaveTransConfirmPresenter(Context context, SaveTransConfirmContract.ViewModel mViewModel,
             SaleTrans saleTrans, GetInfoSaleTranRequest getInfoSaleTranRequest,
@@ -40,6 +42,7 @@ public class SaveTransConfirmPresenter implements SaveTransConfirmContract.Prese
         mContext = context;
         mSubscription = new CompositeSubscription();
         mBanHangKhoTaiChinhRepository = BanHangKhoTaiChinhRepository.getInstance();
+        mUserRepository = UserRepository.getInstance();
         mSaleTrans = saleTrans;
         this.mChannelInfo = channelInfo;
         this.mViewModel = mViewModel;
@@ -75,7 +78,8 @@ public class SaveTransConfirmPresenter implements SaveTransConfirmContract.Prese
                             Common.convertMoneyToString(mSaleTrans.getAmountTax())));
         }
         salerInfor.set(String.format(mContext.getString(R.string.sale_retail_confirm_saler_infor),
-                "Hoang Van Cuong", "0123112312513"));
+                mUserRepository.getUserInfo().getStaffInfo().getStaffName(),
+                mUserRepository.getUserInfo().getStaffInfo().getTel()));
     }
 
     @Override

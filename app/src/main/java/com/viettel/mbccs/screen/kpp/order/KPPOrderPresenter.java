@@ -10,6 +10,7 @@ import com.viettel.mbccs.constance.OrderStatus;
 import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.SaleOrders;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
+import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListOrderRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
@@ -41,6 +42,7 @@ public class KPPOrderPresenter implements KPPOrderContract.Presenter {
     private KPPOrderAdapter mKPPOrderAdapter;
     private List<SaleOrders> mSaleOrderses = new ArrayList<>();
     private BanHangKhoTaiChinhRepository mBanHangKhoTaiChinhRepository;
+    private UserRepository mUserRepository;
     private CompositeSubscription mSubscriptions;
     private long status = OrderStatus.PENDING;
 
@@ -50,6 +52,7 @@ public class KPPOrderPresenter implements KPPOrderContract.Presenter {
         mContext = context;
         mViewModel = viewModel;
         mBanHangKhoTaiChinhRepository = BanHangKhoTaiChinhRepository.getInstance();
+        mUserRepository = UserRepository.getInstance();
         mSubscriptions = new CompositeSubscription();
         init();
     }
@@ -96,6 +99,9 @@ public class KPPOrderPresenter implements KPPOrderContract.Presenter {
         mGetListOrderRequestBaseRequest.setApiCode(ApiCode.GetListOrder);
         GetListOrderRequest request = new GetListOrderRequest();
         request.setOrderStatus(status);
+        request.setShopId(Long.parseLong(mUserRepository.getUserInfo().getShop().getShopId()));
+        request.setStaffId(mUserRepository.getUserInfo().getStaffInfo().getStaffId());
+        request.setIsdnChannel(mUserRepository.getUserInfo().getChannelInfo().getTel());
         request.setFromDate(DateUtils.convertDateToString(mViewModel.getFromDate(),
                 DateUtils.DATE_TIME_FORMAT));
         request.setToDate(DateUtils.convertDateToString(mViewModel.getFromDate(),

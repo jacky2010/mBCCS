@@ -1,6 +1,8 @@
 package com.viettel.mbccs.data.source.remote.service;
 
+import com.viettel.mbccs.data.model.EmptyObject;
 import com.viettel.mbccs.data.model.LoginInfo;
+import com.viettel.mbccs.data.model.UserInfo;
 import com.viettel.mbccs.data.source.remote.request.ChecOTPRequest;
 import com.viettel.mbccs.data.source.remote.request.CheckCalledIsdnRequest;
 import com.viettel.mbccs.data.source.remote.request.CheckIdNoRequest;
@@ -98,6 +100,7 @@ import com.viettel.mbccs.data.source.remote.response.SellAnypayToChannelResponse
 import com.viettel.mbccs.data.source.remote.response.SellAnypayToCustomerResponse;
 import com.viettel.mbccs.data.source.remote.response.SendCodeChangePassResponse;
 import com.viettel.mbccs.data.source.remote.response.SendSurveyKPPResponse;
+import com.viettel.mbccs.data.source.remote.response.ServerDataResponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import com.viettel.mbccs.data.source.remote.response.TransferAnyPayResponse;
 import com.viettel.mbccs.data.source.remote.response.UpdateAllSubInfoResponse;
@@ -121,204 +124,206 @@ public interface MBCSSApi {
 
     @FormUrlEncoded
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<SendCodeChangePassResponse>> sendCodeChangePass(
+    Observable<ServerDataResponse<BaseResponse<SendCodeChangePassResponse>>> sendCodeChangePass(
             @Field("phone") String phone);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<GetListOrderResponse>> getListOrder(
+    Observable<ServerDataResponse<BaseResponse<GetListOrderResponse>>> getListOrder(
             @Body DataRequest<GetListOrderRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<GetListChannelByOwnerTypeIdResponse>> getListChannelByOwnerTypeId(
+    Observable<ServerDataResponse<BaseResponse<GetListChannelByOwnerTypeIdResponse>>> getListChannelByOwnerTypeId(
             @Body DataRequest<GetListChannelByOwnerTypeIdRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<GetAllInfoResponse>> WS_GetAllInfo(
+    Observable<ServerDataResponse<BaseResponse<GetAllInfoResponse>>> WS_GetAllInfo(
             @Body DataRequest<GetAllInfoRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<TelecomServiceAndSaleProgramResponse>> getTelecomserviceAndSaleProgram(
+    Observable<ServerDataResponse<BaseResponse<TelecomServiceAndSaleProgramResponse>>> getTelecomserviceAndSaleProgram(
             @Body DataRequest<GetTelecomServiceAndSaleProgramRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<GetSerialsResponse>> getSerials(
+    Observable<ServerDataResponse<BaseResponse<GetSerialsResponse>>> getSerials(
             @Body DataRequest<GetSerialRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<GetOrderInfoResponse>> getOrderInfo(
+    Observable<ServerDataResponse<BaseResponse<GetOrderInfoResponse>>> getOrderInfo(
             @Body DataRequest<GetOrderInfoRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<GetReasonResponse>> getReason(
+    Observable<ServerDataResponse<BaseResponse<GetReasonResponse>>> getReason(
             @Body DataRequest<GetReasonRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<CreateSaleTransFromOrderResponse>> createSaleTransFromOrder(
+    Observable<ServerDataResponse<BaseResponse<CreateSaleTransFromOrderResponse>>> createSaleTransFromOrder(
             @Body DataRequest<CreateSaleTransFromOrderRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<UpdateSaleOrderResponse>> updateSaleOrder(
+    Observable<ServerDataResponse<BaseResponse<UpdateSaleOrderResponse>>> updateSaleOrder(
             @Body DataRequest<UpdateSaleOrderRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<GetTotalStockResponse>> getModelSales(
+    Observable<ServerDataResponse<BaseResponse<GetTotalStockResponse>>> getModelSales(
             @Body DataRequest<GetTotalStockRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<GetInfoSaleTranResponse>> getSaleTransInfo(
+    Observable<ServerDataResponse<BaseResponse<GetInfoSaleTranResponse>>> getSaleTransInfo(
             @Body DataRequest<GetInfoSaleTranRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<CreateSaleTransRetailResponse>> createSaleTransRetail(
+    Observable<ServerDataResponse<BaseResponse<CreateSaleTransRetailResponse>>> createSaleTransRetail(
             @Body DataRequest<GetInfoSaleTranRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<GetDistributedChannelResponse>> getDistributtedChannelInfo(
+    Observable<ServerDataResponse<BaseResponse<GetDistributedChannelResponse>>> getDistributtedChannelInfo(
             @Body SearchBranchRequest request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<CreateDistributedChannelResponse>> createDistributtedChannel(
+    Observable<ServerDataResponse<BaseResponse<CreateDistributedChannelResponse>>> createDistributtedChannel(
             @Body DataRequest<CreateDistributedChannelRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<CreateSaleTransChannelResponse>> createSaleTransChannel(
+    Observable<ServerDataResponse<BaseResponse<CreateSaleTransChannelResponse>>> createSaleTransChannel(
             @Body DataRequest<CreateSaleTransChannelRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<GetListStockModelResponse>> getListStockModel(
+    Observable<ServerDataResponse<BaseResponse<GetListStockModelResponse>>> getListStockModel(
             @Body DataRequest<GetListStockModelRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<GetListSerialResponse>> getListSerial(
+    Observable<ServerDataResponse<BaseResponse<GetListSerialResponse>>> getListSerial(
             @Body DataRequest<GetListSerialRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<GetListProvinceResponse>> getListProvince(
+    Observable<ServerDataResponse<BaseResponse<GetListProvinceResponse>>> getListProvince(
             @Body DataRequest<GetListProvinceRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<GetListTTKDResponse>> getListTTKD(
+    Observable<ServerDataResponse<BaseResponse<GetListTTKDResponse>>> getListTTKD(
             @Body DataRequest<GetListTTKDRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<GetListShopResponse>> getListShop(
+    Observable<ServerDataResponse<BaseResponse<GetListShopResponse>>> getListShop(
             @Body DataRequest<GetListShopRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<DataResponse>> createSaleOrders(
-            @Body DataRequest<KPPOrderRequest> requestBaseResponse);
+    Observable<ServerDataResponse<BaseResponse<EmptyObject>>> createSaleOrders(
+            @Body DataRequest<KPPOrderRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<RegisterCustomerInfoResponse>> registerCustomerInfo(
+    Observable<ServerDataResponse<BaseResponse<RegisterCustomerInfoResponse>>> registerCustomerInfo(
             @Body DataRequest<RegisterCustomerInfoRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<GetRegiterSubInfoResponse>> getRegiterSubInfo(
+    Observable<ServerDataResponse<BaseResponse<GetRegiterSubInfoResponse>>> getRegiterSubInfo(
             @Body DataRequest<GetRegiterSubInfoRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<GetListBusTypeIdRequireResponse>> getListBusTypeIdRequire(
+    Observable<ServerDataResponse<BaseResponse<GetListBusTypeIdRequireResponse>>> getListBusTypeIdRequire(
             @Body DataRequest<GetListBusTypeIdRequireRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<GetApDomainResponse>> getApDomain(
+    Observable<ServerDataResponse<BaseResponse<GetApDomainResponse>>> getApDomain(
             @Body DataRequest<GetApDomainRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<GetOTPResponse>> getOTP(@Body DataRequest<GetOTPRequest> request);
+    Observable<ServerDataResponse<BaseResponse<GetOTPResponse>>> getOTP(
+            @Body DataRequest<GetOTPRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<CheckOTPResponse>> checOTP(@Body DataRequest<ChecOTPRequest> request);
+    Observable<ServerDataResponse<BaseResponse<CheckOTPResponse>>> checOTP(
+            @Body DataRequest<ChecOTPRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<UpdateAllSubInfoResponse>> updateAllSubInfo(
+    Observable<ServerDataResponse<BaseResponse<UpdateAllSubInfoResponse>>> updateAllSubInfo(
             @Body DataRequest<UpdateAllSubInfoRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<GetProvinceResponse>> getProvince(
+    Observable<ServerDataResponse<BaseResponse<GetProvinceResponse>>> getProvince(
             @Body DataRequest<GetProvinceRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<GetDistrictResponse>> getDistrict(
+    Observable<ServerDataResponse<BaseResponse<GetDistrictResponse>>> getDistrict(
             @Body DataRequest<GetDistrictRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<GetPrecinctResponse>> getPrecinct(
+    Observable<ServerDataResponse<BaseResponse<GetPrecinctResponse>>> getPrecinct(
             @Body DataRequest<GetPrecinctRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<CheckIdNoResponse>> checkIdNo(
+    Observable<ServerDataResponse<BaseResponse<CheckIdNoResponse>>> checkIdNo(
             @Body DataRequest<CheckIdNoRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<GetAnypayAuthorizeResponse>> getAnypayAuthorize(
+    Observable<ServerDataResponse<BaseResponse<GetAnypayAuthorizeResponse>>> getAnypayAuthorize(
             @Body DataRequest<GetAnypayAuthorizeRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<SellAnypayToCustomerResponse>> saleAnypayToCustomer(
+    Observable<ServerDataResponse<BaseResponse<SellAnypayToCustomerResponse>>> saleAnypayToCustomer(
             @Body DataRequest<SellAnypayToCustomerRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<SellAnypayToChannelResponse>> saleAnypayToChannel(
+    Observable<ServerDataResponse<BaseResponse<SellAnypayToChannelResponse>>> saleAnypayToChannel(
             @Body DataRequest<SellAnypayToChannelRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<TransferAnyPayResponse>> transferAnyPay(
+    Observable<ServerDataResponse<BaseResponse<TransferAnyPayResponse>>> transferAnyPay(
             @Body DataRequest<TransferAnyPayRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<RefillAnyPayResponse>> refillAnyPay(
+    Observable<ServerDataResponse<BaseResponse<RefillAnyPayResponse>>> refillAnyPay(
             @Body DataRequest<RefillAnyPayRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<GetRegisterSubResponse>> getRegisterSub(
+    Observable<ServerDataResponse<BaseResponse<GetRegisterSubResponse>>> getRegisterSub(
             @Body DataRequest<GetRegisterSubRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<CheckCalledIsdnResponse>> checkCalledIsdn(
+    Observable<ServerDataResponse<BaseResponse<CheckCalledIsdnResponse>>> checkCalledIsdn(
             @Body DataRequest<CheckCalledIsdnRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<UpdateRegisterSubResponse>> updateRegisterSub(
+    Observable<ServerDataResponse<BaseResponse<UpdateRegisterSubResponse>>> updateRegisterSub(
             @Body DataRequest<UpdateRegisterSubRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<GetSurveyKPPResponse>> getSurveyKPP(
+    Observable<ServerDataResponse<BaseResponse<GetSurveyKPPResponse>>> getSurveyKPP(
             @Body DataRequest<GetSurveyKPPRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<SendSurveyKPPResponse>> sendSurveyKPP(
+    Observable<ServerDataResponse<BaseResponse<SendSurveyKPPResponse>>> sendSurveyKPP(
             @Body DataRequest<SendSurveyKPPRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<GetHotNewsCSKPPResponse>> getHotNews(
+    Observable<ServerDataResponse<BaseResponse<GetHotNewsCSKPPResponse>>> getHotNews(
             @Body DataRequest<GetHotNewsCSKPPRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<GetHotNewsInfoCSKPPResponse>> getHotNewsInfo(
+    Observable<ServerDataResponse<BaseResponse<GetHotNewsInfoCSKPPResponse>>> getHotNewsInfo(
             @Body DataRequest<GetHotNewsInfoCSKPPRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<GetKPPFeedbackResponse>> getKPPFeedback(
+    Observable<ServerDataResponse<BaseResponse<GetKPPFeedbackResponse>>> getKPPFeedback(
             @Body DataRequest<GetKPPFeedbackRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<GetKPPFeedbackInfoResponse>> getKPPFeedbackInfo(
+    Observable<ServerDataResponse<BaseResponse<GetKPPFeedbackInfoResponse>>> getKPPFeedbackInfo(
             @Body DataRequest<GetKPPFeedbackInfoRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<KPPFeedbackResponse>> kppFeedback(
+    Observable<ServerDataResponse<BaseResponse<KPPFeedbackResponse>>> kppFeedback(
             @Body DataRequest<KPPFeedbackRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<KPPResponseFeedbackResponse>> kppResponseFeedback(
+    Observable<ServerDataResponse<BaseResponse<KPPResponseFeedbackResponse>>> kppResponseFeedback(
             @Body DataRequest<KPPResponseFeedbackRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<UploadImageResponse>> uploadImage(
+    Observable<ServerDataResponse<BaseResponse<UploadImageResponse>>> uploadImage(
             @Body DataRequest<UploadImageRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<GetUserInfoResponse>> getUserInfo(
+    Observable<ServerDataResponse<BaseResponse<UserInfo>>> getUserInfo(
             @Body DataRequest<GetUserInfoRequest> request);
 }

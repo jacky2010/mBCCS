@@ -1,5 +1,6 @@
 package com.viettel.mbccs.data.source.remote.service;
 
+import com.viettel.mbccs.data.model.EmptyObject;
 import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.source.remote.request.ChecOTPRequest;
 import com.viettel.mbccs.data.source.remote.request.CheckCalledIsdnRequest;
@@ -97,6 +98,8 @@ import com.viettel.mbccs.data.source.remote.response.SellAnypayToChannelResponse
 import com.viettel.mbccs.data.source.remote.response.SellAnypayToCustomerResponse;
 import com.viettel.mbccs.data.source.remote.response.SendCodeChangePassResponse;
 import com.viettel.mbccs.data.source.remote.response.SendSurveyKPPResponse;
+import com.viettel.mbccs.data.source.remote.response.ServerDataResponse;
+import com.viettel.mbccs.data.source.remote.response.ServerDataResponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import com.viettel.mbccs.data.source.remote.response.TransferAnyPayResponse;
 import com.viettel.mbccs.data.source.remote.response.UpdateAllSubInfoResponse;
@@ -123,206 +126,207 @@ public interface MBCSSApi {
 
     @FormUrlEncoded
     @POST("/send_code_password")
-    Observable<BaseResponse<SendCodeChangePassResponse>> sendCodeChangePass(
+    Observable<ServerDataResponse<BaseResponse<SendCodeChangePassResponse>>> sendCodeChangePass(
             @Field("phone") String phone);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_GetListOrder")
-    Observable<BaseResponse<GetListOrderResponse>> getListOrder(
+    Observable<ServerDataResponse<BaseResponse<GetListOrderResponse>>> getListOrder(
             @Body DataRequest<GetListOrderRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_getListChannelByOwnerTypeId")
-    Observable<BaseResponse<GetListChannelByOwnerTypeIdResponse>> getListChannelByOwnerTypeId(
+    Observable<ServerDataResponse<BaseResponse<GetListChannelByOwnerTypeIdResponse>>> getListChannelByOwnerTypeId(
             @Body DataRequest<GetListChannelByOwnerTypeIdRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_GetAllInfo")
-    Observable<BaseResponse<GetAllInfoResponse>> WS_GetAllInfo(
+    Observable<ServerDataResponse<BaseResponse<GetAllInfoResponse>>> WS_GetAllInfo(
             @Body DataRequest<GetAllInfoRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_GetTelecomServiceAndSaleProgram")
-    Observable<BaseResponse<TelecomServiceAndSaleProgramResponse>> getTelecomserviceAndSaleProgram(
+    Observable<ServerDataResponse<BaseResponse<TelecomServiceAndSaleProgramResponse>>> getTelecomserviceAndSaleProgram(
             @Body DataRequest<GetTelecomServiceAndSaleProgramRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_GetListSerial")
-    Observable<BaseResponse<GetSerialsResponse>> getSerials(
+    Observable<ServerDataResponse<BaseResponse<GetSerialsResponse>>> getSerials(
             @Body DataRequest<GetSerialRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_GetOrderInfo")
-    Observable<BaseResponse<GetOrderInfoResponse>> getOrderInfo(
+    Observable<ServerDataResponse<BaseResponse<GetOrderInfoResponse>>> getOrderInfo(
             @Body DataRequest<GetOrderInfoRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_GetReason")
-    Observable<BaseResponse<GetReasonResponse>> getReason(
+    Observable<ServerDataResponse<BaseResponse<GetReasonResponse>>> getReason(
             @Body DataRequest<GetReasonRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_CreateSaleTransFromOrder")
-    Observable<BaseResponse<CreateSaleTransFromOrderResponse>> createSaleTransFromOrder(
+    Observable<ServerDataResponse<BaseResponse<CreateSaleTransFromOrderResponse>>> createSaleTransFromOrder(
             @Body DataRequest<CreateSaleTransFromOrderRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_UpdateSaleOrder")
-    Observable<BaseResponse<UpdateSaleOrderResponse>> updateSaleOrder(
+    Observable<ServerDataResponse<BaseResponse<UpdateSaleOrderResponse>>> updateSaleOrder(
             @Body DataRequest<UpdateSaleOrderRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_GetStockTotal")
-    Observable<BaseResponse<GetTotalStockResponse>> getModelSales(
+    Observable<ServerDataResponse<BaseResponse<GetTotalStockResponse>>> getModelSales(
             @Body DataRequest<GetTotalStockRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_getSaleTransInfo")
-    Observable<BaseResponse<GetInfoSaleTranResponse>> getSaleTransInfo(
+    Observable<ServerDataResponse<BaseResponse<GetInfoSaleTranResponse>>> getSaleTransInfo(
             @Body DataRequest<GetInfoSaleTranRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_CreateSaleTransRetail")
-    Observable<BaseResponse<CreateSaleTransRetailResponse>> createSaleTransRetail(
+    Observable<ServerDataResponse<BaseResponse<CreateSaleTransRetailResponse>>> createSaleTransRetail(
             @Body DataRequest<GetInfoSaleTranRequest> request);
 
     @POST("/getDistributtedChannelInfo")
-    Observable<BaseResponse<GetDistributedChannelResponse>> getDistributtedChannelInfo(
+    Observable<ServerDataResponse<BaseResponse<GetDistributedChannelResponse>>> getDistributtedChannelInfo(
             @Body SearchBranchRequest request);
 
     @POST("/createDistributtedChannel")
-    Observable<BaseResponse<CreateDistributedChannelResponse>> createDistributtedChannel(
+    Observable<ServerDataResponse<BaseResponse<CreateDistributedChannelResponse>>> createDistributtedChannel(
             @Body DataRequest<CreateDistributedChannelRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_CreateSaleTransChannel")
-    Observable<BaseResponse<CreateSaleTransChannelResponse>> createSaleTransChannel(
+    Observable<ServerDataResponse<BaseResponse<CreateSaleTransChannelResponse>>> createSaleTransChannel(
             @Body DataRequest<CreateSaleTransChannelRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_getListStockModel")
-    Observable<BaseResponse<GetListStockModelResponse>> getListStockModel(
+    Observable<ServerDataResponse<BaseResponse<GetListStockModelResponse>>> getListStockModel(
             @Body DataRequest<GetListStockModelRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_GetListSerial")
-    Observable<BaseResponse<GetListSerialResponse>> getListSerial(
+    Observable<ServerDataResponse<BaseResponse<GetListSerialResponse>>> getListSerial(
             @Body DataRequest<GetListSerialRequest> request);
 
     @POST("/getListProvince")
-    Observable<BaseResponse<GetListProvinceResponse>> getListProvince(
+    Observable<ServerDataResponse<BaseResponse<GetListProvinceResponse>>> getListProvince(
             @Body DataRequest<GetListProvinceRequest> request);
 
     @POST("/getListTTKD")
-    Observable<BaseResponse<GetListTTKDResponse>> getListTTKD(
+    Observable<ServerDataResponse<BaseResponse<GetListTTKDResponse>>> getListTTKD(
             @Body DataRequest<GetListTTKDRequest> request);
 
     @POST("/getListTTKD")
-    Observable<BaseResponse<GetListShopResponse>> getListShop(
+    Observable<ServerDataResponse<BaseResponse<GetListShopResponse>>> getListShop(
             @Body DataRequest<GetListShopRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_createSaleOrders")
-    Observable<BaseResponse<DataResponse>> createSaleOrders(
-            @Body DataRequest<KPPOrderRequest> requestBaseResponse);
+    Observable<ServerDataResponse<BaseResponse<EmptyObject>>> createSaleOrders(
+            @Body DataRequest<KPPOrderRequest> request);
 
     @POST("vietdt/CM_mBCCS/1.0.0/WS_registerCustomerInfo")
-    Observable<BaseResponse<RegisterCustomerInfoResponse>> registerCustomerInfo(
+    Observable<ServerDataResponse<BaseResponse<RegisterCustomerInfoResponse>>> registerCustomerInfo(
             @Body DataRequest<RegisterCustomerInfoRequest> request);
 
     @POST("vietdt/CM_mBCCS/1.0.0/WS_getRegiterSubInfo")
-    Observable<BaseResponse<GetRegiterSubInfoResponse>> getRegiterSubInfo(
+    Observable<ServerDataResponse<BaseResponse<GetRegiterSubInfoResponse>>> getRegiterSubInfo(
             @Body DataRequest<GetRegiterSubInfoRequest> request);
 
     @POST("vietdt/CM_mBCCS/1.0.0/WS_getListBusTypeIdRequire")
-    Observable<BaseResponse<GetListBusTypeIdRequireResponse>> getListBusTypeIdRequire(
+    Observable<ServerDataResponse<BaseResponse<GetListBusTypeIdRequireResponse>>> getListBusTypeIdRequire(
             @Body DataRequest<GetListBusTypeIdRequireRequest> request);
 
     @POST("vietdt/CM_mBCCS/1.0.0/WS_getApDomain")
-    Observable<BaseResponse<GetApDomainResponse>> getApDomain(
+    Observable<ServerDataResponse<BaseResponse<GetApDomainResponse>>> getApDomain(
             @Body DataRequest<GetApDomainRequest> request);
 
     @POST("vietdt/CM_mBCCS/1.0.0/WS_getOTP")
-    Observable<BaseResponse<GetOTPResponse>> getOTP(@Body DataRequest<GetOTPRequest> request);
+    Observable<ServerDataResponse<BaseResponse<GetOTPResponse>>> getOTP(
+            @Body DataRequest<GetOTPRequest> request);
 
     @POST("vietdt/CM_mBCCS/1.0.0/WS_checOTP")
-    Observable<BaseResponse<CheckOTPResponse>> checOTP(@Body DataRequest<ChecOTPRequest> request);
+    Observable<ServerDataResponse<BaseResponse<CheckOTPResponse>>> checOTP(
+            @Body DataRequest<ChecOTPRequest> request);
 
     @POST("vietdt/CM_mBCCS/1.0.0/WS_updateAllSubInfo")
-    Observable<BaseResponse<UpdateAllSubInfoResponse>> updateAllSubInfo(
+    Observable<ServerDataResponse<BaseResponse<UpdateAllSubInfoResponse>>> updateAllSubInfo(
             @Body DataRequest<UpdateAllSubInfoRequest> request);
 
     @POST("vietdt/CM_mBCCS/1.0.0/WS_getProvince")
-    Observable<BaseResponse<GetProvinceResponse>> getProvince(
+    Observable<ServerDataResponse<BaseResponse<GetProvinceResponse>>> getProvince(
             @Body DataRequest<GetProvinceRequest> request);
 
     @POST("vietdt/CM_mBCCS/1.0.0/WS_getDistrict")
-    Observable<BaseResponse<GetDistrictResponse>> getDistrict(
+    Observable<ServerDataResponse<BaseResponse<GetDistrictResponse>>> getDistrict(
             @Body DataRequest<GetDistrictRequest> request);
 
     @POST("vietdt/CM_mBCCS/1.0.0/WS_getPrecinct")
-    Observable<BaseResponse<GetPrecinctResponse>> getPrecinct(
+    Observable<ServerDataResponse<BaseResponse<GetPrecinctResponse>>> getPrecinct(
             @Body DataRequest<GetPrecinctRequest> request);
 
-
     @POST("vietdt/CM_mBCCS/1.0.0/WS_checkIdNo")
-    Observable<BaseResponse<CheckIdNoResponse>> checkIdNo(
+    Observable<ServerDataResponse<BaseResponse<CheckIdNoResponse>>> checkIdNo(
             @Body DataRequest<CheckIdNoRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_CheckAuthenticate")
-    Observable<BaseResponse<GetAnypayAuthorizeResponse>> getAnypayAuthorize(
+    Observable<ServerDataResponse<BaseResponse<GetAnypayAuthorizeResponse>>> getAnypayAuthorize(
             @Body DataRequest<GetAnypayAuthorizeRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_SaleAnyPayToCustomer")
-    Observable<BaseResponse<SellAnypayToCustomerResponse>> saleAnypayToCustomer(
+    Observable<ServerDataResponse<BaseResponse<SellAnypayToCustomerResponse>>> saleAnypayToCustomer(
             @Body DataRequest<SellAnypayToCustomerRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_SaleAnyPayToChannel")
-    Observable<BaseResponse<SellAnypayToChannelResponse>> saleAnypayToChannel(
+    Observable<ServerDataResponse<BaseResponse<SellAnypayToChannelResponse>>> saleAnypayToChannel(
             @Body DataRequest<SellAnypayToChannelRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_TransferAnypay")
-    Observable<BaseResponse<TransferAnyPayResponse>> transferAnyPay(
+    Observable<ServerDataResponse<BaseResponse<TransferAnyPayResponse>>> transferAnyPay(
             @Body DataRequest<TransferAnyPayRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_TransReloadAnypay")
-    Observable<BaseResponse<RefillAnyPayResponse>> refillAnyPay(
+    Observable<ServerDataResponse<BaseResponse<RefillAnyPayResponse>>> refillAnyPay(
             @Body DataRequest<RefillAnyPayRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_TransReloadAnypay")
-    Observable<BaseResponse<GetRegisterSubResponse>> getRegisterSub(
+    Observable<ServerDataResponse<BaseResponse<GetRegisterSubResponse>>> getRegisterSub(
             @Body DataRequest<GetRegisterSubRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_TransReloadAnypay")
-    Observable<BaseResponse<CheckCalledIsdnResponse>> checkCalledIsdn(
+    Observable<ServerDataResponse<BaseResponse<CheckCalledIsdnResponse>>> checkCalledIsdn(
             @Body DataRequest<CheckCalledIsdnRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_TransReloadAnypay")
-    Observable<BaseResponse<UpdateRegisterSubResponse>> updateRegisterSub(
+    Observable<ServerDataResponse<BaseResponse<UpdateRegisterSubResponse>>> updateRegisterSub(
             @Body DataRequest<UpdateRegisterSubRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_TransReloadAnypay")
-    Observable<BaseResponse<GetSurveyKPPResponse>> getSurveyKPP(
+    Observable<ServerDataResponse<BaseResponse<GetSurveyKPPResponse>>> getSurveyKPP(
             @Body DataRequest<GetSurveyKPPRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_TransReloadAnypay")
-    Observable<BaseResponse<SendSurveyKPPResponse>> sendSurveyKPP(
+    Observable<ServerDataResponse<BaseResponse<SendSurveyKPPResponse>>> sendSurveyKPP(
             @Body DataRequest<SendSurveyKPPRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_TransReloadAnypay")
-    Observable<BaseResponse<GetHotNewsCSKPPResponse>> getHotNews(
+    Observable<ServerDataResponse<BaseResponse<GetHotNewsCSKPPResponse>>> getHotNews(
             @Body DataRequest<GetHotNewsCSKPPRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_TransReloadAnypay")
-    Observable<BaseResponse<GetHotNewsInfoCSKPPResponse>> getHotNewsInfo(
+    Observable<ServerDataResponse<BaseResponse<GetHotNewsInfoCSKPPResponse>>> getHotNewsInfo(
             @Body DataRequest<GetHotNewsInfoCSKPPRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_TransReloadAnypay")
-    Observable<BaseResponse<GetKPPFeedbackResponse>> getKPPFeedback(
+    Observable<ServerDataResponse<BaseResponse<GetKPPFeedbackResponse>>> getKPPFeedback(
             @Body DataRequest<GetKPPFeedbackRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_TransReloadAnypay")
-    Observable<BaseResponse<GetKPPFeedbackInfoResponse>> getKPPFeedbackInfo(
+    Observable<ServerDataResponse<BaseResponse<GetKPPFeedbackInfoResponse>>> getKPPFeedbackInfo(
             @Body DataRequest<GetKPPFeedbackInfoRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_TransReloadAnypay")
-    Observable<BaseResponse<KPPFeedbackResponse>> kppFeedback(
+    Observable<ServerDataResponse<BaseResponse<KPPFeedbackResponse>>> kppFeedback(
             @Body DataRequest<KPPFeedbackRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_TransReloadAnypay")
-    Observable<BaseResponse<KPPResponseFeedbackResponse>> kppResponseFeedback(
+    Observable<ServerDataResponse<BaseResponse<KPPResponseFeedbackResponse>>> kppResponseFeedback(
             @Body DataRequest<KPPResponseFeedbackRequest> request);
 
     @POST("vietdt/CM_mBCCS/1.0.0/WS_upLoad")
-    Observable<BaseResponse<UploadImageResponse>> uploadImage(
+    Observable<ServerDataResponse<BaseResponse<UploadImageResponse>>> uploadImage(
             @Body DataRequest<UploadImageRequest> request);
 
     // TODO: 12/06/2017 Fake request
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<BaseResponse<GetUserInfoResponse>> getUserInfo(
+    Observable<ServerDataResponse<BaseResponse<GetUserInfoResponse>>> getUserInfo(
             @Body DataRequest<GetUserInfoRequest> request);
 }

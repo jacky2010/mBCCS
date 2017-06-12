@@ -1,5 +1,6 @@
 package com.viettel.mbccs.data.source.remote.datasource;
 
+import com.viettel.mbccs.data.model.EmptyObject;
 import com.viettel.mbccs.data.source.remote.IBanHangKhoTaiChinhRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.request.CreateSaleTransFromOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
@@ -19,6 +20,7 @@ import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
 import com.viettel.mbccs.data.source.remote.request.KPPOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.UpdateSaleOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListSerialRequest;
+import com.viettel.mbccs.data.source.remote.response.BaseResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransChannelResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransRetailResponse;
 import com.viettel.mbccs.data.source.remote.response.DataResponse;
@@ -34,6 +36,7 @@ import com.viettel.mbccs.data.source.remote.response.GetOrderInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetReasonResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
 import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
+import com.viettel.mbccs.data.source.remote.response.ServerDataResponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import com.viettel.mbccs.data.source.remote.response.UpdateSaleOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListSerialResponse;
@@ -154,12 +157,12 @@ public class BanHangKhoTaiChinhRemoteDataSource implements IBanHangKhoTaiChinhRe
                 .compose(SchedulerUtils.<GetListShopResponse>applyAsyncSchedulers());
     }
 
-    public Observable<DataResponse> createSaleOrders(
+    public Observable<EmptyObject> createSaleOrders(
             DataRequest<KPPOrderRequest> requestDataRequest) {
         return RequestHelper.getRequest()
                 .createSaleOrders(requestDataRequest)
-                .flatMap(SchedulerUtils.convertDataFlatMap())
-                .compose(SchedulerUtils.<DataResponse>applyAsyncSchedulers());
+                .flatMap(SchedulerUtils.<EmptyObject>convertDataFlatMap())
+                .compose(SchedulerUtils.<EmptyObject>applyAsyncSchedulers());
     }
 
     @Override

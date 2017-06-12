@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class GetTelecomServiceAndSaleProgramRequest {
     @Expose
-    @SerializedName("shop_id")
+    @SerializedName("shopId")
     private String shopId;
 
     public String getShopId() {

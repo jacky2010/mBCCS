@@ -18,6 +18,7 @@ import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetInfoSaleTranResponse;
 import com.viettel.mbccs.utils.Common;
+import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.List;
 import rx.Subscription;
@@ -158,15 +159,15 @@ public class PaymentInforChannelPresenter implements PaymentInforChannelContract
 
                             @Override
                             public void onError(BaseException error) {
-                                //DialogUtils.showDialogError(mContext, null, error.getMessage(),
-                                //        null);
+                                DialogUtils.showDialogError(mContext, null, error.getMessage(),
+                                        null);
                                 //fake
-                                isGetTransInfo.set(true);
-                                SaleTrans sale = new SaleTrans();
-                                sale.setAmountNotTax(12000000);
-                                sale.setTax(123000);
-                                sale.setAmountTax(11000000);
-                                loadAmount(sale);
+//                                isGetTransInfo.set(true);
+//                                SaleTrans sale = new SaleTrans();
+//                                sale.setAmountNotTax(12000000);
+//                                sale.setTax(123000);
+//                                sale.setAmountTax(11000000);
+//                                loadAmount(sale);
                             }
 
                             @Override

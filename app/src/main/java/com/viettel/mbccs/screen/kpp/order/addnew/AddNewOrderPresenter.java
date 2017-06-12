@@ -7,8 +7,10 @@ import android.databinding.ObservableField;
 import android.view.View;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.data.model.EmptyObject;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
+import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.KPPOrderRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
@@ -36,6 +38,7 @@ public class AddNewOrderPresenter implements AddNewOrderContract.Presenter {
     private CompositeSubscription mCompositeSubscription;
     private ArrayList<StockTotal> mStockTotals = new ArrayList<>();
     private BanHangKhoTaiChinhRepository mBanHangKhoTaiChinhRepository;
+    private UserRepository mUserRepository;
     private DataRequest<KPPOrderRequest> mKPPOrderRequestBaseRequest;
 
     public AddNewOrderPresenter(Context context, AddNewOrderContract.ViewModel viewModel) {
@@ -43,13 +46,14 @@ public class AddNewOrderPresenter implements AddNewOrderContract.Presenter {
         mViewModel = viewModel;
         mCompositeSubscription = new CompositeSubscription();
         mBanHangKhoTaiChinhRepository = BanHangKhoTaiChinhRepository.getInstance();
+        mUserRepository = UserRepository.getInstance();
         init();
         loadData();
     }
 
     private void init() {
         titleOrder = new ObservableField<>();
-        titleOrder.set("Đặt hàng từ KPP : POS_1233");
+        titleOrder.set(mUserRepository.getUserInfo().getChannelInfo().getChannelName());
         amount = new ObservableField<>();
         caculatePrice();
         mAdapter = new StockTotalAdapter(mContext, mStockTotals);
@@ -113,15 +117,15 @@ public class AddNewOrderPresenter implements AddNewOrderContract.Presenter {
         mKPPOrderRequestBaseRequest = new DataRequest<>();
         mKPPOrderRequestBaseRequest.setApiCode(ApiCode.CreateSaleOrders);
         KPPOrderRequest request = new KPPOrderRequest();
-        request.setStaffId(1);
-        request.setChannelStaffId(1);
+        request.setStaffId(mUserRepository.getUserInfo().getStaffInfo().getStaffId());
+        request.setChannelStaffId(mUserRepository.getUserInfo().getChannelInfo().getChannelId());
         request.setListStockModel(Common.convertStockTotalsToStockModels(mStockTotals));
         mKPPOrderRequestBaseRequest.setParameterApi(request);
         Subscription subscription =
                 mBanHangKhoTaiChinhRepository.createSaleOrders(mKPPOrderRequestBaseRequest)
-                        .subscribe(new MBCCSSubscribe<DataResponse>() {
+                        .subscribe(new MBCCSSubscribe<EmptyObject>() {
                             @Override
-                            public void onSuccess(DataResponse object) {
+                            public void onSuccess(EmptyObject object) {
                                 mViewModel.gotoSuccessScreen(mStockTotals);
                             }
 

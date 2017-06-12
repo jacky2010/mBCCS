@@ -9,7 +9,7 @@ public class GetListOrderRequest  {
     private long shopId;
     private long staffId;
     private long orderStatus;
-    private long isdnChannel;
+    private String isdnChannel;
     private String fromDate;
     private String toDate;
 
@@ -37,11 +37,11 @@ public class GetListOrderRequest  {
         this.orderStatus = orderStatus;
     }
 
-    public long getIsdnChannel() {
+    public String getIsdnChannel() {
         return isdnChannel;
     }
 
-    public void setIsdnChannel(long isdnChannel) {
+    public void setIsdnChannel(String isdnChannel) {
         this.isdnChannel = isdnChannel;
     }
 

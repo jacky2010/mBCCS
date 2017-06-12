@@ -6,6 +6,8 @@ import android.databinding.ObservableField;
 import android.widget.ArrayAdapter;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.SaleTranType;
+import com.viettel.mbccs.constance.StockTotalType;
 import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.model.SaleChannelInitData;
@@ -55,6 +57,7 @@ public class SaleChannelPresenter
     private ChannelInfo currentChannel = new ChannelInfo();
     private int currentStockPosition = -1;
     private BanHangKhoTaiChinhRepository mBanHangKhoTaiChinhRepository;
+    private UserRepository mUserRepository;
     private DataRequest<GetTelecomServiceAndSaleProgramRequest>
             mGetTelecomServiceAndSaleProgramRequest;
     private DataRequest<GetListChannelByOwnerTypeIdRequest> mGetListChannelByOwnerTypeIdRequest;
@@ -66,6 +69,7 @@ public class SaleChannelPresenter
         mViewModel = viewModel;
         mSubscription = new CompositeSubscription();
         mBanHangKhoTaiChinhRepository = BanHangKhoTaiChinhRepository.getInstance();
+        mUserRepository = UserRepository.getInstance();
         init();
         initialData();
     }
@@ -81,8 +85,11 @@ public class SaleChannelPresenter
         if (currentTelecomService.getId() != -1) {
             request.setTelecomServiceId(currentTelecomService.getId());
         }
-        //TODO set attribute for request
-
+        request.setOwnerId(mUserRepository.getUserInfo().getStaffInfo().getStaffId());
+        //hard code 2
+        request.setOwnerType(2);
+        request.setStateId(StockTotalType.TYPE_NEW);
+        request.setSaleTransType(SaleTranType.SALE_CHANNEL);
         mGetTotalStockRequest.setParameterApi(request);
         Subscription subscription =
                 mBanHangKhoTaiChinhRepository.getModelSales(mGetTotalStockRequest)
@@ -189,7 +196,7 @@ public class SaleChannelPresenter
         mGetTelecomServiceAndSaleProgramRequest.setApiCode(ApiCode.GetTelecomServiceAndSaleProgram);
         GetTelecomServiceAndSaleProgramRequest request =
                 new GetTelecomServiceAndSaleProgramRequest();
-
+        request.setShopId(mUserRepository.getUserInfo().getShop().getShopId());
         mGetTelecomServiceAndSaleProgramRequest.setParameterApi(request);
         return mBanHangKhoTaiChinhRepository.getTelecomserviceAndSaleProgram(
                 mGetTelecomServiceAndSaleProgramRequest);
@@ -199,7 +206,7 @@ public class SaleChannelPresenter
         mGetListChannelByOwnerTypeIdRequest = new DataRequest<>();
         mGetListChannelByOwnerTypeIdRequest.setApiCode(ApiCode.GetListChannelByOwnerTypeId);
         GetListChannelByOwnerTypeIdRequest request = new GetListChannelByOwnerTypeIdRequest();
-        request.setStaffId(1);
+        request.setStaffId(mUserRepository.getUserInfo().getStaffInfo().getStaffId());
         request.setLanguage("en");
         mGetListChannelByOwnerTypeIdRequest.setParameterApi(request);
         return mBanHangKhoTaiChinhRepository.getListChannelByOwnerTypeId(
@@ -352,8 +359,8 @@ public class SaleChannelPresenter
         channelText = new ObservableField<>();
         isCollapse = new ObservableField<>();
         isCollapse.set(false);
-        mAdapter = new ArrayAdapter<TeleComService>(mContext, R.layout.item_spinner,
-                mTeleComServices);
+        mAdapter =
+                new ArrayAdapter<TeleComService>(mContext, R.layout.item_spinner, mTeleComServices);
         mAdapter.setDropDownViewResource(R.layout.item_spinner);
         stockAdapter = new StockAdapter(mContext, mModelSales);
         stockAdapter.setOnStockListener(this);

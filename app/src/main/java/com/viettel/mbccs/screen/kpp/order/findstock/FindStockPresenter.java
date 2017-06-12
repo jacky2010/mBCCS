@@ -203,7 +203,7 @@ public class FindStockPresenter
             text += " - " + arrStockType[1];
         }
 
-        if (stockType == StockTotalType.TYPE_OLD) {
+        if (stockType == StockTotalType.TYPE_FAIL) {
             text += " - " + arrStockType[2];
         }
 
@@ -228,7 +228,7 @@ public class FindStockPresenter
             stockType = StockTotalType.TYPE_NEW;
         }
         if (position == 2) {
-            stockType = StockTotalType.TYPE_OLD;
+            stockType = StockTotalType.TYPE_FAIL;
         }
     }
 

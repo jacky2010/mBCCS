@@ -136,7 +136,7 @@ public class SellOrdersPresenter {
         GetListOrderRequest getListOrderRequest = new GetListOrderRequest();
         getListOrderRequest.setShopId(staffInfo.get().getShopId());
         getListOrderRequest.setStaffId(staffInfo.get().getStaffId());
-        getListOrderRequest.setIsdnChannel(channelInfoSelect.getChannelId());
+        getListOrderRequest.setIsdnChannel(String.valueOf(channelInfoSelect.getChannelId()));
         getListOrderRequest.setToDate(sellOrdersView.getStringDateTo());
         getListOrderRequest.setFromDate(sellOrdersView.getStringDateFrom());
         getListOrderRequest.setOrderStatus(1);

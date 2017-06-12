@@ -147,12 +147,12 @@ public class PaymentInfoPresenter implements PaymentInforContract.Presenter {
                                 DialogUtils.showDialogError(mContext, null, error.getMessage(),
                                         null);
                                 //fake
-                                isGetTransInfo.set(true);
-                                SaleTrans sale = new SaleTrans();
-                                sale.setAmountNotTax(12000000);
-                                sale.setTax(123000);
-                                sale.setAmountTax(11000000);
-                                loadAmount(sale);
+//                                isGetTransInfo.set(true);
+//                                SaleTrans sale = new SaleTrans();
+//                                sale.setAmountNotTax(12000000);
+//                                sale.setTax(123000);
+//                                sale.setAmountTax(11000000);
+//                                loadAmount(sale);
                             }
 
                             @Override

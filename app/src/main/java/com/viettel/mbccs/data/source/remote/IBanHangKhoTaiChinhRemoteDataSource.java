@@ -1,5 +1,6 @@
 package com.viettel.mbccs.data.source.remote;
 
+import com.viettel.mbccs.data.model.EmptyObject;
 import com.viettel.mbccs.data.source.remote.request.CreateSaleTransFromOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateSaleTransChannelRequest;
@@ -71,7 +72,7 @@ public interface IBanHangKhoTaiChinhRemoteDataSource {
     Observable<GetListShopResponse> getListShop(DataRequest<GetListShopRequest> request);
 
 
-    Observable<DataResponse> createSaleOrders(DataRequest<KPPOrderRequest> requestDataRequest);
+    Observable<EmptyObject> createSaleOrders(DataRequest<KPPOrderRequest> requestDataRequest);
 
     Observable<TelecomServiceAndSaleProgramResponse> getTelecomserviceAndSaleProgram(
             DataRequest<GetTelecomServiceAndSaleProgramRequest> request);
