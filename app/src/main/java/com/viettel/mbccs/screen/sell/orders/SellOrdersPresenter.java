@@ -86,6 +86,11 @@ public class SellOrdersPresenter {
                         .subscribe(new MBCCSSubscribe<GetListChannelByOwnerTypeIdResponse>() {
                             @Override
                             public void onSuccess(GetListChannelByOwnerTypeIdResponse object) {
+                                if (object == null || object.getChannelInfoList() == null) {
+                                    sellOrdersView.hideLoading();
+                                    sellOrdersView.getListChannelByOwnerTypeIdError("Không có dữ liệu về kênh");
+                                    return;
+                                }
                                 channelInfoList = object.getChannelInfoList();
                                 for (ChannelInfo c : channelInfoList) {
                                     dataSpinnerChannel.add(c.getManagementName());

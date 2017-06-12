@@ -1,5 +1,6 @@
 package com.viettel.mbccs.screen.sell.orders;
 
+import android.content.DialogInterface;
 import android.support.design.widget.TabLayout;
 import android.view.View;
 import android.widget.AdapterView;
@@ -122,6 +123,22 @@ public class SellOrdersActivity
     @Override
     public void getListChannelByOwnerTypeIdError(BaseException error) {
         DialogUtils.showDialogError(this, error.getMessage());
+        DialogUtils.showDialogError(this, error, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                onBackPressed();
+            }
+        }, false);
+    }
+
+    @Override
+    public void getListChannelByOwnerTypeIdError(String error) {
+        DialogUtils.showDialogError(this, null, error, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                onBackPressed();
+            }
+        }, false);
     }
 
     @Override
