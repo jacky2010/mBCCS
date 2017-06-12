@@ -14,7 +14,6 @@ import android.text.method.MovementMethod;
 import android.text.style.ClickableSpan;
 import android.view.View;
 import android.widget.Toast;
-
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.source.UserRepository;
@@ -40,7 +39,8 @@ public class LoginPresenter implements LoginContract.Presenter {
     private Context mContext;
     private UserRepository mUserRepository;
 
-    public LoginPresenter(Context context, LoginContract.ViewModel viewModel, UserRepository userRepository) {
+    public LoginPresenter(Context context, LoginContract.ViewModel viewModel,
+            UserRepository userRepository) {
         mViewModel = viewModel;
         mContext = context;
         mUserRepository = userRepository;
@@ -66,26 +66,29 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     @Override
     public void login(final String username, String password) {
-//        mViewModel.onLoginSuccess();
+        //        mViewModel.onLoginSuccess();
         LoginRequest loginRequest = new LoginRequest();
-        loginRequest.setUsername(username);
-        loginRequest.setPassword(password);
-        UserRepository.getInstance()
-                .login(loginRequest)
-                .subscribe(new MBCCSSubscribe<LoginInfo>() {
-                    @Override
-                    public void onSuccess(LoginInfo object) {
-                        mUserRepository.saveLoginUserName(username);
-                        mUserRepository.saveUser(object);
-                        mViewModel.onLoginSuccess();
-                    }
+        loginRequest.setUsername(username.trim());
+        loginRequest.setPassword(password.trim());
+        UserRepository.getInstance().login(loginRequest).subscribe(new MBCCSSubscribe<LoginInfo>() {
+            @Override
+            public void onSuccess(LoginInfo object) {
+                if (object == null || TextUtils.isEmpty(object.getToken())) {
+                    onError(new Throwable());
+                    return;
+                }
+                mUserRepository.saveLoginUserName(username);
+                mUserRepository.saveUser(object);
+                mViewModel.onLoginSuccess();
+            }
 
-                    @Override
-                    public void onError(BaseException error) {
-                        Toast.makeText(mContext, "Login fail", Toast.LENGTH_SHORT).show();
-                        //TODO
-                    }
-                });
+            @Override
+            public void onError(BaseException error) {
+                Toast.makeText(mContext, "Login fail", Toast.LENGTH_SHORT).show();
+                //TODO
+                loading.set(false);
+            }
+        });
     }
 
     public void login() {
@@ -119,8 +122,7 @@ public class LoginPresenter implements LoginContract.Presenter {
             public void updateDrawState(TextPaint ds) {
                 super.updateDrawState(ds);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    ds.setColor(mContext.getResources()
-                            .getColor(R.color.black, null));
+                    ds.setColor(mContext.getResources().getColor(R.color.black, null));
                 } else {
                     ds.setColor(mContext.getResources().getColor(R.color.black));
                 }
@@ -136,7 +138,8 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     public Spannable getCallText() {
         SpannableStringBuilder content = new SpannableStringBuilder(
-                mContext.getString(R.string.login_presenter_customer_service, CUSTOMER_SERVICE_PHONE));
+                mContext.getString(R.string.login_presenter_customer_service,
+                        CUSTOMER_SERVICE_PHONE));
         content.setSpan(new ClickableSpan() {
                             @Override
                             public void onClick(View widget) {
@@ -150,8 +153,7 @@ public class LoginPresenter implements LoginContract.Presenter {
                                 super.updateDrawState(ds);
                                 ds.setFakeBoldText(true);
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                                    ds.setColor(mContext.getResources()
-                                            .getColor(R.color.black, null));
+                                    ds.setColor(mContext.getResources().getColor(R.color.black, null));
                                 } else {
                                     ds.setColor(mContext.getResources().getColor(R.color.black));
                                 }

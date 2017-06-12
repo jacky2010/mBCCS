@@ -1,4 +1,3 @@
-
 package com.viettel.mbccs.data.model;
 
 import com.google.gson.annotations.Expose;
@@ -12,9 +11,6 @@ public class Apis {
     @SerializedName("apiName")
     @Expose
     private String apiName;
-    @SerializedName("apiKey")
-    @Expose
-    private String apiKey;
 
     public String getApiCode() {
         return apiCode;
@@ -31,13 +27,4 @@ public class Apis {
     public void setApiName(String apiName) {
         this.apiName = apiName;
     }
-
-    public String getApiKey() {
-        return apiKey;
-    }
-
-    public void setApiKey(String apiKey) {
-        this.apiKey = apiKey;
-    }
-
 }

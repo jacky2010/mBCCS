@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.Function;
+import com.viettel.mbccs.data.model.LoginInfo;
+import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.databinding.ActivitySubMenuBinding;
 import com.viettel.mbccs.databinding.ItemImageGridBinding;
 import com.viettel.mbccs.databinding.ItemMenuBinding;
@@ -88,27 +90,11 @@ public class BaseSubMenuActivity
     }
 
     public void initMenuList() {
-        switch (mFunction.getFunctionCode()) {
-            case Function.TopMenu.MENU_QUAN_LY_BAN_HANG:
-                break;
-            case Function.TopMenu.MENU_QUAN_LY_THONG_TIN_KH:
-                break;
-            case Function.TopMenu.MENU_QUAN_LY_DIA_BAN:
-                break;
-            case Function.TopMenu.MENU_QUAN_LY_THU_CUOC:
-                break;
-            case Function.TopMenu.MENU_QUAN_LY_CONG_VIEC:
-                break;
-            case Function.TopMenu.MENU_QUAN_LY_KHO:
-                break;
-            case Function.TopMenu.MENU_QUAN_LY_BAO_HANH:
-                break;
-            case Function.TopMenu.MENU_QUAN_LY_CSKH:
-                break;
-            case Function.TopMenu.MENU_QUAN_LY_TAI_CHINH:
-                break;
-            case Function.TopMenu.MENU_BAO_CAO:
-                break;
+        LoginInfo loginInfo = UserRepository.getInstance().getUser();
+        for (Function f : loginInfo.getFunction()) {
+            if (f.getParentCode().equals(mFunction.getFunctionCode())) {
+                mFunctionList.add(f);
+            }
         }
     }
 
