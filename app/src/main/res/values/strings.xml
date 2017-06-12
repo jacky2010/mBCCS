@@ -172,50 +172,8 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="amount_no_tax">Tổng tiền : %s đồng</string>
     <string name="amount">Số tiền phải thanh toán : %s đồng</string>
     <string name="tax">Tiền thuế : %s đồng</string>
-    <string formatted="false" name="confirm_before_save_trans_msg"><![CDATA[
-Bán cho khách hàng <b>%s</b> :<br>
- · Số điện thoại : <b>%s</b><br>
- · Số tiền thanh toán : <b>%s</b>(%s)<br>
-<br>
-<br>
-<br>
-Từ <b>%s</b><br>
-· Số điện thoại : <b>%s</b><br>
-Theo mã chương trình bán hàng %s
-    ]]></string>
 
-    <string formatted="false" name="confirm_before_save_trans_msg_channel"><![CDATA[
-Bán cho kênh <b>%s</b> :<br>
- · Số điện thoại : <b>%s</b><br>
- · Số tiền thanh toán : <b>%s</b>(%s)<br>
-<br>
-<br>
-<br>
-Từ <b>%s</b><br>
-· Số điện thoại : <b>%s</b><br>
-Theo mã chương trình bán hàng %s
-    ]]></string>
-    <string formatted="false" name="confirm_before_save_trans_msg_no_saleprogram"><![CDATA[
-Bán cho khách hàng <b>%s</b> :<br>
- · Số điện thoại : <b>%s</b><br>
- · Số tiền thanh toán : <b>%s</b>(%s đồng)<br>
-<br>
-<br>
-<br>
-Từ <b>%s</b><br>
-· Số điện thoại : <b>%s</b><br>
-    ]]></string>
-
-    <string formatted="false" name="confirm_before_save_trans_msg_no_saleprogram_channel"><![CDATA[
-Bán cho kênh <b>%s</b> :<br>
- · Số điện thoại : <b>%s</b><br>
- · Số tiền thanh toán : <b>%s</b>(%s đồng)<br>
-<br>
-<br>
-<br>
-Từ <b>%s</b><br>
-· Số điện thoại : <b>%s</b><br>
-    ]]></string>
+    <!--sale -->
     <string name="confirm_sale_retail">Xác nhận bán lẻ</string>
     <string name="no_serial">Chưa có sản phẩm nào được chọn</string>
 
@@ -299,6 +257,48 @@ Từ <b>%s</b><br>
     <string name="common_msg_confirm_change_sim">Bạn có muốn đổi sim cho khách hàng %1$s từ số serial %2$s sang số serial %3$s?</string>
     <string name="change_sim_msg_updated_sim">SIM cho khách hàng %s đã được thay đổi thành công!</string>
     <!--Change Sim-->
+    <string name="channel_code">Mã kênh</string>
+    <string name="channel_name">Tên kênh</string>
+    <string name="tax_code">Mã số thuế</string>
+    <string name="sale_confirm_label_confirm_sell">Xác nhận bán cho</string>
+    <string formatted="false" name="sale_retail_confirm_customer_infor">
+        <![CDATA[
+<b>Bán cho khách hàng %s</b> :<br>
+   Số điện thoại : <b>%s</b><br>
+   Số tiền thanh toán : <b>%s</b>
+   <br>%s
+        ]]>
+    </string>
+
+    <string formatted="false" name="sale_retail_confirm_saler_infor">
+        <![CDATA[
+<b>Từ %s</b><br>
+ Số điện thoại : <b>%s</b><br>
+        ]]>
+    </string>
+
+    <!--sale channel-->
+
+    <string formatted="false" name="sale_channel_confirm_customer_infor">
+        <![CDATA[
+<b>Bán cho kênh  %s</b> :<br>
+   Số điện thoại : <b>%s</b><br>
+   Số tiền thanh toán : <b>%s</b>
+   <br>%s
+        ]]>
+    </string>
+
+    <string formatted="false" name="sale_channel_confirm_saler_infor">
+        <![CDATA[
+<b>Từ %s</b><br>
+ Số điện thoại : <b>%s</b><br>
+        ]]>
+    </string>
+
+
+    <string formatted="false" name="sale_confirm_sale_program">
+        <b>Theo mã chương trình bán hàng %s</b>
+    </string>
 
     <string name="view_ware_house_title">Chi tiết kho</string>
     <string name="view_ware_house_list_stock">Danh sách mặt hàng (%1$d)</string>

@@ -245,6 +245,9 @@ public class BindingUtils {
 
     @BindingAdapter({ "textHtml" })
     public static void setText(TextView text, String html) {
+        if (TextUtils.isEmpty(html)) {
+            return;
+        }
         text.setText(Html.fromHtml(html));
     }
 
@@ -258,7 +261,9 @@ public class BindingUtils {
     @BindingAdapter(value = { "android:adapter", "android:divider" }, requireAll = false)
     public static void setAdapter(RecyclerView recyclerView, RecyclerView.Adapter adapter,
             boolean divider) {
-        recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
+        recyclerView.setLayoutManager(
+                new LinearLayoutManager(recyclerView.getContext(), LinearLayoutManager.VERTICAL,
+                        false));
         recyclerView.setHasFixedSize(true);
         if (divider) {
             recyclerView.addItemDecoration(new VerticalSpaceItemDecoration(30));

@@ -158,7 +158,7 @@ public class Common {
         int slen = temp.length();
         for (int i = 0; i < slen; i++) {
             if (String.valueOf(temp.charAt(i)).equals(".")) {
-                break;
+                continue;
             } else if (Character.isDigit(temp.charAt(i))) {
                 strReturn += String.valueOf(temp.charAt(i));
             }

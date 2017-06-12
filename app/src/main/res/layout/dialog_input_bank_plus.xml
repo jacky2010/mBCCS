@@ -38,7 +38,9 @@
             android:text="@={presenter.phone}"
             app:error="@{presenter.phoneError}"
             style="@style/inputStyle"
-            />
+            >
+            <requestFocus/>
+        </com.viettel.mbccs.widget.CustomEdittext>
 
         <com.viettel.mbccs.widget.CustomButton
             android:layout_width="@dimen/dp_150"

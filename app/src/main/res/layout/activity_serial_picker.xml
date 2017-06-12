@@ -250,11 +250,10 @@
 
                             <ImageView
                                 android:id="@+id/btn_submit_serial"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
+                                android:layout_width="@dimen/dp_20"
+                                android:layout_height="@dimen/dp_20"
                                 android:onClick="@{()->presenter.chooseSerial()}"
-                                android:padding="3dp"
-                                android:src="@{presenter.chooseAble?@drawable/ic_done_green:@drawable/ic_done_black}"
+                                android:src="@{presenter.chooseAble?@drawable/ic_circle_check:null}"
                                 android:text="Chọn serial"
                                 android:textColor="#fff"
                                 android:textStyle="bold"

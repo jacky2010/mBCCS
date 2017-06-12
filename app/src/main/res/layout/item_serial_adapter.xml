@@ -96,7 +96,7 @@
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_gravity="center"
-                        android:src="@{item.selected?@drawable/ic_done_green:@drawable/ic_done_black}"
+                        android:src="@{item.selected?@drawable/ic_circle_check:null}"
                         />
                 </LinearLayout>
             </LinearLayout>
