@@ -33,6 +33,14 @@ android {
       dimension "mbccs"
     }
 
+    stg {
+      applicationId "com.viettel.mbccs"
+      versionCode rootProject.ext.versionCode_dev
+      versionName rootProject.ext.versionName_dev
+      versionNameSuffix "-stg"
+      dimension "mbccs"
+    }
+
     product {
       applicationId "com.viettel.mbccs"
       versionCode rootProject.ext.versionCode_product

@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
 public class BaseResponse<T extends DataResponse> extends DataResponse {
 
     @Expose
-    @SerializedName("wsResponse")
+    @SerializedName("object")
     private T data;
 
     public T getData() {
