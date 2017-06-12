@@ -54,11 +54,12 @@ public class SplashPresenter implements SplashContract.Presenter {
     }
 
     public void checkDataProvince() {
-        if (userRepository.getListProvince().size() != 0) {
-            checkLogin();
-        } else {
-            getDataProvinceFromServer();
-        }
+        checkLogin();
+//        if (userRepository.getListProvince().size() != 0) {
+//            checkLogin();
+//        } else {
+//            getDataProvinceFromServer();
+//        }
     }
 
     private void checkLogin() {

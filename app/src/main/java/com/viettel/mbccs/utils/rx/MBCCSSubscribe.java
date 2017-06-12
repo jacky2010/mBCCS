@@ -4,8 +4,11 @@ import com.viettel.mbccs.data.source.remote.response.BaseException;
 import rx.Subscriber;
 
 public abstract class MBCCSSubscribe<T> extends Subscriber<T> {
-    private T object;
 
+
+
+
+    private T object;
     @Override
     public void onCompleted() {
         onRequestFinish();
