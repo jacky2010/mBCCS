@@ -848,4 +848,8 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="upload_service_finish">Finish</string>
     <string name="input_phone_hint">Nhập số điện thoại</string>
     <string name="login_presenter_login_error">Tên đăng nhập hoặc Mật khẩu không đúng!</string>
+
+    <!--Stock Delivery-->
+    <string name="stock_delivery_title">Xuất kho cấp dưới</string>
+    <string name="stock_deliver_shipment">Phiếu chưa xuất kho (%s)</string>
 </resources>

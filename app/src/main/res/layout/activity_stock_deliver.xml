@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <data>
+        <variable
+            name="presenter"
+            type="com.viettel.mbccs.screen.stockdeliver.StockDeliverPresenter"
+            />
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <include
+            layout="@layout/toolbar"
+            app:background="@{@color/colorAccent}"
+            app:isShow="@{true}"
+            app:leftIcon="@{@drawable/ic_arrow_left_white_24dp}"
+            app:leftIconClick="@{()->presenter.onBackClick()}"
+            app:title="@{@string/stock_delivery_title}"
+            app:titleTextSize="@{@dimen/sp_17}"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_30"
+                android:background="@color/progress_gray"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/dp_16"
+                android:text="@{String.format(@string/stock_deliver_shipment, presenter.countShipment)}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_18"
+                android:textStyle="bold"
+                tools:text="@string/stock_deliver_shipment"
+                />
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adapter="@{presenter.adapter}"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>
