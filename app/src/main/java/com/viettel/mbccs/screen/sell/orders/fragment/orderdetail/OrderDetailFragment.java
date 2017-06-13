@@ -70,6 +70,11 @@ public class OrderDetailFragment extends BaseFragment implements OrderDetailFrag
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         channelInfo = getArguments().getParcelable(ARG_CHANGE_INFO);
+        if(getOrderInfoResponse != null){
+            presenter.setData(getOrderInfoResponse);
+            setData(getOrderInfoResponse);
+            return;
+        }
         presenter.getDetailOrder((long) getArguments().get(ARG_ID_ORDER));
     }
 

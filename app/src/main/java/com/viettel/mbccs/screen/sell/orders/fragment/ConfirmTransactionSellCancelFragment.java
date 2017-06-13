@@ -211,6 +211,7 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
     }
 
     public void onSellOrCancel() {
+        showLoadingDialog();
         if (isSell) {
             sellOrder();
         } else {
@@ -279,10 +280,12 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
     }
 
     private void sellOrderError(BaseException error) {
+        hideLoadingDialog();
         DialogUtils.showDialogError(getActivity(), error.getMessage());
     }
 
     private void sellOrderSuccess(boolean type) {
+        hideLoadingDialog();
         Dialog dia = new DialogFullScreen.Builder(getActivity()).setCenterContent(true)
                 .setTitle(type ? getString(
                         R.string.confirm_transaction_sell_cancel_ban_giao_dich_thanh_cong)

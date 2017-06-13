@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.SaleOrdersDetail;
 import com.viettel.mbccs.data.model.SaleTrans;
-import com.viettel.mbccs.data.model.SerialBO;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetOrderInfoRequest;
@@ -28,8 +27,7 @@ public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract
     private OrderDetailFragmentContract.View view;
     private BanHangKhoTaiChinhRepository banHangKhoTaiChinhRepository;
     private CompositeSubscription subscriptions;
-    private List<SaleOrdersDetail> saleOrdersDetailList;
-    private SaleTrans saleTrans;
+    private GetOrderInfoResponse getOrderInfoResponse;
 
     public ObservableField<OrderDetailAdapter> adapterOrderDetail;
     public ObservableField<SaleTrans> saleTransField;
@@ -72,16 +70,16 @@ public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract
 
     @Override
     public void selectSerialClick(int position) {
-        if (saleOrdersDetailList == null) {
+        if (getOrderInfoResponse.getSaleOrdersDetailList() == null) {
             return;
         }
-        SaleOrdersDetail saleOrdersDetail = saleOrdersDetailList.get(position);
+        SaleOrdersDetail saleOrdersDetail =
+                getOrderInfoResponse.getSaleOrdersDetailList().get(position);
         view.pickSerial(saleOrdersDetail);
     }
 
     public void getDetailOrder(long idOrder) {
         view.showLoading();
-        // TODO: 5/16/17 get Detail Order from API
         this.idOrder.set(String.valueOf(idOrder));
 
         // TODO: 5/30/17 fake data
@@ -96,8 +94,7 @@ public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract
                 .subscribe(new MBCCSSubscribe<GetOrderInfoResponse>() {
                     @Override
                     public void onSuccess(GetOrderInfoResponse object) {
-                        saleOrdersDetailList = object.getSaleOrdersDetailList();
-                        saleTrans = object.getSaleTrans();
+                        getOrderInfoResponse = object;
                         view.setData(object);
                         setDataDisplayMoney();
                         view.hideLoading();
@@ -113,6 +110,7 @@ public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract
     }
 
     private void setDataDisplayMoney() {
+        SaleTrans saleTrans = getOrderInfoResponse.getSaleTrans();
         amountNotTax.set(Common.formatDouble(saleTrans.getAmountNotTax()));
         amountTax.set(Common.formatDouble(saleTrans.getAmountTax()));
         discount.set(Common.formatDouble(saleTrans.getDiscount()));
@@ -137,8 +135,8 @@ public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract
         //        if (list.size())
     }
 
-    @Override
-    public void onSerialPickerSuccess(List<SerialBO> serialBlockBySerials) {
-        //TODO upte serialBO list
+    public void setData(GetOrderInfoResponse data) {
+        this.getOrderInfoResponse = data;
+        setDataDisplayMoney();
     }
 }
