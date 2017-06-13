@@ -12,6 +12,7 @@
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/dp_8"
         >
 
         <com.viettel.mbccs.widget.CustomTextView
@@ -32,6 +33,7 @@
             android:layout_below="@id/text1"
             android:layout_marginTop="@dimen/dp_4"
             android:layout_toStartOf="@+id/text3"
+            android:layout_toLeftOf="@+id/text3"
             android:text="@{ @string/item_nhap_kho_cap_duoi_mat_hang_so_luong_nhap(item.quantity) }"
             style="@style/TextSearchTask"
             />
@@ -41,6 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_alignTop="@id/text2"
             android:textColor="@color/blue"
             android:textSize="@dimen/sp_14"

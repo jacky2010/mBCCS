@@ -1,6 +1,7 @@
 package com.viettel.mbccs.widget;
 
 import android.graphics.Rect;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -14,7 +15,7 @@ public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
 
     private RecyclerView.LayoutManager layoutManager;
 
-    public SpacesItemDecoration(int space, RecyclerView.LayoutManager layoutManager) {
+    public SpacesItemDecoration(int space, @Nullable RecyclerView.LayoutManager layoutManager) {
         this.space = space;
         this.layoutManager = layoutManager;
     }

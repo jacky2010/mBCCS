@@ -28,8 +28,6 @@ public abstract class BaseSearchListViewPresenter<T>
 
     public ObservableBoolean isEmpty = new ObservableBoolean();
 
-    public ObservableBoolean isExpand = new ObservableBoolean();
-
     public ObservableInt itemCount = new ObservableInt();
 
     public BaseSearchListViewPresenter(Context context,
@@ -46,7 +44,6 @@ public abstract class BaseSearchListViewPresenter<T>
                 isEmpty.set(listData.isEmpty());
             }
         });
-        isExpand.set(true);
     }
 
     @Override
@@ -89,9 +86,5 @@ public abstract class BaseSearchListViewPresenter<T>
         return new SpacesItemDecoration((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX,
                 mContext.getResources().getDimension(R.dimen.dp_6),
                 mContext.getResources().getDisplayMetrics()));
-    }
-
-    public void toggleSearchForm() {
-        isExpand.set(!isExpand.get());
     }
 }
