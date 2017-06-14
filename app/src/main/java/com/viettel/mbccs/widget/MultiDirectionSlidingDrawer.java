@@ -215,8 +215,8 @@ public class MultiDirectionSlidingDrawer extends ViewGroup {
         int heightSpecSize = MeasureSpec.getSize(heightMeasureSpec);
 
         if (widthSpecMode == MeasureSpec.UNSPECIFIED || heightSpecMode == MeasureSpec.UNSPECIFIED) {
-            throw new RuntimeException(
-                    "SlidingDrawer cannot have UNSPECIFIED dimensions");
+            //throw new RuntimeException(
+            //        "SlidingDrawer cannot have UNSPECIFIED dimensions");
         }
 
         final View handle = mHandle;
@@ -905,9 +905,9 @@ public class MultiDirectionSlidingDrawer extends ViewGroup {
 
         mExpanded = true;
 
+        mHeaderOpen.setVisibility(VISIBLE);
+        mHeaderClose.setVisibility(GONE);
         if (mOnDrawerOpenListener != null) {
-            mHeaderOpen.setVisibility(VISIBLE);
-            mHeaderClose.setVisibility(GONE);
             mOnDrawerOpenListener.onDrawerOpened();
         }
     }

@@ -112,12 +112,22 @@ public class KPPOrderPresenter implements KPPOrderContract.Presenter {
                         .subscribe(new MBCCSSubscribe<GetListOrderResponse>() {
                             @Override
                             public void onSuccess(GetListOrderResponse object) {
-                                mSaleOrderses.clear();
-                                mSaleOrderses.addAll(object.getSaleOrdersList());
-                                mKPPOrderAdapter.notifyDataSetChanged();
-                                titleOrderList.set(
-                                        String.format(mContext.getString(R.string.order_title_list),
-                                                String.valueOf(mSaleOrderses.size())));
+                                if (object != null && object.getSaleOrdersList() != null) {
+                                    if (object.getSaleOrdersList().size() == 0) {
+                                        DialogUtils.showDialogError(mContext,
+                                                R.string.common_msg_no_data);
+                                        return;
+                                    }
+                                    mSaleOrderses.clear();
+                                    mSaleOrderses.addAll(object.getSaleOrdersList());
+                                    mKPPOrderAdapter.notifyDataSetChanged();
+                                    titleOrderList.set(String.format(
+                                            mContext.getString(R.string.order_title_list),
+                                            String.valueOf(mSaleOrderses.size())));
+                                    mViewModel.collapseForm();
+                                    return;
+                                }
+                                onError(new Throwable());
                             }
 
                             @Override
@@ -210,12 +220,12 @@ public class KPPOrderPresenter implements KPPOrderContract.Presenter {
             case 0:
                 status = OrderStatus.APPROVALS;
                 break;
-
             case 1:
                 status = OrderStatus.PENDING;
                 break;
             case 2:
                 status = OrderStatus.REJECT;
+                break;
             default:
                 status = OrderStatus.APPROVALS;
         }
@@ -227,15 +237,15 @@ public class KPPOrderPresenter implements KPPOrderContract.Presenter {
     }
 
     public void getFilterText() {
-        String text = Common.getDayByLong(mViewModel.getFromDate()) + " - " + Common.getDayByLong(
-                mViewModel.getToDate());
+        String text = Common.getDayByLong(mViewModel.getFromDate()) + mContext.getString(
+                R.string.common_lable_dot) + Common.getDayByLong(mViewModel.getToDate());
         String[] stringArray = mContext.getResources().getStringArray(R.array.order_status_name);
         if (status.equals(OrderStatus.APPROVALS)) {
-            text += " - " + stringArray[0];
+            text += mContext.getString(R.string.common_lable_dot) + stringArray[0];
         } else if (status.equals(OrderStatus.PENDING)) {
-            text += " - " + stringArray[1];
+            text += mContext.getString(R.string.common_lable_dot) + stringArray[1];
         } else {
-            text += " - " + stringArray[2];
+            text += mContext.getString(R.string.common_lable_dot) + stringArray[2];
             return;
         }
 

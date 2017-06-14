@@ -265,7 +265,7 @@ public class SaleRetailPresenter
             filter2 = currentSaleProgram.getName();
         }
 
-        filterText.set(filter1 + " • " + filter2);
+        filterText.set(filter1 + mContext.getString(R.string.common_lable_dot) + filter2);
     }
 
     @Override

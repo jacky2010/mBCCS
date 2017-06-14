@@ -2,6 +2,7 @@ package com.viettel.mbccs.screen.kpp.order.findstock.adapter;
 
 import android.content.Context;
 import android.databinding.ObservableField;
+import android.text.TextUtils;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.utils.Common;
@@ -52,6 +53,22 @@ public class ItemStockTotalPresenter {
     public String getStockModelId() {
         return String.format(mContext.getString(R.string.kpp_order_label_stock_id),
                 String.valueOf(mStockTotal.getStockModelCode()));
+    }
+
+    public String getImage() {
+        if (!TextUtils.isEmpty(mStockTotal.getPathImage1())) {
+            return mStockTotal.getPathImage1();
+        }
+
+        if (!TextUtils.isEmpty(mStockTotal.getPathImage2())) {
+            return mStockTotal.getPathImage2();
+        }
+
+        if (!TextUtils.isEmpty(mStockTotal.getPathImage3())) {
+            return mStockTotal.getPathImage3();
+        }
+
+        return null;
     }
 
     public StockTotal getStockTotal() {

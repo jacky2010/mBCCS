@@ -100,8 +100,7 @@ public class FindStockPresenter
         }
         request.setStateId(StockTotalType.TYPE_NEW);
         request.setOwnerType(2);
-        request.setOwnerId(
-                Long.parseLong(mUserRepository.getUserInfo().getStaffInfo().getStaffOwnerId()));
+        request.setOwnerId(mUserRepository.getUserInfo().getStaffInfo().getStaffId());
         mGetListStockModelRequestBaseRequest.setParameterApi(request);
         mViewModel.showLoading();
         Subscription subscription = mBanHangKhoTaiChinhRepository.getListStockModel(
@@ -109,9 +108,17 @@ public class FindStockPresenter
                 .subscribe(new MBCCSSubscribe<GetListStockModelResponse>() {
                     @Override
                     public void onSuccess(GetListStockModelResponse object) {
-                        mStockTotals.clear();
-                        mStockTotals.addAll(object.getStockTotalList());
-                        stockTotalAdapter.notifyDataSetChanged();
+                        if (object != null && object.getStockTotalList() != null) {
+                            if (object.getStockTotalList().size() == 0) {
+                                DialogUtils.showDialogError(mContext, R.string.common_msg_no_data);
+                            }
+                            mStockTotals.clear();
+                            mStockTotals.addAll(object.getStockTotalList());
+                            stockTotalAdapter.notifyDataSetChanged();
+                            mViewModel.closeForm();
+                            return;
+                        }
+                        DialogUtils.showDialogError(mContext, R.string.common_msg_no_data);
                     }
 
                     @Override
@@ -208,19 +215,19 @@ public class FindStockPresenter
         }
 
         if (stockType == StockTotalType.TYPE_NEW) {
-            text += " - " + arrStockType[1];
+            text += mContext.getString(R.string.common_lable_dot) + arrStockType[1];
         }
 
         if (stockType == StockTotalType.TYPE_FAIL) {
-            text += " - " + arrStockType[2];
+            text += mContext.getString(R.string.common_lable_dot) + arrStockType[2];
         }
 
         if (!TextUtils.isEmpty(code.get())) {
-            text += " - " + code.get();
+            text += mContext.getString(R.string.common_lable_dot) + code.get();
         }
 
         if (!TextUtils.isEmpty(name.get())) {
-            text += " - " + name.get();
+            text += mContext.getString(R.string.common_lable_dot) + name.get();
         }
 
         filterText.set(text);

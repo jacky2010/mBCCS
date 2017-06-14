@@ -470,4 +470,14 @@ public class Function implements Parcelable {
 
         return "";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        try {
+            Function function = (Function) obj;
+            return function.getFunctionCode().equals(getFunctionCode());
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

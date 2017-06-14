@@ -44,7 +44,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="100dp"
                             android:scaleType="fitCenter"
-                            app:loadImage="@{@string/no_channel}"
+                            app:loadImage="@{item.image}"
                             />
                     </LinearLayout>
 

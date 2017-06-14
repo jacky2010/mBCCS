@@ -23,5 +23,7 @@ public interface KPPOrderContract {
         long getFromDate();
 
         long getToDate();
+
+        void collapseForm();
     }
 }
