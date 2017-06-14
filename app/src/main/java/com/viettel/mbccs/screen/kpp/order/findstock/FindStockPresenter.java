@@ -10,6 +10,7 @@ import com.viettel.mbccs.constance.StockTotalType;
 import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
+import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListStockModelRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
@@ -41,12 +42,14 @@ public class FindStockPresenter
     private CompositeSubscription mSubscription;
     private long stockType = -1;
     private BanHangKhoTaiChinhRepository mBanHangKhoTaiChinhRepository;
+    private UserRepository mUserRepository;
 
     public FindStockPresenter(Context context, FindStockContract.ViewModel viewModel) {
         mContext = context;
         mViewModel = viewModel;
         mSubscription = new CompositeSubscription();
         mBanHangKhoTaiChinhRepository = BanHangKhoTaiChinhRepository.getInstance();
+        mUserRepository = UserRepository.getInstance();
         init();
     }
 
@@ -92,9 +95,14 @@ public class FindStockPresenter
         if (stockType != -1) {
             request.setStockTypeId(stockType);
         }
-        request.setStockModelId(code.get());
+        if (!TextUtils.isEmpty(code.get())) {
+            request.setStockModelId(code.get());
+        }
+        request.setStateId(StockTotalType.TYPE_NEW);
+        request.setOwnerType(2);
+        request.setOwnerId(
+                Long.parseLong(mUserRepository.getUserInfo().getStaffInfo().getStaffOwnerId()));
         mGetListStockModelRequestBaseRequest.setParameterApi(request);
-
         mViewModel.showLoading();
         Subscription subscription = mBanHangKhoTaiChinhRepository.getListStockModel(
                 mGetListStockModelRequestBaseRequest)

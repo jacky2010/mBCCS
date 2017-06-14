@@ -27,6 +27,7 @@ public interface SaleRetailContract {
     interface ViewModel extends BaseView<Presenter> {
 
         void onChooseSaleProgram(List<SaleProgram> salePrograms);
+
         void onSerialPicker(ModelSale stockItem);
 
         void onNext(List<ModelSale> stockItems,TeleComService teleComService, SaleProgram saleProgram);

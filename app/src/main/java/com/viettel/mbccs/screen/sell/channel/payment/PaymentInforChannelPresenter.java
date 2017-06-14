@@ -4,6 +4,9 @@ import android.content.Context;
 import android.databinding.ObservableField;
 import android.text.TextUtils;
 import com.viettel.mbccs.R;
+import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.PaymentMethod;
+import com.viettel.mbccs.constance.PriceType;
 import com.viettel.mbccs.constance.SaleTranType;
 import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.Customer;
@@ -45,23 +48,21 @@ public class PaymentInforChannelPresenter implements PaymentInforChannelContract
     public ObservableField<String> channelAddressError;
     public ObservableField<String> channelName;
     public ObservableField<String> channelNameError;
-    public String currentPayment;
-
     private PaymentInforChannelContract.ViewModel mViewModel;
     private Context mContext;
     private List<StockSerial> mStockSerials;
-    private String paymentMethod;
     private String phone;
     private String secureCode;
-
     private DataRequest<GetInfoSaleTranRequest> mGetInfoSaleTranRequestBaseRequest;
     private BanHangKhoTaiChinhRepository mBanHangKhoTaiChinhRepository;
-
+    private UserRepository mUserRepository;
     private CompositeSubscription mSubscriptions;
     private SaleTrans mSaleTrans;
     private TeleComService mTeleComService;
     private SaleProgram mSaleProgram;
     private ChannelInfo mChannelInfo;
+    private String currentPayment = PaymentMethod.PAYMENT_CASH;
+    private String paymentMethod = PaymentMethod.PAYMENT_CASH;
 
     public PaymentInforChannelPresenter(PaymentInforChannelContract.ViewModel viewModel,
             Context context, List<StockSerial> stockSerials, TeleComService teleComService,
@@ -73,6 +74,7 @@ public class PaymentInforChannelPresenter implements PaymentInforChannelContract
         this.mSaleProgram = saleProgram;
         this.mChannelInfo = channelInfo;
         mBanHangKhoTaiChinhRepository = BanHangKhoTaiChinhRepository.getInstance();
+        mUserRepository = UserRepository.getInstance();
         mSubscriptions = new CompositeSubscription();
         mSaleTrans = new SaleTrans();
         init();
@@ -98,6 +100,10 @@ public class PaymentInforChannelPresenter implements PaymentInforChannelContract
         channelIdError = new ObservableField<>();
         channelAddressError = new ObservableField<>();
         channelNameError = new ObservableField<>();
+
+        channelName.set(mChannelInfo.getChannelName());
+        channelAddress.set(mChannelInfo.getAddress());
+        channelId.set(String.valueOf(mChannelInfo.getChannelId()));
     }
 
     public void paymentClick() {
@@ -122,6 +128,7 @@ public class PaymentInforChannelPresenter implements PaymentInforChannelContract
 
         mGetInfoSaleTranRequestBaseRequest = new DataRequest<>();
         GetInfoSaleTranRequest request = new GetInfoSaleTranRequest();
+        mGetInfoSaleTranRequestBaseRequest.setApiCode(ApiCode.GetSaleTransInfo);
         request.setPaymentMethod(paymentMethod);
         request.setCouponCode(coupon.get());
         request.setIsdnPay(phone);
@@ -142,9 +149,12 @@ public class PaymentInforChannelPresenter implements PaymentInforChannelContract
         request.setChanelId(mChannelInfo.getChannelId());
         request.setChannelType((mChannelInfo.getChannelType()));
         request.setDiscountPolicy(mChannelInfo.getDiscountPolicy());
+        request.setPriceType(PriceType.PRICE_CHANNEL);
         request.setPricePolicy(mChannelInfo.getPricePolicy());
         request.setChanelId(mChannelInfo.getChannelId());
         request.setChannelType(mChannelInfo.getChannelType());
+        request.setStaffId(mUserRepository.getUserInfo().getStaffInfo().getStaffId());
+        request.setShopId(Long.parseLong(mUserRepository.getUserInfo().getShop().getShopId()));
 
         mGetInfoSaleTranRequestBaseRequest.setParameterApi(request);
 
@@ -153,8 +163,12 @@ public class PaymentInforChannelPresenter implements PaymentInforChannelContract
                         .subscribe(new MBCCSSubscribe<GetInfoSaleTranResponse>() {
                             @Override
                             public void onSuccess(GetInfoSaleTranResponse object) {
-                                isGetTransInfo.set(true);
-                                loadAmount(object.getSaleTrans());
+                                if (object != null && object.getSaleTrans() != null) {
+                                    isGetTransInfo.set(true);
+                                    loadAmount(object.getSaleTrans());
+                                    return;
+                                }
+                                onError(new Throwable());
                             }
 
                             @Override
@@ -162,12 +176,12 @@ public class PaymentInforChannelPresenter implements PaymentInforChannelContract
                                 DialogUtils.showDialogError(mContext, null, error.getMessage(),
                                         null);
                                 //fake
-//                                isGetTransInfo.set(true);
-//                                SaleTrans sale = new SaleTrans();
-//                                sale.setAmountNotTax(12000000);
-//                                sale.setTax(123000);
-//                                sale.setAmountTax(11000000);
-//                                loadAmount(sale);
+                                //                                isGetTransInfo.set(true);
+                                //                                SaleTrans sale = new SaleTrans();
+                                //                                sale.setAmountNotTax(12000000);
+                                //                                sale.setTax(123000);
+                                //                                sale.setAmountTax(11000000);
+                                //                                loadAmount(sale);
                             }
 
                             @Override
@@ -205,10 +219,10 @@ public class PaymentInforChannelPresenter implements PaymentInforChannelContract
             return false;
         }
 
-        if (TextUtils.isEmpty(tin.get())) {
-            tinError.set(mContext.getResources().getString(R.string.input_empty));
-            return false;
-        }
+        //        if (TextUtils.isEmpty(tin.get())) {
+        //            tinError.set(mContext.getResources().getString(R.string.input_empty));
+        //            return false;
+        //        }
 
         if (TextUtils.isEmpty(channelAddress.get())) {
             channelAddressError.set(mContext.getResources().getString(R.string.input_empty));

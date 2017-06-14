@@ -15,6 +15,7 @@ import com.viettel.mbccs.data.model.TeleComService;
 import com.viettel.mbccs.databinding.ActivitySaleChannelBinding;
 import com.viettel.mbccs.screen.goodsconfirm.SaleReviewActivity;
 import com.viettel.mbccs.screen.sell.channel.channelpicker.ChannelPickerActivity;
+import com.viettel.mbccs.screen.sell.retail.SaleRetailActivity;
 import com.viettel.mbccs.screen.sell.retail.SaleRetailContract;
 import com.viettel.mbccs.screen.sell.retail.sellprogrampicker.SaleProgramPickerActivity;
 import com.viettel.mbccs.screen.serialpicker.SerialPickerActivity;
@@ -141,14 +142,29 @@ public class SaleChannelActivity
             stockSerial.setStockModelId(modelSale.getStockModelId());
             stockSerial.setStockMoldeName(modelSale.getStockMoldeName());
             stockSerial.setStockModelCode(modelSale.getStockModelCode());
-            stockSerial.setQuantity(
-                    Common.getSerialCountByListSerialBlock(modelSale.getSerialBlocks()));
-            stockSerial.setSerialBOs(modelSale.getSerialBlocks());
-            stockSerials.add(stockSerial);
+            if (modelSale.getCheckSerial() == 1) {
+                stockSerial.setSerialBOs(modelSale.getSerialBlocks());
+                stockSerial.setQuantity(
+                        Common.getSerialCountByListSerialBlock(modelSale.getSerialBlocks()));
+            } else {
+                if (modelSale.getChoiceCount() > 0) {
+                    stockSerial.setQuantity(modelSale.getChoiceCount());
+                }
+            }
+
+            if (stockSerial.getQuantity()>0){
+                stockSerials.add(stockSerial);
+            }
+
         }
         int countSerial = 0;
         for (StockSerial serial : stockSerials) {
-            countSerial += Common.getSerialCountByListSerialBlock(serial.getSerialBOs());
+            if (serial.getSerialBOs()!=null){
+                countSerial += Common.getSerialCountByListSerialBlock(serial.getSerialBOs());
+            }else{
+                countSerial+= serial.getQuantity();
+            }
+
         }
         if (countSerial == 0) {
             DialogUtils.showDialogError(SaleChannelActivity.this, null,

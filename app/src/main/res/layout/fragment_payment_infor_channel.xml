@@ -23,9 +23,9 @@
             layout="@layout/toolbar"
             app:background="@{@color/colorAccent}"
             app:isShow="@{true}"
-            app:leftIcon="@{@drawable/back}"
+            app:leftIcon="@{@drawable/ic_close_white}"
             app:leftIconClick="@{()->presenter.onBack()}"
-            app:title="@{@string/sale_retail}"
+            app:title="@{@string/sale_channel}"
             app:titleColor="@{@color/white}"
             app:titleTextSize="@{@dimen/sp_17}"
             />
@@ -98,6 +98,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_input_tranparent"
+                        android:editable="false"
                         android:padding="5dp"
                         android:singleLine="true"
                         android:text="@={presenter.channelId}"
@@ -118,6 +119,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_input_tranparent"
+                        android:editable="false"
                         android:padding="5dp"
                         android:singleLine="true"
                         android:text="@={presenter.channelName}"
@@ -165,6 +167,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_input_tranparent"
+                        android:editable="false"
                         android:gravity="top|start"
                         android:lines="2"
                         android:maxLines="3"
@@ -242,14 +245,15 @@
                             android:layout_margin="@dimen/dp_5"
                             android:layout_weight="1"
                             android:background="@drawable/bg_border"
+                            android:gravity="center"
                             android:orientation="vertical"
                             >
                             <ImageView
                                 android:id="@+id/image_cash"
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
                                 android:layout_gravity="center_horizontal"
-                                android:src="@drawable/tien_mat_select"
+                                android:src="@drawable/tien_mat"
                                 />
                             <RadioButton
                                 android:id="@+id/radio_cash"
@@ -270,12 +274,13 @@
                             android:layout_margin="@dimen/dp_5"
                             android:layout_weight="1"
                             android:background="@drawable/bg_border"
+                            android:gravity="center"
                             android:orientation="vertical"
                             >
                             <ImageView
                                 android:id="@+id/image_bank_plus"
-                                android:layout_width="@dimen/dp_50"
-                                android:layout_height="@dimen/dp_50"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
                                 android:layout_gravity="center_horizontal"
                                 android:src="@drawable/bank_plus"
                                 />
@@ -298,12 +303,13 @@
                             android:layout_margin="@dimen/dp_5"
                             android:layout_weight="1"
                             android:background="@drawable/bg_border"
+                            android:gravity="center"
                             android:orientation="vertical"
                             >
                             <ImageView
                                 android:id="@+id/image_wellet"
-                                android:layout_width="@dimen/dp_50"
-                                android:layout_height="@dimen/dp_50"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
                                 android:layout_gravity="center_horizontal"
                                 android:src="@drawable/vi_dien_tu"
                                 />

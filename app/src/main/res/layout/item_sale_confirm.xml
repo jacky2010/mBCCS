@@ -81,6 +81,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="20dp"
             android:orientation="horizontal"
+            android:visibility="@{item.stockSerial.serialBOs==null ? View.GONE :View.VISIBLE}"
             >
             <com.viettel.mbccs.widget.CustomTextView
                 android:layout_width="0dp"
@@ -125,7 +126,7 @@
             android:background="@drawable/bg_input"
             android:orientation="vertical"
             android:padding="1dp"
-            android:visibility="@{item.isExpand?View.VISIBLE:View.GONE}"
+            android:visibility="@{item.isExpand &amp;&amp; item.stockSerial.serialBOs!=null ?View.VISIBLE:View.GONE}"
             >
             <LinearLayout
                 android:layout_width="match_parent"

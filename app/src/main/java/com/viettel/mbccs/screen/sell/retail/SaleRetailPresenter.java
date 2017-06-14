@@ -77,7 +77,7 @@ public class SaleRetailPresenter
         if (currentTelecomService.getId() != -1) {
             request.setTelecomServiceId(currentTelecomService.getId());
         }
-        request.setOwnerId(mUserRepository.getUserInfo().getStaffInfo().getStaffId());
+        request.setOwnerId((mUserRepository.getUserInfo().getStaffInfo().getStaffId()));
         //hard code 2
         request.setOwnerType(2);
         request.setStateId(StockTotalType.TYPE_NEW);
@@ -91,6 +91,10 @@ public class SaleRetailPresenter
                             @Override
                             public void onSuccess(GetTotalStockResponse object) {
                                 mModelSales.clear();
+                                if (object == null || object.getModelSaleList() == null) {
+                                    onError(new Throwable());
+                                    return;
+                                }
                                 mModelSales.addAll(object.getModelSaleList());
                                 stockAdapter.notifyDataSetChanged();
                             }
@@ -124,7 +128,8 @@ public class SaleRetailPresenter
 
         Subscription subscription = mBanHangKhoTaiChinhRepository.getTelecomserviceAndSaleProgram(
                 mGetTelecomServiceAndSaleProgramRequest)
-                .subscribe(new MBCCSSubscribe<TelecomServiceAndSaleProgramResponse>((Activity) mContext) {
+                .subscribe(new MBCCSSubscribe<TelecomServiceAndSaleProgramResponse>(
+                        (Activity) mContext) {
                     @Override
                     public void onSuccess(TelecomServiceAndSaleProgramResponse object) {
                         mTeleComServices.addAll(object.getTeleComServices());
@@ -142,6 +147,8 @@ public class SaleRetailPresenter
                         currentTelecomService = mTeleComServices.get(0);
 
                         sellProgram.set(currentSaleProgram.getName());
+
+                        changeSearchFilter();
 
                         loadModelSale();
                     }
@@ -162,7 +169,6 @@ public class SaleRetailPresenter
 
         mSubscription.add(subscription);
     }
-
 
     private void init() {
         filterText = new ObservableField<>();
@@ -259,7 +265,7 @@ public class SaleRetailPresenter
             filter2 = currentSaleProgram.getName();
         }
 
-        filterText.set(filter1 + " - " + filter2);
+        filterText.set(filter1 + " • " + filter2);
     }
 
     @Override

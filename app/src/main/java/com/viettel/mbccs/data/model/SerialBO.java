@@ -34,11 +34,21 @@ public class SerialBO implements Parcelable, Serializable {
     public SerialBO(String fromSerial, String toSerial) {
         this.fromSerial = fromSerial;
         this.toSerial = toSerial;
+        executeQuantiy();
     }
 
     public SerialBO() {
         fromSerial = "-1";
         toSerial = "-1";
+    }
+
+    private void executeQuantiy() {
+        if (!fromSerial.equals("-1") && !toSerial.equals("-1")) {
+            long number = Long.parseLong(getToSerial()) - Long.parseLong(getFromSerial()) + 1;
+            if (number > 0) {
+                setQuantity(number);
+            }
+        }
     }
 
     public long getStockModelId() {
@@ -59,6 +69,7 @@ public class SerialBO implements Parcelable, Serializable {
 
     public void setFromSerial(String fromSerial) {
         this.fromSerial = fromSerial;
+        executeQuantiy();
     }
 
     public String getToSerial() {
@@ -67,12 +78,15 @@ public class SerialBO implements Parcelable, Serializable {
 
     public void setToSerial(String toSerial) {
         this.toSerial = toSerial;
+        executeQuantiy();
     }
 
     public long getQuantity() {
         if (quantity == 0) {
             if (TextUtils.isEmpty(getFromSerial()) || TextUtils.isEmpty(getToSerial())) {
                 return 0;
+            } else {
+                return Long.parseLong(getToSerial()) - Long.parseLong(getFromSerial()) + 1;
             }
         }
         return Long.parseLong(getToSerial()) - Long.parseLong(getFromSerial()) + 1;

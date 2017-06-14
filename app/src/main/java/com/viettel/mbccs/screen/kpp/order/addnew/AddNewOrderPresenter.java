@@ -53,7 +53,8 @@ public class AddNewOrderPresenter implements AddNewOrderContract.Presenter {
 
     private void init() {
         titleOrder = new ObservableField<>();
-        titleOrder.set(mUserRepository.getUserInfo().getChannelInfo().getChannelName());
+        titleOrder.set(String.format(mContext.getString(R.string.order_from_kpp),
+                mUserRepository.getUserInfo().getChannelInfo().getChannelName()));
         amount = new ObservableField<>();
         caculatePrice();
         mAdapter = new StockTotalAdapter(mContext, mStockTotals);

@@ -137,7 +137,9 @@ public class SaleChannelPresenter
                 }).subscribe(new MBCCSSubscribe<SaleChannelInitData>() {
             @Override
             public void onSuccess(SaleChannelInitData object) {
-                if (object != null) {
+                if (object != null
+                        && object.getmGetListChannelByOwnerTypeIdResponse() != null
+                        && object.getTelecomServiceAndSaleProgramResponse() != null) {
 
                     //telecom service and salprogram
                     mTeleComServices.addAll(
@@ -158,6 +160,10 @@ public class SaleChannelPresenter
 
                     sellProgram.set(currentSaleProgram.getName());
 
+                    if (object.getmGetListChannelByOwnerTypeIdResponse().getChannelInfoList()
+                            == null) {
+                        return;
+                    }
                     //channel
                     mChannelInfos.clear();
                     mChannelInfos.addAll(
@@ -207,6 +213,7 @@ public class SaleChannelPresenter
         mGetListChannelByOwnerTypeIdRequest.setApiCode(ApiCode.GetListChannelByOwnerTypeId);
         GetListChannelByOwnerTypeIdRequest request = new GetListChannelByOwnerTypeIdRequest();
         request.setStaffId(mUserRepository.getUserInfo().getStaffInfo().getStaffOwnerId());
+        request.setChannelTypeId(mUserRepository.getUserInfo().getStaffInfo().getChannelTypeId());
         request.setLanguage("en");
         mGetListChannelByOwnerTypeIdRequest.setParameterApi(request);
         return mBanHangKhoTaiChinhRepository.getListChannelByOwnerTypeId(

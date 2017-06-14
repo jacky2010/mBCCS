@@ -38,7 +38,7 @@ public class CreateSaleTransChannelRequest extends DataRequest {
 
     @SerializedName("telecomserviceId")
     @Expose
-    private long telecomserviceId;
+    private Long telecomserviceId;
 
     @SerializedName("saleProgrameCode")
     @Expose

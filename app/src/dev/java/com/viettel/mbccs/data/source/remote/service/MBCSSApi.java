@@ -2,6 +2,7 @@ package com.viettel.mbccs.data.source.remote.service;
 
 import com.viettel.mbccs.data.model.EmptyObject;
 import com.viettel.mbccs.data.model.LoginInfo;
+import com.viettel.mbccs.data.model.UserInfo;
 import com.viettel.mbccs.data.source.remote.request.ChecOTPRequest;
 import com.viettel.mbccs.data.source.remote.request.CheckCalledIsdnRequest;
 import com.viettel.mbccs.data.source.remote.request.CheckIdNoRequest;
@@ -327,6 +328,6 @@ public interface MBCSSApi {
 
     // TODO: 12/06/2017 Fake request
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<ServerDataResponse<BaseResponse<GetUserInfoResponse>>> getUserInfo(
+    Observable<ServerDataResponse<BaseResponse<UserInfo>>> getUserInfo(
             @Body DataRequest<GetUserInfoRequest> request);
 }

@@ -4,6 +4,9 @@ import android.content.Context;
 import android.databinding.ObservableField;
 import android.text.TextUtils;
 import com.viettel.mbccs.R;
+import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.PaymentMethod;
+import com.viettel.mbccs.constance.PriceType;
 import com.viettel.mbccs.constance.SaleTranType;
 import com.viettel.mbccs.data.model.Customer;
 import com.viettel.mbccs.data.model.SaleProgram;
@@ -45,17 +48,19 @@ public class PaymentInfoPresenter implements PaymentInforContract.Presenter {
     private PaymentInforContract.ViewModel mViewModel;
     private Context mContext;
     private List<StockSerial> mStockSerials;
-    private String paymentMethod;
+
     private String phone;
     private String secureCode;
 
     private BanHangKhoTaiChinhRepository mBanHangKhoTaiChinhRepository;
+    private UserRepository mUserRepository;
     private DataRequest<GetInfoSaleTranRequest> mGetInfoSaleTranRequestBaseRequest;
     private CompositeSubscription mSubscriptions;
     private SaleTrans mSaleTrans;
     private TeleComService mTeleComService;
     private SaleProgram mSaleProgram;
-    private String currentPayment;
+    private String currentPayment = PaymentMethod.PAYMENT_CASH;
+    private String paymentMethod = PaymentMethod.PAYMENT_CASH;
 
     public PaymentInfoPresenter(PaymentInforContract.ViewModel viewModel, Context context,
             List<StockSerial> stockSerials, TeleComService teleComService,
@@ -66,6 +71,7 @@ public class PaymentInfoPresenter implements PaymentInforContract.Presenter {
         this.mTeleComService = teleComService;
         this.mSaleProgram = saleProgram;
         mBanHangKhoTaiChinhRepository = BanHangKhoTaiChinhRepository.getInstance();
+        mUserRepository = UserRepository.getInstance();
         mSubscriptions = new CompositeSubscription();
         mSaleTrans = new SaleTrans();
         init();
@@ -113,6 +119,7 @@ public class PaymentInfoPresenter implements PaymentInforContract.Presenter {
         isGetTransInfo.set(false);
 
         mGetInfoSaleTranRequestBaseRequest = new DataRequest<>();
+        mGetInfoSaleTranRequestBaseRequest.setApiCode(ApiCode.GetSaleTransInfo);
         GetInfoSaleTranRequest request = new GetInfoSaleTranRequest();
         request.setPaymentMethod(paymentMethod);
         request.setCouponCode(coupon.get());
@@ -125,6 +132,9 @@ public class PaymentInfoPresenter implements PaymentInforContract.Presenter {
             request.setSaleProgrameCode((mSaleProgram.getCode()));
         }
         request.setSaleTransType(String.valueOf(SaleTranType.SALE_RETAIL));
+        request.setShopId(Long.parseLong(mUserRepository.getUserInfo().getShop().getShopId()));
+        request.setPriceType(PriceType.PRICE_RETAIL);
+        request.setStaffId(mUserRepository.getUserInfo().getStaffInfo().getStaffId());
         Customer customer = new Customer();
         customer.setTin(tin.get());
         customer.setAddress(address.get());
@@ -138,8 +148,12 @@ public class PaymentInfoPresenter implements PaymentInforContract.Presenter {
                         .subscribe(new MBCCSSubscribe<GetInfoSaleTranResponse>() {
                             @Override
                             public void onSuccess(GetInfoSaleTranResponse object) {
-                                isGetTransInfo.set(true);
-                                loadAmount(object.getSaleTrans());
+                                if (object != null && object.getSaleTrans() != null) {
+                                    isGetTransInfo.set(true);
+                                    loadAmount(object.getSaleTrans());
+                                    return;
+                                }
+                                onError(new Throwable());
                             }
 
                             @Override
@@ -147,12 +161,12 @@ public class PaymentInfoPresenter implements PaymentInforContract.Presenter {
                                 DialogUtils.showDialogError(mContext, null, error.getMessage(),
                                         null);
                                 //fake
-//                                isGetTransInfo.set(true);
-//                                SaleTrans sale = new SaleTrans();
-//                                sale.setAmountNotTax(12000000);
-//                                sale.setTax(123000);
-//                                sale.setAmountTax(11000000);
-//                                loadAmount(sale);
+                                //                                isGetTransInfo.set(true);
+                                //                                SaleTrans sale = new SaleTrans();
+                                //                                sale.setAmountNotTax(12000000);
+                                //                                sale.setTax(123000);
+                                //                                sale.setAmountTax(11000000);
+                                //                                loadAmount(sale);
                             }
 
                             @Override
@@ -182,10 +196,10 @@ public class PaymentInfoPresenter implements PaymentInforContract.Presenter {
             nameError.set(mContext.getResources().getString(R.string.input_empty));
             return false;
         }
-        if (TextUtils.isEmpty(tin.get().trim())) {
-            tinError.set(mContext.getResources().getString(R.string.input_empty));
-            return false;
-        }
+//        if (TextUtils.isEmpty(tin.get().trim())) {
+//            tinError.set(mContext.getResources().getString(R.string.input_empty));
+//            return false;
+//        }
         if (TextUtils.isEmpty(address.get().trim())) {
             addressError.set(mContext.getResources().getString(R.string.input_empty));
             return false;

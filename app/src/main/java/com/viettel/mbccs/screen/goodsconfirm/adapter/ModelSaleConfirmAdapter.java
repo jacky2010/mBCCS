@@ -27,7 +27,7 @@ public class ModelSaleConfirmAdapter
         mContext = context;
         mStockSerials = stockSerials;
         for (StockSerial stockItem : mStockSerials) {
-            if (Common.getSerialCountByListSerialBlock(stockItem.getSerialBOs()) > 0) {
+            if (stockItem.getQuantity() > 0) {
                 mStockSerialsFilter.add(stockItem);
             }
         }

@@ -7,6 +7,7 @@ import com.google.gson.annotations.SerializedName;
 import com.viettel.mbccs.utils.Common;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -14,6 +15,9 @@ import java.util.List;
  */
 
 public class ModelSale implements Serializable, Parcelable {
+    @SerializedName("checkSerial")
+    @Expose
+    private int checkSerial;
 
     @SerializedName("stockModelId")
     @Expose
@@ -35,15 +39,15 @@ public class ModelSale implements Serializable, Parcelable {
     @Expose
     private long quantityIssue;
 
-    @SerializedName("path_image1")
+    @SerializedName("pathImage1")
     @Expose
     private String pathImage1;
 
-    @SerializedName("path_image2")
+    @SerializedName("pathImage2")
     @Expose
     private String pathImage2;
 
-    @SerializedName("path_image3")
+    @SerializedName("pathImage3")
     @Expose
     private String pathImage3;
 
@@ -131,6 +135,18 @@ public class ModelSale implements Serializable, Parcelable {
     public void setSerialBlocks(List<SerialBO> serialBlocks) {
 
         mSerialBlocks = serialBlocks;
+    }
+
+    public void decreaseSerial() {
+
+        if (mSerials != null && mSerials.size() > 0) {
+            List<String> fake = new ArrayList<>();
+            for (int i = 0; i < mSerials.size() - 1; i++) {
+                fake.add(mSerials.get(i));
+            }
+            mSerials.clear();
+            mSerials.addAll(fake);
+        }
     }
 
     public int getSerialCount() {
@@ -242,5 +258,13 @@ public class ModelSale implements Serializable, Parcelable {
 
     public void setVat(double vat) {
         this.vat = vat;
+    }
+
+    public int getCheckSerial() {
+        return checkSerial;
+    }
+
+    public void setCheckSerial(int checkSerial) {
+        this.checkSerial = checkSerial;
     }
 }
