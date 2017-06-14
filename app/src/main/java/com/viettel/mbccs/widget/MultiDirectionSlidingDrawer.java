@@ -285,7 +285,7 @@ public class MultiDirectionSlidingDrawer extends ViewGroup {
         int handleWidth = handle.getMeasuredWidth();
         int handleHeight = handle.getMeasuredHeight();
 
-        Log.d(LOG_TAG, "handleHeight: " + handleHeight);
+//        Log.d(LOG_TAG, "handleHeight: " + handleHeight);
 
         int handleLeft;
         int handleTop;
@@ -295,7 +295,7 @@ public class MultiDirectionSlidingDrawer extends ViewGroup {
         if (mVertical) {
             handleLeft = (width - handleWidth) / 2;
             if (mInvert) {
-                Log.d(LOG_TAG, "content.layout(1)");
+//                Log.d(LOG_TAG, "content.layout(1)");
                 handleTop = mExpanded ? height - mBottomOffset - handleHeight : mTopOffset;
                 content.layout(0, mTopOffset, content.getMeasuredWidth(), mTopOffset + content.getMeasuredHeight());
             } else {

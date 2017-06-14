@@ -73,20 +73,23 @@ public class BaseException extends RuntimeException {
     }
 
     private String getNetworkErrorMessage(Throwable throwable) {
-        // TODO update later with Japanese
-        if (throwable instanceof SocketTimeoutException) {
-            return throwable.getMessage();
-        }
 
-        if (throwable instanceof UnknownHostException) {
-            return throwable.getMessage();
-        }
 
-        if (throwable instanceof IOException) {
-            return throwable.getMessage();
-        }
+//
+//        // TODO update later with Japanese
+//        if (throwable instanceof SocketTimeoutException) {
+//            return throwable.getMessage();
+//        }
+//
+//        if (throwable instanceof UnknownHostException) {
+//            return throwable.getMessage();
+//        }
+//
+//        if (throwable instanceof IOException) {
+//            return throwable.getMessage();
+//        }
 
-        return throwable.getMessage();
+        return "Server error has occurred";
     }
 
     private String getHttpErrorMessage(int httpCode) {

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.databinding.ObservableField;
 import android.text.TextUtils;
 import com.viettel.mbccs.R;
+import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.constance.SerialStateType;
 import com.viettel.mbccs.data.model.SerialBO;
 import com.viettel.mbccs.data.model.SerialPickerModel;
@@ -51,6 +52,7 @@ public class SerialPickerPresenter
     private SerialBO currentSerialBlock = new SerialBO();
     private DataRequest<GetSerialRequest> mBaseRequest;
     private BanHangKhoTaiChinhRepository mBanHangKhoTaiChinhRepository;
+    private UserRepository mUserRepository;
     private CompositeSubscription mSubscription;
 
     private SerialPickerModel mSerialPickerModel;
@@ -62,50 +64,37 @@ public class SerialPickerPresenter
         mSerialPickerModel = serialPickerModel;
         mSubscription = new CompositeSubscription();
         mBanHangKhoTaiChinhRepository = BanHangKhoTaiChinhRepository.getInstance();
+        mUserRepository = UserRepository.getInstance();
         init();
         loadSerial();
-    }
-
-    private void fakeData() {
-        final SerialBO serialBO = new SerialBO();
-        serialBO.setFromSerial("111111");
-        serialBO.setToSerial("111114");
-
-        final SerialBO serialBO1 = new SerialBO();
-        serialBO1.setFromSerial("111116");
-        serialBO1.setToSerial("111116");
-
-        final SerialBO serialBO2 = new SerialBO();
-        serialBO2.setFromSerial("111118");
-        serialBO2.setToSerial("111119");
-        List<SerialBO> serialBOs = new ArrayList<SerialBO>();
-        serialBOs.add(serialBO);
-        serialBOs.add(serialBO1);
-        serialBOs.add(serialBO2);
-        mSerials.addAll(Common.getSerialsByListSerialBlock(serialBOs));
-        reCaculateSerial();
     }
 
     private void loadSerial() {
         mViewModel.showLoading();
         GetSerialRequest mSerialRequest = new GetSerialRequest();
-
         mSerialRequest.setOwnerType(2);
-        mSerialRequest.setOwnerId(1);//TODO
+        mSerialRequest.setOwnerId(mUserRepository.getUserInfo().getStaffInfo().getStaffId());//TODO
         mSerialRequest.setStateId(SerialStateType.TYPE_NEW);
+        mSerialRequest.setQuantity(mSerialPickerModel.getQuantity());
+        mSerialRequest.setStockModelId(mSerialPickerModel.getStockModelId());
         mBaseRequest = new DataRequest<>();
+        mBaseRequest.setApiCode(ApiCode.GetListSerial);
         mBaseRequest.setParameterApi(mSerialRequest);
 
         Subscription subscription = mBanHangKhoTaiChinhRepository.getSerial(mBaseRequest)
                 .subscribe(new MBCCSSubscribe<GetSerialsResponse>() {
                     @Override
                     public void onSuccess(GetSerialsResponse object) {
-                        if (object.getSerialInStock() != null
-                                && object.getSerialInStock().getSerialBOs().size() > 0) {
-                            List<SerialBO> serialBOs = object.getSerialInStock().getSerialBOs();
+                        if (object != null
+                                && object.getSerialSale() != null
+                                && object.getSerialSale().getSerialBOs() != null
+                                && object.getSerialSale().getSerialBOs().size() > 0) {
+                            List<SerialBO> serialBOs = object.getSerialSale().getSerialBOs();
                             mSerials.addAll(Common.getSerialsByListSerialBlock(serialBOs));
                             reCaculateSerial();
+                            return;
                         }
+                        onError(new Throwable());
                     }
 
                     @Override

@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.databinding.ObservableField;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.SaleTranType;
 import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.SaleTrans;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
@@ -74,7 +75,7 @@ public class SaveTransConfirmPresenter implements SaveTransConfirmContract.Prese
             customerInfor.set(
                     String.format(mContext.getString(R.string.sale_retail_confirm_customer_infor),
                             mGetInfoSaleTranRequest.getCustomer().getCustomerName(),
-                            "0123513124123", Common.formatDouble(mSaleTrans.getAmountTax()),
+                            Common.formatDouble(mSaleTrans.getAmountTax()),
                             Common.convertMoneyToString(mSaleTrans.getAmountTax())));
         }
         salerInfor.set(String.format(mContext.getString(R.string.sale_retail_confirm_saler_infor),
@@ -94,6 +95,8 @@ public class SaveTransConfirmPresenter implements SaveTransConfirmContract.Prese
     private void saveTransactionRetail() {
         mViewModel.showLoading();
         DataRequest<GetInfoSaleTranRequest> baseRequest = new DataRequest<>();
+        baseRequest.setApiCode(ApiCode.CreateSaleTransRetail);
+        mGetInfoSaleTranRequest.setSaleTransType(String.valueOf(SaleTranType.SALE_RETAIL));
         baseRequest.setParameterApi(mGetInfoSaleTranRequest);
         Subscription subscription = mBanHangKhoTaiChinhRepository.createSaleTransRetail(baseRequest)
                 .subscribe(new MBCCSSubscribe<CreateSaleTransRetailResponse>() {
@@ -141,8 +144,11 @@ public class SaveTransConfirmPresenter implements SaveTransConfirmContract.Prese
     private void saveTransactionChannel() {
         mViewModel.showLoading();
         DataRequest<CreateSaleTransChannelRequest> dataRequest = new DataRequest<>();
-        dataRequest.setApiCode(ApiCode.CreateSaleTransChannel);
+        dataRequest.setApiCode(ApiCode.CreateSaleTransRetail);
         CreateSaleTransChannelRequest request = mGetInfoSaleTranRequest.clone();
+        request.setSaleTransType(String.valueOf(SaleTranType.SALE_RETAIL));
+        request.setChanelId(mUserRepository.getUserInfo().getChannelInfo().getChannelId());
+        request.setChannelType(mUserRepository.getUserInfo().getChannelInfo().getChannelType());
         dataRequest.setParameterApi(request);
         Subscription subscription =
                 mBanHangKhoTaiChinhRepository.createSaleTransChannel(dataRequest)

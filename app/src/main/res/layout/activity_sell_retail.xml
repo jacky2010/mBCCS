@@ -24,9 +24,12 @@
             app:titleColor="@{@color/white}"
             app:titleTextSize="@{@dimen/sp_17}"
             />
+
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+
             >
             <com.viettel.mbccs.widget.CustomButton
                 android:id="@+id/btn_next"
@@ -38,71 +41,14 @@
                 android:text="@string/next"
                 style="@style/button_positive"
                 />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_above="@id/btn_next"
+                android:layout_marginTop="@dimen/filter_height"
                 android:orientation="vertical"
                 >
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    >
-                    <include
-                        layout="@layout/item_text_filter"
-                        app:isShow="@{presenter.isCollapse}"
-                        app:onClick="@{()->presenter.toogleExpand()}"
-                        app:text="@{presenter.filterText}"
-                        ></include>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dp_20"
-                        android:layout_marginRight="@dimen/dp_20"
-                        android:orientation="vertical"
-                        android:visibility="@{presenter.isCollapse?View.GONE:View.VISIBLE}"
-                        >
-                        <ImageView
-                            android:layout_width="@dimen/dp_30"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="@dimen/dp_5"
-                            android:onClick="@{()->presenter.toogleExpand()}"
-                            android:src="@drawable/collapse"
-                            />
-
-                        <com.viettel.mbccs.widget.CustomTextView
-                            android:id="@+id/customTextView2"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="@string/service"
-                            />
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            >
-                            <com.viettel.mbccs.widget.SpinnerWithBorder
-                                android:id="@+id/spinner"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                app:adapter="@{presenter.adapter}"
-                                />
-                        </LinearLayout>
-                        <com.viettel.mbccs.widget.CustomTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_5"
-                            android:text="@string/sell_program"
-                            />
-                        <com.viettel.mbccs.widget.FakeSpinner
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:onClick="@{()->presenter.chooseSellProgram()}"
-                            android:text="@{presenter.sellProgram}"
-                            />
-                    </LinearLayout>
-                </RelativeLayout>
 
                 <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="match_parent"
@@ -115,9 +61,102 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:adapter="@{presenter.stockAdapter}"
-                    ></android.support.v7.widget.RecyclerView>
+                    />
 
             </LinearLayout>
+
+            <com.viettel.mbccs.widget.MultiDirectionSlidingDrawer
+                android:id="@+id/drawer"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="300dp"
+                app:content="@+id/content"
+                app:direction="topToBottom"
+                app:handle="@+id/handle"
+                app:handleTwo="@+id/view_close"
+                app:headerOne="@+id/view_open"
+                >
+
+                // layout content when expanded
+                <LinearLayout
+                    android:id="@+id/content"
+                    android:layout_width="match_parent"
+                    android:background="@color/white"
+                    android:layout_height="wrap_content"
+                    >
+                    <RelativeLayout
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:paddingTop="@dimen/dp_10"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dp_20"
+                            android:layout_marginRight="@dimen/dp_20"
+                            android:orientation="vertical"
+                            android:visibility="@{presenter.isCollapse?View.GONE:View.VISIBLE}"
+                            >
+                            <com.viettel.mbccs.widget.CustomTextView
+                                android:id="@+id/customTextView2"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="@string/service"
+                                />
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                >
+                                <com.viettel.mbccs.widget.SpinnerWithBorder
+                                    android:id="@+id/spinner"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    app:adapter="@{presenter.adapter}"
+                                    />
+                            </LinearLayout>
+                            <com.viettel.mbccs.widget.CustomTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_5"
+                                android:text="@string/sell_program"
+                                />
+                            <com.viettel.mbccs.widget.FakeSpinner
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:onClick="@{()->presenter.chooseSellProgram()}"
+                                android:text="@{presenter.sellProgram}"
+                                />
+                        </LinearLayout>
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@id/handle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    // layout content when header_expanded when close
+                    <include
+                        layout="@layout/item_text_filter"
+                        android:id="@+id/view_close"
+                        app:isShow="@{presenter.isCollapse}"
+                        app:onClick="@{()->presenter.toogleExpand()}"
+                        app:text="@{presenter.filterText}"
+                        />
+
+                    // layout content when header_expanded when open
+                    <include
+                        layout="@layout/header_expanded"
+                        android:id="@+id/view_open"
+                        />
+
+                </RelativeLayout>
+
+            </com.viettel.mbccs.widget.MultiDirectionSlidingDrawer>
         </RelativeLayout>
     </LinearLayout>
 </layout>

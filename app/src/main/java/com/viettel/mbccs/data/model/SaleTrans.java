@@ -32,7 +32,7 @@ public class SaleTrans implements Serializable, Parcelable {
     @Expose
     private double amountNotTax;
 
-    @SerializedName("VAT")
+    @SerializedName("vat")
     @Expose
     private double VAT;
 

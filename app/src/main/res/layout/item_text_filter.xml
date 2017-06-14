@@ -14,41 +14,61 @@
             />
         <variable
             name="onClick"
-            type="android.view.View.OnClickListener"/>
+
+            type="android.view.View.OnClickListener"
+            />
         <import type="android.view.View"/>
     </data>
     <LinearLayout
-        android:id="@+id/lyFilterCollapse"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dp_20"
-        android:background="@drawable/bg_filter_input"
-        android:orientation="horizontal"
-        android:padding="@dimen/dp_5"
-        android:onClick="@{onClick}"
-        android:visibility="@{isShow?View.VISIBLE:View.GONE}"
+        android:layout_height="@dimen/filter_height"
+        android:background="@color/blue_dark"
+        android:orientation="vertical"
         >
-        <ImageView
-            android:layout_width="@dimen/dp_20"
-            android:layout_height="@dimen/dp_20"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_search_black_24dp"
-            />
-        <com.viettel.mbccs.widget.CustomTextView
-            android:id="@+id/text_filer"
+        <LinearLayout
+            android:id="@+id/lyFilterCollapse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#00ffffff"
-            android:ellipsize="marquee"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:lines="1"
-            app:selected="@{true}"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:maxLines="1"
-            android:padding="@dimen/dp_3"
-            android:scrollHorizontally="true"
-            app:bindText="@{text}"
+            android:onClick="@{onClick}"
+            android:orientation="horizontal"
+            android:padding="@dimen/dp_5"
+            >
+            <ImageView
+                android:layout_width="@dimen/dp_20"
+                android:layout_height="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_5"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:src="@drawable/ic_search_white"
+                />
+            <com.viettel.mbccs.widget.CustomTextView
+                android:id="@+id/text_filer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="center"
+                android:lines="1"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:maxLines="1"
+                android:padding="@dimen/dp_3"
+                android:scrollHorizontally="true"
+                android:text="asdfasdfasdfasdfasdfasdf"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_15"
+                app:bindText="@{text}"
+                app:selected="@{true}"
+                />
+        </LinearLayout>
+
+        <View
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_2"
+            android:layout_gravity="center"
+            android:background="@color/white_grey"
             />
+
     </LinearLayout>
 </layout>

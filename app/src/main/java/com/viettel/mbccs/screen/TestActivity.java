@@ -41,6 +41,7 @@ public class TestActivity extends BaseActivity {
             }
         });
 
+
         mWrappingSlidingDrawer.setOnDrawerCloseListener(new MultiDirectionSlidingDrawer.OnDrawerCloseListener() {
             @Override
             public void onDrawerClosed() {

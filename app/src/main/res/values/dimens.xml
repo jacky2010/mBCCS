@@ -79,4 +79,5 @@
     <dimen name="all_btn_radius">5dp</dimen>
     <dimen name="dp_0_5">0.5dp</dimen>
     <dimen name="dp_25">25dp</dimen>
+    <dimen name="filter_height">50dp</dimen>
 </resources>

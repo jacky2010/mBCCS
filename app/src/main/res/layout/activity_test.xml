@@ -47,7 +47,7 @@
             // layout content when header_expanded when open
             <include
                 android:id="@+id/view_open"
-                layout="@layout/test_header_expanded" />
+                layout="@layout/header_expanded" />
 
         </RelativeLayout>
 

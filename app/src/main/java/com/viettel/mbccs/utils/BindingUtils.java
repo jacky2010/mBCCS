@@ -103,9 +103,6 @@ public class BindingUtils {
     }, requireAll = false)
     public static void loadImage(ImageView imageView, String url, Drawable placeHolder,
             boolean isCacheSource, boolean centerCrop) {
-        if (TextUtils.isEmpty(url) && placeHolder == null) {
-            return;
-        }
         DrawableRequestBuilder<String> requestBuilder = Glide.with(imageView.getContext())
                 .load(url)
                 .diskCacheStrategy(
