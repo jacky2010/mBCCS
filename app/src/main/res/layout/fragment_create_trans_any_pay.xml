@@ -209,8 +209,10 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/spDefaultAmountList"
                     android:layout_width="match_parent"
+                    android:layout_gravity="center"
                     android:layout_height="@dimen/dp_40"
-                    android:adapter="@{presenter.payAmountListAdapter}" />
+                    app:orientation="@{1}"
+                    android:recyclerAdapter="@{presenter.payAmountListAdapter}" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
