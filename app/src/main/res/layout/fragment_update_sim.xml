@@ -39,9 +39,9 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:paddingLeft="@dimen/dp_6"
                         android:layout_width="@dimen/dp_20"
                         android:layout_height="@dimen/dp_20"
+                        android:paddingLeft="@dimen/dp_6"
                         android:src="@drawable/ic_arrow_right" />
 
                     <TextView
@@ -67,10 +67,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_40"
                     android:background="@drawable/bg_order"
-                    android:text="@={ presenter.customerName }"
-                    android:error="@{presenter.customerNameError}"
                     android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                    android:maxLength="@integer/max_length_customer_name"/>
+                    android:error="@{presenter.customerNameError}"
+                    android:maxLength="@integer/max_length_customer_name"
+                    android:text="@={ presenter.customerName }" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -84,10 +84,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_40"
                     android:background="@drawable/bg_order"
-                    android:text="@={ presenter.documentId }"
                     android:error="@{ presenter.documentIdError }"
                     android:inputType="number"
-                    android:maxLength="@integer/max_length_document_no"/>
+                    android:maxLength="@integer/max_length_document_no"
+                    android:text="@={ presenter.documentId }" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -98,17 +98,17 @@
                     android:textSize="@dimen/sp_16" />
 
                 <com.viettel.mbccs.widget.CustomEdittext
-                    android:layout_gravity="top"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_60"
+                    android:layout_gravity="top"
                     android:background="@drawable/bg_order"
+                    android:error="@{presenter.customerAddressError}"
                     android:lines="3"
+                    android:maxLength="@integer/max_length_address"
                     android:maxLines="3"
                     android:minLines="3"
                     android:scrollbars="vertical"
-                    android:text="@={ presenter.customerAddress }"
-                    android:error="@{presenter.customerAddressError}"
-                    android:maxLength="@integer/max_length_address"/>
+                    android:text="@={ presenter.customerAddress }" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -122,14 +122,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="@{presenter.isPrepaid == true ? View.GONE : View.VISIBLE}">
 
                     <LinearLayout
                         android:id="@+id/image_doc1"
                         android:layout_width="@dimen/dp_160"
                         android:layout_height="@dimen/dp_160"
-                        android:layout_marginTop="@dimen/dp_10"
                         android:layout_marginRight="@dimen/dp_6"
+                        android:layout_marginTop="@dimen/dp_10"
                         android:gravity="center"
                         android:onClick="@{ v -> presenter.onSelectImage(v) }"
                         android:orientation="vertical">
@@ -138,24 +139,26 @@
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1">
+
                             <ImageView
                                 android:layout_width="@dimen/dp_160"
                                 android:layout_height="match_parent"
                                 bind:imageBitmap="@{ presenter.image1 }" />
                         </android.support.v7.widget.CardView>
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textAlignment="center"
-                            android:text="@string/change_sim_label_document_image1"/>
+                            android:text="@string/change_sim_label_document_image1"
+                            android:textAlignment="center" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/image_doc2"
                         android:layout_width="@dimen/dp_160"
                         android:layout_height="@dimen/dp_160"
-                        android:layout_marginTop="@dimen/dp_10"
                         android:layout_marginLeft="@dimen/dp_6"
+                        android:layout_marginTop="@dimen/dp_10"
                         android:gravity="center"
                         android:onClick="@{ v -> presenter.onSelectImage(v) }"
                         android:orientation="vertical">
@@ -164,16 +167,18 @@
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1">
+
                             <ImageView
                                 android:layout_width="@dimen/dp_160"
                                 android:layout_height="match_parent"
                                 bind:imageBitmap="@{ presenter.image2 }" />
                         </android.support.v7.widget.CardView>
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textAlignment="center"
-                            android:text="@string/change_sim_label_document_image2"/>
+                            android:text="@string/change_sim_label_document_image2"
+                            android:textAlignment="center" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -181,14 +186,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="@{presenter.isPrepaid == true ? View.GONE : View.VISIBLE}">
 
                     <LinearLayout
                         android:id="@+id/image_doc3"
                         android:layout_width="@dimen/dp_160"
                         android:layout_height="@dimen/dp_160"
-                        android:layout_marginTop="@dimen/dp_10"
                         android:layout_marginRight="@dimen/dp_6"
+                        android:layout_marginTop="@dimen/dp_10"
                         android:gravity="center"
                         android:onClick="@{ v -> presenter.onSelectImage(v) }"
                         android:orientation="vertical">
@@ -197,27 +203,28 @@
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1">
+
                             <ImageView
                                 android:layout_width="@dimen/dp_160"
                                 android:layout_height="match_parent"
                                 bind:imageBitmap="@{ presenter.image3 }" />
                         </android.support.v7.widget.CardView>
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textAlignment="center"
-                            android:text="@string/change_sim_label_document_image3"/>
+                            android:text="@string/change_sim_label_document_image3"
+                            android:textAlignment="center" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/image_contract4"
                         android:layout_width="@dimen/dp_160"
                         android:layout_height="@dimen/dp_160"
-                        android:layout_marginTop="@dimen/dp_10"
                         android:layout_marginLeft="@dimen/dp_6"
+                        android:layout_marginTop="@dimen/dp_10"
                         android:gravity="center"
-                        android:orientation="vertical">
-                    </LinearLayout>
+                        android:orientation="vertical"></LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -229,9 +236,9 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:paddingLeft="@dimen/dp_6"
                         android:layout_width="@dimen/dp_20"
                         android:layout_height="@dimen/dp_20"
+                        android:paddingLeft="@dimen/dp_6"
                         android:src="@drawable/ic_arrow_right" />
 
                     <TextView
@@ -257,14 +264,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_40"
                     android:background="@drawable/bg_order"
+                    android:error="@{ presenter.oldSimSerialError }"
+                    android:inputType="number"
                     android:lines="3"
+                    android:maxLength="@integer/max_length_sim_serial"
                     android:maxLines="3"
                     android:minLines="3"
-                    android:inputType="number"
                     android:scrollbars="vertical"
-                    android:text="@={ presenter.oldSimSerial }"
-                    android:error="@{ presenter.oldSimSerialError }"
-                    android:maxLength="@integer/max_length_sim_serial"/>
+                    android:text="@={ presenter.oldSimSerial }" />
 
                 <TextView
                     android:id="@+id/txtNewSerial"
@@ -279,17 +286,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_40"
                     android:background="@drawable/bg_order"
-                    android:inputType="number"
-                    android:scrollbars="vertical"
-                    android:text="@={ presenter.newSimSerial }"
                     android:error="@{ presenter.newSimSerialError }"
-                    android:maxLength="@integer/max_length_sim_serial"/>
+                    android:inputType="number"
+                    android:maxLength="@integer/max_length_sim_serial"
+                    android:scrollbars="vertical"
+                    android:text="@={ presenter.newSimSerial }" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:visibility="@{presenter.isPrepaid == true ? View.GONE : View.VISIBLE}">
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -300,9 +306,9 @@
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:paddingLeft="@dimen/dp_6"
                             android:layout_width="@dimen/dp_20"
                             android:layout_height="@dimen/dp_20"
+                            android:paddingLeft="@dimen/dp_6"
                             android:src="@drawable/ic_arrow_right" />
 
                         <TextView
@@ -328,11 +334,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_40"
                         android:background="@drawable/bg_order"
-                        android:inputType="phone"
-                        android:scrollbars="vertical"
-                        android:text="@={ presenter.contact1 }"
                         android:error="@{ presenter.contact1Error }"
-                        android:maxLength="@integer/max_length_isdn"/>
+                        android:inputType="phone"
+                        android:maxLength="@integer/max_length_isdn"
+                        android:scrollbars="vertical"
+                        android:text="@={ presenter.contact1 }" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -346,11 +352,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_40"
                         android:background="@drawable/bg_order"
-                        android:inputType="phone"
-                        android:scrollbars="vertical"
-                        android:text="@={ presenter.contact2 }"
                         android:error="@{ presenter.contact2Error }"
-                        android:maxLength="@integer/max_length_isdn"/>
+                        android:inputType="phone"
+                        android:maxLength="@integer/max_length_isdn"
+                        android:scrollbars="vertical"
+                        android:text="@={ presenter.contact2 }" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -364,11 +370,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_40"
                         android:background="@drawable/bg_order"
-                        android:inputType="phone"
-                        android:scrollbars="vertical"
-                        android:text="@={ presenter.contact3 }"
                         android:error="@{ presenter.contact3Error }"
-                        android:maxLength="@integer/max_length_isdn"/>
+                        android:inputType="phone"
+                        android:maxLength="@integer/max_length_isdn"
+                        android:scrollbars="vertical"
+                        android:text="@={ presenter.contact3 }" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -382,11 +388,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_40"
                         android:background="@drawable/bg_order"
-                        android:inputType="phone"
-                        android:scrollbars="vertical"
-                        android:text="@={ presenter.contact4 }"
                         android:error="@{ presenter.contact4Error }"
-                        android:maxLength="@integer/max_length_isdn"/>
+                        android:inputType="phone"
+                        android:maxLength="@integer/max_length_isdn"
+                        android:scrollbars="vertical"
+                        android:text="@={ presenter.contact4 }" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -400,11 +406,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_40"
                         android:background="@drawable/bg_order"
-                        android:inputType="phone"
-                        android:scrollbars="vertical"
-                        android:text="@={ presenter.contact5 }"
                         android:error="@{ presenter.contact5Error }"
-                        android:maxLength="@integer/max_length_isdn"/>
+                        android:inputType="phone"
+                        android:maxLength="@integer/max_length_isdn"
+                        android:scrollbars="vertical"
+                        android:text="@={ presenter.contact5 }" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -416,9 +422,9 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:paddingLeft="@dimen/dp_6"
                         android:layout_width="@dimen/dp_20"
                         android:layout_height="@dimen/dp_20"
+                        android:paddingLeft="@dimen/dp_6"
                         android:src="@drawable/ic_arrow_right" />
 
                     <TextView
@@ -447,7 +453,7 @@
                         android:id="@+id/txtServiceFee"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{presenter.serviceFee}"/>
+                        android:text="@{presenter.serviceFee}" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -464,7 +470,7 @@
                         android:id="@+id/txtSimFee"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{presenter.changeSimFee}"/>
+                        android:text="@{presenter.changeSimFee}" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -482,8 +488,8 @@
                         android:id="@+id/txtTotalFee"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:text="@{presenter.totalFee}"/>
+                        android:text="@{presenter.totalFee}"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
             </LinearLayout>
