@@ -77,7 +77,7 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
         });
 
         documentTypesList = new ArrayList<>();
-        documentTypeAdapter = new HintArrayAdapter<>(context, R.layout.item_spinner, R.id.text,
+        documentTypeAdapter = new HintArrayAdapter<>(context, R.layout.item_spinner, android.R.id.text1,
                 documentTypesList);
 
         initListeners();

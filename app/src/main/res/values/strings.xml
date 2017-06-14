@@ -223,6 +223,10 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
 
     <!--Change Sim-->
     <string name="change_sim_title">Đổi SIM</string>
+    <string name="change_sim_label_document_image">Ảnh giấy tờ</string>
+    <string name="change_sim_label_document_image1">Ảnh mặt trước</string>
+    <string name="change_sim_label_document_image2">Ảnh mặt sau</string>
+    <string name="change_sim_label_document_image3">Ảnh chân dung</string>
     <string name="change_sim_label_document_id">Số giấy tờ</string>
     <string name="change_sim_label_select_sim">Chọn thông tin</string>
     <string name="change_sim_label_select_sim_error_debit">Thuê bao còn đang nợ cước, đề nghị vào thanh toán cước trước khi đổi sim!</string>

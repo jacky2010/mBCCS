@@ -3,8 +3,10 @@ package com.viettel.mbccs.screen.changesim.fragments;
 import android.content.Context;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.ChangeSimInfo;
@@ -48,7 +50,14 @@ public class UpdateSimPresenter implements UpdateSimContract.Presenter {
     public ObservableField<String> serviceFee;
     public ObservableField<String> changeSimFee;
     public ObservableField<String> totalFee;
+    public ObservableField<Bitmap> image1;
+    public ObservableField<Bitmap> image2;
+    public ObservableField<Bitmap> image3;
     public ObservableBoolean isPrepaid;
+
+    private Bitmap image1Obj;
+    private Bitmap image2Obj;
+    private Bitmap image3Obj;
 
     private ChangeSimRepository repository;
     private double changeSimPrice;
@@ -81,6 +90,9 @@ public class UpdateSimPresenter implements UpdateSimContract.Presenter {
         serviceFee = new ObservableField<>();
         changeSimFee = new ObservableField<>();
         totalFee = new ObservableField<>();
+        image1 = new ObservableField<>();
+        image2 = new ObservableField<>();
+        image3 = new ObservableField<>();
         isPrepaid = new ObservableBoolean();
 
         initListeners();
@@ -239,5 +251,27 @@ public class UpdateSimPresenter implements UpdateSimContract.Presenter {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void onSelectImage(View v) {
+        viewModel.onSelectImage(v);
+    }
+
+    @Override
+    public void setImage1(Bitmap bitmap) {
+        image1Obj = bitmap;
+        image1.set(bitmap);
+    }
+
+    @Override
+    public void setImage2(Bitmap bitmap) {
+        image2Obj = bitmap;
+        image2.set(bitmap);
+    }
+
+    @Override
+    public void setImage3(Bitmap bitmap) {
+        image3Obj = bitmap;
+        image3.set(bitmap);
     }
 }

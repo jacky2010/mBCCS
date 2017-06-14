@@ -90,9 +90,9 @@ public class AddBranchPresenter implements AddBranchContract.Presenter {
         channelTypesList = new ArrayList<>();
         documentTypesList = new ArrayList<>();
 
-        channelTypeAdapter = new HintArrayAdapter<>(context, R.layout.item_spinner, R.id.text,
+        channelTypeAdapter = new HintArrayAdapter<>(context, R.layout.item_spinner, android.R.id.text1,
                 channelTypesList);
-        documentTypeAdapter = new HintArrayAdapter<>(context, R.layout.item_spinner, R.id.text,
+        documentTypeAdapter = new HintArrayAdapter<>(context, R.layout.item_spinner, android.R.id.text1,
                 documentTypesList);
 
         initListeners();
