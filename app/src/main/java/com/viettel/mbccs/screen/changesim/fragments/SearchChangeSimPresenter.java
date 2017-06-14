@@ -40,6 +40,7 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
     public ObservableField<String> isdn;
     public ObservableField<String> isdnError;
     public ObservableBoolean searchFound;
+    public ObservableBoolean hideSearch;
     public ObservableField<ChangeSimListAdapter> changeSimListAdapter;
 
     private HintArrayAdapter<String> documentTypeAdapter;
@@ -61,6 +62,7 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
         changeSimListAdapter = new ObservableField<>();
 
         searchFound = new ObservableBoolean(true);
+        hideSearch = new ObservableBoolean(false);
 
         changeSimAdapter = new ChangeSimListAdapter(context, new ArrayList<ChangeSimItem>());
         changeSimAdapter.setOnItemClickListener(new ChangeSimListAdapter.OnItemClickListener() {
@@ -214,6 +216,14 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void onCollapse(){
+        hideSearch.set(true);
+    }
+
+    public void onExpand(){
+        hideSearch.set(false);
     }
 
     public HintArrayAdapter<String> getDocumentTypeAdapter() {

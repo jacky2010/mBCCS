@@ -4,6 +4,7 @@ import android.content.Context;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -90,9 +91,12 @@ public class UpdateSimPresenter implements UpdateSimContract.Presenter {
         serviceFee = new ObservableField<>();
         changeSimFee = new ObservableField<>();
         totalFee = new ObservableField<>();
-        image1 = new ObservableField<>();
-        image2 = new ObservableField<>();
-        image3 = new ObservableField<>();
+        image1 = new ObservableField<>(
+                BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_select_image));
+        image2 = new ObservableField<>(
+                BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_select_image));
+        image3 = new ObservableField<>(
+                BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_select_image));
         isPrepaid = new ObservableBoolean();
 
         initListeners();
@@ -226,7 +230,7 @@ public class UpdateSimPresenter implements UpdateSimContract.Presenter {
                 }
             }
 
-            if(!isValid)
+            if (!isValid)
                 return;
 
             Customer customer = new Customer();
