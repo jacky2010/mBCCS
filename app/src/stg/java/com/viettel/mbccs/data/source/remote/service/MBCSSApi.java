@@ -62,7 +62,6 @@ import com.viettel.mbccs.data.source.remote.response.CreateDistributedChannelRes
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransChannelResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransFromOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransRetailResponse;
-import com.viettel.mbccs.data.source.remote.response.DataResponse;
 import com.viettel.mbccs.data.source.remote.response.GetAllInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetAnypayAuthorizeResponse;
 import com.viettel.mbccs.data.source.remote.response.GetApDomainResponse;
@@ -91,7 +90,6 @@ import com.viettel.mbccs.data.source.remote.response.GetRegiterSubInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSurveyKPPResponse;
 import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
-import com.viettel.mbccs.data.source.remote.response.GetUserInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.KPPFeedbackResponse;
 import com.viettel.mbccs.data.source.remote.response.KPPResponseFeedbackResponse;
 import com.viettel.mbccs.data.source.remote.response.RefillAnyPayResponse;
@@ -107,6 +105,7 @@ import com.viettel.mbccs.data.source.remote.response.UpdateAllSubInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.UpdateRegisterSubResponse;
 import com.viettel.mbccs.data.source.remote.response.UpdateSaleOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.UploadImageResponse;
+
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -255,7 +254,7 @@ public interface MBCSSApi {
     Observable<ServerDataResponse<BaseResponse<CheckIdNoResponse>>> checkIdNo(
             @Body DataRequest<CheckIdNoRequest> request);
 
-    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    @POST("thonguyen/Sale_mBCCS/1.0.0/WS_CheckAuthenticate")
     Observable<ServerDataResponse<BaseResponse<GetAnypayAuthorizeResponse>>> getAnypayAuthorize(
             @Body DataRequest<GetAnypayAuthorizeRequest> request);
 

@@ -229,6 +229,10 @@
             android:name=".screen.viewwarehouse.ViewWarehouseActivity"
             android:screenOrientation="portrait"/>
 
+        <activity
+            android:name=".screen.common.picker.KeyValuePickerActivity"
+            android:screenOrientation="portrait"/>
+
         <service
             android:name=".service.service.UploadImageService"
             android:exported="true"/>

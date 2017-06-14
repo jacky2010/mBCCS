@@ -54,6 +54,10 @@ public class SellAnyPayPresenter implements SellAnyPayContract.Presenter {
     private void checkPermission(){
         try{
 
+            viewModel.changeToSearchTab();
+            if(2-1==1)
+                return;//TODO minhnx test
+
             viewModel.showLoading();
 
             baseRequest = new DataRequest<>();

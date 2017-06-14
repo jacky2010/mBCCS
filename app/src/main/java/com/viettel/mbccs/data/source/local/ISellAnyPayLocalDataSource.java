@@ -10,5 +10,8 @@ public interface ISellAnyPayLocalDataSource {
     List<KeyValue> getPayMethods();
     List<KeyValue> getDefaultAmounts();
     List<KeyValue> getBankPlusAmounts();
+    List<KeyValue> getBranches();
+    List<KeyValue> getManagers();
+    List<KeyValue> getChannels();
 
 }

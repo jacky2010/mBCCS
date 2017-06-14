@@ -1,10 +1,10 @@
 package com.viettel.mbccs.screen.sellanypay.fragments;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
@@ -12,17 +12,27 @@ import android.widget.Toast;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindFragment;
 import com.viettel.mbccs.data.model.ChangeSimItem;
+import com.viettel.mbccs.data.model.KeyValue;
 import com.viettel.mbccs.databinding.FragmentCreateTransAnyPayBinding;
+import com.viettel.mbccs.screen.common.picker.KeyValuePickerActivity;
 import com.viettel.mbccs.screen.sellanypay.dialogs.DialogConfirmSellAnyPayFragment;
-import com.viettel.mbccs.utils.ActivityUtils;
+import com.viettel.mbccs.utils.GsonUtils;
 import com.viettel.mbccs.variable.Constants;
+
+import java.util.List;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * Created by minhnx on 5/20/17.
  */
 
 public class CreateTransAnyPayFragment extends BaseDataBindFragment<FragmentCreateTransAnyPayBinding, CreateTransAnyPayPresenter>
-        implements CreateTransAnyPayContract.ViewModel{
+        implements CreateTransAnyPayContract.ViewModel {
+
+    private static final int GET_MANAGER = 1001;
+    private static final int GET_BRANCH = GET_MANAGER + 1;
+    private static final int GET_CHANNEL = GET_MANAGER + 2;
 
     private AppCompatActivity mActivity;
 
@@ -60,18 +70,15 @@ public class CreateTransAnyPayFragment extends BaseDataBindFragment<FragmentCrea
 
     @Override
     protected void initView() {
-
+        try {
+            mBinding.spDefaultAmountList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    private void initListeners(){
-        try{
-//            mBinding.txtDocumentId.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//                @Override
-//                public void onFocusChange(View view, boolean b) {
-//                    if(!b)
-//                        hideSoftInput();
-//                }
-//            });
+    private void initListeners() {
+        try {
 
             mBinding.spCustType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -86,129 +93,9 @@ public class CreateTransAnyPayFragment extends BaseDataBindFragment<FragmentCrea
                 }
             });
 
-            mBinding.spPayMethod.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    if (!Constants.View.HINT.equals(view.getTag()))
-                        mPresenter.onPaymentMethodChanged(i);
-                    mPresenter.onAmountChanged();
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> adapterView) {
-
-                }
-            });
-
-            mBinding.spBankPlusAmount.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    if (!Constants.View.HINT.equals(view.getTag()))
-                        mPresenter.onBankPlusAmountChanged(i);
-                    mPresenter.onAmountChanged();
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> adapterView) {
-
-                }
-            });
-
-            mBinding.spDefaultAmountList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    if (!Constants.View.HINT.equals(view.getTag()))
-                        mPresenter.onDefaultAmountChanged(i);
-                    mPresenter.onAmountChanged();
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> adapterView) {
-
-                }
-            });
-            mBinding.txtOtherAmount.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                }
-
-                @Override
-                public void afterTextChanged(Editable editable) {
-                    mPresenter.onAmountChanged();
-                }
-            });
-
-            mBinding.txtEWalletAmount.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                }
-
-                @Override
-                public void afterTextChanged(Editable editable) {
-                    mPresenter.onAmountChanged();
-                }
-            });
-
-//            mBinding.txtOtherAmount.setOnKeyListener(new View.OnKeyListener() {
-//                @Override
-//                public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
-//                    if (keyEvent.getAction() == KeyEvent.ACTION_UP) {
-//                        if (keyCode == KeyEvent.KEYCODE_ENTER) {
-//                            mPresenter.onAmountChanged();
-//                            return true;
-//                        }
-//                        mPresenter.onAmountChanged();
-//                    }
-//                    return false;
-//                }
-//            });
-
-//            mBinding.txtEWalletAmount.setOnKeyListener(new View.OnKeyListener() {
-//                @Override
-//                public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
-//                    if (keyEvent.getAction() == KeyEvent.ACTION_UP) {
-//                        if (keyCode == KeyEvent.KEYCODE_ENTER) {
-//                            mPresenter.onAmountChanged();
-//                            return true;
-//                        }
-//                        mPresenter.onAmountChanged();
-//                    }
-//                    return false;
-//                }
-//            });
-
-            mBinding.rbPayByCashDefaultAmount.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    mPresenter.onAmountChanged();
-                }
-            });
-
-            mBinding.rbPayByCashOtherAmount.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    mPresenter.onAmountChanged();
-                }
-            });
-
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private void hideSoftInput(){
-        ActivityUtils.hideKeyboard(getBaseActivity());
     }
 
     @Override
@@ -228,21 +115,6 @@ public class CreateTransAnyPayFragment extends BaseDataBindFragment<FragmentCrea
     }
 
     @Override
-    public void onDefaultAmountChanged(boolean selectedDefault) {
-        try{
-            if(selectedDefault){
-                mBinding.spDefaultAmountList.setEnabled(true);
-                mBinding.txtOtherAmount.setEnabled(false);
-            }else{
-                mBinding.spDefaultAmountList.setEnabled(false);
-                mBinding.txtOtherAmount.setEnabled(true);
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    @Override
     public void showError(String message) {
         Toast.makeText(mActivity, message, Toast.LENGTH_LONG).show();
     }
@@ -253,12 +125,57 @@ public class CreateTransAnyPayFragment extends BaseDataBindFragment<FragmentCrea
     }
 
     @Override
-    public void onPayMethodChanged(CreateTransAnyPayContract.PayMethod method) {
-
+    public void goToDialogFragment(Bundle args) {
+        getBaseActivity().goToDialogFragment(new DialogConfirmSellAnyPayFragment(), args);
     }
 
     @Override
-    public void goToDialogFragment(Bundle args) {
-        getBaseActivity().goToDialogFragment(new DialogConfirmSellAnyPayFragment(), args);
+    public void onChooseBranch(List<KeyValue> items) {
+        Intent intent = new Intent(getActivity(), KeyValuePickerActivity.class);
+        intent.putExtra(Constants.BundleConstant.ITEM_LIST,
+                GsonUtils.Object2String(items));
+        intent.putExtra(Constants.BundleConstant.FORM_TYPE, getString(R.string.sell_anypay_title_branch));
+        startActivityForResult(intent, GET_BRANCH);
+    }
+
+    @Override
+    public void onChooseManager(List<KeyValue> items) {
+        Intent intent = new Intent(getActivity(), KeyValuePickerActivity.class);
+        intent.putExtra(Constants.BundleConstant.ITEM_LIST,
+                GsonUtils.Object2String(items));
+        intent.putExtra(Constants.BundleConstant.FORM_TYPE, getString(R.string.sell_anypay_title_manager));
+        startActivityForResult(intent, GET_MANAGER);
+    }
+
+    @Override
+    public void onChooseChannel(List<KeyValue> items) {
+        Intent intent = new Intent(getActivity(), KeyValuePickerActivity.class);
+        intent.putExtra(Constants.BundleConstant.ITEM_LIST,
+                GsonUtils.Object2String(items));
+        intent.putExtra(Constants.BundleConstant.FORM_TYPE, getString(R.string.sell_anypay_title_channel));
+        startActivityForResult(intent, GET_CHANNEL);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        try {
+            if (requestCode == GET_MANAGER && resultCode == RESULT_OK) {
+                KeyValue item = (KeyValue) data.getExtras()
+                        .getSerializable(Constants.BundleConstant.RESULT);
+                mPresenter.onGetManagerSuccess(item);
+            } else if (requestCode == GET_BRANCH && resultCode == RESULT_OK) {
+                KeyValue item = (KeyValue) data.getExtras()
+                        .getSerializable(Constants.BundleConstant.RESULT);
+                mPresenter.onGetBranchSuccess(item);
+            } else if (requestCode == GET_CHANNEL && resultCode == RESULT_OK) {
+                KeyValue item = (KeyValue) data.getExtras()
+                        .getSerializable(Constants.BundleConstant.RESULT);
+                mPresenter.onGetChannelSuccess(item);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

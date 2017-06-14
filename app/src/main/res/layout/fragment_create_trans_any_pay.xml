@@ -12,6 +12,7 @@
         <import
             name="View"
             type="android.view.View" />
+
     </data>
 
     <ScrollView
@@ -45,24 +46,134 @@
                     android:adapter="@{presenter.custTypeAdapter}" />
             </LinearLayout>
 
-            <TextView
+            <!--distributor-->
+            <LinearLayout
+                android:visibility="@{presenter.customerType == presenter.CUST_TYPE_CORPORATE ? View.VISIBLE : View.GONE}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_8"
-                android:text="@string/sell_anypay_label_channel_code"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp_16"
-                android:visibility="@{presenter.customerType == presenter.CUST_TYPE_INDIVIDUAL ? View.GONE : View.VISIBLE}" />
+                android:orientation="vertical">
 
-            <com.viettel.mbccs.widget.CustomEdittext
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_40"
-                android:background="@drawable/bg_order"
-                android:inputType="text"
-                android:text="@={ presenter.channelCode }"
-                android:visibility="@{presenter.customerType == presenter.CUST_TYPE_INDIVIDUAL ? View.GONE : View.VISIBLE}"
-                app:error="@{presenter.channelCodeError}"
-                android:maxLength="@integer/max_length_channel_code"/>
+                <com.viettel.mbccs.widget.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:text="@string/sell_anypay_label_branch"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:background="@drawable/bg_border"
+                    android:onClick="@{()->presenter.chooseBranch()}">
+
+                    <ImageView
+                        android:id="@+id/icon_right_0"
+                        android:layout_width="@dimen/dp_12"
+                        android:layout_height="@dimen/dp_12"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dp"
+                        android:src="@drawable/triangle" />
+
+                    <com.viettel.mbccs.widget.CustomEdittext
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_toLeftOf="@id/icon_right_0"
+                        android:background="@color/transparent"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:gravity="center_vertical"
+                        android:hint="@string/sell_anypay_hint_branch"
+                        android:lines="1"
+                        android:onClick="@{()->presenter.chooseBranch()}"
+                        android:padding="@dimen/dp_10"
+                        android:text="@={presenter.branch}"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_13" />
+                </RelativeLayout>
+
+                <com.viettel.mbccs.widget.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:text="@string/sell_anypay_label_manager"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:background="@drawable/bg_border"
+                    android:onClick="@{()->presenter.chooseManager()}">
+
+                    <ImageView
+                        android:id="@+id/icon_right_1"
+                        android:layout_width="@dimen/dp_12"
+                        android:layout_height="@dimen/dp_12"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dp"
+                        android:src="@drawable/triangle" />
+
+                    <com.viettel.mbccs.widget.CustomEdittext
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_toLeftOf="@id/icon_right_1"
+                        android:background="@color/transparent"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:gravity="center_vertical"
+                        android:hint="@string/sell_anypay_hint_manager"
+                        android:lines="1"
+                        android:onClick="@{()->presenter.chooseManager()}"
+                        android:padding="@dimen/dp_10"
+                        android:text="@={presenter.manager}"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_13" />
+                </RelativeLayout>
+
+                <com.viettel.mbccs.widget.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:text="@string/sell_anypay_label_channel"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:background="@drawable/bg_border"
+                    android:onClick="@{()->presenter.chooseChannel()}">
+
+                    <ImageView
+                        android:id="@+id/icon_right_2"
+                        android:layout_width="@dimen/dp_12"
+                        android:layout_height="@dimen/dp_12"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dp"
+                        android:src="@drawable/triangle" />
+
+                    <com.viettel.mbccs.widget.CustomEdittext
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_toLeftOf="@id/icon_right_2"
+                        android:background="@color/transparent"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:gravity="center_vertical"
+                        android:hint="@string/sell_anypay_hint_channel"
+                        android:lines="1"
+                        android:onClick="@{()->presenter.chooseChannel()}"
+                        android:padding="@dimen/dp_10"
+                        android:text="@={presenter.channel}"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_13" />
+                </RelativeLayout>
+            </LinearLayout>
+            <!--/distributor-->
 
             <TextView
                 android:layout_width="match_parent"
@@ -77,9 +188,53 @@
                 android:layout_height="@dimen/dp_40"
                 android:background="@drawable/bg_order"
                 android:inputType="phone"
+                android:maxLength="@integer/max_length_isdn"
                 android:text="@={ presenter.isdn }"
-                app:error="@{presenter.isdnError}"
-                android:maxLength="@integer/max_length_isdn"/>
+                app:error="@{presenter.isdnError}" />
+
+            <!--pay methods-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:text="@string/sell_anypay_label_amount_default"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/spDefaultAmountList"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:adapter="@{presenter.payAmountListAdapter}" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.viettel.mbccs.widget.CustomEdittext
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dp_40"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_order"
+                        android:enabled="@{presenter.otherAmountEnabled}"
+                        android:inputType="number"
+                        android:text="@={presenter.otherAmount}"
+                        app:error="@{presenter.otherAmountError}"
+                        android:maxLength="@integer/max_length_isdn" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:enabled="@{presenter.otherAmountEnabled}"
+                        android:paddingLeft="@dimen/dp_6"
+                        android:text="($)" />
+                </LinearLayout>
+            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -89,177 +244,165 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_16" />
 
+            <RadioGroup
+                android:id="@+id/radio_payment"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_80"
+                android:layout_marginTop="@dimen/dp_5"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/payment_cash"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/dp_5"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_border"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/image_cash"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/tien_mat_select" />
+
+                    <RadioButton
+                        android:id="@+id/radio_cash"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:checked="@{presenter.payMethod == presenter.PAY_METHOD_CASH}"
+                        android:gravity="center"
+                        android:onCheckedChanged="@{(rb, isChecked) -> presenter.onPayMethodChanged(rb, isChecked)}"
+                        android:text="@string/sell_anypay_label_cash"
+                        android:textSize="@dimen/sp_12" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/payment_bank_plus"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:layout_marginRight="@dimen/dp_5"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_border"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/image_bank_plus"
+                        android:layout_width="@dimen/dp_50"
+                        android:layout_height="@dimen/dp_50"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/bank_plus" />
+
+                    <RadioButton
+                        android:id="@+id/radio_bank_plus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:checked="@{presenter.payMethod == presenter.PAY_METHOD_BANK_PLUS}"
+                        android:gravity="center"
+                        android:onCheckedChanged="@{(rb, isChecked) -> presenter.onPayMethodChanged(rb, isChecked)}"
+                        android:text="@string/sell_anypay_label_bankplus"
+                        android:textSize="@dimen/sp_12" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/payment_wellet"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_border"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/image_wellet"
+                        android:layout_width="@dimen/dp_50"
+                        android:layout_height="@dimen/dp_50"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/vi_dien_tu" />
+
+                    <RadioButton
+                        android:id="@+id/radio_ewallet"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:checked="@{presenter.payMethod == presenter.PAY_METHOD_E_WALLET}"
+                        android:gravity="center"
+                        android:onCheckedChanged="@{(rb, isChecked) -> presenter.onPayMethodChanged(rb, isChecked)}"
+                        android:text="@string/sell_anypay_label_ewallet"
+                        android:textSize="@dimen/sp_12" />
+                </LinearLayout>
+            </RadioGroup>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_border">
-
-                <Spinner
-                    android:id="@+id/spPayMethod"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_40"
-                    android:adapter="@{presenter.payMethodAdapter}" />
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_8"
-                android:text="@string/sell_anypay_label_bankplus"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp_16"
-                android:visibility="@{presenter.payMethod == presenter.PAY_METHOD_BANK_PLUS ? View.VISIBLE : View.GONE}" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginRight="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_20"
                 android:orientation="vertical"
                 android:visibility="@{presenter.payMethod == presenter.PAY_METHOD_BANK_PLUS ? View.VISIBLE : View.GONE}">
 
                 <RadioGroup
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
                     android:orientation="horizontal">
 
                     <RadioButton
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/dp_10"
-                        android:text="@string/sell_anypay_label_phone_no"
+                        android:layout_weight="1"
                         android:checked="@{presenter.defaultBankIsdnChecked}"
-                        android:onCheckedChanged="@{(cb, isChecked) -> presenter.onBankIsdnCheckChanged(cb, isChecked)}"/>
+                        android:text="@string/sell_anypay_label_phone_no" />
 
                     <RadioButton
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dp_10"
-                        android:text="@string/sell_anypay_label_acc_no"
-                        android:checked="@{!presenter.defaultBankIsdnChecked}"
-                        android:onCheckedChanged="@{(cb, isChecked) -> presenter.onBankAccountCheckChanged(cb, isChecked)}"/>
+                        android:layout_weight="1"
+                        android:text="@string/sell_anypay_label_acc_no" />
                 </RadioGroup>
 
                 <com.viettel.mbccs.widget.CustomEdittext
-                    android:id="@+id/txtBankPlusValue"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_40"
                     android:background="@drawable/bg_order"
                     android:inputType="number"
-                    android:text="@={presenter.bankPlusValue}"
-                    app:error="@{presenter.bankPlusValueError}"
-                    android:maxLength="@integer/max_length_payment_amount"/>
+                    android:text="@={presenter.bankValue}"
+                    app:error="@{presenter.bankValueError}"
+                    android:maxLength="@integer/max_length_isdn" />
             </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_8"
-                android:text="@string/sell_anypay_label_isdn_wallet"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp_16"
-                android:visibility="@{presenter.payMethod == presenter.PAY_METHOD_E_WALLET ? View.VISIBLE : View.GONE}" />
-
-            <com.viettel.mbccs.widget.CustomEdittext
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_40"
-                android:background="@drawable/bg_order"
-                android:inputType="phone"
-                android:text="@={ presenter.walletIsdn }"
-                android:visibility="@{presenter.payMethod == presenter.PAY_METHOD_E_WALLET ? View.VISIBLE : View.GONE}"
-                app:error="@{presenter.walletIsdnError}"
-                android:maxLength="@integer/max_length_isdn"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_8"
-                android:text="@string/sell_anypay_label_amount_default"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp_16"
-                android:visibility="@{presenter.payMethod == presenter.PAY_METHOD_CASH || presenter.payMethod == presenter.PAY_METHOD_E_WALLET || presenter.payMethod == presenter.PAY_METHOD_BANK_PLUS ? View.VISIBLE : View.GONE}" />
-
-            <com.viettel.mbccs.widget.CustomEdittext
-                android:id="@+id/txtEWalletAmount"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_40"
-                android:background="@drawable/bg_order"
-                android:hint="@string/sell_anypay_label_amount_other_hint"
-                android:inputType="number"
-                android:text="@={presenter.ewalletAmount}"
-                android:visibility="@{presenter.payMethod == presenter.PAY_METHOD_E_WALLET ? View.VISIBLE : View.GONE}"
-                app:error="@{presenter.ewalletAmountError}"
-                android:maxLength="@integer/max_length_payment_amount"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_border"
-                android:visibility="@{presenter.payMethod == presenter.PAY_METHOD_BANK_PLUS ? View.VISIBLE : View.GONE}">
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginRight="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_20"
+                android:orientation="vertical"
+                android:visibility="@{presenter.payMethod == presenter.PAY_METHOD_E_WALLET ? View.VISIBLE : View.GONE}">
 
-                <Spinner
-                    android:id="@+id/spBankPlusAmount"
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_40"
-                    android:adapter="@{presenter.bankPlusAmountAdapter}" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:visibility="@{presenter.payMethod == presenter.PAY_METHOD_CASH ? View.VISIBLE : View.GONE}">
-
-                <RadioButton
-                    android:id="@+id/rbPayByCashDefaultAmount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical|center_horizontal"
-                    android:layout_marginRight="@dimen/dp_10"
-                    android:checked="@{presenter.defaultAmountChecked}"
-                    android:onCheckedChanged="@{(cb, isChecked) -> presenter.onDefaultAmountCheckChanged(cb, isChecked)}" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_border">
-
-                    <Spinner
-                        android:id="@+id/spDefaultAmountList"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/dp_40"
-                        android:adapter="@{presenter.payAmountAdapter}" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_8"
-                android:orientation="horizontal"
-                android:visibility="@{presenter.payMethod == presenter.PAY_METHOD_CASH ? View.VISIBLE : View.GONE}">
-
-                <RadioButton
-                    android:id="@+id/rbPayByCashOtherAmount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical|center_horizontal"
-                    android:layout_marginRight="@dimen/dp_10"
-                    android:checked="@{!presenter.defaultAmountChecked}"
-                    android:onCheckedChanged="@{(cb, isChecked) -> presenter.onOtherAmountCheckChanged(cb, isChecked)}"/>
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:text="@string/sell_anypay_label_isdn_wallet"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_16" />
 
                 <com.viettel.mbccs.widget.CustomEdittext
-                    android:id="@+id/txtOtherAmount"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_40"
-                    android:layout_weight="1"
                     android:background="@drawable/bg_order"
-                    android:hint="@string/sell_anypay_label_amount_other_hint"
                     android:inputType="number"
-                    android:text="@={presenter.otherAmount}"
-                    app:error="@{presenter.otherAmountError}"
-                    android:maxLength="@integer/max_length_payment_amount"/>
+                    android:text="@={presenter.walletIsdn}"
+                    app:error="@{presenter.walletIsdnError}"
+                    android:maxLength="@integer/max_length_isdn" />
             </LinearLayout>
+            <!--/pay methods-->
 
             <View
                 android:layout_width="match_parent"
@@ -291,8 +434,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="right"
-                            android:text="@{presenter.totalAmount}"/>
+                            android:gravity="right" />
                     </TableRow>
 
                     <TableRow

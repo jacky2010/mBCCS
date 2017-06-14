@@ -78,6 +78,51 @@ public class SellAnyPayLocalDataSource implements ISellAnyPayLocalDataSource {
         return result;
     }
 
+    @Override
+    public List<KeyValue> getBranches() {
+        List<KeyValue> result = new ArrayList<>();
+        KeyValue item;
+
+        for(int i = 0; i < 10; i++){
+
+            item = new KeyValue("BRANCH_" + i+1, "Branch " + i+1);
+
+            result.add(item);
+        }
+
+        return result;
+    }
+
+    @Override
+    public List<KeyValue> getManagers() {
+        List<KeyValue> result = new ArrayList<>();
+        KeyValue item;
+
+        for(int i = 0; i < 10; i++){
+
+            item = new KeyValue("STAFF_" + i+1, "Staff " + i+1);
+
+            result.add(item);
+        }
+
+        return result;
+    }
+
+    @Override
+    public List<KeyValue> getChannels() {
+        List<KeyValue> result = new ArrayList<>();
+        KeyValue item;
+
+        for(int i = 0; i < 10; i++){
+
+            item = new KeyValue("CHANNEL_" + i+1, "Channel " + i+1);
+
+            result.add(item);
+        }
+
+        return result;
+    }
+
     public static SellAnyPayLocalDataSource getInstance() {
         if (instance == null) {
             instance = new SellAnyPayLocalDataSource();

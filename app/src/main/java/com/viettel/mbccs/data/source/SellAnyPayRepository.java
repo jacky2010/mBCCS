@@ -76,4 +76,19 @@ public class SellAnyPayRepository implements ISellAnyPayLocalDataSource, ISellAn
     public Observable<SellAnypayToChannelResponse> sellAnypayToChannel(DataRequest<SellAnypayToChannelRequest> request) {
         return remoteDataSource.sellAnypayToChannel(request);
     }
+
+    @Override
+    public List<KeyValue> getBranches() {
+        return localDataSource.getBranches();
+    }
+
+    @Override
+    public List<KeyValue> getManagers() {
+        return localDataSource.getManagers();
+    }
+
+    @Override
+    public List<KeyValue> getChannels() {
+        return localDataSource.getChannels();
+    }
 }

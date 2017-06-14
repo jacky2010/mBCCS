@@ -42,6 +42,9 @@ public class CreateTransferAnyPayPresenter implements CreateTransferAnyPayContra
     public ObservableField<String> refillAmountError;
     public ObservableField<String> transferAmount;
     public ObservableField<String> transferAmountError;
+    public ObservableField<String> otherAmount;
+    public ObservableField<String> otherAmountError;
+
 
     public ObservableBoolean defaultAmountChecked;
 
@@ -65,6 +68,9 @@ public class CreateTransferAnyPayPresenter implements CreateTransferAnyPayContra
         isdnError = new ObservableField<>();
         transferAmountError = new ObservableField<>();
         refillAmountError = new ObservableField<>();
+        otherAmount = new ObservableField<>();
+        otherAmountError = new ObservableField<>();
+
 
         transTypesList = new ArrayList<>();
         payAmountList = new ArrayList<>();
@@ -89,7 +95,7 @@ public class CreateTransferAnyPayPresenter implements CreateTransferAnyPayContra
                 transTypesList.add(item.getValue());
             }
 
-            payAmounts.add(0, new KeyValue(null, context.getString(R.string.sell_anypay_hint_pay_amount)));
+//            payAmounts.add(0, new KeyValue(null, context.getString(R.string.sell_anypay_hint_pay_amount)));
             for (KeyValue item : payAmounts) {
                 payAmountList.add(item.getValue());
             }
