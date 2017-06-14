@@ -31,19 +31,34 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_8"
                 android:text="@string/transfer_anypay_label_trans_type"
-                android:textColor="@color/black"
                 android:textSize="@dimen/sp_16" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_border">
+                android:layout_height="wrap_content">
 
-                <Spinner
-                    android:id="@+id/spTransType"
+                <RadioGroup
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_40"
-                    android:adapter="@{presenter.transTypesAdapter}" />
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rbRefill"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="@={presenter.isRefill}"
+                        android:onCheckedChanged="@{(rb, isChecked) -> presenter.onTransTypeChanged(rb, isChecked)}"
+                        android:text="@string/transfer_anypay_label_refill" />
+
+                    <RadioButton
+                        android:id="@+id/rbTransfer"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onCheckedChanged="@{(rb, isChecked) -> presenter.onTransTypeChanged(rb, isChecked)}"
+                        android:text="@string/transfer_anypay_label_transfer" />
+                </RadioGroup>
             </LinearLayout>
 
             <TextView
@@ -59,10 +74,11 @@
                 android:layout_height="@dimen/dp_40"
                 android:background="@drawable/bg_order"
                 android:inputType="phone"
+                android:maxLength="@integer/max_length_isdn"
                 android:text="@={ presenter.isdn }"
-                app:error="@{presenter.isdnError}"
-                android:maxLength="@integer/max_length_isdn"/>
+                app:error="@{presenter.isdnError}" />
 
+            <!--pay methods-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -74,74 +90,41 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:visibility="@{presenter.transferType == presenter.PAY_METHOD_REFILL ? View.VISIBLE : View.GONE}">
+                android:orientation="vertical">
 
-                <RadioButton
-                    android:id="@+id/rbDefaultAmount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical|center_horizontal"
-                    android:layout_marginRight="@dimen/dp_10"
-                    android:checked="@{presenter.defaultAmountChecked}"
-                    android:onCheckedChanged="@{(cb, isChecked) -> presenter.onDefaultAmountCheckChanged(cb, isChecked)}"/>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/spDefaultAmountList"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_gravity="center"
+                    android:recyclerAdapter="@{presenter.payAmountListAdapter}"
+                    android:visibility="@{presenter.isRefill ? View.VISIBLE : View.GONE}"
+                    app:orientation="@{1}" />
 
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_border">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                    <Spinner
-                        android:id="@+id/spDefaultAmountList"
-                        android:layout_width="match_parent"
+                    <com.viettel.mbccs.widget.CustomEdittext
+                        android:layout_width="0dp"
                         android:layout_height="@dimen/dp_40"
-                        android:adapter="@{presenter.payAmountAdapter}"
-                        />
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_order"
+                        android:enabled="@{presenter.otherAmountEnabled}"
+                        android:inputType="number"
+                        android:maxLength="@integer/max_length_isdn"
+                        android:text="@={presenter.otherAmount}"
+                        app:error="@{presenter.otherAmountError}" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:enabled="@{presenter.otherAmountEnabled}"
+                        android:paddingLeft="@dimen/dp_6"
+                        android:text="($)" />
                 </LinearLayout>
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_8"
-                android:orientation="horizontal"
-                android:visibility="@{presenter.transferType == presenter.PAY_METHOD_REFILL ? View.VISIBLE : View.GONE}">
-
-                <RadioButton
-                    android:id="@+id/rbOtherAmount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical|center_horizontal"
-                    android:layout_marginRight="@dimen/dp_10"
-                    android:checked="@{!presenter.defaultAmountChecked}"
-                    android:onCheckedChanged="@{(cb, isChecked) -> presenter.onOtherAmountCheckChanged(cb, isChecked)}"/>
-
-                <EditText
-                    android:id="@+id/txtOtherAmount"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/dp_40"
-                    android:layout_weight="1"
-                    android:text="@={presenter.refillAmount}"
-                    android:background="@drawable/bg_order"
-                    android:hint="@string/sell_anypay_label_amount_other_hint"
-                    android:inputType="number"
-                    app:error="@{presenter.refillAmountError}"
-                    android:maxLength="@integer/max_length_payment_amount"/>
-            </LinearLayout>
-
-            <EditText
-                android:id="@+id/txtTransferAmount"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_40"
-                android:layout_weight="1"
-                android:background="@drawable/bg_order"
-                android:hint="@string/sell_anypay_label_amount_other_hint"
-                android:inputType="number"
-                android:text="@={presenter.transferAmount}"
-                app:error="@{presenter.transferAmountError}"
-                android:visibility="@{presenter.transferType == presenter.PAY_METHOD_TRANSFER ? View.VISIBLE : View.GONE}"
-                android:maxLength="@integer/max_length_payment_amount"/>
+            <!--/pay methods-->
 
             <Button
                 android:id="@+id/btnExecute"

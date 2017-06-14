@@ -3,8 +3,6 @@ package com.viettel.mbccs.screen.transferanypay.fragments;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.viettel.mbccs.R;
@@ -14,7 +12,6 @@ import com.viettel.mbccs.databinding.FragmentCreateTransferAnyPayBinding;
 import com.viettel.mbccs.screen.transferanypay.dialogs.DialogConfirmRefillAnyPayFragment;
 import com.viettel.mbccs.screen.transferanypay.dialogs.DialogConfirmTransferAnyPayFragment;
 import com.viettel.mbccs.utils.ActivityUtils;
-import com.viettel.mbccs.variable.Constants;
 
 /**
  * Created by minhnx on 5/20/17.
@@ -65,31 +62,47 @@ public class CreateTransferAnyPayFragment extends BaseDataBindFragment<FragmentC
     private void initListeners(){
         try{
 
-            mBinding.spTransType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    mPresenter.onTransTypeChanged(i);
-                }
+//            mBinding.spTransType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//                @Override
+//                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                    mPresenter.onTransTypeChanged(i);
+//                }
+//
+//                @Override
+//                public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//                }
+//            });
+//
+//            mBinding.spDefaultAmountList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//                @Override
+//                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                    if (!Constants.View.HINT.equals(view.getTag()))
+//                        mPresenter.onDefaultAmountChanged(i);
+//                }
+//
+//                @Override
+//                public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//                }
+//            });
 
-                @Override
-                public void onNothingSelected(AdapterView<?> adapterView) {
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
-                }
-            });
-
-            mBinding.spDefaultAmountList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    if (!Constants.View.HINT.equals(view.getTag()))
-                        mPresenter.onDefaultAmountChanged(i);
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> adapterView) {
-
-                }
-            });
-
+    @Override
+    public void onTransTypeChanged(String transType) {
+        try{
+            switch (transType){
+                case CreateTransferAnyPayPresenter.PAY_METHOD_REFILL:
+                    mBinding.btnExecute.setText(R.string.transfer_anypay_label_refill);
+                    break;
+                case CreateTransferAnyPayPresenter.PAY_METHOD_TRANSFER:
+                    mBinding.btnExecute.setText(R.string.transfer_anypay_label_transfer);
+                    break;
+            }
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -116,36 +129,8 @@ public class CreateTransferAnyPayFragment extends BaseDataBindFragment<FragmentC
     }
 
     @Override
-    public void onDefaultAmountChanged(boolean selectedDefault) {
-        try{
-            if(selectedDefault){
-                mBinding.spDefaultAmountList.setEnabled(true);
-                mBinding.txtOtherAmount.setEnabled(false);
-            }else{
-                mBinding.spDefaultAmountList.setEnabled(false);
-                mBinding.txtOtherAmount.setEnabled(true);
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    @Override
     public void showError(String message) {
         Toast.makeText(mActivity, message, Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void onTransferTypeChanged(CreateTransferAnyPayContract.TransferType method) {
-        try{
-            if(method == CreateTransferAnyPayContract.TransferType.TRANSFER){
-                mBinding.btnExecute.setText(getString(R.string.transfer_anypay_label_transfer));
-            }else if(method == CreateTransferAnyPayContract.TransferType.REFILL){
-                mBinding.btnExecute.setText(getString(R.string.transfer_anypay_label_refill));
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
     }
 
     @Override
