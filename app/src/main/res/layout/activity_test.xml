@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,84 +12,46 @@
         android:layout_height="wrap_content"
         app:tbIconLeft="@drawable/ic_arrow_back_black_24dp" />
 
+    // layout in activity
+    <include layout="@layout/test_content_under_activity"/>
 
-    <!--<com.viettel.mbccs.widget.SlidingDrawer xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--xmlns:tools="http://schemas.android.com/tools"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:rotation="180"-->
-    <!--tools:context=".screen.TestActivity" >-->
-
-    <!--</com.viettel.mbccs.widget.SlidingDrawer>-->
-
+    // add view_close and view_open before run
     <com.viettel.mbccs.widget.MultiDirectionSlidingDrawer
+        android:layout_below="@+id/toolbar"
         android:id="@+id/drawer"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="150dp"
         app:content="@+id/content"
         app:direction="topToBottom"
-        app:headerOne ="@+id/view_open"
-        app:handleTwo ="@+id/view_close"
-        app:handle="@+id/handle">
+        app:handle="@+id/handle"
+        app:handleTwo="@+id/view_close"
+        app:headerOne="@+id/view_open">
 
-        <RelativeLayout
-            android:id="@id/content"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@color/white" >
 
-            </RelativeLayout>
-
+        // layout content when expanded
+        <include
+            android:id="@+id/content"
+            layout="@layout/test_content_expanded" />
 
         <RelativeLayout
             android:id="@id/handle"
             android:layout_width="match_parent"
-            android:layout_height="40dp">
+            android:layout_height="wrap_content">
 
-            <LinearLayout
+            // layout content when header_expanded when close
+            <include
                 android:id="@+id/view_close"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@color/yellow">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:background="@drawable/ic_arrow_drop_down_black_24dp"/>
+                layout="@layout/test_header_expanded_close" />
 
-                <com.viettel.mbccs.widget.CustomTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="test01"/>
-
-                <com.viettel.mbccs.widget.CustomTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="test02"/>
-
-            </LinearLayout>
-
-            <LinearLayout
+            // layout content when header_expanded when open
+            <include
                 android:id="@+id/view_open"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:orientation="horizontal"
-                android:background="@color/blue_trans">
-
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:background="@drawable/ic_arrow_drop_down_black_24dp"/>
-
-            </LinearLayout>
-
+                layout="@layout/test_header_expanded" />
 
         </RelativeLayout>
 
     </com.viettel.mbccs.widget.MultiDirectionSlidingDrawer>
 
 
-</LinearLayout>
+</RelativeLayout>
