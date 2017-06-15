@@ -62,31 +62,6 @@ public class CreateTransferAnyPayFragment extends BaseDataBindFragment<FragmentC
     private void initListeners(){
         try{
 
-//            mBinding.spTransType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//                @Override
-//                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//                    mPresenter.onTransTypeChanged(i);
-//                }
-//
-//                @Override
-//                public void onNothingSelected(AdapterView<?> adapterView) {
-//
-//                }
-//            });
-//
-//            mBinding.spDefaultAmountList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//                @Override
-//                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//                    if (!Constants.View.HINT.equals(view.getTag()))
-//                        mPresenter.onDefaultAmountChanged(i);
-//                }
-//
-//                @Override
-//                public void onNothingSelected(AdapterView<?> adapterView) {
-//
-//                }
-//            });
-
         }catch (Exception e){
             e.printStackTrace();
         }

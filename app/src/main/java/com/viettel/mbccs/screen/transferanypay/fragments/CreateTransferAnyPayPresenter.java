@@ -16,6 +16,7 @@ import com.viettel.mbccs.screen.common.adapter.PayAmountListAdapter;
 import com.viettel.mbccs.utils.ValidateUtils;
 import com.viettel.mbccs.variable.Constants;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,8 +29,9 @@ public class CreateTransferAnyPayPresenter implements CreateTransferAnyPayContra
     private static final int MAX_DEFAULT_AMOUNT_ITEM = 3;
     public static final String PAY_METHOD_REFILL = "0";
     public static final String PAY_METHOD_TRANSFER = "1";
-
     private static double DISCOUNT_AMOUNT = 0;
+
+    private DecimalFormat nf = new DecimalFormat("###");
 
     private Context context;
     private CreateTransferAnyPayContract.ViewModel viewModel;
@@ -99,6 +101,7 @@ public class CreateTransferAnyPayPresenter implements CreateTransferAnyPayContra
             if (lstPayAmount.size() > 0) {
                 lstPayAmount.get(0).setSelected(true);
                 defaultAmount.set(String.valueOf(lstPayAmount.get(0).getAmount()));
+                otherAmount.set(nf.format(lstPayAmount.get(0).getAmount()));
             }
 
             payAmountAdapter.setItems(lstPayAmount);
@@ -210,9 +213,11 @@ public class CreateTransferAnyPayPresenter implements CreateTransferAnyPayContra
             if (item.getAmount() == -1) {//other amount
                 otherAmountEnabled.set(true);
                 defaultAmount.set("0");
+                otherAmount.set(null);
             } else {
                 otherAmountEnabled.set(false);
                 defaultAmount.set(String.valueOf(item.getAmount()));
+                otherAmount.set(nf.format(item.getAmount()));
             }
         } catch (Exception e) {
             e.printStackTrace();
