@@ -43,7 +43,7 @@ public class ChangeSimActivity extends BaseDataBindActivity<ActivityChangeSimBin
     private void initView() {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frame_main, SearchChangeSimFragment.newInstance())
-                .addToBackStack(null)
+//                .addToBackStack(null)
                 .commit();
     }
 

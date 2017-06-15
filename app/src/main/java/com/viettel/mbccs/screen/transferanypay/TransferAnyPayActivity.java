@@ -47,7 +47,7 @@ public class TransferAnyPayActivity extends BaseDataBindActivity<ActivityTransfe
     public void changeToSearchTab() {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frame_main, CreateTransferAnyPayFragment.newInstance())
-                .addToBackStack(null)
+//                .addToBackStack(null)
                 .commit();
     }
 }

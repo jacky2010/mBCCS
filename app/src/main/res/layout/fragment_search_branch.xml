@@ -17,8 +17,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,9 +37,9 @@
                 android:visibility="gone" />
 
             <com.viettel.mbccs.widget.CustomEdittext
+                style="@style/inputStyle"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_40"
-                android:background="@drawable/bg_order"
                 android:text="@={ presenter.isdn }"
                 android:visibility="gone" />
 
@@ -53,48 +53,55 @@
 
             <com.viettel.mbccs.widget.CustomEdittext
                 android:id="@+id/txtDocumentId"
+                style="@style/inputStyle"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_40"
-                android:background="@drawable/bg_order"
                 android:text="@={ presenter.documentId }"
-                app:error="@{presenter.documentIdError}"/>
+                app:error="@{presenter.documentIdError}" />
 
-            <Button
+            <com.viettel.mbccs.widget.CustomButton
+                style="@style/button_positive"
                 android:layout_width="@dimen/dp_150"
                 android:layout_height="@dimen/dp_40"
                 android:layout_gravity="center"
-                android:layout_marginTop="@dimen/dp_6"
-                android:background="@color/blue"
-                android:gravity="center"
+                android:layout_marginTop="@dimen/dp_10"
+                android:drawableLeft="@drawable/ic_search_black_24dp"
                 android:onClick="@{ v -> presenter.searchDocument() }"
                 android:text="@string/sell_orders_search"
-                android:textColor="@color/white" />
+                android:textAllCaps="false"
+                android:textSize="@dimen/sp_18" />
+
         </LinearLayout>
 
-        <View
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_6"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_6"
-            android:background="@color/grey" />
+            android:background="@color/grey_three">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/dp_6"
+                android:paddingLeft="@dimen/dp_16"
+                android:paddingRight="@dimen/dp_16"
+                android:paddingTop="@dimen/dp_10"
+                android:text="@string/change_sim_label_select_sim" />
+        </LinearLayout>
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:paddingTop="@dimen/dp_6"
-            android:visibility="@{presenter.searchFound != true ? View.GONE : View.VISIBLE}"
             android:paddingLeft="@dimen/dp_16"
-            android:paddingRight="@dimen/dp_16">
+            android:paddingRight="@dimen/dp_16"
+            android:paddingTop="@dimen/dp_6"
+            android:visibility="@{presenter.searchFound != true ? View.GONE : View.VISIBLE}">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_0.6"
-                    android:background="@color/grey" />
 
                 <android.support.v7.widget.RecyclerView
                     android:layout_width="match_parent"
@@ -114,10 +121,10 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/blue_trans"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginRight="@dimen/dp_20"
                 android:layout_marginTop="@dimen/dp_10"
-                android:layout_marginLeft="@dimen/dp_16"
-                android:layout_marginRight="@dimen/dp_16">
+                app:cardBackgroundColor="@color/orange_two">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -137,20 +144,15 @@
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
-            <Button
+            <com.viettel.mbccs.widget.CustomButton
+                android:id="@+id/btn_next"
+                style="@style/button_positive"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_40"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/dp_6"
-                android:background="@color/blue"
-                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="@dimen/dp_20"
                 android:onClick="@{ v -> presenter.addNewDocument() }"
-                android:paddingEnd="@dimen/dp_8"
-                android:paddingStart="@dimen/dp_8"
-                android:text="@string/branches_add_label_add"
-                android:textColor="@color/white"
-                app:layout_marginLeftPercent="10%"
-                app:layout_marginRightPercent="10%" />
+                android:text="@string/branches_add_label_add" />
         </LinearLayout>
     </LinearLayout>
 </layout>

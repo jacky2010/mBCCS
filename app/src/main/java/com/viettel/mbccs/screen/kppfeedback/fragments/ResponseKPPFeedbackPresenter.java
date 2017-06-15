@@ -97,4 +97,8 @@ public class ResponseKPPFeedbackPresenter implements ResponseKPPFeedbackContract
             e.printStackTrace();
         }
     }
+
+    public void close(){
+        viewModel.onBackPressed();
+    }
 }

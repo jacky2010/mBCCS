@@ -49,7 +49,7 @@ public class HotNewsCSKPPActivity extends BaseDataBindActivity<ActivityHotNewsCs
     public void changeToSearchTab() {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frame_main, SearchHotNewsCSKPPFragment.newInstance())
-                .addToBackStack(null)
+//                .addToBackStack(null)
                 .commit();
     }
 }

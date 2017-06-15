@@ -49,7 +49,7 @@ public class SurveyKPPActivity extends BaseDataBindActivity<ActivitySurveyKppBin
     public void changeToSearchTab() {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frame_main, SearchSurveyKPPFragment.newInstance())
-                .addToBackStack(null)
+//                .addToBackStack(null)
                 .commit();
     }
 }

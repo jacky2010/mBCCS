@@ -82,6 +82,8 @@ public class CreateTransAnyPayFragment extends BaseDataBindFragment<FragmentCrea
             mBinding.spCustType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if(view == null)
+                        return;
                     if (!Constants.View.HINT.equals(view.getTag()))
                         mPresenter.onCustomerTypeChanged(i);
                 }

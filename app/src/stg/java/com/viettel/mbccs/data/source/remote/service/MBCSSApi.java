@@ -254,7 +254,7 @@ public interface MBCSSApi {
     Observable<ServerDataResponse<BaseResponse<CheckIdNoResponse>>> checkIdNo(
             @Body DataRequest<CheckIdNoRequest> request);
 
-    @POST("thonguyen/Sale_mBCCS/1.0.0/WS_CheckAuthenticate")
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<GetAnypayAuthorizeResponse>>> getAnypayAuthorize(
             @Body DataRequest<GetAnypayAuthorizeRequest> request);
 

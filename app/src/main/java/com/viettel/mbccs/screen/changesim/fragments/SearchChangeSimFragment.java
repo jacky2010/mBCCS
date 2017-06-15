@@ -75,6 +75,8 @@ public class SearchChangeSimFragment extends BaseDataBindFragment<FragmentSearch
             mBinding.spDocumentType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if(view == null)
+                        return;
                     if (!Constants.View.HINT.equals(view.getTag()))
                         mPresenter.onDocumentTypeChanged(i);
                 }

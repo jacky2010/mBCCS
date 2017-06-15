@@ -49,7 +49,7 @@ public class BranchesActivity extends BaseDataBindActivity<ActivityBranchesBindi
     private void initView() {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frame_main, SearchBranchFragment.newInstance())
-                .addToBackStack(null)
+//                .addToBackStack(null)
                 .commit();
     }
 }

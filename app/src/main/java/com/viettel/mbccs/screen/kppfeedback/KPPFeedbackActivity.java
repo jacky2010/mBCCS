@@ -61,11 +61,11 @@ public class KPPFeedbackActivity extends BaseDataBindActivity<ActivityKppFeedbac
     public void changeToSendTab() {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frame_main, SendKPPFeedbackFragment.newInstance())
-                .addToBackStack(null)
+//                .addToBackStack(null)
                 .commit();
     }
 
     private boolean isManager(){
-        return true;
+        return false;
     }
 }

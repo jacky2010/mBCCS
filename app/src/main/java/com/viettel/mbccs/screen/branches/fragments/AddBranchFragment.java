@@ -98,6 +98,8 @@ public class AddBranchFragment extends BaseDataBindFragment<FragmentAddBranchBin
             mBinding.spChannelType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if(view == null)
+                        return;
                     if (!Constants.View.HINT.equals(view.getTag()))
                         mPresenter.onChannelTypeChanged(i);
                 }
@@ -111,6 +113,8 @@ public class AddBranchFragment extends BaseDataBindFragment<FragmentAddBranchBin
             mBinding.spDocumentType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if(view == null)
+                        return;
                     if (!Constants.View.HINT.equals(view.getTag()))
                         mPresenter.onDocumentTypeChanged(i);
                 }
