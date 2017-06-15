@@ -9,9 +9,9 @@ import java.util.List;
  * Created by HuyQuyet on 5/27/17.
  */
 
-public class GetListOrderResponse extends DataResponse {
+public class GetListOrderResponse{
     @Expose
-    @SerializedName("lstSaleOrders")
+    @SerializedName("lstSaleOrder")
     private List<SaleOrders> saleOrdersList;
 
     public List<SaleOrders> getSaleOrdersList() {

@@ -89,7 +89,7 @@ public class CreateUpdateInformationPresenter
         getRegiterSubInfoRequest.setIdType(dataPassportType.get(positionPassportType).getCode());
 
         DataRequest<GetRegiterSubInfoRequest> request = new DataRequest<>();
-        request.setApiCode(ApiCode.GetRegiterSubInfo);
+        request.setApiCode(ApiCode.GetRegisterSubInfo);
         request.setParameterApi(getRegiterSubInfoRequest);
         //
         Subscription subscription = qlKhachHangRepository.getRegiterSubInfo(request)

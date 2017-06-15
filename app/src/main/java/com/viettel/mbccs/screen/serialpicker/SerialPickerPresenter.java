@@ -116,9 +116,12 @@ public class SerialPickerPresenter
         if (mSerialPickerModel == null) {
             return;
         }
-        mSerialSelected.addAll(
-                Common.getSerialsByListSerialBlock(mSerialPickerModel.getLstSerial()));
-        mSerials.removeAll(Common.getSerialsByListSerialBlock(mSerialPickerModel.getLstSerial()));
+        if (mSerialPickerModel.getLstSerial()!=null){
+            mSerialSelected.addAll(
+                    Common.getSerialsByListSerialBlock(mSerialPickerModel.getLstSerial()));
+            mSerials.removeAll(Common.getSerialsByListSerialBlock(mSerialPickerModel.getLstSerial()));
+        }
+
         mSerialAdapter.refresh();
         mSerialSelectedAdapter.refreshData();
         refreshProgressSerial();

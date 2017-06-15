@@ -180,12 +180,6 @@ public class SaleChannelPresenter
 
             @Override
             public void onError(BaseException error) {
-
-                //fakeLoadChannel();
-                //fake
-                //fakeData();
-                //loadModelSale();
-
                 DialogUtils.showDialogError(mContext, null, error.getMessage(), null);
             }
 

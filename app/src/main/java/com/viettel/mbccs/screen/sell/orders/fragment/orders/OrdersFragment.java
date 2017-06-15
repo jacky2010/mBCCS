@@ -77,7 +77,7 @@ public class OrdersFragment extends BaseFragment implements OrdersAdapter.Orders
                 getActivity().getSupportFragmentManager().beginTransaction();
         fragmentTransaction.addToBackStack(OrderDetailFragment.STRING_NAME);
         fragmentTransaction.replace(R.id.frame_sell_orders,
-                OrderDetailFragment.newInstance(saleOrdersList.get(position).getSaleOrdersId(),
+                OrderDetailFragment.newInstance(saleOrdersList.get(position),
                         channelInfoSale)).commit();
     }
 }

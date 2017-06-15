@@ -41,6 +41,11 @@ public class SellOrdersActivity
         presenter.subscribe();
         saleOrdersList = new ArrayList<>();
         titleList = new ArrayList<>();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         initView();
     }
 
@@ -93,6 +98,17 @@ public class SellOrdersActivity
     @Override
     public void setDataResult(List<SaleOrders> saleOrdersList, ChannelInfo channelInfoSelect) {
         int countApp = 0, countPen = 0, countRe = 0;
+        if (saleOrdersList == null || saleOrdersList.size() == 0) {
+            DialogUtils.showDialog(this, null, "Không tìm thấy dữ liệu", "OK", null, null, null);
+            titleList.add(getString(R.string.sell_orders_title_pending, 0));
+            titleList.add(getString(R.string.sell_orders_title_approvals, 0));
+            titleList.add(getString(R.string.sell_orders_title_reject, 0));
+
+            sellOrdersFragmentAdapter.setData(
+                    saleOrdersList == null ? new ArrayList<SaleOrders>() : saleOrdersList,
+                    channelInfoSelect, titleList);
+            return;
+        }
         for (SaleOrders saleOrders : saleOrdersList) {
             if (saleOrders.getOrderStatus().equals(OrderStatus.APPROVALS)) {
                 countApp++;

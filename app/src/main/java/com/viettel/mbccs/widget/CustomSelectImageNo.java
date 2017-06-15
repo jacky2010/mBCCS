@@ -362,9 +362,17 @@ public class CustomSelectImageNo extends LinearLayout {
     }
 
     public void recycleBitmap() {
-        imageFront.get().recycle();
-        imageBackside.get().recycle();
-        imagePortrait.get().recycle();
+        if (imageFront.get() != null) {
+            imageFront.get().recycle();
+        }
+
+        if (imageBackside.get() != null) {
+            imageBackside.get().recycle();
+        }
+
+        if (imagePortrait.get() != null) {
+            imagePortrait.get().recycle();
+        }
 
         imageFront.set(null);
         imageBackside.set(null);

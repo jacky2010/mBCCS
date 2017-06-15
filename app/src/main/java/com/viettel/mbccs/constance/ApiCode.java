@@ -76,7 +76,7 @@ public class ApiCode {
     public final static String ConnectionSubscriberFixService = "WS_connectionSubscriberFixService";
 
     // 3.3.3.1
-    public final static String GetRegiterSubInfo = "WS_getRegiterSubInfo";
+    public final static String GetRegisterSubInfo = "WS_getRegisterSubInfo";
 
     // 3.3.3.2
     public final static String RegisterCustomerInfo = "WS_registerCustomerInfo";
@@ -198,7 +198,7 @@ public class ApiCode {
     public final static String UpdateSaleOrder = "WS_UpdateSaleOrder";
 
     // 5.3.3.6
-    public final static String GetReason = "WS_GetReason";
+    public final static String GetListReason = "WS_getListReason";
 
     // 5.4.3.1
     public final static String GetVasForISDN = "WS_GetVasForISDN";

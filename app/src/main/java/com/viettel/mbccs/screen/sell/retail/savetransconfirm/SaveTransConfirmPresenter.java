@@ -126,9 +126,6 @@ public class SaveTransConfirmPresenter implements SaveTransConfirmContract.Prese
 
                     @Override
                     public void onError(BaseException error) {
-                        //fake
-                        //onSuccess(null);
-
                         DialogUtils.showDialogError(mContext, null, error.getMessage(), null);
                     }
 
