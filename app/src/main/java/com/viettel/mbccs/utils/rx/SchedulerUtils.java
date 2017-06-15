@@ -61,8 +61,7 @@ public class SchedulerUtils {
                     baseErrorResponse.setError(
                             Integer.parseInt(response.getResult().getErrorCode()),
                             response.getResult().getErrorMessage());
-                    BaseException baseException = BaseException.toServerError(baseErrorResponse);
-                    return Observable.error(baseException);
+                    return Observable.error(BaseException.toServerError(baseErrorResponse));
                 }
 
                 return Observable.just(response.getResult().getData());

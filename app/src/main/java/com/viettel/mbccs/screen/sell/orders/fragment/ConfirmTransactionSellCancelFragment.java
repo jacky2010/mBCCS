@@ -16,18 +16,24 @@ import android.widget.ArrayAdapter;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseFragment;
 import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.PaymentMethod;
+import com.viettel.mbccs.constance.PriceType;
+import com.viettel.mbccs.constance.ReasonType;
+import com.viettel.mbccs.constance.SaleOrderNewStatus;
 import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.Customer;
 import com.viettel.mbccs.data.model.Reason;
+import com.viettel.mbccs.data.model.SaleOrders;
 import com.viettel.mbccs.data.model.SaleOrdersDetail;
 import com.viettel.mbccs.data.model.SaleTrans;
+import com.viettel.mbccs.data.model.StockSerial;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
-import com.viettel.mbccs.data.source.remote.request.CreateSaleTransFromOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
+import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
 import com.viettel.mbccs.data.source.remote.request.GetReasonRequest;
 import com.viettel.mbccs.data.source.remote.request.UpdateSaleOrderRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
-import com.viettel.mbccs.data.source.remote.response.CreateSaleTransFromOrderResponse;
+import com.viettel.mbccs.data.source.remote.response.CreateSaleTransRetailResponse;
 import com.viettel.mbccs.data.source.remote.response.GetReasonResponse;
 import com.viettel.mbccs.data.source.remote.response.UpdateSaleOrderResponse;
 import com.viettel.mbccs.databinding.FragmentConfirmTransactionSellCancelBinding;
@@ -50,6 +56,7 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
     private static final String ARG_IS_SELL = "IS_SELL";
     private static final String ARG_SALE_TRANS = "SALE_TRANS";
     private static final String ARG_CHANGE_INFO = "CHANGE_INFO";
+    private static final String ARG_ORDER = "ID_ORDER";
     private static final String ARG_LIST_DATA = "LIST_DATA";
     private FragmentConfirmTransactionSellCancelBinding binding;
     private BanHangKhoTaiChinhRepository banHangKhoTaiChinhRepository;
@@ -65,6 +72,7 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
     private ChannelInfo channelInfoSell;
     private SaleTrans saleTrans;
     private List<SaleOrdersDetail> saleOrdersDetailList;
+    private SaleOrders saleOrders;
 
     public ObservableField<ArrayAdapter<String>> spinnerReasonCancelAdapter;
     public ObservableField<String> title;
@@ -78,13 +86,14 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
 
     public static ConfirmTransactionSellCancelFragment newInstance(boolean isSell,
             List<SaleOrdersDetail> saleOrdersDetailList, SaleTrans saleTrans,
-            ChannelInfo channelInfoSell) {
+            ChannelInfo channelInfoSell, SaleOrders saleOrders) {
         Bundle bundle = new Bundle();
         bundle.putBoolean(ARG_IS_SELL, isSell);
         bundle.putParcelableArrayList(ARG_LIST_DATA,
                 (ArrayList<? extends Parcelable>) saleOrdersDetailList);
         bundle.putParcelable(ARG_SALE_TRANS, saleTrans);
         bundle.putParcelable(ARG_CHANGE_INFO, channelInfoSell);
+        bundle.putParcelable(ARG_ORDER, saleOrders);
         ConfirmTransactionSellCancelFragment fragment = new ConfirmTransactionSellCancelFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -100,6 +109,7 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
         saleOrdersDetailList = getArguments().getParcelableArrayList(ARG_LIST_DATA);
         saleTrans = getArguments().getParcelable(ARG_SALE_TRANS);
         channelInfoSell = getArguments().getParcelable(ARG_CHANGE_INFO);
+        saleOrders = getArguments().getParcelable(ARG_ORDER);
 
         if (!isSell) {
             dataSpinnerReason = new ArrayList<>();
@@ -140,13 +150,11 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
     private void getListReason() {
         showLoadingDialog();
         GetReasonRequest reason = new GetReasonRequest();
-        reason.setOwnerId("5435");
-        reason.setOwnerType("2");
-        reason.setReasonType("2");
+        reason.setReasonType(ReasonType.HUY_DON_HANG);
 
         DataRequest<GetReasonRequest> request = new DataRequest<>();
 
-        request.setApiCode(ApiCode.GetReason);
+        request.setApiCode(ApiCode.GetListReason);
         request.setParameterApi(reason);
 
         Subscription subscription = banHangKhoTaiChinhRepository.getReason(request)
@@ -200,7 +208,8 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
         textButton.set(isSell ? getString(R.string.confirm_transaction_btn_sell)
                 : getString(R.string.confirm_transaction_btn_cancel));
         colorButton.set(isSell ? R.color.green : R.color.red_button);
-        idSaleTrans.set("Mã đơn hàng: " + saleTrans.getSaleTransId());
+        idSaleTrans.set(getString(R.string.confirm_transaction_sell_cancel_ma_don_hang)
+                + saleTrans.getSaleTransId());
         phoneNumberChange.set(channelInfoSell.getTel());
         nameChange.set(channelInfoSell.getChannelName());
         sumMoneyTransaction.set(Common.formatDouble(saleTrans.getAmountTax()));
@@ -211,6 +220,7 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
     }
 
     public void onSellOrCancel() {
+        showLoadingDialog();
         if (isSell) {
             sellOrder();
         } else {
@@ -219,7 +229,17 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
     }
 
     private void sellOrder() {
-        CreateSaleTransFromOrderRequest c = new CreateSaleTransFromOrderRequest();
+        List<StockSerial> stockSerials = new ArrayList<>();
+        for (SaleOrdersDetail saleOrdersDetail : saleOrdersDetailList) {
+            StockSerial serial = new StockSerial();
+            serial.setSerialBOs(saleOrdersDetail.getLstSerial());
+            serial.setStockModelId(saleOrdersDetail.getStockModelId());
+            serial.setStockModelCode(saleOrdersDetail.getStockModelCode());
+            serial.setStockMoldeName(saleOrdersDetail.getStockMoldeName());
+            serial.setQuantity(saleOrdersDetail.getQuantity());
+        }
+
+        GetInfoSaleTranRequest c = new GetInfoSaleTranRequest();
         c.setShopId(channelInfoSell.getShopId());
         c.setStaffId(channelInfoSell.getChannelId());
 
@@ -227,19 +247,18 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
         customer.setCustomerName(saleTrans.getCustName());
 
         c.setCustomer(customer);
-        c.setLstSerialSale(saleOrdersDetailList);
-        // TODO: 6/11/17 fix
-        c.setPayMethod("1");
-        c.setPriceType("3");
+        c.setLstSerialSale(stockSerials);
+        c.setPaymentMethod(PaymentMethod.PAYMENT_CASH);
+        c.setPriceType(PriceType.PRICE_CHANNEL);
 
-        DataRequest<CreateSaleTransFromOrderRequest> request = new DataRequest<>();
-        request.setApiCode(ApiCode.CreateSaleTransFromOrder);
+        DataRequest<GetInfoSaleTranRequest> request = new DataRequest<>();
+        request.setApiCode(ApiCode.CreateSaleTransRetail);
         request.setParameterApi(c);
 
-        Subscription subscription = banHangKhoTaiChinhRepository.createSaleTransFromOrder(request)
-                .subscribe(new MBCCSSubscribe<CreateSaleTransFromOrderResponse>() {
+        Subscription subscription = banHangKhoTaiChinhRepository.createSaleTransRetail(request)
+                .subscribe(new MBCCSSubscribe<CreateSaleTransRetailResponse>() {
                     @Override
-                    public void onSuccess(CreateSaleTransFromOrderResponse object) {
+                    public void onSuccess(CreateSaleTransRetailResponse object) {
                         sellOrderSuccess(true);
                     }
 
@@ -253,10 +272,10 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
 
     private void cancelSell() {
         UpdateSaleOrderRequest u = new UpdateSaleOrderRequest();
-        u.setSaleOrderId(String.valueOf(saleTrans.getSaleTransId()));
-        // TODO: 6/11/17 fix new status
-        u.setNewStatus("2");
+        u.setSaleOrderId(String.valueOf(saleOrders.getSaleOrdersId()));
+        u.setNewStatus(SaleOrderNewStatus.DA_HUY);
         u.setReasonId(reason.getReasonId());
+        u.setSaleTransId(saleTrans.getSaleTransId());
 
         DataRequest<UpdateSaleOrderRequest> request = new DataRequest<>();
 
@@ -279,10 +298,12 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
     }
 
     private void sellOrderError(BaseException error) {
+        hideLoadingDialog();
         DialogUtils.showDialogError(getActivity(), error.getMessage());
     }
 
     private void sellOrderSuccess(boolean type) {
+        hideLoadingDialog();
         Dialog dia = new DialogFullScreen.Builder(getActivity()).setCenterContent(true)
                 .setTitle(type ? getString(
                         R.string.confirm_transaction_sell_cancel_ban_giao_dich_thanh_cong)

@@ -13,7 +13,8 @@
         app:tbIconLeft="@drawable/ic_arrow_back_black_24dp" />
 
     // layout in activity
-    <include layout="@layout/test_content_under_activity"/>
+    <include
+        layout="@layout/test_content_under_activity"/>
 
     // add view_close and view_open before run
     <com.viettel.mbccs.widget.MultiDirectionSlidingDrawer
@@ -52,6 +53,5 @@
         </RelativeLayout>
 
     </com.viettel.mbccs.widget.MultiDirectionSlidingDrawer>
-
 
 </RelativeLayout>

@@ -6,8 +6,8 @@ package com.viettel.mbccs.data.source.remote.request;
 
 public class GetListOrderRequest  {
 
-    private long shopId;
-    private long staffId;
+    private Long shopId;
+    private Long staffId;
     private String orderStatus;
     private String isdnChannel;
     private String fromDate;

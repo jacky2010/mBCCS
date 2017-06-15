@@ -700,6 +700,7 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     </string>
 
 
+    <string name="confirm_transaction_sell_cancel_ma_don_hang">Mã đơn hàng: </string>
     <string name="confirm_transaction_sell_cancel_don_dat_hang_tu_kenh">Đơn đặt hàng từ kênh %1$s</string>
     <string name="confirm_transaction_sell_cancel_sdt">- Số điện thoại: %1$s</string>
     <string name="confirm_transaction_sell_cancel_so_tien_thanh_toan">- Số tiền thanh toán: %1$s</string>
