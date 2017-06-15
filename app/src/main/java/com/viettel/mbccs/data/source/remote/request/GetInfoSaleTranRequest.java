@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.viettel.mbccs.constance.PaymentMethod;
 import com.viettel.mbccs.data.model.Customer;
 import com.viettel.mbccs.data.model.StockSerial;
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ public class GetInfoSaleTranRequest implements Parcelable {
     @Expose
     private Customer mCustomer;
 
+    @PaymentMethod
     @SerializedName("payMethod")
     @Expose
     private String paymentMethod;

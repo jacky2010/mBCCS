@@ -10,13 +10,13 @@ import java.util.List;
  * Created by HuyQuyet on 5/18/17.
  */
 
-public class GetOrderInfoResponse extends DataResponse{
+public class GetOrderInfoResponse{
     @Expose
-    @SerializedName("lstSaleOrdersDetail")
+    @SerializedName("lstSaleOrderDetail")
     private List<SaleOrdersDetail> saleOrdersDetailList;
 
     @Expose
-    @SerializedName("saleTrans")
+    @SerializedName("saleTransInfo")
     private SaleTrans saleTrans;
 
     public List<SaleOrdersDetail> getSaleOrdersDetailList() {

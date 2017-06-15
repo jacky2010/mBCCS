@@ -4,6 +4,8 @@ import android.content.Context;
 import android.databinding.ObservableField;
 import android.support.v7.app.AppCompatActivity;
 import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.SaleTranType;
+import com.viettel.mbccs.data.model.SaleOrders;
 import com.viettel.mbccs.data.model.SaleOrdersDetail;
 import com.viettel.mbccs.data.model.SaleTrans;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
@@ -78,13 +80,19 @@ public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract
         view.pickSerial(saleOrdersDetail);
     }
 
-    public void getDetailOrder(long idOrder) {
+    public void getDetailOrder(SaleOrders saleOrders) {
         view.showLoading();
-        this.idOrder.set(String.valueOf(idOrder));
+        this.idOrder.set(String.valueOf(saleOrders.getSaleOrdersId()));
 
-        // TODO: 5/30/17 fake data
         GetOrderInfoRequest g = new GetOrderInfoRequest();
-        g.setSaleOrderId(3253243);
+        g.setSaleOrderId(saleOrders.getSaleOrdersId());
+        g.setOwnerId(saleOrders.getStaffId());
+        g.setSaleTransType(SaleTranType.SALE_CHANNEL);
+        // TODO: 6/15/17 fix data
+        g.setOwnerType("2");
+        g.setStateId("1");
+        g.setTelecomserviceId("1");
+
 
         DataRequest<GetOrderInfoRequest> request = new DataRequest<>();
         request.setApiCode(ApiCode.GetOrderInfo);

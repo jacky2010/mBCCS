@@ -7,7 +7,6 @@ import com.google.gson.annotations.SerializedName;
 import com.viettel.mbccs.utils.Common;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -15,9 +14,6 @@ import java.util.List;
  */
 
 public class ModelSale implements Serializable, Parcelable {
-    @SerializedName("checkSerial")
-    @Expose
-    private int checkSerial;
 
     @SerializedName("stockModelId")
     @Expose
@@ -59,6 +55,11 @@ public class ModelSale implements Serializable, Parcelable {
     @Expose
     private double vat;
 
+    @SerializedName("checkSerial")
+    @Expose
+    private double checkSerial;
+
+
     @Expose
     private int choiceCount;
     @Expose
@@ -86,6 +87,7 @@ public class ModelSale implements Serializable, Parcelable {
         serialCount = in.readInt();
         mSerialBlocks = in.createTypedArrayList(SerialBO.CREATOR);
         mSerials = in.createStringArrayList();
+        checkSerial = in.readDouble();
     }
 
     public static final Creator<ModelSale> CREATOR = new Creator<ModelSale>() {
@@ -121,6 +123,7 @@ public class ModelSale implements Serializable, Parcelable {
         dest.writeInt(serialCount);
         dest.writeTypedList(mSerialBlocks);
         dest.writeStringList(mSerials);
+        dest.writeDouble(checkSerial);
     }
 
     public List<SerialBO> getSerialBlocks() {
@@ -260,11 +263,11 @@ public class ModelSale implements Serializable, Parcelable {
         this.vat = vat;
     }
 
-    public int getCheckSerial() {
+    public double getCheckSerial() {
         return checkSerial;
     }
 
-    public void setCheckSerial(int checkSerial) {
+    public void setCheckSerial(double checkSerial) {
         this.checkSerial = checkSerial;
     }
 }

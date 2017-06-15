@@ -40,6 +40,10 @@ public class SaleOrdersDetail implements Parcelable {
     @Expose
     private ModelSale modelSale;
 
+    @SerializedName("price")
+    @Expose
+    private double price;
+
     @SerializedName("lstSerial")
     @Expose
     private List<SerialBO> lstSerial;
@@ -60,6 +64,7 @@ public class SaleOrdersDetail implements Parcelable {
         lstSerial = in.createTypedArrayList(SerialBO.CREATOR);
         modelSale = in.readParcelable(ModelSale.class.getClassLoader());
         select = in.readInt();
+        price = in.readDouble();
     }
 
     public static final Creator<SaleOrdersDetail> CREATOR = new Creator<SaleOrdersDetail>() {
@@ -89,6 +94,7 @@ public class SaleOrdersDetail implements Parcelable {
         dest.writeLong(quantity);
         dest.writeTypedList(lstSerial);
         dest.writeInt(select);
+        dest.writeDouble(price);
         dest.writeParcelable(modelSale, flags);
     }
 
@@ -162,5 +168,13 @@ public class SaleOrdersDetail implements Parcelable {
 
     public void setSelect(int select) {
         this.select = select;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }
