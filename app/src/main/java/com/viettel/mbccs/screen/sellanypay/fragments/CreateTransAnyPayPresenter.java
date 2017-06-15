@@ -14,9 +14,11 @@ import com.viettel.mbccs.data.model.DefaultPaymentAmount;
 import com.viettel.mbccs.data.model.KeyValue;
 import com.viettel.mbccs.data.source.SellAnyPayRepository;
 import com.viettel.mbccs.screen.common.adapter.PayAmountListAdapter;
+import com.viettel.mbccs.utils.Common;
 import com.viettel.mbccs.utils.ValidateUtils;
 import com.viettel.mbccs.variable.Constants;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +36,7 @@ public class CreateTransAnyPayPresenter implements CreateTransAnyPayContract.Pre
 
     private static final int MAX_DEFAULT_AMOUNT_ITEM = 3;
     private static double DISCOUNT_AMOUNT = 0;
+    private DecimalFormat nf = new DecimalFormat("###");
 
     private Context context;
     private CreateTransAnyPayContract.ViewModel viewModel;
@@ -144,6 +147,9 @@ public class CreateTransAnyPayPresenter implements CreateTransAnyPayContract.Pre
             if (lstPayAmount.size() > 0) {
                 lstPayAmount.get(0).setSelected(true);
                 defaultAmount.set(String.valueOf(lstPayAmount.get(0).getAmount()));
+                otherAmount.set(nf.format(lstPayAmount.get(0).getAmount()));
+
+                onAmountValueChanged();
             }
 
             branchesList = repository.getBranches();
@@ -347,29 +353,47 @@ public class CreateTransAnyPayPresenter implements CreateTransAnyPayContract.Pre
             if (item.getAmount() == -1) {//other amount
                 otherAmountEnabled.set(true);
                 defaultAmount.set("0");
+                otherAmount.set(null);
             } else {
                 otherAmountEnabled.set(false);
                 defaultAmount.set(String.valueOf(item.getAmount()));
+                otherAmount.set(nf.format(item.getAmount()));
             }
+
+            onAmountValueChanged();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void onAmountValueChanged() {
+        try {
+
+            double total = 0;
+
+            total = getTransactionAmount();
+
+            if (total <= 0) {
+                totalAmount.set(null);
+                discountAmount.set(null);
+                payAmount.set(null);
+
+                return;
+            }
+
+            totalAmount.set(Common.formatDouble(total));
+            discountAmount.set(Common.formatDouble(DISCOUNT_AMOUNT));
+            payAmount.set(Common.formatDouble(total - DISCOUNT_AMOUNT));
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public void onAmountChanged() {
-//        try {
-//            double total = getTransactionAmount();
-//
-//            if (total <= 0)
-//                total = 0;
-//
-//            totalAmount.set(Common.formatDouble(total) + " " + context.getString(R.string.common_label_currency_suffix));
-//            discountAmount.set(Common.formatDouble(DISCOUNT_AMOUNT) + " " + context.getString(R.string.common_label_currency_suffix));
-//            lstPayAmount.set(Common.formatDouble(total - DISCOUNT_AMOUNT) + " " + context.getString(R.string.common_label_currency_suffix));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+    public void onOtherAmountChanged() {
+        onAmountValueChanged();
     }
 
     public void onPayMethodChanged(CompoundButton radioGroup, boolean checked) {

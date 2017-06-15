@@ -32,7 +32,7 @@ public class CreateTransAnyPayContract {
     interface Presenter extends BasePresenter {
         void createTransaction();
         void onCustomerTypeChanged(int index);
-        void onAmountChanged();
+        void onOtherAmountChanged();
         void onGetManagerSuccess(KeyValue item);
         void onGetChannelSuccess(KeyValue item);
         void onGetBranchSuccess(KeyValue item);
