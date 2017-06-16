@@ -1,5 +1,6 @@
 package com.viettel.mbccs.utils;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
@@ -45,8 +46,8 @@ public class DialogUtils {
 
     public static void showDialog(Context context, @Nullable String title, String message,
             String yesTitle, @Nullable DialogInterface.OnClickListener yesListener,
-            @Nullable String cancelTitle,
-            @Nullable DialogInterface.OnClickListener cancelListener, boolean cancelable) {
+            @Nullable String cancelTitle, @Nullable DialogInterface.OnClickListener cancelListener,
+            boolean cancelable) {
         new AlertDialog.Builder(context).setTitle(title)
                 .setMessage(message)
                 .setPositiveButton(yesTitle, yesListener)
@@ -83,8 +84,8 @@ public class DialogUtils {
     }
 
     public static void showDialogStyle(Context context, String title, String message,
-            String yesTitle, @Nullable View.OnClickListener yesListener, String cancelTitle,
-            @Nullable View.OnClickListener cancelListener) {
+            String yesTitle, @Nullable final DialogInterface.OnClickListener yesListener,
+            String cancelTitle, @Nullable final DialogInterface.OnClickListener cancelListener) {
         DialogNoticeLayoutBinding mBinding =
                 DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.dialog_notice_layout,
                         null, false);
@@ -98,37 +99,61 @@ public class DialogUtils {
         if (TextUtils.isEmpty(message)) {
             mBinding.textMessage.setText("");
         } else {
-            mBinding.textMessage.setText(yesTitle);
+            mBinding.textMessage.setText(message);
         }
 
         if (TextUtils.isEmpty(yesTitle)) {
-            mBinding.btnPositive.setVisibility(View.GONE);
+            mBinding.btnPositive.setText(context.getString(R.string.ok));
         } else {
             mBinding.btnPositive.setText(yesTitle);
         }
-
         if (TextUtils.isEmpty(cancelTitle)) {
             mBinding.btnNegative.setVisibility(View.GONE);
         } else {
             mBinding.btnNegative.setText(cancelTitle);
         }
-        mBinding.btnPositive.setOnClickListener(yesListener);
-        mBinding.btnNegative.setOnClickListener(cancelListener);
-        mBinding.btnClose.setOnClickListener(cancelListener);
 
-        new AlertDialog.Builder(context).setView(mBinding.getRoot()).show();
+        final Dialog dialog = new AlertDialog.Builder(context).setView(mBinding.getRoot()).create();
+        mBinding.btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        mBinding.btnPositive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                if (yesListener != null) {
+                    yesListener.onClick(dialog, DialogInterface.BUTTON_POSITIVE);
+                }
+            }
+        });
+
+        mBinding.btnNegative.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                if (cancelListener != null) {
+                    cancelListener.onClick(dialog, DialogInterface.BUTTON_NEGATIVE);
+                }
+            }
+        });
+        dialog.show();
     }
 
     public static void showDialogStyle(Context context, @StringRes int title,
             @StringRes int message, @StringRes int yesTitle,
-            @Nullable View.OnClickListener yesListener, @StringRes int cancelTitle,
-            @Nullable View.OnClickListener cancelListener) {
-        DialogNoticeLayoutBinding mBinding =
-                DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.dialog_notice_layout,
-                        null, false);
+            @Nullable DialogInterface.OnClickListener yesListener, @StringRes int cancelTitle,
+            @Nullable DialogInterface.OnClickListener cancelListener) {
         showDialogStyle(context, getString(context, title), getString(context, message),
                 getString(context, yesTitle), yesListener, getString(context, cancelTitle),
                 cancelListener);
+    }
+
+    public static void showDialogStyle(Context context, @StringRes int message) {
+        showDialogStyle(context, null, getString(context, message), null, null, null, null);
     }
 
     public static String getString(Context context, @StringRes int id) {
@@ -143,7 +168,7 @@ public class DialogUtils {
 
     public static void showDialogError(Context context, @Nullable String title, String message,
             @Nullable DialogInterface.OnClickListener yesListener, boolean cancelable) {
-        showDialog(context, title, message, context.getString(R.string.ok), yesListener, null,
-                null, cancelable);
+        showDialog(context, title, message, context.getString(R.string.ok), yesListener, null, null,
+                cancelable);
     }
 }

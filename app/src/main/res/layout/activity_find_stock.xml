@@ -20,93 +20,13 @@
             layout="@layout/toolbar"
             app:background="@{@color/colorAccent}"
             app:isShow="@{true}"
-            app:leftIcon="@{@drawable/ic_arrow_left_white_24dp}"
+            app:leftIcon="@{@drawable/ic_close_white}"
             app:leftIconClick="@{()->presenter.onCancel()}"
-            app:title="@{@string/kpp_order}"
+            app:title="@{@string/kpp_order_label_add_stocl_model}"
             app:titleColor="@{@color/white}"
             app:titleTextSize="@{@dimen/sp_17}"
             />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-            <include
-                layout="@layout/item_text_filter"
-                app:isShow="@{presenter.isCollapse}"
-                app:onClick="@{()->presenter.toogleExpand()}"
-                app:text="@{presenter.filterText}"
-                />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_20"
-                android:focusableInTouchMode="true"
-                android:layout_marginRight="@dimen/dp_20"
-                android:orientation="vertical"
-                android:descendantFocusability="beforeDescendants"
-                android:visibility="@{presenter.isCollapse?View.GONE:View.VISIBLE}"
-                >
-                <ImageView
-                    android:layout_width="@dimen/dp_30"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/dp_5"
-                    android:onClick="@{()->presenter.toogleExpand()}"
-                    android:src="@drawable/collapse"
-                    />
-                <com.viettel.mbccs.widget.CustomTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_5"
-                    android:text="@string/model_type"
-                    />
-
-                    <com.viettel.mbccs.widget.SpinnerWithBorder
-                        android:id="@+id/spinner_type"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:adapter="@{presenter.stockTypeAdapter}"
-                        ></com.viettel.mbccs.widget.SpinnerWithBorder>
-                <com.viettel.mbccs.widget.CustomTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/mode_code"
-                    />
-                <com.viettel.mbccs.widget.CustomEdittext
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@={presenter.code}"
-                    app:error="@{presenter.codeError}"
-                    style="@style/inputStyle"
-                    />
-
-                <com.viettel.mbccs.widget.CustomTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/model_name"
-                    />
-                <com.viettel.mbccs.widget.CustomEdittext
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@={presenter.name}"
-                    app:error="@{presenter.nameError}"
-                    style="@style/inputStyle"
-                    />
-
-                <com.viettel.mbccs.widget.CustomButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:onClick="@{()->presenter.search()}"
-                    android:text="@string/search1"
-                    style="@style/button_positive"
-                    />
-            </LinearLayout>
-
-        </RelativeLayout>
-        <RelativeLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             >
@@ -116,8 +36,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_50"
                 android:layout_alignParentBottom="true"
-                android:gravity="center"
+                android:layout_gravity="bottom|center_horizontal"
                 android:layout_margin="@dimen/dp_10"
+                android:gravity="center"
                 android:onClick="@{()->presenter.addStock()}"
                 android:text="@string/add_stock_total"
                 style="@style/button_positive"
@@ -127,10 +48,129 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_above="@id/btn_add_stock"
-                android:layout_marginTop="@dimen/dp_5"
+                android:layout_marginBottom="@dimen/dp_70"
+                android:layout_marginTop="@dimen/filter_height"
                 android:recyclerAdapter="@{presenter.stockTotalAdapter}"
-                ></android.support.v7.widget.RecyclerView>
-        </RelativeLayout>
+                />
+
+            <com.viettel.mbccs.widget.MultiDirectionSlidingDrawer
+                android:id="@+id/drawer"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="270dp"
+                app:content="@+id/content"
+                app:direction="topToBottom"
+                app:handle="@+id/handle"
+                app:handleTwo="@+id/view_close"
+                app:headerOne="@+id/view_open"
+                >
+
+                // layout content when expanded
+                <LinearLayout
+                    android:id="@+id/content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    >
+                    <LinearLayout
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:paddingTop="@dimen/dp_10"
+                        >
+                        <ScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            >
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dp_20"
+                                android:layout_marginRight="@dimen/dp_20"
+                                android:descendantFocusability="beforeDescendants"
+                                android:focusableInTouchMode="true"
+                                android:orientation="vertical"
+                                >
+
+                                <com.viettel.mbccs.widget.CustomTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dp_5"
+                                    android:text="@string/model_type"
+                                    />
+
+                                <com.viettel.mbccs.widget.SpinnerWithBorder
+                                    android:id="@+id/spinner_type"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:adapter="@{presenter.stockTypeAdapter}"
+                                    ></com.viettel.mbccs.widget.SpinnerWithBorder>
+                                <com.viettel.mbccs.widget.CustomTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/mode_code"
+                                    />
+                                <com.viettel.mbccs.widget.CustomEdittext
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@={presenter.code}"
+                                    app:error="@{presenter.codeError}"
+                                    style="@style/inputStyle"
+                                    />
+
+                                <com.viettel.mbccs.widget.CustomTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:text="@string/model_name"
+                                    />
+                                <com.viettel.mbccs.widget.CustomEdittext
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@={presenter.name}"
+                                    app:error="@{presenter.nameError}"
+                                    style="@style/inputStyle"
+                                    />
+
+                                <com.viettel.mbccs.widget.CustomButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_marginTop="@dimen/dp_10"
+                                    android:onClick="@{()->presenter.search()}"
+                                    android:text="@string/search1"
+                                    style="@style/button_positive"
+                                    />
+                            </LinearLayout>
+                        </ScrollView>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@id/handle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    // layout content when header_expanded when close
+                    <include
+                        layout="@layout/item_text_filter"
+                        android:id="@+id/view_close"
+                        app:isShow="@{presenter.isCollapse}"
+                        app:onClick="@{()->presenter.toogleExpand()}"
+                        app:text="@{presenter.filterText}"
+                        />
+
+                    // layout content when header_expanded when open
+                    <include
+                        layout="@layout/header_expanded"
+                        android:id="@+id/view_open"
+                        />
+
+                </RelativeLayout>
+
+            </com.viettel.mbccs.widget.MultiDirectionSlidingDrawer>
+        </FrameLayout>
 
     </LinearLayout>
 

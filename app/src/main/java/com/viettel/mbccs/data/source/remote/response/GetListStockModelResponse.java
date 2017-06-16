@@ -9,10 +9,10 @@ import java.util.List;
  * Created by HuyQuyet on 5/27/17.
  */
 
-public class GetListStockModelResponse extends DataResponse {
+public class GetListStockModelResponse {
 
     @Expose
-    @SerializedName("lstStockTotal")
+    @SerializedName("listStockTotal")
     private List<StockTotal> stockTotalList;
 
     public List<StockTotal> getStockTotalList() {

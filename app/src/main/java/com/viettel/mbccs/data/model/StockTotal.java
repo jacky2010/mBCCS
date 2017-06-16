@@ -60,8 +60,18 @@ public class StockTotal implements Parcelable {
     private float price;
 
     @Expose
-    @SerializedName("image")
-    private String image;
+    @SerializedName("pathImage1")
+    private String pathImage1;
+
+    @Expose
+    @SerializedName("pathImage2")
+    private String pathImage2;
+
+
+    @Expose
+    @SerializedName("pathImage3")
+    private String pathImage3;
+
 
     private int countChoice;
 
@@ -201,18 +211,38 @@ public class StockTotal implements Parcelable {
         this.price = price;
     }
 
-    public String getImage() {
-        return image;
+    public String getPathImage1() {
+        return pathImage1;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setPathImage1(String pathImage1) {
+        this.pathImage1 = pathImage1;
+    }
+
+    public String getPathImage3() {
+        return pathImage3;
+    }
+
+    public void setPathImage3(String pathImage3) {
+        this.pathImage3 = pathImage3;
+    }
+
+    public String getPathImage2() {
+        return pathImage2;
+    }
+
+    public void setPathImage2(String pathImage2) {
+        this.pathImage2 = pathImage2;
     }
 
     @Override
     public boolean equals(Object obj) {
         return (this.stockModelId == ((StockTotal) obj).getStockModelId()
                 && this.stockModelCode.equals(((StockTotal) obj).getStockModelCode()));
+    }
+
+    public String getTotalMoney() {
+        return Common.formatDouble(getCountChoice() * price);
     }
 
     @Override
@@ -234,7 +264,9 @@ public class StockTotal implements Parcelable {
         dest.writeLong(this.stateId);
         dest.writeString(this.stateName);
         dest.writeFloat(this.price);
-        dest.writeString(this.image);
+        dest.writeString(this.pathImage1);
+        dest.writeString(this.pathImage2);
+        dest.writeString(this.pathImage3);
         dest.writeInt(this.countChoice);
     }
 
@@ -251,12 +283,10 @@ public class StockTotal implements Parcelable {
         this.stateId = in.readLong();
         this.stateName = in.readString();
         this.price = in.readFloat();
-        this.image = in.readString();
+        this.pathImage1 = in.readString();
+        this.pathImage2 = in.readString();
+        this.pathImage3 = in.readString();
         this.countChoice = in.readInt();
-    }
-
-    public String getTotalMoney() {
-        return Common.formatDouble(getCountChoice() * price);
     }
 
     public static final Creator<StockTotal> CREATOR = new Creator<StockTotal>() {

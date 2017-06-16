@@ -173,7 +173,7 @@ public class SaleChannelPresenter
                     mChannelInfos.add(0, channel);
                     currentChannel = mChannelInfos.get(0);
                     channelText.set(currentChannel.getChannelName());
-
+                    changeSearchFilter();
                     loadModelSale();
                 }
             }
@@ -474,7 +474,11 @@ public class SaleChannelPresenter
             filter2 = currentSaleProgram.getName();
         }
 
-        filterText.set(filter0 + " - " + filter1 + " - " + filter2);
+        filterText.set(filter0
+                + mContext.getString(R.string.common_lable_dot)
+                + filter1
+                + mContext.getString(R.string.common_lable_dot)
+                + filter2);
     }
 
     @Override
