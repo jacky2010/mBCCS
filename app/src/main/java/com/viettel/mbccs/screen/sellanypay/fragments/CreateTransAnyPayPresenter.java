@@ -418,6 +418,26 @@ public class CreateTransAnyPayPresenter implements CreateTransAnyPayContract.Pre
         }
     }
 
+    public void onPayMethodChanged(View view) {
+        try {
+
+            switch (view.getId()) {
+                case R.id.ll_payment_cash:
+                    payMethod.set(PAY_METHOD_CASH);
+                    break;
+                case R.id.ll_payment_bank_plus:
+                    payMethod.set(PAY_METHOD_BANK_PLUS);
+                    break;
+                case R.id.ll_payment_wallet:
+                    payMethod.set(PAY_METHOD_E_WALLET);
+                    break;
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void chooseBranch() {
         try {
             viewModel.onChooseBranch(branchesList);
