@@ -23,6 +23,7 @@ import com.viettel.mbccs.utils.Common;
 import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.GsonUtils;
 import com.viettel.mbccs.variable.Constants;
+import com.viettel.mbccs.widget.MultiDirectionSlidingDrawer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +39,8 @@ public class SaleChannelActivity
     public static final int GET_CHANNEL = 126;
     public static final int GET_SERIAL = 124;
 
+    private MultiDirectionSlidingDrawer mDrawer;
+
     @Override
     protected int getIdLayout() {
         return R.layout.activity_sale_channel;
@@ -47,6 +50,13 @@ public class SaleChannelActivity
     protected void initData() {
         mPresenter = new SaleChannelPresenter(this, this);
         mBinding.setPresenter(mPresenter);
+        mDrawer = mBinding.drawer;
+        mDrawer.setOnDrawerCloseListener(new MultiDirectionSlidingDrawer.OnDrawerCloseListener() {
+            @Override
+            public void onDrawerClosed() {
+                mPresenter.changeSearchFilter();
+            }
+        });
         mBinding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -152,19 +162,17 @@ public class SaleChannelActivity
                 }
             }
 
-            if (stockSerial.getQuantity()>0){
+            if (stockSerial.getQuantity() > 0) {
                 stockSerials.add(stockSerial);
             }
-
         }
         int countSerial = 0;
         for (StockSerial serial : stockSerials) {
-            if (serial.getSerialBOs()!=null){
+            if (serial.getSerialBOs() != null) {
                 countSerial += Common.getSerialCountByListSerialBlock(serial.getSerialBOs());
-            }else{
-                countSerial+= serial.getQuantity();
+            } else {
+                countSerial += serial.getQuantity();
             }
-
         }
         if (countSerial == 0) {
             DialogUtils.showDialogError(SaleChannelActivity.this, null,

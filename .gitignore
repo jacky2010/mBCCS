@@ -146,7 +146,7 @@ fabric.properties
 # Linux trash folder which might appear on any partition or disk
 .Trash-*
 ### Windows template
-# Windows image file caches
+# Windows pathImage1 file caches
 Thumbs.db
 ehthumbs.db
 

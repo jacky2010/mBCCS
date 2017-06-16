@@ -135,11 +135,12 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.kpp.order.addnew.AddNewOrderActivity"
+            android:windowSoftInputMode="adjustResize"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.kpp.order.findstock.FindStockActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize|adjustPan"/>
         <activity
             android:name=".screen.kpp.order.ordersuccess.OrderSuccessActivity"
             android:screenOrientation="portrait"/>
@@ -192,7 +193,13 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan"/>
         <activity
+            android:name=".screen.nhapkhocapduoi.createorder.CreateOrderActivity"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".screen.nhapkhocapduoi.createorder.CreateOrderSuccessActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screen.trahangcaptren.create.CreateTicketSuccessActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.survey.SurveyActivity"

@@ -22,6 +22,8 @@
     <string name="common_label_total_amount">Số tiền phải thanh toán</string>
     <string name="common_label_continue">Tiếp tục</string>
     <string name="common_label_complete">Hoàn thành</string>
+    <string name="common_msg_no_data">Không có dữ liệu</string>
+    <string name="common_lable_dot"> • </string>
 
 
     <string formatted="false" name="count_serial_selected">
@@ -396,6 +398,8 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
 
     <!--kpp-->
     <string name="kpp_order">KPP Đặt hàng</string>
+    <string name="kpp_order_label_add_detail">Chi tiết đơn đặt hàng</string>
+    <string name="kpp_order_label_add_stocl_model">Thêm hàng hóa</string>
     <string name="order_approval">Đã được phê duyệt</string>
     <string name="order_reject">Đã từ chối</string>
     <string name="order_pending">Đang chờ phê duyệt</string>
@@ -730,7 +734,7 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="connector_mobile_dich_vu">Dịch vụ</string>
     <string name="connector_mobile_so_giay_to">Số giấy tờ*</string>
     <string name="connector_mobile_tim_kiem">Tìm kiếm</string>
-    <string name="connector_mobile_danh_sach_yeu_cau">Danh sach yêu cầu (%1$d)</string>
+    <string name="connector_mobile_danh_sach_yeu_cau">Danh sách yêu cầu (%1$d)</string>
     <string name="connector_mobile_nhap_moi_thong_tin_dau_noi">Nhập mới thông tin đấu nối</string>
     <string name="item_connector_mobile_ma_yeu_cau">Mã yêu cầu: %1$s</string>
     <string name="item_connector_mobile_dich_vu">Dịch vụ: %1$s</string>
@@ -767,12 +771,12 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="item_nhap_kho_cap_duoi_mat_hang_so_luong_nhap">Số lượng nhập: %1$d</string>
     <string name="item_nhap_kho_cap_duoi_mat_hang_xem_serial">Xem serial</string>
     <string name="activity_create_order_success_lap_phieu_nhap_thanh_cong">Lập phiếu nhập thành công (mã %1$s)</string>
-    <string name="activity_create_order_success_ma_lenh">Mã lệnh: %1$s</string>
+    <string name="activity_create_order_ma_lenh">Mã lệnh: %1$s</string>
     <string name="activity_create_order_success_kho_xuat">Kho xuất: %1$s</string>
     <string name="activity_create_order_success_kho_nhan">Kho nhận: %1$s</string>
     <string name="activity_create_order_success_ngay_lap_lenh_xuat_kho">Ngày lập lệnh xuất kho: %1$s</string>
     <string name="activity_create_order_success_danh_sach_mat_hang">Danh sách mặt hàng</string>
-    <string name="activity_create_order_success_chi_tiet_lenh_nhap">Chi tiết lệnh nhập</string>
+    <string name="activity_create_order_chi_tiet_lenh_nhap">Chi tiết lệnh nhập</string>
     <string name="activity_create_order_success_lap_phieu">Lập phiếu</string>
     <string name="activity_create_order_success_tu_choi">Từ chối</string>
     <string name="activity_create_order_success_thong_bao">Thông báo</string>
@@ -787,7 +791,7 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="nv_trahangcaptren_label_export_status">Trạng thái xuất *</string>
     <string name="nv_trahangcaptren_lap_phieu_lablel_lapphieu">Lập phiếu</string>
     <string name="nv_trahangcaptren_chitiet_title">Chi tiết xuất cho trả hàng cấp trên</string>
-    <string name="nv_trahangcaptren_export_success_labal_amount_response">Số lượng xuất/ Số lượng đáp ứng</string>
+    <string name="nv_trahangcaptren_export_success_label_amount_response">Số lượng xuất/ Số lượng đáp ứng</string>
 
     <!-- Area channel -->
     <string name="title_area">Quản lý địa bàn</string>
@@ -859,6 +863,8 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="upload_service_finish">Finish</string>
     <string name="input_phone_hint">Nhập số điện thoại</string>
     <string name="login_presenter_login_error">Tên đăng nhập hoặc Mật khẩu không đúng!</string>
+    <string name="activity_create_order_success_lenh_xuat_thanh_cong">Lệnh xuất thành công (Mã %1$s)</string>
+    <string name="common_amount_total">%1$d/%2$d</string>
 
     <!--Stock Delivery-->
     <string name="stock_delivery_title">Xuất kho cấp dưới</string>

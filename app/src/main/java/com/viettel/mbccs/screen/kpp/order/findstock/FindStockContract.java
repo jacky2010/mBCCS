@@ -16,6 +16,8 @@ public interface FindStockContract {
     interface ViewModel extends BaseView<Presenter> {
 
         void returnListStockTotal(ArrayList<StockTotal> stockTotalsSaved);
+
+        void closeForm();
     }
 
 }

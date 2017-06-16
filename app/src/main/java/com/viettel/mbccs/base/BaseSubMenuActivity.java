@@ -59,7 +59,7 @@ public class BaseSubMenuActivity
 
     protected LinearLayoutManager mLinearLayoutManager;
 
-//    protected RecyclerView.ItemDecoration mItemDecoration;
+    //    protected RecyclerView.ItemDecoration mItemDecoration;
 
     protected MenuPresenter.MenuAdapter mMenuAdapter;
 
@@ -79,10 +79,10 @@ public class BaseSubMenuActivity
         isGrid.set(false);
         mGridLayoutManager = new GridLayoutManager(this, 3);
         mLinearLayoutManager = new LinearLayoutManager(this);
-//        mItemDecoration = new SpacesItemDecoration(
-//                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX,
-//                        getResources().getDimension(R.dimen.dp_6),
-//                        getResources().getDisplayMetrics()), mGridLayoutManager);
+        //        mItemDecoration = new SpacesItemDecoration(
+        //                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX,
+        //                        getResources().getDimension(R.dimen.dp_6),
+        //                        getResources().getDisplayMetrics()), mGridLayoutManager);
         initMenuList();
         mMenuAdapter = new SubMenuAdapter(this, mFunctionList);
         mBinding.setPresenter(this);
@@ -93,7 +93,9 @@ public class BaseSubMenuActivity
         LoginInfo loginInfo = UserRepository.getInstance().getUser();
         for (Function f : loginInfo.getFunction()) {
             if (f.getParentCode().equals(mFunction.getFunctionCode())) {
-                mFunctionList.add(f);
+                if (!mFunctionList.contains(f)) {
+                    mFunctionList.add(f);
+                }
             }
         }
     }
@@ -291,10 +293,10 @@ public class BaseSubMenuActivity
         isGrid.set(!isGrid.get());
         if (isGrid.get()) {
             mBinding.subMenuView.setLayoutManager(mGridLayoutManager);
-//            mBinding.subMenuView.addItemDecoration(mItemDecoration);
+            //            mBinding.subMenuView.addItemDecoration(mItemDecoration);
         } else {
             mBinding.subMenuView.setLayoutManager(mLinearLayoutManager);
-//            mBinding.subMenuView.removeItemDecoration(mItemDecoration);
+            //            mBinding.subMenuView.removeItemDecoration(mItemDecoration);
         }
         mBinding.subMenuView.setAdapter(mMenuAdapter);
     }

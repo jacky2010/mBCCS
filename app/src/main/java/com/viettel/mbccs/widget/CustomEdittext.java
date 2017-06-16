@@ -3,6 +3,8 @@ package com.viettel.mbccs.widget;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.AppCompatEditText;
+import android.text.InputType;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.widget.EditText;
@@ -15,7 +17,7 @@ import com.viettel.mbccs.utils.FontCache;
  * Created by FRAMGIA\hoang.van.cuong on 16/05/2017.
  */
 
-public class CustomEdittext extends EditText {
+public class CustomEdittext extends AppCompatEditText {
 
     private static final String ANDROID_SCHEMA = "http://schemas.android.com/apk/res/android";
     private static final String STRING_EMPTY = "";
@@ -39,11 +41,16 @@ public class CustomEdittext extends EditText {
         int textSize = (int) getResources().getDimension(R.dimen.sp_14);
         setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         if (attrs != null) {
-            int textStyle = attrs.getAttributeIntValue(ANDROID_SCHEMA, "textStyle", Typeface.NORMAL);
+            int textStyle =
+                    attrs.getAttributeIntValue(ANDROID_SCHEMA, "textStyle", Typeface.NORMAL);
             Typeface customFont = FontCache.selectTypeface(context, textStyle);
             setTypeface(customFont);
         }
-        EditTextUtil.fixFontPasswordType(this);
+        if (getInputType() == InputType.TYPE_TEXT_VARIATION_PASSWORD
+                || getInputType() == InputType.TYPE_NUMBER_VARIATION_PASSWORD
+                || getInputType() == InputType.TYPE_TEXT_VARIATION_WEB_PASSWORD) {
+            EditTextUtil.fixFontPasswordType(this);
+        }
     }
 
     public String getInputText() {

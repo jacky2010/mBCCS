@@ -8,6 +8,7 @@ import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.databinding.ActivityKppOrderBinding;
 import com.viettel.mbccs.screen.kpp.order.addnew.AddNewOrderActivity;
 import com.viettel.mbccs.widget.CustomDatePicker;
+import com.viettel.mbccs.widget.MultiDirectionSlidingDrawer;
 
 /**
  * Created by eo_cuong on 5/21/17.
@@ -21,6 +22,7 @@ public class KPPOrderActivity
 
     private CustomDatePicker fromDate;
     private CustomDatePicker toDate;
+    private MultiDirectionSlidingDrawer mDrawer;
 
     @Override
     protected int getIdLayout() {
@@ -31,19 +33,31 @@ public class KPPOrderActivity
     protected void initData() {
         mPresenter = new KPPOrderPresenter(this, this);
         mBinding.setPresenter(mPresenter);
-        mBinding.spinnerStatus.getSpinner().setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        mDrawer = mBinding.drawer;
+        mDrawer.open();
+        mDrawer.setOnDrawerCloseListener(new MultiDirectionSlidingDrawer.OnDrawerCloseListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mPresenter.onChannelSelectedChagne(position);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+            public void onDrawerClosed() {
+                mPresenter.getFilterText();
             }
         });
+        mBinding.spinnerStatus.getSpinner()
+                .setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position,
+                            long id) {
+                        mPresenter.onChannelSelectedChagne(position);
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
         fromDate = mBinding.fromDate;
         toDate = mBinding.toDate;
+        //set selected for Customtextview
+
     }
 
     @Override
@@ -84,5 +98,10 @@ public class KPPOrderActivity
     @Override
     public long getToDate() {
         return toDate.getDateInMilis();
+    }
+
+    @Override
+    public void collapseForm() {
+        mDrawer.close();
     }
 }

@@ -18,10 +18,10 @@
                 android:id="@+id/btn_close"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_30"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/dp_5"
                 android:src="@drawable/ic_close_black_36dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 />
             <com.viettel.mbccs.widget.CustomTextView
                 android:id="@+id/text_title"

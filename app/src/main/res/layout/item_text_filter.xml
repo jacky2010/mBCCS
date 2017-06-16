@@ -28,7 +28,8 @@
         <LinearLayout
             android:id="@+id/lyFilterCollapse"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dp_45"
+            android:gravity="center_vertical"
             android:onClick="@{onClick}"
             android:orientation="horizontal"
             android:padding="@dimen/dp_5"
@@ -36,8 +37,7 @@
             <ImageView
                 android:layout_width="@dimen/dp_20"
                 android:layout_height="@dimen/dp_20"
-                android:layout_marginTop="@dimen/dp_5"
-                android:layout_gravity="center"
+                android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:src="@drawable/ic_search_white"
                 />
@@ -53,6 +53,8 @@
                 android:lines="1"
                 android:marqueeRepeatLimit="marquee_forever"
                 android:maxLines="1"
+                android:singleLine="true"
+                android:freezesText="true"
                 android:padding="@dimen/dp_3"
                 android:scrollHorizontally="true"
                 android:text="asdfasdfasdfasdfasdfasdf"

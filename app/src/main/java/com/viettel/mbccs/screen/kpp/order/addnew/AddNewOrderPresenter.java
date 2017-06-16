@@ -104,9 +104,9 @@ public class AddNewOrderPresenter implements AddNewOrderContract.Presenter {
             return;
         }
         DialogUtils.showDialogStyle(mContext, R.string.confirm, R.string.confirm_kpp_order,
-                R.string.order2, new View.OnClickListener() {
+                R.string.order2, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(View view) {
+                    public void onClick(DialogInterface dialogInterface, int i) {
                         createOrder();
                     }
                 }, R.string.common_label_close, null);
