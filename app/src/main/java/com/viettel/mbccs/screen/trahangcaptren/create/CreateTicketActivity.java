@@ -1,5 +1,6 @@
 package com.viettel.mbccs.screen.trahangcaptren.create;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
@@ -8,6 +9,7 @@ import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.databinding.ActivityCreateTicketReturnUpperBinding;
 import com.viettel.mbccs.screen.kpp.order.findstock.FindStockActivity;
 import com.viettel.mbccs.variable.Constants;
+import com.viettel.mbccs.widget.CustomDialog;
 import java.util.ArrayList;
 
 import static com.viettel.mbccs.screen.kpp.order.addnew.AddNewOrderActivity.STOCK_TOTAL_PICKER_REQUEST;
@@ -42,7 +44,18 @@ public class CreateTicketActivity
 
     @Override
     public void onCreateTicket() {
-
+        new CustomDialog(this, R.string.confirm,
+                R.string.activity_create_order_success_ban_co_chac_muon_lap_phieu, false,
+                R.string.common_label_close, R.string.activity_create_order_success_lap_phieu, null,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // TODO: 5/27/2017 Api call
+                        startActivity(new Intent(CreateTicketActivity.this,
+                                CreateTicketSuccessActivity.class));
+                        finish();
+                    }
+                }, null, false).show();
     }
 
     @Override

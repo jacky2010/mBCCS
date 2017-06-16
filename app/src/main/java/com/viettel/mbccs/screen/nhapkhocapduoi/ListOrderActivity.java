@@ -5,7 +5,7 @@ import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.base.searchlistview.BaseSearchListViewContract;
 import com.viettel.mbccs.databinding.ActivityListOrderWarehouseBinding;
-import com.viettel.mbccs.screen.nhapkhocapduoi.createorder.CreateOrderSuccessActivity;
+import com.viettel.mbccs.screen.nhapkhocapduoi.createorder.CreateOrderActivity;
 
 /**
  * Created by Anh Vu Viet on 5/31/2017.
@@ -47,6 +47,6 @@ public class ListOrderActivity
 
     @Override
     public void onItemClicked(Object object) {
-        startActivity(new Intent(this, CreateOrderSuccessActivity.class));
+        startActivity(new Intent(this, CreateOrderActivity.class));
     }
 }

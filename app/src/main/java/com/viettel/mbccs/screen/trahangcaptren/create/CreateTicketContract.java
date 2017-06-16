@@ -2,7 +2,6 @@ package com.viettel.mbccs.screen.trahangcaptren.create;
 
 import com.viettel.mbccs.base.searchlistview.BaseSearchListViewContract;
 import com.viettel.mbccs.data.model.StockTotal;
-import com.viettel.mbccs.screen.trahangcaptren.ListOrderReturnUpperContract;
 import java.util.List;
 
 /**
@@ -12,7 +11,7 @@ import java.util.List;
 public interface CreateTicketContract {
 
     interface ViewModel
-            extends BaseSearchListViewContract.ViewModel<ListOrderReturnUpperContract.Presenter> {
+            extends BaseSearchListViewContract.ViewModel<Presenter> {
 
         void onCreateTicket();
 

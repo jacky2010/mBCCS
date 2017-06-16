@@ -21,14 +21,6 @@
         android:paddingTop="@dimen/dp_4"
         >
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:onClick="@{ () -> presenter.toggleSearchForm() }"
-            android:src="@drawable/ic_expand_less_black_24dp"
-            />
-
         <com.viettel.mbccs.widget.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
