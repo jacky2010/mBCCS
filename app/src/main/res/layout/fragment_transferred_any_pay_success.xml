@@ -7,64 +7,54 @@
     android:orientation="vertical">
 
     <!--<LinearLayout-->
-        <!--android:orientation="vertical"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
+    <!--android:orientation="vertical"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
 
-        <com.viettel.mbccs.widget.ToolBarView
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
+    <com.viettel.mbccs.widget.ToolBarView
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tbIconLeft="@drawable/ic_close"
+        app:tbTitle="Thông báo" />
+
+    <LinearLayout
+        android:id="@+id/view_header"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_centerInParent="true"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:tbIconLeft="@drawable/ic_close"
-            app:tbTitle="Thông báo" />
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:background="@drawable/ic_done" />
 
-        <LinearLayout
-            android:id="@+id/view_header"
+        <com.viettel.mbccs.widget.CustomTextView
+            android:id="@+id/txtMessageDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:orientation="vertical">
+            android:gravity="center" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="@dimen/dp_20"
-                android:background="@drawable/ic_done" />
-
-            <com.viettel.mbccs.widget.CustomTextView
-                android:id="@+id/txtMessageDetail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:gravity="center" />
-
-            <com.viettel.mbccs.widget.CustomTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dp_20"
-                android:gravity="center"
-                android:text="" />
-        </LinearLayout>
-
-
-        <LinearLayout
+        <com.viettel.mbccs.widget.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal">
-            <com.viettel.mbccs.widget.ButtonIconView
-                android:id="@+id/biv_done"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/view_header"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/dp_100"
-                app:itb_bg="@color/blue"
-                app:itb_bg_pressed="@color/blue_trans"
-                app:itb_padding_left="@dimen/dp_50"
-                app:itb_padding_right="@dimen/dp_50"
-                app:itb_radius="3dp"
-                app:itb_text="OK" />
-        </LinearLayout>
-    <!--</LinearLayout>-->
+            android:layout_margin="@dimen/dp_20"
+            android:gravity="center"
+            android:text="" />
+    </LinearLayout>
+
+
+    <com.viettel.mbccs.widget.CustomButton
+        android:id="@+id/biv_done"
+        style="@style/button_positive"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/dp_20"
+        android:text="@string/common_label_close" />
 </LinearLayout>

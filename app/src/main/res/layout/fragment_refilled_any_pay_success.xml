@@ -28,7 +28,8 @@
     <LinearLayout
         android:id="@+id/view_header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_centerInParent="true"
         android:orientation="vertical">
 
@@ -54,24 +55,13 @@
             android:text="" />
     </LinearLayout>
 
-    <LinearLayout
+    <com.viettel.mbccs.widget.CustomButton
+        android:id="@+id/biv_done"
+        style="@style/button_positive"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal">
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/dp_20"
+        android:text="@string/common_label_close" />
 
-        <com.viettel.mbccs.widget.ButtonIconView
-            android:id="@+id/biv_done"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/view_header"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/dp_100"
-            app:itb_bg="@color/blue"
-            app:itb_bg_pressed="@color/blue_trans"
-            app:itb_padding_left="@dimen/dp_50"
-            app:itb_padding_right="@dimen/dp_50"
-            app:itb_radius="3dp"
-            app:itb_text="OK" />
-    </LinearLayout>
-    <!--</LinearLayout>-->
 </LinearLayout>

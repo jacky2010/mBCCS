@@ -286,12 +286,14 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:checked="@{presenter.defaultBankIsdnChecked}"
+                            android:textSize="@dimen/sp_16"
                             android:text="@string/sell_anypay_label_phone_no" />
 
                         <RadioButton
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:textSize="@dimen/sp_16"
                             android:text="@string/sell_anypay_label_acc_no" />
                     </RadioGroup>
 

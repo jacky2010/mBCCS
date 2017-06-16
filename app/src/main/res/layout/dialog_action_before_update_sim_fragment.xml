@@ -13,25 +13,34 @@
         app:tbIconLeft="@drawable/ic_close"
         app:tbTitle="@string/common_msg_confirm_general_title" />
 
-    <LinearLayout
-        android:id="@+id/bottom"
+    <com.viettel.mbccs.widget.CustomButton
+        android:id="@+id/biv_done"
+        style="@style/button_positive"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="31dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
+        android:layout_margin="@dimen/dp_20"
+        android:text="@string/common_msg_confirm_general_title" />
 
-        <com.viettel.mbccs.widget.ButtonIconView
-            android:id="@+id/biv_done"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_weight="0.5"
-            app:itb_bg="@color/blue"
-            app:itb_radius="@dimen/default_radius"
-            app:itb_text="@string/common_msg_confirm_general_title" />
-    </LinearLayout>
+    <!--<LinearLayout-->
+        <!--android:id="@+id/bottom"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_marginBottom="31dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<com.viettel.mbccs.widget.ButtonIconView-->
+            <!--android:id="@+id/biv_done"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="5dp"-->
+            <!--android:layout_weight="0.5"-->
+            <!--app:itb_bg="@color/blue"-->
+            <!--app:itb_radius="@dimen/default_radius"-->
+            <!--app:itb_text="@string/common_msg_confirm_general_title" />-->
+    <!--</LinearLayout>-->
 
     <LinearLayout
         android:id="@+id/view_header"
