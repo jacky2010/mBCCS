@@ -234,6 +234,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/green"
                     android:drawableStart="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:drawableLeft="@drawable/ic_arrow_drop_down_black_24dp"
                     android:gravity="center_vertical"
                     android:paddingBottom="@dimen/dp_4"
                     android:paddingTop="@dimen/dp_4"
@@ -283,26 +284,26 @@
                 >
 
                 <com.viettel.mbccs.widget.CustomButton
+                    style="@style/button_negative_red"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/dp_4"
+                    android:layout_marginRight="@dimen/dp_4"
                     android:layout_weight="1"
-                    android:background="@color/red_button"
                     android:onClick="@{ () -> presenter.onReject() }"
                     android:text="@string/reject"
-                    android:textColor="@color/white"
                     android:visibility="@{ presenter.update ? View.GONE : View.VISIBLE }"
                     />
 
                 <com.viettel.mbccs.widget.CustomButton
+                    style="@style/button_positive"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_4"
+                    android:layout_marginLeft="@dimen/dp_4"
                     android:layout_weight="1"
-                    android:background="@color/blue"
                     android:onClick="@{ () -> presenter.onAccept() }"
                     android:text="@string/nhan_viec"
-                    android:textColor="@color/white"
                     android:visibility="@{ presenter.update ? View.GONE : View.VISIBLE }"
                     />
 

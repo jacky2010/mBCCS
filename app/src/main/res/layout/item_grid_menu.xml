@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="imageText"
+            type="String" />
+
+        <variable
+            name="onClicked"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="image"
+            type="android.graphics.drawable.Drawable" />
+
+        <variable
+            name="textSize"
+            type="float" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_120"
+        android:background="@drawable/bg_input"
+        android:onClick="@{ onClicked }"
+        android:paddingBottom="@dimen/dp_8"
+        android:paddingEnd="@dimen/dp_4"
+        android:paddingStart="@dimen/dp_4"
+        android:paddingTop="@dimen/dp_8">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="@dimen/dp_36"
+            android:layout_height="@dimen/dp_36"
+            android:layout_centerHorizontal="true"
+            android:adjustViewBounds="true"
+            android:src="@{ image }" />
+
+        <com.viettel.mbccs.widget.CustomTextView
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/image"
+            android:layout_gravity="center_horizontal|bottom"
+            android:gravity="center"
+            android:text="@{ imageText }"
+            android:textSize="@{ textSize > 0 ? textSize : @dimen/sp_14 }" />
+    </RelativeLayout>
+</layout>

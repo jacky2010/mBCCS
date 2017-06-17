@@ -22,7 +22,7 @@
             app:leftIconClick="@{()->presenter.onCancel()}"
             app:title="@{@string/sale_retail}"
             app:titleColor="@{@color/white}"
-            app:titleTextSize="@{@dimen/sp_17}"
+            app:titleTextSize="@{@dimen/sp_16}"
             />
 
 
@@ -67,7 +67,7 @@
 
             <com.viettel.mbccs.widget.MultiDirectionSlidingDrawer
                 android:id="@+id/drawer"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="350dp"
                 app:content="@+id/content"

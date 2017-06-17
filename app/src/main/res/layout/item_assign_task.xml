@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:text="@{ taskTitle }"
                 android:textColor="@color/black"
-                android:textSize="@dimen/sp_22" />
+                android:textSize="@dimen/sp_20" />
 
             <com.viettel.mbccs.widget.CustomTextView
                 android:id="@+id/text2"
@@ -60,7 +60,7 @@
                 android:layout_below="@id/text1"
                 android:layout_marginTop="@dimen/dp_4"
                 android:text="@{ taskType }"
-                android:textColor="@color/black"
+                android:textColor="@color/default_text_color_gray"
                 android:textSize="@dimen/sp_14" />
 
             <com.viettel.mbccs.widget.CustomTextView
@@ -69,10 +69,12 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/text2"
                 android:layout_marginEnd="@dimen/dp_4"
+                android:layout_marginRight="@dimen/dp_4"
                 android:layout_marginTop="@dimen/dp_4"
                 android:layout_toStartOf="@+id/text4"
+                android:layout_toLeftOf="@+id/text4"
                 android:text="@{ createdDate }"
-                android:textColor="@color/black"
+                android:textColor="@color/default_text_color_gray"
                 android:textSize="@dimen/sp_14" />
 
             <com.viettel.mbccs.widget.CustomTextView
@@ -80,6 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
                 android:layout_alignTop="@id/text3"
                 android:background="@{ statusBackground }"
                 android:paddingBottom="@dimen/dp_4"
