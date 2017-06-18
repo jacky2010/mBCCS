@@ -237,6 +237,7 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
             serial.setStockModelCode(saleOrdersDetail.getStockModelCode());
             serial.setStockMoldeName(saleOrdersDetail.getStockMoldeName());
             serial.setQuantity(saleOrdersDetail.getQuantity());
+            stockSerials.add(serial);
         }
 
         GetInfoSaleTranRequest c = new GetInfoSaleTranRequest();

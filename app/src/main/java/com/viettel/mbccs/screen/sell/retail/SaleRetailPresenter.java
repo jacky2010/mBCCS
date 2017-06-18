@@ -79,7 +79,7 @@ public class SaleRetailPresenter
         }
         request.setOwnerId((mUserRepository.getUserInfo().getStaffInfo().getStaffId()));
         //hard code 2
-        request.setOwnerType(2);
+        request.setOwnerType(2L);
         request.setStateId(StockTotalType.TYPE_NEW);
         request.setSaleTransType(SaleTranType.SALE_RETAIL);
         //TODO set attribute for request

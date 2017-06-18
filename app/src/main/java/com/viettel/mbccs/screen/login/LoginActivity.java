@@ -1,9 +1,7 @@
 package com.viettel.mbccs.screen.login;
 
-
 import android.content.Intent;
 import android.support.annotation.Nullable;
-
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.data.source.UserRepository;

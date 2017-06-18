@@ -43,7 +43,9 @@ import com.txusballesteros.widgets.FitChart;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.Function;
 import com.viettel.mbccs.widget.BottomNavigationView;
+import com.viettel.mbccs.widget.CustomEdittext;
 import com.viettel.mbccs.widget.EndlessRecyclerOnScrollListener;
+import com.viettel.mbccs.widget.callback.DrawableClickListener;
 import de.codecrafters.tableview.TableDataAdapter;
 import de.codecrafters.tableview.TableHeaderAdapter;
 import de.codecrafters.tableview.TableView;
@@ -433,5 +435,10 @@ public class BindingUtils {
     @BindingAdapter({ "touchListener" })
     public static void setTouchListener(View view, View.OnTouchListener listener) {
         view.setOnTouchListener(listener);
+    }
+
+    @BindingAdapter("customEditTextDrawable")
+    public static void setCustomEditTextDrawable(CustomEdittext v, DrawableClickListener listener) {
+        v.setDrawableClickListener(listener);
     }
 }

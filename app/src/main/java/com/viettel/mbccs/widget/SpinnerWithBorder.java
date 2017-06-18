@@ -23,7 +23,6 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.databinding.LayoutSpinnerWithBorderBinding;
@@ -180,5 +179,9 @@ public class SpinnerWithBorder extends FrameLayout {
             int count = super.getCount();
             return count > 0 ? count - 1 : count;
         }
+    }
+
+    public void setSelection(int selection) {
+        getSpinner().setSelection(selection);
     }
 }

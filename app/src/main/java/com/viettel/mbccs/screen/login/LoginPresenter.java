@@ -1,9 +1,13 @@
 package com.viettel.mbccs.screen.login;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.os.Build;
+import android.support.v4.content.LocalBroadcastManager;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -12,10 +16,10 @@ import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.method.MovementMethod;
 import android.text.style.ClickableSpan;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
-
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.LoginInfo;
@@ -25,8 +29,9 @@ import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetUserInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.LoginRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.service.service.CreateDataBaseService;
+import com.viettel.mbccs.utils.Common;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
-
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
@@ -49,6 +54,26 @@ public class LoginPresenter implements LoginContract.Presenter {
     private Context mContext;
     private UserRepository mUserRepository;
     private CompositeSubscription subscriptions;
+    private Intent intentCreateDataBaseAreaService;
+
+    private BroadcastReceiver broadcastReceiverCreateDataBaseArea = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.i("LoginPresenter", " -> onReceive: ----------------: action " + intent.getAction());
+            if (intent.getAction().equals(CreateDataBaseService.ACTION_CREATE_AREA_COMPLETED)) {
+                mViewModel.onLoginSuccess();
+                // TODO: 6/17/17 remove
+                Toast.makeText(context, "create data base success!", Toast.LENGTH_SHORT).show();
+            } else if (intent.getAction()
+                    .equals(CreateDataBaseService.ACTION_CREATE_AREA_SUCCESS)) {
+                // TODO: 6/17/17 handler success
+            } else {
+                // TODO: 6/17/17 handler error
+                Toast.makeText(context, "create data base error!", Toast.LENGTH_SHORT).show();
+                Common.logout(mContext);
+            }
+        }
+    };
 
     public LoginPresenter(Context context, LoginContract.ViewModel viewModel,
                           UserRepository userRepository) {
@@ -74,11 +99,13 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     @Override
     public void unSubscribe() {
+        if (intentCreateDataBaseAreaService != null) {
+            mContext.stopService(intentCreateDataBaseAreaService);
+        }
         subscriptions.clear();
     }
 
     public void loginServer(final String username, String password) {
-        //        mViewModel.onLoginSuccess();
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setUsername(username.trim());
         loginRequest.setPassword(password.trim());
@@ -120,7 +147,19 @@ public class LoginPresenter implements LoginContract.Presenter {
                     @Override
                     public void onSuccess(UserInfo object) {
                         mUserRepository.saveUserInfo(object);
-                        mViewModel.onLoginSuccess();
+                        Log.i("LoginPresenter", " -> onSuccess: ----------------: getUserInfo ");
+                        intentCreateDataBaseAreaService =
+                                new Intent(mContext, CreateDataBaseService.class);
+                        Log.i("LoginPresenter", " -> onSuccess: ----------------: startService");
+                        mContext.startService(intentCreateDataBaseAreaService);
+
+                        IntentFilter intentFilter = new IntentFilter();
+                        intentFilter.addAction(CreateDataBaseService.ACTION_CREATE_AREA_COMPLETED);
+                        intentFilter.addAction(CreateDataBaseService.ACTION_CREATE_AREA_SUCCESS);
+                        intentFilter.addAction(CreateDataBaseService.ACTION_CREATE_AREA_FAIL);
+                        LocalBroadcastManager.getInstance(mContext)
+                                .registerReceiver(broadcastReceiverCreateDataBaseArea,
+                                        intentFilter);
                     }
 
                     @Override

@@ -101,7 +101,7 @@ public class SellOrdersPresenter {
                                 spinnerAdapterChannel.get()
                                         .setDropDownViewResource(
                                                 android.R.layout.simple_spinner_dropdown_item);
-
+                                setTextHideSearch();
                                 sellOrdersView.hideLoading();
                             }
 
@@ -163,11 +163,13 @@ public class SellOrdersPresenter {
 
     public void expandSearch() {
         isHideSearch.set(!isHideSearch.get());
-        textSearch.set(
-                context.getString(R.string.sell_orders_gone_search, shop.get().getShopName(),
-                        staffInfo.get().getStaffName(), channelInfoSelect.getManagementName()));
+        setTextHideSearch();
     }
 
+    public void setTextHideSearch() {
+        textSearch.set(context.getString(R.string.sell_orders_gone_search, shop.get().getShopName(),
+                staffInfo.get().getStaffName(), channelInfoSelect.getManagementName()));
+    }
     public void setSellOrdersFragmentAdapter(SellOrdersFragmentAdapter sellOrdersFragmentAdapter) {
         this.sellOrdersFragmentAdapter.set(sellOrdersFragmentAdapter);
     }

@@ -10,6 +10,7 @@ import com.viettel.mbccs.data.source.remote.request.CreateDistributedChannelRequ
 import com.viettel.mbccs.data.source.remote.request.CreateSaleTransChannelRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateSaleTransFromOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
+import com.viettel.mbccs.data.source.remote.request.DownloadImageRequest;
 import com.viettel.mbccs.data.source.remote.request.GetAllInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.GetAnypayAuthorizeRequest;
 import com.viettel.mbccs.data.source.remote.request.GetApDomainRequest;
@@ -62,6 +63,7 @@ import com.viettel.mbccs.data.source.remote.response.CreateDistributedChannelRes
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransChannelResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransFromOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransRetailResponse;
+import com.viettel.mbccs.data.source.remote.response.DownloadImageResponse;
 import com.viettel.mbccs.data.source.remote.response.GetAllInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetAnypayAuthorizeResponse;
 import com.viettel.mbccs.data.source.remote.response.GetApDomainResponse;
@@ -326,4 +328,8 @@ public interface MBCSSApi {
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<UserInfo>>> getUserInfo(
             @Body DataRequest<GetUserInfoRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<DownloadImageResponse>>> downloadImage(
+            @Body DataRequest<DownloadImageRequest> request);
 }

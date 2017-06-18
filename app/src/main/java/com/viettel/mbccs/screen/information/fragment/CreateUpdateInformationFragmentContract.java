@@ -4,9 +4,7 @@ import android.graphics.Bitmap;
 import com.viettel.mbccs.base.BasePresenter;
 import com.viettel.mbccs.base.BaseView;
 import com.viettel.mbccs.data.model.ApDomain;
-import com.viettel.mbccs.data.model.District;
-import com.viettel.mbccs.data.model.Precinct;
-import com.viettel.mbccs.data.model.Province;
+import com.viettel.mbccs.data.model.Area;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import java.util.List;
 
@@ -24,11 +22,11 @@ public interface CreateUpdateInformationFragmentContract {
 
         void onCancel();
 
-        Province getProvince();
+        Area getAreaProvince();
 
-        District getDistrict();
+        Area getAreaDistrict();
 
-        Precinct getPrecinct();
+        Area getAreaPrecinct();
 
         String getAddress();
 
