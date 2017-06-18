@@ -200,6 +200,27 @@
         <item name="android:gravity">start|top</item>
     </style>
 
+    <style name="inputStyle_1">
+        <item name="android:background">@drawable/bg_input_tranparent</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:padding">@dimen/dp_5</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="inputStyleDrawableRight">
+        <item name="android:background">@drawable/bg_input_tranparent</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:paddingTop">@dimen/dp_4</item>
+        <item name="android:paddingBottom">@dimen/dp_4</item>
+        <item name="android:paddingLeft">@dimen/dp_10</item>
+        <item name="android:paddingRight">@dimen/dp_10</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:drawableEnd">@drawable/ic_cancel_grey_24dp</item>
+        <item name="android:drawableRight">@drawable/ic_cancel_grey_24dp</item>
+    </style>
+
     <style name="inputStyleIconLeft">
         <item name="android:background">@drawable/bg_transparent_inputview</item>
         <item name="android:textColor">@color/black</item>

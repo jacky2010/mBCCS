@@ -43,6 +43,7 @@
             android:value="com.viettel.mbccs.data.model.Precinct,
             com.viettel.mbccs.data.model.Province,
             com.viettel.mbccs.data.model.District,
+            com.viettel.mbccs.data.model.database.AreaDataBase,
             com.viettel.mbccs.data.model.UploadImage"/>
 
         <activity
@@ -242,6 +243,13 @@
 
         <service
             android:name=".service.service.UploadImageService"
+            android:exported="true"/>
+        <service
+            android:name=".service.service.DownloadImageService"
+            android:exported="true"/>
+
+        <service
+            android:name=".service.service.CreateDataBaseService"
             android:exported="true"/>
 
         <receiver android:name=".service.receiver.UploadImageReceiver"/>

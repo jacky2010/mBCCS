@@ -7,7 +7,9 @@ import android.databinding.ObservableInt;
 import android.support.v7.widget.RecyclerView;
 import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.StockTotal;
+import com.viettel.mbccs.data.model.UserInfo;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
+import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListStockModelRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
@@ -27,6 +29,7 @@ public class ViewWarehousePresenter implements ViewWarehouseContract.Presenter,
     private Context context;
     private ViewWarehouseContract.View view;
     private BanHangKhoTaiChinhRepository banHangKhoTaiChinhRepository;
+    private UserRepository userRepository;
     private CompositeSubscription subscriptions;
     private List<StockTotal> stockTotalList;
 
@@ -39,6 +42,7 @@ public class ViewWarehousePresenter implements ViewWarehouseContract.Presenter,
         this.context = context;
         this.view = view;
         banHangKhoTaiChinhRepository = BanHangKhoTaiChinhRepository.getInstance();
+        userRepository = UserRepository.getInstance();
         subscriptions = new CompositeSubscription();
 
         showRightIcon = new ObservableBoolean();
@@ -50,12 +54,14 @@ public class ViewWarehousePresenter implements ViewWarehouseContract.Presenter,
     @Override
     public void subscribe() {
         showRightIcon.set(true);
-        // TODO: 5/21/17 get data user from sharePref
-        //        userRepository.getDataUser();
+        UserInfo userInfo = userRepository.getUserInfo();
         GetListStockModelRequest g = new GetListStockModelRequest();
-        // TODO: 5/22/17 fake data
-        g.setOwnerId(1);
-        g.setOwnerType(1);
+        g.setOwnerId(userInfo.getStaffInfo().getStaffId());
+        /**
+         * if OwnerId == StaffId => OwnerType = 2L
+         * if OwnerId == ShopId => OwnerType = 1L
+         */
+        g.setOwnerType(2L);
 
         DataRequest<GetListStockModelRequest> request = new DataRequest<>();
         request.setParameterApi(g);

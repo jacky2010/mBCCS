@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by HuyQuyet on 6/8/17.
  */
 
-public class UploadImageResponse extends DataResponse implements Parcelable {
+public class UploadImageResponse implements Parcelable {
 
     @SerializedName("result")
     @Expose

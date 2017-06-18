@@ -4,6 +4,7 @@ import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.model.UserInfo;
 import com.viettel.mbccs.data.source.remote.IUserRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
+import com.viettel.mbccs.data.source.remote.request.DownloadImageRequest;
 import com.viettel.mbccs.data.source.remote.request.GetDistrictRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
 import com.viettel.mbccs.data.source.remote.request.GetPrecinctRequest;
@@ -16,13 +17,13 @@ import com.viettel.mbccs.data.source.remote.request.LoginRequest;
 import com.viettel.mbccs.data.source.remote.request.UploadImageRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseErrorResponse;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.DownloadImageResponse;
 import com.viettel.mbccs.data.source.remote.response.GetDistrictResponse;
 import com.viettel.mbccs.data.source.remote.response.GetInfoSaleTranResponse;
 import com.viettel.mbccs.data.source.remote.response.GetPrecinctResponse;
 import com.viettel.mbccs.data.source.remote.response.GetProvinceResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
 import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
-import com.viettel.mbccs.data.source.remote.response.GetUserInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.SendCodeChangePassResponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import com.viettel.mbccs.data.source.remote.response.UploadImageResponse;
@@ -158,5 +159,14 @@ public class UserRemoteDataSource implements IUserRemoteDataSource {
                 .uploadImage(request)
                 .flatMap(SchedulerUtils.<UploadImageResponse>convertDataFlatMap())
                 .compose(SchedulerUtils.<UploadImageResponse>applyAsyncSchedulers());
+    }
+
+    @Override
+    public Observable<DownloadImageResponse> downloadImage(
+            DataRequest<DownloadImageRequest> request) {
+        return RequestHelper.getRequest()
+                .downloadImage(request)
+                .flatMap(SchedulerUtils.<DownloadImageResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<DownloadImageResponse>applyAsyncSchedulers());
     }
 }

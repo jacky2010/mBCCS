@@ -76,13 +76,8 @@ public class UploadImageService extends IntentService {
         observableList = new ArrayList<>();
         if (intent.getParcelableExtra(ARG_DATA_INTENT) != null) {
             uploadImageList = userRepository.getUploadImage();
-            Log.i("UploadImageService",
-                    " -> onHandleIntent: ----------------: intent.getParcelableExtra(ARG_DATA_INTENT) != null");
         } else {
             uploadImageList = intent.getParcelableArrayListExtra(ARG_DATA_INTENT);
-            Log.i("UploadImageService",
-                    " -> onHandleIntent: ----------------: uploadImageList size "
-                            + uploadImageList.size());
         }
 
         if (uploadImageList.size() == 0) return;
@@ -115,8 +110,6 @@ public class UploadImageService extends IntentService {
 
                                     @Override
                                     public void onNext(UploadImageResponse response) {
-                                        Log.i("UploadImageService",
-                                                " -> onNext: ----------------: mergeDelayError");
                                         if (++process <= observableList.size()) {
                                             String name = "";
                                             if (process == observableList.size()) {
@@ -174,7 +167,6 @@ public class UploadImageService extends IntentService {
 
                     @Override
                     public void onNext(UploadImageResponse response) {
-                        Log.i("UploadImageService", " -> onNext: ----------------: subscribe");
                         intent.setAction(ACTION_UPLOAD_SUCCESS);
                         intent.putExtra(DATA_UPLOAD_SUCCESS, response);
                         LocalBroadcastManager.getInstance(UploadImageService.this)
@@ -195,7 +187,6 @@ public class UploadImageService extends IntentService {
         //Send the notification:
         notification = notificationBuilder.getNotification();
         notificationManager.notify(notificationID, notification);
-        Log.i("UploadImageService", " -> createNotification: ----------------: ");
     }
 
     private void updateNotification(String content, int process) {
@@ -205,7 +196,6 @@ public class UploadImageService extends IntentService {
         //Send the notification:
         notification = notificationBuilder.getNotification();
         notificationManager.notify(notificationID, notification);
-        Log.i("UploadImageService", " -> updateNotification: ----------------: content");
     }
 
     private void cancelNotification() {

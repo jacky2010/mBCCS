@@ -11,39 +11,72 @@ import com.google.gson.annotations.SerializedName;
 
 public class Area implements Parcelable {
     @Expose
-    @SerializedName("AreaCode")
+    @SerializedName("area_code")
     private String areaCode;
 
     @Expose
-    @SerializedName("ProvinceCode")
-    private String provinceCode;
+    @SerializedName("parent_code")
+    private String parentCode;
 
     @Expose
-    @SerializedName("District")
+    @SerializedName("cen_code")
+    private String cenCode;
+
+    @Expose
+    @SerializedName("province")
+    private String province;
+
+    @Expose
+    @SerializedName("district")
     private String district;
 
     @Expose
-    @SerializedName("Precinct")
+    @SerializedName("precinct")
     private String precinct;
 
     @Expose
-    @SerializedName("Name")
+    @SerializedName("name")
     private String name;
 
     @Expose
-    @SerializedName("FullName")
+    @SerializedName("full_name")
     private String fullName;
+
+    @Expose
+    @SerializedName("order_no")
+    private String orderNo;
 
     public Area() {
     }
 
     protected Area(Parcel in) {
         areaCode = in.readString();
-        provinceCode = in.readString();
+        parentCode = in.readString();
+        cenCode = in.readString();
+        province = in.readString();
         district = in.readString();
         precinct = in.readString();
         name = in.readString();
         fullName = in.readString();
+        orderNo = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(areaCode);
+        dest.writeString(parentCode);
+        dest.writeString(cenCode);
+        dest.writeString(province);
+        dest.writeString(district);
+        dest.writeString(precinct);
+        dest.writeString(name);
+        dest.writeString(fullName);
+        dest.writeString(orderNo);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<Area> CREATOR = new Creator<Area>() {
@@ -58,21 +91,6 @@ public class Area implements Parcelable {
         }
     };
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(areaCode);
-        dest.writeString(provinceCode);
-        dest.writeString(district);
-        dest.writeString(precinct);
-        dest.writeString(name);
-        dest.writeString(fullName);
-    }
-
     public String getAreaCode() {
         return areaCode;
     }
@@ -81,12 +99,28 @@ public class Area implements Parcelable {
         this.areaCode = areaCode;
     }
 
-    public String getProvinceCode() {
-        return provinceCode;
+    public String getParentCode() {
+        return parentCode;
     }
 
-    public void setProvinceCode(String provinceCode) {
-        this.provinceCode = provinceCode;
+    public void setParentCode(String parentCode) {
+        this.parentCode = parentCode;
+    }
+
+    public String getCenCode() {
+        return cenCode;
+    }
+
+    public void setCenCode(String cenCode) {
+        this.cenCode = cenCode;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
     }
 
     public String getDistrict() {
@@ -119,5 +153,18 @@ public class Area implements Parcelable {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+
+    public String getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
+    }
+
+    @Override
+    public String toString() {
+        return getName();
     }
 }

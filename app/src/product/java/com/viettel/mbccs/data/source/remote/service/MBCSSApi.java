@@ -287,4 +287,8 @@ public interface MBCSSApi {
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<BaseResponse<GetUserInfoResponse>> getUserInfo(
             @Body DataRequest<GetUserInfoRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<DownloadImageResponse>>> downloadImage(
+            @Body DataRequest<DownloadImageRequest> request);
 }
