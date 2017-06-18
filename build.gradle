@@ -63,5 +63,4 @@ ext {
     butterknifeVersion = '8.5.1'
     mapVersion = "10.2.6"
     eventbusVersion = "3.0.0"
-    eventbusVersion = "3.0.0"
 }
