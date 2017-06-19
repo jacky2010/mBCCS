@@ -11,7 +11,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/default_bg_disabled"
+            android:background="@color/colorAccent"
             android:orientation="horizontal">
 
             <ImageView
@@ -78,27 +78,28 @@
             android:layout_marginTop="@dimen/dp_16">
 
             <com.viettel.mbccs.widget.CustomButton
+                style="@style/button_nagative"
                 android:id="@+id/reject"
                 android:layout_width="@dimen/dp_120"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/dp_40"
                 android:layout_marginEnd="@dimen/dp_4"
-                android:background="@drawable/bg_input"
+                android:layout_marginRight="@dimen/dp_4"
                 android:minHeight="0dp"
                 android:paddingBottom="@dimen/dp_8"
                 android:paddingTop="@dimen/dp_8"
                 android:textAllCaps="false" />
 
             <com.viettel.mbccs.widget.CustomButton
+                style="@style/button_positive"
                 android:id="@+id/accept"
                 android:layout_width="@dimen/dp_120"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/dp_40"
                 android:layout_marginStart="@dimen/dp_4"
-                android:background="@color/blue"
+                android:layout_marginLeft="@dimen/dp_4"
                 android:minHeight="0dp"
                 android:paddingBottom="@dimen/dp_8"
                 android:paddingTop="@dimen/dp_8"
-                android:textAllCaps="false"
-                android:textColor="@color/white" />
+                android:textAllCaps="false" />
         </LinearLayout>
     </RelativeLayout>
 </layout>

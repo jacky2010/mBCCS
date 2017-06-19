@@ -20,13 +20,13 @@
             layout="@layout/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:background="@{ @android:color/darker_gray }"
+            app:background="@{ @color/colorAccent }"
             app:isShow="@{ true }"
             app:leftIcon="@{ @drawable/ic_arrow_left_white_24dp }"
             app:leftIconClick="@{ () -> presenter.close() }"
             app:title="@{ presenter.toolbarTitle }"
             app:titleColor="@{ @color/white }"
-            app:titleTextSize="@{ @dimen/sp_18 }" />
+            app:titleTextSize="@{ @dimen/sp_16 }" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -82,6 +82,7 @@
                 android:layout_marginTop="@dimen/dp_4"
                 android:background="@drawable/bg_input"
                 android:drawableEnd="@drawable/ic_arrow_drop_down_black_24dp"
+                android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
                 android:onClick="@{ () -> presenter.onSelectStaffClick() }" />
 
             <com.viettel.mbccs.widget.CustomTextView
@@ -95,6 +96,7 @@
                 style="@style/TextSearchTask"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_4"
                 android:background="@drawable/bg_input"
                 android:minHeight="@dimen/dp_28"
                 android:paddingEnd="@dimen/dp_4"
@@ -131,20 +133,22 @@
             android:orientation="horizontal">
 
             <com.viettel.mbccs.widget.CustomButton
+                style="@style/button_nagative"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/dp_4"
+                android:layout_marginRight="@dimen/dp_4"
                 android:layout_weight="1"
-                android:background="@android:color/darker_gray"
                 android:onClick="@{ () -> presenter.close() }"
                 android:text="@string/common_label_close" />
 
             <com.viettel.mbccs.widget.CustomButton
+                style="@style/button_positive"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_4"
                 android:layout_marginStart="@dimen/dp_4"
                 android:layout_weight="1"
-                android:background="@color/blue"
                 android:onClick="@{ () -> presenter.assign() }"
                 android:text="@string/assign_task" />
         </LinearLayout>

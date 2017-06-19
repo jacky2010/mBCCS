@@ -16,13 +16,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <include
             android:id="@+id/toolbar"
             layout="@layout/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:background="@{ @android:color/darker_gray }"
+            app:background="@{ @color/colorAccent }"
             app:isShow="@{ true }"
             app:leftIcon="@{ @drawable/ic_arrow_left_white_24dp }"
             app:leftIconClick="@{ () -> presenter.close() }"
@@ -89,6 +88,7 @@
                 android:layout_marginTop="@dimen/dp_8"
                 android:background="@drawable/bg_input_tranparent"
                 android:drawableEnd="@drawable/ic_arrow_drop_down_black_24dp"
+                android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
                 android:minHeight="@dimen/dp_40"
                 android:onClick="@{ () -> presenter.onSelectStaffClick() }" />
 
@@ -145,23 +145,24 @@
                 android:layout_alignParentBottom="true">
 
                 <com.viettel.mbccs.widget.CustomButton
+                    style="@style/button_nagative"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/dp_4"
+                    android:layout_marginRight="@dimen/dp_4"
                     android:layout_weight="1"
-                    android:background="@drawable/bg_input"
                     android:onClick="@{ () -> presenter.close() }"
                     android:text="@string/common_label_close" />
 
                 <com.viettel.mbccs.widget.CustomButton
+                    style="@style/button_positive"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_4"
+                    android:layout_marginLeft="@dimen/dp_4"
                     android:layout_weight="1"
-                    android:background="@color/blue"
                     android:onClick="@{ () -> presenter.assign() }"
-                    android:text="@string/activity_create_cskpp_task_giao_cham_soc_kpp"
-                    android:textColor="@color/white" />
+                    android:text="@string/activity_create_cskpp_task_giao_cham_soc_kpp" />
             </LinearLayout>
         </RelativeLayout>
     </RelativeLayout>

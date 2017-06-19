@@ -1,25 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <variable
             name="presenter"
-            type="com.viettel.mbccs.base.BaseSubMenuActivity"
-            />
+            type="com.viettel.mbccs.base.BaseSubMenuActivity" />
     </data>
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
 
             <include
                 layout="@layout/toolbar"
@@ -35,8 +31,7 @@
                 app:showRightIcon="@{ true }"
                 app:title="@{ presenter.toolbarTitle }"
                 app:titleColor="@{ @color/white }"
-                app:titleTextSize="@{ @dimen/sp_18 }"
-                />
+                app:titleTextSize="@{ @dimen/sp_18 }" />
 
         </android.support.design.widget.AppBarLayout>
 
@@ -44,10 +39,8 @@
             android:id="@+id/sub_menu_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/dp_16"
             android:adapter="@{ presenter.menuAdapter }"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            />
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     </android.support.design.widget.CoordinatorLayout>
 </layout>
