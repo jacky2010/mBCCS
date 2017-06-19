@@ -60,6 +60,7 @@
     <color name="dark_grey">#565555</color>
     <color name="dove_grey">#747474</color>
     <color name="french_grey">#BDBDBD</color>
+    <color name="spinner_grey">#f3f3f3</color>
 
     <!-- ItemSpinText -->
     <color name="default_item_spinner_text_color">#000000</color>

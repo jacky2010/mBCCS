@@ -3,6 +3,8 @@ package com.viettel.mbccs.screen.sell.retail;
 import android.app.Activity;
 import android.content.Context;
 import android.databinding.ObservableField;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.SaleTranType;
@@ -21,6 +23,7 @@ import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import com.viettel.mbccs.screen.sell.retail.adapter.StockAdapter;
 import com.viettel.mbccs.utils.DialogUtils;
+import com.viettel.mbccs.utils.SpinnerAdapter;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +39,7 @@ public class SaleRetailPresenter
 
     public ObservableField<String> filterText;
     public ObservableField<String> sellProgram;
-    private ArrayAdapter<TeleComService> mAdapter;
+    private SpinnerAdapter<TeleComService> mAdapter;
     public ObservableField<Boolean> isCollapse;
     private StockAdapter stockAdapter;
     private Context mContext;
@@ -175,9 +178,19 @@ public class SaleRetailPresenter
         sellProgram = new ObservableField<>();
         isCollapse = new ObservableField<>();
         isCollapse.set(false);
-        mAdapter =
-                new ArrayAdapter<TeleComService>(mContext, R.layout.item_spinner, mTeleComServices);
-        mAdapter.setDropDownViewResource(R.layout.item_spinner);
+        mAdapter = new SpinnerAdapter<>(mContext, mTeleComServices);
+        mAdapter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                onItemServiceClick(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         stockAdapter = new StockAdapter(mContext, mModelSales);
         stockAdapter.setOnStockListener(this);
     }
@@ -206,7 +219,7 @@ public class SaleRetailPresenter
         return mAdapter;
     }
 
-    public void setAdapter(ArrayAdapter<TeleComService> adapter) {
+    public void setAdapter(SpinnerAdapter<TeleComService> adapter) {
         mAdapter = adapter;
     }
 
@@ -231,6 +244,7 @@ public class SaleRetailPresenter
     @Override
     public void onItemServiceClick(int position) {
         currentTelecomService = mTeleComServices.get(position);
+        //        mAdapter.setSelectedPosition(position);
         loadModelSale();
     }
 

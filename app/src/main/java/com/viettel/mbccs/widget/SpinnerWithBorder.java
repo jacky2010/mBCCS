@@ -26,6 +26,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.databinding.LayoutSpinnerWithBorderBinding;
+import com.viettel.mbccs.utils.SpinnerAdapter;
+import java.util.List;
 
 /**
  * Created by FRAMGIA\vu.viet.anh on 07/12/2016.
@@ -55,18 +57,6 @@ public class SpinnerWithBorder extends FrameLayout {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    @BindingAdapter(value = { "adapter", "position", "leftIcon" }, requireAll = false)
-    public static void bindData(SpinnerWithBorder spinnerWithBorder, BaseAdapter adapter,
-            int position, Drawable drawable) {
-        spinnerWithBorder.getSpinner().setAdapter(adapter);
-        spinnerWithBorder.getSpinner().setSelection(position);
-        if (drawable != null) {
-            spinnerWithBorder.getImageView().setVisibility(View.VISIBLE);
-            spinnerWithBorder.getImageView().setImageDrawable(drawable);
-        } else {
-            spinnerWithBorder.getImageView().setVisibility(View.GONE);
-        }
-    }
 
     @BindingAdapter(value = {
             "selectedPosition", "selectedValueAttrChanged"
@@ -146,10 +136,14 @@ public class SpinnerWithBorder extends FrameLayout {
         return mImageView;
     }
 
-    public static class HintAdapter<T> extends ArrayAdapter<T> {
+    public static class HintAdapter<T> extends SpinnerAdapter<T> {
 
-        public HintAdapter(Context context, int resource, int textViewResourceId, T[] objects) {
-            super(context, resource, textViewResourceId, objects);
+        public HintAdapter(@NonNull Context context, List<T> list) {
+            super(context, list);
+        }
+
+        public HintAdapter(@NonNull Context context, T[] objs) {
+            super(context, objs);
         }
 
         @Override

@@ -43,7 +43,7 @@
                     android:id="@+id/spChannelType"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:adapter="@{presenter.channelTypeAdapter}"
+                    app:adapter="@{presenter.channelTypeAdapter}"
                     android:prompt="@string/branches_add_hint_channel_type" />
 
                 <com.viettel.mbccs.widget.CustomTextView
@@ -75,7 +75,7 @@
                     android:id="@+id/spDocumentType"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:adapter="@{presenter.documentTypeAdapter}"
+                    app:adapter="@{presenter.documentTypeAdapter}"
                     android:prompt="@string/branches_add_hint_document_type" />
 
 

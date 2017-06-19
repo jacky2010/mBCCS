@@ -1,30 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     >
-    <ImageView
-        android:id="@+id/image"
-        android:layout_width="@dimen/dp_30"
-        android:layout_height="@dimen/dp_30"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/dp_10"
-        android:src="@drawable/check_blue"
-        />
-    <com.viettel.mbccs.widget.CustomTextView
-        android:id="@+id/text"
+    <RelativeLayout
+        android:id="@+id/item_spinner"
         android:layout_width="match_parent"
+        android:padding="@dimen/dp_5"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/image"
-        android:ellipsize="marquee"
-        android:paddingBottom="@dimen/dp_10"
-        android:paddingLeft="@dimen/dp_5"
-        android:paddingRight="@dimen/dp_5"
-        android:paddingTop="@dimen/dp_10"
-        android:singleLine="true"
-        android:textColor="@color/black"
-        android:textSize="@dimen/sp_14"
-        />
-
-</RelativeLayout>
+        >
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_10"
+            android:src="@drawable/check_blue"
+            />
+        <com.viettel.mbccs.widget.CustomTextView
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/image"
+            android:ellipsize="marquee"
+            android:paddingBottom="@dimen/dp_10"
+            android:paddingLeft="@dimen/dp_5"
+            android:paddingRight="@dimen/dp_5"
+            android:paddingTop="@dimen/dp_10"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_14"
+            />
+    </RelativeLayout>
+</LinearLayout>
 

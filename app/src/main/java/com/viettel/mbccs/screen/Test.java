@@ -26,9 +26,8 @@ public class Test extends BaseDataBindActivity<TestBinding, Void> {
         text = new ObservableField<>();
         text.set("231321");
 
-        adapter = new SpinnerWithBorder.HintAdapter<>(this, android.R.layout.simple_spinner_item,
-                android.R.id.text1, getResources().getStringArray(R.array.task_type));
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter = new SpinnerWithBorder.HintAdapter<>(this,
+                getResources().getStringArray(R.array.task_type));
 
         mBinding.setData(this);
         mBinding.layoutSearch.spinner.getSpinner()
@@ -47,7 +46,9 @@ public class Test extends BaseDataBindActivity<TestBinding, Void> {
 
         mBinding.layoutSearch.fromDate.getDateInMilis();
 
-        new DialogFullScreen.Builder(Test.this).setPositiveButton("ok").setTitle("title").setTitleToolbar("hello")
+        new DialogFullScreen.Builder(Test.this).setPositiveButton("ok")
+                .setTitle("title")
+                .setTitleToolbar("hello")
                 .build()
                 .show();
     }

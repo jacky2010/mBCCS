@@ -51,19 +51,19 @@ public class SaleRetailActivity
                 ((SaleRetailPresenter) mPresenter).changeSearchFilter();
             }
         });
-        mBinding.spinner.getSpinner()
-                .setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position,
-                            long id) {
-                        mPresenter.onItemServiceClick(position);
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                });
+//        mBinding.spinner.getSpinner()
+//                .setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//                    @Override
+//                    public void onItemSelected(AdapterView<?> parent, View view, int position,
+//                            long id) {
+//                        mPresenter.onItemServiceClick(position);
+//                    }
+//
+//                    @Override
+//                    public void onNothingSelected(AdapterView<?> parent) {
+//
+//                    }
+//                });
     }
 
     @Override
