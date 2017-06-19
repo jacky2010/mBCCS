@@ -270,6 +270,9 @@
         <activity
             android:name=".screen.warehousecommon.exportsuccess.ExportSuccessDialog"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screen.xuathangchonhanvien.ChiTietXuatKhoNhanVienActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

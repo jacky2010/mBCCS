@@ -2,6 +2,7 @@ package com.viettel.mbccs.screen.serialpicker;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.ObservableField;
 import android.text.TextUtils;
@@ -100,7 +101,13 @@ public class SerialPickerPresenter
                     @Override
                     public void onError(BaseException error) {
                         //fakeData();
-                        DialogUtils.showDialogError(mContext, null, error.getMessage(), null);
+                        DialogUtils.showDialogError(mContext, null, error.getMessage(),
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        onCancel();
+                                    }
+                                });
                     }
 
                     @Override
@@ -116,10 +123,11 @@ public class SerialPickerPresenter
         if (mSerialPickerModel == null) {
             return;
         }
-        if (mSerialPickerModel.getLstSerial()!=null){
+        if (mSerialPickerModel.getLstSerial() != null) {
             mSerialSelected.addAll(
                     Common.getSerialsByListSerialBlock(mSerialPickerModel.getLstSerial()));
-            mSerials.removeAll(Common.getSerialsByListSerialBlock(mSerialPickerModel.getLstSerial()));
+            mSerials.removeAll(
+                    Common.getSerialsByListSerialBlock(mSerialPickerModel.getLstSerial()));
         }
 
         mSerialAdapter.refresh();

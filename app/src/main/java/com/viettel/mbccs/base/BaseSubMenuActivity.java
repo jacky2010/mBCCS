@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.ObservableBoolean;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.Function;
 import com.viettel.mbccs.data.model.LoginInfo;
+import com.viettel.mbccs.data.model.StockTrans;
 import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.databinding.ActivitySubMenuBinding;
 import com.viettel.mbccs.databinding.ItemGridMenuBinding;
@@ -30,15 +32,19 @@ import com.viettel.mbccs.screen.kpp.order.KPPOrderActivity;
 import com.viettel.mbccs.screen.kppfeedback.KPPFeedbackActivity;
 import com.viettel.mbccs.screen.main.fragments.menu.MenuPresenter;
 import com.viettel.mbccs.screen.nhapkhocapduoi.ListOrderActivity;
+import com.viettel.mbccs.screen.nvtrahangcaptren.list.NVTraHangCapTrenActivity;
 import com.viettel.mbccs.screen.sell.channel.SaleChannelActivity;
 import com.viettel.mbccs.screen.sell.orders.SellOrdersActivity;
 import com.viettel.mbccs.screen.sell.retail.SaleRetailActivity;
 import com.viettel.mbccs.screen.sellanypay.SellAnyPayActivity;
+import com.viettel.mbccs.screen.splash.SplashActivity;
 import com.viettel.mbccs.screen.surveykpp.SurveyKPPActivity;
 import com.viettel.mbccs.screen.trahangcaptren.ListOrderReturnUpperActivity;
 import com.viettel.mbccs.screen.transferanypay.TransferAnyPayActivity;
 import com.viettel.mbccs.screen.viewwarehouse.ViewWarehouseActivity;
 
+import com.viettel.mbccs.screen.xuathangchonhanvien.ChiTietXuatKhoNhanVienActivity;
+import com.viettel.mbccs.variable.Constants;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -224,6 +230,8 @@ public class BaseSubMenuActivity
                         case Function.MenuId.MENU_NV_XAC_NHAN_HANG:
                             break;
                         case Function.MenuId.MENU_NHAN_VIEN_TRA_HANG_CAP_TREN:
+                            startActivity(new Intent(BaseSubMenuActivity.this,
+                                    NVTraHangCapTrenActivity.class));
                             break;
                         case Function.MenuId.MENU_NHAP_KHO_TU_NHAN_VIEN:
                             break;
@@ -276,6 +284,16 @@ public class BaseSubMenuActivity
                         case Function.MenuId.MENU_BAO_CAO_TON_KHO:
                             break;
                         case Function.MenuId.MENU_BAO_CAO_GIAO_CHI_TIEU_BAN_HANG:
+                            Intent intent = new Intent(BaseSubMenuActivity.this, ChiTietXuatKhoNhanVienActivity.class);
+                            StockTrans stockTrans = new StockTrans();
+                            stockTrans.setStockTransId(1237);
+                            stockTrans.setToOwnerId(1232);
+                            stockTrans.setCreateDateTime("2017-01-02");
+                            stockTrans.setStockTransStatusName("hang moi");
+                            Bundle bundle = new Bundle();
+                            bundle.putParcelable(Constants.BundleConstant.STOCK_TRANS, stockTrans);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
                             break;
                     }
                 }

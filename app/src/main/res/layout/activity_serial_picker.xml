@@ -57,7 +57,7 @@
                 app:isShow="@{true}"
                 app:leftIcon="@{@drawable/ic_close_white_24dp}"
                 app:leftIconClick="@{()->presenter.onCancel()}"
-                app:title="@{@string/select_serials}"
+                app:title="@{@string/common_label_select_serials}"
                 app:titleColor="@{@color/white}"
                 app:titleTextSize="@{@dimen/sp_17}"
                 />
@@ -209,7 +209,7 @@
                         <com.viettel.mbccs.widget.CustomTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{@string/select_serials_step2}"
+                            android:text="@{@string/common_label_select_serials_step2}"
                             android:textColor="@color/black"
                             style="@style/stepTitleStyle"
                             />
@@ -277,7 +277,7 @@
                             android:id="@+id/text_title_serial_selected"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@{@string/select_serials_step3}"
+                            android:text="@{@string/common_label_select_serials_step3}"
                             android:textColor="@color/black"
                             style="@style/stepTitleStyle"
                             />

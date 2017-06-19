@@ -121,12 +121,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/dp_12"
-            android:background="@color/blue"
             android:onClick="@{ () -> searchClick }"
             android:paddingEnd="@dimen/dp_32"
             android:paddingStart="@dimen/dp_32"
             android:text="@string/common_lable_search"
-            android:textColor="@color/white"
+            style="@style/button_positive"
             />
     </LinearLayout>
 </layout>
