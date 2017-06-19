@@ -879,4 +879,9 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="stock_deliver_shipment">Phiếu chưa xuất kho (%s)</string>
     <string name="activity_finish_task_ngay_hoan_thanh">Ngày hoàn thành</string>
     <string name="activity_finish_task_due_date">Due date</string>
+
+    <!-- Download Image -->
+    <string name="download_image_text">Download Image : %1$d</string>
+    <string name="create_data_area_text">Create data Area : %1$d</string>
+    <!-- End Download Image -->
 </resources>

@@ -54,4 +54,10 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
         startActivity(new Intent(SplashActivity.this, MainActivity.class));
         finish();
     }
+
+    @Override
+    public void gotoDownloadImage() {
+        startActivity(new Intent(SplashActivity.this, DownloadDataActivity.class));
+        finish();
+    }
 }

@@ -10,7 +10,7 @@ import java.util.List;
 
 public class DownloadImageRequest {
 
-    @SerializedName("lsIdImage")
+    @SerializedName("listImageName")
     @Expose
     private List<String> listIdImage;
 

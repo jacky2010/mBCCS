@@ -48,7 +48,11 @@ public class SplashPresenter implements SplashContract.Presenter {
                 userRepository.getUser().getToken()) || userRepository.getUserInfo() == null) {
             splashView.gotoLogin();
         } else {
-            splashView.gotoMain();
+            if (userRepository.isDownloadImage()) {
+                splashView.gotoMain();
+            } else {
+                splashView.gotoDownloadImage();
+            }
         }
     }
 }
