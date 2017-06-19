@@ -1,12 +1,8 @@
 package com.viettel.mbccs.data.source;
 
-import com.viettel.mbccs.data.model.District;
-import com.viettel.mbccs.data.model.DistrictResponse;
+import com.viettel.mbccs.data.model.Area;
 import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.model.Precinct;
-import com.viettel.mbccs.data.model.PrecinctResponse;
-import com.viettel.mbccs.data.model.Province;
-import com.viettel.mbccs.data.model.ProvinceResponse;
 import com.viettel.mbccs.data.model.StaffInfo;
 import com.viettel.mbccs.data.model.UploadImage;
 import com.viettel.mbccs.data.model.UserInfo;
@@ -15,6 +11,7 @@ import com.viettel.mbccs.data.source.local.datasource.UserLocalDataSource;
 import com.viettel.mbccs.data.source.remote.IUserRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.datasource.UserRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
+import com.viettel.mbccs.data.source.remote.request.DownloadImageRequest;
 import com.viettel.mbccs.data.source.remote.request.GetDistrictRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
 import com.viettel.mbccs.data.source.remote.request.GetPrecinctRequest;
@@ -25,13 +22,13 @@ import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
 import com.viettel.mbccs.data.source.remote.request.GetUserInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.LoginRequest;
 import com.viettel.mbccs.data.source.remote.request.UploadImageRequest;
+import com.viettel.mbccs.data.source.remote.response.DownloadImageResponse;
 import com.viettel.mbccs.data.source.remote.response.GetDistrictResponse;
 import com.viettel.mbccs.data.source.remote.response.GetInfoSaleTranResponse;
 import com.viettel.mbccs.data.source.remote.response.GetPrecinctResponse;
 import com.viettel.mbccs.data.source.remote.response.GetProvinceResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
 import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
-import com.viettel.mbccs.data.source.remote.response.GetUserInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.SendCodeChangePassResponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import com.viettel.mbccs.data.source.remote.response.UploadImageResponse;
@@ -179,30 +176,18 @@ public class UserRepository implements IUserLocalDataSource, IUserRemoteDataSour
     }
 
     @Override
-    public List<Province> getListProvince() {
-        List<Province> list = mUserLocalDataSource.getListProvince();
-        if (list == null) {
-            list = new ArrayList<>();
-        }
-        return list;
+    public List<Area> getListAreaProvince() {
+        return mUserLocalDataSource.getListAreaProvince();
     }
 
     @Override
-    public List<District> getListDistrictByProvinceId(String provinceId) {
-        List<District> list = mUserLocalDataSource.getListDistrictByProvinceId(provinceId);
-        if (list == null) {
-            list = new ArrayList<>();
-        }
-        return list;
+    public List<Area> getListDistrictByProvinceId(String provinceId) {
+        return mUserLocalDataSource.getListDistrictByProvinceId(provinceId);
     }
 
     @Override
-    public List<Precinct> getListPrecinctByDistrictId(String districtId) {
-        List<Precinct> list = mUserLocalDataSource.getListPrecinctByDistrictId(districtId);
-        if (list == null) {
-            list = new ArrayList<>();
-        }
-        return list;
+    public List<Area> getListPrecinctByDistrictId(String districtId) {
+        return mUserLocalDataSource.getListPrecinctByDistrictId(districtId);
     }
 
     @Override
@@ -217,24 +202,6 @@ public class UserRepository implements IUserLocalDataSource, IUserRemoteDataSour
     }
 
     @Override
-    public void setListProvince(List<ProvinceResponse> data) {
-        if (data == null || data.size() == 0) return;
-        mUserLocalDataSource.setListProvince(data);
-    }
-
-    @Override
-    public void setListDistrict(List<DistrictResponse> data) {
-        if (data == null || data.size() == 0) return;
-        mUserLocalDataSource.setListDistrict(data);
-    }
-
-    @Override
-    public void setListPrecinct(List<PrecinctResponse> data) {
-        if (data == null || data.size() == 0) return;
-        mUserLocalDataSource.setListPrecinct(data);
-    }
-
-    @Override
     public List<UploadImage> getUploadImage() {
         return mUserLocalDataSource.getUploadImage();
     }
@@ -242,6 +209,16 @@ public class UserRepository implements IUserLocalDataSource, IUserRemoteDataSour
     @Override
     public void setUploadImage(List<UploadImage> data) {
         mUserLocalDataSource.setUploadImage(data);
+    }
+
+    @Override
+    public boolean isCreateDataBaseArea() {
+        return mUserLocalDataSource.isCreateDataBaseArea();
+    }
+
+    @Override
+    public void setCreateDataBaseArea(boolean status) {
+        mUserLocalDataSource.setCreateDataBaseArea(status);
     }
 
     @Override
@@ -306,5 +283,11 @@ public class UserRepository implements IUserLocalDataSource, IUserRemoteDataSour
     @Override
     public Observable<UploadImageResponse> uploadImage(DataRequest<UploadImageRequest> request) {
         return mUserRemoteDataSource.uploadImage(request);
+    }
+
+    @Override
+    public Observable<DownloadImageResponse> downloadImage(
+            DataRequest<DownloadImageRequest> request) {
+        return mUserRemoteDataSource.downloadImage(request);
     }
 }

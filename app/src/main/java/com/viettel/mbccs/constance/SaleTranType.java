@@ -1,6 +1,6 @@
 package com.viettel.mbccs.constance;
 
 public @interface SaleTranType {
-    int SALE_RETAIL = 1;
-    int SALE_CHANNEL = 3;
+    long SALE_RETAIL = 1;
+    long SALE_CHANNEL = 3;
 }

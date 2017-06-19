@@ -105,4 +105,18 @@ public class StringUtils {
     public static boolean isEmpty(String data) {
         return data == null || data.trim().length() == 0;
     }
+
+    public static String loadJson(Context context, String filename) {
+        try {
+            InputStream is = context.getAssets().open(filename);
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            return new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
 }

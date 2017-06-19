@@ -15,9 +15,7 @@ import android.widget.ArrayAdapter;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseFragment;
 import com.viettel.mbccs.data.model.ApDomain;
-import com.viettel.mbccs.data.model.District;
-import com.viettel.mbccs.data.model.Precinct;
-import com.viettel.mbccs.data.model.Province;
+import com.viettel.mbccs.data.model.Area;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetRegiterSubInfoResponse;
 import com.viettel.mbccs.databinding.FragmentCreateUpdateInformationBinding;
@@ -137,18 +135,18 @@ public class CreateUpdateInformationFragment extends BaseFragment
     }
 
     @Override
-    public Province getProvince() {
-        return binding.customSelectAddressCreateInformation.getProvince();
+    public Area getAreaProvince() {
+        return binding.customSelectAddressCreateInformation.getAreaProvince();
     }
 
     @Override
-    public District getDistrict() {
-        return binding.customSelectAddressCreateInformation.getDistrict();
+    public Area getAreaDistrict() {
+        return binding.customSelectAddressCreateInformation.getAreaDistrict();
     }
 
     @Override
-    public Precinct getPrecinct() {
-        return binding.customSelectAddressCreateInformation.getPrecinct();
+    public Area getAreaPrecinct() {
+        return binding.customSelectAddressCreateInformation.getAreaPrecinct();
     }
 
     @Override

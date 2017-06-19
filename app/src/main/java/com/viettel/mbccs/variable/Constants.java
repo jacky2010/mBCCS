@@ -75,10 +75,10 @@ public class Constants {
         public static final String USER_INFO = "USER_INFO";
 
         /**
-         * key to enscrypt and save to sharepreference (value instanceOf {@link Session})
+         * key put get is create data base area
+         * put true if create success
          */
-        public static final String SESSION = "session";
-
+        public static final String CREATE_DATA_AREA = "create_data_area";
         public static final String API_KEY = "api_key";
         public static final String SESSION_VTG = "session_vtg";
         public static final String API_KEY_VTG = "api_key_vtg";

@@ -1,13 +1,9 @@
 package com.viettel.mbccs.data.source.local;
 
 import com.mukesh.countrypicker.Country;
-import com.viettel.mbccs.data.model.District;
-import com.viettel.mbccs.data.model.DistrictResponse;
+import com.viettel.mbccs.data.model.Area;
 import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.model.Precinct;
-import com.viettel.mbccs.data.model.PrecinctResponse;
-import com.viettel.mbccs.data.model.Province;
-import com.viettel.mbccs.data.model.ProvinceResponse;
 import com.viettel.mbccs.data.model.StaffInfo;
 import com.viettel.mbccs.data.model.UploadImage;
 import com.viettel.mbccs.data.model.UserInfo;
@@ -118,21 +114,19 @@ public interface IUserLocalDataSource {
 
     String getApiKey();
 
-    List<Province> getListProvince();
+    List<Area> getListAreaProvince();
 
-    List<District> getListDistrictByProvinceId(String provinceId);
+    List<Area> getListDistrictByProvinceId(String provinceId);
 
-    List<Precinct> getListPrecinctByDistrictId(String districtId);
+    List<Area> getListPrecinctByDistrictId(String districtId);
 
     List<Precinct> getListPrecinctByProvinceAndDistrictId(String provinceId, String districtId);
-
-    void setListProvince(List<ProvinceResponse> data);
-
-    void setListDistrict(List<DistrictResponse> data);
-
-    void setListPrecinct(List<PrecinctResponse> data);
 
     List<UploadImage> getUploadImage();
 
     void setUploadImage(List<UploadImage> data);
+
+    boolean isCreateDataBaseArea();
+
+    void setCreateDataBaseArea(boolean status);
 }

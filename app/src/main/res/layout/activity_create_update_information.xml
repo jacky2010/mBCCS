@@ -50,15 +50,22 @@
                     android:text="@string/create_update_information_create_phone_number"
                     />
                 <com.viettel.mbccs.widget.CustomEdittext
+                    android:id="@+id/edit_isdn"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_40"
                     android:layout_marginTop="@dimen/dp_6"
                     android:drawableLeft="@drawable/ic_phone_black_16dp"
+                    android:drawableEnd="@drawable/ic_cancel_grey_24dp"
                     android:drawableRight="@drawable/ic_cancel_grey_24dp"
+                    android:drawableStart="@drawable/ic_phone_black_16dp"
                     android:inputType="number"
                     android:paddingLeft="@dimen/dp_6"
+                    android:gravity="center_vertical"
                     android:paddingRight="@dimen/dp_10"
+                    android:paddingEnd="@dimen/dp_10"
+                    android:paddingStart="@dimen/dp_6"
                     android:text="@={ presenter.isdn }"
+                    bind:customEditTextDrawable="@{ (v, t)  -> presenter.onDrawableClick(v, t) }"
                     style="@style/inputStyle"
                     />
 
@@ -84,16 +91,22 @@
                     android:text="@string/create_update_information_create_number_passport"
                     />
                 <com.viettel.mbccs.widget.CustomEdittext
+                    android:id="@+id/edit_id_no"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_40"
                     android:layout_marginTop="@dimen/dp_6"
                     android:drawableLeft="@drawable/ic_folder_black_16dp"
+                    android:drawableEnd="@drawable/ic_cancel_grey_24dp"
                     android:drawableRight="@drawable/ic_cancel_grey_24dp"
+                    android:drawableStart="@drawable/ic_folder_black_16dp"
                     android:inputType="number"
                     android:paddingLeft="@dimen/dp_6"
+                    android:gravity="center_vertical"
                     android:paddingRight="@dimen/dp_10"
-                    android:gravity="center"
+                    android:paddingEnd="@dimen/dp_10"
+                    android:paddingStart="@dimen/dp_6"
                     style="@style/inputStyle"
+                    bind:customEditTextDrawable="@{ (v, t)  -> presenter.onDrawableClick(v, t) }"
                     android:text="@={ presenter.idNo }"
                     />
 

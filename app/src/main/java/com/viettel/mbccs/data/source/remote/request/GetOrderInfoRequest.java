@@ -28,7 +28,7 @@ public class GetOrderInfoRequest {
     @SaleTranType
     @Expose
     @SerializedName("saleTransType")
-    private int saleTransType;
+    private Long saleTransType;
 
     @Expose
     @SerializedName("stateId")
@@ -66,11 +66,11 @@ public class GetOrderInfoRequest {
         this.ownerId = ownerId;
     }
 
-    public int getSaleTransType() {
+    public Long getSaleTransType() {
         return saleTransType;
     }
 
-    public void setSaleTransType(int saleTransType) {
+    public void setSaleTransType(Long saleTransType) {
         this.saleTransType = saleTransType;
     }
 

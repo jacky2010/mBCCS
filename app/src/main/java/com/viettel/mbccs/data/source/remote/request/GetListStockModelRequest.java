@@ -10,15 +10,19 @@ import com.google.gson.annotations.SerializedName;
 public class GetListStockModelRequest  {
     @Expose
     @SerializedName("ownerId")
-    private long ownerId;
+    private Long ownerId;
 
+    /**
+     * if OwnerId == StaffId => OwnerType = 2
+     * if OwnerId == ShopId => OwnerType = 1
+     */
     @Expose
     @SerializedName("ownerType")
-    private long ownerType;
+    private Long ownerType;
 
     @Expose
     @SerializedName("stockTypeId")
-    private long stockTypeId;
+    private Long stockTypeId;
 
     @Expose
     @SerializedName("stockModelId")
@@ -26,31 +30,39 @@ public class GetListStockModelRequest  {
 
     @Expose
     @SerializedName("stateId")
-    private long stateId;
+    private Long stateId;
 
     private String languate;
 
-    public long getOwnerId() {
+    public Long getOwnerId() {
         return ownerId;
     }
 
-    public void setOwnerId(long ownerId) {
+    public void setOwnerId(Long ownerId) {
         this.ownerId = ownerId;
     }
 
-    public long getOwnerType() {
+    /**
+     * if OwnerId == StaffId => OwnerType = 2
+     * if OwnerId == ShopId => OwnerType = 1
+     */
+    public Long getOwnerType() {
         return ownerType;
     }
 
-    public void setOwnerType(long ownerType) {
+    /**
+     * if OwnerId == StaffId => OwnerType = 2
+     * if OwnerId == ShopId => OwnerType = 1
+     */
+    public void setOwnerType(Long ownerType) {
         this.ownerType = ownerType;
     }
 
-    public long getStockTypeId() {
+    public Long getStockTypeId() {
         return stockTypeId;
     }
 
-    public void setStockTypeId(long stockTypeId) {
+    public void setStockTypeId(Long stockTypeId) {
         this.stockTypeId = stockTypeId;
     }
 
@@ -62,11 +74,11 @@ public class GetListStockModelRequest  {
         this.stockModelId = stockModelId;
     }
 
-    public long getStateId() {
+    public Long getStateId() {
         return stateId;
     }
 
-    public void setStateId(long stateId) {
+    public void setStateId(Long stateId) {
         this.stateId = stateId;
     }
 

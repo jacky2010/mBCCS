@@ -4,20 +4,18 @@ import android.text.TextUtils;
 import com.activeandroid.query.Select;
 import com.google.gson.Gson;
 import com.viettel.mbccs.MBCCSApplication;
-import com.viettel.mbccs.data.model.District;
-import com.viettel.mbccs.data.model.DistrictResponse;
+import com.viettel.mbccs.data.model.Area;
 import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.model.Precinct;
-import com.viettel.mbccs.data.model.PrecinctResponse;
-import com.viettel.mbccs.data.model.Province;
-import com.viettel.mbccs.data.model.ProvinceResponse;
 import com.viettel.mbccs.data.model.StaffInfo;
 import com.viettel.mbccs.data.model.UploadImage;
 import com.viettel.mbccs.data.model.UserInfo;
+import com.viettel.mbccs.data.model.database.AreaDataBase;
 import com.viettel.mbccs.data.source.local.IUserLocalDataSource;
-import com.viettel.mbccs.utils.GsonUtils;
+import com.viettel.mbccs.utils.ObjectUtils;
 import com.viettel.mbccs.utils.SecureUtils;
 import com.viettel.mbccs.variable.Constants;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -168,24 +166,51 @@ public class UserLocalDataSource implements IUserLocalDataSource {
     }
 
     @Override
-    public List<Province> getListProvince() {
-        return new Select().from(Province.class).orderBy("province_id asc").execute();
+    public List<Area> getListAreaProvince() {
+        List<AreaDataBase> areaDataBaseList = new Select().from(AreaDataBase.class)
+                .where(AreaDataBase.Columns.DISTRICT  + " is null ")
+                .execute();
+        if (areaDataBaseList.size() == 0) {
+            return new ArrayList<>();
+        }
+
+        List<Area> result = new ArrayList<>();
+        for (AreaDataBase areaDataBase : areaDataBaseList) {
+            result.add(ObjectUtils.convertObject(areaDataBase, Area.class));
+        }
+        return result;
     }
 
     @Override
-    public List<District> getListDistrictByProvinceId(String provinceId) {
-        return new Select().from(District.class)
-                .where("province_id = ?", provinceId)
-                .orderBy("district_id asc")
+    public List<Area> getListDistrictByProvinceId(String provinceId) {
+        List<AreaDataBase> areaDataBaseList = new Select().from(AreaDataBase.class)
+                .where(AreaDataBase.Columns.PARENT_CODE + " = ? ", provinceId)
                 .execute();
+        if (areaDataBaseList.size() == 0) {
+            return new ArrayList<>();
+        }
+
+        List<Area> result = new ArrayList<>();
+        for (AreaDataBase areaDataBase : areaDataBaseList) {
+            result.add(ObjectUtils.convertObject(areaDataBase, Area.class));
+        }
+        return result;
     }
 
     @Override
-    public List<Precinct> getListPrecinctByDistrictId(String districtId) {
-        return new Select().from(Precinct.class)
-                .where("district_id = ?", districtId)
-                .orderBy("precint_id asc")
+    public List<Area> getListPrecinctByDistrictId(String districtId) {
+        List<AreaDataBase> areaDataBaseList = new Select().from(AreaDataBase.class)
+                .where(AreaDataBase.Columns.PARENT_CODE + " = ? ", districtId)
                 .execute();
+        if (areaDataBaseList.size() == 0) {
+            return new ArrayList<>();
+        }
+
+        List<Area> result = new ArrayList<>();
+        for (AreaDataBase areaDataBase : areaDataBaseList) {
+            result.add(ObjectUtils.convertObject(areaDataBase, Area.class));
+        }
+        return result;
     }
 
     @Override
@@ -198,42 +223,6 @@ public class UserLocalDataSource implements IUserLocalDataSource {
     }
 
     @Override
-    public void setListProvince(List<ProvinceResponse> data) {
-        Province province;
-        for (ProvinceResponse p : data) {
-            province = new Province();
-            province.setName(p.getName());
-            province.setParentId(p.getParentId());
-            province.setProvinceId(p.getProvinceId());
-            province.save();
-        }
-    }
-
-    @Override
-    public void setListDistrict(List<DistrictResponse> data) {
-        District district;
-        for (DistrictResponse d : data) {
-            district = new District();
-            district.setName(d.getName());
-            district.setDistrictId(d.getDistrictId());
-            district.setProvinceId(d.getProvinceId());
-            district.save();
-        }
-    }
-
-    @Override
-    public void setListPrecinct(List<PrecinctResponse> data) {
-        Precinct precinct;
-        for (PrecinctResponse p : data) {
-            precinct = new Precinct();
-            precinct.setName(p.getName());
-            precinct.setPrecinctId(p.getPrecinctId());
-            precinct.setDistrictId(p.getDistrictId());
-            precinct.save();
-        }
-    }
-
-    @Override
     public List<UploadImage> getUploadImage() {
         return new Select().from(UploadImage.class).execute();
     }
@@ -243,5 +232,15 @@ public class UserLocalDataSource implements IUserLocalDataSource {
         for (UploadImage uploadImage : data) {
             uploadImage.save();
         }
+    }
+
+    @Override
+    public boolean isCreateDataBaseArea() {
+        return sharedPrefs.get(Constants.SharePref.CREATE_DATA_AREA, false);
+    }
+
+    @Override
+    public void setCreateDataBaseArea(boolean status) {
+        sharedPrefs.set(Constants.SharePref.CREATE_DATA_AREA, status);
     }
 }

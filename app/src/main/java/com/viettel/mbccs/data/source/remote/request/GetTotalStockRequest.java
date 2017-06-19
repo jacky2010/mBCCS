@@ -9,18 +9,18 @@ import com.google.gson.annotations.SerializedName;
 
 public class GetTotalStockRequest {
 
-    public static final int SALE_TRAN_RETAIL = 1;
-    public static final int SALE_TRAN_CHANNEL = 3;
-    public static final int STATE_NEW = 1;
-    public static final int STATE_FAIL = 3;
+    public static final Integer SALE_TRAN_RETAIL = 1;
+    public static final Integer SALE_TRAN_CHANNEL = 3;
+    public static final Integer STATE_NEW = 1;
+    public static final Integer STATE_FAIL = 3;
 
     @SerializedName("ownerId")
     @Expose
-    private long ownerId;
+    private Long ownerId;
 
     @SerializedName("ownerType")
     @Expose
-    private long ownerType;
+    private Long ownerType;
 
     @SerializedName("telecomServiceId")
     @Expose
@@ -32,61 +32,61 @@ public class GetTotalStockRequest {
 
     @SerializedName("saleTransType")
     @Expose
-    private int saleTransType;
+    private Long saleTransType;
 
     @SerializedName("stateId")
     @Expose
-    private int stateId;
+    private Long stateId;
 
     @SerializedName("language")
     @Expose
     private String language;
 
-    public long getOwnerId() {
+    public Long getOwnerId() {
         return ownerId;
     }
 
-    public void setOwnerId(long ownerId) {
+    public void setOwnerId(Long ownerId) {
         this.ownerId = ownerId;
     }
 
-    public long getOwnerType() {
+    public Long getOwnerType() {
         return ownerType;
     }
 
-    public void setOwnerType(long ownerType) {
+    public void setOwnerType(Long ownerType) {
         this.ownerType = ownerType;
     }
 
-    public long getTelecomServiceId() {
+    public Long getTelecomServiceId() {
         return telecomServiceId;
     }
 
-    public void setTelecomServiceId(long telecomServiceId) {
+    public void setTelecomServiceId(Long telecomServiceId) {
         this.telecomServiceId = telecomServiceId;
     }
 
-    public long getSaleProgameId() {
+    public Long getSaleProgameId() {
         return saleProgameId;
     }
 
-    public void setSaleProgameId(long saleProgameId) {
+    public void setSaleProgameId(Long saleProgameId) {
         this.saleProgameId = saleProgameId;
     }
 
-    public int getSaleTransType() {
+    public Long getSaleTransType() {
         return saleTransType;
     }
 
-    public void setSaleTransType(int saleTransType) {
+    public void setSaleTransType(Long saleTransType) {
         this.saleTransType = saleTransType;
     }
 
-    public int getStateId() {
+    public Long getStateId() {
         return stateId;
     }
 
-    public void setStateId(int stateId) {
+    public void setStateId(Long stateId) {
         this.stateId = stateId;
     }
 

@@ -49,7 +49,7 @@ public class SchedulerUtils {
         return new Func1<ServerDataResponse<BaseResponse<T>>, Observable<T>>() {
             @Override
             public Observable<T> call(ServerDataResponse<BaseResponse<T>> response) {
-                if (!response.getErrorCode().equals("200")) {
+                if (!response.getErrorCode().equals("S200")) {
                     BaseErrorResponse baseErrorResponse = new BaseErrorResponse();
                     baseErrorResponse.setError(Integer.parseInt(response.getErrorCode()),
                             response.getErrorMessage());

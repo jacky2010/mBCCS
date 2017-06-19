@@ -8,7 +8,6 @@ import android.databinding.ObservableInt;
 import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Parcelable;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,11 +15,9 @@ import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.constance.Data;
 import com.viettel.mbccs.data.model.ApDomain;
+import com.viettel.mbccs.data.model.Area;
 import com.viettel.mbccs.data.model.Contract;
 import com.viettel.mbccs.data.model.Customer;
-import com.viettel.mbccs.data.model.District;
-import com.viettel.mbccs.data.model.Precinct;
-import com.viettel.mbccs.data.model.Province;
 import com.viettel.mbccs.data.model.Subscriber;
 import com.viettel.mbccs.data.model.UploadImage;
 import com.viettel.mbccs.data.source.QLKhachHangRepository;
@@ -43,6 +40,7 @@ import com.viettel.mbccs.service.service.UploadImageService;
 import com.viettel.mbccs.utils.ImageUtils;
 import com.viettel.mbccs.utils.StringUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
+import com.viettel.mbccs.widget.callback.DrawableClickListener;
 import java.util.ArrayList;
 import java.util.List;
 import rx.Observable;
@@ -107,6 +105,8 @@ public class CreateUpdateInformationFragmentPresenter
     public ObservableBoolean checkboxEmail;
     public ObservableBoolean checkboxAtHome;
     public ObservableBoolean isShowContractInformation;
+    public ObservableBoolean isEnableIsdn;
+    public ObservableBoolean isEnableSerial;
     public ObservableInt selectionPassport;
 
     public CreateUpdateInformationFragmentPresenter(Context context,
@@ -147,6 +147,8 @@ public class CreateUpdateInformationFragmentPresenter
         checkboxAtHome = new ObservableBoolean();
 
         isShowContractInformation = new ObservableBoolean();
+        isEnableIsdn = new ObservableBoolean(true);
+        isEnableSerial = new ObservableBoolean(true);
         selectionPassport = new ObservableInt();
     }
 
@@ -338,9 +340,9 @@ public class CreateUpdateInformationFragmentPresenter
     }
 
     private Customer getDataCustomer() {
-        Province province = view.getProvince();
-        District district = view.getDistrict();
-        Precinct precinct = view.getPrecinct();
+        Area areaProvince = view.getAreaProvince();
+        Area areaDistrict = view.getAreaDistrict();
+        Area areaPrecinct = view.getAreaPrecinct();
         String address = view.getAddress();
         // TODO: 5/31/17
         String sex = "M";
@@ -349,9 +351,9 @@ public class CreateUpdateInformationFragmentPresenter
         customer.setName(txtNameCustomer.get());
         customer.setBirthDate(view.getBirthDate());
         customer.setSex(sex);
-        customer.setProvince(province == null ? "0" : province.getProvinceId());
-        customer.setDistrict(district == null ? "0" : district.getDistrictId());
-        customer.setPrecinct(district == null ? "0" : precinct.getPrecinctId());
+        customer.setProvince(areaProvince == null ? "0" : areaProvince.getProvince());
+        customer.setDistrict(areaDistrict == null ? "0" : areaDistrict.getDistrict());
+        customer.setPrecinct(areaPrecinct == null ? "0" : areaPrecinct.getPrecinct());
         customer.setAddress(address);
         customer.setIdType(1);
         //        customer.setIdType(dataPassportType.get(positionSelectionPassportType).getCode());
@@ -387,8 +389,8 @@ public class CreateUpdateInformationFragmentPresenter
     public void clickSendData(boolean isSendImage) {
         // TODO: 6/10/17 fix download offline
         //        view.showLoading();
-
-        if (StringUtils.isEmpty(getDataCustomer().getProvince())) {
+        Customer customer = getDataCustomer();
+        if (StringUtils.isEmpty(customer.getProvince())) {
             view.hideLoading();
             view.customerError();
             return;
@@ -403,10 +405,8 @@ public class CreateUpdateInformationFragmentPresenter
         //        if (isSendImage) {
         Intent intent = new Intent(context, UploadImageService.class);
         intent.putParcelableArrayListExtra(UploadImageService.ARG_DATA_INTENT,
-                (ArrayList<? extends Parcelable>) getBitmapAndSaveDatabase(getDataCustomer()));
+                (ArrayList<? extends Parcelable>) getBitmapAndSaveDatabase(customer));
         context.startService(intent);
-        Log.i("CreateUpdateInformationFragmentPresenter",
-                " -> clickSendData: ----------------: startService");
         //        } else {
         //            getBitmapAndSaveDatabase(getDataCustomer());
         //        }
@@ -420,7 +420,7 @@ public class CreateUpdateInformationFragmentPresenter
 
             UpdateAllSubInfoRequest updateAllSubInfoRequest = new UpdateAllSubInfoRequest();
             updateAllSubInfoRequest.setContract(getDataContract());
-            updateAllSubInfoRequest.setCustomer(getDataCustomer());
+            updateAllSubInfoRequest.setCustomer(customer);
             updateAllSubInfoRequest.setSubscriber(getDataSubscriber());
 
             DataRequest<UpdateAllSubInfoRequest> request = new DataRequest<>();
@@ -449,7 +449,7 @@ public class CreateUpdateInformationFragmentPresenter
             registerCustomerInfoRequest.setIsdn(getDataSubscriber().getIsdn());
             registerCustomerInfoRequest.setSerial(getDataSubscriber().getSerial());
 
-            registerCustomerInfoRequest.setCustomer(getDataCustomer());
+            registerCustomerInfoRequest.setCustomer(customer);
 
             DataRequest<RegisterCustomerInfoRequest> request = new DataRequest<>();
             request.setApiCode(ApiCode.RegisterCustomerInfo);
@@ -524,6 +524,32 @@ public class CreateUpdateInformationFragmentPresenter
         return uploadImage;
     }
 
+    public void onDrawableClick(View v, @DrawableClickListener.DrawablePosition int target) {
+        switch (target) {
+            case DrawableClickListener.DrawablePosition.RIGHT:
+                onDrawableClick(v);
+                break;
+        }
+    }
+
+    private void onDrawableClick(View v) {
+        switch (v.getId()) {
+            case R.id.edit_number_passport:
+                txtNumberPassport.set("");
+                break;
+            case R.id.edit_id_no:
+                if (isEnableIsdn.get()) {
+                    txtPhoneNumber.set("");
+                }
+                break;
+            case R.id.edit_serial:
+                if (isEnableSerial.get()) {
+                    txtSerial.set("");
+                }
+                break;
+        }
+    }
+
     /*---------------------- End on Click in View -----------------------------*/
 
     /*----------------------- Set - Get ---------------------------------------*/
@@ -563,7 +589,13 @@ public class CreateUpdateInformationFragmentPresenter
         // TODO: 6/1/17 set data gói cước
         // set information subscriberResponse
         txtPhoneNumber.set(subscriberResponse.getIsdn());
+        if (!StringUtils.isEmpty(subscriberResponse.getIsdn())) {
+            isEnableIsdn.set(false);
+        }
         txtSerial.set(subscriberResponse.getSerial());
+        if (!StringUtils.isEmpty(subscriberResponse.getSerial())) {
+            isEnableSerial.set(false);
+        }
 
         // set information customerResponse
         txtNameCustomer.set(customerResponse.getName());
@@ -576,11 +608,10 @@ public class CreateUpdateInformationFragmentPresenter
         }
         isEnabledSelectGender.set(false);
 
+        address.set(customerResponse.getAddress());
         idProvince.set(customerResponse.getProvince());
         idDistrict.set(customerResponse.getDistrict());
         idPrecinct.set(customerResponse.getPrecinct());
-//        address.set(customerResponse.getAddress());
-        address.set("Bach khoa, Hai Ba Trung, Ha Noi ");
         txtNumberPassport.set(customerResponse.getIdNo());
         if (!StringUtils.isEmpty(customerResponse.getIdNo())) isEnabledTxtNumberPassport.set(false);
         view.setBirthDate(customerResponse.getBirthDate());

@@ -19,6 +19,7 @@ import com.viettel.mbccs.data.source.remote.response.GetRegiterSubInfoResponse;
 import com.viettel.mbccs.screen.information.adapter.InformationCustomerAdapter;
 import com.viettel.mbccs.utils.StringUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
+import com.viettel.mbccs.widget.callback.DrawableClickListener;
 import java.util.List;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
@@ -180,5 +181,24 @@ public class CreateUpdateInformationPresenter
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    public void onDrawableClick(View v, @DrawableClickListener.DrawablePosition int target) {
+        switch (target) {
+            case DrawableClickListener.DrawablePosition.RIGHT:
+                onDrawableClick(v);
+                break;
+        }
+    }
+
+    private void onDrawableClick(View v) {
+        switch (v.getId()) {
+            case R.id.edit_isdn:
+                isdn.set("");
+                break;
+            case R.id.edit_id_no:
+                idNo.set("");
+                break;
+        }
     }
 }

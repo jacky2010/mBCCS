@@ -5,17 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
-
 import com.androidadvance.androidsurvey.SurveyActivity;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindFragment;
 import com.viettel.mbccs.data.model.SurveyItem;
 import com.viettel.mbccs.databinding.FragmentProcessSurveyKppBinding;
 import com.viettel.mbccs.utils.GsonUtils;
+import com.viettel.mbccs.utils.StringUtils;
 import com.viettel.mbccs.variable.Constants;
-
-import java.io.IOException;
-import java.io.InputStream;
 
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
@@ -69,7 +66,8 @@ public class ProcessSurveyKPPFragment extends BaseDataBindFragment<FragmentProce
                 if (surveyItem != null) {
                     Intent surveyIntent = new Intent(getContext(), SurveyActivity.class);
                     //you have to pass as an extra the json string.
-                    surveyIntent.putExtra(SurveyActivity.DATA_SURVEY_JSON, loadSurveyJson("example_survey_1.json"));
+                    surveyIntent.putExtra(SurveyActivity.DATA_SURVEY_JSON,
+                            StringUtils.loadJson(getActivity(), "example_survey_1.json"));
                     surveyIntent.putExtra(SurveyActivity.DATA_IS_READ_ONLY, true);
                     startActivityForResult(surveyIntent, SURVEY_REQUEST);
                 }
@@ -78,20 +76,6 @@ public class ProcessSurveyKPPFragment extends BaseDataBindFragment<FragmentProce
 
         } catch (Exception e) {
             e.printStackTrace();
-        }
-    }
-
-    private String loadSurveyJson(String filename) {
-        try {
-            InputStream is = getContext().getAssets().open(filename);
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            return new String(buffer, "UTF-8");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
         }
     }
 

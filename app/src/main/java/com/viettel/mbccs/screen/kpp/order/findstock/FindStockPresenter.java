@@ -99,7 +99,7 @@ public class FindStockPresenter
             request.setStockModelId(code.get());
         }
         request.setStateId(StockTotalType.TYPE_NEW);
-        request.setOwnerType(2);
+        request.setOwnerType(2L);
         request.setOwnerId(mUserRepository.getUserInfo().getStaffInfo().getStaffId());
         mGetListStockModelRequestBaseRequest.setParameterApi(request);
         mViewModel.showLoading();
