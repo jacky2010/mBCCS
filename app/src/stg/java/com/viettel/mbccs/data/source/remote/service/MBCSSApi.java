@@ -3,8 +3,10 @@ package com.viettel.mbccs.data.source.remote.service;
 import com.viettel.mbccs.data.model.EmptyObject;
 import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.model.UserInfo;
+import com.viettel.mbccs.data.source.remote.request.ChangeSimRequest;
 import com.viettel.mbccs.data.source.remote.request.ChecOTPRequest;
-import com.viettel.mbccs.data.source.remote.request.CheckCalledIsdnRequest;
+import com.viettel.mbccs.data.source.remote.request.CheckCalledIsdnsRequest;
+import com.viettel.mbccs.data.source.remote.request.CheckDebitChangeSimRequest;
 import com.viettel.mbccs.data.source.remote.request.CheckIdNoRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateDistributedChannelRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateSaleTransChannelRequest;
@@ -33,7 +35,6 @@ import com.viettel.mbccs.data.source.remote.request.GetOrderInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.GetPrecinctRequest;
 import com.viettel.mbccs.data.source.remote.request.GetProvinceRequest;
 import com.viettel.mbccs.data.source.remote.request.GetReasonRequest;
-import com.viettel.mbccs.data.source.remote.request.GetRegisterSubRequest;
 import com.viettel.mbccs.data.source.remote.request.GetRegiterSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSurveyKPPRequest;
@@ -52,17 +53,16 @@ import com.viettel.mbccs.data.source.remote.request.SellAnypayToCustomerRequest;
 import com.viettel.mbccs.data.source.remote.request.SendSurveyKPPRequest;
 import com.viettel.mbccs.data.source.remote.request.TransferAnyPayRequest;
 import com.viettel.mbccs.data.source.remote.request.UpdateAllSubInfoRequest;
-import com.viettel.mbccs.data.source.remote.request.UpdateRegisterSubRequest;
 import com.viettel.mbccs.data.source.remote.request.UpdateSaleOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.UploadImageRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseResponse;
-import com.viettel.mbccs.data.source.remote.response.CheckCalledIsdnResponse;
 import com.viettel.mbccs.data.source.remote.response.CheckIdNoResponse;
 import com.viettel.mbccs.data.source.remote.response.CheckOTPResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateDistributedChannelResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransChannelResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransFromOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransRetailResponse;
+import com.viettel.mbccs.data.source.remote.response.DataResponse;
 import com.viettel.mbccs.data.source.remote.response.DownloadImageResponse;
 import com.viettel.mbccs.data.source.remote.response.GetAllInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetAnypayAuthorizeResponse;
@@ -87,7 +87,6 @@ import com.viettel.mbccs.data.source.remote.response.GetOrderInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetPrecinctResponse;
 import com.viettel.mbccs.data.source.remote.response.GetProvinceResponse;
 import com.viettel.mbccs.data.source.remote.response.GetReasonResponse;
-import com.viettel.mbccs.data.source.remote.response.GetRegisterSubResponse;
 import com.viettel.mbccs.data.source.remote.response.GetRegiterSubInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSurveyKPPResponse;
@@ -104,9 +103,9 @@ import com.viettel.mbccs.data.source.remote.response.ServerDataResponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import com.viettel.mbccs.data.source.remote.response.TransferAnyPayResponse;
 import com.viettel.mbccs.data.source.remote.response.UpdateAllSubInfoResponse;
-import com.viettel.mbccs.data.source.remote.response.UpdateRegisterSubResponse;
 import com.viettel.mbccs.data.source.remote.response.UpdateSaleOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.UploadImageResponse;
+
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -276,16 +275,16 @@ public interface MBCSSApi {
             @Body DataRequest<RefillAnyPayRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<ServerDataResponse<BaseResponse<GetRegisterSubResponse>>> getRegisterSub(
-            @Body DataRequest<GetRegisterSubRequest> request);
+    Observable<ServerDataResponse<BaseResponse<DataResponse>>> checkChangeSimDebit(
+            @Body DataRequest<CheckDebitChangeSimRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<ServerDataResponse<BaseResponse<CheckCalledIsdnResponse>>> checkCalledIsdn(
-            @Body DataRequest<CheckCalledIsdnRequest> request);
+    Observable<ServerDataResponse<BaseResponse<DataResponse>>> checkCalledIsdnChangeSim(
+            @Body DataRequest<CheckCalledIsdnsRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<ServerDataResponse<BaseResponse<UpdateRegisterSubResponse>>> updateRegisterSub(
-            @Body DataRequest<UpdateRegisterSubRequest> request);
+    Observable<ServerDataResponse<BaseResponse<DataResponse>>> changeSim(
+            @Body DataRequest<ChangeSimRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<GetSurveyKPPResponse>>> getSurveyKPP(

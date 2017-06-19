@@ -18,7 +18,9 @@ import com.viettel.mbccs.data.model.ChangeSimItem;
 import com.viettel.mbccs.databinding.FragmentUpdateSimBinding;
 import com.viettel.mbccs.screen.changesim.dialogs.DialogConfirmUpdateSimFragment;
 import com.viettel.mbccs.utils.ActivityUtils;
+import com.viettel.mbccs.utils.GsonUtils;
 import com.viettel.mbccs.utils.PermissionUtils;
+import com.viettel.mbccs.variable.Constants;
 
 import java.io.IOException;
 
@@ -71,7 +73,16 @@ public class UpdateSimFragment extends BaseDataBindFragment<FragmentUpdateSimBin
 
     private void initWindow() {
         try {
+            ChangeSimItem item;
 
+            Bundle args = getArguments();
+
+            if(args != null){
+                item = GsonUtils.String2Object(args.getString(Constants.BundleConstant.ITEM_LIST), ChangeSimItem.class);
+
+                if(item != null)
+                    mPresenter.onPrepareChangeSim(item);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

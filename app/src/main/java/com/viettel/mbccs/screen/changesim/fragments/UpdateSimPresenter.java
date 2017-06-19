@@ -10,14 +10,28 @@ import android.text.TextUtils;
 import android.view.View;
 
 import com.viettel.mbccs.R;
+import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.ChangeSimInfo;
 import com.viettel.mbccs.data.model.ChangeSimItem;
 import com.viettel.mbccs.data.model.Customer;
+import com.viettel.mbccs.data.model.Subscriber;
 import com.viettel.mbccs.data.source.ChangeSimRepository;
+import com.viettel.mbccs.data.source.remote.request.CheckCalledIsdnsRequest;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
+import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.DataResponse;
 import com.viettel.mbccs.utils.Common;
+import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.GsonUtils;
 import com.viettel.mbccs.utils.ValidateUtils;
+import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import com.viettel.mbccs.variable.Constants;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import rx.Subscription;
+import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by minhnx on 5/19/17.
@@ -60,7 +74,10 @@ public class UpdateSimPresenter implements UpdateSimContract.Presenter {
     private Bitmap image2Obj;
     private Bitmap image3Obj;
 
-    private ChangeSimRepository repository;
+    private ChangeSimRepository changeSimRepository;
+    private CompositeSubscription mSubscriptions;
+    private Subscriber sub;
+    private Customer cus;
     private double changeSimPrice;
     private double servicePrice;
 
@@ -113,10 +130,11 @@ public class UpdateSimPresenter implements UpdateSimContract.Presenter {
 
     private void initData() {
         try {
-            repository = ChangeSimRepository.getInstance();
+            changeSimRepository = ChangeSimRepository.getInstance();
+            mSubscriptions = new CompositeSubscription();
 
-            changeSimPrice = repository.getChangeSimPrice();
-            servicePrice = repository.getChangeSimServiceFee();
+            changeSimPrice = changeSimRepository.getChangeSimPrice();
+            servicePrice = changeSimRepository.getChangeSimServiceFee();
 
             serviceFee.set(Common.formatDouble(servicePrice) + " " + context.getString(R.string.common_label_currency_suffix));
             changeSimFee.set(Common.formatDouble(changeSimPrice) + " " + context.getString(R.string.common_label_currency_suffix));
@@ -138,8 +156,38 @@ public class UpdateSimPresenter implements UpdateSimContract.Presenter {
     }
 
     @Override
+    public void onPrepareChangeSim(ChangeSimItem item) {
+        try {
+
+            if (item == null)
+                return;
+
+            sub = item.getSubscriber();
+            cus = item.getCustomer();
+
+            if (cus == null || sub == null) {
+                viewModel.showError(context.getString(R.string.common_msg_error_no_data));
+                return;
+            }
+
+            customerName.set(cus.getName());
+            documentId.set(cus.getIdNo());
+            customerAddress.set(cus.getAddress());
+            oldSimSerial.set(sub.getSerial());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public void changeSim() {
         try {
+
+            if (cus == null || sub == null) {
+                viewModel.showError(context.getString(R.string.common_msg_error_no_data));
+                return;
+            }
 
             customerNameError.set(null);
             documentIdError.set(null);
@@ -233,24 +281,72 @@ public class UpdateSimPresenter implements UpdateSimContract.Presenter {
             if (!isValid)
                 return;
 
-            Customer customer = new Customer();
-            customer.setCustomerName(customerName.get());
+            final List<String> recentContacts = new ArrayList<>();
+            recentContacts.add(contact1.get().trim());
+            recentContacts.add(contact2.get().trim());
+            recentContacts.add(contact3.get().trim());
+            recentContacts.add(contact4.get().trim());
+            recentContacts.add(contact5.get().trim());
 
-            ChangeSimInfo changeSimInfo = new ChangeSimInfo();
-            changeSimInfo.setOldSerial(oldSimSerial.get());
-            changeSimInfo.setNewSerial(newSimSerial.get());
+            //validate recent contacts
+            viewModel.showLoading();
 
-            ChangeSimItem item = new ChangeSimItem();
-            item.setCustomer(customer);
-            item.setChangeSimInfo(changeSimInfo);
+            DataRequest<CheckCalledIsdnsRequest> baseRequest = new DataRequest<>();
+            baseRequest.setApiCode(ApiCode.CheckCalledIsdn);
+            CheckCalledIsdnsRequest request = new CheckCalledIsdnsRequest();
+            request.setListIsdn(recentContacts);
+            baseRequest.setParameterApi(request);
 
-            Bundle args = new Bundle();
-            args.putString(Constants.BundleConstant.CUSTOMER_ITEM, GsonUtils.Object2String(item));
-            args.putDouble(Constants.BundleConstant.SERVICE_FEE, servicePrice);
-            args.putDouble(Constants.BundleConstant.SIM_FEE, changeSimPrice);
-            args.putDouble(Constants.BundleConstant.TOTAL, (servicePrice + changeSimPrice));
+            Subscription subscription =
+                    changeSimRepository.checkCalledIsdn(baseRequest)
+                            .subscribe(new MBCCSSubscribe<DataResponse>() {
+                                @Override
+                                public void onSuccess(DataResponse object) {
+                                    try {
+                                        if (Constants.Service.RESPONSE_OK.equals(object.getErrorCode())) {
 
-            viewModel.goToDialogFragment(args);
+                                            ChangeSimInfo changeSimInfo = new ChangeSimInfo();
+                                            changeSimInfo.setOldSerial(oldSimSerial.get());
+                                            changeSimInfo.setNewSerial(newSimSerial.get());
+                                            changeSimInfo.setRecentContacts(recentContacts);
+
+                                            ChangeSimItem item = new ChangeSimItem();
+                                            item.setCustomer(cus);
+                                            item.setSubscriber(sub);
+                                            item.setChangeSimInfo(changeSimInfo);
+
+                                            Bundle args = new Bundle();
+                                            args.putString(Constants.BundleConstant.CUSTOMER_ITEM, GsonUtils.Object2String(item));
+                                            args.putDouble(Constants.BundleConstant.SERVICE_FEE, servicePrice);
+                                            args.putDouble(Constants.BundleConstant.SIM_FEE, changeSimPrice);
+                                            args.putDouble(Constants.BundleConstant.TOTAL, (servicePrice + changeSimPrice));
+
+                                            viewModel.goToDialogFragment(args);
+
+                                        } else {
+                                            DialogUtils.showDialogError(context, null, context.getString(R.string.change_sim_error_recent_calls_not_valid),
+                                                    null);
+                                        }
+                                    } catch (Exception e) {
+
+                                    }
+                                }
+
+                                @Override
+                                public void onError(BaseException error) {
+                                    DialogUtils.showDialogError(context, null, error.getMessage(),
+                                            null);
+                                }
+
+                                @Override
+                                public void onRequestFinish() {
+                                    super.onRequestFinish();
+                                    viewModel.hideLoading();
+                                }
+                            });
+
+            mSubscriptions.add(subscription);
+            //validate recent contacts
 
         } catch (Exception e) {
             e.printStackTrace();

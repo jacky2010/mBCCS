@@ -5,13 +5,11 @@ import com.viettel.mbccs.data.source.local.IChangeSimLocalDataSource;
 import com.viettel.mbccs.data.source.local.datasource.ChangeSimLocalDataSource;
 import com.viettel.mbccs.data.source.remote.IChangeSimRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.datasource.ChangeSimRemoteDataSource;
-import com.viettel.mbccs.data.source.remote.request.CheckCalledIsdnRequest;
+import com.viettel.mbccs.data.source.remote.request.ChangeSimRequest;
+import com.viettel.mbccs.data.source.remote.request.CheckCalledIsdnsRequest;
+import com.viettel.mbccs.data.source.remote.request.CheckDebitChangeSimRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
-import com.viettel.mbccs.data.source.remote.request.GetRegisterSubRequest;
-import com.viettel.mbccs.data.source.remote.request.UpdateRegisterSubRequest;
-import com.viettel.mbccs.data.source.remote.response.CheckCalledIsdnResponse;
-import com.viettel.mbccs.data.source.remote.response.GetRegisterSubResponse;
-import com.viettel.mbccs.data.source.remote.response.UpdateRegisterSubResponse;
+import com.viettel.mbccs.data.source.remote.response.DataResponse;
 
 import java.util.List;
 
@@ -57,17 +55,17 @@ public class ChangeSimRepository implements IChangeSimLocalDataSource, IChangeSi
     }
 
     @Override
-    public Observable<GetRegisterSubResponse> getRegisterSub(DataRequest<GetRegisterSubRequest> request) {
-        return remoteDataSource.getRegisterSub(request);
+    public Observable<DataResponse> checkDebit(DataRequest<CheckDebitChangeSimRequest> request) {
+        return remoteDataSource.checkDebit(request);
     }
 
     @Override
-    public Observable<CheckCalledIsdnResponse> checkCalledIsdn(DataRequest<CheckCalledIsdnRequest> request) {
+    public Observable<DataResponse> checkCalledIsdn(DataRequest<CheckCalledIsdnsRequest> request) {
         return remoteDataSource.checkCalledIsdn(request);
     }
 
     @Override
-    public Observable<UpdateRegisterSubResponse> updateRegisterSub(DataRequest<UpdateRegisterSubRequest> request) {
-        return remoteDataSource.updateRegisterSub(request);
+    public Observable<DataResponse> changeSim(DataRequest<ChangeSimRequest> request) {
+        return remoteDataSource.changeSim(request);
     }
 }

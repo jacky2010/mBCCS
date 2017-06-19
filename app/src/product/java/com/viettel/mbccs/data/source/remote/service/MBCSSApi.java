@@ -2,7 +2,6 @@ package com.viettel.mbccs.data.source.remote.service;
 
 import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.source.remote.request.ChecOTPRequest;
-import com.viettel.mbccs.data.source.remote.request.CheckCalledIsdnRequest;
 import com.viettel.mbccs.data.source.remote.request.CheckIdNoRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateDistributedChannelRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateSaleTransChannelRequest;
@@ -47,7 +46,6 @@ import com.viettel.mbccs.data.source.remote.request.UploadImageRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListSerialRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseResponse;
 import com.viettel.mbccs.data.source.remote.response.CheckOTPResponse;
-import com.viettel.mbccs.data.source.remote.response.CheckCalledIsdnResponse;
 import com.viettel.mbccs.data.source.remote.response.CheckIdNoResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateDistributedChannelResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransChannelResponse;

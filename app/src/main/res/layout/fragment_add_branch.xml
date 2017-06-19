@@ -208,7 +208,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
-                    android:text="@string/branches_add_label_bts"
+                    app:hint="@{@string/branches_add_label_bts}"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_16" />
 
@@ -216,7 +216,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:onClick="@{()->presenter.chooseBTS()}"
-                    android:prompt="@string/branches_add_hint_bts"
+                    app:hint="@{@string/branches_add_hint_bts}"
                     android:text="@{presenter.bts}" />
 
                 <LinearLayout

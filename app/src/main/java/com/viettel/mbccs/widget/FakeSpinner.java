@@ -24,6 +24,11 @@ public class FakeSpinner extends LinearLayout {
         fakeSpinner.getEdittext().setText(s);
     }
 
+    @BindingAdapter("hint")
+    public static void setHint(FakeSpinner fakeSpinner, CharSequence s) {
+        fakeSpinner.getEdittext().setHint(s);
+    }
+
     @BindingAdapter("android:onClick")
     public static void setOnClick(FakeSpinner fakeSpinner, View.OnClickListener onClick) {
         fakeSpinner.getEdittext().setOnClickListener(onClick);

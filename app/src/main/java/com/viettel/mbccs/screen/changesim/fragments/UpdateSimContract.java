@@ -26,5 +26,6 @@ public class UpdateSimContract {
         void setImage1(Bitmap bitmap);
         void setImage2(Bitmap bitmap);
         void setImage3(Bitmap bitmap);
+        void onPrepareChangeSim(ChangeSimItem item);
     }
 }

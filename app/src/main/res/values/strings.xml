@@ -257,13 +257,14 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="change_sim_error_serial_not_valid">Số Serial Mới không hợp lệ!</string>
     <string name="change_sim_error_recent_call_required">Số thường liên lạc %s không được để trống!</string>
     <string name="change_sim_error_recent_call_not_valid">Số thường liên lạc %s không hợp lệ!</string>
+    <string name="change_sim_error_recent_calls_not_valid">Các số thường liên lạc không khớp!</string>
     <string name="change_sim_label_sim_serial2">Số serial:</string>
     <string name="change_sim_label_cust_name2">Tên khách hàng:</string>
     <string name="change_sim_label_change">Thực Hiện Đổi Sim</string>
     <string name="change_sim_pay_debit">Thanh toán cước</string>
     <string name="change_sim_unbar">Mở chặn</string>
     <string name="common_msg_confirm_change_sim">Bạn có muốn đổi sim cho khách hàng %1$s từ số serial %2$s sang số serial %3$s?</string>
-    <string name="change_sim_msg_updated_sim">SIM cho khách hàng %s đã được thay đổi thành công!</string>
+    <string name="change_sim_msg_updated_sim">sim cho khách hàng %s đã được thay đổi thành công!</string>
     <!--Change Sim-->
     <string name="channel_code">Mã kênh</string>
     <string name="channel_name">Tên kênh</string>
