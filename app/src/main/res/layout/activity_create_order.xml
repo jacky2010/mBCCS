@@ -24,13 +24,13 @@
             layout="@layout/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:background="@{ @android:color/darker_gray }"
+            app:background="@{ @color/colorAccent }"
             app:isShow="@{ true }"
             app:leftIcon="@{ @drawable/ic_arrow_left_white_24dp }"
             app:leftIconClick="@{ () -> presenter.onBackPressed() }"
             app:title="@{ presenter.toolbarTitle }"
             app:titleColor="@{ @color/white }"
-            app:titleTextSize="@{ @dimen/sp_18 }" />
+            app:titleTextSize="@{ @dimen/sp_16 }" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -99,26 +99,24 @@
             android:orientation="horizontal">
 
             <com.viettel.mbccs.widget.CustomButton
+                style="@style/button_negative_red"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/dp_4"
                 android:layout_marginRight="@dimen/dp_4"
                 android:layout_weight="1"
-                android:background="@color/red_button"
                 android:onClick="@{ () -> presenter.reject() }"
-                android:text="@string/activity_create_order_success_tu_choi"
-                android:textColor="@color/white" />
+                android:text="@string/activity_create_order_success_tu_choi" />
 
             <com.viettel.mbccs.widget.CustomButton
+                style="@style/button_positive"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_4"
                 android:layout_marginStart="@dimen/dp_4"
                 android:layout_weight="1"
-                android:background="@color/blue"
                 android:onClick="@{ () -> presenter.create() }"
-                android:text="@string/activity_create_order_success_lap_phieu"
-                android:textColor="@color/white" />
+                android:text="@string/activity_create_order_success_lap_phieu" />
         </LinearLayout>
 
     </RelativeLayout>

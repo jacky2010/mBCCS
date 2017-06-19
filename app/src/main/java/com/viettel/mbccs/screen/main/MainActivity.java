@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
+import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.databinding.ActivityMainBinding;
 import com.viettel.mbccs.screen.config.ConfigActivity;
 import com.viettel.mbccs.screen.main.fragments.main.MainFragment;
@@ -26,7 +27,7 @@ public class MainActivity extends BaseDataBindActivity<ActivityMainBinding, Main
 
     @Override
     protected void initData() {
-        mPresenter = new MainPresenter(this, this);
+        mPresenter = new MainPresenter(this, this, UserRepository.getInstance());
         mBinding.setPresenter(mPresenter);
         initView();
     }

@@ -3,12 +3,16 @@ package com.viettel.mbccs.screen.main;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.ObservableInt;
+import android.text.TextUtils;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseSubMenuActivity;
 import com.viettel.mbccs.data.model.Function;
+import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.widget.BottomNavigationView;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by eo_cuong on 5/11/17.
@@ -24,7 +28,8 @@ public class MainPresenter implements MainContract.Presenter {
 
     public ObservableInt mLastIndex = new ObservableInt();
 
-    public MainPresenter(Context context, MainContract.ViewModel viewModel) {
+    public MainPresenter(Context context, MainContract.ViewModel viewModel,
+            UserRepository userRepository) {
         mContext = context;
         mViewModel = viewModel;
 
@@ -33,36 +38,57 @@ public class MainPresenter implements MainContract.Presenter {
         mFunctionList.add(new Function(Function.TopMenu.MENU_DASHBOARD,
                 mContext.getResources().getString(R.string.menu_dashboard),
                 R.drawable.ic_menu_home_selector));
-        mFunctionList.add(new Function(Function.TopMenu.MENU_QUAN_LY_CONG_VIEC,
-                mContext.getResources().getString(R.string.menu_task),
-                R.drawable.ic_menu_job_selector));
-        mFunctionList.add(new Function(Function.TopMenu.MENU_QUAN_LY_BAN_HANG,
-                mContext.getResources().getString(R.string.menu_sale),
-                R.drawable.ic_menu_cart_selector));
-        mFunctionList.add(new Function(Function.TopMenu.MENU_QUAN_LY_THONG_TIN_KH,
-                mContext.getResources().getString(R.string.menu_customer),
-                R.drawable.ic_menu_customer_selector));
 
-        mFunctionList.add(new Function(Function.TopMenu.MENU_QUAN_LY_BAN_HANG,
-                mContext.getString(R.string.menu_quan_ly_ban_hang), 0));
-        mFunctionList.add(new Function(Function.TopMenu.MENU_QUAN_LY_THONG_TIN_KH,
-                mContext.getString(R.string.menu_quan_ly_thong_tin_kh), 0));
-        mFunctionList.add(new Function(Function.TopMenu.MENU_QUAN_LY_DIA_BAN,
-                mContext.getString(R.string.menu_quan_ly_dia_ban), 0));
-        mFunctionList.add(new Function(Function.TopMenu.MENU_QUAN_LY_THU_CUOC,
-                mContext.getString(R.string.menu_quan_ly_thu_cuoc), 0));
-        mFunctionList.add(new Function(Function.TopMenu.MENU_QUAN_LY_CONG_VIEC,
-                mContext.getString(R.string.menu_quan_ly_cong_viec), 0));
-        mFunctionList.add(new Function(Function.TopMenu.MENU_QUAN_LY_KHO,
-                mContext.getString(R.string.menu_quan_ly_kho), 0));
-        mFunctionList.add(new Function(Function.TopMenu.MENU_QUAN_LY_BAO_HANH,
-                mContext.getString(R.string.menu_quan_ly_bao_hanh), 0));
-        mFunctionList.add(new Function(Function.TopMenu.MENU_QUAN_LY_CSKH,
-                mContext.getString(R.string.menu_quan_ly_cham_soc_kh), 0));
-        mFunctionList.add(new Function(Function.TopMenu.MENU_QUAN_LY_TAI_CHINH,
-                mContext.getString(R.string.menu_quan_ly_tai_chinh), 0));
-        mFunctionList.add(new Function(Function.TopMenu.MENU_BAO_CAO,
-                mContext.getString(R.string.menu_bao_cao), 0));
+        List<Function> functionList = userRepository.getUser().getFunction();
+        Set<String> topMenu = new LinkedHashSet<>();
+        for (Function f : functionList) {
+            if (TextUtils.isEmpty(f.getParentCode())) continue;
+            topMenu.add(f.getParentCode());
+        }
+        for (String s : topMenu) {
+            switch (s) {
+                case Function.TopMenu.MENU_QUAN_LY_BAN_HANG:
+                    mFunctionList.add(new Function(Function.TopMenu.MENU_QUAN_LY_BAN_HANG,
+                            mContext.getString(R.string.menu_quan_ly_ban_hang), 0));
+                    break;
+                case Function.TopMenu.MENU_QUAN_LY_THONG_TIN_KH:
+                    mFunctionList.add(new Function(Function.TopMenu.MENU_QUAN_LY_THONG_TIN_KH,
+                            mContext.getString(R.string.menu_quan_ly_thong_tin_kh), 0));
+                    break;
+                case Function.TopMenu.MENU_QUAN_LY_DIA_BAN:
+                    mFunctionList.add(new Function(Function.TopMenu.MENU_QUAN_LY_DIA_BAN,
+                            mContext.getString(R.string.menu_quan_ly_dia_ban), 0));
+                    break;
+                case Function.TopMenu.MENU_QUAN_LY_THU_CUOC:
+                    mFunctionList.add(new Function(Function.TopMenu.MENU_QUAN_LY_THU_CUOC,
+                            mContext.getString(R.string.menu_quan_ly_thu_cuoc), 0));
+                    break;
+                case Function.TopMenu.MENU_QUAN_LY_CONG_VIEC:
+                    mFunctionList.add(new Function(Function.TopMenu.MENU_QUAN_LY_CONG_VIEC,
+                            mContext.getString(R.string.menu_quan_ly_cong_viec), 0));
+                    break;
+                case Function.TopMenu.MENU_QUAN_LY_KHO:
+                    mFunctionList.add(new Function(Function.TopMenu.MENU_QUAN_LY_KHO,
+                            mContext.getString(R.string.menu_quan_ly_kho), 0));
+                    break;
+                case Function.TopMenu.MENU_QUAN_LY_BAO_HANH:
+                    mFunctionList.add(new Function(Function.TopMenu.MENU_QUAN_LY_BAO_HANH,
+                            mContext.getString(R.string.menu_quan_ly_bao_hanh), 0));
+                    break;
+                case Function.TopMenu.MENU_QUAN_LY_CSKH:
+                    mFunctionList.add(new Function(Function.TopMenu.MENU_QUAN_LY_CSKH,
+                            mContext.getString(R.string.menu_quan_ly_cham_soc_kh), 0));
+                    break;
+                case Function.TopMenu.MENU_QUAN_LY_TAI_CHINH:
+                    mFunctionList.add(new Function(Function.TopMenu.MENU_QUAN_LY_TAI_CHINH,
+                            mContext.getString(R.string.menu_quan_ly_tai_chinh), 0));
+                    break;
+                case Function.TopMenu.MENU_BAO_CAO:
+                    mFunctionList.add(new Function(Function.TopMenu.MENU_BAO_CAO,
+                            mContext.getString(R.string.menu_bao_cao), 0));
+                    break;
+            }
+        }
 
         mFunctionList.add(
                 new Function(Function.TopMenu.MENU_HELP, mContext.getString(R.string.menu_help),
@@ -118,10 +144,14 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
     public ArrayList<Function> getFunctionList() {
+        ArrayList<Function> functionList = new ArrayList<>();
         if (mFunctionList.size() > 5) {
-            return new ArrayList<>(mFunctionList.subList(5, mFunctionList.size()));
+            functionList.addAll(mFunctionList.subList(1, 4));
+            functionList.addAll(mFunctionList.subList(5, mFunctionList.size()));
+        } else {
+            functionList.addAll(mFunctionList.subList(1, mFunctionList.size()));
         }
-        return new ArrayList<>();
+        return functionList;
     }
 
     public void settingsClick() {

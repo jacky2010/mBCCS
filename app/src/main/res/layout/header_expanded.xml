@@ -4,13 +4,13 @@
     android:layout_height="wrap_content"
     android:background="@color/blue_dark"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/dp_5"
+    android:paddingBottom="@dimen/dp_6"
     android:paddingTop="@dimen/dp_10"
     >
     <View
         android:layout_width="@dimen/dp_50"
         android:layout_height="@dimen/dp_2"
-        android:layout_gravity="center"
+        android:layout_gravity="center_horizontal"
         android:background="@color/white_grey"
         />
 

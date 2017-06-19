@@ -17,6 +17,7 @@ import com.viettel.mbccs.data.model.KeyValue;
 import com.viettel.mbccs.data.source.BranchesRepository;
 import com.viettel.mbccs.screen.common.adapter.HintArrayAdapter;
 import com.viettel.mbccs.utils.GsonUtils;
+import com.viettel.mbccs.utils.SpinnerAdapter;
 import com.viettel.mbccs.variable.Constants;
 
 import java.util.ArrayList;
@@ -46,8 +47,8 @@ public class AddBranchPresenter implements AddBranchContract.Presenter {
     public ObservableField<Bitmap> imageDocument;
     public ObservableField<Bitmap> imageContract;
 
-    private HintArrayAdapter<String> channelTypeAdapter;
-    private HintArrayAdapter<String> documentTypeAdapter;
+    private SpinnerAdapter<String> channelTypeAdapter;
+    private SpinnerAdapter<String> documentTypeAdapter;
 
     private List<String> channelTypesList;
     private List<String> documentTypesList;
@@ -90,10 +91,12 @@ public class AddBranchPresenter implements AddBranchContract.Presenter {
         channelTypesList = new ArrayList<>();
         documentTypesList = new ArrayList<>();
 
-        channelTypeAdapter = new HintArrayAdapter<>(context, R.layout.item_spinner, android.R.id.text1,
-                channelTypesList);
-        documentTypeAdapter = new HintArrayAdapter<>(context, R.layout.item_spinner, android.R.id.text1,
-                documentTypesList);
+        channelTypeAdapter = new SpinnerAdapter<>(context, channelTypesList);
+        channelTypeAdapter.setTextHint(
+                context.getString(R.string.branches_add_hint_channel_type));
+        documentTypeAdapter = new SpinnerAdapter<>(context, documentTypesList);
+        documentTypeAdapter.setTextHint(
+                context.getString(R.string.branches_add_hint_document_type));
 
         initListeners();
         initData();
@@ -111,20 +114,23 @@ public class AddBranchPresenter implements AddBranchContract.Presenter {
         try {
             repository = BranchesRepository.getInstance();
 
-//            channelTypesList.clear();
-//            documentTypesList.clear();
-//            managersList.clear();
-//            btsesList.clear();
+            //            channelTypesList.clear();
+            //            documentTypesList.clear();
+            //            managersList.clear();
+            //            btsesList.clear();
 
             channelTypes = repository.getChannelTypes();
             documentTypes = repository.getDocumentTypes();
 
-            channelTypes.add(0, new KeyValue(null, context.getString(R.string.branches_add_hint_channel_type)));
+            //            channelTypes.add(0,
+            //                    new KeyValue(null, context.getString(R.string
+            // .branches_add_hint_channel_type)));
             for (KeyValue item : channelTypes) {
                 channelTypesList.add(item.getValue());
             }
 
-            documentTypes.add(0, new KeyValue(null, context.getString(R.string.branches_add_hint_document_type)));
+            //            documentTypes.add(0, new KeyValue(null,
+            //                    context.getString(R.string.branches_add_hint_document_type)));
             for (KeyValue item : documentTypes) {
                 documentTypesList.add(item.getValue());
             }
@@ -133,8 +139,8 @@ public class AddBranchPresenter implements AddBranchContract.Presenter {
             btsesList = repository.getBtses();
 
             channelTypeAdapter.notifyDataSetChanged();
-            documentTypeAdapter.notifyDataSetChanged();
 
+            documentTypeAdapter.notifyDataSetChanged();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -160,7 +166,8 @@ public class AddBranchPresenter implements AddBranchContract.Presenter {
             locationError.set(null);
 
             if (TextUtils.isEmpty(channelType.get())) {
-                viewModel.showError(context.getString(R.string.common_msg_error_required_field, context.getString(R.string.branches_add_label_channel_type)));
+                viewModel.showError(context.getString(R.string.common_msg_error_required_field,
+                        context.getString(R.string.branches_add_label_channel_type)));
                 isValid = false;
             }
 
@@ -170,7 +177,8 @@ public class AddBranchPresenter implements AddBranchContract.Presenter {
             }
 
             if (TextUtils.isEmpty(documentType.get())) {
-                viewModel.showError(context.getString(R.string.common_msg_error_required_field, context.getString(R.string.branches_add_label_document_type)));
+                viewModel.showError(context.getString(R.string.common_msg_error_required_field,
+                        context.getString(R.string.branches_add_label_document_type)));
                 isValid = false;
             }
 
@@ -190,17 +198,18 @@ public class AddBranchPresenter implements AddBranchContract.Presenter {
             }
 
             if (TextUtils.isEmpty(manager.get())) {
-                viewModel.showError(context.getString(R.string.common_msg_error_required_field, context.getString(R.string.branches_add_label_manager)));
+                viewModel.showError(context.getString(R.string.common_msg_error_required_field,
+                        context.getString(R.string.branches_add_label_manager)));
                 isValid = false;
             }
 
             if (TextUtils.isEmpty(bts.get())) {
-                viewModel.showError(context.getString(R.string.common_msg_error_required_field, context.getString(R.string.branches_add_label_bts)));
+                viewModel.showError(context.getString(R.string.common_msg_error_required_field,
+                        context.getString(R.string.branches_add_label_bts)));
                 isValid = false;
             }
 
-            if (!isValid)
-                return;
+            if (!isValid) return;
 
             BranchItem item = new BranchItem();
             item.setChannelType(channelType.get());
@@ -227,14 +236,11 @@ public class AddBranchPresenter implements AddBranchContract.Presenter {
             args.putString(Constants.BundleConstant.ITEM_LIST, GsonUtils.Object2String(item));
 
             viewModel.goToDialogFragment(args);
-
-        } catch (
-                Exception e)
+        } catch (Exception e)
 
         {
             e.printStackTrace();
         }
-
     }
 
     public void onSelectImage(View v) {
