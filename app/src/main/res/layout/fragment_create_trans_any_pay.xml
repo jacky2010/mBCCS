@@ -66,7 +66,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:onClick="@{()->presenter.chooseBranch()}"
-                        android:prompt="@string/sell_anypay_hint_branch"
+                        app:hint="@{@string/sell_anypay_hint_branch}"
                         android:text="@{presenter.branch}" />
 
                     <com.viettel.mbccs.widget.CustomTextView
@@ -81,7 +81,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:onClick="@{()->presenter.chooseManager()}"
-                        android:prompt="@string/sell_anypay_hint_manager"
+                        app:hint="@{@string/sell_anypay_hint_manager}"
                         android:text="@{presenter.manager}" />
 
                     <com.viettel.mbccs.widget.CustomTextView
@@ -96,7 +96,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:onClick="@{()->presenter.chooseChannel()}"
-                        android:prompt="@string/sell_anypay_hint_channel"
+                        app:hint="@{@string/sell_anypay_hint_channel}"
                         android:text="@{presenter.channel}" />
                 </LinearLayout>
                 <!--/distributor-->

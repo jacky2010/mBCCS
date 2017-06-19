@@ -13,8 +13,8 @@ import com.viettel.mbccs.data.model.ChangeSimItem;
 import com.viettel.mbccs.data.model.KeyValue;
 import com.viettel.mbccs.data.source.ChangeSimRepository;
 import com.viettel.mbccs.screen.changesim.adapter.ChangeSimListAdapter;
-import com.viettel.mbccs.screen.common.adapter.HintArrayAdapter;
 import com.viettel.mbccs.utils.GsonUtils;
+import com.viettel.mbccs.utils.SpinnerAdapter;
 import com.viettel.mbccs.variable.Constants;
 
 import java.util.ArrayList;
@@ -43,7 +43,7 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
     public ObservableBoolean hideSearch;
     public ObservableField<ChangeSimListAdapter> changeSimListAdapter;
 
-    private HintArrayAdapter<String> documentTypeAdapter;
+    private SpinnerAdapter<String> documentTypeAdapter;
 
     private List<String> documentTypesList;
     private List<KeyValue> documentTypes;
@@ -79,8 +79,9 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
         });
 
         documentTypesList = new ArrayList<>();
-        documentTypeAdapter = new HintArrayAdapter<>(context, R.layout.item_spinner, android.R.id.text1,
-                documentTypesList);
+        documentTypeAdapter = new SpinnerAdapter<>(context, documentTypesList);
+        documentTypeAdapter.setTextHint(
+                context.getString(R.string.change_sim_hint_document_type));
 
         initListeners();
         initData();
@@ -218,15 +219,15 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
         }
     }
 
-    public void onCollapse(){
+    public void onCollapse() {
         hideSearch.set(true);
     }
 
-    public void onExpand(){
+    public void onExpand() {
         hideSearch.set(false);
     }
 
-    public HintArrayAdapter<String> getDocumentTypeAdapter() {
+    public SpinnerAdapter<String> getDocumentTypeAdapter() {
         return documentTypeAdapter;
     }
 }

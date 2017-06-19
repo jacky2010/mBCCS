@@ -15,7 +15,6 @@ import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.BranchItem;
 import com.viettel.mbccs.data.model.KeyValue;
 import com.viettel.mbccs.data.source.BranchesRepository;
-import com.viettel.mbccs.screen.common.adapter.HintArrayAdapter;
 import com.viettel.mbccs.utils.GsonUtils;
 import com.viettel.mbccs.utils.SpinnerAdapter;
 import com.viettel.mbccs.variable.Constants;

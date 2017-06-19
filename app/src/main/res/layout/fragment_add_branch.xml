@@ -201,7 +201,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:onClick="@{()->presenter.chooseManager()}"
-                    android:prompt="@string/branches_add_hint_manager"
+                    app:hint="@{@string/branches_add_hint_manager}"
                     android:text="@{presenter.manager}" />
 
                 <com.viettel.mbccs.widget.CustomTextView
