@@ -133,6 +133,7 @@ public class DialogConfirmUpdateSimFragment extends BaseDialog {
             request.setSerial(changeSimItem.getChangeSimInfo().getNewSerial());
             request.setSubType("1");//TODO minhnx
 
+
             baseRequest.setParameterApi(request);
 
             Subscription subscription =
@@ -146,7 +147,7 @@ public class DialogConfirmUpdateSimFragment extends BaseDialog {
                                             showSuccessDialog();
 
                                         } else {
-                                            DialogUtils.showDialogError(getContext(), null, getString(R.string.change_sim_error_recent_calls_not_valid),
+                                            DialogUtils.showDialogError(getContext(), null, getString(R.string.change_sim_error_change_sim_failed),
                                                     null);
                                         }
                                     } catch (Exception e) {

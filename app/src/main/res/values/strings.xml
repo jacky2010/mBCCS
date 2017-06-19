@@ -258,6 +258,7 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="change_sim_error_recent_call_required">Số thường liên lạc %s không được để trống!</string>
     <string name="change_sim_error_recent_call_not_valid">Số thường liên lạc %s không hợp lệ!</string>
     <string name="change_sim_error_recent_calls_not_valid">Các số thường liên lạc không khớp!</string>
+    <string name="change_sim_error_change_sim_failed">Đổi sim không thành công, vui lòng thử lại sau!</string>
     <string name="change_sim_label_sim_serial2">Số serial:</string>
     <string name="change_sim_label_cust_name2">Tên khách hàng:</string>
     <string name="change_sim_label_change">Thực Hiện Đổi Sim</string>
