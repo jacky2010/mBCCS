@@ -371,6 +371,12 @@ public class BindingUtils {
         textView.setSelected(true);
     }
 
+    @BindingAdapter(value = {
+            "android:adapter"
+    }, requireAll = false)
+    public static void setAdapterSpinner(Spinner spinner, BaseAdapter adapter) {
+        spinner.setAdapter(adapter);
+    }
 
     @BindingAdapter("setSpinnerSelection")
     public static void setSpinnerSelection(Spinner spinner, int position) {
