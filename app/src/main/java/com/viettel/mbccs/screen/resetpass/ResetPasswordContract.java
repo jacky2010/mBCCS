@@ -20,5 +20,7 @@ public interface ResetPasswordContract {
         void sendCodeClick();
 
         void changePassword(String password);
+
+        void createNewPass();
     }
 }

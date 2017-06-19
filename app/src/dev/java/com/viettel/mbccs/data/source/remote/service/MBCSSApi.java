@@ -128,6 +128,10 @@ public interface MBCSSApi {
     Observable<ServerDataResponse<BaseResponse<SendCodeChangePassResponse>>> sendCodeChangePass(
             @Field("phone") String phone);
 
+    @POST("thonguyen/Sale_mBCCS/1.0.0/WS_GetAllInfo")
+    Observable<ServerDataResponse<BaseResponse<PassResetResponse>>> resetPassword(
+            @Body DataRequest<PassResetRequest> request);
+
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_GetListOrder")
     Observable<ServerDataResponse<BaseResponse<GetListOrderResponse>>> getListOrder(
             @Body DataRequest<GetListOrderRequest> request);

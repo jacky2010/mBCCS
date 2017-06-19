@@ -3,7 +3,6 @@ package com.viettel.mbccs.screen.splash;
 import android.content.Intent;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseActivity;
-import com.viettel.mbccs.screen.TestActivity;
 import com.viettel.mbccs.screen.login.LoginActivity;
 import com.viettel.mbccs.screen.main.MainActivity;
 
