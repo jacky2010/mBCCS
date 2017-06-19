@@ -45,6 +45,7 @@ import com.viettel.mbccs.data.model.Function;
 import com.viettel.mbccs.widget.BottomNavigationView;
 import com.viettel.mbccs.widget.CustomEdittext;
 import com.viettel.mbccs.widget.EndlessRecyclerOnScrollListener;
+import com.viettel.mbccs.widget.SpinnerWithBorder;
 import com.viettel.mbccs.widget.callback.DrawableClickListener;
 import de.codecrafters.tableview.TableDataAdapter;
 import de.codecrafters.tableview.TableHeaderAdapter;
@@ -440,5 +441,36 @@ public class BindingUtils {
     @BindingAdapter("customEditTextDrawable")
     public static void setCustomEditTextDrawable(CustomEdittext v, DrawableClickListener listener) {
         v.setDrawableClickListener(listener);
+    }
+
+    /***
+     * Binding data for spinner with border
+     * @param spinnerWithBorder
+     * @param adapter
+     * @param position
+     * @param drawable
+     * @param textHint
+     * @param useHintValue
+     */
+    @BindingAdapter(value = {
+            "adapter", "position", "leftIcon", "textHint", "useHintValue"
+    }, requireAll = false)
+    public static void bindData(SpinnerWithBorder spinnerWithBorder, BaseAdapter adapter,
+            int position, Drawable drawable, String textHint, boolean useHintValue) {
+        if (adapter instanceof SpinnerAdapter) {
+            ((SpinnerAdapter) adapter).setSpinner(spinnerWithBorder.getSpinner());
+            if (!TextUtils.isEmpty(textHint)) {
+                ((SpinnerAdapter) adapter).setTextHint(textHint);
+                ((SpinnerAdapter) adapter).setUsehintValue(useHintValue);
+            }
+        }
+        spinnerWithBorder.getSpinner().setAdapter(adapter);
+        spinnerWithBorder.getSpinner().setSelection(position);
+        if (drawable != null) {
+            spinnerWithBorder.getImageView().setVisibility(View.VISIBLE);
+            spinnerWithBorder.getImageView().setImageDrawable(drawable);
+        } else {
+            spinnerWithBorder.getImageView().setVisibility(View.GONE);
+        }
     }
 }

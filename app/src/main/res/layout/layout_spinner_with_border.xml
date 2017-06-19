@@ -29,6 +29,7 @@
         <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/spinner_border"
             android:layout_width="match_parent"
+            android:scrollbars="none"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/image_left"
             android:backgroundTint="@color/grey_bright"

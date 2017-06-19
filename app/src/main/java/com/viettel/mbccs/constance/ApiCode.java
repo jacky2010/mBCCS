@@ -8,7 +8,7 @@ public class ApiCode {
     // 3.1.3.1
     public final static String CheckIdNo = "WS_checkIdNo";
 
-    // TODO: 5/18/17 Error WsCode
+    // TODO: 5/18/17 Error WSCode
     // 3.1.3.2 - 4.3.3.1
     public final static String GetContractInfo = "WS_getContractInfo";
 
@@ -85,10 +85,10 @@ public class ApiCode {
     public final static String GetAllSubInfo = "WS_getAllSubInfo";
 
     // 3.4.3.2 -  9.6.3.1 - 4.2.3.3
-    public final static String GetOTP = "wsGetOTP";
+    public final static String GetOTP = "WSGetOTP";
 
     // 3.4.3.3 - 9.6.3.2 - 4.2.3.3
-    public final static String CheckOTP = "wsCheckOTP";
+    public final static String CheckOTP = "WSCheckOTP";
 
     // 3.4.3.4
     public final static String UpdateAllSubInfo = "WS_updateAllSubInfo";
@@ -110,49 +110,49 @@ public class ApiCode {
      */
 
     // 4.1.3.1
-    public final static String GetAreaLevel1 = "wsGetAreaLevel1";
+    public final static String GetAreaLevel1 = "WSGetAreaLevel1";
 
     // 4.1.3.2
-    public final static String GetAreaLevel2 = "wsGetAreaLevel2";
+    public final static String GetAreaLevel2 = "WSGetAreaLevel2";
 
     // 4.1.3.3
-    public final static String GetAreaLevel3 = "wsGetAreaLevel3";
+    public final static String GetAreaLevel3 = "WSGetAreaLevel3";
 
     // 4.1.3.4
-    public final static String GetUnassignContractByArea = "wsGetUnassignContractByArea";
+    public final static String GetUnassignContractByArea = "WSGetUnassignContractByArea";
 
     // 4.1.3.5
-    public final static String GetChildStaffByArea = "wsGetChildStaffByArea";
+    public final static String GetChildStaffByArea = "WSGetChildStaffByArea";
 
     // 4.1.3.6
-    public final static String AssignVerification = "wsAssignVerification";
+    public final static String AssignVerification = "WSAssignVerification";
 
     // 4.1.3.7
-    public final static String UpdateVerification = "wsUpdateVerification";
+    public final static String UpdateVerification = "WSUpdateVerification";
 
     // 4.2.3.1
-    public final static String GetPaymentContract = "wsGetPaymentContract";
+    public final static String GetPaymentContract = "WSGetPaymentContract";
 
     // 4.2.3.2
-    public final static String GetDetailPaymentContract = "wsGetDetailPaymentContract";
+    public final static String GetDetailPaymentContract = "WSGetDetailPaymentContract";
 
     // 4.2.3.3
-    public final static String PaymentContract = "wsPaymentContract";
+    public final static String PaymentContract = "WSPaymentContract";
 
     // 4.3.3.1
-    // public final static String GetContractInfo  = "wsGetContractInfo ";
+    // public final static String GetContractInfo  = "WSGetContractInfo ";
 
     // 4.3.3.2
-    // public final static String GetOTP = "wsGetOTP";
+    // public final static String GetOTP = "WSGetOTP";
 
     // 4.3.3.3
-    // public final static String CheckOTP  = "wsCheckOTP ";
+    // public final static String CheckOTP  = "WSCheckOTP ";
 
     // 4.3.3.4
-    public final static String GetHotcharge = "wsGetHotcharge";
+    public final static String GetHotcharge = "WSGetHotcharge";
 
     // 4.4.3.1
-    public final static String GetChargeByPeriod = "wsGetChargeByPeriod";
+    public final static String GetChargeByPeriod = "WSGetChargeByPeriod";
 
     /**
      * ---------------------------
@@ -251,70 +251,70 @@ public class ApiCode {
     public final static String GetListOwnerCode = "WS_getListOwnerCode";
 
     // 5.9.3.1
-    public final static String GetListInvoiceImport = "Ws_getListInvoiceImport";
+    public final static String GetListInvoiceImport = "WS_getListInvoiceImport";
 
     // 5.9.3.2
-    public final static String GetListInvoiceExport = "Ws_getListInvoiceExport";
+    public final static String GetListInvoiceExport = "WS_getListInvoiceExport";
 
     // 5.9.3.3
     public final static String ImportInvoiceList = "WS_importInvoiceList";
 
     // 5.10.3.1 - 5.12.3 - 5.14.3
-    public final static String CreateExpCmd = "Ws_createExpCmd";
+    public final static String CreateExpCmd = "WS_createExpCmd";
 
     // 5.10.3.2 - 5.12.3 - 5.14.3
-    public final static String GetListExpCmd = "Ws_getListExpCmd";
+    public final static String GetListExpCmd = "WS_getListExpCmd";
 
     // 5.10.3.3 - 5.12.3 - 5.13.3 - 5.14.3 - 5.15.3
     public final static String GetListStockTransDetail = "WS_getListStockTransDetail";
 
     // 5.10.3.4 - 5.12.3 - 5.14.3
-    public final static String CreateExpNote = "Ws_createExpNote";
+    public final static String CreateExpNote = "WS_createExpNote";
 
     // 5.10.3.5 - 5.12.3
-    public final static String CreateExpStock = "Ws_createExpStock";
+    public final static String CreateExpStock = "WS_createExpStock";
 
     // 5.11.3.1 - 5.13.3 - 5.17.3
-    public final static String CreateImpCmd = "Ws_createImpCmd";
+    public final static String CreateImpCmd = "WS_createImpCmd";
 
     // 5.11.3.2 - 5.13.3 - 5.15.3
     public final static String GetListCmd = "WS_getListCmd";
 
     // 5.11.3.3 - 5.13.3
-    public final static String CreateImpNote = "Ws_createImpNote";
+    public final static String CreateImpNote = "WS_createImpNote";
 
     // 5.11.3.4 - 5.13.3
     public final static String CreateImpStock = "WS_createImpStock";
 
     // 5.15.3.1
-    public final static String CreateImpStockNotHaveCmd = "Ws_createImpStockNotHaveCmd";
+    public final static String CreateImpStockNotHaveCmd = "WS_createImpStockNotHaveCmd";
 
     // 5.16.2.2
     public final static String CreateExpStockNotHaveCmd = "WS_createExpStockNotHaveCmd";
 
     // 5.18.3.1
-    public final static String CreateSaleOrders = "Ws_createSaleOrders";
+    public final static String CreateSaleOrders = "WS_createSaleOrders";
 
     // 5.19.3.1
-    public final static String GetListInvoiceUsed = "Ws_getListInvoiceUsed";
+    public final static String GetListInvoiceUsed = "WS_getListInvoiceUsed";
 
     // 5.19.3.2 - 5.21.3
-    public final static String GetListInvoiceUsedDetail = "Ws_getListInvoiceUsedDetail";
+    public final static String GetListInvoiceUsedDetail = "WS_getListInvoiceUsedDetail";
 
     // 5.19.3.3
-    public final static String CreateBankReceipt = "Ws_createBankReceipt";
+    public final static String CreateBankReceipt = "WS_createBankReceipt";
 
     // 5.20.3.1
-    public final static String GetReceiptBank = "Ws_getReceiptBank";
+    public final static String GetReceiptBank = "WS_getReceiptBank";
 
     // 5.20.3.2 - 5.21.3
     public final static String GetInfoReceiptBank = "WS_getInfoReceiptBank";
 
     // 5.20.3.3
-    public final static String CreateBankReceiptAccept = "Ws_createBankReceiptAccept";
+    public final static String CreateBankReceiptAccept = "WS_createBankReceiptAccept";
 
     // 5.21.3.1
-    public final static String GetAllDebit = "Ws_getAllDebit";
+    public final static String GetAllDebit = "WS_getAllDebit";
 
     /**
      * ---------------------------

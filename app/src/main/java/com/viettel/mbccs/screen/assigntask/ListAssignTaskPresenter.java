@@ -57,17 +57,13 @@ public class ListAssignTaskPresenter extends BaseSearchListViewPresenter<TaskMod
                 new TaskModel("CV 4", TaskModel.TaskType.TYPE_ARISING, System.currentTimeMillis(),
                         TaskModel.TaskStatus.REJECTED, "startDate", "endDate", "assignDate",
                         "description"));
-        HintAdapter<String> adapter =
-                new HintAdapter<>(mContext, android.R.layout.simple_spinner_item,
-                        android.R.id.text1,
-                        mContext.getResources().getStringArray(R.array.task_type));
+        HintAdapter<String> adapter = new HintAdapter<>(mContext,
+                mContext.getResources().getStringArray(R.array.task_type));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         taskTypeAdapter.set(adapter);
 
-        HintAdapter<String> adapter1 =
-                new HintAdapter<>(mContext, android.R.layout.simple_spinner_item,
-                        android.R.id.text1,
-                        mContext.getResources().getStringArray(R.array.task_status));
+        HintAdapter<String> adapter1 = new HintAdapter<>(mContext,
+                mContext.getResources().getStringArray(R.array.task_status));
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         taskStatusAdapter.set(adapter1);
     }
