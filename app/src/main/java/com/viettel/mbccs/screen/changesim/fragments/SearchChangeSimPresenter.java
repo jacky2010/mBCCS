@@ -8,17 +8,27 @@ import android.text.TextUtils;
 import android.view.View;
 
 import com.viettel.mbccs.R;
+import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.ChangeSimInfo;
 import com.viettel.mbccs.data.model.ChangeSimItem;
 import com.viettel.mbccs.data.model.KeyValue;
 import com.viettel.mbccs.data.source.ChangeSimRepository;
+import com.viettel.mbccs.data.source.remote.request.CheckDebitChangeSimRequest;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
+import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.DataResponse;
 import com.viettel.mbccs.screen.changesim.adapter.ChangeSimListAdapter;
+import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.GsonUtils;
 import com.viettel.mbccs.utils.SpinnerAdapter;
+import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import com.viettel.mbccs.variable.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import rx.Subscription;
+import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by minhnx on 5/19/17.
@@ -48,9 +58,10 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
     private List<String> documentTypesList;
     private List<KeyValue> documentTypes;
 
-    private ChangeSimRepository repository;
+    private ChangeSimRepository changeSimRepository;
+    private CompositeSubscription mSubscriptions;
 
-    public SearchChangeSimPresenter(Context context, final SearchChangeSimContract.ViewModel viewModel) {
+    public SearchChangeSimPresenter(final Context context, final SearchChangeSimContract.ViewModel viewModel) {
         this.context = context;
         this.viewModel = viewModel;
 
@@ -67,14 +78,46 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
         changeSimAdapter = new ChangeSimListAdapter(context, new ArrayList<ChangeSimItem>());
         changeSimAdapter.setOnItemClickListener(new ChangeSimListAdapter.OnItemClickListener() {
             @Override
-            public void onClick(View view, ChangeSimItem item) {
+            public void onClick(View view, final ChangeSimItem item) {
 
-                String preAction = getPreAction(item);
+                viewModel.showLoading();
 
-                if (preAction != null) {
-                    goToPreAction(preAction, item);
-                } else
-                    viewModel.onPrepareChangeSim(item);
+                DataRequest<CheckDebitChangeSimRequest> baseRequest = new DataRequest<>();
+                baseRequest.setApiCode(ApiCode.CheckDebit);
+                CheckDebitChangeSimRequest request = new CheckDebitChangeSimRequest();
+                request.setIsdn(item.getSubscriber().getIsdn());
+                baseRequest.setParameterApi(request);
+
+                Subscription subscription =
+                        changeSimRepository.checkDebit(baseRequest)
+                                .subscribe(new MBCCSSubscribe<DataResponse>() {
+                                    @Override
+                                    public void onSuccess(DataResponse object) {
+                                        try {
+                                            if (Constants.Service.RESPONSE_OK.equals(object.getErrorCode())) {
+                                                viewModel.onPrepareChangeSim(item);
+                                            } else {
+                                                goToPreAction(ACTION_PAY_DEBIT, item);
+                                            }
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onError(BaseException error) {
+                                        DialogUtils.showDialogError(context, null, error.getMessage(),
+                                                null);
+                                    }
+
+                                    @Override
+                                    public void onRequestFinish() {
+                                        super.onRequestFinish();
+                                        viewModel.hideLoading();
+                                    }
+                                });
+
+                mSubscriptions.add(subscription);
             }
         });
 
@@ -85,11 +128,6 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
 
         initListeners();
         initData();
-    }
-
-    private String getPreAction(ChangeSimItem item) {
-        return null;
-        //TODO return preaction
     }
 
     private void goToPreAction(String action, ChangeSimItem item) {
@@ -128,9 +166,10 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
 
     private void initData() {
         try {
-            repository = ChangeSimRepository.getInstance();
+            changeSimRepository = ChangeSimRepository.getInstance();
+            mSubscriptions = new CompositeSubscription();
 
-            documentTypes = repository.getDocumentTypes();
+            documentTypes = changeSimRepository.getDocumentTypes();
 
             documentTypes.add(0, new KeyValue(null, context.getString(R.string.branches_add_hint_document_type)));
             for (KeyValue item : documentTypes) {

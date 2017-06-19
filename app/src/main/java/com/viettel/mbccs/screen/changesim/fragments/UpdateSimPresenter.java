@@ -328,7 +328,7 @@ public class UpdateSimPresenter implements UpdateSimContract.Presenter {
                                                     null);
                                         }
                                     } catch (Exception e) {
-
+                                        e.printStackTrace();
                                     }
                                 }
 

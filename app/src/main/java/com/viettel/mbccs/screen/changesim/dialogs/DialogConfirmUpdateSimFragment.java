@@ -6,19 +6,25 @@ import android.view.View;
 
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDialog;
+import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.constance.IconType;
 import com.viettel.mbccs.data.model.ChangeSimItem;
 import com.viettel.mbccs.data.source.ChangeSimRepository;
+import com.viettel.mbccs.data.source.remote.request.ChangeSimRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
-import com.viettel.mbccs.data.source.remote.request.UpdateRegisterSubRequest;
+import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.DataResponse;
 import com.viettel.mbccs.utils.Common;
+import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.GsonUtils;
+import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import com.viettel.mbccs.variable.Constants;
 import com.viettel.mbccs.widget.CustomTextView;
 import com.viettel.mbccs.widget.ToolBarView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
 /**
@@ -41,7 +47,6 @@ public class DialogConfirmUpdateSimFragment extends BaseDialog {
     CustomTextView tvTotal;
 
     private ChangeSimRepository changeSimRepository;
-    private DataRequest<UpdateRegisterSubRequest> changeSimBaseRequest;
     private Bundle currentArgs;
     private CompositeSubscription mSubscriptions;
     private ChangeSimItem changeSimItem;
@@ -81,7 +86,7 @@ public class DialogConfirmUpdateSimFragment extends BaseDialog {
 
                 changeSimItem = GsonUtils.String2Object(currentArgs.getString(Constants.BundleConstant.CUSTOMER_ITEM), ChangeSimItem.class);
 
-                if(changeSimItem != null) {
+                if (changeSimItem != null) {
                     tvTrans.setText(getString(R.string.common_msg_confirm_change_sim, changeSimItem.getCustomer().getCustomerName(), changeSimItem.getChangeSimInfo().getOldSerial(), changeSimItem.getChangeSimInfo().getNewSerial()));
                     tvServiceFee.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.SERVICE_FEE)));
                     tvSimFee.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.SIM_FEE)));
@@ -109,114 +114,60 @@ public class DialogConfirmUpdateSimFragment extends BaseDialog {
                 break;
             case R.id.biv_done:
 
-                sellAnyPay();
+                changeSim();
                 break;
             default:
                 break;
         }
     }
 
-    private void sellAnyPay() {
+    private void changeSim() {
         try {
 
             showLoadingDialog();
 
-//            if (CreateTransAnyPayPresenter.CUST_TYPE_CORPORATE.equals(currentArgs.getString(Constants.BundleConstant.TRANS_TYPE))) {
-//
-//                SellAnypayToChannelRequest request = new SellAnypayToChannelRequest();
-//
-//                request.setAmount(currentArgs.getDouble(Constants.BundleConstant.TOTAL));
-//                request.setChannelId(currentArgs.getInt(Constants.BundleConstant.CHANNEL));
-//                request.setIsdnVi(currentArgs.getString(Constants.BundleConstant.ISDN_WALLET));
-//                request.setPayMethod(currentArgs.getString(Constants.BundleConstant.PAY_METHOD));
-//                request.setStaffId(currentArgs.getInt(Constants.BundleConstant.STAFF));
-//
-//                sellToChannelBaseRequest = new DataRequest<>();
-//                sellToChannelBaseRequest.setApiCode(ApiCode.SellAnyPayToChannel);
-//                sellToChannelBaseRequest.setParameterApi(request);
-//
-//                Subscription subscription =
-//                        sellAnyPayRepository.sellAnypayToChannel(sellToChannelBaseRequest)
-//                                .subscribe(new MBCCSSubscribe<SellAnypayToChannelResponse>() {
-//                                    @Override
-//                                    public void onSuccess(SellAnypayToChannelResponse object) {
-//                                        try {
-//                                            if (Constants.Service.RESPONSE_OK.equals(object.getErrorCode())) {
-//                                                showSuccessDialog();
-//                                            } else {
-//                                                DialogUtils.showDialogError(getContext(), null, getString(R.string.common_msg_error_general),
-//                                                        null);
-//                                            }
-//                                        } catch (Exception e) {
-//                                            e.printStackTrace();
-//                                            DialogUtils.showDialogError(getContext(), null, getString(R.string.common_msg_error_general),
-//                                                    null);
-//                                        }
-//                                    }
-//
-//                                    @Override
-//                                    public void onError(BaseException error) {
-//                                        DialogUtils.showDialogError(getContext(), null, error.getMessage(),
-//                                                null);
-//                                    }
-//
-//                                    @Override
-//                                    public void onRequestFinish() {
-//                                        super.onRequestFinish();
-//                                        hideLoadingDialog();
-//                                    }
-//                                });
-//
-//                mSubscriptions.add(subscription);
-//
-//            } else {
-//                SellAnypayToCustomerRequest request = new SellAnypayToCustomerRequest();
-//
-//                request.setAmount(currentArgs.getDouble(Constants.BundleConstant.TOTAL));
-//                request.setIsdn(currentArgs.getString(Constants.BundleConstant.ISDN));
-//                request.setIsdnVi(currentArgs.getString(Constants.BundleConstant.ISDN_WALLET));
-//                request.setPayMethod(currentArgs.getString(Constants.BundleConstant.PAY_METHOD));
-//                request.setStaffId(currentArgs.getInt(Constants.BundleConstant.STAFF));
-//
-//                sellToCustomerBaseRequest = new DataRequest<>();
-//                sellToCustomerBaseRequest.setApiCode(ApiCode.SellAnyPayToCustomer);
-//                sellToCustomerBaseRequest.setParameterApi(request);
-//
-//                Subscription subscription =
-//                        sellAnyPayRepository.sellAnypayToCustomer(sellToCustomerBaseRequest)
-//                                .subscribe(new MBCCSSubscribe<SellAnypayToCustomerResponse>() {
-//                                    @Override
-//                                    public void onSuccess(SellAnypayToCustomerResponse object) {
-//                                        try {
-//                                            if (Constants.Service.RESPONSE_OK.equals(object.getErrorCode())) {
-//                                                showSuccessDialog();
-//                                            } else {
-//                                                DialogUtils.showDialogError(getContext(), null, getString(R.string.common_msg_error_general),
-//                                                        null);
-//                                            }
-//                                        } catch (Exception e) {
-//                                            e.printStackTrace();
-//                                            DialogUtils.showDialogError(getContext(), null, getString(R.string.common_msg_error_general),
-//                                                    null);
-//                                        }
-//                                    }
-//
-//                                    @Override
-//                                    public void onError(BaseException error) {
-//                                        DialogUtils.showDialogError(getContext(), null, error.getMessage(),
-//                                                null);
-//                                    }
-//
-//                                    @Override
-//                                    public void onRequestFinish() {
-//                                        super.onRequestFinish();
-//                                        hideLoadingDialog();
-//                                    }
-//                                });
-//
-//                mSubscriptions.add(subscription);
-//            }
-            showSuccessDialog();//TEST
+            DataRequest<ChangeSimRequest> baseRequest = new DataRequest<>();
+            baseRequest.setApiCode(ApiCode.ChangeSim);
+            ChangeSimRequest request = new ChangeSimRequest();
+            request.setIsdn(changeSimItem.getSubscriber().getIsdn());
+            request.setSerial(changeSimItem.getChangeSimInfo().getNewSerial());
+            request.setSubType("1");//TODO minhnx
+
+            baseRequest.setParameterApi(request);
+
+            Subscription subscription =
+                    changeSimRepository.changeSim(baseRequest)
+                            .subscribe(new MBCCSSubscribe<DataResponse>() {
+                                @Override
+                                public void onSuccess(DataResponse object) {
+                                    try {
+                                        if (Constants.Service.RESPONSE_OK.equals(object.getErrorCode())) {
+
+                                            showSuccessDialog();
+
+                                        } else {
+                                            DialogUtils.showDialogError(getContext(), null, getString(R.string.change_sim_error_recent_calls_not_valid),
+                                                    null);
+                                        }
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                                @Override
+                                public void onError(BaseException error) {
+                                    DialogUtils.showDialogError(getContext(), null, error.getMessage(),
+                                            null);
+                                }
+
+                                @Override
+                                public void onRequestFinish() {
+                                    super.onRequestFinish();
+                                    hideLoadingDialog();
+                                }
+                            });
+
+            mSubscriptions.add(subscription);
         } catch (Exception e) {
             e.printStackTrace();
         }
