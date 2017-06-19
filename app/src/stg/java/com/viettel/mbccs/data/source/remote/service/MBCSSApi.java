@@ -129,7 +129,7 @@ public interface MBCSSApi {
             @Field("phone") String phone);
 
     @POST("/JsonAPI/webresources/CoreService/reset")
-    Observable<ServerDataResponse<BaseResponse<PassResetResponse>>> resetPassword(
+    Observable<ServerDataResponse<EmptyObject>> resetPassword(
             @Body PassResetRequest request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")

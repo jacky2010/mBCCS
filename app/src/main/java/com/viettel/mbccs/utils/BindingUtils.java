@@ -371,12 +371,6 @@ public class BindingUtils {
         textView.setSelected(true);
     }
 
-    @BindingAdapter(value = {
-            "android:adapter"
-    }, requireAll = false)
-    public static void setAdapterSpinner(Spinner spinner, BaseAdapter adapter) {
-        spinner.setAdapter(adapter);
-    }
 
     @BindingAdapter("setSpinnerSelection")
     public static void setSpinnerSelection(Spinner spinner, int position) {
@@ -472,5 +466,21 @@ public class BindingUtils {
         } else {
             spinnerWithBorder.getImageView().setVisibility(View.GONE);
         }
+    }
+
+    @BindingAdapter(value = {
+            "adapter", "position", "textHint", "useHintValue"
+    }, requireAll = false)
+    public static void bindData(Spinner spinnerWithBorder, BaseAdapter adapter,
+            int position, String textHint, boolean useHintValue) {
+        if (adapter instanceof SpinnerAdapter) {
+            ((SpinnerAdapter) adapter).setSpinner(spinnerWithBorder);
+            if (!TextUtils.isEmpty(textHint)) {
+                ((SpinnerAdapter) adapter).setTextHint(textHint);
+                ((SpinnerAdapter) adapter).setUsehintValue(useHintValue);
+            }
+        }
+        spinnerWithBorder.setAdapter(adapter);
+        spinnerWithBorder.setSelection(position);
     }
 }

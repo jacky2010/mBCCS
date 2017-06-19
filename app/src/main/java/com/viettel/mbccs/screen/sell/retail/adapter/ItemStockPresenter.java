@@ -5,6 +5,9 @@ import android.text.TextUtils;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.utils.Common;
+import com.viettel.mbccs.utils.FileUtils;
+import com.viettel.mbccs.utils.ImageUtils;
+import java.io.File;
 
 /**
  * Created by eo_cuong on 5/15/17.
@@ -39,19 +42,11 @@ public class ItemStockPresenter {
                 Common.formatDouble(mItem.getPrice()));
     }
 
-    public String getUrlImage(){
-        if (!TextUtils.isEmpty(mItem.getPathImage1())){
-            return mItem.getPathImage1();
+    public String getUrlImage() {
+        File file = FileUtils.getImageFileByIdName(mContext, mItem.getStockModelId());
+        if (file != null && file.exists()) {
+            return file.getAbsolutePath();
         }
-
-        if (!TextUtils.isEmpty(mItem.getPathImage2())){
-            return mItem.getPathImage2();
-        }
-
-        if (!TextUtils.isEmpty(mItem.getPathImage3())){
-            return mItem.getPathImage3();
-        }
-
         return null;
     }
 }

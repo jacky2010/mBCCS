@@ -120,18 +120,20 @@ public class Constants {
         public static final String SIM_FEE = "sim_fee";
         public static final String SURVEY_QUESTION = "survey_question";
         public static final String MESSAGE = "message";
+        public static final String SALE_ORDER_ID = "sale_order_id";
+        public static final String CHANNEL_NAME = "channel_name";
     }
 
-    public class Tax{
+    public class Tax {
         public static final int DEFAULT_TAX_RATE = 10;
         public static final int DEFAULT_TAX_CALC_BACK_RATE = 11;
     }
 
-    public class View{
+    public class View {
         public static final String HINT = "hint";
     }
 
-    public class Service{
+    public class Service {
         public static final String RESPONSE_OK = "0";
         public static final String SURVEY_QUESTION = "survey_question";
     }

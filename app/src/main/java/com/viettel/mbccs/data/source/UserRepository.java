@@ -1,6 +1,7 @@
 package com.viettel.mbccs.data.source;
 
 import com.viettel.mbccs.data.model.Area;
+import com.viettel.mbccs.data.model.EmptyObject;
 import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.model.Precinct;
 import com.viettel.mbccs.data.model.StaffInfo;
@@ -294,7 +295,7 @@ public class UserRepository implements IUserLocalDataSource, IUserRemoteDataSour
     }
 
     @Override
-    public Observable<PassResetResponse> resetPassword(PassResetRequest request) {
+    public Observable<EmptyObject> resetPassword(PassResetRequest request) {
         return mUserRemoteDataSource.resetPassword(request);
     }
 }

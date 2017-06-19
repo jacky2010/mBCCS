@@ -57,7 +57,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:adapter="@{presenter.stockAdapter}"
-                    ></android.support.v7.widget.RecyclerView>
+                    />
 
             </LinearLayout>
 
@@ -118,7 +118,7 @@
                                 android:id="@+id/spinner"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:adapter="@{presenter.adapter}"
+                                app:adapter="@{presenter.adapter}"
                                 />
                             <com.viettel.mbccs.widget.CustomTextView
                                 android:layout_width="match_parent"

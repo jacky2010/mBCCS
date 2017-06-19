@@ -13,6 +13,8 @@ public class OrderSuccessActivity
         implements OrderSuccessContract.ViewModel {
 
     private ArrayList<StockTotal> mStockTotals;
+    private String saleOrderId;
+    private String channelName;
 
     @Override
     protected int getIdLayout() {
@@ -26,7 +28,9 @@ public class OrderSuccessActivity
             return;
         }
         mStockTotals = bundle.getParcelableArrayList(Constants.BundleConstant.LIST_STOCK_TOTAL);
-        mPresenter = new OrderSuccessPresenter(this, this, mStockTotals);
+        saleOrderId = bundle.getString(Constants.BundleConstant.SALE_ORDER_ID);
+        channelName = bundle.getString(Constants.BundleConstant.CHANNEL_NAME);
+        mPresenter = new OrderSuccessPresenter(this, this, mStockTotals, saleOrderId, channelName);
         mBinding.setPresenter((OrderSuccessPresenter) mPresenter);
     }
 

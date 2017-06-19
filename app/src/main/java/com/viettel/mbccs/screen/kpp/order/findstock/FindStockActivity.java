@@ -37,18 +37,7 @@ public class FindStockActivity
         });
 
         mDrawer.open();
-        mBinding.spinnerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position,
-                    long l) {
-                mPresenter.stockTypeSelected(position);
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
     }
 
     @Override
