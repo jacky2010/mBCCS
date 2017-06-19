@@ -4,9 +4,14 @@ import android.content.Context;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.os.Handler;
+import android.util.Log;
 import com.viettel.mbccs.R;
+import com.viettel.mbccs.data.model.UserInfo;
 import com.viettel.mbccs.data.source.UserRepository;
+import com.viettel.mbccs.data.source.remote.request.PassResetRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.PassResetResponse;
+import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.StringUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import rx.Subscription;
@@ -28,6 +33,8 @@ public class ResetPasswordPresenter implements ResetPasswordContract.Presenter {
     public ObservableField<String> codeVerify;
     public ObservableField<String> titleActivity;
     public ObservableBoolean isPassStateHide;
+    private PassResetRequest mPassResetRequest;
+    private UserInfo mUserInfo;
 
     public ResetPasswordPresenter(ResetPasswordContract.ViewModel viewModel, Context context) {
         mViewModel = viewModel;
@@ -48,6 +55,8 @@ public class ResetPasswordPresenter implements ResetPasswordContract.Presenter {
         description.set(mContext.getString(R.string.description_reset_password));
         titleActivity.set(mContext.getString(R.string.title_reset_password));
         isPassStateHide.set(true);
+        mPassResetRequest = new PassResetRequest();
+        mUserInfo = UserRepository.getInstance().getUserInfo();
     }
 
     @Override
@@ -102,6 +111,28 @@ public class ResetPasswordPresenter implements ResetPasswordContract.Presenter {
     @Override
     public void changePassword(String password) {
 
+    }
+
+    @Override
+    public void createNewPass() {
+        mPassResetRequest.setPassnew(this.password.get());
+        mPassResetRequest.setPassold(codeVerify.get());
+        mPassResetRequest.setUsername(mUserInfo.getStaffInfo().getStaffName());
+        Subscription subscription = UserRepository.getInstance()
+                .resetPassword(mPassResetRequest)
+                .subscribe(new MBCCSSubscribe<PassResetResponse>() {
+                    @Override
+                    public void onSuccess(PassResetResponse object) {
+                        Log.i("ResetPasswordPresenter", "onSuccess: ---------> ");
+                    }
+
+                    @Override
+                    public void onError(BaseException error) {
+
+                        DialogUtils.showDialogError(mContext, null, error.getMessage(), null);
+                    }
+                });
+        mSubscription.add(subscription);
     }
 
     public void onBackClick() {
