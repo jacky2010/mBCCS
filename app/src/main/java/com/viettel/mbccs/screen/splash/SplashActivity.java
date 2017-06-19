@@ -5,6 +5,7 @@ import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseActivity;
 import com.viettel.mbccs.screen.login.LoginActivity;
 import com.viettel.mbccs.screen.main.MainActivity;
+import com.viettel.mbccs.screen.resetpass.ResetPasswordActivity;
 
 /**
  * Created by Anh Vu Viet on 5/17/2017.

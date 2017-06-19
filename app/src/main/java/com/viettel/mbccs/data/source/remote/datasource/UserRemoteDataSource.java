@@ -1,5 +1,6 @@
 package com.viettel.mbccs.data.source.remote.datasource;
 
+import com.viettel.mbccs.data.model.EmptyObject;
 import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.model.UserInfo;
 import com.viettel.mbccs.data.source.remote.IUserRemoteDataSource;
@@ -173,10 +174,10 @@ public class UserRemoteDataSource implements IUserRemoteDataSource {
     }
 
     @Override
-    public Observable<PassResetResponse> resetPassword(PassResetRequest request) {
+    public Observable<EmptyObject> resetPassword(PassResetRequest request) {
         return RequestHelper.getRequest()
                 .resetPassword(request)
-                .flatMap(SchedulerUtils.<PassResetResponse>convertDataFlatMap())
-                .compose(SchedulerUtils.<PassResetResponse>applyAsyncSchedulers());
+                .flatMap(SchedulerUtils.<EmptyObject>convertDataFlatMapVTG())
+                .compose(SchedulerUtils.<EmptyObject>applyAsyncSchedulers());
     }
 }

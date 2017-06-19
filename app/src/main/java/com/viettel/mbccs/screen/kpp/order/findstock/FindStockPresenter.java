@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.databinding.ObservableField;
 import android.text.TextUtils;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.StockTotalType;
@@ -18,6 +20,7 @@ import com.viettel.mbccs.data.source.remote.response.GetListStockModelResponse;
 import com.viettel.mbccs.screen.kpp.order.findstock.adapter.StockTotalPickerAdapter;
 import com.viettel.mbccs.utils.ActivityUtils;
 import com.viettel.mbccs.utils.DialogUtils;
+import com.viettel.mbccs.utils.SpinnerAdapter;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.ArrayList;
 import rx.Subscription;
@@ -30,7 +33,7 @@ public class FindStockPresenter
     private FindStockContract.ViewModel mViewModel;
     public ObservableField<Boolean> isCollapse;
     public ObservableField<String> filterText;
-    private ArrayAdapter<String> stockTypeAdapter;
+    private SpinnerAdapter<String> stockTypeAdapter;
     public ObservableField<String> code;
     public ObservableField<String> codeError;
     public ObservableField<String> name;
@@ -73,10 +76,20 @@ public class FindStockPresenter
         name = new ObservableField<>();
         nameError = new ObservableField<>();
 
-        stockTypeAdapter = new ArrayAdapter<>(mContext, R.layout.item_spinner,
+        stockTypeAdapter = new SpinnerAdapter<>(mContext,
                 mContext.getResources().getStringArray(R.array.stock_type));
-        stockTypeAdapter.setDropDownViewResource(R.layout.item_spinner);
         stockTotalAdapter = new StockTotalPickerAdapter(mContext, mStockTotals);
+        stockTypeAdapter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                stockTypeSelected(i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         stockTotalAdapter.setOnStockTotalPickListener(this);
     }
 
@@ -146,31 +159,6 @@ public class FindStockPresenter
         //}
 
         return true;
-    }
-
-    private void fake() {
-        mStockTotals.clear();
-        StockTotal stock = new StockTotal();
-        stock.setQuantity(101);
-        stock.setStockModelId(1);
-        stock.setStockModelCode("XAA-42423");
-        StockTotal stock1 = new StockTotal();
-        stock1.setQuantity(45);
-        stock1.setStockModelId(2);
-        stock1.setStockModelCode("XFFFAA-42423");
-        StockTotal stock2 = new StockTotal();
-        stock2.setQuantity(3);
-        stock2.setStockModelId(33);
-        stock2.setStockModelCode("CCC-42423");
-
-        stock.setStockModelName("Iphone 7");
-        stock1.setStockModelName("Galaxy s8");
-        stock2.setStockModelName("Oppo F1s");
-
-        mStockTotals.add(stock);
-        mStockTotals.add(stock1);
-        mStockTotals.add(stock2);
-        stockTotalAdapter.notifyDataSetChanged();
     }
 
     public void toogleExpand() {

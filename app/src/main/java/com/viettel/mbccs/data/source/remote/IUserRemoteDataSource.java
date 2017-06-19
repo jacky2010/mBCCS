@@ -1,5 +1,6 @@
 package com.viettel.mbccs.data.source.remote;
 
+import com.viettel.mbccs.data.model.EmptyObject;
 import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.model.UserInfo;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
@@ -23,9 +24,7 @@ import com.viettel.mbccs.data.source.remote.response.GetPrecinctResponse;
 import com.viettel.mbccs.data.source.remote.response.GetProvinceResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
 import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
-import com.viettel.mbccs.data.source.remote.response.PassResetResponse;
 import com.viettel.mbccs.data.source.remote.response.SendCodeChangePassResponse;
-import com.viettel.mbccs.data.source.remote.response.ServerDataResponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import com.viettel.mbccs.data.source.remote.response.UploadImageResponse;
 import rx.Observable;
@@ -65,6 +64,6 @@ public interface IUserRemoteDataSource {
 
     Observable<DownloadImageResponse> downloadImage(DataRequest<DownloadImageRequest> request);
 
-    Observable<PassResetResponse> resetPassword(
+    Observable<EmptyObject> resetPassword(
             PassResetRequest request);
 }

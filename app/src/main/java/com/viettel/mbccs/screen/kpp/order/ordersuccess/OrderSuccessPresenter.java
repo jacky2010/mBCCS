@@ -2,6 +2,7 @@ package com.viettel.mbccs.screen.kpp.order.ordersuccess;
 
 import android.content.Context;
 import android.databinding.ObservableField;
+import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.StockSerial;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.screen.kpp.order.ordersuccess.adapter.OrderSuccessAdapter;
@@ -16,6 +17,8 @@ public class OrderSuccessPresenter implements OrderSuccessContract.Presenter {
     private OrderSuccessContract.ViewModel mViewModel;
     private OrderSuccessAdapter mAdapter;
     private ArrayList<StockTotal> mList;
+    public ObservableField<String> saleOrderId;
+    public ObservableField<String> saleOrderReceive;
 
     public OrderSuccessPresenter(Context context, OrderSuccessContract.ViewModel viewModel,
             ArrayList<StockTotal> stockTotals) {
@@ -25,9 +28,25 @@ public class OrderSuccessPresenter implements OrderSuccessContract.Presenter {
         init();
     }
 
+    public OrderSuccessPresenter(Context context, OrderSuccessContract.ViewModel viewModel,
+            ArrayList<StockTotal> stockTotals, String saleOrderIdString, String channelName) {
+        mContext = context;
+        mViewModel = viewModel;
+        this.mList = stockTotals;
+        init();
+        this.saleOrderId.set(
+                String.format(mContext.getString(R.string.kpp_order_label_sale_order_id),
+                        saleOrderIdString));
+        this.saleOrderReceive.set(
+                String.format(mContext.getString(R.string.kpp_order_label_sale_order_receive),
+                        channelName));
+    }
+
     private void init() {
         titleCode = new ObservableField<>();
         titleStaffName = new ObservableField<>();
+        saleOrderId = new ObservableField<>();
+        saleOrderReceive = new ObservableField<>();
         mAdapter = new OrderSuccessAdapter(mContext, mList);
     }
 

@@ -15,10 +15,11 @@
         <com.viettel.mbccs.widget.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/grey"
+            android:background="@color/colorAccent"
             android:gravity="center"
             android:text="@string/notice"
             android:textColor="@color/white"
+            android:textSize="@dimen/sp_17"
             />
 
         <com.viettel.mbccs.widget.CustomTextView
@@ -26,16 +27,16 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dp_5"
             android:gravity="center"
-            android:text="Đặt thành công mã đơn hàng là b123124123"
             android:textSize="@dimen/sp_13"
+            app:textHtml="@{presenter.saleOrderId}"
             />
         <com.viettel.mbccs.widget.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dp_5"
             android:gravity="center"
-            android:text="Đầu mối tiếp nhận là KPP-123"
             android:textSize="@dimen/sp_13"
+            app:textHtml="@{presenter.saleOrderReceive}"
             />
 
         <RelativeLayout

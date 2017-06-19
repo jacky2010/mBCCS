@@ -117,7 +117,7 @@ public class AddNewOrderPresenter implements AddNewOrderContract.Presenter {
         mViewModel.showLoading();
         mKPPOrderRequestBaseRequest = new DataRequest<>();
         mKPPOrderRequestBaseRequest.setApiCode(ApiCode.CreateSaleOrders);
-        KPPOrderRequest request = new KPPOrderRequest();
+        final KPPOrderRequest request = new KPPOrderRequest();
         request.setStaffId(mUserRepository.getUserInfo().getStaffInfo().getStaffId());
         request.setChannelStaffId(mUserRepository.getUserInfo().getChannelInfo().getChannelId());
         request.setListStockModel(Common.convertStockTotalsToStockModels(mStockTotals));
@@ -127,7 +127,10 @@ public class AddNewOrderPresenter implements AddNewOrderContract.Presenter {
                         .subscribe(new MBCCSSubscribe<EmptyObject>() {
                             @Override
                             public void onSuccess(EmptyObject object) {
-                                mViewModel.gotoSuccessScreen(mStockTotals);
+                                mViewModel.gotoSuccessScreen(mStockTotals, "1",
+                                        mUserRepository.getUserInfo()
+                                                .getChannelInfo()
+                                                .getChannelName());
                             }
 
                             @Override

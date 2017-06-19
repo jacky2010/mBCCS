@@ -69,6 +69,21 @@ public class SchedulerUtils {
         };
     }
 
+    public static <T> Func1<ServerDataResponse<T>, Observable<T>> convertDataFlatMapVTG() {
+        return new Func1<ServerDataResponse<T>, Observable<T>>() {
+            @Override
+            public Observable<T> call(ServerDataResponse<T> response) {
+                if (!response.getErrorCode().equals("S200")) {
+                    BaseErrorResponse baseErrorResponse = new BaseErrorResponse();
+                    baseErrorResponse.setError(Integer.parseInt(response.getErrorCode()),
+                            response.getErrorMessage());
+                    return Observable.error(BaseException.toServerError(baseErrorResponse));
+                }
+                return Observable.just(response.getResult());
+            }
+        };
+    }
+
     public static <T extends DataResponse> Func1<BaseResponse<T>, T> convertData() {
         return new Func1<BaseResponse<T>, T>() {
             @Override

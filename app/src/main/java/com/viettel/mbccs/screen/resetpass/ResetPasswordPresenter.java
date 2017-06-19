@@ -6,6 +6,7 @@ import android.databinding.ObservableField;
 import android.os.Handler;
 import android.util.Log;
 import com.viettel.mbccs.R;
+import com.viettel.mbccs.data.model.EmptyObject;
 import com.viettel.mbccs.data.model.UserInfo;
 import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.PassResetRequest;
@@ -115,21 +116,28 @@ public class ResetPasswordPresenter implements ResetPasswordContract.Presenter {
 
     @Override
     public void createNewPass() {
+        mViewModel.showLoading();
         mPassResetRequest.setPassnew(this.password.get());
         mPassResetRequest.setPassold(codeVerify.get());
         mPassResetRequest.setUsername(mUserInfo.getStaffInfo().getStaffName());
         Subscription subscription = UserRepository.getInstance()
                 .resetPassword(mPassResetRequest)
-                .subscribe(new MBCCSSubscribe<PassResetResponse>() {
+                .subscribe(new MBCCSSubscribe<EmptyObject>() {
                     @Override
-                    public void onSuccess(PassResetResponse object) {
+                    public void onSuccess(EmptyObject object) {
                         Log.i("ResetPasswordPresenter", "onSuccess: ---------> ");
+                        mViewModel.onBackClick();
                     }
 
                     @Override
                     public void onError(BaseException error) {
-
                         DialogUtils.showDialogError(mContext, null, error.getMessage(), null);
+                    }
+
+                    @Override
+                    public void onRequestFinish() {
+                        super.onRequestFinish();
+                        mViewModel.hideLoading();
                     }
                 });
         mSubscription.add(subscription);
