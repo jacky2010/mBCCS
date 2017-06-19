@@ -25,6 +25,7 @@ import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import com.viettel.mbccs.screen.sell.retail.adapter.StockAdapter;
 import com.viettel.mbccs.utils.DialogUtils;
+import com.viettel.mbccs.utils.SpinnerAdapter;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +44,7 @@ public class SaleChannelPresenter
     public ObservableField<String> filterText;
     public ObservableField<String> sellProgram;
     public ObservableField<String> channelText;
-    private ArrayAdapter<TeleComService> mAdapter;
+    private SpinnerAdapter<TeleComService> mAdapter;
     public ObservableField<Boolean> isCollapse;
     private StockAdapter stockAdapter;
     private Context mContext;
@@ -361,8 +362,7 @@ public class SaleChannelPresenter
         isCollapse = new ObservableField<>();
         isCollapse.set(false);
         mAdapter =
-                new ArrayAdapter<TeleComService>(mContext, R.layout.item_spinner, mTeleComServices);
-        mAdapter.setDropDownViewResource(R.layout.item_spinner);
+                new SpinnerAdapter<TeleComService>(mContext, mTeleComServices);
         stockAdapter = new StockAdapter(mContext, mModelSales);
         stockAdapter.setOnStockListener(this);
     }
@@ -396,11 +396,11 @@ public class SaleChannelPresenter
         mSubscription.clear();
     }
 
-    public ArrayAdapter<TeleComService> getAdapter() {
+    public SpinnerAdapter<TeleComService> getAdapter() {
         return mAdapter;
     }
 
-    public void setAdapter(ArrayAdapter<TeleComService> adapter) {
+    public void setAdapter(SpinnerAdapter<TeleComService> adapter) {
         mAdapter = adapter;
     }
 
