@@ -108,7 +108,7 @@ public class DownloadDataActivity extends BaseActivity {
         }
 
         if (!isFinishing() && intentDownloadImageService != null) {
-            stopService(intentCreateDataBaseAreaService);
+            stopService(intentDownloadImageService);
         }
 
         if (!isFinishing() && broadcastReceiverDownloadImage != null) {

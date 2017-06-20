@@ -2,13 +2,11 @@ package com.viettel.mbccs.screen.kpp.order.findstock.adapter;
 
 import android.content.Context;
 import android.databinding.ObservableField;
-import android.text.TextUtils;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.utils.Common;
 import com.viettel.mbccs.utils.FileUtils;
 import java.io.File;
-import rx.Observable;
 
 /**
  * Created by eo_cuong on 5/23/17.
@@ -59,7 +57,7 @@ public class ItemStockTotalPresenter {
 
     public String getImage() {
 
-        File file = FileUtils.getImageFileByIdName(mContext, mStockTotal.getStockModelId());
+        File file = FileUtils.getImageFileByIdName(mContext, String.valueOf(mStockTotal.getStockModelId()));
         if (file != null && file.exists()) {
             return file.getAbsolutePath();
         }

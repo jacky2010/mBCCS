@@ -4,6 +4,7 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 import com.activeandroid.ActiveAndroid;
 import com.activeandroid.query.Select;
 import com.google.gson.Gson;
@@ -81,22 +82,25 @@ public class CreateDataBaseService extends IntentService {
                         ObjectUtils.convertObject(areaList.get(i), AreaDataBase.class);
                 areaDataBase.save();
 
-                intent.setAction(ACTION_CREATE_AREA_SUCCESS);
-                intent.putExtra(DATA_CREATE_AREA_SUCCESS, (int) (((float) i / size) * 100));
-                LocalBroadcastManager.getInstance(CreateDataBaseService.this).sendBroadcast(intent);
+                Intent intentSuccess = new Intent();
+                intentSuccess.setAction(ACTION_CREATE_AREA_SUCCESS);
+                intentSuccess.putExtra(DATA_CREATE_AREA_SUCCESS, (int) (((float) i / size) * 100));
+                LocalBroadcastManager.getInstance(CreateDataBaseService.this).sendBroadcast(intentSuccess);
             }
 
-            intent.setAction(ACTION_CREATE_AREA_COMPLETED);
-            intent.putExtra(DATA_CREATE_AREA_COMPLETED, 100);
-            LocalBroadcastManager.getInstance(CreateDataBaseService.this).sendBroadcast(intent);
+            Intent intentComplete = new Intent();
+            intentComplete.setAction(ACTION_CREATE_AREA_COMPLETED);
+            intentComplete.putExtra(DATA_CREATE_AREA_COMPLETED, 100);
+            LocalBroadcastManager.getInstance(CreateDataBaseService.this).sendBroadcast(intentComplete);
 
             ActiveAndroid.setTransactionSuccessful();
 
             userRepository.setCreateDataBaseArea(true);
         } catch (Exception e) {
             e.printStackTrace();
-            intent.setAction(ACTION_CREATE_AREA_FAIL);
-            LocalBroadcastManager.getInstance(CreateDataBaseService.this).sendBroadcast(intent);
+            Intent intentFail = new Intent();
+            intentFail.setAction(ACTION_CREATE_AREA_FAIL);
+            LocalBroadcastManager.getInstance(CreateDataBaseService.this).sendBroadcast(intentFail);
             userRepository.setCreateDataBaseArea(false);
         } finally {
             ActiveAndroid.endTransaction();
