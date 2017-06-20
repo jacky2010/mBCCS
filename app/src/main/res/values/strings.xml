@@ -403,6 +403,12 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="kpp_order">KPP Đặt hàng</string>
     <string name="kpp_order_label_add_detail">Chi tiết đơn đặt hàng</string>
     <string name="kpp_order_label_add_stocl_model">Thêm hàng hóa</string>
+    <string name="kpp_order_label_sale_order_id"><![CDATA[
+Đặt hàng thành công mã <b><font color="#303F9F">%s</font></b>
+    ]]></string>
+    <string name="kpp_order_label_sale_order_receive"><![CDATA[
+Đầu mối tiếp nhận <b><font color="#303F9F">%s</font></b>
+    ]]></string>
     <string name="order_approval">Đã được phê duyệt</string>
     <string name="order_reject">Đã từ chối</string>
     <string name="order_pending">Đang chờ phê duyệt</string>

@@ -3,6 +3,8 @@ package com.viettel.mbccs.screen.sell.channel;
 import android.app.Activity;
 import android.content.Context;
 import android.databinding.ObservableField;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.ApiCode;
@@ -25,6 +27,7 @@ import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import com.viettel.mbccs.screen.sell.retail.adapter.StockAdapter;
 import com.viettel.mbccs.utils.DialogUtils;
+import com.viettel.mbccs.utils.SpinnerAdapter;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +46,7 @@ public class SaleChannelPresenter
     public ObservableField<String> filterText;
     public ObservableField<String> sellProgram;
     public ObservableField<String> channelText;
-    private ArrayAdapter<TeleComService> mAdapter;
+    private SpinnerAdapter<TeleComService> mAdapter;
     public ObservableField<Boolean> isCollapse;
     private StockAdapter stockAdapter;
     private Context mContext;
@@ -106,7 +109,6 @@ public class SaleChannelPresenter
 
                                 DialogUtils.showDialogError(mContext, null, error.getMessage(),
                                         null);
-                                //fakeModelSale();
                             }
 
                             @Override
@@ -249,8 +251,6 @@ public class SaleChannelPresenter
                     @Override
                     public void onError(BaseException error) {
                         DialogUtils.showDialogError(mContext, null, error.getMessage(), null);
-                        // fakeData();
-                        //loadModelSale();
                     }
 
                     @Override
@@ -263,106 +263,24 @@ public class SaleChannelPresenter
         mSubscription.add(subscription);
     }
 
-    private void fakeModelSale() {
-
-        mModelSales.clear();
-
-        ModelSale good1 = new ModelSale();
-        good1.setStockMoldeName("Iphone 7 plus");
-        good1.setQuantity(12);
-        good1.setPrice(5000000);
-        good1.setPathImage1("http://didongthongminh"
-                + ".vn/images/products/2017/03/31/resized/samsung-galaxy-s8-plus"
-                + "-_1490956081.jpg");
-
-        ModelSale good2 = new ModelSale();
-        good2.setStockMoldeName("Samsung J5 Prime");
-        good2.setQuantity(10);
-        good2.setPrice(400000);
-        good2.setPathImage1(
-                "https://cdn1.viettelstore.vn/images/Product/ProductImage/small/J5-Prime-A.jpg");
-
-        ModelSale good3 = new ModelSale();
-        good3.setStockMoldeName("Oppo F1s");
-        good3.setQuantity(5);
-        good3.setPrice(7000000);
-        good3.setPathImage1(
-                "https://cdn1.viettelstore.vn/images/Product/ProductImage/small/3211396993674.jpg");
-        mModelSales.add(good1);
-        mModelSales.add(good2);
-        mModelSales.add(good3);
-        stockAdapter.notifyDataSetChanged();
-    }
-
-    void fakeLoadChannel() {
-        ChannelInfo channel1 = new ChannelInfo();
-        channel1.setChannelId(1);
-        channel1.setChannelName("CTV1");
-
-        ChannelInfo channel2 = new ChannelInfo();
-        channel2.setChannelId(2);
-        channel2.setChannelName("CTV2");
-
-        ChannelInfo channel3 = new ChannelInfo();
-        channel3.setChannelId(3);
-        channel3.setChannelName("CTV3");
-
-        ChannelInfo channel4 = new ChannelInfo();
-        channel4.setChannelId(4);
-        channel4.setChannelName("CTV4");
-
-        mChannelInfos.add(channel1);
-        mChannelInfos.add(channel2);
-        mChannelInfos.add(channel3);
-        mChannelInfos.add(channel4);
-        ChannelInfo channel = new ChannelInfo(-1, mContext.getResources().getString(R.string.all_));
-        mChannelInfos.add(0, channel);
-        currentChannel = mChannelInfos.get(0);
-        channelText.set(currentChannel.getChannelName());
-    }
-
-    private void fakeData() {
-
-        SaleProgram sell1 = new SaleProgram(1, "0", "khuyen mai 1");
-        SaleProgram sell2 = new SaleProgram(1, "1", "khuyen mai 2");
-        SaleProgram sell3 = new SaleProgram(1, "2", "khuyen mai 3");
-        mSalePrograms.add(sell1);
-        mSalePrograms.add(sell2);
-        mSalePrograms.add(sell3);
-
-        TeleComService service2 = new TeleComService(1, "Mobile");
-        TeleComService service3 = new TeleComService(2, "PC");
-        TeleComService service4 = new TeleComService(3, "OK");
-        TeleComService service5 = new TeleComService(4, "Phu kien");
-        mTeleComServices.add(service2);
-        mTeleComServices.add(service3);
-        mTeleComServices.add(service4);
-        mTeleComServices.add(service5);
-
-        TeleComService defaultTelecomSercie =
-                new TeleComService(-1, mContext.getResources().getString(R.string.all_));
-        mTeleComServices.add(0, defaultTelecomSercie);
-
-        SaleProgram defaultSaleProgram =
-                new SaleProgram(-1, mContext.getResources().getString(R.string.all_));
-        mSalePrograms.add(0, defaultSaleProgram);
-
-        currentSaleProgram = mSalePrograms.get(0);
-        currentTelecomService = mTeleComServices.get(0);
-
-        sellProgram.set(currentSaleProgram.getName());
-        mAdapter.notifyDataSetChanged();
-    }
-
     private void init() {
         filterText = new ObservableField<>();
         sellProgram = new ObservableField<>();
         channelText = new ObservableField<>();
         isCollapse = new ObservableField<>();
         isCollapse.set(false);
-        mAdapter =
-                new ArrayAdapter<TeleComService>(mContext, R.layout.item_spinner, mTeleComServices);
-        mAdapter.setDropDownViewResource(R.layout.item_spinner);
+        mAdapter = new SpinnerAdapter<TeleComService>(mContext, mTeleComServices);
+        mAdapter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                onItemServiceClick(i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         stockAdapter = new StockAdapter(mContext, mModelSales);
         stockAdapter.setOnStockListener(this);
     }
@@ -396,11 +314,11 @@ public class SaleChannelPresenter
         mSubscription.clear();
     }
 
-    public ArrayAdapter<TeleComService> getAdapter() {
+    public SpinnerAdapter<TeleComService> getAdapter() {
         return mAdapter;
     }
 
-    public void setAdapter(ArrayAdapter<TeleComService> adapter) {
+    public void setAdapter(SpinnerAdapter<TeleComService> adapter) {
         mAdapter = adapter;
     }
 

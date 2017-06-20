@@ -6,6 +6,8 @@ import android.text.TextUtils;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.utils.Common;
+import com.viettel.mbccs.utils.FileUtils;
+import java.io.File;
 import rx.Observable;
 
 /**
@@ -56,18 +58,11 @@ public class ItemStockTotalPresenter {
     }
 
     public String getImage() {
-        if (!TextUtils.isEmpty(mStockTotal.getPathImage1())) {
-            return mStockTotal.getPathImage1();
-        }
 
-        if (!TextUtils.isEmpty(mStockTotal.getPathImage2())) {
-            return mStockTotal.getPathImage2();
+        File file = FileUtils.getImageFileByIdName(mContext, mStockTotal.getStockModelId());
+        if (file != null && file.exists()) {
+            return file.getAbsolutePath();
         }
-
-        if (!TextUtils.isEmpty(mStockTotal.getPathImage3())) {
-            return mStockTotal.getPathImage3();
-        }
-
         return null;
     }
 

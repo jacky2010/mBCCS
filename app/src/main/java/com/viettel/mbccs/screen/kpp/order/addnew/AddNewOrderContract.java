@@ -21,8 +21,7 @@ public class AddNewOrderContract {
 
         void goGoStockPicker();
 
-        void gotoSuccessScreen(ArrayList<StockTotal> stockTotals);
-
-
+        void gotoSuccessScreen(ArrayList<StockTotal> stockTotals, String saleOrderId,
+                String channelName);
     }
 }

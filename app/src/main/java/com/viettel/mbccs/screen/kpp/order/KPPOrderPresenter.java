@@ -3,6 +3,8 @@ package com.viettel.mbccs.screen.kpp.order;
 import android.app.Activity;
 import android.content.Context;
 import android.databinding.ObservableField;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 import com.viettel.mbccs.R;
@@ -19,6 +21,7 @@ import com.viettel.mbccs.screen.kpp.order.adaper.KPPOrderAdapter;
 import com.viettel.mbccs.utils.Common;
 import com.viettel.mbccs.utils.DateUtils;
 import com.viettel.mbccs.utils.DialogUtils;
+import com.viettel.mbccs.utils.SpinnerAdapter;
 import com.viettel.mbccs.utils.ValidateUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.ArrayList;
@@ -38,7 +41,7 @@ public class KPPOrderPresenter implements KPPOrderContract.Presenter {
     public ObservableField<Integer> adapterPosition;
     private Context mContext;
     private KPPOrderContract.ViewModel mViewModel;
-    private ArrayAdapter<String> adapterStatus;
+    private SpinnerAdapter<String> adapterStatus;
     private KPPOrderAdapter mKPPOrderAdapter;
     private List<SaleOrders> mSaleOrderses = new ArrayList<>();
     private BanHangKhoTaiChinhRepository mBanHangKhoTaiChinhRepository;
@@ -65,10 +68,19 @@ public class KPPOrderPresenter implements KPPOrderContract.Presenter {
         adapterPosition = new ObservableField<>();
         adapterPosition.set(1);
 
-        adapterStatus = new ArrayAdapter<String>(mContext, R.layout.item_spinner,
+        adapterStatus = new SpinnerAdapter<String>(mContext,
                 mContext.getResources().getStringArray(R.array.order_status_name));
-        adapterStatus.setDropDownViewResource(R.layout.item_spinner);
+        adapterStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                onChannelSelectedChagne(i);
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         mKPPOrderAdapter = new KPPOrderAdapter(mContext, mSaleOrderses);
     }
 

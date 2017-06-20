@@ -58,10 +58,13 @@ public class AddNewOrderActivity
     }
 
     @Override
-    public void gotoSuccessScreen(ArrayList<StockTotal> stockTotals) {
+    public void gotoSuccessScreen(ArrayList<StockTotal> stockTotals, String saleOrderId,
+            String channelName) {
         Intent intent = new Intent(this, OrderSuccessActivity.class);
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList(Constants.BundleConstant.LIST_STOCK_TOTAL, stockTotals);
+        bundle.putString(Constants.BundleConstant.SALE_ORDER_ID, "1");
+        bundle.putString(Constants.BundleConstant.CHANNEL_NAME, channelName);
         intent.putExtras(bundle);
         startActivityForResult(intent, REQUEST_SUCCESS);
     }

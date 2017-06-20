@@ -41,19 +41,6 @@ public class KPPOrderActivity
                 mPresenter.getFilterText();
             }
         });
-        mBinding.spinnerStatus.getSpinner()
-                .setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position,
-                            long id) {
-                        mPresenter.onChannelSelectedChagne(position);
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                });
         fromDate = mBinding.fromDate;
         toDate = mBinding.toDate;
         //set selected for Customtextview
