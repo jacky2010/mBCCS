@@ -5,12 +5,14 @@ import com.activeandroid.query.Select;
 import com.google.gson.Gson;
 import com.viettel.mbccs.MBCCSApplication;
 import com.viettel.mbccs.data.model.Area;
+import com.viettel.mbccs.data.model.Image;
 import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.model.Precinct;
 import com.viettel.mbccs.data.model.StaffInfo;
 import com.viettel.mbccs.data.model.UploadImage;
 import com.viettel.mbccs.data.model.UserInfo;
 import com.viettel.mbccs.data.model.database.AreaDataBase;
+import com.viettel.mbccs.data.model.database.ImageDataBase;
 import com.viettel.mbccs.data.source.local.IUserLocalDataSource;
 import com.viettel.mbccs.utils.ObjectUtils;
 import com.viettel.mbccs.utils.SecureUtils;
@@ -242,5 +244,65 @@ public class UserLocalDataSource implements IUserLocalDataSource {
     @Override
     public void setCreateDataBaseArea(boolean status) {
         sharedPrefs.set(Constants.SharePref.CREATE_DATA_AREA, status);
+    }
+
+    @Override
+    public boolean isDownloadImage() {
+        return sharedPrefs.get(Constants.SharePref.DOWNLOAD_IMAGE, false);
+    }
+
+    @Override
+    public void setDownloadImage(boolean status) {
+        sharedPrefs.set(Constants.SharePref.DOWNLOAD_IMAGE, status);
+    }
+
+    @Override
+    public boolean isSaveIdImage() {
+        return sharedPrefs.get(Constants.SharePref.SAVE_ID_IMAGE, false);
+    }
+
+    @Override
+    public void setSaveIdImage(boolean status) {
+        sharedPrefs.set(Constants.SharePref.SAVE_ID_IMAGE, status);
+    }
+
+    @Override
+    public List<Image> getImageFromDatabase() {
+        List<ImageDataBase> imageDataBaseList = new Select().from(ImageDataBase.class).execute();
+        List<Image> imageList = new ArrayList<>();
+        if (imageDataBaseList == null || imageDataBaseList.size() == 0) return imageList;
+        for (ImageDataBase i : imageDataBaseList) {
+            Image image = ObjectUtils.convertObject(i, Image.class);
+            imageList.add(image);
+        }
+        return imageList;
+    }
+
+    @Override
+    public List<Image> getImageFromDatabase(int status) {
+        List<ImageDataBase> imageDataBaseList = new Select().from(ImageDataBase.class)
+                .where(ImageDataBase.Columns.IMAGE_STATUS + " = ?", status)
+                .execute();
+        List<Image> imageList = new ArrayList<>();
+        if (imageDataBaseList == null || imageDataBaseList.size() == 0) return imageList;
+        for (ImageDataBase i : imageDataBaseList) {
+            Image image = ObjectUtils.convertObject(i, Image.class);
+            imageList.add(image);
+        }
+        return imageList;
+    }
+
+    @Override
+    public Image getImageFromDatabase(String id) {
+        ImageDataBase imageDataBase = getDataImageFromDatabase(id);
+        if (imageDataBase == null) return new Image();
+        return ObjectUtils.convertObject(imageDataBase, Image.class);
+    }
+
+    @Override
+    public ImageDataBase getDataImageFromDatabase(String id) {
+        return new Select().from(ImageDataBase.class)
+                .where(ImageDataBase.Columns.IMAGE_ID + " = ?", id)
+                .executeSingle();
     }
 }

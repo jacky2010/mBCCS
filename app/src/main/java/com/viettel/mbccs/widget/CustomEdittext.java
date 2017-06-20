@@ -129,7 +129,7 @@ public class CustomEdittext extends AppCompatEditText {
                  * IF USER CLICKS JUST OUT SIDE THE RECTANGLE OF THE DRAWABLE
                  * THAN ADD X AND SUBTRACT THE Y WITH SOME VALUE SO THAT AFTER
                  * CALCULATING X AND Y CO-ORDINATE LIES INTO THE DRAWBABLE
-                 * BOUND. - this process help to increase the tappable area of
+                 * BOUND. - this progressValue help to increase the tappable area of
                  * the rectangle.
                  */
                 x = (int) (actionX + extraTapArea);

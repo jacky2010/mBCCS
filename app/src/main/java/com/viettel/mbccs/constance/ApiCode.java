@@ -408,4 +408,6 @@ public class ApiCode {
     public final static String GetSurveyKPP = "WS_GET_SURVERY";
 
     public final static String UpLoadImage = "WS_upLoad";
+    public final static String GetListImageOfProductOnServer = "WS_getListImageOfProductOnServer";
+    public final static String GetDetailImageOfProduct = "WS_getDetailImageOfProduct";
 }

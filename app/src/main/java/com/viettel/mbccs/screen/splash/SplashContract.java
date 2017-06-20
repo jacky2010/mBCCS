@@ -16,5 +16,7 @@ public interface SplashContract {
         void gotoLogin();
 
         void gotoMain();
+
+        void gotoDownloadImage();
     }
 }

@@ -63,7 +63,6 @@ public class CreateDataBaseService extends IntentService {
         int size = areaList.size();
         try {
             for (int i = 0; i < size; i++) {
-                //                AreaDataBase areaDataBaseResult = new AreaDataBase();
                 List<AreaDataBase> areaDataBaseResult = null;
                 try {
                     areaDataBaseResult = new Select().from(AreaDataBase.class)
@@ -83,7 +82,7 @@ public class CreateDataBaseService extends IntentService {
                 areaDataBase.save();
 
                 intent.setAction(ACTION_CREATE_AREA_SUCCESS);
-                intent.putExtra(DATA_CREATE_AREA_SUCCESS, (i / size) / 100);
+                intent.putExtra(DATA_CREATE_AREA_SUCCESS, (int) (((float) i / size) * 100));
                 LocalBroadcastManager.getInstance(CreateDataBaseService.this).sendBroadcast(intent);
             }
 

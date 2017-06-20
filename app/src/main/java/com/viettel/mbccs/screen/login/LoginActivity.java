@@ -8,6 +8,7 @@ import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.databinding.ActivityLoginBinding;
 import com.viettel.mbccs.screen.main.MainActivity;
 import com.viettel.mbccs.screen.resetpass.ResetPasswordActivity;
+import com.viettel.mbccs.screen.splash.DownloadDataActivity;
 
 /**
  * Created by eo_cuong on 5/10/17.
@@ -45,6 +46,12 @@ public class LoginActivity extends BaseDataBindActivity<ActivityLoginBinding, Lo
     @Override
     public void onLoginSuccess() {
         startActivity(new Intent(this, MainActivity.class));
+        finish();
+    }
+
+    @Override
+    public void gotoDownloadImage() {
+        startActivity(new Intent(this, DownloadDataActivity.class));
         finish();
     }
 

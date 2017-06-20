@@ -9,6 +9,7 @@ import com.viettel.mbccs.data.model.LoginInfo;
 public class Constants {
 
     public static final int NUM_VISIBLE_THRESOLD = 5;
+    public static final int NUM_IMAGE_DOWNLOAD = 10;
     public static final String DEFAULT_NUMBER_INPUT = "0";
 
     public class SharePref {
@@ -79,6 +80,19 @@ public class Constants {
          * put true if create success
          */
         public static final String CREATE_DATA_AREA = "create_data_area";
+
+        /**
+         * key put get is download image "first use the app"
+         * put true if download success
+         */
+        public static final String DOWNLOAD_IMAGE = "download_data";
+
+        /**
+         * key put get is save list id image to database"
+         * put true if save success
+         */
+        public static final String SAVE_ID_IMAGE = "save_id_image";
+
         public static final String API_KEY = "api_key";
         public static final String SESSION_VTG = "session_vtg";
         public static final String API_KEY_VTG = "api_key_vtg";

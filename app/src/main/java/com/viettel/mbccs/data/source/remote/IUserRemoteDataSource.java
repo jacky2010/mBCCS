@@ -7,6 +7,7 @@ import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.DownloadImageRequest;
 import com.viettel.mbccs.data.source.remote.request.GetDistrictRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListIdImageRequest;
 import com.viettel.mbccs.data.source.remote.request.GetPrecinctRequest;
 import com.viettel.mbccs.data.source.remote.request.GetProvinceRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
@@ -20,6 +21,7 @@ import com.viettel.mbccs.data.source.remote.response.BaseResponse;
 import com.viettel.mbccs.data.source.remote.response.DownloadImageResponse;
 import com.viettel.mbccs.data.source.remote.response.GetDistrictResponse;
 import com.viettel.mbccs.data.source.remote.response.GetInfoSaleTranResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListIdImageResponse;
 import com.viettel.mbccs.data.source.remote.response.GetPrecinctResponse;
 import com.viettel.mbccs.data.source.remote.response.GetProvinceResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
@@ -61,6 +63,8 @@ public interface IUserRemoteDataSource {
     Observable<GetPrecinctResponse> getPrecinct(DataRequest<GetPrecinctRequest> request);
 
     Observable<UploadImageResponse> uploadImage(DataRequest<UploadImageRequest> request);
+
+    Observable<GetListIdImageResponse> getListIdImage(DataRequest<GetListIdImageRequest> request);
 
     Observable<DownloadImageResponse> downloadImage(DataRequest<DownloadImageRequest> request);
 

@@ -2,11 +2,13 @@ package com.viettel.mbccs.data.source;
 
 import com.viettel.mbccs.data.model.Area;
 import com.viettel.mbccs.data.model.EmptyObject;
+import com.viettel.mbccs.data.model.Image;
 import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.model.Precinct;
 import com.viettel.mbccs.data.model.StaffInfo;
 import com.viettel.mbccs.data.model.UploadImage;
 import com.viettel.mbccs.data.model.UserInfo;
+import com.viettel.mbccs.data.model.database.ImageDataBase;
 import com.viettel.mbccs.data.source.local.IUserLocalDataSource;
 import com.viettel.mbccs.data.source.local.datasource.UserLocalDataSource;
 import com.viettel.mbccs.data.source.remote.IUserRemoteDataSource;
@@ -15,6 +17,7 @@ import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.DownloadImageRequest;
 import com.viettel.mbccs.data.source.remote.request.GetDistrictRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListIdImageRequest;
 import com.viettel.mbccs.data.source.remote.request.GetPrecinctRequest;
 import com.viettel.mbccs.data.source.remote.request.GetProvinceRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
@@ -27,6 +30,7 @@ import com.viettel.mbccs.data.source.remote.request.UploadImageRequest;
 import com.viettel.mbccs.data.source.remote.response.DownloadImageResponse;
 import com.viettel.mbccs.data.source.remote.response.GetDistrictResponse;
 import com.viettel.mbccs.data.source.remote.response.GetInfoSaleTranResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListIdImageResponse;
 import com.viettel.mbccs.data.source.remote.response.GetPrecinctResponse;
 import com.viettel.mbccs.data.source.remote.response.GetProvinceResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
@@ -225,6 +229,46 @@ public class UserRepository implements IUserLocalDataSource, IUserRemoteDataSour
     }
 
     @Override
+    public boolean isDownloadImage() {
+        return mUserLocalDataSource.isDownloadImage();
+    }
+
+    @Override
+    public void setDownloadImage(boolean status) {
+        mUserLocalDataSource.setDownloadImage(status);
+    }
+
+    @Override
+    public boolean isSaveIdImage() {
+        return mUserLocalDataSource.isSaveIdImage();
+    }
+
+    @Override
+    public void setSaveIdImage(boolean status) {
+        mUserLocalDataSource.setSaveIdImage(status);
+    }
+
+    @Override
+    public List<Image> getImageFromDatabase() {
+        return mUserLocalDataSource.getImageFromDatabase();
+    }
+
+    @Override
+    public List<Image> getImageFromDatabase(int status) {
+        return mUserLocalDataSource.getImageFromDatabase(status);
+    }
+
+    @Override
+    public Image getImageFromDatabase(String id) {
+        return mUserLocalDataSource.getImageFromDatabase(id);
+    }
+
+    @Override
+    public ImageDataBase getDataImageFromDatabase(String id) {
+        return mUserLocalDataSource.getDataImageFromDatabase(id);
+    }
+
+    @Override
     public Observable<LoginInfo> login(LoginRequest loginRequest) {
         return mUserRemoteDataSource.login(loginRequest);
     }
@@ -286,6 +330,12 @@ public class UserRepository implements IUserLocalDataSource, IUserRemoteDataSour
     @Override
     public Observable<UploadImageResponse> uploadImage(DataRequest<UploadImageRequest> request) {
         return mUserRemoteDataSource.uploadImage(request);
+    }
+
+    @Override
+    public Observable<GetListIdImageResponse> getListIdImage(
+            DataRequest<GetListIdImageRequest> request) {
+        return mUserRemoteDataSource.getListIdImage(request);
     }
 
     @Override
