@@ -89,7 +89,7 @@ public class SerialPickerPresenter
                                 && object.getSerialSale() != null
                                 && object.getSerialSale().getSerialBOs() != null
                                 && object.getSerialSale().getSerialBOs().size() > 0) {
-                            List<SerialBO> serialBOs = object.getSerialSale().getSerialBOs();
+                            List<SerialBO> serialBOs = object.getSerialInStock().getSerialBOs();
                             mSerials.addAll(Common.getSerialsByListSerialBlock(serialBOs));
                             reCaculateSerial();
                             return;

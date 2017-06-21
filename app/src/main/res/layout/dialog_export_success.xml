@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="dialog"
+            type="com.viettel.mbccs.screen.warehousecommon.exportsuccess.ExportSuccessDialog"
+            />
+    </data>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/dp_10"
+        >
+
+        <include
+            layout="@layout/toolbar"
+            android:id="@+id/toolbar"
+            app:background="@{ @color/colorAccent }"
+            app:isShow="@{ true }"
+            app:leftIcon="@{ @drawable/ic_close_white }"
+            app:leftIconClick="@{ () -> dialog.onClose() }"
+            app:title="@{ @string/common_label_notice}"
+            app:titleColor="@{ @color/white }"
+            app:titleTextSize="@{ @dimen/sp_16 }"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{dialog.cmdCode}"
+                android:textColor="@color/green"
+                />
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:text="@{dialog.cmdReceive}"
+                android:textColor="@color/black"
+                />
+
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_10"
+                android:text="@string/warehouse_label_list_stock_model"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_18"
+                android:textStyle="bold"
+                />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <com.viettel.mbccs.widget.CustomButton
+                android:id="@+id/btn_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dp_10"
+                android:onClick="@{ () -> dialog.onClose() }"
+                android:padding="@dimen/dp_10"
+                android:text="@string/common_label_close"
+                style="@style/button_nagative"
+                />
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/btn_close"
+                android:adapter="@{dialog.adapter}"
+                />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</layout>

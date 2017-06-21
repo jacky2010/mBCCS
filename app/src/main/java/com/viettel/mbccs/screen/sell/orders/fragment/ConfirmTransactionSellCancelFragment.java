@@ -41,6 +41,7 @@ import com.viettel.mbccs.screen.common.success.DialogFullScreen;
 import com.viettel.mbccs.screen.sell.orders.fragment.orderdetail.OrderDetailFragment;
 import com.viettel.mbccs.utils.Common;
 import com.viettel.mbccs.utils.DialogUtils;
+import com.viettel.mbccs.utils.SpinnerAdapter;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +75,7 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
     private List<SaleOrdersDetail> saleOrdersDetailList;
     private SaleOrders saleOrders;
 
-    public ObservableField<ArrayAdapter<String>> spinnerReasonCancelAdapter;
+    public ObservableField<SpinnerAdapter<String>> spinnerReasonCancelAdapter;
     public ObservableField<String> title;
     public ObservableField<String> textButton;
     public ObservableInt colorButton;
@@ -180,13 +181,9 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
             dataSpinnerReason.add(r.getReasonName());
         }
 
-        spinnerReasonCancelAdapter.set(
-                new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item,
-                        dataSpinnerReason));
-        spinnerReasonCancelAdapter.get()
-                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        binding.spinnerReasonCancel.setOnItemSelectedListener(
-                new AdapterView.OnItemSelectedListener() {
+        spinnerReasonCancelAdapter.set(new SpinnerAdapter<>(getActivity(), dataSpinnerReason));
+        spinnerReasonCancelAdapter.get().
+                setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position,
                             long id) {

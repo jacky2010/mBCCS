@@ -12,20 +12,20 @@ import java.util.List;
 
 public class GetSerialsResponse extends DataResponse {
 
-    @SerializedName("lstSerialSale")
+    @SerializedName("serialInStock")
     @Expose
-    private List<SerialBO> mSerialBOs;
+    private StockSerial serialInStock;
 
-    @SerializedName("stockSerial")
+    @SerializedName("serialSale")
     @Expose
     private StockSerial serialSale;
 
-    public List<SerialBO> getSerialBOs() {
-        return mSerialBOs;
+    public StockSerial getSerialInStock() {
+        return serialInStock;
     }
 
-    public void setSerialBOs(List<SerialBO> serialBOs) {
-        mSerialBOs = serialBOs;
+    public void setSerialInStock(StockSerial serialInStock) {
+        this.serialInStock = serialInStock;
     }
 
     public StockSerial getSerialSale() {
