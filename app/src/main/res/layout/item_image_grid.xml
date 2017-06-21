@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    >
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
     <data>
+
         <variable
             name="imageText"
-            type="String"
-            />
+            type="String" />
+
         <variable
             name="onClicked"
-            type="android.view.View.OnClickListener"
-            />
+            type="android.view.View.OnClickListener" />
+
         <variable
             name="image"
-            type="android.graphics.drawable.Drawable"
-            />
+            type="android.graphics.drawable.Drawable" />
+
         <variable
             name="textSize"
-            type="float"
-            />
+            type="float" />
     </data>
 
     <LinearLayout
@@ -28,8 +28,7 @@
         android:paddingBottom="@dimen/dp_8"
         android:paddingEnd="@dimen/dp_4"
         android:paddingStart="@dimen/dp_4"
-        android:paddingTop="@dimen/dp_8"
-        >
+        android:paddingTop="@dimen/dp_8">
 
         <ImageView
             android:id="@+id/image"
@@ -37,8 +36,7 @@
             android:layout_height="@dimen/dp_24"
             android:layout_gravity="center_horizontal"
             android:adjustViewBounds="true"
-            android:src="@{ image }"
-            />
+            android:src="@{ image }" />
 
         <com.viettel.mbccs.widget.CustomTextView
             android:id="@+id/text"
@@ -46,9 +44,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/dp_4"
+            android:ellipsize="end"
             android:gravity="center"
+            android:lines="2"
             android:text="@{ imageText }"
-            android:textSize="@{ textSize > 0 ? textSize : @dimen/sp_14 }"
-            />
+            android:textSize="@{ textSize > 0 ? textSize : @dimen/sp_14 }" />
     </LinearLayout>
 </layout>
