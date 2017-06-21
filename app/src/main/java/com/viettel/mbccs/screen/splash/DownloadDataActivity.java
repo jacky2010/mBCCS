@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.databinding.DataBindingUtil;
+import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
 import android.os.Handler;
 import android.support.v4.content.LocalBroadcastManager;
@@ -40,47 +41,56 @@ public class DownloadDataActivity extends BaseActivity {
     private Intent intentCreateDataBaseAreaService;
     private Intent intentDownloadImageService;
     private List<String> listIdImage;
-    private boolean checkFinish = false;
 
     public ObservableInt progressValue;
-    public ObservableInt progressValueArea;
-
-    private BroadcastReceiver broadcastReceiverDownloadImage = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals(DownloadImageService.ACTION_DOWNLOAD_COMPLETE)) {
-                userRepository.setDownloadImage(true);
-                progressValue.set(100);
-                gotoMain();
-            } else if (intent.getAction().equals(DownloadImageService.ACTION_DOWNLOAD_SUCCESS)) {
-                progressValue.set(
-                        intent.getIntExtra(DownloadImageService.DATA_DOWNLOAD_SUCCESS, 0));
-            } else {
-                DialogUtils.showDialogError(DownloadDataActivity.this, null,
-                        "Download image error!", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                hideLoadingDialog();
-                                Common.logout(DownloadDataActivity.this);
-                            }
-                        }, false);
-            }
-        }
-    };
+    public ObservableField<String> textProcess;
 
     private BroadcastReceiver broadcastReceiverCreateArea = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(CreateDataBaseService.ACTION_CREATE_AREA_COMPLETED)) {
-                progressValueArea.set(
+                progressValue.set(
                         intent.getIntExtra(CreateDataBaseService.DATA_CREATE_AREA_COMPLETED, 0));
-                gotoMain();
+                textProcess.set(
+                        getString(R.string.create_data_area_text, progressValue.get()) + "%");
+                getData();
             } else if (intent.getAction()
                     .equals(CreateDataBaseService.ACTION_CREATE_AREA_SUCCESS)) {
-                progressValueArea.set(
+                progressValue.set(
                         intent.getIntExtra(CreateDataBaseService.DATA_CREATE_AREA_SUCCESS, 0));
-            } else {
+                textProcess.set(
+                        getString(R.string.create_data_area_text, progressValue.get()) + "%");
+            } else if (intent.getAction().equals(CreateDataBaseService.ACTION_CREATE_AREA_FAIL)) {
                 // TODO: 6/19/17 handler error create data area
+            }
+        }
+    };
+
+    private BroadcastReceiver broadcastReceiverDownloadImage = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(DownloadImageService.ACTION_DOWNLOAD_START)) {
+                progressValue.set(0);
+                textProcess.set(getString(R.string.download_image_text, progressValue.get()) + "%");
+            }
+            if (intent.getAction().equals(DownloadImageService.ACTION_DOWNLOAD_COMPLETE)) {
+                userRepository.setDownloadImage(true);
+                progressValue.set(100);
+                textProcess.set(getString(R.string.download_image_text, progressValue.get()) + "%");
+                gotoMain();
+            } else if (intent.getAction().equals(DownloadImageService.ACTION_DOWNLOAD_SUCCESS)) {
+                progressValue.set(
+                        intent.getIntExtra(DownloadImageService.DATA_DOWNLOAD_SUCCESS, 0));
+                textProcess.set(getString(R.string.download_image_text, progressValue.get()) + "%");
+            } else if (intent.getAction().equals(DownloadImageService.ACTION_DOWNLOAD_FAIL)) {
+                DialogUtils.showDialogError(DownloadDataActivity.this, null,
+                        "Download image error!", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //                                hideLoadingDialog();
+                                Common.logout(DownloadDataActivity.this);
+                            }
+                        }, false);
             }
         }
     };
@@ -97,8 +107,15 @@ public class DownloadDataActivity extends BaseActivity {
         userRepository = UserRepository.getInstance();
         subscriptions = new CompositeSubscription();
         progressValue = new ObservableInt();
-        progressValueArea = new ObservableInt();
-        getData();
+        textProcess = new ObservableField<>();
+
+        textProcess.set(getString(R.string.create_data_area_text, progressValue.get()) + "%");
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                saveDataArea();
+            }
+        }, 500);
     }
 
     @Override
@@ -128,12 +145,10 @@ public class DownloadDataActivity extends BaseActivity {
 
     private void getData() {
         if (userRepository.isSaveIdImage()) {
-            saveDataArea();
             downloadImageService();
             return;
         }
-
-        showLoadingDialog();
+        progressValue.set(0);
 
         DataRequest<GetListIdImageRequest> request = new DataRequest<>();
         request.setParameterApi(new GetListIdImageRequest());
@@ -145,8 +160,6 @@ public class DownloadDataActivity extends BaseActivity {
                     public void onSuccess(GetListIdImageResponse object) {
                         listIdImage = object.getIdImage();
                         saveIdImageToDatabase();
-                        saveDataArea();
-                        hideLoadingDialog();
                     }
 
                     @Override
@@ -155,7 +168,6 @@ public class DownloadDataActivity extends BaseActivity {
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        hideLoadingDialog();
                                         Common.logout(DownloadDataActivity.this);
                                     }
                                 }, false);
@@ -181,6 +193,7 @@ public class DownloadDataActivity extends BaseActivity {
         startService(intentDownloadImageService);
 
         IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(DownloadImageService.ACTION_DOWNLOAD_START);
         intentFilter.addAction(DownloadImageService.ACTION_DOWNLOAD_COMPLETE);
         intentFilter.addAction(DownloadImageService.ACTION_DOWNLOAD_SUCCESS);
         intentFilter.addAction(DownloadImageService.ACTION_DOWNLOAD_FAIL);
@@ -201,11 +214,6 @@ public class DownloadDataActivity extends BaseActivity {
     }
 
     private void gotoMain() {
-        if (!checkFinish) {
-            checkFinish = true;
-            return;
-        }
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
