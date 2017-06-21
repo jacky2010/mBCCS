@@ -33,9 +33,9 @@
             android:id="@+id/layout_information"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_below="@+id/toolbar"
             android:background="@color/white"
+            android:orientation="vertical"
             android:padding="@dimen/dp_16"
             >
             <com.viettel.mbccs.widget.CustomTextView
@@ -51,28 +51,28 @@
 
             <com.viettel.mbccs.widget.CustomTextView
                 android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                android:text="@{ @string/confirm_transaction_sell_cancel_don_dat_hang_tu_kenh(presenter.nameChange)}"
-                    android:textColor="@color/black"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_16"
+                android:text="@{ @string/confirm_transaction_sell_cancel_don_dat_hang_tu_kenh(presenter.nameChange)}"
+                android:textColor="@color/black"
                 android:textSize="@dimen/sp_16"
-                    />
-                <com.viettel.mbccs.widget.CustomTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_30"
-                    android:text="@{ @string/confirm_transaction_sell_cancel_sdt(presenter.phoneNumberChange)}"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16"
-                    />
-                <com.viettel.mbccs.widget.CustomTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_30"
-                    android:text="@{@string/confirm_transaction_sell_cancel_so_tien_thanh_toan(presenter.sumMoneyTransaction)}"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_14"
-                    />
+                />
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:text="@{ @string/confirm_transaction_sell_cancel_sdt(presenter.phoneNumberChange)}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                />
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:text="@{@string/confirm_transaction_sell_cancel_so_tien_thanh_toan(presenter.sumMoneyTransaction)}"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_14"
+                />
         </LinearLayout>
         <LinearLayout
             android:id="@+id/layout_spinner"
@@ -80,8 +80,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/layout_information"
             android:layout_marginTop="@dimen/dp_20"
-            android:orientation="vertical"
             android:background="@color/white"
+            android:orientation="vertical"
             android:padding="@dimen/dp_16"
             android:visibility="@{ presenter.isShow ? View.VISIBLE : View.GONE }"
             >
@@ -94,10 +94,10 @@
                 />
             <com.viettel.mbccs.widget.SpinnerWithBorder
                 android:id="@+id/spinner_reason_cancel"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_40"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
                 app:adapter="@{ presenter.spinnerReasonCancelAdapter }"
-                    />
+                />
         </LinearLayout>
 
         <LinearLayout
