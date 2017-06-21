@@ -12,11 +12,11 @@ import java.util.List;
 
 public class GetSerialsResponse extends DataResponse {
 
-    @SerializedName("lstSerialSale")
+    @SerializedName("lstSerial")
     @Expose
     private List<SerialBO> mSerialBOs;
 
-    @SerializedName("stockSerial")
+    @SerializedName("serialSale")
     @Expose
     private StockSerial serialSale;
 
