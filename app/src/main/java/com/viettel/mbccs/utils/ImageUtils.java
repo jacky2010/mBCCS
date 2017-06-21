@@ -193,7 +193,7 @@ public class ImageUtils {
         File file = FileUtils.getImageFileByIdName(context, id);
         Bitmap bitmap = decodeBase64ToBitmap(base64);
         FileOutputStream fileOutputStream = new FileOutputStream(file);
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 75, fileOutputStream);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 75, fileOutputStream);
         fileOutputStream.flush();
         fileOutputStream.close();
         return file;
