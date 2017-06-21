@@ -16,28 +16,14 @@
         android:background="@color/grey_four"
         >
 
-        <LinearLayout
+        <com.viettel.mbccs.widget.CustomTextView
             android:id="@+id/txt_create_data"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_margin="@dimen/dp_10"
-            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            >
-            <com.viettel.mbccs.widget.CustomTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@{ @string/create_data_area_text(presenter.progressValueArea) }"
-                />
-            <com.viettel.mbccs.widget.CustomTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="%"
-                />
-        </LinearLayout>
+            android:text="@{ presenter.textProcess }"
+            />
 
         <ProgressBar
             android:id="@+id/progressbar_create_area"
@@ -53,51 +39,10 @@
             android:maxHeight="@dimen/dp_30"
             android:minHeight="@dimen/dp_30"
             android:progressDrawable="@drawable/launch_app_progressbar"
-            bind:animatedProgress="@{ presenter.progressValueArea }"
-            tools:progress="0"
-            style="?android:attr/progressBarStyleHorizontal"
-            />
-
-        <LinearLayout
-            android:id="@+id/txt_download_image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/progressbar_create_area"
-            android:layout_centerInParent="true"
-            android:layout_margin="@dimen/dp_10"
-            android:orientation="horizontal"
-            android:gravity="center"
-            >
-            <com.viettel.mbccs.widget.CustomTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@{ @string/download_image_text(presenter.progressValue) }"
-                />
-            <com.viettel.mbccs.widget.CustomTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="%"
-                />
-        </LinearLayout>
-        <ProgressBar
-            android:id="@+id/progressbar_download_image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_download_image"
-            android:layout_marginEnd="@dimen/dp_30"
-            android:layout_marginLeft="@dimen/dp_30"
-            android:layout_marginRight="@dimen/dp_30"
-            android:layout_marginStart="@dimen/dp_30"
-            android:layout_marginTop="@dimen/dp_6"
-            android:indeterminate="false"
-            android:maxHeight="@dimen/dp_30"
-            android:minHeight="@dimen/dp_30"
-            android:progressDrawable="@drawable/launch_app_progressbar"
             bind:animatedProgress="@{ presenter.progressValue }"
             tools:progress="0"
             style="?android:attr/progressBarStyleHorizontal"
             />
+
     </RelativeLayout>
 </layout>

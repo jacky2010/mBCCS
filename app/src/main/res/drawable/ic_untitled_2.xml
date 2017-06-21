@@ -1,0 +1,18 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:height="208dp"
+    android:viewportHeight="208"
+    android:viewportWidth="208"
+    android:width="208dp">
+    <path
+        android:name="Rectangle 13"
+        android:fillColor="#e5f3fa"
+        android:pathData="m0.03 0h207.88v207.84h-207.88v-207.84z"/>
+    <path
+        android:name="Rectangle 13"
+        android:fillColor="#0a7db5"
+        android:pathData="m6.03 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h3.88v-1zm-204 0v3.44h1v-2.44h3v-1zm206.88 2.13v4h1v-4zm-206.88 3.31v4h1v-4zm206.88 2.69v4h1v-4zm-206.88 3.31v4h1v-4zm206.88 2.69v4h1v-4zm-206.88 3.31v4h1v-4zm206.88 2.69v4h1v-4zm-206.88 3.31v4h1v-4zm206.88 2.69v4h1v-4zm-206.88 3.31v4h1v-4zm206.88 2.69v4h1v-4zm-206.88 3.31v4h1v-4zm206.88 2.69v4h1v-4zm-206.88 3.31v4h1v-4zm206.88 2.69v4h1v-4zm-206.88 3.31v4h1v-4zm206.88 2.69v4h1v-4zm-206.88 3.31v4h1v-4zm206.88 2.69v4h1v-4zm-206.88 3.31v4h1v-4zm206.88 2.69v4h1v-4zm-206.88 3.31v4h1v-4zm206.88 2.69v4h1v-4zm-206.88 3.31v4h1v-4zm206.88 2.69v4h1v-4zm-206.88 3.31v4h1v-4zm206.88 2.69v4h1v-4zm-206.88 3.31v4h1v-4zm206.88 2.69v4h1v-4zm-206.88 3.31v4h1v-4zm206.88 2.69v4h1v-4zm-206.88 3.31v4h1v-4zm206.88 2.69v4h1v-4zm-206.88 3.31v4h1v-4zm206.88 2.69v4h1v-4zm-206.88 3.31v4h1v-4zm206.88 2.69v4h1v-4zm-206.88 3.31v4h1v-4zm206.88 2.69v4h1v-4zm-206.88 3.31v4h1v-4zm206.88 2.69v4h1v-4zm-206.88 3.31v4h1v-4zm206.88 2.69v4h1v-4zm-206.88 3.31v4h1v-4zm206.88 2.69v4h1v-4zm-206.88 3.31v4h1v-4zm206.88 2.69v4h1v-4zm-206.88 3.31v4h1v-4zm206.88 2.69v4h1v-4zm-206.88 3.31v4h1v-4zm206.88 2.69v4h1v-4zm-206.88 3.31v4h1v-4zm206.88 2.69v4h1v-4zm-206.88 3.31v4h1v-4zm206.88 2.69v4h1v-4zm-206.88 3.31v4h1v-4zm206.88 2.69v4h1v-4zm-206.88 3.31v4h1v-4zm206.88 2.69v4h1v-4zm-206.88 3.31v4h1v-4zm206.88 2.69v4h1v-4zm-206.88 3.31v4h1v-4zm206.88 2.69v4h1v-4zm-206.88 3.31v4h1v-4zm206.88 2.69v4h1v-4zm-206.88 3.31v4h1v-4zm206.88 2.69v4h1v-4zm-206.88 3.31v4h1v-4zm1.59 3.41v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm6 0v1h4v-1zm7.28 -0.72v0.72h-1.28v1h2.28v-1.72z"/>
+    <path
+        android:name="Shape 20"
+        android:fillColor="#07618d"
+        android:pathData="m104.45 95.12c-7.07 0 -12.8 5.73 -12.8 12.8c0 7.07 5.73 12.8 12.8 12.8c7.07 0 12.8 -5.73 12.8 -12.8c0 -7.07 -5.73 -12.8 -12.8 -12.8zm0 -7.2c11.04 0 20 8.96 20 20c0 11.04 -8.96 20 -20 20c-11.04 0 -20 -8.96 -20 -20c0 -11.04 8.96 -20 20 -20zm-12 -20 -7.32 8h-12.68c-4.4 0 -8 3.6 -8 8v48c0 4.4 3.6 8 8 8h64c4.4 0 8 -3.6 8 -8v-48c0 -4.4 -3.6 -8 -8 -8h-12.68l-7.32 -8z"/>
+</vector>

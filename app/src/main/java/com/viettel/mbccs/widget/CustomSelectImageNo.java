@@ -24,8 +24,6 @@ import android.widget.LinearLayout;
 import com.bumptech.glide.Glide;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.databinding.LayoutSelectImageNoBinding;
-import com.viettel.mbccs.utils.FileUtils;
-import com.viettel.mbccs.utils.ImageCompressor;
 import com.viettel.mbccs.utils.StringUtils;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -288,7 +286,7 @@ public class CustomSelectImageNo extends LinearLayout {
         if (checkFront) return;
         if (StringUtils.isEmpty(url)) {
             Glide.with(context)
-                    .load(R.drawable.ic_select_image)
+                    .load(R.drawable.ic_untitled_2)
                     .centerCrop()
                     .into(binding.imageFront);
             return;
@@ -296,7 +294,7 @@ public class CustomSelectImageNo extends LinearLayout {
         Glide.with(context)
                 .load(url)
                 .centerCrop()
-                .placeholder(R.drawable.ic_select_image)
+                .placeholder(R.drawable.ic_untitled_2)
                 .into(binding.imageBackside);
     }
 
@@ -304,7 +302,7 @@ public class CustomSelectImageNo extends LinearLayout {
         if (checkBackside) return;
         if (StringUtils.isEmpty(url)) {
             Glide.with(context)
-                    .load(R.drawable.ic_select_image)
+                    .load(R.drawable.ic_untitled_2)
                     .centerCrop()
                     .into(binding.imageBackside);
             return;
@@ -312,7 +310,7 @@ public class CustomSelectImageNo extends LinearLayout {
         Glide.with(context)
                 .load(url)
                 .centerCrop()
-                .placeholder(R.drawable.ic_select_image)
+                .placeholder(R.drawable.ic_untitled_2)
                 .into(binding.imageFront);
     }
 
@@ -320,7 +318,7 @@ public class CustomSelectImageNo extends LinearLayout {
         if (checkPortrait) return;
         if (StringUtils.isEmpty(url)) {
             Glide.with(context)
-                    .load(R.drawable.ic_select_image)
+                    .load(R.drawable.ic_untitled_2)
                     .centerCrop()
                     .into(binding.imagePortrait);
             return;
@@ -328,7 +326,7 @@ public class CustomSelectImageNo extends LinearLayout {
         Glide.with(context)
                 .load(url)
                 .centerCrop()
-                .placeholder(R.drawable.ic_select_image)
+                .placeholder(R.drawable.ic_untitled_2)
                 .into(binding.imagePortrait);
     }
 

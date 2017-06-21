@@ -30,6 +30,7 @@ import rx.subscriptions.CompositeSubscription;
 
 public class DownloadImageService extends IntentService {
 
+    public static final String ACTION_DOWNLOAD_START = "action_download_start";
     public static final String ACTION_DOWNLOAD_COMPLETE = "action_download_complete";
     public static final String ACTION_DOWNLOAD_SUCCESS = "action_download_success";
     public static final String ACTION_DOWNLOAD_FAIL = "action_download_fail";
@@ -43,7 +44,7 @@ public class DownloadImageService extends IntentService {
     private int countImageDownload;
     private int currentImageDownload;
     private int currentProcess;
-    private Intent currentIntent;
+    //    private Intent currentIntent;
 
     public DownloadImageService() {
         super(UploadImageService.class.getName());
@@ -67,12 +68,10 @@ public class DownloadImageService extends IntentService {
 
         List<Image> imageList = userRepository.getImageFromDatabase(ImageDataBase.Status.NO_DATA);
         if (imageList == null || imageList.size() == 0) {
-            currentIntent.setAction(ACTION_DOWNLOAD_COMPLETE);
             LocalBroadcastManager.getInstance(DownloadImageService.this)
-                    .sendBroadcast(currentIntent);
+                    .sendBroadcast(new Intent(ACTION_DOWNLOAD_COMPLETE));
             return;
         }
-        currentIntent = intent;
         countImageDownload = imageList.size();
         List<List<Image>> smallerList = Lists.partition(imageList, Constants.NUM_IMAGE_DOWNLOAD);
         for (int i = 0; i < smallerList.size(); i++) {
@@ -88,6 +87,10 @@ public class DownloadImageService extends IntentService {
     }
 
     private void downloadImage() {
+
+        LocalBroadcastManager.getInstance(DownloadImageService.this)
+                .sendBroadcast(new Intent(ACTION_DOWNLOAD_START));
+
         Subscription s = Observable.create(new Observable.OnSubscribe<DownloadImageResponse>() {
             @Override
             public void call(final Subscriber<? super DownloadImageResponse> subscriber) {
@@ -113,16 +116,14 @@ public class DownloadImageService extends IntentService {
         }).subscribe(new Subscriber<DownloadImageResponse>() {
             @Override
             public void onCompleted() {
-                currentIntent.setAction(ACTION_DOWNLOAD_COMPLETE);
                 LocalBroadcastManager.getInstance(DownloadImageService.this)
-                        .sendBroadcast(currentIntent);
+                        .sendBroadcast(new Intent(ACTION_DOWNLOAD_COMPLETE));
             }
 
             @Override
             public void onError(Throwable e) {
-                currentIntent.setAction(ACTION_DOWNLOAD_FAIL);
                 LocalBroadcastManager.getInstance(DownloadImageService.this)
-                        .sendBroadcast(currentIntent);
+                        .sendBroadcast(new Intent(ACTION_DOWNLOAD_FAIL));
             }
 
             @Override
@@ -141,6 +142,7 @@ public class DownloadImageService extends IntentService {
 
     private void saveImageToDatabase(List<DownloadImageResponse.DataImage> dataImage)
             throws IOException {
+        Intent intentSuccess = new Intent(ACTION_DOWNLOAD_SUCCESS);
         for (DownloadImageResponse.DataImage image : dataImage) {
             File file = ImageUtils.saveBase64ToFile(this, image.getData(), image.getId());
             ImageDataBase imageDataBase = userRepository.getDataImageFromDatabase(image.getId());
@@ -152,10 +154,9 @@ public class DownloadImageService extends IntentService {
             imageDataBase.save();
 
             currentImageDownload += 1;
-            currentIntent.setAction(ACTION_DOWNLOAD_SUCCESS);
-            currentIntent.putExtra(DATA_DOWNLOAD_SUCCESS,
+            intentSuccess.putExtra(DATA_DOWNLOAD_SUCCESS,
                     (int) (((float) currentImageDownload / countImageDownload) * 100));
-            LocalBroadcastManager.getInstance(this).sendBroadcast(currentIntent);
+            LocalBroadcastManager.getInstance(this).sendBroadcast(intentSuccess);
         }
     }
 
