@@ -91,7 +91,7 @@ public class SearchKPPFeedbackFragment extends BaseDataBindFragment<FragmentSear
     @Override
     public void openFeedbackDetail(KPPFeedback item) {
         try {
-            ResponseKPPFeedbackFragment fragment = ResponseKPPFeedbackFragment.newInstance();
+            RespondKPPFeedbackFragment fragment = RespondKPPFeedbackFragment.newInstance();
 
             Bundle args = new Bundle();
             args.putString(Constants.BundleConstant.ITEM_LIST, GsonUtils.Object2String(item));

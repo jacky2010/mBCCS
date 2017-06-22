@@ -408,6 +408,14 @@ public class ApiCode {
     public final static String GetSurveyKPP = "WS_GET_SURVERY";
 
     public final static String UpLoadImage = "WS_upLoad";
+    public final static String GetRegiterSubInfo = "WS_getRegiterSubInfo";
+    public final static String GetListHotNews = "WS_getListHotNews";
+    public final static String GetInfoHotNews = "WS_getInfoHotNews";
+    public final static String GetKppFeedback = "WS_getListFeedback";
+    public final static String GetKppFeedbackInfo = "WS_getInfoFeedback";
+    public final static String CreateKppFeedback = "WS_createFeedback";
+    public final static String SendFeedbackKPP = "WS_sendSurvey";
+    public final static String CreateFeedback = "WS_createFeedback";
     public final static String GetListImageOfProductOnServer = "WS_getListImageOfProductOnServer";
     public final static String GetDetailImageOfProduct = "WS_getDetailImageOfProduct";
 }

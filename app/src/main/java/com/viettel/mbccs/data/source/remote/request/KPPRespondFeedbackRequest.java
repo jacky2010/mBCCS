@@ -7,16 +7,19 @@ import com.google.gson.annotations.SerializedName;
  * Created by minhnx on 6/7/17.
  */
 
-public class GetHotNewsInfoCSKPPRequest {
+public class KPPRespondFeedbackRequest {
+    @Expose
     @SerializedName("username")
-    @Expose
     private String username;
+    @Expose
     @SerializedName("language")
-    @Expose
     private String language;
-    @SerializedName("hotNewsId")
     @Expose
-    private int hotNewsId;
+    @SerializedName("feedbackId")
+    private Long feedbackId;
+    @Expose
+    @SerializedName("content")
+    private String content;
 
     public String getUsername() {
         return username;
@@ -34,11 +37,19 @@ public class GetHotNewsInfoCSKPPRequest {
         this.language = language;
     }
 
-    public int getHotNewsId() {
-        return hotNewsId;
+    public Long getFeedbackId() {
+        return feedbackId;
     }
 
-    public void setHotNewsId(int hotNewsId) {
-        this.hotNewsId = hotNewsId;
+    public void setFeedbackId(Long feedbackId) {
+        this.feedbackId = feedbackId;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }

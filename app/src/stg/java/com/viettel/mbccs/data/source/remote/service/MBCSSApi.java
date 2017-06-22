@@ -44,7 +44,7 @@ import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
 import com.viettel.mbccs.data.source.remote.request.GetUserInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.KPPFeedbackRequest;
 import com.viettel.mbccs.data.source.remote.request.KPPOrderRequest;
-import com.viettel.mbccs.data.source.remote.request.KPPResponseFeedbackRequest;
+import com.viettel.mbccs.data.source.remote.request.KPPRespondFeedbackRequest;
 import com.viettel.mbccs.data.source.remote.request.LoginRequest;
 import com.viettel.mbccs.data.source.remote.request.PassResetRequest;
 import com.viettel.mbccs.data.source.remote.request.RefillAnyPayRequest;
@@ -95,8 +95,7 @@ import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSurveyKPPResponse;
 import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
 import com.viettel.mbccs.data.source.remote.response.KPPFeedbackResponse;
-import com.viettel.mbccs.data.source.remote.response.KPPResponseFeedbackResponse;
-import com.viettel.mbccs.data.source.remote.response.PassResetResponse;
+import com.viettel.mbccs.data.source.remote.response.KPPRespondFeedbackResponse;
 import com.viettel.mbccs.data.source.remote.response.RefillAnyPayResponse;
 import com.viettel.mbccs.data.source.remote.response.RegisterCustomerInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.SellAnypayToChannelResponse;
@@ -323,8 +322,8 @@ public interface MBCSSApi {
             @Body DataRequest<KPPFeedbackRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<ServerDataResponse<BaseResponse<KPPResponseFeedbackResponse>>> kppResponseFeedback(
-            @Body DataRequest<KPPResponseFeedbackRequest> request);
+    Observable<ServerDataResponse<BaseResponse<KPPRespondFeedbackResponse>>> kppResponseFeedback(
+            @Body DataRequest<KPPRespondFeedbackRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<UploadImageResponse>>> uploadImage(

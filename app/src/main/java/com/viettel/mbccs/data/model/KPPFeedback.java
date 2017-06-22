@@ -9,8 +9,11 @@ import com.google.gson.annotations.SerializedName;
 
 public class KPPFeedback {
 
-    private static final  int MAX_CONTENT_SHORTENED = 160;
+    private static final int MAX_CONTENT_SHORTENED = 160;
 
+    @Expose
+    @SerializedName("id")
+    private Long id;
     @Expose
     @SerializedName("title")
     private String title;
@@ -18,18 +21,26 @@ public class KPPFeedback {
     @SerializedName("content")
     private String content;
     @Expose
-    @SerializedName("create_date")
+    @SerializedName("createDate")
     private String createDate;
     @Expose
-    @SerializedName("creator")
-    private String creator;
+    @SerializedName("createUser")
+    private String createUser;
     @Expose
-    @SerializedName("response_date")
-    private String responseDate;
+    @SerializedName("updateDate")
+    private String updateDate;
     @Expose
-    @SerializedName("response_user")
-    private String responseUser;
-
+    @SerializedName("updateUser")
+    private String updateUser;
+    @Expose
+    @SerializedName("ownerCode")
+    private String ownerCode;
+    @Expose
+    @SerializedName("lang")
+    private String lang;
+    @Expose
+    @SerializedName("status")
+    private String status;
     @Expose
     @SerializedName("response")
     private String response;
@@ -58,28 +69,60 @@ public class KPPFeedback {
         this.createDate = createDate;
     }
 
-    public String getCreator() {
-        return creator;
+    public Long getId() {
+        return id;
     }
 
-    public void setCreator(String creator) {
-        this.creator = creator;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getResponseDate() {
-        return responseDate;
+    public String getCreateUser() {
+        return createUser;
     }
 
-    public void setResponseDate(String responseDate) {
-        this.responseDate = responseDate;
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser;
     }
 
-    public String getResponseUser() {
-        return responseUser;
+    public String getUpdateDate() {
+        return updateDate;
     }
 
-    public void setResponseUser(String responseUser) {
-        this.responseUser = responseUser;
+    public void setUpdateDate(String updateDate) {
+        this.updateDate = updateDate;
+    }
+
+    public String getUpdateUser() {
+        return updateUser;
+    }
+
+    public void setUpdateUser(String updateUser) {
+        this.updateUser = updateUser;
+    }
+
+    public String getOwnerCode() {
+        return ownerCode;
+    }
+
+    public void setOwnerCode(String ownerCode) {
+        this.ownerCode = ownerCode;
+    }
+
+    public String getLang() {
+        return lang;
+    }
+
+    public void setLang(String lang) {
+        this.lang = lang;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getResponse() {
@@ -90,30 +133,28 @@ public class KPPFeedback {
         this.response = response;
     }
 
-    public String getContentShort(){
-        try{
-            if(content != null)
-            {
-                if(content.length() > MAX_CONTENT_SHORTENED)
+    public String getContentShort() {
+        try {
+            if (content != null) {
+                if (content.length() > MAX_CONTENT_SHORTENED)
                     return content.substring(0, MAX_CONTENT_SHORTENED - 3) + "...";
                 return content;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return null;
     }
 
-    public String getResponseShort(){
-        try{
-            if(response != null)
-            {
-                if(response.length() > MAX_CONTENT_SHORTENED)
+    public String getResponseShort() {
+        try {
+            if (response != null) {
+                if (response.length() > MAX_CONTENT_SHORTENED)
                     return response.substring(0, MAX_CONTENT_SHORTENED - 3) + "...";
                 return response;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

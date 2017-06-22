@@ -236,47 +236,47 @@ public class UpdateSimPresenter implements UpdateSimContract.Presenter {
                 isValid = false;
             }
 
-            if (!isPrepaid.get()) {
-                if (TextUtils.isEmpty(contact1.get())) {
-                    contact1Error.set(context.getString(R.string.input_empty));
-                    isValid = false;
-                } else if (!TextUtils.isEmpty(contact1.get()) && !ValidateUtils.isPhoneNumberValid(contact1.get())) {
-                    contact1Error.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.change_sim_label_contact_1)));
-                    isValid = false;
-                }
-
-                if (TextUtils.isEmpty(contact2.get())) {
-                    contact2Error.set(context.getString(R.string.input_empty));
-                    isValid = false;
-                } else if (!TextUtils.isEmpty(contact2.get()) && !ValidateUtils.isPhoneNumberValid(contact2.get())) {
-                    contact2Error.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.change_sim_label_contact_2)));
-                    isValid = false;
-                }
-
-                if (TextUtils.isEmpty(contact3.get())) {
-                    contact3Error.set(context.getString(R.string.input_empty));
-                    isValid = false;
-                } else if (!TextUtils.isEmpty(contact3.get()) && !ValidateUtils.isPhoneNumberValid(contact3.get())) {
-                    contact3Error.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.change_sim_label_contact_3)));
-                    isValid = false;
-                }
-
-                if (TextUtils.isEmpty(contact4.get())) {
-                    contact4Error.set(context.getString(R.string.input_empty));
-                    isValid = false;
-                } else if (!TextUtils.isEmpty(contact4.get()) && !ValidateUtils.isPhoneNumberValid(contact4.get())) {
-                    contact4Error.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.change_sim_label_contact_4)));
-                    isValid = false;
-                }
-
-                if (TextUtils.isEmpty(contact5.get())) {
-                    contact5Error.set(context.getString(R.string.input_empty));
-                    isValid = false;
-                } else if (!TextUtils.isEmpty(contact5.get()) && !ValidateUtils.isPhoneNumberValid(contact5.get())) {
-                    contact5Error.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.change_sim_label_contact_5)));
-                    isValid = false;
-                }
+//            if (!isPrepaid.get()) {
+            if (TextUtils.isEmpty(contact1.get())) {
+                contact1Error.set(context.getString(R.string.input_empty));
+                isValid = false;
+            } else if (!TextUtils.isEmpty(contact1.get()) && !ValidateUtils.isPhoneNumberValid(contact1.get())) {
+                contact1Error.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.change_sim_label_contact_1)));
+                isValid = false;
             }
+
+            if (TextUtils.isEmpty(contact2.get())) {
+                contact2Error.set(context.getString(R.string.input_empty));
+                isValid = false;
+            } else if (!TextUtils.isEmpty(contact2.get()) && !ValidateUtils.isPhoneNumberValid(contact2.get())) {
+                contact2Error.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.change_sim_label_contact_2)));
+                isValid = false;
+            }
+
+            if (TextUtils.isEmpty(contact3.get())) {
+                contact3Error.set(context.getString(R.string.input_empty));
+                isValid = false;
+            } else if (!TextUtils.isEmpty(contact3.get()) && !ValidateUtils.isPhoneNumberValid(contact3.get())) {
+                contact3Error.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.change_sim_label_contact_3)));
+                isValid = false;
+            }
+
+            if (TextUtils.isEmpty(contact4.get())) {
+                contact4Error.set(context.getString(R.string.input_empty));
+                isValid = false;
+            } else if (!TextUtils.isEmpty(contact4.get()) && !ValidateUtils.isPhoneNumberValid(contact4.get())) {
+                contact4Error.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.change_sim_label_contact_4)));
+                isValid = false;
+            }
+
+            if (TextUtils.isEmpty(contact5.get())) {
+                contact5Error.set(context.getString(R.string.input_empty));
+                isValid = false;
+            } else if (!TextUtils.isEmpty(contact5.get()) && !ValidateUtils.isPhoneNumberValid(contact5.get())) {
+                contact5Error.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.change_sim_label_contact_5)));
+                isValid = false;
+            }
+//            }
 
             if (!isValid)
                 return;

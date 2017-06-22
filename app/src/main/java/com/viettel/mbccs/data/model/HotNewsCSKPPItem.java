@@ -9,17 +9,46 @@ import com.google.gson.annotations.SerializedName;
 
 public class HotNewsCSKPPItem {
 
-    private static final  int MAX_CONTENT_SHORTENED = 160;
+    private static final int MAX_CONTENT_SHORTENED = 160;
 
+    @Expose
+    @SerializedName("id")
+    private int id;
     @Expose
     @SerializedName("title")
     private String title;
     @Expose
-    @SerializedName("create_date")
+    @SerializedName("createDate")
     private String createDate;
     @Expose
     @SerializedName("content")
     private String content;
+    @Expose
+    @SerializedName("content")
+    private String createUser;
+    @Expose
+    @SerializedName("status")
+    private String status;
+    @Expose
+    @SerializedName("ownerCode")
+    private String ownerCode;
+    @Expose
+    @SerializedName("lang")
+    private String lang;
+    @Expose
+    @SerializedName("updateDate")
+    private String updateDate;
+    @Expose
+    @SerializedName("updateUser")
+    private String updateUser;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
@@ -45,15 +74,62 @@ public class HotNewsCSKPPItem {
         this.content = content;
     }
 
-    public String getContentShort(){
-        try{
-            if(content != null)
-            {
-                if(content.length() > MAX_CONTENT_SHORTENED)
+    public String getCreateUser() {
+        return createUser;
+    }
+
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getOwnerCode() {
+        return ownerCode;
+    }
+
+    public void setOwnerCode(String ownerCode) {
+        this.ownerCode = ownerCode;
+    }
+
+    public String getLang() {
+        return lang;
+    }
+
+    public void setLang(String lang) {
+        this.lang = lang;
+    }
+
+    public String getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(String updateDate) {
+        this.updateDate = updateDate;
+    }
+
+    public String getUpdateUser() {
+        return updateUser;
+    }
+
+    public void setUpdateUser(String updateUser) {
+        this.updateUser = updateUser;
+    }
+
+    public String getContentShort() {
+        try {
+            if (content != null) {
+                if (content.length() > MAX_CONTENT_SHORTENED)
                     return content.substring(0, MAX_CONTENT_SHORTENED - 3) + "...";
                 return content;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

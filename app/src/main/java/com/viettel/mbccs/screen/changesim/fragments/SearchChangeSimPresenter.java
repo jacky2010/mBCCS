@@ -15,8 +15,10 @@ import com.viettel.mbccs.data.model.KeyValue;
 import com.viettel.mbccs.data.source.ChangeSimRepository;
 import com.viettel.mbccs.data.source.remote.request.CheckDebitChangeSimRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
+import com.viettel.mbccs.data.source.remote.request.GetRegiterSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.DataResponse;
+import com.viettel.mbccs.data.source.remote.response.GetRegiterSubInfoResponse;
 import com.viettel.mbccs.screen.changesim.adapter.ChangeSimListAdapter;
 import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.GsonUtils;
@@ -200,49 +202,89 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
 
             boolean isValid = true;
 
-            if (TextUtils.isEmpty(isdn.get())) {
+            if ((documentType.get() == null || "".equals(documentType.get().trim())) && TextUtils.isEmpty(isdn.get())) {
                 isdnError.set(context.getString(R.string.input_empty));
                 isValid = false;
             }
 
-            if (documentType.get() == null || "".equals(documentType.get().trim())) {
-                viewModel.showError(context.getString(R.string.change_sim_error_search_documentType_required));
-                isValid = false;
-            }
+            if (TextUtils.isEmpty(isdn.get())) {
+                if (documentType.get() == null || "".equals(documentType.get().trim())) {
+                    viewModel.showError(context.getString(R.string.change_sim_error_search_documentType_required));
+                    isValid = false;
+                }
 
-            if (TextUtils.isEmpty(documentId.get())) {
-                documentIdError.set(context.getString(R.string.input_empty));
-                isValid = false;
+                if (TextUtils.isEmpty(documentId.get())) {
+                    documentIdError.set(context.getString(R.string.input_empty));
+                    isValid = false;
+                }
             }
 
             if (!isValid)
                 return;
 
-            List<ChangeSimItem> items = new ArrayList<>();
+            final List<ChangeSimItem> items = new ArrayList<>();
+            viewModel.showLoading();
 
-            ChangeSimItem item = new ChangeSimItem();
-            item.setChangeSimInfo(new ChangeSimInfo("123456789", "987654321"));
+            DataRequest<GetRegiterSubInfoRequest> baseRequest = new DataRequest<>();
+            baseRequest.setApiCode(ApiCode.GetRegisterSubInfo);
+            GetRegiterSubInfoRequest request = new GetRegiterSubInfoRequest();
+            request.setIsdn(isdn.get());
+            request.setIdNo(documentId.get());
+            request.setIdType(documentType.get());
+            baseRequest.setParameterApi(request);
 
-            items.add(item);
+            Subscription subscription =
+                    changeSimRepository.getRegiterSubInfo(baseRequest)
+                            .subscribe(new MBCCSSubscribe<GetRegiterSubInfoResponse>() {
+                                @Override
+                                public void onSuccess(GetRegiterSubInfoResponse object) {
+                                    try {
+                                        if (Constants.Service.RESPONSE_OK.equals(object.getErrorCode())) {
 
-            item = new ChangeSimItem();
-            item.setChangeSimInfo(new ChangeSimInfo("1234567899", "9876543211"));
+                                            ChangeSimItem item = new ChangeSimItem();
+                                            item.setSubscriber(object.getSubscriber());
+                                            item.setCustomer(object.getCustomer());
+                                            item.setChangeSimInfo(new ChangeSimInfo(item.getSubscriber().getSerial(), null));
 
-            items.add(item);
+                                            items.add(item);
 
-            changeSimAdapter.setBranchItems(items);
+                                            changeSimAdapter.setItems(items);
 
-            changeSimListAdapter.set(changeSimAdapter);
+                                            changeSimListAdapter.set(changeSimAdapter);
 
-            if (changeSimAdapter.getItemCount() > 0) {
-                searchFound.set(true);
+                                            if (changeSimAdapter.getItemCount() > 0) {
+                                                searchFound.set(true);
 
-                viewModel.onSimFound(isdn.get(), documentType.get(), documentId.get());
-            } else {
-                searchFound.set(false);
+                                                viewModel.onSimFound(isdn.get(), documentType.get(), documentId.get());
+                                            } else {
+                                                searchFound.set(false);
 
-                viewModel.onSimNotFound(isdn.get(), documentType.get(), documentId.get());
-            }
+                                                viewModel.onSimNotFound(isdn.get(), documentType.get(), documentId.get());
+                                            }
+
+                                        } else {
+                                            DialogUtils.showDialogError(context, null, context.getString(R.string.change_sim_error_recent_calls_not_valid),
+                                                    null);
+                                        }
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                                @Override
+                                public void onError(BaseException error) {
+                                    DialogUtils.showDialogError(context, null, error.getMessage(),
+                                            null);
+                                }
+
+                                @Override
+                                public void onRequestFinish() {
+                                    super.onRequestFinish();
+                                    viewModel.hideLoading();
+                                }
+                            });
+
+            mSubscriptions.add(subscription);
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -9,7 +9,9 @@ import com.viettel.mbccs.data.source.remote.request.ChangeSimRequest;
 import com.viettel.mbccs.data.source.remote.request.CheckCalledIsdnsRequest;
 import com.viettel.mbccs.data.source.remote.request.CheckDebitChangeSimRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
+import com.viettel.mbccs.data.source.remote.request.GetRegiterSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.response.DataResponse;
+import com.viettel.mbccs.data.source.remote.response.GetRegiterSubInfoResponse;
 
 import java.util.List;
 
@@ -67,5 +69,10 @@ public class ChangeSimRepository implements IChangeSimLocalDataSource, IChangeSi
     @Override
     public Observable<DataResponse> changeSim(DataRequest<ChangeSimRequest> request) {
         return remoteDataSource.changeSim(request);
+    }
+
+    @Override
+    public Observable<GetRegiterSubInfoResponse> getRegiterSubInfo(DataRequest<GetRegiterSubInfoRequest> request) {
+        return remoteDataSource.getRegiterSubInfo(request);
     }
 }

@@ -5,12 +5,25 @@ import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.view.View;
 
+import com.viettel.mbccs.R;
+import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.KPPFeedback;
 import com.viettel.mbccs.data.source.KPPFeedbackRepository;
+import com.viettel.mbccs.data.source.UserRepository;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
+import com.viettel.mbccs.data.source.remote.request.GetKPPFeedbackRequest;
+import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.GetKPPFeedbackResponse;
 import com.viettel.mbccs.screen.kppfeedback.adapters.KPPFeedbackListAdapter;
+import com.viettel.mbccs.utils.DialogUtils;
+import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
+import com.viettel.mbccs.variable.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import rx.Subscription;
+import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by minhnx on 5/19/17.
@@ -25,6 +38,8 @@ public class SearchKPPFeedbackPresenter implements SearchKPPFeedbackContract.Pre
     public ObservableBoolean searchFound;
     public ObservableField<KPPFeedbackListAdapter> feedbacksListAdapter;
     private KPPFeedbackRepository feedbackRepository;
+    private UserRepository userRepository;
+    private CompositeSubscription mSubscriptions;
 
     public SearchKPPFeedbackPresenter(Context context, final SearchKPPFeedbackContract.ViewModel viewModel) {
         this.context = context;
@@ -40,9 +55,8 @@ public class SearchKPPFeedbackPresenter implements SearchKPPFeedbackContract.Pre
             }
         });
 
-        feedbackRepository = KPPFeedbackRepository.getInstance();
-
         initListeners();
+        initData();
         searchFeedbacks();
     }
 
@@ -52,6 +66,11 @@ public class SearchKPPFeedbackPresenter implements SearchKPPFeedbackContract.Pre
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void initData() {
+        feedbackRepository = KPPFeedbackRepository.getInstance();
+        mSubscriptions = new CompositeSubscription();
     }
 
     @Override
@@ -68,33 +87,61 @@ public class SearchKPPFeedbackPresenter implements SearchKPPFeedbackContract.Pre
     public void searchFeedbacks() {
         try {
 
-            List<KPPFeedback> items = new ArrayList<>();
-            KPPFeedback item = new KPPFeedback();
-            item.setTitle("[Video] Honda sẽ có xe tự hành hoàn toàn vào năm 2025");
-            item.setContent("Trong kế hoạch trung hạn Vision 2030, Honda cho biết họ sẽ thúc đẩy sự phối hợp giữa các khâu Nghiên cứu & Phát triển, Thu mua và Sản xuất, vươn xa hơn những loại động cơ truyền thống và những chiếc xe vận hành theo cách thông thường.\n" +
-                    "Theo CEO Honda, ông Takahiro Hachigo, Honda sẽ đặt ưu tiên cao nhất cho việc thúc đẩy phát triển nhanh công nghệ an toàn tiến tiến và xe điện.\n");
-            item.setCreateDate("1/1/2016");
+            final List<KPPFeedback> items = new ArrayList<>();
+            viewModel.showLoading();
 
-            items.add(item);
+            DataRequest<GetKPPFeedbackRequest> baseRequest = new DataRequest<>();
+            baseRequest.setApiCode(ApiCode.GetKppFeedback);
+            GetKPPFeedbackRequest request = new GetKPPFeedbackRequest();
+            request.setUsername(userRepository.getUser() != null ? userRepository.getUser().getUserName() : null);
+            request.setLanguage(userRepository.getLanguageFromSharePrefs());
+            request.setOwnerCode((userRepository.getUserInfo() != null && userRepository.getUserInfo().getChannelInfo() != null) ? userRepository.getUserInfo().getChannelInfo().getChannelCode() : null);
+            baseRequest.setParameterApi(request);
 
-            item = new KPPFeedback();
-            item.setTitle("Demo 2");
-            item.setContent("Survey 2");
-            item.setCreateDate("1/2/2017");
+            Subscription subscription =
+                    feedbackRepository.getFeedback(baseRequest)
+                            .subscribe(new MBCCSSubscribe<GetKPPFeedbackResponse>() {
+                                @Override
+                                public void onSuccess(GetKPPFeedbackResponse object) {
+                                    try {
+                                        if (Constants.Service.RESPONSE_OK.equals(object.getErrorCode())) {
 
-            items.add(item);
+                                            items.addAll(object.getListFeedback());
 
-            feedbackAdapter.setFeedbackItems(items);
+                                            feedbackAdapter.setFeedbackItems(items);
 
-            feedbacksListAdapter.set(feedbackAdapter);
+                                            feedbacksListAdapter.set(feedbackAdapter);
 
-            if (feedbackAdapter.getItemCount() > 0) {
-                searchFound.set(true);
-            } else {
-                searchFound.set(false);
-            }
+                                            if (feedbackAdapter.getItemCount() > 0) {
+                                                searchFound.set(true);
+                                            } else {
+                                                searchFound.set(false);
+                                            }
 
-            viewModel.onSearchCompleted();
+                                            viewModel.onSearchCompleted();
+                                        } else {
+                                            DialogUtils.showDialogError(context, null, context.getString(R.string.change_sim_error_recent_calls_not_valid),
+                                                    null);
+                                        }
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                                @Override
+                                public void onError(BaseException error) {
+                                    DialogUtils.showDialogError(context, null, error.getMessage(),
+                                            null);
+                                }
+
+                                @Override
+                                public void onRequestFinish() {
+                                    super.onRequestFinish();
+                                    viewModel.hideLoading();
+                                }
+                            });
+
+            mSubscriptions.add(subscription);
 
         } catch (Exception e) {
             e.printStackTrace();

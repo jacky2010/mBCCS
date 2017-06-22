@@ -5,7 +5,9 @@ import com.viettel.mbccs.data.source.remote.request.ChangeSimRequest;
 import com.viettel.mbccs.data.source.remote.request.CheckCalledIsdnsRequest;
 import com.viettel.mbccs.data.source.remote.request.CheckDebitChangeSimRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
+import com.viettel.mbccs.data.source.remote.request.GetRegiterSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.response.DataResponse;
+import com.viettel.mbccs.data.source.remote.response.GetRegiterSubInfoResponse;
 import com.viettel.mbccs.data.source.remote.service.RequestHelper;
 import com.viettel.mbccs.utils.rx.SchedulerUtils;
 
@@ -45,6 +47,14 @@ public class ChangeSimRemoteDataSource implements IChangeSimRemoteDataSource {
                 .changeSim(request)
                 .flatMap(SchedulerUtils.<DataResponse>convertDataFlatMap())
                 .compose(SchedulerUtils.<DataResponse>applyAsyncSchedulers());
+    }
+
+    @Override
+    public Observable<GetRegiterSubInfoResponse> getRegiterSubInfo(DataRequest<GetRegiterSubInfoRequest> request) {
+        return RequestHelper.getRequest()
+                .getRegiterSubInfo(request)
+                .flatMap(SchedulerUtils.<GetRegiterSubInfoResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<GetRegiterSubInfoResponse>applyAsyncSchedulers());
     }
 
     public static ChangeSimRemoteDataSource getInstance() {

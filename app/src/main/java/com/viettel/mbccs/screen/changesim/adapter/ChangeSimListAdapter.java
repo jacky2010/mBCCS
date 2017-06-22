@@ -43,7 +43,7 @@ public class ChangeSimListAdapter extends RecyclerView.Adapter<ChangeSimListAdap
         return mChangeSimItems;
     }
 
-    public void setBranchItems(List<ChangeSimItem> items) {
+    public void setItems(List<ChangeSimItem> items) {
         mChangeSimItems = items;
     }
 

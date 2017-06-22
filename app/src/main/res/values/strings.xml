@@ -860,6 +860,7 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="kpp_feedback_label_response_feedback">Kết quả xử lý</string>
     <string name="kpp_feedback_msg_info_sent_response_feedback">Cập nhật kết quả thành công!</string>
     <string name="kpp_feedback_msg_info_empty_feedback">Không có phản ánh nào!</string>
+    <string name="kpp_feedback_label_title">Phản ánh từ SĐT: %s</string>
     <!--/kpp feedback-->
 
     <string name="activity_upload_image_title">Upload ảnh</string>

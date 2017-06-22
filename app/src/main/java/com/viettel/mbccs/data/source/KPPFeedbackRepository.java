@@ -8,11 +8,11 @@ import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetKPPFeedbackInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.GetKPPFeedbackRequest;
 import com.viettel.mbccs.data.source.remote.request.KPPFeedbackRequest;
-import com.viettel.mbccs.data.source.remote.request.KPPResponseFeedbackRequest;
+import com.viettel.mbccs.data.source.remote.request.KPPRespondFeedbackRequest;
 import com.viettel.mbccs.data.source.remote.response.GetKPPFeedbackInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetKPPFeedbackResponse;
 import com.viettel.mbccs.data.source.remote.response.KPPFeedbackResponse;
-import com.viettel.mbccs.data.source.remote.response.KPPResponseFeedbackResponse;
+import com.viettel.mbccs.data.source.remote.response.KPPRespondFeedbackResponse;
 
 import rx.Observable;
 
@@ -56,7 +56,7 @@ public class KPPFeedbackRepository implements IKPPFeedbackLocalDataSource, IKPPF
     }
 
     @Override
-    public Observable<KPPResponseFeedbackResponse> responseFeedback(DataRequest<KPPResponseFeedbackRequest> request) {
+    public Observable<KPPRespondFeedbackResponse> responseFeedback(DataRequest<KPPRespondFeedbackRequest> request) {
         return remoteDataSource.responseFeedback(request);
     }
 }

@@ -131,7 +131,7 @@ public class DialogConfirmUpdateSimFragment extends BaseDialog {
             ChangeSimRequest request = new ChangeSimRequest();
             request.setIsdn(changeSimItem.getSubscriber().getIsdn());
             request.setSerial(changeSimItem.getChangeSimInfo().getNewSerial());
-            request.setSubType("1");//TODO minhnx
+            request.setSubType(changeSimItem.getSubscriber().getSubType());
 
 
             baseRequest.setParameterApi(request);

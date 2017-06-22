@@ -8,7 +8,7 @@ import android.widget.Toast;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindFragment;
 import com.viettel.mbccs.data.model.KPPFeedback;
-import com.viettel.mbccs.databinding.FragmentResponseKppFeedbackBinding;
+import com.viettel.mbccs.databinding.FragmentRespondKppFeedbackBinding;
 import com.viettel.mbccs.utils.GsonUtils;
 import com.viettel.mbccs.variable.Constants;
 
@@ -16,17 +16,17 @@ import com.viettel.mbccs.variable.Constants;
  * Created by minhnx on 5/20/17.
  */
 
-public class ResponseKPPFeedbackFragment extends BaseDataBindFragment<FragmentResponseKppFeedbackBinding, ResponseKPPFeedbackPresenter>
-        implements ResponseKPPFeedbackContract.ViewModel {
+public class RespondKPPFeedbackFragment extends BaseDataBindFragment<FragmentRespondKppFeedbackBinding, RespondKPPFeedbackPresenter>
+        implements RespondKPPFeedbackContract.ViewModel {
 
     private AppCompatActivity mActivity;
 
-    public static ResponseKPPFeedbackFragment newInstance() {
-        return new ResponseKPPFeedbackFragment();
+    public static RespondKPPFeedbackFragment newInstance() {
+        return new RespondKPPFeedbackFragment();
     }
 
     @Override
-    public void setPresenter(ResponseKPPFeedbackContract.Presenter presenter) {
+    public void setPresenter(RespondKPPFeedbackContract.Presenter presenter) {
 
     }
 
@@ -42,7 +42,7 @@ public class ResponseKPPFeedbackFragment extends BaseDataBindFragment<FragmentRe
 
     @Override
     protected void initData() {
-        mPresenter = new ResponseKPPFeedbackPresenter(getContext(), this);
+        mPresenter = new RespondKPPFeedbackPresenter(getContext(), this);
         mBinding.setPresenter(mPresenter);
 
         initListeners();
@@ -61,7 +61,7 @@ public class ResponseKPPFeedbackFragment extends BaseDataBindFragment<FragmentRe
 
     @Override
     protected int getIdLayoutRes() {
-        return R.layout.fragment_response_kpp_feedback;
+        return R.layout.fragment_respond_kpp_feedback;
     }
 
     @Override
