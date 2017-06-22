@@ -24,7 +24,7 @@ public class HotNewsCSKPPItem {
     @SerializedName("content")
     private String content;
     @Expose
-    @SerializedName("content")
+    @SerializedName("createUser")
     private String createUser;
     @Expose
     @SerializedName("status")
