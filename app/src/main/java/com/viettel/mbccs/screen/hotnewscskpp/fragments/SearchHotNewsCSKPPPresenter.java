@@ -17,7 +17,6 @@ import com.viettel.mbccs.data.source.remote.response.GetHotNewsCSKPPResponse;
 import com.viettel.mbccs.screen.hotnewscskpp.adapters.HotNewsCSKPPListAdapter;
 import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
-import com.viettel.mbccs.variable.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,7 +105,7 @@ public class SearchHotNewsCSKPPPresenter implements SearchHotNewsCSKPPContract.P
                                 @Override
                                 public void onSuccess(GetHotNewsCSKPPResponse object) {
                                     try {
-                                        if (Constants.Service.RESPONSE_OK.equals(object.getErrorCode())) {
+                                        if (object != null) {
 
                                             items.addAll(object.getListHotNews());
 
@@ -122,7 +121,7 @@ public class SearchHotNewsCSKPPPresenter implements SearchHotNewsCSKPPContract.P
 
                                             viewModel.onSearchCompleted();
                                         } else {
-                                            DialogUtils.showDialogError(context, null, context.getString(R.string.change_sim_error_recent_calls_not_valid),
+                                            DialogUtils.showDialogError(context, null, context.getString(R.string.common_msg_error_general),
                                                     null);
                                         }
                                     } catch (Exception e) {

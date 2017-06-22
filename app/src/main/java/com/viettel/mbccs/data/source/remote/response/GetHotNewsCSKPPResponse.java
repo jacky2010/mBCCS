@@ -10,7 +10,7 @@ import java.util.List;
  * Created by minhnx on 6/7/17.
  */
 
-public class GetHotNewsCSKPPResponse extends DataResponse {
+public class GetHotNewsCSKPPResponse{
     @Expose
     @SerializedName("listHotNews")
     private List<HotNewsCSKPPItem> listHotNews;

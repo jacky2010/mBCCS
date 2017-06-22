@@ -101,7 +101,7 @@ public class SendKPPFeedbackPresenter implements SendKPPFeedbackContract.Present
             request.setLanguage(userRepository.getLanguageFromSharePrefs());
             request.setDescription(context.getString(R.string.kpp_feedback_label_title, userRepository.getUser() != null ? userRepository.getUser().getUserName() : null));
             request.setContent(content.get());
-            request.setOwnerCode(null);//TODO minhnx owner code?
+            request.setOwnerCode((userRepository.getUserInfo() != null && userRepository.getUserInfo().getChannelInfo() != null) ? userRepository.getUserInfo().getChannelInfo().getChannelCode() : null);
             baseRequest.setParameterApi(request);
 
             Subscription subscription =
