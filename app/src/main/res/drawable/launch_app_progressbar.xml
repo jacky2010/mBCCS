@@ -15,9 +15,13 @@
         <clip>
             <shape>
                 <corners android:radius="@dimen/dp_4"/>
-                <!--<gradient-->
-                    <!--android:angle="0"-->
-                    <!--android:centerColor="@color/colorAccent"/>-->
+
+                <gradient
+                    android:angle="0"
+                    android:centerColor="@color/colorAccent"
+                    android:startColor="@color/colorAccent"
+                    android:endColor="@color/colorAccent"
+                    />
                 <stroke
                 android:color="@color/colorAccent"
                 android:width="@dimen/dp_1"/>

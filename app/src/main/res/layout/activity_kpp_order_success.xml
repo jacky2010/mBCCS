@@ -17,7 +17,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorAccent"
             android:gravity="center"
-            android:text="@string/notice"
+            android:text="@string/common_label_notice"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_17"
             />

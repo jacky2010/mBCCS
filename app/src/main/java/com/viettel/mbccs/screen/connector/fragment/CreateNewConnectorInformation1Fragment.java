@@ -1,26 +1,29 @@
 package com.viettel.mbccs.screen.connector.fragment;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.viettel.mbccs.R;
+import com.viettel.mbccs.base.BaseFragment;
 import com.viettel.mbccs.data.model.Contract;
 import com.viettel.mbccs.data.model.Customer;
+import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.databinding.FragmentCreateNewConnectorInformation1Binding;
+import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.widget.CustomSelectImageNo;
 
 /**
  * Created by HuyQuyet on 6/4/17.
  */
 
-public class CreateNewConnectorInformation1Fragment extends Fragment
+public class CreateNewConnectorInformation1Fragment extends BaseFragment
         implements CreateNewConnectorInformationFragmentContract.ViewFragment1,
         CustomSelectImageNo.SelectImageCallback {
     public static final String STRING_NAME = "CreateNewConnectorInformation1Fragment";
@@ -66,7 +69,7 @@ public class CreateNewConnectorInformation1Fragment extends Fragment
         presenter.subscribe();
         binding.setPresenter(presenter);
         binding.imageSelect.setSelectImageCallback(this);
-        presenter.setData(customer, contract);
+        presenter.loadDataCreateView1();
     }
 
     @Override
@@ -85,12 +88,12 @@ public class CreateNewConnectorInformation1Fragment extends Fragment
 
     @Override
     public void showLoading() {
-        showLoading();
+        showLoadingDialog();
     }
 
     @Override
     public void hideLoading() {
-        hideLoading();
+        hideLoadingDialog();
     }
 
     @Override
@@ -122,6 +125,21 @@ public class CreateNewConnectorInformation1Fragment extends Fragment
     @Override
     public Bitmap imagePortrait() {
         return binding.imageSelect.getBitmapImagePortrait();
+    }
+
+    @Override
+    public void loadDataSpinnerError(BaseException error) {
+        DialogUtils.showDialogError(getActivity(), error, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                getActivity().getSupportFragmentManager().popBackStack();
+            }
+        }, false);
+    }
+
+    @Override
+    public void loadDataSpinnerSuccess() {
+        presenter.setData(customer, contract);
     }
 
     @Override

@@ -14,6 +14,8 @@ public interface LoginContract {
 
         void onLoginSuccess();
 
+        void gotoDownloadImage();
+
         void onForgotPassword(String username);
 
         void showError(int type, @Nullable String message);

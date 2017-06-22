@@ -1,11 +1,11 @@
 package com.viettel.mbccs.screen;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
+import butterknife.BindView;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseActivity;
 import com.viettel.mbccs.constance.IconType;
@@ -15,11 +15,8 @@ import com.viettel.mbccs.utils.ImageUtils;
 import com.viettel.mbccs.widget.CustomTextView;
 import com.viettel.mbccs.widget.MultiDirectionSlidingDrawer;
 import com.viettel.mbccs.widget.ToolBarView;
-
-import butterknife.BindView;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import rx.Subscriber;
 
 /**
@@ -112,7 +109,7 @@ public class TestActivity extends BaseActivity {
                                 try {
                                     File file =
                                             ImageUtils.saveBase64ToFile(getApplicationContext(), s,
-                                                    1101L);
+                                                    "1101");
                                     Toast.makeText(TestActivity.this,
                                             "file save in " + file.getAbsolutePath(),
                                             Toast.LENGTH_SHORT).show();

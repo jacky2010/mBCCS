@@ -3,6 +3,7 @@ package com.viettel.mbccs.screen.connector.fragment;
 import android.graphics.Bitmap;
 import com.viettel.mbccs.base.BasePresenter;
 import com.viettel.mbccs.base.BaseView;
+import com.viettel.mbccs.data.source.remote.response.BaseException;
 
 /**
  * Created by HuyQuyet on 6/4/17.
@@ -28,6 +29,10 @@ public interface CreateNewConnectorInformationFragmentContract {
         Bitmap imageBackside();
 
         Bitmap imagePortrait();
+
+        void loadDataSpinnerError(BaseException error);
+
+        void loadDataSpinnerSuccess();
     }
 
     interface ViewFragment2 extends View {

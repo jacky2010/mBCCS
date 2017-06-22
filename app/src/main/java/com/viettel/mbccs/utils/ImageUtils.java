@@ -8,20 +8,15 @@ import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Base64;
-import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 /**
  * Created by FRAMGIA\bui.dinh.viet on 07/03/2017.
@@ -193,12 +188,12 @@ public class ImageUtils {
      * @param id
      * @return
      */
-    public static File saveBase64ToFile(Context context, String base64, long id)
+    public static File saveBase64ToFile(Context context, String base64, String  id)
             throws IOException {
         File file = FileUtils.getImageFileByIdName(context, id);
         Bitmap bitmap = decodeBase64ToBitmap(base64);
         FileOutputStream fileOutputStream = new FileOutputStream(file);
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 75, fileOutputStream);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 75, fileOutputStream);
         fileOutputStream.flush();
         fileOutputStream.close();
         return file;

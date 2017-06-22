@@ -44,6 +44,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginRight="@dimen/dp_6"
+                android:layout_marginEnd="@dimen/dp_6"
                 android:layout_weight="1"
                 android:background="@color/grey_three"
                 android:gravity="center"
@@ -60,6 +61,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/dp_6"
+                android:layout_marginStart="@dimen/dp_6"
                 android:layout_weight="1"
                 android:background="@drawable/bg_order"
                 android:gravity="center"
@@ -89,21 +91,12 @@
                     android:textSize="@dimen/sp_14"
                     />
 
-                <LinearLayout
+                <com.viettel.mbccs.widget.SpinnerWithBorder
+                    android:id="@+id/spinner_create_connector_type_customer"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_40"
-                    android:layout_marginTop="@dimen/dp_6"
-                    android:background="@drawable/bg_order"
-                    >
-
-                    <Spinner
-                        android:id="@+id/spinner_create_connector_type_customer"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        bind:setSpinnerAdapter="@{ presenter.adapterSpinnerTypeCustomer }"
-                        />
-                </LinearLayout>
+                    android:layout_height="match_parent"
+                    app:adapter="@{presenter.adapterSpinnerCustomerType}"
+                    />
 
                 <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="match_parent"
@@ -116,10 +109,11 @@
 
                 <com.viettel.mbccs.widget.CustomEdittext
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_40"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/dp_40"
                     android:layout_marginTop="@dimen/dp_6"
-                    android:background="@drawable/bg_order"
                     android:text="@={ presenter.nameCustomer }"
+                    style="@style/inputStyle"
                     />
 
                 <com.viettel.mbccs.widget.CustomTextView
@@ -147,7 +141,7 @@
 
                 <RadioGroup
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/dp_40"
                     android:orientation="horizontal"
                     >
                     <RadioButton
@@ -156,6 +150,9 @@
                         android:layout_weight="1"
                         android:checked="@{ presenter.isCheckMale }"
                         android:text="@string/fragment_create_update_information_create_gioi_tinh_nam"
+                        android:layout_marginEnd="@dimen/dp_6"
+                        android:layout_marginRight="@dimen/dp_6"
+                        android:background="@drawable/bg_radio_checked"
                         />
                     <RadioButton
                         android:layout_width="0dp"
@@ -163,7 +160,14 @@
                         android:layout_weight="1"
                         android:checked="@{ presenter.isCheckFemale }"
                         android:text="@string/fragment_create_update_information_create_gioi_tinh_nu"
+                        android:background="@drawable/bg_radio_checked"
                         />
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        />
+
                 </RadioGroup>
 
                 <com.viettel.mbccs.widget.CustomTextView
@@ -173,20 +177,13 @@
                     android:text="@string/fragment_create_update_information_create_loai_giay_to"
                     android:textColor="@color/black"
                     />
-                <LinearLayout
+
+                <com.viettel.mbccs.widget.SpinnerWithBorder
+                    android:id="@+id/spinner_select_type_passport"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_4"
-                    android:background="@drawable/bg_order"
-                    >
-                    <Spinner
-                        android:id="@+id/spinner_select_type_passport"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/dp_40"
-                        android:adapter="@{ presenter.adapterTypePassport }"
-                        bind:setSpinnerSelection="@{ presenter.selectionPassport }"
-                        />
-                </LinearLayout>
+                    android:layout_height="match_parent"
+                    app:adapter="@{presenter.adapterSpinnerPassportType}"
+                    />
 
                 <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="match_parent"
@@ -198,11 +195,12 @@
 
                 <com.viettel.mbccs.widget.CustomEdittext
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_40"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/dp_40"
                     android:layout_marginTop="@dimen/dp_4"
-                    android:background="@drawable/bg_order"
                     android:paddingLeft="@dimen/dp_10"
                     android:text="@={ presenter.txtNumberPassport }"
+                    style="@style/inputStyle"
                     />
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -235,6 +233,7 @@
                         android:layout_width="0dp"
                         android:layout_height="@dimen/dp_40"
                         android:layout_marginRight="@dimen/dp_6"
+                        android:layout_marginEnd="@dimen/dp_6"
                         android:layout_marginTop="@dimen/dp_6"
                         android:layout_weight="1"
                         bind:setDate="@{ presenter.dateCreatePassport }"
@@ -243,6 +242,7 @@
                         android:layout_width="0dp"
                         android:layout_height="@dimen/dp_40"
                         android:layout_marginLeft="@dimen/dp_6"
+                        android:layout_marginStart="@dimen/dp_6"
                         android:layout_marginTop="@dimen/dp_6"
                         android:layout_weight="1"
                         bind:setDate="@{ presenter.outDatePassport }"
@@ -259,11 +259,12 @@
 
                 <com.viettel.mbccs.widget.CustomEdittext
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_40"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/dp_40"
                     android:layout_marginTop="@dimen/dp_4"
-                    android:background="@drawable/bg_order"
                     android:paddingLeft="@dimen/dp_10"
                     android:text="@={ presenter.whereCreatePassport }"
+                    style="@style/inputStyle"
                     />
 
                 <com.viettel.mbccs.widget.CustomSelectAddress
@@ -299,15 +300,17 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginRight="@dimen/dp_6"
+                        android:layout_marginEnd="@dimen/dp_6"
                         android:layout_weight="1"
                         android:onClick="@{ v -> presenter.onCancel() }"
                         android:text="@string/create_new_connector_information_dong"
-                        style="@style/button_nagative"
+                        style="@style/button_nagative_grey_seven"
                         />
                     <com.viettel.mbccs.widget.CustomButton
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginRight="@dimen/dp_6"
+                        android:layout_marginEnd="@dimen/dp_6"
                         android:layout_weight="1"
                         android:onClick="@{ v -> presenter.onNext() }"
                         android:text="@string/create_new_connector_information_next"

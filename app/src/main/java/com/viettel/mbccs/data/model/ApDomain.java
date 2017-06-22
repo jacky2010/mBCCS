@@ -14,6 +14,7 @@ public class ApDomain {
         String LOAI_GIAY_TO = "301";
         String HINH_THUC_THANH_TOAN = "303";
         String HINH_THUC_NHAN_THONG_BAO_CUOC = "308";
+        String LOAI_KHACH_HANG = "310";
     }
 
     @SerializedName("code")
@@ -38,5 +39,10 @@ public class ApDomain {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

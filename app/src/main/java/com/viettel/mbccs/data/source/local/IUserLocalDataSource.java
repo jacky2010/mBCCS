@@ -2,11 +2,13 @@ package com.viettel.mbccs.data.source.local;
 
 import com.mukesh.countrypicker.Country;
 import com.viettel.mbccs.data.model.Area;
+import com.viettel.mbccs.data.model.Image;
 import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.model.Precinct;
 import com.viettel.mbccs.data.model.StaffInfo;
 import com.viettel.mbccs.data.model.UploadImage;
 import com.viettel.mbccs.data.model.UserInfo;
+import com.viettel.mbccs.data.model.database.ImageDataBase;
 import java.util.List;
 
 /**
@@ -129,4 +131,20 @@ public interface IUserLocalDataSource {
     boolean isCreateDataBaseArea();
 
     void setCreateDataBaseArea(boolean status);
+
+    boolean isDownloadImage();
+
+    void setDownloadImage(boolean status);
+
+    boolean isSaveIdImage();
+
+    void setSaveIdImage(boolean status);
+
+    List<Image> getImageFromDatabase();
+
+    List<Image> getImageFromDatabase(int status);
+
+    Image getImageFromDatabase(String id);
+
+    ImageDataBase getDataImageFromDatabase(String id);
 }

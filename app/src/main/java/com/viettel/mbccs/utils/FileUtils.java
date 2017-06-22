@@ -55,11 +55,11 @@ public class FileUtils {
     /***
      * get image path stock by id
      * @param context
-     * @param id
-     * @return
+     * @param id:
+     * @return path file image
      */
-    public static String getImagePathByIdName(Context context, long id) {
-        return getInternalImageFolderPath(context) + File.separator + id + ".jpg";
+    public static String getImagePathByIdName(Context context, String id) {
+        return getInternalImageFolderPath(context) + File.separator + id + ".png";
     }
 
     /***
@@ -68,11 +68,11 @@ public class FileUtils {
      * @param id
      * @return
      */
-    public static File getImageFileByIdName(Context context, long id) {
+    public static File getImageFileByIdName(Context context, String id) {
         return new File(getImagePathByIdName(context, id));
     }
 
-    public static boolean isExistImageById(Context context, long id) {
+    public static boolean isExistImageById(Context context, String id) {
         return getImageFileByIdName(context, id).exists();
     }
 

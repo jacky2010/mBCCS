@@ -431,7 +431,7 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="search1">Tìm kiếm</string>
     <string name="export_per_response">Số lượng xuất/ Số lượng đáp ứng</string>
     <string name="add_stock_total">Thêm hàng hóa</string>
-    <string name="notice">Thông báo</string>
+    <string name="common_label_notice">Thông báo</string>
     <string name="mode_code1">Mã hàng</string>
     <string name="quantity">Số lượng</string>
     <string name="sum_money">Tổng tiền</string>
@@ -877,7 +877,17 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
 
     <!--Stock Delivery-->
     <string name="stock_delivery_title">Xuất kho cấp dưới</string>
-    <string name="stock_deliver_shipment">Phiếu chưa xuất kho (%s)</string>
+    <string name="stock_deliver_shipment">Phiếu chưa xuất kho (%s)</string>ư
     <string name="activity_finish_task_ngay_hoan_thanh">Ngày hoàn thành</string>
     <string name="activity_finish_task_due_date">Due date</string>
+
+    <!-- Download Image -->
+    <string name="download_image_text">Download Image : %1$d</string>
+    <string name="create_data_area_text">Create data Area : %1$d</string>
+    <!-- End Download Image -->
+
+    <!--common warehouse-->
+    <string name="warehouse_label_export_success_code">Xuất kho thành công mã: %s</string>
+    <string name="warehouse_label_receive">Kho nhận: %s</string>
+    <string name="warehouse_label_list_stock_model">Danh sách mặt hàng</string>
 </resources>

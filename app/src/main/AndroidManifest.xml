@@ -20,6 +20,7 @@
         android:allowBackup="true"
         android:icon="@drawable/img_login_logo"
         android:label="${appName}"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
@@ -45,6 +46,7 @@
             com.viettel.mbccs.data.model.Province,
             com.viettel.mbccs.data.model.District,
             com.viettel.mbccs.data.model.database.AreaDataBase,
+            com.viettel.mbccs.data.model.database.ImageDataBase,
             com.viettel.mbccs.data.model.UploadImage"/>
 
 
@@ -243,6 +245,11 @@
             android:name=".screen.common.picker.KeyValuePickerActivity"
             android:screenOrientation="portrait"/>
 
+        <activity
+            android:name=".screen.splash.DownloadDataActivity"
+            android:screenOrientation="portrait"/>
+
+        // -------------------------------- Service ---------------------------------------
         <service
             android:name=".service.service.UploadImageService"
             android:exported="true"/>
@@ -258,6 +265,10 @@
 
         <activity
             android:name=".screen.Test"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screen.warehousecommon.exportsuccess.ExportSuccessDialog"
             android:screenOrientation="portrait"/>
     </application>
 

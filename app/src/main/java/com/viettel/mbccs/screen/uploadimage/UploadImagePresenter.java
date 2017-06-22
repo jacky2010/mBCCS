@@ -120,16 +120,16 @@ public class UploadImagePresenter extends BaseObservable implements UploadImageC
 
 //    public void startUploadImage() {
 //        Subscription subscription = Observable.create(new Observable.OnSubscribe<Integer>() {
-//            int process = 0;
+//            int progressValue = 0;
 //
 //            @Override
 //            public void call(final Subscriber<? super Integer> subscriber) {
 //                Observable.merge(observableList).subscribe(new Action1<Object>() {
 //                    @Override
 //                    public void call(Object integer) {
-//                        if (++process <= observableList.size()) {
-//                            subscriber.onNext(process);
-//                            if (process == observableList.size()) {
+//                        if (++progressValue <= observableList.size()) {
+//                            subscriber.onNext(progressValue);
+//                            if (progressValue == observableList.size()) {
 //                                subscriber.onCompleted();
 //                            }
 //                        }
