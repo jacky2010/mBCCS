@@ -136,6 +136,11 @@ public class Constants {
         public static final String MESSAGE = "message";
         public static final String SALE_ORDER_ID = "sale_order_id";
         public static final String CHANNEL_NAME = "channel_name";
+
+        /*import export warehouse*/
+        public static final String STOCK_TRANS_ID = "stock_trans_id";
+        public static final String STOCK_TRANS = "stock_trans";
+        public static final String STOCK_TRANS_DETAIL_LIST = "stock_trans_detail_list";
     }
 
     public class Tax {

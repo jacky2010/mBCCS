@@ -7,7 +7,7 @@ package com.viettel.mbccs.data.source.remote.request;
 public class GetListChannelByOwnerTypeIdRequest {
 
     public String staffId;
-    public long channelTypeId;
+    public Long channelTypeId;
     public String language;
 
     public String getStaffId() {

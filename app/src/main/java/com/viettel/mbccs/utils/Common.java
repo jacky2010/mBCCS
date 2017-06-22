@@ -1,17 +1,14 @@
 package com.viettel.mbccs.utils;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import com.viettel.mbccs.MBCCSApplication;
-import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.model.SerialBO;
 import com.viettel.mbccs.data.model.StockModel;
 import com.viettel.mbccs.data.model.StockTotal;
-import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.local.datasource.SharedPrefs;
 import com.viettel.mbccs.screen.login.LoginActivity;
 import java.math.BigInteger;
@@ -26,9 +23,9 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.Locale;
 
 public class Common {
     public static boolean isConnectingToInternet() {
@@ -83,7 +80,7 @@ public class Common {
     }
 
     public static List<SerialBO> getSerialBlockBySerials(List<String> integers,
-            ModelSale modelSale) {
+            long stockModelId) {
         if (integers == null) {
             integers = new ArrayList<>();
         }
@@ -95,7 +92,7 @@ public class Common {
             }
         });
         SerialBO serialBlock = new SerialBO();
-        serialBlock.setStockModelId(modelSale.getStockModelId());
+        serialBlock.setStockModelId(stockModelId);
         for (String serial : integers) {
             if (serialBlock.getFromSerial().equals("-1")) {
                 serialBlock.setFromSerial(serial);

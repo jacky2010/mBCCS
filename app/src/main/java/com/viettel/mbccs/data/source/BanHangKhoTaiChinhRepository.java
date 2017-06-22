@@ -5,6 +5,7 @@ import com.viettel.mbccs.data.source.local.IBanHangKhoTaiChinhLocalDataSource;
 import com.viettel.mbccs.data.source.local.datasource.BanHangKhoTaiChinhLocalDataSource;
 import com.viettel.mbccs.data.source.remote.IBanHangKhoTaiChinhRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.datasource.BanHangKhoTaiChinhRemoteDataSource;
+import com.viettel.mbccs.data.source.remote.request.CreateExpStockRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateSaleTransFromOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateSaleTransChannelRequest;
@@ -14,6 +15,7 @@ import com.viettel.mbccs.data.source.remote.request.GetListOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListProvinceRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListShopRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListStockModelRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListStockTransDetailRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListTTKDRequest;
 import com.viettel.mbccs.data.source.remote.request.GetOrderInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.GetReasonRequest;
@@ -38,6 +40,7 @@ import com.viettel.mbccs.data.source.remote.response.GetOrderInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetReasonResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
 import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
+import com.viettel.mbccs.data.source.remote.response.ListStockTransDetailsReponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import com.viettel.mbccs.data.source.remote.response.UpdateSaleOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListSerialResponse;
@@ -168,5 +171,17 @@ public class BanHangKhoTaiChinhRepository
     public Observable<CreateSaleTransChannelResponse> createSaleTransChannel(
             DataRequest<CreateSaleTransChannelRequest> requestBaseRequest) {
         return banHangKhoTaiChinhRemoteDataSource.createSaleTransChannel(requestBaseRequest);
+    }
+
+    @Override
+    public Observable<ListStockTransDetailsReponse> getListStockTransDetail(
+            DataRequest<GetListStockTransDetailRequest> request) {
+        return banHangKhoTaiChinhRemoteDataSource.getListStockTransDetail(request);
+    }
+
+    @Override
+    public Observable<EmptyObject> createExpStock(
+            DataRequest<CreateExpStockRequest> requestDataRequest) {
+        return banHangKhoTaiChinhRemoteDataSource.createExpStock(requestDataRequest);
     }
 }

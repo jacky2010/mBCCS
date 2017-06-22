@@ -162,18 +162,17 @@ public class SaleChannelPresenter
 
                     sellProgram.set(currentSaleProgram.getName());
 
-                    if (object.getmGetListChannelByOwnerTypeIdResponse().getChannelInfoList()
-                            == null) {
-                        return;
-                    }
                     //channel
                     mChannelInfos.clear();
-                    mChannelInfos.addAll(
-                            object.getmGetListChannelByOwnerTypeIdResponse().getChannelInfoList());
                     ChannelInfo channel =
                             new ChannelInfo(-1, mContext.getResources().getString(R.string.all_));
                     mChannelInfos.add(0, channel);
                     currentChannel = mChannelInfos.get(0);
+                    if (object.getmGetListChannelByOwnerTypeIdResponse().getChannelInfoList()
+                            != null) {
+                        mChannelInfos.addAll(object.getmGetListChannelByOwnerTypeIdResponse()
+                                .getChannelInfoList());
+                    }
                     channelText.set(currentChannel.getChannelName());
                     changeSearchFilter();
                     loadModelSale();
@@ -208,8 +207,9 @@ public class SaleChannelPresenter
         mGetListChannelByOwnerTypeIdRequest = new DataRequest<>();
         mGetListChannelByOwnerTypeIdRequest.setApiCode(ApiCode.GetListChannelByOwnerTypeId);
         GetListChannelByOwnerTypeIdRequest request = new GetListChannelByOwnerTypeIdRequest();
-        request.setStaffId(mUserRepository.getUserInfo().getStaffInfo().getStaffOwnerId());
-        request.setChannelTypeId(mUserRepository.getUserInfo().getStaffInfo().getChannelTypeId());
+        request.setStaffId(
+                String.valueOf(mUserRepository.getUserInfo().getStaffInfo().getStaffId()));
+        //request.setChannelTypeId(mUserRepository.getUserInfo().getStaffInfo().getChannelTypeId());
         request.setLanguage("en");
         mGetListChannelByOwnerTypeIdRequest.setParameterApi(request);
         return mBanHangKhoTaiChinhRepository.getListChannelByOwnerTypeId(

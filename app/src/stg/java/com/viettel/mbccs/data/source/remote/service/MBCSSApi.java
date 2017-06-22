@@ -9,6 +9,7 @@ import com.viettel.mbccs.data.source.remote.request.CheckCalledIsdnsRequest;
 import com.viettel.mbccs.data.source.remote.request.CheckDebitChangeSimRequest;
 import com.viettel.mbccs.data.source.remote.request.CheckIdNoRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateDistributedChannelRequest;
+import com.viettel.mbccs.data.source.remote.request.CreateExpStockRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateSaleTransChannelRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateSaleTransFromOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
@@ -30,6 +31,7 @@ import com.viettel.mbccs.data.source.remote.request.GetListProvinceRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListSerialRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListShopRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListStockModelRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListStockTransDetailRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListTTKDRequest;
 import com.viettel.mbccs.data.source.remote.request.GetOTPRequest;
 import com.viettel.mbccs.data.source.remote.request.GetOrderInfoRequest;
@@ -96,6 +98,8 @@ import com.viettel.mbccs.data.source.remote.response.GetSurveyKPPResponse;
 import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
 import com.viettel.mbccs.data.source.remote.response.KPPFeedbackResponse;
 import com.viettel.mbccs.data.source.remote.response.KPPRespondFeedbackResponse;
+import com.viettel.mbccs.data.source.remote.response.ListStockTransDetailsReponse;
+import com.viettel.mbccs.data.source.remote.response.PassResetResponse;
 import com.viettel.mbccs.data.source.remote.response.RefillAnyPayResponse;
 import com.viettel.mbccs.data.source.remote.response.RegisterCustomerInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.SellAnypayToChannelResponse;
@@ -130,15 +134,15 @@ public interface MBCSSApi {
             @Field("phone") String phone);
 
     @POST("/JsonAPI/webresources/CoreService/reset")
-    Observable<ServerDataResponse<EmptyObject>> resetPassword(
-            @Body PassResetRequest request);
+    Observable<ServerDataResponse<EmptyObject>> resetPassword(@Body PassResetRequest request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<GetListOrderResponse>>> getListOrder(
             @Body DataRequest<GetListOrderRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<ServerDataResponse<BaseResponse<GetListChannelByOwnerTypeIdResponse>>> getListChannelByOwnerTypeId(
+    Observable<ServerDataResponse<BaseResponse<GetListChannelByOwnerTypeIdResponse>>>
+    getListChannelByOwnerTypeId(
             @Body DataRequest<GetListChannelByOwnerTypeIdRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
@@ -146,7 +150,8 @@ public interface MBCSSApi {
             @Body DataRequest<GetAllInfoRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<ServerDataResponse<BaseResponse<TelecomServiceAndSaleProgramResponse>>> getTelecomserviceAndSaleProgram(
+    Observable<ServerDataResponse<BaseResponse<TelecomServiceAndSaleProgramResponse>>>
+    getTelecomserviceAndSaleProgram(
             @Body DataRequest<GetTelecomServiceAndSaleProgramRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
@@ -162,7 +167,8 @@ public interface MBCSSApi {
             @Body DataRequest<GetReasonRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<ServerDataResponse<BaseResponse<CreateSaleTransFromOrderResponse>>> createSaleTransFromOrder(
+    Observable<ServerDataResponse<BaseResponse<CreateSaleTransFromOrderResponse>>>
+    createSaleTransFromOrder(
             @Body DataRequest<CreateSaleTransFromOrderRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
@@ -178,19 +184,23 @@ public interface MBCSSApi {
             @Body DataRequest<GetInfoSaleTranRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<ServerDataResponse<BaseResponse<CreateSaleTransRetailResponse>>> createSaleTransRetail(
+    Observable<ServerDataResponse<BaseResponse<CreateSaleTransRetailResponse>>>
+    createSaleTransRetail(
             @Body DataRequest<GetInfoSaleTranRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<ServerDataResponse<BaseResponse<GetDistributedChannelResponse>>> getDistributtedChannelInfo(
+    Observable<ServerDataResponse<BaseResponse<GetDistributedChannelResponse>>>
+    getDistributtedChannelInfo(
             @Body SearchBranchRequest request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<ServerDataResponse<BaseResponse<CreateDistributedChannelResponse>>> createDistributtedChannel(
+    Observable<ServerDataResponse<BaseResponse<CreateDistributedChannelResponse>>>
+    createDistributtedChannel(
             @Body DataRequest<CreateDistributedChannelRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<ServerDataResponse<BaseResponse<CreateSaleTransChannelResponse>>> createSaleTransChannel(
+    Observable<ServerDataResponse<BaseResponse<CreateSaleTransChannelResponse>>>
+    createSaleTransChannel(
             @Body DataRequest<CreateSaleTransChannelRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
@@ -226,7 +236,8 @@ public interface MBCSSApi {
             @Body DataRequest<GetRegiterSubInfoRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<ServerDataResponse<BaseResponse<GetListBusTypeIdRequireResponse>>> getListBusTypeIdRequire(
+    Observable<ServerDataResponse<BaseResponse<GetListBusTypeIdRequireResponse>>>
+    getListBusTypeIdRequire(
             @Body DataRequest<GetListBusTypeIdRequireRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
@@ -340,4 +351,15 @@ public interface MBCSSApi {
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<GetListIdImageResponse>>> getListIdImage(
             @Body DataRequest<GetListIdImageRequest> request);
+
+    /*get list stock trans detail by tran id*/
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<ListStockTransDetailsReponse>>>
+    getListStockTransDetail(
+            @Body DataRequest<GetListStockTransDetailRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<EmptyObject>>> createExpStock(
+            @Body DataRequest<CreateExpStockRequest> requestDataRequest);
 }
+

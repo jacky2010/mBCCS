@@ -1,11 +1,16 @@
 package com.viettel.mbccs.screen.splash;
 
 import android.content.Intent;
+import android.os.Bundle;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseActivity;
+import com.viettel.mbccs.data.model.SaleTrans;
+import com.viettel.mbccs.data.model.StockTrans;
 import com.viettel.mbccs.screen.login.LoginActivity;
 import com.viettel.mbccs.screen.main.MainActivity;
 import com.viettel.mbccs.screen.resetpass.ResetPasswordActivity;
+import com.viettel.mbccs.screen.xuathangchonhanvien.ChiTietXuatKhoNhanVienActivity;
+import com.viettel.mbccs.variable.Constants;
 
 /**
  * Created by Anh Vu Viet on 5/17/2017.
@@ -53,6 +58,19 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
     public void gotoMain() {
         startActivity(new Intent(SplashActivity.this, MainActivity.class));
         finish();
+    }
+
+    void open() {
+        Intent intent = new Intent(SplashActivity.this, ChiTietXuatKhoNhanVienActivity.class);
+        StockTrans stockTrans = new StockTrans();
+        stockTrans.setStockTransId(1237);
+        stockTrans.setToOwnerId(1232);
+        stockTrans.setCreateDateTime("2017-01-02");
+        stockTrans.setStockTransStatusName("hang moi");
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(Constants.BundleConstant.STOCK_TRANS, stockTrans);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     @Override

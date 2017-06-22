@@ -9,9 +9,9 @@
     <string name="common_label_close">Đóng</string>
     <string name="common_format_money">%s đ</string>
     <string name="complete">Hoàn thành</string>
-    <string name="select_serials">Chọn serials</string>
-    <string name="select_serials_step2">2. Sửa dải serial đã chọn ở b1</string>
-    <string name="select_serials_step3">3. Xác nhận các serial đã chọn</string>
+    <string name="common_label_select_serials">Chọn serials</string>
+    <string name="common_label_select_serials_step2">2. Sửa dải serial đã chọn ở b1</string>
+    <string name="common_label_select_serials_step3">3. Xác nhận các serial đã chọn</string>
     <string name="input_empty">Hãy nhập thông tin</string>
     <string name="not_phone">Số điện thoai không hợp lệ</string>
     <string name="common_label_add">Thêm</string>
@@ -794,7 +794,7 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="activity_create_order_success_ly_do_tu_choi">Lý do từ chối</string>
 
     <!--Nhan vien tra hang cap tren-->
-    <string name="nv_trahangcaptren_title">Xuất kho trả hàng cấp trên</string>
+    <string name="nv_trahangcaptren_title">Nhân viên xuất trả hàng</string>
     <string name="nv_trahangcaptren_lap_phieu_title">Lập phiếu xuất kho trả hàng cấp trên</string>
     <string name="nv_trahangcaptren_label_ware_code">Mã kho</string>
     <string name="nv_trahangcaptren_label_export_status">Trạng thái xuất *</string>
@@ -878,7 +878,7 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
 
     <!--Stock Delivery-->
     <string name="stock_delivery_title">Xuất kho cấp dưới</string>
-    <string name="stock_deliver_shipment">Phiếu chưa xuất kho (%s)</string>ư
+    <string name="stock_deliver_shipment">Phiếu chưa xuất kho (%s)</string>
     <string name="activity_finish_task_ngay_hoan_thanh">Ngày hoàn thành</string>
     <string name="activity_finish_task_due_date">Due date</string>
 
@@ -891,4 +891,17 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="warehouse_label_export_success_code">Xuất kho thành công mã: %s</string>
     <string name="warehouse_label_receive">Kho nhận: %s</string>
     <string name="warehouse_label_list_stock_model">Danh sách mặt hàng</string>
+
+    <!--cmd prepare export detail-->
+    <string name="common_cmd_prepare_export_detail_label_list_stock">Danh sách mặt hàng (%s)</string>
+    <string name="common_cmd_prepare_export_detail_label_cmd_code"><![CDATA[Mã lệnh :<b>%s</b>]]></string>
+    <string name="common_cmd_prepare_export_detail_label_receive_warehouse"><![CDATA[Kho nhận :<b>%s</b>]]></string>
+    <string name="common_cmd_prepare_export_detail_label_day_cmd_created"><![CDATA[Ngày lập lệnh:<b>%s</b>]]></string>
+    <string name="common_cmd_prepare_export_detail_label_status"><![CDATA[Trạng thái:<b>%s</b>]]></string>
+    <string name="common_cmd_prepare_export_detail_label_stock_code">Mã hàng: %s</string>
+    <string name="common_cmd_prepare_export_detail_label_quantity_export">Số lượng xuất: %s</string>
+    <string name="common_cmd_prepare_export_detail_msg_error_choose_serial">Hãy chọn đủ số lượng serial của mặt hàng %s</string>
+
+    <!--xuat kho cho nhan vien-->
+    <string name="xuatkhochonhanvien_lablel_chi_tiet_xuat_kho_title">Chi tiết xuất kho cho nhân viên</string>
 </resources>
