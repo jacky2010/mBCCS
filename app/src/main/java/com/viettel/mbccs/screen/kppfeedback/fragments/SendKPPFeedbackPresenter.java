@@ -110,16 +110,16 @@ public class SendKPPFeedbackPresenter implements SendKPPFeedbackContract.Present
                                 @Override
                                 public void onSuccess(KPPFeedbackResponse object) {
                                     try {
-                                        if (Constants.Service.RESPONSE_OK.equals(object.getErrorCode())) {
+//                                        if (Constants.Service.RESPONSE_OK.equals(object.getErrorCode())) {
 
-                                            Bundle args = new Bundle();
-                                            args.putString(Constants.BundleConstant.MESSAGE, context.getString(R.string.kpp_feedback_msg_info_sent_successful));
+                                        Bundle args = new Bundle();
+                                        args.putString(Constants.BundleConstant.MESSAGE, context.getString(R.string.kpp_feedback_msg_info_sent_successful));
 
-                                            viewModel.goToSuccessDialog(args);
-                                        } else {
-                                            DialogUtils.showDialogError(context, null, context.getString(R.string.change_sim_error_recent_calls_not_valid),
-                                                    null);
-                                        }
+                                        viewModel.goToSuccessDialog(args);
+//                                        } else {
+//                                            DialogUtils.showDialogError(context, null, context.getString(R.string.change_sim_error_recent_calls_not_valid),
+//                                                    null);
+//                                        }
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }
@@ -127,7 +127,9 @@ public class SendKPPFeedbackPresenter implements SendKPPFeedbackContract.Present
 
                                 @Override
                                 public void onError(BaseException error) {
-                                    DialogUtils.showDialogError(context, null, error.getMessage(),
+//                                    DialogUtils.showDialogError(context, null, error.getMessage(),
+//                                            null);
+                                    DialogUtils.showDialogError(context, null, context.getString(R.string.common_msg_error_general),
                                             null);
                                 }
 

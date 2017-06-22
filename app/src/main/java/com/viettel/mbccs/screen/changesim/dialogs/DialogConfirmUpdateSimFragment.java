@@ -142,14 +142,14 @@ public class DialogConfirmUpdateSimFragment extends BaseDialog {
                                 @Override
                                 public void onSuccess(DataResponse object) {
                                     try {
-                                        if (Constants.Service.RESPONSE_OK.equals(object.getErrorCode())) {
+//                                        if (Constants.Service.RESPONSE_OK.equals(object.getErrorCode())) {
 
-                                            showSuccessDialog();
+                                        showSuccessDialog();
 
-                                        } else {
-                                            DialogUtils.showDialogError(getContext(), null, getString(R.string.change_sim_error_change_sim_failed),
-                                                    null);
-                                        }
+//                                        } else {
+//                                            DialogUtils.showDialogError(getContext(), null, getString(R.string.change_sim_error_change_sim_failed),
+//                                                    null);
+//                                        }
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }
@@ -157,7 +157,9 @@ public class DialogConfirmUpdateSimFragment extends BaseDialog {
 
                                 @Override
                                 public void onError(BaseException error) {
-                                    DialogUtils.showDialogError(getContext(), null, error.getMessage(),
+//                                    DialogUtils.showDialogError(getContext(), null, error.getMessage(),
+//                                            null);
+                                    DialogUtils.showDialogError(getContext(), null, getString(R.string.change_sim_error_change_sim_failed),
                                             null);
                                 }
 

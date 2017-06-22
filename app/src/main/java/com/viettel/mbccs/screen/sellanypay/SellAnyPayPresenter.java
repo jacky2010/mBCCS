@@ -12,7 +12,6 @@ import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetAnypayAuthorizeResponse;
 import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
-import com.viettel.mbccs.variable.Constants;
 
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
@@ -55,7 +54,7 @@ public class SellAnyPayPresenter implements SellAnyPayContract.Presenter {
         try {
 
             viewModel.changeToSearchTab();
-            if(2-1==1)
+            if (2 - 1 == 1)
                 return;//TODO minhnx test
 
             viewModel.showLoading();
@@ -71,12 +70,12 @@ public class SellAnyPayPresenter implements SellAnyPayContract.Presenter {
                                 @Override
                                 public void onSuccess(GetAnypayAuthorizeResponse object) {
                                     try {
-                                        if (Constants.Service.RESPONSE_OK.equals(object.getErrorCode())) {
-                                            viewModel.changeToSearchTab();
-                                        } else {
-                                            DialogUtils.showDialogError(context, null, context.getString(R.string.common_msg_error_dont_have_permission),
-                                                    null);
-                                        }
+//                                        if (Constants.Service.RESPONSE_OK.equals(object.getErrorCode())) {
+                                        viewModel.changeToSearchTab();
+//                                        } else {
+//                                            DialogUtils.showDialogError(context, null, context.getString(R.string.common_msg_error_dont_have_permission),
+//                                                    null);
+//                                        }
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }
@@ -84,7 +83,9 @@ public class SellAnyPayPresenter implements SellAnyPayContract.Presenter {
 
                                 @Override
                                 public void onError(BaseException error) {
-                                    DialogUtils.showDialogError(context, null, error.getMessage(),
+//                                    DialogUtils.showDialogError(context, null, error.getMessage(),
+//                                            null);
+                                    DialogUtils.showDialogError(context, null, context.getString(R.string.common_msg_error_dont_have_permission),
                                             null);
                                 }
 

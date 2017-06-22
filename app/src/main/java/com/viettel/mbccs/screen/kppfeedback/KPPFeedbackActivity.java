@@ -53,7 +53,7 @@ public class KPPFeedbackActivity extends BaseDataBindActivity<ActivityKppFeedbac
     public void changeToSearchTab() {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frame_main, SearchKPPFeedbackFragment.newInstance())
-                .addToBackStack(null)
+//                .addToBackStack(null)
                 .commit();
     }
 
@@ -66,6 +66,6 @@ public class KPPFeedbackActivity extends BaseDataBindActivity<ActivityKppFeedbac
     }
 
     private boolean isManager(){
-        return false;
+        return true;
     }
 }

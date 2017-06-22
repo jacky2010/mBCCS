@@ -20,6 +20,7 @@ public class ViewHotNewsCSKPPFragment extends BaseDataBindFragment<FragmentViewH
         implements ViewHotNewsCSKPPContract.ViewModel {
 
     private static final int SURVEY_REQUEST = 1001;
+    private boolean shownLoadingDialog = false;
 
     private AppCompatActivity mActivity;
 
@@ -34,12 +35,18 @@ public class ViewHotNewsCSKPPFragment extends BaseDataBindFragment<FragmentViewH
 
     @Override
     public void showLoading() {
+
+        if (shownLoadingDialog)
+            return;
+
         showLoadingDialog();
+        shownLoadingDialog = true;
     }
 
     @Override
     public void hideLoading() {
         hideLoadingDialog();
+        shownLoadingDialog = false;
     }
 
     @Override

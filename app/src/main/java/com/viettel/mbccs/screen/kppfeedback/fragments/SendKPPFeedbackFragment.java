@@ -76,6 +76,16 @@ public class SendKPPFeedbackFragment extends BaseDataBindFragment<FragmentSendKp
 
     @Override
     public void goToSuccessDialog(Bundle args) {
-        getBaseActivity().goToDialogFragment(new com.viettel.mbccs.screen.common.dialog.DialogSuccessFragment(), args);
+
+        com.viettel.mbccs.screen.common.dialog.DialogSuccessFragment fragment = new com.viettel.mbccs.screen.common.dialog.DialogSuccessFragment();
+
+        fragment.setOnCloseListener(new com.viettel.mbccs.screen.common.dialog.DialogSuccessFragment.OnCloseListener() {
+            @Override
+            public void onClose() {
+                onBackPressed();
+            }
+        });
+
+        getBaseActivity().goToDialogFragment(fragment, args);
     }
 }

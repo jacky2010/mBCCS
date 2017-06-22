@@ -303,30 +303,30 @@ public class UpdateSimPresenter implements UpdateSimContract.Presenter {
                                 @Override
                                 public void onSuccess(DataResponse object) {
                                     try {
-                                        if (Constants.Service.RESPONSE_OK.equals(object.getErrorCode())) {
+//                                        if (Constants.Service.RESPONSE_OK.equals(object.getErrorCode())) {
 
-                                            ChangeSimInfo changeSimInfo = new ChangeSimInfo();
-                                            changeSimInfo.setOldSerial(oldSimSerial.get());
-                                            changeSimInfo.setNewSerial(newSimSerial.get());
-                                            changeSimInfo.setRecentContacts(recentContacts);
+                                        ChangeSimInfo changeSimInfo = new ChangeSimInfo();
+                                        changeSimInfo.setOldSerial(oldSimSerial.get());
+                                        changeSimInfo.setNewSerial(newSimSerial.get());
+                                        changeSimInfo.setRecentContacts(recentContacts);
 
-                                            ChangeSimItem item = new ChangeSimItem();
-                                            item.setCustomer(cus);
-                                            item.setSubscriber(sub);
-                                            item.setChangeSimInfo(changeSimInfo);
+                                        ChangeSimItem item = new ChangeSimItem();
+                                        item.setCustomer(cus);
+                                        item.setSubscriber(sub);
+                                        item.setChangeSimInfo(changeSimInfo);
 
-                                            Bundle args = new Bundle();
-                                            args.putString(Constants.BundleConstant.CUSTOMER_ITEM, GsonUtils.Object2String(item));
-                                            args.putDouble(Constants.BundleConstant.SERVICE_FEE, servicePrice);
-                                            args.putDouble(Constants.BundleConstant.SIM_FEE, changeSimPrice);
-                                            args.putDouble(Constants.BundleConstant.TOTAL, (servicePrice + changeSimPrice));
+                                        Bundle args = new Bundle();
+                                        args.putString(Constants.BundleConstant.CUSTOMER_ITEM, GsonUtils.Object2String(item));
+                                        args.putDouble(Constants.BundleConstant.SERVICE_FEE, servicePrice);
+                                        args.putDouble(Constants.BundleConstant.SIM_FEE, changeSimPrice);
+                                        args.putDouble(Constants.BundleConstant.TOTAL, (servicePrice + changeSimPrice));
 
-                                            viewModel.goToDialogFragment(args);
+                                        viewModel.goToDialogFragment(args);
 
-                                        } else {
-                                            DialogUtils.showDialogError(context, null, context.getString(R.string.change_sim_error_recent_calls_not_valid),
-                                                    null);
-                                        }
+//                                        } else {
+//                                        DialogUtils.showDialogError(context, null, context.getString(R.string.change_sim_error_recent_calls_not_valid),
+//                                                null);
+//                                        }
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }
@@ -334,7 +334,9 @@ public class UpdateSimPresenter implements UpdateSimContract.Presenter {
 
                                 @Override
                                 public void onError(BaseException error) {
-                                    DialogUtils.showDialogError(context, null, error.getMessage(),
+//                                    DialogUtils.showDialogError(context, null, error.getMessage(),
+//                                            null);
+                                    DialogUtils.showDialogError(context, null, context.getString(R.string.common_msg_error_general),
                                             null);
                                 }
 

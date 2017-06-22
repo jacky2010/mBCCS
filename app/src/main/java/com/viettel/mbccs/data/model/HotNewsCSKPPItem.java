@@ -41,6 +41,9 @@ public class HotNewsCSKPPItem {
     @Expose
     @SerializedName("updateUser")
     private String updateUser;
+    @Expose
+    @SerializedName("shortContent")
+    private String shortContent;
 
     public int getId() {
         return id;
@@ -120,6 +123,14 @@ public class HotNewsCSKPPItem {
 
     public void setUpdateUser(String updateUser) {
         this.updateUser = updateUser;
+    }
+
+    public String getShortContent() {
+        return shortContent;
+    }
+
+    public void setShortContent(String shortContent) {
+        this.shortContent = shortContent;
     }
 
     public String getContentShort() {

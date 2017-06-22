@@ -12,7 +12,6 @@ import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetAnypayAuthorizeResponse;
 import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
-import com.viettel.mbccs.variable.Constants;
 
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
@@ -31,30 +30,30 @@ public class TransferAnyPayPresenter implements TransferAnyPayContract.Presenter
     private DataRequest<GetAnypayAuthorizeRequest> baseRequest;
     private CompositeSubscription mSubscriptions;
 
-    public TransferAnyPayPresenter(Context context, TransferAnyPayContract.ViewModel viewModel){
+    public TransferAnyPayPresenter(Context context, TransferAnyPayContract.ViewModel viewModel) {
         this.context = context;
         this.viewModel = viewModel;
 
         initData();
     }
 
-    private void initData(){
-        try{
+    private void initData() {
+        try {
             mSubscriptions = new CompositeSubscription();
             title = new ObservableField<>(context.getString(R.string.transfer_anypay_title));
             transferAnyPayRepository = TransferAnyPayRepository.getInstance();
 
             checkPermission();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void checkPermission(){
-        try{
+    private void checkPermission() {
+        try {
 
             viewModel.changeToSearchTab();
-            if(2-1==1)
+            if (2 - 1 == 1)
                 return;//TODO minhnx test
 
             viewModel.showLoading();
@@ -69,21 +68,23 @@ public class TransferAnyPayPresenter implements TransferAnyPayContract.Presenter
                             .subscribe(new MBCCSSubscribe<GetAnypayAuthorizeResponse>() {
                                 @Override
                                 public void onSuccess(GetAnypayAuthorizeResponse object) {
-                                    try{
-                                        if(Constants.Service.RESPONSE_OK.equals(object.getErrorCode())){
-                                            viewModel.changeToSearchTab();
-                                        }else{
-                                            DialogUtils.showDialogError(context, null, context.getString(R.string.common_msg_error_dont_have_permission),
-                                                    null);
-                                        }
-                                    }catch (Exception e){
+                                    try {
+//                                        if(Constants.Service.RESPONSE_OK.equals(object.getErrorCode())){
+                                        viewModel.changeToSearchTab();
+//                                        }else{
+//                                            DialogUtils.showDialogError(context, null, context.getString(R.string.common_msg_error_dont_have_permission),
+//                                                    null);
+//                                        }
+                                    } catch (Exception e) {
 
                                     }
                                 }
 
                                 @Override
                                 public void onError(BaseException error) {
-                                    DialogUtils.showDialogError(context, null, error.getMessage(),
+//                                    DialogUtils.showDialogError(context, null, error.getMessage(),
+//                                            null);
+                                    DialogUtils.showDialogError(context, null, context.getString(R.string.common_msg_error_dont_have_permission),
                                             null);
                                 }
 
@@ -96,7 +97,7 @@ public class TransferAnyPayPresenter implements TransferAnyPayContract.Presenter
 
             mSubscriptions.add(subscription);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

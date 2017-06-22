@@ -88,10 +88,10 @@ public class DialogConfirmSellAnyPayFragment extends BaseDialog {
 
             if (currentArgs != null) {
                 tvTrans.setText(getString(R.string.sell_anypay_msg_confirm_sell_label_cust, currentArgs.getString(Constants.BundleConstant.CUSTOMER_ITEM)));
-                tvPreTax.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.PRE_TAX))+ " " + getString(R.string.common_label_currency_suffix));
-                tvTax.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.TAX))+ " " + getString(R.string.common_label_currency_suffix));
-                tvDiscount.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.DISCOUNT))+ " " + getString(R.string.common_label_currency_suffix));
-                tvTotal.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.TOTAL))+ " " + getString(R.string.common_label_currency_suffix));
+                tvPreTax.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.PRE_TAX)) + " " + getString(R.string.common_label_currency_suffix));
+                tvTax.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.TAX)) + " " + getString(R.string.common_label_currency_suffix));
+                tvDiscount.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.DISCOUNT)) + " " + getString(R.string.common_label_currency_suffix));
+                tvTotal.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.TOTAL)) + " " + getString(R.string.common_label_currency_suffix));
             }
 
             sellAnyPayRepository = SellAnyPayRepository.getInstance();
@@ -146,12 +146,12 @@ public class DialogConfirmSellAnyPayFragment extends BaseDialog {
                                     @Override
                                     public void onSuccess(SellAnypayToChannelResponse object) {
                                         try {
-                                            if (Constants.Service.RESPONSE_OK.equals(object.getErrorCode())) {
-                                                showSuccessDialog();
-                                            } else {
-                                                DialogUtils.showDialogError(getContext(), null, getString(R.string.common_msg_error_general),
-                                                        null);
-                                            }
+//                                            if (Constants.Service.RESPONSE_OK.equals(object.getErrorCode())) {
+                                            showSuccessDialog();
+//                                            } else {
+//                                                DialogUtils.showDialogError(getContext(), null, getString(R.string.common_msg_error_general),
+//                                                        null);
+//                                            }
                                         } catch (Exception e) {
                                             e.printStackTrace();
                                             DialogUtils.showDialogError(getContext(), null, getString(R.string.common_msg_error_general),
@@ -161,7 +161,9 @@ public class DialogConfirmSellAnyPayFragment extends BaseDialog {
 
                                     @Override
                                     public void onError(BaseException error) {
-                                        DialogUtils.showDialogError(getContext(), null, error.getMessage(),
+//                                        DialogUtils.showDialogError(getContext(), null, error.getMessage(),
+//                                                null);
+                                        DialogUtils.showDialogError(getContext(), null, getString(R.string.common_msg_error_general),
                                                 null);
                                     }
 

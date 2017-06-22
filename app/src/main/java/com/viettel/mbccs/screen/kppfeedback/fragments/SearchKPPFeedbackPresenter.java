@@ -17,7 +17,6 @@ import com.viettel.mbccs.data.source.remote.response.GetKPPFeedbackResponse;
 import com.viettel.mbccs.screen.kppfeedback.adapters.KPPFeedbackListAdapter;
 import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
-import com.viettel.mbccs.variable.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,6 +69,7 @@ public class SearchKPPFeedbackPresenter implements SearchKPPFeedbackContract.Pre
 
     private void initData() {
         feedbackRepository = KPPFeedbackRepository.getInstance();
+        userRepository = UserRepository.getInstance();
         mSubscriptions = new CompositeSubscription();
     }
 
@@ -104,7 +104,7 @@ public class SearchKPPFeedbackPresenter implements SearchKPPFeedbackContract.Pre
                                 @Override
                                 public void onSuccess(GetKPPFeedbackResponse object) {
                                     try {
-                                        if (Constants.Service.RESPONSE_OK.equals(object.getErrorCode())) {
+//                                        if (Constants.Service.RESPONSE_OK.equals(object.getErrorCode())) {
 
                                             items.addAll(object.getListFeedback());
 
@@ -119,10 +119,10 @@ public class SearchKPPFeedbackPresenter implements SearchKPPFeedbackContract.Pre
                                             }
 
                                             viewModel.onSearchCompleted();
-                                        } else {
-                                            DialogUtils.showDialogError(context, null, context.getString(R.string.change_sim_error_recent_calls_not_valid),
-                                                    null);
-                                        }
+//                                        } else {
+//                                            DialogUtils.showDialogError(context, null, context.getString(R.string.change_sim_error_recent_calls_not_valid),
+//                                                    null);
+//                                        }
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }
@@ -130,7 +130,9 @@ public class SearchKPPFeedbackPresenter implements SearchKPPFeedbackContract.Pre
 
                                 @Override
                                 public void onError(BaseException error) {
-                                    DialogUtils.showDialogError(context, null, error.getMessage(),
+//                                    DialogUtils.showDialogError(context, null, error.getMessage(),
+//                                            null);
+                                    DialogUtils.showDialogError(context, null, context.getString(R.string.common_msg_error_general),
                                             null);
                                 }
 

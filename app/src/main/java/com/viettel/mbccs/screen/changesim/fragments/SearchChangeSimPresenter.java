@@ -239,33 +239,33 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
                                 @Override
                                 public void onSuccess(GetRegiterSubInfoResponse object) {
                                     try {
-                                        if (Constants.Service.RESPONSE_OK.equals(object.getErrorCode())) {
+//                                        if (Constants.Service.RESPONSE_OK.equals(object.getErrorCode())) {
 
-                                            ChangeSimItem item = new ChangeSimItem();
-                                            item.setSubscriber(object.getSubscriber());
-                                            item.setCustomer(object.getCustomer());
-                                            item.setChangeSimInfo(new ChangeSimInfo(item.getSubscriber().getSerial(), null));
+                                        ChangeSimItem item = new ChangeSimItem();
+                                        item.setSubscriber(object.getSubscriber());
+                                        item.setCustomer(object.getCustomer());
+                                        item.setChangeSimInfo(new ChangeSimInfo(item.getSubscriber().getSerial(), null));
 
-                                            items.add(item);
+                                        items.add(item);
 
-                                            changeSimAdapter.setItems(items);
+                                        changeSimAdapter.setItems(items);
 
-                                            changeSimListAdapter.set(changeSimAdapter);
+                                        changeSimListAdapter.set(changeSimAdapter);
 
-                                            if (changeSimAdapter.getItemCount() > 0) {
-                                                searchFound.set(true);
+                                        if (changeSimAdapter.getItemCount() > 0) {
+                                            searchFound.set(true);
 
-                                                viewModel.onSimFound(isdn.get(), documentType.get(), documentId.get());
-                                            } else {
-                                                searchFound.set(false);
-
-                                                viewModel.onSimNotFound(isdn.get(), documentType.get(), documentId.get());
-                                            }
-
+                                            viewModel.onSimFound(isdn.get(), documentType.get(), documentId.get());
                                         } else {
-                                            DialogUtils.showDialogError(context, null, context.getString(R.string.change_sim_error_recent_calls_not_valid),
-                                                    null);
+                                            searchFound.set(false);
+
+                                            viewModel.onSimNotFound(isdn.get(), documentType.get(), documentId.get());
                                         }
+
+//                                        } else {
+//                                        DialogUtils.showDialogError(context, null, context.getString(R.string.change_sim_error_recent_calls_not_valid),
+//                                                null);
+//                                        }
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }
@@ -273,7 +273,9 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
 
                                 @Override
                                 public void onError(BaseException error) {
-                                    DialogUtils.showDialogError(context, null, error.getMessage(),
+//                                    DialogUtils.showDialogError(context, null, error.getMessage(),
+//                                            null);
+                                    DialogUtils.showDialogError(context, null, context.getString(R.string.change_sim_error_recent_calls_not_valid),
                                             null);
                                 }
 

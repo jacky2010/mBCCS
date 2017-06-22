@@ -20,6 +20,7 @@ public class RespondKPPFeedbackFragment extends BaseDataBindFragment<FragmentRes
         implements RespondKPPFeedbackContract.ViewModel {
 
     private AppCompatActivity mActivity;
+    private boolean shownLoadingDialog = false;
 
     public static RespondKPPFeedbackFragment newInstance() {
         return new RespondKPPFeedbackFragment();
@@ -32,12 +33,17 @@ public class RespondKPPFeedbackFragment extends BaseDataBindFragment<FragmentRes
 
     @Override
     public void showLoading() {
+        if(shownLoadingDialog)
+            return;
+
         showLoadingDialog();
+        shownLoadingDialog = true;
     }
 
     @Override
     public void hideLoading() {
         hideLoadingDialog();
+        shownLoadingDialog = false;
     }
 
     @Override
