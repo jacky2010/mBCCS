@@ -2,7 +2,6 @@ package com.viettel.mbccs.screen.kppfeedback;
 
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
-import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.databinding.ActivityKppFeedbackBinding;
 import com.viettel.mbccs.screen.kppfeedback.fragments.SearchKPPFeedbackFragment;
 import com.viettel.mbccs.screen.kppfeedback.fragments.SendKPPFeedbackFragment;
@@ -14,7 +13,7 @@ import com.viettel.mbccs.screen.kppfeedback.fragments.SendKPPFeedbackFragment;
 public class KPPFeedbackActivity extends BaseDataBindActivity<ActivityKppFeedbackBinding, KPPFeedbackPresenter>
         implements KPPFeedbackContract.ViewModel {
 
-    private UserRepository userRepository;
+    private boolean shownLoadingDialog = false;
 
     @Override
     public void setPresenter(KPPFeedbackContract.Presenter presenter) {
@@ -23,12 +22,17 @@ public class KPPFeedbackActivity extends BaseDataBindActivity<ActivityKppFeedbac
 
     @Override
     public void showLoading() {
+        if (shownLoadingDialog)
+            return;
+
         showLoadingDialog();
+        shownLoadingDialog = true;
     }
 
     @Override
     public void hideLoading() {
         hideLoadingDialog();
+        shownLoadingDialog = false;
     }
 
     @Override
@@ -40,12 +44,11 @@ public class KPPFeedbackActivity extends BaseDataBindActivity<ActivityKppFeedbac
     protected void initData() {
         mPresenter = new KPPFeedbackPresenter(this, this);
         mBinding.setPresenter(mPresenter);
-        userRepository = UserRepository.getInstance();
 
-        if (isManager())
-            changeToSearchTab();
-        else
-            changeToSendTab();
+//        if (isManager())
+//            changeToSearchTab();
+//        else
+//            changeToSendTab();
     }
 
     @Override
@@ -69,7 +72,7 @@ public class KPPFeedbackActivity extends BaseDataBindActivity<ActivityKppFeedbac
                 .commit();
     }
 
-    private boolean isManager(){
-        return true;
-    }
+//    private boolean isManager(){
+//        return true;
+//    }
 }
