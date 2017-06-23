@@ -12,6 +12,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,7 +61,9 @@ public class CustomDatePicker extends LinearLayout {
     private void initView(final Context context, AttributeSet attrs) {
         ((LayoutDatePickerBinding) DataBindingUtil.inflate(LayoutInflater.from(getContext()),
                 R.layout.layout_date_picker, this, true)).setInput(this);
-        mCalendar = Calendar.getInstance();
+        if (mCalendar == null) {
+            mCalendar = Calendar.getInstance();
+        }
         setDate();
 
         setOnClickListener(new OnClickListener() {
@@ -110,8 +113,11 @@ public class CustomDatePicker extends LinearLayout {
     public void setDateString(String dateString) {
         if (StringUtils.isEmpty(dateString)) return;
 
-        Date date = DateUtils.stringToDate(dateString, DateUtils.CALENDAR_DATE_FORMAT_DD_MM_YY,
+        Date date = DateUtils.stringToDate(dateString, DateUtils.TIMEZONE_FORMAT_SERVER,
                 Locale.getDefault());
+        if (mCalendar == null) {
+            mCalendar = Calendar.getInstance();
+        }
         mCalendar.setTime(date);
         setDate();
     }

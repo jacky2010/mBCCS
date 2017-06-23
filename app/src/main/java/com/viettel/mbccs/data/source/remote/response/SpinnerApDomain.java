@@ -5,38 +5,49 @@ package com.viettel.mbccs.data.source.remote.response;
  */
 
 public class SpinnerApDomain {
-    private GetApDomainResponse spinnerGiayTo;
-    private GetApDomainResponse spinnerHTTT;
-    private GetApDomainResponse spinnerHTNhanTB;
+    private GetApDomainByTypeResponse spinnerGiayTo;
+    private GetApDomainByTypeResponse spinnerHTTT;
+    private GetApDomainByTypeResponse spinnerHTNhanTB;
+    private GetListProductResponse spinnerListProduct;
 
-    public SpinnerApDomain(GetApDomainResponse spinnerGiayTo, GetApDomainResponse spinnerHTTT,
-            GetApDomainResponse spinnerHTNhanTB) {
+    public SpinnerApDomain(GetApDomainByTypeResponse spinnerGiayTo,
+            GetApDomainByTypeResponse spinnerHTTT, GetApDomainByTypeResponse spinnerHTNhanTB,
+            GetListProductResponse spinnerListProduct) {
         this.spinnerGiayTo = spinnerGiayTo;
         this.spinnerHTTT = spinnerHTTT;
         this.spinnerHTNhanTB = spinnerHTNhanTB;
+        this.spinnerListProduct = spinnerListProduct;
     }
 
-    public GetApDomainResponse getSpinnerGiayTo() {
+    public GetApDomainByTypeResponse getSpinnerGiayTo() {
         return spinnerGiayTo;
     }
 
-    public void setSpinnerGiayTo(GetApDomainResponse spinnerGiayTo) {
+    public void setSpinnerGiayTo(GetApDomainByTypeResponse spinnerGiayTo) {
         this.spinnerGiayTo = spinnerGiayTo;
     }
 
-    public GetApDomainResponse getSpinnerHTTT() {
+    public GetApDomainByTypeResponse getSpinnerHTTT() {
         return spinnerHTTT;
     }
 
-    public void setSpinnerHTTT(GetApDomainResponse spinnerHTTT) {
+    public void setSpinnerHTTT(GetApDomainByTypeResponse spinnerHTTT) {
         this.spinnerHTTT = spinnerHTTT;
     }
 
-    public GetApDomainResponse getSpinnerHTNhanTB() {
+    public GetApDomainByTypeResponse getSpinnerHTNhanTB() {
         return spinnerHTNhanTB;
     }
 
-    public void setSpinnerHTNhanTB(GetApDomainResponse spinnerHTNhanTB) {
+    public void setSpinnerHTNhanTB(GetApDomainByTypeResponse spinnerHTNhanTB) {
         this.spinnerHTNhanTB = spinnerHTNhanTB;
+    }
+
+    public GetListProductResponse getSpinnerListProduct() {
+        return spinnerListProduct;
+    }
+
+    public void setSpinnerListProduct(GetListProductResponse spinnerListProduct) {
+        this.spinnerListProduct = spinnerListProduct;
     }
 }

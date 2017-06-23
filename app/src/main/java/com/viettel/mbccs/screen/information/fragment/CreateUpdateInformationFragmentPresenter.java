@@ -14,7 +14,7 @@ import android.widget.ArrayAdapter;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.constance.Data;
-import com.viettel.mbccs.data.model.ApDomain;
+import com.viettel.mbccs.data.model.ApDomainByType;
 import com.viettel.mbccs.data.model.Area;
 import com.viettel.mbccs.data.model.Contract;
 import com.viettel.mbccs.data.model.Customer;
@@ -23,14 +23,16 @@ import com.viettel.mbccs.data.model.UploadImage;
 import com.viettel.mbccs.data.source.QLKhachHangRepository;
 import com.viettel.mbccs.data.source.remote.request.ChecOTPRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
-import com.viettel.mbccs.data.source.remote.request.GetApDomainRequest;
+import com.viettel.mbccs.data.source.remote.request.GetApDomainByTypeRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListProductRequest;
 import com.viettel.mbccs.data.source.remote.request.GetOTPRequest;
 import com.viettel.mbccs.data.source.remote.request.RegisterCustomerInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.UpdateAllSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseErrorResponse;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.CheckOTPResponse;
-import com.viettel.mbccs.data.source.remote.response.GetApDomainResponse;
+import com.viettel.mbccs.data.source.remote.response.GetApDomainByTypeResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListProductResponse;
 import com.viettel.mbccs.data.source.remote.response.GetOTPResponse;
 import com.viettel.mbccs.data.source.remote.response.GetRegiterSubInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.RegisterCustomerInfoResponse;
@@ -38,6 +40,7 @@ import com.viettel.mbccs.data.source.remote.response.SpinnerApDomain;
 import com.viettel.mbccs.data.source.remote.response.UpdateAllSubInfoResponse;
 import com.viettel.mbccs.service.service.UploadImageService;
 import com.viettel.mbccs.utils.ImageUtils;
+import com.viettel.mbccs.utils.SpinnerAdapter;
 import com.viettel.mbccs.utils.StringUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import com.viettel.mbccs.widget.callback.DrawableClickListener;
@@ -46,16 +49,17 @@ import java.util.List;
 import rx.Observable;
 import rx.Subscription;
 import rx.functions.Func1;
-import rx.functions.Func3;
+import rx.functions.Func4;
 import rx.subscriptions.CompositeSubscription;
 
 /**
- * Created by HuyQuyet on 5/29/17.
+ * Created by HuyQuyet on 08:06.
  */
 
 public class CreateUpdateInformationFragmentPresenter
-        implements CreateUpdateInformationFragmentContract.Presenter,
-        AdapterView.OnItemSelectedListener {
+        implements CreateUpdateInformationFragmentContract.Presenter {
+    private final int TimeDelayHideDialogLoading = 100;
+    private final String StringNull = null;
     private Context context;
     private CreateUpdateInformationFragmentContract.View view;
     private QLKhachHangRepository qlKhachHangRepository;
@@ -67,8 +71,8 @@ public class CreateUpdateInformationFragmentPresenter
     private Customer customerResponse;
     private Subscriber subscriberResponse;
 
-    private List<ApDomain> dataPassportType;
-    private List<ApDomain> dataHTTT;
+    private List<ApDomainByType> dataPassportType;
+    private List<ApDomainByType> dataHTTT;
     private int positionSelectionPassportType;
     private int positionSelectionHTTT;
 
@@ -76,17 +80,14 @@ public class CreateUpdateInformationFragmentPresenter
     public ObservableField<String> textBtnRegisterUpdate;
 
     public ObservableField<ArrayAdapter<String>> adapterGoiCuoc;
-    public ObservableField<ArrayAdapter<String>> adapterTypePassport;
-    public ObservableField<ArrayAdapter<String>> adapterHTThanhToan;
+    public ObservableField<SpinnerAdapter<ApDomainByType>> adapterTypePassport;
+    public ObservableField<SpinnerAdapter<ApDomainByType>> adapterHTThanhToan;
 
     public ObservableField<String> txtPhoneNumber;
     public ObservableField<String> txtSerial;
     public ObservableField<String> txtNameCustomer;
     public ObservableField<String> txtNumberPassport;
-    public ObservableField<Bitmap> imageFront;
-    public ObservableField<Bitmap> imageBackside;
-    public ObservableField<Bitmap> imagePortrait;
-
+    
     public ObservableField<String> imageUrlFront;
     public ObservableField<String> imageUrlBackside;
     public ObservableField<String> imageUrlPortrait;
@@ -95,6 +96,7 @@ public class CreateUpdateInformationFragmentPresenter
     public ObservableField<String> idPrecinct;
     public ObservableField<String> address;
     public ObservableField<String> textOTP;
+    public ObservableField<String> setDate;
 
     public ObservableBoolean isEnabledTxtNumberPassport;
     public ObservableBoolean isEnabledSelectGender;
@@ -109,7 +111,7 @@ public class CreateUpdateInformationFragmentPresenter
     public ObservableBoolean isEnableSerial;
     public ObservableInt selectionPassport;
 
-    public CreateUpdateInformationFragmentPresenter(Context context,
+    CreateUpdateInformationFragmentPresenter(Context context,
             CreateUpdateInformationFragmentContract.View view) {
         this.context = context;
         this.view = view;
@@ -127,15 +129,13 @@ public class CreateUpdateInformationFragmentPresenter
 
         txtNameCustomer = new ObservableField<>();
         txtNumberPassport = new ObservableField<>();
-        //        imageFront = new ObservableField<>();
-        //        imageBackside = new ObservableField<>();
-        //        imagePortrait = new ObservableField<>();
 
         idProvince = new ObservableField<>();
         idDistrict = new ObservableField<>();
         idPrecinct = new ObservableField<>();
         address = new ObservableField<>();
         textOTP = new ObservableField<>();
+        setDate = new ObservableField<>();
 
         isEnabledTxtNumberPassport = new ObservableBoolean(true);
         isEnabledSelectGender = new ObservableBoolean(true);
@@ -162,29 +162,34 @@ public class CreateUpdateInformationFragmentPresenter
         subscriptions.clear();
     }
 
-    public void getDataSpinner() {
+    void getDataSpinner() {
         view.showLoading();
         Subscription subscription =
                 Observable.zip(getDataSpinnerPassport(), getDataSpinnerHTThanhToan(),
-                        getDataSpinnerHTNhanTB(),
-                        new Func3<GetApDomainResponse, GetApDomainResponse, GetApDomainResponse, SpinnerApDomain>() {
+                        getDataSpinnerHTNhanTB(), getDataListProduct(),
+                        new Func4<GetApDomainByTypeResponse, GetApDomainByTypeResponse, GetApDomainByTypeResponse, GetListProductResponse, SpinnerApDomain>() {
                             @Override
-                            public SpinnerApDomain call(GetApDomainResponse response,
-                                    GetApDomainResponse response2, GetApDomainResponse response3) {
-                                return new SpinnerApDomain(response, response2, response3);
+                            public SpinnerApDomain call(GetApDomainByTypeResponse response,
+                                    GetApDomainByTypeResponse response2,
+                                    GetApDomainByTypeResponse response3,
+                                    GetListProductResponse response4) {
+                                return new SpinnerApDomain(response, response2, response3,
+                                        response4);
                             }
                         }).flatMap(new Func1<SpinnerApDomain, Observable<SpinnerApDomain>>() {
                     @Override
                     public Observable<SpinnerApDomain> call(SpinnerApDomain domain) {
-                        GetApDomainResponse spinnerGiayTo = domain.getSpinnerGiayTo();
-                        GetApDomainResponse spinnerHTTT = domain.getSpinnerHTTT();
-                        GetApDomainResponse spinnerHTNhanTB = domain.getSpinnerHTNhanTB();
+                        GetApDomainByTypeResponse spinnerGiayTo = domain.getSpinnerGiayTo();
+                        GetApDomainByTypeResponse spinnerHTTT = domain.getSpinnerHTTT();
+                        GetApDomainByTypeResponse spinnerHTNhanTB = domain.getSpinnerHTNhanTB();
+                        GetListProductResponse spinnerListProduct = domain.getSpinnerListProduct();
                         if (spinnerGiayTo == null
-                                || spinnerGiayTo.getApDomainList().size() == 0
+                                || spinnerGiayTo.getApDomainByTypeList().size() == 0
                                 || spinnerHTTT == null
-                                || spinnerHTTT.getApDomainList().size() == 0
+                                || spinnerHTTT.getApDomainByTypeList().size() == 0
                                 || spinnerHTNhanTB == null
-                                || spinnerHTNhanTB.getApDomainList().size() == 0) {
+                                || spinnerHTNhanTB.getApDomainByTypeList().size() == 0
+                                || spinnerListProduct == null) {
                             BaseErrorResponse baseErrorResponse = new BaseErrorResponse();
                             baseErrorResponse.setError(201, "");
                             return Observable.error(BaseException.toServerError(baseErrorResponse));
@@ -198,17 +203,16 @@ public class CreateUpdateInformationFragmentPresenter
                         if (dataPassportType != null && dataPassportType.size() != 0) {
                             dataPassportType.clear();
                         }
-                        dataPassportType = object.getSpinnerGiayTo().getApDomainList();
-                        view.getDataSpinnerPassportSuccess(dataPassportType);
+                        dataPassportType = object.getSpinnerGiayTo().getApDomainByTypeList();
 
                         if (typeFragment
                                 == CreateUpdateInformationFragment.Type.UPDATE_INFORMATION) {
                             if (dataHTTT != null && dataHTTT.size() != 0) {
                                 dataHTTT.clear();
                             }
-                            dataHTTT = object.getSpinnerHTTT().getApDomainList();
-                            view.getDataHTTTSuccess(dataHTTT);
+                            dataHTTT = object.getSpinnerHTTT().getApDomainByTypeList();
                         }
+
                         setData();
                     }
 
@@ -221,37 +225,46 @@ public class CreateUpdateInformationFragmentPresenter
         subscriptions.add(subscription);
     }
 
-    public Observable<GetApDomainResponse> getDataSpinnerPassport() {
-        DataRequest<GetApDomainRequest> request = new DataRequest<>();
-        GetApDomainRequest apDomainRequest = new GetApDomainRequest();
-        apDomainRequest.setType(ApDomain.Type.LOAI_GIAY_TO);
+    private Observable<GetApDomainByTypeResponse> getDataSpinnerPassport() {
+        DataRequest<GetApDomainByTypeRequest> request = new DataRequest<>();
+        GetApDomainByTypeRequest apDomainRequest = new GetApDomainByTypeRequest();
+        apDomainRequest.setType(ApDomainByType.Type.LOAI_GIAY_TO);
 
         request.setParameterApi(apDomainRequest);
-        request.setApiCode(ApiCode.GetListBusTypeIdRequire);
+        request.setApiCode(ApiCode.GetApDomainByType);
 
-        return qlKhachHangRepository.getApDomain(request);
+        return qlKhachHangRepository.getApDomainByType(request);
     }
 
-    private Observable<GetApDomainResponse> getDataSpinnerHTThanhToan() {
-        DataRequest<GetApDomainRequest> request = new DataRequest<>();
-        GetApDomainRequest apDomainRequest = new GetApDomainRequest();
-        apDomainRequest.setType(ApDomain.Type.HINH_THUC_THANH_TOAN);
+    private Observable<GetApDomainByTypeResponse> getDataSpinnerHTThanhToan() {
+        DataRequest<GetApDomainByTypeRequest> request = new DataRequest<>();
+        GetApDomainByTypeRequest apDomainRequest = new GetApDomainByTypeRequest();
+        apDomainRequest.setType(ApDomainByType.Type.HINH_THUC_THANH_TOAN);
 
         request.setParameterApi(apDomainRequest);
-        request.setApiCode(ApiCode.GetListBusTypeIdRequire);
+        request.setApiCode(ApiCode.GetApDomainByType);
 
-        return qlKhachHangRepository.getApDomain(request);
+        return qlKhachHangRepository.getApDomainByType(request);
     }
 
-    private Observable<GetApDomainResponse> getDataSpinnerHTNhanTB() {
-        DataRequest<GetApDomainRequest> request = new DataRequest<>();
-        GetApDomainRequest apDomainRequest = new GetApDomainRequest();
-        apDomainRequest.setType(ApDomain.Type.HINH_THUC_NHAN_THONG_BAO_CUOC);
+    private Observable<GetApDomainByTypeResponse> getDataSpinnerHTNhanTB() {
+        DataRequest<GetApDomainByTypeRequest> request = new DataRequest<>();
+        GetApDomainByTypeRequest apDomainRequest = new GetApDomainByTypeRequest();
+        apDomainRequest.setType(ApDomainByType.Type.HINH_THUC_NHAN_THONG_BAO_CUOC);
 
         request.setParameterApi(apDomainRequest);
-        request.setApiCode(ApiCode.GetListBusTypeIdRequire);
+        request.setApiCode(ApiCode.GetApDomainByType);
 
-        return qlKhachHangRepository.getApDomain(request);
+        return qlKhachHangRepository.getApDomainByType(request);
+    }
+
+    private Observable<GetListProductResponse> getDataListProduct() {
+        GetListProductRequest getListProductRequest = new GetListProductRequest();
+
+        DataRequest<GetListProductRequest> request = new DataRequest<>();
+        request.setParameterApi(getListProductRequest);
+        request.setApiCode(ApiCode.GetListProduct);
+        return qlKhachHangRepository.getListProduct(request);
     }
 
     /*---------------------- on Click in View -----------------------------*/
@@ -295,7 +308,7 @@ public class CreateUpdateInformationFragmentPresenter
                         view.isOTPEmpty();
                         view.hideLoading();
                     }
-                }, 100);
+                }, TimeDelayHideDialogLoading);
                 return;
             }
 
@@ -315,10 +328,9 @@ public class CreateUpdateInformationFragmentPresenter
                                 @Override
                                 public void run() {
                                     view.isSendImage();
-                                    // TODO: 6/10/17 fix download offline
-                                    //                                    view.hideLoading();
+                                    view.hideLoading();
                                 }
-                            }, 100);
+                            }, TimeDelayHideDialogLoading);
                         }
 
                         @Override
@@ -332,10 +344,9 @@ public class CreateUpdateInformationFragmentPresenter
                 @Override
                 public void run() {
                     view.isSendImage();
-                    // TODO: 6/10/17 fix download offline
-                    //                    view.hideLoading();
+                    view.hideLoading();
                 }
-            }, 100);
+            }, TimeDelayHideDialogLoading);
         }
     }
 
@@ -343,21 +354,39 @@ public class CreateUpdateInformationFragmentPresenter
         Area areaProvince = view.getAreaProvince();
         Area areaDistrict = view.getAreaDistrict();
         Area areaPrecinct = view.getAreaPrecinct();
-        String address = view.getAddress();
-        // TODO: 5/31/17
-        String sex = "M";
 
         Customer customer = new Customer();
-        customer.setName(txtNameCustomer.get());
+
+        customer.setAddress(view.getAddress());
+        customer.setAreaCode(areaPrecinct.getAreaCode());
         customer.setBirthDate(view.getBirthDate());
-        customer.setSex(sex);
-        customer.setProvince(areaProvince == null ? "0" : areaProvince.getProvince());
-        customer.setDistrict(areaDistrict == null ? "0" : areaDistrict.getDistrict());
-        customer.setPrecinct(areaPrecinct == null ? "0" : areaPrecinct.getPrecinct());
-        customer.setAddress(address);
-        customer.setIdType(1);
-        //        customer.setIdType(dataPassportType.get(positionSelectionPassportType).getCode());
+        customer.setBusType(
+                customerResponse != null && customerResponse.getBusType() != null ? customerResponse
+                        .getBusType() : StringNull);
+
+        customer.setCustId(customerResponse != null && customerResponse.getCustId() != null
+                ? customerResponse.getCustId() : null);
+
+        customer.setDistrict(areaDistrict == null ? StringNull : areaDistrict.getDistrict());
+        //        customer.setHome(StringNull);
+        //        customer.setIdIssueDate(StringNull);
         customer.setIdNo(txtNumberPassport.get());
+        customer.setIdType(dataPassportType.get(positionSelectionPassportType).getCode());
+        customer.setName(txtNameCustomer.get());
+
+        customer.setNationality(
+                customerResponse != null && customerResponse.getNationality() != null
+                        ? customerResponse.getNationality() : StringNull);
+
+        customer.setPrecinct(areaPrecinct == null ? StringNull : areaPrecinct.getPrecinct());
+        customer.setProvince(areaProvince == null ? StringNull : areaProvince.getProvince());
+        customer.setSex(isCheckFemale.get() ? Data.Gender.FEMALE : Data.Gender.MALE);
+
+        customer.setStatus(customerResponse != null && customerResponse.getStatus() != null
+                ? customerResponse.getStatus() : null);
+
+        //        customer.setStreetBlockName(StringNull);
+        //        customer.setStreetName(StringNull);
         return customer;
     }
 
@@ -386,35 +415,50 @@ public class CreateUpdateInformationFragmentPresenter
         return contract;
     }
 
-    public void clickSendData(boolean isSendImage) {
-        // TODO: 6/10/17 fix download offline
-        //        view.showLoading();
+    void clickSendData(boolean isSendImage) {
+        view.showLoading();
         Customer customer = getDataCustomer();
         if (StringUtils.isEmpty(customer.getProvince())) {
-            view.hideLoading();
-            view.customerError();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    view.hideLoading();
+                    view.customerError();
+                }
+            }, TimeDelayHideDialogLoading);
             return;
         }
 
         if (StringUtils.isEmpty(getDataSubscriber().getIsdn()) || StringUtils.isEmpty(
                 getDataSubscriber().getSerial())) {
-            view.hideLoading();
-            view.IsdnImsiError();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    view.hideLoading();
+                    view.IsdnImsiError();
+                }
+            }, TimeDelayHideDialogLoading);
             return;
         }
-        //        if (isSendImage) {
-        Intent intent = new Intent(context, UploadImageService.class);
-        intent.putParcelableArrayListExtra(UploadImageService.ARG_DATA_INTENT,
-                (ArrayList<? extends Parcelable>) getBitmapAndSaveDatabase(customer));
-        context.startService(intent);
-        //        } else {
-        //            getBitmapAndSaveDatabase(getDataCustomer());
-        //        }
+
+        if (isSendImage) {
+            Intent intent = new Intent(context, UploadImageService.class);
+            intent.putParcelableArrayListExtra(UploadImageService.ARG_DATA_INTENT,
+                    (ArrayList<? extends Parcelable>) getBitmapAndSaveDatabase(customer));
+            context.startService(intent);
+        } else {
+            getBitmapAndSaveDatabase(getDataCustomer());
+        }
 
         if (typeFragment == CreateUpdateInformationFragment.Type.UPDATE_INFORMATION) {
             if (getDataContract().getNoticeCharge().size() == 0) {
-                view.hideLoading();
-                view.selectNoticeChargeError();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        view.hideLoading();
+                        view.selectNoticeChargeError();
+                    }
+                }, TimeDelayHideDialogLoading);
                 return;
             }
 
@@ -473,7 +517,7 @@ public class CreateUpdateInformationFragmentPresenter
         }
     }
 
-    public boolean isExistsImageUpload() {
+    boolean isExistsImageUpload() {
         return view.imageFront() != null
                 || view.imageBackside() != null
                 || view.imagePortrait() != null;
@@ -529,6 +573,12 @@ public class CreateUpdateInformationFragmentPresenter
             case DrawableClickListener.DrawablePosition.RIGHT:
                 onDrawableClick(v);
                 break;
+            case DrawableClickListener.DrawablePosition.BOTTOM:
+                break;
+            case DrawableClickListener.DrawablePosition.LEFT:
+                break;
+            case DrawableClickListener.DrawablePosition.TOP:
+                break;
         }
     }
 
@@ -553,7 +603,7 @@ public class CreateUpdateInformationFragmentPresenter
     /*---------------------- End on Click in View -----------------------------*/
 
     /*----------------------- Set - Get ---------------------------------------*/
-    public void setTypeFragment(int type, GetRegiterSubInfoResponse data) {
+    void setTypeFragment(int type, GetRegiterSubInfoResponse data) {
         this.typeFragment = type;
         this.data = data;
         switch (typeFragment) {
@@ -582,75 +632,86 @@ public class CreateUpdateInformationFragmentPresenter
     }
 
     private void setData() {
-        if (data == null) return;
+        if (dataPassportType != null && dataPassportType.size() != 0) {
+            adapterTypePassport.set(new SpinnerAdapter<>(context, dataPassportType));
+            adapterTypePassport.get()
+                    .setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position,
+                                long id) {
+                            positionSelectionPassportType = position;
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
+        }
+
+        if (dataHTTT != null && dataHTTT.size() != 0) {
+            adapterHTThanhToan.set(new SpinnerAdapter<>(context, dataHTTT));
+            adapterHTThanhToan.get()
+                    .setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position,
+                                long id) {
+                            positionSelectionHTTT = position;
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
+        }
+
+        if (data == null) {
+            view.hideLoading();
+            return;
+        }
         customerResponse = data.getCustomer();
         subscriberResponse = data.getSubscriber();
-        if (customerResponse == null || subscriberResponse == null) return;
-        // TODO: 6/1/17 set data gói cước
-        // set information subscriberResponse
-        txtPhoneNumber.set(subscriberResponse.getIsdn());
-        if (!StringUtils.isEmpty(subscriberResponse.getIsdn())) {
-            isEnableIsdn.set(false);
+        if (subscriberResponse != null) {
+            txtPhoneNumber.set(subscriberResponse.getIsdn());
+            if (!StringUtils.isEmpty(subscriberResponse.getIsdn())) {
+                isEnableIsdn.set(false);
+            }
+            txtSerial.set(subscriberResponse.getSerial());
+            if (!StringUtils.isEmpty(subscriberResponse.getSerial())) {
+                isEnableSerial.set(false);
+            }
         }
-        txtSerial.set(subscriberResponse.getSerial());
-        if (!StringUtils.isEmpty(subscriberResponse.getSerial())) {
-            isEnableSerial.set(false);
-        }
+        if (customerResponse != null) {
+            txtNameCustomer.set(customerResponse.getName());
+            if (customerResponse.getSex().equals(Data.Gender.MALE)) {
+                isCheckMale.set(true);
+                isCheckFemale.set(false);
+            } else {
+                isCheckMale.set(false);
+                isCheckFemale.set(true);
+            }
+            isEnabledSelectGender.set(false);
 
-        // set information customerResponse
-        txtNameCustomer.set(customerResponse.getName());
-        if (customerResponse.getSex().equals(Data.Gender.MALE)) {
-            isCheckMale.set(true);
-            isCheckFemale.set(false);
-        } else {
-            isCheckMale.set(false);
-            isCheckFemale.set(true);
-        }
-        isEnabledSelectGender.set(false);
+            address.set(customerResponse.getAddress());
+            idProvince.set(customerResponse.getProvince());
+            idDistrict.set(customerResponse.getDistrict());
+            idPrecinct.set(customerResponse.getPrecinct());
+            txtNumberPassport.set(customerResponse.getIdNo());
+            if (!StringUtils.isEmpty(customerResponse.getIdNo())) {
+                isEnabledTxtNumberPassport.set(false);
+            }
+            setDate.set(customerResponse.getBirthDate());
 
-        address.set(customerResponse.getAddress());
-        idProvince.set(customerResponse.getProvince());
-        idDistrict.set(customerResponse.getDistrict());
-        idPrecinct.set(customerResponse.getPrecinct());
-        txtNumberPassport.set(customerResponse.getIdNo());
-        if (!StringUtils.isEmpty(customerResponse.getIdNo())) isEnabledTxtNumberPassport.set(false);
-        view.setBirthDate(customerResponse.getBirthDate());
-
-        for (int i = 0; i < dataPassportType.size(); i++) {
-            if (dataPassportType.get(i)
-                    .getCode()
-                    .equals(String.valueOf(customerResponse.getIdType()))) {
-                selectionPassport.set(i);
-                break;
+            for (int i = 0; i < dataPassportType.size(); i++) {
+                if (dataPassportType.get(i).getCode().equals(customerResponse.getIdType())) {
+                    selectionPassport.set(i);
+                    break;
+                }
             }
         }
         view.hideLoading();
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        switch (parent.getId()) {
-            case R.id.spinner_select_type_passport:
-                positionSelectionPassportType = position;
-                break;
-
-            case R.id.spinner_select_httt:
-                positionSelectionHTTT = position;
-                break;
-        }
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-
-    public void setAdapterPassportType(ArrayAdapter<String> adapter) {
-        adapterTypePassport.set(adapter);
-    }
-
-    public void setadapterHTThanhToan(ArrayAdapter<String> adapter) {
-        adapterHTThanhToan.set(adapter);
-    }
     /*----------------------- End Set - Get ---------------------------------------*/
 }

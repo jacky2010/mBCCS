@@ -2,8 +2,6 @@ package com.viettel.mbccs.screen.warehousecommon.exportsuccess;
 
 import android.databinding.ObservableField;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.data.model.StockTransDetail;
@@ -11,7 +9,6 @@ import com.viettel.mbccs.databinding.DialogExportSuccessBinding;
 import com.viettel.mbccs.screen.common.success.DialogViewSerial;
 import com.viettel.mbccs.screen.warehousecommon.cmdprepareexportdetail.StockTransDetailAdapter;
 import com.viettel.mbccs.variable.Constants;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -77,7 +74,7 @@ public class ExportSuccessDialog
 
     @Override
     public void onSerialPickerClick(int position, StockTransDetail stockTransDetail) {
-        DialogViewSerial dialogViewSerial = DialogViewSerial.newInstance(null);
+        DialogViewSerial dialogViewSerial = DialogViewSerial.newInstance();
         dialogViewSerial.show(getSupportFragmentManager(), "");
         //TODO open serial
     }

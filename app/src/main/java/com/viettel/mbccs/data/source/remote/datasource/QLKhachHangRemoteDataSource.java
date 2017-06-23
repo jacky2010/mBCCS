@@ -4,16 +4,18 @@ import com.viettel.mbccs.data.source.remote.IQLKhachHangRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.request.ChecOTPRequest;
 import com.viettel.mbccs.data.source.remote.request.CheckIdNoRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
-import com.viettel.mbccs.data.source.remote.request.GetApDomainRequest;
+import com.viettel.mbccs.data.source.remote.request.GetApDomainByTypeRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListBusTypeIdRequireRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListProductRequest;
 import com.viettel.mbccs.data.source.remote.request.GetOTPRequest;
 import com.viettel.mbccs.data.source.remote.request.GetRegiterSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.RegisterCustomerInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.UpdateAllSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.response.CheckOTPResponse;
 import com.viettel.mbccs.data.source.remote.response.CheckIdNoResponse;
-import com.viettel.mbccs.data.source.remote.response.GetApDomainResponse;
+import com.viettel.mbccs.data.source.remote.response.GetApDomainByTypeResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListBusTypeIdRequireResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListProductResponse;
 import com.viettel.mbccs.data.source.remote.response.GetOTPResponse;
 import com.viettel.mbccs.data.source.remote.response.GetRegiterSubInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.RegisterCustomerInfoResponse;
@@ -68,11 +70,11 @@ public class QLKhachHangRemoteDataSource implements IQLKhachHangRemoteDataSource
     }
 
     @Override
-    public Observable<GetApDomainResponse> getApDomain(DataRequest<GetApDomainRequest> request) {
+    public Observable<GetApDomainByTypeResponse> getApDomainByType(DataRequest<GetApDomainByTypeRequest> request) {
         return RequestHelper.getRequest()
-                .getApDomain(request)
-                .flatMap(SchedulerUtils.<GetApDomainResponse>convertDataFlatMap())
-                .compose(SchedulerUtils.<GetApDomainResponse>applyAsyncSchedulers());
+                .getApDomainByType(request)
+                .flatMap(SchedulerUtils.<GetApDomainByTypeResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<GetApDomainByTypeResponse>applyAsyncSchedulers());
     }
 
     @Override
@@ -106,5 +108,14 @@ public class QLKhachHangRemoteDataSource implements IQLKhachHangRemoteDataSource
                 .checkIdNo(request)
                 .flatMap(SchedulerUtils.<CheckIdNoResponse>convertDataFlatMap())
                 .compose(SchedulerUtils.<CheckIdNoResponse>applyAsyncSchedulers());
+    }
+
+    @Override
+    public Observable<GetListProductResponse> getListProduct(
+            DataRequest<GetListProductRequest> request) {
+        return RequestHelper.getRequest()
+                .getListProduct(request)
+                .flatMap(SchedulerUtils.<GetListProductResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<GetListProductResponse>applyAsyncSchedulers());
     }
 }

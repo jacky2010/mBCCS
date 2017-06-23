@@ -4,7 +4,9 @@ import android.databinding.ObservableField;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import com.viettel.mbccs.data.model.Image;
 import com.viettel.mbccs.data.model.SaleOrdersDetail;
+import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.databinding.ItemOrderDetailBinding;
 import com.viettel.mbccs.utils.Common;
 import java.util.List;
@@ -18,9 +20,11 @@ public class OrderDetailAdapter
     private ItemOrderDetailBinding binding;
     private List<SaleOrdersDetail> saleOrdersDetailList;
     private OrderDetailAdapterCallback callback;
+    private UserRepository userRepository;
 
     public OrderDetailAdapter(List<SaleOrdersDetail> saleOrdersDetailList) {
         this.saleOrdersDetailList = saleOrdersDetailList;
+        userRepository = UserRepository.getInstance();
     }
 
     @Override
@@ -71,7 +75,8 @@ public class OrderDetailAdapter
             }
             position = pos;
             saleOrdersDetail = item;
-            imageUrl.set(saleOrdersDetail.getModelSale().getPathImage1());
+            Image image = userRepository.getImageFromDatabase(item.getStockModelCode());
+            imageUrl.set(image.getImagePath());
             nameStock.set(saleOrdersDetail.getStockMoldeName());
             priceStock.set(Common.formatDouble(saleOrdersDetail.getModelSale().getPrice()));
             quantityStock.set(String.valueOf(saleOrdersDetail.getQuantity()));

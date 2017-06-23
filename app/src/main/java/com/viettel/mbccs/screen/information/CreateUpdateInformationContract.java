@@ -2,7 +2,7 @@ package com.viettel.mbccs.screen.information;
 
 import com.viettel.mbccs.base.BasePresenter;
 import com.viettel.mbccs.base.BaseView;
-import com.viettel.mbccs.data.model.ApDomain;
+import com.viettel.mbccs.data.model.ApDomainByType;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetRegiterSubInfoResponse;
 import java.util.List;
@@ -27,7 +27,7 @@ public interface CreateUpdateInformationContract {
 
         void onRegisterNewPayment();
 
-        void getDataSpinnerPassportSuccess(List<ApDomain> dataPassportType);
+        void getDataSpinnerPassportSuccess(List<ApDomainByType> dataPassportType);
 
         void getDataSpinnerPassportError(BaseException error);
 

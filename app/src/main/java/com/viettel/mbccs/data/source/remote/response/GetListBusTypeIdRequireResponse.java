@@ -2,7 +2,7 @@ package com.viettel.mbccs.data.source.remote.response;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.viettel.mbccs.data.model.ApDomain;
+import com.viettel.mbccs.data.model.ApDomainByType;
 import java.util.List;
 
 /**
@@ -13,13 +13,13 @@ public class GetListBusTypeIdRequireResponse extends DataResponse {
 
     @SerializedName("lstApDomain")
     @Expose
-    private List<ApDomain> apDomainList;
+    private List<ApDomainByType> apDomainList;
 
-    public List<ApDomain> getApDomainList() {
+    public List<ApDomainByType> getApDomainList() {
         return apDomainList;
     }
 
-    public void setApDomainList(List<ApDomain> apDomainList) {
+    public void setApDomainList(List<ApDomainByType> apDomainList) {
         this.apDomainList = apDomainList;
     }
 }

@@ -8,13 +8,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.ApiCode;
-import com.viettel.mbccs.data.model.ApDomain;
+import com.viettel.mbccs.data.model.ApDomainByType;
 import com.viettel.mbccs.data.source.QLKhachHangRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
-import com.viettel.mbccs.data.source.remote.request.GetApDomainRequest;
+import com.viettel.mbccs.data.source.remote.request.GetApDomainByTypeRequest;
 import com.viettel.mbccs.data.source.remote.request.GetRegiterSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
-import com.viettel.mbccs.data.source.remote.response.GetApDomainResponse;
+import com.viettel.mbccs.data.source.remote.response.GetApDomainByTypeResponse;
 import com.viettel.mbccs.data.source.remote.response.GetRegiterSubInfoResponse;
 import com.viettel.mbccs.screen.information.adapter.InformationCustomerAdapter;
 import com.viettel.mbccs.utils.StringUtils;
@@ -35,7 +35,7 @@ public class CreateUpdateInformationPresenter
     private QLKhachHangRepository qlKhachHangRepository;
     private CompositeSubscription subscriptions;
     private boolean typeCreate;
-    private List<ApDomain> dataPassportType;
+    private List<ApDomainByType> dataPassportType;
     private int positionPassportType;
 
     public ObservableField<InformationCustomerAdapter> informationCustomerAdapter;
@@ -58,9 +58,9 @@ public class CreateUpdateInformationPresenter
         title = new ObservableField<>();
         isHideData = new ObservableBoolean();
         isHideBtnCreate = new ObservableBoolean();
-
-        isdn = new ObservableField<>();
-        idNo = new ObservableField<>();
+        // TODO: 6/22/17 fix data test
+        isdn = new ObservableField<>("620103022");
+        idNo = new ObservableField<>("145079102");
         adapterPassportType = new ObservableField<>();
     }
 
@@ -141,21 +141,21 @@ public class CreateUpdateInformationPresenter
 
     public void getDataSpinnerPassport() {
         view.showLoading();
-        DataRequest<GetApDomainRequest> request = new DataRequest<>();
-        GetApDomainRequest getApDomainRequest = new GetApDomainRequest();
-        getApDomainRequest.setType(ApDomain.Type.LOAI_GIAY_TO);
+        DataRequest<GetApDomainByTypeRequest> request = new DataRequest<>();
+        GetApDomainByTypeRequest getApDomainRequest = new GetApDomainByTypeRequest();
+        getApDomainRequest.setType(ApDomainByType.Type.LOAI_GIAY_TO);
 
         request.setParameterApi(getApDomainRequest);
-        request.setApiCode(ApiCode.GetListBusTypeIdRequire);
+        request.setApiCode(ApiCode.GetApDomainByType);
 
-        Subscription subscription = qlKhachHangRepository.getApDomain(request)
-                .subscribe(new MBCCSSubscribe<GetApDomainResponse>() {
+        Subscription subscription = qlKhachHangRepository.getApDomainByType(request)
+                .subscribe(new MBCCSSubscribe<GetApDomainByTypeResponse>() {
                     @Override
-                    public void onSuccess(GetApDomainResponse object) {
+                    public void onSuccess(GetApDomainByTypeResponse object) {
                         if (dataPassportType != null && dataPassportType.size() != 0) {
                             dataPassportType.clear();
                         }
-                        dataPassportType = object.getApDomainList();
+                        dataPassportType = object.getApDomainByTypeList();
                         view.getDataSpinnerPassportSuccess(dataPassportType);
                         view.hideLoading();
                     }

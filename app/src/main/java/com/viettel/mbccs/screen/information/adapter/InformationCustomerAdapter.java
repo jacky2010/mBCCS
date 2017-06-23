@@ -70,10 +70,14 @@ public class InformationCustomerAdapter
                 viewBinding.setPresenter(this);
             }
             name.set(data.getCustomer().getName());
-            phone.set(data.getSubscriber().getIsdn());
+            if (data.getSubscriber() != null) {
+                phone.set(data.getSubscriber().getIsdn());
+                type.set(data.getSubscriber().getSubType());
+            }
+
             icon.set(isCreate ? context.getResources().getDrawable(R.drawable.ic_file_black_24dp)
                     : context.getResources().getDrawable(R.drawable.ic_edit_black));
-            type.set(data.getSubscriber().getSubType());
+
             this.position = position;
         }
 

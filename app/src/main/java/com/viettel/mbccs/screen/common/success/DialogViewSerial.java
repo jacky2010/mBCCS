@@ -41,7 +41,6 @@ import rx.subscriptions.CompositeSubscription;
  */
 
 public class DialogViewSerial extends DialogFragment {
-    private static final String ARG_STOCK_TOTAL = "STOCK_TOTAL";
     private DialogViewSerialBinding binding;
     private BanHangKhoTaiChinhRepository banHangKhoTaiChinhRepository;
     private CompositeSubscription subscriptions;
@@ -53,20 +52,25 @@ public class DialogViewSerial extends DialogFragment {
     public ObservableField<ViewViewSerialAdapter> adapterViewSerial;
     public ObservableInt totalSerial;
 
-    public static DialogViewSerial newInstance(StockTotal stockTotal) {
+    public static DialogViewSerial newInstance() {
         Bundle bundle = new Bundle();
-        bundle.putParcelable(ARG_STOCK_TOTAL, stockTotal);
         DialogViewSerial fragment = new DialogViewSerial();
         fragment.setArguments(bundle);
         return fragment;
     }
 
+    public void setStockTotal(StockTotal stockTotal) {
+        this.stockTotal = stockTotal;
+    }
+
+    public void setStockSerial(StockSerial stockSerial) {
+        this.stockSerial = stockSerial;
+    }
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         banHangKhoTaiChinhRepository = BanHangKhoTaiChinhRepository.getInstance();
         subscriptions = new CompositeSubscription();
-        stockTotal = getArguments().getParcelable(ARG_STOCK_TOTAL);
 
         codeStock = new ObservableField<>();
         totalSerial = new ObservableInt();
@@ -85,11 +89,15 @@ public class DialogViewSerial extends DialogFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        if (stockSerial != null) {
+            setData(stockSerial);
+            return;
+        }
+
         if (loadingDialog == null) {
             loadingDialog = new LoadingDialog();
             loadingDialog.setCancelable(false);
         }
-
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         loadingDialog.show(fragmentManager, "loading");
 

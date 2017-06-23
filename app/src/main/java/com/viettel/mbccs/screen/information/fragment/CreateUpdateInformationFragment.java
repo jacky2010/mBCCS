@@ -11,10 +11,8 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseFragment;
-import com.viettel.mbccs.data.model.ApDomain;
 import com.viettel.mbccs.data.model.Area;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetRegiterSubInfoResponse;
@@ -22,8 +20,6 @@ import com.viettel.mbccs.databinding.FragmentCreateUpdateInformationBinding;
 import com.viettel.mbccs.screen.common.success.DialogFullScreen;
 import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.widget.CustomSelectImageNo;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by HuyQuyet on 5/29/17.
@@ -49,13 +45,6 @@ public class CreateUpdateInformationFragment extends BaseFragment
     @Type
     private int typeFragment;
     private GetRegiterSubInfoResponse data;
-
-    private List<String> dataPassportType;
-    private List<String> dataHTTT;
-    private List<ApDomain> passportTypeList;
-    private List<ApDomain> hTTTList;
-    private ArrayAdapter<String> adapterPassportType;
-    private ArrayAdapter<String> adapterHTThanhToan;
 
     public static CreateUpdateInformationFragment newInstance(@Type int typeFragment,
             @Nullable GetRegiterSubInfoResponse data) {
@@ -86,21 +75,6 @@ public class CreateUpdateInformationFragment extends BaseFragment
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         presenter = new CreateUpdateInformationFragmentPresenter(getActivity(), this);
-
-        dataPassportType = new ArrayList<>();
-        adapterPassportType =
-                new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item,
-                        dataPassportType);
-        adapterPassportType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        presenter.setAdapterPassportType(adapterPassportType);
-        binding.spinnerSelectTypePassport.setOnItemSelectedListener(presenter);
-
-        dataHTTT = new ArrayList<>();
-        adapterHTThanhToan =
-                new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, dataHTTT);
-        adapterHTThanhToan.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        presenter.setadapterHTThanhToan(adapterHTThanhToan);
-        binding.spinnerSelectHttt.setOnItemSelectedListener(presenter);
 
         presenter.setTypeFragment(typeFragment, data);
         presenter.getDataSpinner();
@@ -160,11 +134,6 @@ public class CreateUpdateInformationFragment extends BaseFragment
     }
 
     @Override
-    public void setBirthDate(String birthDate) {
-        binding.dateBirthday.setDateString(birthDate);
-    }
-
-    @Override
     public void registerCustomerInfoError(BaseException error) {
         DialogUtils.showDialogError(getActivity(), error);
     }
@@ -199,24 +168,6 @@ public class CreateUpdateInformationFragment extends BaseFragment
         dia.setCancelable(false);
         dia.setCanceledOnTouchOutside(false);
         dia.show();
-    }
-
-    @Override
-    public void getDataSpinnerPassportSuccess(List<ApDomain> type) {
-        passportTypeList = type;
-        for (ApDomain a : passportTypeList) {
-            dataPassportType.add(a.getName());
-        }
-        adapterPassportType.notifyDataSetChanged();
-    }
-
-    @Override
-    public void getDataHTTTSuccess(List<ApDomain> type) {
-        hTTTList = type;
-        for (ApDomain a : hTTTList) {
-            dataHTTT.add(a.getName());
-        }
-        adapterHTThanhToan.notifyDataSetChanged();
     }
 
     @Override
@@ -270,23 +221,22 @@ public class CreateUpdateInformationFragment extends BaseFragment
 
     @Override
     public void isSendImage() {
-        // TODO: 6/10/17 fix download offline
-        //        if (presenter.isExistsImageUpload()) {
-        //            DialogUtils.showDialog(getActivity(), "Send Image", "Send image now", "OK",
-        //                    new DialogInterface.OnClickListener() {
-        //                        @Override
-        //                        public void onClick(DialogInterface dialog, int which) {
-        //                            presenter.clickSendData(true);
-        //                        }
-        //                    }, "Cancel", new DialogInterface.OnClickListener() {
-        //                        @Override
-        //                        public void onClick(DialogInterface dialog, int which) {
-        //                            presenter.clickSendData(false);
-        //                        }
-        //                    });
-        //        } else {
+        if (presenter.isExistsImageUpload()) {
+            DialogUtils.showDialog(getActivity(), "Send Image", "Send image now", "OK",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            presenter.clickSendData(true);
+                        }
+                    }, "No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            presenter.clickSendData(false);
+                        }
+                    });
+        } else {
         presenter.clickSendData(false);
-        //        }
+        }
     }
 
     @Override

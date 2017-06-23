@@ -25,5 +25,7 @@ public class OrderDetailFragmentContract {
         void clickCancelSell();
 
         void onClickSell();
+
+        void checkCountSerialError();
     }
 }

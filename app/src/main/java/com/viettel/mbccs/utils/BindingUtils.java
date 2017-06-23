@@ -234,14 +234,13 @@ public class BindingUtils {
                 .into(imageview);
     }
 
-    @BindingAdapter({ "imageBitmap" })
-    public static void setImageBitmap(ImageView imageview, Drawable resource) {
-        Glide.with(imageview.getContext())
-                .load(resource)
-                .centerCrop()
-                .bitmapTransform(new CircleTransform(imageview.getContext()))
-                .into(imageview);
-    }
+//    @BindingAdapter({ "imageBitmap" })
+//    public static void setImageBitmap(ImageView imageview, Drawable resource) {
+//        Glide.with(imageview.getContext())
+//                .load(resource)
+//                .bitmapTransform(new CircleTransform(imageview.getContext()))
+//                .into(imageview);
+//    }
 
     @BindingAdapter({ "textHtml" })
     public static void setText(TextView text, String html) {

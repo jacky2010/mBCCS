@@ -1,6 +1,5 @@
 package com.viettel.mbccs.screen.warehousecommon.cmdprepareexportdetail;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.databinding.ObservableField;
 import com.viettel.mbccs.R;
@@ -107,6 +106,7 @@ public class CmdPrepareExportDetailPresenter implements CmdPrepareExportDetailCo
                                 bindData(fakeData());
                             }
                         });
+        mSubscription.add(subscription);
     }
 
     private void bindData(ListStockTransDetailsReponse object) {

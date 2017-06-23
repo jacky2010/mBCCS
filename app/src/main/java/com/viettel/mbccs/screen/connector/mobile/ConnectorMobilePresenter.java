@@ -5,9 +5,7 @@ import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import com.viettel.mbccs.BR;
-import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.constance.Data;
 import com.viettel.mbccs.data.model.Contract;
@@ -18,6 +16,7 @@ import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.CheckIdNoResponse;
 import com.viettel.mbccs.screen.connector.adapter.ConnectorMobileAdapter;
+import com.viettel.mbccs.utils.SpinnerAdapter;
 import com.viettel.mbccs.utils.StringUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.ArrayList;
@@ -31,7 +30,7 @@ import rx.subscriptions.CompositeSubscription;
 
 public class ConnectorMobilePresenter extends BaseObservable
         implements ConnectorMobileContract.Presenter,
-        ConnectorMobileAdapter.ConnectorMobileAdapterCallback, AdapterView.OnItemSelectedListener {
+        ConnectorMobileAdapter.ConnectorMobileAdapterCallback {
     private Context context;
     private ConnectorMobileContract.View viewConnectorMobile;
     private QLKhachHangRepository qlKhachHangRepository;
@@ -46,7 +45,7 @@ public class ConnectorMobilePresenter extends BaseObservable
 
     private int countResult;
 
-    private ArrayAdapter<Data.DataField> adapterSpinnerMobileService;
+    private SpinnerAdapter<Data.DataField> adapterSpinnerMobileService;
     private ConnectorMobileAdapter connectorMobileAdapter;
 
     private List<Contract> contractList;
@@ -66,12 +65,22 @@ public class ConnectorMobilePresenter extends BaseObservable
         subscriptions = new CompositeSubscription();
         contractList = new ArrayList<>();
         mobileServiceList = Data.connectorMobileService();
-        adapterSpinnerMobileService =
-                new ArrayAdapter<>(context, android.R.layout.simple_spinner_item,
-                        mobileServiceList);
-        adapterSpinnerMobileService.setDropDownViewResource(
-                android.R.layout.simple_spinner_dropdown_item);
+        adapterSpinnerMobileService = new SpinnerAdapter<>(context, mobileServiceList);
         adapterSpinnerMobileService.notifyDataSetChanged();
+        adapterSpinnerMobileService.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position,
+                            long id) {
+                        positionMobileService = position;
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+        setTextHideSearch();
         setSelectBefore(true);
         setSelectAfter(false);
     }
@@ -144,12 +153,12 @@ public class ConnectorMobilePresenter extends BaseObservable
     }
 
     @Bindable
-    public ArrayAdapter<Data.DataField> getAdapterSpinnerMobileService() {
+    public SpinnerAdapter<Data.DataField> getAdapterSpinnerMobileService() {
         return adapterSpinnerMobileService;
     }
 
     public void setAdapterSpinnerMobileService(
-            ArrayAdapter<Data.DataField> adapterSpinnerMobileService) {
+            SpinnerAdapter<Data.DataField> adapterSpinnerMobileService) {
         this.adapterSpinnerMobileService = adapterSpinnerMobileService;
         notifyPropertyChanged(BR.adapterSpinnerMobileService);
     }
@@ -184,12 +193,15 @@ public class ConnectorMobilePresenter extends BaseObservable
 
     public void expandSearch() {
         setHideSearch(!isHideSearch());
-        if (!isHideSearch()) {
-            setTextSearch((isSelectBefore ? "Thuê bao trả trước" : "Thuê bao trả sau")
-                    + " - "
-                    + "Mobile" + " - " + (StringUtils.isEmpty(txtPassport) ? "Trống"
-                    : txtPassport));
-        }
+        setTextHideSearch();
+    }
+
+    private void setTextHideSearch() {
+        setTextSearch((isSelectBefore ? "Thuê bao trả trước" : "Thuê bao trả sau")
+                + " - "
+                + "Mobile"
+                + " - "
+                + (StringUtils.isEmpty(txtPassport) ? "Trống" : txtPassport));
     }
 
     public void onSearch() {
@@ -239,19 +251,5 @@ public class ConnectorMobilePresenter extends BaseObservable
     @Override
     public void onItemClick(int position) {
         viewConnectorMobile.onItemClick(position);
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        switch (parent.getId()) {
-            case R.id.spinner_connector_mobile_service:
-                positionMobileService = position;
-                break;
-        }
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
     }
 }
