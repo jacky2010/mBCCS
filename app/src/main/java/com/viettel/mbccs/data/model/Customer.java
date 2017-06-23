@@ -30,7 +30,7 @@ public class Customer implements Parcelable {
     // Id khách hàng
     @SerializedName("custId")
     @Expose
-    private int custId;
+    private Integer custId;
 
     // Loại khách hàng
     @SerializedName("busType")
@@ -45,7 +45,7 @@ public class Customer implements Parcelable {
     // Loại giấy tờ
     @SerializedName("idType")
     @Expose
-    private int idType;
+    private String idType;
 
     // Số giấy tờ
     @SerializedName("idNo")
@@ -179,7 +179,7 @@ public class Customer implements Parcelable {
     // Trạng thái
     @SerializedName("status")
     @Expose
-    private int status;
+    private Integer status;
 
     // Người thêm mới bản ghi
     @SerializedName("addedUser")
@@ -217,7 +217,7 @@ public class Customer implements Parcelable {
         custId = in.readInt();
         busType = in.readString();
         custTypeId = in.readInt();
-        idType = in.readInt();
+        idType = in.readString();
         idNo = in.readString();
         idIssuePlace = in.readString();
         idIssueDate = in.readString();
@@ -261,7 +261,7 @@ public class Customer implements Parcelable {
         dest.writeInt(custId);
         dest.writeString(busType);
         dest.writeInt(custTypeId);
-        dest.writeInt(idType);
+        dest.writeString(idType);
         dest.writeString(idNo);
         dest.writeString(idIssuePlace);
         dest.writeString(idIssueDate);
@@ -345,11 +345,11 @@ public class Customer implements Parcelable {
         this.tin = tin;
     }
 
-    public int getCustId() {
+    public Integer getCustId() {
         return custId;
     }
 
-    public void setCustId(int custId) {
+    public void setCustId(Integer custId) {
         this.custId = custId;
     }
 
@@ -373,14 +373,14 @@ public class Customer implements Parcelable {
      *
      * @return id loại giấy tờ
      */
-    public int getIdType() {
+    public String getIdType() {
         return idType;
     }
 
     /**
      * @param idType Loại giấy tờ
      */
-    public void setIdType(int idType) {
+    public void setIdType(String idType) {
         this.idType = idType;
     }
 
@@ -616,11 +616,11 @@ public class Customer implements Parcelable {
         this.vip = vip;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

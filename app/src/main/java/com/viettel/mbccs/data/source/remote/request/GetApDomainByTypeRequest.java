@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by HuyQuyet on 6/2/17.
  */
 
-public class GetApDomainRequest {
+public class GetApDomainByTypeRequest {
 
     @SerializedName("type")
     @Expose

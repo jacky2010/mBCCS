@@ -16,7 +16,7 @@ import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.DownloadImageRequest;
 import com.viettel.mbccs.data.source.remote.request.GetAllInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.GetAnypayAuthorizeRequest;
-import com.viettel.mbccs.data.source.remote.request.GetApDomainRequest;
+import com.viettel.mbccs.data.source.remote.request.GetApDomainByTypeRequest;
 import com.viettel.mbccs.data.source.remote.request.GetDistrictRequest;
 import com.viettel.mbccs.data.source.remote.request.GetHotNewsCSKPPRequest;
 import com.viettel.mbccs.data.source.remote.request.GetHotNewsInfoCSKPPRequest;
@@ -27,6 +27,7 @@ import com.viettel.mbccs.data.source.remote.request.GetListBusTypeIdRequireReque
 import com.viettel.mbccs.data.source.remote.request.GetListChannelByOwnerTypeIdRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListIdImageRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListOrderRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListProductRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListProvinceRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListSerialRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListShopRequest;
@@ -70,7 +71,7 @@ import com.viettel.mbccs.data.source.remote.response.DataResponse;
 import com.viettel.mbccs.data.source.remote.response.DownloadImageResponse;
 import com.viettel.mbccs.data.source.remote.response.GetAllInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetAnypayAuthorizeResponse;
-import com.viettel.mbccs.data.source.remote.response.GetApDomainResponse;
+import com.viettel.mbccs.data.source.remote.response.GetApDomainByTypeResponse;
 import com.viettel.mbccs.data.source.remote.response.GetDistributedChannelResponse;
 import com.viettel.mbccs.data.source.remote.response.GetDistrictResponse;
 import com.viettel.mbccs.data.source.remote.response.GetHotNewsCSKPPResponse;
@@ -82,6 +83,7 @@ import com.viettel.mbccs.data.source.remote.response.GetListBusTypeIdRequireResp
 import com.viettel.mbccs.data.source.remote.response.GetListChannelByOwnerTypeIdResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListIdImageResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListOrderResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListProductResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListProvinceResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListSerialResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListShopResponse;
@@ -112,7 +114,6 @@ import com.viettel.mbccs.data.source.remote.response.TransferAnyPayResponse;
 import com.viettel.mbccs.data.source.remote.response.UpdateAllSubInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.UpdateSaleOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.UploadImageResponse;
-
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -241,8 +242,8 @@ public interface MBCSSApi {
             @Body DataRequest<GetListBusTypeIdRequireRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<ServerDataResponse<BaseResponse<GetApDomainResponse>>> getApDomain(
-            @Body DataRequest<GetApDomainRequest> request);
+    Observable<ServerDataResponse<BaseResponse<GetApDomainByTypeResponse>>> getApDomainByType(
+            @Body DataRequest<GetApDomainByTypeRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<GetOTPResponse>>> getOTP(
@@ -361,5 +362,9 @@ public interface MBCSSApi {
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<EmptyObject>>> createExpStock(
             @Body DataRequest<CreateExpStockRequest> requestDataRequest);
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+
+    Observable<ServerDataResponse<BaseResponse<GetListProductResponse>>> getListProduct(
+            @Body DataRequest<GetListProductRequest> request);
 }
 

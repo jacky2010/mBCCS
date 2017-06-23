@@ -33,7 +33,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:background="@{ @android:color/darker_gray }"
+                app:background="@{@color/colorAccent}"
                 app:isShow="@{ true }"
                 app:leftIcon="@{ @drawable/ic_arrow_left_white_24dp }"
                 app:leftIconClick="@{ () -> presenter.onCancel() }"
@@ -42,135 +42,14 @@
                 app:titleTextSize="@{ @dimen/sp_18 }"
                 />
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="@dimen/dp_10"
-                android:paddingRight="@dimen/dp_10"
+                android:layout_height="match_parent"
                 >
-
-                <include
-                    layout="@layout/item_text_filter"
-                    app:isShow="@{!presenter.hideSearch}"
-                    app:onClick="@{ v -> presenter.expandSearch() }"
-                    app:text="@{presenter.textSearch}"
-                    />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:visibility="@{ presenter.hideSearch ? View.VISIBLE : View.GONE }"
-                    >
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/dp_4"
-                        android:onClick="@{ v -> presenter.expandSearch() }"
-                        android:src="@drawable/collapse"
-                        />
-
-                    <com.viettel.mbccs.widget.CustomTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/connector_mobile_loai_thue_bao"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_14"
-                        />
-
-                    <RadioGroup
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingLeft="@dimen/dp_20"
-                        android:paddingRight="@dimen/dp_20"
-                        >
-
-                        <RadioButton
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:checked="@{ presenter.selectBefore }"
-                            android:text="@string/connector_mobile_tra_truoc"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_14"
-                            />
-
-                        <RadioButton
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:checked="@{ presenter.selectAfter }"
-                            android:text="@string/connector_mobile_tra_sau"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_14"
-                            />
-                    </RadioGroup>
-
-                    <com.viettel.mbccs.widget.CustomTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_8"
-                        android:text="@string/connector_mobile_dich_vu"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_14"
-                        />
-
-
-                    <com.viettel.mbccs.widget.SpinnerWithBorder
-                        android:id="@+id/spinner_connector_mobile_service"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/dp_6"
-                        bind:adapter="@{ presenter.adapterSpinnerMobileService }"
-                        />
-
-                    <com.viettel.mbccs.widget.CustomTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_8"
-                        android:text="@string/connector_mobile_so_giay_to"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_14"
-                        />
-
-                    <com.viettel.mbccs.widget.CustomEdittext
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/dp_40"
-                        android:layout_marginTop="@dimen/dp_6"
-                        android:text="@={ presenter.txtPassport }"
-                        style="@style/inputStyle"
-                        />
-
-                    <com.viettel.mbccs.widget.CustomButton
-                        android:layout_width="@dimen/dp_150"
-                        android:layout_height="@dimen/dp_40"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:drawableLeft="@drawable/ic_search_black_24dp"
-                        android:onClick="@{ v -> presenter.onSearch() }"
-                        android:text="@string/connector_mobile_tim_kiem"
-                        android:textAllCaps="false"
-                        android:textSize="@dimen/sp_18"
-                        style="@style/button_positive"
-                        />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_0.6"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:background="@color/grey"
-                    />
-
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/filter_height"
                     >
 
                     <com.viettel.mbccs.widget.CustomTextView
@@ -193,7 +72,6 @@
                     <com.viettel.mbccs.widget.CustomButton
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/dp_40"
-                        android:layout_alignParentBottom="true"
                         android:layout_centerInParent="true"
                         android:onClick="@{ v -> presenter.onClickCreateNew() }"
                         android:paddingLeft="@dimen/dp_20"
@@ -204,7 +82,139 @@
                         style="@style/button_positive"
                         />
                 </RelativeLayout>
-            </LinearLayout>
+                <com.viettel.mbccs.widget.MultiDirectionSlidingDrawer
+                    android:id="@+id/drawer"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dp_150"
+                    app:content="@+id/content"
+                    app:direction="topToBottom"
+                    app:handle="@+id/handle"
+                    app:handleTwo="@+id/view_close"
+                    app:headerOne="@+id/view_open"
+                    >
+
+                    <LinearLayout
+                        android:id="@+id/content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:clickable="true"
+                        android:orientation="vertical"
+                        android:visibility="@{ presenter.hideSearch ? View.VISIBLE : View.GONE }"
+                        >
+
+                        <com.viettel.mbccs.widget.CustomTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:text="@string/connector_mobile_loai_thue_bao"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_14"
+                            />
+
+                        <RadioGroup
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingLeft="@dimen/dp_20"
+                            android:paddingRight="@dimen/dp_20"
+                            >
+
+                            <RadioButton
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:checked="@{ presenter.selectBefore }"
+                                android:text="@string/connector_mobile_tra_truoc"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_14"
+                                />
+
+                            <RadioButton
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:checked="@{ presenter.selectAfter }"
+                                android:text="@string/connector_mobile_tra_sau"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_14"
+                                />
+                        </RadioGroup>
+
+                        <com.viettel.mbccs.widget.CustomTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_8"
+                            android:text="@string/connector_mobile_dich_vu"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_14"
+                            />
+
+
+                        <com.viettel.mbccs.widget.SpinnerWithBorder
+                            android:id="@+id/spinner_connector_mobile_service"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp_40"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/dp_6"
+                            bind:adapter="@{ presenter.adapterSpinnerMobileService }"
+                            />
+
+                        <com.viettel.mbccs.widget.CustomTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_8"
+                            android:text="@string/connector_mobile_so_giay_to"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_14"
+                            />
+
+                        <com.viettel.mbccs.widget.CustomEdittext
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp_40"
+                            android:layout_marginTop="@dimen/dp_6"
+                            android:text="@={ presenter.txtPassport }"
+                            style="@style/inputStyle"
+                            />
+
+                        <com.viettel.mbccs.widget.CustomButton
+                            android:layout_width="@dimen/dp_150"
+                            android:layout_height="@dimen/dp_40"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:drawableLeft="@drawable/ic_search_white_24dp"
+                            android:onClick="@{ v -> presenter.onSearch() }"
+                            android:text="@string/connector_mobile_tim_kiem"
+                            android:textAllCaps="false"
+                            android:textSize="@dimen/sp_18"
+                            style="@style/button_positive"
+                            />
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:id="@id/handle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+
+                        <include
+                            layout="@layout/item_text_filter"
+                            android:id="@+id/view_close"
+                            app:isShow="@{presenter.hideSearch}"
+                            app:onClick="@{()->presenter.expandSearch()}"
+                            app:text="@{presenter.textSearch}"
+                            />
+
+                        // layout content when header_expanded when open
+                        <include
+                            layout="@layout/header_expanded"
+                            android:id="@+id/view_open"
+                            />
+
+                    </RelativeLayout>
+                </com.viettel.mbccs.widget.MultiDirectionSlidingDrawer>
+            </RelativeLayout>
         </LinearLayout>
     </FrameLayout>
 </layout>

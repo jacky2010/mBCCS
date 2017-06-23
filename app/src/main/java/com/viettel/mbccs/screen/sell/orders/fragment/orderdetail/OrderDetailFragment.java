@@ -1,6 +1,7 @@
 package com.viettel.mbccs.screen.sell.orders.fragment.orderdetail;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -107,7 +108,12 @@ public class OrderDetailFragment extends BaseFragment implements OrderDetailFrag
 
     @Override
     public void getOrderInfoError(BaseException error) {
-        DialogUtils.showDialogError(getActivity(), error.getMessage());
+        DialogUtils.showDialogError(getActivity(), error, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                getActivity().getSupportFragmentManager().popBackStack();
+            }
+        }, false);
     }
 
     @Override
@@ -150,6 +156,11 @@ public class OrderDetailFragment extends BaseFragment implements OrderDetailFrag
         transaction.replace(R.id.frame_sell_orders, fragment);
         transaction.addToBackStack(ConfirmTransactionSellCancelFragment.STRING_NAME);
         transaction.commit();
+    }
+
+    @Override
+    public void checkCountSerialError() {
+        DialogUtils.showDialogError(getActivity(), "Bạn chưa chọn đủ số lượng serial!");
     }
 
     @Override

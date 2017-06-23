@@ -88,7 +88,8 @@ public class ViewWarehouseActivity
 
     @Override
     public void onClickViewSerial(StockTotal stockTotal) {
-        DialogViewSerial dialog = DialogViewSerial.newInstance(stockTotal);  // dialog title
+        DialogViewSerial dialog = DialogViewSerial.newInstance();  // dialog title
+        dialog.setStockTotal(stockTotal);
         dialog.show(getSupportFragmentManager(), "");
     }
 

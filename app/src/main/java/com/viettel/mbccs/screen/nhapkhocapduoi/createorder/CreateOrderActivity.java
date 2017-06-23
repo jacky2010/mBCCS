@@ -117,7 +117,8 @@ public class CreateOrderActivity
 
     @Override
     public void onViewSerialClickListener(StockTotal item) {
-        DialogViewSerial dialog = DialogViewSerial.newInstance(item);  // dialog title
+        DialogViewSerial dialog = DialogViewSerial.newInstance();  // dialog title
+        dialog.setStockTotal(item);
         dialog.show(getSupportFragmentManager(), "");
     }
 }

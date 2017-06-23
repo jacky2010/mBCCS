@@ -19,6 +19,7 @@ public class DateUtils {
     public static final String CALENDAR_DATE_FORMAT_DD_MM_YY_HH = "dd/MM/yyyy HH:mm:ss";
     public static final String CALENDAR_DATE_FORMAT_DD_MM_YY = "dd/MM/yyyy";
     public static final String TIMEZONE_FORMAT = "yyyy-MM-dd'T'HH:mm:ssZ";
+    public static final String TIMEZONE_FORMAT_SERVER = "yyyy-MM-dd'T'HH:mm:ssZZZZZ";
     public static final String REVIEW_TIME_FORMAT = "yyyy年MM月dd日";
     public static final String BIRTHDAY_TIME_FORMAT = "yyyy/MM/dd";
     public static final String WORKING_TIME_FORMAT = "%1$s~%2$s";

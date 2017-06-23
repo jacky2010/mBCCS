@@ -37,7 +37,7 @@ public class ApiCode {
     public final static String GetListBusType = "WS_getListBusType";
 
     // 3.1.3.11
-    public final static String GetListBusTypeIdRequire = "WS_getListBusTypeIdRequire";
+    public final static String GetApDomainByType = "WS_getApDomainByType";
 
     // 3.1.3.12
     public final static String ConnectSubscriber = "WS_connectSubscriber";
@@ -76,7 +76,7 @@ public class ApiCode {
     public final static String ConnectionSubscriberFixService = "WS_connectionSubscriberFixService";
 
     // 3.3.3.1
-    public final static String GetRegisterSubInfo = "WS_getRegisterSubInfo";
+    public final static String GetRegisterSubInfo = "WS_getRegiterSubInfo";
 
     // 3.3.3.2
     public final static String RegisterCustomerInfo = "WS_registerCustomerInfo";

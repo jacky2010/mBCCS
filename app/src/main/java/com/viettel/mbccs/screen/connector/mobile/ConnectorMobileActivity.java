@@ -31,7 +31,6 @@ public class ConnectorMobileActivity
         mPresenter = new ConnectorMobilePresenter(this, this);
         mPresenter.subscribe();
         mBinding.setPresenter(mPresenter);
-        mBinding.spinnerConnectorMobileService.setOnItemSelectedListener(mPresenter);
     }
 
     @Override

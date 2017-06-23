@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.widget.ArrayAdapter;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
-import com.viettel.mbccs.data.model.ApDomain;
+import com.viettel.mbccs.data.model.ApDomainByType;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetRegiterSubInfoResponse;
 import com.viettel.mbccs.databinding.ActivityCreateUpdateInformationBinding;
@@ -31,7 +31,7 @@ public class CreateUpdateInformationActivity extends
     private GetRegiterSubInfoResponse data;
 
     private List<String> dataPassportType;
-    private List<ApDomain> apDomainList;
+    private List<ApDomainByType> apDomainList;
 
     @Override
     public void onBackPressed() {
@@ -111,9 +111,9 @@ public class CreateUpdateInformationActivity extends
     }
 
     @Override
-    public void getDataSpinnerPassportSuccess(List<ApDomain> data) {
+    public void getDataSpinnerPassportSuccess(List<ApDomainByType> data) {
         apDomainList = data;
-        for (ApDomain a : data) {
+        for (ApDomainByType a : data) {
             dataPassportType.add(a.getName());
         }
         adapterPassportType.notifyDataSetChanged();

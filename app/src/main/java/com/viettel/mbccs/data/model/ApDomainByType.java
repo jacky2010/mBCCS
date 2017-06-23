@@ -8,13 +8,12 @@ import com.google.gson.annotations.SerializedName;
  * Created by HuyQuyet on 6/1/17.
  */
 
-public class ApDomain {
+public class ApDomainByType {
     @StringDef({ Type.LOAI_GIAY_TO, Type.HINH_THUC_THANH_TOAN, Type.HINH_THUC_NHAN_THONG_BAO_CUOC })
     public @interface Type {
         String LOAI_GIAY_TO = "301";
         String HINH_THUC_THANH_TOAN = "303";
         String HINH_THUC_NHAN_THONG_BAO_CUOC = "308";
-        String LOAI_KHACH_HANG = "310";
     }
 
     @SerializedName("code")

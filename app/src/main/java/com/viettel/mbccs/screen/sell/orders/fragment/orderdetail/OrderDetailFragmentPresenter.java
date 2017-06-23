@@ -136,6 +136,19 @@ public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract
     }
 
     public void onClickSell() {
+        List<SaleOrdersDetail> saleOrdersDetailList =
+                getOrderInfoResponse.getSaleOrdersDetailList();
+        boolean checkCountSerial = true;
+        for (SaleOrdersDetail s : saleOrdersDetailList) {
+            if (s.getLstSerial().size() != s.getQuantity()) {
+                checkCountSerial = false;
+                break;
+            }
+        }
+        if (!checkCountSerial){
+            view.checkCountSerialError();
+            return;
+        }
         view.onClickSell();
     }
 

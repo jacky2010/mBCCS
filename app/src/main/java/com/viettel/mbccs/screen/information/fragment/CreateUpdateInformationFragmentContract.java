@@ -3,10 +3,8 @@ package com.viettel.mbccs.screen.information.fragment;
 import android.graphics.Bitmap;
 import com.viettel.mbccs.base.BasePresenter;
 import com.viettel.mbccs.base.BaseView;
-import com.viettel.mbccs.data.model.ApDomain;
 import com.viettel.mbccs.data.model.Area;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
-import java.util.List;
 
 /**
  * Created by HuyQuyet on 5/29/17.
@@ -38,15 +36,9 @@ public interface CreateUpdateInformationFragmentContract {
 
         Bitmap imagePortrait();
 
-        void setBirthDate(String birthDate);
-
         void registerCustomerInfoError(BaseException error);
 
         void registerUpdateCustomerInfoSuccess(String result, boolean isRegister);
-
-        void getDataSpinnerPassportSuccess(List<ApDomain> type);
-
-        void getDataHTTTSuccess(List<ApDomain> type);
 
         void getDataSpinnerError(BaseException error);
 

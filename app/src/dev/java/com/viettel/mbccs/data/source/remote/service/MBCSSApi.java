@@ -15,7 +15,7 @@ import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.DownloadImageRequest;
 import com.viettel.mbccs.data.source.remote.request.GetAllInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.GetAnypayAuthorizeRequest;
-import com.viettel.mbccs.data.source.remote.request.GetApDomainRequest;
+import com.viettel.mbccs.data.source.remote.request.GetApDomainByTypeRequest;
 import com.viettel.mbccs.data.source.remote.request.GetDistrictRequest;
 import com.viettel.mbccs.data.source.remote.request.GetHotNewsCSKPPRequest;
 import com.viettel.mbccs.data.source.remote.request.GetHotNewsInfoCSKPPRequest;
@@ -68,7 +68,7 @@ import com.viettel.mbccs.data.source.remote.response.DataResponse;
 import com.viettel.mbccs.data.source.remote.response.DownloadImageResponse;
 import com.viettel.mbccs.data.source.remote.response.GetAllInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetAnypayAuthorizeResponse;
-import com.viettel.mbccs.data.source.remote.response.GetApDomainResponse;
+import com.viettel.mbccs.data.source.remote.response.GetApDomainByTypeResponse;
 import com.viettel.mbccs.data.source.remote.response.GetDistributedChannelResponse;
 import com.viettel.mbccs.data.source.remote.response.GetDistrictResponse;
 import com.viettel.mbccs.data.source.remote.response.GetHotNewsCSKPPResponse;
@@ -229,8 +229,8 @@ public interface MBCSSApi {
             @Body DataRequest<GetListBusTypeIdRequireRequest> request);
 
     @POST("vietdt/CM_mBCCS/1.0.0/WS_getApDomain")
-    Observable<ServerDataResponse<BaseResponse<GetApDomainResponse>>> getApDomain(
-            @Body DataRequest<GetApDomainRequest> request);
+    Observable<ServerDataResponse<BaseResponse<GetApDomainByTypeResponse>>> getApDomainByType(
+            @Body DataRequest<GetApDomainByTypeRequest> request);
 
     @POST("vietdt/CM_mBCCS/1.0.0/WS_getOTP")
     Observable<ServerDataResponse<BaseResponse<GetOTPResponse>>> getOTP(
@@ -362,4 +362,9 @@ public interface MBCSSApi {
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<EmptyObject>>> createExpStock(
             @Body DataRequest<CreateExpStockRequest> requestDataRequest);
+
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<GetListProductResponse>>> getListProduct(
+            @Body DataRequest<GetListProductRequest> request);
 }

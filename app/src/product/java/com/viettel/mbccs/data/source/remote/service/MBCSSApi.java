@@ -294,4 +294,19 @@ public interface MBCSSApi {
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<DownloadImageResponse>>> downloadImage(
             @Body DataRequest<DownloadImageRequest> request);
+
+    /*get list stock trans detail by tran id*/
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<ListStockTransDetailsReponse>>>
+    getListStockTransDetail(
+            @Body DataRequest<GetListStockTransDetailRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<EmptyObject>>> createExpStock(
+            @Body DataRequest<CreateExpStockRequest> requestDataRequest);
+
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<GetListProductResponse>>> getListProduct(
+            @Body DataRequest<GetListProductRequest> request);
 }

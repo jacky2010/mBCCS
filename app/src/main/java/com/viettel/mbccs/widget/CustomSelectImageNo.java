@@ -286,7 +286,7 @@ public class CustomSelectImageNo extends LinearLayout {
         if (checkFront) return;
         if (StringUtils.isEmpty(url)) {
             Glide.with(context)
-                    .load(R.drawable.ic_untitled_2)
+                    .load(R.drawable.ic_camera_placeholder)
                     .centerCrop()
                     .into(binding.imageFront);
             return;
@@ -294,7 +294,7 @@ public class CustomSelectImageNo extends LinearLayout {
         Glide.with(context)
                 .load(url)
                 .centerCrop()
-                .placeholder(R.drawable.ic_untitled_2)
+                .placeholder(R.drawable.ic_camera_placeholder)
                 .into(binding.imageBackside);
     }
 
@@ -302,7 +302,7 @@ public class CustomSelectImageNo extends LinearLayout {
         if (checkBackside) return;
         if (StringUtils.isEmpty(url)) {
             Glide.with(context)
-                    .load(R.drawable.ic_untitled_2)
+                    .load(R.drawable.ic_camera_placeholder)
                     .centerCrop()
                     .into(binding.imageBackside);
             return;
@@ -310,7 +310,7 @@ public class CustomSelectImageNo extends LinearLayout {
         Glide.with(context)
                 .load(url)
                 .centerCrop()
-                .placeholder(R.drawable.ic_untitled_2)
+                .placeholder(R.drawable.ic_camera_placeholder)
                 .into(binding.imageFront);
     }
 
@@ -318,7 +318,7 @@ public class CustomSelectImageNo extends LinearLayout {
         if (checkPortrait) return;
         if (StringUtils.isEmpty(url)) {
             Glide.with(context)
-                    .load(R.drawable.ic_untitled_2)
+                    .load(R.drawable.ic_camera_placeholder)
                     .centerCrop()
                     .into(binding.imagePortrait);
             return;
@@ -326,7 +326,7 @@ public class CustomSelectImageNo extends LinearLayout {
         Glide.with(context)
                 .load(url)
                 .centerCrop()
-                .placeholder(R.drawable.ic_untitled_2)
+                .placeholder(R.drawable.ic_camera_placeholder)
                 .into(binding.imagePortrait);
     }
 

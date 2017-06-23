@@ -19,7 +19,8 @@ public class CreateOrderSuccessActivity extends BaseCreateOrderSuccessActivity
 
     @Override
     public void showSerialViewer(StockTotal item) {
-        DialogViewSerial dialog = DialogViewSerial.newInstance(item);  // dialog title
+        DialogViewSerial dialog = DialogViewSerial.newInstance();  // dialog title
+        dialog.setStockTotal(item);
         dialog.show(getSupportFragmentManager(), "");
     }
 }
