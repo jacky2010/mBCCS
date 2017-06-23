@@ -105,7 +105,7 @@ public class SaleRetailPresenter
                             @Override
                             public void onError(BaseException error) {
 
-                                DialogUtils.showDialogError(mContext, null, error.getMessage(),
+                                DialogUtils.showDialog(mContext, null, error.getMessage(),
                                         null);
                                 //fakeModelSale();
                             }
@@ -158,7 +158,7 @@ public class SaleRetailPresenter
 
                     @Override
                     public void onError(BaseException error) {
-                        DialogUtils.showDialogError(mContext, null, error.getMessage(), null);
+                        DialogUtils.showDialog(mContext, null, error.getMessage(), null);
                         //fakeData();
                         //loadModelSale();
                     }
@@ -279,7 +279,7 @@ public class SaleRetailPresenter
             filter2 = currentSaleProgram.getName();
         }
 
-        filterText.set(filter1 + mContext.getString(R.string.common_lable_dot) + filter2);
+        filterText.set(filter1 + mContext.getString(R.string.common_label_dot) + filter2);
     }
 
     @Override

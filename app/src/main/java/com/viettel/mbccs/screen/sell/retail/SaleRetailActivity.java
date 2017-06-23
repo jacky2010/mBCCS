@@ -3,8 +3,6 @@ package com.viettel.mbccs.screen.sell.retail;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.View;
-import android.widget.AdapterView;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.data.model.ModelSale;
@@ -21,7 +19,6 @@ import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.GsonUtils;
 import com.viettel.mbccs.variable.Constants;
 import com.viettel.mbccs.widget.MultiDirectionSlidingDrawer;
-import com.viettel.mbccs.widget.SpinnerWithBorder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -168,7 +165,7 @@ public class SaleRetailActivity
             }
         }
         if (countSerial == 0) {
-            DialogUtils.showDialogError(SaleRetailActivity.this, null,
+            DialogUtils.showDialog(SaleRetailActivity.this, null,
                     getResources().getString(R.string.no_serial), null);
             return;
         }

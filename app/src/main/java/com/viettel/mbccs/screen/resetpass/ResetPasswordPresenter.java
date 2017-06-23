@@ -11,7 +11,6 @@ import com.viettel.mbccs.data.model.UserInfo;
 import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.PassResetRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
-import com.viettel.mbccs.data.source.remote.response.PassResetResponse;
 import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.StringUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
@@ -131,7 +130,7 @@ public class ResetPasswordPresenter implements ResetPasswordContract.Presenter {
 
                     @Override
                     public void onError(BaseException error) {
-                        DialogUtils.showDialogError(mContext, null, error.getMessage(), null);
+                        DialogUtils.showDialog(mContext, null, error.getMessage(), null);
                     }
 
                     @Override

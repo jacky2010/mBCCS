@@ -107,7 +107,6 @@ dependencies {
     compile 'org.jetbrains:annotations-java5:15.0'
     compile project(path: ':countrypicker')
     compile project(path: ':languagepicker')
-    compile project(path: ':surveylib')
     compile 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
     compile 'com.android.support:multidex:1.0.1'
     compile 'com.romandanylyk:pageindicatorview:0.2.0@aar'

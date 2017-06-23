@@ -68,8 +68,8 @@ public class DialogConfirmUpdateSimFragment extends BaseDialog {
             }
         });
 
-        mLinearLayoutManager = new LinearLayoutManager(getBaseActivity(),
-                LinearLayoutManager.VERTICAL, false);
+        mLinearLayoutManager =
+                new LinearLayoutManager(getBaseActivity(), LinearLayoutManager.VERTICAL, false);
     }
 
     @Override
@@ -84,13 +84,21 @@ public class DialogConfirmUpdateSimFragment extends BaseDialog {
 
             if (currentArgs != null) {
 
-                changeSimItem = GsonUtils.String2Object(currentArgs.getString(Constants.BundleConstant.CUSTOMER_ITEM), ChangeSimItem.class);
+                changeSimItem = GsonUtils.String2Object(
+                        currentArgs.getString(Constants.BundleConstant.CUSTOMER_ITEM),
+                        ChangeSimItem.class);
 
                 if (changeSimItem != null) {
-                    tvTrans.setText(getString(R.string.common_msg_confirm_change_sim, changeSimItem.getSubscriber().getIsdn(), changeSimItem.getChangeSimInfo().getOldSerial(), changeSimItem.getChangeSimInfo().getNewSerial()));
-                    tvServiceFee.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.SERVICE_FEE)));
-                    tvSimFee.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.SIM_FEE)));
-                    tvTotal.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.TOTAL)));
+                    tvTrans.setText(getString(R.string.common_msg_confirm_change_sim,
+                            changeSimItem.getSubscriber().getIsdn(),
+                            changeSimItem.getChangeSimInfo().getOldSerial(),
+                            changeSimItem.getChangeSimInfo().getNewSerial()));
+                    tvServiceFee.setText(Common.formatDouble(
+                            currentArgs.getDouble(Constants.BundleConstant.SERVICE_FEE)));
+                    tvSimFee.setText(Common.formatDouble(
+                            currentArgs.getDouble(Constants.BundleConstant.SIM_FEE)));
+                    tvTotal.setText(Common.formatDouble(
+                            currentArgs.getDouble(Constants.BundleConstant.TOTAL)));
                 }
             }
 
@@ -106,7 +114,7 @@ public class DialogConfirmUpdateSimFragment extends BaseDialog {
         return 0;
     }
 
-    @OnClick({R.id.biv_close, R.id.biv_done})
+    @OnClick({ R.id.biv_close, R.id.biv_done })
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.biv_close:
@@ -133,46 +141,43 @@ public class DialogConfirmUpdateSimFragment extends BaseDialog {
             request.setSerial(changeSimItem.getChangeSimInfo().getNewSerial());
             request.setSubType(changeSimItem.getSubscriber().getSubType());
 
-
             baseRequest.setParameterApi(request);
 
-            Subscription subscription =
-                    changeSimRepository.changeSim(baseRequest)
-                            .subscribe(new MBCCSSubscribe<DataResponse>() {
-                                @Override
-                                public void onSuccess(DataResponse object) {
-                                    try {
-//                                        if (Constants.Service.RESPONSE_OK.equals(object.getErrorCode())) {
+            Subscription subscription = changeSimRepository.changeSim(baseRequest)
+                    .subscribe(new MBCCSSubscribe<DataResponse>() {
+                        @Override
+                        public void onSuccess(DataResponse object) {
+                            try {
+                                //                                        if (Constants.Service.RESPONSE_OK.equals(object.getErrorCode())) {
 
-                                        showSuccessDialog();
+                                showSuccessDialog();
 
-//                                        } else {
-//                                            DialogUtils.showDialogError(getContext(), null, getString(R.string.change_sim_error_change_sim_failed),
-//                                                    null);
-//                                        }
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }
-                                }
+                                //                                        } else {
+                                //                                            DialogUtils.showDialog(getContext(), null, getString(R.string.change_sim_error_change_sim_failed),
+                                //                                                    null);
+                                //                                        }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
 
-                                @Override
-                                public void onError(BaseException error) {
+                        @Override
+                        public void onError(BaseException error) {
+                            String errorMessage = getErrorMessage(error.getMessage());
+                            if (errorMessage != null) {
+                                DialogUtils.showDialog(getContext(), errorMessage);
+                            } else {
+                                DialogUtils.showDialog(getContext(),
+                                        getString(R.string.change_sim_error_change_sim_failed));
+                            }
+                        }
 
-                                    String errorMessage = getErrorMessage(error.getMessage());
-                                    if (errorMessage != null)
-                                        DialogUtils.showDialogError(getContext(), null, errorMessage,
-                                                null);
-                                    else
-                                        DialogUtils.showDialogError(getContext(), null, getString(R.string.change_sim_error_change_sim_failed),
-                                                null);
-                                }
-
-                                @Override
-                                public void onRequestFinish() {
-                                    super.onRequestFinish();
-                                    hideLoadingDialog();
-                                }
-                            });
+                        @Override
+                        public void onRequestFinish() {
+                            super.onRequestFinish();
+                            hideLoadingDialog();
+                        }
+                    });
 
             mSubscriptions.add(subscription);
         } catch (Exception e) {
@@ -185,10 +190,14 @@ public class DialogConfirmUpdateSimFragment extends BaseDialog {
             DialogUpdatedSimSuccessfulFragment fragment = new DialogUpdatedSimSuccessfulFragment();
 
             Bundle args = new Bundle();
-            args.putString(Constants.BundleConstant.CUSTOMER_ITEM, currentArgs.getString(Constants.BundleConstant.CUSTOMER_ITEM));
-            args.putString(Constants.BundleConstant.SERVICE_FEE, Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.SERVICE_FEE)));
-            args.putString(Constants.BundleConstant.SIM_FEE, Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.SIM_FEE)));
-            args.putString(Constants.BundleConstant.TOTAL, Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.TOTAL)));
+            args.putString(Constants.BundleConstant.CUSTOMER_ITEM,
+                    currentArgs.getString(Constants.BundleConstant.CUSTOMER_ITEM));
+            args.putString(Constants.BundleConstant.SERVICE_FEE, Common.formatDouble(
+                    currentArgs.getDouble(Constants.BundleConstant.SERVICE_FEE)));
+            args.putString(Constants.BundleConstant.SIM_FEE,
+                    Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.SIM_FEE)));
+            args.putString(Constants.BundleConstant.TOTAL,
+                    Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.TOTAL)));
 
             getBaseActivity().goToDialogFragment(fragment, args);
             dismiss();
@@ -201,19 +210,23 @@ public class DialogConfirmUpdateSimFragment extends BaseDialog {
         try {
 
             if (error.contains("Cannot get kit from stock")) {
-                return getString(R.string.change_sim_error_new_serial_not_found, changeSimItem.getChangeSimInfo().getNewSerial());
+                return getString(R.string.change_sim_error_new_serial_not_found,
+                        changeSimItem.getChangeSimInfo().getNewSerial());
             } else if (error.contains("Kit IMSI is empty")) {
-                return getString(R.string.change_sim_error_new_serial_not_found, changeSimItem.getChangeSimInfo().getNewSerial());
+                return getString(R.string.change_sim_error_new_serial_not_found,
+                        changeSimItem.getChangeSimInfo().getNewSerial());
             } else if (error.contains("Cannot get SubMB")) {
-                return getString(R.string.change_sim_error_sub_not_found, changeSimItem.getSubscriber().getIsdn());
+                return getString(R.string.change_sim_error_sub_not_found,
+                        changeSimItem.getSubscriber().getIsdn());
             } else if (error.contains("Cannot get SubSimMB")) {
-                return getString(R.string.change_sim_error_sub_not_found, changeSimItem.getSubscriber().getIsdn());
+                return getString(R.string.change_sim_error_sub_not_found,
+                        changeSimItem.getSubscriber().getIsdn());
             } else if (error.contains("Cannot get StockIsdnMobile")) {
-                return getString(R.string.change_sim_error_sub_not_found, changeSimItem.getSubscriber().getIsdn());
+                return getString(R.string.change_sim_error_sub_not_found,
+                        changeSimItem.getSubscriber().getIsdn());
             }
 
             return null;
-
         } catch (Exception e) {
             e.printStackTrace();
             return null;

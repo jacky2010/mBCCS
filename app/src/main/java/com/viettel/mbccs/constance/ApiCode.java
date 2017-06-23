@@ -404,8 +404,8 @@ public class ApiCode {
     public final static String SellAnyPayToChannel = "WS_SaleAnyPayToChannel";
     public final static String RefillAnyPay = "WS_TransReloadAnypay";
     public final static String TransferAnyPay = "WS_TransferAnypay";
-    public final static String SendSurveyKPP = "WS_GUI_TRA_LOI";
-    public final static String GetSurveyKPP = "WS_GET_SURVERY";
+    public final static String SendSurveyKPP = "WS_sendSurvey";
+    public final static String GetSurveyKPP = "WS_getListSurvey";
 
     public final static String UpLoadImage = "WS_upLoad";
     public final static String GetRegiterSubInfo = "WS_getRegiterSubInfo";

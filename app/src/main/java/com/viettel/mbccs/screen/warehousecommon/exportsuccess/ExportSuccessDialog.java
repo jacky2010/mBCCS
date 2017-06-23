@@ -75,7 +75,7 @@ public class ExportSuccessDialog
     @Override
     public void onSerialPickerClick(int position, StockTransDetail stockTransDetail) {
         DialogViewSerial dialogViewSerial = DialogViewSerial.newInstance();
+        dialogViewSerial.setStockSerial(stockTransDetail.getStockSerial());
         dialogViewSerial.show(getSupportFragmentManager(), "");
-        //TODO open serial
     }
 }

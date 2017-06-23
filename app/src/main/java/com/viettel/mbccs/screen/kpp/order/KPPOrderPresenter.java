@@ -126,7 +126,7 @@ public class KPPOrderPresenter implements KPPOrderContract.Presenter {
                             public void onSuccess(GetListOrderResponse object) {
                                 if (object != null && object.getSaleOrdersList() != null) {
                                     if (object.getSaleOrdersList().size() == 0) {
-                                        DialogUtils.showDialogError(mContext,
+                                        DialogUtils.showDialog(mContext,
                                                 R.string.common_msg_no_data);
                                         return;
                                     }
@@ -144,7 +144,7 @@ public class KPPOrderPresenter implements KPPOrderContract.Presenter {
 
                             @Override
                             public void onError(BaseException error) {
-                                DialogUtils.showDialogError(mContext, null, error.getMessage(),
+                                DialogUtils.showDialog(mContext, null, error.getMessage(),
                                         null);
                                 //fakeOrder();
                             }
@@ -250,14 +250,14 @@ public class KPPOrderPresenter implements KPPOrderContract.Presenter {
 
     public void getFilterText() {
         String text = Common.getDayByLong(mViewModel.getFromDate()) + mContext.getString(
-                R.string.common_lable_dot) + Common.getDayByLong(mViewModel.getToDate());
+                R.string.common_label_dot) + Common.getDayByLong(mViewModel.getToDate());
         String[] stringArray = mContext.getResources().getStringArray(R.array.order_status_name);
         if (status.equals(OrderStatus.APPROVALS)) {
-            text += mContext.getString(R.string.common_lable_dot) + stringArray[0];
+            text += mContext.getString(R.string.common_label_dot) + stringArray[0];
         } else if (status.equals(OrderStatus.PENDING)) {
-            text += mContext.getString(R.string.common_lable_dot) + stringArray[1];
+            text += mContext.getString(R.string.common_label_dot) + stringArray[1];
         } else {
-            text += mContext.getString(R.string.common_lable_dot) + stringArray[2];
+            text += mContext.getString(R.string.common_label_dot) + stringArray[2];
             return;
         }
 

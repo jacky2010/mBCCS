@@ -109,8 +109,9 @@
                     android:layout_marginTop="@dimen/dp_20"
                     android:layout_weight="1"
                     android:onClick="@{ () -> presenter.close() }"
-                    android:text="@string/close"
+                    android:text="@string/common_label_close"
                     android:textSize="@dimen/default_label_text_size" />
+
 
                 <com.viettel.mbccs.widget.CustomButton
                     style="@style/button_positive"

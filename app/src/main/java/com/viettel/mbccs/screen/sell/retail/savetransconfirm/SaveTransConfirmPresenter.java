@@ -126,7 +126,7 @@ public class SaveTransConfirmPresenter implements SaveTransConfirmContract.Prese
 
                     @Override
                     public void onError(BaseException error) {
-                        DialogUtils.showDialogError(mContext, null, error.getMessage(), null);
+                        DialogUtils.showDialog(mContext, null, error.getMessage(), null);
                     }
 
                     @Override
@@ -178,7 +178,7 @@ public class SaveTransConfirmPresenter implements SaveTransConfirmContract.Prese
 
                             @Override
                             public void onError(BaseException error) {
-                                DialogUtils.showDialogError(mContext, null, error.getMessage(),
+                                DialogUtils.showDialog(mContext, null, error.getMessage(),
                                         null);
                             }
 

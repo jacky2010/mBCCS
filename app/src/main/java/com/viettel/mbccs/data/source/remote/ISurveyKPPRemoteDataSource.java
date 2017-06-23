@@ -14,6 +14,5 @@ import rx.Observable;
 
 public interface ISurveyKPPRemoteDataSource {
     Observable<GetSurveyKPPResponse> getSurveyKPP(DataRequest<GetSurveyKPPRequest> request);
-
     Observable<SendSurveyKPPResponse> sendSurveyKPP(DataRequest<SendSurveyKPPRequest> request);
 }

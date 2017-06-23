@@ -121,7 +121,7 @@ public class SearchHotNewsCSKPPPresenter implements SearchHotNewsCSKPPContract.P
 
                                             viewModel.onSearchCompleted();
                                         } else {
-                                            DialogUtils.showDialogError(context, null, context.getString(R.string.common_msg_error_general),
+                                            DialogUtils.showDialog(context, null, context.getString(R.string.common_msg_error_general),
                                                     null);
                                         }
                                     } catch (Exception e) {
@@ -131,7 +131,7 @@ public class SearchHotNewsCSKPPPresenter implements SearchHotNewsCSKPPContract.P
 
                                 @Override
                                 public void onError(BaseException error) {
-                                    DialogUtils.showDialogError(context, null, error.getMessage(),
+                                    DialogUtils.showDialog(context, null, error.getMessage(),
                                             null);
                                 }
 

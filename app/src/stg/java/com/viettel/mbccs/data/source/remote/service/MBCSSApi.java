@@ -363,13 +363,21 @@ public interface MBCSSApi {
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<EmptyObject>>> createExpStock(
             @Body DataRequest<CreateExpStockRequest> requestDataRequest);
-    @POST("/JsonAPI/webresources/CoreService/UserRouting")
 
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<GetListProductResponse>>> getListProduct(
             @Body DataRequest<GetListProductRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<DataResponse>>> isKppManager(
             @Body DataRequest<IsKPPManagerRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<GetSurveyKPPResponse>>> getSurveyKPPList(
+            @Body DataRequest<GetSurveyKPPRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<EmptyObject>>> sendSurvey(
+            @Body DataRequest<SendSurveyKPPRequest> request);
 }
 

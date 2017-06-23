@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.databinding.ObservableField;
-import android.view.View;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.EmptyObject;
@@ -14,8 +13,6 @@ import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.KPPOrderRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
-import com.viettel.mbccs.data.source.remote.response.BaseResponse;
-import com.viettel.mbccs.data.source.remote.response.DataResponse;
 import com.viettel.mbccs.utils.Common;
 import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
@@ -135,7 +132,7 @@ public class AddNewOrderPresenter implements AddNewOrderContract.Presenter {
 
                             @Override
                             public void onError(BaseException error) {
-                                DialogUtils.showDialogError(mContext, null, error.getMessage(),
+                                DialogUtils.showDialog(mContext, null, error.getMessage(),
                                         null);
                                 //mViewModel.gotoSuccessScreen(mStockTotals);
                             }
@@ -204,7 +201,7 @@ public class AddNewOrderPresenter implements AddNewOrderContract.Presenter {
             }
         }
         if (count == 0) {
-            DialogUtils.showDialogError(mContext, R.string.no_item_order);
+            DialogUtils.showDialog(mContext, R.string.no_item_order);
             return false;
         }
 

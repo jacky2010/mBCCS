@@ -131,7 +131,7 @@ public class CreateUpdateInformationActivity extends
 
     @Override
     public void showDialogValidate() {
-        DialogUtils.showDialogError(this,
+        DialogUtils.showDialog(this,
                 getString(R.string.create_update_information_create_validate_field));
     }
 

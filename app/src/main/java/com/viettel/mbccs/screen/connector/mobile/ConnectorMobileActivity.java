@@ -61,7 +61,7 @@ public class ConnectorMobileActivity
 
     @Override
     public void txtPassportEmpty() {
-        DialogUtils.showDialogError(this, "Số giấy tờ trống!");
+        DialogUtils.showDialog(this, "Số giấy tờ trống!");
     }
 
     @Override

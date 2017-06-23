@@ -34,10 +34,14 @@ public abstract class BaseRecyclerViewAdapterBinding<T extends BaseViewHolderBin
     @Override
     public BaseViewHolderBinding onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_NODATA) {
-            return new NoDataViewHolder(
-                    ItemNoDataListBinding.inflate(LayoutInflater.from(mContext), parent, false));
+            getNoDataViewHolder(parent);
         }
         return getViewHolder(parent);
+    }
+
+    public BaseViewHolderBinding getNoDataViewHolder(ViewGroup parent) {
+        return new NoDataViewHolder(
+                ItemNoDataListBinding.inflate(LayoutInflater.from(mContext), parent, false));
     }
 
     @Override

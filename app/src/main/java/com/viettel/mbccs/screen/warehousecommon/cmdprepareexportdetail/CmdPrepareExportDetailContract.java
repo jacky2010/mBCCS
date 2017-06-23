@@ -3,6 +3,7 @@ package com.viettel.mbccs.screen.warehousecommon.cmdprepareexportdetail;
 import com.viettel.mbccs.base.BasePresenter;
 import com.viettel.mbccs.base.BaseView;
 import com.viettel.mbccs.data.model.StockTransDetail;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,6 +21,6 @@ interface CmdPrepareExportDetailContract {
 
         void onSerialPicker(StockTransDetail stockTransDetail);
 
-        void onCreateExpStockSuccess(List<StockTransDetail> stockTransDetails);
+        void onCreateExpStockSuccess(ArrayList<StockTransDetail> stockTransDetails);
     }
 }

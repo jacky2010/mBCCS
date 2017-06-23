@@ -1,12 +1,14 @@
 package com.viettel.mbccs.constance;
 
-import android.support.annotation.StringDef;
+import android.support.annotation.IntDef;
 
 /**
  * Created by eo_cuong on 6/10/17.
  */
-@StringDef({ SurveyType.SINGLE_CHOICE, SurveyType.MULTI_CHOICE })
+@IntDef({ SurveyType.SINGLE_CHOICE, SurveyType.MULTI_CHOICE, SurveyType.TEXT, SurveyType.NUMBER })
 public @interface SurveyType {
-    String SINGLE_CHOICE = "single";
-    String MULTI_CHOICE = "multi";
+    int SINGLE_CHOICE = 2;
+    int MULTI_CHOICE = 1;
+    int TEXT = 3;
+    int NUMBER = 4;
 }

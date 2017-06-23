@@ -10,7 +10,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.Function;
 import com.viettel.mbccs.data.model.LoginInfo;
@@ -37,12 +36,10 @@ import com.viettel.mbccs.screen.sell.channel.SaleChannelActivity;
 import com.viettel.mbccs.screen.sell.orders.SellOrdersActivity;
 import com.viettel.mbccs.screen.sell.retail.SaleRetailActivity;
 import com.viettel.mbccs.screen.sellanypay.SellAnyPayActivity;
-import com.viettel.mbccs.screen.splash.SplashActivity;
-import com.viettel.mbccs.screen.surveykpp.SurveyKPPActivity;
+import com.viettel.mbccs.screen.survey.SurveyListActivity;
 import com.viettel.mbccs.screen.trahangcaptren.ListOrderReturnUpperActivity;
 import com.viettel.mbccs.screen.transferanypay.TransferAnyPayActivity;
 import com.viettel.mbccs.screen.viewwarehouse.ViewWarehouseActivity;
-
 import com.viettel.mbccs.screen.xuathangchonhanvien.ChiTietXuatKhoNhanVienActivity;
 import com.viettel.mbccs.variable.Constants;
 import java.util.ArrayList;
@@ -251,7 +248,7 @@ public class BaseSubMenuActivity
 
                         case Function.MenuId.MENU_SURVEY_KPP:
                             startActivity(
-                                    new Intent(BaseSubMenuActivity.this, SurveyKPPActivity.class));
+                                    new Intent(BaseSubMenuActivity.this, SurveyListActivity.class));
                             //                            startActivity(
                             //                                    new Intent(BaseSubMenuActivity.this, SurveyActivity.class));
                             break;

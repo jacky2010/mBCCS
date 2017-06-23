@@ -142,21 +142,21 @@ public class DialogConfirmTransferAnyPayFragment extends BaseDialog {
 //                                        if (Constants.Service.RESPONSE_OK.equals(object.getErrorCode())) {
                                         showSuccessDialog();
 //                                        } else {
-//                                            DialogUtils.showDialogError(getContext(), null, getString(R.string.common_msg_error_general),
+//                                            DialogUtils.showDialog(getContext(), null, getString(R.string.common_msg_error_general),
 //                                                    null);
 //                                        }
                                     } catch (Exception e) {
                                         e.printStackTrace();
-                                        DialogUtils.showDialogError(getContext(), null, getString(R.string.common_msg_error_general),
+                                        DialogUtils.showDialog(getContext(), null, getString(R.string.common_msg_error_general),
                                                 null);
                                     }
                                 }
 
                                 @Override
                                 public void onError(BaseException error) {
-//                                    DialogUtils.showDialogError(getContext(), null, error.getMessage(),
+//                                    DialogUtils.showDialog(getContext(), null, error.getMessage(),
 //                                            null);
-                                    DialogUtils.showDialogError(getContext(), null, getString(R.string.common_msg_error_general),
+                                    DialogUtils.showDialog(getContext(), null, getString(R.string.common_msg_error_general),
                                             null);
                                 }
 

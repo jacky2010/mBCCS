@@ -160,7 +160,7 @@ public class OrderDetailFragment extends BaseFragment implements OrderDetailFrag
 
     @Override
     public void checkCountSerialError() {
-        DialogUtils.showDialogError(getActivity(), "Bạn chưa chọn đủ số lượng serial!");
+        DialogUtils.showDialog(getActivity(), "Bạn chưa chọn đủ số lượng serial!");
     }
 
     @Override

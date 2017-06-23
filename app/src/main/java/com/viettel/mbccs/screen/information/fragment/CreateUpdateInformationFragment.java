@@ -192,25 +192,25 @@ public class CreateUpdateInformationFragment extends BaseFragment
 
     @Override
     public void isOTPEmpty() {
-        DialogUtils.showDialogError(getActivity(),
+        DialogUtils.showDialog(getActivity(),
                 getString(R.string.fragment_create_update_information_update_opt_is_empty));
     }
 
     @Override
     public void selectNoticeChargeError() {
-        DialogUtils.showDialogError(getActivity(),
+        DialogUtils.showDialog(getActivity(),
                 getString(R.string.fragment_create_update_information_update_notice_charge_empty));
     }
 
     @Override
     public void customerError() {
-        DialogUtils.showDialogError(getActivity(), getString(
+        DialogUtils.showDialog(getActivity(), getString(
                 R.string.fragment_create_update_information_update_information_customer_empty));
     }
 
     @Override
     public void IsdnImsiError() {
-        DialogUtils.showDialogError(getActivity(),
+        DialogUtils.showDialog(getActivity(),
                 getString(R.string.fragment_create_update_information_update_isdn_serial_empty));
     }
 

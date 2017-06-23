@@ -2,8 +2,6 @@ package com.viettel.mbccs.screen.sell.channel;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.data.model.ChannelInfo;
@@ -15,7 +13,6 @@ import com.viettel.mbccs.data.model.TeleComService;
 import com.viettel.mbccs.databinding.ActivitySaleChannelBinding;
 import com.viettel.mbccs.screen.goodsconfirm.SaleReviewActivity;
 import com.viettel.mbccs.screen.sell.channel.channelpicker.ChannelPickerActivity;
-import com.viettel.mbccs.screen.sell.retail.SaleRetailActivity;
 import com.viettel.mbccs.screen.sell.retail.SaleRetailContract;
 import com.viettel.mbccs.screen.sell.retail.sellprogrampicker.SaleProgramPickerActivity;
 import com.viettel.mbccs.screen.serialpicker.SerialPickerActivity;
@@ -164,7 +161,7 @@ public class SaleChannelActivity
             }
         }
         if (countSerial == 0) {
-            DialogUtils.showDialogError(SaleChannelActivity.this, null,
+            DialogUtils.showDialog(SaleChannelActivity.this, null,
                     getResources().getString(R.string.no_serial), null);
             return;
         }

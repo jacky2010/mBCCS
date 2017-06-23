@@ -313,7 +313,7 @@ public class UpdateSimPresenter implements UpdateSimContract.Presenter {
                                             goToConfirmDialog(recentContacts);
 
 //                                        } else {
-//                                        DialogUtils.showDialogError(context, null, context.getString(R.string.change_sim_error_recent_calls_not_valid),
+//                                        DialogUtils.showDialog(context, null, context.getString(R.string.change_sim_error_recent_calls_not_valid),
 //                                                null);
 //                                        }
                                         } catch (Exception e) {
@@ -324,10 +324,10 @@ public class UpdateSimPresenter implements UpdateSimContract.Presenter {
                                     @Override
                                     public void onError(BaseException error) {
                                         if (error.getMessage().contains("Called isdns are not match")) {
-                                            DialogUtils.showDialogError(context, null, context.getString(R.string.change_sim_error_recent_calls_not_valid),
+                                            DialogUtils.showDialog(context, null, context.getString(R.string.change_sim_error_recent_calls_not_valid),
                                                     null);
                                         } else
-                                            DialogUtils.showDialogError(context, null, context.getString(R.string.common_msg_error_general),
+                                            DialogUtils.showDialog(context, null, context.getString(R.string.common_msg_error_general),
                                                     null);
                                     }
 

@@ -7,10 +7,10 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 /**
- * Created by minhnx on 6/9/17.
+ * Created by FRAMGIA\hoang.van.cuong on 23/06/2017.
  */
 
-public class SurveyItem implements Parcelable {
+public class Survey implements Parcelable {
     @SerializedName("createUser")
     @Expose
     private String createUser;
@@ -41,14 +41,14 @@ public class SurveyItem implements Parcelable {
     @SerializedName("status")
     @Expose
     private String status;
-    @SerializedName("title")
 
-    @Expose
-    private String title;
     @SerializedName("surveyQuestions")
     @Expose
     private List<SurveyQuestion> mSurveyQuestions;
 
+    @SerializedName("title")
+    @Expose
+    private String title;
     @SerializedName("toDate")
     @Expose
     private String toDate;
@@ -174,15 +174,15 @@ public class SurveyItem implements Parcelable {
         dest.writeString(this.lang);
         dest.writeString(this.ownerCode);
         dest.writeString(this.status);
-        dest.writeString(this.title);
         dest.writeTypedList(this.mSurveyQuestions);
+        dest.writeString(this.title);
         dest.writeString(this.toDate);
     }
 
-    public SurveyItem() {
+    public Survey() {
     }
 
-    protected SurveyItem(Parcel in) {
+    protected Survey(Parcel in) {
         this.createUser = in.readString();
         this.description = in.readString();
         this.endMessage = in.readString();
@@ -193,21 +193,20 @@ public class SurveyItem implements Parcelable {
         this.lang = in.readString();
         this.ownerCode = in.readString();
         this.status = in.readString();
-        this.title = in.readString();
         this.mSurveyQuestions = in.createTypedArrayList(SurveyQuestion.CREATOR);
+        this.title = in.readString();
         this.toDate = in.readString();
     }
 
-    public static final Parcelable.Creator<SurveyItem> CREATOR =
-            new Parcelable.Creator<SurveyItem>() {
-                @Override
-                public SurveyItem createFromParcel(Parcel source) {
-                    return new SurveyItem(source);
-                }
+    public static final Parcelable.Creator<Survey> CREATOR = new Parcelable.Creator<Survey>() {
+        @Override
+        public Survey createFromParcel(Parcel source) {
+            return new Survey(source);
+        }
 
-                @Override
-                public SurveyItem[] newArray(int size) {
-                    return new SurveyItem[size];
-                }
-            };
+        @Override
+        public Survey[] newArray(int size) {
+            return new Survey[size];
+        }
+    };
 }

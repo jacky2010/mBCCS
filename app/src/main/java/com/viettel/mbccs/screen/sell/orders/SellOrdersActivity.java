@@ -145,12 +145,11 @@ public class SellOrdersActivity
     }
     @Override
     public void getDataError(BaseException error) {
-        DialogUtils.showDialogError(this, error.getMessage());
+        DialogUtils.showDialog(this, error.getMessage());
     }
 
     @Override
     public void getListChannelByOwnerTypeIdError(BaseException error) {
-        DialogUtils.showDialogError(this, error.getMessage());
         DialogUtils.showDialogError(this, error, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -161,7 +160,7 @@ public class SellOrdersActivity
 
     @Override
     public void getListChannelByOwnerTypeIdError(String error) {
-        DialogUtils.showDialogError(this, null, error, new DialogInterface.OnClickListener() {
+        DialogUtils.showDialog(this, null, error, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 onBackPressed();
@@ -191,6 +190,6 @@ public class SellOrdersActivity
 
     @Override
     public void showErrorDate() {
-        DialogUtils.showDialogError(this, "Thoi gian toi da 1 thang ");
+        DialogUtils.showDialog(this, "Thoi gian toi da 1 thang ");
     }
 }
