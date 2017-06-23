@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.places.ui.PlacePicker;
@@ -95,35 +94,35 @@ public class AddBranchFragment extends BaseDataBindFragment<FragmentAddBranchBin
 
     private void initListeners() {
         try{
-            mBinding.spChannelType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    if(view == null)
-                        return;
-                    if (!Constants.View.HINT.equals(view.getTag()))
-                        mPresenter.onChannelTypeChanged(i);
-                }
+//            mBinding.spChannelType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//                @Override
+//                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                    if(view == null)
+//                        return;
+//                    if (!Constants.View.HINT.equals(view.getTag()))
+//                        mPresenter.onChannelTypeChanged(i - 1);
+//                }
+//
+//                @Override
+//                public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//                }
+//            });
 
-                @Override
-                public void onNothingSelected(AdapterView<?> adapterView) {
-
-                }
-            });
-
-            mBinding.spDocumentType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    if(view == null)
-                        return;
-                    if (!Constants.View.HINT.equals(view.getTag()))
-                        mPresenter.onDocumentTypeChanged(i);
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> adapterView) {
-
-                }
-            });
+//            mBinding.spDocumentType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//                @Override
+//                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                    if(view == null)
+//                        return;
+//                    if (!Constants.View.HINT.equals(view.getTag()))
+//                        mPresenter.onDocumentTypeChanged(i - 1);
+//                }
+//
+//                @Override
+//                public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//                }
+//            });
 
             mBinding.ivLocationPicker.setOnClickListener(new View.OnClickListener() {
                 @Override

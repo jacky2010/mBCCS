@@ -174,6 +174,7 @@ public class UpdateSimPresenter implements UpdateSimContract.Presenter {
             documentId.set(cus.getIdNo());
             customerAddress.set(cus.getAddress());
             oldSimSerial.set(sub.getSerial());
+            isPrepaid.set("1".equals(sub.getSubType()));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -236,123 +237,136 @@ public class UpdateSimPresenter implements UpdateSimContract.Presenter {
                 isValid = false;
             }
 
-//            if (!isPrepaid.get()) {
-            if (TextUtils.isEmpty(contact1.get())) {
-                contact1Error.set(context.getString(R.string.input_empty));
-                isValid = false;
-            } else if (!TextUtils.isEmpty(contact1.get()) && !ValidateUtils.isPhoneNumberValid(contact1.get())) {
-                contact1Error.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.change_sim_label_contact_1)));
-                isValid = false;
-            }
+            if (isPrepaid.get()) {
+                if (TextUtils.isEmpty(contact1.get())) {
+                    contact1Error.set(context.getString(R.string.input_empty));
+                    isValid = false;
+                } else if (!TextUtils.isEmpty(contact1.get()) && !ValidateUtils.isPhoneNumberValid(contact1.get())) {
+                    contact1Error.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.change_sim_label_contact_1)));
+                    isValid = false;
+                }
 
-            if (TextUtils.isEmpty(contact2.get())) {
-                contact2Error.set(context.getString(R.string.input_empty));
-                isValid = false;
-            } else if (!TextUtils.isEmpty(contact2.get()) && !ValidateUtils.isPhoneNumberValid(contact2.get())) {
-                contact2Error.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.change_sim_label_contact_2)));
-                isValid = false;
-            }
+                if (TextUtils.isEmpty(contact2.get())) {
+                    contact2Error.set(context.getString(R.string.input_empty));
+                    isValid = false;
+                } else if (!TextUtils.isEmpty(contact2.get()) && !ValidateUtils.isPhoneNumberValid(contact2.get())) {
+                    contact2Error.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.change_sim_label_contact_2)));
+                    isValid = false;
+                }
 
-            if (TextUtils.isEmpty(contact3.get())) {
-                contact3Error.set(context.getString(R.string.input_empty));
-                isValid = false;
-            } else if (!TextUtils.isEmpty(contact3.get()) && !ValidateUtils.isPhoneNumberValid(contact3.get())) {
-                contact3Error.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.change_sim_label_contact_3)));
-                isValid = false;
-            }
+                if (TextUtils.isEmpty(contact3.get())) {
+                    contact3Error.set(context.getString(R.string.input_empty));
+                    isValid = false;
+                } else if (!TextUtils.isEmpty(contact3.get()) && !ValidateUtils.isPhoneNumberValid(contact3.get())) {
+                    contact3Error.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.change_sim_label_contact_3)));
+                    isValid = false;
+                }
 
-            if (TextUtils.isEmpty(contact4.get())) {
-                contact4Error.set(context.getString(R.string.input_empty));
-                isValid = false;
-            } else if (!TextUtils.isEmpty(contact4.get()) && !ValidateUtils.isPhoneNumberValid(contact4.get())) {
-                contact4Error.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.change_sim_label_contact_4)));
-                isValid = false;
-            }
+                if (TextUtils.isEmpty(contact4.get())) {
+                    contact4Error.set(context.getString(R.string.input_empty));
+                    isValid = false;
+                } else if (!TextUtils.isEmpty(contact4.get()) && !ValidateUtils.isPhoneNumberValid(contact4.get())) {
+                    contact4Error.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.change_sim_label_contact_4)));
+                    isValid = false;
+                }
 
-            if (TextUtils.isEmpty(contact5.get())) {
-                contact5Error.set(context.getString(R.string.input_empty));
-                isValid = false;
-            } else if (!TextUtils.isEmpty(contact5.get()) && !ValidateUtils.isPhoneNumberValid(contact5.get())) {
-                contact5Error.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.change_sim_label_contact_5)));
-                isValid = false;
+                if (TextUtils.isEmpty(contact5.get())) {
+                    contact5Error.set(context.getString(R.string.input_empty));
+                    isValid = false;
+                } else if (!TextUtils.isEmpty(contact5.get()) && !ValidateUtils.isPhoneNumberValid(contact5.get())) {
+                    contact5Error.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.change_sim_label_contact_5)));
+                    isValid = false;
+                }
             }
-//            }
 
             if (!isValid)
                 return;
 
-            final List<String> recentContacts = new ArrayList<>();
-            recentContacts.add(contact1.get().trim());
-            recentContacts.add(contact2.get().trim());
-            recentContacts.add(contact3.get().trim());
-            recentContacts.add(contact4.get().trim());
-            recentContacts.add(contact5.get().trim());
+            if (isPrepaid.get()) {
 
-            //validate recent contacts
-            viewModel.showLoading();
+                final List<String> recentContacts = new ArrayList<>();
+                recentContacts.add(contact1.get().trim());
+                recentContacts.add(contact2.get().trim());
+                recentContacts.add(contact3.get().trim());
+                recentContacts.add(contact4.get().trim());
+                recentContacts.add(contact5.get().trim());
 
-            DataRequest<CheckCalledIsdnsRequest> baseRequest = new DataRequest<>();
-            baseRequest.setApiCode(ApiCode.CheckCalledIsdn);
-            CheckCalledIsdnsRequest request = new CheckCalledIsdnsRequest();
-            request.setListIsdn(recentContacts);
-            baseRequest.setParameterApi(request);
+                //validate recent contacts
+                viewModel.showLoading();
 
-            Subscription subscription =
-                    changeSimRepository.checkCalledIsdn(baseRequest)
-                            .subscribe(new MBCCSSubscribe<DataResponse>() {
-                                @Override
-                                public void onSuccess(DataResponse object) {
-                                    try {
+                DataRequest<CheckCalledIsdnsRequest> baseRequest = new DataRequest<>();
+                baseRequest.setApiCode(ApiCode.CheckCalledIsdn);
+                CheckCalledIsdnsRequest request = new CheckCalledIsdnsRequest();
+                request.setListIsdn(recentContacts);
+                request.setIsdn(sub.getIsdn());
+                request.setSubType(sub.getSubType());
+                baseRequest.setParameterApi(request);
+
+                Subscription subscription =
+                        changeSimRepository.checkCalledIsdn(baseRequest)
+                                .subscribe(new MBCCSSubscribe<DataResponse>() {
+                                    @Override
+                                    public void onSuccess(DataResponse object) {
+                                        try {
 //                                        if (Constants.Service.RESPONSE_OK.equals(object.getErrorCode())) {
 
-                                        ChangeSimInfo changeSimInfo = new ChangeSimInfo();
-                                        changeSimInfo.setOldSerial(oldSimSerial.get());
-                                        changeSimInfo.setNewSerial(newSimSerial.get());
-                                        changeSimInfo.setRecentContacts(recentContacts);
-
-                                        ChangeSimItem item = new ChangeSimItem();
-                                        item.setCustomer(cus);
-                                        item.setSubscriber(sub);
-                                        item.setChangeSimInfo(changeSimInfo);
-
-                                        Bundle args = new Bundle();
-                                        args.putString(Constants.BundleConstant.CUSTOMER_ITEM, GsonUtils.Object2String(item));
-                                        args.putDouble(Constants.BundleConstant.SERVICE_FEE, servicePrice);
-                                        args.putDouble(Constants.BundleConstant.SIM_FEE, changeSimPrice);
-                                        args.putDouble(Constants.BundleConstant.TOTAL, (servicePrice + changeSimPrice));
-
-                                        viewModel.goToDialogFragment(args);
+                                            goToConfirmDialog(recentContacts);
 
 //                                        } else {
 //                                        DialogUtils.showDialogError(context, null, context.getString(R.string.change_sim_error_recent_calls_not_valid),
 //                                                null);
 //                                        }
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
                                     }
-                                }
 
-                                @Override
-                                public void onError(BaseException error) {
-//                                    DialogUtils.showDialogError(context, null, error.getMessage(),
-//                                            null);
-                                    DialogUtils.showDialogError(context, null, context.getString(R.string.common_msg_error_general),
-                                            null);
-                                }
+                                    @Override
+                                    public void onError(BaseException error) {
+                                        if (error.getMessage().contains("Called isdns are not match")) {
+                                            DialogUtils.showDialogError(context, null, context.getString(R.string.change_sim_error_recent_calls_not_valid),
+                                                    null);
+                                        } else
+                                            DialogUtils.showDialogError(context, null, context.getString(R.string.common_msg_error_general),
+                                                    null);
+                                    }
 
-                                @Override
-                                public void onRequestFinish() {
-                                    super.onRequestFinish();
-                                    viewModel.hideLoading();
-                                }
-                            });
+                                    @Override
+                                    public void onRequestFinish() {
+                                        super.onRequestFinish();
+                                        viewModel.hideLoading();
+                                    }
+                                });
 
-            mSubscriptions.add(subscription);
-            //validate recent contacts
+                mSubscriptions.add(subscription);
+                //validate recent contacts
+            } else {
+                goToConfirmDialog(null);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void goToConfirmDialog(List<String> recentContacts) {
+        ChangeSimInfo changeSimInfo = new ChangeSimInfo();
+        changeSimInfo.setOldSerial(oldSimSerial.get());
+        changeSimInfo.setNewSerial(newSimSerial.get());
+        changeSimInfo.setRecentContacts(recentContacts);
+
+        ChangeSimItem item = new ChangeSimItem();
+        item.setCustomer(cus);
+        item.setSubscriber(sub);
+        item.setChangeSimInfo(changeSimInfo);
+
+        Bundle args = new Bundle();
+        args.putString(Constants.BundleConstant.CUSTOMER_ITEM, GsonUtils.Object2String(item));
+        args.putDouble(Constants.BundleConstant.SERVICE_FEE, servicePrice);
+        args.putDouble(Constants.BundleConstant.SIM_FEE, changeSimPrice);
+        args.putDouble(Constants.BundleConstant.TOTAL, (servicePrice + changeSimPrice));
+
+        viewModel.goToDialogFragment(args);
     }
 
     public void onSelectImage(View v) {

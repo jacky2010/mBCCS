@@ -58,6 +58,7 @@
         <com.viettel.mbccs.widget.CustomTextView
             android:id="@+id/tv_trans"
             style="@style/ItemBilling"
+            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -76,7 +77,9 @@
                 <com.viettel.mbccs.widget.CustomTextView
                     android:id="@+id/tv_service_fee"
                     style="@style/ItemBilling"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
                     android:layout_height="wrap_content" />
             </TableRow>
 
@@ -91,7 +94,9 @@
                 <com.viettel.mbccs.widget.CustomTextView
                     android:id="@+id/tv_sim_fee"
                     style="@style/ItemBilling"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
                     android:layout_height="wrap_content" />
             </TableRow>
 
@@ -106,7 +111,9 @@
                 <com.viettel.mbccs.widget.CustomTextView
                     android:id="@+id/tv_total"
                     style="@style/ItemBilling"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
                     android:layout_height="wrap_content" />
             </TableRow>
         </TableLayout>

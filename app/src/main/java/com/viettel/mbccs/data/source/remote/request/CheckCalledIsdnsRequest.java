@@ -28,4 +28,20 @@ public class CheckCalledIsdnsRequest {
     public void setListIsdn(List<String> listIsdn) {
         this.listIsdn = listIsdn;
     }
+
+    public String getIsdn() {
+        return isdn;
+    }
+
+    public void setIsdn(String isdn) {
+        this.isdn = isdn;
+    }
+
+    public String getSubType() {
+        return subType;
+    }
+
+    public void setSubType(String subType) {
+        this.subType = subType;
+    }
 }

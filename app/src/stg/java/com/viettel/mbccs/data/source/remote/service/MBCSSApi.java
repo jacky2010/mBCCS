@@ -45,6 +45,7 @@ import com.viettel.mbccs.data.source.remote.request.GetSurveyKPPRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
 import com.viettel.mbccs.data.source.remote.request.GetUserInfoRequest;
+import com.viettel.mbccs.data.source.remote.request.IsKPPManagerRequest;
 import com.viettel.mbccs.data.source.remote.request.KPPFeedbackRequest;
 import com.viettel.mbccs.data.source.remote.request.KPPOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.KPPRespondFeedbackRequest;
@@ -101,7 +102,6 @@ import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
 import com.viettel.mbccs.data.source.remote.response.KPPFeedbackResponse;
 import com.viettel.mbccs.data.source.remote.response.KPPRespondFeedbackResponse;
 import com.viettel.mbccs.data.source.remote.response.ListStockTransDetailsReponse;
-import com.viettel.mbccs.data.source.remote.response.PassResetResponse;
 import com.viettel.mbccs.data.source.remote.response.RefillAnyPayResponse;
 import com.viettel.mbccs.data.source.remote.response.RegisterCustomerInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.SellAnypayToChannelResponse;
@@ -114,6 +114,7 @@ import com.viettel.mbccs.data.source.remote.response.TransferAnyPayResponse;
 import com.viettel.mbccs.data.source.remote.response.UpdateAllSubInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.UpdateSaleOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.UploadImageResponse;
+
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -366,5 +367,9 @@ public interface MBCSSApi {
 
     Observable<ServerDataResponse<BaseResponse<GetListProductResponse>>> getListProduct(
             @Body DataRequest<GetListProductRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<DataResponse>>> isKppManager(
+            @Body DataRequest<IsKPPManagerRequest> request);
 }
 

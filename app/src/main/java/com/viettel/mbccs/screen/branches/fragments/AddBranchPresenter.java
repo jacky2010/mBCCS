@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import com.google.android.gms.location.places.Place;
@@ -93,9 +94,32 @@ public class AddBranchPresenter implements AddBranchContract.Presenter {
         channelTypeAdapter = new SpinnerAdapter<>(context, channelTypesList);
         channelTypeAdapter.setTextHint(
                 context.getString(R.string.branches_add_hint_channel_type));
+        channelTypeAdapter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                onChannelTypeChanged(i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         documentTypeAdapter = new SpinnerAdapter<>(context, documentTypesList);
         documentTypeAdapter.setTextHint(
                 context.getString(R.string.branches_add_hint_document_type));
+        documentTypeAdapter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                onDocumentTypeChanged(i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         initListeners();
         initData();

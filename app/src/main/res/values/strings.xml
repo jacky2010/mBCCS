@@ -264,9 +264,11 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="change_sim_label_change">Thực Hiện Đổi Sim</string>
     <string name="change_sim_pay_debit">Thanh toán cước</string>
     <string name="change_sim_unbar">Mở chặn</string>
-    <string name="common_msg_confirm_change_sim">Bạn có muốn đổi sim cho khách hàng %1$s từ số serial %2$s sang số serial %3$s?</string>
+    <string name="common_msg_confirm_change_sim">Bạn có muốn đổi sim cho thuê bao %1$s từ số serial %2$s sang số serial %3$s?</string>
     <string name="change_sim_msg_updated_sim">sim cho khách hàng %s đã được thay đổi thành công!</string>
     <string name="change_sim_hint_document_type">- Chọn loại giấy tờ -</string>
+    <string name="change_sim_error_new_serial_not_found">Không tìm thấy số serial %s trong kho!</string>
+    <string name="change_sim_error_sub_not_found">Không tìm thấy thông tin thuê bao %s!</string>
     <!--Change Sim-->
     <string name="channel_code">Mã kênh</string>
     <string name="channel_name">Tên kênh</string>

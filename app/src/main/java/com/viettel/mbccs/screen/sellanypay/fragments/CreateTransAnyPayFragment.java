@@ -87,7 +87,7 @@ public class CreateTransAnyPayFragment extends BaseDataBindFragment<FragmentCrea
                     if(view == null)
                         return;
                     if (!Constants.View.HINT.equals(view.getTag()))
-                        mPresenter.onCustomerTypeChanged(i);
+                        mPresenter.onCustomerTypeChanged(i - 1);
                 }
 
                 @Override

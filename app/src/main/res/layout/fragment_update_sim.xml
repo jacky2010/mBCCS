@@ -73,7 +73,7 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16" />
 
-                    <com.viettel.mbccs.widget.CustomEdittext
+                    <com.viettel.mbccs.widget.CustomTextView
                         style="@style/inputStyle"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_40"
@@ -90,7 +90,7 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16" />
 
-                    <com.viettel.mbccs.widget.CustomEdittext
+                    <com.viettel.mbccs.widget.CustomTextView
                         style="@style/inputStyle"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_40"
@@ -107,7 +107,7 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16" />
 
-                    <com.viettel.mbccs.widget.CustomEdittext
+                    <com.viettel.mbccs.widget.CustomTextView
                         style="@style/inputStyle"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_60"
@@ -288,7 +288,7 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_16" />
 
-                    <com.viettel.mbccs.widget.CustomEdittext
+                    <com.viettel.mbccs.widget.CustomTextView
                         style="@style/inputStyle"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_40"
@@ -325,7 +325,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="@{presenter.isPrepaid ? View.VISIBLE : View.GONE}">
 
                     <View
                         android:layout_width="match_parent"
@@ -500,7 +501,10 @@
                     android:layout_height="wrap_content"
                     android:background="@color/white"
                     android:orientation="vertical"
-                    android:paddingBottom="@dimen/dp_30">
+                    android:paddingBottom="@dimen/dp_30"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:paddingLeft="@dimen/dp_16"
+                    android:paddingRight="@dimen/dp_16">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -515,7 +519,9 @@
 
                         <TextView
                             android:id="@+id/txtServiceFee"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:gravity="right"
                             android:layout_height="wrap_content"
                             android:text="@{presenter.serviceFee}" />
                     </LinearLayout>
@@ -533,7 +539,9 @@
 
                         <TextView
                             android:id="@+id/txtSimFee"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:gravity="right"
                             android:layout_height="wrap_content"
                             android:text="@{presenter.changeSimFee}" />
                     </LinearLayout>
@@ -552,7 +560,9 @@
 
                         <TextView
                             android:id="@+id/txtTotalFee"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:gravity="right"
                             android:layout_height="wrap_content"
                             android:text="@{presenter.totalFee}"
                             android:textStyle="bold" />

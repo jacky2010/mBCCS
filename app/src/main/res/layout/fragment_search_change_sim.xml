@@ -57,7 +57,7 @@
                 android:id="@+id/spDocumentType"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:adapter="@{presenter.documentTypeAdapter}" />
+                app:adapter="@{presenter.documentTypeAdapter}" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -82,7 +82,7 @@
                 android:layout_height="@dimen/dp_40"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/dp_10"
-                android:drawableLeft="@drawable/ic_search_black_24dp"
+                android:drawableLeft="@drawable/ic_search_white_24dp"
                 android:onClick="@{ v -> presenter.searchSim() }"
                 android:text="@string/connector_mobile_tim_kiem"
                 android:textAllCaps="false"
@@ -111,7 +111,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_6"
-            android:background="@color/grey_three">
+            android:background="@color/white_2">
 
             <TextView
                 android:layout_width="match_parent"
@@ -135,12 +135,12 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_0.6"
-                    android:layout_marginLeft="@dimen/dp_16"
-                    android:layout_marginRight="@dimen/dp_16"
-                    android:background="@color/grey" />
+                <!--<View-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="@dimen/dp_0.6"-->
+                    <!--android:layout_marginLeft="@dimen/dp_16"-->
+                    <!--android:layout_marginRight="@dimen/dp_16"-->
+                    <!--android:background="@color/grey" />-->
 
                 <android.support.v7.widget.RecyclerView
                     android:layout_width="match_parent"

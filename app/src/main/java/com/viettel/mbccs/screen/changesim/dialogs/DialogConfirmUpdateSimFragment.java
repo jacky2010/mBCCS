@@ -87,7 +87,7 @@ public class DialogConfirmUpdateSimFragment extends BaseDialog {
                 changeSimItem = GsonUtils.String2Object(currentArgs.getString(Constants.BundleConstant.CUSTOMER_ITEM), ChangeSimItem.class);
 
                 if (changeSimItem != null) {
-                    tvTrans.setText(getString(R.string.common_msg_confirm_change_sim, changeSimItem.getCustomer().getCustomerName(), changeSimItem.getChangeSimInfo().getOldSerial(), changeSimItem.getChangeSimInfo().getNewSerial()));
+                    tvTrans.setText(getString(R.string.common_msg_confirm_change_sim, changeSimItem.getSubscriber().getIsdn(), changeSimItem.getChangeSimInfo().getOldSerial(), changeSimItem.getChangeSimInfo().getNewSerial()));
                     tvServiceFee.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.SERVICE_FEE)));
                     tvSimFee.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.SIM_FEE)));
                     tvTotal.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.TOTAL)));
@@ -157,10 +157,14 @@ public class DialogConfirmUpdateSimFragment extends BaseDialog {
 
                                 @Override
                                 public void onError(BaseException error) {
-//                                    DialogUtils.showDialogError(getContext(), null, error.getMessage(),
-//                                            null);
-                                    DialogUtils.showDialogError(getContext(), null, getString(R.string.change_sim_error_change_sim_failed),
-                                            null);
+
+                                    String errorMessage = getErrorMessage(error.getMessage());
+                                    if (errorMessage != null)
+                                        DialogUtils.showDialogError(getContext(), null, errorMessage,
+                                                null);
+                                    else
+                                        DialogUtils.showDialogError(getContext(), null, getString(R.string.change_sim_error_change_sim_failed),
+                                                null);
                                 }
 
                                 @Override
@@ -190,6 +194,29 @@ public class DialogConfirmUpdateSimFragment extends BaseDialog {
             dismiss();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private String getErrorMessage(String error) {
+        try {
+
+            if (error.contains("Cannot get kit from stock")) {
+                return getString(R.string.change_sim_error_new_serial_not_found, changeSimItem.getChangeSimInfo().getNewSerial());
+            } else if (error.contains("Kit IMSI is empty")) {
+                return getString(R.string.change_sim_error_new_serial_not_found, changeSimItem.getChangeSimInfo().getNewSerial());
+            } else if (error.contains("Cannot get SubMB")) {
+                return getString(R.string.change_sim_error_sub_not_found, changeSimItem.getSubscriber().getIsdn());
+            } else if (error.contains("Cannot get SubSimMB")) {
+                return getString(R.string.change_sim_error_sub_not_found, changeSimItem.getSubscriber().getIsdn());
+            } else if (error.contains("Cannot get StockIsdnMobile")) {
+                return getString(R.string.change_sim_error_sub_not_found, changeSimItem.getSubscriber().getIsdn());
+            }
+
+            return null;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }

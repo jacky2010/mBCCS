@@ -4,8 +4,10 @@ import com.viettel.mbccs.data.source.remote.IKPPFeedbackRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetKPPFeedbackInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.GetKPPFeedbackRequest;
+import com.viettel.mbccs.data.source.remote.request.IsKPPManagerRequest;
 import com.viettel.mbccs.data.source.remote.request.KPPFeedbackRequest;
 import com.viettel.mbccs.data.source.remote.request.KPPRespondFeedbackRequest;
+import com.viettel.mbccs.data.source.remote.response.DataResponse;
 import com.viettel.mbccs.data.source.remote.response.GetKPPFeedbackInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetKPPFeedbackResponse;
 import com.viettel.mbccs.data.source.remote.response.KPPFeedbackResponse;
@@ -57,6 +59,14 @@ public class KPPFeedbackRemoteDataSource implements IKPPFeedbackRemoteDataSource
                 .kppResponseFeedback(request)
                 .flatMap(SchedulerUtils.<KPPRespondFeedbackResponse>convertDataFlatMap())
                 .compose(SchedulerUtils.<KPPRespondFeedbackResponse>applyAsyncSchedulers());
+    }
+
+    @Override
+    public Observable<DataResponse> isKPPManager(DataRequest<IsKPPManagerRequest> request) {
+        return RequestHelper.getRequest()
+                .isKppManager(request)
+                .flatMap(SchedulerUtils.<DataResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<DataResponse>applyAsyncSchedulers());
     }
 
     public static KPPFeedbackRemoteDataSource getInstance() {

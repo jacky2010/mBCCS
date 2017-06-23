@@ -367,4 +367,8 @@ public interface MBCSSApi {
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<GetListProductResponse>>> getListProduct(
             @Body DataRequest<GetListProductRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<DataResponse>>> isKppManager(
+            @Body DataRequest<IsKPPManagerRequest> request);
 }

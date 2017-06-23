@@ -15,6 +15,8 @@ public class GetRegiterSubInfoRequest {
     // loại giấy tờ
     private String idType;
 
+    private String checkRegisterStatus;
+
     public String getIsdn() {
         return isdn;
     }
@@ -37,5 +39,13 @@ public class GetRegiterSubInfoRequest {
 
     public void setIdType(String idType) {
         this.idType = idType;
+    }
+
+    public String getCheckRegisterStatus() {
+        return checkRegisterStatus;
+    }
+
+    public void setCheckRegisterStatus(String checkRegisterStatus) {
+        this.checkRegisterStatus = checkRegisterStatus;
     }
 }

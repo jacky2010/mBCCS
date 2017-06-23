@@ -6,6 +6,7 @@ import android.databinding.ObservableField;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
 
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.ApiCode;
@@ -96,11 +97,11 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
                                     @Override
                                     public void onSuccess(DataResponse object) {
                                         try {
-                                            if (Constants.Service.RESPONSE_OK.equals(object.getErrorCode())) {
-                                                viewModel.onPrepareChangeSim(item);
-                                            } else {
-                                                goToPreAction(ACTION_PAY_DEBIT, item);
-                                            }
+//                                            if (Constants.Service.RESPONSE_OK.equals(object.getErrorCode())) {
+                                            viewModel.onPrepareChangeSim(item);
+//                                            } else {
+//                                                goToPreAction(ACTION_PAY_DEBIT, item);
+//                                            }
                                         } catch (Exception e) {
                                             e.printStackTrace();
                                         }
@@ -108,8 +109,11 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
 
                                     @Override
                                     public void onError(BaseException error) {
-                                        DialogUtils.showDialogError(context, null, error.getMessage(),
-                                                null);
+                                        if (error.getMessage().contains("Subscriber has debit")) {
+                                            goToPreAction(ACTION_PAY_DEBIT, item);
+                                        } else
+                                            DialogUtils.showDialogError(context, null, error.getMessage(),
+                                                    null);
                                     }
 
                                     @Override
@@ -127,9 +131,25 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
         documentTypeAdapter = new SpinnerAdapter<>(context, documentTypesList);
         documentTypeAdapter.setTextHint(
                 context.getString(R.string.change_sim_hint_document_type));
+        documentTypeAdapter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                onDocumentTypeChanged(i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         initListeners();
         initData();
+
+        //TODO minhnx test
+        isdn.set("620103022");
+        documentType.set("0");
+        documentId.set("145079102");
     }
 
     private void goToPreAction(String action, ChangeSimItem item) {
@@ -207,16 +227,14 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
                 isValid = false;
             }
 
-            if (TextUtils.isEmpty(isdn.get())) {
-                if (documentType.get() == null || "".equals(documentType.get().trim())) {
-                    viewModel.showError(context.getString(R.string.change_sim_error_search_documentType_required));
-                    isValid = false;
-                }
+            if (documentType.get() == null || "".equals(documentType.get().trim())) {
+                viewModel.showError(context.getString(R.string.change_sim_error_search_documentType_required));
+                isValid = false;
+            }
 
-                if (TextUtils.isEmpty(documentId.get())) {
-                    documentIdError.set(context.getString(R.string.input_empty));
-                    isValid = false;
-                }
+            if (TextUtils.isEmpty(documentId.get())) {
+                documentIdError.set(context.getString(R.string.input_empty));
+                isValid = false;
             }
 
             if (!isValid)
@@ -231,6 +249,7 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
             request.setIsdn(isdn.get());
             request.setIdNo(documentId.get());
             request.setIdType(documentType.get());
+            request.setCheckRegisterStatus("0");//ignore check register status
             baseRequest.setParameterApi(request);
 
             Subscription subscription =
@@ -275,7 +294,7 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
                                 public void onError(BaseException error) {
 //                                    DialogUtils.showDialogError(context, null, error.getMessage(),
 //                                            null);
-                                    DialogUtils.showDialogError(context, null, context.getString(R.string.change_sim_error_recent_calls_not_valid),
+                                    DialogUtils.showDialogError(context, null, context.getString(R.string.common_msg_error_no_data),
                                             null);
                                 }
 

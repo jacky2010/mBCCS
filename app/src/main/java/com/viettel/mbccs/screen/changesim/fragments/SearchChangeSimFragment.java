@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.viettel.mbccs.R;
@@ -72,20 +71,20 @@ public class SearchChangeSimFragment extends BaseDataBindFragment<FragmentSearch
                 }
             });
 
-            mBinding.spDocumentType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    if(view == null)
-                        return;
-                    if (!Constants.View.HINT.equals(view.getTag()))
-                        mPresenter.onDocumentTypeChanged(i);
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> adapterView) {
-
-                }
-            });
+//            mBinding.spDocumentType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//                @Override
+//                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                    if(view == null)
+//                        return;
+//                    if (!Constants.View.HINT.equals(view.getTag()))
+//                        mPresenter.onDocumentTypeChanged(i);
+//                }
+//
+//                @Override
+//                public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//                }
+//            });
         } catch (Exception e) {
             e.printStackTrace();
         }

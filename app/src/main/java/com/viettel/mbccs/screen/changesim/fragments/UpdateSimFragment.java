@@ -78,7 +78,7 @@ public class UpdateSimFragment extends BaseDataBindFragment<FragmentUpdateSimBin
             Bundle args = getArguments();
 
             if(args != null){
-                item = GsonUtils.String2Object(args.getString(Constants.BundleConstant.ITEM_LIST), ChangeSimItem.class);
+                item = GsonUtils.String2Object(args.getString(Constants.BundleConstant.CHANGE_SIM_ITEM), ChangeSimItem.class);
 
                 if(item != null)
                     mPresenter.onPrepareChangeSim(item);

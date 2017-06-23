@@ -124,7 +124,7 @@ public class Subscriber implements Parcelable {
     // Mã chương trình khuyênn
     @SerializedName("promotionCode")
     @Expose
-    private int promotionCode;
+    private String promotionCode;
 
     // loại hòa mạng
     @SerializedName("regType")
@@ -332,7 +332,7 @@ public class Subscriber implements Parcelable {
         data = in.readString();
         addressCode = in.readString();
         quota = in.readInt();
-        promotionCode = in.readInt();
+        promotionCode = in.readString();
         regType = in.readString();
         reasonDepositId = in.readInt();
         userUsing = in.readString();
@@ -395,7 +395,7 @@ public class Subscriber implements Parcelable {
         dest.writeString(data);
         dest.writeString(addressCode);
         dest.writeInt(quota);
-        dest.writeInt(promotionCode);
+        dest.writeString(promotionCode);
         dest.writeString(regType);
         dest.writeInt(reasonDepositId);
         dest.writeString(userUsing);
@@ -627,11 +627,11 @@ public class Subscriber implements Parcelable {
         this.quota = quota;
     }
 
-    public int getPromotionCode() {
+    public String getPromotionCode() {
         return promotionCode;
     }
 
-    public void setPromotionCode(int promotionCode) {
+    public void setPromotionCode(String promotionCode) {
         this.promotionCode = promotionCode;
     }
 
