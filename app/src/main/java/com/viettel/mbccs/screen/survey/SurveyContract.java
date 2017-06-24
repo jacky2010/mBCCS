@@ -18,5 +18,7 @@ public interface SurveyContract {
         void onCancel();
 
         void nextQuestion(int i);
+
+        void onSendSurveySuccess();
     }
 }

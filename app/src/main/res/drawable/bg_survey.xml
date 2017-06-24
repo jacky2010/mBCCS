@@ -7,9 +7,9 @@
             <stroke
                 android:color="@color/grey_bright"
                 android:width="@dimen/dp_0_5"/>
-            <solid android:color="@color/ice_berg"></solid>
+            <solid android:color="@color/ice_berg"/>
         </shape>
     </item>
 
-    <item android:drawable="@drawable/bg_border"></item>
+    <item android:drawable="@drawable/bg_border"/>
 </selector>

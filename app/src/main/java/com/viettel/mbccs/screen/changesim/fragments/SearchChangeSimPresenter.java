@@ -112,8 +112,9 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
                                         if (error.getMessage().contains("Subscriber has debit")) {
                                             goToPreAction(ACTION_PAY_DEBIT, item);
                                         } else
-                                            DialogUtils.showDialogError(context, null, error.getMessage(),
+                                            DialogUtils.showDialog(context, null, error.getMessage(),
                                                     null);
+
                                     }
 
                                     @Override
@@ -282,7 +283,7 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
                                         }
 
 //                                        } else {
-//                                        DialogUtils.showDialogError(context, null, context.getString(R.string.change_sim_error_recent_calls_not_valid),
+//                                        DialogUtils.showDialog(context, null, context.getString(R.string.change_sim_error_recent_calls_not_valid),
 //                                                null);
 //                                        }
                                     } catch (Exception e) {
@@ -292,9 +293,10 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
 
                                 @Override
                                 public void onError(BaseException error) {
-//                                    DialogUtils.showDialogError(context, null, error.getMessage(),
+//                                    DialogUtils.showDialog(context, null, error.getMessage(),
 //                                            null);
-                                    DialogUtils.showDialogError(context, null, context.getString(R.string.common_msg_error_no_data),
+                                    DialogUtils.showDialog(context, null, context.getString(R.string.common_msg_error_no_data),
+
                                             null);
                                 }
 

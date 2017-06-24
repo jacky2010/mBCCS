@@ -208,6 +208,7 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.survey.SurveyActivity"
+            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"/>
         <!-- Area Channel -->
         <activity
@@ -218,11 +219,7 @@
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".screen.surveykpp.SurveyKPPActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity
-            android:name="com.androidadvance.androidsurvey.SurveyActivity"
+            android:name=".screen.survey.SurveyListActivity"
             android:screenOrientation="portrait"/>
 
         <activity
@@ -249,7 +246,7 @@
             android:name=".screen.splash.DownloadDataActivity"
             android:screenOrientation="portrait"/>
 
-        // -------------------------------- Service ---------------------------------------
+        <!--Servicew-->
         <service
             android:name=".service.service.UploadImageService"
             android:exported="true"/>

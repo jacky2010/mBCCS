@@ -2,8 +2,8 @@ package com.viettel.mbccs.data.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import com.viettel.mbccs.constance.SurveyType;
-import java.util.ArrayList;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 /**
@@ -12,63 +12,109 @@ import java.util.List;
 
 public class SurveyQuestion implements Parcelable {
 
-    private String content;
-    private int code;
-    private List<Answer> mAnswers;
-    private String type;
+    @SerializedName("description")
+    @Expose
+    private String description;
+    @SerializedName("id")
+    @Expose
+    private int id;
+    @SerializedName("isRequired")
+    @Expose
+    private String isRequired;
+    @SerializedName("question")
+    @Expose
+    private String question;
+    @SerializedName("status")
+    @Expose
+    private String status;
+    @SerializedName("surveyId")
+    @Expose
+    private int surveyId;
+    @SerializedName("surveyQuestionAnswers")
+    @Expose
+    private List<Answer> surveyQuestionAnswers = null;
+    @SerializedName("type")
+    @Expose
+    private int type;
 
-    public String getContent() {
-        return content;
+    public String getDescription() {
+        return description;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public int getCode() {
-        return code;
+    public int getId() {
+        return id;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public List<Answer> getAnswers() {
-        return mAnswers;
+    public String getIsRequired() {
+        return isRequired;
     }
 
-    public void setAnswers(List<Answer> answers) {
-        mAnswers = answers;
+    public void setIsRequired(String isRequired) {
+        this.isRequired = isRequired;
     }
 
-    public String getType() {
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public int getSurveyId() {
+        return surveyId;
+    }
+
+    public void setSurveyId(int surveyId) {
+        this.surveyId = surveyId;
+    }
+
+    public List<Answer> getSurveyQuestionAnswers() {
+        return surveyQuestionAnswers;
+    }
+
+    public void setSurveyQuestionAnswers(List<Answer> surveyQuestionAnswers) {
+        this.surveyQuestionAnswers = surveyQuestionAnswers;
+    }
+
+    public int getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(int type) {
         this.type = type;
     }
 
     public static class Answer implements Parcelable {
-        private int code;
-        private String content;
+        @SerializedName("answer")
+        @Expose
+        private String answer;
+        @SerializedName("id")
+        @Expose
+        private int id;
+        @SerializedName("status")
+        @Expose
+        private String status;
+        @SerializedName("surveyQuestionId")
+        @Expose
+        private int surveyQuestionId;
         private boolean isSelect;
-
-        public int getCode() {
-            return code;
-        }
-
-        public void setCode(int code) {
-            this.code = code;
-        }
-
-        public String getContent() {
-            return content;
-        }
-
-        public void setContent(String content) {
-            this.content = content;
-        }
 
         public boolean isSelect() {
             return isSelect;
@@ -78,6 +124,43 @@ public class SurveyQuestion implements Parcelable {
             isSelect = select;
         }
 
+        public String getAnswer() {
+            return answer;
+        }
+
+        public void setAnswer(String answer) {
+            this.answer = answer;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getStatus() {
+            return status;
+        }
+
+        public void setStatus(String status) {
+            this.status = status;
+        }
+
+        public int getSurveyQuestionId() {
+            return surveyQuestionId;
+        }
+
+        public void setSurveyQuestionId(int surveyQuestionId) {
+            this.surveyQuestionId = surveyQuestionId;
+        }
+
+        @Override
+        public String toString() {
+            return answer;
+        }
+
         @Override
         public int describeContents() {
             return 0;
@@ -85,8 +168,10 @@ public class SurveyQuestion implements Parcelable {
 
         @Override
         public void writeToParcel(Parcel dest, int flags) {
-            dest.writeInt(this.code);
-            dest.writeString(this.content);
+            dest.writeString(this.answer);
+            dest.writeInt(this.id);
+            dest.writeString(this.status);
+            dest.writeInt(this.surveyQuestionId);
             dest.writeByte(this.isSelect ? (byte) 1 : (byte) 0);
         }
 
@@ -94,12 +179,14 @@ public class SurveyQuestion implements Parcelable {
         }
 
         protected Answer(Parcel in) {
-            this.code = in.readInt();
-            this.content = in.readString();
+            this.answer = in.readString();
+            this.id = in.readInt();
+            this.status = in.readString();
+            this.surveyQuestionId = in.readInt();
             this.isSelect = in.readByte() != 0;
         }
 
-        public final Creator<Answer> CREATOR = new Creator<Answer>() {
+        public static final Creator<Answer> CREATOR = new Creator<Answer>() {
             @Override
             public Answer createFromParcel(Parcel source) {
                 return new Answer(source);
@@ -119,21 +206,28 @@ public class SurveyQuestion implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.content);
-        dest.writeInt(this.code);
-        dest.writeList(this.mAnswers);
-        dest.writeString(this.type);
+        dest.writeString(this.description);
+        dest.writeInt(this.id);
+        dest.writeString(this.isRequired);
+        dest.writeString(this.question);
+        dest.writeString(this.status);
+        dest.writeInt(this.surveyId);
+        dest.writeTypedList(this.surveyQuestionAnswers);
+        dest.writeInt(this.type);
     }
 
     public SurveyQuestion() {
     }
 
     protected SurveyQuestion(Parcel in) {
-        this.content = in.readString();
-        this.code = in.readInt();
-        this.mAnswers = new ArrayList<Answer>();
-        in.readList(this.mAnswers, Answer.class.getClassLoader());
-        this.type = in.readString();
+        this.description = in.readString();
+        this.id = in.readInt();
+        this.isRequired = in.readString();
+        this.question = in.readString();
+        this.status = in.readString();
+        this.surveyId = in.readInt();
+        this.surveyQuestionAnswers = in.createTypedArrayList(Answer.CREATOR);
+        this.type = in.readInt();
     }
 
     public static final Creator<SurveyQuestion> CREATOR = new Creator<SurveyQuestion>() {
@@ -148,3 +242,5 @@ public class SurveyQuestion implements Parcelable {
         }
     };
 }
+
+

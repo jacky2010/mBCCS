@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
@@ -33,44 +32,63 @@ public class DialogUtils {
                 .show();
     }
 
-    public static void showDialog(Context context, @Nullable String title, String message,
+    public static Dialog showDialog(Context context, @Nullable String title, String message,
             String yesTitle, @Nullable DialogInterface.OnClickListener yesListener,
             @Nullable String cancelTitle,
             @Nullable DialogInterface.OnClickListener cancelListener) {
-        new AlertDialog.Builder(context).setTitle(title)
+        Dialog dialog = new AlertDialog.Builder(context).setTitle(title)
                 .setMessage(message)
                 .setPositiveButton(yesTitle, yesListener)
                 .setNegativeButton(cancelTitle, cancelListener)
                 .show();
+
+        return dialog;
     }
 
-    public static void showDialog(Context context, @Nullable String title, String message,
+    public static Dialog showDialog(Context context, @Nullable String title, String message,
             String yesTitle, @Nullable DialogInterface.OnClickListener yesListener,
             @Nullable String cancelTitle, @Nullable DialogInterface.OnClickListener cancelListener,
             boolean cancelable) {
-        new AlertDialog.Builder(context).setTitle(title)
+        Dialog dialog = new AlertDialog.Builder(context).setTitle(title)
                 .setMessage(message)
                 .setPositiveButton(yesTitle, yesListener)
                 .setNegativeButton(cancelTitle, cancelListener)
                 .setCancelable(cancelable)
                 .show();
+
+        return dialog;
     }
 
     public static void showDialogError(Context context, BaseException error,
             DialogInterface.OnClickListener yesListener, boolean cancelable) {
-        showDialogError(context, null, error.getMessage(), yesListener, cancelable);
+        showDialog(context, null, error.getMessage(), yesListener, cancelable);
     }
 
     public static void showDialogError(Context context, BaseException error) {
-        showDialogError(context, null, error.getMessage(), null);
+        showDialog(context, null, error.getMessage(), null);
     }
 
-    public static void showDialogError(Context context, String message) {
-        showDialogError(context, null, message, null);
+    public static void showDialogError(Context context, BaseException error,
+            DialogInterface.OnClickListener onClickListener) {
+        showDialog(context, null, error.getMessage(), onClickListener);
     }
 
-    public static void showDialogError(Context context, int message) {
-        showDialogError(context, null, context.getString(message), null);
+    public static Dialog showDialog(Context context, String message) {
+        return showDialog(context, null, message, null);
+    }
+
+    public static Dialog showDialog(Context context, int message) {
+        return showDialog(context, null, context.getString(message), null);
+    }
+
+    public static Dialog showDialog(Context context, String messsage,
+            DialogInterface.OnClickListener onClickListener) {
+        return showDialog(context, null, messsage, onClickListener);
+    }
+
+    public static void showDialog(Context context, int messsage,
+            DialogInterface.OnClickListener onClickListener) {
+        showDialog(context, null, context.getString(messsage), onClickListener);
     }
 
     public static void showDialog(Context context, @StringRes int title, @StringRes int message,
@@ -160,15 +178,15 @@ public class DialogUtils {
         return context.getResources().getString(id);
     }
 
-    public static void showDialogError(Context context, @Nullable String title, String message,
+    public static Dialog showDialog(Context context, @Nullable String title, String message,
             @Nullable DialogInterface.OnClickListener yesListener) {
-        showDialog(context, title, message, context.getString(R.string.ok), yesListener, null,
-                null);
+        return showDialog(context, title, message, context.getString(R.string.ok), yesListener,
+                null, null);
     }
 
-    public static void showDialogError(Context context, @Nullable String title, String message,
+    public static Dialog showDialog(Context context, @Nullable String title, String message,
             @Nullable DialogInterface.OnClickListener yesListener, boolean cancelable) {
-        showDialog(context, title, message, context.getString(R.string.ok), yesListener, null, null,
-                cancelable);
+        return showDialog(context, title, message, context.getString(R.string.ok), yesListener,
+                null, null, cancelable);
     }
 }

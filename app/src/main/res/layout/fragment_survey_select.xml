@@ -3,7 +3,7 @@
     <data>
         <variable
             name="data"
-            type="com.viettel.mbccs.screen.survey.SurveyFragment"
+            type="com.viettel.mbccs.screen.survey.SurveyFragmentSelect"
             />
     </data>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -17,10 +17,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/dp_20"
-            android:textSize="@dimen/sp_15"
+            android:text="@{data.surveyQuestion.description}"
             android:textColor="@color/black"
+            android:textSize="@dimen/sp_15"
             android:textStyle="bold"
-            android:text="@{data.surveyQuestion.content}"
+            />
+
+        <com.viettel.mbccs.widget.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:text="@{data.surveyQuestion.question}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_15"
+            android:textStyle="bold"
             />
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"

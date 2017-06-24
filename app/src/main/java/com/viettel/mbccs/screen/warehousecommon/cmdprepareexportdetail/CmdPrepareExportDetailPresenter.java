@@ -38,7 +38,7 @@ public class CmdPrepareExportDetailPresenter implements CmdPrepareExportDetailCo
     private BanHangKhoTaiChinhRepository mBanHangKhoTaiChinhRepository;
     private DataRequest<GetListStockTransDetailRequest> mDataRequest;
     private DataRequest<CreateExpStockRequest> mCreateExpStockRequest;
-    private List<StockTransDetail> mStockTransDetails = new ArrayList<>();
+    private ArrayList<StockTransDetail> mStockTransDetails = new ArrayList<>();
     private StockTransDetailAdapter mAdapter;
     private CompositeSubscription mSubscription;
     private int currentPosition = -1;
@@ -101,7 +101,7 @@ public class CmdPrepareExportDetailPresenter implements CmdPrepareExportDetailCo
 
                             @Override
                             public void onError(BaseException error) {
-                                //                                DialogUtils.showDialogError
+                                //                                DialogUtils.showDialog
                                 // (mContext, error.getMessage());
                                 bindData(fakeData());
                             }
@@ -194,7 +194,7 @@ public class CmdPrepareExportDetailPresenter implements CmdPrepareExportDetailCo
                             @Override
                             public void onError(BaseException error) {
 
-                                DialogUtils.showDialogError(mContext, null, error.getMessage(),
+                                DialogUtils.showDialog(mContext, null, error.getMessage(),
                                         null);
                                 mViewModel.onCreateExpStockSuccess(mStockTransDetails);
                             }
@@ -211,7 +211,7 @@ public class CmdPrepareExportDetailPresenter implements CmdPrepareExportDetailCo
     public boolean validate() {
         for (StockTransDetail stockTransDetail : mStockTransDetails) {
             if (!stockTransDetail.isPickSerialOk()) {
-                DialogUtils.showDialogError(mContext, String.format(mContext.getString(
+                DialogUtils.showDialog(mContext, String.format(mContext.getString(
                         R.string.common_cmd_prepare_export_detail_msg_error_choose_serial),
                         stockTransDetail.getStockModelName()));
                 return false;

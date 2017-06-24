@@ -45,8 +45,10 @@ public class StockTransDetail implements Parcelable {
     @Expose
     private String stateName;
 
+    @Expose
     private StockSerial mStockSerial;
 
+    @Expose
     private List<String> mSerials = new ArrayList<>();
 
     private List<SerialBO> mSerialBlocks = new ArrayList<>();
@@ -159,6 +161,9 @@ public class StockTransDetail implements Parcelable {
         this.stateName = stateName;
     }
 
+    public StockTransDetail() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -174,9 +179,9 @@ public class StockTransDetail implements Parcelable {
         dest.writeLong(this.quantity);
         dest.writeLong(this.stateId);
         dest.writeString(this.stateName);
-    }
-
-    public StockTransDetail() {
+        dest.writeSerializable(this.mStockSerial);
+        dest.writeStringList(this.mSerials);
+        dest.writeTypedList(this.mSerialBlocks);
     }
 
     protected StockTransDetail(Parcel in) {
@@ -188,18 +193,20 @@ public class StockTransDetail implements Parcelable {
         this.quantity = in.readLong();
         this.stateId = in.readLong();
         this.stateName = in.readString();
+        this.mStockSerial = (StockSerial) in.readSerializable();
+        this.mSerials = in.createStringArrayList();
+        this.mSerialBlocks = in.createTypedArrayList(SerialBO.CREATOR);
     }
 
-    public static final Parcelable.Creator<StockTransDetail> CREATOR =
-            new Parcelable.Creator<StockTransDetail>() {
-                @Override
-                public StockTransDetail createFromParcel(Parcel source) {
-                    return new StockTransDetail(source);
-                }
+    public static final Creator<StockTransDetail> CREATOR = new Creator<StockTransDetail>() {
+        @Override
+        public StockTransDetail createFromParcel(Parcel source) {
+            return new StockTransDetail(source);
+        }
 
-                @Override
-                public StockTransDetail[] newArray(int size) {
-                    return new StockTransDetail[size];
-                }
-            };
+        @Override
+        public StockTransDetail[] newArray(int size) {
+            return new StockTransDetail[size];
+        }
+    };
 }

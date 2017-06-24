@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import com.viettel.mbccs.R;
+import com.viettel.mbccs.constance.SaleTranType;
 import com.viettel.mbccs.constance.StockTotalType;
 import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.StockTotal;
@@ -113,6 +114,7 @@ public class FindStockPresenter
         }
         request.setStateId(StockTotalType.TYPE_NEW);
         request.setOwnerType(2L);
+        request.setSaleTransType(SaleTranType.SALE_CHANNEL);
         request.setOwnerId(mUserRepository.getUserInfo().getStaffInfo().getStaffId());
         mGetListStockModelRequestBaseRequest.setParameterApi(request);
         mViewModel.showLoading();
@@ -123,7 +125,7 @@ public class FindStockPresenter
                     public void onSuccess(GetListStockModelResponse object) {
                         if (object != null && object.getStockTotalList() != null) {
                             if (object.getStockTotalList().size() == 0) {
-                                DialogUtils.showDialogError(mContext, R.string.common_msg_no_data);
+                                DialogUtils.showDialog(mContext, R.string.common_msg_no_data);
                             }
                             mStockTotals.clear();
                             mStockTotals.addAll(object.getStockTotalList());
@@ -131,12 +133,12 @@ public class FindStockPresenter
                             mViewModel.closeForm();
                             return;
                         }
-                        DialogUtils.showDialogError(mContext, R.string.common_msg_no_data);
+                        DialogUtils.showDialog(mContext, R.string.common_msg_no_data);
                     }
 
                     @Override
                     public void onError(BaseException error) {
-                        DialogUtils.showDialogError(mContext, null, error.getMessage(), null);
+                        DialogUtils.showDialog(mContext, null, error.getMessage(), null);
                         //fake();
                     }
 
@@ -203,19 +205,19 @@ public class FindStockPresenter
         }
 
         if (stockType == StockTotalType.TYPE_NEW) {
-            text += mContext.getString(R.string.common_lable_dot) + arrStockType[1];
+            text += mContext.getString(R.string.common_label_dot) + arrStockType[1];
         }
 
         if (stockType == StockTotalType.TYPE_FAIL) {
-            text += mContext.getString(R.string.common_lable_dot) + arrStockType[2];
+            text += mContext.getString(R.string.common_label_dot) + arrStockType[2];
         }
 
         if (!TextUtils.isEmpty(code.get())) {
-            text += mContext.getString(R.string.common_lable_dot) + code.get();
+            text += mContext.getString(R.string.common_label_dot) + code.get();
         }
 
         if (!TextUtils.isEmpty(name.get())) {
-            text += mContext.getString(R.string.common_lable_dot) + name.get();
+            text += mContext.getString(R.string.common_label_dot) + name.get();
         }
 
         filterText.set(text);

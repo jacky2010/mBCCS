@@ -11,7 +11,7 @@ import java.util.List;
  * Created by HuyQuyet on 5/17/17.
  */
 
-public class StockSerial implements Serializable {
+public class StockSerial implements Serializable, Parcelable {
 
     @SerializedName("stockModelId")
     @Expose
@@ -72,4 +72,42 @@ public class StockSerial implements Serializable {
     public void setSerialBOs(List<SerialBO> serialBOs) {
         mSerialBOs = serialBOs;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(this.stockModelId);
+        dest.writeString(this.stockModelCode);
+        dest.writeString(this.stockMoldeName);
+        dest.writeLong(this.quantity);
+        dest.writeTypedList(this.mSerialBOs);
+    }
+
+    public StockSerial() {
+    }
+
+    protected StockSerial(Parcel in) {
+        this.stockModelId = in.readLong();
+        this.stockModelCode = in.readString();
+        this.stockMoldeName = in.readString();
+        this.quantity = in.readLong();
+        this.mSerialBOs = in.createTypedArrayList(SerialBO.CREATOR);
+    }
+
+    public static final Parcelable.Creator<StockSerial> CREATOR =
+            new Parcelable.Creator<StockSerial>() {
+                @Override
+                public StockSerial createFromParcel(Parcel source) {
+                    return new StockSerial(source);
+                }
+
+                @Override
+                public StockSerial[] newArray(int size) {
+                    return new StockSerial[size];
+                }
+            };
 }

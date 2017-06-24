@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseFragment;
 import com.viettel.mbccs.constance.ApiCode;
@@ -297,7 +296,7 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
 
     private void sellOrderError(BaseException error) {
         hideLoadingDialog();
-        DialogUtils.showDialogError(getActivity(), error.getMessage());
+        DialogUtils.showDialog(getActivity(), error.getMessage());
     }
 
     private void sellOrderSuccess(boolean type) {

@@ -28,4 +28,5 @@ public interface IKPPFeedbackRemoteDataSource {
     Observable<KPPRespondFeedbackResponse> responseFeedback(DataRequest<KPPRespondFeedbackRequest> request);
 
     Observable<DataResponse> isKPPManager(DataRequest<IsKPPManagerRequest> request);
+
 }

@@ -73,7 +73,7 @@ public class SellAnyPayPresenter implements SellAnyPayContract.Presenter {
 //                                        if (Constants.Service.RESPONSE_OK.equals(object.getErrorCode())) {
                                         viewModel.changeToSearchTab();
 //                                        } else {
-//                                            DialogUtils.showDialogError(context, null, context.getString(R.string.common_msg_error_dont_have_permission),
+//                                            DialogUtils.showDialog(context, null, context.getString(R.string.common_msg_error_dont_have_permission),
 //                                                    null);
 //                                        }
                                     } catch (Exception e) {
@@ -83,9 +83,9 @@ public class SellAnyPayPresenter implements SellAnyPayContract.Presenter {
 
                                 @Override
                                 public void onError(BaseException error) {
-//                                    DialogUtils.showDialogError(context, null, error.getMessage(),
+//                                    DialogUtils.showDialog(context, null, error.getMessage(),
 //                                            null);
-                                    DialogUtils.showDialogError(context, null, context.getString(R.string.common_msg_error_dont_have_permission),
+                                    DialogUtils.showDialog(context, null, context.getString(R.string.common_msg_error_dont_have_permission),
                                             null);
                                 }
 

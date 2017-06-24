@@ -6,7 +6,7 @@
             type="com.viettel.mbccs.data.model.SurveyQuestion"
             />
         <variable
-            name="question"
+            name="answer"
             type="com.viettel.mbccs.data.model.SurveyQuestion.Answer"
             />
         <import type="android.view.View"/>
@@ -30,20 +30,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:drawableTint="@color/green"
-                android:checked="@{question.select}"
-                android:theme="@style/MyRadioCheckbox"
+                android:checked="@{answer.select}"
                 android:clickable="false"
+                android:drawableTint="@color/green"
+                android:theme="@style/MyRadioCheckbox"
                 android:visibility="@{item.type == SurveyType.SINGLE_CHOICE ? View.VISIBLE: View.GONE}"
                 />
             <android.support.v7.widget.AppCompatCheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:checked="@{answer.select}"
+                android:clickable="false"
                 android:drawableTint="@color/green"
                 android:theme="@style/MyRadioCheckbox"
-                android:checked="@{question.select}"
-                android:clickable="false"
                 android:visibility="@{item.type == SurveyType.MULTI_CHOICE ? View.VISIBLE: View.GONE}"
                 />
         </RelativeLayout>
@@ -54,7 +54,7 @@
             android:layout_centerVertical="true"
             android:layout_margin="@dimen/dp_10"
             android:layout_toRightOf="@id/layout_check"
-            android:text="@{question.content}"
+            android:text="@{answer.answer}"
             />
     </RelativeLayout>
 </layout>

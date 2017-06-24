@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseFragment;
 import com.viettel.mbccs.data.model.SurveyQuestion;
-import com.viettel.mbccs.databinding.FragmentSurveyBinding;
+import com.viettel.mbccs.databinding.FragmentSurveySelectBinding;
 import com.viettel.mbccs.variable.Constants;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,23 +18,23 @@ import java.util.List;
  * Created by eo_cuong on 6/10/17.
  */
 
-public class SurveyFragment extends BaseFragment {
+public class SurveyFragmentSelect extends BaseFragment {
 
     private SurveyQuestion mSurveyQuestion;
     private SurveyQuestionAdapter mAdapter;
     private List<SurveyQuestion.Answer> mAnwsers = new ArrayList<>();
-    private FragmentSurveyBinding mBinding;
+    private FragmentSurveySelectBinding mBinding;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_survey, container, false);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_survey_select, container, false);
         return mBinding.getRoot();
     }
 
-    public static SurveyFragment newInstance(SurveyQuestion surveyQuestion) {
-        SurveyFragment surveyFragment = new SurveyFragment();
+    public static SurveyFragmentSelect newInstance(SurveyQuestion surveyQuestion) {
+        SurveyFragmentSelect surveyFragment = new SurveyFragmentSelect();
         Bundle bundle = new Bundle();
         bundle.putParcelable(Constants.BundleConstant.SURVEY_QUESTION, surveyQuestion);
         surveyFragment.setArguments(bundle);
@@ -52,14 +52,16 @@ public class SurveyFragment extends BaseFragment {
         if (mSurveyQuestion == null) {
             return;
         }
-        if (mSurveyQuestion.getAnswers() == null) {
+        if (mSurveyQuestion.getSurveyQuestionAnswers() == null) {
             return;
         }
-        mAnwsers.addAll(mSurveyQuestion.getAnswers());
+        mAnwsers.addAll(mSurveyQuestion.getSurveyQuestionAnswers());
         mAdapter = new SurveyQuestionAdapter(getActivity(), mSurveyQuestion);
 
         mBinding.setData(this);
     }
+
+
 
     public List<SurveyQuestion.Answer> getAnwsers() {
         return mAdapter.getSelectedAnwser();

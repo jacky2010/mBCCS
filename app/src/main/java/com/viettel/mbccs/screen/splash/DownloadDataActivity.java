@@ -83,7 +83,7 @@ public class DownloadDataActivity extends BaseActivity {
                         intent.getIntExtra(DownloadImageService.DATA_DOWNLOAD_SUCCESS, 0));
                 textProcess.set(getString(R.string.download_image_text, progressValue.get()) + "%");
             } else if (intent.getAction().equals(DownloadImageService.ACTION_DOWNLOAD_FAIL)) {
-                DialogUtils.showDialogError(DownloadDataActivity.this, null,
+                DialogUtils.showDialog(DownloadDataActivity.this, null,
                         "Download image error!", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

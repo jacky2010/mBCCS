@@ -141,6 +141,7 @@ public class Constants {
         public static final String STOCK_TRANS_ID = "stock_trans_id";
         public static final String STOCK_TRANS = "stock_trans";
         public static final String STOCK_TRANS_DETAIL_LIST = "stock_trans_detail_list";
+        public static final String SURVEY = "survey";
     }
 
     public class Tax {

@@ -77,11 +77,14 @@ public abstract class CmdPrepareExportDetaiActivity extends
     }
 
     @Override
-    public void onCreateExpStockSuccess(List<StockTransDetail> stockTransDetails) {
+    public void onCreateExpStockSuccess(ArrayList<StockTransDetail> stockTransDetails) {
+        for (StockTransDetail stockTransDetail : stockTransDetails) {
+            stockTransDetail.getStockSerial();
+        }
         Intent intent = new Intent(CmdPrepareExportDetaiActivity.this, ExportSuccessDialog.class);
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList(Constants.BundleConstant.STOCK_TRANS_DETAIL_LIST,
-                (ArrayList<? extends Parcelable>) stockTransDetails);
+                stockTransDetails);
         intent.putExtras(bundle);
         startActivity(intent);
         finish();

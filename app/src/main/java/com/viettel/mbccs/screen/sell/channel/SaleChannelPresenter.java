@@ -5,7 +5,6 @@ import android.content.Context;
 import android.databinding.ObservableField;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.constance.SaleTranType;
@@ -107,7 +106,7 @@ public class SaleChannelPresenter
                             @Override
                             public void onError(BaseException error) {
 
-                                DialogUtils.showDialogError(mContext, null, error.getMessage(),
+                                DialogUtils.showDialog(mContext, null, error.getMessage(),
                                         null);
                             }
 
@@ -181,7 +180,7 @@ public class SaleChannelPresenter
 
             @Override
             public void onError(BaseException error) {
-                DialogUtils.showDialogError(mContext, null, error.getMessage(), null);
+                DialogUtils.showDialog(mContext, null, error.getMessage(), null);
             }
 
             @Override
@@ -250,7 +249,7 @@ public class SaleChannelPresenter
 
                     @Override
                     public void onError(BaseException error) {
-                        DialogUtils.showDialogError(mContext, null, error.getMessage(), null);
+                        DialogUtils.showDialog(mContext, null, error.getMessage(), null);
                     }
 
                     @Override
@@ -393,9 +392,9 @@ public class SaleChannelPresenter
         }
 
         filterText.set(filter0
-                + mContext.getString(R.string.common_lable_dot)
+                + mContext.getString(R.string.common_label_dot)
                 + filter1
-                + mContext.getString(R.string.common_lable_dot)
+                + mContext.getString(R.string.common_label_dot)
                 + filter2);
     }
 
@@ -420,7 +419,7 @@ public class SaleChannelPresenter
 
     private boolean validate() {
         if (currentChannel.getChannelId() == -1) {
-            DialogUtils.showDialogError(mContext, R.string.no_channel);
+            DialogUtils.showDialog(mContext, R.string.no_channel);
             return false;
         }
         return true;

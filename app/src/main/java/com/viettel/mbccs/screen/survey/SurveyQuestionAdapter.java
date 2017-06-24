@@ -9,9 +9,8 @@ import android.view.ViewGroup;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.SurveyType;
 import com.viettel.mbccs.data.model.SurveyQuestion;
-import com.viettel.mbccs.databinding.ItemSurveyBinding;
+import com.viettel.mbccs.databinding.ItemSurveySelectAnswerBinding;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -49,18 +48,19 @@ public class SurveyQuestionAdapter
     @Override
     public SurveyQuestionViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new SurveyQuestionViewHolder(
-                (ItemSurveyBinding) DataBindingUtil.inflate(LayoutInflater.from(mContext),
-                        R.layout.item_survey, null, false));
+                (ItemSurveySelectAnswerBinding) DataBindingUtil.inflate(LayoutInflater.from(mContext),
+                        R.layout.item_survey_select_answer, null, false));
     }
 
     @Override
     public void onBindViewHolder(SurveyQuestionViewHolder holder, int position) {
-        holder.bind(mSurveyQuestion.getAnswers().get(position), currentSelect == position);
+        holder.bind(mSurveyQuestion.getSurveyQuestionAnswers().get(position),
+                currentSelect == position);
     }
 
     public List<SurveyQuestion.Answer> getSelectedAnwser() {
         List<SurveyQuestion.Answer> answers = new ArrayList<>();
-        for (SurveyQuestion.Answer answer : mSurveyQuestion.getAnswers()) {
+        for (SurveyQuestion.Answer answer : mSurveyQuestion.getSurveyQuestionAnswers()) {
             if (answer.isSelect()) {
                 answers.add(answer);
             }
@@ -70,15 +70,15 @@ public class SurveyQuestionAdapter
 
     @Override
     public int getItemCount() {
-        return mSurveyQuestion.getAnswers().size();
+        return mSurveyQuestion.getSurveyQuestionAnswers().size();
     }
 
     public class SurveyQuestionViewHolder extends RecyclerView.ViewHolder {
 
-        ItemSurveyBinding mBinding;
+        ItemSurveySelectAnswerBinding mBinding;
         SurveyQuestion.Answer mAnswer;
 
-        public SurveyQuestionViewHolder(ItemSurveyBinding binding) {
+        public SurveyQuestionViewHolder(ItemSurveySelectAnswerBinding binding) {
             super(binding.getRoot());
             mBinding = binding;
             mBinding.layoutQuestion.setOnClickListener(new View.OnClickListener() {
@@ -99,7 +99,7 @@ public class SurveyQuestionAdapter
                 answer.setSelect(selected);
             }
             mBinding.setItem(mSurveyQuestion);
-            mBinding.setQuestion(answer);
+            mBinding.setAnswer(answer);
         }
     }
 }

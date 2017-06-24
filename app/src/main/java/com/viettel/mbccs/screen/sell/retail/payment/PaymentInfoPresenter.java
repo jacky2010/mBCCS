@@ -158,7 +158,7 @@ public class PaymentInfoPresenter implements PaymentInforContract.Presenter {
 
                             @Override
                             public void onError(BaseException error) {
-                                DialogUtils.showDialogError(mContext, null, error.getMessage(),
+                                DialogUtils.showDialog(mContext, null, error.getMessage(),
                                         null);
                                 //fake
                                 //                                isGetTransInfo.set(true);

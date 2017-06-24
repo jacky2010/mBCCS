@@ -10,7 +10,6 @@ import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindFragment;
 import com.viettel.mbccs.data.model.HotNewsCSKPPItem;
 import com.viettel.mbccs.databinding.FragmentSearchHotNewsCsKppBinding;
-import com.viettel.mbccs.screen.surveykpp.fragments.ProcessSurveyKPPFragment;
 import com.viettel.mbccs.utils.GsonUtils;
 import com.viettel.mbccs.variable.Constants;
 

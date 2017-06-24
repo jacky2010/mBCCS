@@ -109,7 +109,7 @@ public class RespondKPPFeedbackPresenter implements RespondKPPFeedbackContract.P
 
                                         feedback.set(item.getContent());
 //                                        } else {
-//                                            DialogUtils.showDialogError(context, null, context.getString(R.string.common_msg_error_general),
+//                                            DialogUtils.showDialog(context, null, context.getString(R.string.common_msg_error_general),
 //                                                    null);
 //                                        }
                                     } catch (Exception e) {
@@ -119,9 +119,9 @@ public class RespondKPPFeedbackPresenter implements RespondKPPFeedbackContract.P
 
                                 @Override
                                 public void onError(BaseException error) {
-//                                    DialogUtils.showDialogError(context, null, error.getMessage(),
+//                                    DialogUtils.showDialog(context, null, error.getMessage(),
 //                                            null);
-                                    DialogUtils.showDialogError(context, null, context.getString(R.string.common_msg_error_general),
+                                    DialogUtils.showDialog(context, null, context.getString(R.string.common_msg_error_general),
                                             null);
                                 }
 
@@ -179,7 +179,7 @@ public class RespondKPPFeedbackPresenter implements RespondKPPFeedbackContract.P
 
                                         viewModel.goToSuccessDialog(args);
 //                                        } else {
-//                                        DialogUtils.showDialogError(context, null, context.getString(R.string.change_sim_error_recent_calls_not_valid),
+//                                        DialogUtils.showDialog(context, null, context.getString(R.string.change_sim_error_recent_calls_not_valid),
 //                                                null);
 //                                        }
                                     } catch (Exception e) {
@@ -189,9 +189,9 @@ public class RespondKPPFeedbackPresenter implements RespondKPPFeedbackContract.P
 
                                 @Override
                                 public void onError(BaseException error) {
-//                                    DialogUtils.showDialogError(context, null, error.getMessage(),
+//                                    DialogUtils.showDialog(context, null, error.getMessage(),
 //                                            null);
-                                    DialogUtils.showDialogError(context, null, context.getString(R.string.common_msg_error_general),
+                                    DialogUtils.showDialog(context, null, context.getString(R.string.common_msg_error_general),
                                             null);
                                 }
 

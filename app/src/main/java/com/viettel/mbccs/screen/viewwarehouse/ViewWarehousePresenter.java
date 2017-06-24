@@ -6,6 +6,7 @@ import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
 import android.support.v7.widget.RecyclerView;
 import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.SaleTranType;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.model.UserInfo;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
@@ -57,6 +58,7 @@ public class ViewWarehousePresenter implements ViewWarehouseContract.Presenter,
         UserInfo userInfo = userRepository.getUserInfo();
         GetListStockModelRequest g = new GetListStockModelRequest();
         g.setOwnerId(userInfo.getStaffInfo().getStaffId());
+        g.setSaleTransType(SaleTranType.SALE_RETAIL);
         /**
          * if OwnerId == StaffId => OwnerType = 2L
          * if OwnerId == ShopId => OwnerType = 1L

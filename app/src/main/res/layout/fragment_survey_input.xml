@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="data"
+            type="com.viettel.mbccs.screen.survey.SurveyFragmentInput"
+            />
+        <import type="com.viettel.mbccs.constance.SurveyType"/>
+        <import type="android.text.InputType"/>
+    </data>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_border"
+        android:orientation="vertical"
+        android:padding="@dimen/dp_20"
+        >
+        <com.viettel.mbccs.widget.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:text="@{data.surveyQuestion.description}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_15"
+            android:textStyle="bold"
+            />
+
+        <com.viettel.mbccs.widget.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:text="@{data.surveyQuestion.question}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_15"
+            android:textStyle="bold"
+            />
+
+        <com.viettel.mbccs.widget.CustomEdittext
+            android:id="@+id/input_answer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_20"
+            android:editable="true"
+            android:hint="@string/survey_kpp_hint"
+            android:imeOptions="actionDone"
+            android:inputType="@{data.surveyQuestion.type== SurveyType.NUMBER ? InputType.TYPE_CLASS_NUMBER : InputType.TYPE_CLASS_TEXT}"
+            android:text="@={data.textAnswer}"
+            />n
+    </LinearLayout>
+
+</layout>

@@ -101,7 +101,7 @@ public class SerialPickerPresenter
                     @Override
                     public void onError(BaseException error) {
                         //fakeData();
-                        DialogUtils.showDialogError(mContext, null, error.getMessage(),
+                        DialogUtils.showDialog(mContext, null, error.getMessage(),
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
@@ -249,12 +249,12 @@ public class SerialPickerPresenter
             currentSerialBlock.setFromSerial((serialFrom.get()));
             currentSerialBlock.setToSerial((serialTo.get()));
             if (currentSerialBlock.getQuantity() < 1) {
-                DialogUtils.showDialogError(mContext, R.string.invalid_serial);
+                DialogUtils.showDialog(mContext, R.string.invalid_serial);
                 return false;
             }
 
             if (mSerials.size() == 0) {
-                DialogUtils.showDialogError(mContext, R.string.not_enought_serial);
+                DialogUtils.showDialog(mContext, R.string.not_enought_serial);
                 return false;
             }
             if (Long.parseLong(currentSerialBlock.getFromSerial()) < Long.valueOf(
@@ -270,13 +270,13 @@ public class SerialPickerPresenter
             List<String> commonSerial = new ArrayList<>(mSerials);
             commonSerial.retainAll(currentSerialBlock.toSerialList());
             if (commonSerial.size() <= 0) {
-                DialogUtils.showDialogError(mContext, R.string.invalid_serial);
+                DialogUtils.showDialog(mContext, R.string.invalid_serial);
                 return false;
             }
 
             int remain = (int) (mSerialPickerModel.getQuantity() - mSerialSelected.size());
             if (remain == 0) {
-                DialogUtils.showDialogError(mContext, R.string.full_serial);
+                DialogUtils.showDialog(mContext, R.string.full_serial);
                 return false;
             }
         } catch (Exception e) {

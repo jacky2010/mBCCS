@@ -70,7 +70,7 @@ public class KPPFeedbackPresenter implements KPPFeedbackContract.Presenter {
                                 public void onError(BaseException error) {
 
                                     if (!error.getMessage().contains("This user is not belong to")) {
-                                        DialogUtils.showDialogError(context, null, context.getString(R.string.common_msg_error_general),
+                                        DialogUtils.showDialog(context, null, context.getString(R.string.common_msg_error_general),
                                                 null);
                                     }
 

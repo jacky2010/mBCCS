@@ -92,7 +92,6 @@ import com.viettel.mbccs.data.source.remote.response.GetProvinceResponse;
 import com.viettel.mbccs.data.source.remote.response.GetReasonResponse;
 import com.viettel.mbccs.data.source.remote.response.GetRegiterSubInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
-import com.viettel.mbccs.data.source.remote.response.GetSurveyKPPResponse;
 import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
 import com.viettel.mbccs.data.source.remote.response.KPPFeedbackResponse;
 import com.viettel.mbccs.data.source.remote.response.KPPResponseFeedbackResponse;
@@ -372,4 +371,12 @@ public interface MBCSSApi {
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<DataResponse>>> isKppManager(
             @Body DataRequest<IsKPPManagerRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<GetSurveyKPPResponse>>> getSurveyKPPList(
+            @Body DataRequest<GetSurveyKPPRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<EmptyObject>>> sendSurvey(
+            @Body DataRequest<SendSurveyKPPRequest> request);
 }

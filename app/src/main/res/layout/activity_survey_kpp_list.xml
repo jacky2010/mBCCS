@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/tools">
-
+    >
     <data>
-
         <variable
             name="presenter"
-            type="com.viettel.mbccs.screen.surveykpp.SurveyKPPPresenter" />
-
+            type="com.viettel.mbccs.screen.survey.SurveyListPresenter"
+            />
     </data>
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
 
         <include
-            android:id="@+id/toolbar_update_information"
             layout="@layout/toolbar"
             app:background="@{@color/colorAccent}"
             app:isShow="@{true}"
-            app:leftIcon="@{@drawable/ic_arrow_left_24dp}"
+            app:leftIcon="@{@drawable/ic_arrow_left_white_24dp}"
             app:leftIconClick="@{()->presenter.onCancel()}"
-            app:title="@{ presenter.title }"
+            app:title="@{ @string/survey_kpp_title_list}"
             app:titleColor="@{@color/white}"
-            app:titleTextSize="@{@dimen/sp_17}" />
+            app:titleTextSize="@{@dimen/sp_17}"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <FrameLayout
-                android:id="@+id/frame_main"
+            android:layout_weight="1"
+            >
+            <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:adapter="@{presenter.adapter}"
+                />
         </LinearLayout>
     </LinearLayout>
 </layout>
