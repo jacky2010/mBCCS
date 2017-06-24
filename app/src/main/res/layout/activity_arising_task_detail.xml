@@ -10,7 +10,7 @@
 
         <variable
             name="item"
-            type="com.viettel.mbccs.data.model.TaskModel"/>
+            type="com.viettel.mbccs.data.model.TaskShopManagement"/>
     </data>
 
     <LinearLayout
@@ -40,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_8"
-            android:text="@{ item.startDate }" />
+            android:text="@{ item.createDate }" />
 
         <com.viettel.mbccs.widget.CustomTextView
             style="@style/TextTaskCSKPPDetail"
@@ -95,7 +95,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:text="@{ item.assignDate }" />
+                android:text="@{ item.createDate }" />
         </LinearLayout>
 
         <com.viettel.mbccs.widget.CustomTextView
@@ -110,7 +110,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_8"
-            android:text="@{ item.title }"
+            android:text="@{ item.description }"
             android:textSize="@dimen/sp_16" />
 
         <com.viettel.mbccs.widget.CustomTextView

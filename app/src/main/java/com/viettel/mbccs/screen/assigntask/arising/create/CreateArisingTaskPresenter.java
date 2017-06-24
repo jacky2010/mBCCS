@@ -2,7 +2,21 @@ package com.viettel.mbccs.screen.assigntask.arising.create;
 
 import android.content.Context;
 import android.databinding.ObservableField;
+
 import com.viettel.mbccs.R;
+import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.data.model.TaskShopManagement;
+import com.viettel.mbccs.data.source.CongViecRepository;
+import com.viettel.mbccs.data.source.UserRepository;
+import com.viettel.mbccs.data.source.remote.request.CreateTaskExtendRequest;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
+import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.CreateTaskExtendResponse;
+import com.viettel.mbccs.utils.DateUtils;
+import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
+
+import rx.Subscription;
+import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by Anh Vu Viet on 5/23/2017.
@@ -18,12 +32,20 @@ public class CreateArisingTaskPresenter implements CreatingArisingTaskContract.P
 
     private CreatingArisingTaskContract.ViewModel mViewModel;
 
+    private CongViecRepository mCongViecRepository;
+
+    private UserRepository mUserRepository;
+
+    private CompositeSubscription mSubscription = new CompositeSubscription();
+
     public CreateArisingTaskPresenter(Context context,
-            CreatingArisingTaskContract.ViewModel viewModel) {
+                                      CreatingArisingTaskContract.ViewModel viewModel) {
         mContext = context;
         mViewModel = viewModel;
         taskName = new ObservableField<>();
         taskDescription = new ObservableField<>();
+        mCongViecRepository = CongViecRepository.getInstance();
+        mUserRepository = UserRepository.getInstance();
     }
 
     @Override
@@ -49,7 +71,54 @@ public class CreateArisingTaskPresenter implements CreatingArisingTaskContract.P
     }
 
     public void assign() {
-        // TODO: 5/27/2017 Validate info
-        mViewModel.assignTask();
+        mViewModel.showAssignTaskDialog();
+    }
+
+    @Override
+    public void createTask() {
+        long fromDate = mViewModel.getFromDate();
+        long toDate = mViewModel.getToDate();
+        if (fromDate > toDate) {
+            // TODO: 7/2/2017 Show error
+            return;
+        }
+
+        CreateTaskExtendRequest request = new CreateTaskExtendRequest();
+        request.setShopId(String.valueOf(mUserRepository.getUserInfo().getShop().getShopId()));
+        request.setChannelCode(mUserRepository.getUserInfo().getChannelInfo().getChannelCode());
+        request.setFromDate(DateUtils.convertDateToString(fromDate,
+                DateUtils.TIMEZONE_FORMAT_SERVER));
+        request.setToDate(DateUtils.convertDateToString(toDate,
+                DateUtils.TIMEZONE_FORMAT_SERVER));
+        request.setJobDescription(taskDescription.get());
+        request.setJobName(taskName.get());
+        request.setShopCodeCreate(mUserRepository.getUserInfo().getShop().getShopCode());
+        request.setStaffId(String.valueOf(mViewModel.getStaff().getStaffId()));
+        request.setType(TaskShopManagement.TaskType.TYPE_PHAT_SINH);
+        request.setUserCreate(mUserRepository.getUserInfo().getStaffInfo().getStaffCode());
+
+        DataRequest<CreateTaskExtendRequest> dataRequest = new DataRequest<>();
+        dataRequest.setWsCode(ApiCode.CreateTaskExtend);
+        dataRequest.setWsRequest(request);
+
+        Subscription subscription = mCongViecRepository.createTaskExtend(dataRequest)
+                .subscribe(new MBCCSSubscribe<CreateTaskExtendResponse>() {
+                    @Override
+                    public void onSuccess(CreateTaskExtendResponse object) {
+                        assignTask();
+                    }
+
+                    @Override
+                    public void onError(BaseException error) {
+                        // TODO: 7/2/2017 onError
+                    }
+                });
+        mSubscription.add(subscription);
+    }
+
+    private void assignTask() {
+        // TODO: 7/2/2017 Assign task after create
+        mViewModel.hideLoading();
+        mViewModel.showSuccessDialog();
     }
 }

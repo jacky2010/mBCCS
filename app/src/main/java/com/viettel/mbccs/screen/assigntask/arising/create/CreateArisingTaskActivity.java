@@ -6,17 +6,24 @@ import android.content.Intent;
 
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
+import com.viettel.mbccs.data.model.StaffInfo;
 import com.viettel.mbccs.databinding.ActivityCreateArisingTaskBinding;
 import com.viettel.mbccs.screen.assigntask.staffpicker.StaffPickerActivity;
 import com.viettel.mbccs.screen.common.success.DialogFullScreen;
+import com.viettel.mbccs.variable.Constants;
 import com.viettel.mbccs.widget.CustomDialog;
 
 /**
  * Created by FRAMGIA\vu.viet.anh on 23/05/2017.
  */
 
-public class CreateArisingTaskActivity extends BaseDataBindActivity<ActivityCreateArisingTaskBinding,
-        CreateArisingTaskPresenter> implements CreatingArisingTaskContract.ViewModel {
+public class CreateArisingTaskActivity extends
+        BaseDataBindActivity<ActivityCreateArisingTaskBinding, CreateArisingTaskPresenter>
+        implements CreatingArisingTaskContract.ViewModel {
+
+    public static final int REQUEST_STAFF_INFO = 1002;
+
+    private StaffInfo mSelectedStaff;
 
     @Override
     protected int getIdLayout() {
@@ -31,46 +38,71 @@ public class CreateArisingTaskActivity extends BaseDataBindActivity<ActivityCrea
 
     @Override
     public void showLoading() {
-
+        showLoadingDialog();
     }
 
     @Override
     public void hideLoading() {
-
+        hideLoadingDialog();
     }
 
     @Override
     public void openStaffPicker() {
-        // TODO: 5/27/2017 Pass on info to get list
-        startActivity(new Intent(this, StaffPickerActivity.class));
+        startActivityForResult(new Intent(this, StaffPickerActivity.class), REQUEST_STAFF_INFO);
     }
 
     @Override
-    public void assignTask() {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_STAFF_INFO && resultCode == RESULT_OK && data != null) {
+            mSelectedStaff = data.getParcelableExtra(Constants.BundleConstant.STAFF_INFO);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void showAssignTaskDialog() {
         new CustomDialog(this, R.string.confirm, R.string.ban_co_chac_muon_giao_viec_phat_sinh,
-                false, R.string.common_label_close, R.string.assign, null, new CustomDialog.OnInputDialogListener() {
+                false, R.string.common_label_close, R.string.assign, null, new CustomDialog
+                .OnInputDialogListener() {
             @Override
             public void onClick(DialogInterface var1, int var2, String input) {
-                // TODO: 5/27/2017 Api call
-                Dialog dia =
-                        new DialogFullScreen.Builder(CreateArisingTaskActivity.this).setCenterContent(true)
-                                .setAutoClose(true)
-                                .setTitle(getString(R.string.create_arising_task_activity_giao_viec_thanh_cong))
-                                .setContent(getString(R.string.tin_nhan_thong_bao_da_gui_toi_nhan_vien))
-                                .build();
-
-                dia.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialogInterface) {
-                        finish();
-                    }
-                });
-
-                dia.setCancelable(false);
-                dia.setCanceledOnTouchOutside(false);
-
-                dia.show();
+                mPresenter.createTask();
             }
         }, null, false, false).show();
+    }
+
+    @Override
+    public void showSuccessDialog() {
+        Dialog dia = new DialogFullScreen.Builder(CreateArisingTaskActivity.this)
+                .setCenterContent(true).setAutoClose(true).setTitle(getString(R.string
+                        .create_arising_task_activity_giao_viec_thanh_cong)).setContent(getString
+                        (R.string.tin_nhan_thong_bao_da_gui_toi_nhan_vien)).build();
+
+        dia.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                finish();
+            }
+        });
+
+        dia.setCancelable(false);
+        dia.setCanceledOnTouchOutside(false);
+
+        dia.show();
+    }
+
+    @Override
+    public long getFromDate() {
+        return mBinding.fromDate.getDateInMilis();
+    }
+
+    @Override
+    public long getToDate() {
+        return mBinding.toDate.getDateInMilis();
+    }
+
+    @Override
+    public StaffInfo getStaff() {
+        return mSelectedStaff;
     }
 }

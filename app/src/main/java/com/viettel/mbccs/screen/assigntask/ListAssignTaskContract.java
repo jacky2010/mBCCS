@@ -9,8 +9,11 @@ import com.viettel.mbccs.base.searchlistview.BaseSearchListViewContract;
 public interface ListAssignTaskContract {
 
     interface ViewModel extends BaseSearchListViewContract.ViewModel<Presenter> {
+        long getFromDate();
 
-//        void onTaskClicked(TaskModel task);
+        long getToDate();
+
+//        void onTaskClicked(TaskShopManagement task);
     }
 
     interface Presenter extends BaseSearchListViewContract.Presenter {

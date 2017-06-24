@@ -19,6 +19,7 @@ import com.viettel.mbccs.databinding.ActivitySubMenuBinding;
 import com.viettel.mbccs.databinding.ItemGridMenuBinding;
 import com.viettel.mbccs.databinding.ItemMenuBinding;
 import com.viettel.mbccs.screen.assigntask.ListAssignTaskActivity;
+import com.viettel.mbccs.screen.assigntask.ListUpdateTaskActivity;
 import com.viettel.mbccs.screen.billing.BillingActivity;
 import com.viettel.mbccs.screen.branches.BranchesActivity;
 import com.viettel.mbccs.screen.change.installation.InstallationAddressActivity;
@@ -202,9 +203,12 @@ public class BaseSubMenuActivity
                         //                            break;
                         case Function.MenuId.MENU_GIAO_VIEC_PHAT_SINH:
                         case Function.MenuId.MENU_GIAO_VIEC_CS_KPP:
-                        case Function.MenuId.MENU_DONG_VIEC:
                             startActivity(new Intent(BaseSubMenuActivity.this,
                                     ListAssignTaskActivity.class));
+                            break;
+                        case Function.MenuId.MENU_DONG_VIEC:
+                            startActivity(new Intent(BaseSubMenuActivity.this,
+                                    ListUpdateTaskActivity.class));
                             break;
 
                         case Function.MenuId.MENU_XEM_KHO:

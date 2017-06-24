@@ -8,9 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.data.model.TaskModel;
+import com.viettel.mbccs.data.model.TaskShopManagement;
 import com.viettel.mbccs.databinding.ItemAssignTaskBinding;
-import com.viettel.mbccs.utils.DateUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,13 +20,13 @@ import java.util.List;
 
 public class AssignTaskAdapter extends RecyclerView.Adapter<AssignTaskAdapter.AssignTaskViewHolder> {
 
-    private List<TaskModel> mList = new ArrayList<>();
+    private List<TaskShopManagement> mList = new ArrayList<>();
 
     private Context mContext;
 
     private OnTaskClickListener mOnTaskClickListener;
 
-    public AssignTaskAdapter(Context context, List<TaskModel> list) {
+    public AssignTaskAdapter(Context context, List<TaskShopManagement> list) {
         mContext = context;
         mList = list;
     }
@@ -65,39 +64,21 @@ public class AssignTaskAdapter extends RecyclerView.Adapter<AssignTaskAdapter.As
             mBinding = binding;
         }
 
-        public void bind(final TaskModel item) {
-            mBinding.setTaskTitle(item.getTitle());
-            mBinding.setCreatedDate(
-                    DateUtils.timestampToString(item.getCreatedDate(), DateUtils.DATE_PICKER_FORMAT,
-                            null));
-            switch (item.getType()) {
-                case TaskModel.TaskType.TYPE_CSKPP:
-                    mBinding.setTaskType(itemView.getResources().getString(R.string.task_cskpp));
-                    break;
-                case TaskModel.TaskType.TYPE_ARISING:
-                    mBinding.setTaskType(itemView.getResources().getString(R.string.task_arising));
-                    break;
-                case TaskModel.TaskType.TYPE_TEAM:
-                    mBinding.setTaskType(itemView.getResources().getString(R.string.task_team));
-                    break;
-            }
+        public void bind(final TaskShopManagement item) {
+            mBinding.setTaskTitle(item.getName());
+            mBinding.setCreatedDate(item.getCreateDate());
             switch (item.getStatus()) {
-                case TaskModel.TaskStatus.REJECTED:
-                    mBinding.setTaskStatus(itemView.getResources().getString(R.string.reject));
-                    mBinding.setStatusBackground(Color.RED);
-                    mBinding.setStatusBackgroundLight(false);
-                    break;
-                case TaskModel.TaskStatus.NOT_ACCEPTED:
+                case TaskShopManagement.TaskStatus.STATUS_NEW:
                     mBinding.setTaskStatus(itemView.getResources().getString(R.string.not_accepted));
                     mBinding.setStatusBackground(Color.GRAY);
                     mBinding.setStatusBackgroundLight(false);
                     break;
-                case TaskModel.TaskStatus.INPROGRESS:
+                case TaskShopManagement.TaskStatus.STATUS_ASSIGNED:
                     mBinding.setTaskStatus(itemView.getResources().getString(R.string.inprogress));
                     mBinding.setStatusBackground(Color.YELLOW);
                     mBinding.setStatusBackgroundLight(true);
                     break;
-                case TaskModel.TaskStatus.DONE:
+                case TaskShopManagement.TaskStatus.STATUS_CLOSE:
                     mBinding.setTaskStatus(itemView.getResources().getString(R.string.finished));
                     mBinding.setStatusBackground(Color.GREEN);
                     mBinding.setStatusBackgroundLight(true);
@@ -113,6 +94,6 @@ public class AssignTaskAdapter extends RecyclerView.Adapter<AssignTaskAdapter.As
     }
 
     public interface OnTaskClickListener {
-        void onTaskClick(TaskModel task);
+        void onTaskClick(TaskShopManagement task);
     }
 }

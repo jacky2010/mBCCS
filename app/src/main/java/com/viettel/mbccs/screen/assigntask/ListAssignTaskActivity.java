@@ -6,10 +6,7 @@ import android.support.v7.app.AlertDialog;
 import android.widget.ArrayAdapter;
 
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.base.BaseDataBindActivity;
-import com.viettel.mbccs.base.searchlistview.BaseSearchListViewContract;
-import com.viettel.mbccs.data.model.TaskModel;
-import com.viettel.mbccs.databinding.ActivityTaskSearchListBinding;
+import com.viettel.mbccs.data.model.TaskShopManagement;
 import com.viettel.mbccs.databinding.LayoutPopupSpinnerBinding;
 import com.viettel.mbccs.screen.assigntask.arising.create.CreateArisingTaskActivity;
 import com.viettel.mbccs.screen.assigntask.cskpp.create.CreateCSKPPTaskActivity;
@@ -21,31 +18,12 @@ import com.viettel.mbccs.variable.Constants;
  */
 
 public class ListAssignTaskActivity
-        extends BaseDataBindActivity<ActivityTaskSearchListBinding, ListAssignTaskPresenter>
-        implements ListAssignTaskContract.ViewModel {
-
-    public static int REQUEST_CODE_TASK_INFO = 57;
-
-    @Override
-    protected int getIdLayout() {
-        return R.layout.activity_task_search_list;
-    }
+        extends BaseListTaskActivity<ListAssignTaskPresenter> {
 
     @Override
     protected void initData() {
         mPresenter = new ListAssignTaskPresenter(this, this);
         mBinding.setPresenter(mPresenter);
-    }
-
-
-    @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void hideLoading() {
-
     }
 
     @Override
@@ -63,15 +41,15 @@ public class ListAssignTaskActivity
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         switch (binding.spinner.getSpinner().getSelectedItemPosition()) {
-                            case TaskModel.TaskType.TYPE_CSKPP:
+                            case 0:
                                 startActivity(new Intent(ListAssignTaskActivity.this,
                                         CreateCSKPPTaskActivity.class));
                                 break;
-                            case TaskModel.TaskType.TYPE_ARISING:
+                            case 1:
                                 startActivity(new Intent(ListAssignTaskActivity.this,
                                         CreateArisingTaskActivity.class));
                                 break;
-                            case TaskModel.TaskType.TYPE_TEAM:
+                            default:
                                 break;
                         }
                     }
@@ -85,13 +63,13 @@ public class ListAssignTaskActivity
     @Override
     public void onItemClicked(Object object) {
         // TODO: 5/28/2017 Phan quyen user nguoi giao/duoc giao
-        switch (((TaskModel) object).getStatus()) {
-            case TaskModel.TaskStatus.NOT_ACCEPTED:
+        switch (((TaskShopManagement) object).getStatus()) {
+            case TaskShopManagement.TaskStaffStatus.STATUS_NEW:
                 Intent intent = new Intent(this, TaskCSKPPDetailActivity.class);
-                intent.putExtra(Constants.BundleConstant.TASK_INFO, (TaskModel) object);
+                intent.putExtra(Constants.BundleConstant.TASK_INFO, (TaskShopManagement) object);
                 startActivityForResult(intent, REQUEST_CODE_TASK_INFO);
                 break;
-            case TaskModel.TaskStatus.INPROGRESS:
+            case TaskShopManagement.TaskStatus.STATUS_ASSIGNED:
                 break;
         }
     }

@@ -4,7 +4,7 @@ import android.content.DialogInterface;
 
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
-import com.viettel.mbccs.data.model.TaskModel;
+import com.viettel.mbccs.data.model.TaskShopManagement;
 import com.viettel.mbccs.databinding.ActivityTaskCskppDetailBinding;
 import com.viettel.mbccs.variable.Constants;
 import com.viettel.mbccs.widget.CustomDialog;
@@ -25,8 +25,7 @@ public class TaskCSKPPDetailActivity
     @Override
     protected void initData() {
         mPresenter = new TaskCSKPPDetailPresenter(this, this,
-                (TaskModel) getIntent().getParcelableExtra(Constants.BundleConstant.TASK_INFO),
-                false);
+                (TaskShopManagement) getIntent().getParcelableExtra(Constants.BundleConstant.TASK_INFO), false);
         mBinding.setPresenter(mPresenter);
     }
 

@@ -25,8 +25,7 @@
             app:isShow="@{ true }"
             app:leftIcon="@{ @drawable/ic_arrow_left_white_24dp }"
             app:leftIconClick="@{ () -> presenter.close() }"
-            app:title="@{ presenter.toolbarTitle }"
-            />
+            app:title="@{ presenter.toolbarTitle }" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -53,8 +52,10 @@
                 android:orientation="horizontal">
 
                 <com.viettel.mbccs.widget.CustomDatePicker
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:id="@+id/from_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
 
                 <com.viettel.mbccs.widget.CustomTextView
                     style="@style/TextSearchTask"
@@ -63,11 +64,13 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="@dimen/dp_8"
                     android:layout_marginStart="@dimen/dp_8"
-                    android:text="@string/activity_create_cskpp_task_den" />
+                    android:text="-" />
 
                 <com.viettel.mbccs.widget.CustomDatePicker
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:id="@+id/to_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
             </LinearLayout>
 
             <com.viettel.mbccs.widget.CustomTextView
@@ -89,7 +92,9 @@
                 android:drawableEnd="@drawable/ic_arrow_drop_down_black_24dp"
                 android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
                 android:minHeight="@dimen/dp_40"
-                android:onClick="@{ () -> presenter.onSelectStaffClick() }" />
+                android:onClick="@{ () -> presenter.onSelectStaffClick() }"
+                android:paddingEnd="@dimen/dp_4"
+                android:paddingRight="@dimen/dp_4" />
 
             <com.viettel.mbccs.widget.CustomTextView
                 android:id="@+id/text3"
@@ -132,13 +137,22 @@
                 android:layout_marginTop="@dimen/dp_16"
                 bind:textUnderLine="@{ @string/activity_create_cskpp_task_tuyen_cham_soc }" />
 
-            <com.viettel.mbccs.widget.SpinnerWithBorder
+            <!--<com.viettel.mbccs.widget.SpinnerWithBorder-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@id/text5"-->
+            <!--android:layout_marginTop="@dimen/dp_8" />-->
+
+            <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_above="@id/layout_button"
                 android:layout_below="@id/text5"
+                android:layout_marginBottom="@dimen/dp_8"
                 android:layout_marginTop="@dimen/dp_8" />
 
             <LinearLayout
+                android:id="@+id/layout_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true">
@@ -147,6 +161,7 @@
                     style="@style/button_negative"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginEnd="@dimen/dp_4"
                     android:layout_marginRight="@dimen/dp_4"
                     android:layout_weight="1"
@@ -157,8 +172,9 @@
                     style="@style/button_positive"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_4"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/dp_4"
+                    android:layout_marginStart="@dimen/dp_4"
                     android:layout_weight="1"
                     android:onClick="@{ () -> presenter.assign() }"
                     android:text="@string/activity_create_cskpp_task_giao_cham_soc_kpp" />

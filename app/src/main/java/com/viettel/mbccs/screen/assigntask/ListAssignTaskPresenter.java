@@ -1,101 +1,74 @@
 package com.viettel.mbccs.screen.assigntask;
 
 import android.content.Context;
-import android.databinding.ObservableField;
-import android.databinding.ObservableInt;
 import android.support.v7.widget.RecyclerView;
-import com.viettel.mbccs.R;
-import com.viettel.mbccs.base.searchlistview.BaseSearchListViewPresenter;
-import com.viettel.mbccs.data.model.TaskModel;
+
+import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.data.model.TaskShopManagement;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
+import com.viettel.mbccs.data.source.remote.request.GetTaskPrepareAssignStaffRequest;
+import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.GetTaskPrepareAssignStaffResponse;
 import com.viettel.mbccs.screen.assigntask.adapters.AssignTaskAdapter;
-import com.viettel.mbccs.widget.SpinnerWithBorder.HintAdapter;
+import com.viettel.mbccs.utils.DateUtils;
+import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
+
+import rx.Subscription;
 
 /**
  * Created by Anh Vu Viet on 5/13/2017.
  */
 
-public class ListAssignTaskPresenter extends BaseSearchListViewPresenter<TaskModel,ListAssignTaskContract.ViewModel>
-        implements ListAssignTaskContract.Presenter, AssignTaskAdapter.OnTaskClickListener {
-
-    public ObservableInt taskTypePosition = new ObservableInt();
-
-    public ObservableInt taskStatusPosition = new ObservableInt();
-
-    public ObservableField<HintAdapter<String>> taskTypeAdapter =
-            new ObservableField<HintAdapter<String>>() {
-                @Override
-                public void set(HintAdapter<String> value) {
-                    super.set(value);
-                    taskTypePosition.set(value.getCount());
-                }
-            };
-
-    public ObservableField<HintAdapter<String>> taskStatusAdapter =
-            new ObservableField<HintAdapter<String>>() {
-                @Override
-                public void set(HintAdapter<String> value) {
-                    super.set(value);
-                    taskStatusPosition.set(value.getCount());
-                }
-            };
+public class ListAssignTaskPresenter extends BaseListTaskPresenter<TaskShopManagement>
+        implements ListAssignTaskContract.Presenter {
 
     public ListAssignTaskPresenter(Context context, ListAssignTaskContract.ViewModel viewModel) {
         super(context, viewModel);
-        // TODO: Fake data
-        listData.add(
-                new TaskModel("CV 1", TaskModel.TaskType.TYPE_ARISING, System.currentTimeMillis(),
-                        TaskModel.TaskStatus.DONE, "startDate", "endDate", "assignDate",
-                        "description"));
-        listData.add(new TaskModel("CV 2", TaskModel.TaskType.TYPE_TEAM, System.currentTimeMillis(),
-                TaskModel.TaskStatus.INPROGRESS, "startDate", "endDate", "assignDate",
-                "description"));
-        listData.add(
-                new TaskModel("CV 3", TaskModel.TaskType.TYPE_CSKPP, System.currentTimeMillis(),
-                        TaskModel.TaskStatus.NOT_ACCEPTED, "startDate", "endDate", "assignDate",
-                        "description"));
-        listData.add(
-                new TaskModel("CV 4", TaskModel.TaskType.TYPE_ARISING, System.currentTimeMillis(),
-                        TaskModel.TaskStatus.REJECTED, "startDate", "endDate", "assignDate",
-                        "description"));
-        HintAdapter<String> adapter = new HintAdapter<>(mContext,
-                mContext.getResources().getStringArray(R.array.task_type));
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        taskTypeAdapter.set(adapter);
-
-        HintAdapter<String> adapter1 = new HintAdapter<>(mContext,
-                mContext.getResources().getStringArray(R.array.task_status));
-        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        taskStatusAdapter.set(adapter1);
     }
 
     @Override
     public void doSearch() {
+        long fromDate = ((ListAssignTaskContract.ViewModel) mViewModel).getFromDate();
+        long toDate = ((ListAssignTaskContract.ViewModel) mViewModel).getToDate();
+        if (fromDate > toDate){
+            // TODO: 7/2/2017 Show error
+            return;
+        }
+        mViewModel.showLoading();
 
-    }
+        // FIXME: 10/07/2017 Account and serviceType
+        GetTaskPrepareAssignStaffRequest request = new GetTaskPrepareAssignStaffRequest();
+        request.setServiceType("1");
+        request.setShopCode(mUserRepository.getUserInfo().getShop().getShopCode());
+        request.setType(String.valueOf(taskType.get()));
+        request.setAccount(mUserRepository.getUserInfo().getStaffInfo().getTel());
+        request.setFromDate(DateUtils.convertDateToString(fromDate,
+                DateUtils.TIMEZONE_FORMAT_SERVER));
+        request.setToDate(DateUtils.convertDateToString(toDate,
+                DateUtils.TIMEZONE_FORMAT_SERVER));
+        request.setStaffCode(mUserRepository.getUserInfo().getStaffInfo().getStaffCode());
+        request.setStatus(String.valueOf(taskStatus.get()));
 
-    @Override
-    public void onSearchSuccess() {
+        DataRequest<GetTaskPrepareAssignStaffRequest> dataRequest = new DataRequest<>();
+        dataRequest.setWsCode(ApiCode.GetTaskPrepareAssignStaff);
+        dataRequest.setWsRequest(request);
 
-    }
+        Subscription subscription = mRepository.getTaskPrepareAssignStaff(dataRequest)
+                .subscribe(new MBCCSSubscribe<GetTaskPrepareAssignStaffResponse>() {
+                    @Override
+                    public void onSuccess(GetTaskPrepareAssignStaffResponse object) {
+                        mViewModel.hideLoading();
+                        if (object == null) return;
 
-    @Override
-    public void onSearchFail() {
+                        listData.addAll(object.getLstTaskShopManagement());
+                    }
 
-    }
-
-    @Override
-    public String getSearchHint() {
-        return mContext.getString(R.string.search_task_hint);
-    }
-
-    @Override
-    public String getToolbarTitle() {
-        return mContext.getString(R.string.quan_ly_giao_viec);
-    }
-
-    @Override
-    public void onBackPressed() {
-        mViewModel.onBackPressed();
+                    @Override
+                    public void onError(BaseException error) {
+                        mViewModel.hideLoading();
+                    }
+                });
+        mSubscription.add(subscription);
     }
 
     @Override
@@ -103,20 +76,5 @@ public class ListAssignTaskPresenter extends BaseSearchListViewPresenter<TaskMod
         AssignTaskAdapter adapter = new AssignTaskAdapter(mContext, listData);
         adapter.setOnTaskClickListener(this);
         return adapter;
-    }
-
-    @Override
-    public String getItemCountString() {
-        return null;
-    }
-
-    @Override
-    public void onAddClick() {
-        mViewModel.onAddClick();
-    }
-
-    @Override
-    public void onTaskClick(TaskModel task) {
-        mViewModel.onItemClicked(task);
     }
 }

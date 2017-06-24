@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.ChannelInfo;
-import com.viettel.mbccs.data.model.TaskModel;
+import com.viettel.mbccs.data.model.TaskShopManagement;
 import com.viettel.mbccs.databinding.ItemTaskKppUpdateBinding;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,13 +22,13 @@ public class TaskCSKPPUpdatePresenter implements TaskCSKPPUpdateContract.Present
 
     private TaskCSKPPUpdateContract.ViewModel mViewModel;
 
-    private TaskModel mTaskModel;
+    private TaskShopManagement mTaskShopManagement;
 
     public TaskCSKPPUpdatePresenter(Context context, TaskCSKPPUpdateContract.ViewModel viewModel,
-            TaskModel taskModel) {
+            TaskShopManagement taskShopManagement) {
         mContext = context;
         mViewModel = viewModel;
-        mTaskModel = taskModel;
+        mTaskShopManagement = taskShopManagement;
     }
 
     @Override
