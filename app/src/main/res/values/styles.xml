@@ -210,10 +210,9 @@
     </style>
 
     <style name="inputStyle_1">
-        <item name="android:background">@drawable/bg_input_tranparent</item>
+        <item name="android:background">@drawable/bg_input_transparent_1</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">@dimen/sp_14</item>
-        <item name="android:padding">@dimen/dp_5</item>
         <item name="android:gravity">center_vertical</item>
     </style>
 

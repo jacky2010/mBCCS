@@ -215,6 +215,7 @@
                     bind:customEditTextDrawable="@{ (v, t)  -> presenter.onDrawableClick(v, t) }"
                     style="@style/inputStyleDrawableRight"
                     android:text="@={ presenter.txtNumberPassport }"
+                    android:inputType="number"
                     />
 
                 <com.viettel.mbccs.widget.CustomSelectImageNo

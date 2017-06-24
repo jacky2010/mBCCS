@@ -10,7 +10,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -217,9 +216,18 @@ public class CustomSelectAddress extends LinearLayout {
             dataDistrict.add(d.getName());
         }
         adapterDistrict.get().notifyDataSetChanged();
+        positionDistrict = 0;
 
         if (StringUtils.isEmpty(setDistrictId)) {
-            binding.spinnerLayoutSelectDistrict.setSelection(0);
+            binding.spinnerLayoutSelectDistrict.setSelection(positionDistrict);
+            areaPrecinctList.clear();
+            dataPrecinct.clear();
+            adapterPrecinct.get().notifyDataSetChanged();
+
+            getDataAreaPrecinct(
+                    areaDistrictList.get(positionDistrict).getProvince() + areaDistrictList.get(
+                            positionDistrict).getDistrict());
+
             return;
         }
 
@@ -229,11 +237,6 @@ public class CustomSelectAddress extends LinearLayout {
             position = i;
             setDistrictId = "";
             break;
-        }
-        if (positionDistrict == 0) {
-            getDataAreaPrecinct(
-                    areaDistrictList.get(position).getProvince() + areaDistrictList.get(position)
-                            .getDistrict());
         }
         binding.spinnerLayoutSelectDistrict.setSelection(position);
     }

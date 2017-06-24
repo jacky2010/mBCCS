@@ -11,11 +11,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_input_tranparent"
-        android:paddingBottom="@dimen/dp_5"
+        android:background="@drawable/bg_input_transparent_1"
         android:paddingLeft="0dp"
         android:paddingRight="@dimen/dp_3"
-        android:paddingTop="@dimen/dp_5"
         >
         <ImageView
             android:id="@+id/image_left"

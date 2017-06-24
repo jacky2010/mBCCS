@@ -5,20 +5,18 @@ import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.ApDomainByType;
 import com.viettel.mbccs.data.source.QLKhachHangRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetApDomainByTypeRequest;
+import com.viettel.mbccs.data.source.remote.request.GetRegisterSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetApDomainByTypeResponse;
-
-import com.viettel.mbccs.data.source.remote.request.GetRegisterSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.response.GetRegisterSubInfoResponse;
-
 import com.viettel.mbccs.screen.information.adapter.InformationCustomerAdapter;
+import com.viettel.mbccs.utils.SpinnerAdapter;
 import com.viettel.mbccs.utils.StringUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import com.viettel.mbccs.widget.callback.DrawableClickListener;
@@ -30,8 +28,7 @@ import rx.subscriptions.CompositeSubscription;
  * Created by HuyQuyet on 5/29/17.
  */
 
-public class CreateUpdateInformationPresenter
-        implements CreateUpdateInformationContract.Presenter, AdapterView.OnItemSelectedListener {
+public class CreateUpdateInformationPresenter implements CreateUpdateInformationContract.Presenter {
     private Context context;
     private CreateUpdateInformationContract.View view;
     private QLKhachHangRepository qlKhachHangRepository;
@@ -47,7 +44,7 @@ public class CreateUpdateInformationPresenter
 
     public ObservableField<String> isdn;
     public ObservableField<String> idNo;
-    public ObservableField<ArrayAdapter<String>> adapterPassportType;
+    public ObservableField<SpinnerAdapter<ApDomainByType>> adapterPassportType;
 
     public CreateUpdateInformationPresenter(Context context,
             CreateUpdateInformationContract.View view) {
@@ -61,8 +58,8 @@ public class CreateUpdateInformationPresenter
         isHideData = new ObservableBoolean();
         isHideBtnCreate = new ObservableBoolean();
         // TODO: 6/22/17 fix data test
-        isdn = new ObservableField<>("620103022");
-        idNo = new ObservableField<>("145079102");
+        isdn = new ObservableField<>("624916209");
+        idNo = new ObservableField<>("111111");
         adapterPassportType = new ObservableField<>();
     }
 
@@ -99,7 +96,7 @@ public class CreateUpdateInformationPresenter
                 .subscribe(new MBCCSSubscribe<GetRegisterSubInfoResponse>() {
                     @Override
                     public void onSuccess(GetRegisterSubInfoResponse object) {
-                        if (object.getCustomer() == null) {
+                        if (object == null || object.getCustomer() == null) {
                             isHideData.set(true);
                             isHideBtnCreate.set(false);
                         } else {
@@ -137,10 +134,6 @@ public class CreateUpdateInformationPresenter
                         : context.getString(R.string.create_update_information_update_title));
     }
 
-    public void setAdapterPassportType(ArrayAdapter<String> adapter) {
-        adapterPassportType.set(adapter);
-    }
-
     public void getDataSpinnerPassport() {
         view.showLoading();
         DataRequest<GetApDomainByTypeRequest> request = new DataRequest<>();
@@ -158,7 +151,7 @@ public class CreateUpdateInformationPresenter
                             dataPassportType.clear();
                         }
                         dataPassportType = object.getApDomainByTypeList();
-                        view.getDataSpinnerPassportSuccess(dataPassportType);
+                        setSpinnerPassportType();
                         view.hideLoading();
                     }
 
@@ -169,20 +162,6 @@ public class CreateUpdateInformationPresenter
                     }
                 });
         subscriptions.add(subscription);
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        switch (parent.getId()) {
-            case R.id.spinner:
-                positionPassportType = position;
-                break;
-        }
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
     }
 
     public void onDrawableClick(View v, @DrawableClickListener.DrawablePosition int target) {
@@ -202,5 +181,22 @@ public class CreateUpdateInformationPresenter
                 idNo.set("");
                 break;
         }
+    }
+
+    private void setSpinnerPassportType() {
+        adapterPassportType.set(new SpinnerAdapter<>(context, dataPassportType));
+        adapterPassportType.get()
+                .setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position,
+                            long id) {
+                        positionPassportType = position;
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
     }
 }

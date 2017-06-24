@@ -14,12 +14,12 @@ public class Subscriber implements Parcelable {
     // Id thuê bao
     @SerializedName("subID")
     @Expose
-    private int subID;
+    private Integer subID;
 
     // custReqId
     @SerializedName("custReqId")
     @Expose
-    private int custReqId;
+    private Integer custReqId;
 
     // Id hợp đồng
     @SerializedName("contractId")
@@ -451,19 +451,19 @@ public class Subscriber implements Parcelable {
         }
     };
 
-    public int getSubID() {
+    public Integer getSubID() {
         return subID;
     }
 
-    public void setSubID(int subID) {
+    public void setSubID(Integer subID) {
         this.subID = subID;
     }
 
-    public int getCustReqId() {
+    public Integer getCustReqId() {
         return custReqId;
     }
 
-    public void setCustReqId(int custReqId) {
+    public void setCustReqId(Integer custReqId) {
         this.custReqId = custReqId;
     }
 

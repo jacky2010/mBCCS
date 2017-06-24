@@ -61,7 +61,7 @@ public class ConnectorMobileActivity
 
     @Override
     public void txtPassportEmpty() {
-        DialogUtils.showDialog(this, "Số giấy tờ trống!");
+        DialogUtils.showDialog(this, getString(R.string.connector_mobile_so_giay_to_trong));
     }
 
     @Override
