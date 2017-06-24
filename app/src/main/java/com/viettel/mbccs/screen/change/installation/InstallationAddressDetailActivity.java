@@ -5,6 +5,8 @@ import android.view.View;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseActivity;
 import com.viettel.mbccs.constance.IconType;
+import com.viettel.mbccs.screen.change.BaseChangeAddressFragment;
+import com.viettel.mbccs.utils.EditTextUtil;
 import com.viettel.mbccs.widget.ButtonIconView;
 import com.viettel.mbccs.widget.ToolBarView;
 import com.viettel.mbccs.widget.TopBarView;
@@ -58,6 +60,7 @@ public class InstallationAddressDetailActivity extends BaseActivity {
         callFragment(mType);
         setBgTopBar(mType);
         setTitleToolbar(R.string.title_install_address);
+        EditTextUtil.hideKeyboard(this);
     }
 
     @Override
@@ -77,22 +80,24 @@ public class InstallationAddressDetailActivity extends BaseActivity {
         switch (v.getId()) {
             case R.id.bt_back:
                 type = (mType == TypeChangeAddress.CHANGE_ADDRESS_NEW) ? mType : (mType - 1);
-                if (TypeChangeAddress.CHANGE_FACILITY > type && type >= TypeChangeAddress.CHANGE_ADDRESS_NEW) {
+                if (TypeChangeAddress.CHANGE_SURVEY > type && type >= TypeChangeAddress.CHANGE_ADDRESS_NEW) {
                     mType = type;
                     onBackFragment();
                 }
                 break;
             case R.id.bt_next:
-                type = ((mType == TypeChangeAddress.CHANGE_FACILITY) ? mType : (mType + 1));
+                type = ((mType == TypeChangeAddress.CHANGE_SURVEY) ? mType : (mType + 1));
                 if (type != mType) {
                     callFragment(type);
+                } else {
+                    callApi();
                 }
                 break;
             default:
                 break;
         }
         mButtonBack.setButtonText(mType == TypeChangeAddress.CHANGE_ADDRESS_NEW ? R.string.common_label_close : R.string.back_item);
-        mButtonNext.setButtonText(mType == TypeChangeAddress.CHANGE_FACILITY ? R.string.title_change_add : R.string.next);
+        mButtonNext.setButtonText(mType == TypeChangeAddress.CHANGE_SURVEY ? R.string.title_change_add : R.string.next);
         setBgTopBar(mType);
     }
 
@@ -118,5 +123,13 @@ public class InstallationAddressDetailActivity extends BaseActivity {
         mAddNew.setBgTextView(type == TypeChangeAddress.CHANGE_ADDRESS_NEW ? R.drawable.bg_border_item_top : R.drawable.bg_border_item_top_dis);
         mSurvey.setBgTextView(type == TypeChangeAddress.CHANGE_SURVEY ? R.drawable.bg_border_item_top : R.drawable.bg_border_item_top_dis);
         mFacility.setBgTextView(type == TypeChangeAddress.CHANGE_FACILITY ? R.drawable.bg_border_item_top : R.drawable.bg_border_item_top_dis);
+    }
+
+    public void callApi() {
+        if (mFragStack != null && mFragStack.size() > 0) {
+            if (mFragStack.lastElement() != null && mFragStack.lastElement() instanceof BaseChangeAddressFragment) {
+                ((BaseChangeAddressFragment) mFragStack.lastElement()).callApiRequest();
+            }
+        }
     }
 }

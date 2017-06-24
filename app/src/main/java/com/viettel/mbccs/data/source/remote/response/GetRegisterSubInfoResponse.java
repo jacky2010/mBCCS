@@ -11,7 +11,7 @@ import com.viettel.mbccs.data.model.Subscriber;
  * Created by HuyQuyet on 5/31/17.
  */
 
-public class GetRegiterSubInfoResponse extends DataResponse implements Parcelable{
+public class GetRegisterSubInfoResponse extends DataResponse implements Parcelable{
 
     @SerializedName("subscriber")
     @Expose
@@ -25,11 +25,11 @@ public class GetRegiterSubInfoResponse extends DataResponse implements Parcelabl
     @Expose
     private boolean result;
 
-    public GetRegiterSubInfoResponse (){
+    public GetRegisterSubInfoResponse(){
 
     }
 
-    protected GetRegiterSubInfoResponse(Parcel in) {
+    protected GetRegisterSubInfoResponse(Parcel in) {
         subscriber = in.readParcelable(Subscriber.class.getClassLoader());
         customer = in.readParcelable(Customer.class.getClassLoader());
         result = in.readByte() != 0;
@@ -47,16 +47,16 @@ public class GetRegiterSubInfoResponse extends DataResponse implements Parcelabl
         return 0;
     }
 
-    public static final Creator<GetRegiterSubInfoResponse> CREATOR =
-            new Creator<GetRegiterSubInfoResponse>() {
+    public static final Creator<GetRegisterSubInfoResponse> CREATOR =
+            new Creator<GetRegisterSubInfoResponse>() {
                 @Override
-                public GetRegiterSubInfoResponse createFromParcel(Parcel in) {
-                    return new GetRegiterSubInfoResponse(in);
+                public GetRegisterSubInfoResponse createFromParcel(Parcel in) {
+                    return new GetRegisterSubInfoResponse(in);
                 }
 
                 @Override
-                public GetRegiterSubInfoResponse[] newArray(int size) {
-                    return new GetRegiterSubInfoResponse[size];
+                public GetRegisterSubInfoResponse[] newArray(int size) {
+                    return new GetRegisterSubInfoResponse[size];
                 }
             };
 

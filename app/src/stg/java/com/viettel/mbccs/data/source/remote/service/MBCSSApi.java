@@ -3,6 +3,7 @@ package com.viettel.mbccs.data.source.remote.service;
 import com.viettel.mbccs.data.model.EmptyObject;
 import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.model.UserInfo;
+import com.viettel.mbccs.data.source.remote.request.AddressRequest;
 import com.viettel.mbccs.data.source.remote.request.ChangeSimRequest;
 import com.viettel.mbccs.data.source.remote.request.ChecOTPRequest;
 import com.viettel.mbccs.data.source.remote.request.CheckCalledIsdnsRequest;
@@ -25,6 +26,7 @@ import com.viettel.mbccs.data.source.remote.request.GetKPPFeedbackInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.GetKPPFeedbackRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListBusTypeIdRequireRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListChannelByOwnerTypeIdRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListDsLamByTeamIdRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListIdImageRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListProductRequest;
@@ -34,12 +36,14 @@ import com.viettel.mbccs.data.source.remote.request.GetListShopRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListStockModelRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListStockTransDetailRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListTTKDRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListTeamRequest;
 import com.viettel.mbccs.data.source.remote.request.GetOTPRequest;
 import com.viettel.mbccs.data.source.remote.request.GetOrderInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.GetPrecinctRequest;
 import com.viettel.mbccs.data.source.remote.request.GetProvinceRequest;
 import com.viettel.mbccs.data.source.remote.request.GetReasonRequest;
-import com.viettel.mbccs.data.source.remote.request.GetRegiterSubInfoRequest;
+import com.viettel.mbccs.data.source.remote.request.GetReceiverChangeAddressRequest;
+import com.viettel.mbccs.data.source.remote.request.GetRegisterSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSurveyKPPRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
@@ -82,6 +86,7 @@ import com.viettel.mbccs.data.source.remote.response.GetKPPFeedbackInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetKPPFeedbackResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListBusTypeIdRequireResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListChannelByOwnerTypeIdResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListDsLamByTeamIdResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListIdImageResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListProductResponse;
@@ -90,12 +95,14 @@ import com.viettel.mbccs.data.source.remote.response.GetListSerialResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListShopResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListStockModelResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListTTKDResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListTeamResponse;
 import com.viettel.mbccs.data.source.remote.response.GetOTPResponse;
 import com.viettel.mbccs.data.source.remote.response.GetOrderInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetPrecinctResponse;
 import com.viettel.mbccs.data.source.remote.response.GetProvinceResponse;
 import com.viettel.mbccs.data.source.remote.response.GetReasonResponse;
-import com.viettel.mbccs.data.source.remote.response.GetRegiterSubInfoResponse;
+import com.viettel.mbccs.data.source.remote.response.GetReceiverChangeAddressResponse;
+import com.viettel.mbccs.data.source.remote.response.GetRegisterSubInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSurveyKPPResponse;
 import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
@@ -234,8 +241,8 @@ public interface MBCSSApi {
             @Body DataRequest<RegisterCustomerInfoRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<ServerDataResponse<BaseResponse<GetRegiterSubInfoResponse>>> getRegiterSubInfo(
-            @Body DataRequest<GetRegiterSubInfoRequest> request);
+    Observable<ServerDataResponse<BaseResponse<GetRegisterSubInfoResponse>>> getRegiterSubInfo(
+            @Body DataRequest<GetRegisterSubInfoRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<GetListBusTypeIdRequireResponse>>>
@@ -379,5 +386,18 @@ public interface MBCSSApi {
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<EmptyObject>>> sendSurvey(
             @Body DataRequest<SendSurveyKPPRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<GetListTeamResponse>>> getListTeam(
+            @Body DataRequest<GetListTeamRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<GetListDsLamByTeamIdResponse>>> getListDsLamByTeamId(
+            @Body DataRequest<GetListDsLamByTeamIdRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<GetReceiverChangeAddressResponse>>> receiverChangeAddress(
+            @Body AddressRequest<GetReceiverChangeAddressRequest> request);
+
 }
 

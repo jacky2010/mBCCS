@@ -34,7 +34,7 @@ import com.viettel.mbccs.data.source.remote.response.CheckOTPResponse;
 import com.viettel.mbccs.data.source.remote.response.GetApDomainByTypeResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListProductResponse;
 import com.viettel.mbccs.data.source.remote.response.GetOTPResponse;
-import com.viettel.mbccs.data.source.remote.response.GetRegiterSubInfoResponse;
+import com.viettel.mbccs.data.source.remote.response.GetRegisterSubInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.RegisterCustomerInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.SpinnerApDomain;
 import com.viettel.mbccs.data.source.remote.response.UpdateAllSubInfoResponse;
@@ -67,7 +67,7 @@ public class CreateUpdateInformationFragmentPresenter
 
     @CreateUpdateInformationFragment.Type
     private int typeFragment;
-    private GetRegiterSubInfoResponse data;
+    private GetRegisterSubInfoResponse data;
     private Customer customerResponse;
     private Subscriber subscriberResponse;
 
@@ -603,7 +603,7 @@ public class CreateUpdateInformationFragmentPresenter
     /*---------------------- End on Click in View -----------------------------*/
 
     /*----------------------- Set - Get ---------------------------------------*/
-    void setTypeFragment(int type, GetRegiterSubInfoResponse data) {
+    void setTypeFragment(int type, GetRegisterSubInfoResponse data) {
         this.typeFragment = type;
         this.data = data;
         switch (typeFragment) {

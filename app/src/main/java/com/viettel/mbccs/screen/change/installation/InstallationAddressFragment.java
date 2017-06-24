@@ -8,14 +8,28 @@ import android.view.View;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataFragment;
 import com.viettel.mbccs.callback.OnListenerItemRecyclerView;
+import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.data.model.ApDomain;
 import com.viettel.mbccs.data.model.Customer;
+import com.viettel.mbccs.data.source.QLKhachHangRepository;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
+import com.viettel.mbccs.data.source.remote.request.GetApDomainRequest;
+import com.viettel.mbccs.data.source.remote.request.GetRegisterSubInfoRequest;
+import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.GetApDomainResponse;
+import com.viettel.mbccs.data.source.remote.response.GetRegisterSubInfoResponse;
 import com.viettel.mbccs.screen.change.installation.adapter.InstallationAddressAdapter;
+import com.viettel.mbccs.utils.EditTextUtil;
+import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
+import com.viettel.mbccs.widget.ItemSpinText;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import rx.Subscription;
+import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by jacky on 5/22/17.
@@ -25,9 +39,19 @@ public class InstallationAddressFragment extends BaseDataFragment {
 
     @BindView(R.id.list)
     RecyclerView mRecyclerView;
+    @BindView(R.id.ist_phone_number)
+    ItemSpinText mPhoneNumber;
+    @BindView(R.id.ist_type_of_pages)
+    ItemSpinText mTypeOfPage;
+    @BindView(R.id.ist_number_of_pages)
+    ItemSpinText mNumberOfPage;
 
     private LinearLayoutManager mLinearLayoutManager;
     private InstallationAddressAdapter mAdapter;
+    private QLKhachHangRepository qlKhachHangRepository;
+    private CompositeSubscription subscriptions;
+    private boolean typeCreate;
+    private List<ApDomain> dataPassportType;
 
     @Override
     protected void initData() {
@@ -41,12 +65,38 @@ public class InstallationAddressFragment extends BaseDataFragment {
 
     @Override
     protected void initView() {
+
+        qlKhachHangRepository = QLKhachHangRepository.getInstance();
+        subscriptions = new CompositeSubscription();
+
         mLinearLayoutManager = new LinearLayoutManager(getBaseActivity(),
                 LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(),
                 LinearLayoutManager.VERTICAL);
         mRecyclerView.addItemDecoration(dividerItemDecoration);
+
+        getDataSpinnerPassport();
+        mTypeOfPage.setListSpinner(fakeSearch());
+
+        EditTextUtil.hideKeyboard(getActivity());
+    }
+
+    private List<String> fakeSearch() {
+        List<String> list = new ArrayList<>();
+        list.add("BCS 001");
+        list.add("BCS 002");
+        list.add("BCS 003");
+        list.add("BCS 004");
+        list.add("BCS 005");
+        list.add("BCS 006");
+        list.add("BCS 007");
+        list.add("BCS 008");
+        list.add("BCS 009");
+        list.add("BCS 0010");
+        list.add("BCS 0011");
+        list.add("BCS 0012");
+        return list;
     }
 
     @Override
@@ -55,7 +105,13 @@ public class InstallationAddressFragment extends BaseDataFragment {
         getBaseActivity().setTitleToolbar(R.string.title_install_address);
     }
 
-    private void showSearchInfoCustomer() {
+    private void showSearchInfoCustomer(GetRegisterSubInfoResponse mResponse) {
+        List<Customer> mList = new ArrayList<>();
+        if (mResponse != null) {
+            mList.add(mResponse.getCustomer());
+        } else {
+            mList.addAll(listCustomer());
+        }
         mAdapter = new InstallationAddressAdapter(listCustomer(), getBaseActivity());
         mAdapter.setOnClickItemRecycleView(new OnListenerItemRecyclerView<Customer>() {
             @Override
@@ -81,10 +137,68 @@ public class InstallationAddressFragment extends BaseDataFragment {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_search:
-                showSearchInfoCustomer();
+                ///callApiSearch();
+                showSearchInfoCustomer(null);
                 break;
             default:
                 break;
         }
+    }
+
+    private void callApiSearch() {
+        getBaseActivity().showLoadingDialog();
+        GetRegisterSubInfoRequest getRegisterSubInfoRequest = new GetRegisterSubInfoRequest();
+        getRegisterSubInfoRequest.setIsdn(mPhoneNumber.getStringEditText());
+        getRegisterSubInfoRequest.setIdNo(mTypeOfPage.getStringEditText());
+        getRegisterSubInfoRequest.setIdType(mNumberOfPage.getStringEditText());
+
+        DataRequest<GetRegisterSubInfoRequest> request = new DataRequest<>();
+        request.setApiCode(ApiCode.GetRegisterSubInfo);
+        request.setParameterApi(getRegisterSubInfoRequest);
+        //
+        Subscription subscription = qlKhachHangRepository.getRegiterSubInfo(request)
+                .subscribe(new MBCCSSubscribe<GetRegisterSubInfoResponse>() {
+                    @Override
+                    public void onSuccess(GetRegisterSubInfoResponse object) {
+                        showSearchInfoCustomer(object);
+                        getBaseActivity().hideLoadingDialog();
+                    }
+
+                    @Override
+                    public void onError(BaseException error) {
+                        getBaseActivity().hideLoadingDialog();
+                    }
+                });
+        subscriptions.add(subscription);
+
+    }
+
+
+    public void getDataSpinnerPassport() {
+        getBaseActivity().showLoadingDialog();
+        DataRequest<GetApDomainRequest> request = new DataRequest<>();
+        GetApDomainRequest getApDomainRequest = new GetApDomainRequest();
+        getApDomainRequest.setType(ApDomain.Type.LOAI_GIAY_TO);
+
+        request.setParameterApi(getApDomainRequest);
+        request.setApiCode(ApiCode.GetListBusTypeIdRequire);
+
+        Subscription subscription = qlKhachHangRepository.getApDomain(request)
+                .subscribe(new MBCCSSubscribe<GetApDomainResponse>() {
+                    @Override
+                    public void onSuccess(GetApDomainResponse object) {
+                        if (dataPassportType != null && dataPassportType.size() != 0) {
+                            dataPassportType.clear();
+                        }
+                        dataPassportType = object.getApDomainList();
+                        getBaseActivity().hideLoadingDialog();
+                    }
+
+                    @Override
+                    public void onError(BaseException error) {
+                        getBaseActivity().hideLoadingDialog();
+                    }
+                });
+        subscriptions.add(subscription);
     }
 }

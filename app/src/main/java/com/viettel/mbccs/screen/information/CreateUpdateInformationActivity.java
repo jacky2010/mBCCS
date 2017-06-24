@@ -7,7 +7,7 @@ import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.data.model.ApDomainByType;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
-import com.viettel.mbccs.data.source.remote.response.GetRegiterSubInfoResponse;
+import com.viettel.mbccs.data.source.remote.response.GetRegisterSubInfoResponse;
 import com.viettel.mbccs.databinding.ActivityCreateUpdateInformationBinding;
 import com.viettel.mbccs.screen.information.adapter.InformationCustomerAdapter;
 import com.viettel.mbccs.screen.information.fragment.CreateUpdateInformationFragment;
@@ -27,8 +27,8 @@ public class CreateUpdateInformationActivity extends
     private ArrayAdapter<String> adapterPassportType;
     private InformationCustomerAdapter adapter;
     private boolean typeCreate;
-    private List<GetRegiterSubInfoResponse> getRegiterSubInfoResponseList;
-    private GetRegiterSubInfoResponse data;
+    private List<GetRegisterSubInfoResponse> getRegisterSubInfoResponseList;
+    private GetRegisterSubInfoResponse data;
 
     private List<String> dataPassportType;
     private List<ApDomainByType> apDomainList;
@@ -86,11 +86,11 @@ public class CreateUpdateInformationActivity extends
     }
 
     @Override
-    public void onSearchSuccess(GetRegiterSubInfoResponse data) {
+    public void onSearchSuccess(GetRegisterSubInfoResponse data) {
         this.data = data;
-        getRegiterSubInfoResponseList = new ArrayList<>();
-        getRegiterSubInfoResponseList.add(data);
-        adapter = new InformationCustomerAdapter(this, getRegiterSubInfoResponseList, typeCreate);
+        getRegisterSubInfoResponseList = new ArrayList<>();
+        getRegisterSubInfoResponseList.add(data);
+        adapter = new InformationCustomerAdapter(this, getRegisterSubInfoResponseList, typeCreate);
         mPresenter.setInformationCustomerAdapter(adapter);
         adapter.setItemClick(this);
     }

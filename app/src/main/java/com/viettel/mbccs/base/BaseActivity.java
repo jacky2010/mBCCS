@@ -18,7 +18,7 @@ import butterknife.Unbinder;
 public abstract class BaseActivity extends AppCompatActivity {
 
     private FragmentManager mFrgManager;
-    private Stack<BaseFragment> mFragStack;
+    protected Stack<BaseFragment> mFragStack;
     private LoadingDialog mLoadingDialog;
     private Unbinder mUnbinder;
 

@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.data.source.remote.response.GetRegiterSubInfoResponse;
+import com.viettel.mbccs.data.source.remote.response.GetRegisterSubInfoResponse;
 import com.viettel.mbccs.databinding.ItemInformationCustomerBinding;
 import java.util.List;
 
@@ -20,10 +20,10 @@ public class InformationCustomerAdapter
     private ItemInformationCustomerBinding binding;
     private ItemClick listener;
     private Context context;
-    private List<GetRegiterSubInfoResponse> dataList;
+    private List<GetRegisterSubInfoResponse> dataList;
     private boolean isCreate;
 
-    public InformationCustomerAdapter(Context context, List<GetRegiterSubInfoResponse> data, boolean isCreate) {
+    public InformationCustomerAdapter(Context context, List<GetRegisterSubInfoResponse> data, boolean isCreate) {
         this.context = context;
         this.dataList = data;
         this.isCreate = isCreate;
@@ -65,7 +65,7 @@ public class InformationCustomerAdapter
             icon = new ObservableField<>();
         }
 
-        public void bind(GetRegiterSubInfoResponse data, int position) {
+        public void bind(GetRegisterSubInfoResponse data, int position) {
             if (viewBinding.getPresenter() == null) {
                 viewBinding.setPresenter(this);
             }

@@ -12,10 +12,12 @@ import com.viettel.mbccs.data.model.ApDomainByType;
 import com.viettel.mbccs.data.source.QLKhachHangRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetApDomainByTypeRequest;
-import com.viettel.mbccs.data.source.remote.request.GetRegiterSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetApDomainByTypeResponse;
-import com.viettel.mbccs.data.source.remote.response.GetRegiterSubInfoResponse;
+
+import com.viettel.mbccs.data.source.remote.request.GetRegisterSubInfoRequest;
+import com.viettel.mbccs.data.source.remote.response.GetRegisterSubInfoResponse;
+
 import com.viettel.mbccs.screen.information.adapter.InformationCustomerAdapter;
 import com.viettel.mbccs.utils.StringUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
@@ -84,19 +86,19 @@ public class CreateUpdateInformationPresenter
             return;
         }
         view.showLoading();
-        GetRegiterSubInfoRequest getRegiterSubInfoRequest = new GetRegiterSubInfoRequest();
-        getRegiterSubInfoRequest.setIsdn(isdn.get());
-        getRegiterSubInfoRequest.setIdNo(idNo.get());
-        getRegiterSubInfoRequest.setIdType(dataPassportType.get(positionPassportType).getCode());
+        GetRegisterSubInfoRequest getRegisterSubInfoRequest = new GetRegisterSubInfoRequest();
+        getRegisterSubInfoRequest.setIsdn(isdn.get());
+        getRegisterSubInfoRequest.setIdNo(idNo.get());
+        getRegisterSubInfoRequest.setIdType(dataPassportType.get(positionPassportType).getCode());
 
-        DataRequest<GetRegiterSubInfoRequest> request = new DataRequest<>();
+        DataRequest<GetRegisterSubInfoRequest> request = new DataRequest<>();
         request.setApiCode(ApiCode.GetRegisterSubInfo);
-        request.setParameterApi(getRegiterSubInfoRequest);
+        request.setParameterApi(getRegisterSubInfoRequest);
         //
         Subscription subscription = qlKhachHangRepository.getRegiterSubInfo(request)
-                .subscribe(new MBCCSSubscribe<GetRegiterSubInfoResponse>() {
+                .subscribe(new MBCCSSubscribe<GetRegisterSubInfoResponse>() {
                     @Override
-                    public void onSuccess(GetRegiterSubInfoResponse object) {
+                    public void onSuccess(GetRegisterSubInfoResponse object) {
                         if (object.getCustomer() == null) {
                             isHideData.set(true);
                             isHideBtnCreate.set(false);

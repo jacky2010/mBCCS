@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.viettel.mbccs.widget.CustomTextView
+        android:id="@+id/tv_title"
+        style="@style/InstallAddressTv"
+        android:text="@string/msg_default_choose_time_trans"
+        android:textSize="@dimen/sp_14" />
+
+    <com.viettel.mbccs.widget.CustomEdittext
+        android:id="@+id/ed_text"
+        style="@style/edit_main_bg"
+        android:layout_marginTop="@dimen/margin_default"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|start"
+        android:maxLines="1"
+        android:singleLine="true"/>
+
+    <include layout="@layout/item_view_line"/>
+
+</LinearLayout>

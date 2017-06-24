@@ -1,53 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <com.viettel.mbccs.widget.ItemSpinText
-        style="@style/ItemSpinText"
-        app:istTextView="true"
-        app:istTextViewTitle="Địa chỉ lắp đặt" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
 
-    <com.viettel.mbccs.widget.ButtonIconView
-        android:id="@+id/bt_select_station"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_margin="5dp"
-        app:itb_bg="@color/blue"
-        app:itb_bg_pressed="@color/blue_trans"
-        app:itb_icon="@drawable/ic_place_while_24dp"
-        app:itb_icon_position="left"
-        app:itb_radius="3dp"
-        app:itb_text="@string/title_select_station" />
+        <com.viettel.mbccs.widget.ItemSpinText
+            style="@style/ItemSpinText"
+            app:istTextView="true"
+            app:istTextViewTitle="Địa chỉ lắp đặt" />
 
-    <com.viettel.mbccs.widget.ItemSpinText
-        style="@style/ItemSpinText"
-        app:istIconLeft="true"
-        app:istIconLeftBg="@drawable/ic_add_black_24dp"
-        app:istIconRight="true"
-        app:istIconRightBg="@drawable/ic_add_black_24dp"
-        app:istTextView="true"
-        app:istTextViewTitle="@string/title_survey_teams" />
+        <com.viettel.mbccs.widget.ButtonIconView
+            android:id="@+id/bt_select_station"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_margin="5dp"
+            app:itb_bg="@color/blue"
+            app:itb_bg_pressed="@color/blue_trans"
+            app:itb_icon="@drawable/ic_place_while_24dp"
+            app:itb_icon_position="left"
+            app:itb_radius="3dp"
+            app:itb_text="@string/title_select_station" />
 
-    <com.viettel.mbccs.widget.ItemSpinText
-        style="@style/ItemSpinText"
-        app:istIconLeft="true"
-        app:istIconLeftBg="@drawable/ic_add_black_24dp"
-        app:istIconRight="true"
-        app:istIconRightBg="@drawable/ic_add_black_24dp"
-        app:istTextView="true"
-        app:istTextViewTitle="@string/title_survey_bts_station" />
+        <com.viettel.mbccs.widget.ItemSpinText
+            android:id="@+id/ist_team"
+            style="@style/ItemSpinText"
+            app:istIconRight="true"
+            app:istIconRightBg="@drawable/ic_arrow_drop_down_black_24dp"
+            app:istSpinner="true"
+            app:istSpinnerEnable="false"
+            app:istSpinnerTitle=" -- Chọn tổ đội --"
+            app:istTextView="true"
+            app:istTextViewTitle="@string/title_survey_teams" />
 
-    <com.viettel.mbccs.widget.ItemSpinText
-        style="@style/ItemSpinText"
-        app:istIconLeft="true"
-        app:istIconLeftBg="@drawable/ic_add_black_24dp"
-        app:istIconRight="true"
-        app:istIconRightBg="@drawable/ic_add_black_24dp"
-        app:istTextView="true"
-        app:istTextViewTitle="@string/title_survey_port" />
-</LinearLayout>
+        <com.viettel.mbccs.widget.ItemSpinText
+            android:id="@+id/ist_lam_ds"
+            style="@style/ItemSpinText"
+            app:istIconRight="true"
+            app:istIconRightBg="@drawable/ic_arrow_drop_down_black_24dp"
+            app:istSpinner="true"
+            app:istSpinnerEnable="false"
+            app:istSpinnerTitle=" -- Chọn Trạm BTS --"
+            app:istTextView="true"
+            app:istTextViewTitle="@string/title_survey_bts_station" />
+
+        <com.viettel.mbccs.widget.ItemSpinText
+            style="@style/ItemSpinText"
+            app:istIconRight="true"
+            app:istIconRightBg="@drawable/ic_arrow_drop_down_black_24dp"
+            app:istSpinner="true"
+            app:istSpinnerEnable="false"
+            app:istSpinnerTitle=" -- Chọn Port --"
+            app:istTextView="true"
+            app:istTextViewTitle="@string/title_survey_port" />
+
+        <com.viettel.mbccs.widget.ItemSpinText
+            style="@style/ItemSpinText"
+            app:istIconRight="true"
+            app:istIconRightBg="@drawable/ic_arrow_drop_down_black_24dp"
+            app:istSpinner="true"
+            app:istSpinnerEnable="false"
+            app:istSpinnerTitle=" -- Chọn lý do --"
+            app:istTextView="true"
+            app:istTextViewTitle="@string/title_facility_choose_change" />
+
+        <com.viettel.mbccs.widget.ItemTitleWithEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_5"
+            app:iteTextViewTitle="SĐT tổ đội" />
+    </LinearLayout>
+</ScrollView>

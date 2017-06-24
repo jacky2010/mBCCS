@@ -4,7 +4,8 @@ import com.viettel.mbccs.base.BasePresenter;
 import com.viettel.mbccs.base.BaseView;
 import com.viettel.mbccs.data.model.ApDomainByType;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
-import com.viettel.mbccs.data.source.remote.response.GetRegiterSubInfoResponse;
+import com.viettel.mbccs.data.source.remote.response.GetRegisterSubInfoResponse;
+
 import java.util.List;
 
 /**
@@ -21,7 +22,7 @@ public interface CreateUpdateInformationContract {
 
         void onCancel();
 
-        void onSearchSuccess(GetRegiterSubInfoResponse data);
+        void onSearchSuccess(GetRegisterSubInfoResponse data);
 
         void onSearchError(BaseException error);
 

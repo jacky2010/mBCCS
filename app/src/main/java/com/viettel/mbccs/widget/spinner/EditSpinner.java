@@ -27,13 +27,13 @@ import java.util.List;
 
 public class EditSpinner extends RelativeLayout implements View.OnClickListener, AdapterView.OnItemClickListener, TextWatcher {
 
-    private EditText editText;
+    private EditText mEditText;
     private ImageView mRightIv;
     private View mRightImageTopView;
     private Context mContext;
     private ListPopupWindow popupWindow;
-    private BaseEditSpinnerAdapter adapter;
-    private TypedArray tArray;
+    private BaseEditSpinnerAdapter mAdapter;
+    private TypedArray mTypedArray;
     private boolean isPopupWindowShowing;
     //private Animation mAnimation;
     //private Animation mResetAnimation;
@@ -47,24 +47,24 @@ public class EditSpinner extends RelativeLayout implements View.OnClickListener,
 
 
     public void setItemData(List<String> data) {
-        adapter = new SpinnerAdapter(mContext, data);
-        setAdapter(adapter);
+        mAdapter = new SpinnerAdapter(mContext, data);
+        setAdapter(mAdapter);
     }
 
     public void setText(String text) {
-        editText.setText(text);
+        mEditText.setText(text);
     }
 
     public void setTextColor(@ColorInt int color) {
-        editText.setTextColor(color);
+        mEditText.setTextColor(color);
     }
 
     public String getText() {
-        return editText.getText().toString();
+        return mEditText.getText().toString();
     }
 
     public void setHint(String hint) {
-        editText.setHint(hint);
+        mEditText.setHint(hint);
     }
 
     public void setRightImageDrawable(Drawable drawable) {
@@ -75,9 +75,9 @@ public class EditSpinner extends RelativeLayout implements View.OnClickListener,
         mRightIv.setImageResource(res);
     }
 
-    public void setAdapter(BaseEditSpinnerAdapter adapter) {
-        this.adapter = adapter;
-        setBaseAdapter(this.adapter);
+    public void setAdapter(BaseEditSpinnerAdapter mAdapter) {
+        this.mAdapter = mAdapter;
+        setBaseAdapter(this.mAdapter);
     }
 
     private void initAnimation() {
@@ -91,32 +91,33 @@ public class EditSpinner extends RelativeLayout implements View.OnClickListener,
 
     private void initView(AttributeSet attrs) {
         LayoutInflater.from(mContext).inflate(R.layout.edit_spinner, this);
-        editText = (EditText) findViewById(R.id.edit_sipnner_edit);
+        mEditText = (EditText) findViewById(R.id.edit_sipnner_edit);
         mRightIv = (ImageView) findViewById(R.id.edit_spinner_expand);
         mRightImageTopView = findViewById(R.id.edit_spinner_expand_above);
         mRightImageTopView.setOnClickListener(this);
         mRightIv.setOnClickListener(this);
         //mRightIv.setRotation(90);
-        editText.addTextChangedListener(this);
-        tArray = mContext.obtainStyledAttributes(attrs,
+        mEditText.addTextChangedListener(this);
+        mTypedArray = mContext.obtainStyledAttributes(attrs,
                 R.styleable.EditSpinner);
-        editText.setHint(tArray.getString(R.styleable.EditSpinner_hint_text));
-        int imageId = tArray.getResourceId(R.styleable.EditSpinner_rightImage, 0);
+        mEditText.setHint(mTypedArray.getString(R.styleable.EditSpinner_hint_text));
+        int imageId = mTypedArray.getResourceId(R.styleable.EditSpinner_rightImage, 0);
         if (imageId != 0) {
             mRightIv.setImageResource(imageId);
         }
-        int bg = tArray.getResourceId(R.styleable.EditSpinner_Background, 0);
+        mRightIv.setVisibility(imageId == 0 ? GONE : VISIBLE);
+        int bg = mTypedArray.getResourceId(R.styleable.EditSpinner_Background, 0);
         if (bg != 0) {
-            editText.setBackgroundResource(bg);
+            mEditText.setBackgroundResource(bg);
         }
-        tArray.recycle();
+        mTypedArray.recycle();
     }
 
-    private final void setBaseAdapter(BaseAdapter adapter) {
+    private final void setBaseAdapter(BaseAdapter mAdapter) {
         if (popupWindow == null) {
             initPopupWindow();
         }
-        popupWindow.setAdapter(adapter);
+        popupWindow.setAdapter(mAdapter);
     }
 
     private void initPopupWindow() {
@@ -138,7 +139,7 @@ public class EditSpinner extends RelativeLayout implements View.OnClickListener,
         popupWindow.setPromptPosition(ListPopupWindow.POSITION_PROMPT_BELOW);
         popupWindow.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
         popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-        popupWindow.setAnchorView(editText);
+        popupWindow.setAnchorView(mEditText);
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
@@ -151,8 +152,7 @@ public class EditSpinner extends RelativeLayout implements View.OnClickListener,
 
     @Override
     public final void onClick(View v) {
-        System.out.println("popupWindow");
-        if (adapter == null || popupWindow == null) {
+        if (mAdapter == null || popupWindow == null) {
             return;
         }
         if (v.getId() == R.id.edit_spinner_expand_above) {
@@ -170,7 +170,7 @@ public class EditSpinner extends RelativeLayout implements View.OnClickListener,
 
     @Override
     public final void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        editText.setText(((BaseEditSpinnerAdapter) parent.getAdapter()).getItemString(position));
+       // mEditText.setText(((BaseEditSpinnerAdapter) parent.getAdapter()).getItemString(position));
         popupWindow.dismiss();
     }
 
@@ -186,23 +186,25 @@ public class EditSpinner extends RelativeLayout implements View.OnClickListener,
 
     @Override
     public final void afterTextChanged(Editable s) {
-        String key = s.toString();
-        editText.setSelection(key.length());
-        if (!TextUtils.isEmpty(key)) {
-            showFilterData(key);
-        } else {
-            popupWindow.dismiss();
-        }
+//        String key = s.toString();
+//        mEditText.setSelection(key.length());
+//        if (!TextUtils.isEmpty(key)) {
+//            showFilterData(key);
+//        } else {
+//            if (popupWindow != null) {
+//                popupWindow.dismiss();
+//            }
+//        }
     }
 
     private void showFilterData(String key) {
-        if (popupWindow == null || adapter == null || adapter.getEditSpinnerFilter() == null) {
+        if (popupWindow == null || mAdapter == null || mAdapter.getEditSpinnerFilter() == null) {
             if (popupWindow != null) {
                 popupWindow.dismiss();
             }
             return;
         }
-        if (adapter.getEditSpinnerFilter().onFilter(key)) {
+        if (mAdapter.getEditSpinnerFilter().onFilter(key)) {
             popupWindow.dismiss();
         } else {
             popupWindow.show();
@@ -211,8 +213,8 @@ public class EditSpinner extends RelativeLayout implements View.OnClickListener,
     }
 
     public void setEnabledEditText(boolean isEnable) {
-        if (editText != null) {
-            editText.setEnabled(isEnable);
+        if (mEditText != null) {
+            mEditText.setEnabled(isEnable);
         }
     }
 }

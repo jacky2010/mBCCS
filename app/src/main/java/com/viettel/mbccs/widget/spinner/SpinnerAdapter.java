@@ -34,7 +34,7 @@ public class SpinnerAdapter extends BaseEditSpinnerAdapter implements EditSpinne
 
     @Override
     public String getItemString(int position) {
-        return mSpinnerData.get(mIndex[position]);
+        return mSpinnerData.get(position);
     }
 
     @Override
