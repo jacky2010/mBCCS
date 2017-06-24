@@ -15,6 +15,7 @@ import com.viettel.mbccs.data.model.KeyValue;
 import com.viettel.mbccs.data.source.SellAnyPayRepository;
 import com.viettel.mbccs.screen.common.adapter.PayAmountListAdapter;
 import com.viettel.mbccs.utils.Common;
+import com.viettel.mbccs.utils.SpinnerAdapter;
 import com.viettel.mbccs.utils.ValidateUtils;
 import com.viettel.mbccs.variable.Constants;
 
@@ -41,7 +42,7 @@ public class CreateTransAnyPayPresenter implements CreateTransAnyPayContract.Pre
     private Context context;
     private CreateTransAnyPayContract.ViewModel viewModel;
 
-    private ArrayAdapter<String> custTypeAdapter;
+    private SpinnerAdapter<String> custTypeAdapter;
     private PayAmountListAdapter payAmountAdapter;
 
     public ObservableField<String> customerType;
@@ -109,8 +110,7 @@ public class CreateTransAnyPayPresenter implements CreateTransAnyPayContract.Pre
         custTypesList = new ArrayList<>();
         lstPayAmount = new ArrayList<>();
 
-        custTypeAdapter = new ArrayAdapter<>(context, R.layout.item_spinner, android.R.id.text1,
-                custTypesList);
+        custTypeAdapter = new SpinnerAdapter<>(context, custTypesList);
         payAmountAdapter = new PayAmountListAdapter(context,
                 lstPayAmount);
 

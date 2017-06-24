@@ -45,7 +45,7 @@
                     android:id="@+id/spCustType"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:adapter="@{presenter.custTypeAdapter}" />
+                    app:adapter="@{presenter.custTypeAdapter}" />
 
                 <!--distributor-->
                 <LinearLayout
@@ -135,7 +135,7 @@
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/spDefaultAmountList"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="@dimen/dp_40"
                         android:layout_gravity="center"
                         android:recyclerAdapter="@{presenter.payAmountListAdapter}"
@@ -188,9 +188,8 @@
                         android:id="@+id/ll_payment_cash"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_marginRight="@dimen/dp_5"
                         android:layout_weight="1"
-                        android:background="@drawable/bg_border"
+                        android:background="@{presenter.payMethod == presenter.PAY_METHOD_CASH ? @drawable/bg_pay_method_selected : @drawable/bg_pay_method_none}"
                         android:onClick="@{(v) -> presenter.onPayMethodChanged(v)}"
                         android:orientation="vertical">
 
@@ -217,10 +216,8 @@
                         android:id="@+id/ll_payment_bank_plus"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_marginLeft="@dimen/dp_5"
-                        android:layout_marginRight="@dimen/dp_5"
                         android:layout_weight="1"
-                        android:background="@drawable/bg_border"
+                        android:background="@{presenter.payMethod == presenter.PAY_METHOD_BANK_PLUS ? @drawable/bg_pay_method_selected : @drawable/bg_pay_method_none}"
                         android:onClick="@{(v) -> presenter.onPayMethodChanged(v)}"
                         android:orientation="vertical">
 
@@ -247,9 +244,8 @@
                         android:id="@+id/ll_payment_wallet"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_marginLeft="@dimen/dp_5"
                         android:layout_weight="1"
-                        android:background="@drawable/bg_border"
+                        android:background="@{presenter.payMethod == presenter.PAY_METHOD_E_WALLET ? @drawable/bg_pay_method_selected : @drawable/bg_pay_method_none}"
                         android:onClick="@{(v) -> presenter.onPayMethodChanged(v)}"
                         android:orientation="vertical">
 
@@ -275,11 +271,18 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_20"
-                    android:layout_marginRight="@dimen/dp_20"
-                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_height="@dimen/dp_20"
                     android:orientation="vertical"
+                    android:visibility="@{presenter.payMethod == presenter.PAY_METHOD_CASH ? View.VISIBLE : View.GONE}" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dp_20"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/dp_20"
+                    android:paddingRight="@dimen/dp_20"
+                    android:paddingTop="@dimen/dp_20"
                     android:visibility="@{presenter.payMethod == presenter.PAY_METHOD_BANK_PLUS ? View.VISIBLE : View.GONE}">
 
                     <RadioGroup
@@ -317,10 +320,11 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_20"
-                    android:layout_marginRight="@dimen/dp_20"
-                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_marginBottom="@dimen/dp_20"
                     android:orientation="vertical"
+                    android:paddingLeft="@dimen/dp_20"
+                    android:paddingRight="@dimen/dp_20"
+                    android:paddingTop="@dimen/dp_20"
                     android:visibility="@{presenter.payMethod == presenter.PAY_METHOD_E_WALLET ? View.VISIBLE : View.GONE}">
 
                     <TextView
@@ -342,10 +346,6 @@
                         app:error="@{presenter.walletIsdnError}" />
                 </LinearLayout>
                 <!--/pay methods-->
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_20" />
 
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
@@ -372,8 +372,9 @@
                                 android:textSize="@dimen/default_label_text_size" />
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="1"
                                 android:gravity="right"
                                 android:text="@{presenter.totalAmount}"
                                 android:textSize="@dimen/default_label_text_size" />
@@ -390,9 +391,10 @@
                                 android:textSize="@dimen/default_label_text_size" />
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="right"
+                                android:layout_weight="1"
+                                android:gravity="right"
                                 android:text="@{presenter.discountAmount}"
                                 android:textSize="@dimen/default_label_text_size" />
                         </TableRow>
@@ -408,11 +410,11 @@
                                 android:textSize="@dimen/default_label_text_size" />
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:text="@{presenter.payAmount}"
-                                android:textSize="@dimen/default_label_text_size" />
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:text="@{presenter.payAmount}" />
                         </TableRow>
                     </TableLayout>
                 </android.support.v7.widget.CardView>
@@ -423,11 +425,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="@dimen/dp_20"
-                android:layout_marginTop="@dimen/dp_20"
+                android:layout_margin="@dimen/dp_20"
                 android:onClick="@{ () -> presenter.createTransaction() }"
                 android:text="@string/sell_anypay_label_sell"
                 android:textSize="@dimen/default_label_text_size" />
+
         </LinearLayout>
     </ScrollView>
 </layout>

@@ -70,4 +70,6 @@
 
     <!-- Tool bar -->
     <color name="default_item_tool_bar_text_color">#ffffff</color>
+
+    <color name="pay_method_selected">#AED6F1</color>
 </resources>
