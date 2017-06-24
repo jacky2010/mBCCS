@@ -70,6 +70,7 @@
                     android:paddingEnd="@dimen/dp_8"
                     android:paddingStart="@dimen/dp_8"
                     android:text="@string/kpp_feedback_msg_info_empty_feedback"
+                    android:textSize="@dimen/default_label_text_size"
                     app:layout_marginLeftPercent="10%"
                     app:layout_marginRightPercent="10%" />
             </android.support.v7.widget.CardView>

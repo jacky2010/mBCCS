@@ -58,7 +58,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:textSize="@dimen/default_label_text_size" />
 
                     <TableLayout
                         android:layout_width="match_parent"
@@ -70,13 +71,15 @@
                                 style="@style/ItemBilling"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/branches_add_label_channel_type" />
+                                android:text="@string/branches_add_label_channel_type"
+                                android:textSize="@dimen/default_label_text_size" />
 
                             <com.viettel.mbccs.widget.CustomTextView
                                 android:id="@+id/tv_channel_type"
                                 style="@style/ItemBilling"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/default_label_text_size" />
                         </TableRow>
 
                         <TableRow>
@@ -85,13 +88,15 @@
                                 style="@style/ItemBilling"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/branches_add_label_phone_no" />
+                                android:text="@string/branches_add_label_phone_no"
+                                android:textSize="@dimen/default_label_text_size" />
 
                             <com.viettel.mbccs.widget.CustomTextView
                                 android:id="@+id/tv_phone_no"
                                 style="@style/ItemBilling"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/default_label_text_size" />
                         </TableRow>
 
                         <TableRow>
@@ -100,13 +105,15 @@
                                 style="@style/ItemBilling"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/branches_add_label_document_type" />
+                                android:text="@string/branches_add_label_document_type"
+                                android:textSize="@dimen/default_label_text_size" />
 
                             <com.viettel.mbccs.widget.CustomTextView
                                 android:id="@+id/tv_document_type"
                                 style="@style/ItemBilling"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/default_label_text_size" />
                         </TableRow>
 
                         <TableRow>
@@ -115,13 +122,15 @@
                                 style="@style/ItemBilling"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/branches_add_label_address" />
+                                android:text="@string/branches_add_label_address"
+                                android:textSize="@dimen/default_label_text_size" />
 
                             <com.viettel.mbccs.widget.CustomTextView
                                 android:id="@+id/tv_address"
                                 style="@style/ItemBilling"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/default_label_text_size" />
                         </TableRow>
 
                         <TableRow>
@@ -130,13 +139,15 @@
                                 style="@style/ItemBilling"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/branches_add_label_location" />
+                                android:text="@string/branches_add_label_location"
+                                android:textSize="@dimen/default_label_text_size" />
 
                             <com.viettel.mbccs.widget.CustomTextView
                                 android:id="@+id/tv_location"
                                 style="@style/ItemBilling"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/default_label_text_size" />
                         </TableRow>
 
                         <TableRow>
@@ -145,13 +156,15 @@
                                 style="@style/ItemBilling"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/branches_add_label_manager" />
+                                android:text="@string/branches_add_label_manager"
+                                android:textSize="@dimen/default_label_text_size" />
 
                             <com.viettel.mbccs.widget.CustomTextView
                                 android:id="@+id/tv_manager"
                                 style="@style/ItemBilling"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/default_label_text_size" />
                         </TableRow>
 
                         <TableRow>
@@ -160,13 +173,15 @@
                                 style="@style/ItemBilling"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/branches_add_label_bts" />
+                                android:text="@string/branches_add_label_bts"
+                                android:textSize="@dimen/default_label_text_size" />
 
                             <com.viettel.mbccs.widget.CustomTextView
                                 android:id="@+id/tv_bts"
                                 style="@style/ItemBilling"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/default_label_text_size" />
                         </TableRow>
                     </TableLayout>
                 </LinearLayout>
@@ -181,7 +196,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_margin="@dimen/dp_20"
-        android:text="@string/common_label_close" />
+        android:text="@string/common_label_close"
+        android:textSize="@dimen/default_label_text_size"/>
 
     <!--</LinearLayout>-->
 </LinearLayout>

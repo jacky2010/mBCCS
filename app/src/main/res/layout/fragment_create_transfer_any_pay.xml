@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_8"
                 android:text="@string/transfer_anypay_label_trans_type"
-                android:textSize="@dimen/sp_16" />
+                android:textSize="@dimen/default_label_text_size" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -52,6 +52,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:checked="@={presenter.isRefill}"
+                        android:textSize="@dimen/default_radio_text_size"
                         android:onCheckedChanged="@{(rb, isChecked) -> presenter.onTransTypeChanged(rb, isChecked)}"
                         android:text="@string/transfer_anypay_label_refill" />
 
@@ -60,18 +61,19 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textSize="@dimen/default_radio_text_size"
                         android:onCheckedChanged="@{(rb, isChecked) -> presenter.onTransTypeChanged(rb, isChecked)}"
                         android:text="@string/transfer_anypay_label_transfer" />
                 </RadioGroup>
             </LinearLayout>
 
-            <TextView
+            <com.viettel.mbccs.widget.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_8"
                 android:text="@string/sell_anypay_label_isdn"
                 android:textColor="@color/black"
-                android:textSize="@dimen/sp_16" />
+                android:textSize="@dimen/default_label_text_size" />
 
             <com.viettel.mbccs.widget.CustomEdittext
                 style="@style/inputStyle"
@@ -79,17 +81,18 @@
                 android:layout_height="@dimen/dp_40"
                 android:inputType="phone"
                 android:maxLength="@integer/max_length_isdn"
+                android:textSize="@dimen/default_content_text_size"
                 android:text="@={ presenter.isdn }"
                 app:error="@{presenter.isdnError}" />
 
             <!--pay methods-->
-            <TextView
+            <com.viettel.mbccs.widget.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_8"
                 android:text="@string/sell_anypay_label_amount_default"
                 android:textColor="@color/black"
-                android:textSize="@dimen/sp_16" />
+                android:textSize="@dimen/default_label_text_size" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -117,6 +120,7 @@
                         android:enabled="@{presenter.otherAmountEnabled}"
                         android:inputType="number"
                         android:maxLength="@integer/max_length_isdn"
+                        android:textSize="@dimen/default_content_text_size"
                         android:text="@={presenter.otherAmount}"
                         app:error="@{presenter.otherAmountError}" />
 
@@ -125,7 +129,8 @@
                         android:layout_height="wrap_content"
                         android:enabled="@{presenter.otherAmountEnabled}"
                         android:paddingLeft="@dimen/dp_6"
-                        android:text="($)" />
+                        android:text="($)"
+                        android:textSize="@dimen/default_label_text_size"/>
                 </LinearLayout>
             </LinearLayout>
             <!--/pay methods-->
@@ -143,6 +148,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_margin="@dimen/dp_20"
+            android:textSize="@dimen/default_label_text_size"
             android:onClick="@{ () -> presenter.createTransaction() }"
             android:text="@string/sell_anypay_label_sell" />
     </LinearLayout>

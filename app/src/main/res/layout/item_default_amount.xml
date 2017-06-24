@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:textSize="@dimen/default_radio_text_size"
             android:text="@{presenter.item.title}"
             android:checked="@{presenter.item.selected}"/>
     </LinearLayout>

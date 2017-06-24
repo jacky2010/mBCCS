@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tbIconLeft="@drawable/ic_close_white_24dp"
-        app:tbTitle="Thông báo" />
+        app:tbTitle="@string/common_label_success" />
 
     <LinearLayout
         android:id="@+id/view_header"
@@ -45,6 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:textSize="@dimen/default_label_text_size"
             android:gravity="center" />
 
         <com.viettel.mbccs.widget.CustomTextView
@@ -52,6 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dp_20"
             android:gravity="center"
+            android:textSize="@dimen/default_label_text_size"
             android:text="" />
     </LinearLayout>
 
@@ -61,6 +63,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:textSize="@dimen/default_label_text_size"
         android:layout_margin="@dimen/dp_20"
         android:text="@string/common_label_close" />
 

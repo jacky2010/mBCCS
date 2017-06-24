@@ -30,16 +30,16 @@
                 android:layout_weight="1"
                 android:background="@color/white"
                 android:orientation="vertical"
+                android:paddingBottom="@dimen/dp_16"
                 android:paddingLeft="@dimen/dp_16"
-                android:paddingRight="@dimen/dp_16"
-                android:paddingBottom="@dimen/dp_16">
+                android:paddingRight="@dimen/dp_16">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
                     android:text="@string/kpp_feedback_label_cust_feedback"
-                    android:textSize="@dimen/sp_16" />
+                    android:textSize="@dimen/default_label_text_size" />
 
                 <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="match_parent"
@@ -50,8 +50,9 @@
                     android:padding="@dimen/dp_2"
                     android:scrollHorizontally="false"
                     android:scrollbars="vertical"
+                    android:text="@={ presenter.feedback }"
                     android:textColor="@color/black"
-                    android:text="@={ presenter.feedback }" />
+                    android:textSize="@dimen/default_label_text_size" />
             </LinearLayout>
 
             <View
@@ -65,9 +66,9 @@
                 android:layout_weight="1"
                 android:background="@color/white"
                 android:orientation="vertical"
+                android:paddingBottom="@dimen/dp_16"
                 android:paddingLeft="@dimen/dp_16"
-                android:paddingRight="@dimen/dp_16"
-                android:paddingBottom="@dimen/dp_16">
+                android:paddingRight="@dimen/dp_16">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -75,7 +76,7 @@
                     android:layout_marginTop="@dimen/dp_8"
                     android:paddingTop="@dimen/dp_10"
                     android:text="@string/kpp_feedback_label_response_feedback"
-                    android:textSize="@dimen/sp_16" />
+                    android:textSize="@dimen/default_label_text_size" />
 
                 <com.viettel.mbccs.widget.CustomEdittext
                     style="@style/inputStyle"
@@ -86,8 +87,9 @@
                     android:inputType="textMultiLine"
                     android:maxLength="@integer/max_length_feedback_content"
                     android:padding="@dimen/dp_2"
-                    android:textColor="@color/black"
                     android:text="@={ presenter.response }"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/default_label_text_size"
                     app:error="@{presenter.responseError}" />
             </LinearLayout>
 
@@ -107,7 +109,8 @@
                     android:layout_marginTop="@dimen/dp_20"
                     android:layout_weight="1"
                     android:onClick="@{ () -> presenter.close() }"
-                    android:text="@string/close" />
+                    android:text="@string/close"
+                    android:textSize="@dimen/default_label_text_size" />
 
                 <com.viettel.mbccs.widget.CustomButton
                     style="@style/button_positive"
@@ -120,7 +123,8 @@
                     android:layout_marginTop="@dimen/dp_20"
                     android:layout_weight="1"
                     android:onClick="@{ () -> presenter.sendResponse() }"
-                    android:text="@string/kpp_feedback_response_feedback" />
+                    android:text="@string/kpp_feedback_response_feedback"
+                    android:textSize="@dimen/default_label_text_size" />
             </LinearLayout>
         </LinearLayout>
 

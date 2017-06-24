@@ -27,19 +27,19 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/dp_20"
                 android:background="@color/white"
                 android:orientation="vertical"
+                android:paddingBottom="@dimen/dp_20"
                 android:paddingLeft="@dimen/dp_16"
                 android:paddingRight="@dimen/dp_16">
 
-                <TextView
+                <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
                     android:text="@string/sell_anypay_label_cust_type"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
+                    android:textSize="@dimen/default_label_text_size" />
 
                 <com.viettel.mbccs.widget.SpinnerWithBorder
                     android:id="@+id/spCustType"
@@ -60,14 +60,14 @@
                         android:layout_marginTop="@dimen/dp_8"
                         android:text="@string/sell_anypay_label_branch"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
+                        android:textSize="@dimen/default_label_text_size" />
 
                     <com.viettel.mbccs.widget.FakeSpinner
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:onClick="@{()->presenter.chooseBranch()}"
-                        app:hint="@{@string/sell_anypay_hint_branch}"
-                        android:text="@{presenter.branch}" />
+                        android:text="@{presenter.branch}"
+                        app:hint="@{@string/sell_anypay_hint_branch}" />
 
                     <com.viettel.mbccs.widget.CustomTextView
                         android:layout_width="match_parent"
@@ -75,14 +75,14 @@
                         android:layout_marginTop="@dimen/dp_8"
                         android:text="@string/sell_anypay_label_manager"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
+                        android:textSize="@dimen/default_label_text_size" />
 
                     <com.viettel.mbccs.widget.FakeSpinner
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:onClick="@{()->presenter.chooseManager()}"
-                        app:hint="@{@string/sell_anypay_hint_manager}"
-                        android:text="@{presenter.manager}" />
+                        android:text="@{presenter.manager}"
+                        app:hint="@{@string/sell_anypay_hint_manager}" />
 
                     <com.viettel.mbccs.widget.CustomTextView
                         android:layout_width="match_parent"
@@ -90,24 +90,24 @@
                         android:layout_marginTop="@dimen/dp_8"
                         android:text="@string/sell_anypay_label_channel"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
+                        android:textSize="@dimen/default_label_text_size" />
 
                     <com.viettel.mbccs.widget.FakeSpinner
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:onClick="@{()->presenter.chooseChannel()}"
-                        app:hint="@{@string/sell_anypay_hint_channel}"
-                        android:text="@{presenter.channel}" />
+                        android:text="@{presenter.channel}"
+                        app:hint="@{@string/sell_anypay_hint_channel}" />
                 </LinearLayout>
                 <!--/distributor-->
 
-                <TextView
+                <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
                     android:text="@string/sell_anypay_label_isdn"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
+                    android:textSize="@dimen/default_label_text_size" />
 
                 <com.viettel.mbccs.widget.CustomEdittext
                     style="@style/inputStyle"
@@ -116,16 +116,17 @@
                     android:inputType="phone"
                     android:maxLength="@integer/max_length_isdn"
                     android:text="@={ presenter.isdn }"
+                    android:textSize="@dimen/default_content_text_size"
                     app:error="@{presenter.isdnError}" />
 
                 <!--pay methods-->
-                <TextView
+                <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
                     android:text="@string/sell_anypay_label_amount_default"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
+                    android:textSize="@dimen/default_label_text_size" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -154,6 +155,7 @@
                             android:inputType="number"
                             android:maxLength="@integer/max_length_isdn"
                             android:text="@={presenter.otherAmount}"
+                            android:textSize="@dimen/default_content_text_size"
                             app:error="@{presenter.otherAmountError}" />
 
                         <TextView
@@ -161,17 +163,18 @@
                             android:layout_height="wrap_content"
                             android:enabled="@{presenter.otherAmountEnabled}"
                             android:paddingLeft="@dimen/dp_6"
-                            android:text="($)" />
+                            android:text="($)"
+                            android:textSize="@dimen/default_label_text_size" />
                     </LinearLayout>
                 </LinearLayout>
 
-                <TextView
+                <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
                     android:text="@string/sell_anypay_label_pay_method"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
+                    android:textSize="@dimen/default_label_text_size" />
 
                 <RadioGroup
                     android:id="@+id/radio_payment"
@@ -188,8 +191,8 @@
                         android:layout_marginRight="@dimen/dp_5"
                         android:layout_weight="1"
                         android:background="@drawable/bg_border"
-                        android:orientation="vertical"
-                        android:onClick="@{(v) -> presenter.onPayMethodChanged(v)}">
+                        android:onClick="@{(v) -> presenter.onPayMethodChanged(v)}"
+                        android:orientation="vertical">
 
                         <ImageView
                             android:id="@+id/image_cash"
@@ -207,7 +210,7 @@
                             android:gravity="center"
                             android:onCheckedChanged="@{(rb, isChecked) -> presenter.onPayMethodChanged(rb, isChecked)}"
                             android:text="@string/sell_anypay_label_cash"
-                            android:textSize="@dimen/sp_12" />
+                            android:textSize="@dimen/default_radio_text_size" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -218,8 +221,8 @@
                         android:layout_marginRight="@dimen/dp_5"
                         android:layout_weight="1"
                         android:background="@drawable/bg_border"
-                        android:orientation="vertical"
-                        android:onClick="@{(v) -> presenter.onPayMethodChanged(v)}">
+                        android:onClick="@{(v) -> presenter.onPayMethodChanged(v)}"
+                        android:orientation="vertical">
 
                         <ImageView
                             android:id="@+id/image_bank_plus"
@@ -237,7 +240,7 @@
                             android:gravity="center"
                             android:onCheckedChanged="@{(rb, isChecked) -> presenter.onPayMethodChanged(rb, isChecked)}"
                             android:text="@string/sell_anypay_label_bankplus"
-                            android:textSize="@dimen/sp_12" />
+                            android:textSize="@dimen/default_radio_text_size" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -247,8 +250,8 @@
                         android:layout_marginLeft="@dimen/dp_5"
                         android:layout_weight="1"
                         android:background="@drawable/bg_border"
-                        android:orientation="vertical"
-                        android:onClick="@{(v) -> presenter.onPayMethodChanged(v)}">
+                        android:onClick="@{(v) -> presenter.onPayMethodChanged(v)}"
+                        android:orientation="vertical">
 
                         <ImageView
                             android:id="@+id/image_wallet"
@@ -266,7 +269,7 @@
                             android:gravity="center"
                             android:onCheckedChanged="@{(rb, isChecked) -> presenter.onPayMethodChanged(rb, isChecked)}"
                             android:text="@string/sell_anypay_label_ewallet"
-                            android:textSize="@dimen/sp_12" />
+                            android:textSize="@dimen/default_radio_text_size" />
                     </LinearLayout>
                 </RadioGroup>
 
@@ -289,15 +292,15 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:checked="@{presenter.defaultBankIsdnChecked}"
-                            android:textSize="@dimen/sp_16"
-                            android:text="@string/sell_anypay_label_phone_no" />
+                            android:text="@string/sell_anypay_label_phone_no"
+                            android:textSize="@dimen/default_radio_text_size" />
 
                         <RadioButton
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:textSize="@dimen/sp_16"
-                            android:text="@string/sell_anypay_label_acc_no" />
+                            android:text="@string/sell_anypay_label_acc_no"
+                            android:textSize="@dimen/default_radio_text_size" />
                     </RadioGroup>
 
                     <com.viettel.mbccs.widget.CustomEdittext
@@ -307,6 +310,7 @@
                         android:inputType="number"
                         android:maxLength="@integer/max_length_isdn"
                         android:text="@={presenter.bankValue}"
+                        android:textSize="@dimen/default_content_text_size"
                         app:error="@{presenter.bankValueError}" />
                 </LinearLayout>
 
@@ -325,7 +329,7 @@
                         android:layout_marginTop="@dimen/dp_8"
                         android:text="@string/sell_anypay_label_isdn_wallet"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
+                        android:textSize="@dimen/default_label_text_size" />
 
                     <com.viettel.mbccs.widget.CustomEdittext
                         style="@style/inputStyle"
@@ -334,6 +338,7 @@
                         android:inputType="number"
                         android:maxLength="@integer/max_length_isdn"
                         android:text="@={presenter.walletIsdn}"
+                        android:textSize="@dimen/default_content_text_size"
                         app:error="@{presenter.walletIsdnError}" />
                 </LinearLayout>
                 <!--/pay methods-->
@@ -363,13 +368,15 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/sell_anypay_label_total_amount" />
+                                android:text="@string/sell_anypay_label_total_amount"
+                                android:textSize="@dimen/default_label_text_size" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="right"
-                                android:text="@{presenter.totalAmount}" />
+                                android:text="@{presenter.totalAmount}"
+                                android:textSize="@dimen/default_label_text_size" />
                         </TableRow>
 
                         <TableRow
@@ -379,13 +386,15 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/sell_anypay_label_discount" />
+                                android:text="@string/sell_anypay_label_discount"
+                                android:textSize="@dimen/default_label_text_size" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right"
-                                android:text="@{presenter.discountAmount}" />
+                                android:text="@{presenter.discountAmount}"
+                                android:textSize="@dimen/default_label_text_size" />
                         </TableRow>
 
                         <TableRow
@@ -395,13 +404,15 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/sell_anypay_label_pay_amount" />
+                                android:text="@string/sell_anypay_label_pay_amount"
+                                android:textSize="@dimen/default_label_text_size" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right"
-                                android:text="@{presenter.payAmount}" />
+                                android:text="@{presenter.payAmount}"
+                                android:textSize="@dimen/default_label_text_size" />
                         </TableRow>
                     </TableLayout>
                 </android.support.v7.widget.CardView>
@@ -415,7 +426,8 @@
                 android:layout_marginBottom="@dimen/dp_20"
                 android:layout_marginTop="@dimen/dp_20"
                 android:onClick="@{ () -> presenter.createTransaction() }"
-                android:text="@string/sell_anypay_label_sell" />
+                android:text="@string/sell_anypay_label_sell"
+                android:textSize="@dimen/default_label_text_size" />
         </LinearLayout>
     </ScrollView>
 </layout>

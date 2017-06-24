@@ -53,7 +53,7 @@
                         android:gravity="center_vertical"
                         android:text="@string/change_sim_label_cust_info"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16"
+                        android:textSize="@dimen/default_label_text_size"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -71,7 +71,7 @@
                         android:layout_marginTop="@dimen/dp_8"
                         android:text="@string/change_sim_label_cust_name"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
+                        android:textSize="@dimen/default_label_text_size" />
 
                     <com.viettel.mbccs.widget.CustomTextView
                         style="@style/inputStyle"
@@ -80,7 +80,8 @@
                         android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                         android:error="@{presenter.customerNameError}"
                         android:maxLength="@integer/max_length_customer_name"
-                        android:text="@={ presenter.customerName }" />
+                        android:text="@={ presenter.customerName }"
+                        android:textSize="@dimen/default_label_text_size" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -88,7 +89,7 @@
                         android:layout_marginTop="@dimen/dp_8"
                         android:text="@string/change_sim_label_document_id"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
+                        android:textSize="@dimen/default_label_text_size" />
 
                     <com.viettel.mbccs.widget.CustomTextView
                         style="@style/inputStyle"
@@ -97,7 +98,8 @@
                         android:error="@{ presenter.documentIdError }"
                         android:inputType="number"
                         android:maxLength="@integer/max_length_document_no"
-                        android:text="@={ presenter.documentId }" />
+                        android:text="@={ presenter.documentId }"
+                        android:textSize="@dimen/default_label_text_size" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -105,7 +107,7 @@
                         android:layout_marginTop="@dimen/dp_8"
                         android:text="@string/change_sim_label_address"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
+                        android:textSize="@dimen/default_label_text_size" />
 
                     <com.viettel.mbccs.widget.CustomTextView
                         style="@style/inputStyle"
@@ -118,7 +120,8 @@
                         android:maxLines="3"
                         android:minLines="3"
                         android:scrollbars="vertical"
-                        android:text="@={ presenter.customerAddress }" />
+                        android:text="@={ presenter.customerAddress }"
+                        android:textSize="@dimen/default_label_text_size" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -126,7 +129,7 @@
                         android:layout_marginTop="@dimen/dp_8"
                         android:text="@string/change_sim_label_document_image"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
+                        android:textSize="@dimen/default_label_text_size" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -160,7 +163,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="@string/change_sim_label_document_image1"
-                                android:textAlignment="center" />
+                                android:textAlignment="center"
+                                android:textSize="@dimen/default_label_text_size" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -188,7 +192,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="@string/change_sim_label_document_image2"
-                                android:textAlignment="center" />
+                                android:textAlignment="center"
+                                android:textSize="@dimen/default_label_text_size" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -268,7 +273,7 @@
                         android:gravity="center_vertical"
                         android:text="@string/change_sim_label_sim_info"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16"
+                        android:textSize="@dimen/default_label_text_size"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -286,7 +291,7 @@
                         android:layout_marginTop="@dimen/dp_8"
                         android:text="@string/change_sim_label_old_serial"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
+                        android:textSize="@dimen/default_label_text_size" />
 
                     <com.viettel.mbccs.widget.CustomTextView
                         style="@style/inputStyle"
@@ -299,7 +304,8 @@
                         android:maxLines="3"
                         android:minLines="3"
                         android:scrollbars="vertical"
-                        android:text="@={ presenter.oldSimSerial }" />
+                        android:text="@={ presenter.oldSimSerial }"
+                        android:textSize="@dimen/default_label_text_size" />
 
                     <TextView
                         android:id="@+id/txtNewSerial"
@@ -308,7 +314,7 @@
                         android:layout_marginTop="@dimen/dp_8"
                         android:text="@string/change_sim_label_new_serial"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
+                        android:textSize="@dimen/default_label_text_size" />
 
                     <com.viettel.mbccs.widget.CustomEdittext
                         style="@style/inputStyle"
@@ -318,7 +324,8 @@
                         android:inputType="number"
                         android:maxLength="@integer/max_length_sim_serial"
                         android:scrollbars="vertical"
-                        android:text="@={ presenter.newSimSerial }" />
+                        android:text="@={ presenter.newSimSerial }"
+                        android:textSize="@dimen/default_content_text_size" />
 
                 </LinearLayout>
 
@@ -358,7 +365,7 @@
                             android:gravity="center_vertical"
                             android:text="@string/change_sim_label_contact_info"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16"
+                            android:textSize="@dimen/default_label_text_size"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -376,7 +383,7 @@
                             android:layout_marginTop="@dimen/dp_8"
                             android:text="@string/change_sim_label_contact_1"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
+                            android:textSize="@dimen/default_label_text_size" />
 
                         <com.viettel.mbccs.widget.CustomEdittext
                             style="@style/inputStyle"
@@ -386,7 +393,8 @@
                             android:inputType="phone"
                             android:maxLength="@integer/max_length_isdn"
                             android:scrollbars="vertical"
-                            android:text="@={ presenter.contact1 }" />
+                            android:text="@={ presenter.contact1 }"
+                            android:textSize="@dimen/default_content_text_size" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -394,7 +402,7 @@
                             android:layout_marginTop="@dimen/dp_8"
                             android:text="@string/change_sim_label_contact_2"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
+                            android:textSize="@dimen/default_label_text_size" />
 
                         <com.viettel.mbccs.widget.CustomEdittext
                             style="@style/inputStyle"
@@ -404,7 +412,8 @@
                             android:inputType="phone"
                             android:maxLength="@integer/max_length_isdn"
                             android:scrollbars="vertical"
-                            android:text="@={ presenter.contact2 }" />
+                            android:text="@={ presenter.contact2 }"
+                            android:textSize="@dimen/default_content_text_size" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -412,7 +421,7 @@
                             android:layout_marginTop="@dimen/dp_8"
                             android:text="@string/change_sim_label_contact_3"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
+                            android:textSize="@dimen/default_label_text_size" />
 
                         <com.viettel.mbccs.widget.CustomEdittext
                             style="@style/inputStyle"
@@ -422,7 +431,8 @@
                             android:inputType="phone"
                             android:maxLength="@integer/max_length_isdn"
                             android:scrollbars="vertical"
-                            android:text="@={ presenter.contact3 }" />
+                            android:text="@={ presenter.contact3 }"
+                            android:textSize="@dimen/default_content_text_size" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -430,7 +440,7 @@
                             android:layout_marginTop="@dimen/dp_8"
                             android:text="@string/change_sim_label_contact_4"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
+                            android:textSize="@dimen/default_label_text_size" />
 
                         <com.viettel.mbccs.widget.CustomEdittext
                             style="@style/inputStyle"
@@ -440,7 +450,8 @@
                             android:inputType="phone"
                             android:maxLength="@integer/max_length_isdn"
                             android:scrollbars="vertical"
-                            android:text="@={ presenter.contact4 }" />
+                            android:text="@={ presenter.contact4 }"
+                            android:textSize="@dimen/default_content_text_size" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -448,7 +459,7 @@
                             android:layout_marginTop="@dimen/dp_8"
                             android:text="@string/change_sim_label_contact_5"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16" />
+                            android:textSize="@dimen/default_label_text_size" />
 
                         <com.viettel.mbccs.widget.CustomEdittext
                             style="@style/inputStyle"
@@ -458,7 +469,8 @@
                             android:inputType="phone"
                             android:maxLength="@integer/max_length_isdn"
                             android:scrollbars="vertical"
-                            android:text="@={ presenter.contact5 }" />
+                            android:text="@={ presenter.contact5 }"
+                            android:textSize="@dimen/default_content_text_size" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -492,17 +504,17 @@
                         android:gravity="center_vertical"
                         android:text="@string/change_sim_label_trans_info"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16"
+                        android:textSize="@dimen/default_label_text_size"
                         android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
                     android:background="@color/white"
                     android:orientation="vertical"
                     android:paddingBottom="@dimen/dp_30"
-                    android:layout_marginTop="@dimen/dp_10"
                     android:paddingLeft="@dimen/dp_16"
                     android:paddingRight="@dimen/dp_16">
 
@@ -515,15 +527,17 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/change_sim_label_service_fee" />
+                            android:text="@string/change_sim_label_service_fee"
+                            android:textSize="@dimen/default_label_text_size" />
 
                         <TextView
                             android:id="@+id/txtServiceFee"
                             android:layout_width="0dp"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="right"
-                            android:layout_height="wrap_content"
-                            android:text="@{presenter.serviceFee}" />
+                            android:text="@{presenter.serviceFee}"
+                            android:textSize="@dimen/default_label_text_size" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -535,15 +549,17 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/change_sim_label_sim_fee" />
+                            android:text="@string/change_sim_label_sim_fee"
+                            android:textSize="@dimen/default_label_text_size" />
 
                         <TextView
                             android:id="@+id/txtSimFee"
                             android:layout_width="0dp"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="right"
-                            android:layout_height="wrap_content"
-                            android:text="@{presenter.changeSimFee}" />
+                            android:text="@{presenter.changeSimFee}"
+                            android:textSize="@dimen/default_label_text_size" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -556,15 +572,17 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/change_sim_label_total_fee"
+                            android:textSize="@dimen/default_label_text_size"
                             android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/txtTotalFee"
                             android:layout_width="0dp"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="right"
-                            android:layout_height="wrap_content"
                             android:text="@{presenter.totalFee}"
+                            android:textSize="@dimen/default_label_text_size"
                             android:textStyle="bold" />
                     </LinearLayout>
                 </LinearLayout>
@@ -577,7 +595,8 @@
                 android:layout_alignParentBottom="true"
                 android:layout_margin="@dimen/dp_20"
                 android:onClick="@{ () -> presenter.changeSim() }"
-                android:text="@string/change_sim_label_change" />
+                android:text="@string/change_sim_label_change"
+                android:textSize="@dimen/default_label_text_size" />
 
         </LinearLayout>
     </ScrollView>

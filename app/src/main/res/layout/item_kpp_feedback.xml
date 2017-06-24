@@ -39,7 +39,7 @@
                         android:layout_height="wrap_content"
                         android:text="@{ presenter.item.title }"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/sp_14"
+                        android:textSize="@dimen/default_label_text_size"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -54,7 +54,7 @@
                         android:layout_height="wrap_content"
                         android:text="@{ presenter.item.contentShort }"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/sp_12" />
+                        android:textSize="@dimen/default_label_text_size2" />
 
                 </LinearLayout>
             </LinearLayout>

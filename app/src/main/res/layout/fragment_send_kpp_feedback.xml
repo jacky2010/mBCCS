@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_8"
                 android:text="@string/kpp_feedback_label_content_desc"
-                android:textSize="@dimen/sp_16" />
+                android:textSize="@dimen/default_label_text_size" />
 
             <com.viettel.mbccs.widget.CustomEdittext
                 style="@style/inputStyle"
@@ -44,6 +44,7 @@
                 android:gravity="top"
                 android:inputType="textMultiLine"
                 android:maxLength="@integer/max_length_feedback_content"
+                android:textSize="@dimen/default_content_text_size"
                 android:text="@={ presenter.content }"
                 app:error="@{presenter.contentError}" />
 
@@ -55,6 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_margin="@dimen/dp_20"
+            android:textSize="@dimen/default_label_text_size"
             android:onClick="@{ () -> presenter.sendFeedback() }"
             android:text="@string/kpp_feedback_send_feedback" />
     </LinearLayout>

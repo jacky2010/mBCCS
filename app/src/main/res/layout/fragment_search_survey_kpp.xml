@@ -23,10 +23,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/survey_kpp_label_select_survey"
             android:paddingLeft="@dimen/dp_16"
             android:paddingRight="@dimen/dp_16"
-            android:paddingTop="@dimen/dp_6"/>
+            android:paddingTop="@dimen/dp_6"
+            android:text="@string/survey_kpp_label_select_survey"
+            android:textSize="@dimen/default_label_text_size" />
 
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/srlSurveyList"
@@ -78,6 +79,7 @@
                     android:paddingEnd="@dimen/dp_8"
                     android:paddingStart="@dimen/dp_8"
                     android:text="@string/survey_kpp_msg_info_no_survey_kpp"
+                    android:textSize="@dimen/default_label_text_size"
                     app:layout_marginLeftPercent="10%"
                     app:layout_marginRightPercent="10%" />
             </android.support.v7.widget.CardView>

@@ -83,4 +83,11 @@
     <dimen name="dp_25">25dp</dimen>
     <dimen name="filter_height">50dp</dimen>
     <dimen name="dp_45">45dp</dimen>
+
+    <!--labels & content-->
+    <dimen name="default_label_text_size">16dp</dimen>
+    <dimen name="default_content_text_size">16dp</dimen>
+    <dimen name="default_label_text_size2">13dp</dimen>
+    <dimen name="default_picker_text_size">13dp</dimen>
+    <dimen name="default_radio_text_size">13dp</dimen>
 </resources>

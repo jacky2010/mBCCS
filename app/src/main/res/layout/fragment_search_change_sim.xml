@@ -20,12 +20,12 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:visibility="@{presenter.hideSearch ? View.GONE : View.VISIBLE}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="@dimen/dp_16"
-            android:paddingRight="@dimen/dp_16">
+            android:paddingRight="@dimen/dp_16"
+            android:visibility="@{presenter.hideSearch ? View.GONE : View.VISIBLE}">
 
             <TextView
                 android:layout_width="match_parent"
@@ -33,7 +33,7 @@
                 android:layout_marginTop="@dimen/dp_8"
                 android:text="@string/branches_search_label_isdn"
                 android:textColor="@color/black"
-                android:textSize="@dimen/sp_16" />
+                android:textSize="@dimen/default_label_text_size" />
 
             <com.viettel.mbccs.widget.CustomEdittext
                 style="@style/inputStyle"
@@ -42,6 +42,7 @@
                 android:inputType="phone"
                 android:maxLength="@integer/max_length_isdn"
                 android:text="@={ presenter.isdn }"
+                android:textSize="@dimen/default_label_text_size"
                 app:error="@{presenter.isdnError}" />
 
             <TextView
@@ -50,7 +51,7 @@
                 android:layout_marginTop="@dimen/dp_8"
                 android:text="@string/branches_add_label_document_type"
                 android:textColor="@color/black"
-                android:textSize="@dimen/sp_16" />
+                android:textSize="@dimen/default_label_text_size" />
 
 
             <com.viettel.mbccs.widget.SpinnerWithBorder
@@ -65,7 +66,7 @@
                 android:layout_marginTop="@dimen/dp_8"
                 android:text="@string/change_sim_label_document_id"
                 android:textColor="@color/black"
-                android:textSize="@dimen/sp_16" />
+                android:textSize="@dimen/default_label_text_size" />
 
             <com.viettel.mbccs.widget.CustomEdittext
                 android:id="@+id/txtDocumentId"
@@ -74,6 +75,7 @@
                 android:layout_height="@dimen/dp_40"
                 android:maxLength="@integer/max_length_document_no"
                 android:text="@={ presenter.documentId }"
+                android:textSize="@dimen/default_label_text_size"
                 app:error="@{presenter.documentIdError}" />
 
             <com.viettel.mbccs.widget.CustomButton
@@ -86,25 +88,27 @@
                 android:onClick="@{ v -> presenter.searchSim() }"
                 android:text="@string/connector_mobile_tim_kiem"
                 android:textAllCaps="false"
-                android:textSize="@dimen/sp_18" />
+                android:textSize="@dimen/default_label_text_size" />
+
             <ImageView
-                android:paddingTop="@dimen/dp_6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/collapse"
-                android:onClick="@{()->presenter.onCollapse()}"/>
+                android:onClick="@{()->presenter.onCollapse()}"
+                android:paddingTop="@dimen/dp_6"
+                android:src="@drawable/collapse" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_30"
             android:visibility="@{presenter.hideSearch ? View.VISIBLE : View.GONE}">
+
             <ImageView
-                android:paddingTop="@dimen/dp_6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_search_black_24dp"
-                android:onClick="@{()->presenter.onExpand()}"/>
+                android:onClick="@{()->presenter.onExpand()}"
+                android:paddingTop="@dimen/dp_6"
+                android:src="@drawable/ic_search_black_24dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -116,11 +120,12 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/dp_10"
                 android:paddingBottom="@dimen/dp_6"
                 android:paddingLeft="@dimen/dp_16"
                 android:paddingRight="@dimen/dp_16"
-                android:text="@string/change_sim_label_select_sim" />
+                android:paddingTop="@dimen/dp_10"
+                android:text="@string/change_sim_label_select_sim"
+                android:textSize="@dimen/default_label_text_size" />
         </LinearLayout>
 
         <ScrollView
@@ -136,11 +141,11 @@
                 android:orientation="vertical">
 
                 <!--<View-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="@dimen/dp_0.6"-->
-                    <!--android:layout_marginLeft="@dimen/dp_16"-->
-                    <!--android:layout_marginRight="@dimen/dp_16"-->
-                    <!--android:background="@color/grey" />-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/dp_0.6"-->
+                <!--android:layout_marginLeft="@dimen/dp_16"-->
+                <!--android:layout_marginRight="@dimen/dp_16"-->
+                <!--android:background="@color/grey" />-->
 
                 <android.support.v7.widget.RecyclerView
                     android:layout_width="match_parent"
@@ -167,6 +172,7 @@
                 android:paddingEnd="@dimen/dp_8"
                 android:paddingStart="@dimen/dp_8"
                 android:text="@string/common_msg_error_no_data"
+                android:textSize="@dimen/default_label_text_size"
                 app:layout_marginLeftPercent="10%"
                 app:layout_marginRightPercent="10%" />
 

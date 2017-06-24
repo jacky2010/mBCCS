@@ -37,7 +37,7 @@
                     android:layout_marginTop="@dimen/dp_8"
                     android:text="@string/branches_add_label_channel_type"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
+                    android:textSize="@dimen/default_label_text_size" />
 
                 <com.viettel.mbccs.widget.SpinnerWithBorder
                     android:id="@+id/spChannelType"
@@ -52,7 +52,7 @@
                     android:layout_marginTop="@dimen/dp_8"
                     android:text="@string/branches_add_label_phone_no"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
+                    android:textSize="@dimen/default_label_text_size" />
 
                 <com.viettel.mbccs.widget.CustomEdittext
                     style="@style/inputStyle"
@@ -61,6 +61,7 @@
                     android:hint="@string/branches_add_hint_phone_no"
                     android:inputType="phone"
                     android:text="@={ presenter.phoneNo }"
+                    android:textSize="@dimen/default_content_text_size"
                     app:error="@{presenter.phoneNoError}" />
 
                 <com.viettel.mbccs.widget.CustomTextView
@@ -69,7 +70,7 @@
                     android:layout_marginTop="@dimen/dp_8"
                     android:text="@string/branches_add_label_document_type"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
+                    android:textSize="@dimen/default_label_text_size" />
 
                 <com.viettel.mbccs.widget.SpinnerWithBorder
                     android:id="@+id/spDocumentType"
@@ -85,7 +86,7 @@
                     android:layout_marginTop="@dimen/dp_8"
                     android:text="@string/branches_add_label_document_id"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
+                    android:textSize="@dimen/default_label_text_size" />
 
                 <com.viettel.mbccs.widget.CustomEdittext
                     style="@style/inputStyle"
@@ -93,6 +94,7 @@
                     android:layout_height="@dimen/dp_40"
                     android:hint="@string/branches_add_hint_document_id"
                     android:text="@={ presenter.documentNo }"
+                    android:textSize="@dimen/default_content_text_size"
                     app:error="@{presenter.documentNoError}" />
 
                 <LinearLayout
@@ -108,7 +110,7 @@
                         android:layout_marginRight="@dimen/dp_6"
                         android:text="@string/branches_add_label_image"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
+                        android:textSize="@dimen/default_label_text_size" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -145,7 +147,7 @@
                     android:layout_marginTop="@dimen/dp_8"
                     android:text="@string/branches_add_label_address"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
+                    android:textSize="@dimen/default_label_text_size" />
 
                 <com.viettel.mbccs.widget.CustomEdittext
                     style="@style/inputStyle"
@@ -153,6 +155,7 @@
                     android:layout_height="@dimen/dp_60"
                     android:inputType="textMultiLine"
                     android:text="@={ presenter.address }"
+                    android:textSize="@dimen/default_content_text_size"
                     app:error="@{presenter.addressError}" />
 
                 <com.viettel.mbccs.widget.CustomTextView
@@ -161,7 +164,7 @@
                     android:layout_marginTop="@dimen/dp_8"
                     android:text="@string/branches_add_label_location"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
+                    android:textSize="@dimen/default_label_text_size" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -178,6 +181,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/dp_40"
                             android:text="@={ presenter.location }"
+                            android:textSize="@dimen/default_label_text_size"
                             app:error="@{presenter.locationError}" />
                     </LinearLayout>
 
@@ -195,7 +199,7 @@
                     android:layout_marginTop="@dimen/dp_8"
                     android:text="@string/branches_add_label_manager"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
+                    android:textSize="@dimen/default_label_text_size" />
 
                 <com.viettel.mbccs.widget.FakeSpinner
                     android:layout_width="match_parent"
@@ -210,7 +214,7 @@
                     android:layout_marginTop="@dimen/dp_8"
                     app:hint="@{@string/branches_add_label_bts}"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/sp_16" />
+                    android:textSize="@dimen/default_label_text_size" />
 
                 <com.viettel.mbccs.widget.FakeSpinner
                     android:layout_width="match_parent"
@@ -232,7 +236,7 @@
                         android:layout_marginRight="@dimen/dp_6"
                         android:text="@string/branches_add_label_contract"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16" />
+                        android:textSize="@dimen/default_label_text_size" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -271,7 +275,8 @@
                 android:layout_alignParentBottom="true"
                 android:layout_margin="@dimen/dp_20"
                 android:onClick="@{ () -> presenter.addNewDocument() }"
-                android:text="@string/branches_add_label_add" />
+                android:text="@string/branches_add_label_add"
+                android:textSize="@dimen/default_label_text_size"/>
 
         </LinearLayout>
     </ScrollView>

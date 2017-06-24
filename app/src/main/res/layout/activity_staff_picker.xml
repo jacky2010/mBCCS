@@ -15,7 +15,7 @@
         >
         <include
             layout="@layout/toolbar"
-            app:background="@{@color/grey}"
+            app:background="@{@color/colorAccent}"
             app:isShow="@{true}"
             app:leftIcon="@{@drawable/ic_close}"
             app:leftIconClick="@{()->presenter.onCancel()}"
@@ -30,7 +30,7 @@
             android:layout_margin="@dimen/dp_20"
             app:text="@={presenter.text}"
             app:textColor="@color/black"
-            app:textSize="@dimen/sp_13"
+            app:textSize="@dimen/default_picker_text_size"
             />
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"

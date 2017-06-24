@@ -38,14 +38,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/change_sim_label_sim_serial2"
+                        android:textSize="@dimen/default_label_text_size"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:layout_marginLeft="@dimen/dp_4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_4"
                         android:text="@{ presenter.item.changeSimInfo.oldSerial }"
                         android:textColor="@color/black"
+                        android:textSize="@dimen/default_label_text_size"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -59,14 +61,16 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/change_sim_label_cust_name2" />
+                        android:text="@string/change_sim_label_cust_name2"
+                        android:textSize="@dimen/default_label_text_size" />
 
                     <TextView
-                        android:layout_marginLeft="@dimen/dp_4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_4"
                         android:text="@{ presenter.item.customer.name }"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/default_label_text_size" />
 
                 </LinearLayout>
             </LinearLayout>

@@ -30,7 +30,8 @@
             android:layout_marginRight="@dimen/dp_10"
             android:layout_marginTop="@dimen/dp_20"
             android:layout_weight="1"
-            android:text="@string/common_label_close" />
+            android:text="@string/common_label_close"
+            android:textSize="@dimen/default_label_text_size" />
 
         <com.viettel.mbccs.widget.CustomButton
             android:id="@+id/biv_done"
@@ -43,7 +44,8 @@
             android:layout_marginRight="@dimen/dp_20"
             android:layout_marginTop="@dimen/dp_20"
             android:layout_weight="1"
-            android:text="@string/title_confirm" />
+            android:text="@string/title_confirm"
+            android:textSize="@dimen/default_label_text_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -59,59 +61,79 @@
             android:id="@+id/tv_trans"
             style="@style/ItemBilling"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/default_label_text_size" />
 
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TableRow>
+
                 <com.viettel.mbccs.widget.CustomTextView
                     style="@style/ItemBilling"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/sell_anypay_label_pre_tax"/>
+                    android:text="@string/sell_anypay_label_pre_tax"
+                    android:textSize="@dimen/default_label_text_size" />
+
                 <com.viettel.mbccs.widget.CustomTextView
                     android:id="@+id/tv_pre_tax"
                     style="@style/ItemBilling"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/default_label_text_size" />
             </TableRow>
+
             <TableRow>
+
                 <com.viettel.mbccs.widget.CustomTextView
                     style="@style/ItemBilling"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/sell_anypay_refill_label_tax"/>
+                    android:text="@string/sell_anypay_refill_label_tax"
+                    android:textSize="@dimen/default_label_text_size" />
+
                 <com.viettel.mbccs.widget.CustomTextView
                     android:id="@+id/tv_tax"
                     style="@style/ItemBilling"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/default_label_text_size" />
             </TableRow>
 
             <TableRow>
+
                 <com.viettel.mbccs.widget.CustomTextView
                     style="@style/ItemBilling"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/sell_anypay_label_discount2"/>
+                    android:text="@string/sell_anypay_label_discount2"
+                    android:textSize="@dimen/default_label_text_size" />
+
                 <com.viettel.mbccs.widget.CustomTextView
                     android:id="@+id/tv_discount"
                     style="@style/ItemBilling"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/default_label_text_size" />
             </TableRow>
+
             <TableRow>
+
                 <com.viettel.mbccs.widget.CustomTextView
                     style="@style/ItemBilling"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/sell_anypay_refill_label_total"/>
+                    android:text="@string/sell_anypay_refill_label_total"
+                    android:textSize="@dimen/default_label_text_size" />
+
                 <com.viettel.mbccs.widget.CustomTextView
                     android:id="@+id/tv_total"
                     style="@style/ItemBilling"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/default_label_text_size" />
             </TableRow>
         </TableLayout>
 

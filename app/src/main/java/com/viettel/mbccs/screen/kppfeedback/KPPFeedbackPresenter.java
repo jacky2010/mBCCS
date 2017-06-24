@@ -69,15 +69,16 @@ public class KPPFeedbackPresenter implements KPPFeedbackContract.Presenter {
                                 @Override
                                 public void onError(BaseException error) {
 
-                                    if (error.getMessage().contains("This user is not belong to")) {
-                                        try {
-                                            viewModel.changeToSearchTab();
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
-                                        }
-                                    } else
+                                    if (!error.getMessage().contains("This user is not belong to")) {
                                         DialogUtils.showDialogError(context, null, context.getString(R.string.common_msg_error_general),
                                                 null);
+                                    }
+
+                                    try {
+                                        viewModel.changeToSendTab();
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
                                 }
 
                                 @Override

@@ -30,7 +30,8 @@
             android:layout_marginRight="@dimen/dp_10"
             android:layout_marginTop="@dimen/dp_20"
             android:layout_weight="1"
-            android:text="@string/common_label_close" />
+            android:text="@string/common_label_close"
+            android:textSize="@dimen/default_label_text_size" />
 
         <com.viettel.mbccs.widget.CustomButton
             android:id="@+id/biv_done"
@@ -43,7 +44,8 @@
             android:layout_marginRight="@dimen/dp_20"
             android:layout_marginTop="@dimen/dp_20"
             android:layout_weight="1"
-            android:text="@string/title_confirm" />
+            android:text="@string/title_confirm"
+            android:textSize="@dimen/default_label_text_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -58,9 +60,10 @@
         <com.viettel.mbccs.widget.CustomTextView
             android:id="@+id/tv_trans"
             style="@style/ItemBilling"
-            android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/default_label_text_size" />
 
         <TableLayout
             android:layout_width="match_parent"
@@ -72,15 +75,17 @@
                     style="@style/ItemBilling"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/change_sim_label_service_fee" />
+                    android:text="@string/change_sim_label_service_fee"
+                    android:textSize="@dimen/default_label_text_size" />
 
                 <com.viettel.mbccs.widget.CustomTextView
                     android:id="@+id/tv_service_fee"
                     style="@style/ItemBilling"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="right"
-                    android:layout_height="wrap_content" />
+                    android:textSize="@dimen/default_label_text_size" />
             </TableRow>
 
             <TableRow>
@@ -89,15 +94,17 @@
                     style="@style/ItemBilling"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/change_sim_label_sim_fee" />
+                    android:text="@string/change_sim_label_sim_fee"
+                    android:textSize="@dimen/default_label_text_size" />
 
                 <com.viettel.mbccs.widget.CustomTextView
                     android:id="@+id/tv_sim_fee"
                     style="@style/ItemBilling"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="right"
-                    android:layout_height="wrap_content" />
+                    android:textSize="@dimen/default_label_text_size" />
             </TableRow>
 
             <TableRow>
@@ -106,15 +113,17 @@
                     style="@style/ItemBilling"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/change_sim_label_total_fee" />
+                    android:text="@string/change_sim_label_total_fee"
+                    android:textSize="@dimen/default_label_text_size" />
 
                 <com.viettel.mbccs.widget.CustomTextView
                     android:id="@+id/tv_total"
                     style="@style/ItemBilling"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="right"
-                    android:layout_height="wrap_content" />
+                    android:textSize="@dimen/default_label_text_size" />
             </TableRow>
         </TableLayout>
 
