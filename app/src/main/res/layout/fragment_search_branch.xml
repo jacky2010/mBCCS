@@ -67,7 +67,7 @@
                 android:layout_height="@dimen/dp_40"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/dp_10"
-                android:drawableLeft="@drawable/ic_search_black_24dp"
+                android:drawableLeft="@drawable/ic_search_white_24dp"
                 android:onClick="@{ v -> presenter.searchDocument() }"
                 android:text="@string/sell_orders_search"
                 android:textAllCaps="false"

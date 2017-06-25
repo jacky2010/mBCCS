@@ -77,8 +77,8 @@ public class FindStockPresenter
         name = new ObservableField<>();
         nameError = new ObservableField<>();
 
-        stockTypeAdapter = new SpinnerAdapter<>(mContext,
-                mContext.getResources().getStringArray(R.array.stock_type));
+//        stockTypeAdapter = new SpinnerAdapter<>(mContext,
+//                mContext.getResources().getStringArray(R.array.stock_type));
         stockTotalAdapter = new StockTotalPickerAdapter(mContext, mStockTotals);
         stockTypeAdapter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -198,29 +198,29 @@ public class FindStockPresenter
     }
 
     public void refreshTextFilter() {
-        String[] arrStockType = mContext.getResources().getStringArray(R.array.stock_type);
-        String text = "";
-        if (stockType == -1) {
-            text += "Tất cả";
-        }
-
-        if (stockType == StockTotalType.TYPE_NEW) {
-            text += mContext.getString(R.string.common_label_dot) + arrStockType[1];
-        }
-
-        if (stockType == StockTotalType.TYPE_FAIL) {
-            text += mContext.getString(R.string.common_label_dot) + arrStockType[2];
-        }
-
-        if (!TextUtils.isEmpty(code.get())) {
-            text += mContext.getString(R.string.common_label_dot) + code.get();
-        }
-
-        if (!TextUtils.isEmpty(name.get())) {
-            text += mContext.getString(R.string.common_label_dot) + name.get();
-        }
-
-        filterText.set(text);
+//        String[] arrStockType = mContext.getResources().getStringArray(R.array.stock_type);
+//        String text = "";
+//        if (stockType == -1) {
+//            text += "Tất cả";
+//        }
+//
+//        if (stockType == StockTotalType.TYPE_NEW) {
+//            text += mContext.getString(R.string.common_label_dot) + arrStockType[1];
+//        }
+//
+//        if (stockType == StockTotalType.TYPE_FAIL) {
+//            text += mContext.getString(R.string.common_label_dot) + arrStockType[2];
+//        }
+//
+//        if (!TextUtils.isEmpty(code.get())) {
+//            text += mContext.getString(R.string.common_label_dot) + code.get();
+//        }
+//
+//        if (!TextUtils.isEmpty(name.get())) {
+//            text += mContext.getString(R.string.common_label_dot) + name.get();
+//        }
+//
+//        filterText.set(text);
     }
 
     @Override

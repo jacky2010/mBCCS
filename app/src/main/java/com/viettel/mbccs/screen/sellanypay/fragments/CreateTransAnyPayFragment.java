@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.viettel.mbccs.R;
@@ -81,20 +79,20 @@ public class CreateTransAnyPayFragment extends BaseDataBindFragment<FragmentCrea
     private void initListeners() {
         try {
 
-            mBinding.spCustType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    if(view == null)
-                        return;
-                    if (!Constants.View.HINT.equals(view.getTag()))
-                        mPresenter.onCustomerTypeChanged(i - 1);
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> adapterView) {
-
-                }
-            });
+//            mBinding.spCustType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//                @Override
+//                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                    if(view == null)
+//                        return;
+//                    if (!Constants.View.HINT.equals(view.getTag()))
+//                        mPresenter.onCustomerTypeChanged(i);
+//                }
+//
+//                @Override
+//                public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//                }
+//            });
 
             mBinding.txtOtherAmount.addTextChangedListener(new TextWatcher() {
                 @Override

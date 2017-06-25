@@ -6,6 +6,7 @@ import android.databinding.ObservableField;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 
@@ -13,6 +14,7 @@ import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.DefaultPaymentAmount;
 import com.viettel.mbccs.data.model.KeyValue;
 import com.viettel.mbccs.data.source.SellAnyPayRepository;
+import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.screen.common.adapter.PayAmountListAdapter;
 import com.viettel.mbccs.utils.Common;
 import com.viettel.mbccs.utils.SpinnerAdapter;
@@ -76,7 +78,9 @@ public class CreateTransAnyPayPresenter implements CreateTransAnyPayContract.Pre
     private List<KeyValue> channelsList;
     private List<DefaultPaymentAmount> lstPayAmount;
 
-    private SellAnyPayRepository repository;
+    private SellAnyPayRepository anyPayRepository;
+    private UserRepository userRepository;
+
     private KeyValue branchObj;
     private KeyValue managerObj;
     private KeyValue channelObj;
@@ -111,6 +115,17 @@ public class CreateTransAnyPayPresenter implements CreateTransAnyPayContract.Pre
         lstPayAmount = new ArrayList<>();
 
         custTypeAdapter = new SpinnerAdapter<>(context, custTypesList);
+        custTypeAdapter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                onCustomerTypeChanged(i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         payAmountAdapter = new PayAmountListAdapter(context,
                 lstPayAmount);
 
@@ -122,11 +137,12 @@ public class CreateTransAnyPayPresenter implements CreateTransAnyPayContract.Pre
 
     private void initData() {
         try {
-            repository = SellAnyPayRepository.getInstance();
+            anyPayRepository = SellAnyPayRepository.getInstance();
+            userRepository = UserRepository.getInstance();
 
-            lstCustTypes = repository.getCustTypes();
+            lstCustTypes = anyPayRepository.getCustTypes();
             lstPayAmount = new ArrayList<>();
-            List<KeyValue> tempDefaultAmount = repository.getDefaultAmounts();
+            List<KeyValue> tempDefaultAmount = anyPayRepository.getDefaultAmounts();
 
             for (KeyValue item : lstCustTypes) {
                 custTypesList.add(item.getValue());
@@ -152,9 +168,9 @@ public class CreateTransAnyPayPresenter implements CreateTransAnyPayContract.Pre
                 onAmountValueChanged();
             }
 
-            branchesList = repository.getBranches();
-            managersList = repository.getManagers();
-            channelsList = repository.getChannels();
+            branchesList = anyPayRepository.getBranches();
+            managersList = anyPayRepository.getManagers();
+            channelsList = anyPayRepository.getChannels();
 
             payAmountAdapter.setItems(lstPayAmount);
 
@@ -296,11 +312,8 @@ public class CreateTransAnyPayPresenter implements CreateTransAnyPayContract.Pre
             args.putString(Constants.BundleConstant.ISDN_WALLET, walletIsdn.get());
             args.putString(Constants.BundleConstant.ISDN, isdn.get());
             args.putString(Constants.BundleConstant.PAY_METHOD, payMethod.get());
-
-            //TODO minhnx test
-            args.putInt(Constants.BundleConstant.CHANNEL, 0);
-            args.putInt(Constants.BundleConstant.STAFF, 0);
-            //minhnx test
+            args.putLong(Constants.BundleConstant.CHANNEL, userRepository.getUserInfo() != null && userRepository.getUserInfo().getChannelInfo() != null ? userRepository.getUserInfo().getChannelInfo().getChannelId() : -1l);
+            args.putLong(Constants.BundleConstant.STAFF, userRepository.getUserInfo() != null && userRepository.getUserInfo().getStaffInfo() != null ? userRepository.getUserInfo().getStaffInfo().getStaffId() : -1l);
 
             viewModel.goToDialogFragment(args);
 
@@ -337,9 +350,9 @@ public class CreateTransAnyPayPresenter implements CreateTransAnyPayContract.Pre
 
         try {
             if (!otherAmountEnabled.get()) {
-                total = Double.parseDouble(defaultAmount.get() != null ? defaultAmount.get().trim() : "0");
+                total = Double.parseDouble(defaultAmount.get() != null && !"".equals(defaultAmount.get()) ? defaultAmount.get().trim() : "0");
             } else {
-                total = Double.parseDouble(otherAmount.get() != null ? otherAmount.get().trim() : "0");
+                total = Double.parseDouble(otherAmount.get() != null && !"".equals(otherAmount.get()) ? otherAmount.get().trim() : "0");
             }
         } catch (Exception e) {
             e.printStackTrace();

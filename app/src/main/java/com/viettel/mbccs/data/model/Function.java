@@ -350,6 +350,7 @@ public class Function implements Parcelable {
             case Function.MenuId.MENU_DAU_NOI_CO_DINH:
             case Function.MenuId.MENU_BAN_ANYPAY:
             case Function.MenuId.MENU_NAP_CHUYEN_ANYPAY:
+            case Function.MenuId.MENU_TRA_CUU_SP:
                 return TopMenu.MENU_QUAN_LY_BAN_HANG;
 
             case Function.MenuId.MENU_DANG_KY_THONG_TIN:
@@ -402,8 +403,6 @@ public class Function implements Parcelable {
             case Function.MenuId.MENU_HOTNEW_CS_KPP:
             case Function.MenuId.MENU_KPP_FEEDBACK:
                 return TopMenu.MENU_QUAN_LY_CSKH;
-            case Function.MenuId.MENU_TRA_CUU_SP:
-                break;
 
             case Function.MenuId.MENU_TAO_GIAY_NOP_TIEN:
             case Function.MenuId.MENU_PHE_DUYET_GIAY_NOP_TIEN:

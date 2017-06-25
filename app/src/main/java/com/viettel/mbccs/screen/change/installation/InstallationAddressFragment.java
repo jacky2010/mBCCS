@@ -9,14 +9,14 @@ import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataFragment;
 import com.viettel.mbccs.callback.OnListenerItemRecyclerView;
 import com.viettel.mbccs.constance.ApiCode;
-import com.viettel.mbccs.data.model.ApDomain;
+//import com.viettel.mbccs.data.model.ApDomain;
 import com.viettel.mbccs.data.model.Customer;
 import com.viettel.mbccs.data.source.QLKhachHangRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
-import com.viettel.mbccs.data.source.remote.request.GetApDomainRequest;
+//import com.viettel.mbccs.data.source.remote.request.GetApDomainRequest;
 import com.viettel.mbccs.data.source.remote.request.GetRegisterSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
-import com.viettel.mbccs.data.source.remote.response.GetApDomainResponse;
+//import com.viettel.mbccs.data.source.remote.response.GetApDomainResponse;
 import com.viettel.mbccs.data.source.remote.response.GetRegisterSubInfoResponse;
 import com.viettel.mbccs.screen.change.installation.adapter.InstallationAddressAdapter;
 import com.viettel.mbccs.utils.EditTextUtil;
@@ -51,7 +51,7 @@ public class InstallationAddressFragment extends BaseDataFragment {
     private QLKhachHangRepository qlKhachHangRepository;
     private CompositeSubscription subscriptions;
     private boolean typeCreate;
-    private List<ApDomain> dataPassportType;
+//    private List<ApDomain> dataPassportType;
 
     @Override
     protected void initData() {
@@ -175,30 +175,30 @@ public class InstallationAddressFragment extends BaseDataFragment {
 
 
     public void getDataSpinnerPassport() {
-        getBaseActivity().showLoadingDialog();
-        DataRequest<GetApDomainRequest> request = new DataRequest<>();
-        GetApDomainRequest getApDomainRequest = new GetApDomainRequest();
-        getApDomainRequest.setType(ApDomain.Type.LOAI_GIAY_TO);
-
-        request.setParameterApi(getApDomainRequest);
-        request.setApiCode(ApiCode.GetListBusTypeIdRequire);
-
-        Subscription subscription = qlKhachHangRepository.getApDomain(request)
-                .subscribe(new MBCCSSubscribe<GetApDomainResponse>() {
-                    @Override
-                    public void onSuccess(GetApDomainResponse object) {
-                        if (dataPassportType != null && dataPassportType.size() != 0) {
-                            dataPassportType.clear();
-                        }
-                        dataPassportType = object.getApDomainList();
-                        getBaseActivity().hideLoadingDialog();
-                    }
-
-                    @Override
-                    public void onError(BaseException error) {
-                        getBaseActivity().hideLoadingDialog();
-                    }
-                });
-        subscriptions.add(subscription);
+//        getBaseActivity().showLoadingDialog();
+//        DataRequest<GetApDomainRequest> request = new DataRequest<>();
+//        GetApDomainRequest getApDomainRequest = new GetApDomainRequest();
+//        getApDomainRequest.setType(ApDomain.Type.LOAI_GIAY_TO);
+//
+//        request.setParameterApi(getApDomainRequest);
+//        request.setApiCode(ApiCode.GetListBusTypeIdRequire);
+//
+//        Subscription subscription = qlKhachHangRepository.getApDomain(request)
+//                .subscribe(new MBCCSSubscribe<GetApDomainResponse>() {
+//                    @Override
+//                    public void onSuccess(GetApDomainResponse object) {
+//                        if (dataPassportType != null && dataPassportType.size() != 0) {
+//                            dataPassportType.clear();
+//                        }
+//                        dataPassportType = object.getApDomainList();
+//                        getBaseActivity().hideLoadingDialog();
+//                    }
+//
+//                    @Override
+//                    public void onError(BaseException error) {
+//                        getBaseActivity().hideLoadingDialog();
+//                    }
+//                });
+//        subscriptions.add(subscription);
     }
 }

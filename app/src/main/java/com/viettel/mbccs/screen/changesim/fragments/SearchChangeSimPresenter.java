@@ -16,10 +16,10 @@ import com.viettel.mbccs.data.model.KeyValue;
 import com.viettel.mbccs.data.source.ChangeSimRepository;
 import com.viettel.mbccs.data.source.remote.request.CheckDebitChangeSimRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
-import com.viettel.mbccs.data.source.remote.request.GetRegiterSubInfoRequest;
+import com.viettel.mbccs.data.source.remote.request.GetRegisterSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.DataResponse;
-import com.viettel.mbccs.data.source.remote.response.GetRegiterSubInfoResponse;
+import com.viettel.mbccs.data.source.remote.response.GetRegisterSubInfoResponse;
 import com.viettel.mbccs.screen.changesim.adapter.ChangeSimListAdapter;
 import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.GsonUtils;
@@ -244,9 +244,9 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
             final List<ChangeSimItem> items = new ArrayList<>();
             viewModel.showLoading();
 
-            DataRequest<GetRegiterSubInfoRequest> baseRequest = new DataRequest<>();
+            DataRequest<GetRegisterSubInfoRequest> baseRequest = new DataRequest<>();
             baseRequest.setApiCode(ApiCode.GetRegisterSubInfo);
-            GetRegiterSubInfoRequest request = new GetRegiterSubInfoRequest();
+            GetRegisterSubInfoRequest request = new GetRegisterSubInfoRequest();
             request.setIsdn(isdn.get());
             request.setIdNo(documentId.get());
             request.setIdType(documentType.get());
@@ -254,10 +254,10 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
             baseRequest.setParameterApi(request);
 
             Subscription subscription =
-                    changeSimRepository.getRegiterSubInfo(baseRequest)
-                            .subscribe(new MBCCSSubscribe<GetRegiterSubInfoResponse>() {
+                    changeSimRepository.getRegisterSubInfo(baseRequest)
+                            .subscribe(new MBCCSSubscribe<GetRegisterSubInfoResponse>() {
                                 @Override
-                                public void onSuccess(GetRegiterSubInfoResponse object) {
+                                public void onSuccess(GetRegisterSubInfoResponse object) {
                                     try {
 //                                        if (Constants.Service.RESPONSE_OK.equals(object.getErrorCode())) {
 

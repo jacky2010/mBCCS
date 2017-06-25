@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.Function;
 import com.viettel.mbccs.data.model.LoginInfo;
@@ -32,6 +33,7 @@ import com.viettel.mbccs.screen.kppfeedback.KPPFeedbackActivity;
 import com.viettel.mbccs.screen.main.fragments.menu.MenuPresenter;
 import com.viettel.mbccs.screen.nhapkhocapduoi.ListOrderActivity;
 import com.viettel.mbccs.screen.nvtrahangcaptren.list.NVTraHangCapTrenActivity;
+import com.viettel.mbccs.screen.searchproducts.SearchProductsActivity;
 import com.viettel.mbccs.screen.sell.channel.SaleChannelActivity;
 import com.viettel.mbccs.screen.sell.orders.SellOrdersActivity;
 import com.viettel.mbccs.screen.sell.retail.SaleRetailActivity;
@@ -42,6 +44,7 @@ import com.viettel.mbccs.screen.transferanypay.TransferAnyPayActivity;
 import com.viettel.mbccs.screen.viewwarehouse.ViewWarehouseActivity;
 import com.viettel.mbccs.screen.xuathangchonhanvien.ChiTietXuatKhoNhanVienActivity;
 import com.viettel.mbccs.variable.Constants;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -260,8 +263,10 @@ public class BaseSubMenuActivity
                             startActivity(new Intent(BaseSubMenuActivity.this,
                                     KPPFeedbackActivity.class));
                             break;
-                        //                        case Function.MenuId.MENU_TRA_CUU_SP:
-                        //                            break;
+                        case Function.MenuId.MENU_TRA_CUU_SP:
+                            startActivity(new Intent(BaseSubMenuActivity.this,
+                                    SearchProductsActivity.class));
+                            break;
 
                         case Function.MenuId.MENU_TAO_GIAY_NOP_TIEN:
                             break;
