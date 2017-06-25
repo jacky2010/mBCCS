@@ -46,8 +46,11 @@ public class InstallationAddressAdapter extends GenericRecycleAdapter<Customer,
     }
 
     @Override
-    public void onSet(Customer item, InstallationAddressViewHolder holder, int position) {
-        if (item != null) {
+    public void onSet(Customer mCustomer, InstallationAddressViewHolder holder, int position) {
+        if (mCustomer != null) {
+            holder.mNameCustomer.setText(mCustomer.getName());
+            holder.mPhoneNumberCustomer.setText(mCustomer.getIdNo());
+            holder.mService.setText(mCustomer.getName());
         }
     }
 

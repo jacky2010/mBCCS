@@ -11,7 +11,7 @@ import com.viettel.mbccs.data.source.remote.request.GetApDomainByTypeRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListBusTypeIdRequireRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListProductRequest;
 import com.viettel.mbccs.data.source.remote.request.GetOTPRequest;
-import com.viettel.mbccs.data.source.remote.request.GetRegiterSubInfoRequest;
+import com.viettel.mbccs.data.source.remote.request.GetRegisterSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.RegisterCustomerInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.UpdateAllSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.response.CheckOTPResponse;
@@ -20,7 +20,7 @@ import com.viettel.mbccs.data.source.remote.response.GetApDomainByTypeResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListBusTypeIdRequireResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListProductResponse;
 import com.viettel.mbccs.data.source.remote.response.GetOTPResponse;
-import com.viettel.mbccs.data.source.remote.response.GetRegiterSubInfoResponse;
+import com.viettel.mbccs.data.source.remote.response.GetRegisterSubInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.RegisterCustomerInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.UpdateAllSubInfoResponse;
 import rx.Observable;
@@ -50,8 +50,8 @@ public class QLKhachHangRepository
     }
 
     @Override
-    public Observable<GetRegiterSubInfoResponse> getRegiterSubInfo(
-            DataRequest<GetRegiterSubInfoRequest> request) {
+    public Observable<GetRegisterSubInfoResponse> getRegiterSubInfo(
+            DataRequest<GetRegisterSubInfoRequest> request) {
         return qLKhachHangRemoteDataSource.getRegiterSubInfo(request);
     }
 

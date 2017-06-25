@@ -174,4 +174,14 @@
         <attr name="allowSingleTap" format="boolean" />
         <attr name="animateOnClick" format="boolean" />
     </declare-styleable>
+
+    <!-- ItemSpinText -->
+    <declare-styleable name="ItemTitleWithEditText">
+        <attr name="iteTextView" format="boolean" />
+        <attr name="iteTextViewSize" format="dimension" />
+        <attr name="iteTextViewTitle" format="string" />
+        <attr name="iteTextViewColor" format="color" />
+        <attr name="iteEditText" format="boolean" />
+        <attr name="iteEditTextTitle" format="string" />
+    </declare-styleable>
 </resources>

@@ -1,37 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <com.viettel.mbccs.widget.ItemSpinText
-        style="@style/ItemSpinText"
-        app:istIconLeft="true"
-        app:istIconLeftBg="@drawable/ic_add_black_24dp"
-        app:istIconRight="true"
-        app:istIconRightBg="@drawable/ic_add_black_24dp"
-        app:istTextView="true"
-        app:istTextViewTitle="@string/title_change_add_city" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
 
-    <com.viettel.mbccs.widget.ItemSpinText
-        style="@style/ItemSpinText"
-        app:istIconLeft="true"
-        app:istIconLeftBg="@drawable/ic_add_black_24dp"
-        app:istIconRight="true"
-        app:istIconRightBg="@drawable/ic_add_black_24dp"
-        app:istTextView="true"
-        app:istTextViewTitle="@string/title_change_add_district" />
+        <com.viettel.mbccs.widget.ItemSpinText
+            android:id="@+id/ist_provincial"
+            style="@style/ItemSpinText"
+            app:istIconRight="true"
+            app:istIconRightBg="@drawable/ic_arrow_drop_down_black_24dp"
+            app:istSpinner="true"
+            app:istSpinnerEnable="false"
+            app:istSpinnerTitle="-- Chọn Tỉnh/TP --"
+            app:istTextView="true"
+            app:istTextViewTitle="@string/title_change_add_city" />
 
-    <com.viettel.mbccs.widget.ItemSpinText
-        style="@style/ItemSpinText"
-        app:istIconLeft="true"
-        app:istIconLeftBg="@drawable/ic_add_black_24dp"
-        app:istIconRight="true"
-        app:istIconRightBg="@drawable/ic_add_black_24dp"
-        app:istTextView="true"
-        app:istTextViewTitle="@string/title_change_add_commune" />
+        <com.viettel.mbccs.widget.ItemSpinText
+            android:id="@+id/ist_district"
+            style="@style/ItemSpinText"
+            app:istIconRight="true"
+            app:istIconRightBg="@drawable/ic_arrow_drop_down_black_24dp"
+            app:istSpinner="true"
+            app:istSpinnerEnable="false"
+            app:istSpinnerTitle="-- Chọn Quận/Huyện --"
+            app:istTextView="true"
+            app:istTextViewTitle="@string/title_change_add_district" />
 
+        <com.viettel.mbccs.widget.ItemSpinText
+            android:id="@+id/ist_precinct"
+            style="@style/ItemSpinText"
+            app:istIconRight="true"
+            app:istIconRightBg="@drawable/ic_arrow_drop_down_black_24dp"
+            app:istSpinner="true"
+            app:istSpinnerEnable="false"
+            app:istSpinnerTitle="-- Chọn Phường/Xã --"
+            app:istTextView="true"
+            app:istTextViewTitle="@string/title_change_add_commune" />
 
-</LinearLayout>
+        <com.viettel.mbccs.widget.ItemTitleWithEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_5"
+            app:iteTextViewTitle="Địa chỉ chi tiết (số nhà, tên đường, tổ)" />
+
+        <com.viettel.mbccs.widget.ItemTitleWithEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_5"
+            app:iteTextViewTitle="SĐT liên hệ" />
+
+    </LinearLayout>
+</ScrollView>

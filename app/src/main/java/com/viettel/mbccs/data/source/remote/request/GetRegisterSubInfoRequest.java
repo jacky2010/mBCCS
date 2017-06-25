@@ -4,7 +4,7 @@ package com.viettel.mbccs.data.source.remote.request;
  * Created by HuyQuyet on 5/31/17.
  */
 
-public class GetRegiterSubInfoRequest {
+public class GetRegisterSubInfoRequest {
 
     // thuê bao
     private String isdn;

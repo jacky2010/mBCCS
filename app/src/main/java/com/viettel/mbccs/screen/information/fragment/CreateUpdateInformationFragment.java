@@ -15,7 +15,7 @@ import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseFragment;
 import com.viettel.mbccs.data.model.Area;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
-import com.viettel.mbccs.data.source.remote.response.GetRegiterSubInfoResponse;
+import com.viettel.mbccs.data.source.remote.response.GetRegisterSubInfoResponse;
 import com.viettel.mbccs.databinding.FragmentCreateUpdateInformationBinding;
 import com.viettel.mbccs.screen.common.success.DialogFullScreen;
 import com.viettel.mbccs.utils.DialogUtils;
@@ -44,10 +44,10 @@ public class CreateUpdateInformationFragment extends BaseFragment
     private CreateUpdateInformationFragmentPresenter presenter;
     @Type
     private int typeFragment;
-    private GetRegiterSubInfoResponse data;
+    private GetRegisterSubInfoResponse data;
 
     public static CreateUpdateInformationFragment newInstance(@Type int typeFragment,
-            @Nullable GetRegiterSubInfoResponse data) {
+            @Nullable GetRegisterSubInfoResponse data) {
         Bundle bundle = new Bundle();
         bundle.putInt(ARG_TYPE_FRAGMENT, typeFragment);
         bundle.putParcelable(ARG_DATA, data);

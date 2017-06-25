@@ -32,14 +32,15 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
             app:tbvIconRight="true"
-            app:tbvIconRightBg="@drawable/ic_right_arrow"
             app:tbvTitle="@string/title_survey" />
+        <!-- app:tbvIconRightBg="@drawable/ic_right_arrow" -->
 
         <com.viettel.mbccs.widget.TopBarView
             android:id="@+id/tbv_facility"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
+            android:visibility="gone"
             app:tbvTitle="@string/title_facility" />
     </LinearLayout>
 

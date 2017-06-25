@@ -20,7 +20,7 @@
             style="@style/TextViewItem"
             android:layout_centerInParent="true"
             android:text="Khảo sát vị trí trạm"
-            android:textColor="@color/black" />
+            android:textColor="@color/white" />
     </RelativeLayout>
 
     <com.viettel.mbccs.screen.map.InfoWrapperLayout

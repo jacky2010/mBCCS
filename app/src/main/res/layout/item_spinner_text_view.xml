@@ -24,7 +24,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true" />
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_5" />
 
 
         <ImageView
@@ -32,30 +33,44 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true" />
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_5" />
+
+        <!--<RelativeLayout-->
+        <!--android:id="@+id/frame"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_toLeftOf="@+id/iv_icon_right"-->
+        <!--android:layout_toRightOf="@+id/iv_icon_left">-->
+
+        <!--<com.viettel.mbccs.widget.CustomTextView-->
+        <!--android:id="@+id/tv_content"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center|start"-->
+        <!--android:layout_marginLeft="@dimen/dp_5"-->
+        <!--android:visibility="visible" />-->
+
+        <com.viettel.mbccs.widget.CustomEdittext
+            android:id="@+id/spinner"
+            style="@style/edit_main_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|start"
+            android:layout_toLeftOf="@+id/iv_icon_right"
+            android:layout_toRightOf="@+id/iv_icon_left"
+            android:maxLines="1"
+            android:singleLine="true"
+            app:hint="EditSpinnerTest" />
+
 
         <FrameLayout
+            android:id="@+id/frame"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_toLeftOf="@+id/iv_icon_right"
-            android:layout_toRightOf="@+id/iv_icon_left">
+            android:layout_height="@dimen/size_item_spin_text"
+            android:layout_gravity="center|start" />
 
-            <com.viettel.mbccs.widget.CustomTextView
-                android:id="@+id/tv_content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|start"
-                android:layout_marginLeft="@dimen/dp_5"
-                android:visibility="gone" />
-
-            <com.viettel.mbccs.widget.spinner.EditSpinner
-                android:id="@+id/spinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|start"
-                app:hint="EditSpinnerTest" />
-
-        </FrameLayout>
+        <!--</RelativeLayout>-->
 
     </RelativeLayout>
 </LinearLayout>
