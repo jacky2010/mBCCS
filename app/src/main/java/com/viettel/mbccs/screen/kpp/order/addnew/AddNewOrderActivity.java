@@ -52,8 +52,11 @@ public class AddNewOrderActivity
     }
 
     @Override
-    public void goGoStockPicker() {
+    public void goGoStockPicker(ArrayList<StockTotal> stockTotals) {
         Intent intent = new Intent(this, FindStockActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList(Constants.BundleConstant.LIST_STOCK_TOTAL, stockTotals);
+        intent.putExtras(bundle);
         startActivityForResult(intent, STOCK_TOTAL_PICKER_REQUEST);
     }
 
@@ -81,5 +84,17 @@ public class AddNewOrderActivity
             setResult(RESULT_OK);
             finish();
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mPresenter.subscribe();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mPresenter.unSubscribe();
     }
 }

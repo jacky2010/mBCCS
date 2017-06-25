@@ -4,13 +4,21 @@ import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.databinding.ItemStocktotalPickerBinding;
+import com.viettel.mbccs.utils.StockTotalCompare;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class StockTotalPickerAdapter
@@ -19,12 +27,75 @@ public class StockTotalPickerAdapter
 
     private Context mContext;
     private List<StockTotal> mStockTotals;
+    private List<StockTotal> mStockTotalsFilter = new ArrayList<>();
 
     private OnStockTotalPickListener mOnStockTotalPickListener;
 
     public StockTotalPickerAdapter(Context context, List<StockTotal> stockTotals) {
         mContext = context;
         mStockTotals = stockTotals;
+        mStockTotalsFilter.addAll(mStockTotals);
+    }
+
+    public void filter(long stateid, String code, String nameStock) {
+        Log.i("StockTotalPickerAdapter", "filter -------- code: " + code);
+        Log.i("StockTotalPickerAdapter", "filter--------: nameStock: " + nameStock);
+        mStockTotalsFilter.clear();
+        for (StockTotal stockTotal : mStockTotals) {
+            if (!TextUtils.isEmpty(code) && TextUtils.isEmpty(nameStock)) {
+                if (stockTotal.getStockModelCode().toLowerCase().contains(code.toLowerCase())) {
+                    if (stateid == -1) {
+                        mStockTotalsFilter.add(stockTotal);
+                    } else {
+                        if (stockTotal.getStateId() == stateid) {
+                            mStockTotalsFilter.add(stockTotal);
+                        }
+                    }
+                }
+            }
+
+            if (!TextUtils.isEmpty(code) && !TextUtils.isEmpty(nameStock)) {
+                if (stockTotal.getStockModelCode().toLowerCase().contains(code.toLowerCase())
+                        && stockTotal.getStockModelName()
+                        .toLowerCase()
+                        .contains(nameStock.toLowerCase())) {
+                    if (stateid == -1) {
+                        mStockTotalsFilter.add(stockTotal);
+                    } else {
+                        if (stockTotal.getStateId() == stateid) {
+                            mStockTotalsFilter.add(stockTotal);
+                        }
+                    }
+                }
+            }
+
+            if (TextUtils.isEmpty(code) && !TextUtils.isEmpty(nameStock)) {
+                if (stockTotal.getStockModelName()
+                        .toLowerCase()
+                        .contains(nameStock.toLowerCase())) {
+                    if (stateid == -1) {
+                        mStockTotalsFilter.add(stockTotal);
+                    } else {
+                        if (stockTotal.getStateId() == stateid) {
+                            mStockTotalsFilter.add(stockTotal);
+                        }
+                    }
+                }
+            }
+
+            if (TextUtils.isEmpty(code) && TextUtils.isEmpty(nameStock)) {
+                if (stateid == -1) {
+                    mStockTotalsFilter.add(stockTotal);
+                } else {
+                    if (stockTotal.getStateId() == stateid) {
+                        mStockTotalsFilter.add(stockTotal);
+                    }
+                }
+            }
+        }
+
+        Collections.sort(mStockTotalsFilter, new StockTotalCompare());
+        notifyDataSetChanged();
     }
 
     @Override
@@ -36,7 +107,7 @@ public class StockTotalPickerAdapter
 
     @Override
     public void onBindViewHolder(StockTotalPickerViewHolder holder, int position) {
-        holder.bind(mStockTotals.get(position));
+        holder.bind(mStockTotalsFilter.get(position));
     }
 
     public void setOnStockTotalPickListener(OnStockTotalPickListener onStockTotalPickListener) {
@@ -45,7 +116,7 @@ public class StockTotalPickerAdapter
 
     @Override
     public int getItemCount() {
-        return mStockTotals.size();
+        return mStockTotalsFilter.size();
     }
 
     @Override
@@ -111,7 +182,7 @@ public class StockTotalPickerAdapter
             mBinding.buttonDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mStockTotals.remove(mStockTotals.get(getAdapterPosition()));
+                    mStockTotalsFilter.remove(mStockTotalsFilter.get(getAdapterPosition()));
                     notifyDataSetChanged();
                 }
             });

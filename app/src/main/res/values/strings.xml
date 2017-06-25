@@ -28,7 +28,7 @@
     <string name="common_label_no">Không</string>
 
 
-    <string name="count_serial_selected" formatted="false">
+    <string formatted="false" name="count_serial_selected">
         <![CDATA[
 Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt hàng <font color="#317BE1"><u> %s</u></font>
         ]]>
@@ -158,10 +158,10 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="title_search">Tìm kiếm</string>
     <string name="title_confirm">Xác Nhận</string>
     <string name="msg_title_confirm_trans">Bạn đã lập hóa đơn cho các giao dịch sau:</string>
-    <string name="msg_before_tax" formatted="false">Trước thuế: %f</string>
-    <string name="msg_rent" formatted="false">Tiền thuế: %f</string>
-    <string name="msg_discount" formatted="false">Chiết khấu: %f</string>
-    <string name="msg_total_amount_payable" formatted="false">Tổng tiền phải trả: %f</string>
+    <string formatted="false" name="msg_before_tax">Trước thuế: %f</string>
+    <string formatted="false" name="msg_rent">Tiền thuế: %f</string>
+    <string formatted="false" name="msg_discount">Chiết khấu: %f</string>
+    <string formatted="false" name="msg_total_amount_payable">Tổng tiền phải trả: %f</string>
     <string name="msg_choose_transaction">Chọn giao dịch</string>
     <string name="msg_list_trans">Danh sách giao dịch (%d)</string>
     <string name="title_channel">Kênh</string>
@@ -276,7 +276,7 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="channel_name">Tên kênh</string>
     <string name="tax_code">Mã số thuế</string>
     <string name="sale_confirm_label_confirm_sell">Xác nhận bán cho</string>
-    <string name="sale_retail_confirm_customer_infor" formatted="false">
+    <string formatted="false" name="sale_retail_confirm_customer_infor">
         <![CDATA[
 <b>Bán cho khách hàng %s</b> :<br>
    Số tiền thanh toán : <b>%s</b>
@@ -284,7 +284,7 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
         ]]>
     </string>
 
-    <string name="sale_retail_confirm_saler_infor" formatted="false">
+    <string formatted="false" name="sale_retail_confirm_saler_infor">
         <![CDATA[
 <b>Từ %s</b><br>
  Số điện thoại : <b>%s</b><br>
@@ -293,7 +293,7 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
 
     <!--sale channel-->
 
-    <string name="sale_channel_confirm_customer_infor" formatted="false">
+    <string formatted="false" name="sale_channel_confirm_customer_infor">
         <![CDATA[
 <b>Bán cho kênh  %s</b> :<br>
    Số điện thoại : <b>%s</b><br>
@@ -302,7 +302,7 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
         ]]>
     </string>
 
-    <string name="sale_channel_confirm_saler_infor" formatted="false">
+    <string formatted="false" name="sale_channel_confirm_saler_infor">
         <![CDATA[
 <b>Từ %s</b><br>
  Số điện thoại : <b>%s</b><br>
@@ -310,7 +310,7 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     </string>
 
 
-    <string name="sale_confirm_sale_program" formatted="false">
+    <string formatted="false" name="sale_confirm_sale_program">
         <b>Theo mã chương trình bán hàng %s</b>
     </string>
 
@@ -449,7 +449,11 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     </string>
     <string name="kpp_order_label_stock_id">Mã hàng: %s</string>
     <string name="kpp_order_label_price">%s VND</string>
-    pâhmr
+    <array name="stock_type">
+        <item>-Tất cả -</item>
+        <item>Hàng mới</item>
+        <item>Hàng cũ</item>
+    </array>
     <string name="task_cskpp">Chăm sóc kênh phân phối</string>
     <string name="task_arising">Việc phát sinh</string>
     <string name="task_team">Việc tổ đội</string>
@@ -805,7 +809,7 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
 
     <!-- Area channel -->
     <string name="title_area">Quản lý địa bàn</string>
-    <string name="msg_empty_text" />
+    <string name="msg_empty_text"/>
     <string name="title_province">Tỉnh</string>
     <string name="title_district">Huyện</string>
 

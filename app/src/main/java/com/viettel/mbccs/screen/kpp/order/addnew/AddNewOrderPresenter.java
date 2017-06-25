@@ -6,17 +6,24 @@ import android.content.DialogInterface;
 import android.databinding.ObservableField;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.SaleTranType;
 import com.viettel.mbccs.data.model.EmptyObject;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListStockModelRequest;
 import com.viettel.mbccs.data.source.remote.request.KPPOrderRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.GetListStockModelResponse;
+import com.viettel.mbccs.utils.ActivityUtils;
 import com.viettel.mbccs.utils.Common;
 import com.viettel.mbccs.utils.DialogUtils;
+import com.viettel.mbccs.utils.StockTotalCompare;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
@@ -37,6 +44,7 @@ public class AddNewOrderPresenter implements AddNewOrderContract.Presenter {
     private BanHangKhoTaiChinhRepository mBanHangKhoTaiChinhRepository;
     private UserRepository mUserRepository;
     private DataRequest<KPPOrderRequest> mKPPOrderRequestBaseRequest;
+    private CompositeSubscription mSubscription;
 
     public AddNewOrderPresenter(Context context, AddNewOrderContract.ViewModel viewModel) {
         mContext = context;
@@ -44,8 +52,9 @@ public class AddNewOrderPresenter implements AddNewOrderContract.Presenter {
         mCompositeSubscription = new CompositeSubscription();
         mBanHangKhoTaiChinhRepository = BanHangKhoTaiChinhRepository.getInstance();
         mUserRepository = UserRepository.getInstance();
+        mSubscription = new CompositeSubscription();
         init();
-        loadData();
+        search();
     }
 
     private void init() {
@@ -72,8 +81,50 @@ public class AddNewOrderPresenter implements AddNewOrderContract.Presenter {
                 Common.formatDouble(totalMoney)));
     }
 
-    private void loadData() {
-        //  fakeData();
+    public void search() {
+        DataRequest<GetListStockModelRequest> mGetListStockModelRequestBaseRequest =
+                new DataRequest<>();
+        mGetListStockModelRequestBaseRequest.setApiCode(ApiCode.GetListStockModel);
+        GetListStockModelRequest request = new GetListStockModelRequest();
+        //request.setStockTypeId(StockTotalType.TYPE_NEW);
+        //request.setStateId(StockTotalType.TYPE_NEW);
+        request.setOwnerType(2L);
+        request.setSaleTransType(SaleTranType.SALE_CHANNEL);
+        request.setOwnerId(mUserRepository.getUserInfo().getStaffInfo().getStaffId());
+        mGetListStockModelRequestBaseRequest.setParameterApi(request);
+        mViewModel.showLoading();
+        Subscription subscription = mBanHangKhoTaiChinhRepository.getListStockModel(
+                mGetListStockModelRequestBaseRequest)
+                .subscribe(new MBCCSSubscribe<GetListStockModelResponse>() {
+                    @Override
+                    public void onSuccess(GetListStockModelResponse object) {
+                        if (object != null && object.getStockTotalList() != null) {
+                            if (object.getStockTotalList().size() == 0) {
+                                DialogUtils.showDialog(mContext, R.string.common_msg_no_data);
+                            }
+                            mStockTotals.clear();
+                            mStockTotals.addAll(object.getStockTotalList());
+                            mAdapter.notifyDataSetChanged();
+                            return;
+                        }
+                        DialogUtils.showDialog(mContext, R.string.common_msg_no_data);
+                    }
+
+                    @Override
+                    public void onError(BaseException error) {
+                        DialogUtils.showDialog(mContext, null, error.getMessage(), null);
+                        //fake();
+                    }
+
+                    @Override
+                    public void onRequestFinish() {
+                        super.onRequestFinish();
+                        mViewModel.hideLoading();
+                        ActivityUtils.hideKeyboard((Activity) mContext);
+                    }
+                });
+
+        mSubscription.add(subscription);
     }
 
     private void fakeData() {
@@ -132,8 +183,7 @@ public class AddNewOrderPresenter implements AddNewOrderContract.Presenter {
 
                             @Override
                             public void onError(BaseException error) {
-                                DialogUtils.showDialog(mContext, null, error.getMessage(),
-                                        null);
+                                DialogUtils.showDialog(mContext, null, error.getMessage(), null);
                                 //mViewModel.gotoSuccessScreen(mStockTotals);
                             }
 
@@ -147,8 +197,7 @@ public class AddNewOrderPresenter implements AddNewOrderContract.Presenter {
     }
 
     public void addNewStock() {
-
-        mViewModel.goGoStockPicker();
+        mViewModel.goGoStockPicker(mStockTotals);
     }
 
     @Override
@@ -172,9 +221,7 @@ public class AddNewOrderPresenter implements AddNewOrderContract.Presenter {
     public void mergeStockTotalList(StockTotal stockTotal) {
         for (int i = 0; i < mStockTotals.size(); i++) {
             if (mStockTotals.get(i).equals(stockTotal)) {
-                mStockTotals.get(i)
-                        .setCountChoice(
-                                mStockTotals.get(i).getCountChoice() + stockTotal.getCountChoice());
+                mStockTotals.get(i).setCountChoice(stockTotal.getCountChoice());
                 return;
             }
         }
@@ -186,6 +233,7 @@ public class AddNewOrderPresenter implements AddNewOrderContract.Presenter {
         for (StockTotal stockTotal : stockTotals) {
             mergeStockTotalList(stockTotal);
         }
+        Collections.sort(mStockTotals, new StockTotalCompare());
         mAdapter.notifyDataSetChanged();
         caculatePrice();
         //TODO add list stock total

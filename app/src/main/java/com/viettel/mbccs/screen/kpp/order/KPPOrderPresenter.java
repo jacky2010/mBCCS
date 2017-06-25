@@ -116,7 +116,7 @@ public class KPPOrderPresenter implements KPPOrderContract.Presenter {
         request.setIsdnChannel(mUserRepository.getUserInfo().getChannelInfo().getTel());
         request.setFromDate(DateUtils.convertDateToString(mViewModel.getFromDate(),
                 DateUtils.DATE_TIME_FORMAT));
-        request.setToDate(DateUtils.convertDateToString(mViewModel.getFromDate(),
+        request.setToDate(DateUtils.convertDateToString(mViewModel.getToDate(),
                 DateUtils.DATE_TIME_FORMAT));
         mGetListOrderRequestBaseRequest.setParameterApi(request);
         Subscription subscription =
