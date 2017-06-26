@@ -7,7 +7,7 @@
 
         <variable
             name="presenter"
-            type="com.viettel.mbccs.screen.nhapkhocapduoi.createorder.CreateOrderActivity" />
+            type="com.viettel.mbccs.base.createorder.BaseCreateOrderPresenter" />
 
         <import type="android.view.View" />
 
@@ -17,6 +17,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white_grey"
         android:paddingBottom="@dimen/dp_8">
 
         <include
@@ -30,7 +31,7 @@
             app:leftIconClick="@{ () -> presenter.onBackPressed() }"
             app:title="@{ presenter.toolbarTitle }"
             app:titleColor="@{ @color/white }"
-            app:titleTextSize="@{ @dimen/sp_16 }" />
+            app:titleTextSize="@{ @dimen/sp_20 }" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,34 +40,46 @@
             android:layout_below="@+id/toolbar"
             android:orientation="vertical">
 
-            <com.viettel.mbccs.widget.CustomTextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/dp_16"
-                android:layout_marginStart="@dimen/dp_16"
-                android:layout_marginTop="@dimen/dp_16"
-                android:text="@{ presenter.orderCode }"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp_14" />
+                android:background="@color/white"
+                android:orientation="vertical">
 
-            <com.viettel.mbccs.widget.CustomTextView
-                style="@style/TextSearchTask"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/dp_16"
-                android:layout_marginStart="@dimen/dp_16"
-                android:layout_marginTop="@dimen/dp_8"
-                android:text="@{ presenter.exportWarehouseCode }" />
+                <com.viettel.mbccs.widget.CustomTextView
+                    style="@style/TextSearchTask"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:text="@{ presenter.orderCode }" />
 
-            <com.viettel.mbccs.widget.CustomTextView
-                style="@style/TextSearchTask"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/dp_16"
-                android:layout_marginStart="@dimen/dp_16"
-                android:layout_marginTop="@dimen/dp_8"
-                android:text="@{ presenter.createdDate }"
-                android:visibility="@{ TextUtils.isEmpty(presenter.createdDate) ? View.GONE : View.VISIBLE }" />
+                <com.viettel.mbccs.widget.CustomTextView
+                    style="@style/TextSearchTask"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:text="@{ presenter.exportWarehouseCode }" />
+
+                <com.viettel.mbccs.widget.CustomTextView
+                    style="@style/TextSearchTask"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:text="@{ presenter.createdDate }"
+                    android:visibility="@{ TextUtils.isEmpty(presenter.createdDate) ? View.GONE : View.VISIBLE }" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_0.6"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:background="@color/default_bg_disabled" />
+            </LinearLayout>
 
             <com.viettel.mbccs.widget.CustomTextView
                 android:layout_width="match_parent"
@@ -78,15 +91,21 @@
                 android:layout_marginTop="@dimen/dp_16"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_18"
-                bind:textUnderLine="@{ @string/activity_create_order_success_danh_sach_mat_hang }" />
+                bind:textUnderLine="@{ presenter.itemCountString }" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_0.6"
+                android:layout_marginTop="@dimen/dp_8"
+                android:background="@color/default_bg_disabled" />
 
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginEnd="@dimen/dp_16"
-                android:layout_marginStart="@dimen/dp_16"
-                android:layout_marginTop="@dimen/dp_8"
                 android:adapter="@{ presenter.adapter }"
+                android:background="@color/white"
+                android:paddingEnd="@dimen/dp_16"
+                android:paddingStart="@dimen/dp_16"
                 bind:addItemDecoration="@{ presenter.itemDecoration }" />
         </LinearLayout>
 
@@ -96,10 +115,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_margin="@dimen/dp_16"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="@{ presenter.showButton ? View.VISIBLE : View.GONE }">
 
             <com.viettel.mbccs.widget.CustomButton
-                style="@style/button_negative_red"
+                style="@style/button_negative_red2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/dp_4"

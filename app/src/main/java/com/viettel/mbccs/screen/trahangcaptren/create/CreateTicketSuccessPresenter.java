@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.base.createordersuccess.BaseCreateOrderSuccessPresenter;
+import com.viettel.mbccs.base.createorder.BaseCreateOrderSuccessPresenter;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.screen.trahangcaptren.adapters.GoodsReturnUpperAdapter;
 import com.viettel.mbccs.widget.SpacesItemDecoration;
@@ -13,7 +13,7 @@ import com.viettel.mbccs.widget.SpacesItemDecoration;
  * Created by FRAMGIA\vu.viet.anh on 14/06/2017.
  */
 
-public class CreateTicketSuccessPresenter extends BaseCreateOrderSuccessPresenter
+public class CreateTicketSuccessPresenter extends BaseCreateOrderSuccessPresenter<StockTotal>
         implements CreateTicketSuccessContract.Presenter {
 
     public CreateTicketSuccessPresenter(Context context,
@@ -59,7 +59,7 @@ public class CreateTicketSuccessPresenter extends BaseCreateOrderSuccessPresente
     }
 
     @Override
-    public RecyclerView.Adapter getAdapter() {
+    public RecyclerView.Adapter getListAdapter() {
         // TODO: 6/1/2017 Fake data
         mList.add(new StockTotal(1, 12, 115, "stockModelCode", "stockModelName", 1, "stockTypeName",
                 10, 100, 12, "stateName", 1));
