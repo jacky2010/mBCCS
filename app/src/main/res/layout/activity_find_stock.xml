@@ -57,7 +57,7 @@
                 android:id="@+id/drawer"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="270dp"
+                android:layout_marginBottom="240dp"
                 app:content="@+id/content"
                 app:direction="topToBottom"
                 app:handle="@+id/handle"

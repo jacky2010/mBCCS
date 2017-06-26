@@ -11,12 +11,14 @@ import com.viettel.mbccs.databinding.ActivityFindStockBinding;
 import com.viettel.mbccs.variable.Constants;
 import com.viettel.mbccs.widget.MultiDirectionSlidingDrawer;
 import java.util.ArrayList;
+import java.util.List;
 
 public class FindStockActivity
         extends BaseDataBindActivity<ActivityFindStockBinding, FindStockContract.Presenter>
         implements FindStockContract.ViewModel {
 
     private MultiDirectionSlidingDrawer mDrawer;
+    private ArrayList<StockTotal> mStockTotals;
 
     @Override
     protected int getIdLayout() {
@@ -26,7 +28,17 @@ public class FindStockActivity
     @Override
     protected void initData() {
 
-        mPresenter = new FindStockPresenter(this, this);
+        Bundle bundle = getIntent().getExtras();
+        if (bundle == null) {
+            return;
+        }
+
+        mStockTotals = bundle.getParcelableArrayList(Constants.BundleConstant.LIST_STOCK_TOTAL);
+        if (mStockTotals == null) {
+            return;
+        }
+
+        mPresenter = new FindStockPresenter(this, this, mStockTotals);
         mBinding.setPresenter((FindStockPresenter) mPresenter);
         mDrawer = mBinding.drawer;
         mDrawer.setOnDrawerCloseListener(new MultiDirectionSlidingDrawer.OnDrawerCloseListener() {
@@ -37,7 +49,6 @@ public class FindStockActivity
         });
 
         mDrawer.open();
-
     }
 
     @Override

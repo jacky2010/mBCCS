@@ -8,7 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.SaleTranType;
-import com.viettel.mbccs.constance.StockTotalType;
+import com.viettel.mbccs.constance.StockStateId;
 import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.model.SaleProgram;
@@ -82,7 +82,7 @@ public class SaleRetailPresenter
         request.setOwnerId((mUserRepository.getUserInfo().getStaffInfo().getStaffId()));
         //hard code 2
         request.setOwnerType(2L);
-        request.setStateId(StockTotalType.TYPE_NEW);
+        request.setStateId((long) StockStateId.TYPE_NEW);
         request.setSaleTransType(SaleTranType.SALE_RETAIL);
         //TODO set attribute for request
 

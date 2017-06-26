@@ -8,23 +8,15 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.constance.SaleTranType;
-import com.viettel.mbccs.constance.StockTotalType;
-import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.StockStateId;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListStockModelRequest;
-import com.viettel.mbccs.data.source.remote.response.BaseException;
-import com.viettel.mbccs.data.source.remote.response.GetListStockModelResponse;
 import com.viettel.mbccs.screen.kpp.order.findstock.adapter.StockTotalPickerAdapter;
-import com.viettel.mbccs.utils.ActivityUtils;
-import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.SpinnerAdapter;
-import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.ArrayList;
-import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
 public class FindStockPresenter
@@ -40,7 +32,7 @@ public class FindStockPresenter
     public ObservableField<String> name;
     public ObservableField<String> nameError;
     private StockTotalPickerAdapter stockTotalAdapter;
-    private ArrayList<StockTotal> mStockTotals = new ArrayList<>();
+    private ArrayList<StockTotal> mStockTotals;
     private ArrayList<StockTotal> mStockTotalsSaved = new ArrayList<>();
     private DataRequest<GetListStockModelRequest> mGetListStockModelRequestBaseRequest;
     private CompositeSubscription mSubscription;
@@ -48,12 +40,17 @@ public class FindStockPresenter
     private BanHangKhoTaiChinhRepository mBanHangKhoTaiChinhRepository;
     private UserRepository mUserRepository;
 
-    public FindStockPresenter(Context context, FindStockContract.ViewModel viewModel) {
+    public FindStockPresenter(Context context, FindStockContract.ViewModel viewModel,
+            ArrayList<StockTotal> stockTotals) {
         mContext = context;
         mViewModel = viewModel;
         mSubscription = new CompositeSubscription();
         mBanHangKhoTaiChinhRepository = BanHangKhoTaiChinhRepository.getInstance();
         mUserRepository = UserRepository.getInstance();
+        this.mStockTotals = stockTotals;
+        if (mStockTotals == null) {
+            return;
+        }
         init();
     }
 
@@ -73,12 +70,14 @@ public class FindStockPresenter
         filterText = new ObservableField<>();
 
         code = new ObservableField<>();
+        code.set("");
         codeError = new ObservableField<>();
         name = new ObservableField<>();
+        name.set("");
         nameError = new ObservableField<>();
 
-//        stockTypeAdapter = new SpinnerAdapter<>(mContext,
-//                mContext.getResources().getStringArray(R.array.stock_type));
+        stockTypeAdapter = new SpinnerAdapter<>(mContext,
+                mContext.getResources().getStringArray(R.array.stock_type));
         stockTotalAdapter = new StockTotalPickerAdapter(mContext, mStockTotals);
         stockTypeAdapter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -95,70 +94,19 @@ public class FindStockPresenter
     }
 
     public void search() {
-
-        if (!isValidate()) {
-            return;
-        }
-
-        saveStockToList();
-
-        mGetListStockModelRequestBaseRequest = new DataRequest<>();
-        mGetListStockModelRequestBaseRequest.setApiCode(ApiCode.GetListStockModel);
-        GetListStockModelRequest request = new GetListStockModelRequest();
-        request.setStockModelId(code.get());
-        if (stockType != -1) {
-            request.setStockTypeId(stockType);
-        }
-        if (!TextUtils.isEmpty(code.get())) {
-            request.setStockModelId(code.get());
-        }
-        request.setStateId(StockTotalType.TYPE_NEW);
-        request.setOwnerType(2L);
-        request.setSaleTransType(SaleTranType.SALE_CHANNEL);
-        request.setOwnerId(mUserRepository.getUserInfo().getStaffInfo().getStaffId());
-        mGetListStockModelRequestBaseRequest.setParameterApi(request);
-        mViewModel.showLoading();
-        Subscription subscription = mBanHangKhoTaiChinhRepository.getListStockModel(
-                mGetListStockModelRequestBaseRequest)
-                .subscribe(new MBCCSSubscribe<GetListStockModelResponse>() {
-                    @Override
-                    public void onSuccess(GetListStockModelResponse object) {
-                        if (object != null && object.getStockTotalList() != null) {
-                            if (object.getStockTotalList().size() == 0) {
-                                DialogUtils.showDialog(mContext, R.string.common_msg_no_data);
-                            }
-                            mStockTotals.clear();
-                            mStockTotals.addAll(object.getStockTotalList());
-                            stockTotalAdapter.notifyDataSetChanged();
-                            mViewModel.closeForm();
-                            return;
-                        }
-                        DialogUtils.showDialog(mContext, R.string.common_msg_no_data);
-                    }
-
-                    @Override
-                    public void onError(BaseException error) {
-                        DialogUtils.showDialog(mContext, null, error.getMessage(), null);
-                        //fake();
-                    }
-
-                    @Override
-                    public void onRequestFinish() {
-                        super.onRequestFinish();
-                        mViewModel.hideLoading();
-                        ActivityUtils.hideKeyboard((Activity) mContext);
-                    }
-                });
-
-        mSubscription.add(subscription);
+        //if (!isValidate()) {
+        //    return;
+        //}
+        stockTotalAdapter.filter(stockType, code.get(), name.get());
+        mViewModel.closeForm();
     }
 
     private boolean isValidate() {
-        //codeError.set(null);
-        //if (TextUtils.isEmpty(code.get())) {
-        //    codeError.set(mContext.getString(R.string.input_empty));
-        //    return false;
-        //}
+        codeError.set(null);
+        if (TextUtils.isEmpty(code.get())) {
+            codeError.set(mContext.getString(R.string.input_empty));
+            return false;
+        }
 
         return true;
     }
@@ -198,29 +146,29 @@ public class FindStockPresenter
     }
 
     public void refreshTextFilter() {
-//        String[] arrStockType = mContext.getResources().getStringArray(R.array.stock_type);
-//        String text = "";
-//        if (stockType == -1) {
-//            text += "Tất cả";
-//        }
-//
-//        if (stockType == StockTotalType.TYPE_NEW) {
-//            text += mContext.getString(R.string.common_label_dot) + arrStockType[1];
-//        }
-//
-//        if (stockType == StockTotalType.TYPE_FAIL) {
-//            text += mContext.getString(R.string.common_label_dot) + arrStockType[2];
-//        }
-//
-//        if (!TextUtils.isEmpty(code.get())) {
-//            text += mContext.getString(R.string.common_label_dot) + code.get();
-//        }
-//
-//        if (!TextUtils.isEmpty(name.get())) {
-//            text += mContext.getString(R.string.common_label_dot) + name.get();
-//        }
-//
-//        filterText.set(text);
+        String[] arrStockType = mContext.getResources().getStringArray(R.array.stock_type);
+        String text = "";
+        if (stockType == -1) {
+            text += "Tất cả";
+        }
+
+        if (stockType == StockStateId.TYPE_NEW) {
+            text += mContext.getString(R.string.common_label_dot) + arrStockType[1];
+        }
+
+        if (stockType == StockStateId.TYPE_FAIL) {
+            text += mContext.getString(R.string.common_label_dot) + arrStockType[2];
+        }
+
+        if (!TextUtils.isEmpty(code.get())) {
+            text += mContext.getString(R.string.common_label_dot) + code.get();
+        }
+
+        if (!TextUtils.isEmpty(name.get())) {
+            text += mContext.getString(R.string.common_label_dot) + name.get();
+        }
+
+        filterText.set(text);
     }
 
     @Override
@@ -230,10 +178,10 @@ public class FindStockPresenter
             stockType = -1;
         }
         if (position == 1) {
-            stockType = StockTotalType.TYPE_NEW;
+            stockType = StockStateId.TYPE_NEW;
         }
         if (position == 2) {
-            stockType = StockTotalType.TYPE_FAIL;
+            stockType = StockStateId.TYPE_FAIL;
         }
     }
 

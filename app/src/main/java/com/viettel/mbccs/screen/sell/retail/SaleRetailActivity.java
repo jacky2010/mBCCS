@@ -184,4 +184,5 @@ public class SaleRetailActivity
     public void refresh() {
         mBinding.spinner.getSpinner().setSelection(0);
     }
+
 }

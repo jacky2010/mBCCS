@@ -19,7 +19,7 @@ public class AddNewOrderContract {
 
     interface ViewModel extends BaseView<Presenter> {
 
-        void goGoStockPicker();
+        void goGoStockPicker(ArrayList<StockTotal> stockTotals);
 
         void gotoSuccessScreen(ArrayList<StockTotal> stockTotals, String saleOrderId,
                 String channelName);

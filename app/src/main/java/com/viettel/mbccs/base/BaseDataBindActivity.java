@@ -43,4 +43,22 @@ public abstract class BaseDataBindActivity<T extends ViewDataBinding,K> extends 
         }
         return super.dispatchTouchEvent(event);
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (mPresenter instanceof BasePresenter)
+        {
+            ((BasePresenter)mPresenter).subscribe();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mPresenter instanceof BasePresenter)
+        {
+            ((BasePresenter)mPresenter).unSubscribe();
+        }
+    }
 }
