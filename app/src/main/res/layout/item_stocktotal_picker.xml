@@ -30,14 +30,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@{data.stockTotal.stockModelName}"
-                android:textSize="@dimen/sp_20"
+                android:textSize="@dimen/sp_17"
+                android:textColor="@color/black"
                 android:textStyle="bold"
                 />
             <com.viettel.mbccs.widget.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@{data.stockModelId}"
-                android:textSize="@dimen/sp_20"
+                android:textSize="@dimen/sp_17"
+                android:textColor="@color/black"
                 android:textStyle="bold"
                 />
 
@@ -66,7 +68,9 @@
 
                 <EditText
                     android:id="@+id/input_quantity_choice"
-                    android:layout_width="@dimen/dp_50"
+                    android:layout_width="wrap_content"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingRight="@dimen/dp_10"
                     android:layout_height="@dimen/dp_40"
                     android:layout_marginLeft="@dimen/dp_10"
                     android:layout_marginRight="@dimen/dp_10"
@@ -74,7 +78,6 @@
                     android:gravity="center"
                     android:imeOptions="actionDone"
                     android:inputType="numberSigned"
-                    android:padding="@dimen/dp_4"
                     android:selectAllOnFocus="true"
                     android:text="@{String.valueOf(data.countChoice)}"
                     android:textSize="@dimen/sp_16"

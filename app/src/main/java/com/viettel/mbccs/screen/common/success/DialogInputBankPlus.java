@@ -8,6 +8,7 @@ import android.databinding.ObservableField;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.View;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.databinding.DialogInputBankPlusBinding;
 import com.viettel.mbccs.utils.ValidateUtils;
@@ -44,6 +45,12 @@ public class DialogInputBankPlus extends Dialog {
         mBinding.setPresenter(this);
         setCancelable(false);
         setCanceledOnTouchOutside(false);
+        mBinding.btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismiss();
+            }
+        });
     }
 
     private void init() {

@@ -79,8 +79,15 @@ public class Common {
         return result;
     }
 
-    public static List<SerialBO> getSerialBlockBySerials(List<String> integers,
-            long stockModelId) {
+    public static String formatDouble1(double d) {
+        if (d == (long) d) {
+            return String.format("%d", (long) d);
+        } else {
+            return String.format("%s", d);
+        }
+    }
+
+    public static List<SerialBO> getSerialBlockBySerials(List<String> integers, long stockModelId) {
         if (integers == null) {
             integers = new ArrayList<>();
         }

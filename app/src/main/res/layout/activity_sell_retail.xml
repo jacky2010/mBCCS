@@ -103,7 +103,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:text="@string/service"
-                                style="@style/textTitleInput"
+                                style="@style/textTitleInputLight"
                                 />
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -122,7 +122,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_5"
                                 android:text="@string/sell_program"
-                                style="@style/textTitleInput"
+                                style="@style/textTitleInputLight"
                                 />
                             <com.viettel.mbccs.widget.FakeSpinner
                                 app:themeLight="@{true}"

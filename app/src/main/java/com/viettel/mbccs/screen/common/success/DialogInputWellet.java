@@ -7,6 +7,7 @@ import android.databinding.ObservableField;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.View;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.databinding.DialogInputWelletBinding;
 import com.viettel.mbccs.utils.ValidateUtils;
@@ -44,6 +45,12 @@ public class DialogInputWellet extends Dialog {
         setContentView(mBinding.getRoot());
         init();
         mBinding.setPresenter(this);
+        mBinding.btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismiss();
+            }
+        });
     }
 
     private void init() {

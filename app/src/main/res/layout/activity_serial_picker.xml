@@ -24,6 +24,8 @@
             android:layout_alignParentBottom="true"
             android:gravity="center"
             android:orientation="horizontal"
+            android:paddingBottom="@dimen/dp_5"
+            android:paddingTop="@dimen/dp_5"
             >
             <com.viettel.mbccs.widget.CustomButton
                 android:layout_width="@dimen/dp_150"
@@ -74,14 +76,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/white"
-                        android:paddingTop="@dimen/dp_10"
                         android:orientation="vertical"
+                        android:paddingTop="@dimen/dp_10"
                         >
                         <com.viettel.mbccs.widget.CustomTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@{@string/serial_step1}"
                             android:textColor="@color/black"
+                            android:textStyle="bold"
                             style="@style/stepTitleStyle"
                             />
                         <LinearLayout
@@ -168,12 +171,12 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:padding="@dimen/dp_10"
-                                android:layout_margin="@dimen/dp_10"
                                 android:layout_gravity="center"
+                                android:layout_margin="@dimen/dp_10"
                                 android:background="@drawable/bg_qrcode"
                                 android:gravity="center"
                                 android:onClick="@{()->presenter.pickSerialByScanQrcode()}"
+                                android:padding="@dimen/dp_10"
                                 >
                                 <ImageView
                                     android:id="@+id/btn_scanbarcode"
@@ -202,8 +205,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/white"
-                        android:padding="@dimen/dp_3"
                         android:orientation="vertical"
+                        android:padding="@dimen/dp_3"
                         >
 
                         <com.viettel.mbccs.widget.CustomTextView
@@ -211,6 +214,7 @@
                             android:layout_height="wrap_content"
                             android:text="@{@string/common_label_select_serials_step2}"
                             android:textColor="@color/black"
+                            android:textStyle="bold"
                             style="@style/stepTitleStyle"
                             />
                         <LinearLayout
@@ -279,6 +283,7 @@
                             android:layout_height="wrap_content"
                             android:text="@{@string/common_label_select_serials_step3}"
                             android:textColor="@color/black"
+                            android:textStyle="bold"
                             style="@style/stepTitleStyle"
                             />
 
@@ -317,6 +322,7 @@
                                 <View
                                     style="@style/dividerVerticalStyle"/>
                                 <com.viettel.mbccs.widget.CustomTextView
+                                    android:id="@+id/customTextView4"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -372,35 +378,31 @@
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
+                                android:layout_weight="1.7"
+                                android:gravity="right"
+                                android:orientation="horizontal"
                                 >
                                 <com.viettel.mbccs.widget.CustomTextView
                                     android:id="@+id/text_serial_to"
-                                    android:layout_width="match_parent"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
                                     android:gravity="center"
                                     android:padding="5dp"
                                     android:text="@string/total_serial"
+                                    android:textColor="@color/black"
                                     />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0.7"
-                                >
                                 <com.viettel.mbccs.widget.CustomTextView
                                     android:id="@+id/text_serial_quantity"
-                                    android:layout_width="match_parent"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
                                     android:gravity="center"
                                     android:padding="5dp"
                                     android:text="@{presenter.quantity}"
-                                    android:textColor="@color/black"
+                                    android:textColor="@color/seafoam_blue"
                                     android:textStyle="bold"
                                     />
                             </LinearLayout>
+
 
                             <LinearLayout
                                 android:id="@+id/layout_delete"

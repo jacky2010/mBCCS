@@ -21,6 +21,11 @@ public interface PaymentInforChannelContract {
 
         void onBack();
 
-        void goToSaveTransConfirm(DataRequest<GetInfoSaleTranRequest> request, SaleTrans saleTrans,ChannelInfo channelInfo);
+        void goToSaveTransConfirm(DataRequest<GetInfoSaleTranRequest> request, SaleTrans saleTrans,
+                ChannelInfo channelInfo);
+
+        void openBankplus();
+
+        void openWellet();
     }
 }

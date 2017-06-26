@@ -24,7 +24,7 @@
                 layout="@layout/toolbar"
                 app:background="@{@color/colorAccent}"
                 app:isShow="@{true}"
-                app:leftIcon="@{@drawable/ic_close_white}"
+                app:leftIcon="@{@drawable/ic_arrow_left_white_24dp}"
                 app:leftIconClick="@{()->presenter.onCancel()}"
                 app:title="@{@string/confirm_goods}"
                 app:titleColor="@{@color/white}"
