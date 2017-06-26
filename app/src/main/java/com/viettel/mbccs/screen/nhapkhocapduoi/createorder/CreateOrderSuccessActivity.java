@@ -1,6 +1,6 @@
 package com.viettel.mbccs.screen.nhapkhocapduoi.createorder;
 
-import com.viettel.mbccs.base.createordersuccess.BaseCreateOrderSuccessActivity;
+import com.viettel.mbccs.base.createorder.BaseCreateOrderSuccessActivity;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.screen.common.success.DialogViewSerial;
 

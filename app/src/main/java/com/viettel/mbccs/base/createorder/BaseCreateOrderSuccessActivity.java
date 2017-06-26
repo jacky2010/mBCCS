@@ -1,4 +1,4 @@
-package com.viettel.mbccs.base.createordersuccess;
+package com.viettel.mbccs.base.createorder;
 
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;

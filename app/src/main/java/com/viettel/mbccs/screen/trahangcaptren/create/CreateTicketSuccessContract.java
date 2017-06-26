@@ -1,6 +1,6 @@
 package com.viettel.mbccs.screen.trahangcaptren.create;
 
-import com.viettel.mbccs.base.createordersuccess.BaseCreateOrderSuccessContract;
+import com.viettel.mbccs.base.createorder.BaseCreateOrderSuccessContract;
 
 public interface CreateTicketSuccessContract {
 

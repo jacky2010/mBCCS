@@ -1,6 +1,6 @@
 package com.viettel.mbccs.screen.trahangcaptren.create;
 
-import com.viettel.mbccs.base.createordersuccess.BaseCreateOrderSuccessActivity;
+import com.viettel.mbccs.base.createorder.BaseCreateOrderSuccessActivity;
 
 /**
  * Created by FRAMGIA\vu.viet.anh on 13/06/2017.
