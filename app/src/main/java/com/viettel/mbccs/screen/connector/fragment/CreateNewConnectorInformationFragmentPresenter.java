@@ -85,6 +85,8 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
 
     private List<ApDomainByType> dataSpinnerCustomerType;
     private List<ApDomainByType> dataSpinnerPassportType;
+    private int positionSpinnerCustomerType;
+    private int positionSpinnerPassportType;
 
 
 
@@ -164,7 +166,7 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position,
                             long id) {
-
+                        positionSpinnerCustomerType = position;
                     }
 
                     @Override
@@ -172,8 +174,7 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
 
                     }
                 });
-        adapterSpinnerCustomerType.setTextHint("-Tất cả-");
-        adapterSpinnerCustomerType.setUsehintValue(true);
+        notifyPropertyChanged(BR.adapterSpinnerCustomerType);
 
         adapterSpinnerPassportType = new SpinnerAdapter<>(context, dataSpinnerPassportType);
         adapterSpinnerPassportType.setOnItemSelectedListener(
@@ -181,7 +182,7 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position,
                             long id) {
-
+                        positionSpinnerPassportType = position;
                     }
 
                     @Override
@@ -189,6 +190,7 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
 
                     }
                 });
+        notifyPropertyChanged(BR.adapterSpinnerPassportType);
         createNewView1.loadDataSpinnerSuccess();
         createNewView1.hideLoading();
     }

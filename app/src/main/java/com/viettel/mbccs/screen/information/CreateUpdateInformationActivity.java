@@ -2,10 +2,8 @@ package com.viettel.mbccs.screen.information;
 
 import android.content.DialogInterface;
 import android.support.v4.app.FragmentTransaction;
-import android.widget.ArrayAdapter;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
-import com.viettel.mbccs.data.model.ApDomainByType;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetRegisterSubInfoResponse;
 import com.viettel.mbccs.databinding.ActivityCreateUpdateInformationBinding;
@@ -24,14 +22,10 @@ public class CreateUpdateInformationActivity extends
         implements CreateUpdateInformationContract.View, InformationCustomerAdapter.ItemClick {
     public final static String ARG_TYPE = "TYPE";
 
-    private ArrayAdapter<String> adapterPassportType;
     private InformationCustomerAdapter adapter;
     private boolean typeCreate;
     private List<GetRegisterSubInfoResponse> getRegisterSubInfoResponseList;
     private GetRegisterSubInfoResponse data;
-
-    private List<String> dataPassportType;
-    private List<ApDomainByType> apDomainList;
 
     @Override
     public void onBackPressed() {
@@ -53,12 +47,6 @@ public class CreateUpdateInformationActivity extends
     protected void initData() {
         typeCreate = getIntent().getBooleanExtra(ARG_TYPE, true);
         mPresenter = new CreateUpdateInformationPresenter(this, this);
-        dataPassportType = new ArrayList<>();
-        adapterPassportType =
-                new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, dataPassportType);
-        adapterPassportType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mPresenter.setAdapterPassportType(adapterPassportType);
-        mBinding.spinner.setOnItemSelectedListener(mPresenter);
 
         mBinding.setPresenter(mPresenter);
         mPresenter.setTypeCreate(typeCreate);
@@ -108,15 +96,6 @@ public class CreateUpdateInformationActivity extends
         transaction.replace(R.id.frame_create_update_information, fragment);
         transaction.addToBackStack(CreateUpdateInformationFragment.STRING_NAME);
         transaction.commit();
-    }
-
-    @Override
-    public void getDataSpinnerPassportSuccess(List<ApDomainByType> data) {
-        apDomainList = data;
-        for (ApDomainByType a : data) {
-            dataPassportType.add(a.getName());
-        }
-        adapterPassportType.notifyDataSetChanged();
     }
 
     @Override

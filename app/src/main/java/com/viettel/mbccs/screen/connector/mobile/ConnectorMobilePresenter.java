@@ -64,7 +64,7 @@ public class ConnectorMobilePresenter extends BaseObservable
         qlKhachHangRepository = QLKhachHangRepository.getInstance();
         subscriptions = new CompositeSubscription();
         contractList = new ArrayList<>();
-        mobileServiceList = Data.connectorMobileService();
+        mobileServiceList = Data.connectorMobileServiceString();
         adapterSpinnerMobileService = new SpinnerAdapter<>(context, mobileServiceList);
         adapterSpinnerMobileService.notifyDataSetChanged();
         adapterSpinnerMobileService.setOnItemSelectedListener(

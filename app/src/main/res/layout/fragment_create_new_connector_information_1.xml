@@ -94,7 +94,7 @@
                 <com.viettel.mbccs.widget.SpinnerWithBorder
                     android:id="@+id/spinner_create_connector_type_customer"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     app:adapter="@{presenter.adapterSpinnerCustomerType}"
                     />
 
@@ -110,10 +110,10 @@
                 <com.viettel.mbccs.widget.CustomEdittext
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minHeight="@dimen/dp_40"
+                    android:minHeight="@dimen/dp_30"
                     android:layout_marginTop="@dimen/dp_6"
                     android:text="@={ presenter.nameCustomer }"
-                    style="@style/inputStyle"
+                    style="@style/inputStyle_1"
                     />
 
                 <com.viettel.mbccs.widget.CustomTextView
@@ -181,7 +181,7 @@
                 <com.viettel.mbccs.widget.SpinnerWithBorder
                     android:id="@+id/spinner_select_type_passport"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     app:adapter="@{presenter.adapterSpinnerPassportType}"
                     />
 
@@ -260,11 +260,11 @@
                 <com.viettel.mbccs.widget.CustomEdittext
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minHeight="@dimen/dp_40"
+                    android:minHeight="@dimen/dp_30"
                     android:layout_marginTop="@dimen/dp_4"
                     android:paddingLeft="@dimen/dp_10"
                     android:text="@={ presenter.whereCreatePassport }"
-                    style="@style/inputStyle"
+                    style="@style/inputStyle_1"
                     />
 
                 <com.viettel.mbccs.widget.CustomSelectAddress

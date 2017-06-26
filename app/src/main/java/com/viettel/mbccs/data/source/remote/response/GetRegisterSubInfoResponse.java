@@ -11,7 +11,7 @@ import com.viettel.mbccs.data.model.Subscriber;
  * Created by HuyQuyet on 5/31/17.
  */
 
-public class GetRegisterSubInfoResponse extends DataResponse implements Parcelable{
+public class GetRegisterSubInfoResponse  implements Parcelable{
 
     @SerializedName("subscriber")
     @Expose

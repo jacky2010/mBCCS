@@ -771,6 +771,7 @@ Bạn đã nhập <font color="#317BE1"><u> %d/%d</u></font> serial cho mặt h�
     <string name="create_new_connector_information_next">Next</string>
     <string name="create_new_connector_information_back">Quay lại</string>
     <string name="create_new_connector_information_enter">Đấu nối</string>
+    <string name="connector_mobile_so_giay_to_trong">Số giấy tờ trống!</string>
 
     <string name="activity_list_order_warehouse_ngay_lap_lenh">Ngày lập lệnh</string>
     <string name="activity_list_order_warehouse_ma_kho_xuat">Mã kho xuất</string>

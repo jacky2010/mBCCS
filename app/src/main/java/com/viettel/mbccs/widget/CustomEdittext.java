@@ -45,6 +45,7 @@ public class CustomEdittext extends AppCompatEditText {
     public CustomEdittext(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         applyCustomFont(context, attrs);
+//        getBackground().setColorFilter(R.color.grey_bright, PorterDuff.Mode.DST_IN);
     }
 
     @Override

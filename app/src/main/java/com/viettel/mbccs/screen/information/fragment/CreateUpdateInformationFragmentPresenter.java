@@ -10,14 +10,16 @@ import android.os.Handler;
 import android.os.Parcelable;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.constance.Data;
+import com.viettel.mbccs.constance.MobileService;
+import com.viettel.mbccs.constance.MobileType;
 import com.viettel.mbccs.data.model.ApDomainByType;
 import com.viettel.mbccs.data.model.Area;
 import com.viettel.mbccs.data.model.Contract;
 import com.viettel.mbccs.data.model.Customer;
+import com.viettel.mbccs.data.model.Product;
 import com.viettel.mbccs.data.model.Subscriber;
 import com.viettel.mbccs.data.model.UploadImage;
 import com.viettel.mbccs.data.source.QLKhachHangRepository;
@@ -39,13 +41,16 @@ import com.viettel.mbccs.data.source.remote.response.RegisterCustomerInfoRespons
 import com.viettel.mbccs.data.source.remote.response.SpinnerApDomain;
 import com.viettel.mbccs.data.source.remote.response.UpdateAllSubInfoResponse;
 import com.viettel.mbccs.service.service.UploadImageService;
+import com.viettel.mbccs.utils.DateUtils;
 import com.viettel.mbccs.utils.ImageUtils;
 import com.viettel.mbccs.utils.SpinnerAdapter;
 import com.viettel.mbccs.utils.StringUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import com.viettel.mbccs.widget.callback.DrawableClickListener;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import rx.Observable;
 import rx.Subscription;
 import rx.functions.Func1;
@@ -60,6 +65,7 @@ public class CreateUpdateInformationFragmentPresenter
         implements CreateUpdateInformationFragmentContract.Presenter {
     private final int TimeDelayHideDialogLoading = 100;
     private final String StringNull = null;
+    private final Integer IntegerNull = null;
     private Context context;
     private CreateUpdateInformationFragmentContract.View view;
     private QLKhachHangRepository qlKhachHangRepository;
@@ -71,15 +77,17 @@ public class CreateUpdateInformationFragmentPresenter
     private Customer customerResponse;
     private Subscriber subscriberResponse;
 
+    private List<Product> dataGoiCuoc;
     private List<ApDomainByType> dataPassportType;
     private List<ApDomainByType> dataHTTT;
     private int positionSelectionPassportType;
     private int positionSelectionHTTT;
+    private int positionSelectionGoiCuoc;
 
     public ObservableField<String> title;
     public ObservableField<String> textBtnRegisterUpdate;
 
-    public ObservableField<ArrayAdapter<String>> adapterGoiCuoc;
+    public ObservableField<SpinnerAdapter<Product>> adapterGoiCuoc;
     public ObservableField<SpinnerAdapter<ApDomainByType>> adapterTypePassport;
     public ObservableField<SpinnerAdapter<ApDomainByType>> adapterHTThanhToan;
 
@@ -126,6 +134,7 @@ public class CreateUpdateInformationFragmentPresenter
         adapterGoiCuoc = new ObservableField<>();
         adapterTypePassport = new ObservableField<>();
         adapterHTThanhToan = new ObservableField<>();
+        adapterGoiCuoc = new ObservableField<>();
 
         txtNameCustomer = new ObservableField<>();
         txtNumberPassport = new ObservableField<>();
@@ -205,6 +214,11 @@ public class CreateUpdateInformationFragmentPresenter
                         }
                         dataPassportType = object.getSpinnerGiayTo().getApDomainByTypeList();
 
+                        if (dataGoiCuoc != null && dataGoiCuoc.size() != 0) {
+                            dataGoiCuoc.clear();
+                        }
+
+                        dataGoiCuoc = object.getSpinnerListProduct().getListProduct();
                         if (typeFragment
                                 == CreateUpdateInformationFragment.Type.UPDATE_INFORMATION) {
                             if (dataHTTT != null && dataHTTT.size() != 0) {
@@ -260,6 +274,8 @@ public class CreateUpdateInformationFragmentPresenter
 
     private Observable<GetListProductResponse> getDataListProduct() {
         GetListProductRequest getListProductRequest = new GetListProductRequest();
+        getListProductRequest.setSubType(MobileType.TRA_TRUOC);
+        getListProductRequest.setTelServiceId(MobileService.Mobile);
 
         DataRequest<GetListProductRequest> request = new DataRequest<>();
         request.setParameterApi(getListProductRequest);
@@ -392,13 +408,26 @@ public class CreateUpdateInformationFragmentPresenter
 
     private Subscriber getDataSubscriber() {
         Subscriber subscriber = new Subscriber();
-        subscriber.setSubID(subscriberResponse.getSubID());
-        subscriber.setCustReqId(subscriberResponse.getCustReqId());
-        subscriber.setSubType(subscriberResponse.getSubType());
+        subscriber.setSubID(
+                subscriberResponse == null ? IntegerNull : subscriberResponse.getSubID());
         subscriber.setIsdn(txtPhoneNumber.get());
-        subscriber.setImsi(subscriberResponse.getImsi());
+        subscriber.setCustReqId(
+                subscriberResponse == null ? IntegerNull : subscriberResponse.getCustReqId());
+        subscriber.setImsi(subscriberResponse == null ? StringNull : subscriberResponse.getImsi());
         subscriber.setSerial(txtSerial.get());
-        subscriber.setPackageName(subscriberResponse.getPackageName());
+        subscriber.setPackageName(
+                subscriberResponse == null ? StringNull : subscriberResponse.getPackageName());
+        subscriber.setTelecomServiceId(MobileService.Mobile);
+
+        switch (typeFragment) {
+            case CreateUpdateInformationFragment.Type.CREATE_INFORMATION:
+                subscriber.setSubType(MobileType.TRA_TRUOC);
+                break;
+            case CreateUpdateInformationFragment.Type.CREATE_INFORMATION_CLONE:
+                break;
+            case CreateUpdateInformationFragment.Type.UPDATE_INFORMATION:
+                break;
+        }
 
         return subscriber;
     }
@@ -415,10 +444,21 @@ public class CreateUpdateInformationFragmentPresenter
         return contract;
     }
 
+    private boolean compareDate() {
+        Date birthDate = DateUtils.stringToDate(getDataCustomer().getBirthDate(),
+                DateUtils.CALENDAR_DATE_FORMAT_DD_MM_YY, Locale.getDefault());
+
+        Date date = new Date(System.currentTimeMillis());
+        return birthDate.before(date);
+    }
+
     void clickSendData(boolean isSendImage) {
         view.showLoading();
         Customer customer = getDataCustomer();
-        if (StringUtils.isEmpty(customer.getProvince())) {
+        if (StringUtils.isEmpty(customer.getProvince())
+                || StringUtils.isEmpty(customer.getName())
+                || StringUtils.isEmpty(customer.getIdNo())
+                || !compareDate()) {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -640,6 +680,23 @@ public class CreateUpdateInformationFragmentPresenter
                         public void onItemSelected(AdapterView<?> parent, View view, int position,
                                 long id) {
                             positionSelectionPassportType = position;
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
+        }
+
+        if (dataGoiCuoc != null && dataGoiCuoc.size() != 0) {
+            adapterGoiCuoc.set(new SpinnerAdapter<>(context, dataGoiCuoc));
+            adapterGoiCuoc.get()
+                    .setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position,
+                                long id) {
+                            positionSelectionGoiCuoc = position;
                         }
 
                         @Override
