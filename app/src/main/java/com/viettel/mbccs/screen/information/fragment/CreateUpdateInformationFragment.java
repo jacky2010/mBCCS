@@ -15,6 +15,7 @@ import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseFragment;
 import com.viettel.mbccs.data.model.Area;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.GetAllSubInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetRegisterSubInfoResponse;
 import com.viettel.mbccs.databinding.FragmentCreateUpdateInformationBinding;
 import com.viettel.mbccs.screen.common.success.DialogFullScreen;
@@ -38,19 +39,17 @@ public class CreateUpdateInformationFragment extends BaseFragment
     }
 
     private static final String ARG_TYPE_FRAGMENT = "TYPE_FRAGMENT";
-    private static final String ARG_DATA = "DATA";
 
     private FragmentCreateUpdateInformationBinding binding;
     private CreateUpdateInformationFragmentPresenter presenter;
     @Type
     private int typeFragment;
-    private GetRegisterSubInfoResponse data;
+    private GetRegisterSubInfoResponse dataRegister;
+    private GetAllSubInfoResponse dataUpdate;
 
-    public static CreateUpdateInformationFragment newInstance(@Type int typeFragment,
-            @Nullable GetRegisterSubInfoResponse data) {
+    public static CreateUpdateInformationFragment newInstance(@Type int typeFragment) {
         Bundle bundle = new Bundle();
         bundle.putInt(ARG_TYPE_FRAGMENT, typeFragment);
-        bundle.putParcelable(ARG_DATA, data);
         CreateUpdateInformationFragment fragment = new CreateUpdateInformationFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -60,7 +59,6 @@ public class CreateUpdateInformationFragment extends BaseFragment
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         typeFragment = getArguments().getInt(ARG_TYPE_FRAGMENT);
-        data = getArguments().getParcelable(ARG_DATA);
     }
 
     @Nullable
@@ -76,7 +74,7 @@ public class CreateUpdateInformationFragment extends BaseFragment
         super.onViewCreated(view, savedInstanceState);
         presenter = new CreateUpdateInformationFragmentPresenter(getActivity(), this);
 
-        presenter.setTypeFragment(typeFragment, data);
+        presenter.setTypeFragment(typeFragment, dataRegister, dataUpdate);
         presenter.getDataSpinner();
         binding.imageSelect.setSelectImageCallback(this);
         binding.setPresenter(presenter);
@@ -91,6 +89,14 @@ public class CreateUpdateInformationFragment extends BaseFragment
     @Override
     public void setPresenter(CreateUpdateInformationFragmentContract.Presenter presenter) {
 
+    }
+
+    public void setDataRegister(GetRegisterSubInfoResponse dataRegister) {
+        this.dataRegister = dataRegister;
+    }
+
+    public void setDataUpdate(GetAllSubInfoResponse dataUpdate) {
+        this.dataUpdate = dataUpdate;
     }
 
     @Override

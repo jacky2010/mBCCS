@@ -295,12 +295,13 @@
                         />
 
                     <com.viettel.mbccs.widget.SpinnerWithBorder
-                            android:id="@+id/spinner_select_httt"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                        android:id="@+id/spinner_select_httt"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/dp_4"
                         bind:adapter="@{ presenter.adapterHTThanhToan }"
                         bind:leftIcon="@drawable/ic_folder_black_16dp"
+                        bind:position="@{ presenter.selectionHTTT }"
                             />
 
                     <LinearLayout
