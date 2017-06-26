@@ -6,7 +6,7 @@ import android.view.View;
 
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDialog;
-import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.constance.IconType;
 import com.viettel.mbccs.data.source.TransferAnyPayRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
@@ -130,8 +130,8 @@ public class DialogConfirmTransferAnyPayFragment extends BaseDialog {
             request.setToChannelId(Integer.parseInt(currentArgs.getString(Constants.BundleConstant.TO_CHANNEL)));
 
             transferAnyPayRequest = new DataRequest<>();
-            transferAnyPayRequest.setApiCode(ApiCode.TransferAnyPay);
-            transferAnyPayRequest.setParameterApi(request);
+            transferAnyPayRequest.setWsCode(WsCode.TransferAnyPay);
+            transferAnyPayRequest.setWsRequest(request);
 
             Subscription subscription =
                     transferAnyPayRepository.transferAnyPay(transferAnyPayRequest)

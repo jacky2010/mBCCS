@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.source.KPPFeedbackRepository;
 import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
@@ -95,14 +95,14 @@ public class SendKPPFeedbackPresenter implements SendKPPFeedbackContract.Present
             viewModel.showLoading();
 
             DataRequest<KPPFeedbackRequest> baseRequest = new DataRequest<>();
-            baseRequest.setApiCode(ApiCode.CreateFeedback);
+            baseRequest.setWsCode(WsCode.CreateFeedback);
             KPPFeedbackRequest request = new KPPFeedbackRequest();
             request.setUsername(userRepository.getUser() != null ? userRepository.getUser().getUserName() : null);
             request.setLanguage(userRepository.getLanguageFromSharePrefs());
             request.setDescription(context.getString(R.string.kpp_feedback_label_title, userRepository.getUser() != null ? userRepository.getUser().getUserName() : null));
             request.setContent(content.get());
             request.setOwnerCode((userRepository.getUserInfo() != null && userRepository.getUserInfo().getChannelInfo() != null) ? userRepository.getUserInfo().getChannelInfo().getChannelCode() : null);
-            baseRequest.setParameterApi(request);
+            baseRequest.setWsRequest(request);
 
             Subscription subscription =
                     kppFeedbackRepository.feedback(baseRequest)

@@ -3,7 +3,7 @@ package com.viettel.mbccs.screen.warehousecommon.cmdprepareexportdetail;
 import android.content.Context;
 import android.databinding.ObservableField;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.EmptyObject;
 import com.viettel.mbccs.data.model.StockSerial;
 import com.viettel.mbccs.data.model.StockTrans;
@@ -84,10 +84,10 @@ public class CmdPrepareExportDetailPresenter implements CmdPrepareExportDetailCo
 
     private void loadData() {
         mDataRequest = new DataRequest<>();
-        mDataRequest.setApiCode(ApiCode.GetListStockTransDetail);
+        mDataRequest.setWsCode(WsCode.GetListStockTransDetail);
         GetListStockTransDetailRequest request = new GetListStockTransDetailRequest();
         request.setStockTransId(mStockTrans.getStockTransId());
-        mDataRequest.setParameterApi(request);
+        mDataRequest.setWsRequest(request);
         Subscription subscription =
                 mBanHangKhoTaiChinhRepository.getListStockTransDetail(mDataRequest).subscribe(
 
@@ -172,7 +172,7 @@ public class CmdPrepareExportDetailPresenter implements CmdPrepareExportDetailCo
         }
         mViewModel.showLoading();
         mCreateExpStockRequest = new DataRequest<>();
-        mCreateExpStockRequest.setApiCode(ApiCode.CreateExpStock);
+        mCreateExpStockRequest.setWsCode(WsCode.CreateExpStock);
         CreateExpStockRequest request = new CreateExpStockRequest();
         request.setStockTransId(mStockTrans.getStockTransId());
         List<StockSerial> stockSerials = new ArrayList<>();
@@ -180,7 +180,7 @@ public class CmdPrepareExportDetailPresenter implements CmdPrepareExportDetailCo
             stockSerials.add(stockTransDetail.getStockSerial());
         }
         request.setStockSerials(stockSerials);
-        mCreateExpStockRequest.setParameterApi(request);
+        mCreateExpStockRequest.setWsRequest(request);
         Subscription subcription =
                 mBanHangKhoTaiChinhRepository.createExpStock(mCreateExpStockRequest).subscribe(
 

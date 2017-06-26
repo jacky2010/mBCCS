@@ -1,7 +1,7 @@
 package com.viettel.mbccs.screen.survey;
 
 import android.content.Context;
-import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.Survey;
 import com.viettel.mbccs.data.source.SurveyKPPRepository;
 import com.viettel.mbccs.data.source.UserRepository;
@@ -48,8 +48,8 @@ public class SurveyListPresenter implements SurveyListContract.Presenter,
         request.setLanguage(mUserRepository.getLanguageFromSharePrefs());
         request.setUserName(mUserRepository.getLoginUserName());
         DataRequest<GetSurveyKPPRequest> dataRequest = new DataRequest<>();
-        dataRequest.setApiCode(ApiCode.GetSurveyKPP);
-        dataRequest.setParameterApi(request);
+        dataRequest.setWsCode(WsCode.GetSurveyKPP);
+        dataRequest.setWsRequest(request);
         Subscription subscription = mSurveyKPPRepository.getSurveyKPP(dataRequest)
                 .subscribe(new MBCCSSubscribe<GetSurveyKPPResponse>() {
                     @Override

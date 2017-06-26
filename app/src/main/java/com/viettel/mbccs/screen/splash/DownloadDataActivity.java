@@ -12,7 +12,7 @@ import android.os.Handler;
 import android.support.v4.content.LocalBroadcastManager;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseActivity;
-import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.database.ImageDataBase;
 import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
@@ -151,8 +151,8 @@ public class DownloadDataActivity extends BaseActivity {
         progressValue.set(0);
 
         DataRequest<GetListIdImageRequest> request = new DataRequest<>();
-        request.setParameterApi(new GetListIdImageRequest());
-        request.setApiCode(ApiCode.GetListImageOfProductOnServer);
+        request.setWsRequest(new GetListIdImageRequest());
+        request.setWsCode(WsCode.GetListImageOfProductOnServer);
 
         Subscription subscription = userRepository.getListIdImage(request)
                 .subscribe(new MBCCSSubscribe<GetListIdImageResponse>() {

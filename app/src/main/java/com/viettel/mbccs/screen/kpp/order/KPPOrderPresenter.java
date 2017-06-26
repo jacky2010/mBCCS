@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Toast;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.OrderStatus;
-import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.SaleOrders;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.UserRepository;
@@ -108,7 +108,7 @@ public class KPPOrderPresenter implements KPPOrderContract.Presenter {
         }
         mViewModel.showLoading();
         mGetListOrderRequestBaseRequest = new DataRequest<>();
-        mGetListOrderRequestBaseRequest.setApiCode(ApiCode.GetListOrder);
+        mGetListOrderRequestBaseRequest.setWsCode(WsCode.GetListOrder);
         GetListOrderRequest request = new GetListOrderRequest();
         request.setOrderStatus(status);
         request.setShopId(Long.parseLong(mUserRepository.getUserInfo().getShop().getShopId()));
@@ -118,7 +118,7 @@ public class KPPOrderPresenter implements KPPOrderContract.Presenter {
                 DateUtils.DATE_TIME_FORMAT));
         request.setToDate(DateUtils.convertDateToString(mViewModel.getToDate(),
                 DateUtils.DATE_TIME_FORMAT));
-        mGetListOrderRequestBaseRequest.setParameterApi(request);
+        mGetListOrderRequestBaseRequest.setWsRequest(request);
         Subscription subscription =
                 mBanHangKhoTaiChinhRepository.getListOrder(mGetListOrderRequestBaseRequest)
                         .subscribe(new MBCCSSubscribe<GetListOrderResponse>() {

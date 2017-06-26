@@ -6,7 +6,7 @@ import android.view.View;
 
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDialog;
-import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.constance.IconType;
 import com.viettel.mbccs.data.source.SellAnyPayRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
@@ -137,8 +137,8 @@ public class DialogConfirmSellAnyPayFragment extends BaseDialog {
                 request.setStaffId(currentArgs.getInt(Constants.BundleConstant.STAFF));
 
                 sellToChannelBaseRequest = new DataRequest<>();
-                sellToChannelBaseRequest.setApiCode(ApiCode.SellAnyPayToChannel);
-                sellToChannelBaseRequest.setParameterApi(request);
+                sellToChannelBaseRequest.setWsCode(WsCode.SellAnyPayToChannel);
+                sellToChannelBaseRequest.setWsRequest(request);
 
                 Subscription subscription =
                         sellAnyPayRepository.sellAnypayToChannel(sellToChannelBaseRequest)
@@ -186,8 +186,8 @@ public class DialogConfirmSellAnyPayFragment extends BaseDialog {
                 request.setStaffId(currentArgs.getInt(Constants.BundleConstant.STAFF));
 
                 sellToCustomerBaseRequest = new DataRequest<>();
-                sellToCustomerBaseRequest.setApiCode(ApiCode.SellAnyPayToCustomer);
-                sellToCustomerBaseRequest.setParameterApi(request);
+                sellToCustomerBaseRequest.setWsCode(WsCode.SellAnyPayToCustomer);
+                sellToCustomerBaseRequest.setWsRequest(request);
 
                 Subscription subscription =
                         sellAnyPayRepository.sellAnypayToCustomer(sellToCustomerBaseRequest)

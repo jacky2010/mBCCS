@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseFragment;
-import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.constance.PaymentMethod;
 import com.viettel.mbccs.constance.PriceType;
 import com.viettel.mbccs.constance.ReasonType;
@@ -154,8 +154,8 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
 
         DataRequest<GetReasonRequest> request = new DataRequest<>();
 
-        request.setApiCode(ApiCode.GetListReason);
-        request.setParameterApi(reason);
+        request.setWsCode(WsCode.GetListReason);
+        request.setWsRequest(reason);
 
         Subscription subscription = banHangKhoTaiChinhRepository.getReason(request)
                 .subscribe(new MBCCSSubscribe<GetReasonResponse>() {
@@ -249,8 +249,8 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
         c.setPriceType(PriceType.PRICE_CHANNEL);
 
         DataRequest<GetInfoSaleTranRequest> request = new DataRequest<>();
-        request.setApiCode(ApiCode.CreateSaleTransRetail);
-        request.setParameterApi(c);
+        request.setWsCode(WsCode.CreateSaleTransRetail);
+        request.setWsRequest(c);
 
         Subscription subscription = banHangKhoTaiChinhRepository.createSaleTransRetail(request)
                 .subscribe(new MBCCSSubscribe<CreateSaleTransRetailResponse>() {
@@ -276,8 +276,8 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
 
         DataRequest<UpdateSaleOrderRequest> request = new DataRequest<>();
 
-        request.setApiCode(ApiCode.UpdateSaleOrder);
-        request.setParameterApi(u);
+        request.setWsCode(WsCode.UpdateSaleOrder);
+        request.setWsRequest(u);
 
         Subscription subscription = banHangKhoTaiChinhRepository.updateSaleOrder(request)
                 .subscribe(new MBCCSSubscribe<UpdateSaleOrderResponse>() {

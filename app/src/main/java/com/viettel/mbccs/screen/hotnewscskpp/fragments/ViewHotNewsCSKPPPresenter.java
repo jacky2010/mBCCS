@@ -4,7 +4,7 @@ import android.content.Context;
 import android.databinding.ObservableField;
 
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.HotNewsCSKPPItem;
 import com.viettel.mbccs.data.source.HotNewsCSKPPRepository;
 import com.viettel.mbccs.data.source.UserRepository;
@@ -80,12 +80,12 @@ public class ViewHotNewsCSKPPPresenter implements ViewHotNewsCSKPPContract.Prese
             viewModel.showLoading();
 
             DataRequest<GetHotNewsInfoCSKPPRequest> baseRequest = new DataRequest<>();
-            baseRequest.setApiCode(ApiCode.GetInfoHotNews);
+            baseRequest.setWsCode(WsCode.GetInfoHotNews);
             GetHotNewsInfoCSKPPRequest request = new GetHotNewsInfoCSKPPRequest();
             request.setUsername(userRepository.getUser() != null ? userRepository.getUser().getUserName() : null);
             request.setLanguage(userRepository.getLanguageFromSharePrefs());
             request.setHotNewsId(item.getId());
-            baseRequest.setParameterApi(request);
+            baseRequest.setWsRequest(request);
 
             Subscription subscription =
                     hotNewsRepository.getHotNewsInfo(baseRequest)

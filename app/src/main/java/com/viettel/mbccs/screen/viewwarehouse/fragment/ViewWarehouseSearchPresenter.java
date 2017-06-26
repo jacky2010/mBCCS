@@ -7,7 +7,7 @@ import android.widget.ArrayAdapter;
 import com.viettel.mbccs.BR;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.ShopLevel;
-import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListProvinceRequest;
@@ -78,8 +78,8 @@ public class ViewWarehouseSearchPresenter extends BaseObservable
         getListShopRequest.setParentShopId(1);
 
         DataRequest<GetListShopRequest> request = new DataRequest<>();
-        request.setParameterApi(getListShopRequest);
-        request.setApiCode(ApiCode.GetListShop);
+        request.setWsRequest(getListShopRequest);
+        request.setWsCode(WsCode.GetListShop);
         // TODO: 5/23/17 fake data
         Subscription subscription = banHangKhoTaiChinhRepository.getListShop(request)
                 .subscribe(new MBCCSSubscribe<GetListShopResponse>() {
@@ -104,8 +104,8 @@ public class ViewWarehouseSearchPresenter extends BaseObservable
         getListTTKDRequest.setShopLevel(ShopLevel.TTKD);
 
         DataRequest<GetListTTKDRequest> request = new DataRequest<>();
-        request.setParameterApi(getListTTKDRequest);
-        request.setApiCode(ApiCode.GetListTTKD);
+        request.setWsRequest(getListTTKDRequest);
+        request.setWsCode(WsCode.GetListTTKD);
         // TODO: 5/23/17 fake data
         Subscription subscription = banHangKhoTaiChinhRepository.getListTTKD(request)
                 .subscribe(new MBCCSSubscribe<GetListTTKDResponse>() {
@@ -125,8 +125,8 @@ public class ViewWarehouseSearchPresenter extends BaseObservable
 
     private void getDataProvince() {
         DataRequest<GetListProvinceRequest> request = new DataRequest<>();
-        request.setParameterApi(new GetListProvinceRequest());
-        request.setApiCode(ApiCode.GetListProvince);
+        request.setWsRequest(new GetListProvinceRequest());
+        request.setWsCode(WsCode.GetListProvince);
         Subscription subscription = banHangKhoTaiChinhRepository.getListProvince(request)
                 .subscribe(new MBCCSSubscribe<GetListProvinceResponse>() {
                     @Override

@@ -6,7 +6,7 @@ import android.view.View;
 
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDialog;
-import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.constance.IconType;
 import com.viettel.mbccs.data.model.ChangeSimItem;
 import com.viettel.mbccs.data.source.ChangeSimRepository;
@@ -135,13 +135,13 @@ public class DialogConfirmUpdateSimFragment extends BaseDialog {
             showLoadingDialog();
 
             DataRequest<ChangeSimRequest> baseRequest = new DataRequest<>();
-            baseRequest.setApiCode(ApiCode.ChangeSim);
+            baseRequest.setWsCode(WsCode.ChangeSim);
             ChangeSimRequest request = new ChangeSimRequest();
             request.setIsdn(changeSimItem.getSubscriber().getIsdn());
             request.setSerial(changeSimItem.getChangeSimInfo().getNewSerial());
             request.setSubType(changeSimItem.getSubscriber().getSubType());
 
-            baseRequest.setParameterApi(request);
+            baseRequest.setWsRequest(request);
 
             Subscription subscription = changeSimRepository.changeSim(baseRequest)
                     .subscribe(new MBCCSSubscribe<DataResponse>() {

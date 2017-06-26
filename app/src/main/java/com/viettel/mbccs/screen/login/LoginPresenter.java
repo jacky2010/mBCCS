@@ -16,7 +16,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.model.UserInfo;
 import com.viettel.mbccs.data.source.UserRepository;
@@ -109,8 +109,8 @@ public class LoginPresenter implements LoginContract.Presenter {
         getUserInfoRequest.setStaffCode(loginInfo.getUserName());
 
         DataRequest<GetUserInfoRequest> request = new DataRequest<>();
-        request.setParameterApi(getUserInfoRequest);
-        request.setApiCode(ApiCode.GetUserInfo);
+        request.setWsRequest(getUserInfoRequest);
+        request.setWsCode(WsCode.GetUserInfo);
 
         Subscription subscription =
                 mUserRepository.getUserInfo(request).subscribe(new MBCCSSubscribe<UserInfo>() {

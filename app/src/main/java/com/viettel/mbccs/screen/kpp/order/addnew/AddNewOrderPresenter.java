@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.databinding.ObservableField;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.constance.SaleTranType;
 import com.viettel.mbccs.data.model.EmptyObject;
 import com.viettel.mbccs.data.model.StockTotal;
@@ -23,7 +23,6 @@ import com.viettel.mbccs.utils.StockTotalCompare;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
@@ -84,14 +83,14 @@ public class AddNewOrderPresenter implements AddNewOrderContract.Presenter {
     public void search() {
         DataRequest<GetListStockModelRequest> mGetListStockModelRequestBaseRequest =
                 new DataRequest<>();
-        mGetListStockModelRequestBaseRequest.setApiCode(ApiCode.GetListStockModel);
+        mGetListStockModelRequestBaseRequest.setWsCode(WsCode.GetListStockModel);
         GetListStockModelRequest request = new GetListStockModelRequest();
         //request.setStockTypeId(StockTotalType.TYPE_NEW);
         //request.setStateId(StockTotalType.TYPE_NEW);
         request.setOwnerType(2L);
         request.setSaleTransType(SaleTranType.SALE_CHANNEL);
         request.setOwnerId(mUserRepository.getUserInfo().getStaffInfo().getStaffId());
-        mGetListStockModelRequestBaseRequest.setParameterApi(request);
+        mGetListStockModelRequestBaseRequest.setWsRequest(request);
         mViewModel.showLoading();
         Subscription subscription = mBanHangKhoTaiChinhRepository.getListStockModel(
                 mGetListStockModelRequestBaseRequest)
@@ -164,12 +163,12 @@ public class AddNewOrderPresenter implements AddNewOrderContract.Presenter {
 
         mViewModel.showLoading();
         mKPPOrderRequestBaseRequest = new DataRequest<>();
-        mKPPOrderRequestBaseRequest.setApiCode(ApiCode.CreateSaleOrders);
+        mKPPOrderRequestBaseRequest.setWsCode(WsCode.CreateSaleOrders);
         final KPPOrderRequest request = new KPPOrderRequest();
         request.setStaffId(mUserRepository.getUserInfo().getStaffInfo().getStaffId());
         request.setChannelStaffId(mUserRepository.getUserInfo().getChannelInfo().getChannelId());
         request.setListStockModel(Common.convertStockTotalsToStockModels(mStockTotals));
-        mKPPOrderRequestBaseRequest.setParameterApi(request);
+        mKPPOrderRequestBaseRequest.setWsRequest(request);
         Subscription subscription =
                 mBanHangKhoTaiChinhRepository.createSaleOrders(mKPPOrderRequestBaseRequest)
                         .subscribe(new MBCCSSubscribe<EmptyObject>() {

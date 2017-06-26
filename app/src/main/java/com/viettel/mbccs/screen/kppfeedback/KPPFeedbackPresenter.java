@@ -4,7 +4,7 @@ import android.content.Context;
 import android.databinding.ObservableField;
 
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.source.KPPFeedbackRepository;
 import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
@@ -49,10 +49,10 @@ public class KPPFeedbackPresenter implements KPPFeedbackContract.Presenter {
             viewModel.showLoading();
 
             DataRequest<IsKPPManagerRequest> baseRequest = new DataRequest<>();
-            baseRequest.setApiCode(ApiCode.IsKPPManager);
+            baseRequest.setWsCode(WsCode.IsKPPManager);
             IsKPPManagerRequest request = new IsKPPManagerRequest();
             request.setUsername(userRepository.getUser() != null ? userRepository.getUser().getUserName() : null);
-            baseRequest.setParameterApi(request);
+            baseRequest.setWsRequest(request);
 
             Subscription subscription =
                     kppFeedbackRepository.isKPPManager(baseRequest)

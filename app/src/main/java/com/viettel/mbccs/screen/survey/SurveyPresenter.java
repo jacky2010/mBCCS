@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.constance.SurveyType;
 import com.viettel.mbccs.data.model.Survey;
 import com.viettel.mbccs.data.model.SurveyQuestion;
@@ -69,7 +69,7 @@ public class SurveyPresenter implements SurveyContract.Presenter {
     private void sendSurvey() {
         mViewModel.showLoading();
         DataRequest<SendSurveyKPPRequest> dataRequest = new DataRequest<>();
-        dataRequest.setApiCode(ApiCode.SendSurveyKPP);
+        dataRequest.setWsCode(WsCode.SendSurveyKPP);
         SendSurveyKPPRequest request = new SendSurveyKPPRequest();
         request.setLanguage(mUserRepository.getLanguageFromSharePrefs());
         request.setUserName(mUserRepository.getLoginUserName());
@@ -96,7 +96,7 @@ public class SurveyPresenter implements SurveyContract.Presenter {
         }
         surveyResponse.setSurveyResponseAnswer(surveyResponseAnswers);
         request.setSurveyResponse(surveyResponse);
-        dataRequest.setParameterApi(request);
+        dataRequest.setWsRequest(request);
         Subscription subscription = mSurveyKPPRepository.sendSurveyKPP(dataRequest)
                 .subscribe(new MBCCSSubscribe<SendSurveyKPPResponse>() {
                     @Override

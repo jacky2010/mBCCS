@@ -8,7 +8,7 @@ import android.view.View;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataFragment;
 import com.viettel.mbccs.callback.OnListenerItemRecyclerView;
-import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.WsCode;
 //import com.viettel.mbccs.data.model.ApDomain;
 import com.viettel.mbccs.data.model.Customer;
 import com.viettel.mbccs.data.source.QLKhachHangRepository;
@@ -153,8 +153,8 @@ public class InstallationAddressFragment extends BaseDataFragment {
         getRegisterSubInfoRequest.setIdType(mNumberOfPage.getStringEditText());
 
         DataRequest<GetRegisterSubInfoRequest> request = new DataRequest<>();
-        request.setApiCode(ApiCode.GetRegisterSubInfo);
-        request.setParameterApi(getRegisterSubInfoRequest);
+        request.setWsCode(WsCode.GetRegisterSubInfo);
+        request.setWsRequest(getRegisterSubInfoRequest);
         //
         Subscription subscription = qlKhachHangRepository.getRegiterSubInfo(request)
                 .subscribe(new MBCCSSubscribe<GetRegisterSubInfoResponse>() {
@@ -180,8 +180,8 @@ public class InstallationAddressFragment extends BaseDataFragment {
 //        GetApDomainRequest getApDomainRequest = new GetApDomainRequest();
 //        getApDomainRequest.setType(ApDomain.Type.LOAI_GIAY_TO);
 //
-//        request.setParameterApi(getApDomainRequest);
-//        request.setApiCode(ApiCode.GetListBusTypeIdRequire);
+//        request.setWsRequest(getApDomainRequest);
+//        request.setWsCode(ApiCode.GetListBusTypeIdRequire);
 //
 //        Subscription subscription = qlKhachHangRepository.getApDomain(request)
 //                .subscribe(new MBCCSSubscribe<GetApDomainResponse>() {
