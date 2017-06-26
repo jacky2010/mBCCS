@@ -3,7 +3,7 @@ package com.viettel.mbccs.screen.sell.orders.fragment.orderdetail;
 import android.content.Context;
 import android.databinding.ObservableField;
 import android.support.v7.app.AppCompatActivity;
-import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.constance.SaleTranType;
 import com.viettel.mbccs.data.model.SaleOrders;
 import com.viettel.mbccs.data.model.SaleOrdersDetail;
@@ -95,8 +95,8 @@ public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract
 
 
         DataRequest<GetOrderInfoRequest> request = new DataRequest<>();
-        request.setApiCode(ApiCode.GetOrderInfo);
-        request.setParameterApi(g);
+        request.setWsCode(WsCode.GetOrderInfo);
+        request.setWsRequest(g);
 
         Subscription subscription = banHangKhoTaiChinhRepository.getOrderInfo(request)
                 .subscribe(new MBCCSSubscribe<GetOrderInfoResponse>() {

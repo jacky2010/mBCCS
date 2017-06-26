@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseActivity;
 import com.viettel.mbccs.callback.OnListenerItemRecyclerView;
-import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.constance.IconType;
 import com.viettel.mbccs.data.model.Area;
 import com.viettel.mbccs.data.source.QLDiaBanRepository;
@@ -134,8 +134,8 @@ public class AreaChanelActivity extends BaseActivity {
 
     private void getDataProvince() {
         DataRequest<GetListProvinceRequest> request = new DataRequest<>();
-        request.setParameterApi(new GetListProvinceRequest());
-        request.setApiCode(ApiCode.GetListProvince);
+        request.setWsRequest(new GetListProvinceRequest());
+        request.setWsCode(WsCode.GetListProvince);
         Subscription subscription = mQlDiaBanRepository.getListProvince(request)
                 .subscribe(new MBCCSSubscribe<GetListProvinceResponse>() {
                     @Override

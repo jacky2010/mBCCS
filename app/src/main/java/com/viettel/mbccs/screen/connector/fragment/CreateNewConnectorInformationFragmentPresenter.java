@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import com.viettel.mbccs.BR;
-import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.constance.Data;
 import com.viettel.mbccs.data.model.ApDomainByType;
 import com.viettel.mbccs.data.model.Contract;
@@ -200,8 +200,8 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
         GetApDomainByTypeRequest apDomainRequest = new GetApDomainByTypeRequest();
         apDomainRequest.setType(ApDomainByType.Type.LOAI_GIAY_TO);
 
-        request.setParameterApi(apDomainRequest);
-        request.setApiCode(ApiCode.GetApDomainByType);
+        request.setWsRequest(apDomainRequest);
+        request.setWsCode(WsCode.GetApDomainByType);
 
         return qlKhachHangRepository.getApDomainByType(request);
     }
@@ -211,8 +211,8 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
         GetApDomainByTypeRequest apDomainRequest = new GetApDomainByTypeRequest();
         apDomainRequest.setType(ApDomainByType.Type.LOAI_GIAY_TO);
 
-        request.setParameterApi(apDomainRequest);
-        request.setApiCode(ApiCode.GetApDomainByType);
+        request.setWsRequest(apDomainRequest);
+        request.setWsCode(WsCode.GetApDomainByType);
 
         return qlKhachHangRepository.getApDomainByType(request);
     }

@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.databinding.ObservableField;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.constance.SaleTranType;
 import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.SaleTrans;
@@ -95,9 +95,9 @@ public class SaveTransConfirmPresenter implements SaveTransConfirmContract.Prese
     private void saveTransactionRetail() {
         mViewModel.showLoading();
         DataRequest<GetInfoSaleTranRequest> baseRequest = new DataRequest<>();
-        baseRequest.setApiCode(ApiCode.CreateSaleTransRetail);
+        baseRequest.setWsCode(WsCode.CreateSaleTransRetail);
         mGetInfoSaleTranRequest.setSaleTransType(String.valueOf(SaleTranType.SALE_RETAIL));
-        baseRequest.setParameterApi(mGetInfoSaleTranRequest);
+        baseRequest.setWsRequest(mGetInfoSaleTranRequest);
         Subscription subscription = mBanHangKhoTaiChinhRepository.createSaleTransRetail(baseRequest)
                 .subscribe(new MBCCSSubscribe<CreateSaleTransRetailResponse>() {
                     @Override
@@ -141,12 +141,12 @@ public class SaveTransConfirmPresenter implements SaveTransConfirmContract.Prese
     private void saveTransactionChannel() {
         mViewModel.showLoading();
         DataRequest<CreateSaleTransChannelRequest> dataRequest = new DataRequest<>();
-        dataRequest.setApiCode(ApiCode.CreateSaleTransRetail);
+        dataRequest.setWsCode(WsCode.CreateSaleTransRetail);
         CreateSaleTransChannelRequest request = mGetInfoSaleTranRequest.clone();
         request.setSaleTransType(String.valueOf(SaleTranType.SALE_RETAIL));
         request.setChanelId(mUserRepository.getUserInfo().getChannelInfo().getChannelId());
         request.setChannelType(mUserRepository.getUserInfo().getChannelInfo().getChannelType());
-        dataRequest.setParameterApi(request);
+        dataRequest.setWsRequest(request);
         Subscription subscription =
                 mBanHangKhoTaiChinhRepository.createSaleTransChannel(dataRequest)
                         .subscribe(new MBCCSSubscribe<CreateSaleTransChannelResponse>() {

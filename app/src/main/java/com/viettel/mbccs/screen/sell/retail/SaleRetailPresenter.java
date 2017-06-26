@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.SaleTranType;
 import com.viettel.mbccs.constance.StockStateId;
-import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.model.SaleProgram;
 import com.viettel.mbccs.data.model.TeleComService;
@@ -71,7 +71,7 @@ public class SaleRetailPresenter
     private void loadModelSale() {
         mViewModel.showLoading();
         mGetTotalStockRequest = new DataRequest<>();
-        mGetTotalStockRequest.setApiCode(ApiCode.GetStockTotal);
+        mGetTotalStockRequest.setWsCode(WsCode.GetStockTotal);
         GetTotalStockRequest request = new GetTotalStockRequest();
         if (currentSaleProgram.getId() != -1) {
             request.setSaleProgameId(currentSaleProgram.getId());
@@ -86,7 +86,7 @@ public class SaleRetailPresenter
         request.setSaleTransType(SaleTranType.SALE_RETAIL);
         //TODO set attribute for request
 
-        mGetTotalStockRequest.setParameterApi(request);
+        mGetTotalStockRequest.setWsRequest(request);
         Subscription subscription =
                 mBanHangKhoTaiChinhRepository.getModelSales(mGetTotalStockRequest)
                         .subscribe(new MBCCSSubscribe<GetTotalStockResponse>((Activity) mContext) {
@@ -122,11 +122,11 @@ public class SaleRetailPresenter
     private void loadServiceAndProgram() {
         mViewModel.showLoading();
         mGetTelecomServiceAndSaleProgramRequest = new DataRequest<>();
-        mGetTelecomServiceAndSaleProgramRequest.setApiCode(ApiCode.GetTelecomServiceAndSaleProgram);
+        mGetTelecomServiceAndSaleProgramRequest.setWsCode(WsCode.GetTelecomServiceAndSaleProgram);
         GetTelecomServiceAndSaleProgramRequest request =
                 new GetTelecomServiceAndSaleProgramRequest();
         request.setShopId(mUserRepository.getUserInfo().getShop().getShopId());
-        mGetTelecomServiceAndSaleProgramRequest.setParameterApi(request);
+        mGetTelecomServiceAndSaleProgramRequest.setWsRequest(request);
 
         Subscription subscription = mBanHangKhoTaiChinhRepository.getTelecomserviceAndSaleProgram(
                 mGetTelecomServiceAndSaleProgramRequest)

@@ -20,8 +20,8 @@ public class DataRequest<T> {
     private String userName;
 
     @Expose
-    @SerializedName("apiCode")
-    private String apiCode;
+    @SerializedName("wsCode")
+    private String wsCode;
 
     @Expose
     @SerializedName("apiKey")
@@ -31,9 +31,9 @@ public class DataRequest<T> {
     @Expose
     private String token;
 
-    @SerializedName("parameterApi")
+    @SerializedName("wsRequest")
     @Expose
-    private T parameterApi;
+    private T wsRequest;
 
     public DataRequest() {
 
@@ -51,12 +51,12 @@ public class DataRequest<T> {
         this.mSession = mSession;
     }
 
-    public String getApiCode() {
-        return apiCode;
+    public String getWsCode() {
+        return wsCode;
     }
 
-    public void setApiCode(String apiCode) {
-        this.apiCode = apiCode;
+    public void setWsCode(String wsCode) {
+        this.wsCode = wsCode;
     }
 
     public String getApiKey() {
@@ -83,11 +83,11 @@ public class DataRequest<T> {
         this.token = token;
     }
 
-    public T getParameterApi() {
-        return parameterApi;
+    public T getWsRequest() {
+        return wsRequest;
     }
 
-    public void setParameterApi(T parameterApi) {
-        this.parameterApi = parameterApi;
+    public void setWsRequest(T wsRequest) {
+        this.wsRequest = wsRequest;
     }
 }

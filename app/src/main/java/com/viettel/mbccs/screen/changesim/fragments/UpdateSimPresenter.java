@@ -10,7 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.ChangeSimInfo;
 import com.viettel.mbccs.data.model.ChangeSimItem;
 import com.viettel.mbccs.data.model.Customer;
@@ -295,12 +295,12 @@ public class UpdateSimPresenter implements UpdateSimContract.Presenter {
                 viewModel.showLoading();
 
                 DataRequest<CheckCalledIsdnsRequest> baseRequest = new DataRequest<>();
-                baseRequest.setApiCode(ApiCode.CheckCalledIsdn);
+                baseRequest.setWsCode(WsCode.CheckCalledIsdn);
                 CheckCalledIsdnsRequest request = new CheckCalledIsdnsRequest();
                 request.setListIsdn(recentContacts);
                 request.setIsdn(sub.getIsdn());
                 request.setSubType(sub.getSubType());
-                baseRequest.setParameterApi(request);
+                baseRequest.setWsRequest(request);
 
                 Subscription subscription =
                         changeSimRepository.checkCalledIsdn(baseRequest)

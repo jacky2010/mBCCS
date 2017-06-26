@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.ChangeSimInfo;
 import com.viettel.mbccs.data.model.ChangeSimItem;
 import com.viettel.mbccs.data.model.KeyValue;
@@ -86,10 +86,10 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
                 viewModel.showLoading();
 
                 DataRequest<CheckDebitChangeSimRequest> baseRequest = new DataRequest<>();
-                baseRequest.setApiCode(ApiCode.CheckDebit);
+                baseRequest.setWsCode(WsCode.CheckDebit);
                 CheckDebitChangeSimRequest request = new CheckDebitChangeSimRequest();
                 request.setIsdn(item.getSubscriber().getIsdn());
-                baseRequest.setParameterApi(request);
+                baseRequest.setWsRequest(request);
 
                 Subscription subscription =
                         changeSimRepository.checkDebit(baseRequest)
@@ -245,13 +245,13 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
             viewModel.showLoading();
 
             DataRequest<GetRegisterSubInfoRequest> baseRequest = new DataRequest<>();
-            baseRequest.setApiCode(ApiCode.GetRegisterSubInfo);
+            baseRequest.setWsCode(WsCode.GetRegisterSubInfo);
             GetRegisterSubInfoRequest request = new GetRegisterSubInfoRequest();
             request.setIsdn(isdn.get());
             request.setIdNo(documentId.get());
             request.setIdType(documentType.get());
             request.setCheckRegisterStatus("0");//ignore check register status
-            baseRequest.setParameterApi(request);
+            baseRequest.setWsRequest(request);
 
             Subscription subscription =
                     changeSimRepository.getRegisterSubInfo(baseRequest)

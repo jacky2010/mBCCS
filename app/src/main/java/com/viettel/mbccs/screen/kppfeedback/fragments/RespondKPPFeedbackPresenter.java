@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.KPPFeedback;
 import com.viettel.mbccs.data.source.KPPFeedbackRepository;
 import com.viettel.mbccs.data.source.UserRepository;
@@ -90,12 +90,12 @@ public class RespondKPPFeedbackPresenter implements RespondKPPFeedbackContract.P
             feedbackItem = item;
 
             DataRequest<GetKPPFeedbackInfoRequest> baseRequest = new DataRequest<>();
-            baseRequest.setApiCode(ApiCode.GetKppFeedbackInfo);
+            baseRequest.setWsCode(WsCode.GetKppFeedbackInfo);
             GetKPPFeedbackInfoRequest request = new GetKPPFeedbackInfoRequest();
             request.setUsername(userRepository.getUser() != null ? userRepository.getUser().getUserName() : null);
             request.setLanguage(userRepository.getLanguageFromSharePrefs());
             request.setFeedbackId(item.getId());
-            baseRequest.setParameterApi(request);
+            baseRequest.setWsRequest(request);
 
             Subscription subscription =
                     kppFeedbackRepository.getFeedbackInfo(baseRequest)
@@ -157,14 +157,14 @@ public class RespondKPPFeedbackPresenter implements RespondKPPFeedbackContract.P
             viewModel.showLoading();
 
             DataRequest<KPPRespondFeedbackRequest> baseRequest = new DataRequest<>();
-            baseRequest.setApiCode(ApiCode.SendFeedbackKPP);
+            baseRequest.setWsCode(WsCode.SendFeedbackKPP);
             KPPRespondFeedbackRequest request = new KPPRespondFeedbackRequest();
 
             request.setUsername(userRepository.getUser() != null ? userRepository.getUser().getUserName() : null);
             request.setLanguage(userRepository.getLanguageFromSharePrefs());
             request.setFeedbackId(feedbackItem.getId());
             request.setContent(response.get());
-            baseRequest.setParameterApi(request);
+            baseRequest.setWsRequest(request);
 
             Subscription subscription =
                     kppFeedbackRepository.responseFeedback(baseRequest)

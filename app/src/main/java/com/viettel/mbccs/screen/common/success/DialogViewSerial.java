@@ -18,7 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.SerialBO;
 import com.viettel.mbccs.data.model.StockSerial;
 import com.viettel.mbccs.data.model.StockTotal;
@@ -108,8 +108,8 @@ public class DialogViewSerial extends DialogFragment {
         v.setStateId(stockTotal.getStateId());
 
         DataRequest<GetListSerialRequest> request = new DataRequest<>();
-        request.setApiCode(ApiCode.GetListSerial);
-        request.setParameterApi(v);
+        request.setWsCode(WsCode.GetListSerial);
+        request.setWsRequest(v);
 
         Subscription subscription = banHangKhoTaiChinhRepository.getListSerial(request)
                 .subscribe(new MBCCSSubscribe<GetListSerialResponse>() {

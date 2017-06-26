@@ -6,7 +6,7 @@ import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
 import com.google.common.collect.Lists;
-import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.Image;
 import com.viettel.mbccs.data.model.database.ImageDataBase;
 import com.viettel.mbccs.data.source.UserRepository;
@@ -169,8 +169,8 @@ public class DownloadImageService extends IntentService {
         downloadImageRequest.setListIdImage(dataList);
 
         DataRequest<DownloadImageRequest> request = new DataRequest<>();
-        request.setParameterApi(downloadImageRequest);
-        request.setApiCode(ApiCode.GetDetailImageOfProduct);
+        request.setWsRequest(downloadImageRequest);
+        request.setWsCode(WsCode.GetDetailImageOfProduct);
         return userRepository.downloadImage(request);
     }
 }

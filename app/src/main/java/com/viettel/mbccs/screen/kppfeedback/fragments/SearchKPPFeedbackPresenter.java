@@ -6,7 +6,7 @@ import android.databinding.ObservableField;
 import android.view.View;
 
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.KPPFeedback;
 import com.viettel.mbccs.data.source.KPPFeedbackRepository;
 import com.viettel.mbccs.data.source.UserRepository;
@@ -91,12 +91,12 @@ public class SearchKPPFeedbackPresenter implements SearchKPPFeedbackContract.Pre
             viewModel.showLoading();
 
             DataRequest<GetKPPFeedbackRequest> baseRequest = new DataRequest<>();
-            baseRequest.setApiCode(ApiCode.GetKppFeedback);
+            baseRequest.setWsCode(WsCode.GetKppFeedback);
             GetKPPFeedbackRequest request = new GetKPPFeedbackRequest();
             request.setUsername(userRepository.getUser() != null ? userRepository.getUser().getUserName() : null);
             request.setLanguage(userRepository.getLanguageFromSharePrefs());
             request.setOwnerCode((userRepository.getUserInfo() != null && userRepository.getUserInfo().getChannelInfo() != null) ? userRepository.getUserInfo().getChannelInfo().getChannelCode() : null);
-            baseRequest.setParameterApi(request);
+            baseRequest.setWsRequest(request);
 
             Subscription subscription =
                     feedbackRepository.getFeedback(baseRequest)

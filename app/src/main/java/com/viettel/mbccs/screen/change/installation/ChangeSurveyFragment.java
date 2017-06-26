@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import android.view.View;
 
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.LamModel;
 import com.viettel.mbccs.data.model.Shop;
 import com.viettel.mbccs.data.source.ManagerInstallAddressRepository;
@@ -99,8 +99,8 @@ public class ChangeSurveyFragment extends BaseChangeAddressFragment {
         mGetListTeamRequest.districtCode = "02";
         mGetListTeamRequest.precinctCode = "07";
 
-        request.setParameterApi(mGetListTeamRequest);
-        request.setApiCode(ApiCode.GetListTeam);
+        request.setWsRequest(mGetListTeamRequest);
+        request.setWsCode(WsCode.GetListTeam);
 
         Subscription subscription = mInstallAddressRepository.getListTeam(request)
                 .flatMap(new Func1<GetListTeamResponse, Observable<Shop>>() {
@@ -142,8 +142,8 @@ public class ChangeSurveyFragment extends BaseChangeAddressFragment {
         GetListDsLamByTeamIdRequest mGetListDsLamByTeamIdRequest = new GetListDsLamByTeamIdRequest();
         mGetListDsLamByTeamIdRequest.shopId = shopId;
 
-        request.setParameterApi(mGetListDsLamByTeamIdRequest);
-        request.setApiCode(ApiCode.GetListDsLamByTeamId);
+        request.setWsRequest(mGetListDsLamByTeamIdRequest);
+        request.setWsCode(WsCode.GetListDsLamByTeamId);
 
         Subscription subscription = mInstallAddressRepository.getListDsLamByTeamId(request)
                 .flatMap(new Func1<GetListDsLamByTeamIdResponse, Observable<LamModel>>() {
@@ -191,7 +191,7 @@ public class ChangeSurveyFragment extends BaseChangeAddressFragment {
         mGetListDsLamByTeamIdRequest.subscriber = subscriber;
 
         request.setParameterApi(mGetListDsLamByTeamIdRequest);
-        request.setApiCode(ApiCode.GetListDsLamByTeamId);
+        request.setApiCode(WsCode.GetListDsLamByTeamId);
         request.setTeamId(1005450);
         request.setDsTeamId(122435499);
         request.setHasNIMS(1);

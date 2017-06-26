@@ -10,7 +10,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.Toast;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.UploadImage;
 import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
@@ -214,8 +214,8 @@ public class UploadImageService extends IntentService {
                 DateUtils.CALENDAR_DATE_FORMAT_DD_MM_YY_HH));
 
         DataRequest<UploadImageRequest> request = new DataRequest<>();
-        request.setParameterApi(uploadImageRequest);
-        request.setApiCode(ApiCode.UpLoadImage);
+        request.setWsRequest(uploadImageRequest);
+        request.setWsCode(WsCode.UpLoadImage);
         return userRepository.uploadImage(request);
     }
 }

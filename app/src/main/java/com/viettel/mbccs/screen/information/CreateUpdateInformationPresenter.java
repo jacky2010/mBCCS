@@ -6,7 +6,7 @@ import android.databinding.ObservableField;
 import android.view.View;
 import android.widget.AdapterView;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.ApDomainByType;
 import com.viettel.mbccs.data.model.Customer;
 import com.viettel.mbccs.data.model.Subscriber;
@@ -95,8 +95,8 @@ public class CreateUpdateInformationPresenter implements CreateUpdateInformation
                     dataPassportType.get(positionPassportType).getCode());
 
             DataRequest<GetRegisterSubInfoRequest> request = new DataRequest<>();
-            request.setApiCode(ApiCode.GetRegisterSubInfo);
-            request.setParameterApi(getRegisterSubInfoRequest);
+            request.setWsCode(WsCode.GetRegisterSubInfo);
+            request.setWsRequest(getRegisterSubInfoRequest);
 
             Subscription subscription = qlKhachHangRepository.getRegiterSubInfo(request)
                     .subscribe(new MBCCSSubscribe<GetRegisterSubInfoResponse>() {
@@ -128,8 +128,8 @@ public class CreateUpdateInformationPresenter implements CreateUpdateInformation
                     dataPassportType.get(positionPassportType).getCode());
 
             DataRequest<GetAllSubInfoRequest> request = new DataRequest<>();
-            request.setApiCode(ApiCode.GetAllSubInfo);
-            request.setParameterApi(getAllSubInfoRequest);
+            request.setWsCode(WsCode.GetAllSubInfo);
+            request.setWsRequest(getAllSubInfoRequest);
 
             Subscription subscription = qlKhachHangRepository.getAllSubInfo(request)
                     .subscribe(new MBCCSSubscribe<GetAllSubInfoResponse>() {
@@ -188,8 +188,8 @@ public class CreateUpdateInformationPresenter implements CreateUpdateInformation
         GetApDomainByTypeRequest getApDomainRequest = new GetApDomainByTypeRequest();
         getApDomainRequest.setType(ApDomainByType.Type.LOAI_GIAY_TO);
 
-        request.setParameterApi(getApDomainRequest);
-        request.setApiCode(ApiCode.GetApDomainByType);
+        request.setWsRequest(getApDomainRequest);
+        request.setWsCode(WsCode.GetApDomainByType);
 
         Subscription subscription = qlKhachHangRepository.getApDomainByType(request)
                 .subscribe(new MBCCSSubscribe<GetApDomainByTypeResponse>() {

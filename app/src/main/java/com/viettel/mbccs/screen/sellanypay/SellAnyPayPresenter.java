@@ -4,7 +4,7 @@ import android.content.Context;
 import android.databinding.ObservableField;
 
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.source.SellAnyPayRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetAnypayAuthorizeRequest;
@@ -60,9 +60,9 @@ public class SellAnyPayPresenter implements SellAnyPayContract.Presenter {
             viewModel.showLoading();
 
             baseRequest = new DataRequest<>();
-            baseRequest.setApiCode(ApiCode.GetAnyPay);
+            baseRequest.setWsCode(WsCode.GetAnyPay);
             GetAnypayAuthorizeRequest request = new GetAnypayAuthorizeRequest();
-            baseRequest.setParameterApi(request);
+            baseRequest.setWsRequest(request);
 
             Subscription subscription =
                     sellAnyPayRepository.getAnypayAuthorize(baseRequest)

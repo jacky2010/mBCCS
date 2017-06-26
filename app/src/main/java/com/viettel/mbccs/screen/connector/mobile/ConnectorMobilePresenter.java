@@ -6,7 +6,7 @@ import android.databinding.Bindable;
 import android.view.View;
 import android.widget.AdapterView;
 import com.viettel.mbccs.BR;
-import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.constance.Data;
 import com.viettel.mbccs.data.model.Contract;
 import com.viettel.mbccs.data.model.Customer;
@@ -217,8 +217,8 @@ public class ConnectorMobilePresenter extends BaseObservable
         checkIdNoRequest.setServiceType(mobileServiceList.get(positionMobileService).getCode());
         checkIdNoRequest.setSubType("1");
         DataRequest<CheckIdNoRequest> request = new DataRequest<>();
-        request.setApiCode(ApiCode.CheckIdNo);
-        request.setParameterApi(checkIdNoRequest);
+        request.setWsCode(WsCode.CheckIdNo);
+        request.setWsRequest(checkIdNoRequest);
 
         Subscription subscription = qlKhachHangRepository.checkIdNo(request)
                 .subscribe(new MBCCSSubscribe<CheckIdNoResponse>() {

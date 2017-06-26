@@ -4,7 +4,7 @@ import android.content.Context;
 import android.databinding.ObservableField;
 import android.text.TextUtils;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.constance.PaymentMethod;
 import com.viettel.mbccs.constance.PriceType;
 import com.viettel.mbccs.constance.SaleTranType;
@@ -128,7 +128,7 @@ public class PaymentInforChannelPresenter implements PaymentInforChannelContract
 
         mGetInfoSaleTranRequestBaseRequest = new DataRequest<>();
         GetInfoSaleTranRequest request = new GetInfoSaleTranRequest();
-        mGetInfoSaleTranRequestBaseRequest.setApiCode(ApiCode.GetSaleTransInfo);
+        mGetInfoSaleTranRequestBaseRequest.setWsCode(WsCode.GetSaleTransInfo);
         request.setPaymentMethod(paymentMethod);
         request.setCouponCode(coupon.get());
         request.setIsdnPay(phone);
@@ -156,7 +156,7 @@ public class PaymentInforChannelPresenter implements PaymentInforChannelContract
         request.setStaffId(mUserRepository.getUserInfo().getStaffInfo().getStaffId());
         request.setShopId(Long.parseLong(mUserRepository.getUserInfo().getShop().getShopId()));
 
-        mGetInfoSaleTranRequestBaseRequest.setParameterApi(request);
+        mGetInfoSaleTranRequestBaseRequest.setWsRequest(request);
 
         Subscription subscription =
                 mBanHangKhoTaiChinhRepository.getSaleTransInfo(mGetInfoSaleTranRequestBaseRequest)

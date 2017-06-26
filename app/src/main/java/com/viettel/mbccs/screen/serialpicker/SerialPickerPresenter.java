@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.databinding.ObservableField;
 import android.text.TextUtils;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.constance.SerialStateType;
 import com.viettel.mbccs.data.model.SerialBO;
 import com.viettel.mbccs.data.model.SerialPickerModel;
@@ -79,8 +79,8 @@ public class SerialPickerPresenter
         mSerialRequest.setQuantity(mSerialPickerModel.getQuantity());
         mSerialRequest.setStockModelId(mSerialPickerModel.getStockModelId());
         mBaseRequest = new DataRequest<>();
-        mBaseRequest.setApiCode(ApiCode.GetListSerial);
-        mBaseRequest.setParameterApi(mSerialRequest);
+        mBaseRequest.setWsCode(WsCode.GetListSerial);
+        mBaseRequest.setWsRequest(mSerialRequest);
 
         Subscription subscription = mBanHangKhoTaiChinhRepository.getSerial(mBaseRequest)
                 .subscribe(new MBCCSSubscribe<GetSerialsResponse>() {

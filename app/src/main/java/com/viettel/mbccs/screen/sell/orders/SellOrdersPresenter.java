@@ -4,9 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
-import android.widget.ArrayAdapter;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.Shop;
 import com.viettel.mbccs.data.model.StaffInfo;
@@ -78,8 +77,8 @@ public class SellOrdersPresenter {
         g.setChannelTypeId(staffInfo.get().getChannelTypeId());
 
         DataRequest<GetListChannelByOwnerTypeIdRequest> request = new DataRequest<>();
-        request.setParameterApi(g);
-        request.setApiCode(ApiCode.GetListChannelByOwnerTypeId);
+        request.setWsRequest(g);
+        request.setWsCode(WsCode.GetListChannelByOwnerTypeId);
 
         Subscription subscription =
                 banHangKhoTaiChinhRepository.getListChannelByOwnerTypeId(request)
@@ -140,8 +139,8 @@ public class SellOrdersPresenter {
         getListOrderRequest.setOrderStatus(staffInfo.get().getStatus());
 
         DataRequest<GetListOrderRequest> baseRequest = new DataRequest<>();
-        baseRequest.setApiCode(ApiCode.GetListOrder);
-        baseRequest.setParameterApi(getListOrderRequest);
+        baseRequest.setWsCode(WsCode.GetListOrder);
+        baseRequest.setWsRequest(getListOrderRequest);
 
         banHangKhoTaiChinhRepository.getListOrder(baseRequest)
                 .subscribe(new MBCCSSubscribe<GetListOrderResponse>() {

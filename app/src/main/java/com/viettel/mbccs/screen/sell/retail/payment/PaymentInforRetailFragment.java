@@ -231,7 +231,7 @@ public class PaymentInforRetailFragment extends BaseFragment
                 .beginTransaction()
                 .addToBackStack("SaveTransConfirmFragment")
                 .replace(R.id.container,
-                        SaveTransConfirmFragment.newInstance(request.getParameterApi(), saleTrans,
+                        SaveTransConfirmFragment.newInstance(request.getWsRequest(), saleTrans,
                                 null))
                 .commit();
     }

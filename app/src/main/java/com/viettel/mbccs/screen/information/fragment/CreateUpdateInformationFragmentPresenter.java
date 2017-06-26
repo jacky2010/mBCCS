@@ -12,7 +12,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.AdapterView;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.constance.ApiCode;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.constance.Data;
 import com.viettel.mbccs.constance.MobileService;
 import com.viettel.mbccs.constance.MobileType;
@@ -256,8 +256,8 @@ public class CreateUpdateInformationFragmentPresenter
         GetApDomainByTypeRequest apDomainRequest = new GetApDomainByTypeRequest();
         apDomainRequest.setType(ApDomainByType.Type.LOAI_GIAY_TO);
 
-        request.setParameterApi(apDomainRequest);
-        request.setApiCode(ApiCode.GetApDomainByType);
+        request.setWsRequest(apDomainRequest);
+        request.setWsCode(WsCode.GetApDomainByType);
 
         return qlKhachHangRepository.getApDomainByType(request);
     }
@@ -267,8 +267,8 @@ public class CreateUpdateInformationFragmentPresenter
         GetApDomainByTypeRequest apDomainRequest = new GetApDomainByTypeRequest();
         apDomainRequest.setType(ApDomainByType.Type.HINH_THUC_THANH_TOAN);
 
-        request.setParameterApi(apDomainRequest);
-        request.setApiCode(ApiCode.GetApDomainByType);
+        request.setWsRequest(apDomainRequest);
+        request.setWsCode(WsCode.GetApDomainByType);
 
         return qlKhachHangRepository.getApDomainByType(request);
     }
@@ -278,8 +278,8 @@ public class CreateUpdateInformationFragmentPresenter
         GetApDomainByTypeRequest apDomainRequest = new GetApDomainByTypeRequest();
         apDomainRequest.setType(ApDomainByType.Type.HINH_THUC_NHAN_THONG_BAO_CUOC);
 
-        request.setParameterApi(apDomainRequest);
-        request.setApiCode(ApiCode.GetApDomainByType);
+        request.setWsRequest(apDomainRequest);
+        request.setWsCode(WsCode.GetApDomainByType);
 
         return qlKhachHangRepository.getApDomainByType(request);
     }
@@ -290,8 +290,8 @@ public class CreateUpdateInformationFragmentPresenter
         getListProductRequest.setTelServiceId(MobileService.Mobile);
 
         DataRequest<GetListProductRequest> request = new DataRequest<>();
-        request.setParameterApi(getListProductRequest);
-        request.setApiCode(ApiCode.GetListProduct);
+        request.setWsRequest(getListProductRequest);
+        request.setWsCode(WsCode.GetListProduct);
         return qlKhachHangRepository.getListProduct(request);
     }
 
@@ -307,8 +307,8 @@ public class CreateUpdateInformationFragmentPresenter
         getOTPRequest.setIsdn(txtPhoneNumber.get());
 
         DataRequest<GetOTPRequest> request = new DataRequest<>();
-        request.setApiCode(ApiCode.GetOTP);
-        request.setParameterApi(getOTPRequest);
+        request.setWsCode(WsCode.GetOTP);
+        request.setWsRequest(getOTPRequest);
 
         Subscription subscription = qlKhachHangRepository.getOTP(request)
                 .subscribe(new MBCCSSubscribe<GetOTPResponse>() {
@@ -345,8 +345,8 @@ public class CreateUpdateInformationFragmentPresenter
             checOTPRequest.setOtp(textOTP.get());
 
             DataRequest<ChecOTPRequest> request = new DataRequest<>();
-            request.setApiCode(ApiCode.CheckOTP);
-            request.setParameterApi(checOTPRequest);
+            request.setWsCode(WsCode.CheckOTP);
+            request.setWsRequest(checOTPRequest);
 
             Subscription subscription = qlKhachHangRepository.checOTP(request)
                     .subscribe(new MBCCSSubscribe<CheckOTPResponse>() {
@@ -526,8 +526,8 @@ public class CreateUpdateInformationFragmentPresenter
             updateAllSubInfoRequest.setSubscriber(getDataSubscriber());
 
             DataRequest<UpdateAllSubInfoRequest> request = new DataRequest<>();
-            request.setParameterApi(updateAllSubInfoRequest);
-            request.setApiCode(ApiCode.UpdateAllSubInfo);
+            request.setWsRequest(updateAllSubInfoRequest);
+            request.setWsCode(WsCode.UpdateAllSubInfo);
 
             Subscription subscription = qlKhachHangRepository.updateAllSubInfo(request)
                     .subscribe(new MBCCSSubscribe<UpdateAllSubInfoResponse>() {
@@ -558,8 +558,8 @@ public class CreateUpdateInformationFragmentPresenter
             registerCustomerInfoRequest.setCustomer(customer);
 
             DataRequest<RegisterCustomerInfoRequest> request = new DataRequest<>();
-            request.setApiCode(ApiCode.RegisterCustomerInfo);
-            request.setParameterApi(registerCustomerInfoRequest);
+            request.setWsCode(WsCode.RegisterCustomerInfo);
+            request.setWsRequest(registerCustomerInfoRequest);
 
             Subscription subscription = qlKhachHangRepository.registerCustomerInfo(request)
                     .subscribe(new MBCCSSubscribe<RegisterCustomerInfoResponse>() {
