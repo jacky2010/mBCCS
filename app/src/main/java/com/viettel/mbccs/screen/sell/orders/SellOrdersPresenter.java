@@ -20,6 +20,7 @@ import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetListChannelByOwnerTypeIdResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListOrderResponse;
 import com.viettel.mbccs.screen.sell.orders.adapter.SellOrdersFragmentAdapter;
+import com.viettel.mbccs.utils.SpinnerAdapter;
 import com.viettel.mbccs.utils.ValidateUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ public class SellOrdersPresenter {
 
     public ObservableField<StaffInfo> staffInfo;
     public ObservableField<Shop> shop;
-    public ObservableField<ArrayAdapter<String>> spinnerAdapterChannel;
+    public ObservableField<SpinnerAdapter<String>> spinnerAdapterChannel;
     public ObservableField<SellOrdersFragmentAdapter> sellOrdersFragmentAdapter;
     public ObservableBoolean isHideSearch;
     public ObservableField<String> textSearch;
@@ -96,11 +97,8 @@ public class SellOrdersPresenter {
                                 for (ChannelInfo c : channelInfoList) {
                                     dataSpinnerChannel.add(c.getManagementName());
                                 }
-                                spinnerAdapterChannel.set(new ArrayAdapter<>(context,
-                                        android.R.layout.simple_spinner_item, dataSpinnerChannel));
-                                spinnerAdapterChannel.get()
-                                        .setDropDownViewResource(
-                                                android.R.layout.simple_spinner_dropdown_item);
+                                spinnerAdapterChannel.set(
+                                        new SpinnerAdapter<String>(context, dataSpinnerChannel));
                                 setTextHideSearch();
                                 sellOrdersView.hideLoading();
                             }
@@ -170,6 +168,7 @@ public class SellOrdersPresenter {
         textSearch.set(context.getString(R.string.sell_orders_gone_search, shop.get().getShopName(),
                 staffInfo.get().getStaffName(), channelInfoSelect.getManagementName()));
     }
+
     public void setSellOrdersFragmentAdapter(SellOrdersFragmentAdapter sellOrdersFragmentAdapter) {
         this.sellOrdersFragmentAdapter.set(sellOrdersFragmentAdapter);
     }

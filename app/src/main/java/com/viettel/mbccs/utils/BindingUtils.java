@@ -234,13 +234,13 @@ public class BindingUtils {
                 .into(imageview);
     }
 
-//    @BindingAdapter({ "imageBitmap" })
-//    public static void setImageBitmap(ImageView imageview, Drawable resource) {
-//        Glide.with(imageview.getContext())
-//                .load(resource)
-//                .bitmapTransform(new CircleTransform(imageview.getContext()))
-//                .into(imageview);
-//    }
+    //    @BindingAdapter({ "imageBitmap" })
+    //    public static void setImageBitmap(ImageView imageview, Drawable resource) {
+    //        Glide.with(imageview.getContext())
+    //                .load(resource)
+    //                .bitmapTransform(new CircleTransform(imageview.getContext()))
+    //                .into(imageview);
+    //    }
 
     @BindingAdapter({ "textHtml" })
     public static void setText(TextView text, String html) {
@@ -370,7 +370,6 @@ public class BindingUtils {
         textView.setSelected(true);
     }
 
-
     @BindingAdapter("setSpinnerSelection")
     public static void setSpinnerSelection(Spinner spinner, int position) {
         spinner.setSelection(position);
@@ -456,7 +455,10 @@ public class BindingUtils {
                 ((SpinnerAdapter) adapter).setTextHint(textHint);
                 ((SpinnerAdapter) adapter).setUsehintValue(useHintValue);
             }
+
+            ((SpinnerAdapter) adapter).setThemeLight(spinnerWithBorder.isLight());
         }
+
         spinnerWithBorder.getSpinner().setAdapter(adapter);
         spinnerWithBorder.getSpinner().setSelection(position);
         if (drawable != null) {
@@ -470,8 +472,8 @@ public class BindingUtils {
     @BindingAdapter(value = {
             "adapter", "position", "textHint", "useHintValue"
     }, requireAll = false)
-    public static void bindData(Spinner spinnerWithBorder, BaseAdapter adapter,
-            int position, String textHint, boolean useHintValue) {
+    public static void bindData(Spinner spinnerWithBorder, BaseAdapter adapter, int position,
+            String textHint, boolean useHintValue) {
         if (adapter instanceof SpinnerAdapter) {
             ((SpinnerAdapter) adapter).setSpinner(spinnerWithBorder);
             if (!TextUtils.isEmpty(textHint)) {

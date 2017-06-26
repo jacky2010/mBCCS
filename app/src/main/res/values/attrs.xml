@@ -9,6 +9,7 @@
     <declare-styleable name="CustomDatePicker">
         <attr name="dateTextSize" format="dimension" />
         <attr name="dateTextColor" format="color|reference" />
+        <attr name="underLineColor" format="color|reference" />
     </declare-styleable>
     <declare-styleable name="BottomNavigationView">
         <attr name="bottomBarTextSize" format="dimension" />

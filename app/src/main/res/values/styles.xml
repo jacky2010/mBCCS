@@ -209,6 +209,14 @@
         <item name="android:gravity">start|top</item>
     </style>
 
+    <style name="inputStyleLight">
+        <item name="android:background">@drawable/bg_input_tranparent_light</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:padding">@dimen/dp_5</item>
+        <item name="android:gravity">start|top</item>
+    </style>
+
     <style name="inputStyle_1">
         <item name="android:background">@drawable/bg_input_transparent_1</item>
         <item name="android:textColor">@color/black</item>
@@ -301,6 +309,11 @@
     <style name="MyRadioCheckbox" parent="Theme.AppCompat.Light">
         <item name="colorControlNormal">@color/green</item>
         <item name="colorControlActivated">@color/green</item>
+    </style>
+
+    <style name="textTitleInput">
+        <item name="android:textColor">@color/text_title_input</item>
+        <item name="android:textSize">@dimen/sp_13</item>
     </style>
 
 </resources>

@@ -7,7 +7,9 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.databinding.ItemFakeSpinnerBinding;
 
@@ -18,6 +20,8 @@ import com.viettel.mbccs.databinding.ItemFakeSpinnerBinding;
 public class FakeSpinner extends LinearLayout {
 
     private CustomEdittext mEdittext;
+    private ImageView mImageView;
+    private View mView;
 
     @BindingAdapter("android:text")
     public static void setText(FakeSpinner fakeSpinner, CharSequence s) {
@@ -34,6 +38,16 @@ public class FakeSpinner extends LinearLayout {
         fakeSpinner.getEdittext().setOnClickListener(onClick);
     }
 
+    @BindingAdapter("themeLight")
+    public static void isThemLight(FakeSpinner spinner, boolean isLight) {
+        if (isLight) {
+            spinner.getImageView().setImageResource(R.drawable.triangle_light);
+            spinner.getEdittext()
+                    .setTextColor(spinner.getContext().getResources().getColor(R.color.white));
+            spinner.getDivider().setBackgroundColor(spinner.getResources().getColor(R.color.white_light_theme));
+        }
+    }
+
     public CustomEdittext getEdittext() {
         return mEdittext;
     }
@@ -41,7 +55,6 @@ public class FakeSpinner extends LinearLayout {
     public void setEdittext(CustomEdittext edittext) {
         mEdittext = edittext;
     }
-
 
     public FakeSpinner(Context context) {
         super(context);
@@ -58,9 +71,19 @@ public class FakeSpinner extends LinearLayout {
         initView();
     }
 
+    public ImageView getImageView() {
+        return mImageView;
+    }
+
+    public View getDivider() {
+        return mView;
+    }
+
     private void initView() {
         ItemFakeSpinnerBinding item = DataBindingUtil.inflate(LayoutInflater.from(getContext()),
                 R.layout.item_fake_spinner, this, true);
         mEdittext = item.text;
+        mImageView = item.iconRight;
+        mView = item.divider;
     }
 }

@@ -76,13 +76,12 @@
                     android:id="@+id/content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
+                    android:background="@color/blue_dark"
                     >
                     <RelativeLayout
                         xmlns:android="http://schemas.android.com/apk/res/android"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/white"
                         android:paddingTop="@dimen/dp_10"
                         >
 
@@ -91,6 +90,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             android:padding="@dimen/dp_10"
+
                             >
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -105,6 +105,8 @@
                                     android:layout_gravity="center"
                                     android:layout_weight="1"
                                     android:gravity="center"
+                                    app:dateTextColor="@color/white"
+                                    app:underLineColor="@color/white_light_theme"
                                     />
                                 <com.viettel.mbccs.widget.CustomTextView
                                     android:layout_width="wrap_content"
@@ -113,6 +115,7 @@
                                     android:layout_margin="@dimen/dp_5"
                                     android:text="-"
                                     android:textStyle="bold"
+                                    style="@style/textTitleInput"
                                     />
                                 <com.viettel.mbccs.widget.CustomDatePicker
                                     android:id="@+id/to_date"
@@ -121,6 +124,8 @@
                                     android:layout_gravity="center"
                                     android:layout_weight="1"
                                     android:gravity="center"
+                                    app:dateTextColor="@color/white"
+                                    app:underLineColor="@color/white_light_theme"
                                     />
                             </LinearLayout>
                             <com.viettel.mbccs.widget.CustomTextView
@@ -128,8 +133,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_8"
                                 android:text="@string/status"
-                                android:textColor="@color/black"
                                 android:textSize="@dimen/sp_16"
+                                style="@style/textTitleInput"
                                 />
 
                             <com.viettel.mbccs.widget.SpinnerWithBorder
@@ -138,13 +143,16 @@
                                 android:layout_height="wrap_content"
                                 app:adapter="@{presenter.adapterStatus}"
                                 app:position="@{presenter.adapterPosition}"
+                                app:themeLight="@{true}"
                                 />
 
                             <com.viettel.mbccs.widget.CustomButton
-                                android:layout_width="@dimen/dp_150"
+                                android:layout_width="match_parent"
                                 android:layout_height="@dimen/dp_40"
                                 android:layout_gravity="center"
-                                android:layout_marginTop="@dimen/dp_10"
+                                android:layout_marginLeft="@dimen/dp_15"
+                                android:layout_marginRight="@dimen/dp_15"
+                                android:layout_marginTop="@dimen/dp_30"
                                 android:gravity="center"
                                 android:onClick="@{ v -> presenter.clickSearch() }"
                                 android:text="@string/sell_orders_search"

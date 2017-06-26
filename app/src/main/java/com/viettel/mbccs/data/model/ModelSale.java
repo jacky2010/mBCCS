@@ -140,6 +140,17 @@ public class ModelSale implements Serializable, Parcelable {
         mSerialBlocks = serialBlocks;
     }
 
+    public void recaculateSerial(){
+        if (mSerials != null && mSerials.size() > 0) {
+            List<String> fake = new ArrayList<>();
+            for (int i = 0; i < choiceCount; i++) {
+                fake.add(mSerials.get(i));
+            }
+            mSerials=new ArrayList<>();
+            mSerials.addAll(fake);
+        }
+    }
+
     public void decreaseSerial() {
 
         if (mSerials != null && mSerials.size() > 0) {
@@ -147,7 +158,7 @@ public class ModelSale implements Serializable, Parcelable {
             for (int i = 0; i < mSerials.size() - 1; i++) {
                 fake.add(mSerials.get(i));
             }
-            mSerials.clear();
+            mSerials=new ArrayList<>();
             mSerials.addAll(fake);
         }
     }

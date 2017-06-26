@@ -22,8 +22,7 @@ import java.util.List;
  * Created by eo_cuong on 5/15/17.
  */
 
-public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHolder>
-        implements View.OnFocusChangeListener {
+public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHolder> {
 
     private Context mContext;
     private List<ModelSale> mStockItems;
@@ -71,21 +70,6 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
         return mStockItems.size();
     }
 
-    @Override
-    public void onFocusChange(View view, boolean b) {
-        if (b && mOnStockListener!=null){
-            mOnStockListener.onItemFocus();
-        }
-        if (!b) {
-            new Handler().post(new Runnable() {
-                @Override
-                public void run() {
-                    notifyDataSetChanged();
-                }
-            });
-        }
-    }
-
     class StockViewHolder extends RecyclerView.ViewHolder {
 
         ItemStockBinding mBinding;
@@ -102,7 +86,7 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
                         currentChoice--;
                         mStockItem.setChoiceCount(currentChoice);
                         mStockItem.decreaseSerial();
-                        notifyDataSetChanged();
+                        notifyItemChanged(getAdapterPosition());
                     }
                 }
             });
@@ -114,7 +98,7 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
                     if (currentChoice < mStockItem.getQuantityIssue()) {
                         currentChoice++;
                         mStockItem.setChoiceCount(currentChoice);
-                        notifyDataSetChanged();
+                        notifyItemChanged(getAdapterPosition());
                     }
                 }
             });
@@ -127,6 +111,9 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
 
                 @Override
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    if (mStockItem.getCheckSerial()==0){
+                        return;
+                    }
                     try {
                         if (charSequence.toString().equals("")) {
                             mStockItem.setChoiceCount(0);
@@ -176,7 +163,20 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
                         }
                     });
 
-            mBinding.inputQuantityChoice.setOnFocusChangeListener(StockAdapter.this);
+            mBinding.inputQuantityChoice.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if (!hasFocus) {
+                        new Handler().post(new Runnable() {
+                            @Override
+                            public void run() {
+                                mStockItem.recaculateSerial();
+                                notifyItemChanged(getAdapterPosition());
+                            }
+                        });
+                    }
+                }
+            });
 
             binding.textSerial.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -197,6 +197,7 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
 
     public interface OnStockListener {
         void onSerialClick(ModelSale item, int position);
+
         void onItemFocus();
     }
 }

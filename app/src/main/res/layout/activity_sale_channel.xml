@@ -69,6 +69,7 @@
                 app:content="@+id/content"
                 app:direction="topToBottom"
                 app:handle="@+id/handle"
+
                 app:handleTwo="@+id/view_close"
                 app:headerOne="@+id/view_open"
                 >
@@ -77,14 +78,13 @@
                 <LinearLayout
                     android:id="@+id/content"
                     android:layout_width="match_parent"
-                    android:background="@color/white"
                     android:layout_height="wrap_content"
+                    android:background="@color/blue_dark"
                     >
                     <RelativeLayout
                         xmlns:android="http://schemas.android.com/apk/res/android"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/white"
                         android:paddingTop="@dimen/dp_10"
                         >
 
@@ -94,13 +94,13 @@
                             android:layout_marginLeft="@dimen/dp_20"
                             android:layout_marginRight="@dimen/dp_20"
                             android:orientation="vertical"
-                            android:visibility="@{presenter.isCollapse?View.GONE:View.VISIBLE}"
                             >
                             <com.viettel.mbccs.widget.CustomTextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_5"
                                 android:text="@string/channel_title"
+                                style="@style/textTitleInput"
                                 />
 
                             <com.viettel.mbccs.widget.FakeSpinner
@@ -108,29 +108,34 @@
                                 android:layout_height="wrap_content"
                                 android:onClick="@{()->presenter.chooseChannel()}"
                                 android:text="@{presenter.channelText}"
+                                app:themeLight="@{true}"
                                 />
                             <com.viettel.mbccs.widget.CustomTextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="@string/service"
+                                style="@style/textTitleInput"
                                 />
                             <com.viettel.mbccs.widget.SpinnerWithBorder
                                 android:id="@+id/spinner"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 app:adapter="@{presenter.adapter}"
+                                app:themeLight="@{true}"
                                 />
                             <com.viettel.mbccs.widget.CustomTextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_5"
                                 android:text="@string/sell_program"
+                                style="@style/textTitleInput"
                                 />
                             <com.viettel.mbccs.widget.FakeSpinner
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:onClick="@{()->presenter.chooseSellProgram()}"
                                 android:text="@{presenter.sellProgram}"
+                                app:themeLight="@{true}"
                                 />
                         </LinearLayout>
                     </RelativeLayout>
