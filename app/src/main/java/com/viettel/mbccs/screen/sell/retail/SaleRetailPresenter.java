@@ -40,7 +40,6 @@ public class SaleRetailPresenter
     public ObservableField<String> filterText;
     public ObservableField<String> sellProgram;
     private SpinnerAdapter<TeleComService> mAdapter;
-    public ObservableField<Boolean> isCollapse;
     private StockAdapter stockAdapter;
     private Context mContext;
     private SaleRetailContract.ViewModel mViewModel;
@@ -176,8 +175,6 @@ public class SaleRetailPresenter
     private void init() {
         filterText = new ObservableField<>();
         sellProgram = new ObservableField<>();
-        isCollapse = new ObservableField<>();
-        isCollapse.set(false);
         mAdapter = new SpinnerAdapter<>(mContext, mTeleComServices);
         mAdapter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -195,10 +192,6 @@ public class SaleRetailPresenter
         stockAdapter.setOnStockListener(this);
     }
 
-    public void toogleExpand() {
-        isCollapse.set(!isCollapse.get());
-        changeSearchFilter();
-    }
 
     public void chooseSellProgram() {
         mViewModel.onChooseSaleProgram(mSalePrograms);
@@ -290,8 +283,6 @@ public class SaleRetailPresenter
 
     @Override
     public void onItemFocus() {
-        isCollapse.set(true);
-        changeSearchFilter();
     }
 
     public void onNext() {

@@ -32,7 +32,8 @@ import java.util.Locale;
  */
 
 @BindingMethods({
-        @BindingMethod(type = CustomDatePicker.class, attribute = "setDate", method = "setDateString")
+        @BindingMethod(type = CustomDatePicker.class, attribute = "setDate", method =
+                "setDateString")
 })
 public class CustomDatePicker extends LinearLayout {
 
@@ -83,6 +84,7 @@ public class CustomDatePicker extends LinearLayout {
         });
 
         TextView textView = (TextView) findViewById(R.id.text_date);
+        View view = findViewById(R.id.view);
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CustomDatePicker);
         try {
@@ -91,14 +93,16 @@ public class CustomDatePicker extends LinearLayout {
                             getResources().getDimension(R.dimen.sp_14)));
             textView.setTextColor(
                     a.getColor(R.styleable.CustomDatePicker_dateTextColor, Color.BLACK));
+            view.setBackgroundColor(a.getColor(R.styleable.CustomDatePicker_underLineColor,
+                    getContext().getResources().getColor(R.color.grey_bright)));
         } finally {
             a.recycle();
         }
     }
 
     private void setDate() {
-        date.set(DateUtils.convertToString(mCalendar.getTime(), DateUtils.CALENDAR_DATE_FORMAT_DD_MM_YY,
-                null));
+        date.set(DateUtils.convertToString(mCalendar.getTime(),
+                DateUtils.CALENDAR_DATE_FORMAT_DD_MM_YY, null));
     }
 
     public long getDateInMilis() {

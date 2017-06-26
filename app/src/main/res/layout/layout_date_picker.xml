@@ -3,36 +3,53 @@
     <data>
         <variable
             name="input"
-            type="com.viettel.mbccs.widget.CustomDatePicker" />
+            type="com.viettel.mbccs.widget.CustomDatePicker"
+            />
 
-        <import type="android.view.View" />
+        <import type="android.view.View"/>
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            >
 
-        <com.viettel.mbccs.widget.CustomTextView
-            android:id="@+id/text_date"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center_vertical"
-            android:layout_weight="1"
-            android:minWidth="@dimen/dp_32"
-            android:layout_marginRight="@dimen/dp_6"
-            android:layout_marginEnd="@dimen/dp_6"
-            android:padding="@dimen/dp_5"
-            android:background="@drawable/bg_input_tranparent"
-            android:text="@={input.date }" />
+            <com.viettel.mbccs.widget.CustomTextView
+                android:id="@+id/text_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="@dimen/dp_6"
+                android:layout_marginRight="@dimen/dp_6"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:minWidth="@dimen/dp_32"
+                android:padding="@dimen/dp_5"
+                android:text="@={input.date }"
+                />
 
-        <ImageView
-            android:layout_width="@dimen/dp_24"
-            android:layout_height="@dimen/dp_24"
-            android:layout_gravity="center_vertical"
-            android:adjustViewBounds="true"
-            android:src="@drawable/ic_calendar" />
+            <ImageView
+                android:layout_width="@dimen/dp_24"
+                android:layout_height="@dimen/dp_24"
+                android:layout_gravity="center_vertical"
+                android:adjustViewBounds="true"
 
+                android:src="@drawable/ic_calendar"
+                />
+        </LinearLayout>
+        <View
+            android:id="@+id/view"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0.6"
+            android:background="@color/grey_bright"
+            />
     </LinearLayout>
+
 </layout>

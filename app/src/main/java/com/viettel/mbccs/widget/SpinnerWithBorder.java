@@ -12,6 +12,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.AppCompatSpinner;
 import android.util.AttributeSet;
@@ -37,6 +38,8 @@ public class SpinnerWithBorder extends FrameLayout {
 
     private AppCompatSpinner mSpinner;
     private ImageView mImageView;
+    private View divider;
+    private boolean isLight = false;
 
     public SpinnerWithBorder(Context context) {
         this(context, null);
@@ -56,7 +59,6 @@ public class SpinnerWithBorder extends FrameLayout {
             int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
-
 
     @BindingAdapter(value = {
             "selectedPosition", "selectedValueAttrChanged"
@@ -79,6 +81,33 @@ public class SpinnerWithBorder extends FrameLayout {
         spinnerWithBorder.getSpinner().setSelection(seletedPosition);
     }
 
+    @BindingAdapter("themeLight")
+    public static void isThemLight(SpinnerWithBorder spinner, boolean isLight) {
+        if (isLight) {
+            spinner.getSpinner()
+                    .setSupportBackgroundTintList(
+                            ContextCompat.getColorStateList(spinner.getContext(),
+                                    R.color.background_tint_spinner_light));
+            spinner.setLight(isLight);
+            spinner.getDivider()
+                    .setBackgroundColor(spinner.getContext()
+                            .getResources()
+                            .getColor(R.color.white_light_theme));
+        }
+    }
+
+    public boolean isLight() {
+        return isLight;
+    }
+
+    public void setLight(boolean light) {
+        isLight = light;
+    }
+
+    public View getDivider() {
+        return divider;
+    }
+
     public void setOnItemSelectedListener(
             AdapterView.OnItemSelectedListener onItemSelectedListener) {
         getSpinner().setOnItemSelectedListener(onItemSelectedListener);
@@ -95,6 +124,7 @@ public class SpinnerWithBorder extends FrameLayout {
 
         mSpinner = (AppCompatSpinner) findViewById(R.id.spinner_border);
         mImageView = (ImageView) findViewById(R.id.image_left);
+        divider = (View) findViewById(R.id.divider);
 
         TypedArray typedArray =
                 getContext().obtainStyledAttributes(attributeSet, R.styleable.SpinnerWithBorder);

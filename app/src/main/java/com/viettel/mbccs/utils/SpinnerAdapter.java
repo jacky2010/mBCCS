@@ -33,6 +33,7 @@ public class SpinnerAdapter<T> extends ArrayAdapter<T> {
     private Spinner spinner;
     private String textHint;
     private boolean isUsehintValue;
+    private boolean isThemeLight = false;
     private AdapterView.OnItemSelectedListener mOnItemSelectedListener;
 
     public SpinnerAdapter(@NonNull Context context, List<T> list) {
@@ -67,6 +68,14 @@ public class SpinnerAdapter<T> extends ArrayAdapter<T> {
     public void setOnItemSelectedListener(
             AdapterView.OnItemSelectedListener onItemSelectedListener) {
         mOnItemSelectedListener = onItemSelectedListener;
+    }
+
+    public boolean isThemeLight() {
+        return isThemeLight;
+    }
+
+    public void setThemeLight(boolean themeLight) {
+        isThemeLight = themeLight;
     }
 
     public void setSpinner(Spinner spinner) {
@@ -122,15 +131,31 @@ public class SpinnerAdapter<T> extends ArrayAdapter<T> {
         if (!TextUtils.isEmpty(textHint)) {
             if (position == 0) {
                 viewHolder.tvName.setText(textHint);
-                viewHolder.tvName.setTextColor(mContext.getResources().getColor(R.color.grey_dove));
+                if (isThemeLight){
+                    viewHolder.tvName.setTextColor(mContext.getResources().getColor(R.color.white_trans));
+                }else{
+                    viewHolder.tvName.setTextColor(mContext.getResources().getColor(R.color.grey_dove));
+                }
+
             } else {
-                viewHolder.tvName.setTextColor(mContext.getResources().getColor(R.color.black));
+                if (isThemeLight){
+                    viewHolder.tvName.setTextColor(mContext.getResources().getColor(R.color.white));
+                }else{
+                    viewHolder.tvName.setTextColor(mContext.getResources().getColor(R.color.black));
+                }
+
                 viewHolder.tvName.setText(mList.get(position - 1).toString());
                 viewHolder.imageView.setVisibility(View.GONE);
             }
         } else {
+            if (isThemeLight){
+                viewHolder.tvName.setTextColor(mContext.getResources().getColor(R.color.white));
+            }else{
+                viewHolder.tvName.setTextColor(mContext.getResources().getColor(R.color.black));
+            }
             viewHolder.tvName.setText(mList.get(position).toString());
         }
+
         viewHolder.imageView.setVisibility(View.GONE);
         // Return the completed view to render on screen
         return convertView;
@@ -150,8 +175,8 @@ public class SpinnerAdapter<T> extends ArrayAdapter<T> {
         ViewHolder viewHolder = null;
         if (convertView == null) {
             viewHolder = new ViewHolder();
-            convertView =
-                    LayoutInflater.from(mContext).inflate(R.layout.item_spinner, parent, false);
+            convertView = LayoutInflater.from(mContext)
+                    .inflate(R.layout.item_spinner_dropdown, parent, false);
             // Lookup view for data population
             viewHolder.tvName = (CustomTextView) convertView.findViewById(R.id.text);
             viewHolder.imageView = (ImageView) convertView.findViewById(R.id.image);
@@ -182,7 +207,8 @@ public class SpinnerAdapter<T> extends ArrayAdapter<T> {
                                 .getColor(R.color.spinner_grey)
                                 : mContext.getResources().getColor(R.color.white));
                 viewHolder.item_spinner.setVisibility(View.VISIBLE);
-                viewHolder.item_spinner.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                viewHolder.item_spinner.getLayoutParams().height =
+                        ViewGroup.LayoutParams.WRAP_CONTENT;
                 viewHolder.item_spinner.requestLayout();
             }
         } else {

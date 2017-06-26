@@ -46,7 +46,6 @@ public class SaleChannelPresenter
     public ObservableField<String> sellProgram;
     public ObservableField<String> channelText;
     private SpinnerAdapter<TeleComService> mAdapter;
-    public ObservableField<Boolean> isCollapse;
     private StockAdapter stockAdapter;
     private Context mContext;
     private SaleChannelContract.ViewModel mViewModel;
@@ -266,8 +265,6 @@ public class SaleChannelPresenter
         filterText = new ObservableField<>();
         sellProgram = new ObservableField<>();
         channelText = new ObservableField<>();
-        isCollapse = new ObservableField<>();
-        isCollapse.set(false);
         mAdapter = new SpinnerAdapter<TeleComService>(mContext, mTeleComServices);
         mAdapter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -282,16 +279,6 @@ public class SaleChannelPresenter
         });
         stockAdapter = new StockAdapter(mContext, mModelSales);
         stockAdapter.setOnStockListener(this);
-    }
-
-    public void onCollapse() {
-        isCollapse.set(!isCollapse.get());
-        changeSearchFilter();
-    }
-
-    public void onExpand() {
-        isCollapse.set(false);
-        changeSearchFilter();
     }
 
     public void chooseSellProgram() {
@@ -406,8 +393,6 @@ public class SaleChannelPresenter
 
     @Override
     public void onItemFocus() {
-        isCollapse.set(true);
-        changeSearchFilter();
     }
 
     public void onNext() {

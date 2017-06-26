@@ -6,17 +6,20 @@
             type="com.viettel.mbccs.widget.FakeSpinner"
             />
     </data>
+
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/layout_root"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_40"
-        style="@style/inputStyle"
+        android:gravity="start|top"
+        android:padding="@dimen/dp_5"
         >
         <ImageView
             android:id="@+id/icon_right"
             android:layout_width="@dimen/dp_12"
             android:layout_height="@dimen/dp_12"
             android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp_5"
             android:layout_centerVertical="true"
             android:src="@drawable/triangle"
             />
@@ -30,5 +33,12 @@
             android:lines="1"
             style="@style/inputStyleTranparent"
             />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:background="@color/grey_bright"
+            android:layout_height="@dimen/dp_0.6"/>
     </RelativeLayout>
 </layout>

@@ -41,6 +41,8 @@ public class StockTransDetailAdapter extends
         this.action = action;
     }
 
+
+
     class StockTransDetailViewHolder
             extends BaseViewHolderBinding<ItemStockTransDetailBinding, StockTransDetail> {
 
