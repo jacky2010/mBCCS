@@ -18,6 +18,18 @@ public class RegisterCustomerInfoRequest {
     @Expose
     private String serial;
 
+    @SerializedName("subType")
+    @Expose
+    private String subType;
+
+    @SerializedName("shopCode")
+    @Expose
+    private String shopCode;
+
+    @SerializedName("staffCode")
+    @Expose
+    private String staffCode;
+
     @SerializedName("customer")
     @Expose
     private Customer customer;
@@ -44,5 +56,29 @@ public class RegisterCustomerInfoRequest {
 
     public void setSerial(String serial) {
         this.serial = serial;
+    }
+
+    public String getSubType() {
+        return subType;
+    }
+
+    public void setSubType(String subType) {
+        this.subType = subType;
+    }
+
+    public String getShopCode() {
+        return shopCode;
+    }
+
+    public void setShopCode(String shopCode) {
+        this.shopCode = shopCode;
+    }
+
+    public String getStaffCode() {
+        return staffCode;
+    }
+
+    public void setStaffCode(String staffCode) {
+        this.staffCode = staffCode;
     }
 }

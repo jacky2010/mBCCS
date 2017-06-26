@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentTransaction;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.GetAllSubInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetRegisterSubInfoResponse;
 import com.viettel.mbccs.databinding.ActivityCreateUpdateInformationBinding;
 import com.viettel.mbccs.screen.information.adapter.InformationCustomerAdapter;
@@ -24,8 +25,9 @@ public class CreateUpdateInformationActivity extends
 
     private InformationCustomerAdapter adapter;
     private boolean typeCreate;
-    private List<GetRegisterSubInfoResponse> getRegisterSubInfoResponseList;
-    private GetRegisterSubInfoResponse data;
+    private GetRegisterSubInfoResponse dataRegister;
+    private GetAllSubInfoResponse dataUpdate;
+    List<InformationCustomerAdapter.DataInformationCustomerAdapter> dataList;
 
     @Override
     public void onBackPressed() {
@@ -51,6 +53,7 @@ public class CreateUpdateInformationActivity extends
         mBinding.setPresenter(mPresenter);
         mPresenter.setTypeCreate(typeCreate);
         mPresenter.getDataSpinnerPassport();
+        dataList = new ArrayList<>();
     }
 
     @Override
@@ -74,13 +77,21 @@ public class CreateUpdateInformationActivity extends
     }
 
     @Override
-    public void onSearchSuccess(GetRegisterSubInfoResponse data) {
-        this.data = data;
-        getRegisterSubInfoResponseList = new ArrayList<>();
-        getRegisterSubInfoResponseList.add(data);
-        adapter = new InformationCustomerAdapter(this, getRegisterSubInfoResponseList, typeCreate);
+    public void onSearchDKTTSuccess(GetRegisterSubInfoResponse data) {
+        this.dataRegister = data;
+        InformationCustomerAdapter.DataInformationCustomerAdapter dataInformation =
+                new InformationCustomerAdapter.DataInformationCustomerAdapter();
+        dataInformation.setCustomer(data.getCustomer());
+        dataInformation.setSubscriber(data.getSubscriber());
+        dataList.add(dataInformation);
+        adapter = new InformationCustomerAdapter(this, dataList, typeCreate);
         mPresenter.setInformationCustomerAdapter(adapter);
         adapter.setItemClick(this);
+    }
+
+    @Override
+    public void onSearchCNTTSuccess(GetAllSubInfoResponse data) {
+        this.dataUpdate = data;
     }
 
     @Override
@@ -89,10 +100,11 @@ public class CreateUpdateInformationActivity extends
     }
 
     @Override
-    public void onRegisterNewPayment() {
+    public void onRegisterNewPayment(GetRegisterSubInfoResponse getRegisterSubInfoResponse) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         CreateUpdateInformationFragment fragment = CreateUpdateInformationFragment.newInstance(
-                CreateUpdateInformationFragment.Type.CREATE_INFORMATION, null);
+                CreateUpdateInformationFragment.Type.CREATE_INFORMATION);
+        fragment.setDataRegister(getRegisterSubInfoResponse);
         transaction.replace(R.id.frame_create_update_information, fragment);
         transaction.addToBackStack(CreateUpdateInformationFragment.STRING_NAME);
         transaction.commit();
@@ -119,7 +131,12 @@ public class CreateUpdateInformationActivity extends
         if (position != 0) return;
         CreateUpdateInformationFragment fragment = CreateUpdateInformationFragment.newInstance(
                 typeCreate ? CreateUpdateInformationFragment.Type.CREATE_INFORMATION_CLONE
-                        : CreateUpdateInformationFragment.Type.UPDATE_INFORMATION, data);
+                        : CreateUpdateInformationFragment.Type.UPDATE_INFORMATION);
+        if (typeCreate) {
+            fragment.setDataRegister(dataRegister);
+        } else {
+            fragment.setDataUpdate(dataUpdate);
+        }
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_create_update_information, fragment);
         transaction.addToBackStack(CreateUpdateInformationFragment.STRING_NAME);

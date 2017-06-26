@@ -8,11 +8,15 @@ import android.widget.AdapterView;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.ApDomainByType;
+import com.viettel.mbccs.data.model.Customer;
+import com.viettel.mbccs.data.model.Subscriber;
 import com.viettel.mbccs.data.source.QLKhachHangRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
+import com.viettel.mbccs.data.source.remote.request.GetAllSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.GetApDomainByTypeRequest;
 import com.viettel.mbccs.data.source.remote.request.GetRegisterSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.GetAllSubInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetApDomainByTypeResponse;
 import com.viettel.mbccs.data.source.remote.response.GetRegisterSubInfoResponse;
 import com.viettel.mbccs.screen.information.adapter.InformationCustomerAdapter;
@@ -58,8 +62,8 @@ public class CreateUpdateInformationPresenter implements CreateUpdateInformation
         isHideData = new ObservableBoolean();
         isHideBtnCreate = new ObservableBoolean();
         // TODO: 6/22/17 fix data test
-        isdn = new ObservableField<>("624916209");
-        idNo = new ObservableField<>("111111");
+        isdn = new ObservableField<>("628312606");
+        idNo = new ObservableField<>("162989033");
         adapterPassportType = new ObservableField<>();
     }
 
@@ -83,44 +87,88 @@ public class CreateUpdateInformationPresenter implements CreateUpdateInformation
             return;
         }
         view.showLoading();
-        GetRegisterSubInfoRequest getRegisterSubInfoRequest = new GetRegisterSubInfoRequest();
-        getRegisterSubInfoRequest.setIsdn(isdn.get());
-        getRegisterSubInfoRequest.setIdNo(idNo.get());
-        getRegisterSubInfoRequest.setIdType(dataPassportType.get(positionPassportType).getCode());
+        if (typeCreate) {
+            GetRegisterSubInfoRequest getRegisterSubInfoRequest = new GetRegisterSubInfoRequest();
+            getRegisterSubInfoRequest.setIsdn(isdn.get());
+            getRegisterSubInfoRequest.setIdNo(idNo.get());
+            getRegisterSubInfoRequest.setIdType(
+                    dataPassportType.get(positionPassportType).getCode());
 
-        DataRequest<GetRegisterSubInfoRequest> request = new DataRequest<>();
-        request.setApiCode(ApiCode.GetRegisterSubInfo);
-        request.setParameterApi(getRegisterSubInfoRequest);
-        //
-        Subscription subscription = qlKhachHangRepository.getRegiterSubInfo(request)
-                .subscribe(new MBCCSSubscribe<GetRegisterSubInfoResponse>() {
-                    @Override
-                    public void onSuccess(GetRegisterSubInfoResponse object) {
-                        if (object == null || object.getCustomer() == null) {
-                            isHideData.set(true);
-                            isHideBtnCreate.set(false);
-                        } else {
-                            view.onSearchSuccess(object);
-                            isHideData.set(false);
-                            isHideBtnCreate.set(true);
+            DataRequest<GetRegisterSubInfoRequest> request = new DataRequest<>();
+            request.setApiCode(ApiCode.GetRegisterSubInfo);
+            request.setParameterApi(getRegisterSubInfoRequest);
+
+            Subscription subscription = qlKhachHangRepository.getRegiterSubInfo(request)
+                    .subscribe(new MBCCSSubscribe<GetRegisterSubInfoResponse>() {
+                        @Override
+                        public void onSuccess(GetRegisterSubInfoResponse object) {
+                            if (object == null || object.getCustomer() == null) {
+                                isHideData.set(true);
+                                isHideBtnCreate.set(false);
+                            } else {
+                                view.onSearchDKTTSuccess(object);
+                                isHideData.set(false);
+                                isHideBtnCreate.set(true);
+                    }
+                            view.hideLoading();
                         }
-                        view.hideLoading();
-                    }
 
-                    @Override
-                    public void onError(BaseException error) {
-                        view.hideLoading();
-                        view.onSearchError(error);
-                    }
-                });
-        subscriptions.add(subscription);
+                        @Override
+                        public void onError(BaseException error) {
+                            view.hideLoading();
+                            view.onSearchError(error);
+                        }
+                    });
+            subscriptions.add(subscription);
+        } else {
+            GetAllSubInfoRequest getAllSubInfoRequest = new GetAllSubInfoRequest();
+            getAllSubInfoRequest.setIsdn(isdn.get());
+            getAllSubInfoRequest.setIdNo(idNo.get());
+            getAllSubInfoRequest.setIdType(
+                    dataPassportType.get(positionPassportType).getCode());
+
+            DataRequest<GetAllSubInfoRequest> request = new DataRequest<>();
+            request.setApiCode(ApiCode.GetAllSubInfo);
+            request.setParameterApi(getAllSubInfoRequest);
+
+            Subscription subscription = qlKhachHangRepository.getAllSubInfo(request)
+                    .subscribe(new MBCCSSubscribe<GetAllSubInfoResponse>() {
+                        @Override
+                        public void onSuccess(GetAllSubInfoResponse object) {
+//                            if (object == null || object.getCustomer() == null) {
+//                                isHideData.set(true);
+//                                isHideBtnCreate.set(false);
+//                            } else {
+//                                view.onSearchDKTTSuccess(object);
+//                                isHideData.set(false);
+//                                isHideBtnCreate.set(true);
+//                            }
+//                            view.hideLoading();
+                        }
+
+                        @Override
+                        public void onError(BaseException error) {
+                            view.hideLoading();
+                            view.onSearchError(error);
+                        }
+                    });
+            subscriptions.add(subscription);
+        }
 
         //        isHideData.set(true);
         //        isHideBtnCreate.set(false);
     }
 
     public void onRegisterNewPayment() {
-        view.onRegisterNewPayment();
+        GetRegisterSubInfoResponse getRegisterSubInfoResponse = new GetRegisterSubInfoResponse();
+        Subscriber subscriber = new Subscriber();
+        subscriber.setIsdn(isdn.get());
+        Customer customer = new Customer();
+        customer.setIdNo(idNo.get());
+        customer.setIdType(dataPassportType.get(positionPassportType).getCode());
+        getRegisterSubInfoResponse.setCustomer(customer);
+        getRegisterSubInfoResponse.setSubscriber(subscriber);
+        view.onRegisterNewPayment(getRegisterSubInfoResponse);
     }
 
     public void setInformationCustomerAdapter(InformationCustomerAdapter adapter) {

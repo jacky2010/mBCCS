@@ -7,7 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.data.source.remote.response.GetRegisterSubInfoResponse;
+import com.viettel.mbccs.data.model.Customer;
+import com.viettel.mbccs.data.model.Subscriber;
 import com.viettel.mbccs.databinding.ItemInformationCustomerBinding;
 import java.util.List;
 
@@ -20,10 +21,11 @@ public class InformationCustomerAdapter
     private ItemInformationCustomerBinding binding;
     private ItemClick listener;
     private Context context;
-    private List<GetRegisterSubInfoResponse> dataList;
+    private List<DataInformationCustomerAdapter> dataList;
     private boolean isCreate;
 
-    public InformationCustomerAdapter(Context context, List<GetRegisterSubInfoResponse> data, boolean isCreate) {
+    public InformationCustomerAdapter(Context context, List<DataInformationCustomerAdapter> data,
+            boolean isCreate) {
         this.context = context;
         this.dataList = data;
         this.isCreate = isCreate;
@@ -65,7 +67,7 @@ public class InformationCustomerAdapter
             icon = new ObservableField<>();
         }
 
-        public void bind(GetRegisterSubInfoResponse data, int position) {
+        public void bind(DataInformationCustomerAdapter data, int position) {
             if (viewBinding.getPresenter() == null) {
                 viewBinding.setPresenter(this);
             }
@@ -94,5 +96,26 @@ public class InformationCustomerAdapter
 
     public void setItemClick(ItemClick itemClick) {
         listener = itemClick;
+    }
+
+    public static class DataInformationCustomerAdapter {
+        private Customer customer;
+        private Subscriber subscriber;
+
+        public Customer getCustomer() {
+            return customer;
+        }
+
+        public void setCustomer(Customer customer) {
+            this.customer = customer;
+        }
+
+        public Subscriber getSubscriber() {
+            return subscriber;
+        }
+
+        public void setSubscriber(Subscriber subscriber) {
+            this.subscriber = subscriber;
+        }
     }
 }

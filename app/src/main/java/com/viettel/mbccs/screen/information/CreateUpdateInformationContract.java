@@ -3,6 +3,7 @@ package com.viettel.mbccs.screen.information;
 import com.viettel.mbccs.base.BasePresenter;
 import com.viettel.mbccs.base.BaseView;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.GetAllSubInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetRegisterSubInfoResponse;
 
 /**
@@ -19,11 +20,13 @@ public interface CreateUpdateInformationContract {
 
         void onCancel();
 
-        void onSearchSuccess(GetRegisterSubInfoResponse data);
+        void onSearchDKTTSuccess(GetRegisterSubInfoResponse data);
+
+        void onSearchCNTTSuccess(GetAllSubInfoResponse data);
 
         void onSearchError(BaseException error);
 
-        void onRegisterNewPayment();
+        void onRegisterNewPayment(GetRegisterSubInfoResponse getRegisterSubInfoResponse);
 
 //        void getDataSpinnerPassportSuccess(List<ApDomainByType> dataPassportType);
 

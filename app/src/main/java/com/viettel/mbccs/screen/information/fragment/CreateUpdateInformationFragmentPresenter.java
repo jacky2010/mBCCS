@@ -8,6 +8,7 @@ import android.databinding.ObservableInt;
 import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.AdapterView;
 import com.viettel.mbccs.R;
@@ -22,7 +23,9 @@ import com.viettel.mbccs.data.model.Customer;
 import com.viettel.mbccs.data.model.Product;
 import com.viettel.mbccs.data.model.Subscriber;
 import com.viettel.mbccs.data.model.UploadImage;
+import com.viettel.mbccs.data.model.UserInfo;
 import com.viettel.mbccs.data.source.QLKhachHangRepository;
+import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.ChecOTPRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetApDomainByTypeRequest;
@@ -33,6 +36,7 @@ import com.viettel.mbccs.data.source.remote.request.UpdateAllSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseErrorResponse;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.CheckOTPResponse;
+import com.viettel.mbccs.data.source.remote.response.GetAllSubInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetApDomainByTypeResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListProductResponse;
 import com.viettel.mbccs.data.source.remote.response.GetOTPResponse;
@@ -69,13 +73,16 @@ public class CreateUpdateInformationFragmentPresenter
     private Context context;
     private CreateUpdateInformationFragmentContract.View view;
     private QLKhachHangRepository qlKhachHangRepository;
+    private UserRepository userRepository;
     private CompositeSubscription subscriptions;
 
     @CreateUpdateInformationFragment.Type
     private int typeFragment;
-    private GetRegisterSubInfoResponse data;
+    private GetRegisterSubInfoResponse dataRegister;
+    private GetAllSubInfoResponse dataUpdate;
     private Customer customerResponse;
     private Subscriber subscriberResponse;
+    private Contract contractResponse;
 
     private List<Product> dataGoiCuoc;
     private List<ApDomainByType> dataPassportType;
@@ -117,13 +124,16 @@ public class CreateUpdateInformationFragmentPresenter
     public ObservableBoolean isShowContractInformation;
     public ObservableBoolean isEnableIsdn;
     public ObservableBoolean isEnableSerial;
+    public ObservableBoolean isEnableIdNo;
     public ObservableInt selectionPassport;
+    public ObservableInt selectionHTTT;
 
     CreateUpdateInformationFragmentPresenter(Context context,
             CreateUpdateInformationFragmentContract.View view) {
         this.context = context;
         this.view = view;
         qlKhachHangRepository = QLKhachHangRepository.getInstance();
+        userRepository = UserRepository.getInstance();
         subscriptions = new CompositeSubscription();
 
         title = new ObservableField<>();
@@ -158,7 +168,9 @@ public class CreateUpdateInformationFragmentPresenter
         isShowContractInformation = new ObservableBoolean();
         isEnableIsdn = new ObservableBoolean(true);
         isEnableSerial = new ObservableBoolean(true);
+        isEnableIdNo = new ObservableBoolean(true);
         selectionPassport = new ObservableInt();
+        selectionHTTT = new ObservableInt();
     }
 
     @Override
@@ -438,9 +450,15 @@ public class CreateUpdateInformationFragmentPresenter
         if (checkboxEmail.get()) noticeChargeList.add(Contract.TypeNoticeChange.EMAIL);
         if (checkboxAtHome.get()) noticeChargeList.add(Contract.TypeNoticeChange.AT_HOME);
 
-        Contract contract = new Contract();
+        Contract contract;
+        if (contractResponse != null) {
+            contract = contractResponse;
+        } else {
+            contract = new Contract();
+        }
         contract.setPayMethodCode(dataHTTT.get(positionSelectionHTTT).getCode());
         contract.setNoticeCharge(noticeChargeList);
+
         return contract;
     }
 
@@ -527,11 +545,15 @@ public class CreateUpdateInformationFragmentPresenter
                     });
             subscriptions.add(subscription);
         } else {
+            UserInfo userInfo = userRepository.getUserInfo();
 
             RegisterCustomerInfoRequest registerCustomerInfoRequest =
                     new RegisterCustomerInfoRequest();
             registerCustomerInfoRequest.setIsdn(getDataSubscriber().getIsdn());
             registerCustomerInfoRequest.setSerial(getDataSubscriber().getSerial());
+            registerCustomerInfoRequest.setSubType(MobileType.TRA_TRUOC);
+            registerCustomerInfoRequest.setShopCode(userInfo.getShop().getShopCode());
+            registerCustomerInfoRequest.setStaffCode(userInfo.getStaffInfo().getStaffCode());
 
             registerCustomerInfoRequest.setCustomer(customer);
 
@@ -643,13 +665,18 @@ public class CreateUpdateInformationFragmentPresenter
     /*---------------------- End on Click in View -----------------------------*/
 
     /*----------------------- Set - Get ---------------------------------------*/
-    void setTypeFragment(int type, GetRegisterSubInfoResponse data) {
+    void setTypeFragment(int type, @Nullable GetRegisterSubInfoResponse dataRegister,
+            @Nullable GetAllSubInfoResponse dataUpdate) {
         this.typeFragment = type;
-        this.data = data;
         switch (typeFragment) {
             case CreateUpdateInformationFragment.Type.CREATE_INFORMATION:
                 title.set(context.getString(
                         R.string.fragment_create_update_information_create_title));
+                this.dataRegister = dataRegister;
+
+                customerResponse = dataRegister.getCustomer();
+                subscriberResponse = dataRegister.getSubscriber();
+
                 textBtnRegisterUpdate.set(context.getString(
                         R.string.fragment_create_update_information_create_dang_ky));
                 isShowContractInformation.set(false);
@@ -657,6 +684,10 @@ public class CreateUpdateInformationFragmentPresenter
             case CreateUpdateInformationFragment.Type.CREATE_INFORMATION_CLONE:
                 title.set(context.getString(
                         R.string.fragment_create_update_information_create_clone_title));
+                this.dataRegister = dataRegister;
+
+                customerResponse = dataRegister.getCustomer();
+                subscriberResponse = dataRegister.getSubscriber();
                 textBtnRegisterUpdate.set(context.getString(
                         R.string.fragment_create_update_information_create_dang_ky));
                 isShowContractInformation.set(false);
@@ -664,6 +695,12 @@ public class CreateUpdateInformationFragmentPresenter
             case CreateUpdateInformationFragment.Type.UPDATE_INFORMATION:
                 title.set(context.getString(
                         R.string.fragment_create_update_information_update_title));
+                this.dataUpdate = dataUpdate;
+
+                customerResponse = dataUpdate.getCustomer();
+                subscriberResponse = dataUpdate.getSubscriber();
+                contractResponse = dataUpdate.getContract();
+
                 textBtnRegisterUpdate.set(context.getString(
                         R.string.fragment_create_update_information_create_cap_nhat));
                 isShowContractInformation.set(true);
@@ -723,17 +760,18 @@ public class CreateUpdateInformationFragmentPresenter
                     });
         }
 
-        if (data == null) {
+        if (dataRegister == null || dataUpdate == null) {
             view.hideLoading();
             return;
         }
-        customerResponse = data.getCustomer();
-        subscriberResponse = data.getSubscriber();
+
         if (subscriberResponse != null) {
             txtPhoneNumber.set(subscriberResponse.getIsdn());
             if (!StringUtils.isEmpty(subscriberResponse.getIsdn())) {
                 isEnableIsdn.set(false);
             }
+            // TODO: 6/26/17
+            subscriberResponse.setSerial("8925509002901845693");
             txtSerial.set(subscriberResponse.getSerial());
             if (!StringUtils.isEmpty(subscriberResponse.getSerial())) {
                 isEnableSerial.set(false);
@@ -741,7 +779,8 @@ public class CreateUpdateInformationFragmentPresenter
         }
         if (customerResponse != null) {
             txtNameCustomer.set(customerResponse.getName());
-            if (customerResponse.getSex().equals(Data.Gender.MALE)) {
+            if (customerResponse.getSex() != null && customerResponse.getSex()
+                    .equals(Data.Gender.MALE)) {
                 isCheckMale.set(true);
                 isCheckFemale.set(false);
             } else {
@@ -758,12 +797,41 @@ public class CreateUpdateInformationFragmentPresenter
             if (!StringUtils.isEmpty(customerResponse.getIdNo())) {
                 isEnabledTxtNumberPassport.set(false);
             }
-            setDate.set(customerResponse.getBirthDate());
+            if (customerResponse.getBirthDate() != null) {
+                setDate.set(customerResponse.getBirthDate());
+            }
 
             for (int i = 0; i < dataPassportType.size(); i++) {
                 if (dataPassportType.get(i).getCode().equals(customerResponse.getIdType())) {
                     selectionPassport.set(i);
                     break;
+                }
+            }
+        }
+        if (contractResponse != null) {
+            if (contractResponse.getNoticeCharge() != null
+                    && contractResponse.getNoticeCharge().size() != 0) {
+                for (String s : contractResponse.getNoticeCharge()) {
+                    if (s.equals(Contract.TypeNoticeChange.SMS)) {
+                        checkboxSms.set(true);
+                    }
+
+                    if (s.equals(Contract.TypeNoticeChange.EMAIL)) {
+                        checkboxEmail.set(true);
+                    }
+
+                    if (s.equals(Contract.TypeNoticeChange.AT_HOME)) {
+                        checkboxAtHome.set(true);
+                    }
+                }
+            }
+
+            if (contractResponse.getPayMethodCode() != null) {
+                for (int i = 0; i < dataHTTT.size(); i++) {
+                    if (dataHTTT.get(i).getCode().equals(contractResponse.getPayMethodCode())) {
+                        selectionHTTT.set(i);
+                        break;
+                    }
                 }
             }
         }
