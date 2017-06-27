@@ -39,8 +39,6 @@
                     app:leftIcon="@{ @drawable/ic_arrow_left_white_24dp }"
                     app:leftIconClick="@{ () -> presenter.onBackPressed() }"
                     app:title="@{ presenter.title }"
-                    app:titleColor="@{ @color/white }"
-                    app:titleTextSize="@{ @dimen/sp_16 }"
                     />
 
                 <LinearLayout

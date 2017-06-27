@@ -30,8 +30,7 @@
                 app:rightIconClick="@{ () -> presenter.switchView() }"
                 app:showRightIcon="@{ true }"
                 app:title="@{ presenter.toolbarTitle }"
-                app:titleColor="@{ @color/white }"
-                app:titleTextSize="@{ @dimen/sp_18 }" />
+                />
 
         </android.support.design.widget.AppBarLayout>
 

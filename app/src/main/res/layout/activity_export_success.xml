@@ -18,8 +18,6 @@
             app:leftIcon="@{@drawable/ic_close_white}"
             app:leftIconClick="@{()->presenter.onCancel()}"
             app:title="@{@string/nv_trahangcaptren_lap_phieu_title}"
-            app:titleColor="@{@color/white}"
-            app:titleTextSize="@{@dimen/sp_17}"
             />
 
         <com.viettel.mbccs.widget.CustomTextView

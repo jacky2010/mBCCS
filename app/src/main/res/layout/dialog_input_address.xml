@@ -26,8 +26,6 @@
             app:leftIcon="@{ @drawable/ic_arrow_left_white_24dp }"
             app:leftIconClick="@{ () -> presenter.onBackPressed() }"
             app:title="@{ @string/dialog_input_address_title }"
-            app:titleColor="@{ @color/white }"
-            app:titleTextSize="@{ @dimen/sp_18 }"
             />
 
         <LinearLayout

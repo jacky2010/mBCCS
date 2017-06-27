@@ -32,8 +32,6 @@
                 app:rightIconClick="@{()->presenter.onSearch()}"
                 app:showRightIcon="@{presenter.showRightIcon}"
                 app:title="@{@string/view_ware_house_title}"
-                app:titleColor="@{@color/white}"
-                app:titleTextSize="@{@dimen/sp_17}"
                 />
             <com.viettel.mbccs.widget.CustomTextView
                 android:layout_width="match_parent"

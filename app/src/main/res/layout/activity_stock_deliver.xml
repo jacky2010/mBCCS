@@ -22,7 +22,6 @@
             app:leftIcon="@{@drawable/ic_arrow_left_white_24dp}"
             app:leftIconClick="@{()->presenter.onBackClick()}"
             app:title="@{@string/stock_delivery_title}"
-            app:titleTextSize="@{@dimen/sp_17}"
             />
 
         <LinearLayout

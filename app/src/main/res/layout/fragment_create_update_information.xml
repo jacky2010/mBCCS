@@ -26,8 +26,6 @@
             app:leftIcon="@{@drawable/ic_arrow_left_white_24dp}"
             app:leftIconClick="@{()->presenter.onCancel()}"
             app:title="@{ presenter.title }"
-            app:titleColor="@{@color/white}"
-            app:titleTextSize="@{@dimen/sp_17}"
             />
         <ScrollView
             android:layout_width="match_parent"

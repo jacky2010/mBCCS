@@ -26,8 +26,6 @@
             app:leftIcon="@{@drawable/ic_arrow_left_white_24dp}"
             app:leftIconClick="@{()->presenter.onClose()}"
             app:title="@{ presenter.title }"
-            app:titleColor="@{@color/white}"
-            app:titleTextSize="@{@dimen/sp_17}"
             />
         <LinearLayout
             android:id="@+id/layout_information"

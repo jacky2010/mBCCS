@@ -38,8 +38,6 @@
                 app:leftIcon="@{ @drawable/ic_arrow_left_white_24dp }"
                 app:leftIconClick="@{ () -> presenter.onCancel() }"
                 app:title="@{ @string/connector_mobile_title }"
-                app:titleColor="@{ @color/white }"
-                app:titleTextSize="@{ @dimen/sp_18 }"
                 />
 
             <RelativeLayout

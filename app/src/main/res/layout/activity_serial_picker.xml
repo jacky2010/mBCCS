@@ -60,8 +60,6 @@
                 app:leftIcon="@{@drawable/ic_close_white_24dp}"
                 app:leftIconClick="@{()->presenter.onCancel()}"
                 app:title="@{@string/common_label_select_serials}"
-                app:titleColor="@{@color/white}"
-                app:titleTextSize="@{@dimen/sp_17}"
                 />
             <android.support.v4.widget.NestedScrollView
                 android:layout_width="match_parent"

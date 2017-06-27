@@ -108,7 +108,7 @@
             app:bindText="@{ title }"
             android:textAllCaps="@{isAllCaps}"
             android:textColor="@{ titleColor == 0 ? @color/white : titleColor}"
-            android:textSize="@{ titleTextSize }"
+            android:textSize="@{ titleTextSize == 0 ? @dimen/sp_20 : titleTextSize }"
             android:textStyle="bold"
             />
     </RelativeLayout>
