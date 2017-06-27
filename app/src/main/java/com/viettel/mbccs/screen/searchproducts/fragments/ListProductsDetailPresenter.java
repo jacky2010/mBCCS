@@ -4,10 +4,12 @@ import android.content.Context;
 import android.databinding.ObservableField;
 
 import com.viettel.mbccs.data.model.KeyValue;
+import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.source.SellAnyPayRepository;
 import com.viettel.mbccs.screen.searchproducts.adapters.ProductsAdapter;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -70,6 +72,37 @@ public class ListProductsDetailPresenter implements ListProductsDetailContract.P
             filterText = new ObservableField<>();
 
             isCollapse = new ObservableField<>(false);
+
+            manufacturerList = new ArrayList<>();
+            screenSizeList = new ArrayList<>();
+            cameraList = new ArrayList<>();
+            priceRangeList = new ArrayList<>();
+            modelList = new ArrayList<>();
+            featureList = new ArrayList<>();
+
+            //TODO minhnx test
+            List<ModelSale> items = new ArrayList<>();
+            ModelSale item = new ModelSale();
+            item.setStockMoldeName("Demo 1");
+            item.setPrice(3000);
+            items.add(item);
+
+            item = new ModelSale();
+            item.setStockMoldeName("Demo 2");
+            item.setPrice(3000);
+            items.add(item);
+
+            item = new ModelSale();
+            item.setStockMoldeName("Demo 3");
+            item.setPrice(3000);
+            items.add(item);
+
+            item = new ModelSale();
+            item.setStockMoldeName("Demo 4");
+            item.setPrice(3000);
+            items.add(item);
+            productAdapter = new ProductsAdapter(context, items);
+            productAdapter.notifyDataSetChanged();
         } catch (Exception e) {
             e.printStackTrace();
         }

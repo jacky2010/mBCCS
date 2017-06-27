@@ -305,6 +305,10 @@ public class Subscriber implements Parcelable {
     @Expose
     private String packageName;
 
+    @SerializedName("customer")
+    @Expose
+    private Customer customer;
+
     public Subscriber() {
 
     }
@@ -921,5 +925,13 @@ public class Subscriber implements Parcelable {
 
     public void setPackageName(String packageName) {
         this.packageName = packageName;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }

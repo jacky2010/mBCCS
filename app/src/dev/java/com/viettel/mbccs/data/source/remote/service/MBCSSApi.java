@@ -379,4 +379,8 @@ public interface MBCSSApi {
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<EmptyObject>>> sendSurvey(
             @Body DataRequest<SendSurveyKPPRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<GetRegisterSubResponse>>> getRegiterSub(
+            @Body DataRequest<GetRegisterSubRequest> request);
 }
