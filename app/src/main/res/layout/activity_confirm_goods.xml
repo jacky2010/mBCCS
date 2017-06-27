@@ -27,8 +27,6 @@
                 app:leftIcon="@{@drawable/ic_arrow_left_white_24dp}"
                 app:leftIconClick="@{()->presenter.onCancel()}"
                 app:title="@{@string/confirm_goods}"
-                app:titleColor="@{@color/white}"
-                app:titleTextSize="@{@dimen/sp_17}"
                 />
         </RelativeLayout>
 
@@ -49,8 +47,7 @@
             android:layout_height="match_parent"
             android:layout_above="@id/btn_confirm_good"
             android:layout_below="@id/lyHeader"
-            android:adapter="@{presenter.adapter}"
-            ></android.support.v7.widget.RecyclerView>
+            android:adapter="@{presenter.adapter}" />
 
     </RelativeLayout>
 </layout>

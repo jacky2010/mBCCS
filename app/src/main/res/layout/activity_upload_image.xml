@@ -24,8 +24,6 @@
             app:leftIcon="@{@drawable/ic_arrow_left_white_24dp}"
             app:leftIconClick="@{()->presenter.onCancel()}"
             app:title="@{@string/activity_upload_image_title}"
-            app:titleColor="@{@color/white}"
-            app:titleTextSize="@{@dimen/sp_17}"
             />
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"

@@ -20,8 +20,6 @@
             app:leftIcon="@{@drawable/ic_close}"
             app:leftIconClick="@{()->presenter.onCancel()}"
             app:title="@{@string/choose_staff}"
-            app:titleColor="@{@color/white}"
-            app:titleTextSize="@{@dimen/sp_17}"
             />
         <com.viettel.mbccs.widget.SearchInputView
             android:id="@+id/searchInput"

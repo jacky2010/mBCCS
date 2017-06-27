@@ -32,8 +32,6 @@
                 app:rightIcon="@{@drawable/ic_search_white_24dp}"
                 app:showRightIcon="@{presenter.showRightIcon}"
                 app:title="@{@string/help_title}"
-                app:titleColor="@{@color/white}"
-                app:titleTextSize="@{@dimen/sp_17}"
                 />
 
             <LinearLayout

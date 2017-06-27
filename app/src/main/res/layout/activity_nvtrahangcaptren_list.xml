@@ -19,8 +19,6 @@
             app:leftIcon="@{@drawable/ic_arrow_left_white_24dp}"
             app:leftIconClick="@{()->presenter.onCancel()}"
             app:title="@{@string/nv_trahangcaptren_title}"
-            app:titleColor="@{@color/white}"
-            app:titleTextSize="@{@dimen/sp_17}"
             />
 
         <include

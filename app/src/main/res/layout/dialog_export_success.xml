@@ -21,8 +21,6 @@
             app:leftIcon="@{ @drawable/ic_close_white }"
             app:leftIconClick="@{ () -> dialog.onClose() }"
             app:title="@{ @string/common_label_notice}"
-            app:titleColor="@{ @color/white }"
-            app:titleTextSize="@{ @dimen/sp_16 }"
             />
 
         <LinearLayout

@@ -21,8 +21,7 @@
             app:leftIcon="@{@drawable/ic_close}"
             app:leftIconClick="@{()->presenter.onCancel()}"
             app:title="@{presenter.title}"
-            app:titleColor="@{@color/white}"
-            app:titleTextSize="@{@dimen/sp_17}" />
+            />
 
         <com.viettel.mbccs.widget.SearchInputView
             android:id="@+id/searchInput"
@@ -37,6 +36,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/dp_10"
-            android:adapter="@{presenter.adapter}"></android.support.v7.widget.RecyclerView>
+            android:adapter="@{presenter.adapter}" />
     </LinearLayout>
 </layout>
