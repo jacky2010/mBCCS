@@ -277,4 +277,9 @@ public class ChannelInfo implements Parcelable, Serializable {
     public void setDiscountPolicy(String discountPolicy) {
         this.discountPolicy = discountPolicy;
     }
+
+    @Override
+    public String toString() {
+        return getManagementName();
+    }
 }

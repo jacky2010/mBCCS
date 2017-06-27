@@ -1,6 +1,7 @@
 package com.viettel.mbccs.screen.information.fragment;
 
 import android.graphics.Bitmap;
+import android.support.annotation.Nullable;
 import com.viettel.mbccs.base.BasePresenter;
 import com.viettel.mbccs.base.BaseView;
 import com.viettel.mbccs.data.model.Area;
@@ -38,7 +39,7 @@ public interface CreateUpdateInformationFragmentContract {
 
         void registerCustomerInfoError(BaseException error);
 
-        void registerUpdateCustomerInfoSuccess(String result, boolean isRegister);
+        void registerUpdateCustomerInfoSuccess(@Nullable String result, boolean isRegister);
 
         void getDataSpinnerError(BaseException error);
 

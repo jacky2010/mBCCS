@@ -1,6 +1,7 @@
 package com.viettel.mbccs.widget;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -45,7 +46,7 @@ public class CustomEdittext extends AppCompatEditText {
     public CustomEdittext(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         applyCustomFont(context, attrs);
-//        getBackground().setColorFilter(R.color.grey_bright, PorterDuff.Mode.DST_IN);
+        getBackground().setColorFilter(R.color.blue, PorterDuff.Mode.DST_IN);
     }
 
     @Override

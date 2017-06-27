@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
+import android.view.View;
+import android.widget.AdapterView;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.ChannelInfo;
@@ -38,12 +40,12 @@ public class SellOrdersPresenter {
     private UserRepository userRepository;
     private CompositeSubscription subscriptions;
     private List<ChannelInfo> channelInfoList;
-    private List<String> dataSpinnerChannel;
+    //    private List<String> dataSpinnerChannel;
     private ChannelInfo channelInfoSelect;
 
     public ObservableField<StaffInfo> staffInfo;
     public ObservableField<Shop> shop;
-    public ObservableField<SpinnerAdapter<String>> spinnerAdapterChannel;
+    public ObservableField<SpinnerAdapter<ChannelInfo>> spinnerAdapterChannel;
     public ObservableField<SellOrdersFragmentAdapter> sellOrdersFragmentAdapter;
     public ObservableBoolean isHideSearch;
     public ObservableField<String> textSearch;
@@ -54,7 +56,7 @@ public class SellOrdersPresenter {
         banHangKhoTaiChinhRepository = BanHangKhoTaiChinhRepository.getInstance();
         userRepository = UserRepository.getInstance();
         subscriptions = new CompositeSubscription();
-        dataSpinnerChannel = new ArrayList<>();
+        //        dataSpinnerChannel = new ArrayList<>();
         channelInfoList = new ArrayList<>();
         channelInfoSelect = new ChannelInfo();
 
@@ -93,11 +95,28 @@ public class SellOrdersPresenter {
                                     return;
                                 }
                                 channelInfoList = object.getChannelInfoList();
-                                for (ChannelInfo c : channelInfoList) {
-                                    dataSpinnerChannel.add(c.getManagementName());
-                                }
+                                //                                for (ChannelInfo c : channelInfoList) {
+                                //                                    dataSpinnerChannel.add(c.getManagementName());
+                                //                                }
                                 spinnerAdapterChannel.set(
-                                        new SpinnerAdapter<String>(context, dataSpinnerChannel));
+                                        new SpinnerAdapter<>(context, channelInfoList));
+                                spinnerAdapterChannel.get()
+                                        .setOnItemSelectedListener(
+                                                new AdapterView.OnItemSelectedListener() {
+                                                    @Override
+                                                    public void onItemSelected(
+                                                            AdapterView<?> parent, View view,
+                                                            int position, long id) {
+                                                        channelInfoSelect =
+                                                                channelInfoList.get(position);
+                                                    }
+
+                                                    @Override
+                                                    public void onNothingSelected(
+                                                            AdapterView<?> parent) {
+
+                                                    }
+                                                });
                                 setTextHideSearch();
                                 sellOrdersView.hideLoading();
                             }
@@ -172,7 +191,7 @@ public class SellOrdersPresenter {
         this.sellOrdersFragmentAdapter.set(sellOrdersFragmentAdapter);
     }
 
-    public void setPositionSelectChange(int position) {
-        channelInfoSelect = channelInfoList.get(position);
-    }
+//    public void setPositionSelectChange(int position) {
+//        channelInfoSelect = channelInfoList.get(position);
+//    }
 }

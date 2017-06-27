@@ -6,6 +6,7 @@ import android.databinding.ObservableField;
 import android.view.View;
 import android.widget.AdapterView;
 import com.viettel.mbccs.R;
+import com.viettel.mbccs.constance.MobileType;
 import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.ApDomainByType;
 import com.viettel.mbccs.data.model.Customer;
@@ -62,8 +63,8 @@ public class CreateUpdateInformationPresenter implements CreateUpdateInformation
         isHideData = new ObservableBoolean();
         isHideBtnCreate = new ObservableBoolean();
         // TODO: 6/22/17 fix data test
-        isdn = new ObservableField<>("628312606");
-        idNo = new ObservableField<>("162989033");
+        isdn = new ObservableField<>("624638439");
+        idNo = new ObservableField<>("122026111");
         adapterPassportType = new ObservableField<>();
     }
 
@@ -135,15 +136,15 @@ public class CreateUpdateInformationPresenter implements CreateUpdateInformation
                     .subscribe(new MBCCSSubscribe<GetAllSubInfoResponse>() {
                         @Override
                         public void onSuccess(GetAllSubInfoResponse object) {
-//                            if (object == null || object.getCustomer() == null) {
-//                                isHideData.set(true);
-//                                isHideBtnCreate.set(false);
-//                            } else {
-//                                view.onSearchDKTTSuccess(object);
-//                                isHideData.set(false);
-//                                isHideBtnCreate.set(true);
-//                            }
-//                            view.hideLoading();
+                            if (object == null || object.getCustomer() == null) {
+                                onError(new Exception());
+                            } else {
+                                view.onSearchCNTTSuccess(object);
+                                isHideData.set(false);
+                                isHideBtnCreate.set(true);
+                            }
+
+                            view.hideLoading();
                         }
 
                         @Override
@@ -154,9 +155,6 @@ public class CreateUpdateInformationPresenter implements CreateUpdateInformation
                     });
             subscriptions.add(subscription);
         }
-
-        //        isHideData.set(true);
-        //        isHideBtnCreate.set(false);
     }
 
     public void onRegisterNewPayment() {
@@ -187,6 +185,7 @@ public class CreateUpdateInformationPresenter implements CreateUpdateInformation
         DataRequest<GetApDomainByTypeRequest> request = new DataRequest<>();
         GetApDomainByTypeRequest getApDomainRequest = new GetApDomainByTypeRequest();
         getApDomainRequest.setType(ApDomainByType.Type.LOAI_GIAY_TO);
+        getApDomainRequest.setSubType(MobileType.TRA_TRUOC);
 
         request.setWsRequest(getApDomainRequest);
         request.setWsCode(WsCode.GetApDomainByType);

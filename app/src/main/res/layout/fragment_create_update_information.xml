@@ -60,7 +60,7 @@
                 <com.viettel.mbccs.widget.CustomEdittext
                     android:id="@+id/edit_id_no"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_40"
+                    android:layout_height="wrap_content"
                     android:enabled="@{ presenter.isEnableIsdn }"
                     android:inputType="number"
                     bind:customEditTextDrawable="@{ (v, t)  -> presenter.onDrawableClick(v, t) }"
@@ -81,7 +81,8 @@
                     android:layout_height="@dimen/dp_40"
                     android:layout_marginTop="@dimen/dp_4"
                     bind:adapter="@{ presenter.adapterGoiCuoc }"
-                        />
+                    bind:selectedPosition="@={ presenter.selectedGoiCuoc }"
+                    />
 
                 <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="match_parent"
@@ -93,8 +94,8 @@
                 <com.viettel.mbccs.widget.CustomEdittext
                     android:id="@+id/edit_serial"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_40"
-                    android:layout_marginTop="@dimen/dp_4"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_2"
                     android:inputType="number"
                     android:text="@={ presenter.txtSerial }"
                     android:enabled="@{ presenter.isEnableSerial }"
@@ -122,9 +123,8 @@
 
                 <com.viettel.mbccs.widget.CustomEdittext
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_40"
-                    android:layout_marginTop="@dimen/dp_4"
-                    android:paddingLeft="@dimen/dp_10"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_2"
                     android:text="@={ presenter.txtNameCustomer }"
                     style="@style/inputStyle"
                     />
@@ -207,8 +207,8 @@
                 <com.viettel.mbccs.widget.CustomEdittext
                     android:layout_width="match_parent"
                     android:id="@+id/edit_number_passport"
-                    android:layout_height="@dimen/dp_40"
-                    android:layout_marginTop="@dimen/dp_4"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_2"
                     android:enabled="@{ presenter.isEnabledTxtNumberPassport}"
                     bind:customEditTextDrawable="@{ (v, t)  -> presenter.onDrawableClick(v, t) }"
                     style="@style/inputStyleDrawableRight"

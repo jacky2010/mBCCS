@@ -8,6 +8,9 @@ import android.support.annotation.StringDef;
 
 @StringDef({ MobileType.TRA_TRUOC, MobileType.TRA_SAU })
 public @interface MobileType {
+    // prepaid
     String TRA_TRUOC = "2";
+
+    // postpaid
     String TRA_SAU = "1";
 }

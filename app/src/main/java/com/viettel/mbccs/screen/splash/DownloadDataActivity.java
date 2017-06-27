@@ -13,6 +13,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseActivity;
 import com.viettel.mbccs.constance.WsCode;
+import com.viettel.mbccs.data.model.Image;
 import com.viettel.mbccs.data.model.database.ImageDataBase;
 import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
@@ -29,6 +30,9 @@ import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.List;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
+
+import static com.viettel.mbccs.service.service.CreateDataBaseService.ACTION_CREATE_AREA_COMPLETED;
+import static com.viettel.mbccs.service.service.CreateDataBaseService.DATA_CREATE_AREA_COMPLETED;
 
 /**
  * Created by HuyQuyet on 6/18/17.
@@ -48,9 +52,8 @@ public class DownloadDataActivity extends BaseActivity {
     private BroadcastReceiver broadcastReceiverCreateArea = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals(CreateDataBaseService.ACTION_CREATE_AREA_COMPLETED)) {
-                progressValue.set(
-                        intent.getIntExtra(CreateDataBaseService.DATA_CREATE_AREA_COMPLETED, 0));
+            if (intent.getAction().equals(ACTION_CREATE_AREA_COMPLETED)) {
+                progressValue.set(intent.getIntExtra(DATA_CREATE_AREA_COMPLETED, 0));
                 textProcess.set(
                         getString(R.string.create_data_area_text, progressValue.get()) + "%");
                 getData();
@@ -74,7 +77,6 @@ public class DownloadDataActivity extends BaseActivity {
                 textProcess.set(getString(R.string.download_image_text, progressValue.get()) + "%");
             }
             if (intent.getAction().equals(DownloadImageService.ACTION_DOWNLOAD_COMPLETE)) {
-                userRepository.setDownloadImage(true);
                 progressValue.set(100);
                 textProcess.set(getString(R.string.download_image_text, progressValue.get()) + "%");
                 gotoMain();
@@ -119,14 +121,48 @@ public class DownloadDataActivity extends BaseActivity {
     }
 
     @Override
-    protected void onStop() {
-        if (!isFinishing() && intentCreateDataBaseAreaService != null) {
-            stopService(intentCreateDataBaseAreaService);
+    protected void onResume() {
+        super.onResume();
+        if (userRepository.isCreateDataBaseArea()) {
+            progressValue.set(100);
+            textProcess.set(getString(R.string.create_data_area_text, progressValue.get()) + "%");
+            getData();
+        }
+        List<Image> imageList = userRepository.getImageFromDatabase();
+        List<Image> imageListNoDownload =
+                userRepository.getImageFromDatabase(ImageDataBase.Status.NO_DATA);
+        if (imageList != null && imageList.size() != 0 && (imageListNoDownload == null
+                || imageListNoDownload.size() == 0)) {
+            progressValue.set(100);
+            textProcess.set(getString(R.string.download_image_text, progressValue.get()) + "%");
+            gotoMain();
         }
 
-        if (!isFinishing() && intentDownloadImageService != null) {
-            stopService(intentDownloadImageService);
-        }
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(DownloadImageService.ACTION_DOWNLOAD_START);
+        intentFilter.addAction(DownloadImageService.ACTION_DOWNLOAD_COMPLETE);
+        intentFilter.addAction(DownloadImageService.ACTION_DOWNLOAD_SUCCESS);
+        intentFilter.addAction(DownloadImageService.ACTION_DOWNLOAD_FAIL);
+        LocalBroadcastManager.getInstance(this)
+                .registerReceiver(broadcastReceiverDownloadImage, intentFilter);
+
+        IntentFilter intentFilterCreateArea = new IntentFilter();
+        intentFilterCreateArea.addAction(ACTION_CREATE_AREA_COMPLETED);
+        intentFilterCreateArea.addAction(CreateDataBaseService.ACTION_CREATE_AREA_SUCCESS);
+        intentFilterCreateArea.addAction(CreateDataBaseService.ACTION_CREATE_AREA_FAIL);
+        LocalBroadcastManager.getInstance(this)
+                .registerReceiver(broadcastReceiverCreateArea, intentFilterCreateArea);
+    }
+
+    @Override
+    protected void onStop() {
+        //        if (!isFinishing() && intentCreateDataBaseAreaService != null) {
+        //            stopService(intentCreateDataBaseAreaService);
+        //        }
+        //
+        //        if (!isFinishing() && intentDownloadImageService != null) {
+        //            stopService(intentDownloadImageService);
+        //        }
 
         if (!isFinishing() && broadcastReceiverDownloadImage != null) {
             LocalBroadcastManager.getInstance(this)
@@ -149,6 +185,7 @@ public class DownloadDataActivity extends BaseActivity {
             return;
         }
         progressValue.set(0);
+        textProcess.set(getString(R.string.download_image_text, progressValue.get()) + "%");
 
         DataRequest<GetListIdImageRequest> request = new DataRequest<>();
         request.setWsRequest(new GetListIdImageRequest());
@@ -179,26 +216,11 @@ public class DownloadDataActivity extends BaseActivity {
     private void saveDataArea() {
         intentCreateDataBaseAreaService = new Intent(this, CreateDataBaseService.class);
         startService(intentCreateDataBaseAreaService);
-
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(CreateDataBaseService.ACTION_CREATE_AREA_COMPLETED);
-        intentFilter.addAction(CreateDataBaseService.ACTION_CREATE_AREA_SUCCESS);
-        intentFilter.addAction(CreateDataBaseService.ACTION_CREATE_AREA_FAIL);
-        LocalBroadcastManager.getInstance(this)
-                .registerReceiver(broadcastReceiverCreateArea, intentFilter);
     }
 
     private void downloadImageService() {
         intentDownloadImageService = new Intent(this, DownloadImageService.class);
         startService(intentDownloadImageService);
-
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(DownloadImageService.ACTION_DOWNLOAD_START);
-        intentFilter.addAction(DownloadImageService.ACTION_DOWNLOAD_COMPLETE);
-        intentFilter.addAction(DownloadImageService.ACTION_DOWNLOAD_SUCCESS);
-        intentFilter.addAction(DownloadImageService.ACTION_DOWNLOAD_FAIL);
-        LocalBroadcastManager.getInstance(this)
-                .registerReceiver(broadcastReceiverDownloadImage, intentFilter);
     }
 
     private void saveIdImageToDatabase() {

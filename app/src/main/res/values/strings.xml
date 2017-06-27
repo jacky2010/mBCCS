@@ -660,6 +660,7 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
 
     <!-- Create Update information -->
     <string name="create_update_information_create_title">Đăng ký thông tin thuê bao</string>
+    <string name="create_update_information_create_description">Tìm thông tin thuê bao trước khi thêm mới</string>
     <string name="create_update_information_create_phone_number">Số thuê bao</string>
     <string name="create_update_information_create_type_passport">Loại giấy tờ</string>
     <string name="create_update_information_create_number_passport">Số giấy tờ</string>
