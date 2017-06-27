@@ -171,16 +171,7 @@ public class PaymentInforChannelFragment extends BaseFragment
                 //imageCash.setImageResource(R.drawable.tien_mat);
                 //imagebankPlus.setImageResource(R.drawable.bank_plus_select);
                 //imageWellet.setImageResource(R.drawable.vi_dien_tu);
-                DialogInputBankPlus dialogInputBankPlus = new DialogInputBankPlus(getActivity());
-                dialogInputBankPlus.setDialogInputListener(
-                        new DialogInputBankPlus.DialogInputListener() {
-                            @Override
-                            public void onDialogDissmiss(String phone) {
-                                ActivityUtils.hideKeyboard(getActivity());
-                                ((PaymentInforChannelPresenter) mPresenter).setPhone(phone);
-                            }
-                        });
-                dialogInputBankPlus.show();
+                openBankplus();
                 ((PaymentInforChannelPresenter) mPresenter).setPaymentMethod(
                         PaymentMethod.PAYMENT_BANK_PLUS);
             }
@@ -199,15 +190,7 @@ public class PaymentInforChannelFragment extends BaseFragment
                 //imagebankPlus.setImageResource(R.drawable.bank_plus);
                 //imageWellet.setImageResource(R.drawable.vi_dien_tu_select);
 
-                DialogInputWellet dialogInPutWellet = new DialogInputWellet(getActivity());
-                dialogInPutWellet.setDialogInputListener(
-                        new DialogInputWellet.DialogInputListener() {
-                            @Override
-                            public void onDialogDissmiss(String phone) {
-                                ((PaymentInforChannelPresenter) mPresenter).setPhone(phone);
-                            }
-                        });
-                dialogInPutWellet.show();
+                openWellet();
                 ((PaymentInforChannelPresenter) mPresenter).setPaymentMethod(
                         PaymentMethod.PAYMENT_WELLET);
             }
@@ -245,5 +228,30 @@ public class PaymentInforChannelFragment extends BaseFragment
                         SaveTransConfirmFragment.newInstance(request.getWsRequest(), saleTrans,
                                 channelInfo))
                 .commit();
+    }
+
+    @Override
+    public void openBankplus() {
+        DialogInputBankPlus dialogInputBankPlus = new DialogInputBankPlus(getActivity());
+        dialogInputBankPlus.setDialogInputListener(new DialogInputBankPlus.DialogInputListener() {
+            @Override
+            public void onDialogDissmiss(String phone) {
+                ActivityUtils.hideKeyboard(getActivity());
+                ((PaymentInforChannelPresenter) mPresenter).setPhone(phone);
+            }
+        });
+        dialogInputBankPlus.show();
+    }
+
+    @Override
+    public void openWellet() {
+        DialogInputWellet dialogInPutWellet = new DialogInputWellet(getActivity());
+        dialogInPutWellet.setDialogInputListener(new DialogInputWellet.DialogInputListener() {
+            @Override
+            public void onDialogDissmiss(String phone) {
+                ((PaymentInforChannelPresenter) mPresenter).setPhone(phone);
+            }
+        });
+        dialogInPutWellet.show();
     }
 }

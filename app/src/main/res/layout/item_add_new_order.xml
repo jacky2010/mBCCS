@@ -43,7 +43,7 @@
                             android:id="@+id/image_cover"
                             android:layout_width="match_parent"
                             android:layout_height="100dp"
-                            android:scaleType="fitCenter"
+                            android:scaleType="fitXY"
                             app:loadImage="@{item.image}"
                             />
                     </LinearLayout>
@@ -66,7 +66,7 @@
                         <com.viettel.mbccs.widget.CustomTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
+                            android:gravity="left"
                             android:text="@string/order"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_13"
@@ -76,7 +76,7 @@
                             android:id="@+id/text_good_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
+                            android:gravity="left"
                             android:text="@{item.mStockTotal.stockModelName}"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_13"
@@ -86,32 +86,46 @@
                             android:id="@+id/text_good_price"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:layout_marginBottom="@dimen/dp_10"
                             android:gravity="center"
                             android:text="@{item.price}"
                             android:textColor="@color/red"
-                            android:textSize="12sp"
+                            android:textSize="@dimen/sp_12"
                             android:textStyle="bold"
                             />
 
-                        <LinearLayout
+                        <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:orientation="horizontal"
                             >
                             <com.viettel.mbccs.widget.CustomTextView
                                 android:id="@+id/btn_subtracs"
                                 android:onClick="@{()->item.subtract()}"
                                 android:text="-"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentLeft="true"
                                 style="@style/button_add_subtract"
                                 />
+
+                            <com.viettel.mbccs.widget.CustomTextView
+                                android:id="@+id/btn_plus"
+                                android:onClick="@{()->item.addChoice()}"
+                                android:text="+"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentRight="true"
+                                style="@style/button_add_subtract"
+                                />
+
                             <com.viettel.mbccs.widget.CustomEdittext
                                 android:id="@+id/input_quantity_choice"
-                                android:layout_width="50dp"
+                                android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginRight="10dp"
+                                android:layout_centerVertical="true"
+                                android:layout_toLeftOf="@id/btn_plus"
+                                android:layout_toRightOf="@id/btn_subtracs"
                                 android:background="@drawable/bg_input"
                                 android:gravity="center"
                                 android:imeOptions="actionDone"
@@ -122,13 +136,7 @@
                                 android:text="@{String.valueOf(item.countChoice)}"
                                 android:textSize="@dimen/sp_13"
                                 />
-                            <com.viettel.mbccs.widget.CustomTextView
-                                android:id="@+id/btn_plus"
-                                android:onClick="@{()->item.addChoice()}"
-                                android:text="+"
-                                style="@style/button_add_subtract"
-                                />
-                        </LinearLayout>
+                        </RelativeLayout>
 
                     </LinearLayout>
 

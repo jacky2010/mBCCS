@@ -22,7 +22,7 @@
             app:background="@{@color/colorAccent}"
             app:isShow="@{true}"
             app:leftIcon="@{@drawable/ic_arrow_left_white_24dp}"
-            app:leftIconClick="@{()->presenter.onBack()}"
+            app:leftIconClick="@{()->presenter.onClose()}"
             app:title="@{@string/sale_confirm_label_confirm_sell}"
             app:titleColor="@{@color/white}"
             app:titleTextSize="@{@dimen/sp_17}"

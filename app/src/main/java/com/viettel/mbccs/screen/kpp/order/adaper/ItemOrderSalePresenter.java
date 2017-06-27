@@ -4,6 +4,7 @@ import android.content.Context;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.OrderStatus;
 import com.viettel.mbccs.data.model.SaleOrders;
+import com.viettel.mbccs.utils.Common;
 
 /**
  * Created by eo_cuong on 5/21/17.
@@ -30,6 +31,11 @@ public class ItemOrderSalePresenter {
 
     public SaleOrders getSaleOrders() {
         return mSaleOrders;
+    }
+
+    public String getAmount() {
+        return String.format(mContext.getString(R.string.kpp_order_label_amount),
+                Common.formatDouble(mSaleOrders.getAmount()));
     }
 
     public void setSaleOrders(SaleOrders saleOrders) {

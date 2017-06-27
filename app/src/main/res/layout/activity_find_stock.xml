@@ -20,7 +20,7 @@
             layout="@layout/toolbar"
             app:background="@{@color/colorAccent}"
             app:isShow="@{true}"
-            app:leftIcon="@{@drawable/ic_close_white}"
+            app:leftIcon="@{@drawable/ic_arrow_left_white_24dp}"
             app:leftIconClick="@{()->presenter.onCancel()}"
             app:title="@{@string/kpp_order_label_add_stocl_model}"
             app:titleColor="@{@color/white}"
@@ -57,7 +57,7 @@
                 android:id="@+id/drawer"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="240dp"
+                android:layout_marginBottom="220dp"
                 app:content="@+id/content"
                 app:direction="topToBottom"
                 app:handle="@+id/handle"
@@ -70,13 +70,12 @@
                     android:id="@+id/content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
+                    android:background="@color/blue_dark"
                     >
                     <LinearLayout
                         xmlns:android="http://schemas.android.com/apk/res/android"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/white"
                         android:paddingTop="@dimen/dp_10"
                         >
                         <ScrollView
@@ -98,6 +97,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="@dimen/dp_5"
                                     android:text="@string/model_type"
+                                    style="@style/textTitleInputLight"
                                     />
 
                                 <com.viettel.mbccs.widget.SpinnerWithBorder
@@ -105,38 +105,44 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     app:adapter="@{presenter.stockTypeAdapter}"
+                                    app:themeLight="@{true}"
                                     />
                                 <com.viettel.mbccs.widget.CustomTextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="@string/mode_code"
+                                    style="@style/textTitleInputLight"
                                     />
                                 <com.viettel.mbccs.widget.CustomEdittext
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="@={presenter.code}"
                                     app:error="@{presenter.codeError}"
-                                    style="@style/inputStyle"
+                                    style="@style/inputStyleLight"
                                     />
 
                                 <com.viettel.mbccs.widget.CustomTextView
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:text="@string/model_name"
+                                    style="@style/textTitleInputLight"
+
                                     />
                                 <com.viettel.mbccs.widget.CustomEdittext
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="@={presenter.name}"
                                     app:error="@{presenter.nameError}"
-                                    style="@style/inputStyle"
+                                    style="@style/inputStyleLight"
                                     />
 
                                 <com.viettel.mbccs.widget.CustomButton
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_horizontal"
-                                    android:layout_marginTop="@dimen/dp_10"
+                                    android:layout_marginLeft="@dimen/dp_15"
+                                    android:layout_marginRight="@dimen/dp_15"
+                                    android:layout_marginTop="@dimen/dp_30"
                                     android:onClick="@{()->presenter.search()}"
                                     android:text="@string/search1"
                                     style="@style/button_positive"
@@ -156,8 +162,6 @@
                     <include
                         layout="@layout/item_text_filter"
                         android:id="@+id/view_close"
-                        app:isShow="@{presenter.isCollapse}"
-                        app:onClick="@{()->presenter.toogleExpand()}"
                         app:text="@{presenter.filterText}"
                         />
 

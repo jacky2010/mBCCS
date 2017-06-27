@@ -57,6 +57,10 @@ public class SaleOrders implements Parcelable {
     @Expose
     private String actionDate;
 
+    @SerializedName("amount")
+    @Expose
+    private double amount;
+
     public SaleOrders() {
     }
 
@@ -198,5 +202,13 @@ public class SaleOrders implements Parcelable {
 
     public void setActionDate(String actionDate) {
         this.actionDate = actionDate;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 }

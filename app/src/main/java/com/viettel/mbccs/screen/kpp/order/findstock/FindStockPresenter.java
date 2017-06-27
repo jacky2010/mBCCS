@@ -187,8 +187,5 @@ public class FindStockPresenter
 
     @Override
     public void onEdittextFocus() {
-        if (!isCollapse.get()) {
-            toogleExpand();
-        }
     }
 }

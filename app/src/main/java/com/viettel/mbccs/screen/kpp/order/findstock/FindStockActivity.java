@@ -2,8 +2,6 @@ package com.viettel.mbccs.screen.kpp.order.findstock;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.data.model.StockTotal;
@@ -11,7 +9,6 @@ import com.viettel.mbccs.databinding.ActivityFindStockBinding;
 import com.viettel.mbccs.variable.Constants;
 import com.viettel.mbccs.widget.MultiDirectionSlidingDrawer;
 import java.util.ArrayList;
-import java.util.List;
 
 public class FindStockActivity
         extends BaseDataBindActivity<ActivityFindStockBinding, FindStockContract.Presenter>

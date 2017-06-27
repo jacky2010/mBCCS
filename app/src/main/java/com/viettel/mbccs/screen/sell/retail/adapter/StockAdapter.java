@@ -111,9 +111,7 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
 
                 @Override
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    if (mStockItem.getCheckSerial()==0){
-                        return;
-                    }
+
                     try {
                         if (charSequence.toString().equals("")) {
                             mStockItem.setChoiceCount(0);

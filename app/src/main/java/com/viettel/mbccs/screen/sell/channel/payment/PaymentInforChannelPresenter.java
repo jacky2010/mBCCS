@@ -1,5 +1,6 @@
 package com.viettel.mbccs.screen.sell.channel.payment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.databinding.ObservableField;
 import android.text.TextUtils;
@@ -20,6 +21,7 @@ import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetInfoSaleTranResponse;
+import com.viettel.mbccs.utils.ActivityUtils;
 import com.viettel.mbccs.utils.Common;
 import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
@@ -51,7 +53,7 @@ public class PaymentInforChannelPresenter implements PaymentInforChannelContract
     private PaymentInforChannelContract.ViewModel mViewModel;
     private Context mContext;
     private List<StockSerial> mStockSerials;
-    private String phone;
+    private String phone = null;
     private String secureCode;
     private DataRequest<GetInfoSaleTranRequest> mGetInfoSaleTranRequestBaseRequest;
     private BanHangKhoTaiChinhRepository mBanHangKhoTaiChinhRepository;
@@ -107,6 +109,7 @@ public class PaymentInforChannelPresenter implements PaymentInforChannelContract
     }
 
     public void paymentClick() {
+        ActivityUtils.hideKeyboard((Activity) mContext);
         createTransaction();
     }
 
@@ -173,8 +176,7 @@ public class PaymentInforChannelPresenter implements PaymentInforChannelContract
 
                             @Override
                             public void onError(BaseException error) {
-                                DialogUtils.showDialog(mContext, null, error.getMessage(),
-                                        null);
+                                DialogUtils.showDialog(mContext, null, error.getMessage(), null);
                                 //fake
                                 //                                isGetTransInfo.set(true);
                                 //                                SaleTrans sale = new SaleTrans();
@@ -217,6 +219,18 @@ public class PaymentInforChannelPresenter implements PaymentInforChannelContract
         if (TextUtils.isEmpty(channelName.get())) {
             channelNameError.set(mContext.getResources().getString(R.string.input_empty));
             return false;
+        }
+
+        if (TextUtils.isEmpty(phone)) {
+            if (paymentMethod == PaymentMethod.PAYMENT_BANK_PLUS) {
+                mViewModel.openBankplus();
+                return false;
+            }
+
+            if (paymentMethod == PaymentMethod.PAYMENT_WELLET) {
+                mViewModel.openWellet();
+                return false;
+            }
         }
 
         //        if (TextUtils.isEmpty(tin.get())) {

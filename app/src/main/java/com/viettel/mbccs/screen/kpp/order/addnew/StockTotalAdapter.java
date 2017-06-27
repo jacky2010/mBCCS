@@ -5,9 +5,13 @@ import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.TextView;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.databinding.ItemAddNewOrderBinding;
@@ -79,10 +83,6 @@ public class StockTotalAdapter
                 @Override
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                    if (mStockTotalListener != null) {
-                        mStockTotalListener.onStockQuantityChange();
-                    }
-
                     try {
                         if (charSequence.toString().equals("")) {
                             mStockTotal.setCountChoice(0);
@@ -104,6 +104,9 @@ public class StockTotalAdapter
                                 }
                             }
                         }
+                        if (mStockTotalListener != null) {
+                            mStockTotalListener.onStockQuantityChange();
+                        }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -112,6 +115,32 @@ public class StockTotalAdapter
                 @Override
                 public void afterTextChanged(Editable editable) {
 
+                }
+            });
+
+            mBinding.inputQuantityChoice.setOnEditorActionListener(
+                    new TextView.OnEditorActionListener() {
+                        @Override
+                        public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                            if (i == EditorInfo.IME_ACTION_DONE) {
+                                mBinding.inputQuantityChoice.clearFocus();
+                                InputMethodManager imm =
+                                        (InputMethodManager) mContext.getSystemService(
+                                                Context.INPUT_METHOD_SERVICE);
+                                imm.hideSoftInputFromWindow(
+                                        mBinding.inputQuantityChoice.getWindowToken(), 0);
+                                return true;
+                            }
+                            return false;
+                        }
+                    });
+
+            mBinding.inputQuantityChoice.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View view, boolean b) {
+                    if (!b) {
+                        notifyItemChanged(getAdapterPosition());
+                    }
                 }
             });
         }

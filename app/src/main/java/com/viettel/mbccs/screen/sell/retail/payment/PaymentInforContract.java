@@ -21,5 +21,9 @@ public interface PaymentInforContract {
         void onBack();
 
         void goToSaveTransConfirm(DataRequest<GetInfoSaleTranRequest> request, SaleTrans saleTrans);
+
+        void openBankplus();
+
+        void openWellet();
     }
 }

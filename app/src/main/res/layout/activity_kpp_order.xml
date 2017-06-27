@@ -115,7 +115,7 @@
                                     android:layout_margin="@dimen/dp_5"
                                     android:text="-"
                                     android:textStyle="bold"
-                                    style="@style/textTitleInput"
+                                    style="@style/textTitleInputLight"
                                     />
                                 <com.viettel.mbccs.widget.CustomDatePicker
                                     android:id="@+id/to_date"
@@ -134,7 +134,7 @@
                                 android:layout_marginTop="@dimen/dp_8"
                                 android:text="@string/status"
                                 android:textSize="@dimen/sp_16"
-                                style="@style/textTitleInput"
+                                style="@style/textTitleInputLight"
                                 />
 
                             <com.viettel.mbccs.widget.SpinnerWithBorder
