@@ -13,6 +13,7 @@ import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.ApDomainByType;
 import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.ApDomainByType;
+import com.viettel.mbccs.data.model.ApDomainByType;
 import com.viettel.mbccs.data.model.ChangeSimInfo;
 import com.viettel.mbccs.data.model.ChangeSimItem;
 import com.viettel.mbccs.data.model.KeyValue;
@@ -205,10 +206,10 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
             viewModel.showLoading();
 
             DataRequest<GetApDomainByTypeRequest> baseRequest = new DataRequest<>();
-            baseRequest.setApiCode(ApiCode.GetApDomainByType);
+            baseRequest.setWsCode(ApiCode.GetApDomainByType);
             GetApDomainByTypeRequest request = new GetApDomainByTypeRequest();
             request.setType(ApDomainByType.Type.LOAI_GIAY_TO);
-            baseRequest.setParameterApi(request);
+            baseRequest.setWsRequest(request);
 
             Subscription subscription =
                     apDomainRepository.getApDomainByType(baseRequest)
@@ -293,12 +294,12 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
             viewModel.showLoading();
 
             DataRequest<GetRegisterSubRequest> baseRequest = new DataRequest<>();
-            baseRequest.setApiCode(ApiCode.GetRegisterSub);
+            baseRequest.setWsCode(ApiCode.GetRegisterSub);
             GetRegisterSubRequest request = new GetRegisterSubRequest();
             request.setIsdn(isdn.get());
             request.setIdNo(documentId.get());
             request.setIdType(Long.parseLong(documentType.get()));
-            baseRequest.setParameterApi(request);
+            baseRequest.setWsRequest(request);
 
             Subscription subscription =
                     changeSimRepository.getRegisterSub(baseRequest)
