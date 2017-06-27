@@ -10,6 +10,10 @@ public class SpinnerApDomain {
     private GetApDomainByTypeResponse spinnerHTNhanTB;
     private GetListProductResponse spinnerListProduct;
 
+    public SpinnerApDomain() {
+
+    }
+
     public SpinnerApDomain(GetApDomainByTypeResponse spinnerGiayTo,
             GetApDomainByTypeResponse spinnerHTTT, GetApDomainByTypeResponse spinnerHTNhanTB,
             GetListProductResponse spinnerListProduct) {

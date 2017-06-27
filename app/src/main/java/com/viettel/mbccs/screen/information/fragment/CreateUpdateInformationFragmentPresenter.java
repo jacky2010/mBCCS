@@ -12,10 +12,10 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.AdapterView;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.constance.Data;
 import com.viettel.mbccs.constance.MobileService;
 import com.viettel.mbccs.constance.MobileType;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.ApDomainByType;
 import com.viettel.mbccs.data.model.Area;
 import com.viettel.mbccs.data.model.Contract;
@@ -58,6 +58,7 @@ import java.util.Locale;
 import rx.Observable;
 import rx.Subscription;
 import rx.functions.Func1;
+import rx.functions.Func2;
 import rx.functions.Func4;
 import rx.subscriptions.CompositeSubscription;
 
@@ -127,6 +128,7 @@ public class CreateUpdateInformationFragmentPresenter
     public ObservableBoolean isEnableIdNo;
     public ObservableInt selectionPassport;
     public ObservableInt selectionHTTT;
+    public ObservableInt selectedGoiCuoc;
 
     CreateUpdateInformationFragmentPresenter(Context context,
             CreateUpdateInformationFragmentContract.View view) {
@@ -171,6 +173,7 @@ public class CreateUpdateInformationFragmentPresenter
         isEnableIdNo = new ObservableBoolean(true);
         selectionPassport = new ObservableInt();
         selectionHTTT = new ObservableInt();
+        selectedGoiCuoc = new ObservableInt();
     }
 
     @Override
@@ -185,9 +188,130 @@ public class CreateUpdateInformationFragmentPresenter
 
     void getDataSpinner() {
         view.showLoading();
+        if (typeFragment == CreateUpdateInformationFragment.Type.CREATE_INFORMATION
+                || typeFragment == CreateUpdateInformationFragment.Type.CREATE_INFORMATION_CLONE) {
+            getDataSpinnerRegister(MobileType.TRA_TRUOC);
+        } else {
+            if (dataUpdate != null && dataUpdate.getSubscriber()
+                    .getSubType()
+                    .equals(MobileType.TRA_TRUOC)) {
+                getDataSpinnerUpdatePre(MobileType.TRA_TRUOC);
+            } else {
+                getDataSpinnerUpdatePos(MobileType.TRA_SAU);
+            }
+        }
+    }
+
+    private void getDataSpinnerRegister(String subType) {
         Subscription subscription =
-                Observable.zip(getDataSpinnerPassport(), getDataSpinnerHTThanhToan(),
-                        getDataSpinnerHTNhanTB(), getDataListProduct(),
+                Observable.zip(getDataSpinnerPassport(subType), getDataListProduct(subType),
+                        new Func2<GetApDomainByTypeResponse, GetListProductResponse, SpinnerApDomain>() {
+                            @Override
+                            public SpinnerApDomain call(GetApDomainByTypeResponse response,
+                                    GetListProductResponse response2) {
+                                SpinnerApDomain spinnerApDomain = new SpinnerApDomain();
+                                spinnerApDomain.setSpinnerGiayTo(response);
+                                spinnerApDomain.setSpinnerListProduct(response2);
+                                return spinnerApDomain;
+                            }
+                        }).flatMap(new Func1<SpinnerApDomain, Observable<SpinnerApDomain>>() {
+                    @Override
+                    public Observable<SpinnerApDomain> call(SpinnerApDomain domain) {
+                        GetApDomainByTypeResponse spinnerGiayTo = domain.getSpinnerGiayTo();
+                        GetListProductResponse spinnerListProduct = domain.getSpinnerListProduct();
+                        if (spinnerGiayTo == null
+                                || spinnerGiayTo.getApDomainByTypeList().size() == 0
+                                || spinnerListProduct == null
+                                || spinnerListProduct.getListProduct().size() == 0) {
+                            BaseErrorResponse baseErrorResponse = new BaseErrorResponse();
+                            baseErrorResponse.setError(201, "");
+                            return Observable.error(BaseException.toServerError(baseErrorResponse));
+                        } else {
+                            return Observable.just(domain);
+                        }
+                    }
+                }).subscribe(new MBCCSSubscribe<SpinnerApDomain>() {
+                    @Override
+                    public void onSuccess(SpinnerApDomain object) {
+                        if (dataPassportType != null && dataPassportType.size() != 0) {
+                            dataPassportType.clear();
+                        }
+                        dataPassportType = object.getSpinnerGiayTo().getApDomainByTypeList();
+
+                        if (dataGoiCuoc != null && dataGoiCuoc.size() != 0) {
+                            dataGoiCuoc.clear();
+                        }
+
+                        dataGoiCuoc = object.getSpinnerListProduct().getListProduct();
+                        setData();
+                    }
+
+                    @Override
+                    public void onError(BaseException error) {
+                        view.getDataSpinnerError(error);
+                        view.hideLoading();
+                    }
+                });
+        subscriptions.add(subscription);
+    }
+
+    private void getDataSpinnerUpdatePre(String subType) {
+        Subscription subscription =
+                Observable.zip(getDataSpinnerPassport(subType), getDataListProduct(subType),
+                        new Func2<GetApDomainByTypeResponse, GetListProductResponse, SpinnerApDomain>() {
+                            @Override
+                            public SpinnerApDomain call(GetApDomainByTypeResponse response,
+                                    GetListProductResponse response2) {
+                                SpinnerApDomain spinnerApDomain = new SpinnerApDomain();
+                                spinnerApDomain.setSpinnerGiayTo(response);
+                                spinnerApDomain.setSpinnerListProduct(response2);
+                                return spinnerApDomain;
+                            }
+                        }).flatMap(new Func1<SpinnerApDomain, Observable<SpinnerApDomain>>() {
+                    @Override
+                    public Observable<SpinnerApDomain> call(SpinnerApDomain domain) {
+                        GetApDomainByTypeResponse spinnerGiayTo = domain.getSpinnerGiayTo();
+                        GetListProductResponse spinnerListProduct = domain.getSpinnerListProduct();
+                        if (spinnerGiayTo == null
+                                || spinnerGiayTo.getApDomainByTypeList().size() == 0
+                                || spinnerListProduct == null
+                                || spinnerListProduct.getListProduct().size() == 0) {
+                            BaseErrorResponse baseErrorResponse = new BaseErrorResponse();
+                            baseErrorResponse.setError(201, "");
+                            return Observable.error(BaseException.toServerError(baseErrorResponse));
+                        } else {
+                            return Observable.just(domain);
+                        }
+                    }
+                }).subscribe(new MBCCSSubscribe<SpinnerApDomain>() {
+                    @Override
+                    public void onSuccess(SpinnerApDomain object) {
+                        if (dataPassportType != null && dataPassportType.size() != 0) {
+                            dataPassportType.clear();
+                        }
+                        dataPassportType = object.getSpinnerGiayTo().getApDomainByTypeList();
+
+                        if (dataGoiCuoc != null && dataGoiCuoc.size() != 0) {
+                            dataGoiCuoc.clear();
+                        }
+
+                        dataGoiCuoc = object.getSpinnerListProduct().getListProduct();
+                        setData();
+                    }
+
+                    @Override
+                    public void onError(BaseException error) {
+                        view.getDataSpinnerError(error);
+                        view.hideLoading();
+                    }
+                });
+        subscriptions.add(subscription);
+    }
+
+    private void getDataSpinnerUpdatePos(String subType) {
+        Subscription subscription =
+                Observable.zip(getDataSpinnerPassport(subType), getDataSpinnerHTThanhToan(subType),
+                        getDataSpinnerHTNhanTB(subType), getDataListProduct(subType),
                         new Func4<GetApDomainByTypeResponse, GetApDomainByTypeResponse, GetApDomainByTypeResponse, GetListProductResponse, SpinnerApDomain>() {
                             @Override
                             public SpinnerApDomain call(GetApDomainByTypeResponse response,
@@ -251,10 +375,11 @@ public class CreateUpdateInformationFragmentPresenter
         subscriptions.add(subscription);
     }
 
-    private Observable<GetApDomainByTypeResponse> getDataSpinnerPassport() {
+    private Observable<GetApDomainByTypeResponse> getDataSpinnerPassport(String subType) {
         DataRequest<GetApDomainByTypeRequest> request = new DataRequest<>();
         GetApDomainByTypeRequest apDomainRequest = new GetApDomainByTypeRequest();
         apDomainRequest.setType(ApDomainByType.Type.LOAI_GIAY_TO);
+        apDomainRequest.setSubType(subType);
 
         request.setWsRequest(apDomainRequest);
         request.setWsCode(WsCode.GetApDomainByType);
@@ -262,10 +387,11 @@ public class CreateUpdateInformationFragmentPresenter
         return qlKhachHangRepository.getApDomainByType(request);
     }
 
-    private Observable<GetApDomainByTypeResponse> getDataSpinnerHTThanhToan() {
+    private Observable<GetApDomainByTypeResponse> getDataSpinnerHTThanhToan(String subType) {
         DataRequest<GetApDomainByTypeRequest> request = new DataRequest<>();
         GetApDomainByTypeRequest apDomainRequest = new GetApDomainByTypeRequest();
         apDomainRequest.setType(ApDomainByType.Type.HINH_THUC_THANH_TOAN);
+        apDomainRequest.setSubType(subType);
 
         request.setWsRequest(apDomainRequest);
         request.setWsCode(WsCode.GetApDomainByType);
@@ -273,10 +399,11 @@ public class CreateUpdateInformationFragmentPresenter
         return qlKhachHangRepository.getApDomainByType(request);
     }
 
-    private Observable<GetApDomainByTypeResponse> getDataSpinnerHTNhanTB() {
+    private Observable<GetApDomainByTypeResponse> getDataSpinnerHTNhanTB(String subType) {
         DataRequest<GetApDomainByTypeRequest> request = new DataRequest<>();
         GetApDomainByTypeRequest apDomainRequest = new GetApDomainByTypeRequest();
         apDomainRequest.setType(ApDomainByType.Type.HINH_THUC_NHAN_THONG_BAO_CUOC);
+        apDomainRequest.setSubType(subType);
 
         request.setWsRequest(apDomainRequest);
         request.setWsCode(WsCode.GetApDomainByType);
@@ -284,9 +411,9 @@ public class CreateUpdateInformationFragmentPresenter
         return qlKhachHangRepository.getApDomainByType(request);
     }
 
-    private Observable<GetListProductResponse> getDataListProduct() {
+    private Observable<GetListProductResponse> getDataListProduct(String subType) {
         GetListProductRequest getListProductRequest = new GetListProductRequest();
-        getListProductRequest.setSubType(MobileType.TRA_TRUOC);
+        getListProductRequest.setSubType(subType);
         getListProductRequest.setTelServiceId(MobileService.Mobile);
 
         DataRequest<GetListProductRequest> request = new DataRequest<>();
@@ -328,7 +455,8 @@ public class CreateUpdateInformationFragmentPresenter
 
     public void onClickRegisterUpdate() {
         view.showLoading();
-        if (typeFragment == CreateUpdateInformationFragment.Type.UPDATE_INFORMATION) {
+        if (typeFragment == CreateUpdateInformationFragment.Type.UPDATE_INFORMATION
+                && getDataSubscriber().getSubType().equals(MobileType.TRA_SAU)) {
             if (StringUtils.isEmpty(textOTP.get())) {
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -436,8 +564,12 @@ public class CreateUpdateInformationFragmentPresenter
                 subscriber.setSubType(MobileType.TRA_TRUOC);
                 break;
             case CreateUpdateInformationFragment.Type.CREATE_INFORMATION_CLONE:
+                subscriber.setSubType(subscriberResponse == null ? MobileType.TRA_TRUOC
+                        : subscriberResponse.getSubType());
                 break;
             case CreateUpdateInformationFragment.Type.UPDATE_INFORMATION:
+                subscriber.setSubType(
+                        subscriberResponse == null ? StringNull : subscriberResponse.getSubType());
                 break;
         }
 
@@ -473,6 +605,7 @@ public class CreateUpdateInformationFragmentPresenter
     void clickSendData(boolean isSendImage) {
         view.showLoading();
         Customer customer = getDataCustomer();
+        Subscriber subscriber = getDataSubscriber();
         if (StringUtils.isEmpty(customer.getProvince())
                 || StringUtils.isEmpty(customer.getName())
                 || StringUtils.isEmpty(customer.getIdNo())
@@ -487,8 +620,8 @@ public class CreateUpdateInformationFragmentPresenter
             return;
         }
 
-        if (StringUtils.isEmpty(getDataSubscriber().getIsdn()) || StringUtils.isEmpty(
-                getDataSubscriber().getSerial())) {
+        if (StringUtils.isEmpty(subscriber.getIsdn()) || StringUtils.isEmpty(
+                subscriber.getSerial())) {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -509,7 +642,8 @@ public class CreateUpdateInformationFragmentPresenter
         }
 
         if (typeFragment == CreateUpdateInformationFragment.Type.UPDATE_INFORMATION) {
-            if (getDataContract().getNoticeCharge().size() == 0) {
+            if (subscriber.getSubType().equals(MobileType.TRA_SAU)
+                    && getDataContract().getNoticeCharge().size() == 0) {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -521,9 +655,11 @@ public class CreateUpdateInformationFragmentPresenter
             }
 
             UpdateAllSubInfoRequest updateAllSubInfoRequest = new UpdateAllSubInfoRequest();
-            updateAllSubInfoRequest.setContract(getDataContract());
+            if (subscriber.getSubType().equals(MobileType.TRA_SAU)) {
+                updateAllSubInfoRequest.setContract(getDataContract());
+            }
             updateAllSubInfoRequest.setCustomer(customer);
-            updateAllSubInfoRequest.setSubscriber(getDataSubscriber());
+            updateAllSubInfoRequest.setSubscriber(subscriber);
 
             DataRequest<UpdateAllSubInfoRequest> request = new DataRequest<>();
             request.setWsRequest(updateAllSubInfoRequest);
@@ -533,7 +669,7 @@ public class CreateUpdateInformationFragmentPresenter
                     .subscribe(new MBCCSSubscribe<UpdateAllSubInfoResponse>() {
                         @Override
                         public void onSuccess(UpdateAllSubInfoResponse object) {
-                            view.registerUpdateCustomerInfoSuccess(object.getResult(), false);
+                            view.registerUpdateCustomerInfoSuccess(null, false);
                             view.hideLoading();
                         }
 
@@ -549,8 +685,8 @@ public class CreateUpdateInformationFragmentPresenter
 
             RegisterCustomerInfoRequest registerCustomerInfoRequest =
                     new RegisterCustomerInfoRequest();
-            registerCustomerInfoRequest.setIsdn(getDataSubscriber().getIsdn());
-            registerCustomerInfoRequest.setSerial(getDataSubscriber().getSerial());
+            registerCustomerInfoRequest.setIsdn(subscriber.getIsdn());
+            registerCustomerInfoRequest.setSerial(subscriber.getSerial());
             registerCustomerInfoRequest.setSubType(MobileType.TRA_TRUOC);
             registerCustomerInfoRequest.setShopCode(userInfo.getShop().getShopCode());
             registerCustomerInfoRequest.setStaffCode(userInfo.getStaffInfo().getStaffCode());
@@ -703,7 +839,9 @@ public class CreateUpdateInformationFragmentPresenter
 
                 textBtnRegisterUpdate.set(context.getString(
                         R.string.fragment_create_update_information_create_cap_nhat));
-                isShowContractInformation.set(true);
+
+                isShowContractInformation.set(
+                        dataUpdate.getSubscriber().getSubType().equals(MobileType.TRA_SAU));
                 break;
         }
     }
@@ -760,7 +898,7 @@ public class CreateUpdateInformationFragmentPresenter
                     });
         }
 
-        if (dataRegister == null || dataUpdate == null) {
+        if (dataRegister == null && dataUpdate == null) {
             view.hideLoading();
             return;
         }
@@ -770,13 +908,22 @@ public class CreateUpdateInformationFragmentPresenter
             if (!StringUtils.isEmpty(subscriberResponse.getIsdn())) {
                 isEnableIsdn.set(false);
             }
-            // TODO: 6/26/17
-            subscriberResponse.setSerial("8925509002901845693");
             txtSerial.set(subscriberResponse.getSerial());
             if (!StringUtils.isEmpty(subscriberResponse.getSerial())) {
                 isEnableSerial.set(false);
             }
+            if (subscriberResponse.getProductCode() != null) {
+                for (int i = 0; i < dataGoiCuoc.size(); i++) {
+                    String offerCode = dataGoiCuoc.get(i).getOfferCode();
+                    if (offerCode != null && subscriberResponse.getProductCode()
+                            .equals(offerCode)) {
+                        selectedGoiCuoc.set(i);
+                        break;
+                    }
+                }
+            }
         }
+
         if (customerResponse != null) {
             txtNameCustomer.set(customerResponse.getName());
             if (customerResponse.getSex() != null && customerResponse.getSex()

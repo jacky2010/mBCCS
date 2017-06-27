@@ -4,8 +4,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
-import android.view.View;
-import android.widget.AdapterView;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.constance.OrderStatus;
@@ -57,19 +55,19 @@ public class SellOrdersActivity
         saleOrdersList = new ArrayList<>();
         titleList = new ArrayList<>();
 
-        mBinding.spinnerChannelSellOrder.setOnItemSelectedListener(
-                new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position,
-                            long id) {
-                        presenter.setPositionSelectChange(position);
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                });
+//        mBinding.spinnerChannelSellOrder.setOnItemSelectedListener(
+//                new AdapterView.OnItemSelectedListener() {
+//                    @Override
+//                    public void onItemSelected(AdapterView<?> parent, View view, int position,
+//                            long id) {
+//                        presenter.setPositionSelectChange(position);
+//                    }
+//
+//                    @Override
+//                    public void onNothingSelected(AdapterView<?> parent) {
+//
+//                    }
+//                });
 
         mBinding.tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         sellOrdersFragmentAdapter = new SellOrdersFragmentAdapter(getSupportFragmentManager());

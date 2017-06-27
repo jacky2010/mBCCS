@@ -74,7 +74,7 @@
             android:layout_marginTop="@dimen/dp_4"
             android:text="@{ presenter.txtAddressDetail }"
             android:onClick="@{ v -> presenter.enterAddress() }"
-            style="@style/inputStyle_1"
+            style="@style/inputStyle"
             />
 
         <!--<com.viettel.mbccs.widget.CustomEdittext-->

@@ -11,7 +11,7 @@ import java.util.List;
 
 public class GetApDomainByTypeResponse extends DataResponse {
 
-    @SerializedName("apdomain")
+    @SerializedName("listApDomain")
     @Expose
     private List<ApDomainByType> apDomainByTypeList;
 

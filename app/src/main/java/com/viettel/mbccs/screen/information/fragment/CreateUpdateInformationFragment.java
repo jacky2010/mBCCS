@@ -19,6 +19,7 @@ import com.viettel.mbccs.data.source.remote.response.GetAllSubInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetRegisterSubInfoResponse;
 import com.viettel.mbccs.databinding.FragmentCreateUpdateInformationBinding;
 import com.viettel.mbccs.screen.common.success.DialogFullScreen;
+import com.viettel.mbccs.screen.information.CreateUpdateInformationActivity;
 import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.widget.CustomSelectImageNo;
 
@@ -151,13 +152,18 @@ public class CreateUpdateInformationFragment extends BaseFragment
                         R.string.fragment_create_update_information_create_dk_thanh_cong)
                         : getString(
                                 R.string.fragment_create_update_information_update_thanh_cong))
-                .setContent(result)
+                .setContent(result == null ? (isRegister ? getString(
+                        R.string.fragment_create_update_information_create_dk_thanh_cong)
+                        : getString(R.string.fragment_create_update_information_update_thanh_cong))
+                        : result)
                 .setPositiveButton(getString(R.string.OK))
                 .setListener(new DialogFullScreen.SuccessDialogListener() {
                     @Override
                     public void onPositiveButtonClick(Dialog dialog) {
                         dialog.dismiss();
-                        getActivity().getSupportFragmentManager().popBackStack();
+                        //                        getActivity().getSupportFragmentManager().popBackStack();
+                        backActivity();
+
                     }
 
                     @Override
@@ -174,6 +180,13 @@ public class CreateUpdateInformationFragment extends BaseFragment
         dia.setCancelable(false);
         dia.setCanceledOnTouchOutside(false);
         dia.show();
+    }
+
+    private void backActivity() {
+        Intent intentDKTT = new Intent(getActivity(), CreateUpdateInformationActivity.class);
+        intentDKTT.putExtra(CreateUpdateInformationActivity.ARG_TYPE, typeFragment);
+        startActivity(intentDKTT);
+        getActivity().finish();
     }
 
     @Override

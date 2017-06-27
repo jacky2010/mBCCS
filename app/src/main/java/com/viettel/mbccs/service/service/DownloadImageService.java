@@ -116,6 +116,7 @@ public class DownloadImageService extends IntentService {
         }).subscribe(new Subscriber<DownloadImageResponse>() {
             @Override
             public void onCompleted() {
+                userRepository.setDownloadImage(true);
                 LocalBroadcastManager.getInstance(DownloadImageService.this)
                         .sendBroadcast(new Intent(ACTION_DOWNLOAD_COMPLETE));
             }

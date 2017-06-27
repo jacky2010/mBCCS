@@ -21,7 +21,7 @@
             layout="@layout/toolbar"
             android:id="@+id/toolbar_update_information"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_40"
+            android:layout_height="@dimen/dp_56"
             app:background="@{@color/colorAccent}"
             app:isAllCaps="@{true}"
             app:isShow="@{true}"
@@ -108,10 +108,9 @@
                 <com.viettel.mbccs.widget.CustomEdittext
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minHeight="@dimen/dp_30"
-                    android:layout_marginTop="@dimen/dp_6"
+                    android:layout_marginTop="@dimen/dp_2"
                     android:text="@={ presenter.nameCustomer }"
-                    style="@style/inputStyle_1"
+                    style="@style/inputStyle"
                     />
 
                 <com.viettel.mbccs.widget.CustomTextView
@@ -194,9 +193,7 @@
                 <com.viettel.mbccs.widget.CustomEdittext
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minHeight="@dimen/dp_40"
-                    android:layout_marginTop="@dimen/dp_4"
-                    android:paddingLeft="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_2"
                     android:text="@={ presenter.txtNumberPassport }"
                     style="@style/inputStyle"
                     />
@@ -258,11 +255,9 @@
                 <com.viettel.mbccs.widget.CustomEdittext
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minHeight="@dimen/dp_30"
-                    android:layout_marginTop="@dimen/dp_4"
-                    android:paddingLeft="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_2"
                     android:text="@={ presenter.whereCreatePassport }"
-                    style="@style/inputStyle_1"
+                    style="@style/inputStyle"
                     />
 
                 <com.viettel.mbccs.widget.CustomSelectAddress

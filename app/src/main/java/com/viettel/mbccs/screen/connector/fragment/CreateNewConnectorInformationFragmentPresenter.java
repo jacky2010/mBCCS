@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import com.viettel.mbccs.BR;
+import com.viettel.mbccs.constance.MobileType;
 import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.constance.Data;
 import com.viettel.mbccs.data.model.ApDomainByType;
@@ -199,6 +200,7 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
         DataRequest<GetApDomainByTypeRequest> request = new DataRequest<>();
         GetApDomainByTypeRequest apDomainRequest = new GetApDomainByTypeRequest();
         apDomainRequest.setType(ApDomainByType.Type.LOAI_GIAY_TO);
+        apDomainRequest.setSubType(MobileType.TRA_TRUOC);
 
         request.setWsRequest(apDomainRequest);
         request.setWsCode(WsCode.GetApDomainByType);
@@ -210,6 +212,7 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
         DataRequest<GetApDomainByTypeRequest> request = new DataRequest<>();
         GetApDomainByTypeRequest apDomainRequest = new GetApDomainByTypeRequest();
         apDomainRequest.setType(ApDomainByType.Type.LOAI_GIAY_TO);
+        apDomainRequest.setSubType(MobileType.TRA_TRUOC);
 
         request.setWsRequest(apDomainRequest);
         request.setWsCode(WsCode.GetApDomainByType);

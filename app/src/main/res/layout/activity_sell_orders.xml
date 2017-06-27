@@ -64,7 +64,7 @@
                     android:id="@+id/drawer"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/dp_150"
+                    android:layout_marginBottom="@dimen/dp_140"
                     app:content="@+id/content"
                     app:direction="topToBottom"
                     app:handle="@+id/handle"
@@ -77,7 +77,7 @@
                         android:id="@+id/content"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/white"
+                        android:background="@color/blue_dark"
                         android:focusableInTouchMode="true"
                         android:orientation="vertical"
                         android:paddingLeft="@dimen/dp_16"
@@ -88,8 +88,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/sell_orders_date_orders"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16"
+                            style="@style/textTitleInputLight"
+                            android:layout_marginTop="@dimen/dp_10"
                             />
 
                         <LinearLayout
@@ -104,6 +104,8 @@
                                 android:layout_gravity="center"
                                 android:layout_weight="1"
                                 android:gravity="center"
+                                app:dateTextColor="@color/white"
+                                app:underLineColor="@color/white_light_theme"
                                 />
                             <com.viettel.mbccs.widget.CustomTextView
                                 android:layout_width="wrap_content"
@@ -121,6 +123,8 @@
                                 android:layout_gravity="center"
                                 android:layout_weight="1"
                                 android:gravity="center"
+                                app:dateTextColor="@color/white"
+                                app:underLineColor="@color/white_light_theme"
                                 />
                         </LinearLayout>
 
@@ -128,6 +132,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/sell_orders_time_range"
+                            style="@style/textTitleInputLight"
                             />
 
                         <com.viettel.mbccs.widget.CustomTextView
@@ -135,14 +140,14 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_8"
                             android:text="@string/sell_orders_unit"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16"
+                            style="@style/textTitleInputLight"
                             />
 
                         <com.viettel.mbccs.widget.FakeSpinner
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@{ presenter.shop.getShopName() }"
+                            app:themeLight="@{true}"
                             />
 
                         <com.viettel.mbccs.widget.CustomTextView
@@ -150,14 +155,14 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_8"
                             android:text="@string/sell_orders_user_manager"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16"
+                            style="@style/textTitleInputLight"
                             />
 
                         <com.viettel.mbccs.widget.FakeSpinner
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@{ presenter.staffInfo.getStaffName() }"
+                            app:themeLight="@{true}"
                             />
 
                         <com.viettel.mbccs.widget.CustomTextView
@@ -165,8 +170,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_8"
                             android:text="@string/sell_orders_change"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_16"
+                            style="@style/textTitleInputLight"
                             />
 
                         <com.viettel.mbccs.widget.SpinnerWithBorder
@@ -174,10 +178,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/dp_40"
                             app:adapter="@{ presenter.spinnerAdapterChannel }"
+                            app:themeLight="@{true}"
                             />
 
                         <com.viettel.mbccs.widget.CustomButton
-                            android:layout_width="@dimen/dp_150"
+                            android:layout_width="@dimen/dp_300"
                             android:layout_height="@dimen/dp_40"
                             android:layout_gravity="center"
                             android:layout_marginTop="@dimen/dp_6"
