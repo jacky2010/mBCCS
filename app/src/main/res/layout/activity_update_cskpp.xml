@@ -50,7 +50,7 @@
             >
 
             <com.viettel.mbccs.widget.CustomButton
-                style="@style/button_nagative"
+                style="@style/button_negative"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/dp_4"

@@ -54,7 +54,7 @@
                     android:onClick="@{() -> presenter.negativeClick()}"
                     android:text="@{presenter.negativeButton}"
                     android:visibility="@{presenter.showNegative? View.VISIBLE : View.GONE}"
-                    style="@style/button_nagative"
+                    style="@style/button_negative"
                     />
                 <com.viettel.mbccs.widget.CustomButton
                     android:layout_width="@dimen/dp_150"

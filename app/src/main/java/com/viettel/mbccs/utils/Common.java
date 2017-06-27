@@ -184,7 +184,9 @@ public class Common {
     }
 
     public static String formatDouble(double number) {
-        return String.format(Locale.getDefault(), "%,.0f", number);
+        NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.GERMAN);
+        numberFormat.setGroupingUsed(true);
+        return numberFormat.format(number);
     }
 
     public static String numberToString(double number) {

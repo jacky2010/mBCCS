@@ -25,5 +25,7 @@ public interface PaymentInforContract {
         void openBankplus();
 
         void openWellet();
+
+        void initPaymentMethod(String paymentMethod);
     }
 }

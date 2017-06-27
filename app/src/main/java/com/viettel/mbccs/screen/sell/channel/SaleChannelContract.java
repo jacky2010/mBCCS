@@ -5,7 +5,7 @@ import com.viettel.mbccs.base.BaseView;
 import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.model.SaleProgram;
-import com.viettel.mbccs.data.model.TeleComService;
+import com.viettel.mbccs.data.model.TelecomService;
 import com.viettel.mbccs.screen.sell.retail.SaleRetailContract;
 import java.util.List;
 
@@ -36,7 +36,7 @@ public class SaleChannelContract {
 
         void onSerialPicker(ModelSale stockItem);
 
-        void onNext(List<ModelSale> stockItems, TeleComService teleComService,
+        void onNext(List<ModelSale> stockItems, TelecomService teleComService,
                 SaleProgram saleProgram, ChannelInfo currentChannel);
 
         void refresh();

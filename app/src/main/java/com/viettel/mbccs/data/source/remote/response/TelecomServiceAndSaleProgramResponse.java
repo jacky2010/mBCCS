@@ -3,7 +3,7 @@ package com.viettel.mbccs.data.source.remote.response;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.viettel.mbccs.data.model.SaleProgram;
-import com.viettel.mbccs.data.model.TeleComService;
+import com.viettel.mbccs.data.model.TelecomService;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,17 +11,17 @@ public class TelecomServiceAndSaleProgramResponse extends DataResponse{
 
     @SerializedName("lstTelecomService")
     @Expose
-    private List<TeleComService> mTeleComServices = new ArrayList<>();
+    private List<TelecomService> mTeleComServices = new ArrayList<>();
 
     @SerializedName("lstSalesProgram")
     @Expose
     private List<SaleProgram> mSalePrograms = new ArrayList<>();
 
-    public List<TeleComService> getTeleComServices() {
+    public List<TelecomService> getTeleComServices() {
         return mTeleComServices;
     }
 
-    public void setTeleComServices(List<TeleComService> teleComServices) {
+    public void setTeleComServices(List<TelecomService> teleComServices) {
         mTeleComServices = teleComServices;
     }
 

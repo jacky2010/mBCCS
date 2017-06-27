@@ -18,6 +18,7 @@ import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransChannelResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransRetailResponse;
 import com.viettel.mbccs.screen.common.success.DialogFullScreen;
+import com.viettel.mbccs.screen.sell.retail.payment.PaymentInfoPresenter;
 import com.viettel.mbccs.utils.Common;
 import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
@@ -102,6 +103,7 @@ public class SaveTransConfirmPresenter implements SaveTransConfirmContract.Prese
                 .subscribe(new MBCCSSubscribe<CreateSaleTransRetailResponse>() {
                     @Override
                     public void onSuccess(CreateSaleTransRetailResponse object) {
+                        PaymentInfoPresenter.clearCache();
                         Dialog dialog =
                                 new DialogFullScreen.Builder(mContext).setCenterContent(true)
                                         .setAutoClose(true)
@@ -178,8 +180,7 @@ public class SaveTransConfirmPresenter implements SaveTransConfirmContract.Prese
 
                             @Override
                             public void onError(BaseException error) {
-                                DialogUtils.showDialog(mContext, null, error.getMessage(),
-                                        null);
+                                DialogUtils.showDialog(mContext, null, error.getMessage(), null);
                             }
 
                             @Override

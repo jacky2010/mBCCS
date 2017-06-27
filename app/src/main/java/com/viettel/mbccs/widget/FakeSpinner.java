@@ -45,6 +45,7 @@ public class FakeSpinner extends LinearLayout {
             spinner.getEdittext()
                     .setTextColor(spinner.getContext().getResources().getColor(R.color.white));
             spinner.getDivider().setBackgroundColor(spinner.getResources().getColor(R.color.white_light_theme));
+            spinner.getEdittext().setHintTextColor(spinner.getResources().getColor(R.color.white_trans));
         }
     }
 

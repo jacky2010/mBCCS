@@ -52,7 +52,7 @@
         <item name="android:elevation" tools:targetApi="lollipop">@dimen/dp_2</item>
     </style>
 
-    <style name="button_nagative">
+    <style name="button_negative">
         <item name="android:background">@drawable/bg_btn_nagative</item>
         <item name="android:textColor">@color/button_negative_text_color</item>
         <item name="android:textSize">@dimen/sp_16</item>

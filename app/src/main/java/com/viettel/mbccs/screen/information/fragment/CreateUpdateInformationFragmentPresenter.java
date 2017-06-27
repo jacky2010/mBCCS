@@ -396,8 +396,8 @@ public class CreateUpdateInformationFragmentPresenter
                 ? customerResponse.getCustId() : null);
 
         customer.setDistrict(areaDistrict == null ? StringNull : areaDistrict.getDistrict());
-        //        customer.setHome(StringNull);
-        //        customer.setIdIssueDate(StringNull);
+        //        cacheCustomer.setHome(StringNull);
+        //        cacheCustomer.setIdIssueDate(StringNull);
         customer.setIdNo(txtNumberPassport.get());
         customer.setIdType(dataPassportType.get(positionSelectionPassportType).getCode());
         customer.setName(txtNameCustomer.get());
@@ -413,8 +413,8 @@ public class CreateUpdateInformationFragmentPresenter
         customer.setStatus(customerResponse != null && customerResponse.getStatus() != null
                 ? customerResponse.getStatus() : null);
 
-        //        customer.setStreetBlockName(StringNull);
-        //        customer.setStreetName(StringNull);
+        //        cacheCustomer.setStreetBlockName(StringNull);
+        //        cacheCustomer.setStreetName(StringNull);
         return customer;
     }
 

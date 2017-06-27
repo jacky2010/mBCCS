@@ -131,16 +131,17 @@ public class SpinnerAdapter<T> extends ArrayAdapter<T> {
         if (!TextUtils.isEmpty(textHint)) {
             if (position == 0) {
                 viewHolder.tvName.setText(textHint);
-                if (isThemeLight){
-                    viewHolder.tvName.setTextColor(mContext.getResources().getColor(R.color.white_trans));
-                }else{
-                    viewHolder.tvName.setTextColor(mContext.getResources().getColor(R.color.grey_dove));
+                if (isThemeLight) {
+                    viewHolder.tvName.setTextColor(
+                            mContext.getResources().getColor(R.color.white_trans));
+                } else {
+                    viewHolder.tvName.setTextColor(
+                            mContext.getResources().getColor(R.color.grey_dove));
                 }
-
             } else {
-                if (isThemeLight){
+                if (isThemeLight) {
                     viewHolder.tvName.setTextColor(mContext.getResources().getColor(R.color.white));
-                }else{
+                } else {
                     viewHolder.tvName.setTextColor(mContext.getResources().getColor(R.color.black));
                 }
 
@@ -148,9 +149,9 @@ public class SpinnerAdapter<T> extends ArrayAdapter<T> {
                 viewHolder.imageView.setVisibility(View.GONE);
             }
         } else {
-            if (isThemeLight){
+            if (isThemeLight) {
                 viewHolder.tvName.setTextColor(mContext.getResources().getColor(R.color.white));
-            }else{
+            } else {
                 viewHolder.tvName.setTextColor(mContext.getResources().getColor(R.color.black));
             }
             viewHolder.tvName.setText(mList.get(position).toString());
@@ -195,8 +196,13 @@ public class SpinnerAdapter<T> extends ArrayAdapter<T> {
                         selectedPosition == position ? mContext.getResources()
                                 .getColor(R.color.spinner_grey)
                                 : mContext.getResources().getColor(R.color.white));
-                viewHolder.item_spinner.setVisibility(isUsehintValue ? View.VISIBLE : View.GONE);
-                viewHolder.item_spinner.getLayoutParams().height = 0;
+                if (isUsehintValue) {
+                    viewHolder.item_spinner.getLayoutParams().height =
+                            ViewGroup.LayoutParams.WRAP_CONTENT;
+                } else {
+                    viewHolder.item_spinner.getLayoutParams().height = 0;
+                }
+
                 viewHolder.item_spinner.requestLayout();
             } else {
                 viewHolder.tvName.setText(mList.get(position - 1).toString());

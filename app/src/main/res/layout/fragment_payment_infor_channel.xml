@@ -66,8 +66,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
                         android:text="@string/customer_info"
-                        android:textSize="20sp"
+                        android:textSize="@dimen/sp_16"
                         android:textStyle="bold"
+                        android:textColor="@color/black"
                         />
                 </LinearLayout>
                 <View
@@ -204,7 +205,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_15"
                         android:text="Thông tin thanh toán"
-                        android:textSize="20sp"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16"
                         android:textStyle="bold"
                         />
                 </LinearLayout>
@@ -444,7 +446,7 @@
                         android:layout_weight="1"
                         android:onClick="@{()->presenter.onBack()}"
                         android:text="@string/common_label_close"
-                        style="@style/button_nagative"
+                        style="@style/button_negative"
                         />
 
                     <com.viettel.mbccs.widget.CustomButton

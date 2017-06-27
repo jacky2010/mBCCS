@@ -13,7 +13,7 @@ import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.model.SaleChannelInitData;
 import com.viettel.mbccs.data.model.SaleProgram;
-import com.viettel.mbccs.data.model.TeleComService;
+import com.viettel.mbccs.data.model.TelecomService;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
@@ -45,16 +45,16 @@ public class SaleChannelPresenter
     public ObservableField<String> filterText;
     public ObservableField<String> sellProgram;
     public ObservableField<String> channelText;
-    private SpinnerAdapter<TeleComService> mAdapter;
+    private SpinnerAdapter<TelecomService> mAdapter;
     private StockAdapter stockAdapter;
     private Context mContext;
     private SaleChannelContract.ViewModel mViewModel;
     private List<ModelSale> mModelSales = new ArrayList<>();
     private List<SaleProgram> mSalePrograms = new ArrayList<>();
     private List<ChannelInfo> mChannelInfos = new ArrayList<>();
-    private List<TeleComService> mTeleComServices = new ArrayList<>();
+    private List<TelecomService> mTeleComServices = new ArrayList<>();
     private SaleProgram currentSaleProgram = new SaleProgram();
-    private TeleComService currentTelecomService = new TeleComService();
+    private TelecomService currentTelecomService = new TelecomService();
     private ChannelInfo currentChannel = new ChannelInfo();
     private int currentStockPosition = -1;
     private BanHangKhoTaiChinhRepository mBanHangKhoTaiChinhRepository;
@@ -64,6 +64,9 @@ public class SaleChannelPresenter
     private DataRequest<GetListChannelByOwnerTypeIdRequest> mGetListChannelByOwnerTypeIdRequest;
     private DataRequest<GetTotalStockRequest> mGetTotalStockRequest;
     private CompositeSubscription mSubscription;
+    private TelecomService defaultTelecomService;
+    public SaleProgram defaultSaleProgram;
+    public ChannelInfo defaultChannel;
 
     public SaleChannelPresenter(Context context, SaleChannelContract.ViewModel viewModel) {
         mContext = context;
@@ -105,8 +108,7 @@ public class SaleChannelPresenter
                             @Override
                             public void onError(BaseException error) {
 
-                                DialogUtils.showDialog(mContext, null, error.getMessage(),
-                                        null);
+                                DialogUtils.showDialog(mContext, null, error.getMessage(), null);
                             }
 
                             @Override
@@ -122,11 +124,14 @@ public class SaleChannelPresenter
     private void initialData() {
         mViewModel.showLoading();
         Observable.zip(getObservableTeleComserviceAndSaleProgram(), getObservaleChannelInfors(),
-                new Func2<TelecomServiceAndSaleProgramResponse, GetListChannelByOwnerTypeIdResponse, SaleChannelInitData>() {
+                new Func2<TelecomServiceAndSaleProgramResponse,
+                        GetListChannelByOwnerTypeIdResponse, SaleChannelInitData>() {
                     @Override
                     public SaleChannelInitData call(
-                            TelecomServiceAndSaleProgramResponse telecomServiceAndSaleProgramResponse,
-                            GetListChannelByOwnerTypeIdResponse getListChannelByOwnerTypeIdResponse) {
+                            TelecomServiceAndSaleProgramResponse
+                                    telecomServiceAndSaleProgramResponse,
+                            GetListChannelByOwnerTypeIdResponse
+                                    getListChannelByOwnerTypeIdResponse) {
                         if (telecomServiceAndSaleProgramResponse == null
                                 || getListChannelByOwnerTypeIdResponse == null) {
                             return null;
@@ -147,31 +152,17 @@ public class SaleChannelPresenter
                     mSalePrograms.addAll(
                             object.getTelecomServiceAndSaleProgramResponse().getSalePrograms());
                     mAdapter.notifyDataSetChanged();
-                    TeleComService defaultTelecomSercie = new TeleComService(-1,
-                            mContext.getResources().getString(R.string.all_));
-                    mTeleComServices.add(0, defaultTelecomSercie);
-
-                    SaleProgram defaultSaleProgram =
-                            new SaleProgram(-1, mContext.getResources().getString(R.string.all_));
                     mSalePrograms.add(0, defaultSaleProgram);
-
                     currentSaleProgram = mSalePrograms.get(0);
-                    currentTelecomService = mTeleComServices.get(0);
-
-                    sellProgram.set(currentSaleProgram.getName());
-
                     //channel
                     mChannelInfos.clear();
-                    ChannelInfo channel =
-                            new ChannelInfo(-1, mContext.getResources().getString(R.string.all_));
-                    mChannelInfos.add(0, channel);
+                    mChannelInfos.add(0, defaultChannel);
                     currentChannel = mChannelInfos.get(0);
                     if (object.getmGetListChannelByOwnerTypeIdResponse().getChannelInfoList()
                             != null) {
                         mChannelInfos.addAll(object.getmGetListChannelByOwnerTypeIdResponse()
                                 .getChannelInfoList());
                     }
-                    channelText.set(currentChannel.getChannelName());
                     changeSearchFilter();
                     loadModelSale();
                 }
@@ -190,7 +181,8 @@ public class SaleChannelPresenter
         });
     }
 
-    private Observable<TelecomServiceAndSaleProgramResponse> getObservableTeleComserviceAndSaleProgram() {
+    private Observable<TelecomServiceAndSaleProgramResponse>
+    getObservableTeleComserviceAndSaleProgram() {
         mGetTelecomServiceAndSaleProgramRequest = new DataRequest<>();
         mGetTelecomServiceAndSaleProgramRequest.setWsCode(WsCode.GetTelecomServiceAndSaleProgram);
         GetTelecomServiceAndSaleProgramRequest request =
@@ -214,58 +206,19 @@ public class SaleChannelPresenter
                 mGetListChannelByOwnerTypeIdRequest);
     }
 
-    private void loadServiceAndProgram() {
-        mViewModel.showLoading();
-        mGetTelecomServiceAndSaleProgramRequest = new DataRequest<>();
-        mGetTelecomServiceAndSaleProgramRequest.setWsCode(WsCode.GetTelecomServiceAndSaleProgram);
-        GetTelecomServiceAndSaleProgramRequest request =
-                new GetTelecomServiceAndSaleProgramRequest();
-        mGetTelecomServiceAndSaleProgramRequest.setWsRequest(request);
-
-        Subscription subscription = mBanHangKhoTaiChinhRepository.getTelecomserviceAndSaleProgram(
-                mGetTelecomServiceAndSaleProgramRequest)
-                .subscribe(new MBCCSSubscribe<TelecomServiceAndSaleProgramResponse>() {
-                    @Override
-                    public void onSuccess(TelecomServiceAndSaleProgramResponse object) {
-                        mTeleComServices.addAll(object.getTeleComServices());
-                        mSalePrograms.addAll(object.getSalePrograms());
-                        mAdapter.notifyDataSetChanged();
-                        TeleComService defaultTelecomSercie = new TeleComService(-1,
-                                mContext.getResources().getString(R.string.all_));
-                        mTeleComServices.add(0, defaultTelecomSercie);
-
-                        SaleProgram defaultSaleProgram = new SaleProgram(-1,
-                                mContext.getResources().getString(R.string.all_));
-                        mSalePrograms.add(0, defaultSaleProgram);
-
-                        currentSaleProgram = mSalePrograms.get(0);
-                        currentTelecomService = mTeleComServices.get(0);
-
-                        sellProgram.set(currentSaleProgram.getName());
-
-                        loadModelSale();
-                    }
-
-                    @Override
-                    public void onError(BaseException error) {
-                        DialogUtils.showDialog(mContext, null, error.getMessage(), null);
-                    }
-
-                    @Override
-                    public void onRequestFinish() {
-                        super.onRequestFinish();
-                        mViewModel.hideLoading();
-                    }
-                });
-
-        mSubscription.add(subscription);
-    }
-
     private void init() {
         filterText = new ObservableField<>();
         sellProgram = new ObservableField<>();
         channelText = new ObservableField<>();
-        mAdapter = new SpinnerAdapter<TeleComService>(mContext, mTeleComServices);
+        defaultChannel = new ChannelInfo(-1, mContext.getResources().getString(R.string.all_));
+        currentChannel = defaultChannel;
+        defaultTelecomService =
+                new TelecomService(-1, mContext.getResources().getString(R.string.all_));
+        currentTelecomService = defaultTelecomService;
+        defaultSaleProgram = new SaleProgram(-1, mContext.getResources().getString(R.string.all_));
+        mAdapter = new SpinnerAdapter<TelecomService>(mContext, mTeleComServices);
+        mAdapter.setTextHint(currentTelecomService.getName());
+        mAdapter.setUsehintValue(true);
         mAdapter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -300,11 +253,11 @@ public class SaleChannelPresenter
         mSubscription.clear();
     }
 
-    public SpinnerAdapter<TeleComService> getAdapter() {
+    public SpinnerAdapter<TelecomService> getAdapter() {
         return mAdapter;
     }
 
-    public void setAdapter(SpinnerAdapter<TeleComService> adapter) {
+    public void setAdapter(SpinnerAdapter<TelecomService> adapter) {
         mAdapter = adapter;
     }
 
@@ -337,7 +290,11 @@ public class SaleChannelPresenter
 
     @Override
     public void onItemServiceClick(int position) {
-        currentTelecomService = mTeleComServices.get(position);
+        if (position == 0) {
+            currentTelecomService = defaultTelecomService;
+        } else {
+            currentTelecomService = mTeleComServices.get(position - 1);
+        }
         loadModelSale();
     }
 

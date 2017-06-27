@@ -110,15 +110,15 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
                 Đã chọn %d serial
                 </string>
     <string name="select_serial">Chọn serial</string>
-    <string name="next">Next</string>
+    <string name="next">Tiếp tục</string>
     <string name="sale_retail">Bán lẻ</string>
     <string name="sale_channel">Bán cho kênh</string>
     <string name="all">Tất cả</string>
     <string name="all_">-Tất cả-</string>
     <string name="customer_info">Thông tin khách hàng</string>
-    <string name="customer_name">Tên khách hàng/Công ty</string>
+    <string name="customer_name">Tên khách hàng/Công ty (*)</string>
     <string name="customer_identity">Chứng minh thư</string>
-    <string name="address">Địa chỉ</string>
+    <string name="address">Địa chỉ (*)</string>
     <string name="back">Quay lại</string>
     <string name="payment">Thanh toán</string>
     <string name="sale_success">Bán hàng thành công</string>
@@ -168,6 +168,7 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="msg_default_choose_time_trans">Khoảng thời gian (tối đa 1 tháng)</string>
     <string name="msg_date_create_trans">Ngày tạo giao dịch *</string>
     <string name="channel_title">Kênh *</string>
+    <string name="channel_title_html"><![CDATA[<font color="#dadada">Kênh</font> <font color="#DF0101">*</font>]]></string>
     <string name="sale_program">Chương trình bán hàng</string>
     <string name="choose_channel">Chọn kênh</string>
     <string name="bank_plus">Bank Plus</string>

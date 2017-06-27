@@ -19,10 +19,8 @@ import java.util.List;
  * Created by eo_cuong on 5/21/17.
  */
 
-public class KPPOrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class KPPOrderAdapter extends RecyclerView.Adapter<KPPOrderAdapter.KPPOrderViewHolder> {
 
-    public static final int TYPE_TOTAL = 0;
-    public static final int TYPE_NORMAL = 1;
     private Context mContext;
     private List<SaleOrders> mSaleOrderses;
     private KPPOrderListener mKPPOrderListener;
@@ -33,62 +31,24 @@ public class KPPOrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType == TYPE_TOTAL) {
-            return new TotalViewHolder(
-                    ItemTotalAmoutKppBinding.inflate(LayoutInflater.from(mContext), parent, false));
-        }
+    public KPPOrderViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new KPPOrderViewHolder(
                 (ItemKppOrderBinding) DataBindingUtil.inflate(LayoutInflater.from(mContext),
                         R.layout.item_kpp_order, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (mSaleOrderses.size() > 0) {
-            if (holder instanceof KPPOrderViewHolder) {
-                ((KPPOrderViewHolder) holder).bind(mSaleOrderses.get(position - 1));
-            }
-        } else {
-            ((KPPOrderViewHolder) holder).bind(mSaleOrderses.get(position));
-        }
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        if (mSaleOrderses.size() > 0) {
-            if (position == 0) {
-                return TYPE_TOTAL;
-            }
-            return TYPE_NORMAL;
-        }
-        return TYPE_NORMAL;
+    public void onBindViewHolder(KPPOrderViewHolder holder, int position) {
+        holder.bind(mSaleOrderses.get(position));
     }
 
     @Override
     public int getItemCount() {
-        if (mSaleOrderses.size() > 0) {
-            return mSaleOrderses.size() + 1;
-        }
         return mSaleOrderses.size();
     }
 
     public void setKPPOrderListener(KPPOrderListener KPPOrderListener) {
         mKPPOrderListener = KPPOrderListener;
-    }
-
-    class TotalViewHolder extends BaseViewHolderBinding<ItemTotalAmoutKppBinding, EmptyObject> {
-
-        public TotalViewHolder(ItemTotalAmoutKppBinding binding) {
-            super(binding);
-            double total = 0;
-            for (SaleOrders saleOrders : mSaleOrderses) {
-                total += saleOrders.getAmount();
-            }
-            mBinding.textTotalAmount.setText(
-                    String.format(mContext.getString(R.string.kpp_order_label_amount),
-                            Common.formatDouble(total)));
-        }
     }
 
     class KPPOrderViewHolder extends RecyclerView.ViewHolder {

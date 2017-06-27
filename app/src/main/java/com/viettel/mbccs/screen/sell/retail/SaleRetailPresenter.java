@@ -12,7 +12,7 @@ import com.viettel.mbccs.constance.StockStateId;
 import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.model.SaleProgram;
-import com.viettel.mbccs.data.model.TeleComService;
+import com.viettel.mbccs.data.model.TelecomService;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
@@ -39,24 +39,24 @@ public class SaleRetailPresenter
 
     public ObservableField<String> filterText;
     public ObservableField<String> sellProgram;
-    private SpinnerAdapter<TeleComService> mAdapter;
+    private SpinnerAdapter<TelecomService> mAdapter;
     private StockAdapter stockAdapter;
     private Context mContext;
     private SaleRetailContract.ViewModel mViewModel;
     private List<ModelSale> mModelSales = new ArrayList<>();
     private List<SaleProgram> mSalePrograms = new ArrayList<>();
-    private List<TeleComService> mTeleComServices = new ArrayList<>();
+    private List<TelecomService> mTeleComServices = new ArrayList<>();
     private SaleProgram currentSaleProgram = new SaleProgram();
-    private TeleComService currentTelecomService = new TeleComService();
+    private TelecomService currentTelecomService = new TelecomService();
     private int currentStockPosition = -1;
-
     private DataRequest<GetTelecomServiceAndSaleProgramRequest>
             mGetTelecomServiceAndSaleProgramRequest;
     private BanHangKhoTaiChinhRepository mBanHangKhoTaiChinhRepository;
     private UserRepository mUserRepository;
-
     private DataRequest<GetTotalStockRequest> mGetTotalStockRequest;
     private CompositeSubscription mSubscription;
+    private TelecomService defaultTelecomService;
+    public SaleProgram defaultSaleProgram;
 
     public SaleRetailPresenter(Context context, SaleRetailContract.ViewModel viewModel) {
         mContext = context;
@@ -104,8 +104,7 @@ public class SaleRetailPresenter
                             @Override
                             public void onError(BaseException error) {
 
-                                DialogUtils.showDialog(mContext, null, error.getMessage(),
-                                        null);
+                                DialogUtils.showDialog(mContext, null, error.getMessage(), null);
                                 //fakeModelSale();
                             }
 
@@ -137,18 +136,9 @@ public class SaleRetailPresenter
                         mTeleComServices.addAll(object.getTeleComServices());
                         mSalePrograms.addAll(object.getSalePrograms());
                         mAdapter.notifyDataSetChanged();
-                        TeleComService defaultTelecomSercie = new TeleComService(-1,
-                                mContext.getResources().getString(R.string.all_));
-                        mTeleComServices.add(0, defaultTelecomSercie);
-
-                        SaleProgram defaultSaleProgram = new SaleProgram(-1, null,
-                                mContext.getResources().getString(R.string.all_));
                         mSalePrograms.add(0, defaultSaleProgram);
-
                         currentSaleProgram = mSalePrograms.get(0);
                         currentTelecomService = mTeleComServices.get(0);
-
-                        sellProgram.set(currentSaleProgram.getName());
 
                         changeSearchFilter();
 
@@ -175,7 +165,18 @@ public class SaleRetailPresenter
     private void init() {
         filterText = new ObservableField<>();
         sellProgram = new ObservableField<>();
+
+        //default data
+        defaultTelecomService =
+                new TelecomService(-1, mContext.getResources().getString(R.string.all_));
+        currentTelecomService = defaultTelecomService;
+
+        defaultSaleProgram =
+                new SaleProgram(-1, null, mContext.getResources().getString(R.string.all_));
+        currentSaleProgram = defaultSaleProgram;
         mAdapter = new SpinnerAdapter<>(mContext, mTeleComServices);
+        mAdapter.setTextHint(defaultTelecomService.getName());
+        mAdapter.setUsehintValue(true);
         mAdapter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -192,7 +193,6 @@ public class SaleRetailPresenter
         stockAdapter.setOnStockListener(this);
     }
 
-
     public void chooseSellProgram() {
         mViewModel.onChooseSaleProgram(mSalePrograms);
     }
@@ -208,11 +208,11 @@ public class SaleRetailPresenter
         mSubscription.clear();
     }
 
-    public ArrayAdapter<TeleComService> getAdapter() {
+    public ArrayAdapter<TelecomService> getAdapter() {
         return mAdapter;
     }
 
-    public void setAdapter(SpinnerAdapter<TeleComService> adapter) {
+    public void setAdapter(SpinnerAdapter<TelecomService> adapter) {
         mAdapter = adapter;
     }
 
@@ -236,7 +236,12 @@ public class SaleRetailPresenter
 
     @Override
     public void onItemServiceClick(int position) {
-        currentTelecomService = mTeleComServices.get(position);
+        if (position == 0) {
+            currentTelecomService = defaultTelecomService;
+        } else {
+            currentTelecomService = mTeleComServices.get(position - 1);
+        }
+
         //        mAdapter.setSelectedPosition(position);
         loadModelSale();
     }
