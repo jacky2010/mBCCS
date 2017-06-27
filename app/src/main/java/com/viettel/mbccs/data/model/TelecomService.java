@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
-public class TeleComService implements Serializable{
+public class TelecomService implements Serializable{
 
     @SerializedName("telecomServiceId")
     @Expose
@@ -14,10 +14,10 @@ public class TeleComService implements Serializable{
     @Expose
     private String name;
 
-    public TeleComService() {
+    public TelecomService() {
     }
 
-    public TeleComService(long id, String name) {
+    public TelecomService(long id, String name) {
         this.id = id;
         this.name = name;
     }

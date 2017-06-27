@@ -256,7 +256,7 @@
                             android:layout_marginRight="@dimen/dp_6"
                             android:layout_weight="1"
                             android:text="@string/create_new_connector_information_back"
-                            style="@style/button_nagative"
+                            style="@style/button_negative"
                             android:onClick="@{ v -> presenter.onCancel() }"
                             />
                         <com.viettel.mbccs.widget.CustomButton

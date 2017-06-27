@@ -126,7 +126,7 @@
 
         <com.viettel.mbccs.widget.CustomButton
             android:id="@+id/button_close"
-            style="@style/button_nagative"
+            style="@style/button_negative"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

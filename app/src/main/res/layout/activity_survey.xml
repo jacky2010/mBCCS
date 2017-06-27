@@ -65,7 +65,7 @@
                     android:layout_weight="1"
                     android:onClick="@{()-> presenter.onCancel()}"
                     android:text="@string/common_label_close"
-                    style="@style/button_nagative"
+                    style="@style/button_negative"
                     />
                 <com.viettel.mbccs.widget.CustomButton
                     android:layout_width="0dp"

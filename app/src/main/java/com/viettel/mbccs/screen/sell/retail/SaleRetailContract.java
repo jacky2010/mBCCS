@@ -4,7 +4,7 @@ import com.viettel.mbccs.base.BasePresenter;
 import com.viettel.mbccs.base.BaseView;
 import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.model.SaleProgram;
-import com.viettel.mbccs.data.model.TeleComService;
+import com.viettel.mbccs.data.model.TelecomService;
 import java.util.List;
 
 /**
@@ -30,7 +30,7 @@ public interface SaleRetailContract {
 
         void onSerialPicker(ModelSale stockItem);
 
-        void onNext(List<ModelSale> stockItems,TeleComService teleComService, SaleProgram saleProgram);
+        void onNext(List<ModelSale> stockItems,TelecomService teleComService, SaleProgram saleProgram);
 
         void refresh();
     }

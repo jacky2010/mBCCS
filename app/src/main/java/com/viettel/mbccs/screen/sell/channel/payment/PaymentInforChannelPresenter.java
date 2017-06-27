@@ -14,7 +14,7 @@ import com.viettel.mbccs.data.model.Customer;
 import com.viettel.mbccs.data.model.SaleProgram;
 import com.viettel.mbccs.data.model.SaleTrans;
 import com.viettel.mbccs.data.model.StockSerial;
-import com.viettel.mbccs.data.model.TeleComService;
+import com.viettel.mbccs.data.model.TelecomService;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
@@ -60,14 +60,25 @@ public class PaymentInforChannelPresenter implements PaymentInforChannelContract
     private UserRepository mUserRepository;
     private CompositeSubscription mSubscriptions;
     private SaleTrans mSaleTrans;
-    private TeleComService mTeleComService;
+    private TelecomService mTeleComService;
     private SaleProgram mSaleProgram;
     private ChannelInfo mChannelInfo;
     private String currentPayment = PaymentMethod.PAYMENT_CASH;
     private String paymentMethod = PaymentMethod.PAYMENT_CASH;
+    public static String cacheCoupon;
+    public static String cachepaymentMethod;
+    public static String cachePhone;
+    public static String cacheTin;
+
+    public static void clearCache() {
+        cacheCoupon = null;
+        cachepaymentMethod = null;
+        cachePhone = null;
+        cacheTin = null;
+    }
 
     public PaymentInforChannelPresenter(PaymentInforChannelContract.ViewModel viewModel,
-            Context context, List<StockSerial> stockSerials, TeleComService teleComService,
+            Context context, List<StockSerial> stockSerials, TelecomService teleComService,
             SaleProgram saleProgram, ChannelInfo channelInfo) {
         mViewModel = viewModel;
         mContext = context;
@@ -83,9 +94,21 @@ public class PaymentInforChannelPresenter implements PaymentInforChannelContract
     }
 
     private void init() {
-        tin = new ObservableField<>();
+        tin = new ObservableField<String>() {
+            @Override
+            public void set(String value) {
+                super.set(value);
+                cacheTin = value;
+            }
+        };
         tinError = new ObservableField<>();
-        coupon = new ObservableField<>();
+        coupon = new ObservableField<String>() {
+            @Override
+            public void set(String value) {
+                super.set(value);
+                cacheCoupon = value;
+            }
+        };
         amount = new ObservableField<>();
         amountNotTax = new ObservableField<>();
         tax = new ObservableField<>();
@@ -106,6 +129,24 @@ public class PaymentInforChannelPresenter implements PaymentInforChannelContract
         channelName.set(mChannelInfo.getChannelName());
         channelAddress.set(mChannelInfo.getAddress());
         channelId.set(String.valueOf(mChannelInfo.getChannelId()));
+
+        if (!TextUtils.isEmpty(cacheCoupon)) {
+            coupon.set(cacheCoupon);
+        }
+
+        if (!TextUtils.isEmpty(cacheTin)) {
+            tin.set(cacheTin);
+        }
+
+        if (!TextUtils.isEmpty(cachePhone)) {
+            phone = cachePhone;
+        }
+
+        if (!TextUtils.isEmpty(cachepaymentMethod)) {
+            currentPayment = cachepaymentMethod;
+            paymentMethod = cachepaymentMethod;
+            mViewModel.initPaymentMethod(paymentMethod);
+        }
     }
 
     public void paymentClick() {
@@ -287,10 +328,12 @@ public class PaymentInforChannelPresenter implements PaymentInforChannelContract
         this.paymentMethod = paymentMethod;
         currentPayment = paymentMethod;
         isGetTransInfo.set(false);
+        cachepaymentMethod = currentPayment;
     }
 
     public void setPhone(String phone) {
         this.phone = phone;
+        cachePhone = phone;
     }
 
     public ChannelInfo getChannelInfo() {

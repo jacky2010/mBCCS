@@ -8,7 +8,7 @@ import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.SaleProgram;
 import com.viettel.mbccs.data.model.StockSerial;
-import com.viettel.mbccs.data.model.TeleComService;
+import com.viettel.mbccs.data.model.TelecomService;
 import com.viettel.mbccs.databinding.ActivityConfirmGoodsBinding;
 import com.viettel.mbccs.screen.sell.retail.CreateSaleActivity;
 import com.viettel.mbccs.utils.GsonUtils;
@@ -24,7 +24,7 @@ public class SaleReviewActivity
         implements SaleReviewContract.ViewModel {
     private static final int REQUEST_TRANS_RETAIL = 125;
     private List<StockSerial> mStockSerials;
-    private TeleComService mTeleComService;
+    private TelecomService mTeleComService;
     private SaleProgram mSaleProgram;
     private ChannelInfo mChannelInfo;
 
@@ -40,7 +40,7 @@ public class SaleReviewActivity
             mStockSerials = GsonUtils.String2ListObject(json, StockSerial[].class);
         }
 
-        mTeleComService = (TeleComService) getIntent().getExtras()
+        mTeleComService = (TelecomService) getIntent().getExtras()
                 .getSerializable(Constants.BundleConstant.TELECOMSERIVE);
 
         mSaleProgram = (SaleProgram) getIntent().getExtras()

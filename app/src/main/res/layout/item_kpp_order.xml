@@ -42,7 +42,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.3"
-                    android:text="@{order.amount}"
+                    android:text="@{order.saleOrders.oderName}"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_14"
                     tools:text="Tong tien 120000"
@@ -76,4 +76,5 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+
 </layout>

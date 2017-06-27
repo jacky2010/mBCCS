@@ -13,7 +13,7 @@ import com.viettel.mbccs.data.model.Customer;
 import com.viettel.mbccs.data.model.SaleProgram;
 import com.viettel.mbccs.data.model.SaleTrans;
 import com.viettel.mbccs.data.model.StockSerial;
-import com.viettel.mbccs.data.model.TeleComService;
+import com.viettel.mbccs.data.model.TelecomService;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
@@ -57,13 +57,26 @@ public class PaymentInfoPresenter implements PaymentInforContract.Presenter {
     private DataRequest<GetInfoSaleTranRequest> mGetInfoSaleTranRequestBaseRequest;
     private CompositeSubscription mSubscriptions;
     private SaleTrans mSaleTrans;
-    private TeleComService mTeleComService;
+    private TelecomService mTeleComService;
     private SaleProgram mSaleProgram;
     private String currentPayment = PaymentMethod.PAYMENT_CASH;
     private String paymentMethod = PaymentMethod.PAYMENT_CASH;
 
+    //cache
+    public static Customer cacheCustomer;
+    public static String cacheCoupon;
+    public static String cachepaymentMethod;
+    public static String cachePhone;
+
+    public static void clearCache() {
+        cacheCustomer = null;
+        cacheCoupon = null;
+        cachepaymentMethod = null;
+        cachePhone = null;
+    }
+
     public PaymentInfoPresenter(PaymentInforContract.ViewModel viewModel, Context context,
-            List<StockSerial> stockSerials, TeleComService teleComService,
+            List<StockSerial> stockSerials, TelecomService teleComService,
             SaleProgram saleProgram) {
         mViewModel = viewModel;
         mContext = context;
@@ -78,29 +91,76 @@ public class PaymentInfoPresenter implements PaymentInforContract.Presenter {
     }
 
     private void init() {
-        name = new ObservableField<>();
-        name.set("");
-        tin = new ObservableField<>();
-        tin.set("");
-        address = new ObservableField<>();
-        address.set("");
+        if (cacheCustomer == null) {
+            cacheCustomer = new Customer();
+        }
+        isGetTransInfo = new ObservableField<>();
+        isGetTransInfo.set(false);
+        name = new ObservableField<String>() {
+            @Override
+            public void set(String value) {
+                super.set(value);
+                isGetTransInfo.set(false);
+                cacheCustomer.setCustomerName(value);
+            }
+        };
+        name.set(cacheCustomer.getCustomerName());
+        tin = new ObservableField<String>() {
+            @Override
+            public void set(String value) {
+                super.set(value);
+                cacheCustomer.setTin(value);
+            }
+        };
+        tin.set(cacheCustomer.getTin());
+        address = new ObservableField<String>() {
+            @Override
+            public void set(String value) {
+                super.set(value);
+                isGetTransInfo.set(false);
+                cacheCustomer.setAddress(value);
+            }
+        };
+        address.set(cacheCustomer.getAddress());
         nameError = new ObservableField<>();
         tinError = new ObservableField<>();
         addressError = new ObservableField<>();
-        coupon = new ObservableField<>();
+        coupon = new ObservableField<String>() {
+            @Override
+            public void set(String value) {
+                super.set(value);
+                cacheCoupon = value;
+            }
+        };
         amount = new ObservableField<>();
         amountNotTax = new ObservableField<>();
         tax = new ObservableField<>();
-        isGetTransInfo = new ObservableField<>();
-        isGetTransInfo.set(false);
+
         isExpandCustomerInfo = new ObservableField<>();
         isExpandCustomerInfo.set(true);
         isExpandPaymentInfo = new ObservableField<>();
         isExpandPaymentInfo.set(true);
+
+        if (!TextUtils.isEmpty(cachePhone)) {
+            phone = cachePhone;
+        }
+
+        if (!TextUtils.isEmpty(cachepaymentMethod)) {
+            paymentMethod = cachepaymentMethod;
+            currentPayment = cachepaymentMethod;
+            mViewModel.initPaymentMethod(paymentMethod);
+        }
+
+        if (!TextUtils.isEmpty(cacheCoupon)) {
+            coupon.set(cacheCoupon);
+        }
     }
 
     public void paymentClick() {
         ActivityUtils.hideKeyboard((Activity) mContext);
+        if (!validate()) {
+            return;
+        }
         createTransaction();
     }
 
@@ -113,9 +173,6 @@ public class PaymentInfoPresenter implements PaymentInforContract.Presenter {
     }
 
     private void getTranInfo() {
-        if (!validate()) {
-            return;
-        }
         mViewModel.showLoading();
         isGetTransInfo.set(false);
 
@@ -189,34 +246,37 @@ public class PaymentInfoPresenter implements PaymentInforContract.Presenter {
     }
 
     private boolean validate() {
-        nameError.set(null);
-        tinError.set(null);
+        boolean isValid = true;
         addressError.set(null);
-        if (TextUtils.isEmpty(name.get().trim())) {
+        tinError.set(null);
+        nameError.set(null);
+        if (TextUtils.isEmpty(name.get())) {
             nameError.set(mContext.getResources().getString(R.string.input_empty));
-            return false;
+            isValid = false;
+        }
+
+        if (TextUtils.isEmpty(address.get())) {
+            addressError.set(mContext.getResources().getString(R.string.input_empty));
+            isValid = false;
         }
 
         if (TextUtils.isEmpty(phone)) {
             if (paymentMethod == PaymentMethod.PAYMENT_BANK_PLUS) {
                 mViewModel.openBankplus();
-                return false;
+                isValid = false;
             }
 
             if (paymentMethod == PaymentMethod.PAYMENT_WELLET) {
                 mViewModel.openWellet();
-                return false;
+                isValid = false;
             }
         }
         //        if (TextUtils.isEmpty(tin.get().trim())) {
         //            tinError.set(mContext.getResources().getString(R.string.input_empty));
         //            return false;
         //        }
-        if (TextUtils.isEmpty(address.get().trim())) {
-            addressError.set(mContext.getResources().getString(R.string.input_empty));
-            return false;
-        }
-        return true;
+
+        return isValid;
     }
 
     public void toogleCustomerInfo() {
@@ -260,9 +320,11 @@ public class PaymentInfoPresenter implements PaymentInforContract.Presenter {
         this.paymentMethod = paymentMethod;
         currentPayment = paymentMethod;
         isGetTransInfo.set(false);
+        cachepaymentMethod = currentPayment;
     }
 
     public void setPhone(String phone) {
         this.phone = phone;
+        cachePhone = phone;
     }
 }

@@ -18,7 +18,7 @@ import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.SaleProgram;
 import com.viettel.mbccs.data.model.SaleTrans;
 import com.viettel.mbccs.data.model.StockSerial;
-import com.viettel.mbccs.data.model.TeleComService;
+import com.viettel.mbccs.data.model.TelecomService;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
 import com.viettel.mbccs.databinding.FragmentPaymentInforChannelBinding;
@@ -43,7 +43,7 @@ public class PaymentInforChannelFragment extends BaseFragment
 
     private List<StockSerial> mStockSerials;
 
-    private TeleComService mTeleComService;
+    private TelecomService mTeleComService;
 
     private SaleProgram mSaleProgram;
 
@@ -69,8 +69,10 @@ public class PaymentInforChannelFragment extends BaseFragment
 
     ImageView imageWellet;
 
+    private String paymentMethod = null;
+
     public static PaymentInforChannelFragment newInstance(List<StockSerial> stockSerials,
-            TeleComService telecomService, SaleProgram saleProgram, ChannelInfo channelInfo) {
+            TelecomService telecomService, SaleProgram saleProgram, ChannelInfo channelInfo) {
         Bundle args = new Bundle();
         args.putString(Constants.BundleConstant.STOCK_SERIAL_LIST,
                 GsonUtils.Object2String(stockSerials));
@@ -94,7 +96,7 @@ public class PaymentInforChannelFragment extends BaseFragment
 
         String telecomSeriveString = bundle.getString(Constants.BundleConstant.TELECOMSERIVE);
         if (!TextUtils.isEmpty(telecomSeriveString)) {
-            mTeleComService = GsonUtils.String2Object(telecomSeriveString, TeleComService.class);
+            mTeleComService = GsonUtils.String2Object(telecomSeriveString, TelecomService.class);
         }
 
         String saleProgramString = bundle.getString(Constants.BundleConstant.SALE_PROGRAM);
@@ -195,6 +197,36 @@ public class PaymentInforChannelFragment extends BaseFragment
                         PaymentMethod.PAYMENT_WELLET);
             }
         });
+
+        if (paymentMethod != null) {
+            if (paymentMethod.equals(PaymentMethod.PAYMENT_CASH)) {
+                layoutPaymentCash.setSelected(false);
+                layoutPaymentBankPlus.setSelected(true);
+                layoutPaymentWellet.setSelected(false);
+                radioCash.setChecked(false);
+                radioBankplus.setChecked(true);
+                radioWellet.setChecked(false);
+                return;
+            }
+            if (paymentMethod.equals(PaymentMethod.PAYMENT_BANK_PLUS)) {
+                layoutPaymentCash.setSelected(false);
+                layoutPaymentBankPlus.setSelected(true);
+                layoutPaymentWellet.setSelected(false);
+                radioCash.setChecked(false);
+                radioBankplus.setChecked(true);
+                radioWellet.setChecked(false);
+                return;
+            }
+            if (paymentMethod.equals(PaymentMethod.PAYMENT_WELLET)) {
+                layoutPaymentCash.setSelected(false);
+                layoutPaymentBankPlus.setSelected(false);
+                layoutPaymentWellet.setSelected(true);
+                radioCash.setChecked(false);
+                radioBankplus.setChecked(false);
+                radioWellet.setChecked(true);
+                return;
+            }
+        }
     }
 
     @Override
@@ -253,5 +285,10 @@ public class PaymentInforChannelFragment extends BaseFragment
             }
         });
         dialogInPutWellet.show();
+    }
+
+    @Override
+    public void initPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 }

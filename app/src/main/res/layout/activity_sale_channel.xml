@@ -27,20 +27,42 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             >
-            <com.viettel.mbccs.widget.CustomButton
-                android:id="@+id/btn_next"
+            <LinearLayout
+                android:id="@+id/layout_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_margin="@dimen/dp_20"
-                android:onClick="@{()->presenter.onNext()}"
-                android:text="@string/next"
-                style="@style/button_positive"
-                />
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_5"
+                >
+                <com.viettel.mbccs.widget.CustomButton
+                    android:id="@+id/btn_close"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_10"
+                    android:layout_weight="1"
+                    android:onClick="@{()->presenter.onCancel()}"
+                    android:text="@string/common_label_close"
+                    style="@style/button_negative"
+                    />
+
+                <com.viettel.mbccs.widget.CustomButton
+                    android:id="@+id/btn_next"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_margin="@dimen/dp_10"
+                    android:layout_weight="1"
+                    android:onClick="@{()->presenter.onNext()}"
+                    android:text="@string/next"
+                    style="@style/button_positive"
+                    />
+
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_above="@id/btn_next"
+                android:layout_above="@id/layout_button"
                 android:layout_marginTop="@dimen/filter_height"
                 android:orientation="vertical"
                 >
@@ -97,7 +119,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_5"
-                                android:text="@string/channel_title"
+                                app:textHtml="@{@string/channel_title_html}"
                                 style="@style/textTitleInputLight"
                                 />
 
@@ -106,6 +128,7 @@
                                 android:layout_height="wrap_content"
                                 android:onClick="@{()->presenter.chooseChannel()}"
                                 android:text="@{presenter.channelText}"
+                                app:hint="@{presenter.defaultChannel.channelName}"
                                 app:themeLight="@{true}"
                                 />
                             <com.viettel.mbccs.widget.CustomTextView
@@ -120,6 +143,7 @@
                                 android:layout_height="wrap_content"
                                 app:adapter="@{presenter.adapter}"
                                 app:themeLight="@{true}"
+
                                 />
                             <com.viettel.mbccs.widget.CustomTextView
                                 android:layout_width="match_parent"
@@ -133,7 +157,9 @@
                                 android:layout_height="wrap_content"
                                 android:onClick="@{()->presenter.chooseSellProgram()}"
                                 android:text="@{presenter.sellProgram}"
+                                app:hint="@{presenter.defaultSaleProgram.name}"
                                 app:themeLight="@{true}"
+
                                 />
                         </LinearLayout>
                     </RelativeLayout>

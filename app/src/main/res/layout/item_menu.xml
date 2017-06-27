@@ -35,6 +35,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_12"
+        android:background="?attr/selectableItemBackground"
+        android:onClick="@{ onClicked }"
         android:paddingEnd="@dimen/dp_16"
         android:paddingStart="@dimen/dp_16"
         >
@@ -57,9 +59,7 @@
             android:layout_marginStart="@dimen/dp_12"
             android:layout_toEndOf="@+id/icon"
             android:layout_toRightOf="@+id/icon"
-            android:background="?attr/selectableItemBackground"
             android:drawablePadding="@dimen/dp_4"
-            android:onClick="@{ onClicked }"
             android:text="@{ text }"
             android:textColor="@{ textColor == 0 ? @color/black : textColor }"
             android:textSize="@{ textSize == 0 ? @dimen/sp_18 : textSize }"

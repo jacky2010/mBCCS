@@ -171,7 +171,7 @@
                     android:layout_margin="@dimen/dp_5"
                     android:onClick="@{()->presenter.onCancel()}"
                     android:text="@string/view_ware_house_search_close"
-                    style="@style/button_nagative"
+                    style="@style/button_negative"
                     />
 
                 <com.viettel.mbccs.widget.CustomButton

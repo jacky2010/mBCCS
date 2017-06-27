@@ -78,7 +78,7 @@
             android:layout_marginTop="@dimen/dp_16">
 
             <com.viettel.mbccs.widget.CustomButton
-                style="@style/button_nagative"
+                style="@style/button_negative"
                 android:id="@+id/reject"
                 android:layout_width="@dimen/dp_120"
                 android:layout_height="@dimen/dp_40"

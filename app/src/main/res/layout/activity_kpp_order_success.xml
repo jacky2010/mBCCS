@@ -56,7 +56,7 @@
                 android:paddingRight="@dimen/dp_20"
                 android:paddingTop="@dimen/dp_5"
                 android:text="@string/common_label_close"
-                style="@style/button_nagative"
+                style="@style/button_negative"
                 />
 
             <android.support.v7.widget.RecyclerView

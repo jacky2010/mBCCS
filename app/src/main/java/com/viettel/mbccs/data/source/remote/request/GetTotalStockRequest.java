@@ -22,7 +22,7 @@ public class GetTotalStockRequest {
     @Expose
     private Long ownerType;
 
-    @SerializedName("telecomServiceId")
+    @SerializedName("telecomserviceId")
     @Expose
     private Long telecomServiceId;
 

@@ -9,7 +9,7 @@ import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.model.SaleProgram;
 import com.viettel.mbccs.data.model.SerialPickerModel;
 import com.viettel.mbccs.data.model.StockSerial;
-import com.viettel.mbccs.data.model.TeleComService;
+import com.viettel.mbccs.data.model.TelecomService;
 import com.viettel.mbccs.databinding.ActivitySaleChannelBinding;
 import com.viettel.mbccs.screen.goodsconfirm.SaleReviewActivity;
 import com.viettel.mbccs.screen.sell.channel.channelpicker.ChannelPickerActivity;
@@ -128,7 +128,7 @@ public class SaleChannelActivity
     }
 
     @Override
-    public void onNext(List<ModelSale> stockItems, TeleComService teleComService,
+    public void onNext(List<ModelSale> stockItems, TelecomService teleComService,
             SaleProgram saleProgram, ChannelInfo currentChannel) {
 
         List<StockSerial> stockSerials = new ArrayList<>();
