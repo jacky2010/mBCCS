@@ -156,6 +156,7 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
 
         //TODO minhnx test
         isdn.set("620103022");
+        documentType.set("0");
         documentId.set("145079102");
     }
 
