@@ -16,7 +16,7 @@ import java.util.List;
  * Created by minhnx on 5/19/17.
  */
 
-public class ListProductsDetailPresenter implements ListProductsDetailContract.Presenter {
+public class ViewProductDetailPresenter implements ListProductsDetailContract.Presenter {
 
     private DecimalFormat nf = new DecimalFormat("###");
 
@@ -51,7 +51,7 @@ public class ListProductsDetailPresenter implements ListProductsDetailContract.P
 
     private SellAnyPayRepository anyPayRepository;
 
-    public ListProductsDetailPresenter(Context context, final ListProductsDetailContract.ViewModel viewModel) {
+    public ViewProductDetailPresenter(Context context, final ListProductsDetailContract.ViewModel viewModel) {
         this.context = context;
         this.viewModel = viewModel;
 

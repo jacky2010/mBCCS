@@ -237,112 +237,112 @@ public class UpdateSimPresenter implements UpdateSimContract.Presenter {
                 isValid = false;
             }
 
-            if (isPrepaid.get()) {
-                if (TextUtils.isEmpty(contact1.get())) {
-                    contact1Error.set(context.getString(R.string.input_empty));
-                    isValid = false;
-                } else if (!TextUtils.isEmpty(contact1.get()) && !ValidateUtils.isPhoneNumberValid(contact1.get())) {
-                    contact1Error.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.change_sim_label_contact_1)));
-                    isValid = false;
-                }
-
-                if (TextUtils.isEmpty(contact2.get())) {
-                    contact2Error.set(context.getString(R.string.input_empty));
-                    isValid = false;
-                } else if (!TextUtils.isEmpty(contact2.get()) && !ValidateUtils.isPhoneNumberValid(contact2.get())) {
-                    contact2Error.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.change_sim_label_contact_2)));
-                    isValid = false;
-                }
-
-                if (TextUtils.isEmpty(contact3.get())) {
-                    contact3Error.set(context.getString(R.string.input_empty));
-                    isValid = false;
-                } else if (!TextUtils.isEmpty(contact3.get()) && !ValidateUtils.isPhoneNumberValid(contact3.get())) {
-                    contact3Error.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.change_sim_label_contact_3)));
-                    isValid = false;
-                }
-
-                if (TextUtils.isEmpty(contact4.get())) {
-                    contact4Error.set(context.getString(R.string.input_empty));
-                    isValid = false;
-                } else if (!TextUtils.isEmpty(contact4.get()) && !ValidateUtils.isPhoneNumberValid(contact4.get())) {
-                    contact4Error.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.change_sim_label_contact_4)));
-                    isValid = false;
-                }
-
-                if (TextUtils.isEmpty(contact5.get())) {
-                    contact5Error.set(context.getString(R.string.input_empty));
-                    isValid = false;
-                } else if (!TextUtils.isEmpty(contact5.get()) && !ValidateUtils.isPhoneNumberValid(contact5.get())) {
-                    contact5Error.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.change_sim_label_contact_5)));
-                    isValid = false;
-                }
+//            if (isPrepaid.get()) {
+            if (TextUtils.isEmpty(contact1.get())) {
+                contact1Error.set(context.getString(R.string.input_empty));
+                isValid = false;
+            } else if (!TextUtils.isEmpty(contact1.get()) && !ValidateUtils.isPhoneNumberValid(contact1.get())) {
+                contact1Error.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.change_sim_label_contact_1)));
+                isValid = false;
             }
+
+            if (TextUtils.isEmpty(contact2.get())) {
+                contact2Error.set(context.getString(R.string.input_empty));
+                isValid = false;
+            } else if (!TextUtils.isEmpty(contact2.get()) && !ValidateUtils.isPhoneNumberValid(contact2.get())) {
+                contact2Error.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.change_sim_label_contact_2)));
+                isValid = false;
+            }
+
+            if (TextUtils.isEmpty(contact3.get())) {
+                contact3Error.set(context.getString(R.string.input_empty));
+                isValid = false;
+            } else if (!TextUtils.isEmpty(contact3.get()) && !ValidateUtils.isPhoneNumberValid(contact3.get())) {
+                contact3Error.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.change_sim_label_contact_3)));
+                isValid = false;
+            }
+
+            if (TextUtils.isEmpty(contact4.get())) {
+                contact4Error.set(context.getString(R.string.input_empty));
+                isValid = false;
+            } else if (!TextUtils.isEmpty(contact4.get()) && !ValidateUtils.isPhoneNumberValid(contact4.get())) {
+                contact4Error.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.change_sim_label_contact_4)));
+                isValid = false;
+            }
+
+            if (TextUtils.isEmpty(contact5.get())) {
+                contact5Error.set(context.getString(R.string.input_empty));
+                isValid = false;
+            } else if (!TextUtils.isEmpty(contact5.get()) && !ValidateUtils.isPhoneNumberValid(contact5.get())) {
+                contact5Error.set(context.getString(R.string.common_msg_error_invalid_field, context.getString(R.string.change_sim_label_contact_5)));
+                isValid = false;
+            }
+//            }
 
             if (!isValid)
                 return;
 
-            if (isPrepaid.get()) {
+//            if (isPrepaid.get()) {
 
-                final List<String> recentContacts = new ArrayList<>();
-                recentContacts.add(contact1.get().trim());
-                recentContacts.add(contact2.get().trim());
-                recentContacts.add(contact3.get().trim());
-                recentContacts.add(contact4.get().trim());
-                recentContacts.add(contact5.get().trim());
+            final List<String> recentContacts = new ArrayList<>();
+            recentContacts.add(contact1.get().trim());
+            recentContacts.add(contact2.get().trim());
+            recentContacts.add(contact3.get().trim());
+            recentContacts.add(contact4.get().trim());
+            recentContacts.add(contact5.get().trim());
 
-                //validate recent contacts
-                viewModel.showLoading();
+            //validate recent contacts
+            viewModel.showLoading();
 
-                DataRequest<CheckCalledIsdnsRequest> baseRequest = new DataRequest<>();
-                baseRequest.setWsCode(WsCode.CheckCalledIsdn);
-                CheckCalledIsdnsRequest request = new CheckCalledIsdnsRequest();
-                request.setListIsdn(recentContacts);
-                request.setIsdn(sub.getIsdn());
-                request.setSubType(sub.getSubType());
-                baseRequest.setWsRequest(request);
+            DataRequest<CheckCalledIsdnsRequest> baseRequest = new DataRequest<>();
+            baseRequest.setWsCode(WsCode.CheckCalledIsdn);
+            CheckCalledIsdnsRequest request = new CheckCalledIsdnsRequest();
+            request.setListIsdn(recentContacts);
+            request.setIsdn(sub.getIsdn());
+            request.setSubType(sub.getSubType());
+            baseRequest.setWsRequest(request);
 
-                Subscription subscription =
-                        changeSimRepository.checkCalledIsdn(baseRequest)
-                                .subscribe(new MBCCSSubscribe<DataResponse>() {
-                                    @Override
-                                    public void onSuccess(DataResponse object) {
-                                        try {
+            Subscription subscription =
+                    changeSimRepository.checkCalledIsdn(baseRequest)
+                            .subscribe(new MBCCSSubscribe<DataResponse>() {
+                                @Override
+                                public void onSuccess(DataResponse object) {
+                                    try {
 //                                        if (Constants.Service.RESPONSE_OK.equals(object.getErrorCode())) {
 
-                                            goToConfirmDialog(recentContacts);
+                                        goToConfirmDialog(recentContacts);
 
 //                                        } else {
 //                                        DialogUtils.showDialog(context, null, context.getString(R.string.change_sim_error_recent_calls_not_valid),
 //                                                null);
 //                                        }
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
-                                        }
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
                                     }
+                                }
 
-                                    @Override
-                                    public void onError(BaseException error) {
-                                        if (error.getMessage().contains("Called isdns are not match")) {
-                                            DialogUtils.showDialog(context, null, context.getString(R.string.change_sim_error_recent_calls_not_valid),
-                                                    null);
-                                        } else
-                                            DialogUtils.showDialog(context, null, context.getString(R.string.common_msg_error_general),
-                                                    null);
-                                    }
+                                @Override
+                                public void onError(BaseException error) {
+                                    if (error.getMessage().contains("Called isdns are not match")) {
+                                        DialogUtils.showDialog(context, null, context.getString(R.string.change_sim_error_recent_calls_not_valid),
+                                                null);
+                                    } else
+                                        DialogUtils.showDialog(context, null, context.getString(R.string.common_msg_error_general),
+                                                null);
+                                }
 
-                                    @Override
-                                    public void onRequestFinish() {
-                                        super.onRequestFinish();
-                                        viewModel.hideLoading();
-                                    }
-                                });
+                                @Override
+                                public void onRequestFinish() {
+                                    super.onRequestFinish();
+                                    viewModel.hideLoading();
+                                }
+                            });
 
-                mSubscriptions.add(subscription);
-                //validate recent contacts
-            } else {
-                goToConfirmDialog(null);
-            }
+            mSubscriptions.add(subscription);
+            //validate recent contacts
+//            } else {
+//                goToConfirmDialog(null);
+//            }
 
         } catch (Exception e) {
             e.printStackTrace();

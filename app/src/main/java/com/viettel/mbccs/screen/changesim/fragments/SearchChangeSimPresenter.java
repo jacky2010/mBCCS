@@ -158,7 +158,6 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
 
         //TODO minhnx test
         isdn.set("620103022");
-        documentType.set("0");
         documentId.set("145079102");
     }
 
@@ -201,6 +200,8 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
             changeSimRepository = ChangeSimRepository.getInstance();
             apDomainRepository = ApDomainRepository.getInstance();
             mSubscriptions = new CompositeSubscription();
+
+            documentTypes = new ArrayList<>();
 
             //
             viewModel.showLoading();
@@ -271,18 +272,20 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
         try {
 
             boolean isValid = true;
+            isdnError.set(null);
+            documentIdError.set(null);
 
-            if ((documentType.get() == null || "".equals(documentType.get().trim())) && TextUtils.isEmpty(isdn.get())) {
+            if ((documentId.get() == null || "".equals(documentId.get().trim())) && TextUtils.isEmpty(isdn.get())) {
                 isdnError.set(context.getString(R.string.input_empty));
                 isValid = false;
             }
 
-            if (documentType.get() == null || "".equals(documentType.get().trim())) {
+            if (documentId.get() != null && !"".equals(documentId.get()) && (documentType.get() == null || "".equals(documentType.get().trim()))) {
                 viewModel.showError(context.getString(R.string.change_sim_error_search_documentType_required));
                 isValid = false;
             }
 
-            if (TextUtils.isEmpty(documentId.get())) {
+            if ((isdn.get() == null || TextUtils.isEmpty(isdn.get())) && TextUtils.isEmpty(documentId.get())) {
                 documentIdError.set(context.getString(R.string.input_empty));
                 isValid = false;
             }

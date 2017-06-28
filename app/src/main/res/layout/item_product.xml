@@ -58,7 +58,6 @@
                         android:id="@+id/text_good_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:text="@{item.item.stockMoldeName}"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
@@ -67,12 +66,27 @@
                         android:id="@+id/text_good_price"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:gravity="center"
+                        android:layout_marginTop="@dimen/dp_4"
                         android:text="@{item.price}"
                         android:textColor="@color/red"
                         android:textSize="12sp"
                         android:textStyle="bold" />
+
+                    <com.viettel.mbccs.widget.CustomTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_6"
+                        android:text="Description"
+                        android:textSize="12sp" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/spAvailableColorsList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_6"
+                        android:layout_gravity="center"
+                        android:recyclerAdapter="@{item.availableColorsListAdapter}"
+                        app:orientation="@{1}" />
 
                 </LinearLayout>
             </LinearLayout>

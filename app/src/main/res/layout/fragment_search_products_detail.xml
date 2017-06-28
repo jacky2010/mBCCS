@@ -21,13 +21,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.viettel.mbccs.widget.NonSwipeViewPager
-            android:id="@+id/vpPager"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            bind:pagerAdapter="@{ presenter.fragmentAdapter }" />
-
         <android.support.design.widget.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
@@ -39,6 +32,13 @@
             app:tabIndicatorHeight="0dp"
             app:tabSelectedTextColor="#0083c2"
             app:tabTextAppearance="@style/tablayoutStyle" />
+
+        <com.viettel.mbccs.widget.NonSwipeViewPager
+            android:id="@+id/vpPager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            bind:pagerAdapter="@{ presenter.fragmentAdapter }" />
 
     </LinearLayout>
 </layout>
