@@ -10,9 +10,7 @@ import android.widget.AdapterView;
 
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.ApiCode;
-import com.viettel.mbccs.data.model.ApDomainByType;
 import com.viettel.mbccs.constance.WsCode;
-import com.viettel.mbccs.data.model.ApDomainByType;
 import com.viettel.mbccs.data.model.ApDomainByType;
 import com.viettel.mbccs.data.model.ChangeSimInfo;
 import com.viettel.mbccs.data.model.ChangeSimItem;
@@ -210,6 +208,7 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
             baseRequest.setWsCode(ApiCode.GetApDomainByType);
             GetApDomainByTypeRequest request = new GetApDomainByTypeRequest();
             request.setType(ApDomainByType.Type.LOAI_GIAY_TO);
+            request.setSubType(ApDomainByType.SubType.POSTPAID);
             baseRequest.setWsRequest(request);
 
             Subscription subscription =

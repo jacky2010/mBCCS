@@ -28,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_above="@id/btn_next"
-                android:layout_marginTop="@dimen/dp_70"
+                android:layout_marginTop="@dimen/search_product_top_bar_size"
                 android:orientation="vertical">
 
                 <com.viettel.mbccs.widget.CustomTextView
@@ -64,6 +64,7 @@
                         android:layout_height="match_parent"
                         android:paddingTop="@dimen/dp_6"
                         android:text="@string/search_products_detail_title_manufacturer"
+                        android:textSize="@dimen/default_label_text_size"
                         android:textColor="@color/white" />
 
                     <com.viettel.mbccs.widget.FakeSpinner
@@ -71,6 +72,7 @@
                         android:layout_height="wrap_content"
                         android:onClick="@{()->presenter.chooseManufacturer()}"
                         android:text="@{presenter.manufacturer}"
+                        android:textSize="@dimen/default_label_text_size"
                         android:textColor="@color/white" />
 
                     <com.viettel.mbccs.widget.CustomTextView
@@ -78,6 +80,7 @@
                         android:layout_height="match_parent"
                         android:paddingTop="@dimen/dp_6"
                         android:text="@string/search_products_detail_title_screen_size"
+                        android:textSize="@dimen/default_label_text_size"
                         android:textColor="@color/white" />
 
                     <com.viettel.mbccs.widget.FakeSpinner
@@ -85,6 +88,7 @@
                         android:layout_height="wrap_content"
                         android:onClick="@{()->presenter.chooseScreenSize()}"
                         android:text="@{presenter.screenSize}"
+                        android:textSize="@dimen/default_label_text_size"
                         android:textColor="@color/white" />
 
                     <com.viettel.mbccs.widget.CustomTextView
@@ -92,6 +96,7 @@
                         android:layout_height="match_parent"
                         android:paddingTop="@dimen/dp_6"
                         android:text="@string/search_products_detail_title_camera"
+                        android:textSize="@dimen/default_label_text_size"
                         android:textColor="@color/white" />
 
                     <com.viettel.mbccs.widget.FakeSpinner
@@ -99,6 +104,7 @@
                         android:layout_height="wrap_content"
                         android:onClick="@{()->presenter.chooseCamera()}"
                         android:text="@{presenter.camera}"
+                        android:textSize="@dimen/default_label_text_size"
                         android:textColor="@color/white" />
 
                     <com.viettel.mbccs.widget.CustomTextView
@@ -106,6 +112,7 @@
                         android:layout_height="match_parent"
                         android:paddingTop="@dimen/dp_6"
                         android:text="@string/search_products_detail_title_price_range"
+                        android:textSize="@dimen/default_label_text_size"
                         android:textColor="@color/white" />
 
                     <com.viettel.mbccs.widget.FakeSpinner
@@ -113,6 +120,7 @@
                         android:layout_height="wrap_content"
                         android:onClick="@{()->presenter.choosePriceRange()}"
                         android:text="@{presenter.priceRange}"
+                        android:textSize="@dimen/default_label_text_size"
                         android:textColor="@color/white" />
 
                     <com.viettel.mbccs.widget.CustomTextView
@@ -120,6 +128,7 @@
                         android:layout_height="match_parent"
                         android:paddingTop="@dimen/dp_6"
                         android:text="@string/search_products_detail_title_model"
+                        android:textSize="@dimen/default_label_text_size"
                         android:textColor="@color/white" />
 
                     <com.viettel.mbccs.widget.FakeSpinner
@@ -127,6 +136,7 @@
                         android:layout_height="wrap_content"
                         android:onClick="@{()->presenter.chooseModel()}"
                         android:text="@{presenter.model}"
+                        android:textSize="@dimen/default_label_text_size"
                         android:textColor="@color/white" />
 
                     <com.viettel.mbccs.widget.CustomTextView
@@ -134,6 +144,7 @@
                         android:layout_height="match_parent"
                         android:paddingTop="@dimen/dp_6"
                         android:text="@string/search_products_detail_title_feature"
+                        android:textSize="@dimen/default_label_text_size"
                         android:textColor="@color/white" />
 
                     <com.viettel.mbccs.widget.FakeSpinner
@@ -141,6 +152,7 @@
                         android:layout_height="wrap_content"
                         android:onClick="@{()->presenter.chooseFeature()}"
                         android:text="@{presenter.feature}"
+                        android:textSize="@dimen/default_label_text_size"
                         android:textColor="@color/white" />
 
                     <ImageView
@@ -148,6 +160,7 @@
                         android:layout_height="wrap_content"
                         android:onClick="@{()->presenter.toogleExpand()}"
                         android:paddingTop="@dimen/dp_6"
+                        android:textSize="@dimen/default_label_text_size"
                         android:src="@drawable/collapse" />
                 </LinearLayout>
 

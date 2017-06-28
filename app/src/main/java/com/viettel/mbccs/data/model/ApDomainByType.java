@@ -16,6 +16,11 @@ public class ApDomainByType {
         String HINH_THUC_NHAN_THONG_BAO_CUOC = "308";
     }
 
+    public @interface SubType {
+        String PREPAID = "1";
+        String POSTPAID = "3";
+    }
+
     @SerializedName("code")
     @Expose
     private String code;
