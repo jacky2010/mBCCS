@@ -10,6 +10,7 @@ import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
 import android.os.Handler;
 import android.support.v4.content.LocalBroadcastManager;
+import android.view.WindowManager;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseActivity;
 import com.viettel.mbccs.constance.WsCode;
@@ -104,6 +105,8 @@ public class DownloadDataActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        
         binding = DataBindingUtil.setContentView(this, getIdLayout());
         binding.setPresenter(this);
         userRepository = UserRepository.getInstance();
@@ -118,6 +121,7 @@ public class DownloadDataActivity extends BaseActivity {
                 saveDataArea();
             }
         }, 500);
+
     }
 
     @Override

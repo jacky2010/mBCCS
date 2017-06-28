@@ -1,10 +1,12 @@
 package com.viettel.mbccs.screen.connector.fragment;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -16,6 +18,8 @@ import com.viettel.mbccs.data.model.Contract;
 import com.viettel.mbccs.data.model.Customer;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.databinding.FragmentCreateNewConnectorInformation1Binding;
+import com.viettel.mbccs.permission.PermissionListener;
+import com.viettel.mbccs.permission.PermissionsUtil;
 import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.widget.CustomSelectImageNo;
 
@@ -65,11 +69,15 @@ public class CreateNewConnectorInformation1Fragment extends BaseFragment
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        presenter = new CreateNewConnectorInformationFragmentPresenter(getActivity(), this);
-        presenter.subscribe();
         binding.setPresenter(presenter);
         binding.imageSelect.setSelectImageCallback(this);
         presenter.loadDataCreateView1();
+    }
+
+    @Override
+    public void onStop() {
+        presenter.unSubscribe();
+        super.onStop();
     }
 
     @Override
@@ -77,13 +85,12 @@ public class CreateNewConnectorInformation1Fragment extends BaseFragment
         if (binding != null) {
             binding.imageSelect.recycleBitmap();
         }
-        presenter.unSubscribe();
         super.onDestroy();
     }
 
     @Override
-    public void setPresenter(CreateNewConnectorInformationFragmentContract.Presenter presenter) {
-
+    public void setPresenter(CreateNewConnectorInformationFragmentContract.Presenter pre) {
+        this.presenter = (CreateNewConnectorInformationFragmentPresenter) pre;
     }
 
     @Override
@@ -105,6 +112,8 @@ public class CreateNewConnectorInformation1Fragment extends BaseFragment
     public void onNext() {
         CreateNewConnectorInformation2Fragment fragment;
         fragment = CreateNewConnectorInformation2Fragment.newInstance();
+        presenter.setView(fragment);
+
         FragmentTransaction transaction =
                 getActivity().getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.frame_connector_mobile, fragment);
@@ -143,6 +152,11 @@ public class CreateNewConnectorInformation1Fragment extends BaseFragment
     }
 
     @Override
+    public void validateNameCustomerError() {
+        DialogUtils.showDialog(getActivity(), "Tên khách hàng phải là chữ và số lượng nhỏ hơn 100 ký tự");
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
@@ -151,7 +165,18 @@ public class CreateNewConnectorInformation1Fragment extends BaseFragment
     }
 
     @Override
-    public void onSelectImage(Intent intent, int type) {
-        startActivityForResult(intent, type);
+    public void onSelectImage(final Intent intent, final int type) {
+        PermissionsUtil.requestPermission(getActivity(), new PermissionListener() {
+            @Override
+            public void permissionGranted(@NonNull String[] permissions) {
+                startActivityForResult(intent, type);
+            }
+
+            @Override
+            public void permissionDenied(@NonNull String[] permissions) {
+
+            }
+        }, new String[] { Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE });
+
     }
 }
