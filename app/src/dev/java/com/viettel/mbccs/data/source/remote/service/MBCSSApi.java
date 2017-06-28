@@ -137,7 +137,8 @@ public interface MBCSSApi {
             @Body DataRequest<GetListOrderRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_getListChannelByOwnerTypeId")
-    Observable<ServerDataResponse<BaseResponse<GetListChannelByOwnerTypeIdResponse>>> getListChannelByOwnerTypeId(
+    Observable<ServerDataResponse<BaseResponse<GetListChannelByOwnerTypeIdResponse>>>
+    getListChannelByOwnerTypeId(
             @Body DataRequest<GetListChannelByOwnerTypeIdRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_GetAllInfo")
@@ -145,7 +146,8 @@ public interface MBCSSApi {
             @Body DataRequest<GetAllInfoRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_GetTelecomServiceAndSaleProgram")
-    Observable<ServerDataResponse<BaseResponse<TelecomServiceAndSaleProgramResponse>>> getTelecomserviceAndSaleProgram(
+    Observable<ServerDataResponse<BaseResponse<TelecomServiceAndSaleProgramResponse>>>
+    getTelecomserviceAndSaleProgram(
             @Body DataRequest<GetTelecomServiceAndSaleProgramRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_GetListSerial")
@@ -161,7 +163,8 @@ public interface MBCSSApi {
             @Body DataRequest<GetReasonRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_CreateSaleTransFromOrder")
-    Observable<ServerDataResponse<BaseResponse<CreateSaleTransFromOrderResponse>>> createSaleTransFromOrder(
+    Observable<ServerDataResponse<BaseResponse<CreateSaleTransFromOrderResponse>>>
+    createSaleTransFromOrder(
             @Body DataRequest<CreateSaleTransFromOrderRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_UpdateSaleOrder")
@@ -177,19 +180,23 @@ public interface MBCSSApi {
             @Body DataRequest<GetInfoSaleTranRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_CreateSaleTransRetail")
-    Observable<ServerDataResponse<BaseResponse<CreateSaleTransRetailResponse>>> createSaleTransRetail(
+    Observable<ServerDataResponse<BaseResponse<CreateSaleTransRetailResponse>>>
+    createSaleTransRetail(
             @Body DataRequest<GetInfoSaleTranRequest> request);
 
     @POST("/getDistributtedChannelInfo")
-    Observable<ServerDataResponse<BaseResponse<GetDistributedChannelResponse>>> getDistributtedChannelInfo(
+    Observable<ServerDataResponse<BaseResponse<GetDistributedChannelResponse>>>
+    getDistributtedChannelInfo(
             @Body SearchBranchRequest request);
 
     @POST("/createDistributtedChannel")
-    Observable<ServerDataResponse<BaseResponse<CreateDistributedChannelResponse>>> createDistributtedChannel(
+    Observable<ServerDataResponse<BaseResponse<CreateDistributedChannelResponse>>>
+    createDistributtedChannel(
             @Body DataRequest<CreateDistributedChannelRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_CreateSaleTransChannel")
-    Observable<ServerDataResponse<BaseResponse<CreateSaleTransChannelResponse>>> createSaleTransChannel(
+    Observable<ServerDataResponse<BaseResponse<CreateSaleTransChannelResponse>>>
+    createSaleTransChannel(
             @Body DataRequest<CreateSaleTransChannelRequest> request);
 
     @POST("thonguyen/Sale_mBCCS/1.0.0/WS_getListStockModel")
@@ -225,7 +232,8 @@ public interface MBCSSApi {
             @Body DataRequest<GetRegiterSubInfoRequest> request);
 
     @POST("vietdt/CM_mBCCS/1.0.0/WS_getListBusTypeIdRequire")
-    Observable<ServerDataResponse<BaseResponse<GetListBusTypeIdRequireResponse>>> getListBusTypeIdRequire(
+    Observable<ServerDataResponse<BaseResponse<GetListBusTypeIdRequireResponse>>>
+    getListBusTypeIdRequire(
             @Body DataRequest<GetListBusTypeIdRequireRequest> request);
 
     @POST("vietdt/CM_mBCCS/1.0.0/WS_getApDomain")
@@ -377,7 +385,6 @@ public interface MBCSSApi {
     Observable<ServerDataResponse<BaseResponse<EmptyObject>>> createExpStock(
             @Body DataRequest<CreateExpStockRequest> requestDataRequest);
 
-
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<GetListProductResponse>>> getListProduct(
             @Body DataRequest<GetListProductRequest> request);
@@ -397,4 +404,8 @@ public interface MBCSSApi {
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<GetRegisterSubResponse>>> getRegiterSub(
             @Body DataRequest<GetRegisterSubRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<EmptyObject>>> createExpStockNotHaveCmd(
+            @Body DataRequest<CreateExpStockNotHaveCmdRequest> request);
 }

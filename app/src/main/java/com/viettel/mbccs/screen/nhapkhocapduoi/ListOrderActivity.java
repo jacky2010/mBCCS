@@ -8,14 +8,23 @@ import com.viettel.mbccs.screen.nhapkhocapduoi.createorder.CreateOrderActivity;
  * Created by Anh Vu Viet on 5/31/2017.
  */
 
-public class ListOrderActivity
-        extends BaseListOrderActivity<ListOrderPresenter>
+public class ListOrderActivity extends BaseListOrderActivity<ListOrderPresenter>
         implements ListOrderContract.ViewModel {
 
     @Override
     protected void initData() {
         mPresenter = new ListOrderPresenter(this, this);
         mBinding.setPresenter(mPresenter);
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
     }
 
     @Override

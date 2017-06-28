@@ -48,10 +48,6 @@ public class FindStockActivity
         mDrawer.open();
     }
 
-    @Override
-    public void setPresenter(FindStockContract.Presenter presenter) {
-
-    }
 
     @Override
     public void showLoading() {

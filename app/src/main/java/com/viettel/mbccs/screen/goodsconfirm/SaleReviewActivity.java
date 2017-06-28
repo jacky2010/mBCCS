@@ -57,10 +57,6 @@ public class SaleReviewActivity
         mBinding.setPresenter(mPresenter);
     }
 
-    @Override
-    public void setPresenter(SaleReviewContract.Presenter presenter) {
-
-    }
 
     @Override
     public void showLoading() {

@@ -12,10 +12,6 @@ import com.viettel.mbccs.screen.branches.fragments.SearchBranchFragment;
 public class BranchesActivity extends BaseDataBindActivity<ActivityBranchesBinding, BranchesPresenter>
         implements BranchesContract.ViewModel{
 
-    @Override
-    public void setPresenter(BranchesContract.Presenter presenter) {
-
-    }
 
     @Override
     public void showLoading() {

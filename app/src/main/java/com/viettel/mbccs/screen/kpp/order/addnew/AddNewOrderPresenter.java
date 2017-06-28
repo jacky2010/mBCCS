@@ -134,22 +134,6 @@ public class AddNewOrderPresenter implements AddNewOrderContract.Presenter {
         mSubscription.add(subscription);
     }
 
-    private void fakeData() {
-        StockTotal stock1 = new StockTotal();
-        stock1.setStockModelName("Iphone 7");
-        StockTotal stock2 = new StockTotal();
-        stock2.setStockModelName("Galaxy s8");
-        StockTotal stock3 = new StockTotal();
-        stock3.setStockModelName("Oppo F1s");
-        StockTotal stock4 = new StockTotal();
-        stock4.setStockModelName("LG G5");
-        mStockTotals.add(stock1);
-        mStockTotals.add(stock2);
-        mStockTotals.add(stock3);
-        mStockTotals.add(stock4);
-        mAdapter.notifyDataSetChanged();
-    }
-
     public void cancelClick() {
         ((Activity) mContext).finish();
     }

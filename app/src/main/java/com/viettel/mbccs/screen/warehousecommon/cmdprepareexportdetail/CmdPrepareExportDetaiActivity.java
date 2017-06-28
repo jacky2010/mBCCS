@@ -31,11 +31,6 @@ public abstract class CmdPrepareExportDetaiActivity extends
     public abstract String getHeaderTitle();
 
     @Override
-    public void setPresenter(CmdPrepareExportDetailContract.Presenter presenter) {
-
-    }
-
-    @Override
     protected int getIdLayout() {
         return R.layout.activity_cmd_prepare_export_detail;
     }
@@ -81,13 +76,18 @@ public abstract class CmdPrepareExportDetaiActivity extends
         for (StockTransDetail stockTransDetail : stockTransDetails) {
             stockTransDetail.getStockSerial();
         }
-        Intent intent = new Intent(CmdPrepareExportDetaiActivity.this, ExportSuccessDialog.class);
-        Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList(Constants.BundleConstant.STOCK_TRANS_DETAIL_LIST,
-                stockTransDetails);
-        intent.putExtras(bundle);
-        startActivity(intent);
-        finish();
+        ExportSuccessDialog exportSuccessDialog = ExportSuccessDialog.newInstance(stockTransDetails,
+                String.format(getString(R.string.warehouse_label_export_success_code), ""),
+                String.format(getString(R.string.warehouse_label_receive), ""));
+        exportSuccessDialog.setOnDialogDismissListener(
+                new ExportSuccessDialog.OnDialogDismissListener() {
+
+                    @Override
+                    public void onDialogDissmis() {
+                        finish();
+                    }
+                });
+        exportSuccessDialog.show(getSupportFragmentManager(), "");
     }
 
     @Override

@@ -83,11 +83,6 @@ public class SellOrdersActivity
     }
 
     @Override
-    public void setPresenter(SellOrdersContract.Presenter presenter) {
-
-    }
-
-    @Override
     public void showLoading() {
         showLoadingDialog(false);
     }

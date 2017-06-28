@@ -40,11 +40,6 @@ public class ListProductsDetailFragment extends BaseDataBindFragment<FragmentLis
     }
 
     @Override
-    public void setPresenter(ListProductsDetailContract.Presenter presenter) {
-
-    }
-
-    @Override
     public void showLoading() {
 
     }

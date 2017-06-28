@@ -89,10 +89,6 @@ public class OrderDetailFragment extends BaseFragment
         presenter.getDetailOrder(saleOrders);
     }
 
-    @Override
-    public void setPresenter(OrderDetailFragmentContract.Presenter presenter) {
-
-    }
 
     @Override
     public void showLoading() {

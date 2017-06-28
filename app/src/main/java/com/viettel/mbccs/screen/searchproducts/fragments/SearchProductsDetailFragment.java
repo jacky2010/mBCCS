@@ -25,10 +25,6 @@ public class SearchProductsDetailFragment extends BaseDataBindFragment<FragmentS
         return new SearchProductsDetailFragment();
     }
 
-    @Override
-    public void setPresenter(SearchProductsDetailContract.Presenter presenter) {
-
-    }
 
     @Override
     public void showLoading() {

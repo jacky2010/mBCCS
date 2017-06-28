@@ -52,11 +52,6 @@ public class ViewWarehouseSearchFragment extends BaseFragment
     }
 
     @Override
-    public void setPresenter(ViewWarehouseSearchContract.Presenter presenter) {
-
-    }
-
-    @Override
     public void showLoading() {
         showLoadingDialog();
     }

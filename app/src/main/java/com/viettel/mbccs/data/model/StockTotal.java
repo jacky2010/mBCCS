@@ -5,6 +5,8 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.viettel.mbccs.utils.Common;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by HuyQuyet on 5/21/17.
@@ -72,8 +74,55 @@ public class StockTotal implements Parcelable {
     @SerializedName("pathImage3")
     private String pathImage3;
 
+    @Expose
+    private StockSerial mStockSerial;
+
+    @Expose
+    private List<String> mSerials = new ArrayList<>();
+
+    private List<SerialBO> mSerialBlocks = new ArrayList<>();
 
     private int countChoice;
+
+    public List<SerialBO> getSerialBlocks() {
+        if (mSerialBlocks.size() == 0) {
+            if (mSerials.size() > 0) {
+                return Common.getSerialBlockBySerials(mSerials, stockModelId);
+            }
+        }
+        return mSerialBlocks;
+    }
+
+    public int getSerialCount() {
+        if (getSerialBlocks() == null) {
+            return 0;
+        }
+        return Common.getSerialCountByListSerialBlock(getSerialBlocks());
+    }
+
+    public boolean isPickSerialOk() {
+        return getSerialCount() == quantity;
+    }
+
+    public List<String> getSerials() {
+        return mSerials;
+    }
+
+    public void setSerials(List<String> serials) {
+        mSerials = serials;
+    }
+
+    public StockSerial getStockSerial() {
+        if (mStockSerial == null) {
+            mStockSerial = new StockSerial();
+            mStockSerial.setQuantity(quantity);
+            mStockSerial.setSerialBOs(getSerialBlocks());
+            mStockSerial.setStockModelId(stockModelId);
+            mStockSerial.setStockModelCode(stockModelCode);
+            mStockSerial.setStockModelName(stockModelName);
+        }
+        return mStockSerial;
+    }
 
     public void addChoice() {
         if (countChoice < quantity) {

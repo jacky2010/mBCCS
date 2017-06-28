@@ -25,11 +25,6 @@ public class CompareProductsDetailFragment extends BaseDataBindFragment<Fragment
     }
 
     @Override
-    public void setPresenter(CompareProductsDetailContract.Presenter presenter) {
-
-    }
-
-    @Override
     public void showLoading() {
 
     }

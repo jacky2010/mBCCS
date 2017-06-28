@@ -56,10 +56,6 @@ public class CreateUpdateInformationActivity extends
         dataList = new ArrayList<>();
     }
 
-    @Override
-    public void setPresenter(CreateUpdateInformationContract.Presenter presenter) {
-
-    }
 
     @Override
     public void showLoading() {

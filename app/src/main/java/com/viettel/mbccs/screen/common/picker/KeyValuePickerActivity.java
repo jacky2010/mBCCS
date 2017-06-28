@@ -65,10 +65,6 @@ public class KeyValuePickerActivity
         mPresenter.setTitle(bundle.getString(Constants.BundleConstant.FORM_TYPE, ""));
     }
 
-    @Override
-    public void setPresenter(KeyValuePickerContract.Presenter presenter) {
-
-    }
 
     @Override
     public void showLoading() {

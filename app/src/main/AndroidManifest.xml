@@ -208,8 +208,8 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.survey.SurveyActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"/>
         <!-- Area Channel -->
         <activity
             android:name=".screen.manager.area.AreaChanelActivity"
@@ -272,6 +272,9 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.searchproducts.SearchProductsActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screen.nhanvientrahang.LapPhieuXuatTraHangActivity"
             android:screenOrientation="portrait"/>
     </application>
 

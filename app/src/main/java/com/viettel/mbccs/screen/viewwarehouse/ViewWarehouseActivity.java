@@ -47,10 +47,6 @@ public class ViewWarehouseActivity
         }
     }
 
-    @Override
-    public void setPresenter(ViewWarehouseContract.Presenter presenter) {
-
-    }
 
     @Override
     public void showLoading() {

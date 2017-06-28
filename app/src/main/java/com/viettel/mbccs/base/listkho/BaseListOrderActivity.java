@@ -18,10 +18,6 @@ public abstract class BaseListOrderActivity<T extends BaseListOrderPresenter>
         return R.layout.activity_list_order_warehouse;
     }
 
-    @Override
-    public void setPresenter(BaseSearchListViewContract.Presenter presenter) {
-
-    }
 
     @Override
     public void showLoading() {

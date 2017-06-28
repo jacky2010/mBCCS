@@ -57,11 +57,6 @@ public class AddBranchFragment extends BaseDataBindFragment<FragmentAddBranchBin
     }
 
     @Override
-    public void setPresenter(AddBranchContract.Presenter presenter) {
-
-    }
-
-    @Override
     public void showLoading() {
 
     }

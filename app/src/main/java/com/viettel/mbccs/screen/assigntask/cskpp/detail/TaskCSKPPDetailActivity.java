@@ -29,10 +29,6 @@ public class TaskCSKPPDetailActivity extends
         mBinding.setPresenter(mPresenter);
     }
 
-    @Override
-    public void setPresenter(TaskCSKPPDetailContract.Presenter presenter) {
-
-    }
 
     @Override
     public void showLoading() {

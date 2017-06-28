@@ -12,10 +12,6 @@ import com.viettel.mbccs.screen.hotnewscskpp.fragments.SearchHotNewsCSKPPFragmen
 public class HotNewsCSKPPActivity extends BaseDataBindActivity<ActivityHotNewsCsKppBinding, HotNewsCSKPPPresenter>
         implements HotNewsCSKPPContract.ViewModel {
 
-    @Override
-    public void setPresenter(HotNewsCSKPPContract.Presenter presenter) {
-
-    }
 
     @Override
     public void showLoading() {

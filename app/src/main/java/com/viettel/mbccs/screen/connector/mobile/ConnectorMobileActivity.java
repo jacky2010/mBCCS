@@ -40,10 +40,6 @@ public class ConnectorMobileActivity
         super.onStart();
     }
 
-    @Override
-    public void setPresenter(ConnectorMobileContract.Presenter presenter) {
-
-    }
 
     @Override
     public void showLoading() {

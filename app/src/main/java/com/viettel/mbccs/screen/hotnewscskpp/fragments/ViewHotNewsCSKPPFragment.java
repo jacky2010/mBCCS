@@ -28,10 +28,6 @@ public class ViewHotNewsCSKPPFragment extends BaseDataBindFragment<FragmentViewH
         return new ViewHotNewsCSKPPFragment();
     }
 
-    @Override
-    public void setPresenter(ViewHotNewsCSKPPContract.Presenter presenter) {
-
-    }
 
     @Override
     public void showLoading() {

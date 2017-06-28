@@ -43,6 +43,7 @@ public class CreateNewConnectorInformation2Fragment extends Fragment
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        presenter=new CreateNewConnectorInformationFragmentPresenter(getActivity());
         binding.setPresenter(presenter);
         presenter.loadDataCreateView2();
     }
@@ -54,11 +55,7 @@ public class CreateNewConnectorInformation2Fragment extends Fragment
     }
 
     @Override
-    public void setPresenter(CreateNewConnectorInformationFragmentContract.Presenter pre) {
-        this.presenter = (CreateNewConnectorInformationFragmentPresenter) pre;
-    }
 
-    @Override
     public void showLoading() {
 
     }

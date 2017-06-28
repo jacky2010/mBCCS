@@ -26,10 +26,6 @@ public class CreateTransferAnyPayFragment extends BaseDataBindFragment<FragmentC
         return new CreateTransferAnyPayFragment();
     }
 
-    @Override
-    public void setPresenter(CreateTransferAnyPayContract.Presenter presenter) {
-
-    }
 
     @Override
     public void showLoading() {

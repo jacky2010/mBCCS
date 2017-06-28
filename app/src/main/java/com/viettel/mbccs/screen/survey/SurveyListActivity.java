@@ -29,10 +29,6 @@ public class SurveyListActivity
         mBinding.setPresenter(mPresenter);
     }
 
-    @Override
-    public void setPresenter(SurveyListContract.Presenter presenter) {
-
-    }
 
     @Override
     public void showLoading() {
