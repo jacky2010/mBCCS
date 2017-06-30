@@ -937,4 +937,11 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
         <item>Sản phẩm</item>
         <item>So sánh</item>
     </string-array>
+    <string-array name="search_products_detail_title_tabs_desc">
+        <item>Mô tả sản phẩm</item>
+        <item>Thông số kỹ thuật</item>
+        <item>Đánh giá</item>
+    </string-array>
+
+    <string name="view_product_detail_title">Chi tiết sản phẩm</string>
 </resources>

@@ -1,15 +1,18 @@
-package com.viettel.mbccs.screen.searchproducts.fragments;
+package com.viettel.mbccs.screen.viewproduct.fragment;
 
 import android.os.Bundle;
 
 import com.viettel.mbccs.base.BasePresenter;
 import com.viettel.mbccs.base.BaseView;
+import com.viettel.mbccs.data.model.KeyValue;
+
+import java.util.List;
 
 /**
  * Created by minhnx on 5/19/17.
  */
 
-public class ViewProductDetailContract {
+public class ViewProductDescriptionContract {
 
     interface ViewModel extends BaseView<Presenter> {
         void showError(String message);
@@ -18,6 +21,6 @@ public class ViewProductDetailContract {
     }
 
     interface Presenter extends BasePresenter {
-        void displayDetail();
+        void showDetailTabs(String description, List<KeyValue> features, List<KeyValue> comments);
     }
 }

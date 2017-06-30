@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.databinding.ItemProductColorBinding;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,10 +23,19 @@ public class AvailableColorsListAdapter extends RecyclerView.Adapter<AvailableCo
 
     private Context mContext;
     private List<Integer> mItems;
+    private List<Boolean> mSelectedIndex;
 
     public AvailableColorsListAdapter(Context context, List<Integer> items) {
         mContext = context;
         mItems = items;
+
+        mSelectedIndex = new ArrayList<>();
+
+        if (mItems != null) {
+            for (Integer item : mItems) {
+                mSelectedIndex.add(false);
+            }
+        }
     }
 
     public Context getContext() {
@@ -42,6 +52,27 @@ public class AvailableColorsListAdapter extends RecyclerView.Adapter<AvailableCo
 
     public void setItems(List<Integer> items) {
         mItems = items;
+
+        mSelectedIndex = new ArrayList<>();
+
+        if (mItems != null) {
+            for (Integer item : mItems) {
+                mSelectedIndex.add(false);
+            }
+        }
+    }
+
+    public void setSelectedIndex(int index) {
+        if (mSelectedIndex != null) {
+            for (int i = 0; i < mSelectedIndex.size(); i++) {
+                if (i == index)
+                    mSelectedIndex.set(i, true);
+                else
+                    mSelectedIndex.set(i, false);
+            }
+
+            notifyDataSetChanged();
+        }
     }
 
     public int getItem(int index) {
@@ -57,8 +88,9 @@ public class AvailableColorsListAdapter extends RecyclerView.Adapter<AvailableCo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.bind(mItems.get(position));
+        holder.bind(mItems.get(position), mSelectedIndex.get(position));
     }
+
 
     @Override
     public int getItemCount() {
@@ -87,9 +119,9 @@ public class AvailableColorsListAdapter extends RecyclerView.Adapter<AvailableCo
             mBinding = binding;
         }
 
-        public void bind(int item) {
+        public void bind(int item, boolean selected) {
             this.item = item;
-            ItemProductColorPresenter itemPresenter = new ItemProductColorPresenter(mContext, item);
+            ItemProductColorPresenter itemPresenter = new ItemProductColorPresenter(mContext, item, selected);
             mBinding.setItem(itemPresenter);
         }
     }
