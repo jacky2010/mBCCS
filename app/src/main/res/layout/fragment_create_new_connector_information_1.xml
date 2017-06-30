@@ -23,10 +23,9 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_56"
             app:background="@{@color/colorAccent}"
-            app:isAllCaps="@{true}"
             app:isShow="@{true}"
             app:leftIcon="@{@drawable/ic_arrow_left_white_24dp}"
-            app:leftIconClick="@{()->presenter.onCancel()}"
+            app:leftIconClick="@{()->presenter.onCancelNewView1()}"
             app:title="@{ @string/create_new_connector_information_title }"
             />
         <LinearLayout
@@ -197,6 +196,7 @@
                     android:text="@={ presenter.txtNumberPassport }"
                     style="@style/inputStyle"
                     />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -295,7 +295,7 @@
                         android:layout_marginRight="@dimen/dp_6"
                         android:layout_marginEnd="@dimen/dp_6"
                         android:layout_weight="1"
-                        android:onClick="@{ v -> presenter.onCancel() }"
+                        android:onClick="@{ v -> presenter.onCancelNewView1() }"
                         android:text="@string/create_new_connector_information_dong"
                         style="@style/button_nagative_grey_seven"
                         />

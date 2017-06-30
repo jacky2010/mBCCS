@@ -33,6 +33,8 @@ public interface CreateNewConnectorInformationFragmentContract {
         void loadDataSpinnerError(BaseException error);
 
         void loadDataSpinnerSuccess();
+
+        void validateNameCustomerError();
     }
 
     interface ViewFragment2 extends View {

@@ -22,6 +22,7 @@ public class FakeSpinner extends LinearLayout {
     private CustomEdittext mEdittext;
     private ImageView mImageView;
     private View mView;
+    private RelativeLayout root;
 
     @BindingAdapter("android:text")
     public static void setText(FakeSpinner fakeSpinner, CharSequence s) {
@@ -35,7 +36,7 @@ public class FakeSpinner extends LinearLayout {
 
     @BindingAdapter("android:onClick")
     public static void setOnClick(FakeSpinner fakeSpinner, View.OnClickListener onClick) {
-        fakeSpinner.getEdittext().setOnClickListener(onClick);
+        fakeSpinner.getRoot().setOnClickListener(onClick);
     }
 
     @BindingAdapter("themeLight")
@@ -44,8 +45,10 @@ public class FakeSpinner extends LinearLayout {
             spinner.getImageView().setImageResource(R.drawable.triangle_light);
             spinner.getEdittext()
                     .setTextColor(spinner.getContext().getResources().getColor(R.color.white));
-            spinner.getDivider().setBackgroundColor(spinner.getResources().getColor(R.color.white_light_theme));
-            spinner.getEdittext().setHintTextColor(spinner.getResources().getColor(R.color.white_trans));
+            spinner.getDivider()
+                    .setBackgroundColor(spinner.getResources().getColor(R.color.white_light_theme));
+            spinner.getEdittext()
+                    .setHintTextColor(spinner.getResources().getColor(R.color.white_trans));
         }
     }
 
@@ -76,6 +79,10 @@ public class FakeSpinner extends LinearLayout {
         return mImageView;
     }
 
+    public RelativeLayout getRoot() {
+        return root;
+    }
+
     public View getDivider() {
         return mView;
     }
@@ -83,8 +90,22 @@ public class FakeSpinner extends LinearLayout {
     private void initView() {
         ItemFakeSpinnerBinding item = DataBindingUtil.inflate(LayoutInflater.from(getContext()),
                 R.layout.item_fake_spinner, this, true);
-        mEdittext = item.text;
         mImageView = item.iconRight;
         mView = item.divider;
+        root = item.layoutRoot;
+        mEdittext = item.text;
+        mEdittext.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                root.performClick();
+            }
+        });
+        mImageView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                root.performClick();
+            }
+        });
+
     }
 }
