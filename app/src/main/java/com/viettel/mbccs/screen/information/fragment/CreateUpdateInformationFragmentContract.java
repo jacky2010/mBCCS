@@ -4,8 +4,8 @@ import android.graphics.Bitmap;
 import android.support.annotation.Nullable;
 import com.viettel.mbccs.base.BasePresenter;
 import com.viettel.mbccs.base.BaseView;
-import com.viettel.mbccs.data.model.Area;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.widget.CustomSelectAddress;
 
 /**
  * Created by HuyQuyet on 5/29/17.
@@ -21,13 +21,7 @@ public interface CreateUpdateInformationFragmentContract {
 
         void onCancel();
 
-        Area getAreaProvince();
-
-        Area getAreaDistrict();
-
-        Area getAreaPrecinct();
-
-        String getAddress();
+        CustomSelectAddress.Address getAddress();
 
         String getBirthDate();
 
@@ -47,13 +41,9 @@ public interface CreateUpdateInformationFragmentContract {
 
         void checkOTPError(BaseException error);
 
-        void isOTPEmpty();
-
         void selectNoticeChargeError();
 
-        void customerError();
-
-        void IsdnImsiError();
+        void customerBirthdayError();
 
         void updateAllSubInfoError(BaseException error);
 

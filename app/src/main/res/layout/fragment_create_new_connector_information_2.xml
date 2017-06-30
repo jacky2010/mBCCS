@@ -21,7 +21,7 @@
             layout="@layout/toolbar"
             android:id="@+id/toolbar_update_information"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_40"
+            android:layout_height="@dimen/dp_56"
             app:background="@{@color/colorAccent}"
             app:isShow="@{true}"
             app:leftIcon="@{@drawable/ic_arrow_left_white_24dp}"
@@ -125,13 +125,13 @@
                     android:layout_height="wrap_content"
                     android:text="@string/create_new_connector_information_loai_thue_bao"
                     style="@style/textTitleInput"
+                    android:layout_marginTop="@dimen/dp_4"
                     />
 
                 <com.viettel.mbccs.widget.SpinnerWithBorder
                     android:id="@+id/spinner_create_connector_2_loai_thue_bao"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_2"
                     bind:adapter="@{ presenter.adapterSpinner2LoaiThueBao }"
                     />
 
@@ -140,13 +140,13 @@
                     android:layout_height="wrap_content"
                     android:text="@string/create_new_connector_information_hinh_thuc_hoa_mang"
                     style="@style/textTitleInput"
+                    android:layout_marginTop="@dimen/dp_4"
                     />
 
                 <com.viettel.mbccs.widget.SpinnerWithBorder
                     android:id="@+id/spinner_create_connector_2_hinh_thuc_hoa_mang"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_2"
                     bind:adapter="@{ presenter.adapterSpinner2HTHoaMang }"
                     />
 
@@ -155,12 +155,12 @@
                     android:layout_height="wrap_content"
                     android:text="@string/create_new_connector_information_so_isdn"
                     style="@style/textTitleInput"
+                    android:layout_marginTop="@dimen/dp_4"
                     />
 
                 <com.viettel.mbccs.widget.CustomEdittext
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_2"
                     android:text="@={ presenter.noIsdn }"
                     style="@style/inputStyle"
                     />
@@ -170,12 +170,12 @@
                     android:layout_height="wrap_content"
                     android:text="@string/create_new_connector_information_serial"
                     style="@style/textTitleInput"
+                    android:layout_marginTop="@dimen/dp_4"
                     />
 
                 <com.viettel.mbccs.widget.CustomEdittext
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_2"
                     android:text="@={ presenter.serial }"
                     style="@style/inputStyle"
                     />
@@ -185,12 +185,12 @@
                     android:layout_height="wrap_content"
                     android:text="@string/create_new_connector_information_thong_tin_hang_hoa_di_kem"
                     style="@style/textTitleInput"
+                    android:layout_marginTop="@dimen/dp_4"
                     />
 
                 <com.viettel.mbccs.widget.CustomEdittext
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_2"
                     android:text="@={ presenter.informationStock }"
                     android:drawableEnd="@drawable/ic_search_black_24dp"
                     android:drawableRight="@drawable/ic_search_black_24dp"

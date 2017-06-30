@@ -63,7 +63,7 @@ public class CreateUpdateInformationActivity extends
 
     @Override
     public void showLoading() {
-        showLoadingDialog();
+        showLoadingDialog(false);
     }
 
     @Override
@@ -129,12 +129,6 @@ public class CreateUpdateInformationActivity extends
                 finish();
             }
         }, false);
-    }
-
-    @Override
-    public void showDialogValidate() {
-        DialogUtils.showDialog(this,
-                getString(R.string.create_update_information_create_validate_field));
     }
 
     @Override

@@ -15,7 +15,7 @@ public class Data {
         String FEMALE = "N";
     }
 
-    public static List<DataField> connectorMobileServiceString() {
+    public static List<DataField> connectorTelServiceType() {
         List<DataField> result = new ArrayList<>();
         result.add(new DataField("M", "Mobile"));
         result.add(new DataField("H", "Homephone"));
@@ -27,7 +27,7 @@ public class Data {
         return result;
     }
 
-    public static List<DataField> connectorMobileServiceInt() {
+    public static List<DataField> connectorTelServiceId() {
         List<DataField> result = new ArrayList<>();
         result.add(new DataField("1", "Mobile"));
         result.add(new DataField("2", "Homephone"));

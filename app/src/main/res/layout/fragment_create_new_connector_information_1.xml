@@ -122,6 +122,7 @@
                     />
 
                 <com.viettel.mbccs.widget.CustomDatePicker
+                    android:id="@+id/birthDate"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_40"
                     android:layout_marginTop="@dimen/dp_6"
@@ -195,6 +196,7 @@
                     android:layout_marginTop="@dimen/dp_2"
                     android:text="@={ presenter.txtNumberPassport }"
                     style="@style/inputStyle"
+                    android:inputType="number"
                     />
 
                 <LinearLayout
@@ -225,6 +227,7 @@
                     android:orientation="horizontal"
                     >
                     <com.viettel.mbccs.widget.CustomDatePicker
+                        android:id="@+id/date_create_passport"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/dp_40"
                         android:layout_marginRight="@dimen/dp_6"
@@ -234,6 +237,7 @@
                         bind:setDate="@{ presenter.dateCreatePassport }"
                         />
                     <com.viettel.mbccs.widget.CustomDatePicker
+                        android:id="@+id/date_out_date_passport"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/dp_40"
                         android:layout_marginLeft="@dimen/dp_6"
@@ -256,7 +260,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_2"
-                    android:text="@={ presenter.whereCreatePassport }"
+                    android:text="@={ presenter.placeCreatePassport }"
                     style="@style/inputStyle"
                     />
 

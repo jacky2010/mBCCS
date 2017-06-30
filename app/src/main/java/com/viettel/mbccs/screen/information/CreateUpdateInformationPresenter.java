@@ -49,6 +49,8 @@ public class CreateUpdateInformationPresenter implements CreateUpdateInformation
 
     public ObservableField<String> isdn;
     public ObservableField<String> idNo;
+    public ObservableField<String> isdnError;
+    public ObservableField<String> idNoError;
     public ObservableField<SpinnerAdapter<ApDomainByType>> adapterPassportType;
 
     public CreateUpdateInformationPresenter(Context context,
@@ -65,6 +67,9 @@ public class CreateUpdateInformationPresenter implements CreateUpdateInformation
         // TODO: 6/22/17 fix data test
         isdn = new ObservableField<>("624638439");
         idNo = new ObservableField<>("122026111");
+
+        isdnError = new ObservableField<>();
+        idNoError = new ObservableField<>();
         adapterPassportType = new ObservableField<>();
     }
 
@@ -83,8 +88,7 @@ public class CreateUpdateInformationPresenter implements CreateUpdateInformation
     }
 
     public void onSearch() {
-        if (StringUtils.isEmpty(isdn.get()) || StringUtils.isEmpty(idNo.get())) {
-            view.showDialogValidate();
+        if (!validateField()) {
             return;
         }
         view.showLoading();
@@ -245,5 +249,26 @@ public class CreateUpdateInformationPresenter implements CreateUpdateInformation
 
                     }
                 });
+    }
+
+    /**
+     * @return false if exists field null or empty
+     */
+    private boolean validateField() {
+        boolean result = true;
+        isdnError.set(null);
+        idNoError.set(null);
+
+        if (StringUtils.isEmpty(idNo.get())) {
+            idNoError.set(context.getString(R.string.input_empty));
+            result = false;
+        }
+
+        if (StringUtils.isEmpty(isdn.get())) {
+            isdnError.set(context.getString(R.string.input_empty));
+            result = false;
+        }
+
+        return result;
     }
 }
