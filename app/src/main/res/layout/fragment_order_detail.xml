@@ -9,7 +9,7 @@
             type="com.viettel.mbccs.screen.sell.orders.fragment.orderdetail.OrderDetailFragmentPresenter"
             />
     </data>
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/grey_five"
@@ -26,10 +26,11 @@
             app:title="@{ @string/order_detail_title(presenter.idOrder) }"
             />
         <android.support.v7.widget.RecyclerView
-            android:layout_height="wrap_content"
             android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
             android:layout_below="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:adapter="@{ presenter.adapterOrderDetail }"
             />
         <LinearLayout
@@ -166,6 +167,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/dp_1"
+                android:layout_marginEnd="@dimen/dp_1"
                 android:layout_weight="1"
                 android:onClick="@{ v -> presenter.onCancelSell() }"
                 android:text="@string/order_detail_cancel"
@@ -175,11 +177,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_1"
+                android:layout_marginStart="@dimen/dp_1"
                 android:layout_weight="1"
                 android:onClick="@{ v -> presenter.onClickSell() }"
                 android:text="@string/order_detail_ok"
                 style="@style/button_positive"
                 />
         </LinearLayout>
-    </RelativeLayout>
+    </LinearLayout>
 </layout>

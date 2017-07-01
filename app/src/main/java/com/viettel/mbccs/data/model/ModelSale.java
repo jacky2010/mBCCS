@@ -23,9 +23,9 @@ public class ModelSale implements Serializable, Parcelable {
     @Expose
     private String stockModelCode;
 
-    @SerializedName("stockMoldeName")
+    @SerializedName("stockModelName")
     @Expose
-    private String stockMoldeName;
+    private String stockModelName;
 
     @SerializedName("quantity")
     @Expose
@@ -75,7 +75,7 @@ public class ModelSale implements Serializable, Parcelable {
     protected ModelSale(Parcel in) {
         stockModelId = in.readLong();
         stockModelCode = in.readString();
-        stockMoldeName = in.readString();
+        stockModelName = in.readString();
         quantity = in.readLong();
         quantityIssue = in.readLong();
         pathImage1 = in.readString();
@@ -111,7 +111,7 @@ public class ModelSale implements Serializable, Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(stockModelId);
         dest.writeString(stockModelCode);
-        dest.writeString(stockMoldeName);
+        dest.writeString(stockModelName);
         dest.writeLong(quantity);
         dest.writeLong(quantityIssue);
         dest.writeString(pathImage1);
@@ -226,12 +226,12 @@ public class ModelSale implements Serializable, Parcelable {
         this.stockModelCode = stockModelCode;
     }
 
-    public String getStockMoldeName() {
-        return stockMoldeName;
+    public String getStockModelName() {
+        return stockModelName;
     }
 
-    public void setStockMoldeName(String stockMoldeName) {
-        this.stockMoldeName = stockMoldeName;
+    public void setStockModelName(String stockModelName) {
+        this.stockModelName = stockModelName;
     }
 
     public long getQuantity() {

@@ -153,9 +153,9 @@ public class SellOrdersPresenter {
         GetListOrderRequest getListOrderRequest = new GetListOrderRequest();
         getListOrderRequest.setShopId(staffInfo.get().getShopId());
         getListOrderRequest.setStaffId(staffInfo.get().getStaffId());
-        getListOrderRequest.setToDate(sellOrdersView.getStringDateTo());
-        getListOrderRequest.setFromDate(sellOrdersView.getStringDateFrom());
-        getListOrderRequest.setOrderStatus(staffInfo.get().getStatus());
+        getListOrderRequest.setEndDate(sellOrdersView.getStringDateTo());
+        getListOrderRequest.setStartDate(sellOrdersView.getStringDateFrom());
+//        getListOrderRequest.setOrderStatus(staffInfo.get().getStatus());
 
         DataRequest<GetListOrderRequest> baseRequest = new DataRequest<>();
         baseRequest.setWsCode(WsCode.GetListOrder);

@@ -12,6 +12,7 @@ import com.viettel.mbccs.data.model.SaleOrders;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.databinding.ActivitySellOrdersBinding;
 import com.viettel.mbccs.screen.sell.orders.adapter.SellOrdersFragmentAdapter;
+import com.viettel.mbccs.screen.sell.orders.listener.ChangeStatusOrderCallback;
 import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.widget.MultiDirectionSlidingDrawer;
 import java.util.ArrayList;
@@ -23,11 +24,12 @@ import java.util.List;
 
 public class SellOrdersActivity
         extends BaseDataBindActivity<ActivitySellOrdersBinding, SellOrdersPresenter>
-        implements SellOrdersContract.View {
+        implements SellOrdersContract.View, ChangeStatusOrderCallback {
 
     private SellOrdersPresenter presenter;
     private SellOrdersFragmentAdapter sellOrdersFragmentAdapter;
     private List<SaleOrders> saleOrdersList;
+    private ChannelInfo channelInfo;
     private List<String> titleList;
 
     @Override
@@ -53,6 +55,7 @@ public class SellOrdersActivity
         mBinding.setPresenter(presenter);
         presenter.subscribe();
         saleOrdersList = new ArrayList<>();
+        channelInfo = new ChannelInfo();
         titleList = new ArrayList<>();
 
 //        mBinding.spinnerChannelSellOrder.setOnItemSelectedListener(
@@ -71,6 +74,7 @@ public class SellOrdersActivity
 
         mBinding.tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         sellOrdersFragmentAdapter = new SellOrdersFragmentAdapter(getSupportFragmentManager());
+        sellOrdersFragmentAdapter.setConfirmTransactionSellCancelCallback(this);
         presenter.setSellOrdersFragmentAdapter(sellOrdersFragmentAdapter);
         mBinding.tabLayout.setupWithViewPager(mBinding.vpPager);
     }
@@ -89,7 +93,7 @@ public class SellOrdersActivity
 
     private void initView() {
         setTitleList(0, 0, 0);
-        sellOrdersFragmentAdapter.setData(saleOrdersList, new ChannelInfo(), titleList);
+        sellOrdersFragmentAdapter.setData(saleOrdersList, channelInfo, titleList);
     }
 
     @Override
@@ -99,7 +103,7 @@ public class SellOrdersActivity
 
     @Override
     public void showLoading() {
-        showLoadingDialog();
+        showLoadingDialog(false);
     }
 
     @Override
@@ -109,6 +113,8 @@ public class SellOrdersActivity
 
     @Override
     public void setDataResult(List<SaleOrders> saleOrdersList, ChannelInfo channelInfoSelect) {
+        this.saleOrdersList = saleOrdersList;
+        this.channelInfo = channelInfoSelect;
         int countApp = 0, countPen = 0, countRe = 0;
         if (saleOrdersList == null || saleOrdersList.size() == 0) {
             DialogUtils.showDialog(this, null, "Không tìm thấy dữ liệu", "OK", null, null, null);
@@ -120,7 +126,7 @@ public class SellOrdersActivity
             return;
         }
 
-        for (SaleOrders saleOrders : saleOrdersList) {
+        for (SaleOrders saleOrders : this.saleOrdersList) {
             if (saleOrders.getOrderStatus().equals(OrderStatus.APPROVALS)) {
                 countApp++;
             } else if (saleOrders.getOrderStatus().equals(OrderStatus.PENDING)) {
@@ -132,7 +138,7 @@ public class SellOrdersActivity
 
         setTitleList(countPen, countApp, countRe);
 
-        sellOrdersFragmentAdapter.setData(saleOrdersList, channelInfoSelect, titleList);
+        sellOrdersFragmentAdapter.setData(this.saleOrdersList, channelInfo, titleList);
     }
 
     private void setTitleList(int countPen, int countApp, int countRe) {
@@ -189,5 +195,10 @@ public class SellOrdersActivity
     @Override
     public void showErrorDate() {
         DialogUtils.showDialog(this, "Thoi gian toi da 1 thang ");
+    }
+
+    @Override
+    public void callback(long saleOrdersId, @OrderStatus String orderStatus) {
+        presenter.clickSearch();
     }
 }

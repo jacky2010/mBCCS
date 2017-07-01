@@ -14,11 +14,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseFragment;
-import com.viettel.mbccs.constance.WsCode;
+import com.viettel.mbccs.constance.OrderStatus;
 import com.viettel.mbccs.constance.PaymentMethod;
 import com.viettel.mbccs.constance.PriceType;
 import com.viettel.mbccs.constance.ReasonType;
-import com.viettel.mbccs.constance.SaleOrderNewStatus;
+import com.viettel.mbccs.constance.SaleTranType;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.Customer;
 import com.viettel.mbccs.data.model.Reason;
@@ -38,6 +39,7 @@ import com.viettel.mbccs.data.source.remote.response.UpdateSaleOrderResponse;
 import com.viettel.mbccs.databinding.FragmentConfirmTransactionSellCancelBinding;
 import com.viettel.mbccs.screen.common.success.DialogFullScreen;
 import com.viettel.mbccs.screen.sell.orders.fragment.orderdetail.OrderDetailFragment;
+import com.viettel.mbccs.screen.sell.orders.listener.ChangeStatusOrderCallback;
 import com.viettel.mbccs.utils.Common;
 import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.SpinnerAdapter;
@@ -64,6 +66,7 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
     private Reason reason;
     private List<String> dataSpinnerReason;
     private CompositeSubscription subscriptions;
+    private ChangeStatusOrderCallback callback;
 
     /**
      * isSell -> status of fragment
@@ -205,10 +208,11 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
                 : getString(R.string.confirm_transaction_btn_cancel));
         colorButton.set(isSell ? R.color.green : R.color.red_button);
         idSaleTrans.set(getString(R.string.confirm_transaction_sell_cancel_ma_don_hang)
-                + saleTrans.getSaleTransId());
+                + saleOrders.getSaleOrdersId());
         phoneNumberChange.set(channelInfoSell.getTel());
         nameChange.set(channelInfoSell.getChannelName());
-        sumMoneyTransaction.set(Common.formatDouble(saleTrans.getAmountTax()));
+        sumMoneyTransaction.set(
+                saleTrans == null ? "0" : Common.formatDouble(saleTrans.getAmountTax()));
     }
 
     public void onClose() {
@@ -231,7 +235,7 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
             serial.setSerialBOs(saleOrdersDetail.getLstSerial());
             serial.setStockModelId(saleOrdersDetail.getStockModelId());
             serial.setStockModelCode(saleOrdersDetail.getStockModelCode());
-            serial.setStockMoldeName(saleOrdersDetail.getStockMoldeName());
+            serial.setStockModelName(saleOrdersDetail.getStockModelName());
             serial.setQuantity(saleOrdersDetail.getQuantity());
             stockSerials.add(serial);
         }
@@ -241,12 +245,15 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
         c.setStaffId(channelInfoSell.getChannelId());
 
         Customer customer = new Customer();
-        customer.setCustomerName(saleTrans.getCustName());
+        customer.setCustomerName(channelInfoSell.getChannelName());
+        customer.setAddress(channelInfoSell.getAddress());
+        customer.setTin("");
 
         c.setCustomer(customer);
         c.setLstSerialSale(stockSerials);
         c.setPaymentMethod(PaymentMethod.PAYMENT_CASH);
         c.setPriceType(PriceType.PRICE_CHANNEL);
+        c.setSaleTransType(String.valueOf(SaleTranType.SALE_CHANNEL));
 
         DataRequest<GetInfoSaleTranRequest> request = new DataRequest<>();
         request.setWsCode(WsCode.CreateSaleTransRetail);
@@ -256,6 +263,9 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
                 .subscribe(new MBCCSSubscribe<CreateSaleTransRetailResponse>() {
                     @Override
                     public void onSuccess(CreateSaleTransRetailResponse object) {
+                        if (callback != null) {
+                            callback.callback(saleOrders.getSaleOrdersId(), OrderStatus.APPROVALS);
+                        }
                         sellOrderSuccess(true);
                     }
 
@@ -270,9 +280,8 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
     private void cancelSell() {
         UpdateSaleOrderRequest u = new UpdateSaleOrderRequest();
         u.setSaleOrderId(String.valueOf(saleOrders.getSaleOrdersId()));
-        u.setNewStatus(SaleOrderNewStatus.DA_HUY);
+        u.setNewStatus(OrderStatus.REJECT);
         u.setReasonId(reason.getReasonId());
-        u.setSaleTransId(saleTrans.getSaleTransId());
 
         DataRequest<UpdateSaleOrderRequest> request = new DataRequest<>();
 
@@ -283,6 +292,9 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
                 .subscribe(new MBCCSSubscribe<UpdateSaleOrderResponse>() {
                     @Override
                     public void onSuccess(UpdateSaleOrderResponse object) {
+                        if (callback != null) {
+                            callback.callback(saleOrders.getSaleOrdersId(), OrderStatus.REJECT);
+                        }
                         sellOrderSuccess(false);
                     }
 
@@ -331,5 +343,10 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
         dia.setCancelable(false);
         dia.setCanceledOnTouchOutside(false);
         dia.show();
+    }
+
+    public void setConfirmTransactionSellCancelCallback(
+            ChangeStatusOrderCallback callback) {
+        this.callback = callback;
     }
 }

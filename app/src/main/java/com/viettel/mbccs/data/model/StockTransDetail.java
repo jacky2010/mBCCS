@@ -88,7 +88,7 @@ public class StockTransDetail implements Parcelable {
             mStockSerial.setSerialBOs(getSerialBlocks());
             mStockSerial.setStockModelId(stockModelId);
             mStockSerial.setStockModelCode(stockModelCode);
-            mStockSerial.setStockMoldeName(stockModelName);
+            mStockSerial.setStockModelName(stockModelName);
         }
         return mStockSerial;
     }

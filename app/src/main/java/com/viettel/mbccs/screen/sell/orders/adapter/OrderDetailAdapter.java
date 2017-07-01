@@ -1,5 +1,6 @@
 package com.viettel.mbccs.screen.sell.orders.adapter;
 
+import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,12 +18,15 @@ import java.util.List;
 
 public class OrderDetailAdapter
         extends RecyclerView.Adapter<OrderDetailAdapter.OrderDetailViewHolder> {
+
+    //    private Context context;
     private ItemOrderDetailBinding binding;
     private List<SaleOrdersDetail> saleOrdersDetailList;
     private OrderDetailAdapterCallback callback;
     private UserRepository userRepository;
 
     public OrderDetailAdapter(List<SaleOrdersDetail> saleOrdersDetailList) {
+        //        this.context = context;
         this.saleOrdersDetailList = saleOrdersDetailList;
         userRepository = UserRepository.getInstance();
     }
@@ -56,6 +60,7 @@ public class OrderDetailAdapter
         public ObservableField<String> quantityStock;
         public ObservableField<String> countStock;
         public ObservableField<String> selectStock;
+        public ObservableBoolean isShowSerial;
 
         public OrderDetailViewHolder(ItemOrderDetailBinding itemView) {
             super(itemView.getRoot());
@@ -66,6 +71,7 @@ public class OrderDetailAdapter
             quantityStock = new ObservableField<>();
             countStock = new ObservableField<>();
             selectStock = new ObservableField<>();
+            isShowSerial = new ObservableBoolean(true);
         }
 
         public void bind(SaleOrdersDetail item, int pos) {
@@ -75,13 +81,15 @@ public class OrderDetailAdapter
             }
             position = pos;
             saleOrdersDetail = item;
-            Image image = userRepository.getImageFromDatabase(item.getStockModelCode());
+            Image image =
+                    userRepository.getImageFromDatabase(String.valueOf(item.getStockModelId()));
             imageUrl.set(image.getImagePath());
-            nameStock.set(saleOrdersDetail.getStockMoldeName());
-            priceStock.set(Common.formatDouble(saleOrdersDetail.getModelSale().getPrice()));
+            nameStock.set(saleOrdersDetail.getStockModelName());
+            priceStock.set(Common.formatDouble(saleOrdersDetail.getPrice()));
             quantityStock.set(String.valueOf(saleOrdersDetail.getQuantity()));
-            countStock.set(String.valueOf(saleOrdersDetail.getModelSale().getChoiceCount()));
+            countStock.set(String.valueOf(saleOrdersDetail.getQuantityIssue()));
             selectStock.set(String.valueOf(saleOrdersDetail.getSelect()));
+            isShowSerial.set(saleOrdersDetail.getCheckSerial() == 1);
         }
 
         public void selectSerial() {

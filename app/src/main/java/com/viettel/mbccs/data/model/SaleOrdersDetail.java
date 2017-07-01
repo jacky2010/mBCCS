@@ -28,17 +28,21 @@ public class SaleOrdersDetail implements Parcelable {
     @Expose
     private String stockModelCode;
 
-    @SerializedName("stockMoldeName")
+    @SerializedName("stockModelName")
     @Expose
-    private String stockMoldeName;
+    private String stockModelName;
 
     @SerializedName("quantity")
     @Expose
     private long quantity;
 
-    @SerializedName("modelSale")
+    @SerializedName("quantityIssue")
     @Expose
-    private ModelSale modelSale;
+    private long quantityIssue;
+
+    @SerializedName("checkSerial")
+    @Expose
+    private long checkSerial;
 
     @SerializedName("price")
     @Expose
@@ -59,10 +63,9 @@ public class SaleOrdersDetail implements Parcelable {
         saleOrdersDetailId = in.readLong();
         stockModelId = in.readLong();
         stockModelCode = in.readString();
-        stockMoldeName = in.readString();
+        stockModelName = in.readString();
         quantity = in.readLong();
         lstSerial = in.createTypedArrayList(SerialBO.CREATOR);
-        modelSale = in.readParcelable(ModelSale.class.getClassLoader());
         select = in.readInt();
         price = in.readDouble();
     }
@@ -90,12 +93,11 @@ public class SaleOrdersDetail implements Parcelable {
         dest.writeLong(saleOrdersDetailId);
         dest.writeLong(stockModelId);
         dest.writeString(stockModelCode);
-        dest.writeString(stockMoldeName);
+        dest.writeString(stockModelName);
         dest.writeLong(quantity);
         dest.writeTypedList(lstSerial);
         dest.writeInt(select);
         dest.writeDouble(price);
-        dest.writeParcelable(modelSale, flags);
     }
 
     public long getSaleOrdersId() {
@@ -130,12 +132,12 @@ public class SaleOrdersDetail implements Parcelable {
         this.stockModelCode = stockModelCode;
     }
 
-    public String getStockMoldeName() {
-        return stockMoldeName;
+    public String getStockModelName() {
+        return stockModelName;
     }
 
-    public void setStockMoldeName(String stockMoldeName) {
-        this.stockMoldeName = stockMoldeName;
+    public void setStockModelName(String stockModelName) {
+        this.stockModelName = stockModelName;
     }
 
     public long getQuantity() {
@@ -146,20 +148,28 @@ public class SaleOrdersDetail implements Parcelable {
         this.quantity = quantity;
     }
 
+    public long getQuantityIssue() {
+        return quantityIssue;
+    }
+
+    public void setQuantityIssue(long quantityIssue) {
+        this.quantityIssue = quantityIssue;
+    }
+
+    public long getCheckSerial() {
+        return checkSerial;
+    }
+
+    public void setCheckSerial(long checkSerial) {
+        this.checkSerial = checkSerial;
+    }
+
     public List<SerialBO> getLstSerial() {
         return lstSerial;
     }
 
     public void setLstSerial(List<SerialBO> lstSerial) {
         this.lstSerial = lstSerial;
-    }
-
-    public ModelSale getModelSale() {
-        return modelSale;
-    }
-
-    public void setModelSale(ModelSale modelSale) {
-        this.modelSale = modelSale;
     }
 
     public int getSelect() {
