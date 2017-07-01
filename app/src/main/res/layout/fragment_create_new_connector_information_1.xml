@@ -23,10 +23,9 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_56"
             app:background="@{@color/colorAccent}"
-            app:isAllCaps="@{true}"
             app:isShow="@{true}"
             app:leftIcon="@{@drawable/ic_arrow_left_white_24dp}"
-            app:leftIconClick="@{()->presenter.onCancel()}"
+            app:leftIconClick="@{()->presenter.onCancelNewView1()}"
             app:title="@{ @string/create_new_connector_information_title }"
             />
         <LinearLayout
@@ -123,6 +122,7 @@
                     />
 
                 <com.viettel.mbccs.widget.CustomDatePicker
+                    android:id="@+id/birthDate"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_40"
                     android:layout_marginTop="@dimen/dp_6"
@@ -196,7 +196,9 @@
                     android:layout_marginTop="@dimen/dp_2"
                     android:text="@={ presenter.txtNumberPassport }"
                     style="@style/inputStyle"
+                    android:inputType="number"
                     />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -225,6 +227,7 @@
                     android:orientation="horizontal"
                     >
                     <com.viettel.mbccs.widget.CustomDatePicker
+                        android:id="@+id/date_create_passport"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/dp_40"
                         android:layout_marginRight="@dimen/dp_6"
@@ -234,6 +237,7 @@
                         bind:setDate="@{ presenter.dateCreatePassport }"
                         />
                     <com.viettel.mbccs.widget.CustomDatePicker
+                        android:id="@+id/date_out_date_passport"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/dp_40"
                         android:layout_marginLeft="@dimen/dp_6"
@@ -256,7 +260,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_2"
-                    android:text="@={ presenter.whereCreatePassport }"
+                    android:text="@={ presenter.placeCreatePassport }"
                     style="@style/inputStyle"
                     />
 
@@ -295,7 +299,7 @@
                         android:layout_marginRight="@dimen/dp_6"
                         android:layout_marginEnd="@dimen/dp_6"
                         android:layout_weight="1"
-                        android:onClick="@{ v -> presenter.onCancel() }"
+                        android:onClick="@{ v -> presenter.onCancelNewView1() }"
                         android:text="@string/create_new_connector_information_dong"
                         style="@style/button_nagative_grey_seven"
                         />

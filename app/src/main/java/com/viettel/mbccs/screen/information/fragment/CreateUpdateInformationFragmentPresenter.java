@@ -13,8 +13,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.Data;
-import com.viettel.mbccs.constance.MobileService;
 import com.viettel.mbccs.constance.MobileType;
+import com.viettel.mbccs.constance.TelServiceId;
 import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.ApDomainByType;
 import com.viettel.mbccs.data.model.Area;
@@ -50,11 +50,11 @@ import com.viettel.mbccs.utils.ImageUtils;
 import com.viettel.mbccs.utils.SpinnerAdapter;
 import com.viettel.mbccs.utils.StringUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
+import com.viettel.mbccs.widget.CustomSelectAddress;
 import com.viettel.mbccs.widget.callback.DrawableClickListener;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import rx.Observable;
 import rx.Subscription;
 import rx.functions.Func1;
@@ -71,6 +71,7 @@ public class CreateUpdateInformationFragmentPresenter
     private final int TimeDelayHideDialogLoading = 100;
     private final String StringNull = null;
     private final Integer IntegerNull = null;
+    private String stringError = null;
     private Context context;
     private CreateUpdateInformationFragmentContract.View view;
     private QLKhachHangRepository qlKhachHangRepository;
@@ -114,6 +115,12 @@ public class CreateUpdateInformationFragmentPresenter
     public ObservableField<String> textOTP;
     public ObservableField<String> setDate;
 
+    public ObservableField<String> isdnError;
+    public ObservableField<String> serialError;
+    public ObservableField<String> nameCustomerError;
+    public ObservableField<String> numberPassportError;
+    public ObservableField<String> otpError;
+
     public ObservableBoolean isEnabledTxtNumberPassport;
     public ObservableBoolean isEnabledSelectGender;
 
@@ -129,6 +136,8 @@ public class CreateUpdateInformationFragmentPresenter
     public ObservableInt selectionPassport;
     public ObservableInt selectionHTTT;
     public ObservableInt selectedGoiCuoc;
+    public ObservableField<Date> maxDateBirthDay;
+    public ObservableField<String> minDateBirthDay;
 
     CreateUpdateInformationFragmentPresenter(Context context,
             CreateUpdateInformationFragmentContract.View view) {
@@ -158,6 +167,12 @@ public class CreateUpdateInformationFragmentPresenter
         textOTP = new ObservableField<>();
         setDate = new ObservableField<>();
 
+        isdnError = new ObservableField<>();
+        serialError = new ObservableField<>();
+        nameCustomerError = new ObservableField<>();
+        numberPassportError = new ObservableField<>();
+        otpError = new ObservableField<>();
+
         isEnabledTxtNumberPassport = new ObservableBoolean(true);
         isEnabledSelectGender = new ObservableBoolean(true);
 
@@ -174,6 +189,9 @@ public class CreateUpdateInformationFragmentPresenter
         selectionPassport = new ObservableInt();
         selectionHTTT = new ObservableInt();
         selectedGoiCuoc = new ObservableInt();
+        maxDateBirthDay = new ObservableField<>(new Date());
+        minDateBirthDay = new ObservableField<>("30/12/1970");
+        stringError = context.getString(R.string.input_empty);
     }
 
     @Override
@@ -414,7 +432,7 @@ public class CreateUpdateInformationFragmentPresenter
     private Observable<GetListProductResponse> getDataListProduct(String subType) {
         GetListProductRequest getListProductRequest = new GetListProductRequest();
         getListProductRequest.setSubType(subType);
-        getListProductRequest.setTelServiceId(MobileService.Mobile);
+        getListProductRequest.setTelServiceId(TelServiceId.Mobile);
 
         DataRequest<GetListProductRequest> request = new DataRequest<>();
         request.setWsRequest(getListProductRequest);
@@ -454,19 +472,35 @@ public class CreateUpdateInformationFragmentPresenter
     }
 
     public void onClickRegisterUpdate() {
-        view.showLoading();
+        Customer customer = getDataCustomer();
+        Subscriber subscriber = getDataSubscriber();
+        if (customer == null || subscriber == null || !validateField(customer, subscriber)) {
+            return;
+        }
+
+        if (StringUtils.isEmpty(customer.getProvince()) || !DateUtils.compareDateToDay(
+                customer.getBirthDate())) {
+            view.customerBirthdayError();
+            return;
+        }
+
         if (typeFragment == CreateUpdateInformationFragment.Type.UPDATE_INFORMATION
                 && getDataSubscriber().getSubType().equals(MobileType.TRA_SAU)) {
+            otpError.set(null);
+            Contract contract = getDataContract();
             if (StringUtils.isEmpty(textOTP.get())) {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        view.isOTPEmpty();
-                        view.hideLoading();
-                    }
-                }, TimeDelayHideDialogLoading);
+                otpError.set(stringError);
                 return;
             }
+
+            if (contract != null
+                    && contract.getNoticeCharge() != null
+                    && contract.getNoticeCharge().size() == 0) {
+                view.selectNoticeChargeError();
+                return;
+            }
+
+            view.showLoading();
 
             ChecOTPRequest checOTPRequest = new ChecOTPRequest();
             checOTPRequest.setIsdn(txtPhoneNumber.get());
@@ -496,24 +530,19 @@ public class CreateUpdateInformationFragmentPresenter
                     });
             subscriptions.add(subscription);
         } else {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    view.isSendImage();
-                    view.hideLoading();
-                }
-            }, TimeDelayHideDialogLoading);
+            view.isSendImage();
         }
     }
 
     private Customer getDataCustomer() {
-        Area areaProvince = view.getAreaProvince();
-        Area areaDistrict = view.getAreaDistrict();
-        Area areaPrecinct = view.getAreaPrecinct();
+        CustomSelectAddress.Address address = view.getAddress();
+        Area areaProvince = address.getAreaProvince();
+        Area areaDistrict = address.getAreaDistrict();
+        Area areaPrecinct = address.getAreaPrecinct();
 
         Customer customer = new Customer();
 
-        customer.setAddress(view.getAddress());
+        customer.setAddress(address.getAddress());
         customer.setAreaCode(areaPrecinct.getAreaCode());
         customer.setBirthDate(view.getBirthDate());
         customer.setBusType(
@@ -557,7 +586,7 @@ public class CreateUpdateInformationFragmentPresenter
         subscriber.setSerial(txtSerial.get());
         subscriber.setPackageName(
                 subscriberResponse == null ? StringNull : subscriberResponse.getPackageName());
-        subscriber.setTelecomServiceId(MobileService.Mobile);
+        subscriber.setTelecomServiceId(TelServiceId.Mobile);
 
         switch (typeFragment) {
             case CreateUpdateInformationFragment.Type.CREATE_INFORMATION:
@@ -594,43 +623,10 @@ public class CreateUpdateInformationFragmentPresenter
         return contract;
     }
 
-    private boolean compareDate() {
-        Date birthDate = DateUtils.stringToDate(getDataCustomer().getBirthDate(),
-                DateUtils.CALENDAR_DATE_FORMAT_DD_MM_YY, Locale.getDefault());
-
-        Date date = new Date(System.currentTimeMillis());
-        return birthDate.before(date);
-    }
-
     void clickSendData(boolean isSendImage) {
         view.showLoading();
         Customer customer = getDataCustomer();
         Subscriber subscriber = getDataSubscriber();
-        if (StringUtils.isEmpty(customer.getProvince())
-                || StringUtils.isEmpty(customer.getName())
-                || StringUtils.isEmpty(customer.getIdNo())
-                || !compareDate()) {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    view.hideLoading();
-                    view.customerError();
-                }
-            }, TimeDelayHideDialogLoading);
-            return;
-        }
-
-        if (StringUtils.isEmpty(subscriber.getIsdn()) || StringUtils.isEmpty(
-                subscriber.getSerial())) {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    view.hideLoading();
-                    view.IsdnImsiError();
-                }
-            }, TimeDelayHideDialogLoading);
-            return;
-        }
 
         if (isSendImage) {
             Intent intent = new Intent(context, UploadImageService.class);
@@ -642,17 +638,6 @@ public class CreateUpdateInformationFragmentPresenter
         }
 
         if (typeFragment == CreateUpdateInformationFragment.Type.UPDATE_INFORMATION) {
-            if (subscriber.getSubType().equals(MobileType.TRA_SAU)
-                    && getDataContract().getNoticeCharge().size() == 0) {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        view.hideLoading();
-                        view.selectNoticeChargeError();
-                    }
-                }, TimeDelayHideDialogLoading);
-                return;
-            }
 
             UpdateAllSubInfoRequest updateAllSubInfoRequest = new UpdateAllSubInfoRequest();
             if (subscriber.getSubType().equals(MobileType.TRA_SAU)) {
@@ -719,6 +704,36 @@ public class CreateUpdateInformationFragmentPresenter
         return view.imageFront() != null
                 || view.imageBackside() != null
                 || view.imagePortrait() != null;
+    }
+
+    private boolean validateField(Customer customer, Subscriber subscriber) {
+        boolean validate = true;
+        numberPassportError.set(null);
+        nameCustomerError.set(null);
+        isdnError.set(null);
+        serialError.set(null);
+
+        if (StringUtils.isEmpty(customer.getIdNo())) {
+            validate = false;
+            numberPassportError.set(stringError);
+        }
+
+        if (StringUtils.isEmpty(customer.getName())) {
+            validate = false;
+            nameCustomerError.set(stringError);
+        }
+
+        if (StringUtils.isEmpty(subscriber.getSerial())) {
+            validate = false;
+            serialError.set(stringError);
+        }
+
+        if (StringUtils.isEmpty(subscriber.getIsdn())) {
+            validate = false;
+            isdnError.set(stringError);
+        }
+
+        return validate;
     }
 
     private List<UploadImage> getBitmapAndSaveDatabase(Customer customer) {

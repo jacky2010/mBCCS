@@ -675,9 +675,7 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="create_update_information_create_no_information">Không tìm thấy số thuê bao!</string>
     <string name="create_update_information_register_new_payment">Đăng ký trả trước mới</string>
     <string name="create_update_information_update_title">Cập nhật thông tin thuê bao</string>
-    <string name="create_update_information_create_validate_field">
-        Số thuê bao và số giấy tờ không thể bỏ trống
-    </string>
+
     <string name="fragment_create_update_information_create_title">Đăng ký thông tin</string>
     <string name="fragment_create_update_information_create_clone_title">Đăng ký thông tin (clone)</string>
     <string name="fragment_create_update_information_create_tttb">Thông tin thuê bao</string>
@@ -685,14 +683,30 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="fragment_create_update_information_create_goi_cuoc">Gói cước</string>
     <string name="fragment_create_update_information_create_serial">Serial</string>
     <string name="fragment_create_update_information_create_tt_khach_hang">Thông tin khách hàng</string>
-    <string name="fragment_create_update_information_create_ten_khach_hang">Tên khách hàng*</string>
+    <string formatted="false" name="fragment_create_update_information_create_ten_khach_hang">
+        <![CDATA[
+        Tên khách hàng<font color="#c42126">*</font>
+        ]]>
+    </string>
     <string name="fragment_create_update_information_create_gioi_tinh">Giới tính</string>
     <string name="fragment_create_update_information_create_gioi_tinh_nam">Nam</string>
     <string name="fragment_create_update_information_create_gioi_tinh_nu">Nữ</string>
     <string name="fragment_create_update_information_create_ngay_sinh">Ngày sinh</string>
-    <string name="fragment_create_update_information_create_province">Tỉnh*</string>
-    <string name="fragment_create_update_information_create_district">Quận/Huyện*</string>
-    <string name="fragment_create_update_information_create_wards">Phường/xã</string>
+    <string name="fragment_create_update_information_create_province">
+        <![CDATA[
+        Tỉnh<font color="#c42126">*</font>
+        ]]>
+    </string>
+    <string name="fragment_create_update_information_create_district">
+        <![CDATA[
+        Quận/Huyện<font color="#c42126">*</font>
+        ]]>
+    </string>
+    <string name="fragment_create_update_information_create_wards">
+        <![CDATA[
+        Phường/xã<font color="#c42126">*</font>
+        ]]>
+    </string>
     <string name="fragment_create_update_information_create_address">Địa chỉ chi tiết (số nhà, tên đường, phố)</string>
     <string name="fragment_create_update_information_create_loai_giay_to">Loại giấy tờ</string>
     <string name="fragment_create_update_information_create_so_giay_to">Số giấy tờ</string>
@@ -712,17 +726,12 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="fragment_create_update_information_create_dk_thanh_cong">Đăng ký thành công</string>
     <string name="fragment_create_update_information_update_thanh_cong">Cập nhật thông tin thành công</string>
     <string name="fragment_create_update_information_update_title">Cập nhật thông tin thuê bao</string>
-    <string name="fragment_create_update_information_update_opt_is_empty">OTP không thể bỏ trống</string>
     <string name="fragment_create_update_information_update_notice_charge_empty">
         Chưa lựa chọn hình thức nhận thông báo cước
     </string>
     <string name="fragment_create_update_information_update_information_customer_empty">
-        Các trường trong mục thông tin khách hàng không thể bỏ trống
+        Ngày sinh phải nhỏ nhơn ngày hiện tại
     </string>
-    <string name="fragment_create_update_information_update_isdn_serial_empty">
-        Số điện thoại và Serail không thể bỏ trống
-    </string>
-
 
     <string name="confirm_transaction_sell_cancel_ma_don_hang">Mã đơn hàng: </string>
     <string name="confirm_transaction_sell_cancel_don_dat_hang_tu_kenh">Đơn đặt hàng từ kênh %1$s</string>
@@ -740,9 +749,21 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="picker_photo_cancel">Hủy</string>
     <string name="picker_photo_add_photo">Chọn ảnh</string>
 
-    <string name="layout_select_address_province">Tỉnh*</string>
-    <string name="layout_select_address_district">Quận/Huyện*</string>
-    <string name="layout_select_address_wards">Phường/xã</string>
+    <string formatted="false" name="layout_select_address_province">
+        <![CDATA[
+        Tỉnh<font color="#c42126">*</font>
+        ]]>
+    </string>
+    <string formatted="false" name="layout_select_address_district">
+        <![CDATA[
+        Quận/Huyện<font color="#c42126">*</font>
+        ]]>
+    </string>
+    <string formatted="false" name="layout_select_address_wards">
+        <![CDATA[
+        Phường/xã<font color="#c42126">*</font>
+        ]]>
+    </string>
     <string name="layout_select_address_address">Địa chỉ chi tiết (số nhà, tên đường, phố)</string>
     <string name="dialog_input_address_title">Nhập địa chỉ</string>
     <string name="dialog_input_address_address">Address:</string>
@@ -767,10 +788,10 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="create_new_connector_information_loai_khach_hang">Loai KH*</string>
     <string name="create_new_connector_information_ten_khach_hang">Tên KH*</string>
     <string name="create_new_connector_information_ngay_sinh">Ngày sinh/Ngày thành lập</string>
-    <string name="create_new_connector_information_so_giay_to">Số giấy tờ (CMND/Hộ chiếu/Giấy phép kinh doanh)</string>
-    <string name="create_new_connector_information_ngay_cap">Ngày cấp</string>
+    <string name="create_new_connector_information_so_giay_to">Số giấy tờ (CMND/Hộ chiếu/Giấy phép kinh doanh)*</string>
+    <string name="create_new_connector_information_ngay_cap">Ngày cấp*</string>
     <string name="create_new_connector_information_ngay_het_han">Ngày hết hạn</string>
-    <string name="create_new_connector_information_noi_cap">Nơi cấp</string>
+    <string name="create_new_connector_information_noi_cap">Nơi cấp*</string>
     <string name="create_new_connector_information_dich_vu">Dịch vụ*</string>
     <string name="create_new_connector_information_goi_cuoc">Gói cước*</string>
     <string name="create_new_connector_information_loai_thue_bao">Loại thuê bao*</string>
@@ -783,6 +804,13 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="create_new_connector_information_back">Quay lại</string>
     <string name="create_new_connector_information_enter">Đấu nối</string>
     <string name="connector_mobile_so_giay_to_trong">Số giấy tờ trống!</string>
+    <string name="create_new_connector_information_validate_name">Tên khách hàng phải là chữ và số lượng nhỏ hơn 100 ký tự!</string>
+    <string name="create_new_connector_information_validate_id_no">Số giấy tờ không thể trống!</string>
+    <string name="create_new_connector_information_validate_birthday">Ngày sinh cần trước ngày hiện tại!</string>
+    <string name="create_new_connector_information_validate_date_id_no">Giấy tờ đã hết hạn!</string>
+    <string name="create_new_connector_information_validate_out_date_id_no">Ngày cấp giấy tờ sau ngày hiện tại hoặc trước ngày hết hạn!</string>
+    <string name="create_new_connector_information_validate_place_id_no">Nơi cấp giấy tờ không thể trống!</string>
+    <string name="create_new_connector_information_validate_address">Địa chỉ không thể trống!</string>
 
     <string name="activity_list_order_warehouse_ngay_lap_lenh">Ngày lập lệnh</string>
     <string name="activity_list_order_warehouse_ma_kho_xuat">Mã kho xuất</string>

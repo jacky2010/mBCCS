@@ -6,8 +6,9 @@ import android.databinding.Bindable;
 import android.view.View;
 import android.widget.AdapterView;
 import com.viettel.mbccs.BR;
-import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.constance.Data;
+import com.viettel.mbccs.constance.MobileType;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.Contract;
 import com.viettel.mbccs.data.model.Customer;
 import com.viettel.mbccs.data.source.QLKhachHangRepository;
@@ -36,9 +37,9 @@ public class ConnectorMobilePresenter extends BaseObservable
     private QLKhachHangRepository qlKhachHangRepository;
     private CompositeSubscription subscriptions;
 
-    private boolean isHideSearch = true;
-    private boolean isSelectBefore;
-    private boolean isSelectAfter;
+    private boolean isHideSearch = false;
+    private boolean isSelectPrepaid;
+    private boolean isSelectPostpaid;
 
     private String textSearch;
     private String txtPassport;
@@ -53,8 +54,7 @@ public class ConnectorMobilePresenter extends BaseObservable
     private Customer customer;
     private int positionMobileService;
 
-    public ConnectorMobilePresenter(Context context,
-            ConnectorMobileContract.View viewConnectorMobile) {
+    ConnectorMobilePresenter(Context context, ConnectorMobileContract.View viewConnectorMobile) {
         this.context = context;
         this.viewConnectorMobile = viewConnectorMobile;
     }
@@ -64,7 +64,7 @@ public class ConnectorMobilePresenter extends BaseObservable
         qlKhachHangRepository = QLKhachHangRepository.getInstance();
         subscriptions = new CompositeSubscription();
         contractList = new ArrayList<>();
-        mobileServiceList = Data.connectorMobileServiceString();
+        mobileServiceList = Data.connectorTelServiceType();
         adapterSpinnerMobileService = new SpinnerAdapter<>(context, mobileServiceList);
         adapterSpinnerMobileService.notifyDataSetChanged();
         adapterSpinnerMobileService.setOnItemSelectedListener(
@@ -81,8 +81,8 @@ public class ConnectorMobilePresenter extends BaseObservable
                     }
                 });
         setTextHideSearch();
-        setSelectBefore(true);
-        setSelectAfter(false);
+        setSelectPrepaid(true);
+        setSelectPostpaid(false);
     }
 
     @Override
@@ -103,23 +103,23 @@ public class ConnectorMobilePresenter extends BaseObservable
     }
 
     @Bindable
-    public boolean isSelectBefore() {
-        return isSelectBefore;
+    public boolean isSelectPrepaid() {
+        return isSelectPrepaid;
     }
 
-    public void setSelectBefore(boolean selectBefore) {
-        isSelectBefore = selectBefore;
-        notifyPropertyChanged(BR.selectBefore);
+    public void setSelectPrepaid(boolean selectPrepaid) {
+        isSelectPrepaid = selectPrepaid;
+        notifyPropertyChanged(BR.selectPrepaid);
     }
 
     @Bindable
-    public boolean isSelectAfter() {
-        return isSelectAfter;
+    public boolean isSelectPostpaid() {
+        return isSelectPostpaid;
     }
 
-    public void setSelectAfter(boolean selectAfter) {
-        isSelectAfter = selectAfter;
-        notifyPropertyChanged(BR.selectAfter);
+    public void setSelectPostpaid(boolean selectPostpaid) {
+        isSelectPostpaid = selectPostpaid;
+        notifyPropertyChanged(BR.selectPostpaid);
     }
 
     @Bindable
@@ -197,7 +197,7 @@ public class ConnectorMobilePresenter extends BaseObservable
     }
 
     private void setTextHideSearch() {
-        setTextSearch((isSelectBefore ? "Thuê bao trả trước" : "Thuê bao trả sau")
+        setTextSearch((isSelectPrepaid ? "Thuê bao trả trước" : "Thuê bao trả sau")
                 + " - "
                 + "Mobile"
                 + " - "
@@ -213,9 +213,9 @@ public class ConnectorMobilePresenter extends BaseObservable
 
         CheckIdNoRequest checkIdNoRequest = new CheckIdNoRequest();
         checkIdNoRequest.setIdNo(txtPassport);
-        // TODO: 6/4/17 fake data
         checkIdNoRequest.setServiceType(mobileServiceList.get(positionMobileService).getCode());
-        checkIdNoRequest.setSubType("1");
+        checkIdNoRequest.setSubType(isSelectPrepaid() ? MobileType.TRA_TRUOC : MobileType.TRA_SAU);
+
         DataRequest<CheckIdNoRequest> request = new DataRequest<>();
         request.setWsCode(WsCode.CheckIdNo);
         request.setWsRequest(checkIdNoRequest);

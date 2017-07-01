@@ -31,6 +31,7 @@
             android:background="@color/transparent"
             android:editable="false"
             android:lines="1"
+            android:focusable="false"
             style="@style/inputStyleTranparent"
             />
 

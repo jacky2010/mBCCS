@@ -309,7 +309,7 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
                                 @Override
                                 public void onSuccess(GetRegisterSubResponse object) {
                                     try {
-//                                        if (Constants.Service.RESPONSE_OK.equals(object.getErrorCode())) {
+//                                        if  (Constants.Service.RESPONSE_OK.equals(object.getErrorCode())) {
 
                                         items.clear();
 
@@ -391,3 +391,4 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
         return documentTypeAdapter;
     }
 }
+//TEST

@@ -14,7 +14,6 @@ import java.util.List;
 
 public class ConnectorMobileAdapter
         extends RecyclerView.Adapter<ConnectorMobileAdapter.ViewHolder> {
-    private ItemConnectorMobileBinding binding;
     private ConnectorMobileAdapterCallback callback;
     private List<Contract> contractList;
 
@@ -24,7 +23,7 @@ public class ConnectorMobileAdapter
 
     @Override
     public ConnectorMobileAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        binding =
+        ItemConnectorMobileBinding binding =
                 ItemConnectorMobileBinding.inflate(LayoutInflater.from(parent.getContext()), parent,
                         false);
         return new ViewHolder(binding);
@@ -68,11 +67,11 @@ public class ConnectorMobileAdapter
             contract = data;
             position = pos;
 
-            contractNo.set("lkdjflajlf");
-            service.set("lkdjflajlf");
-            isdn.set("lkdjflajlf");
-            date.set("lkdjflajlf");
-            status.set("lkdjflajlf");
+            contractNo.set(contract.getContractNo());
+            service.set(contract.getServiceTypes());
+            isdn.set(contract.getIsdn());
+            date.set(contract.getDateCreate());
+            status.set(contract.getStatus());
         }
 
         public void onItemClick() {

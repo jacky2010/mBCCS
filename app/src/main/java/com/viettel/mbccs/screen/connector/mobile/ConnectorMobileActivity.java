@@ -9,6 +9,7 @@ import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.databinding.ActivityConnectorMobileBinding;
 import com.viettel.mbccs.screen.connector.adapter.ConnectorMobileAdapter;
 import com.viettel.mbccs.screen.connector.fragment.CreateNewConnectorInformation1Fragment;
+import com.viettel.mbccs.screen.connector.fragment.CreateNewConnectorInformationFragmentPresenter;
 import com.viettel.mbccs.utils.DialogUtils;
 import java.util.List;
 
@@ -87,6 +88,10 @@ public class ConnectorMobileActivity
             fragment = CreateNewConnectorInformation1Fragment.newInstance(customer,
                     contractList.get(position));
         }
+        CreateNewConnectorInformationFragmentPresenter presenter =
+                new CreateNewConnectorInformationFragmentPresenter(this);
+        presenter.setView(fragment);
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_connector_mobile, fragment);
         transaction.addToBackStack(CreateNewConnectorInformation1Fragment.STRING_NAME);

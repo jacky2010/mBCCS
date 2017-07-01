@@ -7,10 +7,10 @@ import android.support.annotation.IntDef;
  */
 
 @IntDef({
-        MobileService.Mobile, MobileService.Homephone, MobileService.ADSL, MobileService.Leasedline,
-        MobileService.PSTN, MobileService.White_leaseline, MobileService.FTTH
+        TelServiceId.Mobile, TelServiceId.Homephone, TelServiceId.ADSL, TelServiceId.Leasedline,
+        TelServiceId.PSTN, TelServiceId.White_leaseline, TelServiceId.FTTH
 })
-public @interface MobileService {
+public @interface TelServiceId {
     int Mobile = 1;
     int Homephone = 2;
     int ADSL = 4;

@@ -1,5 +1,6 @@
 package com.viettel.mbccs.screen.information.fragment;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -7,20 +8,23 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.IntDef;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseFragment;
-import com.viettel.mbccs.data.model.Area;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetAllSubInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetRegisterSubInfoResponse;
 import com.viettel.mbccs.databinding.FragmentCreateUpdateInformationBinding;
+import com.viettel.mbccs.permission.PermissionListener;
+import com.viettel.mbccs.permission.PermissionsUtil;
 import com.viettel.mbccs.screen.common.success.DialogFullScreen;
 import com.viettel.mbccs.screen.information.CreateUpdateInformationActivity;
 import com.viettel.mbccs.utils.DialogUtils;
+import com.viettel.mbccs.widget.CustomSelectAddress;
 import com.viettel.mbccs.widget.CustomSelectImageNo;
 
 /**
@@ -116,22 +120,7 @@ public class CreateUpdateInformationFragment extends BaseFragment
     }
 
     @Override
-    public Area getAreaProvince() {
-        return binding.customSelectAddressCreateInformation.getAreaProvince();
-    }
-
-    @Override
-    public Area getAreaDistrict() {
-        return binding.customSelectAddressCreateInformation.getAreaDistrict();
-    }
-
-    @Override
-    public Area getAreaPrecinct() {
-        return binding.customSelectAddressCreateInformation.getAreaPrecinct();
-    }
-
-    @Override
-    public String getAddress() {
+    public CustomSelectAddress.Address getAddress() {
         return binding.customSelectAddressCreateInformation.getAddress();
     }
 
@@ -146,7 +135,7 @@ public class CreateUpdateInformationFragment extends BaseFragment
     }
 
     @Override
-    public void registerUpdateCustomerInfoSuccess(String result, boolean isRegister) {
+    public void registerUpdateCustomerInfoSuccess(String result, final boolean isRegister) {
         Dialog dia = new DialogFullScreen.Builder(getActivity()).setCenterContent(true)
                 .setTitle(isRegister ? getString(
                         R.string.fragment_create_update_information_create_dk_thanh_cong)
@@ -161,8 +150,7 @@ public class CreateUpdateInformationFragment extends BaseFragment
                     @Override
                     public void onPositiveButtonClick(Dialog dialog) {
                         dialog.dismiss();
-                        //                        getActivity().getSupportFragmentManager().popBackStack();
-                        backActivity();
+                        backActivity(isRegister);
 
                     }
 
@@ -182,9 +170,9 @@ public class CreateUpdateInformationFragment extends BaseFragment
         dia.show();
     }
 
-    private void backActivity() {
+    private void backActivity(boolean isRegister) {
         Intent intentDKTT = new Intent(getActivity(), CreateUpdateInformationActivity.class);
-        intentDKTT.putExtra(CreateUpdateInformationActivity.ARG_TYPE, typeFragment);
+        intentDKTT.putExtra(CreateUpdateInformationActivity.ARG_TYPE, isRegister);
         startActivity(intentDKTT);
         getActivity().finish();
     }
@@ -210,27 +198,15 @@ public class CreateUpdateInformationFragment extends BaseFragment
     }
 
     @Override
-    public void isOTPEmpty() {
-        DialogUtils.showDialog(getActivity(),
-                getString(R.string.fragment_create_update_information_update_opt_is_empty));
-    }
-
-    @Override
     public void selectNoticeChargeError() {
         DialogUtils.showDialog(getActivity(),
                 getString(R.string.fragment_create_update_information_update_notice_charge_empty));
     }
 
     @Override
-    public void customerError() {
+    public void customerBirthdayError() {
         DialogUtils.showDialog(getActivity(), getString(
                 R.string.fragment_create_update_information_update_information_customer_empty));
-    }
-
-    @Override
-    public void IsdnImsiError() {
-        DialogUtils.showDialog(getActivity(),
-                getString(R.string.fragment_create_update_information_update_isdn_serial_empty));
     }
 
     @Override
@@ -282,7 +258,17 @@ public class CreateUpdateInformationFragment extends BaseFragment
     }
 
     @Override
-    public void onSelectImage(Intent intent, int type) {
-        startActivityForResult(intent, type);
+    public void onSelectImage(final Intent intent, final int type) {
+        PermissionsUtil.requestPermission(getActivity(), new PermissionListener() {
+            @Override
+            public void permissionGranted(@NonNull String[] permissions) {
+                startActivityForResult(intent, type);
+            }
+
+            @Override
+            public void permissionDenied(@NonNull String[] permissions) {
+
+            }
+        }, new String[] { Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE });
     }
 }

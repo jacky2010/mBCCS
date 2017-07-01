@@ -3,6 +3,7 @@ package com.viettel.mbccs.screen.connector.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ public class CreateNewConnectorInformation2Fragment extends Fragment
     public static final String STRING_NAME = "CreateNewConnectorInformation2Fragment";
     private FragmentCreateNewConnectorInformation2Binding binding;
     private CreateNewConnectorInformationFragmentPresenter presenter;
+
     public static CreateNewConnectorInformation2Fragment newInstance() {
         Bundle bundle = new Bundle();
         CreateNewConnectorInformation2Fragment fragment =
@@ -41,9 +43,8 @@ public class CreateNewConnectorInformation2Fragment extends Fragment
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        presenter = new CreateNewConnectorInformationFragmentPresenter(getActivity(), this);
-        presenter.subscribe();
         binding.setPresenter(presenter);
+        presenter.loadDataCreateView2();
     }
 
     @Override
@@ -53,8 +54,8 @@ public class CreateNewConnectorInformation2Fragment extends Fragment
     }
 
     @Override
-    public void setPresenter(CreateNewConnectorInformationFragmentContract.Presenter presenter) {
-
+    public void setPresenter(CreateNewConnectorInformationFragmentContract.Presenter pre) {
+        this.presenter = (CreateNewConnectorInformationFragmentPresenter) pre;
     }
 
     @Override
@@ -69,7 +70,9 @@ public class CreateNewConnectorInformation2Fragment extends Fragment
 
     @Override
     public void onCancel() {
-        getActivity().getSupportFragmentManager().popBackStack();
+//        getActivity().getSupportFragmentManager().popBackStack();
+        Log.i("CreateNewConnectorInformation2Fragment", " -> onCancel: ----------------: ");
+        getActivity().onBackPressed();
     }
 
     @Override

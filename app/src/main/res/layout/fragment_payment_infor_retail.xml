@@ -134,7 +134,6 @@
                         android:id="@+id/address"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:singleLine="true"
                         android:imeOptions="actionDone"
                         android:background="@drawable/bg_input_tranparent"
                         android:text="@={presenter.address}"

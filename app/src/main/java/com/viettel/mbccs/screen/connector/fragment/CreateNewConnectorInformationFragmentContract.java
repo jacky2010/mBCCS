@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import com.viettel.mbccs.base.BasePresenter;
 import com.viettel.mbccs.base.BaseView;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.widget.CustomSelectAddress;
 
 /**
  * Created by HuyQuyet on 6/4/17.
@@ -33,6 +34,16 @@ public interface CreateNewConnectorInformationFragmentContract {
         void loadDataSpinnerError(BaseException error);
 
         void loadDataSpinnerSuccess();
+
+        void validateCustomerError(String error);
+
+        String getBirthDate();
+
+        String getDateCreatePassport();
+
+        String getDateOutDatePassport();
+
+        CustomSelectAddress.Address getAddress();
     }
 
     interface ViewFragment2 extends View {

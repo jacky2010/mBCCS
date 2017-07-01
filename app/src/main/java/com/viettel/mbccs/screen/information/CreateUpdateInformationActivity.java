@@ -2,7 +2,6 @@ package com.viettel.mbccs.screen.information;
 
 import android.content.DialogInterface;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
@@ -29,29 +28,10 @@ public class CreateUpdateInformationActivity extends
     private GetRegisterSubInfoResponse dataRegister;
     private GetAllSubInfoResponse dataUpdate;
     List<InformationCustomerAdapter.DataInformationCustomerAdapter> dataList;
-    private boolean isResetData;
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-    }
-
-    @Override
-    protected void onResume() {
-        Log.i("CreateUpdateInformationActivity", " -> onResume: ----------------: ");
-        super.onResume();
-        if (isResetData && dataList != null && adapter != null) {
-            dataList.clear();
-            adapter.notifyDataSetChanged();
-        } else {
-            isResetData = true;
-        }
-    }
-    
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.i("CreateUpdateInformationActivity", " -> onPause: ----------------: ");
     }
 
     @Override
@@ -74,7 +54,6 @@ public class CreateUpdateInformationActivity extends
         mPresenter.setTypeCreate(typeCreate);
         mPresenter.getDataSpinnerPassport();
         dataList = new ArrayList<>();
-        isResetData = false;
     }
 
     @Override
@@ -84,7 +63,7 @@ public class CreateUpdateInformationActivity extends
 
     @Override
     public void showLoading() {
-        showLoadingDialog();
+        showLoadingDialog(false);
     }
 
     @Override
@@ -150,12 +129,6 @@ public class CreateUpdateInformationActivity extends
                 finish();
             }
         }, false);
-    }
-
-    @Override
-    public void showDialogValidate() {
-        DialogUtils.showDialog(this,
-                getString(R.string.create_update_information_create_validate_field));
     }
 
     @Override
