@@ -39,8 +39,10 @@
 
                 <android.support.v7.widget.RecyclerView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:adapter="@{presenter.productAdapter}" />
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:adapter="@{presenter.productAdapter}"
+                    android:scrollbars="vertical" />
 
             </LinearLayout>
 
@@ -64,104 +66,104 @@
                         android:layout_height="match_parent"
                         android:paddingTop="@dimen/dp_6"
                         android:text="@string/search_products_detail_title_manufacturer"
-                        android:textSize="@dimen/default_label_text_size"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/default_label_text_size" />
 
                     <com.viettel.mbccs.widget.FakeSpinner
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:onClick="@{()->presenter.chooseManufacturer()}"
                         android:text="@{presenter.manufacturer}"
-                        android:textSize="@dimen/default_label_text_size"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/default_label_text_size" />
 
                     <com.viettel.mbccs.widget.CustomTextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:paddingTop="@dimen/dp_6"
                         android:text="@string/search_products_detail_title_screen_size"
-                        android:textSize="@dimen/default_label_text_size"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/default_label_text_size" />
 
                     <com.viettel.mbccs.widget.FakeSpinner
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:onClick="@{()->presenter.chooseScreenSize()}"
                         android:text="@{presenter.screenSize}"
-                        android:textSize="@dimen/default_label_text_size"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/default_label_text_size" />
 
                     <com.viettel.mbccs.widget.CustomTextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:paddingTop="@dimen/dp_6"
                         android:text="@string/search_products_detail_title_camera"
-                        android:textSize="@dimen/default_label_text_size"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/default_label_text_size" />
 
                     <com.viettel.mbccs.widget.FakeSpinner
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:onClick="@{()->presenter.chooseCamera()}"
                         android:text="@{presenter.camera}"
-                        android:textSize="@dimen/default_label_text_size"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/default_label_text_size" />
 
                     <com.viettel.mbccs.widget.CustomTextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:paddingTop="@dimen/dp_6"
                         android:text="@string/search_products_detail_title_price_range"
-                        android:textSize="@dimen/default_label_text_size"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/default_label_text_size" />
 
                     <com.viettel.mbccs.widget.FakeSpinner
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:onClick="@{()->presenter.choosePriceRange()}"
                         android:text="@{presenter.priceRange}"
-                        android:textSize="@dimen/default_label_text_size"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/default_label_text_size" />
 
                     <com.viettel.mbccs.widget.CustomTextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:paddingTop="@dimen/dp_6"
                         android:text="@string/search_products_detail_title_model"
-                        android:textSize="@dimen/default_label_text_size"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/default_label_text_size" />
 
                     <com.viettel.mbccs.widget.FakeSpinner
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:onClick="@{()->presenter.chooseModel()}"
                         android:text="@{presenter.model}"
-                        android:textSize="@dimen/default_label_text_size"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/default_label_text_size" />
 
                     <com.viettel.mbccs.widget.CustomTextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:paddingTop="@dimen/dp_6"
                         android:text="@string/search_products_detail_title_feature"
-                        android:textSize="@dimen/default_label_text_size"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/default_label_text_size" />
 
                     <com.viettel.mbccs.widget.FakeSpinner
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:onClick="@{()->presenter.chooseFeature()}"
                         android:text="@{presenter.feature}"
-                        android:textSize="@dimen/default_label_text_size"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/default_label_text_size" />
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:onClick="@{()->presenter.toogleExpand()}"
                         android:paddingTop="@dimen/dp_6"
-                        android:textSize="@dimen/default_label_text_size"
-                        android:src="@drawable/collapse" />
+                        android:src="@drawable/collapse"
+                        android:textSize="@dimen/default_label_text_size" />
                 </LinearLayout>
 
                 <include

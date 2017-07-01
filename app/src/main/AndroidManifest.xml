@@ -273,6 +273,10 @@
         <activity
             android:name=".screen.searchproducts.SearchProductsActivity"
             android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screen.viewproduct.ViewProductDetailActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

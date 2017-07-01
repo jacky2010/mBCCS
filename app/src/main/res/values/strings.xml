@@ -961,8 +961,16 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="search_products_detail_title_model">Loại máy</string>
     <string name="search_products_detail_title_feature">Tính năng</string>
     <string name="search_products_detail_label_products">Danh sách sản phẩm</string>
+    <string name="search_products_hint_search_product_name">Tìm theo tên</string>
     <string-array name="search_products_detail_title_tabs">
         <item>Sản phẩm</item>
         <item>So sánh</item>
     </string-array>
+    <string-array name="search_products_detail_title_tabs_desc">
+        <item>Mô tả sản phẩm</item>
+        <item>Thông số kỹ thuật</item>
+        <item>Đánh giá</item>
+    </string-array>
+
+    <string name="view_product_detail_title">Chi tiết sản phẩm</string>
 </resources>
