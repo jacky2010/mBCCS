@@ -241,13 +241,13 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="change_sim_label_address">Địa chỉ</string>
     <string name="change_sim_label_sim_info">Thông tin đổi sim</string>
     <string name="change_sim_label_old_serial">Serial cũ</string>
-    <string name="change_sim_label_new_serial">Serial mới</string>
+    <string name="change_sim_label_new_serial">Serial mới(*)</string>
     <string name="change_sim_label_contact_info">Số thường xuyên liên lạc</string>
-    <string name="change_sim_label_contact_1">Số thường LL 1</string>
-    <string name="change_sim_label_contact_2">Số thường LL 2</string>
-    <string name="change_sim_label_contact_3">Số thường LL 3</string>
-    <string name="change_sim_label_contact_4">Số thường LL 4</string>
-    <string name="change_sim_label_contact_5">Số thường LL 5</string>
+    <string name="change_sim_label_contact_1">Số thường LL 1(*)</string>
+    <string name="change_sim_label_contact_2">Số thường LL 2(*)</string>
+    <string name="change_sim_label_contact_3">Số thường LL 3(*)</string>
+    <string name="change_sim_label_contact_4">Số thường LL 4(*)</string>
+    <string name="change_sim_label_contact_5">Số thường LL 5(*)</string>
     <string name="change_sim_label_trans_info">Thông tin giao dịch</string>
     <string name="change_sim_label_service_fee">Phí dịch vụ:</string>
     <string name="change_sim_label_sim_fee">Phí Sim:</string>
@@ -658,6 +658,11 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="common_label_update">Cập nhật</string>
     <string name="common_label_currency_suffix">đồng</string>
     <string name="common_label_success">Thành công</string>
+    <string name="common_label_advanced_search">
+        <![CDATA[
+         <u>Tìm kiếm nâng cao</u>
+        ]]>
+    </string>
 
     <!-- Create Update information -->
     <string name="create_update_information_create_title">Đăng ký thông tin thuê bao</string>
@@ -948,6 +953,7 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="search_products_title">Tra cứu sản phẩm</string>
 
     <string name="search_products_detail_title">Tra cứu sản phẩm</string>
+    <string name="search_products_detail_hint_search_key">Tra cứu tên sản phẩm</string>
     <string name="search_products_detail_title_manufacturer">Nhà sản xuất</string>
     <string name="search_products_detail_title_screen_size">Màn hình</string>
     <string name="search_products_detail_title_camera">Camera</string>

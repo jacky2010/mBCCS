@@ -33,7 +33,7 @@ public class KeyValuePickerActivity
     protected void initData() {
 
         Bundle bundle = getIntent().getExtras();
-        if (bundle == null) {
+        if (bundle == null || bundle.getString(Constants.BundleConstant.ITEM_LIST) == null) {
             return;
         }
         items = GsonUtils.String2ListObject(

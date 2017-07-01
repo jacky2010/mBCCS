@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.viettel.mbccs.screen.searchproducts.adapters.ItemProductColorPresenter" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="@dimen/dp_30"
+        android:layout_height="@dimen/dp_16"
+        android:layout_marginRight="@dimen/dp_4"
+        android:background="@{context.getResources().getColor(item.color)}"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"></LinearLayout>
+</layout>

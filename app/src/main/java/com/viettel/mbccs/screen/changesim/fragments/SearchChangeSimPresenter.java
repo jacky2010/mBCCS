@@ -9,17 +9,23 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.viettel.mbccs.R;
+import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.constance.WsCode;
+import com.viettel.mbccs.data.model.ApDomainByType;
 import com.viettel.mbccs.data.model.ChangeSimInfo;
 import com.viettel.mbccs.data.model.ChangeSimItem;
 import com.viettel.mbccs.data.model.KeyValue;
+import com.viettel.mbccs.data.model.Subscriber;
+import com.viettel.mbccs.data.source.ApDomainRepository;
 import com.viettel.mbccs.data.source.ChangeSimRepository;
 import com.viettel.mbccs.data.source.remote.request.CheckDebitChangeSimRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
-import com.viettel.mbccs.data.source.remote.request.GetRegisterSubInfoRequest;
+import com.viettel.mbccs.data.source.remote.request.GetApDomainByTypeRequest;
+import com.viettel.mbccs.data.source.remote.request.GetRegisterSubRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.DataResponse;
-import com.viettel.mbccs.data.source.remote.response.GetRegisterSubInfoResponse;
+import com.viettel.mbccs.data.source.remote.response.GetApDomainByTypeResponse;
+import com.viettel.mbccs.data.source.remote.response.GetRegisterSubResponse;
 import com.viettel.mbccs.screen.changesim.adapter.ChangeSimListAdapter;
 import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.GsonUtils;
@@ -62,6 +68,7 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
     private List<KeyValue> documentTypes;
 
     private ChangeSimRepository changeSimRepository;
+    private ApDomainRepository apDomainRepository;
     private CompositeSubscription mSubscriptions;
 
     public SearchChangeSimPresenter(final Context context, final SearchChangeSimContract.ViewModel viewModel) {
@@ -190,16 +197,58 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
     private void initData() {
         try {
             changeSimRepository = ChangeSimRepository.getInstance();
+            apDomainRepository = ApDomainRepository.getInstance();
             mSubscriptions = new CompositeSubscription();
 
-            documentTypes = changeSimRepository.getDocumentTypes();
+            documentTypes = new ArrayList<>();
 
-            documentTypes.add(0, new KeyValue(null, context.getString(R.string.branches_add_hint_document_type)));
-            for (KeyValue item : documentTypes) {
-                documentTypesList.add(item.getValue());
-            }
+            //
+            viewModel.showLoading();
 
-            documentTypeAdapter.notifyDataSetChanged();
+            DataRequest<GetApDomainByTypeRequest> baseRequest = new DataRequest<>();
+            baseRequest.setWsCode(ApiCode.GetApDomainByType);
+            GetApDomainByTypeRequest request = new GetApDomainByTypeRequest();
+            request.setType(ApDomainByType.Type.LOAI_GIAY_TO);
+            baseRequest.setWsRequest(request);
+
+            Subscription subscription =
+                    apDomainRepository.getApDomainByType(baseRequest)
+                            .subscribe(new MBCCSSubscribe<GetApDomainByTypeResponse>() {
+                                @Override
+                                public void onSuccess(GetApDomainByTypeResponse object) {
+                                    try {
+                                        if (object != null && object.getApDomainByTypeList() != null) {
+
+                                            for (ApDomainByType item : object.getApDomainByTypeList()) {
+                                                documentTypes.add(new KeyValue(item.getCode(), item.getName()));
+                                                documentTypesList.add(item.getName());
+                                            }
+
+                                            documentTypeAdapter.notifyDataSetChanged();
+
+                                        } else {
+                                            DialogUtils.showDialog(context, null, context.getString(R.string.common_msg_error_general),
+                                                    null);
+                                        }
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                                @Override
+                                public void onError(BaseException error) {
+                                    DialogUtils.showDialog(context, null, error.getMessage(),
+                                            null);
+                                }
+
+                                @Override
+                                public void onRequestFinish() {
+                                    super.onRequestFinish();
+                                    viewModel.hideLoading();
+                                }
+                            });
+
+            mSubscriptions.add(subscription);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -222,18 +271,20 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
         try {
 
             boolean isValid = true;
+            isdnError.set(null);
+            documentIdError.set(null);
 
-            if ((documentType.get() == null || "".equals(documentType.get().trim())) && TextUtils.isEmpty(isdn.get())) {
+            if ((documentId.get() == null || "".equals(documentId.get().trim())) && TextUtils.isEmpty(isdn.get())) {
                 isdnError.set(context.getString(R.string.input_empty));
                 isValid = false;
             }
 
-            if (documentType.get() == null || "".equals(documentType.get().trim())) {
+            if (documentId.get() != null && !"".equals(documentId.get()) && (documentType.get() == null || "".equals(documentType.get().trim()))) {
                 viewModel.showError(context.getString(R.string.change_sim_error_search_documentType_required));
                 isValid = false;
             }
 
-            if (TextUtils.isEmpty(documentId.get())) {
+            if ((isdn.get() == null || TextUtils.isEmpty(isdn.get())) && TextUtils.isEmpty(documentId.get())) {
                 documentIdError.set(context.getString(R.string.input_empty));
                 isValid = false;
             }
@@ -244,29 +295,34 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
             final List<ChangeSimItem> items = new ArrayList<>();
             viewModel.showLoading();
 
-            DataRequest<GetRegisterSubInfoRequest> baseRequest = new DataRequest<>();
-            baseRequest.setWsCode(WsCode.GetRegisterSubInfo);
-            GetRegisterSubInfoRequest request = new GetRegisterSubInfoRequest();
+            DataRequest<GetRegisterSubRequest> baseRequest = new DataRequest<>();
+            baseRequest.setWsCode(ApiCode.GetRegisterSub);
+            GetRegisterSubRequest request = new GetRegisterSubRequest();
             request.setIsdn(isdn.get());
             request.setIdNo(documentId.get());
-            request.setIdType(documentType.get());
-            request.setCheckRegisterStatus("0");//ignore check register status
+            request.setIdType(Long.parseLong(documentType.get()));
             baseRequest.setWsRequest(request);
 
             Subscription subscription =
-                    changeSimRepository.getRegisterSubInfo(baseRequest)
-                            .subscribe(new MBCCSSubscribe<GetRegisterSubInfoResponse>() {
+                    changeSimRepository.getRegisterSub(baseRequest)
+                            .subscribe(new MBCCSSubscribe<GetRegisterSubResponse>() {
                                 @Override
-                                public void onSuccess(GetRegisterSubInfoResponse object) {
+                                public void onSuccess(GetRegisterSubResponse object) {
                                     try {
-//                                        if (Constants.Service.RESPONSE_OK.equals(object.getErrorCode())) {
+//                                        if  (Constants.Service.RESPONSE_OK.equals(object.getErrorCode())) {
 
-                                        ChangeSimItem item = new ChangeSimItem();
-                                        item.setSubscriber(object.getSubscriber());
-                                        item.setCustomer(object.getCustomer());
-                                        item.setChangeSimInfo(new ChangeSimInfo(item.getSubscriber().getSerial(), null));
+                                        items.clear();
 
-                                        items.add(item);
+                                        if (object.getListSubscriber() != null) {
+                                            for (Subscriber sub : object.getListSubscriber()) {
+                                                ChangeSimItem item = new ChangeSimItem();
+                                                item.setSubscriber(sub);
+                                                item.setCustomer(sub.getCustomer());
+                                                item.setChangeSimInfo(new ChangeSimInfo(item.getSubscriber().getSerial(), null));
+
+                                                items.add(item);
+                                            }
+                                        }
 
                                         changeSimAdapter.setItems(items);
 
@@ -335,3 +391,4 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
         return documentTypeAdapter;
     }
 }
+//TEST

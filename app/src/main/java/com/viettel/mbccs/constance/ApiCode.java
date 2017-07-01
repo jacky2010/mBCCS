@@ -419,4 +419,5 @@ public class ApiCode {
     public final static String GetListImageOfProductOnServer = "WS_getListImageOfProductOnServer";
     public final static String GetDetailImageOfProduct = "WS_getDetailImageOfProduct";
     public final static String IsKPPManager = "WS_isManager";
+    public final static String GetRegisterSub = "WS_getRegisterSub";
 }
