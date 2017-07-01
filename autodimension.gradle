@@ -1,14 +1,12 @@
 import org.w3c.dom.Document
 import org.w3c.dom.Element
+import org.w3c.dom.Node
+import org.w3c.dom.NodeList
 
 import javax.xml.parsers.DocumentBuilder
 import javax.xml.parsers.DocumentBuilderFactory
 import java.util.regex.Matcher
 import java.util.regex.Pattern
-import org.w3c.dom.NodeList
-import org.w3c.dom.Node
-import org.w3c.dom.Element
-
 /**
  * How to use:
  * https://github.com/nvmanh/android-auto-generate-dimension
@@ -333,5 +331,5 @@ createDimen {
   negativeMaxDP = 60 //change to 600 or any other value if needed
   negativeMaxSP = 20 //change to 600 or any other value if needed
   type = DimenType.FROM_DIMEN_FILE
-  dimenFileName = 'values-sw360dp/auto_dimens.xml' // name of file, for type = DimenType.FROM_DIMEN_FILE only
+  dimenFileName = 'values/dimens.xml' // name of file, for type = DimenType.FROM_DIMEN_FILE only
 }

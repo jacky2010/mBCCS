@@ -297,20 +297,25 @@ public class CustomSelectAddress extends LinearLayout {
         setAddress = address;
     }
 
-    public Area getAreaProvince() {
+    private Area getAreaProvince() {
         return areaProvinceList.size() != 0 ? areaProvinceList.get(positionProvince) : null;
     }
 
-    public Area getAreaDistrict() {
+    private Area getAreaDistrict() {
         return areaDistrictList.size() != 0 ? areaDistrictList.get(positionDistrict) : null;
     }
 
-    public Area getAreaPrecinct() {
+    private Area getAreaPrecinct() {
         return areaPrecinctList.size() != 0 ? areaPrecinctList.get(positionPrecinct) : null;
     }
 
-    public String getAddress() {
-        return txtAddressDetail.get();
+    public Address getAddress(){
+        Address result = new Address();
+        result.setAreaProvince(getAreaProvince());
+        result.setAreaDistrict(getAreaDistrict());
+        result.setAreaPrecinct(getAreaPrecinct());
+        result.setAddress(txtAddressDetail.get());
+        return  result;
     }
 
     public void enterAddress() {
@@ -334,5 +339,54 @@ public class CustomSelectAddress extends LinearLayout {
         });
         dialog.setCancelable(false);
         dialog.show(((AppCompatActivity) context).getSupportFragmentManager(), "");
+    }
+
+    public class Address {
+        private Area areaProvince;
+        private Area areaDistrict;
+        private Area areaPrecinct;
+        private String address;
+
+        public Address() {
+        }
+
+        public Address(Area areaProvince, Area areaDistrict, Area areaPrecinct, String address) {
+            this.areaProvince = areaProvince;
+            this.areaDistrict = areaDistrict;
+            this.areaPrecinct = areaPrecinct;
+            this.address = address;
+        }
+
+        public Area getAreaProvince() {
+            return areaProvince;
+        }
+
+        public void setAreaProvince(Area areaProvince) {
+            this.areaProvince = areaProvince;
+        }
+
+        public Area getAreaDistrict() {
+            return areaDistrict;
+        }
+
+        public void setAreaDistrict(Area areaDistrict) {
+            this.areaDistrict = areaDistrict;
+        }
+
+        public Area getAreaPrecinct() {
+            return areaPrecinct;
+        }
+
+        public void setAreaPrecinct(Area areaPrecinct) {
+            this.areaPrecinct = areaPrecinct;
+        }
+
+        public String getAddress() {
+            return address;
+        }
+
+        public void setAddress(String address) {
+            this.address = address;
+        }
     }
 }

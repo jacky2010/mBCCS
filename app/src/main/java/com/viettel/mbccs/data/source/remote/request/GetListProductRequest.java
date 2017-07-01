@@ -1,6 +1,6 @@
 package com.viettel.mbccs.data.source.remote.request;
 
-import com.viettel.mbccs.constance.MobileService;
+import com.viettel.mbccs.constance.TelServiceId;
 import com.viettel.mbccs.constance.MobileType;
 
 /**
@@ -11,7 +11,7 @@ public class GetListProductRequest {
     @MobileType
     private String subType;
 
-    @MobileService
+    @TelServiceId
     private int telServiceId;
 
     public String getSubType() {

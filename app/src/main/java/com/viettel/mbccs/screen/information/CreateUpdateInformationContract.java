@@ -31,7 +31,5 @@ public interface CreateUpdateInformationContract {
 //        void getDataSpinnerPassportSuccess(List<ApDomainByType> dataPassportType);
 
         void getDataSpinnerPassportError(BaseException error);
-
-        void showDialogValidate();
     }
 }

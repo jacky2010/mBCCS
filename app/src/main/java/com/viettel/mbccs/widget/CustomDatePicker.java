@@ -12,7 +12,6 @@ import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,13 +31,17 @@ import java.util.Locale;
  */
 
 @BindingMethods({
-        @BindingMethod(type = CustomDatePicker.class, attribute = "setDate", method =
-                "setDateString")
+        @BindingMethod(type = CustomDatePicker.class, attribute = "setDate", method = "setDateString"),
+        @BindingMethod(type = CustomDatePicker.class, attribute = "maxDate", method = "setMaxDate"),
+        @BindingMethod(type = CustomDatePicker.class, attribute = "minDate", method = "setMinDate")
 })
 public class CustomDatePicker extends LinearLayout {
 
     private Calendar mCalendar;
     public ObservableField<String> date = new ObservableField<>();
+    private DatePickerDialog datePickerDialog;
+    private long maxDate = -1;
+    private long minDate = -1;
 
     public CustomDatePicker(Context context) {
         this(context, null);
@@ -70,7 +73,8 @@ public class CustomDatePicker extends LinearLayout {
         setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+                datePickerDialog =
+                        new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         mCalendar.set(Calendar.YEAR, year);
@@ -79,7 +83,14 @@ public class CustomDatePicker extends LinearLayout {
                         setDate();
                     }
                 }, mCalendar.get(Calendar.YEAR), mCalendar.get(Calendar.MONTH),
-                        mCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                                mCalendar.get(Calendar.DAY_OF_MONTH));
+                if (maxDate != -1) {
+                    datePickerDialog.getDatePicker().setMaxDate(maxDate);
+                }
+                if (minDate != -1) {
+                    datePickerDialog.getDatePicker().setMinDate(minDate);
+                }
+                datePickerDialog.show();
             }
         });
 
@@ -111,7 +122,7 @@ public class CustomDatePicker extends LinearLayout {
 
     public String getStringDate() {
         return DateUtils.timestampToString(mCalendar.getTimeInMillis(),
-                DateUtils.CALENDAR_DATE_FORMAT_DD_MM_YY_HH, null);
+                DateUtils.TIMEZONE_FORMAT_SERVER, null);
     }
 
     public void setDateString(String dateString) {
@@ -124,5 +135,39 @@ public class CustomDatePicker extends LinearLayout {
         }
         mCalendar.setTime(date);
         setDate();
+    }
+
+    public void setMaxDate(String date) {
+        Date d = DateUtils.convertToDate(date, DateUtils.CALENDAR_DATE_FORMAT_DD_MM_YY);
+        if (d == null) {
+            maxDate = -1;
+            return;
+        }
+        maxDate = d.getTime();
+    }
+
+    public void setMaxDate(Date date) {
+        if (date == null) {
+            maxDate = -1;
+            return;
+        }
+        maxDate = date.getTime();
+    }
+
+    public void setMinDate(String date) {
+        Date d = DateUtils.convertToDate(date, DateUtils.CALENDAR_DATE_FORMAT_DD_MM_YY);
+        if (d == null) {
+            minDate = -1;
+            return;
+        }
+        minDate = d.getTime();
+    }
+
+    public void setMinDate(Date date) {
+        if (date == null) {
+            minDate = -1;
+            return;
+        }
+        minDate = date.getTime();
     }
 }

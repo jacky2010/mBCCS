@@ -21,6 +21,7 @@ import com.viettel.mbccs.databinding.FragmentCreateNewConnectorInformation1Bindi
 import com.viettel.mbccs.permission.PermissionListener;
 import com.viettel.mbccs.permission.PermissionsUtil;
 import com.viettel.mbccs.utils.DialogUtils;
+import com.viettel.mbccs.widget.CustomSelectAddress;
 import com.viettel.mbccs.widget.CustomSelectImageNo;
 
 /**
@@ -152,8 +153,8 @@ public class CreateNewConnectorInformation1Fragment extends BaseFragment
     }
 
     @Override
-    public void validateNameCustomerError() {
-        DialogUtils.showDialog(getActivity(), "Tên khách hàng phải là chữ và số lượng nhỏ hơn 100 ký tự");
+    public void validateCustomerError(String error) {
+        DialogUtils.showDialog(getActivity(), error);
     }
 
     @Override
@@ -177,6 +178,22 @@ public class CreateNewConnectorInformation1Fragment extends BaseFragment
 
             }
         }, new String[] { Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE });
+    }
 
+    public String getBirthDate() {
+        return binding.birthDate.getStringDate();
+    }
+
+    public String getDateCreatePassport() {
+        return binding.dateCreatePassport.getStringDate();
+    }
+
+    public String getDateOutDatePassport() {
+        return binding.dateOutDatePassport.getStringDate();
+    }
+
+    @Override
+    public CustomSelectAddress.Address getAddress() {
+        return binding.customSelectAddressCreateConnector.getAddress();
     }
 }

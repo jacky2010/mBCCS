@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/tools"
     xmlns:bind="http://schemas.android.com/tools"
     >
     <data>
@@ -43,7 +43,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_40"
                     android:layout_marginTop="@dimen/dp_10"
-                    android:background="@color/green_two"
+                    android:background="@color/green_three"
                     android:drawableLeft="@drawable/ic_arrow_drop_down_black_36dp"
                     android:gravity="center_vertical"
                     android:text="@string/fragment_create_update_information_create_tttb"
@@ -63,8 +63,8 @@
                     android:layout_height="wrap_content"
                     android:enabled="@{ presenter.isEnableIsdn }"
                     android:inputType="number"
-                    bind:customEditTextDrawable="@{ (v, t)  -> presenter.onDrawableClick(v, t) }"
                     android:text="@={ presenter.txtPhoneNumber }"
+                    bind:error="@{ presenter.isdnError }"
                     style="@style/inputStyleDrawableRight"
                     />
 
@@ -78,7 +78,8 @@
                 <com.viettel.mbccs.widget.SpinnerWithBorder
                     android:id="@+id/spinner_select_serial"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_40"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/dp_36"
                     android:layout_marginTop="@dimen/dp_4"
                     bind:adapter="@{ presenter.adapterGoiCuoc }"
                     bind:selectedPosition="@={ presenter.selectedGoiCuoc }"
@@ -99,6 +100,7 @@
                     android:inputType="number"
                     android:text="@={ presenter.txtSerial }"
                     android:enabled="@{ presenter.isEnableSerial }"
+                    bind:error="@{ presenter.serialError }"
                     bind:customEditTextDrawable="@{ (v, t)  -> presenter.onDrawableClick(v, t) }"
                     style="@style/inputStyleDrawableRight"
                     />
@@ -107,7 +109,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_40"
                     android:layout_marginTop="@dimen/dp_16"
-                    android:background="@color/green_two"
+                    android:background="@color/green_three"
                     android:drawableLeft="@drawable/ic_arrow_drop_down_black_36dp"
                     android:gravity="center_vertical"
                     android:text="@string/fragment_create_update_information_create_tt_khach_hang"
@@ -118,14 +120,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
-                    android:text="@string/fragment_create_update_information_create_ten_khach_hang"
+                    bind:textHtml="@{ @string/fragment_create_update_information_create_ten_khach_hang }"
                     />
 
                 <com.viettel.mbccs.widget.CustomEdittext
+                    android:id="@+id/txt_name_customer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_2"
                     android:text="@={ presenter.txtNameCustomer }"
+                    bind:error="@{ presenter.nameCustomerError }"
                     style="@style/inputStyle"
                     />
 
@@ -146,7 +150,6 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:checked="@{ presenter.isCheckMale }"
-                        android:enabled="@{ presenter.isEnabledSelectGender }"
                         android:text="@string/fragment_create_update_information_create_gioi_tinh_nam"
                         />
                     <RadioButton
@@ -154,7 +157,6 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:checked="@{ presenter.isCheckFemale }"
-                        android:enabled="@{ presenter.isEnabledSelectGender }"
                         android:text="@string/fragment_create_update_information_create_gioi_tinh_nu"
                         />
                 </RadioGroup>
@@ -171,6 +173,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_40"
                     bind:setDate="@{ presenter.setDate }"
+                    bind:maxDate="@{ presenter.maxDateBirthDay }"
+                    bind:minDate="@{ presenter.minDateBirthDay }"
                     />
 
                 <com.viettel.mbccs.widget.CustomSelectAddress
@@ -191,8 +195,9 @@
                 <com.viettel.mbccs.widget.SpinnerWithBorder
                     android:id="@+id/spinner_select_type_passport"
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/dp_36"
                     android:layout_marginTop="@dimen/dp_4"
-                    android:layout_height="@dimen/dp_40"
                     bind:adapter="@{ presenter.adapterTypePassport }"
                     bind:position="@{ presenter.selectionPassport }"
                         />
@@ -205,15 +210,16 @@
                     />
 
                 <com.viettel.mbccs.widget.CustomEdittext
-                    android:layout_width="match_parent"
                     android:id="@+id/edit_number_passport"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_2"
                     android:enabled="@{ presenter.isEnabledTxtNumberPassport}"
-                    bind:customEditTextDrawable="@{ (v, t)  -> presenter.onDrawableClick(v, t) }"
-                    style="@style/inputStyleDrawableRight"
                     android:text="@={ presenter.txtNumberPassport }"
                     android:inputType="number"
+                    bind:customEditTextDrawable="@{ (v, t)  -> presenter.onDrawableClick(v, t) }"
+                    bind:error="@{ presenter.numberPassportError }"
+                    style="@style/inputStyle"
                     />
 
                 <com.viettel.mbccs.widget.CustomSelectImageNo
@@ -235,7 +241,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_40"
                         android:layout_marginTop="@dimen/dp_10"
-                        android:background="@color/green_two"
+                        android:background="@color/green_three"
                         android:drawableLeft="@drawable/ic_arrow_drop_down_black_36dp"
                         android:gravity="center_vertical"
                         android:text="@string/fragment_create_update_information_create_tt_hop_dong"
@@ -310,11 +316,13 @@
                         android:orientation="horizontal"
                         >
                         <com.viettel.mbccs.widget.CustomEdittext
+                            android:id="@+id/txt_otp"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:background="@drawable/bg_order"
                             android:text="@={ presenter.textOTP }"
+                            bind:error="@{ presenter.otpError }"
                             />
                         <com.viettel.mbccs.widget.CustomButton
                             android:layout_width="wrap_content"
