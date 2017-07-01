@@ -63,7 +63,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="@{item.item.stockMoldeName}"
+                        android:text="@{item.item.stockModelName}"
                         android:textColor="@color/black"
                         android:textSize="12sp"
                         />

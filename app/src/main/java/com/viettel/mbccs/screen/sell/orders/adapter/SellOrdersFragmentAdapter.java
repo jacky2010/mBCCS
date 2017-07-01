@@ -8,6 +8,7 @@ import com.viettel.mbccs.constance.OrderStatus;
 import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.SaleOrders;
 import com.viettel.mbccs.screen.sell.orders.fragment.orders.OrdersFragment;
+import com.viettel.mbccs.screen.sell.orders.listener.ChangeStatusOrderCallback;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,13 +16,15 @@ import java.util.List;
  * Created by HuyQuyet on 5/16/17.
  */
 
-public class SellOrdersFragmentAdapter extends FragmentStatePagerAdapter {
+public class SellOrdersFragmentAdapter extends FragmentStatePagerAdapter
+        implements ChangeStatusOrderCallback {
     private static int NUM_ITEMS = 3;
     private List<SaleOrders> orderListApprovals;
     private List<SaleOrders> orderListPending;
     private List<SaleOrders> orderListReject;
     private List<String> listTitle;
     private ChannelInfo channelInfoSell;
+    private ChangeStatusOrderCallback callback;
 
     public SellOrdersFragmentAdapter(FragmentManager fm) {
         super(fm);
@@ -77,11 +80,20 @@ public class SellOrdersFragmentAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return OrdersFragment.newInstance(orderListPending, channelInfoSell);
+                OrdersFragment fragmentPending =
+                        OrdersFragment.newInstance(orderListPending, channelInfoSell);
+                fragmentPending.setConfirmTransactionSellCancelCallback(this);
+                return fragmentPending;
             case 1:
-                return OrdersFragment.newInstance(orderListApprovals, channelInfoSell);
+                OrdersFragment fragmentApprovals =
+                        OrdersFragment.newInstance(orderListApprovals, channelInfoSell);
+                fragmentApprovals.setConfirmTransactionSellCancelCallback(this);
+                return fragmentApprovals;
             case 2:
-                return OrdersFragment.newInstance(orderListReject, channelInfoSell);
+                OrdersFragment fragmentReject =
+                        OrdersFragment.newInstance(orderListReject, channelInfoSell);
+                fragmentReject.setConfirmTransactionSellCancelCallback(this);
+                return fragmentReject;
             //            default:
             //                return null;
         }
@@ -96,5 +108,16 @@ public class SellOrdersFragmentAdapter extends FragmentStatePagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         return listTitle.get(position);
+    }
+
+    public void setConfirmTransactionSellCancelCallback(ChangeStatusOrderCallback callback) {
+        this.callback = callback;
+    }
+
+    @Override
+    public void callback(long saleOrdersId, @OrderStatus String orderStatus) {
+        if (this.callback != null) {
+            this.callback.callback(saleOrdersId, orderStatus);
+        }
     }
 }

@@ -21,9 +21,9 @@ public class StockSerial implements Serializable, Parcelable {
     @Expose
     private String stockModelCode;
 
-    @SerializedName("stockMoldeName")
+    @SerializedName("stockModelName")
     @Expose
-    private String stockMoldeName;
+    private String stockModelName;
 
     @SerializedName("quantity")
     @Expose
@@ -49,12 +49,12 @@ public class StockSerial implements Serializable, Parcelable {
         this.stockModelCode = stockModelCode;
     }
 
-    public String getStockMoldeName() {
-        return stockMoldeName;
+    public String getStockModelName() {
+        return stockModelName;
     }
 
-    public void setStockMoldeName(String stockMoldeName) {
-        this.stockMoldeName = stockMoldeName;
+    public void setStockModelName(String stockModelName) {
+        this.stockModelName = stockModelName;
     }
 
     public long getQuantity() {
@@ -82,7 +82,7 @@ public class StockSerial implements Serializable, Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(this.stockModelId);
         dest.writeString(this.stockModelCode);
-        dest.writeString(this.stockMoldeName);
+        dest.writeString(this.stockModelName);
         dest.writeLong(this.quantity);
         dest.writeTypedList(this.mSerialBOs);
     }
@@ -93,7 +93,7 @@ public class StockSerial implements Serializable, Parcelable {
     protected StockSerial(Parcel in) {
         this.stockModelId = in.readLong();
         this.stockModelCode = in.readString();
-        this.stockMoldeName = in.readString();
+        this.stockModelName = in.readString();
         this.quantity = in.readLong();
         this.mSerialBOs = in.createTypedArrayList(SerialBO.CREATOR);
     }
