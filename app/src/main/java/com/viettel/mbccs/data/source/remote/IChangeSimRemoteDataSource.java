@@ -4,9 +4,9 @@ import com.viettel.mbccs.data.source.remote.request.ChangeSimRequest;
 import com.viettel.mbccs.data.source.remote.request.CheckCalledIsdnsRequest;
 import com.viettel.mbccs.data.source.remote.request.CheckDebitChangeSimRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
-import com.viettel.mbccs.data.source.remote.request.GetRegisterSubInfoRequest;
+import com.viettel.mbccs.data.source.remote.request.GetRegisterSubRequest;
 import com.viettel.mbccs.data.source.remote.response.DataResponse;
-import com.viettel.mbccs.data.source.remote.response.GetRegisterSubInfoResponse;
+import com.viettel.mbccs.data.source.remote.response.GetRegisterSubResponse;
 
 import rx.Observable;
 
@@ -21,5 +21,5 @@ public interface IChangeSimRemoteDataSource {
 
     Observable<DataResponse> changeSim(DataRequest<ChangeSimRequest> request);
 
-    Observable<GetRegisterSubInfoResponse> getRegisterSubInfo(DataRequest<GetRegisterSubInfoRequest> request);
+    Observable<GetRegisterSubResponse> getRegisterSub(DataRequest<GetRegisterSubRequest> request);
 }

@@ -45,6 +45,7 @@ import com.viettel.mbccs.data.source.remote.request.GetProvinceRequest;
 import com.viettel.mbccs.data.source.remote.request.GetReasonRequest;
 import com.viettel.mbccs.data.source.remote.request.GetReceiverChangeAddressRequest;
 import com.viettel.mbccs.data.source.remote.request.GetRegisterSubInfoRequest;
+import com.viettel.mbccs.data.source.remote.request.GetRegisterSubRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSurveyKPPRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
@@ -105,6 +106,7 @@ import com.viettel.mbccs.data.source.remote.response.GetProvinceResponse;
 import com.viettel.mbccs.data.source.remote.response.GetReasonResponse;
 import com.viettel.mbccs.data.source.remote.response.GetReceiverChangeAddressResponse;
 import com.viettel.mbccs.data.source.remote.response.GetRegisterSubInfoResponse;
+import com.viettel.mbccs.data.source.remote.response.GetRegisterSubResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSurveyKPPResponse;
 import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
@@ -403,6 +405,10 @@ public interface MBCSSApi {
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<GetReceiverChangeAddressResponse>>> receiverChangeAddress(
             @Body AddressRequest<GetReceiverChangeAddressRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<GetRegisterSubResponse>>> getRegiterSub(
+            @Body DataRequest<GetRegisterSubRequest> request);
 
 }
 

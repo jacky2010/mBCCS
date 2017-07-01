@@ -23,6 +23,7 @@ public class SearchChangeSimFragment extends BaseDataBindFragment<FragmentSearch
         implements SearchChangeSimContract.ViewModel {
 
     private AppCompatActivity mActivity;
+    private boolean shownLoadingDialog = false;
 
     public static SearchChangeSimFragment newInstance() {
         return new SearchChangeSimFragment();
@@ -35,12 +36,17 @@ public class SearchChangeSimFragment extends BaseDataBindFragment<FragmentSearch
 
     @Override
     public void showLoading() {
+        if(shownLoadingDialog)
+            return;
+
         showLoadingDialog();
+        shownLoadingDialog = true;
     }
 
     @Override
     public void hideLoading() {
         hideLoadingDialog();
+        shownLoadingDialog = false;
     }
 
     @Override
