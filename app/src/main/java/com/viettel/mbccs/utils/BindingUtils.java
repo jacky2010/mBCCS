@@ -43,6 +43,7 @@ import com.txusballesteros.widgets.FitChart;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.Function;
 import com.viettel.mbccs.widget.BottomNavigationView;
+import com.viettel.mbccs.widget.CustomEditTextInput;
 import com.viettel.mbccs.widget.CustomEdittext;
 import com.viettel.mbccs.widget.EndlessRecyclerOnScrollListener;
 import com.viettel.mbccs.widget.SpinnerWithBorder;
@@ -483,5 +484,11 @@ public class BindingUtils {
         }
         spinnerWithBorder.setAdapter(adapter);
         spinnerWithBorder.setSelection(position);
+    }
+
+    @BindingAdapter("isThemeLight")
+    public static void setThemeLightEditText(CustomEditTextInput customEditTextInput,
+            boolean isThemeLight) {
+        customEditTextInput.setThemeLight(isThemeLight);
     }
 }

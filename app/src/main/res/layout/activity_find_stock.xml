@@ -111,12 +111,12 @@
                                     android:text="@string/mode_code"
                                     style="@style/textTitleInputLight"
                                     />
-                                <com.viettel.mbccs.widget.CustomEdittext
+                                <com.viettel.mbccs.widget.CustomEditTextInput
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="@={presenter.code}"
                                     app:error="@{presenter.codeError}"
-                                    style="@style/inputStyleLight"
+                                    app:isThemeLight="@{true}"
                                     />
 
                                 <com.viettel.mbccs.widget.CustomTextView
@@ -126,12 +126,12 @@
                                     style="@style/textTitleInputLight"
 
                                     />
-                                <com.viettel.mbccs.widget.CustomEdittext
+                                <com.viettel.mbccs.widget.CustomEditTextInput
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="@={presenter.name}"
                                     app:error="@{presenter.nameError}"
-                                    style="@style/inputStyleLight"
+                                    app:isThemeLight="@{true}"
                                     />
 
                                 <com.viettel.mbccs.widget.CustomButton
