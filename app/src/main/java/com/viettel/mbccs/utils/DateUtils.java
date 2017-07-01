@@ -3,7 +3,6 @@ package com.viettel.mbccs.utils;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -132,5 +131,21 @@ public class DateUtils {
 
         DateFormat df = new SimpleDateFormat(format, locale == null ? Locale.getDefault() : locale);
         return df.format(source);
+    }
+
+    public static boolean compareDateToDay(String data) {
+        Date birthDate = DateUtils.stringToDate(data, TIMEZONE_FORMAT_SERVER, Locale.getDefault());
+
+        Date date = new Date(System.currentTimeMillis());
+        return birthDate.before(date);
+    }
+
+    public static boolean compareTwoDate(String dateBefore, String dateAfter) {
+        Date before =
+                DateUtils.stringToDate(dateBefore, TIMEZONE_FORMAT_SERVER, Locale.getDefault());
+
+        Date after = DateUtils.stringToDate(dateAfter, TIMEZONE_FORMAT_SERVER, Locale.getDefault());
+
+        return before.before(after);
     }
 }

@@ -22,9 +22,10 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_136"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal"
+            android:baselineAligned="false"
             >
 
             <LinearLayout
@@ -32,18 +33,20 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginRight="@dimen/dp_4"
+                android:layout_marginEnd="@dimen/dp_4"
                 android:layout_weight="1"
                 android:onClick="@{ v -> presenter.onSelectImage(v) }"
                 android:orientation="vertical"
+                android:gravity="center"
                 >
 
                 <ImageView
                     android:id="@+id/image_front"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:scaleType="fitXY"
+                    android:layout_width="@dimen/dp_110"
+                    android:layout_height="@dimen/dp_110"
                     bind:imageBitmap="@{ presenter.imageFront }"
+                    android:contentDescription="@string/fragment_create_update_information_create_anh_mat_truoc"
+                    android:scaleType="centerInside"
                     />
 
                 <TextView
@@ -59,18 +62,20 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginRight="@dimen/dp_4"
+                android:layout_marginEnd="@dimen/dp_4"
                 android:layout_weight="1"
                 android:onClick="@{ v -> presenter.onSelectImage(v) }"
                 android:orientation="vertical"
+                android:gravity="center"
                 >
-                <ImageView
 
+                <ImageView
                     android:id="@+id/image_backside"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:scaleType="fitXY"
+                    android:layout_width="@dimen/dp_110"
+                    android:layout_height="@dimen/dp_110"
                     bind:imageBitmap="@{ presenter.imageBackside }"
+                    android:contentDescription="@string/fragment_create_update_information_create_anh_mat_sau"
+                    android:scaleType="centerInside"
                     />
 
                 <TextView
@@ -87,17 +92,17 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center"
                 android:onClick="@{ v -> presenter.onSelectImage(v) }"
                 android:orientation="vertical"
+                android:gravity="center"
                 >
                 <ImageView
                     android:id="@+id/image_portrait"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:scaleType="fitXY"
+                    android:layout_width="@dimen/dp_110"
+                    android:layout_height="@dimen/dp_110"
+                    android:contentDescription="@string/fragment_create_update_information_create_anh_chan_dung"
                     bind:imageBitmap="@{ presenter.imagePortrait }"
+                    android:scaleType="centerInside"
                     />
 
                 <TextView

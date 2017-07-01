@@ -79,6 +79,7 @@
                         android:paddingStart="@dimen/dp_6"
                         android:text="@={ presenter.isdn }"
                         bind:customEditTextDrawable="@{ (v, t)  -> presenter.onDrawableClick(v, t) }"
+                        bind:error="@{ presenter.isdnError }"
                         style="@style/inputStyleLight"
                         />
 
@@ -123,6 +124,7 @@
                         android:paddingStart="@dimen/dp_6"
                         android:text="@={ presenter.idNo }"
                         bind:customEditTextDrawable="@{ (v, t)  -> presenter.onDrawableClick(v, t) }"
+                        bind:error="@{ presenter.idNoError }"
                         style="@style/inputStyleLight"
                         />
 

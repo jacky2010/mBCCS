@@ -25,7 +25,6 @@ import com.bumptech.glide.Glide;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.databinding.LayoutSelectImageNoBinding;
 import com.viettel.mbccs.utils.StringUtils;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -67,10 +66,6 @@ public class CustomSelectImageNo extends LinearLayout {
     public ObservableField<Bitmap> imageFront;
     public ObservableField<Bitmap> imageBackside;
     public ObservableField<Bitmap> imagePortrait;
-
-    //    private Uri uriImageFront;
-    //    private Uri uriImageBackside;
-    //    private Uri uriImagePortrait;
 
     private Uri imageFileUri;
     private String imageFilePath;
@@ -194,16 +189,6 @@ public class CustomSelectImageNo extends LinearLayout {
         }
 
         thumbnail = decodeBitmapFromPathFile(picturePath, 200, 200);
-
-        //try {
-        //    File filePath = FileUtils.from(getContext(), selectedImage);
-        //    thumbnail = new ImageCompressor(getContext()).setMaxWidth(200)
-        //            .setMaxHeight(200)
-        //            .compressToBitmap(filePath);
-        //} catch (IOException e) {
-        //    e.printStackTrace();
-        //}
-
         try {
             ei = new ExifInterface(picturePath);
         } catch (IOException e) {
@@ -255,28 +240,15 @@ public class CustomSelectImageNo extends LinearLayout {
         return picturePath;
     }
 
-    public Uri getImageUri(Context inContext, Bitmap inImage, String nameImage,
-            @Nullable String description) {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage,
-                nameImage, description);
-        Uri uri = Uri.parse(path);
-        return uri;
-    }
-
     private void setImageView(Bitmap thumbnail, Uri selectedImage) {
         switch (imageSelect) {
             case IMAGE_FRONT:
-                //                uriImageFront = selectedImage;
                 imageFront.set(thumbnail);
                 break;
             case IMAGE_BACKSIDE:
-                //                uriImageBackside = selectedImage;
                 imageBackside.set(thumbnail);
                 break;
             case IMAGE_PORTRAIT:
-                //                uriImagePortrait = selectedImage;
                 imagePortrait.set(thumbnail);
                 break;
         }
@@ -287,13 +259,11 @@ public class CustomSelectImageNo extends LinearLayout {
         if (StringUtils.isEmpty(url)) {
             Glide.with(context)
                     .load(R.drawable.ic_camera_placeholder)
-                    .centerCrop()
                     .into(binding.imageFront);
             return;
         }
         Glide.with(context)
                 .load(url)
-                .centerCrop()
                 .placeholder(R.drawable.ic_camera_placeholder)
                 .into(binding.imageBackside);
     }
@@ -303,13 +273,11 @@ public class CustomSelectImageNo extends LinearLayout {
         if (StringUtils.isEmpty(url)) {
             Glide.with(context)
                     .load(R.drawable.ic_camera_placeholder)
-                    .centerCrop()
                     .into(binding.imageBackside);
             return;
         }
         Glide.with(context)
                 .load(url)
-                .centerCrop()
                 .placeholder(R.drawable.ic_camera_placeholder)
                 .into(binding.imageFront);
     }
@@ -319,13 +287,11 @@ public class CustomSelectImageNo extends LinearLayout {
         if (StringUtils.isEmpty(url)) {
             Glide.with(context)
                     .load(R.drawable.ic_camera_placeholder)
-                    .centerCrop()
                     .into(binding.imagePortrait);
             return;
         }
         Glide.with(context)
                 .load(url)
-                .centerCrop()
                 .placeholder(R.drawable.ic_camera_placeholder)
                 .into(binding.imagePortrait);
     }
@@ -433,4 +399,5 @@ public class CustomSelectImageNo extends LinearLayout {
     public void setSelectImageCallback(SelectImageCallback callback) {
         this.callback = callback;
     }
+
 }

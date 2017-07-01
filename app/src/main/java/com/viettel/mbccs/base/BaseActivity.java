@@ -6,20 +6,16 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-
-import android.util.Log;
-import com.viettel.mbccs.dialog.LoadingDialog;
-
-import java.util.Stack;
-
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import com.viettel.mbccs.dialog.LoadingDialog;
+import java.util.Stack;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
     private FragmentManager mFrgManager;
     protected Stack<BaseFragment> mFragStack;
-    private LoadingDialog mLoadingDialog;
+    protected LoadingDialog mLoadingDialog;
     private Unbinder mUnbinder;
 
     @Override
@@ -51,6 +47,25 @@ public abstract class BaseActivity extends AppCompatActivity {
                 if (mLoadingDialog == null) {
                     mLoadingDialog = new LoadingDialog();
                     mLoadingDialog.setCancelable(true);
+                }
+
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                mLoadingDialog.show(fragmentManager, "loading");
+            }
+        });
+    }
+
+    public void showLoadingDialog(final boolean cancelable) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (isFinishing() || (mLoadingDialog != null && mLoadingDialog.isAdded())) {
+                    return;
+                }
+
+                if (mLoadingDialog == null) {
+                    mLoadingDialog = new LoadingDialog();
+                    mLoadingDialog.setCancelable(cancelable);
                 }
 
                 FragmentManager fragmentManager = getSupportFragmentManager();
