@@ -25,7 +25,7 @@ import com.viettel.mbccs.widget.callback.DrawableClickListener;
 public class CustomEdittext extends AppCompatEditText {
 
     private static final String ANDROID_SCHEMA = "http://schemas.android.com/apk/res/android";
-    private static final String STRING_EMPTY = "";
+    protected static final String STRING_EMPTY = "";
 
     private Drawable drawableRight;
     private Drawable drawableLeft;
@@ -39,7 +39,7 @@ public class CustomEdittext extends AppCompatEditText {
 
     int actionX, actionY;
 
-    private DrawableClickListener clickListener;
+    protected DrawableClickListener clickListener;
 
     public CustomEdittext(Context context) {
         super(context);

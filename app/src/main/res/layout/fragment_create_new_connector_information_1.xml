@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
     >
     <data>
         <variable
@@ -22,11 +21,11 @@
             android:id="@+id/toolbar_update_information"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_56"
-            app:background="@{@color/colorAccent}"
-            app:isShow="@{true}"
-            app:leftIcon="@{@drawable/ic_arrow_left_white_24dp}"
-            app:leftIconClick="@{()->presenter.onCancelNewView1()}"
-            app:title="@{ @string/create_new_connector_information_title }"
+            bind:background="@{@color/colorAccent}"
+            bind:isShow="@{true}"
+            bind:leftIcon="@{@drawable/ic_arrow_left_white_24dp}"
+            bind:leftIconClick="@{()->presenter.onCancelNewView1()}"
+            bind:title="@{ @string/create_new_connector_information_title }"
             />
         <LinearLayout
             android:layout_width="match_parent"
@@ -92,7 +91,7 @@
                     android:id="@+id/spinner_create_connector_type_customer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:adapter="@{presenter.adapterSpinnerCustomerType}"
+                    bind:adapter="@{presenter.adapterSpinnerCustomerType}"
                     />
 
                 <com.viettel.mbccs.widget.CustomTextView
@@ -104,12 +103,14 @@
                     android:textSize="@dimen/sp_14"
                     />
 
-                <com.viettel.mbccs.widget.CustomEdittext
+                <com.viettel.mbccs.widget.CustomEditTextInput
+                    android:id="@+id/edit_name_customer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:minHeight="@dimen/dp_36"
                     android:layout_marginTop="@dimen/dp_2"
                     android:text="@={ presenter.nameCustomer }"
-                    style="@style/inputStyle"
+                    bind:error="@{ presenter.nameCustomerError }"
                     />
 
                 <com.viettel.mbccs.widget.CustomTextView
@@ -127,6 +128,7 @@
                     android:layout_height="@dimen/dp_40"
                     android:layout_marginTop="@dimen/dp_6"
                     bind:setDate="@{ presenter.dateBirthday }"
+                    bind:maxDate="@{ presenter.maxDateBirthday}"
                     />
                 <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="match_parent"
@@ -179,7 +181,7 @@
                     android:id="@+id/spinner_select_type_passport"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:adapter="@{presenter.adapterSpinnerPassportType}"
+                    bind:adapter="@{presenter.adapterSpinnerPassportType}"
                     />
 
                 <com.viettel.mbccs.widget.CustomTextView
@@ -190,12 +192,14 @@
                     android:textColor="@color/black"
                     />
 
-                <com.viettel.mbccs.widget.CustomEdittext
+                <com.viettel.mbccs.widget.CustomEditTextInput
+                    android:id="@+id/edit_number_passport"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:minHeight="@dimen/dp_36"
                     android:layout_marginTop="@dimen/dp_2"
                     android:text="@={ presenter.txtNumberPassport }"
-                    style="@style/inputStyle"
+                    bind:error="@{ presenter.txtNumberPassportError }"
                     android:inputType="number"
                     />
 
@@ -235,6 +239,8 @@
                         android:layout_marginTop="@dimen/dp_6"
                         android:layout_weight="1"
                         bind:setDate="@{ presenter.dateCreatePassport }"
+                        bind:maxDate="@{ presenter.maxDateCreatePassport }"
+                        bind:minDate="@{ presenter.minDateCreatePassport }"
                         />
                     <com.viettel.mbccs.widget.CustomDatePicker
                         android:id="@+id/date_out_date_passport"
@@ -245,6 +251,8 @@
                         android:layout_marginTop="@dimen/dp_6"
                         android:layout_weight="1"
                         bind:setDate="@{ presenter.outDatePassport }"
+                        bind:maxDate="@{ presenter.maxOutDatePassport }"
+                        bind:minDate="@{ presenter.minOutDatePassport }"
                         />
                 </LinearLayout>
 
@@ -256,12 +264,14 @@
                     android:textColor="@color/black"
                     />
 
-                <com.viettel.mbccs.widget.CustomEdittext
+                <com.viettel.mbccs.widget.CustomEditTextInput
+                    android:id="@+id/edit_place_create_passport"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:minHeight="@dimen/dp_36"
                     android:layout_marginTop="@dimen/dp_2"
                     android:text="@={ presenter.placeCreatePassport }"
-                    style="@style/inputStyle"
+                    bind:error="@{ presenter.placeCreatePassportError }"
                     />
 
                 <com.viettel.mbccs.widget.CustomSelectAddress
