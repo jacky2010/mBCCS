@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.viettel.mbccs.widget.CustomEdittext
+    <com.viettel.mbccs.widget.CustomEditText
         android:id="@+id/edit_sipnner_edit"
         style="@style/edit_main_bg"
         android:layout_width="match_parent"

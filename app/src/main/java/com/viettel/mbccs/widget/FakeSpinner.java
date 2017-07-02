@@ -19,7 +19,7 @@ import com.viettel.mbccs.databinding.ItemFakeSpinnerBinding;
 
 public class FakeSpinner extends LinearLayout {
 
-    private CustomEdittext mEdittext;
+    private CustomEditText mEdittext;
     private ImageView mImageView;
     private View mView;
     private RelativeLayout root;
@@ -52,11 +52,11 @@ public class FakeSpinner extends LinearLayout {
         }
     }
 
-    public CustomEdittext getEdittext() {
+    public CustomEditText getEdittext() {
         return mEdittext;
     }
 
-    public void setEdittext(CustomEdittext edittext) {
+    public void setEdittext(CustomEditText edittext) {
         mEdittext = edittext;
     }
 

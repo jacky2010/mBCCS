@@ -73,8 +73,8 @@ public class SellOrdersPresenter {
         shop.set(userInfo.getShop());
 
         GetListChannelByOwnerTypeIdRequest g = new GetListChannelByOwnerTypeIdRequest();
-        g.setStaffId(String.valueOf(staffInfo.get().getStaffId()));
-//        g.setChannelTypeId(staffInfo.get().getChannelTypeId());
+        g.setStaffId((staffInfo.get().getStaffId()));
+        //        g.setChannelTypeId(staffInfo.get().getChannelTypeId());
 
         DataRequest<GetListChannelByOwnerTypeIdRequest> request = new DataRequest<>();
         request.setWsRequest(g);
@@ -93,8 +93,10 @@ public class SellOrdersPresenter {
                                     return;
                                 }
                                 channelInfoList = object.getChannelInfoList();
-                                //                                for (ChannelInfo c : channelInfoList) {
-                                //                                    dataSpinnerChannel.add(c.getManagementName());
+                                //                                for (ChannelInfo c :
+                                // channelInfoList) {
+                                //                                    dataSpinnerChannel.add(c
+                                // .getManagementName());
                                 //                                }
                                 spinnerAdapterChannel.set(
                                         new SpinnerAdapter<>(context, channelInfoList));
@@ -154,7 +156,7 @@ public class SellOrdersPresenter {
         getListOrderRequest.setStaffId(channelInfoSelect.getChannelId());
         getListOrderRequest.setEndDate(sellOrdersView.getStringDateTo());
         getListOrderRequest.setStartDate(sellOrdersView.getStringDateFrom());
-//        getListOrderRequest.setOrderStatus(staffInfo.get().getStatus());
+        //        getListOrderRequest.setOrderStatus(staffInfo.get().getStatus());
 
         DataRequest<GetListOrderRequest> baseRequest = new DataRequest<>();
         baseRequest.setWsCode(WsCode.GetListOrder);
@@ -190,7 +192,7 @@ public class SellOrdersPresenter {
         this.sellOrdersFragmentAdapter.set(sellOrdersFragmentAdapter);
     }
 
-//    public void setPositionSelectChange(int position) {
-//        channelInfoSelect = channelInfoList.get(position);
-//    }
+    //    public void setPositionSelectChange(int position) {
+    //        channelInfoSelect = channelInfoList.get(position);
+    //    }
 }

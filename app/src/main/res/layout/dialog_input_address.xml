@@ -47,7 +47,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_14"
                     />
-                <com.viettel.mbccs.widget.CustomEdittext
+                <com.viettel.mbccs.widget.CustomEditText
                     android:id="@+id/edit_text_address"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

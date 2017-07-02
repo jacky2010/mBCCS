@@ -75,7 +75,7 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/default_label_text_size" />
 
-            <com.viettel.mbccs.widget.CustomEdittext
+            <com.viettel.mbccs.widget.CustomEditText
                 style="@style/inputStyle"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_40"
@@ -112,7 +112,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <com.viettel.mbccs.widget.CustomEdittext
+                    <com.viettel.mbccs.widget.CustomEditText
                         style="@style/inputStyle"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/dp_40"

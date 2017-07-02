@@ -23,5 +23,7 @@ public class AddNewOrderContract {
 
         void gotoSuccessScreen(ArrayList<StockTotal> stockTotals, String saleOrderId,
                 String channelName);
+
+        void finishScreen();
     }
 }

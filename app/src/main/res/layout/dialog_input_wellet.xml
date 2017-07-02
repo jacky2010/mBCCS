@@ -52,7 +52,7 @@
                 android:text="@string/phone_wellet"
                 />
 
-            <com.viettel.mbccs.widget.CustomEdittext
+            <com.viettel.mbccs.widget.CustomEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@={presenter.phone}"
@@ -60,7 +60,7 @@
                 style="@style/inputStyle"
                 >
                 <requestFocus/>
-            </com.viettel.mbccs.widget.CustomEdittext>
+            </com.viettel.mbccs.widget.CustomEditText>
 
             <com.viettel.mbccs.widget.CustomButton
                 android:layout_width="@dimen/dp_150"

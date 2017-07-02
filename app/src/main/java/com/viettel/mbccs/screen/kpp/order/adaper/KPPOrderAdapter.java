@@ -19,8 +19,10 @@ import java.util.List;
  * Created by eo_cuong on 5/21/17.
  */
 
-public class KPPOrderAdapter extends RecyclerView.Adapter<KPPOrderAdapter.KPPOrderViewHolder> {
+public class KPPOrderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    public static final int TYPE_TOTAL = 0;
+    public static final int TYPE_NORMAL = 1;
     private Context mContext;
     private List<SaleOrders> mSaleOrderses;
     private KPPOrderListener mKPPOrderListener;
@@ -31,24 +33,77 @@ public class KPPOrderAdapter extends RecyclerView.Adapter<KPPOrderAdapter.KPPOrd
     }
 
     @Override
-    public KPPOrderViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (viewType == TYPE_TOTAL) {
+            return new TotalViewHolder(
+                    ItemTotalAmoutKppBinding.inflate(LayoutInflater.from(mContext), parent, false));
+        }
         return new KPPOrderViewHolder(
                 (ItemKppOrderBinding) DataBindingUtil.inflate(LayoutInflater.from(mContext),
                         R.layout.item_kpp_order, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(KPPOrderViewHolder holder, int position) {
-        holder.bind(mSaleOrderses.get(position));
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (mSaleOrderses.size() > 0) {
+            if (holder instanceof KPPOrderViewHolder) {
+                ((KPPOrderViewHolder) holder).bind(mSaleOrderses.get(position - 1));
+            }
+
+            if (holder instanceof TotalViewHolder) {
+                ((TotalViewHolder) holder).bindData(null);
+            }
+        } else {
+            ((KPPOrderViewHolder) holder).bind(mSaleOrderses.get(position));
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (mSaleOrderses.size() > 0) {
+            if (position == 0) {
+                return TYPE_TOTAL;
+            }
+            return TYPE_NORMAL;
+        }
+        return TYPE_NORMAL;
     }
 
     @Override
     public int getItemCount() {
+        if (mSaleOrderses.size() > 0) {
+            return mSaleOrderses.size() + 1;
+        }
         return mSaleOrderses.size();
     }
 
     public void setKPPOrderListener(KPPOrderListener KPPOrderListener) {
         mKPPOrderListener = KPPOrderListener;
+    }
+
+    class TotalViewHolder extends BaseViewHolderBinding<ItemTotalAmoutKppBinding, EmptyObject> {
+
+        public TotalViewHolder(ItemTotalAmoutKppBinding binding) {
+            super(binding);
+
+        }
+
+        @Override
+        public void bindData(EmptyObject emptyObject) {
+            super.bindData(emptyObject);
+            double total = 0;
+            for (SaleOrders saleOrders : mSaleOrderses) {
+                total += saleOrders.getAmount();
+            }
+            if (total != 0) {
+                mBinding.textTotalAmount.setText(
+                        String.format(mContext.getString(R.string.kpp_order_label_amount),
+                                Common.formatDouble(total)));
+                mBinding.textTotalAmount.setVisibility(View.VISIBLE);
+            } else {
+                mBinding.textTotalAmount.setVisibility(View.GONE);
+            }
+        }
     }
 
     class KPPOrderViewHolder extends RecyclerView.ViewHolder {

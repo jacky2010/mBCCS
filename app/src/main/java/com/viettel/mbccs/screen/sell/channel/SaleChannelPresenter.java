@@ -124,14 +124,11 @@ public class SaleChannelPresenter
     private void initialData() {
         mViewModel.showLoading();
         Observable.zip(getObservableTeleComserviceAndSaleProgram(), getObservaleChannelInfors(),
-                new Func2<TelecomServiceAndSaleProgramResponse,
-                        GetListChannelByOwnerTypeIdResponse, SaleChannelInitData>() {
+                new Func2<TelecomServiceAndSaleProgramResponse, GetListChannelByOwnerTypeIdResponse, SaleChannelInitData>() {
                     @Override
                     public SaleChannelInitData call(
-                            TelecomServiceAndSaleProgramResponse
-                                    telecomServiceAndSaleProgramResponse,
-                            GetListChannelByOwnerTypeIdResponse
-                                    getListChannelByOwnerTypeIdResponse) {
+                            TelecomServiceAndSaleProgramResponse telecomServiceAndSaleProgramResponse,
+                            GetListChannelByOwnerTypeIdResponse getListChannelByOwnerTypeIdResponse) {
                         if (telecomServiceAndSaleProgramResponse == null
                                 || getListChannelByOwnerTypeIdResponse == null) {
                             return null;
@@ -181,8 +178,7 @@ public class SaleChannelPresenter
         });
     }
 
-    private Observable<TelecomServiceAndSaleProgramResponse>
-    getObservableTeleComserviceAndSaleProgram() {
+    private Observable<TelecomServiceAndSaleProgramResponse> getObservableTeleComserviceAndSaleProgram() {
         mGetTelecomServiceAndSaleProgramRequest = new DataRequest<>();
         mGetTelecomServiceAndSaleProgramRequest.setWsCode(WsCode.GetTelecomServiceAndSaleProgram);
         GetTelecomServiceAndSaleProgramRequest request =
@@ -197,8 +193,7 @@ public class SaleChannelPresenter
         mGetListChannelByOwnerTypeIdRequest = new DataRequest<>();
         mGetListChannelByOwnerTypeIdRequest.setWsCode(WsCode.GetListChannelByOwnerTypeId);
         GetListChannelByOwnerTypeIdRequest request = new GetListChannelByOwnerTypeIdRequest();
-        request.setStaffId(
-                String.valueOf(mUserRepository.getUserInfo().getStaffInfo().getStaffId()));
+        request.setStaffId((mUserRepository.getUserInfo().getStaffInfo().getStaffId()));
         //request.setChannelTypeId(mUserRepository.getUserInfo().getStaffInfo().getChannelTypeId());
         request.setLanguage("en");
         mGetListChannelByOwnerTypeIdRequest.setWsRequest(request);
