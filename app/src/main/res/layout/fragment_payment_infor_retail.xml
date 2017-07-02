@@ -301,7 +301,7 @@
                         android:text="Nhập mã coupon"
                         android:textColor="#000"
                         />
-                    <com.viettel.mbccs.widget.CustomEdittext
+                    <com.viettel.mbccs.widget.CustomEditTextInput
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -309,7 +309,6 @@
                         android:background="@drawable/bg_input_tranparent"
                         android:singleLine="true"
                         android:text="@={presenter.coupon}"
-                        style="@style/inputStyle"
                         />
                 </LinearLayout>
 

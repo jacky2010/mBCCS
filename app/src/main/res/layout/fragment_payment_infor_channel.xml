@@ -136,7 +136,7 @@
                         android:textColor="#000"
                         />
 
-                    <com.viettel.mbccs.widget.CustomEdittext
+                    <com.viettel.mbccs.widget.CustomEditTextInput
                         android:id="@+id/customEdittext"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -338,7 +338,7 @@
                         android:text="Nhập mã coupon"
                         android:textColor="#000"
                         />
-                    <com.viettel.mbccs.widget.CustomEdittext
+                    <com.viettel.mbccs.widget.CustomEditTextInput
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
