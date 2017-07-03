@@ -66,9 +66,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
                         android:text="@string/customer_info"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/sp_16"
                         android:textStyle="bold"
-                        android:textColor="@color/black"
                         />
                 </LinearLayout>
                 <View
@@ -157,8 +157,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:padding="5dp"
-                        android:text="@string/address"
                         android:textColor="#000"
+                        app:textHtml="@{@string/address}"
                         />
 
                     <com.viettel.mbccs.widget.CustomEditText
@@ -455,7 +455,7 @@
                         android:layout_marginLeft="@dimen/dp_10"
                         android:layout_weight="1"
                         android:onClick="@{()->presenter.paymentClick()}"
-                        android:text="@string/payment"
+                        android:text="@{presenter.titleButton}"
                         android:textColor="#fff"
                         style="@style/button_positive"
                         />
