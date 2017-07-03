@@ -340,6 +340,20 @@ public interface MBCSSApi {
     Observable<ServerDataResponse<BaseResponse<UploadImageResponse>>> uploadImage(
             @Body DataRequest<UploadImageRequest> request);
 
+    //Nhap hoa don API
+    @GET("vietdt/CM_mBCCS/1.0.0/Ws_importInvoiceList")
+    Observable<ServerDataResponse<BaseResponse<UploadImageResponse>>> getImportInvoiceList(
+            @Body DataRequest<UploadImageRequest> request);
+
+    @GET("vietdt/CM_mBCCS/1.0.0/WS_getListInvoiceImport")
+    Observable<ServerDataResponse<BaseResponse<UploadImageResponse>>> getListInvoiceImport(
+            @Body DataRequest<UploadImageRequest> request);
+
+    @GET("vietdt/CM_mBCCS/1.0.0/Ws_getListInvoiceExport")
+    Observable<ServerDataResponse<BaseResponse<UploadImageResponse>>> getListInvoiceExport(
+            @Body DataRequest<UploadImageRequest> request);
+    //End API Nhap hoa don
+
     // TODO: 12/06/2017 Fake request
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<UserInfo>>> getUserInfo(
