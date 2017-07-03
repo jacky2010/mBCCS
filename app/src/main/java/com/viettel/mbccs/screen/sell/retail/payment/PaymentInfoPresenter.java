@@ -47,6 +47,7 @@ public class PaymentInfoPresenter implements PaymentInforContract.Presenter {
     public ObservableField<Boolean> isGetTransInfo;
     public ObservableField<Boolean> isExpandCustomerInfo;
     public ObservableField<Boolean> isExpandPaymentInfo;
+    public ObservableField<String> titleButton;
     private PaymentInforContract.ViewModel mViewModel;
     private Context mContext;
     private List<StockSerial> mStockSerials;
@@ -94,7 +95,15 @@ public class PaymentInfoPresenter implements PaymentInforContract.Presenter {
         if (cacheCustomer == null) {
             cacheCustomer = new Customer();
         }
-        isGetTransInfo = new ObservableField<>();
+        titleButton = new ObservableField<>();
+        isGetTransInfo = new ObservableField<Boolean>(){
+            @Override
+            public void set(Boolean value) {
+                super.set(value);
+                updateTitleButton();
+            }
+        };
+
         isGetTransInfo.set(false);
         name = new ObservableField<String>() {
             @Override
@@ -102,6 +111,7 @@ public class PaymentInfoPresenter implements PaymentInforContract.Presenter {
                 super.set(value);
                 isGetTransInfo.set(false);
                 cacheCustomer.setCustomerName(value);
+
             }
         };
         name.set(cacheCustomer.getCustomerName());
@@ -153,6 +163,14 @@ public class PaymentInfoPresenter implements PaymentInforContract.Presenter {
 
         if (!TextUtils.isEmpty(cacheCoupon)) {
             coupon.set(cacheCoupon);
+        }
+    }
+
+    private void updateTitleButton() {
+        if (!isGetTransInfo.get()) {
+            titleButton.set(mContext.getString(R.string.common_label_caculate_amount));
+        } else {
+            titleButton.set(mContext.getString(R.string.payment));
         }
     }
 
