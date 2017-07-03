@@ -111,7 +111,7 @@ public class KPPOrderPresenter implements KPPOrderContract.Presenter {
         mGetListOrderRequestBaseRequest.setWsCode(WsCode.GetListOrder);
         GetListOrderRequest request = new GetListOrderRequest();
         request.setOrderStatus(status);
-        request.setShopId(Long.parseLong(mUserRepository.getUserInfo().getShop().getShopId()));
+        request.setShopId(mUserRepository.getUserInfo().getShop().getShopId());
         request.setStaffId(mUserRepository.getUserInfo().getStaffInfo().getStaffId());
         request.setIsdnChannel(mUserRepository.getUserInfo().getChannelInfo().getTel());
         request.setStartDate(DateUtils.convertDateToString(mViewModel.getFromDate(),

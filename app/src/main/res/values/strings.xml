@@ -87,6 +87,7 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="order_detail_tax_money">Tiền thuế: </string>
     <string name="order_detail_money">%1$s đ</string>
     <string name="order_detail_cancel">Hủy Giao Dịch</string>
+    <string name="order_detail_ok_1">Lên Giao Dịch</string>
     <string name="order_detail_ok">Bán hàng</string>
 
     <string name="item_order_detail_price_item">%1$s đ</string>
@@ -806,9 +807,6 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="connector_mobile_so_giay_to_trong">Số giấy tờ trống!</string>
     <string name="create_new_connector_information_validate_name">Tên khách hàng phải là chữ và số lượng nhỏ hơn 100 ký tự!</string>
     <string name="create_new_connector_information_validate_id_no">Số giấy tờ không thể trống!</string>
-    <string name="create_new_connector_information_validate_birthday">Ngày sinh cần trước ngày hiện tại!</string>
-    <string name="create_new_connector_information_validate_date_id_no">Giấy tờ đã hết hạn!</string>
-    <string name="create_new_connector_information_validate_out_date_id_no">Ngày cấp giấy tờ sau ngày hiện tại hoặc trước ngày hết hạn!</string>
     <string name="create_new_connector_information_validate_place_id_no">Nơi cấp giấy tờ không thể trống!</string>
     <string name="create_new_connector_information_validate_address">Địa chỉ không thể trống!</string>
 

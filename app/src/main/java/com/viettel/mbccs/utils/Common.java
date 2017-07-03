@@ -27,6 +27,10 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+import static com.viettel.mbccs.variable.Constants.SharePref.LOGIN_INFO;
+import static com.viettel.mbccs.variable.Constants.SharePref.LOGIN_USER_NAME;
+import static com.viettel.mbccs.variable.Constants.SharePref.USER_INFO;
+
 public class Common {
     public static boolean isConnectingToInternet() {
         ConnectivityManager connectivity = (ConnectivityManager) MBCCSApplication.self()
@@ -43,7 +47,10 @@ public class Common {
 
     public static void logout(Context mContext) {
         SharedPrefs sharedPrefs = SharedPrefs.getInstance();
-        sharedPrefs.clear();
+        sharedPrefs.remove(LOGIN_INFO);
+        sharedPrefs.remove(LOGIN_USER_NAME);
+        sharedPrefs.remove(USER_INFO);
+        //        sharedPrefs.clear();
         Intent intent = new Intent(mContext, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         mContext.startActivity(intent);

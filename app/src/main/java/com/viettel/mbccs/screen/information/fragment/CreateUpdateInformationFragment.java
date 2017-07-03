@@ -204,12 +204,6 @@ public class CreateUpdateInformationFragment extends BaseFragment
     }
 
     @Override
-    public void customerBirthdayError() {
-        DialogUtils.showDialog(getActivity(), getString(
-                R.string.fragment_create_update_information_update_information_customer_empty));
-    }
-
-    @Override
     public void updateAllSubInfoError(BaseException error) {
         DialogUtils.showDialogError(getActivity(), error);
     }

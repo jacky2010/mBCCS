@@ -26,7 +26,7 @@ public class PermissionsUtil {
     public static void requestPermission(@NonNull Activity activity, @NonNull PermissionListener listener, @NonNull String[] permissions, boolean showTip, @Nullable TipInfo tip) {
 
         if (Build.VERSION.SDK_INT < 23) {
-            listener.permissionDenied(permissions);
+            listener.permissionGranted(permissions);
             return;
         }
 

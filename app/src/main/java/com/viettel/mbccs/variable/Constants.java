@@ -1,6 +1,7 @@
 package com.viettel.mbccs.variable;
 
 import com.viettel.mbccs.data.model.LoginInfo;
+import com.viettel.mbccs.data.model.UserInfo;
 
 /**
  * Created by eo_cuong on 5/10/17.
@@ -14,12 +15,6 @@ public class Constants {
 
     public class SharePref {
         public static final String PREF_NAME = "mbccs_db";
-
-        /**
-         * key put get language in app
-         * put when user loginServer in app
-         */
-        public static final String STAFF_INFO = "STAFF_INFO";
 
         /**
          * key put get language in app
@@ -60,18 +55,21 @@ public class Constants {
         /**
          * key put get LOGIN INFO in app (value instanceOf {@link LoginInfo})
          * put when log in
+         * remove when logout
          */
         public static final String LOGIN_INFO = "LOGIN_INFO";
 
         /**
          * key put get LOGIN USER NAME in app
          * put when log in
+         * remove when logout
          */
         public static final String LOGIN_USER_NAME = "LOGIN_USER_NAME";
 
         /**
-         * key put get USER INFO in app
+         * key put get USER INFO in app  (value instanceOf {@link UserInfo})
          * put when log in
+         * remove when logout
          */
         public static final String USER_INFO = "USER_INFO";
 
