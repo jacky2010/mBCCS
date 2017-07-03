@@ -220,7 +220,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
                             >
-                            <com.viettel.mbccs.widget.CustomEdittext
+                            <com.viettel.mbccs.widget.CustomEditText
                                 android:id="@+id/input_serial_from"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -237,7 +237,7 @@
                                 android:layout_height="20dp"
                                 android:src="@drawable/ic_chevron_right_grey600_24dp"
                                 />
-                            <com.viettel.mbccs.widget.CustomEdittext
+                            <com.viettel.mbccs.widget.CustomEditText
                                 android:id="@+id/input_serial_to"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"

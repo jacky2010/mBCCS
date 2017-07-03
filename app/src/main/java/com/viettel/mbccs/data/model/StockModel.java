@@ -8,7 +8,7 @@ public class StockModel implements Serializable {
 
     @SerializedName("stockModelId")
     @Expose
-    private long stockModelId;
+    private Long stockModelId;
 
     @SerializedName("stockModelCode")
     @Expose
@@ -20,11 +20,11 @@ public class StockModel implements Serializable {
 
     @SerializedName("stateId")
     @Expose
-    private long stateId;
+    private Long stateId;
 
     @SerializedName("quantityIssue")
     @Expose
-    private long quantity;
+    private Long quantity;
 
     public long getStockModelId() {
         return stockModelId;

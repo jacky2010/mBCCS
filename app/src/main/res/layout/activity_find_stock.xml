@@ -116,7 +116,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="@={presenter.code}"
                                     app:error="@{presenter.codeError}"
-                                    app:isThemeLight="@{true}"
+                                    app:themeLight="@{true}"
                                     />
 
                                 <com.viettel.mbccs.widget.CustomTextView
@@ -131,7 +131,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="@={presenter.name}"
                                     app:error="@{presenter.nameError}"
-                                    app:isThemeLight="@{true}"
+                                    app:themeLight="@{true}"
                                     />
 
                                 <com.viettel.mbccs.widget.CustomButton

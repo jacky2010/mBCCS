@@ -21,6 +21,7 @@ import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
 import com.viettel.mbccs.data.source.remote.request.KPPOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.UpdateSaleOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListSerialRequest;
+import com.viettel.mbccs.data.source.remote.response.CreateOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransChannelResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransRetailResponse;
 import com.viettel.mbccs.data.source.remote.response.DataResponse;
@@ -74,7 +75,7 @@ public interface IBanHangKhoTaiChinhRemoteDataSource {
 
     Observable<GetListShopResponse> getListShop(DataRequest<GetListShopRequest> request);
 
-    Observable<EmptyObject> createSaleOrders(DataRequest<KPPOrderRequest> requestDataRequest);
+    Observable<CreateOrderResponse> createSaleOrders(DataRequest<KPPOrderRequest> requestDataRequest);
 
     Observable<TelecomServiceAndSaleProgramResponse> getTelecomserviceAndSaleProgram(
             DataRequest<GetTelecomServiceAndSaleProgramRequest> request);
