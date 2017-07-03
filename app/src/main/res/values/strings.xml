@@ -116,11 +116,12 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="all">Tất cả</string>
     <string name="all_">-Tất cả-</string>
     <string name="customer_info">Thông tin khách hàng</string>
-    <string name="customer_name">Tên khách hàng/Công ty (*)</string>
+    <string name="customer_name"><![CDATA[Tên khách hàng/Công ty <font color="#DF0101">*</font>]]></string>
     <string name="customer_identity">Chứng minh thư</string>
-    <string name="address">Địa chỉ (*)</string>
+    <string name="address"><![CDATA[Địa chỉ <font color="#DF0101">*</font>]]></string>
     <string name="back">Quay lại</string>
     <string name="payment">Thanh toán</string>
+    <string name="common_label_caculate_amount">Tính tiền</string>
     <string name="sale_success">Bán hàng thành công</string>
     <string name="sale_success_content">Tin nhắn thông báo đã gửi đến SĐT của khách hàng và người bán</string>
     <string name="activity_login_ten_dang_nhap">Tên đăng nhập</string>

@@ -88,7 +88,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:padding="5dp"
-                        android:text="@string/customer_name"
+                        app:textHtml="@{@string/customer_name}"
                         android:textColor="#000"
                         />
 
@@ -124,7 +124,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:padding="5dp"
-                        android:text="@string/address"
+                        app:textHtml="@{@string/address}"
                         android:textColor="#000"
                         />
 
@@ -418,7 +418,7 @@
                         android:layout_marginLeft="@dimen/dp_10"
                         android:layout_weight="1"
                         android:onClick="@{()->presenter.paymentClick()}"
-                        android:text="@string/payment"
+                        android:text="@{presenter.titleButton}"
                         android:textColor="#fff"
                         style="@style/button_positive"
                         />

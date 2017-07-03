@@ -50,6 +50,7 @@ public class PaymentInforChannelPresenter implements PaymentInforChannelContract
     public ObservableField<String> channelAddressError;
     public ObservableField<String> channelName;
     public ObservableField<String> channelNameError;
+    public ObservableField<String> titleButton;
     private PaymentInforChannelContract.ViewModel mViewModel;
     private Context mContext;
     private List<StockSerial> mStockSerials;
@@ -112,7 +113,14 @@ public class PaymentInforChannelPresenter implements PaymentInforChannelContract
         amount = new ObservableField<>();
         amountNotTax = new ObservableField<>();
         tax = new ObservableField<>();
-        isGetTransInfo = new ObservableField<>();
+        titleButton = new ObservableField<>();
+        isGetTransInfo = new ObservableField<Boolean>() {
+            @Override
+            public void set(Boolean value) {
+                super.set(value);
+                updateTitleButton();
+            }
+        };
         isGetTransInfo.set(false);
         isExpandCustomerInfo = new ObservableField<>();
         isExpandCustomerInfo.set(true);
@@ -146,6 +154,14 @@ public class PaymentInforChannelPresenter implements PaymentInforChannelContract
             currentPayment = cachepaymentMethod;
             paymentMethod = cachepaymentMethod;
             mViewModel.initPaymentMethod(paymentMethod);
+        }
+    }
+
+    private void updateTitleButton() {
+        if (!isGetTransInfo.get()) {
+            titleButton.set(mContext.getString(R.string.common_label_caculate_amount));
+        } else {
+            titleButton.set(mContext.getString(R.string.payment));
         }
     }
 
