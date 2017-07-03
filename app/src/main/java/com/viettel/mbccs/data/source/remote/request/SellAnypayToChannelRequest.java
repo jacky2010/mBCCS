@@ -10,10 +10,10 @@ import com.google.gson.annotations.SerializedName;
 public class SellAnypayToChannelRequest {
     @Expose
     @SerializedName("channelId")
-    private int channelId;
+    private Long channelId;
     @Expose
-    @SerializedName("paymethod")
-    private String payMethod;
+    @SerializedName("payMethod")
+    private Integer payMethod;
     @Expose
     @SerializedName("isdnVi")
     private String isdnVi;
@@ -22,21 +22,21 @@ public class SellAnypayToChannelRequest {
     private double amount;
     @Expose
     @SerializedName("staffId")
-    private int staffId;
+    private Long staffId;
 
-    public int getChannelId() {
+    public Long getChannelId() {
         return channelId;
     }
 
-    public void setChannelId(int channelId) {
+    public void setChannelId(Long channelId) {
         this.channelId = channelId;
     }
 
-    public String getPayMethod() {
+    public Integer getPayMethod() {
         return payMethod;
     }
 
-    public void setPayMethod(String payMethod) {
+    public void setPayMethod(Integer payMethod) {
         this.payMethod = payMethod;
     }
 
@@ -56,11 +56,11 @@ public class SellAnypayToChannelRequest {
         this.amount = amount;
     }
 
-    public int getStaffId() {
+    public Long getStaffId() {
         return staffId;
     }
 
-    public void setStaffId(int staffId) {
+    public void setStaffId(Long staffId) {
         this.staffId = staffId;
     }
 }

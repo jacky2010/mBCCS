@@ -87,7 +87,7 @@ public class DialogConfirmSellAnyPayFragment extends BaseDialog {
             currentArgs = getArguments();
 
             if (currentArgs != null) {
-                tvTrans.setText(getString(R.string.sell_anypay_msg_confirm_sell_label_cust, currentArgs.getString(Constants.BundleConstant.CUSTOMER_ITEM)));
+                tvTrans.setText(getString(R.string.sell_anypay_msg_confirm_sell_label_cust, currentArgs.getString(Constants.BundleConstant.ISDN)));
                 tvPreTax.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.PRE_TAX)) + " " + getString(R.string.common_label_currency_suffix));
                 tvTax.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.TAX)) + " " + getString(R.string.common_label_currency_suffix));
                 tvDiscount.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.DISCOUNT)) + " " + getString(R.string.common_label_currency_suffix));
@@ -131,10 +131,10 @@ public class DialogConfirmSellAnyPayFragment extends BaseDialog {
                 SellAnypayToChannelRequest request = new SellAnypayToChannelRequest();
 
                 request.setAmount(currentArgs.getDouble(Constants.BundleConstant.TOTAL));
-                request.setChannelId(currentArgs.getInt(Constants.BundleConstant.CHANNEL));
+                request.setChannelId(currentArgs.getLong(Constants.BundleConstant.CHANNEL));
                 request.setIsdnVi(currentArgs.getString(Constants.BundleConstant.ISDN_WALLET));
-                request.setPayMethod(currentArgs.getString(Constants.BundleConstant.PAY_METHOD));
-                request.setStaffId(currentArgs.getInt(Constants.BundleConstant.STAFF));
+                request.setPayMethod(Integer.parseInt(currentArgs.getString(Constants.BundleConstant.PAY_METHOD)));
+                request.setStaffId(currentArgs.getLong(Constants.BundleConstant.STAFF));
 
                 sellToChannelBaseRequest = new DataRequest<>();
                 sellToChannelBaseRequest.setWsCode(WsCode.SellAnyPayToChannel);
@@ -182,8 +182,8 @@ public class DialogConfirmSellAnyPayFragment extends BaseDialog {
                 request.setAmount(currentArgs.getDouble(Constants.BundleConstant.TOTAL));
                 request.setIsdn(currentArgs.getString(Constants.BundleConstant.ISDN));
                 request.setIsdnVi(currentArgs.getString(Constants.BundleConstant.ISDN_WALLET));
-                request.setPayMethod(currentArgs.getString(Constants.BundleConstant.PAY_METHOD));
-                request.setStaffId(currentArgs.getInt(Constants.BundleConstant.STAFF));
+                request.setPayMethod(Integer.parseInt(currentArgs.getString(Constants.BundleConstant.PAY_METHOD)));
+                request.setStaffId(currentArgs.getLong(Constants.BundleConstant.STAFF));
 
                 sellToCustomerBaseRequest = new DataRequest<>();
                 sellToCustomerBaseRequest.setWsCode(WsCode.SellAnyPayToCustomer);
@@ -194,23 +194,12 @@ public class DialogConfirmSellAnyPayFragment extends BaseDialog {
                                 .subscribe(new MBCCSSubscribe<SellAnypayToCustomerResponse>() {
                                     @Override
                                     public void onSuccess(SellAnypayToCustomerResponse object) {
-                                        try {
-                                            if (Constants.Service.RESPONSE_OK.equals(object.getErrorCode())) {
-                                                showSuccessDialog();
-                                            } else {
-                                                DialogUtils.showDialog(getContext(), null, getString(R.string.common_msg_error_general),
-                                                        null);
-                                            }
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
-                                            DialogUtils.showDialog(getContext(), null, getString(R.string.common_msg_error_general),
-                                                    null);
-                                        }
+                                        showSuccessDialog();
                                     }
 
                                     @Override
                                     public void onError(BaseException error) {
-                                        DialogUtils.showDialog(getContext(), null, error.getMessage(),
+                                        DialogUtils.showDialog(getContext(), null, getString(R.string.common_msg_error_general),
                                                 null);
                                     }
 
