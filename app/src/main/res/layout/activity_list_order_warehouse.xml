@@ -68,7 +68,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_margin="16dp"
+            android:layout_margin="@dimen/dp_16"
             android:onClick="@{ () -> presenter.onAddClick() }"
             android:src="@drawable/ic_add_white_24dp"
             android:visibility="gone"
@@ -82,6 +82,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/toolbar"
+            android:layout_marginBottom="@dimen/dp_200"
             app:content="@+id/search_form"
             app:direction="topToBottom"
             app:handle="@+id/handle"
@@ -89,23 +90,17 @@
             app:headerOne="@+id/view_open"
             >
 
-            <android.support.v7.widget.CardView
+            <include
+                layout="@layout/repository_base_search_form"
                 android:id="@+id/search_form"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/dp_4"
-                app:cardElevation="@dimen/dp_2"
-                >
-
-                <include
-                    layout="@layout/repository_base_search_form"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    bind:adapter="@{ presenter.warehouseAdapter }"
-                    bind:titleSpinner="@{ @string/activity_list_order_warehouse_ma_kho_xuat }"
-                    bind:titleTime="@{ @string/activity_list_order_warehouse_ngay_lap_lenh }"
-                    />
-            </android.support.v7.widget.CardView>
+                bind:adapter="@{ presenter.warehouseAdapter }"
+                bind:adapter2="@{ presenter.statusAdapter }"
+                bind:titleSpinner="@{ @string/activity_list_order_warehouse_ma_kho_xuat }"
+                bind:titleSpinner2="@{ @string/activity_list_order_warehouse_trang_thai_lenh }"
+                bind:titleTime="@{ @string/activity_list_order_warehouse_ngay_lap_lenh }"
+                />
 
             <RelativeLayout
                 android:id="@+id/handle"

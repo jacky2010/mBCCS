@@ -812,6 +812,7 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
 
     <string name="activity_list_order_warehouse_ngay_lap_lenh">Ngày lập lệnh</string>
     <string name="activity_list_order_warehouse_ma_kho_xuat">Mã kho xuất</string>
+    <string name="activity_list_order_warehouse_trang_thai_lenh">Trạng thái lệnh</string>
     <string name="activity_list_order_warehouse_lenh_chua_lap_phieu">Lệnh chưa lập phiếu (%1$d)</string>
     <string name="list_order_presenter_nhap_kho_cap_duoi">Nhập kho cấp dưới</string>
     <string name="item_nhap_kho_cap_duoi_mat_hang_ma_hang">Mã hàng: %1$s</string>

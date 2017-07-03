@@ -2,6 +2,7 @@ package com.viettel.mbccs.screen.main;
 
 import android.content.Context;
 import android.content.Intent;
+import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
 import android.text.TextUtils;
 import com.viettel.mbccs.R;
@@ -28,6 +29,10 @@ public class MainPresenter implements MainContract.Presenter {
 
     public ObservableInt mLastIndex = new ObservableInt();
 
+    public ObservableField<String> userName = new ObservableField<>();
+
+    public ObservableField<String> userTel = new ObservableField<>();
+
     public MainPresenter(Context context, MainContract.ViewModel viewModel,
             UserRepository userRepository) {
         mContext = context;
@@ -38,6 +43,8 @@ public class MainPresenter implements MainContract.Presenter {
         mFunctionList.add(new Function(Function.TopMenu.MENU_DASHBOARD,
                 mContext.getResources().getString(R.string.menu_dashboard),
                 R.drawable.ic_menu_home_selector));
+        userName.set(userRepository.getUserInfo().getStaffInfo().getStaffName());
+        userTel.set(userRepository.getUserInfo().getStaffInfo().getTel());
 
         List<Function> functionList = userRepository.getUser().getFunction();
         Set<String> topMenu = new LinkedHashSet<>();
