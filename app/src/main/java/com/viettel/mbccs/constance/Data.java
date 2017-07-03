@@ -17,33 +17,23 @@ public class Data {
 
     public static List<DataField> connectorTelServiceType() {
         List<DataField> result = new ArrayList<>();
-        result.add(new DataField("M", "Mobile"));
-        result.add(new DataField("H", "Homephone"));
-        result.add(new DataField("A", "ADSL"));
-        result.add(new DataField("L", "Leasedline"));
-        result.add(new DataField("P", "PSTN"));
-        result.add(new DataField("W", "White leaseline "));
-        result.add(new DataField("F", "FTTH"));
-        return result;
-    }
-
-    public static List<DataField> connectorTelServiceId() {
-        List<DataField> result = new ArrayList<>();
-        result.add(new DataField("1", "Mobile"));
-        result.add(new DataField("2", "Homephone"));
-        result.add(new DataField("4", "ADSL"));
-        result.add(new DataField("5", "Leasedline"));
-        result.add(new DataField("9", "PSTN"));
-        result.add(new DataField("12", "White leaseline "));
-        result.add(new DataField("15", "FTTH"));
+        result.add(new DataField(1, "M", "Mobile"));
+        result.add(new DataField(2, "H", "Homephone"));
+        result.add(new DataField(4, "A", "ADSL"));
+        result.add(new DataField(5, "L", "Leasedline"));
+        result.add(new DataField(9, "P", "PSTN"));
+        result.add(new DataField(12, "W", "White leaseline "));
+        result.add(new DataField(15, "F", "FTTH"));
         return result;
     }
 
     public static class DataField {
         String name;
         String code;
+        int id;
 
-        DataField(String code, String name) {
+        DataField(int id, String code, String name) {
+            this.id = id;
             this.code = code;
             this.name = name;
         }
@@ -62,6 +52,14 @@ public class Data {
 
         public void setCode(String code) {
             this.code = code;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
         }
 
         @Override

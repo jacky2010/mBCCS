@@ -83,7 +83,7 @@
                 <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/create_new_connector_information_dich_vu"
+                    bind:textHtml="@{ @string/create_new_connector_information_dich_vu }"
                     style="@style/textTitleInput"
                     />
 
@@ -96,7 +96,7 @@
                 <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/create_new_connector_information_goi_cuoc"
+                    bind:textHtml="@{ @string/create_new_connector_information_goi_cuoc }"
                     style="@style/textTitleInput"
                     />
 
@@ -123,9 +123,9 @@
                 <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/create_new_connector_information_loai_thue_bao"
-                    style="@style/textTitleInput"
                     android:layout_marginTop="@dimen/dp_4"
+                    bind:textHtml="@{ @string/create_new_connector_information_loai_thue_bao }"
+                    style="@style/textTitleInput"
                     />
 
                 <com.viettel.mbccs.widget.SpinnerWithBorder
@@ -138,9 +138,9 @@
                 <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/create_new_connector_information_hinh_thuc_hoa_mang"
-                    style="@style/textTitleInput"
                     android:layout_marginTop="@dimen/dp_4"
+                    bind:textHtml="@{ @string/create_new_connector_information_hinh_thuc_hoa_mang }"
+                    style="@style/textTitleInput"
                     />
 
                 <com.viettel.mbccs.widget.SpinnerWithBorder
@@ -153,9 +153,9 @@
                 <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/create_new_connector_information_so_isdn"
-                    style="@style/textTitleInput"
                     android:layout_marginTop="@dimen/dp_4"
+                    bind:textHtml="@{ @string/create_new_connector_information_so_isdn }"
+                    style="@style/textTitleInput"
                     />
 
                 <com.viettel.mbccs.widget.CustomEditTextInput
@@ -169,9 +169,9 @@
                 <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/create_new_connector_information_serial"
-                    style="@style/textTitleInput"
                     android:layout_marginTop="@dimen/dp_4"
+                    bind:textHtml="@{ @string/create_new_connector_information_serial }"
+                    style="@style/textTitleInput"
                     />
 
                 <com.viettel.mbccs.widget.CustomEditTextInput

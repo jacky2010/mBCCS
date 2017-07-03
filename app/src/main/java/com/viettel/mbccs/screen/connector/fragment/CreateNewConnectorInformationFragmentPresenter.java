@@ -11,18 +11,28 @@ import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.Data;
 import com.viettel.mbccs.constance.MobileType;
 import com.viettel.mbccs.constance.TelServiceId;
+import com.viettel.mbccs.constance.TelServiceType;
 import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.ApDomainByType;
 import com.viettel.mbccs.data.model.Contract;
 import com.viettel.mbccs.data.model.Customer;
+import com.viettel.mbccs.data.model.Product;
+import com.viettel.mbccs.data.model.Subscriber;
+import com.viettel.mbccs.data.model.UserInfo;
 import com.viettel.mbccs.data.source.QLKhachHangRepository;
+import com.viettel.mbccs.data.source.UserRepository;
+import com.viettel.mbccs.data.source.remote.request.ConnectSubscriberRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetApDomainByTypeRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListProductRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListRegTypeRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListSubTypeRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseErrorResponse;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetApDomainByTypeResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListProductResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListRegTypeResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListSubTypeResponse;
 import com.viettel.mbccs.utils.DateUtils;
 import com.viettel.mbccs.utils.PatternUtils;
 import com.viettel.mbccs.utils.SpinnerAdapter;
@@ -48,6 +58,7 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
     private CreateNewConnectorInformationFragmentContract.ViewFragment1 createNewView1;
     private CreateNewConnectorInformationFragmentContract.ViewFragment2 createNewView2;
     private QLKhachHangRepository qlKhachHangRepository;
+    private UserRepository userRepository;
     private CompositeSubscription subscriptions;
     private String stringError;
 
@@ -55,6 +66,7 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
     private Contract contract;
 
     private Customer customerCurrent;
+    private Subscriber subscriberCurrent;
     private Contract contractCurrent;
 
     private String nameCustomer;
@@ -102,24 +114,32 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
 
     private SpinnerAdapter<ApDomainByType> adapterSpinnerCustomerType;
     private SpinnerAdapter<ApDomainByType> adapterSpinnerPassportType;
+
     private SpinnerAdapter<Data.DataField> adapterSpinner2DichVu;
-    private SpinnerAdapter<ApDomainByType> adapterSpinner2GoiCuoc;
-    private SpinnerAdapter<ApDomainByType> adapterSpinner2LoaiThueBao;
-    private SpinnerAdapter<ApDomainByType> adapterSpinner2HTHoaMang;
+    private SpinnerAdapter<Product> adapterSpinner2GoiCuoc;
+    private SpinnerAdapter<String> adapterSpinner2LoaiThueBao;
+    private SpinnerAdapter<String> adapterSpinner2HTHoaMang;
 
     private List<ApDomainByType> dataSpinnerCustomerType;
     private List<ApDomainByType> dataSpinnerPassportType;
     private List<Data.DataField> dataSpinner2DichVu;
+    private List<Product> dataSpinner2GoiCuoc;
+    private List<String> dataSpinner2LoaiThueBao;
+    private List<String> dataSpinner2HTHoaMang;
 
     private int positionSpinnerCustomerType;
     private int positionSpinnerPassportType;
     private int positionSpinner2DichVu;
+    private int positionSpinner2GoiCuoc;
+    private int positionSpinner2LoaiThueBao;
+    private int positionSpinner2HTHoaMang;
 
 
     public CreateNewConnectorInformationFragmentPresenter(Context context) {
         this.context = context;
 
         qlKhachHangRepository = QLKhachHangRepository.getInstance();
+        userRepository = UserRepository.getInstance();
         subscriptions = new CompositeSubscription();
         stringError = context.getString(R.string.input_empty);
     }
@@ -128,9 +148,11 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
         if (view instanceof CreateNewConnectorInformationFragmentContract.ViewFragment1) {
             this.createNewView1 =
                     (CreateNewConnectorInformationFragmentContract.ViewFragment1) view;
+            view.setPresenter(this);
         } else {
             this.createNewView2 =
                     (CreateNewConnectorInformationFragmentContract.ViewFragment2) view;
+            view.setPresenter(this);
         }
     }
 
@@ -147,15 +169,15 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
     void loadDataCreateView1() {
         createNewView1.showLoading();
         Subscription subscription = Observable.zip(getDataSpinnerPassport(), getDataTypeCustomer(),
-                new Func2<GetApDomainByTypeResponse, GetApDomainByTypeResponse, DataSpinner>() {
+                new Func2<GetApDomainByTypeResponse, GetApDomainByTypeResponse, DataSpinnerView1>() {
                     @Override
-                    public DataSpinner call(GetApDomainByTypeResponse response,
+                    public DataSpinnerView1 call(GetApDomainByTypeResponse response,
                             GetApDomainByTypeResponse response2) {
-                        return new DataSpinner(response, response2);
+                        return new DataSpinnerView1(response, response2);
                     }
-                }).flatMap(new Func1<DataSpinner, Observable<DataSpinner>>() {
+                }).flatMap(new Func1<DataSpinnerView1, Observable<DataSpinnerView1>>() {
             @Override
-            public Observable<DataSpinner> call(DataSpinner spinner) {
+            public Observable<DataSpinnerView1> call(DataSpinnerView1 spinner) {
                 GetApDomainByTypeResponse spinnerGiayTo = spinner.getSpinnerGiayTo();
                 GetApDomainByTypeResponse spinnerCustomerType = spinner.getSpinnerCustomerType();
                 if (spinnerGiayTo == null
@@ -171,9 +193,9 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
                     return Observable.just(spinner);
                 }
             }
-        }).subscribe(new MBCCSSubscribe<DataSpinner>() {
+        }).subscribe(new MBCCSSubscribe<DataSpinnerView1>() {
             @Override
-            public void onSuccess(DataSpinner object) {
+            public void onSuccess(DataSpinnerView1 object) {
                 dataSpinnerCustomerType = object.getSpinnerCustomerType().getApDomainByTypeList();
                 dataSpinnerPassportType = object.getSpinnerGiayTo().getApDomainByTypeList();
                 setDataCreateView1();
@@ -235,6 +257,51 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
         createNewView2.showLoading();
         dataSpinner2DichVu = Data.connectorTelServiceType();
 
+        Observable<DataSpinnerView2> observable =
+                Observable.zip(getDataSpinner2GoiCuoc(), getDataSpinner2LoaiThueBao(),
+                        new Func2<GetListProductResponse, GetListSubTypeResponse, DataSpinnerView2>() {
+                            @Override
+                            public DataSpinnerView2 call(GetListProductResponse response,
+                                    GetListSubTypeResponse response2) {
+                                return new DataSpinnerView2(response, response2);
+                            }
+                        }).flatMap(new Func1<DataSpinnerView2, Observable<DataSpinnerView2>>() {
+                    @Override
+                    public Observable<DataSpinnerView2> call(DataSpinnerView2 dataSpinnerView2) {
+                        List<Product> dataSpinner2GoiCuoc =
+                                dataSpinnerView2.getSpinner2GoiCuoc().getListProduct();
+                        List<String> dataSpinner2LoaiThueBao =
+                                dataSpinnerView2.getSpinner2LoaiThueBao().getData();
+                        if (dataSpinner2GoiCuoc == null
+                                || dataSpinner2GoiCuoc.size() == 0
+                                || dataSpinner2LoaiThueBao == null
+                                || dataSpinner2LoaiThueBao.size() == 0) {
+                            BaseErrorResponse baseErrorResponse = new BaseErrorResponse();
+                            baseErrorResponse.setError(201, "Error load data");
+                            return Observable.error(BaseException.toServerError(baseErrorResponse));
+                        } else {
+                            return Observable.just(dataSpinnerView2);
+                        }
+                    }
+                });
+
+        Subscription subscription = observable.subscribe(new MBCCSSubscribe<DataSpinnerView2>() {
+            @Override
+            public void onSuccess(DataSpinnerView2 object) {
+                dataSpinner2GoiCuoc = object.getSpinner2GoiCuoc().getListProduct();
+                dataSpinner2LoaiThueBao = object.getSpinner2LoaiThueBao().getData();
+
+                setDataCreateView2();
+            }
+
+            @Override
+            public void onError(BaseException error) {
+                createNewView2.hideLoading();
+                createNewView2.loadDataSpinnerError(error);
+            }
+        });
+        subscriptions.add(subscription);
+
     }
 
     private void setDataCreateView2() {
@@ -251,6 +318,54 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
 
             }
         });
+        setAdapterSpinner2DichVu(adapterSpinner2DichVu);
+
+        adapterSpinner2GoiCuoc = new SpinnerAdapter<>(context, dataSpinner2GoiCuoc);
+        adapterSpinner2GoiCuoc.notifyDataSetChanged();
+        adapterSpinner2GoiCuoc.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                positionSpinner2GoiCuoc = position;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        adapterSpinner2LoaiThueBao = new SpinnerAdapter<>(context, dataSpinner2LoaiThueBao);
+        adapterSpinner2LoaiThueBao.notifyDataSetChanged();
+        adapterSpinner2LoaiThueBao.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position,
+                            long id) {
+                        positionSpinner2LoaiThueBao = position;
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+
+        adapterSpinner2HTHoaMang = new SpinnerAdapter<>(context, dataSpinner2HTHoaMang);
+        adapterSpinner2HTHoaMang.notifyDataSetChanged();
+        adapterSpinner2HTHoaMang.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position,
+                            long id) {
+                        positionSpinner2HTHoaMang = position;
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+
         createNewView2.hideLoading();
     }
 
@@ -289,6 +404,27 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
         return qlKhachHangRepository.getListProduct(request);
     }
 
+    private Observable<GetListSubTypeResponse> getDataSpinner2LoaiThueBao() {
+        GetListSubTypeRequest getListSubTypeRequest = new GetListSubTypeRequest();
+        getListSubTypeRequest.setServiceType(TelServiceType.Mobile);
+
+        DataRequest<GetListSubTypeRequest> request = new DataRequest<>();
+        request.setWsRequest(getListSubTypeRequest);
+        request.setWsCode(WsCode.GetListSubType);
+        return qlKhachHangRepository.getListSubType(request);
+    }
+
+    private Observable<GetListRegTypeResponse> getDataSpinner2HTHoaMang() {
+        GetListRegTypeRequest getListRegTypeRequest = new GetListRegTypeRequest();
+        //        getListRegTypeRequest.setSubType(MobileType.TRA_TRUOC);
+        //        getListRegTypeRequest.setTelServiceId(TelServiceId.Mobile);
+
+        DataRequest<GetListRegTypeRequest> request = new DataRequest<>();
+        request.setWsRequest(getListRegTypeRequest);
+        request.setWsCode(WsCode.GetListRegType);
+        return qlKhachHangRepository.getListRegType(request);
+    }
+
     /*---------------------------------- onClick View ---------------------------------------*/
     public void onCancelNewView1() {
         if (createNewView1 != null) createNewView1.onCancel();
@@ -300,16 +436,7 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
 
     public void onNext() {
         getCustomer();
-
-        if (StringUtils.isEmpty(customerCurrent.getIdIssuePlace())) {
-            createNewView1.validateCustomerError(context.getString(
-                    R.string.create_new_connector_information_validate_place_id_no));
-            return;
-        }
-
-        if (StringUtils.isEmpty(customerCurrent.getAddress())) {
-            createNewView1.validateCustomerError(
-                    context.getString(R.string.create_new_connector_information_validate_address));
+        if (!validateCustomer()) {
             return;
         }
 
@@ -320,7 +447,21 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
     }
 
     public void onEnter() {
-        createNewView2.onEnter();
+        getSubscriber();
+        if (!validateSubscriber()) {
+            return;
+        }
+        UserInfo userInfo = userRepository.getUserInfo();
+
+        ConnectSubscriberRequest connectSubscriberRequest = new ConnectSubscriberRequest();
+        connectSubscriberRequest.setContract(contractCurrent);
+        connectSubscriberRequest.setCustomer(customerCurrent);
+        connectSubscriberRequest.setSubscriber(subscriberCurrent);
+        connectSubscriberRequest.setStaffCode(userInfo.getStaffInfo().getStaffCode());
+        connectSubscriberRequest.setShopCode(userInfo.getShop().getShopCode());
+
+        createNewView2.connectSubscriber(connectSubscriberRequest, userInfo);
+
     }
 
     public void onSelectImage(View view) {
@@ -342,22 +483,62 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
         customerCurrent.setIdNo(getTxtNumberPassport());
     }
 
+    private void getSubscriber() {
+        if (subscriberCurrent == null) subscriberCurrent = new Subscriber();
+        CustomSelectAddress.Address address = createNewView2.getAddress();
+        subscriberCurrent.setIsdn(getIsdn());
+        subscriberCurrent.setSerial(getSerial());
+        subscriberCurrent.setSubType(dataSpinner2LoaiThueBao.get(positionSpinner2LoaiThueBao));
+        subscriberCurrent.setRegType(dataSpinner2HTHoaMang.get(positionSpinner2HTHoaMang));
+        subscriberCurrent.setTelecomServiceId(
+                dataSpinner2DichVu.get(positionSpinner2DichVu).getId());
+        subscriberCurrent.setAddress(address.getAddress());
+        subscriberCurrent.setProvince(address.getAreaProvince().getProvince());
+        subscriberCurrent.setDistrict(address.getAreaDistrict().getDistrict());
+        subscriberCurrent.setPrecinct(address.getAreaPrecinct().getPrecinct());
+    }
+
+    private void getContract() {
+        if (contractCurrent == null) contractCurrent = new Contract();
+    }
+
     private boolean validateCustomer() {
         boolean validate = true;
+
+        if (StringUtils.isEmpty(customerCurrent.getIdIssuePlace())) {
+            setPlaceCreatePassportError(stringError);
+            validate = false;
+        }
+
+        if (StringUtils.isEmpty(customerCurrent.getIdNo())) {
+            setTxtNumberPassportError(stringError);
+            validate = false;
+        }
+
         if (!PatternUtils.validateString(customerCurrent.getName(),
                 PatternUtils.PATTERN_TEXT_LENGTH_100)) {
             setNameCustomerError(
                     context.getString(R.string.create_new_connector_information_validate_name));
             validate = false;
         }
+        return validate;
+    }
 
-        if (StringUtils.isEmpty(customerCurrent.getIdNo())) {
+    private boolean validateSubscriber() {
+        boolean validate = true;
+        if (StringUtils.isEmpty(subscriberCurrent.getSerial())) {
+            setSerialError(stringError);
+            validate = false;
+        }
+
+        if (StringUtils.isEmpty(subscriberCurrent.getIsdn())) {
             setIsdnError(stringError);
             validate = false;
         }
 
         return validate;
     }
+
 
     /*---------------------------------- End onClick View ---------------------------------------*/
 
@@ -717,33 +898,31 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
     }
 
     @Bindable
-    public SpinnerAdapter<ApDomainByType> getAdapterSpinner2GoiCuoc() {
+    public SpinnerAdapter<Product> getAdapterSpinner2GoiCuoc() {
         return adapterSpinner2GoiCuoc;
     }
 
-    public void setAdapterSpinner2GoiCuoc(SpinnerAdapter<ApDomainByType> adapterSpinner2GoiCuoc) {
+    public void setAdapterSpinner2GoiCuoc(SpinnerAdapter<Product> adapterSpinner2GoiCuoc) {
         this.adapterSpinner2GoiCuoc = adapterSpinner2GoiCuoc;
         notifyPropertyChanged(BR.adapterSpinner2GoiCuoc);
     }
 
     @Bindable
-    public SpinnerAdapter<ApDomainByType> getAdapterSpinner2LoaiThueBao() {
+    public SpinnerAdapter<String> getAdapterSpinner2LoaiThueBao() {
         return adapterSpinner2LoaiThueBao;
     }
 
-    public void setAdapterSpinner2LoaiThueBao(
-            SpinnerAdapter<ApDomainByType> adapterSpinner2LoaiThueBao) {
+    public void setAdapterSpinner2LoaiThueBao(SpinnerAdapter<String> adapterSpinner2LoaiThueBao) {
         this.adapterSpinner2LoaiThueBao = adapterSpinner2LoaiThueBao;
         notifyPropertyChanged(BR.adapterSpinner2LoaiThueBao);
     }
 
     @Bindable
-    public SpinnerAdapter<ApDomainByType> getAdapterSpinner2HTHoaMang() {
+    public SpinnerAdapter<String> getAdapterSpinner2HTHoaMang() {
         return adapterSpinner2HTHoaMang;
     }
 
-    public void setAdapterSpinner2HTHoaMang(
-            SpinnerAdapter<ApDomainByType> adapterSpinner2HTHoaMang) {
+    public void setAdapterSpinner2HTHoaMang(SpinnerAdapter<String> adapterSpinner2HTHoaMang) {
         this.adapterSpinner2HTHoaMang = adapterSpinner2HTHoaMang;
         notifyPropertyChanged(BR.adapterSpinner2HTHoaMang);
     }
@@ -836,14 +1015,14 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
         setAddress(customer.getAddress());
     }
 
-    private class DataSpinner {
+    private class DataSpinnerView1 {
         private GetApDomainByTypeResponse spinnerGiayTo;
         private GetApDomainByTypeResponse spinnerCustomerType;
 
-        public DataSpinner() {
+        public DataSpinnerView1() {
         }
 
-        public DataSpinner(GetApDomainByTypeResponse spinnerGiayTo,
+        public DataSpinnerView1(GetApDomainByTypeResponse spinnerGiayTo,
                 GetApDomainByTypeResponse spinnerTypeCustomer) {
             this.spinnerGiayTo = spinnerGiayTo;
             this.spinnerCustomerType = spinnerTypeCustomer;
@@ -863,6 +1042,36 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
 
         public void setSpinnerCustomerType(GetApDomainByTypeResponse spinnerCustomerType) {
             this.spinnerCustomerType = spinnerCustomerType;
+        }
+    }
+
+    private class DataSpinnerView2 {
+        private GetListProductResponse spinner2GoiCuoc;
+        private GetListSubTypeResponse spinner2LoaiThueBao;
+
+        public DataSpinnerView2() {
+        }
+
+        public DataSpinnerView2(GetListProductResponse spinner2GoiCuoc,
+                GetListSubTypeResponse spinner2LoaiThueBao) {
+            this.spinner2GoiCuoc = spinner2GoiCuoc;
+            this.spinner2LoaiThueBao = spinner2LoaiThueBao;
+        }
+
+        public GetListProductResponse getSpinner2GoiCuoc() {
+            return spinner2GoiCuoc;
+        }
+
+        public void setSpinner2GoiCuoc(GetListProductResponse spinner2GoiCuoc) {
+            this.spinner2GoiCuoc = spinner2GoiCuoc;
+        }
+
+        public GetListSubTypeResponse getSpinner2LoaiThueBao() {
+            return spinner2LoaiThueBao;
+        }
+
+        public void setSpinner2LoaiThueBao(GetListSubTypeResponse spinner2LoaiThueBao) {
+            this.spinner2LoaiThueBao = spinner2LoaiThueBao;
         }
     }
 }
