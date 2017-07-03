@@ -39,7 +39,6 @@ public class OrderFragment extends BaseFragment implements OrderContract.ViewMod
                 DataBindingUtil.inflate(inflater, R.layout.fragment_input_order, container, false);
         mAdapter = new OrderAdapter();
         mPresenter = new OrderPresenter(this, getIndexTab());
-        mPresenter.setAdapter(mAdapter);
         mBinding.setPresenter(mPresenter);
         mPresenter.subscribe();
         return mBinding.getRoot();
