@@ -73,7 +73,7 @@
                 android:gravity="center_vertical"
                 android:padding="20dp"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="@dimen/sp_14"
                 app:textHtml="@{presenter.customerInfor}"
                 />
             <View style="@style/dividerHorizontalStyle"/>
@@ -90,7 +90,7 @@
                 android:gravity="center_vertical"
                 android:padding="20dp"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="@dimen/sp_14"
                 app:textHtml="@{presenter.salerInfor}"
                 />
 
@@ -110,7 +110,7 @@
                 android:gravity="center_vertical"
                 android:padding="20dp"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="@dimen/sp_14"
                 android:textStyle="bold"
                 android:visibility="@{TextUtils.isEmpty(presenter.saleProgram)?View.GONE:View.VISIBLE}"
                 app:textHtml="@{presenter.saleProgram}"

@@ -29,7 +29,7 @@
             android:padding="@dimen/dp_5"
             app:textHtml="@{presenter.titleOrder}"
             android:textColor="@color/black"
-            android:textSize="@dimen/sp_18"
+            android:textSize="@dimen/sp_16"
             tools:text="@string/order_from_kpp"
             />
 
@@ -87,6 +87,7 @@
                 android:background="@color/orange"
                 android:padding="@dimen/dp_10"
                 android:text="@{presenter.amount}"
+                android:textSize="@dimen/sp_14"
                 android:textColor="@color/black"
                 />
 

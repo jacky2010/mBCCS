@@ -32,8 +32,8 @@
 
         <ImageView
             android:id="@+id/image"
-            android:layout_width="@dimen/dp_24"
-            android:layout_height="@dimen/dp_24"
+            android:layout_width="@dimen/sp_20"
+            android:layout_height="@dimen/sp_20"
             android:layout_gravity="center_horizontal"
             android:adjustViewBounds="true"
             android:src="@{ image }" />
@@ -48,6 +48,6 @@
             android:gravity="center"
             android:lines="2"
             android:text="@{ imageText }"
-            android:textSize="@{ textSize > 0 ? textSize : @dimen/sp_14 }" />
+            android:textSize="@{ textSize > 0 ? textSize : @dimen/sp_13 }" />
     </LinearLayout>
 </layout>

@@ -117,6 +117,7 @@
                                     android:text="@={presenter.code}"
                                     app:error="@{presenter.codeError}"
                                     app:themeLight="@{true}"
+                                    android:textSize="@dimen/sp_14"
                                     />
 
                                 <com.viettel.mbccs.widget.CustomTextView
@@ -132,6 +133,7 @@
                                     android:text="@={presenter.name}"
                                     app:error="@{presenter.nameError}"
                                     app:themeLight="@{true}"
+                                    android:textSize="@dimen/sp_14"
                                     />
 
                                 <com.viettel.mbccs.widget.CustomButton
