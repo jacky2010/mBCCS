@@ -1,6 +1,6 @@
 package com.viettel.mbccs.screen.nhapkhocapduoi;
 
-import com.viettel.mbccs.base.searchlistview.BaseSearchListViewContract;
+import com.viettel.mbccs.base.listkho.BaseListOrderContract;
 
 /**
  * Created by Anh Vu Viet on 5/31/2017.
@@ -8,10 +8,10 @@ import com.viettel.mbccs.base.searchlistview.BaseSearchListViewContract;
 
 public interface ListOrderContract {
 
-    interface ViewModel extends BaseSearchListViewContract.ViewModel<Presenter> {
+    interface ViewModel extends BaseListOrderContract.ViewModel {
 
     }
 
-    interface Presenter extends BaseSearchListViewContract.Presenter {
+    interface Presenter extends BaseListOrderContract.Presenter {
     }
 }

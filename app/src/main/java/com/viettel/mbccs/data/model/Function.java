@@ -75,10 +75,9 @@ public class Function implements Parcelable {
             MenuId.MENU_TAO_GIAY_NOP_TIEN, MenuId.MENU_PHE_DUYET_GIAY_NOP_TIEN,
             MenuId.MENU_DOI_SOAT_CONG_NO_GIAY_NOP_TIEN, MenuId.MENU_KHAI_BAO_GIA_KENH_CHAN_RET,
 
-            MenuId.MENU_BAO_CAO_PHAT_TRIEN_THUE_BAO, MenuId.MENU_BAO_CAO_DOANH_SO_TONG_KIT,
-            MenuId.MENU_BAO_CAO_CHAM_SOC_KENH, MenuId.MENU_BAO_CAO_TAN_SUAT_CHAM_SOC_KENH,
-            MenuId.MENU_BAO_CAO_HOA_HONG, MenuId.MENU_BAO_CAO_TON_KHO,
-            MenuId.MENU_BAO_CAO_GIAO_CHI_TIEU_BAN_HANG
+            MenuId.MENU_BAO_CAO_PHAT_TRIEN_THUE_BAO, MenuId.MENU_BAO_CAO_CHAM_SOC_KENH,
+            MenuId.MENU_BAO_CAO_TAN_SUAT_CHAM_SOC_KENH, MenuId.MENU_BAO_CAO_HOA_HONG,
+            MenuId.MENU_BAO_CAO_TON_KHO, MenuId.MENU_BAO_CAO_GIAO_CHI_TIEU_BAN_HANG
     })
 
     public @interface MenuId {
@@ -133,20 +132,19 @@ public class Function implements Parcelable {
         String MENU_SURVEY_KPP = "SURVE";
         String MENU_HOTNEW_CS_KPP = "HOTNE";
         String MENU_KPP_FEEDBACK = "KPPFB";
-        String MENU_TRA_CUU_SP = "MENU_TRA_CUU_SP";
+        String MENU_TRA_CUU_SP = "TRASP";
 
         String MENU_TAO_GIAY_NOP_TIEN = "TAONT";
         String MENU_PHE_DUYET_GIAY_NOP_TIEN = "PHENT";
         String MENU_DOI_SOAT_CONG_NO_GIAY_NOP_TIEN = "DOIST";
         String MENU_KHAI_BAO_GIA_KENH_CHAN_RET = "KBGKR";
 
-        String MENU_BAO_CAO_DOANH_SO_TONG_KIT = "BCDSK";
         String MENU_BAO_CAO_CHAM_SOC_KENH = "BCCSK";
         String MENU_BAO_CAO_TAN_SUAT_CHAM_SOC_KENH = "BCTSCSK";
         String MENU_BAO_CAO_HOA_HONG = "BCHOAH";
         String MENU_BAO_CAO_TON_KHO = "BCTONK";
         String MENU_BAO_CAO_GIAO_CHI_TIEU_BAN_HANG = "BCGCTB";
-        String MENU_BAO_CAO_PHAT_TRIEN_THUE_BAO = "MENU_BAO_CAO_PHAT_TRIEN_THUE_BAO";
+        String MENU_BAO_CAO_PHAT_TRIEN_THUE_BAO = "BCDSK";
     }
 
     @StringDef({
@@ -214,6 +212,7 @@ public class Function implements Parcelable {
             case Function.MenuId.MENU_BAN_ANYPAY:
                 return R.drawable.ic_sales_anypay;
             case Function.MenuId.MENU_NAP_CHUYEN_ANYPAY:
+            case Function.MenuId.MENU_TRA_CUU_SP:
                 return R.drawable.ic_add_black_24dp;
 
             case Function.MenuId.MENU_DANG_KY_THONG_TIN:
@@ -278,8 +277,6 @@ public class Function implements Parcelable {
             case Function.MenuId.MENU_HOTNEW_CS_KPP:
             case Function.MenuId.MENU_KPP_FEEDBACK:
                 return R.drawable.ic_add_black_24dp;
-            case Function.MenuId.MENU_TRA_CUU_SP:
-                break;
 
             case Function.MenuId.MENU_TAO_GIAY_NOP_TIEN:
             case Function.MenuId.MENU_PHE_DUYET_GIAY_NOP_TIEN:
@@ -411,7 +408,6 @@ public class Function implements Parcelable {
                 return TopMenu.MENU_QUAN_LY_TAI_CHINH;
 
             case Function.MenuId.MENU_BAO_CAO_PHAT_TRIEN_THUE_BAO:
-                break;
             case Function.MenuId.MENU_BAO_CAO_CHAM_SOC_KENH:
             case Function.MenuId.MENU_BAO_CAO_TAN_SUAT_CHAM_SOC_KENH:
             case Function.MenuId.MENU_BAO_CAO_TON_KHO:
