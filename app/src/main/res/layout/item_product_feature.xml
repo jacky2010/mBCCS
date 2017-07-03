@@ -87,7 +87,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="@{item.item.product1.stockMoldeName}"
+                            android:text="@{item.item.product1.stockModelName}"
                             android:textSize="@dimen/default_content_text_size"
                             android:textStyle="bold" />
 
@@ -155,7 +155,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="@{item.item.product2.stockMoldeName}"
+                            android:text="@{item.item.product2.stockModelName}"
                             android:textSize="@dimen/default_content_text_size"
                             android:textStyle="bold" />
 

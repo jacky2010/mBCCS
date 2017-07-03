@@ -87,7 +87,7 @@ public class ViewProductDetailPresenter implements ViewProductDetailContract.Pre
     @Override
     public void displayProductDetail(ModelSale item) {
         try {
-            productName.set(item.getStockMoldeName());
+            productName.set(item.getStockModelName());
 
             description = "It means people without close family or business relationships in the US could be denied visas and barred entry.\n" +
                     "Grandparents, aunts, uncles, nephews and nieces are not considered to be \"bona fide\" relations.\n" +

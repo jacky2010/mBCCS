@@ -45,12 +45,12 @@ public class CompareProductsDetailPresenter implements CompareProductsDetailCont
             ModelSale product1 = new ModelSale();
             product1.setPrice(300000);
             product1.setStockModelId(1);
-            product1.setStockMoldeName("Product 1");
+            product1.setStockModelName("Product 1");
 
             ModelSale product2 = new ModelSale();
             product2.setPrice(400000);
             product2.setStockModelId(1);
-            product2.setStockMoldeName("Product 1");
+            product2.setStockModelName("Product 1");
 
             features = new ArrayList<>();
             CompareProducts item = new CompareProducts();
