@@ -35,11 +35,6 @@ public class OrderSuccessActivity
     }
 
     @Override
-    public void setPresenter(OrderSuccessContract.Presenter presenter) {
-
-    }
-
-    @Override
     public void showLoading() {
 
     }

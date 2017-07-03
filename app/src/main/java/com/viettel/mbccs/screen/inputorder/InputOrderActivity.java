@@ -12,10 +12,6 @@ public class InputOrderActivity
 
     private OrderMainPagerAdapter mPagerAdapter;
 
-    @Override
-    public void setPresenter(InputOrderContract.Presenter presenter) {
-
-    }
 
     @Override
     public void showLoading() {

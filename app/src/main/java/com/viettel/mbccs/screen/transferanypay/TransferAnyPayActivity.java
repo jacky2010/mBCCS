@@ -13,11 +13,6 @@ public class TransferAnyPayActivity extends BaseDataBindActivity<ActivityTransfe
         implements TransferAnyPayContract.ViewModel{
 
     @Override
-    public void setPresenter(TransferAnyPayContract.Presenter presenter) {
-
-    }
-
-    @Override
     public void showLoading() {
         showLoadingDialog();
     }

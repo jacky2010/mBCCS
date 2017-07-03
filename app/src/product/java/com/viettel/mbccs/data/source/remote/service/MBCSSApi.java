@@ -236,7 +236,6 @@ public interface MBCSSApi {
     Observable<BaseResponse<GetPrecinctResponse>> getPrecinct(
             @Body DataRequest<GetPrecinctRequest> request);
 
-
     @POST("vietdt/CM_mBCCS/1.0.0/WS_checkIdNo")
     Observable<BaseResponse<CheckIdNoResponse>> checkIdNo(
             @Body DataRequest<CheckIdNoRequest> request);
@@ -304,8 +303,11 @@ public interface MBCSSApi {
     Observable<ServerDataResponse<BaseResponse<EmptyObject>>> createExpStock(
             @Body DataRequest<CreateExpStockRequest> requestDataRequest);
 
-
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<GetListProductResponse>>> getListProduct(
             @Body DataRequest<GetListProductRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<EmptyObject>>> createExpStockNotHaveCmd(
+            @Body DataRequest<CreateExpStockNotHaveCmdRequest> request);
 }

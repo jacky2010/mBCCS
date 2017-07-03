@@ -27,11 +27,6 @@ public class SearchHotNewsCSKPPFragment extends BaseDataBindFragment<FragmentSea
     }
 
     @Override
-    public void setPresenter(SearchHotNewsCSKPPContract.Presenter presenter) {
-
-    }
-
-    @Override
     public void showLoading() {
 
     }

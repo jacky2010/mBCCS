@@ -30,11 +30,6 @@ public class SearchChangeSimFragment extends BaseDataBindFragment<FragmentSearch
     }
 
     @Override
-    public void setPresenter(SearchChangeSimContract.Presenter presenter) {
-
-    }
-
-    @Override
     public void showLoading() {
         if(shownLoadingDialog)
             return;

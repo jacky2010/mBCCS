@@ -132,7 +132,6 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
             this.createNewView2 =
                     (CreateNewConnectorInformationFragmentContract.ViewFragment2) view;
         }
-        view.setPresenter(this);
     }
 
     @Override

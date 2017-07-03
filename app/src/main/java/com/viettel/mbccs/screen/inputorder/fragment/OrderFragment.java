@@ -49,11 +49,6 @@ public class OrderFragment extends BaseFragment implements OrderContract.ViewMod
     }
 
     @Override
-    public void setPresenter(InputOrderContract.Presenter presenter) {
-
-    }
-
-    @Override
     public void showLoading() {
         showLoadingDialog();
     }

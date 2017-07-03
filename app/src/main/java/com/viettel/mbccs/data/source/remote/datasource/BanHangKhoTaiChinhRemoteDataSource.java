@@ -2,6 +2,7 @@ package com.viettel.mbccs.data.source.remote.datasource;
 
 import com.viettel.mbccs.data.model.EmptyObject;
 import com.viettel.mbccs.data.source.remote.IBanHangKhoTaiChinhRemoteDataSource;
+import com.viettel.mbccs.data.source.remote.request.CreateExpStockNotHaveCmdRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateExpStockRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateSaleTransChannelRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateSaleTransFromOrderRequest;
@@ -259,5 +260,13 @@ public class BanHangKhoTaiChinhRemoteDataSource implements IBanHangKhoTaiChinhRe
                 .importInvoiceList(requestDataRequest)
                 .flatMap(SchedulerUtils.<InputOrderResponse>convertDataFlatMap())
                 .compose(SchedulerUtils.<InputOrderResponse>applyAsyncSchedulers());
+    }
+
+    public Observable<EmptyObject> createExpStockNotHaveCmd(
+            DataRequest<CreateExpStockNotHaveCmdRequest> requestDataRequest) {
+        return RequestHelper.getRequest()
+                .createExpStockNotHaveCmd(requestDataRequest)
+                .flatMap(SchedulerUtils.<EmptyObject>convertDataFlatMap())
+                .compose(SchedulerUtils.<EmptyObject>applyAsyncSchedulers());
     }
 }

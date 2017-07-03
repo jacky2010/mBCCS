@@ -63,11 +63,6 @@ public class SaveTransConfirmFragment extends BaseFragment
     }
 
     @Override
-    public void setPresenter(SaveTransConfirmContract.Presenter presenter) {
-
-    }
-
-    @Override
     public void showLoading() {
         showLoadingDialog();
     }

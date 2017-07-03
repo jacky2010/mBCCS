@@ -47,10 +47,6 @@ public class UpdateSimFragment extends BaseDataBindFragment<FragmentUpdateSimBin
         return new UpdateSimFragment();
     }
 
-    @Override
-    public void setPresenter(UpdateSimContract.Presenter presenter) {
-
-    }
 
     @Override
     public void showLoading() {

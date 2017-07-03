@@ -64,10 +64,6 @@ public class CreateTicketActivity
         startActivityForResult(intent, STOCK_TOTAL_PICKER_REQUEST);
     }
 
-    @Override
-    public void setPresenter(BaseSearchListViewContract.Presenter presenter) {
-
-    }
 
     @Override
     public void showLoading() {

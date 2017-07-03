@@ -26,10 +26,6 @@ public class SearchKPPFeedbackFragment extends BaseDataBindFragment<FragmentSear
         return new SearchKPPFeedbackFragment();
     }
 
-    @Override
-    public void setPresenter(SearchKPPFeedbackContract.Presenter presenter) {
-
-    }
 
     @Override
     public void showLoading() {

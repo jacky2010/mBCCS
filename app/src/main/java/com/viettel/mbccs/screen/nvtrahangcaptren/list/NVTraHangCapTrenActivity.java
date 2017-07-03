@@ -23,10 +23,6 @@ public class NVTraHangCapTrenActivity extends
         mBinding.setPresenter((NVTraHangCapTrenPresenter) mPresenter);
     }
 
-    @Override
-    public void setPresenter(NVTraHangCapTrenContract.Presenter presenter) {
-
-    }
 
     @Override
     public void showLoading() {

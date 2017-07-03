@@ -1,6 +1,7 @@
 package com.viettel.mbccs.data.source.remote;
 
 import com.viettel.mbccs.data.model.EmptyObject;
+import com.viettel.mbccs.data.source.remote.request.CreateExpStockNotHaveCmdRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateExpStockRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateSaleTransChannelRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateSaleTransFromOrderRequest;
@@ -105,4 +106,7 @@ public interface IBanHangKhoTaiChinhRemoteDataSource {
 
     Observable<InputOrderResponse> importInvoiceList(
             DataRequest<InputOrderRequest> requestDataRequest);
+
+    Observable<EmptyObject> createExpStockNotHaveCmd(
+            DataRequest<CreateExpStockNotHaveCmdRequest> requestDataRequest);
 }

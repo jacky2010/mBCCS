@@ -70,6 +70,7 @@ public class CreateNewConnectorInformation1Fragment extends BaseFragment
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        presenter=new CreateNewConnectorInformationFragmentPresenter(getActivity());
         binding.setPresenter(presenter);
         binding.imageSelect.setSelectImageCallback(this);
         presenter.loadDataCreateView1();
@@ -89,12 +90,9 @@ public class CreateNewConnectorInformation1Fragment extends BaseFragment
         super.onDestroy();
     }
 
-    @Override
-    public void setPresenter(CreateNewConnectorInformationFragmentContract.Presenter pre) {
-        this.presenter = (CreateNewConnectorInformationFragmentPresenter) pre;
-    }
 
     @Override
+
     public void showLoading() {
         showLoadingDialog();
     }

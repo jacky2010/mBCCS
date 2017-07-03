@@ -63,11 +63,6 @@ public class StaffPickerActivity
     }
 
     @Override
-    public void setPresenter(StaffPickerContract.Presenter presenter) {
-
-    }
-
-    @Override
     public void showLoading() {
 
     }

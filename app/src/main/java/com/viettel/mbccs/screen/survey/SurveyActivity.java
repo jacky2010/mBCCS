@@ -61,11 +61,6 @@ public class SurveyActivity extends BaseDataBindActivity<ActivitySurveyBinding, 
     }
 
     @Override
-    public void setPresenter(SurveyContract.Presenter presenter) {
-
-    }
-
-    @Override
     public void showLoading() {
 
     }

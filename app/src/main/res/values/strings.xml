@@ -946,9 +946,12 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="common_cmd_prepare_export_detail_label_stock_code">Mã hàng: %s</string>
     <string name="common_cmd_prepare_export_detail_label_quantity_export">Số lượng xuất: %s</string>
     <string name="common_cmd_prepare_export_detail_msg_error_choose_serial">Hãy chọn đủ số lượng serial của mặt hàng %s</string>
+    <!--nha vien xuat tra-->
+    <string name="nhanvien_xuattra_lable_tra_kho_cap_tren">Trả kho cấp trên</string>
 
     <!--xuat kho cho nhan vien-->
     <string name="xuatkhochonhanvien_lablel_chi_tiet_xuat_kho_title">Chi tiết xuất kho cho nhân viên</string>
+    <string name="xuatkhochonhanvien_lablel_chi_title">Lập phiếu trả hàng</string>
 
     <string name="search_products_title">Tra cứu sản phẩm</string>
 

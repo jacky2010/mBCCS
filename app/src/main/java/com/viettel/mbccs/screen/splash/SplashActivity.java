@@ -7,9 +7,9 @@ import com.viettel.mbccs.base.BaseActivity;
 import com.viettel.mbccs.data.model.StockTrans;
 import com.viettel.mbccs.screen.login.LoginActivity;
 import com.viettel.mbccs.screen.main.MainActivity;
+import com.viettel.mbccs.screen.nhanvientrahang.LapPhieuXuatTraHangActivity;
 import com.viettel.mbccs.screen.xuathangchonhanvien.ChiTietXuatKhoNhanVienActivity;
 import com.viettel.mbccs.variable.Constants;
-
 
 /**
  * Created by Anh Vu Viet on 5/17/2017.
@@ -33,11 +33,6 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
     }
 
     @Override
-    public void setPresenter(SplashContract.Presenter presenter) {
-
-    }
-
-    @Override
     public void showLoading() {
 
     }
@@ -56,6 +51,7 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
     @Override
     public void gotoMain() {
         startActivity(new Intent(SplashActivity.this, MainActivity.class));
+        //        open();
         finish();
     }
 
@@ -69,6 +65,19 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
         Bundle bundle = new Bundle();
         bundle.putParcelable(Constants.BundleConstant.STOCK_TRANS, stockTrans);
         intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
+    void open1() {
+        Intent intent = new Intent(SplashActivity.this, LapPhieuXuatTraHangActivity.class);
+        //        StockTrans stockTrans = new StockTrans();
+        //        stockTrans.setStockTransId(1237);
+        //        stockTrans.setToOwnerId(1232);
+        //        stockTrans.setCreateDateTime("2017-01-02");
+        //        stockTrans.setStockTransStatusName("hang moi");
+        //        Bundle bundle = new Bundle();
+        //        bundle.putParcelable(Constants.BundleConstant.STOCK_TRANS, stockTrans);
+        //        intent.putExtras(bundle);
         startActivity(intent);
     }
 

@@ -17,10 +17,6 @@ public abstract class BaseCreateOrderSuccessActivity extends
         return R.layout.activity_create_order_success;
     }
 
-    @Override
-    public void setPresenter(Object o) {
-
-    }
 
     @Override
     public void showLoading() {

@@ -157,6 +157,10 @@ public class StockTransDetail implements Parcelable {
         return stateName;
     }
 
+    public void setSerialBlocks(List<SerialBO> serialBlocks) {
+        mSerialBlocks = serialBlocks;
+    }
+
     public void setStateName(String stateName) {
         this.stateName = stateName;
     }

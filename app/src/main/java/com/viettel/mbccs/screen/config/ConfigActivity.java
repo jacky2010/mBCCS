@@ -45,10 +45,6 @@ public class ConfigActivity extends BaseDataBindActivity<ActivityConfigBinding, 
         mBinding.spinnerTimeSyncBccs.setOnItemSelectedListener(mPresenter);
     }
 
-    @Override
-    public void setPresenter(ConfigContract.Presenter presenter) {
-        // TODO: 5/19/17
-    }
 
     @Override
     public void showLoading() {

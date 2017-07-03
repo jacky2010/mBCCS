@@ -34,7 +34,7 @@ public abstract class BaseRecyclerViewAdapterBinding<T extends BaseViewHolderBin
     @Override
     public BaseViewHolderBinding onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_NODATA) {
-            getNoDataViewHolder(parent);
+            return getNoDataViewHolder(parent);
         }
         return getViewHolder(parent);
     }
@@ -67,14 +67,19 @@ public abstract class BaseRecyclerViewAdapterBinding<T extends BaseViewHolderBin
         return mList.size();
     }
 
-    class NoDataViewHolder extends BaseViewHolderBinding<ItemNoDataListBinding, EmptyObject> {
+    class NoDataViewHolder extends BaseViewHolderBinding<ItemNoDataListBinding, String> {
 
         public NoDataViewHolder(ItemNoDataListBinding binding) {
             super(binding);
         }
+
+        @Override
+        public void bindData(String s) {
+            mBinding.text.setText(s);
+        }
     }
 
     public interface OnRecyclerItemListener<T> {
-        void onItemClick(int postition, T data);
+        void onItemClick(int position, T data);
     }
 }

@@ -32,10 +32,6 @@ public class MainActivity extends BaseDataBindActivity<ActivityMainBinding, Main
         initView();
     }
 
-    @Override
-    public void setPresenter(MainContract.Presenter presenter) {
-
-    }
 
     private void initView() {
         getSupportFragmentManager().beginTransaction()

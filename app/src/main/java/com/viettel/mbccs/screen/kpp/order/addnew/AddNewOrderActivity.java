@@ -36,11 +36,6 @@ public class AddNewOrderActivity
     }
 
     @Override
-    public void setPresenter(AddNewOrderContract.Presenter presenter) {
-
-    }
-
-    @Override
     public void showLoading() {
 
         showLoadingDialog();
