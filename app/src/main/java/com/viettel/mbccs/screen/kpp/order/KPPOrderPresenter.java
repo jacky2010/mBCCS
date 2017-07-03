@@ -114,9 +114,9 @@ public class KPPOrderPresenter implements KPPOrderContract.Presenter {
         request.setShopId(Long.parseLong(mUserRepository.getUserInfo().getShop().getShopId()));
         request.setStaffId(mUserRepository.getUserInfo().getStaffInfo().getStaffId());
         request.setIsdnChannel(mUserRepository.getUserInfo().getChannelInfo().getTel());
-        request.setFromDate(DateUtils.convertDateToString(mViewModel.getFromDate(),
+        request.setStartDate(DateUtils.convertDateToString(mViewModel.getFromDate(),
                 DateUtils.DATE_TIME_FORMAT));
-        request.setToDate(DateUtils.convertDateToString(mViewModel.getToDate(),
+        request.setEndDate(DateUtils.convertDateToString(mViewModel.getToDate(),
                 DateUtils.DATE_TIME_FORMAT));
         mGetListOrderRequestBaseRequest.setWsRequest(request);
         Subscription subscription =

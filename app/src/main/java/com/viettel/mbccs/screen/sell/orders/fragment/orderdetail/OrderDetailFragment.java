@@ -12,15 +12,19 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseFragment;
+import com.viettel.mbccs.constance.OrderStatus;
 import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.SaleOrders;
 import com.viettel.mbccs.data.model.SaleOrdersDetail;
+import com.viettel.mbccs.data.model.SaleTrans;
+import com.viettel.mbccs.data.model.SerialBO;
 import com.viettel.mbccs.data.model.SerialPickerModel;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetOrderInfoResponse;
 import com.viettel.mbccs.databinding.FragmentOrderDetailBinding;
 import com.viettel.mbccs.screen.sell.orders.adapter.OrderDetailAdapter;
 import com.viettel.mbccs.screen.sell.orders.fragment.ConfirmTransactionSellCancelFragment;
+import com.viettel.mbccs.screen.sell.orders.listener.ChangeStatusOrderCallback;
 import com.viettel.mbccs.screen.serialpicker.SerialPickerActivity;
 import com.viettel.mbccs.utils.Common;
 import com.viettel.mbccs.utils.DialogUtils;
@@ -32,7 +36,8 @@ import java.util.List;
  * Created by HuyQuyet on 5/16/17.
  */
 
-public class OrderDetailFragment extends BaseFragment implements OrderDetailFragmentContract.View {
+public class OrderDetailFragment extends BaseFragment
+        implements OrderDetailFragmentContract.View, ChangeStatusOrderCallback {
     public static final String STRING_NAME = "OrderDetailFragment";
     private static final String ARG_ORDER = "ID_ORDER";
     private static final String ARG_CHANGE_INFO = "CHANGE_INFO";
@@ -44,6 +49,7 @@ public class OrderDetailFragment extends BaseFragment implements OrderDetailFrag
     private ChannelInfo channelInfo;
     private SaleOrders saleOrders;
     private GetOrderInfoResponse getOrderInfoResponse;
+    private ChangeStatusOrderCallback callback;
 
     public static OrderDetailFragment newInstance(SaleOrders saleOrders, ChannelInfo channelInfo) {
         Bundle bundle = new Bundle();
@@ -66,7 +72,7 @@ public class OrderDetailFragment extends BaseFragment implements OrderDetailFrag
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
         binding = FragmentOrderDetailBinding.inflate(inflater, container, false);
-        presenter = new OrderDetailFragmentPresenter(getActivity(), this);
+        presenter = new OrderDetailFragmentPresenter(getActivity(), this, channelInfo);
         binding.setPresenter(presenter);
         return binding.getRoot();
     }
@@ -122,7 +128,7 @@ public class OrderDetailFragment extends BaseFragment implements OrderDetailFrag
         Intent intent = new Intent(getActivity(), SerialPickerActivity.class);
         SerialPickerModel serialPickerModel = new SerialPickerModel();
         serialPickerModel.setStockModelId(saleOrdersDetail.getStockModelId());
-        serialPickerModel.setStockMoldeName(saleOrdersDetail.getStockMoldeName());
+        serialPickerModel.setStockMoldeName(saleOrdersDetail.getStockModelName());
         serialPickerModel.setQuantity(saleOrdersDetail.getQuantity());
         serialPickerModel.setLstSerial(saleOrdersDetail.getLstSerial());
 
@@ -133,11 +139,12 @@ public class OrderDetailFragment extends BaseFragment implements OrderDetailFrag
     }
 
     @Override
-    public void clickCancelSell() {
+    public void clickCancelSell(SaleTrans saleTrans) {
         ConfirmTransactionSellCancelFragment fragment =
                 ConfirmTransactionSellCancelFragment.newInstance(false,
-                        getOrderInfoResponse.getSaleOrdersDetailList(),
-                        getOrderInfoResponse.getSaleTrans(), channelInfo, saleOrders);
+                        getOrderInfoResponse.getSaleOrdersDetailList(), saleTrans, channelInfo,
+                        saleOrders);
+        fragment.setConfirmTransactionSellCancelCallback(this);
         FragmentTransaction transaction =
                 getActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_sell_orders, fragment);
@@ -146,11 +153,12 @@ public class OrderDetailFragment extends BaseFragment implements OrderDetailFrag
     }
 
     @Override
-    public void onClickSell() {
+    public void onClickSell(SaleTrans saleTrans) {
         ConfirmTransactionSellCancelFragment fragment =
                 ConfirmTransactionSellCancelFragment.newInstance(true,
-                        getOrderInfoResponse.getSaleOrdersDetailList(),
-                        getOrderInfoResponse.getSaleTrans(), channelInfo, saleOrders);
+                        getOrderInfoResponse.getSaleOrdersDetailList(), saleTrans, channelInfo,
+                        saleOrders);
+        fragment.setConfirmTransactionSellCancelCallback(this);
         FragmentTransaction transaction =
                 getActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_sell_orders, fragment);
@@ -164,6 +172,11 @@ public class OrderDetailFragment extends BaseFragment implements OrderDetailFrag
     }
 
     @Override
+    public void getTranInfoError(BaseException error) {
+        DialogUtils.showDialogError(getActivity(), error);
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == GET_SERIAL && resultCode == Activity.RESULT_OK) {
             List<String> serials = GsonUtils.String2ListObject(
@@ -174,9 +187,24 @@ public class OrderDetailFragment extends BaseFragment implements OrderDetailFrag
                 Toast.makeText(getActivity(), "Bạn chưa chọn đủ số lượn serial", Toast.LENGTH_SHORT)
                         .show();
             }
-            saleOrdersDetailSelect.setLstSerial(Common.getSerialBlockBySerials(serials));
+            List<SerialBO> serialBOs = Common.getSerialBlockBySerials(serials);
+            for (SerialBO s : serialBOs) {
+                s.setStockModelId(saleOrdersDetailSelect.getStockModelId());
+            }
+            saleOrdersDetailSelect.setLstSerial(serialBOs);
             saleOrdersDetailSelect.setSelect(serials.size());
             orderDetailAdapter.notifyDataSetChanged();
+        }
+    }
+
+    public void setConfirmTransactionSellCancelCallback(ChangeStatusOrderCallback callback) {
+        this.callback = callback;
+    }
+
+    @Override
+    public void callback(long saleOrdersId, @OrderStatus String orderStatus) {
+        if (this.callback != null) {
+            this.callback.callback(saleOrdersId, orderStatus);
         }
     }
 }

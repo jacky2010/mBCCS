@@ -158,11 +158,12 @@
                     android:layout_marginTop="@dimen/dp_4"
                     />
 
-                <com.viettel.mbccs.widget.CustomEdittext
+                <com.viettel.mbccs.widget.CustomEditTextInput
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@={ presenter.noIsdn }"
-                    style="@style/inputStyle"
+                    android:text="@={ presenter.isdn }"
+                    android:singleLine="true"
+                    bind:error="@{ presenter.isdnError }"
                     />
 
                 <com.viettel.mbccs.widget.CustomTextView
@@ -173,11 +174,11 @@
                     android:layout_marginTop="@dimen/dp_4"
                     />
 
-                <com.viettel.mbccs.widget.CustomEdittext
+                <com.viettel.mbccs.widget.CustomEditTextInput
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@={ presenter.serial }"
-                    style="@style/inputStyle"
+                    bind:error="@{ presenter.serialError }"
                     />
 
                 <com.viettel.mbccs.widget.CustomTextView
@@ -195,6 +196,7 @@
                     android:drawableEnd="@drawable/ic_search_black_24dp"
                     android:drawableRight="@drawable/ic_search_black_24dp"
                     style="@style/inputStyle"
+                    bind:error="@{ presenter.informationStockError }"
                     />
 
                 <LinearLayout

@@ -31,7 +31,7 @@ import java.util.Locale;
  */
 
 @BindingMethods({
-        @BindingMethod(type = CustomDatePicker.class, attribute = "setDate", method = "setDateString"),
+        @BindingMethod(type = CustomDatePicker.class, attribute = "setDate", method = "setDateToCalendar"),
         @BindingMethod(type = CustomDatePicker.class, attribute = "maxDate", method = "setMaxDate"),
         @BindingMethod(type = CustomDatePicker.class, attribute = "minDate", method = "setMinDate")
 })
@@ -125,7 +125,7 @@ public class CustomDatePicker extends LinearLayout {
                 DateUtils.TIMEZONE_FORMAT_SERVER, null);
     }
 
-    public void setDateString(String dateString) {
+    public void setDateToCalendar(String dateString) {
         if (StringUtils.isEmpty(dateString)) return;
 
         Date date = DateUtils.stringToDate(dateString, DateUtils.TIMEZONE_FORMAT_SERVER,
@@ -137,13 +137,26 @@ public class CustomDatePicker extends LinearLayout {
         setDate();
     }
 
+    public void setDateToCalendar(Date date) {
+        if (date == null) return;
+        mCalendar.setTime(date);
+        setDate();
+    }
+
     public void setMaxDate(String date) {
         Date d = DateUtils.convertToDate(date, DateUtils.CALENDAR_DATE_FORMAT_DD_MM_YY);
         if (d == null) {
             maxDate = -1;
             return;
         }
-        maxDate = d.getTime();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(d);
+        calendar.set(Calendar.HOUR_OF_DAY, calendar.getMaximum(Calendar.HOUR_OF_DAY));
+        calendar.set(Calendar.MINUTE, calendar.getMaximum(Calendar.MINUTE));
+        calendar.set(Calendar.SECOND, calendar.getMaximum(Calendar.SECOND));
+        calendar.set(Calendar.MILLISECOND, calendar.getMaximum(Calendar.MILLISECOND));
+
+        maxDate = calendar.getTimeInMillis();
     }
 
     public void setMaxDate(Date date) {
@@ -151,7 +164,14 @@ public class CustomDatePicker extends LinearLayout {
             maxDate = -1;
             return;
         }
-        maxDate = date.getTime();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(Calendar.HOUR_OF_DAY, calendar.getMaximum(Calendar.HOUR_OF_DAY));
+        calendar.set(Calendar.MINUTE, calendar.getMaximum(Calendar.MINUTE));
+        calendar.set(Calendar.SECOND, calendar.getMaximum(Calendar.SECOND));
+        calendar.set(Calendar.MILLISECOND, calendar.getMaximum(Calendar.MILLISECOND));
+
+        maxDate = calendar.getTimeInMillis();
     }
 
     public void setMinDate(String date) {
@@ -160,7 +180,14 @@ public class CustomDatePicker extends LinearLayout {
             minDate = -1;
             return;
         }
-        minDate = d.getTime();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(d);
+        calendar.set(Calendar.HOUR_OF_DAY, calendar.getMinimum(Calendar.HOUR_OF_DAY));
+        calendar.set(Calendar.MINUTE, calendar.getMinimum(Calendar.MINUTE));
+        calendar.set(Calendar.SECOND, calendar.getMinimum(Calendar.SECOND));
+        calendar.set(Calendar.MILLISECOND, calendar.getMinimum(Calendar.MILLISECOND));
+
+        minDate = calendar.getTimeInMillis();
     }
 
     public void setMinDate(Date date) {
@@ -168,6 +195,13 @@ public class CustomDatePicker extends LinearLayout {
             minDate = -1;
             return;
         }
-        minDate = date.getTime();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(Calendar.HOUR_OF_DAY, calendar.getMinimum(Calendar.HOUR_OF_DAY));
+        calendar.set(Calendar.MINUTE, calendar.getMinimum(Calendar.MINUTE));
+        calendar.set(Calendar.SECOND, calendar.getMinimum(Calendar.SECOND));
+        calendar.set(Calendar.MILLISECOND, calendar.getMinimum(Calendar.MILLISECOND));
+
+        minDate = calendar.getTimeInMillis();
     }
 }

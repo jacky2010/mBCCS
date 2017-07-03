@@ -28,6 +28,7 @@ public class DateUtils {
     public static final long INVALID_TIME = -1;
     public static final String DATE_TIME_FORMAT = "dd/MM/yyyy HH:mm:ss";
     public static final String DATE_FORMAT1 = "dd/MM/yyyy";
+    private static final int TUOI = 15;
 
     public static Date stringToDate(String time, String format, Locale locale) {
         if (TextUtils.isEmpty(time) || TextUtils.isEmpty(format)) {
@@ -147,5 +148,11 @@ public class DateUtils {
         Date after = DateUtils.stringToDate(dateAfter, TIMEZONE_FORMAT_SERVER, Locale.getDefault());
 
         return before.before(after);
+    }
+
+    public static Date minDateBirthday() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, calendar.get(Calendar.YEAR) - TUOI);
+        return calendar.getTime();
     }
 }

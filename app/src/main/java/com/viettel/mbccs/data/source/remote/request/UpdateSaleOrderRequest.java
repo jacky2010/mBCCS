@@ -2,7 +2,6 @@ package com.viettel.mbccs.data.source.remote.request;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.viettel.mbccs.constance.SaleOrderNewStatus;
 
 /**
  * Created by HuyQuyet on 5/31/17.
@@ -14,7 +13,6 @@ public class UpdateSaleOrderRequest {
     @Expose
     private String saleOrderId;
 
-    @SaleOrderNewStatus
     @SerializedName("newStatus")
     @Expose
     private String newStatus;
@@ -39,7 +37,7 @@ public class UpdateSaleOrderRequest {
         return newStatus;
     }
 
-    public void setNewStatus(@SaleOrderNewStatus String newStatus) {
+    public void setNewStatus(String newStatus) {
         this.newStatus = newStatus;
     }
 

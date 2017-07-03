@@ -92,13 +92,12 @@
                         android:textColor="#000"
                         />
 
-                    <com.viettel.mbccs.widget.CustomEdittext
+                    <com.viettel.mbccs.widget.CustomEditTextInput
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
                         android:text="@={presenter.name}"
                         app:error="@{presenter.nameError}"
-                        style="@style/inputStyle"
                         />
 
                     <com.viettel.mbccs.widget.CustomTextView
@@ -111,13 +110,12 @@
                         android:textColor="#000"
                         />
 
-                    <com.viettel.mbccs.widget.CustomEdittext
+                    <com.viettel.mbccs.widget.CustomEditTextInput
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
                         android:text="@={presenter.tin}"
                         app:error="@{presenter.tinError}"
-                        style="@style/inputStyle"
                         />
 
 
@@ -130,7 +128,7 @@
                         android:textColor="#000"
                         />
 
-                    <com.viettel.mbccs.widget.CustomEdittext
+                    <com.viettel.mbccs.widget.CustomEditTextInput
                         android:id="@+id/address"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -138,7 +136,6 @@
                         android:background="@drawable/bg_input_tranparent"
                         android:text="@={presenter.address}"
                         app:error="@{presenter.addressError}"
-                        style="@style/inputStyle"
                         />
                 </LinearLayout>
 

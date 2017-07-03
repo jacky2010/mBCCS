@@ -11,11 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseFragment;
+import com.viettel.mbccs.constance.OrderStatus;
 import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.SaleOrders;
 import com.viettel.mbccs.databinding.FragmentOrdersBinding;
 import com.viettel.mbccs.screen.sell.orders.adapter.OrdersAdapter;
 import com.viettel.mbccs.screen.sell.orders.fragment.orderdetail.OrderDetailFragment;
+import com.viettel.mbccs.screen.sell.orders.listener.ChangeStatusOrderCallback;
 import com.viettel.mbccs.widget.DividerItemDecoration;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,13 +26,15 @@ import java.util.List;
  * Created by HuyQuyet on 5/16/17.
  */
 
-public class OrdersFragment extends BaseFragment implements OrdersAdapter.OrdersAdapterCallback {
+public class OrdersFragment extends BaseFragment
+        implements OrdersAdapter.OrdersAdapterCallback, ChangeStatusOrderCallback {
     public static final String STRING_NAME = "OrdersFragment";
     private static final String ARG_DATA = "DATA";
     private static final String ARG_CHANGE_INFO = "CHANGE_INFO";
     private FragmentOrdersBinding binding;
     private List<SaleOrders> saleOrdersList;
     private ChannelInfo channelInfoSale;
+    private ChangeStatusOrderCallback callback;
 
     public ObservableField<OrdersAdapter> adapterOrders;
     public ObservableField<RecyclerView.ItemDecoration> itemDecoration;
@@ -76,8 +80,20 @@ public class OrdersFragment extends BaseFragment implements OrdersAdapter.Orders
         FragmentTransaction fragmentTransaction =
                 getActivity().getSupportFragmentManager().beginTransaction();
         fragmentTransaction.addToBackStack(OrderDetailFragment.STRING_NAME);
-        fragmentTransaction.replace(R.id.frame_sell_orders,
-                OrderDetailFragment.newInstance(saleOrdersList.get(position),
-                        channelInfoSale)).commit();
+        OrderDetailFragment orderDetailFragment =
+                OrderDetailFragment.newInstance(saleOrdersList.get(position), channelInfoSale);
+        orderDetailFragment.setConfirmTransactionSellCancelCallback(this);
+        fragmentTransaction.replace(R.id.frame_sell_orders, orderDetailFragment).commit();
+    }
+
+    public void setConfirmTransactionSellCancelCallback(ChangeStatusOrderCallback callback) {
+        this.callback = callback;
+    }
+
+    @Override
+    public void callback(long saleOrdersId, @OrderStatus String orderStatus) {
+        if (this.callback != null) {
+            this.callback.callback(saleOrdersId, orderStatus);
+        }
     }
 }

@@ -3,7 +3,6 @@ package com.viettel.mbccs.data.source.remote.response;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.viettel.mbccs.data.model.SaleOrdersDetail;
-import com.viettel.mbccs.data.model.SaleTrans;
 import java.util.List;
 
 /**
@@ -15,9 +14,9 @@ public class GetOrderInfoResponse{
     @SerializedName("lstSaleOrderDetail")
     private List<SaleOrdersDetail> saleOrdersDetailList;
 
-    @Expose
-    @SerializedName("saleTransInfo")
-    private SaleTrans saleTrans;
+//    @Expose
+//    @SerializedName("saleTransInfo")
+//    private SaleTrans saleTrans;
 
     public List<SaleOrdersDetail> getSaleOrdersDetailList() {
         return saleOrdersDetailList;
@@ -27,11 +26,11 @@ public class GetOrderInfoResponse{
         this.saleOrdersDetailList = saleOrdersDetailList;
     }
 
-    public SaleTrans getSaleTrans() {
-        return saleTrans;
-    }
-
-    public void setSaleTrans(SaleTrans saleTrans) {
-        this.saleTrans = saleTrans;
-    }
+//    public SaleTrans getSaleTrans() {
+//        return saleTrans;
+//    }
+//
+//    public void setSaleTrans(SaleTrans saleTrans) {
+//        this.saleTrans = saleTrans;
+//    }
 }

@@ -5,7 +5,9 @@ import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.InputType;
 import android.util.AttributeSet;
@@ -23,15 +25,21 @@ import com.viettel.mbccs.widget.callback.DrawableClickListener;
 public class CustomEdittext extends AppCompatEditText {
 
     private static final String ANDROID_SCHEMA = "http://schemas.android.com/apk/res/android";
-    private static final String STRING_EMPTY = "";
+    protected static final String STRING_EMPTY = "";
 
     private Drawable drawableRight;
     private Drawable drawableLeft;
     private Drawable drawableTop;
     private Drawable drawableBottom;
+
+    private int drawableRightInt;
+    private int drawableLeftInt;
+    private int drawableTopInt;
+    private int drawableBottomInt;
+
     int actionX, actionY;
 
-    private DrawableClickListener clickListener;
+    protected DrawableClickListener clickListener;
 
     public CustomEdittext(Context context) {
         super(context);
@@ -69,6 +77,31 @@ public class CustomEdittext extends AppCompatEditText {
             drawableBottom = bottom;
         }
         super.setCompoundDrawables(left, top, right, bottom);
+    }
+
+    @Override
+    public void setCompoundDrawablesWithIntrinsicBounds(@DrawableRes int left, @DrawableRes int top,
+            @DrawableRes int right, @DrawableRes int bottom) {
+        drawableLeftInt = left;
+        drawableRightInt = right;
+        drawableTopInt = top;
+        drawableBottomInt = bottom;
+        if (left != 0) {
+            drawableLeft = ResourcesCompat.getDrawable(getContext().getResources(), left, null);
+        }
+        if (right != 0) {
+            drawableRight = ResourcesCompat.getDrawable(getContext().getResources(), right, null);
+        }
+
+        if (top != 0) {
+            drawableTop = ResourcesCompat.getDrawable(getContext().getResources(), top, null);
+        }
+
+        if (bottom != 0) {
+            drawableBottom = ResourcesCompat.getDrawable(getContext().getResources(), bottom, null);
+        }
+
+        super.setCompoundDrawablesWithIntrinsicBounds(left, top, right, bottom);
     }
 
     @Override
@@ -178,6 +211,38 @@ public class CustomEdittext extends AppCompatEditText {
         drawableLeft = null;
         drawableTop = null;
         super.finalize();
+    }
+
+    public int getDrawableRightInt() {
+        return drawableRightInt;
+    }
+
+    public void setDrawableRightInt(int drawableRightInt) {
+        this.drawableRightInt = drawableRightInt;
+    }
+
+    public int getDrawableLeftInt() {
+        return drawableLeftInt;
+    }
+
+    public void setDrawableLeftInt(int drawableLeftInt) {
+        this.drawableLeftInt = drawableLeftInt;
+    }
+
+    public int getDrawableTopInt() {
+        return drawableTopInt;
+    }
+
+    public void setDrawableTopInt(int drawableTopInt) {
+        this.drawableTopInt = drawableTopInt;
+    }
+
+    public int getDrawableBottomInt() {
+        return drawableBottomInt;
+    }
+
+    public void setDrawableBottomInt(int drawableBottomInt) {
+        this.drawableBottomInt = drawableBottomInt;
     }
 
     public void setDrawableClickListener(DrawableClickListener listener) {

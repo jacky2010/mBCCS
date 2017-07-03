@@ -118,7 +118,7 @@ public class SaleChannelActivity
         Intent intent = new Intent(this, SerialPickerActivity.class);
         SerialPickerModel serialPickerModel = new SerialPickerModel();
         serialPickerModel.setStockModelId(stockItem.getStockModelId());
-        serialPickerModel.setStockMoldeName(stockItem.getStockMoldeName());
+        serialPickerModel.setStockMoldeName(stockItem.getStockModelName());
         serialPickerModel.setQuantity(stockItem.getChoiceCount());
         serialPickerModel.setLstSerial(stockItem.getSerialBlocks());
         Bundle bundle = new Bundle();
@@ -136,7 +136,7 @@ public class SaleChannelActivity
         for (ModelSale modelSale : stockItems) {
             StockSerial stockSerial = new StockSerial();
             stockSerial.setStockModelId(modelSale.getStockModelId());
-            stockSerial.setStockMoldeName(modelSale.getStockMoldeName());
+            stockSerial.setStockModelName(modelSale.getStockModelName());
             stockSerial.setStockModelCode(modelSale.getStockModelCode());
             if (modelSale.getCheckSerial() == 1) {
                 stockSerial.setSerialBOs(modelSale.getSerialBlocks());

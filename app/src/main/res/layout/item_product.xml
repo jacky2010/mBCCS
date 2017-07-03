@@ -59,7 +59,8 @@
                         android:id="@+id/text_good_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@{item.item.stockMoldeName}"
+                        android:gravity="center"
+                        android:text="@{item.item.stockModelName}"
                         android:textColor="@color/black"
                         android:textSize="@dimen/default_label_text_size" />
 

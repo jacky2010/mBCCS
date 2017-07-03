@@ -86,32 +86,32 @@ public class ListProductsDetailPresenter implements ListProductsDetailContract.P
             //TODO minhnx test
             List<ModelSale> items = new ArrayList<>();
             ModelSale item = new ModelSale();
-            item.setStockMoldeName("Demo 1");
+            item.setStockModelName("Demo 1");
             item.setPrice(3000);
             items.add(item);
 
             item = new ModelSale();
-            item.setStockMoldeName("Demo 2");
+            item.setStockModelName("Demo 2");
             item.setPrice(3000);
             items.add(item);
 
             item = new ModelSale();
-            item.setStockMoldeName("Demo 3");
+            item.setStockModelName("Demo 3");
             item.setPrice(3000);
             items.add(item);
 
             item = new ModelSale();
-            item.setStockMoldeName("Demo 4");
+            item.setStockModelName("Demo 4");
             item.setPrice(3000);
             items.add(item);
 
             item = new ModelSale();
-            item.setStockMoldeName("Demo 5");
+            item.setStockModelName("Demo 5");
             item.setPrice(3000);
             items.add(item);
 
             item = new ModelSale();
-            item.setStockMoldeName("Demo 6");
+            item.setStockModelName("Demo 6");
             item.setPrice(3000);
             items.add(item);
 

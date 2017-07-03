@@ -10,8 +10,8 @@ public class GetListOrderRequest  {
     private Long staffId;
     private String orderStatus;
     private String isdnChannel;
-    private String fromDate;
-    private String toDate;
+    private String startDate;
+    private String endDate;
 
     public long getShopId() {
         return shopId;
@@ -45,19 +45,19 @@ public class GetListOrderRequest  {
         this.isdnChannel = isdnChannel;
     }
 
-    public String getFromDate() {
-        return fromDate;
+    public String getStartDate() {
+        return startDate;
     }
 
-    public void setFromDate(String fromDate) {
-        this.fromDate = fromDate;
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 
-    public String getToDate() {
-        return toDate;
+    public String getEndDate() {
+        return endDate;
     }
 
-    public void setToDate(String toDate) {
-        this.toDate = toDate;
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 }

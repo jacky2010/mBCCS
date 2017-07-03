@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.view.View;
 import android.widget.AdapterView;
 import com.viettel.mbccs.BR;
+import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.Data;
 import com.viettel.mbccs.constance.MobileType;
 import com.viettel.mbccs.constance.TelServiceId;
@@ -22,9 +23,13 @@ import com.viettel.mbccs.data.source.remote.response.BaseErrorResponse;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetApDomainByTypeResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListProductResponse;
+import com.viettel.mbccs.utils.DateUtils;
+import com.viettel.mbccs.utils.PatternUtils;
 import com.viettel.mbccs.utils.SpinnerAdapter;
+import com.viettel.mbccs.utils.StringUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import com.viettel.mbccs.widget.CustomSelectAddress;
+import java.util.Date;
 import java.util.List;
 import rx.Observable;
 import rx.Subscription;
@@ -44,6 +49,7 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
     private CreateNewConnectorInformationFragmentContract.ViewFragment2 createNewView2;
     private QLKhachHangRepository qlKhachHangRepository;
     private CompositeSubscription subscriptions;
+    private String stringError;
 
     private Customer customer;
     private Contract contract;
@@ -53,9 +59,15 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
 
     private String nameCustomer;
     private String dateBirthday;
+    private Date maxDateBirthday;
+    private Date minDateBirthday;
     private String txtNumberPassport;
     private String dateCreatePassport;
+    private Date maxDateCreatePassport;
+    private Date minDateCreatePassport;
     private String outDatePassport;
+    private Date maxOutDatePassport;
+    private Date minOutDatePassport;
     private String placeCreatePassport;
     private String address;
     private String idDistrict;
@@ -77,9 +89,16 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
     private String idDistrict2;
     private String idPrecinct2;
     private String idProvince2;
-    private String noIsdn;
+    private String isdn;
     private String serial;
     private String informationStock;
+
+    private String nameCustomerError;
+    private String txtNumberPassportError;
+    private String placeCreatePassportError;
+    private String isdnError;
+    private String serialError;
+    private String informationStockError;
 
     private SpinnerAdapter<ApDomainByType> adapterSpinnerCustomerType;
     private SpinnerAdapter<ApDomainByType> adapterSpinnerPassportType;
@@ -102,6 +121,7 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
 
         qlKhachHangRepository = QLKhachHangRepository.getInstance();
         subscriptions = new CompositeSubscription();
+        stringError = context.getString(R.string.input_empty);
     }
 
     public void setView(CreateNewConnectorInformationFragmentContract.View view) {
@@ -202,6 +222,13 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
                 });
         notifyPropertyChanged(BR.adapterSpinnerPassportType);
         createNewView1.loadDataSpinnerSuccess();
+        setMaxDateBirthday(DateUtils.minDateBirthday());
+        setDateBirthday(
+                DateUtils.convertToString(DateUtils.minDateBirthday(), DateUtils.TIMEZONE_FORMAT,
+                        null));
+        setMinDateCreatePassport(DateUtils.minDateBirthday());
+        setMaxDateCreatePassport(new Date());
+        setMinOutDatePassport(new Date());
         createNewView1.hideLoading();
     }
 
@@ -274,50 +301,38 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
 
     public void onNext() {
         getCustomer();
-        //        if (!PatternUtils.validateString(customerCurrent.getName(),
-        //                PatternUtils.PATTERN_TEXT_LENGTH_100)) {
-        //            createNewView1.validateCustomerError(
-        //                    context.getString(R.string.create_new_connector_information_validate_name));
-        //            return;
-        //        }
-        //
-        //        if (StringUtils.isEmpty(customerCurrent.getIdNo())) {
-        //            createNewView1.validateCustomerError(
-        //                    context.getString(R.string.create_new_connector_information_validate_id_no));
-        //            return;
-        //        }
-        //
-        //        if (!DateUtils.compareDateToDay(customerCurrent.getBirthDate())) {
-        //            createNewView1.validateCustomerError(
-        //                    context.getString(R.string.create_new_connector_information_validate_birthday));
-        //            return;
-        //        }
-        //
-        //        if (DateUtils.compareDateToDay(customerCurrent.getIdExpireDate())) {
-        //            createNewView1.validateCustomerError(context.getString(
-        //                    R.string.create_new_connector_information_validate_date_id_no));
-        //            return;
-        //        }
-        //
-        //        if (!DateUtils.compareDateToDay(customerCurrent.getIdIssueDate())
-        //                || !DateUtils.compareTwoDate(customerCurrent.getIdIssueDate(),
-        //                customerCurrent.getIdExpireDate())) {
-        //            createNewView1.validateCustomerError(context.getString(
-        //                    R.string.create_new_connector_information_validate_out_date_id_no));
-        //            return;
-        //        }
-        //
-        //        if (StringUtils.isEmpty(customerCurrent.getIdIssuePlace())) {
-        //            createNewView1.validateCustomerError(context.getString(
-        //                    R.string.create_new_connector_information_validate_place_id_no));
-        //            return;
-        //        }
-        //
-        //        if (StringUtils.isEmpty(customerCurrent.getAddress())) {
-        //            createNewView1.validateCustomerError(
-        //                    context.getString(R.string.create_new_connector_information_validate_address));
-        //            return;
-        //        }
+
+        if (!DateUtils.compareDateToDay(customerCurrent.getBirthDate())) {
+            createNewView1.validateCustomerError(
+                    context.getString(R.string.create_new_connector_information_validate_birthday));
+            return;
+        }
+
+        if (DateUtils.compareDateToDay(customerCurrent.getIdExpireDate())) {
+            createNewView1.validateCustomerError(context.getString(
+                    R.string.create_new_connector_information_validate_date_id_no));
+            return;
+        }
+
+        if (!DateUtils.compareDateToDay(customerCurrent.getIdIssueDate())
+                || !DateUtils.compareTwoDate(customerCurrent.getIdIssueDate(),
+                customerCurrent.getIdExpireDate())) {
+            createNewView1.validateCustomerError(context.getString(
+                    R.string.create_new_connector_information_validate_out_date_id_no));
+            return;
+        }
+
+        if (StringUtils.isEmpty(customerCurrent.getIdIssuePlace())) {
+            createNewView1.validateCustomerError(context.getString(
+                    R.string.create_new_connector_information_validate_place_id_no));
+            return;
+        }
+
+        if (StringUtils.isEmpty(customerCurrent.getAddress())) {
+            createNewView1.validateCustomerError(
+                    context.getString(R.string.create_new_connector_information_validate_address));
+            return;
+        }
 
         imageFront = createNewView1.imageFront();
         imageBackside = createNewView1.imageBackside();
@@ -347,6 +362,24 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
         customerCurrent.setPrecinct(address.getAreaPrecinct().getPrecinct());
         customerCurrent.setIdNo(getTxtNumberPassport());
     }
+
+    private boolean validateCustomer() {
+        boolean validate = true;
+        if (!PatternUtils.validateString(customerCurrent.getName(),
+                PatternUtils.PATTERN_TEXT_LENGTH_100)) {
+            setNameCustomerError(
+                    context.getString(R.string.create_new_connector_information_validate_name));
+            validate = false;
+        }
+
+        if (StringUtils.isEmpty(customerCurrent.getIdNo())) {
+            setIsdnError(stringError);
+            validate = false;
+        }
+
+        return validate;
+    }
+
     /*---------------------------------- End onClick View ---------------------------------------*/
 
     /*---------------------------------- Set - Get ---------------------------------------*/
@@ -372,6 +405,26 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
     }
 
     @Bindable
+    public Date getMaxDateBirthday() {
+        return maxDateBirthday;
+    }
+
+    public void setMaxDateBirthday(Date maxDateBirthday) {
+        this.maxDateBirthday = maxDateBirthday;
+        notifyPropertyChanged(BR.maxDateBirthday);
+    }
+
+    @Bindable
+    public Date getMinDateBirthday() {
+        return minDateBirthday;
+    }
+
+    public void setMinDateBirthday(Date minDateBirthday) {
+        this.minDateBirthday = minDateBirthday;
+        notifyPropertyChanged(BR.minDateBirthday);
+    }
+
+    @Bindable
     public String getTxtNumberPassport() {
         return txtNumberPassport;
     }
@@ -392,6 +445,26 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
     }
 
     @Bindable
+    public Date getMaxDateCreatePassport() {
+        return maxDateCreatePassport;
+    }
+
+    public void setMaxDateCreatePassport(Date maxDateCreatePassport) {
+        this.maxDateCreatePassport = maxDateCreatePassport;
+        notifyPropertyChanged(BR.maxDateCreatePassport);
+    }
+
+    @Bindable
+    public Date getMinDateCreatePassport() {
+        return minDateCreatePassport;
+    }
+
+    public void setMinDateCreatePassport(Date minDateCreatePassport) {
+        this.minDateCreatePassport = minDateCreatePassport;
+        notifyPropertyChanged(BR.minDateCreatePassport);
+    }
+
+    @Bindable
     public String getOutDatePassport() {
         return outDatePassport;
     }
@@ -399,6 +472,26 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
     public void setOutDatePassport(String outDatePassport) {
         this.outDatePassport = outDatePassport;
         notifyPropertyChanged(BR.outDatePassport);
+    }
+
+    @Bindable
+    public Date getMaxOutDatePassport() {
+        return maxOutDatePassport;
+    }
+
+    public void setMaxOutDatePassport(Date maxOutDatePassport) {
+        this.maxOutDatePassport = maxOutDatePassport;
+        notifyPropertyChanged(BR.maxOutDatePassport);
+    }
+
+    @Bindable
+    public Date getMinOutDatePassport() {
+        return minOutDatePassport;
+    }
+
+    public void setMinOutDatePassport(Date minOutDatePassport) {
+        this.minOutDatePassport = minOutDatePassport;
+        notifyPropertyChanged(BR.minOutDatePassport);
     }
 
     @Bindable
@@ -605,13 +698,13 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
     }
 
     @Bindable
-    public String getNoIsdn() {
-        return noIsdn;
+    public String getIsdn() {
+        return isdn;
     }
 
-    public void setNoIsdn(String noIsdn) {
-        this.noIsdn = noIsdn;
-        notifyPropertyChanged(BR.noIsdn);
+    public void setIsdn(String isdn) {
+        this.isdn = isdn;
+        notifyPropertyChanged(BR.isdn);
     }
 
     @Bindable
@@ -675,6 +768,67 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
         this.adapterSpinner2HTHoaMang = adapterSpinner2HTHoaMang;
         notifyPropertyChanged(BR.adapterSpinner2HTHoaMang);
     }
+
+    @Bindable
+    public String getIsdnError() {
+        return isdnError;
+    }
+
+    public void setIsdnError(String isdnError) {
+        this.isdnError = isdnError;
+        notifyPropertyChanged(BR.isdnError);
+    }
+
+    @Bindable
+    public String getSerialError() {
+        return serialError;
+    }
+
+    public void setSerialError(String serialError) {
+        this.serialError = serialError;
+        notifyPropertyChanged(BR.serialError);
+    }
+
+    @Bindable
+    public String getInformationStockError() {
+        return informationStockError;
+    }
+
+    public void setInformationStockError(String informationStockError) {
+        this.informationStockError = informationStockError;
+        notifyPropertyChanged(BR.informationStockError);
+    }
+
+    @Bindable
+    public String getNameCustomerError() {
+        return nameCustomerError;
+    }
+
+    public void setNameCustomerError(String nameCustomerError) {
+        this.nameCustomerError = nameCustomerError;
+        notifyPropertyChanged(BR.nameCustomerError);
+    }
+
+    @Bindable
+    public String getTxtNumberPassportError() {
+        return txtNumberPassportError;
+    }
+
+    public void setTxtNumberPassportError(String txtNumberPassportError) {
+        this.txtNumberPassportError = txtNumberPassportError;
+        notifyPropertyChanged(BR.txtNumberPassportError);
+    }
+
+    @Bindable
+    public String getPlaceCreatePassportError() {
+        return placeCreatePassportError;
+    }
+
+    public void setPlaceCreatePassportError(String placeCreatePassportError) {
+        this.placeCreatePassportError = placeCreatePassportError;
+        notifyPropertyChanged(BR.placeCreatePassportError);
+    }
+
     /*---------------------------------- End Set - Get ---------------------------------------*/
 
     public void setData(Customer customer, Contract contract) {
