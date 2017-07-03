@@ -302,26 +302,6 @@ public class CreateNewConnectorInformationFragmentPresenter extends BaseObservab
     public void onNext() {
         getCustomer();
 
-        if (!DateUtils.compareDateToDay(customerCurrent.getBirthDate())) {
-            createNewView1.validateCustomerError(
-                    context.getString(R.string.create_new_connector_information_validate_birthday));
-            return;
-        }
-
-        if (DateUtils.compareDateToDay(customerCurrent.getIdExpireDate())) {
-            createNewView1.validateCustomerError(context.getString(
-                    R.string.create_new_connector_information_validate_date_id_no));
-            return;
-        }
-
-        if (!DateUtils.compareDateToDay(customerCurrent.getIdIssueDate())
-                || !DateUtils.compareTwoDate(customerCurrent.getIdIssueDate(),
-                customerCurrent.getIdExpireDate())) {
-            createNewView1.validateCustomerError(context.getString(
-                    R.string.create_new_connector_information_validate_out_date_id_no));
-            return;
-        }
-
         if (StringUtils.isEmpty(customerCurrent.getIdIssuePlace())) {
             createNewView1.validateCustomerError(context.getString(
                     R.string.create_new_connector_information_validate_place_id_no));

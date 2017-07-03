@@ -72,6 +72,10 @@ public class CreateSaleTransChannelRequest extends DataRequest {
     @Expose
     private String couponCode;
 
+    @SerializedName("orderId")
+    @Expose
+    private long orderId;
+
     @SerializedName("language")
     @Expose
     private String language;
@@ -204,4 +208,11 @@ public class CreateSaleTransChannelRequest extends DataRequest {
         mCustomer = customer;
     }
 
+    public long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(long orderId) {
+        this.orderId = orderId;
+    }
 }

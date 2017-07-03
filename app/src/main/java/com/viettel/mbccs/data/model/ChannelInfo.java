@@ -280,6 +280,6 @@ public class ChannelInfo implements Parcelable, Serializable {
 
     @Override
     public String toString() {
-        return getManagementName();
+        return getChannelName();
     }
 }

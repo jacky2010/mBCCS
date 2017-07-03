@@ -74,4 +74,10 @@ public class SharedPrefs {
         editor.clear();
         editor.commit();
     }
+
+    public void remove(String key) {
+        SharedPreferences.Editor editor = mSharedpreferences.edit();
+        editor.remove(key);
+        editor.apply();
+    }
 }

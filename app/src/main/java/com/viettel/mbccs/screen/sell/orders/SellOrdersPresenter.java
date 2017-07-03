@@ -40,7 +40,6 @@ public class SellOrdersPresenter {
     private UserRepository userRepository;
     private CompositeSubscription subscriptions;
     private List<ChannelInfo> channelInfoList;
-    //    private List<String> dataSpinnerChannel;
     private ChannelInfo channelInfoSelect;
 
     public ObservableField<StaffInfo> staffInfo;
@@ -56,7 +55,6 @@ public class SellOrdersPresenter {
         banHangKhoTaiChinhRepository = BanHangKhoTaiChinhRepository.getInstance();
         userRepository = UserRepository.getInstance();
         subscriptions = new CompositeSubscription();
-        //        dataSpinnerChannel = new ArrayList<>();
         channelInfoList = new ArrayList<>();
         channelInfoSelect = new ChannelInfo();
 
@@ -75,8 +73,8 @@ public class SellOrdersPresenter {
         shop.set(userInfo.getShop());
 
         GetListChannelByOwnerTypeIdRequest g = new GetListChannelByOwnerTypeIdRequest();
-        g.setStaffId(staffInfo.get().getStaffOwnerId());
-        g.setChannelTypeId(staffInfo.get().getChannelTypeId());
+        g.setStaffId(String.valueOf(staffInfo.get().getStaffId()));
+//        g.setChannelTypeId(staffInfo.get().getChannelTypeId());
 
         DataRequest<GetListChannelByOwnerTypeIdRequest> request = new DataRequest<>();
         request.setWsRequest(g);
@@ -141,7 +139,6 @@ public class SellOrdersPresenter {
     }
 
     public void clickSearch() {
-        sellOrdersView.showLoading();
         long dateFrom = sellOrdersView.getDateFrom();
         long dateTo = sellOrdersView.getDateTo();
 
@@ -150,9 +147,11 @@ public class SellOrdersPresenter {
             return;
         }
 
+        sellOrdersView.showLoading();
+
         GetListOrderRequest getListOrderRequest = new GetListOrderRequest();
         getListOrderRequest.setShopId(staffInfo.get().getShopId());
-        getListOrderRequest.setStaffId(staffInfo.get().getStaffId());
+        getListOrderRequest.setStaffId(channelInfoSelect.getChannelId());
         getListOrderRequest.setEndDate(sellOrdersView.getStringDateTo());
         getListOrderRequest.setStartDate(sellOrdersView.getStringDateFrom());
 //        getListOrderRequest.setOrderStatus(staffInfo.get().getStatus());
