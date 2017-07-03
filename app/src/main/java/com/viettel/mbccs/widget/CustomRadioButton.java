@@ -2,29 +2,28 @@ package com.viettel.mbccs.widget;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatRadioButton;
 import android.util.AttributeSet;
-import android.widget.Button;
 import com.viettel.mbccs.utils.FontCache;
 
 /**
- * Created by FRAMGIA\hoang.van.cuong on 16/05/2017.
+ * Created by eo_cuong on 7/3/17.
  */
 
-public class CustomButton extends AppCompatButton {
+public class CustomRadioButton extends AppCompatRadioButton {
     private static final String ANDROID_SCHEMA = "http://schemas.android.com/apk/res/android";
 
-    public CustomButton(Context context) {
+    public CustomRadioButton(Context context) {
         super(context);
         applyCustomFont(context, null);
     }
 
-    public CustomButton(Context context, AttributeSet attrs) {
+    public CustomRadioButton(Context context, AttributeSet attrs) {
         super(context, attrs);
         applyCustomFont(context, attrs);
     }
 
-    public CustomButton(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CustomRadioButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         applyCustomFont(context, attrs);
     }

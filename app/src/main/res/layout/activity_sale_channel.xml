@@ -71,6 +71,9 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dp_10"
                     android:text="@string/stock_list"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/sp_14"
                     />
 
                 <android.support.v7.widget.RecyclerView

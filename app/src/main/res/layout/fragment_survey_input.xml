@@ -45,6 +45,7 @@
             android:imeOptions="actionDone"
             android:inputType="@{data.surveyQuestion.type== SurveyType.NUMBER ? InputType.TYPE_CLASS_NUMBER : InputType.TYPE_CLASS_TEXT}"
             android:text="@={data.textAnswer}"
+            style="@style/inputStyle"
             />n
     </LinearLayout>
 

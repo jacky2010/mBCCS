@@ -65,7 +65,7 @@ public class BaseSubMenuActivity
 
     protected LinearLayoutManager mLinearLayoutManager;
 
-//    protected RecyclerView.ItemDecoration mItemDecoration;
+    //    protected RecyclerView.ItemDecoration mItemDecoration;
 
     protected MenuPresenter.MenuAdapter mMenuAdapter;
 
@@ -85,10 +85,10 @@ public class BaseSubMenuActivity
         isGrid.set(false);
         mGridLayoutManager = new GridLayoutManager(this, 3);
         mLinearLayoutManager = new LinearLayoutManager(this);
-//        mItemDecoration = new SpacesItemDecoration(
-//                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX,
-//                        getResources().getDimension(R.dimen.dp_0_6),
-//                        getResources().getDisplayMetrics()), mGridLayoutManager);
+        //        mItemDecoration = new SpacesItemDecoration(
+        //                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX,
+        //                        getResources().getDimension(R.dimen.dp_0_6),
+        //                        getResources().getDisplayMetrics()), mGridLayoutManager);
         initMenuList();
         mMenuAdapter = new SubMenuAdapter(this, mFunctionList);
         mBinding.setPresenter(this);
@@ -287,7 +287,8 @@ public class BaseSubMenuActivity
                         case Function.MenuId.MENU_BAO_CAO_TON_KHO:
                             break;
                         case Function.MenuId.MENU_BAO_CAO_GIAO_CHI_TIEU_BAN_HANG:
-                            Intent intent = new Intent(BaseSubMenuActivity.this, ChiTietXuatKhoNhanVienActivity.class);
+                            Intent intent = new Intent(BaseSubMenuActivity.this,
+                                    ChiTietXuatKhoNhanVienActivity.class);
                             StockTrans stockTrans = new StockTrans();
                             stockTrans.setStockTransId(1237);
                             stockTrans.setToOwnerId(1232);
@@ -313,10 +314,10 @@ public class BaseSubMenuActivity
         isGrid.set(!isGrid.get());
         if (isGrid.get()) {
             mBinding.subMenuView.setLayoutManager(mGridLayoutManager);
-//            mBinding.subMenuView.addItemDecoration(mItemDecoration);
+            //            mBinding.subMenuView.addItemDecoration(mItemDecoration);
         } else {
             mBinding.subMenuView.setLayoutManager(mLinearLayoutManager);
-//            mBinding.subMenuView.removeItemDecoration(mItemDecoration);
+            //            mBinding.subMenuView.removeItemDecoration(mItemDecoration);
         }
         mBinding.subMenuView.setAdapter(mMenuAdapter);
     }

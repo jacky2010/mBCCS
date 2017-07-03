@@ -33,8 +33,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_12"
+        android:layout_height="50dp"
         android:background="?attr/selectableItemBackground"
         android:onClick="@{ onClicked }"
         android:paddingEnd="@dimen/dp_16"
@@ -43,8 +42,8 @@
 
         <ImageView
             android:id="@+id/icon"
-            android:layout_width="@dimen/dp_24"
-            android:layout_height="@dimen/dp_24"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
             android:layout_centerVertical="true"
             android:adjustViewBounds="true"
             android:src="@{ image }"
@@ -53,25 +52,23 @@
         <com.viettel.mbccs.widget.CustomTextView
             android:id="@+id/menu_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dp_12"
+            android:gravity="center_vertical"
             android:layout_marginStart="@dimen/dp_12"
             android:layout_toEndOf="@+id/icon"
             android:layout_toRightOf="@+id/icon"
             android:drawablePadding="@dimen/dp_4"
             android:text="@{ text }"
             android:textColor="@{ textColor == 0 ? @color/black : textColor }"
-            android:textSize="@{ textSize == 0 ? @dimen/sp_18 : textSize }"
+            android:textSize="@{ textSize == 0 ? @dimen/sp_14 : textSize }"
             app:drawableEnd="@{ @drawable/ic_arrow_right_black_24dp }"
             />
 
         <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_0.6"
-            android:layout_below="@+id/menu_name"
-            android:layout_marginTop="@dimen/dp_16"
-            android:background="@color/default_text_color_gray"
+            style="@style/dividerHorizontalStyle"
+            android:layout_alignParentBottom="true"
             />
     </RelativeLayout>
 </layout>

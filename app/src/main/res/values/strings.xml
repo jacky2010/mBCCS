@@ -117,9 +117,11 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="all">Tất cả</string>
     <string name="all_">-Tất cả-</string>
     <string name="customer_info">Thông tin khách hàng</string>
-    <string name="customer_name"><![CDATA[Tên khách hàng/Công ty <font color="#DF0101">*</font>]]></string>
-    <string name="customer_identity">Chứng minh thư</string>
-    <string name="address"><![CDATA[Địa chỉ <font color="#DF0101">*</font>]]></string>
+    <string name="customer_name"><![CDATA[<font color="#707070">Tên khách hàng/Công ty</font> <font color="#DF0101">*</font>]]></string>
+    <string name="customer_identity"><![CDATA[
+<font color="#707070">Chứng minh thư</font>
+    ]]></string>
+    <string name="address"><![CDATA[<font color="#707070">Địa chỉ</font> <font color="#DF0101">*</font>]]></string>
     <string name="back">Quay lại</string>
     <string name="payment">Thanh toán</string>
     <string name="common_label_caculate_amount">Tính tiền</string>
@@ -132,6 +134,9 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="phone_number_cannot_be_empty">Số điện thoại không thể bỏ trống.</string>
     <string name="password_cannot_be_empty">Mật khẩu không thể bỏ trống.</string>
     <string name="login_presenter_customer_service">Tổng đài chăm sóc khách hàng\n%1$s</string>
+    <string name="sale_retail_lable_remain_warehouse">Kho còn</string>
+    <string name="sale_label_payment_method">Hình thức thanh toán</string>
+    <string name="sale_label_input_coupon">Nhập mã coupon</string>
 
     <string name="menu_help">Trợ giúp</string>
     <string name="menu_settings">Cấu hình</string>
@@ -173,10 +178,8 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="channel_title_html"><![CDATA[<font color="#dadada">Kênh</font> <font color="#DF0101">*</font>]]></string>
     <string name="sale_program">Chương trình bán hàng</string>
     <string name="choose_channel">Chọn kênh</string>
-    <string name="bank_plus">Bank Plus</string>
     <string name="phone">Số điện thoại</string>
     <string name="secure_code">Mã bí mật</string>
-    <string name="wellet">Ví điện tử</string>
     <string name="phone_wellet">Số điện thoại ví</string>
     <string name="amount_no_tax">Tổng tiền : %s đồng</string>
     <string name="amount">Số tiền phải thanh toán : %s đồng</string>
@@ -365,7 +368,7 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="sell_anypay_label_discount">Chiết khấu:</string>
     <string name="sell_anypay_label_cash">Tiền mặt</string>
     <string name="sell_anypay_label_bankplus">Bank Plus</string>
-    <string name="sell_anypay_label_ewallet">Ví điện tử</string>
+    <string name="sell_anypay_label_wellet">Ví điện tử</string>
     <string name="sell_anypay_label_phone_no">Số điện thoại</string>
     <string name="sell_anypay_label_acc_no">Số tài khoản</string>
     <string name="sell_anypay_label_pay_amount">Số tiền phải thanh toán:</string>

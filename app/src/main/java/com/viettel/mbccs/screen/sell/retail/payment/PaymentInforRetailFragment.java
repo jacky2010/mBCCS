@@ -27,6 +27,7 @@ import com.viettel.mbccs.screen.sell.retail.savetransconfirm.SaveTransConfirmFra
 import com.viettel.mbccs.utils.ActivityUtils;
 import com.viettel.mbccs.utils.GsonUtils;
 import com.viettel.mbccs.variable.Constants;
+import com.viettel.mbccs.widget.CustomRadioButton;
 import java.util.List;
 
 /**
@@ -53,11 +54,11 @@ public class PaymentInforRetailFragment extends BaseFragment
 
     RadioGroup mRadioGroupPayment;
 
-    RadioButton radioCash;
+    CustomRadioButton radioCash;
 
-    RadioButton radioBankplus;
+    CustomRadioButton radioBankplus;
 
-    RadioButton radioWellet;
+    CustomRadioButton radioWellet;
 
     ImageView imageCash;
 
