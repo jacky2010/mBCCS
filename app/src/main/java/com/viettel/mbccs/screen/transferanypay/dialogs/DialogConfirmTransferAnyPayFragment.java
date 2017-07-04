@@ -124,8 +124,8 @@ public class DialogConfirmTransferAnyPayFragment extends BaseDialog {
             showLoadingDialog();
 
             TransferAnyPayRequest request = new TransferAnyPayRequest();
-            request.setFromChannelId(currentArgs.getLong(Constants.BundleConstant.FROM_CHANNEL));
-            request.setToChannelId(-1l);//TODO -> isdn
+            request.setFromIsdn(currentArgs.getString(Constants.BundleConstant.FROM_CHANNEL));
+            request.setToIsdn(currentArgs.getString(Constants.BundleConstant.TO_CHANNEL));
             request.setAmount(currentArgs.getDouble(Constants.BundleConstant.TOTAL));
 
             transferAnyPayRequest = new DataRequest<>();
@@ -153,10 +153,10 @@ public class DialogConfirmTransferAnyPayFragment extends BaseDialog {
 
                                 @Override
                                 public void onError(BaseException error) {
-//                                    DialogUtils.showDialog(getContext(), null, error.getMessage(),
-//                                            null);
-                                    DialogUtils.showDialog(getContext(), null, getString(R.string.common_msg_error_general),
+                                    DialogUtils.showDialog(getContext(), null, error.getMessage(),
                                             null);
+//                                    DialogUtils.showDialog(getContext(), null, getString(R.string.common_msg_error_general),
+//                                            null);
                                 }
 
                                 @Override
