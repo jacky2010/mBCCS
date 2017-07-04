@@ -12,65 +12,72 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorAccent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/dp_8"
+            android:paddingTop="@dimen/dp_8">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/image_alert"
+                android:layout_width="@dimen/dp_36"
+                android:layout_height="@dimen/dp_36"
                 android:layout_gravity="center_vertical"
-                android:layout_marginEnd="@dimen/dp_4"
-                android:layout_marginStart="@dimen/dp_4"
-                android:src="@drawable/ic_close_black_24dp"
-                android:visibility="invisible" />
+                android:layout_marginLeft="@dimen/dp_12"
+                android:layout_marginRight="@dimen/dp_8"
+                android:src="@drawable/ic_info_outline_white_24dp" />
 
             <com.viettel.mbccs.widget.CustomTextView
                 android:id="@+id/title"
-                style="@style/TextSearchTask"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:textSize="@dimen/sp_18"
                 android:paddingBottom="@dimen/dp_12"
-                android:paddingTop="@dimen/dp_12" />
+                android:paddingTop="@dimen/dp_12"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_20"
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/close"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/dp_36"
+                android:layout_height="@dimen/dp_36"
                 android:layout_gravity="center_vertical"
-                android:layout_marginEnd="@dimen/dp_4"
-                android:layout_marginStart="@dimen/dp_4"
+                android:layout_marginLeft="@dimen/dp_8"
+                android:layout_marginRight="@dimen/dp_12"
                 android:src="@drawable/ic_close_white_24dp" />
         </LinearLayout>
 
         <com.viettel.mbccs.widget.CustomTextView
             android:id="@+id/message"
-            style="@style/TextSearchTask"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/toolbar"
-            android:layout_marginRight="@dimen/dp_10"
             android:layout_marginBottom="@dimen/dp_12"
             android:layout_marginEnd="@dimen/dp_16"
+            android:layout_marginRight="@dimen/dp_10"
             android:layout_marginStart="@dimen/dp_16"
-            android:layout_marginTop="@dimen/dp_8" />
+            android:layout_marginTop="@dimen/dp_32"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_16" />
 
         <com.viettel.mbccs.widget.CustomEditText
             android:id="@+id/content"
-            style="@style/TextSearchTask"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/message"
             android:layout_marginEnd="@dimen/dp_16"
             android:layout_marginStart="@dimen/dp_16"
-            android:background="@drawable/bg_input_tranparent"
+            android:background="@drawable/bg_custom_dialog_reject_button"
             android:gravity="top|start"
             android:inputType="textMultiLine"
             android:lines="5"
-            android:textSize="@dimen/sp_14"
+            android:paddingBottom="@dimen/dp_4"
             android:paddingEnd="@dimen/dp_8"
-            android:paddingStart="@dimen/dp_8" />
+            android:paddingStart="@dimen/dp_8"
+            android:paddingTop="@dimen/dp_4"
+            android:textColor="@color/grey_bright"
+            android:textSize="@dimen/sp_14" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -81,28 +88,27 @@
             android:layout_marginTop="@dimen/dp_16">
 
             <com.viettel.mbccs.widget.CustomButton
-                style="@style/button_negative"
                 android:id="@+id/reject"
                 android:layout_width="@dimen/dp_120"
                 android:layout_height="@dimen/dp_40"
                 android:layout_marginEnd="@dimen/dp_4"
                 android:layout_marginRight="@dimen/dp_4"
+                android:background="@drawable/bg_custom_dialog_reject_button"
                 android:minHeight="0dp"
                 android:paddingBottom="@dimen/dp_8"
                 android:paddingTop="@dimen/dp_8"
-                android:textAllCaps="false" />
+                android:textColor="@color/black" />
 
             <com.viettel.mbccs.widget.CustomButton
-                style="@style/button_positive"
                 android:id="@+id/accept"
+                style="@style/button_positive"
                 android:layout_width="@dimen/dp_120"
                 android:layout_height="@dimen/dp_40"
-                android:layout_marginStart="@dimen/dp_4"
                 android:layout_marginLeft="@dimen/dp_4"
+                android:layout_marginStart="@dimen/dp_4"
                 android:minHeight="0dp"
                 android:paddingBottom="@dimen/dp_8"
-                android:paddingTop="@dimen/dp_8"
-                android:textAllCaps="false" />
+                android:paddingTop="@dimen/dp_8" />
         </LinearLayout>
     </RelativeLayout>
 </layout>

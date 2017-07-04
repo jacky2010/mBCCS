@@ -73,6 +73,6 @@ public class CreateArisingTaskActivity extends BaseDataBindActivity<ActivityCrea
 
                         dia.show();
                     }
-                }, null, false).show();
+                }, null, false, false).show();
     }
 }

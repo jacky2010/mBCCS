@@ -79,4 +79,10 @@
     <color name="default_item_tool_bar_text_color">#ffffff</color>
 
     <color name="pay_method_selected">#AED6F1</color>
+
+    <!-- Custom Dialog -->
+    <color name="dialogPink">#f5c3c3</color>
+    <color name="dialogTextRed">#8b1a1a</color>
+    <color name="dialogButtonCancel">#fafafa</color>
+    <color name="dialogButtonCancelBorder">#cdcdcd</color>
 </resources>
