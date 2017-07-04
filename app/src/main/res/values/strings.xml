@@ -974,4 +974,5 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     </string-array>
 
     <string name="view_product_detail_title">Chi tiết sản phẩm</string>
+    <string-array name="store_order_status"/>
 </resources>

@@ -1,6 +1,7 @@
 package com.viettel.mbccs.data.source.remote.request;
 
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by minhnx on 6/7/17.
@@ -8,26 +9,28 @@ import com.google.gson.annotations.Expose;
 
 public class TransferAnyPayRequest {
     @Expose
-    private Long fromChannelId;
+    @SerializedName("fromISDN")
+    private String fromIsdn;
     @Expose
-    private Long toChannelId;
+    @SerializedName("toISDN")
+    private String toIsdn;
     @Expose
     private Double amount;
 
-    public Long getFromChannelId() {
-        return fromChannelId;
+    public String getFromIsdn() {
+        return fromIsdn;
     }
 
-    public void setFromChannelId(Long fromChannelId) {
-        this.fromChannelId = fromChannelId;
+    public void setFromIsdn(String fromIsdn) {
+        this.fromIsdn = fromIsdn;
     }
 
-    public Long getToChannelId() {
-        return toChannelId;
+    public String getToIsdn() {
+        return toIsdn;
     }
 
-    public void setToChannelId(Long toChannelId) {
-        this.toChannelId = toChannelId;
+    public void setToIsdn(String toIsdn) {
+        this.toIsdn = toIsdn;
     }
 
     public Double getAmount() {

@@ -198,7 +198,8 @@ public class CreateTransferAnyPayPresenter implements CreateTransferAnyPayContra
             args.putLong(Constants.BundleConstant.CHANNEL, userRepository.getUserInfo().getChannelInfo().getChannelId());
             args.putString(Constants.BundleConstant.ISDN, userRepository.getUserInfo().getStaffInfo().getTel());
             args.putLong(Constants.BundleConstant.STAFF, userRepository.getUserInfo().getStaffInfo().getStaffId());
-            args.putLong(Constants.BundleConstant.FROM_CHANNEL, userRepository.getUserInfo().getChannelInfo().getChannelId());
+            args.putString(Constants.BundleConstant.FROM_CHANNEL, userRepository.getUserInfo().getStaffInfo().getTel());
+            args.putString(Constants.BundleConstant.TO_CHANNEL, isdn.get());
 
             viewModel.goToDialogFragment(isRefill.get(), args);
 
