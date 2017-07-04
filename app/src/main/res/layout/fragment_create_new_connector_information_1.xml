@@ -82,9 +82,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_6"
-                    android:text="@string/create_new_connector_information_loai_khach_hang"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_14"
+                    bind:textHtml="@{ @string/create_new_connector_information_loai_khach_hang }"
                     />
 
                 <com.viettel.mbccs.widget.SpinnerWithBorder
@@ -98,9 +98,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_6"
-                    android:text="@string/create_new_connector_information_ten_khach_hang"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_14"
+                    bind:textHtml="@{ @string/create_new_connector_information_ten_khach_hang }"
                     />
 
                 <com.viettel.mbccs.widget.CustomEditTextInput
@@ -188,8 +188,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
-                    android:text="@string/create_new_connector_information_so_giay_to"
                     android:textColor="@color/black"
+                    bind:textHtml="@{ @string/create_new_connector_information_so_giay_to }"
                     />
 
                 <com.viettel.mbccs.widget.CustomEditTextInput
@@ -213,8 +213,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/create_new_connector_information_ngay_cap"
                         android:textColor="@color/black"
+                        bind:textHtml="@{ @string/create_new_connector_information_ngay_cap }"
                         />
                     <com.viettel.mbccs.widget.CustomTextView
                         android:layout_width="0dp"
@@ -260,8 +260,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
-                    android:text="@string/create_new_connector_information_noi_cap"
                     android:textColor="@color/black"
+                    bind:textHtml="@{ @string/create_new_connector_information_noi_cap }"
                     />
 
                 <com.viettel.mbccs.widget.CustomEditTextInput

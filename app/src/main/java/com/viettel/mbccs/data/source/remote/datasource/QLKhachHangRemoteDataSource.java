@@ -3,21 +3,27 @@ package com.viettel.mbccs.data.source.remote.datasource;
 import com.viettel.mbccs.data.source.remote.IQLKhachHangRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.request.ChecOTPRequest;
 import com.viettel.mbccs.data.source.remote.request.CheckIdNoRequest;
+import com.viettel.mbccs.data.source.remote.request.ConnectSubscriberRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetAllSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.GetApDomainByTypeRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListBusTypeIdRequireRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListProductRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListRegTypeRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListSubTypeRequest;
 import com.viettel.mbccs.data.source.remote.request.GetOTPRequest;
 import com.viettel.mbccs.data.source.remote.request.GetRegisterSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.RegisterCustomerInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.UpdateAllSubInfoRequest;
-import com.viettel.mbccs.data.source.remote.response.CheckOTPResponse;
 import com.viettel.mbccs.data.source.remote.response.CheckIdNoResponse;
+import com.viettel.mbccs.data.source.remote.response.CheckOTPResponse;
+import com.viettel.mbccs.data.source.remote.response.ConnectSubscriberResponse;
 import com.viettel.mbccs.data.source.remote.response.GetAllSubInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetApDomainByTypeResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListBusTypeIdRequireResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListProductResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListRegTypeResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListSubTypeResponse;
 import com.viettel.mbccs.data.source.remote.response.GetOTPResponse;
 import com.viettel.mbccs.data.source.remote.response.GetRegisterSubInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.RegisterCustomerInfoResponse;
@@ -128,5 +134,32 @@ public class QLKhachHangRemoteDataSource implements IQLKhachHangRemoteDataSource
                 .getListProduct(request)
                 .flatMap(SchedulerUtils.<GetListProductResponse>convertDataFlatMap())
                 .compose(SchedulerUtils.<GetListProductResponse>applyAsyncSchedulers());
+    }
+
+    @Override
+    public Observable<GetListRegTypeResponse> getListRegType(
+            DataRequest<GetListRegTypeRequest> request) {
+        return RequestHelper.getRequest()
+                .getListRegType(request)
+                .flatMap(SchedulerUtils.<GetListRegTypeResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<GetListRegTypeResponse>applyAsyncSchedulers());
+    }
+
+    @Override
+    public Observable<GetListSubTypeResponse> getListSubType(
+            DataRequest<GetListSubTypeRequest> request) {
+        return RequestHelper.getRequest()
+                .getListSubType(request)
+                .flatMap(SchedulerUtils.<GetListSubTypeResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<GetListSubTypeResponse>applyAsyncSchedulers());
+    }
+
+    @Override
+    public Observable<ConnectSubscriberResponse> connectSubscriber(
+            DataRequest<ConnectSubscriberRequest> request) {
+        return RequestHelper.getRequest()
+                .connectSubscriber(request)
+                .flatMap(SchedulerUtils.<ConnectSubscriberResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<ConnectSubscriberResponse>applyAsyncSchedulers());
     }
 }
