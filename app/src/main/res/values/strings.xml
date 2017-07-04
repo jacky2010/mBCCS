@@ -1036,4 +1036,8 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
         <item>Sản phẩm</item>
         <item>So sánh</item>
     </string-array>
+    <!--Xuat kho cap duoi-->
+    <string name="dialog_text_input_store">Nhập kho</string>
+    <string name="xuatkhocapduoi_message_input_store">Bạn muốn nhập kho không?</string>
+    <string name="xuatkhocapduoi_message_create_bill_input_store">Bạn có chắc lập phiếu nhập kho?</string>
 </resources>

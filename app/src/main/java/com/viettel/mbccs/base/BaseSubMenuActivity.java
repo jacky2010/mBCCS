@@ -10,7 +10,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.Function;
 import com.viettel.mbccs.data.model.LoginInfo;
@@ -38,13 +37,13 @@ import com.viettel.mbccs.screen.sell.channel.SaleChannelActivity;
 import com.viettel.mbccs.screen.sell.orders.SellOrdersActivity;
 import com.viettel.mbccs.screen.sell.retail.SaleRetailActivity;
 import com.viettel.mbccs.screen.sellanypay.SellAnyPayActivity;
+import com.viettel.mbccs.screen.stockdeliver.TestStockDeliveryActivity;
 import com.viettel.mbccs.screen.survey.SurveyListActivity;
 import com.viettel.mbccs.screen.trahangcaptren.ListOrderReturnUpperActivity;
 import com.viettel.mbccs.screen.transferanypay.TransferAnyPayActivity;
 import com.viettel.mbccs.screen.viewwarehouse.ViewWarehouseActivity;
 import com.viettel.mbccs.screen.xuathangchonhanvien.ChiTietXuatKhoNhanVienActivity;
 import com.viettel.mbccs.variable.Constants;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -215,6 +214,17 @@ public class BaseSubMenuActivity
                                     new Intent(BaseSubMenuActivity.this, InputOrderActivity.class));
                             break;
                         case Function.MenuId.MENU_XUAT_KHO_CAP_DUOI:
+                            Intent stockDelivery = new Intent(BaseSubMenuActivity.this,
+                                    TestStockDeliveryActivity.class);
+                            StockTrans stockTransData = new StockTrans();
+                            stockTransData.setStockTransId(1237);
+                            stockTransData.setToOwnerId(1232);
+                            stockTransData.setCreateDateTime("2017-01-02");
+                            stockTransData.setStockTransStatusName("hang moi");
+                            Bundle stockbundle = new Bundle();
+                            stockbundle.putParcelable(Constants.BundleConstant.STOCK_TRANS, stockTransData);
+                            stockDelivery.putExtras(stockbundle);
+                            startActivity(stockDelivery);
                             break;
                         case Function.MenuId.MENU_NHAP_KHO_CAP_TREN:
                             break;
