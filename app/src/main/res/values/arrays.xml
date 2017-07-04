@@ -23,8 +23,8 @@
 
     <string-array name="store_order_status">
         <item>Đã lập lệnh</item>
-        <item>Lập phiếu</item>
-        <item>Xuất kho</item>
-        <item>Hủy</item>
+        <item>Đã lập phiếu</item>
+        <item>Đã xuất kho</item>
+        <item>Đã hủy</item>
     </string-array>
 </resources>
