@@ -13,8 +13,8 @@ public class SellAnypayToCustomerRequest {
     @SerializedName("isdn")
     private String isdn;
     @Expose
-    @SerializedName("paymethod")
-    private String payMethod;
+    @SerializedName("payMethod")
+    private Integer payMethod;
     @Expose
     @SerializedName("isdnVi")
     private String isdnVi;
@@ -23,7 +23,7 @@ public class SellAnypayToCustomerRequest {
     private double amount;
     @Expose
     @SerializedName("staffId")
-    private int staffId;
+    private long staffId;
 
     public String getIsdn() {
         return isdn;
@@ -33,11 +33,11 @@ public class SellAnypayToCustomerRequest {
         this.isdn = isdn;
     }
 
-    public String getPayMethod() {
+    public Integer getPayMethod() {
         return payMethod;
     }
 
-    public void setPayMethod(String payMethod) {
+    public void setPayMethod(Integer payMethod) {
         this.payMethod = payMethod;
     }
 
@@ -57,11 +57,11 @@ public class SellAnypayToCustomerRequest {
         this.amount = amount;
     }
 
-    public int getStaffId() {
+    public long getStaffId() {
         return staffId;
     }
 
-    public void setStaffId(int staffId) {
+    public void setStaffId(long staffId) {
         this.staffId = staffId;
     }
 }

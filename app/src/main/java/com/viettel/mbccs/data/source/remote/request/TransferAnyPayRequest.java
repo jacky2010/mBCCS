@@ -1,36 +1,32 @@
 package com.viettel.mbccs.data.source.remote.request;
 
 import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by minhnx on 6/7/17.
  */
 
-public class TransferAnyPayRequest{
+public class TransferAnyPayRequest {
     @Expose
-    @SerializedName("fromChannelId")
-    private Integer fromChannelId;
+    private Long fromChannelId;
     @Expose
-    @SerializedName("toChannelId")
-    private Integer toChannelId;
+    private Long toChannelId;
     @Expose
-    @SerializedName("amount")
     private Double amount;
 
-    public Integer getFromChannelId() {
+    public Long getFromChannelId() {
         return fromChannelId;
     }
 
-    public void setFromChannelId(Integer fromChannelId) {
+    public void setFromChannelId(Long fromChannelId) {
         this.fromChannelId = fromChannelId;
     }
 
-    public Integer getToChannelId() {
+    public Long getToChannelId() {
         return toChannelId;
     }
 
-    public void setToChannelId(Integer toChannelId) {
+    public void setToChannelId(Long toChannelId) {
         this.toChannelId = toChannelId;
     }
 

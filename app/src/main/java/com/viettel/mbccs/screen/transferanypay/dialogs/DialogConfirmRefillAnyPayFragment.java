@@ -83,7 +83,7 @@ public class DialogConfirmRefillAnyPayFragment extends BaseDialog {
             currentArgs = getArguments();
 
             if (currentArgs != null) {
-                tvTrans.setText(getString(R.string.sell_anypay_msg_confirm_refill_label_cust, currentArgs.getString(Constants.BundleConstant.CUSTOMER_ITEM)));
+                tvTrans.setText(getString(R.string.sell_anypay_msg_confirm_refill_label_cust, currentArgs.getString(Constants.BundleConstant.ISDN)));
                 tvPreTax.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.PRE_TAX)) + " " + getString(R.string.common_label_currency_suffix));
                 tvTax.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.TAX)) + " " + getString(R.string.common_label_currency_suffix));
                 tvDiscount.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.DISCOUNT)) + " " + getString(R.string.common_label_currency_suffix));
@@ -123,10 +123,9 @@ public class DialogConfirmRefillAnyPayFragment extends BaseDialog {
             showLoadingDialog();
 
             RefillAnyPayRequest request = new RefillAnyPayRequest();
-
-            request.setAmount(currentArgs.getDouble(Constants.BundleConstant.TOTAL));
-            request.setChannelId(Integer.parseInt(currentArgs.getString(Constants.BundleConstant.CHANNEL)));
             request.setIsdn(currentArgs.getString(Constants.BundleConstant.ISDN));
+            request.setChannelId(currentArgs.getLong(Constants.BundleConstant.CHANNEL));
+            request.setAmount(currentArgs.getDouble(Constants.BundleConstant.TOTAL));
 
             refillAnyPayRequest = new DataRequest<>();
             refillAnyPayRequest.setWsCode(WsCode.RefillAnyPay);
