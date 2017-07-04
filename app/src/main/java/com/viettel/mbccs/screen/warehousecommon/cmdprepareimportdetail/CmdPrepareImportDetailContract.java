@@ -1,4 +1,4 @@
-package com.viettel.mbccs.screen.warehousecommon.cmdprepareexportdetail;
+package com.viettel.mbccs.screen.warehousecommon.cmdprepareimportdetail;
 
 import com.viettel.mbccs.base.BasePresenter;
 import com.viettel.mbccs.base.BaseView;
@@ -8,21 +8,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by eo_cuong on 6/20/17.
+ * Created by FRAMGIA\hoang.van.cuong on 04/07/2017.
  */
 
-interface CmdPrepareExportDetailContract {
-
+public interface CmdPrepareImportDetailContract {
     interface Presenter extends BasePresenter {
         void onSerialPickerSuccess(List<String> serials);
     }
 
     interface ViewModel extends BaseView<Presenter> {
+
         String getToolBarTitle();
 
         void onSerialPicker(StockTransDetail stockTransDetail);
 
-        void onCreateExpStockSuccess(ArrayList<StockTransDetail> stockTransDetails,
+        void onCreateImportStockSuccess(ArrayList<StockTransDetail> stockTransDetails,
                 StockTrans stockTrans);
     }
 }

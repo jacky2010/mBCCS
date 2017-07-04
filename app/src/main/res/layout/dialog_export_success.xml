@@ -5,6 +5,8 @@
             name="dialog"
             type="com.viettel.mbccs.screen.warehousecommon.exportsuccess.ExportSuccessDialog"
             />
+        <import type="android.view.View"/>
+        <import type="android.text.TextUtils"/>
     </data>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -34,14 +36,26 @@
                 android:layout_height="wrap_content"
                 android:text="@{dialog.cmdCode}"
                 android:textColor="@color/green"
+                android:visibility="@{TextUtils.isEmpty(dialog.cmdCode) ? View.GONE : View.VISIBLE}"
                 />
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:text="@{dialog.cmdSender}"
+                android:textColor="@color/black"
+                android:visibility="@{TextUtils.isEmpty(dialog.cmdSender) ? View.GONE : View.VISIBLE}"
+                />
+
             <com.viettel.mbccs.widget.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_5"
                 android:text="@{dialog.cmdReceive}"
                 android:textColor="@color/black"
+                android:visibility="@{TextUtils.isEmpty(dialog.cmdReceive) ? View.GONE : View.VISIBLE}"
                 />
+
 
             <com.viettel.mbccs.widget.CustomTextView
                 android:layout_width="match_parent"
@@ -52,15 +66,16 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_18"
                 android:textStyle="bold"
+                android:visibility="@{TextUtils.isEmpty(dialog.cmdCode) ? View.GONE : View.VISIBLE}"
                 />
 
         </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:paddingLeft="@dimen/dp_10"
             android:paddingRight="@dimen/dp_10"
-            android:layout_height="match_parent"
             >
             <com.viettel.mbccs.widget.CustomButton
                 android:id="@+id/btn_close"
@@ -68,10 +83,10 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
+                android:layout_margin="@dimen/dp_10"
                 android:layout_marginTop="@dimen/dp_10"
                 android:onClick="@{ () -> dialog.onClose() }"
                 android:padding="@dimen/dp_10"
-                android:layout_margin="@dimen/dp_10"
                 android:text="@string/common_label_close"
                 style="@style/button_negative"
                 />

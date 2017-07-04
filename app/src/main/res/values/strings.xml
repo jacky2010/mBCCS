@@ -1003,9 +1003,10 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <!--common warehouse-->
     <string name="warehouse_label_export_success_code">Xuất kho thành công mã: %s</string>
     <string name="warehouse_label_receive">Kho nhận: %s</string>
+    <string name="warehouse_label_sender">Kho xuất: %s</string>
     <string name="warehouse_label_list_stock_model">Danh sách mặt hàng</string>
 
-    <!--cmd prepare export detail-->
+    <!--cmd prepare importStock detail-->
     <string name="common_cmd_prepare_export_detail_label_list_stock">Danh sách mặt hàng (%s)</string>
     <string name="common_cmd_prepare_export_detail_label_cmd_code"><![CDATA[Mã lệnh :<b>%s</b>]]></string>
     <string name="common_cmd_prepare_export_detail_label_receive_warehouse"><![CDATA[Kho nhận :<b>%s</b>]]></string>
