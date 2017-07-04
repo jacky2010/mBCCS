@@ -51,11 +51,14 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
 
     @Override
     public void gotoMain() {
-//        startActivity(new Intent(SplashActivity.this, MainActivity.class));
-                open2();
+        startActivity(new Intent(SplashActivity.this, MainActivity.class));
+        //open1();
         finish();
     }
 
+    /***
+     * demo xuat kho
+     */
     void open() {
         Intent intent = new Intent(SplashActivity.this, ChiTietXuatKhoNhanVienActivity.class);
         StockTrans stockTrans = new StockTrans();
@@ -69,6 +72,9 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
         startActivity(intent);
     }
 
+    /***
+     * Demo xuat tra hang
+     */
     void open1() {
         Intent intent = new Intent(SplashActivity.this, LapPhieuXuatTraHangActivity.class);
         //        StockTrans stockTrans = new StockTrans();
@@ -82,6 +88,9 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
         startActivity(intent);
     }
 
+    /***
+     * demo nhap kho
+     */
     void open2() {
         Intent intent = new Intent(SplashActivity.this, NhapKhoCapDuoiDemo.class);
         StockTrans stockTrans = new StockTrans();

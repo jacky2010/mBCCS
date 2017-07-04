@@ -37,7 +37,6 @@ public class CmdPrepareImportDetailPresenter implements CmdPrepareImportDetailCo
     public ObservableField<String> cmdCode;
     public ObservableField<String> receiveWarehouse;
     public ObservableField<String> dayCreated;
-    public ObservableField<String> status;
     private BanHangKhoTaiChinhRepository mBanHangKhoTaiChinhRepository;
     private DataRequest<GetListStockTransDetailRequest> mDataRequest;
     private DataRequest<CreateImportStockRequest> mCreateImportStockRequestDataRequest;
@@ -63,23 +62,18 @@ public class CmdPrepareImportDetailPresenter implements CmdPrepareImportDetailCo
         cmdCode = new ObservableField<>();
         receiveWarehouse = new ObservableField<>();
         dayCreated = new ObservableField<>();
-        status = new ObservableField<>();
 
         cmdCode.set(String.format(
                 mContext.getString(R.string.common_cmd_prepare_export_detail_label_cmd_code),
                 String.valueOf(mStockTrans.getStockTransId())));
 
-        receiveWarehouse.set(String.format(mContext.getString(
-                R.string.common_cmd_prepare_export_detail_label_receive_warehouse),
+        receiveWarehouse.set(String.format(
+                mContext.getString(R.string.common_cmd_prepare_import_label_export_warehouse),
                 String.valueOf(mStockTrans.getToOwnerId())));
 
         dayCreated.set(String.format(
-                mContext.getString(R.string.common_cmd_prepare_export_detail_label_day_cmd_created),
+                mContext.getString(R.string.common_cmd_prepare_import_label_day_created),
                 mStockTrans.getCreateDateTime()));
-
-        status.set(String.format(
-                mContext.getString(R.string.common_cmd_prepare_export_detail_label_status),
-                mStockTrans.getStockTransStatusName()));
 
         mAdapter = new StockTransDetailAdapter(mContext, mStockTransDetails,
                 mContext.getString(R.string.item_view_ware_house_view_serial));
@@ -121,10 +115,10 @@ public class CmdPrepareImportDetailPresenter implements CmdPrepareImportDetailCo
 
     public ListStockTransDetailsReponse fakeData() {
 
-        StockSerial stockSerial=new StockSerial();
-        List<SerialBO> serialBOs=new ArrayList<>();
-        serialBOs.add(new SerialBO("111111","111115"));
-        serialBOs.add(new SerialBO("111117","111119"));
+        StockSerial stockSerial = new StockSerial();
+        List<SerialBO> serialBOs = new ArrayList<>();
+        serialBOs.add(new SerialBO("111111", "111115"));
+        serialBOs.add(new SerialBO("111117", "111119"));
         stockSerial.setSerialBOs(serialBOs);
 
         ListStockTransDetailsReponse reponse = new ListStockTransDetailsReponse();
@@ -215,7 +209,6 @@ public class CmdPrepareImportDetailPresenter implements CmdPrepareImportDetailCo
                 });
         mSubscription.add(subcription);
     }
-
 
     public void reject() {
 

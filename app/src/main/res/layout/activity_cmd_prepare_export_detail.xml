@@ -26,7 +26,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="@dimen/dp_5"
+            android:background="@color/white"
+            android:padding="@dimen/dp_10"
             >
             <com.viettel.mbccs.widget.CustomTextView
                 android:layout_width="match_parent"
@@ -60,16 +61,18 @@
                 android:textSize="@dimen/sp_13"
                 app:textHtml="@{presenter.status}"
                 />
-
-            <com.viettel.mbccs.widget.CustomTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/dp_5"
-                android:text="@string/stock_list"
-                android:textColor="@color/grey"
-                android:textSize="@dimen/sp_18"
-                />
         </LinearLayout>
+        <View
+            style="@style/dividerHorizontalStyle"/>
+        <com.viettel.mbccs.widget.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:padding="@dimen/dp_10"
+            android:text="@string/stock_list"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_14"
+            />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -79,8 +82,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
+                android:layout_margin="@dimen/dp_10"
                 android:orientation="horizontal"
-                android:padding="@dimen/dp_5"
                 >
                 <com.viettel.mbccs.widget.CustomButton
                     android:layout_width="0dp"
@@ -89,7 +92,9 @@
                     android:onClick="@{() -> presenter.reject()}"
                     android:padding="@dimen/dp_5"
                     android:text="@string/common_label_reject"
-                    style="@style/button_negative_red"
+                    android:textSize="@dimen/sp_15"
+                    android:textStyle="bold"
+                    style="@style/button_negative_red2"
                     />
                 <com.viettel.mbccs.widget.CustomButton
                     android:layout_width="0dp"
@@ -99,15 +104,23 @@
                     android:onClick="@{() -> presenter.export()}"
                     android:padding="@dimen/dp_5"
                     android:text="@string/common_label_export"
+                    android:textSize="@dimen/sp_15"
+                    android:textStyle="bold"
                     style="@style/button_positive"
                     />
             </LinearLayout>
+            <View
+                android:layout_above="@id/bottom_button"
+                style="@style/dividerHorizontalStyle"
+                />
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_above="@id/bottom_button"
                 android:adapter="@{presenter.adapter}"
                 />
+            <View
+                style="@style/dividerHorizontalStyle"/>
         </RelativeLayout>
     </LinearLayout>
 

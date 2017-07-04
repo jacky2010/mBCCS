@@ -9,7 +9,8 @@ import com.viettel.mbccs.base.searchlistview.BaseSearchListViewPresenter;
  * Created by FRAMGIA\vu.viet.anh on 26/05/2017.
  */
 
-public abstract class BaseSearchListPickerPresenter<T> extends BaseSearchListViewPresenter<T> {
+public abstract class BaseSearchListPickerPresenter<T>
+        extends BaseSearchListViewPresenter<T, BaseSearchListViewContract.ViewModel> {
 
     public ObservableField<String> text;
 
