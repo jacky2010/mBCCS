@@ -246,6 +246,14 @@
             android:name=".screen.splash.DownloadDataActivity"
             android:screenOrientation="portrait"/>
 
+        <activity
+            android:name=".screen.stockdeliver.StockDeliverActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screen.stockdeliver.TestStockDeliveryActivity"
+            android:screenOrientation="portrait"/>
+
         <!--Servicew-->
         <service
             android:name=".service.service.UploadImageService"
