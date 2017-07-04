@@ -44,6 +44,11 @@ public class DateUtils {
         return date;
     }
 
+    public static String convertStringToStringFormat(String time, String formatTo) {
+        long timeLong = timezoneToLong(time);
+        return convertDateToString(timeLong, formatTo);
+    }
+
     public static long timeToLong(String time, String format, Locale locale) {
         if (TextUtils.isEmpty(time) || TextUtils.isEmpty(format)) {
             return INVALID_TIME;
@@ -79,7 +84,7 @@ public class DateUtils {
     }
 
     public static long timezoneToLong(String timezone) {
-        return timeToLong(timezone, TIMEZONE_FORMAT, Locale.JAPAN);
+        return timeToLong(timezone, TIMEZONE_FORMAT_SERVER, Locale.getDefault());
     }
 
     public static boolean isExpired(String time) {

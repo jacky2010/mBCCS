@@ -2,14 +2,11 @@ package com.viettel.mbccs.base.listkho;
 
 import android.content.Context;
 import android.databinding.ObservableField;
-import android.support.annotation.StringDef;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
-import com.viettel.mbccs.R;
-import com.viettel.mbccs.base.searchlistview.BaseSearchListViewContract;
 import com.viettel.mbccs.base.searchlistview.BaseSearchListViewPresenter;
-import com.viettel.mbccs.data.model.WarehouseOrder;
+import com.viettel.mbccs.data.model.StockTrans;
 import com.viettel.mbccs.screen.nhapkhocapduoi.adapters.ListOrderAdapter;
 import com.viettel.mbccs.utils.SpinnerAdapter;
 import java.util.ArrayList;
@@ -19,19 +16,25 @@ import java.util.List;
  * Created by Anh Vu Viet on 5/31/2017.
  */
 
-public abstract class BaseListOrderPresenter extends BaseSearchListViewPresenter<WarehouseOrder>
+public class BaseListOrderPresenter
+        extends BaseSearchListViewPresenter<StockTrans, BaseListOrderContract.ViewModel>
         implements BaseListOrderContract.Presenter {
 
     public ObservableField<SpinnerAdapter<String>> warehouseAdapter = new ObservableField<>();
 
     public ObservableField<SpinnerAdapter<String>> statusAdapter = new ObservableField<>();
 
+    public ObservableField<String> filterText = new ObservableField<>();
+
+    public ListOrderAdapter mAdaper;
+
     protected List<String> mWareHouseData = new ArrayList<>();
+    protected List<String> mStatusList = new ArrayList<>();
 
-    @OrderStatus
-    protected String mSelectedStatus;
+    protected int positionWareHouse = 0;
+    protected int positionStatus = 0;
 
-    public BaseListOrderPresenter(Context context, BaseSearchListViewContract.ViewModel viewModel) {
+    public BaseListOrderPresenter(Context context, BaseListOrderContract.ViewModel viewModel) {
         super(context, viewModel);
         // TODO: 06/06/2017 Phân quyền
 
@@ -39,14 +42,19 @@ public abstract class BaseListOrderPresenter extends BaseSearchListViewPresenter
         adapter.setOnItemSelectedListener(getWareHouseItemSelectedListener());
         warehouseAdapter.set(adapter);
 
-        SpinnerAdapter<String> adapter2 = new SpinnerAdapter<>(mContext,
-                mContext.getResources().getStringArray(R.array.store_order_status));
+        SpinnerAdapter<String> adapter2 = new SpinnerAdapter<>(mContext, mStatusList);
         adapter2.setOnItemSelectedListener(getStatusItemSelectedListener());
         statusAdapter.set(adapter2);
     }
 
     @Override
+    public void doSearch() {
+        mViewModel.doSearch();
+    }
+
+    @Override
     public void onSearchSuccess() {
+
 
     }
 
@@ -61,6 +69,11 @@ public abstract class BaseListOrderPresenter extends BaseSearchListViewPresenter
     }
 
     @Override
+    public String getToolbarTitle() {
+        return mViewModel.getToolbarTitle();
+    }
+
+    @Override
     public void onBackPressed() {
         mViewModel.onBackPressed();
     }
@@ -68,21 +81,31 @@ public abstract class BaseListOrderPresenter extends BaseSearchListViewPresenter
     @Override
     protected RecyclerView.Adapter getListAdapter() {
         // TODO: 06/06/2017 Phân quyền
-        ListOrderAdapter adapter = new ListOrderAdapter(mContext, listData);
-        adapter.setOnOrderClickListener(new ListOrderAdapter.OnOrderClickListener() {
+        mAdaper = new ListOrderAdapter(mContext, listData);
+        mAdaper.setOnOrderClickListener(new ListOrderAdapter.OnOrderClickListener() {
             @Override
-            public void onOrderClick(WarehouseOrder item) {
-                mViewModel.onItemClicked(item);
+            public void onOrderClick(StockTrans item) {
+                onItemStockTransClick(item);
             }
         });
-        return adapter;
+        return mAdaper;
+    }
+
+    @Override
+    public String getItemCountString() {
+        return mViewModel.getItemCountString();
+    }
+
+    @Override
+    public void onAddClick() {
+        mViewModel.onAddClick();
     }
 
     protected AdapterView.OnItemSelectedListener getWareHouseItemSelectedListener() {
         return new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                positionWareHouse = position;
             }
 
             @Override
@@ -96,22 +119,7 @@ public abstract class BaseListOrderPresenter extends BaseSearchListViewPresenter
         return new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch (position) {
-                    case 0:
-                        mSelectedStatus = OrderStatus.STATUS_DA_LAP_LENH;
-                        break;
-                    case 1:
-                        mSelectedStatus = OrderStatus.STATUS_LAP_PHIEU;
-                        break;
-                    case 2:
-                        mSelectedStatus = OrderStatus.STATUS_XUAT_KHO;
-                        break;
-                    case 3:
-                        mSelectedStatus = OrderStatus.STATUS_HUY;
-                        break;
-                    default:
-                        break;
-                }
+                positionStatus = position;
             }
 
             @Override
@@ -121,14 +129,34 @@ public abstract class BaseListOrderPresenter extends BaseSearchListViewPresenter
         };
     }
 
-    @StringDef({
-            OrderStatus.STATUS_DA_LAP_LENH, OrderStatus.STATUS_LAP_PHIEU,
-            OrderStatus.STATUS_XUAT_KHO, OrderStatus.STATUS_HUY
-    })
-    public @interface OrderStatus {
-        String STATUS_DA_LAP_LENH = "Đã lập lệnh";
-        String STATUS_LAP_PHIEU = "Lập phiếu";
-        String STATUS_XUAT_KHO = "Xuất kho";
-        String STATUS_HUY = "Hủy";
+    @Override
+    public void setWareHouseData(List<String> mList) {
+        mWareHouseData.clear();
+        mWareHouseData.addAll(mList);
+        warehouseAdapter.notifyChange();
+    }
+
+    @Override
+    public void setStatus(List<String> mList) {
+        mStatusList.clear();
+        mStatusList.addAll(mList);
+        statusAdapter.notifyChange();
+    }
+
+    @Override
+    public void onItemStockTransClick(StockTrans stockTrans) {
+        mViewModel.onItemStockTransClick(stockTrans);
+    }
+
+    @Override
+    public void setDataSearch(List<StockTrans> stockTranses) {
+        listData.clear();
+        listData.addAll(stockTranses);
+        mAdaper.notifyDataSetChanged();
+    }
+
+    @Override
+    public boolean isShowAddButton() {
+        return mViewModel.isShowAddButton();
     }
 }

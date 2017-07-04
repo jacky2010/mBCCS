@@ -14,7 +14,7 @@ import com.viettel.mbccs.widget.SpinnerWithBorder.HintAdapter;
  * Created by Anh Vu Viet on 5/13/2017.
  */
 
-public class ListAssignTaskPresenter extends BaseSearchListViewPresenter<TaskModel>
+public class ListAssignTaskPresenter extends BaseSearchListViewPresenter<TaskModel,ListAssignTaskContract.ViewModel>
         implements ListAssignTaskContract.Presenter, AssignTaskAdapter.OnTaskClickListener {
 
     public ObservableInt taskTypePosition = new ObservableInt();

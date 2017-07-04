@@ -7,7 +7,7 @@
     <data>
         <variable
             name="presenter"
-            type="com.viettel.mbccs.screen.nhapkhocapduoi.ListOrderPresenter"
+            type="com.viettel.mbccs.base.listkho.BaseListOrderPresenter"
             />
 
         <import type="android.view.View"/>
@@ -71,7 +71,7 @@
             android:layout_margin="@dimen/dp_16"
             android:onClick="@{ () -> presenter.onAddClick() }"
             android:src="@drawable/ic_add_white_24dp"
-            android:visibility="gone"
+            android:visibility="@{ presenter.showAddButton ? View.VISIBLE : View.GONE }"
             app:fabSize="auto"
             app:layout_anchor="@id/recyclerView"
             app:layout_anchorGravity="bottom|right|end"
@@ -100,6 +100,7 @@
                 bind:titleSpinner="@{ @string/activity_list_order_warehouse_ma_kho_xuat }"
                 bind:titleSpinner2="@{ @string/activity_list_order_warehouse_trang_thai_lenh }"
                 bind:titleTime="@{ @string/activity_list_order_warehouse_ngay_lap_lenh }"
+                bind:searchClick="@{() -> presenter.doSearch()}"
                 />
 
             <RelativeLayout
@@ -113,24 +114,14 @@
                     android:id="@+id/view_close"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/filter_height"
+                    app:text="@{presenter.filterText}"
                     bind:isShow="@{ true }"
                     />
 
-                <FrameLayout
+                <include
+                    layout="@layout/header_expanded"
                     android:id="@+id/view_open"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    >
-                    <View
-                        android:layout_width="@dimen/dp_100"
-                        android:layout_height="@dimen/dp_0.6"
-                        android:layout_gravity="center_horizontal|bottom"
-                        android:layout_marginBottom="@dimen/dp_8"
-                        android:layout_marginTop="@dimen/dp_8"
-                        android:background="@color/default_text_color_gray"
-                        />
-                </FrameLayout>
+                    />
             </RelativeLayout>
         </com.viettel.mbccs.widget.MultiDirectionSlidingDrawer>
 
