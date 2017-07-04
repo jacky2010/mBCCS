@@ -34,7 +34,7 @@ public class CreateOrderActivity extends BaseCreateOrderActivity implements Crea
                                 CreateOrderSuccessActivity.class));
                         finish();
                     }
-                }, null, false).show();
+                }, null, false, false).show();
     }
 
     @Override
@@ -48,7 +48,7 @@ public class CreateOrderActivity extends BaseCreateOrderActivity implements Crea
                         // TODO: 5/27/2017 Api call
                         finish();
                     }
-                }, null, false).setBackgroundAcceptButton(R.color.red_button).show();
+                }, null, false, true).setBackgroundAcceptButton(R.color.red_button).show();
     }
 
     @Override

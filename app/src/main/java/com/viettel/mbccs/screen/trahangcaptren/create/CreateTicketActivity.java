@@ -2,14 +2,15 @@ package com.viettel.mbccs.screen.trahangcaptren.create;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
-import com.viettel.mbccs.base.searchlistview.BaseSearchListViewContract;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.databinding.ActivityCreateTicketReturnUpperBinding;
 import com.viettel.mbccs.screen.kpp.order.findstock.FindStockActivity;
 import com.viettel.mbccs.variable.Constants;
 import com.viettel.mbccs.widget.CustomDialog;
+
 import java.util.ArrayList;
 
 import static com.viettel.mbccs.screen.kpp.order.addnew.AddNewOrderActivity.STOCK_TOTAL_PICKER_REQUEST;
@@ -55,7 +56,7 @@ public class CreateTicketActivity
                                 CreateTicketSuccessActivity.class));
                         finish();
                     }
-                }, null, false).show();
+                }, null, false, false).show();
     }
 
     @Override
