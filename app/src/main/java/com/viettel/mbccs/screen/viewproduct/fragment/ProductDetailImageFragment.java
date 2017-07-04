@@ -35,11 +35,6 @@ public class ProductDetailImageFragment extends BaseDataBindFragment<FragmentPro
     }
 
     @Override
-    public void setPresenter(ProductDetailImageContract.Presenter presenter) {
-
-    }
-
-    @Override
     public void showLoading() {
 
     }

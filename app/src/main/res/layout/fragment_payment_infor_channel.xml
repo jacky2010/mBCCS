@@ -30,8 +30,8 @@
         <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/white"
             >
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -67,8 +67,7 @@
                         android:layout_marginLeft="15dp"
                         android:text="@string/customer_info"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16"
-                        android:textStyle="bold"
+                        android:textSize="@dimen/sp_15"
                         />
                 </LinearLayout>
                 <View
@@ -90,7 +89,8 @@
                         android:layout_marginTop="10dp"
                         android:padding="5dp"
                         android:text="@string/channel_label_code"
-                        android:textColor="#000"
+                        android:textColor="@color/grey_dove"
+                        style="@style/inputTitleName"
                         />
 
                     <com.viettel.mbccs.widget.CustomEdittext
@@ -101,9 +101,8 @@
                         android:padding="5dp"
                         android:singleLine="true"
                         android:text="@={presenter.channelId}"
-                        android:textColor="#000"
-                        android:textSize="18sp"
                         app:error="@{presenter.channelIdError}"
+                        style="@style/inputStyle"
                         />
                     <com.viettel.mbccs.widget.CustomTextView
                         android:layout_width="match_parent"
@@ -111,7 +110,8 @@
                         android:layout_marginTop="10dp"
                         android:padding="5dp"
                         android:text="@string/channel_label_name"
-                        android:textColor="#000"
+                        android:textColor="@color/grey_dove"
+                        style="@style/inputTitleName"
                         />
 
                     <com.viettel.mbccs.widget.CustomEdittext
@@ -122,9 +122,8 @@
                         android:padding="5dp"
                         android:singleLine="true"
                         android:text="@={presenter.channelName}"
-                        android:textColor="#000"
-                        android:textSize="18sp"
                         app:error="@{presenter.channelNameError}"
+                        style="@style/inputStyle"
                         />
 
                     <com.viettel.mbccs.widget.CustomTextView
@@ -133,7 +132,8 @@
                         android:layout_marginTop="10dp"
                         android:padding="5dp"
                         android:text="@string/common_label_tax_code"
-                        android:textColor="#000"
+                        android:textColor="@color/grey_dove"
+                        style="@style/inputTitleName"
                         />
 
                     <com.viettel.mbccs.widget.CustomEdittext
@@ -146,8 +146,7 @@
                         android:padding="5dp"
                         android:singleLine="true"
                         android:text="@={presenter.tin}"
-                        android:textColor="#000"
-                        android:textSize="18sp"
+                        style="@style/inputStyle"
                         app:error="@{presenter.tinError}"
                         />
 
@@ -206,8 +205,7 @@
                         android:layout_marginLeft="@dimen/dp_15"
                         android:text="Thông tin thanh toán"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16"
-                        android:textStyle="bold"
+                        android:textSize="@dimen/sp_15"
                         />
                 </LinearLayout>
                 <View
@@ -255,7 +253,7 @@
                                 android:layout_gravity="center_horizontal"
                                 android:src="@drawable/tien_mat"
                                 />
-                            <RadioButton
+                            <com.viettel.mbccs.widget.CustomRadioButton
                                 android:id="@+id/radio_cash"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -263,7 +261,7 @@
                                 android:buttonTint="@color/green"
                                 android:clickable="false"
                                 android:gravity="center"
-                                android:text="Tiền mặt"
+                                android:text="@string/sell_anypay_label_cash"
                                 android:textSize="@dimen/sp_12"
                                 />
                         </LinearLayout>
@@ -285,7 +283,7 @@
                                 android:layout_gravity="center_horizontal"
                                 android:src="@drawable/bank_plus"
                                 />
-                            <RadioButton
+                            <com.viettel.mbccs.widget.CustomRadioButton
                                 android:id="@+id/radio_bank_plus"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -293,7 +291,7 @@
                                 android:buttonTint="@color/green"
                                 android:clickable="false"
                                 android:gravity="center"
-                                android:text="Bank plus"
+                                android:text="@string/sell_anypay_label_bankplus"
                                 android:textSize="@dimen/sp_12"
                                 />
                         </LinearLayout>
@@ -315,7 +313,7 @@
                                 android:layout_gravity="center_horizontal"
                                 android:src="@drawable/vi_dien_tu"
                                 />
-                            <RadioButton
+                            <com.viettel.mbccs.widget.CustomRadioButton
                                 android:id="@+id/radio_wellet"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -323,7 +321,7 @@
                                 android:buttonTint="@color/green"
                                 android:clickable="false"
                                 android:gravity="center"
-                                android:text="Ví điện tử"
+                                android:text="@string/sell_anypay_label_wellet"
                                 android:textSize="@dimen/sp_12"
                                 />
                         </LinearLayout>
@@ -335,8 +333,9 @@
                         android:layout_marginRight="@dimen/dp_10"
                         android:layout_marginTop="@dimen/dp_10"
                         android:padding="@dimen/dp_5"
-                        android:text="Nhập mã coupon"
-                        android:textColor="#000"
+                        android:text=""
+                        android:textColor="@color/grey_dove"
+                        style="@style/inputTitleName"
                         />
                     <com.viettel.mbccs.widget.CustomEdittext
                         android:layout_width="match_parent"
@@ -369,7 +368,7 @@
                             android:layout_weight="1"
                             android:text="@string/common_label_total_money"
                             android:textColor="@color/black"
-                            android:textSize="13sp"
+                            android:textSize="@dimen/sp_14"
                             />
                         <com.viettel.mbccs.widget.CustomTextView
                             android:layout_width="0dp"
@@ -378,7 +377,7 @@
                             android:gravity="right|center_vertical"
                             android:text="@={presenter.amountNotTax}"
                             android:textColor="@color/black"
-                            android:textSize="13sp"
+                            android:textSize="@dimen/sp_16"
                             />
                     </LinearLayout>
 
@@ -393,7 +392,7 @@
                             android:layout_weight="1"
                             android:text="@string/common_label_tax"
                             android:textColor="@color/black"
-                            android:textSize="13sp"
+                            android:textSize="@dimen/sp_14"
                             />
                         <com.viettel.mbccs.widget.CustomTextView
                             android:layout_width="0dp"
@@ -402,7 +401,7 @@
                             android:gravity="right|center_vertical"
                             android:text="@{presenter.tax}"
                             android:textColor="@color/black"
-                            android:textSize="13sp"
+                            android:textSize="@dimen/sp_16"
                             />
                     </LinearLayout>
 
@@ -418,7 +417,7 @@
                             android:layout_weight="1"
                             android:text="@string/common_label_total_amount"
                             android:textColor="@color/black"
-                            android:textSize="13sp"
+                            android:textSize="@dimen/sp_14"
                             />
                         <com.viettel.mbccs.widget.CustomTextView
                             android:layout_width="0dp"
@@ -427,7 +426,7 @@
                             android:gravity="right|center_vertical"
                             android:text="@{presenter.amount}"
                             android:textColor="@color/red"
-                            android:textSize="13sp"
+                            android:textSize="@dimen/sp_16"
                             />
                     </LinearLayout>
                 </LinearLayout>

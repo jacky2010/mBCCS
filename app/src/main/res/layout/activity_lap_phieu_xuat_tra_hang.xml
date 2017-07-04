@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="presenter"
+            type="com.viettel.mbccs.screen.nhanvientrahang.LapPhieuXuatTraHangPresenter"
+            />
+    </data>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <include
+            layout="@layout/toolbar"
+            android:id="@+id/toolbar_update_information"
+            app:background="@{@color/colorAccent}"
+            app:isShow="@{true}"
+            app:leftIcon="@{@drawable/ic_arrow_left_white_24dp}"
+            app:leftIconClick="@{()->presenter.onCancel()}"
+            app:title="@{@string/xuatkhochonhanvien_lablel_chi_title }"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/dp_10"
+            >
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/dp_10"
+                android:text="lap lenh xuat "
+                android:textColor="@color/black"
+                />
+
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ma kho nhan"
+                style="@style/textTitleInput"
+                />
+
+            <com.viettel.mbccs.widget.CustomEditTextInput
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:textColor="@color/grey_bright"
+                android:text="@{presenter.mStockReceiveName}"
+                style="@style/inputStyle"
+                />
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="trang thai xuat"
+                />
+            <com.viettel.mbccs.widget.SpinnerWithBorder
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:adapter="@{presenter.statusAdapter}"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/dp_10"
+                android:paddingBottom="@dimen/dp_10"
+                >
+                <com.viettel.mbccs.widget.CustomButton
+                    android:id="@+id/btn_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:onClick="@{() -> presenter.addClick()}"
+                    android:text="@string/common_label_add"
+                    style="@style/button_positive"
+                    />
+
+                <com.viettel.mbccs.widget.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dp_5"
+                    android:layout_toLeftOf="@id/btn_add"
+                    android:text="@{presenter.countStock}"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_18"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+                <com.viettel.mbccs.widget.CustomButton
+                    android:id="@+id/btn_export"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> presenter.export()}"
+                    android:layout_alignParentBottom="true"
+                    android:text="@string/nhanvien_xuattra_lable_tra_kho_cap_tren"
+                    style="@style/button_positive"
+                    />
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@id/btn_export"
+                    android:layout_marginBottom="@dimen/dp_5"
+                    android:adapter="@{presenter.adapter}"
+                    />
+            </RelativeLayout>
+        </LinearLayout>
+
+
+    </LinearLayout>
+</layout>

@@ -37,12 +37,12 @@
             android:padding="@dimen/dp_20"
             >
 
-            <RadioButton
+            <com.viettel.mbccs.widget.CustomRadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:checked="true"
-                android:text="@string/wellet"
+                android:text="@string/sell_anypay_label_wellet"
                 />
 
             <com.viettel.mbccs.widget.CustomTextView

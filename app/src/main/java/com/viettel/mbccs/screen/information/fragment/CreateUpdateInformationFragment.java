@@ -91,10 +91,6 @@ public class CreateUpdateInformationFragment extends BaseFragment
         super.onDestroy();
     }
 
-    @Override
-    public void setPresenter(CreateUpdateInformationFragmentContract.Presenter presenter) {
-
-    }
 
     public void setDataRegister(GetRegisterSubInfoResponse dataRegister) {
         this.dataRegister = dataRegister;

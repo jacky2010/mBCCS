@@ -5,7 +5,9 @@
     <data>
         <variable
             name="presenter"
-            type="com.viettel.mbccs.screen.inputorder.fragment.OrderPresenter"/>
+            type="com.viettel.mbccs.screen.inputorder.fragment.OrderPresenter"
+            />
+        <import type="android.view.View"/>
     </data>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,13 +20,21 @@
             android:recyclerAdapter="@{ presenter.adapter }"
             />
 
+        <include
+            layout="@layout/item_no_data_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/btn_input_order"
+            android:visibility="@{ presenter.adapter.itemCount != 0 ? View.VISIBLE : View.GONE }"
+            />
+
         <com.viettel.mbccs.widget.AppButton
             android:id="@+id/btn_input_order"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_gravity="end"
             android:layout_marginTop="@dimen/dp_10"
-            android:layout_alignParentBottom="true"
             android:onClick="@{() -> presenter.onInputOrderClick()}"
             android:text="@string/btn_input_order"
             android:textAllCaps="false"

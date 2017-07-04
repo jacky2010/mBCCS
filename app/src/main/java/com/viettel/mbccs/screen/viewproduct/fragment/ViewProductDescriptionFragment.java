@@ -41,11 +41,6 @@ public class ViewProductDescriptionFragment extends BaseDataBindFragment<Fragmen
     }
 
     @Override
-    public void setPresenter(ViewProductDescriptionContract.Presenter presenter) {
-
-    }
-
-    @Override
     public void showLoading() {
 
     }

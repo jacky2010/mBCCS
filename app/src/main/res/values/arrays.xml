@@ -20,4 +20,11 @@
         <item>Hoàn thành</item>
         <item>-Chọn trạng thái công việc-</item>
     </string-array>
+
+    <string-array name="store_order_status">
+        <item>Đã lập lệnh</item>
+        <item>Đã lập phiếu</item>
+        <item>Đã xuất kho</item>
+        <item>Đã hủy</item>
+    </string-array>
 </resources>

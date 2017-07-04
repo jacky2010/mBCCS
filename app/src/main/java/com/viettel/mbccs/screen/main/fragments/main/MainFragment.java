@@ -28,11 +28,6 @@ public class MainFragment extends BaseFragment implements MainFragmentContract.V
     }
 
     @Override
-    public void setPresenter(MainFragmentContract.Presenter presenter) {
-
-    }
-
-    @Override
     public void showLoading() {
 
     }

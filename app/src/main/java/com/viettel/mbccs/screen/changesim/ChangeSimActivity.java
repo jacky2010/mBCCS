@@ -12,10 +12,6 @@ import com.viettel.mbccs.screen.changesim.fragments.SearchChangeSimFragment;
 public class ChangeSimActivity extends BaseDataBindActivity<ActivityChangeSimBinding, ChangeSimPresenter>
         implements ChangeSimContract.ViewModel{
 
-    @Override
-    public void setPresenter(ChangeSimContract.Presenter presenter) {
-
-    }
 
     @Override
     public void showLoading() {

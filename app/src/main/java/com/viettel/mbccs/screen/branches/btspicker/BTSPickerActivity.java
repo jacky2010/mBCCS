@@ -62,10 +62,6 @@ public class BTSPickerActivity
         });
     }
 
-    @Override
-    public void setPresenter(BTSPickerContract.Presenter presenter) {
-
-    }
 
     @Override
     public void showLoading() {

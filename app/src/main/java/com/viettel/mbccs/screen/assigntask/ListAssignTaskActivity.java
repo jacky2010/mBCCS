@@ -37,10 +37,6 @@ public class ListAssignTaskActivity
         mBinding.setPresenter(mPresenter);
     }
 
-    @Override
-    public void setPresenter(BaseSearchListViewContract.Presenter presenter) {
-
-    }
 
     @Override
     public void showLoading() {

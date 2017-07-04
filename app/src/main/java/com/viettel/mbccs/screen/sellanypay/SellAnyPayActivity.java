@@ -13,11 +13,6 @@ public class SellAnyPayActivity extends BaseDataBindActivity<ActivitySellAnyPayB
         implements SellAnyPayContract.ViewModel {
 
     @Override
-    public void setPresenter(SellAnyPayContract.Presenter presenter) {
-
-    }
-
-    @Override
     public void showLoading() {
         showLoadingDialog();
     }

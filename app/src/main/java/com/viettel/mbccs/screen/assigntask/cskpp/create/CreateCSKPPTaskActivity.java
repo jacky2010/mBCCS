@@ -30,10 +30,6 @@ public class CreateCSKPPTaskActivity
         mBinding.setPresenter(mPresenter);
     }
 
-    @Override
-    public void setPresenter(CreatingCSKPPTaskContract.Presenter presenter) {
-
-    }
 
     @Override
     public void showLoading() {

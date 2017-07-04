@@ -12,10 +12,6 @@ public class ResetPasswordActivity
         extends BaseDataBindActivity<ActivityResetPasswordBinding, ResetPasswordPresenter>
         implements ResetPasswordContract.ViewModel {
 
-    @Override
-    public void setPresenter(ResetPasswordContract.Presenter presenter) {
-
-    }
 
     @Override
     public void showLoading() {

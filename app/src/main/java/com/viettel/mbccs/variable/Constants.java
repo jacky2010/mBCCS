@@ -141,6 +141,10 @@ public class Constants {
         public static final String STOCK_TRANS_ID = "stock_trans_id";
         public static final String STOCK_TRANS = "stock_trans";
         public static final String STOCK_TRANS_DETAIL_LIST = "stock_trans_detail_list";
+        public static final String CMD_CODE_TITLE = "cmd_code_title";
+        public static final String CMD_NAME_TITLE = "cmd_code_title";
+
+        /*survey*/
         public static final String SURVEY = "survey";
     }
 

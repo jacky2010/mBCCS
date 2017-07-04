@@ -69,7 +69,7 @@
                             android:gravity="left"
                             android:text="@string/order"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/sp_13"
+                            android:textSize="@dimen/sp_14"
                             />
 
                         <com.viettel.mbccs.widget.CustomTextView
@@ -79,7 +79,7 @@
                             android:gravity="left"
                             android:text="@{item.mStockTotal.stockModelName}"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/sp_13"
+                            android:textSize="@dimen/sp_14"
                             />
 
                         <com.viettel.mbccs.widget.CustomTextView
@@ -91,8 +91,7 @@
                             android:gravity="center"
                             android:text="@{item.price}"
                             android:textColor="@color/red"
-                            android:textSize="@dimen/sp_12"
-                            android:textStyle="bold"
+                            android:textSize="@dimen/sp_14"
                             />
 
                         <RelativeLayout
@@ -134,7 +133,7 @@
                                 android:padding="5dp"
                                 android:selectAllOnFocus="true"
                                 android:text="@{String.valueOf(item.countChoice)}"
-                                android:textSize="@dimen/sp_13"
+                                android:textSize="@dimen/sp_14"
                                 />
                         </RelativeLayout>
 

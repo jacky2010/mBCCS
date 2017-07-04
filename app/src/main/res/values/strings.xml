@@ -116,9 +116,11 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="all">Tất cả</string>
     <string name="all_">-Tất cả-</string>
     <string name="customer_info">Thông tin khách hàng</string>
-    <string name="customer_name"><![CDATA[Tên khách hàng/Công ty <font color="#DF0101">*</font>]]></string>
-    <string name="customer_identity">Chứng minh thư</string>
-    <string name="address"><![CDATA[Địa chỉ <font color="#DF0101">*</font>]]></string>
+    <string name="customer_name"><![CDATA[<font color="#707070">Tên khách hàng/Công ty</font> <font color="#DF0101">*</font>]]></string>
+    <string name="customer_identity"><![CDATA[
+<font color="#707070">Chứng minh thư</font>
+    ]]></string>
+    <string name="address"><![CDATA[<font color="#707070">Địa chỉ</font> <font color="#DF0101">*</font>]]></string>
     <string name="back">Quay lại</string>
     <string name="payment">Thanh toán</string>
     <string name="common_label_caculate_amount">Tính tiền</string>
@@ -131,6 +133,9 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="phone_number_cannot_be_empty">Số điện thoại không thể bỏ trống.</string>
     <string name="password_cannot_be_empty">Mật khẩu không thể bỏ trống.</string>
     <string name="login_presenter_customer_service">Tổng đài chăm sóc khách hàng\n%1$s</string>
+    <string name="sale_retail_lable_remain_warehouse">Kho còn</string>
+    <string name="sale_label_payment_method">Hình thức thanh toán</string>
+    <string name="sale_label_input_coupon">Nhập mã coupon</string>
 
     <string name="menu_help">Trợ giúp</string>
     <string name="menu_settings">Cấu hình</string>
@@ -172,10 +177,8 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="channel_title_html"><![CDATA[<font color="#dadada">Kênh</font> <font color="#DF0101">*</font>]]></string>
     <string name="sale_program">Chương trình bán hàng</string>
     <string name="choose_channel">Chọn kênh</string>
-    <string name="bank_plus">Bank Plus</string>
     <string name="phone">Số điện thoại</string>
     <string name="secure_code">Mã bí mật</string>
-    <string name="wellet">Ví điện tử</string>
     <string name="phone_wellet">Số điện thoại ví</string>
     <string name="amount_no_tax">Tổng tiền : %s đồng</string>
     <string name="amount">Số tiền phải thanh toán : %s đồng</string>
@@ -364,7 +367,7 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="sell_anypay_label_discount">Chiết khấu:</string>
     <string name="sell_anypay_label_cash">Tiền mặt</string>
     <string name="sell_anypay_label_bankplus">Bank Plus</string>
-    <string name="sell_anypay_label_ewallet">Ví điện tử</string>
+    <string name="sell_anypay_label_wellet">Ví điện tử</string>
     <string name="sell_anypay_label_phone_no">Số điện thoại</string>
     <string name="sell_anypay_label_acc_no">Số tài khoản</string>
     <string name="sell_anypay_label_pay_amount">Số tiền phải thanh toán:</string>
@@ -432,7 +435,7 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="order">Đặt</string>
     <string name="order2">Đặt hàng</string>
     <string name="model_type">Loại mặt hàng</string>
-    <string name="mode_code">Mã mặt hàng *</string>
+    <string name="mode_code">Mã mặt hàng </string>
     <string name="model_name">Tên mặt hàng</string>
     <string name="search1">Tìm kiếm</string>
     <string name="export_per_response">Số lượng xuất/ Số lượng đáp ứng</string>
@@ -786,19 +789,63 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="create_new_connector_information_title">Nhập mới thông tin đấu nối</string>
     <string name="create_new_connector_information_khach_hang">1.Khách hàng</string>
     <string name="create_new_connector_information_thue_bao">2.Thuê bao</string>
-    <string name="create_new_connector_information_loai_khach_hang">Loai KH*</string>
-    <string name="create_new_connector_information_ten_khach_hang">Tên KH*</string>
+    <string formatted="false" name="create_new_connector_information_loai_khach_hang">
+        <![CDATA[
+        Loai KH<font color="#c42126">*</font>
+        ]]>
+    </string>
+    <string formatted="false" name="create_new_connector_information_ten_khach_hang">
+        <![CDATA[
+        Tên KH<font color="#c42126">*</font>
+        ]]>
+    </string>
     <string name="create_new_connector_information_ngay_sinh">Ngày sinh/Ngày thành lập</string>
-    <string name="create_new_connector_information_so_giay_to">Số giấy tờ (CMND/Hộ chiếu/Giấy phép kinh doanh)*</string>
-    <string name="create_new_connector_information_ngay_cap">Ngày cấp*</string>
+    <string formatted="false" name="create_new_connector_information_so_giay_to">
+        <![CDATA[
+        Số giấy tờ (CMND/Hộ chiếu/Giấy phép kinh doanh)<font color="#c42126">*</font>
+        ]]>
+    </string>
+    <string formatted="false" name="create_new_connector_information_ngay_cap">
+        <![CDATA[
+        Ngày cấp<font color="#c42126">*</font>
+        ]]>
+    </string>
     <string name="create_new_connector_information_ngay_het_han">Ngày hết hạn</string>
-    <string name="create_new_connector_information_noi_cap">Nơi cấp*</string>
-    <string name="create_new_connector_information_dich_vu">Dịch vụ*</string>
-    <string name="create_new_connector_information_goi_cuoc">Gói cước*</string>
-    <string name="create_new_connector_information_loai_thue_bao">Loại thuê bao*</string>
-    <string name="create_new_connector_information_hinh_thuc_hoa_mang">Hình thức hòa mạng*</string>
-    <string name="create_new_connector_information_so_isdn">Số ISDN*</string>
-    <string name="create_new_connector_information_serial">Serial*</string>
+    <string formatted="false" name="create_new_connector_information_noi_cap">
+        <![CDATA[
+        Nơi cấp<font color="#c42126">*</font>
+        ]]>
+    </string>
+    <string formatted="false" name="create_new_connector_information_dich_vu">
+        <![CDATA[
+        Dịch vụ<font color="#c42126">*</font>
+        ]]>
+    </string>
+    <string formatted="false" name="create_new_connector_information_goi_cuoc">
+        <![CDATA[
+        Gói cước<font color="#c42126">*</font>
+        ]]>
+    </string>
+    <string formatted="false" name="create_new_connector_information_loai_thue_bao">
+        <![CDATA[
+        Loại thuê bao<font color="#c42126">*</font>
+        ]]>
+    </string>
+    <string formatted="false" name="create_new_connector_information_hinh_thuc_hoa_mang">
+        <![CDATA[
+        Hình thức hòa mạng<font color="#c42126">*</font>
+        ]]>
+    </string>
+    <string formatted="false" name="create_new_connector_information_so_isdn">
+        <![CDATA[
+        Số ISDN<font color="#c42126">*</font>
+        ]]>
+    </string>
+    <string formatted="false" name="create_new_connector_information_serial">
+        <![CDATA[
+        Serial<font color="#c42126">*</font>
+        ]]>
+    </string>
     <string name="create_new_connector_information_thong_tin_hang_hoa_di_kem">Thông tin hàng hóa đi kèm</string>
     <string name="create_new_connector_information_dong">Đóng</string>
     <string name="create_new_connector_information_next">Next</string>
@@ -806,6 +853,30 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="create_new_connector_information_enter">Đấu nối</string>
     <string name="connector_mobile_so_giay_to_trong">Số giấy tờ trống!</string>
     <string name="create_new_connector_information_validate_name">Tên khách hàng phải là chữ và số lượng nhỏ hơn 100 ký tự!</string>
+    <string name="confirm_connect_subscriber_title">Xác nhận đấu nối</string>
+    <string formatted="false" name="confirm_connect_subscriber_connect_subscriber">
+        <![CDATA[
+        Đấu nối dịch vụ %s cho khách hàng <b> %s</b>
+        ]]>
+    </string>
+    <string name="confirm_connect_subscriber_phone_number">
+        <![CDATA[
+        - Số điện thoại:  <b> %s</b>
+        ]]>
+    </string>
+    <string name="confirm_connect_subscriber_so_tien_thanh_toan">- Số tiền thanh toán: %1$s</string>
+    <string formatted="false" name="confirm_connect_subscriber_from_staff">
+        <![CDATA[
+        Từ <b> %s</b>
+        ]]>
+    </string>
+    <string name="confirm_connect_subscriber_dau_noi">Đấu nối</string>
+    <string name="confirm_connect_subscriber_dialog_dau_noi_thanh_cong">Đấu nối thành công</string>
+    <string name="confirm_connect_subscriber_dialog_gui_tin_nhan">
+        Tin nhắn thông báo đã gửi tới SĐT của kênh phân phối đặt hàng và kênh bán
+    </string>
+    <string name="confirm_connect_subscriber_dialog_dang_ky_vas">Tạo đăng ký VAS</string>
+    <string name="confirm_connect_subscriber_dialog_bo_qua">Bỏ qua</string>
     <string name="create_new_connector_information_validate_id_no">Số giấy tờ không thể trống!</string>
     <string name="create_new_connector_information_validate_birthday">Ngày sinh cần trước ngày hiện tại!</string>
     <string name="create_new_connector_information_validate_date_id_no">Giấy tờ đã hết hạn!</string>
@@ -947,9 +1018,12 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="common_cmd_prepare_export_detail_label_stock_code">Mã hàng: %s</string>
     <string name="common_cmd_prepare_export_detail_label_quantity_export">Số lượng xuất: %s</string>
     <string name="common_cmd_prepare_export_detail_msg_error_choose_serial">Hãy chọn đủ số lượng serial của mặt hàng %s</string>
+    <!--nha vien xuat tra-->
+    <string name="nhanvien_xuattra_lable_tra_kho_cap_tren">Trả kho cấp trên</string>
 
     <!--xuat kho cho nhan vien-->
     <string name="xuatkhochonhanvien_lablel_chi_tiet_xuat_kho_title">Chi tiết xuất kho cho nhân viên</string>
+    <string name="xuatkhochonhanvien_lablel_chi_title">Lập phiếu trả hàng</string>
 
     <string name="search_products_title">Tra cứu sản phẩm</string>
 
@@ -967,6 +1041,10 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
         <item>Sản phẩm</item>
         <item>So sánh</item>
     </string-array>
+    <!--Xuat kho cap duoi-->
+    <string name="dialog_text_input_store">Nhập kho</string>
+    <string name="xuatkhocapduoi_message_input_store">Bạn muốn nhập kho không?</string>
+    <string name="xuatkhocapduoi_message_create_bill_input_store">Bạn có chắc lập phiếu nhập kho?</string>
     <string-array name="search_products_detail_title_tabs_desc">
         <item>Mô tả sản phẩm</item>
         <item>Thông số kỹ thuật</item>
@@ -974,5 +1052,4 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     </string-array>
 
     <string name="view_product_detail_title">Chi tiết sản phẩm</string>
-    <string-array name="store_order_status"/>
 </resources>

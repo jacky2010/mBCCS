@@ -27,10 +27,6 @@ public class TaskCSKPPUpdateActivity
 
     }
 
-    @Override
-    public void setPresenter(TaskCSKPPUpdateContract.Presenter presenter) {
-
-    }
 
     @Override
     public void showLoading() {

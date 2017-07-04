@@ -12,10 +12,6 @@ import com.viettel.mbccs.screen.searchproducts.fragments.SearchProductsDetailFra
 public class SearchProductsActivity extends BaseDataBindActivity<ActivitySearchProductsBinding, SearchProductsPresenter>
         implements SearchProductsContract.ViewModel {
 
-    @Override
-    public void setPresenter(SearchProductsContract.Presenter presenter) {
-
-    }
 
     @Override
     public void showLoading() {

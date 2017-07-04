@@ -12,10 +12,6 @@ public class ExportSuccessActivity
         extends BaseDataBindActivity<ActivityExportSuccessBinding, ExportSuccessContract.Presenter>
         implements ExportSuccessContract.ViewModel {
 
-    @Override
-    public void setPresenter(Object o) {
-
-    }
 
     @Override
     public void showLoading() {

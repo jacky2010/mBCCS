@@ -79,10 +79,6 @@ public class UploadImageActivity
         mPresenter.subscribe();
     }
 
-    @Override
-    public void setPresenter(UploadImageContract.Presenter presenter) {
-
-    }
 
     @Override
     public void showLoading() {

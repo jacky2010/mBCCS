@@ -44,7 +44,8 @@
                     android:layout_height="wrap_content"
                     android:text="@{presenter.titleOrderList}"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/sp_20"
+                    android:textSize="@dimen/sp_14"
+                    android:padding="@dimen/dp_5"
                     android:textStyle="bold"
                     tools:text="asdfasf"
                     />
@@ -131,7 +132,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_8"
                                 android:text="@string/status"
-                                android:textSize="@dimen/sp_16"
                                 style="@style/textTitleInputLight"
                                 />
 

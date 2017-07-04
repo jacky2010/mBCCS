@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    >
+    <data>
+        <variable
+            name="presenter"
+            type="com.viettel.mbccs.screen.connector.fragment.confirm.ConfirmConnectSubscriberPresenter"
+            />
+        <import type="android.view.View"/>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/grey_five"
+        android:clickable="true"
+        android:orientation="vertical"
+        >
+        <include
+            layout="@layout/toolbar"
+            android:id="@+id/toolbar"
+            app:background="@{@color/colorAccent}"
+            app:isShow="@{true}"
+            app:leftIcon="@{@drawable/ic_arrow_left_white_24dp}"
+            app:leftIconClick="@{()->presenter.onClose()}"
+            app:title="@{ @string/confirm_connect_subscriber_title }"
+            />
+        <LinearLayout
+            android:id="@+id/layout_information"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/toolbar"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="@dimen/dp_16"
+            >
+            <com.viettel.mbccs.widget.CustomTextView
+                android:id="@+id/idOrder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                bind:textHtml="@{ @string/confirm_connect_subscriber_connect_subscriber(presenter.dichVu, presenter.nameCustomer) }"
+                />
+
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:layout_marginStart="@dimen/dp_30"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                bind:textHtml="@{ @string/confirm_connect_subscriber_phone_number(presenter.phoneNumberCustomer) }"
+                />
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:layout_marginStart="@dimen/dp_30"
+                android:text="@{@string/confirm_connect_subscriber_so_tien_thanh_toan(presenter.sumMoney) }"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_14"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layout_from_staff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_information"
+            android:layout_marginTop="@dimen/dp_20"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="@dimen/dp_16"
+            >
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                bind:textHtml="@{ @string/confirm_connect_subscriber_from_staff(presenter.nameStaff) }"
+                />
+
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:layout_marginStart="@dimen/dp_30"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                bind:textHtml="@{ @string/confirm_connect_subscriber_phone_number(presenter.phoneNumberStaff) }"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/dp_50"
+            android:layout_marginTop="@dimen/dp_10"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dp_2"
+            android:paddingRight="@dimen/dp_2"
+            >
+            <com.viettel.mbccs.widget.CustomButton
+                android:layout_width="@dimen/dp_150"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp_16"
+                android:layout_marginRight="@dimen/dp_16"
+                android:onClick="@{ v -> presenter.onClose() }"
+                android:text="@string/common_label_close"
+                style="@style/button_nagative_grey_seven"
+                />
+
+            <com.viettel.mbccs.widget.CustomButton
+                android:layout_width="@dimen/dp_150"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginStart="@dimen/dp_16"
+                android:onClick="@{ v -> presenter.onConnectSubscriber() }"
+                android:text="@string/confirm_connect_subscriber_dau_noi"
+                style="@style/button_positive"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

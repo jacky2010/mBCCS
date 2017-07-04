@@ -31,8 +31,8 @@
 
         <ImageView
             android:id="@+id/image"
-            android:layout_width="@dimen/dp_36"
-            android:layout_height="@dimen/dp_36"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
             android:layout_centerHorizontal="true"
             android:adjustViewBounds="true"
             android:src="@{ image }" />
@@ -43,6 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_below="@+id/image"
+            android:textColor="@color/black"
             android:layout_gravity="center_horizontal|bottom"
             android:gravity="center"
             android:text="@{ imageText }"

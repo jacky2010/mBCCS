@@ -45,7 +45,7 @@
                 android:layout_toRightOf="@id/avatar"
                 android:text="Hoàng Văn Cương"
                 android:textColor="@color/white"
-                android:textSize="@dimen/sp_16"
+                android:textSize="@dimen/sp_15"
                 android:textStyle="bold"
                 />
 
@@ -58,7 +58,7 @@
                 android:layout_toRightOf="@id/avatar"
                 android:text="+84 904032023"
                 android:textColor="@color/white"
-                android:textSize="@dimen/sp_14"
+                android:textSize="@dimen/sp_12"
                 />
 
             <ImageView

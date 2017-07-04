@@ -56,10 +56,6 @@ public class SaleChannelActivity
         });
     }
 
-    @Override
-    public void setPresenter(SaleRetailContract.Presenter presenter) {
-
-    }
 
     @Override
     public void showLoading() {

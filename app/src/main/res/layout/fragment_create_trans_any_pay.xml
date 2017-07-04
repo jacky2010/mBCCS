@@ -264,7 +264,7 @@
                             android:checked="@{presenter.payMethod == presenter.PAY_METHOD_E_WALLET}"
                             android:gravity="center"
                             android:onCheckedChanged="@{(rb, isChecked) -> presenter.onPayMethodChanged(rb, isChecked)}"
-                            android:text="@string/sell_anypay_label_ewallet"
+                            android:text="@string/sell_anypay_label_wellet"
                             android:textSize="@dimen/default_radio_text_size" />
                     </LinearLayout>
                 </RadioGroup>

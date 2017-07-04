@@ -28,11 +28,6 @@ public class ViewProductDetailActivity extends BaseDataBindActivity<ActivityView
     private List<String> tabTitles;
 
     @Override
-    public void setPresenter(ViewProductDetailContract.Presenter presenter) {
-
-    }
-
-    @Override
     public void showLoading() {
         showLoadingDialog();
     }

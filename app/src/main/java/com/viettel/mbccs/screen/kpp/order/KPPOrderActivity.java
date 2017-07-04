@@ -47,10 +47,6 @@ public class KPPOrderActivity
 
     }
 
-    @Override
-    public void setPresenter(KPPOrderContract.Presenter presenter) {
-
-    }
 
     @Override
     public void showLoading() {

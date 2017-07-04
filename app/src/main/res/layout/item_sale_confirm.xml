@@ -30,6 +30,7 @@
                 android:layout_weight="1"
                 android:padding="5dp"
                 android:text="Mặt hàng"
+                style="@style/inputTitleName"
                 android:textColor="@color/black"
                 />
             <com.viettel.mbccs.widget.CustomTextView
@@ -37,7 +38,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:padding="5dp"
+                style="@style/inputTitleName"
                 android:text="@{item.stockSerial.stockModelName}"
                 android:textColor="@color/black"
                 />
@@ -55,7 +56,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:padding="5dp"
+                style="@style/inputTitleName"
                 android:text="Số lượng bán"
                 android:textColor="@color/black"
                 />
@@ -64,7 +65,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:padding="5dp"
+                style="@style/inputTitleName"
                 android:text="@{String.valueOf(item.stockSerial.quantity)}"
                 android:textColor="@color/black"
                 android:textSize="17sp"
@@ -81,6 +82,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="20dp"
             android:orientation="horizontal"
+            style="@style/inputTitleName"
             android:visibility="@{item.stockSerial.serialBOs==null ? View.GONE :View.VISIBLE}"
             >
             <com.viettel.mbccs.widget.CustomTextView
@@ -103,7 +105,7 @@
                     android:id="@+id/text_more"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
+                    style="@style/inputTitleName"
                     android:text="more"
                     android:textColor="@color/blue"
                     />
@@ -141,6 +143,7 @@
                     android:paddingBottom="@dimen/dp_5"
                     android:paddingTop="@dimen/dp_5"
                     android:text="Từ serial"
+                    style="@style/inputTitleName"
                     android:textColor="@color/black"
                     />
                 <View
@@ -163,6 +166,7 @@
                     android:layout_weight="0.7"
                     android:gravity="center"
                     android:text="Số lượng"
+                    style="@style/inputTitleName"
                     android:textColor="@color/black"
                     />
 

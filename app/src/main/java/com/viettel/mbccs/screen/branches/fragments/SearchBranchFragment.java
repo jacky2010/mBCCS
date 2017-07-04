@@ -26,10 +26,6 @@ public class SearchBranchFragment extends BaseDataBindFragment<FragmentSearchBra
         return new SearchBranchFragment();
     }
 
-    @Override
-    public void setPresenter(SearchBranchContract.Presenter presenter) {
-
-    }
 
     @Override
     public void showLoading() {

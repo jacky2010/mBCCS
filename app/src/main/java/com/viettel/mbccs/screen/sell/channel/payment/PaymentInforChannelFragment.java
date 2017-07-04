@@ -229,10 +229,6 @@ public class PaymentInforChannelFragment extends BaseFragment
         }
     }
 
-    @Override
-    public void setPresenter(PaymentInforContract.Presenter presenter) {
-
-    }
 
     @Override
     public void showLoading() {

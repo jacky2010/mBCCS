@@ -89,12 +89,9 @@ public class CreateNewConnectorInformation1Fragment extends BaseFragment
         super.onDestroy();
     }
 
-    @Override
-    public void setPresenter(CreateNewConnectorInformationFragmentContract.Presenter pre) {
-        this.presenter = (CreateNewConnectorInformationFragmentPresenter) pre;
-    }
 
     @Override
+
     public void showLoading() {
         showLoadingDialog();
     }
@@ -102,6 +99,11 @@ public class CreateNewConnectorInformation1Fragment extends BaseFragment
     @Override
     public void hideLoading() {
         hideLoadingDialog();
+    }
+
+    @Override
+    public void setPresenter(CreateNewConnectorInformationFragmentContract.Presenter presenter) {
+        this.presenter  = (CreateNewConnectorInformationFragmentPresenter) presenter;
     }
 
     @Override
@@ -150,11 +152,6 @@ public class CreateNewConnectorInformation1Fragment extends BaseFragment
     @Override
     public void loadDataSpinnerSuccess() {
         presenter.setData(customer, contract);
-    }
-
-    @Override
-    public void validateCustomerError(String error) {
-        DialogUtils.showDialog(getActivity(), error);
     }
 
     @Override

@@ -15,10 +15,6 @@ public class KPPFeedbackActivity extends BaseDataBindActivity<ActivityKppFeedbac
 
     private boolean shownLoadingDialog = false;
 
-    @Override
-    public void setPresenter(KPPFeedbackContract.Presenter presenter) {
-
-    }
 
     @Override
     public void showLoading() {

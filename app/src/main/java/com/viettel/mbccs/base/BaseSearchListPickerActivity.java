@@ -22,10 +22,6 @@ public abstract class BaseSearchListPickerActivity extends
 
     }
 
-    @Override
-    public void setPresenter(Object o) {
-
-    }
 
     @Override
     public void showLoading() {

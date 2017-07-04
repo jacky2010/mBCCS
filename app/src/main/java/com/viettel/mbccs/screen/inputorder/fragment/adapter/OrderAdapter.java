@@ -6,29 +6,29 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.data.model.BillRange;
+import com.viettel.mbccs.data.model.InvoiceList;
 import com.viettel.mbccs.databinding.ItemBillRangeBinding;
 import java.util.ArrayList;
 import java.util.List;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> {
 
-    private List<BillRange> mBillRangeList;
+    private List<InvoiceList> mInvoiceListList;
     private boolean isLastItems;
 
     public OrderAdapter() {
     }
 
-    public void setBillRangeList(List<BillRange> list) {
+    public void setInvoiceListList(List<InvoiceList> list) {
         if (null == list || list.isEmpty()) {
             reachLastItems();
             return;
         }
-        if (mBillRangeList == null) {
-            mBillRangeList = new ArrayList<>();
+        if (mInvoiceListList == null) {
+            mInvoiceListList = new ArrayList<>();
         }
-        int sizeList = mBillRangeList.size();
-        mBillRangeList.addAll(list);
+        int sizeList = mInvoiceListList.size();
+        mInvoiceListList.addAll(list);
         notifyItemInserted(sizeList);
     }
 
@@ -42,13 +42,13 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.bindData(mBillRangeList.get(position));
+        holder.bindData(mInvoiceListList.get(position));
         holder.setIsReachLastItems(isLastItems);
     }
 
     @Override
     public int getItemCount() {
-        return mBillRangeList == null ? 0 : mBillRangeList.size();
+        return mInvoiceListList == null ? 0 : mInvoiceListList.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -62,9 +62,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             isReachLastItems = new ObservableBoolean();
         }
 
-        public void bindData(BillRange billRange) {
+        public void bindData(InvoiceList invoiceList) {
             if (mBinding.getPresenter() == null) {
-                mBinding.setPresenter(new BillRangePresenter(billRange));
+                mBinding.setPresenter(new BillRangePresenter(invoiceList));
             }
         }
 

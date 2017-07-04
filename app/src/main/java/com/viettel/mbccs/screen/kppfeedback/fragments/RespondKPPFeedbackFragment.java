@@ -26,10 +26,6 @@ public class RespondKPPFeedbackFragment extends BaseDataBindFragment<FragmentRes
         return new RespondKPPFeedbackFragment();
     }
 
-    @Override
-    public void setPresenter(RespondKPPFeedbackContract.Presenter presenter) {
-
-    }
 
     @Override
     public void showLoading() {

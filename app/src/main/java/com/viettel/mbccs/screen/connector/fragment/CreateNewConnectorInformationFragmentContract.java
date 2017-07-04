@@ -3,6 +3,8 @@ package com.viettel.mbccs.screen.connector.fragment;
 import android.graphics.Bitmap;
 import com.viettel.mbccs.base.BasePresenter;
 import com.viettel.mbccs.base.BaseView;
+import com.viettel.mbccs.data.model.UserInfo;
+import com.viettel.mbccs.data.source.remote.request.ConnectSubscriberRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.widget.CustomSelectAddress;
 
@@ -17,8 +19,13 @@ public interface CreateNewConnectorInformationFragmentContract {
     }
 
     interface View extends BaseView<Presenter> {
+        void setPresenter(Presenter presenter);
+
+        void loadDataSpinnerError(BaseException error);
 
         void onCancel();
+
+        CustomSelectAddress.Address getAddress();
     }
 
     interface ViewFragment1 extends View {
@@ -31,23 +38,17 @@ public interface CreateNewConnectorInformationFragmentContract {
 
         Bitmap imagePortrait();
 
-        void loadDataSpinnerError(BaseException error);
-
         void loadDataSpinnerSuccess();
-
-        void validateCustomerError(String error);
 
         String getBirthDate();
 
         String getDateCreatePassport();
 
         String getDateOutDatePassport();
-
-        CustomSelectAddress.Address getAddress();
     }
 
     interface ViewFragment2 extends View {
 
-        void onEnter();
+        void connectSubscriber(ConnectSubscriberRequest request, UserInfo userInfo);
     }
 }

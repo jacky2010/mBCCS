@@ -40,11 +40,6 @@ public class CreateTransAnyPayFragment extends BaseDataBindFragment<FragmentCrea
     }
 
     @Override
-    public void setPresenter(CreateTransAnyPayContract.Presenter presenter) {
-
-    }
-
-    @Override
     public void showLoading() {
 
     }

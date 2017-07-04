@@ -22,10 +22,6 @@ public class SendKPPFeedbackFragment extends BaseDataBindFragment<FragmentSendKp
         return new SendKPPFeedbackFragment();
     }
 
-    @Override
-    public void setPresenter(SendKPPFeedbackContract.Presenter presenter) {
-
-    }
 
     @Override
     public void showLoading() {

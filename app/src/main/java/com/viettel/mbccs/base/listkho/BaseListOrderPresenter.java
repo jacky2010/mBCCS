@@ -36,13 +36,11 @@ public abstract class BaseListOrderPresenter extends BaseSearchListViewPresenter
         // TODO: 06/06/2017 Phân quyền
 
         SpinnerAdapter<String> adapter = new SpinnerAdapter<>(mContext, mWareHouseData);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         adapter.setOnItemSelectedListener(getWareHouseItemSelectedListener());
         warehouseAdapter.set(adapter);
 
         SpinnerAdapter<String> adapter2 = new SpinnerAdapter<>(mContext,
                 mContext.getResources().getStringArray(R.array.store_order_status));
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         adapter2.setOnItemSelectedListener(getStatusItemSelectedListener());
         statusAdapter.set(adapter2);
     }

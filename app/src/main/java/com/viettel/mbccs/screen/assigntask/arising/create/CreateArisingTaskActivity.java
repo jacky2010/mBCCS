@@ -30,11 +30,6 @@ public class CreateArisingTaskActivity extends BaseDataBindActivity<ActivityCrea
     }
 
     @Override
-    public void setPresenter(CreatingArisingTaskContract.Presenter presenter) {
-
-    }
-
-    @Override
     public void showLoading() {
 
     }

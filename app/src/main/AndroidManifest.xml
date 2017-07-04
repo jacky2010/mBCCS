@@ -208,8 +208,8 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.survey.SurveyActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"/>
         <!-- Area Channel -->
         <activity
             android:name=".screen.manager.area.AreaChanelActivity"
@@ -246,6 +246,14 @@
             android:name=".screen.splash.DownloadDataActivity"
             android:screenOrientation="portrait"/>
 
+        <activity
+            android:name=".screen.stockdeliver.StockDeliverActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screen.stockdeliver.TestStockDeliveryActivity"
+            android:screenOrientation="portrait"/>
+
         <!--Servicew-->
         <service
             android:name=".service.service.UploadImageService"
@@ -272,6 +280,9 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.searchproducts.SearchProductsActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screen.nhanvientrahang.LapPhieuXuatTraHangActivity"
             android:screenOrientation="portrait"/>
 
         <activity

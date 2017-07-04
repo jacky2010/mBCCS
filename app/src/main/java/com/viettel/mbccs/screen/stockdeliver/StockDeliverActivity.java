@@ -15,11 +15,6 @@ public class StockDeliverActivity
     private StockDeliverPresenter mPresenter;
 
     @Override
-    public void setPresenter(StockDeliverContract.Presenter presenter) {
-
-    }
-
-    @Override
     public void showLoading() {
 
     }

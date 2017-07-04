@@ -30,10 +30,6 @@ public class LoginActivity extends BaseDataBindActivity<ActivityLoginBinding, Lo
     }
 
     @Override
-    public void setPresenter(LoginContract.Presenter presenter) {
-    }
-
-    @Override
     public void showLoading() {
 
     }

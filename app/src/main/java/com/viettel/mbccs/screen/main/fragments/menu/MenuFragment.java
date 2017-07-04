@@ -36,10 +36,6 @@ public class MenuFragment extends BaseFragment implements MenuContract.ViewModel
         return binding.getRoot();
     }
 
-    @Override
-    public void setPresenter(MenuContract.Presenter presenter) {
-
-    }
 
     @Override
     public void showLoading() {

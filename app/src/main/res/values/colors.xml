@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#1484C0</color>
+    <color name="colorAccent">#0082c2</color>
     <color name="blue_vice">#09577E</color>
     <color name="black_opacity_30">#4D000000</color>
     <color name="grey">#585858</color>
@@ -27,6 +27,7 @@
     <color name="red_button">#c42126</color>
     <color name="link_water">#D9EDF6</color>
     <color name="manibu">#5AB5DF</color>
+
 
     <color name="orange_two">#ecd6ab</color>
 
@@ -59,7 +60,7 @@
     <color name="bg_dashboard_progress">#8367a6</color>
     <color name="bg_dashboard_text">#ff8367</color>
     <color name="default_text_color_gray">#6c6c6c</color>
-    <color name="blue_dark">#00618a</color>
+    <color name="blue_dark">#06618d</color>
     <color name="dark_grey">#565555</color>
     <color name="dove_grey">#747474</color>
     <color name="french_grey">#BDBDBD</color>

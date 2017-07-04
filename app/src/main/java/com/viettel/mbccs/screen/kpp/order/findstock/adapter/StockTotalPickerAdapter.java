@@ -38,8 +38,6 @@ public class StockTotalPickerAdapter
     }
 
     public void filter(long stateid, String code, String nameStock) {
-        Log.i("StockTotalPickerAdapter", "filter -------- code: " + code);
-        Log.i("StockTotalPickerAdapter", "filter--------: nameStock: " + nameStock);
         mStockTotalsFilter.clear();
         for (StockTotal stockTotal : mStockTotals) {
             if (!TextUtils.isEmpty(code) && TextUtils.isEmpty(nameStock)) {

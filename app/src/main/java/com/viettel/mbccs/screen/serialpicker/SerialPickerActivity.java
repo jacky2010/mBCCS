@@ -58,11 +58,6 @@ public class SerialPickerActivity
     }
 
     @Override
-    public void setPresenter(SerialPickerContract.Presenter presenter) {
-
-    }
-
-    @Override
     public void showLoading() {
         showLoadingDialog();
     }
