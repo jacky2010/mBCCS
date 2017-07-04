@@ -144,6 +144,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_4"
             app:adapter="@{ adapter2 }"
+            android:visibility="@{ adapter2 != null ? View.VISIBLE : View.GONE }"
             app:themeLight="@{true}"
             />
 

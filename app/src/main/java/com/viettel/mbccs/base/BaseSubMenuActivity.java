@@ -37,6 +37,7 @@ import com.viettel.mbccs.screen.sell.channel.SaleChannelActivity;
 import com.viettel.mbccs.screen.sell.orders.SellOrdersActivity;
 import com.viettel.mbccs.screen.sell.retail.SaleRetailActivity;
 import com.viettel.mbccs.screen.sellanypay.SellAnyPayActivity;
+import com.viettel.mbccs.screen.stockdeliver.StockDeliverActivity;
 import com.viettel.mbccs.screen.stockdeliver.TestStockDeliveryActivity;
 import com.viettel.mbccs.screen.survey.SurveyListActivity;
 import com.viettel.mbccs.screen.trahangcaptren.ListOrderReturnUpperActivity;
@@ -215,15 +216,15 @@ public class BaseSubMenuActivity
                             break;
                         case Function.MenuId.MENU_XUAT_KHO_CAP_DUOI:
                             Intent stockDelivery = new Intent(BaseSubMenuActivity.this,
-                                    TestStockDeliveryActivity.class);
-                            StockTrans stockTransData = new StockTrans();
+                                    StockDeliverActivity.class);
+                            /*StockTrans stockTransData = new StockTrans();
                             stockTransData.setStockTransId(1237);
                             stockTransData.setToOwnerId(1232);
                             stockTransData.setCreateDateTime("2017-01-02");
                             stockTransData.setStockTransStatusName("hang moi");
                             Bundle stockbundle = new Bundle();
                             stockbundle.putParcelable(Constants.BundleConstant.STOCK_TRANS, stockTransData);
-                            stockDelivery.putExtras(stockbundle);
+                            stockDelivery.putExtras(stockbundle);*/
                             startActivity(stockDelivery);
                             break;
                         case Function.MenuId.MENU_NHAP_KHO_CAP_TREN:

@@ -991,7 +991,7 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
 
     <!--Stock Delivery-->
     <string name="stock_delivery_title">Xuất kho cấp dưới</string>
-    <string name="stock_deliver_shipment">Phiếu chưa xuất kho (%s)</string>
+    <string name="stock_deliver_shipment">Phiếu chưa xuất kho (%d)</string>
     <string name="activity_finish_task_ngay_hoan_thanh">Ngày hoàn thành</string>
     <string name="activity_finish_task_due_date">Due date</string>
 
