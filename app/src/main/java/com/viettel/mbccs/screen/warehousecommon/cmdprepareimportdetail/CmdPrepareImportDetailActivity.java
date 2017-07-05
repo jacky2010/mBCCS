@@ -17,7 +17,8 @@ import java.util.ArrayList;
  */
 
 public abstract class CmdPrepareImportDetailActivity extends
-        BaseDataBindActivity<ActivityCmdPrepareImportDetailBinding, CmdPrepareImportDetailContract.Presenter>
+        BaseDataBindActivity<ActivityCmdPrepareImportDetailBinding,
+                CmdPrepareImportDetailContract.Presenter>
         implements CmdPrepareImportDetailContract.ViewModel {
     public abstract String getHeaderTitle();
 
@@ -73,13 +74,14 @@ public abstract class CmdPrepareImportDetailActivity extends
         for (StockTransDetail stockTransDetail : stockTransDetails) {
             stockTransDetail.getStockSerial();
         }
-        ExportSuccessDialog exportSuccessDialog = ExportSuccessDialog.newInstance(stockTransDetails,
-                String.format(getString(R.string.warehouse_label_export_success_code),
-                        String.valueOf(stockTrans.getStockTransId())),
-                String.format(getString(R.string.warehouse_label_receive),
-                        String.valueOf(stockTrans.getToOwnerId())),
-                String.format(getString(R.string.warehouse_label_sender),
-                        String.valueOf(stockTrans.getFromOwnerId())));
+        ExportSuccessDialog exportSuccessDialog =
+                ExportSuccessDialog.newInstance(stockTransDetails, stockTrans,
+                        String.format(getString(R.string.warehouse_label_export_success_code),
+                                String.valueOf(stockTrans.getStockTransId())),
+                        String.format(getString(R.string.warehouse_label_receive),
+                                String.valueOf(stockTrans.getToOwnerId())),
+                        String.format(getString(R.string.warehouse_label_sender),
+                                String.valueOf(stockTrans.getFromOwnerId())));
         exportSuccessDialog.setOnDialogDismissListener(
                 new ExportSuccessDialog.OnDialogDismissListener() {
 

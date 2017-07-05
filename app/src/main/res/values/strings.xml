@@ -910,6 +910,9 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="nv_trahangcaptren_lap_phieu_lablel_lapphieu">Lập phiếu</string>
     <string name="nv_trahangcaptren_chitiet_title">Chi tiết xuất cho trả hàng cấp trên</string>
     <string name="nv_trahangcaptren_export_success_label_amount_response">Số lượng xuất/ Số lượng đáp ứng</string>
+    <string name="nv_trahangcaptren_title_create_note_export">Lập phiếu xuất trả hàng</string>
+    <string name="nv_trahangcaptren_list_label_count_exported">Phiếu đã xuất (%d)</string>
+    <string name="nv_trahangcaptren_list_label_count_canceled">Phiếu bị hủy (%d)</string>
 
     <!-- Area channel -->
     <string name="title_area">Quản lý địa bàn</string>

@@ -30,6 +30,7 @@ import com.viettel.mbccs.screen.inputorder.InputOrderActivity;
 import com.viettel.mbccs.screen.kpp.order.KPPOrderActivity;
 import com.viettel.mbccs.screen.kppfeedback.KPPFeedbackActivity;
 import com.viettel.mbccs.screen.main.fragments.menu.MenuPresenter;
+import com.viettel.mbccs.screen.nhanvientrahang.list.ListNhanVienTraHangActivity;
 import com.viettel.mbccs.screen.nhapkhocapduoi.ListOrderActivity;
 import com.viettel.mbccs.screen.nvtrahangcaptren.list.NVTraHangCapTrenActivity;
 import com.viettel.mbccs.screen.searchproducts.SearchProductsActivity;
@@ -243,7 +244,7 @@ public class BaseSubMenuActivity
                             break;
                         case Function.MenuId.MENU_NHAN_VIEN_TRA_HANG_CAP_TREN:
                             startActivity(new Intent(BaseSubMenuActivity.this,
-                                    NVTraHangCapTrenActivity.class));
+                                    ListNhanVienTraHangActivity.class));
                             break;
                         case Function.MenuId.MENU_NHAP_KHO_TU_NHAN_VIEN:
                             break;
@@ -303,7 +304,7 @@ public class BaseSubMenuActivity
                             StockTrans stockTrans = new StockTrans();
                             stockTrans.setStockTransId(1237);
                             stockTrans.setToOwnerId(1232);
-                            stockTrans.setCreateDateTime("2017-01-02");
+                            stockTrans.setCreateDatetime("2017-01-02");
                             stockTrans.setStockTransStatusName("hang moi");
                             Bundle bundle = new Bundle();
                             bundle.putParcelable(Constants.BundleConstant.STOCK_TRANS, stockTrans);

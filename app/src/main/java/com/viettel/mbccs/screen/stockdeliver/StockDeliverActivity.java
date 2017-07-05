@@ -51,7 +51,7 @@ public class StockDeliverActivity
         StockTrans stockTrans = new StockTrans();
         stockTrans.setStockTransId(1237);
         stockTrans.setToOwnerId(1232);
-        stockTrans.setCreateDateTime("2017-01-02");
+        stockTrans.setCreateDatetime("2017-01-02");
         stockTrans.setStockTransStatusName("hang moi");
         Bundle bundle = new Bundle();
         bundle.putParcelable(Constants.BundleConstant.STOCK_TRANS, stockTrans);
