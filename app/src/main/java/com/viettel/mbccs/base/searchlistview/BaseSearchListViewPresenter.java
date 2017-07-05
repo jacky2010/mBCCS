@@ -15,12 +15,12 @@ import java.util.List;
  * Created by Anh Vu Viet on 5/13/2017.
  */
 
-public abstract class BaseSearchListViewPresenter<T>
+public abstract class BaseSearchListViewPresenter<T, K extends BaseSearchListViewContract.ViewModel >
         implements BaseSearchListViewContract.Presenter {
 
     protected Context mContext;
 
-    protected BaseSearchListViewContract.ViewModel mViewModel;
+    protected K mViewModel;
 
     protected List<T> listData;
 
@@ -31,7 +31,7 @@ public abstract class BaseSearchListViewPresenter<T>
     public ObservableInt itemCount = new ObservableInt();
 
     public BaseSearchListViewPresenter(Context context,
-            BaseSearchListViewContract.ViewModel viewModel) {
+            K viewModel) {
         mContext = context;
         mViewModel = viewModel;
         listData = new ArrayList<>();

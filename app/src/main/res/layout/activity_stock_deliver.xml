@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     >
     <data>
@@ -9,14 +10,14 @@
             type="com.viettel.mbccs.screen.stockdeliver.StockDeliverPresenter"
             />
     </data>
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         >
 
         <include
             layout="@layout/toolbar"
+            android:id="@+id/layout_toolbar"
             app:background="@{@color/colorAccent}"
             app:isShow="@{true}"
             app:leftIcon="@{@drawable/ic_arrow_left_white_24dp}"
@@ -27,6 +28,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@+id/layout_toolbar"
+            android:layout_marginTop="?attr/actionBarSize"
             android:orientation="vertical"
             >
 
@@ -36,7 +39,7 @@
                 android:background="@color/progress_gray"
                 android:gravity="center_vertical"
                 android:paddingLeft="@dimen/dp_16"
-                android:text="@{String.format(@string/stock_deliver_shipment, presenter.countShipment)}"
+                android:text="@{String.format(@string/stock_deliver_shipment, presenter.adapter.itemCount)}"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_18"
                 android:textStyle="bold"
@@ -51,5 +54,76 @@
 
         </LinearLayout>
 
-    </LinearLayout>
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/dp_16"
+            android:onClick="@{ () -> presenter.onAddClick() }"
+            android:src="@drawable/ic_add_white_24dp"
+            app:fabSize="auto"
+            app:layout_anchor="@id/recyclerView"
+            app:layout_anchorGravity="bottom|right|end"
+            />
+
+        <com.viettel.mbccs.widget.MultiDirectionSlidingDrawer
+            android:id="@+id/drawer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_toolbar"
+            android:layout_marginBottom="@dimen/dp_200"
+            android:clickable="true"
+            app:content="@+id/search_form"
+            app:direction="topToBottom"
+            app:handle="@+id/handle"
+            app:handleTwo="@+id/view_close"
+            app:headerOne="@+id/view_open"
+            >
+
+            <include
+                layout="@layout/repository_base_search_form"
+                android:id="@+id/search_form"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                bind:adapter="@{ presenter.codeStoreReceive }"
+                bind:titleSpinner="@{ @string/activity_list_order_return_upper_kho_nhan }"
+                bind:titleTime="@{ @string/activity_list_order_warehouse_ngay_lap_lenh }"
+                />
+
+            <RelativeLayout
+                android:id="@+id/handle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <include
+                    layout="@layout/item_text_filter"
+                    android:id="@+id/view_close"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/filter_height"
+                    bind:isShow="@{ true }"
+                    />
+
+                <FrameLayout
+                    android:id="@+id/view_open"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    >
+                    <View
+                        android:layout_width="@dimen/dp_100"
+                        android:layout_height="@dimen/dp_0.6"
+                        android:layout_gravity="center_horizontal|bottom"
+                        android:layout_marginBottom="@dimen/dp_8"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:background="@color/default_text_color_gray"
+                        />
+                </FrameLayout>
+            </RelativeLayout>
+        </com.viettel.mbccs.widget.MultiDirectionSlidingDrawer>
+
+
+    </RelativeLayout>
 </layout>

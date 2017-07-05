@@ -7,6 +7,7 @@ import com.viettel.mbccs.data.source.remote.IBanHangKhoTaiChinhRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.datasource.BanHangKhoTaiChinhRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.request.CreateExpStockNotHaveCmdRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateExpStockRequest;
+import com.viettel.mbccs.data.source.remote.request.CreateImportStockRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateSaleTransChannelRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateSaleTransFromOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
@@ -203,5 +204,11 @@ public class BanHangKhoTaiChinhRepository
     public Observable<EmptyObject> createExpStockNotHaveCmd(
             DataRequest<CreateExpStockNotHaveCmdRequest> requestDataRequest) {
         return banHangKhoTaiChinhRemoteDataSource.createExpStockNotHaveCmd(requestDataRequest);
+    }
+
+    @Override
+    public Observable<EmptyObject> createImportStock(
+            DataRequest<CreateImportStockRequest> requestDataRequest) {
+        return banHangKhoTaiChinhRemoteDataSource.createImportStock(requestDataRequest);
     }
 }

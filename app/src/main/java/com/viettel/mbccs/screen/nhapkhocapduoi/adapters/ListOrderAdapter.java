@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.viettel.mbccs.R;
+import com.viettel.mbccs.data.model.StockTrans;
 import com.viettel.mbccs.data.model.WarehouseOrder;
 import com.viettel.mbccs.databinding.ItemWarehouseOrderBinding;
 import com.viettel.mbccs.utils.DateUtils;
@@ -20,13 +21,13 @@ import java.util.List;
 
 public class ListOrderAdapter extends RecyclerView.Adapter<ListOrderAdapter.OrderViewHolder> {
 
-    private List<WarehouseOrder> mList = new ArrayList<>();
+    private List<StockTrans> mList = new ArrayList<>();
 
     private Context mContext;
 
     private OnOrderClickListener mOnOrderClickListener;
 
-    public ListOrderAdapter(Context context, List<WarehouseOrder> list) {
+    public ListOrderAdapter(Context context, List<StockTrans> list) {
         mContext = context;
         mList = list;
     }
@@ -64,13 +65,14 @@ public class ListOrderAdapter extends RecyclerView.Adapter<ListOrderAdapter.Orde
             mBinding = binding;
         }
 
-        public void bind(final WarehouseOrder item) {
+        public void bind(final StockTrans item) {
             mBinding.setTitle(itemView.getContext()
-                    .getString(R.string.item_orders_change_code_name, item.getOrderId(), item.getWarehouseId()));
-            mBinding.setChannelName(item.getChannelName());
-            mBinding.setCreatedDate(
-                    DateUtils.timestampToString(item.getCreatedDate(), DateUtils.DATE_PICKER_FORMAT,
-                            null));
+                    .getString(R.string.item_orders_change_code_name,
+                            String.valueOf(item.getStockTransId()),
+                            String.valueOf(item.getToOwnerId())));
+            mBinding.setChannelName(String.valueOf(item.getToOwnerType()));
+            mBinding.setCreatedDate(DateUtils.convertStringToStringFormat(item.getCreateDateTime(),
+                    DateUtils.DATE_TIME_FORMAT));
             mBinding.setOnClicked(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -81,6 +83,6 @@ public class ListOrderAdapter extends RecyclerView.Adapter<ListOrderAdapter.Orde
     }
 
     public interface OnOrderClickListener {
-        void onOrderClick(WarehouseOrder item);
+        void onOrderClick(StockTrans item);
     }
 }

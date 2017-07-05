@@ -273,7 +273,7 @@
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".screen.warehousecommon.exportsuccess.ExportSuccessDialog"
+            android:name=".screen.nhanvientrahang.NhapKhoCapDuoiDemo"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.xuathangchonhanvien.ChiTietXuatKhoNhanVienActivity"

@@ -25,7 +25,7 @@ import java.util.List;
  * Created by Anh Vu Viet on 5/31/2017.
  */
 
-public class CreateTicketPresenter extends BaseSearchListViewPresenter<StockTotal>
+public class CreateTicketPresenter extends BaseSearchListViewPresenter<StockTotal,BaseSearchListViewContract.ViewModel>
         implements CreateTicketContract.Presenter {
 
     public ObservableInt warehousePosition = new ObservableInt();

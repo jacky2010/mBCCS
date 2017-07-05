@@ -5,6 +5,8 @@
             name="dialog"
             type="com.viettel.mbccs.screen.warehousecommon.exportsuccess.ExportSuccessDialog"
             />
+        <import type="android.view.View"/>
+        <import type="android.text.TextUtils"/>
     </data>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -28,50 +30,71 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="@dimen/dp_10"
+            android:background="@color/blue_dark"
             >
             <com.viettel.mbccs.widget.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@{dialog.cmdCode}"
-                android:textColor="@color/green"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_14"
+                android:visibility="@{TextUtils.isEmpty(dialog.cmdCode) ? View.GONE : View.VISIBLE}"
                 />
             <com.viettel.mbccs.widget.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_5"
-                android:text="@{dialog.cmdReceive}"
-                android:textColor="@color/black"
+                android:text="@{dialog.cmdSender}"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_14"
+                android:visibility="@{TextUtils.isEmpty(dialog.cmdSender) ? View.GONE : View.VISIBLE}"
                 />
 
             <com.viettel.mbccs.widget.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dp_10"
-                android:layout_marginTop="@dimen/dp_10"
-                android:text="@string/warehouse_label_list_stock_model"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp_18"
-                android:textStyle="bold"
+                android:layout_marginTop="@dimen/dp_5"
+                android:text="@{dialog.cmdReceive}"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_14"
+                android:visibility="@{TextUtils.isEmpty(dialog.cmdReceive) ? View.GONE : View.VISIBLE}"
                 />
+
+
 
         </LinearLayout>
 
+        <com.viettel.mbccs.widget.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:text="@string/warehouse_label_list_stock_model"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_14"
+            android:textStyle="bold"
+            android:visibility="@{TextUtils.isEmpty(dialog.cmdCode) ? View.GONE : View.VISIBLE}"
+            />
+
+
         <RelativeLayout
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:paddingLeft="@dimen/dp_10"
             android:paddingRight="@dimen/dp_10"
-            android:layout_height="match_parent"
             >
             <com.viettel.mbccs.widget.CustomButton
                 android:id="@+id/btn_close"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
+                android:layout_margin="@dimen/dp_10"
                 android:layout_marginTop="@dimen/dp_10"
                 android:onClick="@{ () -> dialog.onClose() }"
                 android:padding="@dimen/dp_10"
-                android:layout_margin="@dimen/dp_10"
                 android:text="@string/common_label_close"
                 style="@style/button_negative"
                 />

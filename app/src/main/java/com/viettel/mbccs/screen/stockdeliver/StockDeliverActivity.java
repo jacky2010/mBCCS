@@ -31,7 +31,7 @@ public class StockDeliverActivity
 
     @Override
     protected void initData() {
-        mPresenter = new StockDeliverPresenter(this);
+        mPresenter = new StockDeliverPresenter(this, this);
         mBinding.setPresenter(mPresenter);
     }
 

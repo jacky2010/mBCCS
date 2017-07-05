@@ -36,9 +36,11 @@ public class ExportSuccessDialog extends DialogFragment
 
     public ObservableField<String> cmdCode;
     public ObservableField<String> cmdReceive;
+    public ObservableField<String> cmdSender;
     private List<StockTransDetail> mStockTransDetails;
     private String cmdCodeTitle;
     private String cmdReceiveTitle;
+    private String cmdSenderTitle;
     DialogExportSuccessBinding mBinding;
     private AppCompatActivity mAppCompatActivity;
     private List<StockSerial> mStockSerials = new ArrayList<>();
@@ -59,7 +61,21 @@ public class ExportSuccessDialog extends DialogFragment
         bundle.putParcelableArrayList(Constants.BundleConstant.STOCK_TRANS_DETAIL_LIST,
                 stockTransDetail);
         bundle.putString(Constants.BundleConstant.CMD_CODE_TITLE, cmdCodeTitle);
-        bundle.putString(Constants.BundleConstant.CMD_NAME_TITLE, cmdNameTitle);
+        bundle.putString(Constants.BundleConstant.CMD_RECEIVE_TITLE, cmdNameTitle);
+        ExportSuccessDialog fragment = new ExportSuccessDialog();
+        fragment.setArguments(bundle);
+        isFromBundle = true;
+        return fragment;
+    }
+
+    public static ExportSuccessDialog newInstance(ArrayList<StockTransDetail> stockTransDetail,
+            String cmdCodeTitle, String cmdNameTitle, String cmdSenderTitle) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList(Constants.BundleConstant.STOCK_TRANS_DETAIL_LIST,
+                stockTransDetail);
+        bundle.putString(Constants.BundleConstant.CMD_CODE_TITLE, cmdCodeTitle);
+        bundle.putString(Constants.BundleConstant.CMD_RECEIVE_TITLE, cmdNameTitle);
+        bundle.putString(Constants.BundleConstant.CMD_SENDER_TITLE, cmdSenderTitle);
         ExportSuccessDialog fragment = new ExportSuccessDialog();
         fragment.setArguments(bundle);
         isFromBundle = true;
@@ -104,6 +120,10 @@ public class ExportSuccessDialog extends DialogFragment
         mStockSerials.addAll(stockSerials);
     }
 
+    public void setCmdSender(ObservableField<String> cmdSender) {
+        this.cmdSender = cmdSender;
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
@@ -132,7 +152,8 @@ public class ExportSuccessDialog extends DialogFragment
             mStockTransDetails =
                     bundle.getParcelableArrayList(Constants.BundleConstant.STOCK_TRANS_DETAIL_LIST);
             cmdCodeTitle = bundle.getString(Constants.BundleConstant.CMD_CODE_TITLE);
-            cmdReceiveTitle = bundle.getString(Constants.BundleConstant.CMD_NAME_TITLE);
+            cmdReceiveTitle = bundle.getString(Constants.BundleConstant.CMD_RECEIVE_TITLE);
+            cmdSenderTitle = bundle.getString(Constants.BundleConstant.CMD_SENDER_TITLE);
         } else {
             if (mStockTransDetails == null && mStockSerials != null) {
                 mStockTransDetails = new ArrayList<>();
@@ -157,8 +178,11 @@ public class ExportSuccessDialog extends DialogFragment
     private void init() {
         cmdCode = new ObservableField<>();
         cmdReceive = new ObservableField<>();
+        cmdSender = new ObservableField<>();
         cmdCode.set(cmdCodeTitle);
         cmdReceive.set(cmdReceiveTitle);
+        cmdSender.set(cmdSenderTitle);
+
         //        cmdCode.set(String.format(getString(R.string
         // .warehouse_label_export_success_code), ""));
         //        cmdReceive.set(String.format(getString(R.string.warehouse_label_receive), ""));

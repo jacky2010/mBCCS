@@ -51,7 +51,7 @@ public class TaskCSKPPDetailActivity extends
                     public void onClick(DialogInterface dialog, int which) {
 
                     }
-                }, null, false).show();
+                }, null, false, true).show();
     }
 
     @Override
@@ -65,7 +65,7 @@ public class TaskCSKPPDetailActivity extends
                     public void onClick(DialogInterface dialog, int which) {
 
                     }
-                }, null, false).show();
+                }, null, false, false).show();
     }
 
     @Override

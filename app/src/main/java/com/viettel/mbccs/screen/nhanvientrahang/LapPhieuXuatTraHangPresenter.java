@@ -40,6 +40,7 @@ public class LapPhieuXuatTraHangPresenter implements LapPhieuXuatTraHangContract
     private LapPhieuXuatTraHangContract.ViewModel mViewModel;
     private StockLapPhieuAdapter mAdapter;
     private ArrayList<StockTotal> mStockTotals = new ArrayList<>();
+    public ObservableField<String> titleExportFrom;
     public ObservableField<String> mStockReceiveName;
     public ObservableField<String> countStock;
     private SpinnerAdapter<String> mStatusAdapter;
@@ -62,7 +63,7 @@ public class LapPhieuXuatTraHangPresenter implements LapPhieuXuatTraHangContract
     }
 
     private void fake() {
-        mStockReceiveName.set(mUserRepository.getUserInfo().getChannelInfo().getChannelName());
+        mStockReceiveName.set(mUserRepository.getUserInfo().getChannelInfo().getManagementName());
         mStatus.addAll(Arrays.asList("NEW", "OLD"));
     }
 
@@ -89,7 +90,7 @@ public class LapPhieuXuatTraHangPresenter implements LapPhieuXuatTraHangContract
                             }
                             mStockTotals.clear();
                             mStockTotals.addAll(object.getStockTotalList());
-                        //    mAdapter.notifyDataSetChanged();
+                            mAdapter.notifyDataSetChanged();
                             reloadStockListCount();
                             return;
                         }
@@ -116,6 +117,10 @@ public class LapPhieuXuatTraHangPresenter implements LapPhieuXuatTraHangContract
     private void init() {
         mStockReceiveName = new ObservableField<>();
         countStock = new ObservableField<>();
+        titleExportFrom = new ObservableField<>();
+        titleExportFrom.set(
+                String.format(mContext.getString(R.string.nhanvien_xuattra_label_export_from),
+                        mUserRepository.getUserInfo().getChannelInfo().getChannelName()));
         mStatusAdapter = new SpinnerAdapter<String>(mContext, mStatus);
         mAdapter = new StockLapPhieuAdapter(mContext, mStockTotals);
         mAdapter.setOnStockLapPhieuListener(this);
@@ -241,5 +246,4 @@ public class LapPhieuXuatTraHangPresenter implements LapPhieuXuatTraHangContract
     public void onRemoveStock() {
         reloadStockListCount();
     }
-
 }

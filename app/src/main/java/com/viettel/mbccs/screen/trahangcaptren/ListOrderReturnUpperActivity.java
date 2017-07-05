@@ -1,48 +1,51 @@
 package com.viettel.mbccs.screen.trahangcaptren;
 
-import android.content.Intent;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.base.BaseDataBindActivity;
-import com.viettel.mbccs.base.searchlistview.BaseSearchListViewContract;
-import com.viettel.mbccs.databinding.ActivityListOrderReturnUpperBinding;
-import com.viettel.mbccs.screen.trahangcaptren.create.CreateTicketActivity;
+import com.viettel.mbccs.base.listkho.BaseListOrderActivity;
+import com.viettel.mbccs.data.model.StockTrans;
 
 /**
  * Created by Anh Vu Viet on 5/31/2017.
  */
 
 public class ListOrderReturnUpperActivity
-        extends BaseDataBindActivity<ActivityListOrderReturnUpperBinding, ListOrderReturnUpperPresenter>
-        implements ListOrderReturnUpperContract.ViewModel {
+        extends BaseListOrderActivity {
 
     @Override
-    protected int getIdLayout() {
-        return R.layout.activity_list_order_return_upper;
-    }
-
-    @Override
-    protected void initData() {
-        mPresenter = new ListOrderReturnUpperPresenter(this, this);
-        mBinding.setPresenter(mPresenter);
-    }
-
-
-    @Override
-    public void showLoading() {
+    public void doSearch() {
 
     }
 
     @Override
-    public void hideLoading() {
+    public void onItemStockTransClick(StockTrans stockTrans) {
 
     }
 
     @Override
-    public void onAddClick() {
-        startActivity(new Intent(this, CreateTicketActivity.class));
+    public String getItemCountString() {
+        return getString(R.string.activity_list_order_return_upper_co_phieu_chua_nhan,
+                itemCount.get());
+    }
+
+    @Override
+    public String getToolbarTitle() {
+        return getString(
+                R.string.activity_list_order_return_upper_xuat_kho_tra_hang_cap_tren);
+
+    }
+
+    @Override
+    public boolean isShowAddButton() {
+        return true;
     }
 
     @Override
     public void onItemClicked(Object object) {
+
+    }
+
+    @Override
+    public void init() {
+
     }
 }
