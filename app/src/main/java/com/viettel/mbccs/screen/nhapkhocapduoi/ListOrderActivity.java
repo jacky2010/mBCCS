@@ -23,9 +23,8 @@ public class ListOrderActivity extends BaseListOrderActivity {
     }
 
     @Override
-    public String getItemCountString() {
-        return getString(R.string.activity_list_order_warehouse_lenh_chua_lap_phieu,
-                itemCount.get());
+    public String getItemCountStringFormat() {
+        return getString(R.string.activity_list_order_warehouse_lenh_chua_lap_phieu);
     }
 
     @Override
@@ -59,6 +58,11 @@ public class ListOrderActivity extends BaseListOrderActivity {
 
         int positionStatus = getPositionStatus();
         int positionWareHouser = getPositionWareHouser();
+        if (positionStatus==1){
+            setItemCountStringFormat(getString(R.string.nhanvien_xuattra_label_count_cmd_not_approve));
+        }else{
+            getString(R.string.activity_list_order_warehouse_lenh_chua_lap_phieu);
+        }
         //TODO do search
 
         //fake

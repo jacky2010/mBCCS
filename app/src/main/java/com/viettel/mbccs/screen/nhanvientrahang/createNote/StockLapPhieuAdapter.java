@@ -1,4 +1,4 @@
-package com.viettel.mbccs.screen.nhanvientrahang;
+package com.viettel.mbccs.screen.nhanvientrahang.createNote;
 
 import android.content.Context;
 import android.text.Editable;
