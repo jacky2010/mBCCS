@@ -114,28 +114,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_4"
             app:adapter="@{ adapter }"
-<<<<<<< HEAD
-=======
-            app:themeLight="@{true}"
-            />
-
-        <com.viettel.mbccs.widget.CustomTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_12"
-            android:text="@{ titleSpinner2 }"
-            style="@style/TextSearchLight"
-            />
-
-        <com.viettel.mbccs.widget.SpinnerWithBorder
-            android:id="@+id/spinner2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_4"
-            app:adapter="@{ adapter2 }"
-            android:visibility="@{ adapter2 != null ? View.VISIBLE : View.GONE }"
-            app:themeLight="@{true}"
->>>>>>> fdb7fc0a011d16883ba6efe984f3c054ee3b707b
             />
 
         <com.viettel.mbccs.widget.CustomButton
@@ -143,7 +121,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/dp_12"
-            android:onClick="@{ searchClick }"
+            android:onClick="@{ () -> searchClick }"
             android:paddingEnd="@dimen/dp_32"
             android:paddingStart="@dimen/dp_32"
             android:text="@string/common_lable_search"
