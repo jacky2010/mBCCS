@@ -1,4 +1,4 @@
-package com.viettel.mbccs.screen.nhanvientrahang;
+package com.viettel.mbccs.screen.nhanvientrahang.createNote;
 
 import com.viettel.mbccs.screen.warehousecommon.cmdprepareimportdetail
         .CmdPrepareImportDetailActivity;

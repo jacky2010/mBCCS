@@ -15,7 +15,7 @@ import java.util.List;
  * Created by Anh Vu Viet on 5/13/2017.
  */
 
-public abstract class BaseSearchListViewPresenter<T, K extends BaseSearchListViewContract.ViewModel >
+public abstract class BaseSearchListViewPresenter<T, K extends BaseSearchListViewContract.ViewModel>
         implements BaseSearchListViewContract.Presenter {
 
     protected Context mContext;
@@ -30,8 +30,7 @@ public abstract class BaseSearchListViewPresenter<T, K extends BaseSearchListVie
 
     public ObservableInt itemCount = new ObservableInt();
 
-    public BaseSearchListViewPresenter(Context context,
-            K viewModel) {
+    public BaseSearchListViewPresenter(Context context, K viewModel) {
         mContext = context;
         mViewModel = viewModel;
         listData = new ArrayList<>();
@@ -41,6 +40,7 @@ public abstract class BaseSearchListViewPresenter<T, K extends BaseSearchListVie
             public void onChanged() {
                 super.onChanged();
                 itemCount.set(listData.size());
+                onAdapterChangeSize(itemCount.get());
                 isEmpty.set(listData.isEmpty());
             }
         });
@@ -53,6 +53,10 @@ public abstract class BaseSearchListViewPresenter<T, K extends BaseSearchListVie
 
     @Override
     public void unSubscribe() {
+
+    }
+
+    public void onAdapterChangeSize(int size) {
 
     }
 

@@ -1,15 +1,14 @@
-package com.viettel.mbccs.screen.trahangcaptren;
+package com.viettel.mbccs.screen.nhanvientrahang.list;
 
-import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.listkho.BaseListOrderActivity;
 import com.viettel.mbccs.data.model.StockTrans;
 
 /**
- * Created by Anh Vu Viet on 5/31/2017.
+ * Created by eo_cuong on 7/5/17.
  */
 
-public class ListOrderReturnUpperActivity
-        extends BaseListOrderActivity {
+public class ListNhanVienTraHangActivity extends BaseListOrderActivity {
+
 
     @Override
     public void doSearch() {
@@ -23,20 +22,18 @@ public class ListOrderReturnUpperActivity
 
     @Override
     public String getItemCountStringFormat() {
-        return getString(R.string.activity_list_order_return_upper_co_phieu_chua_nhan);
+        return null;
     }
 
 
     @Override
     public String getToolbarTitle() {
-        return getString(
-                R.string.activity_list_order_return_upper_xuat_kho_tra_hang_cap_tren);
-
+        return null;
     }
 
     @Override
     public boolean isShowAddButton() {
-        return true;
+        return false;
     }
 
     @Override

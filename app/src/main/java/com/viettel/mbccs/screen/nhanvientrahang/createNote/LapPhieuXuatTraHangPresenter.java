@@ -1,7 +1,6 @@
-package com.viettel.mbccs.screen.nhanvientrahang;
+package com.viettel.mbccs.screen.nhanvientrahang.createNote;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.databinding.ObservableField;
 import com.viettel.mbccs.R;

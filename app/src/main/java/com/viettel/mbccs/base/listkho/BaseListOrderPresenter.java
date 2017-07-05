@@ -26,11 +26,14 @@ public class BaseListOrderPresenter
 
     public ObservableField<String> filterText = new ObservableField<>();
 
+    public ObservableField<String> itemCountStringText = new ObservableField<>();
+
     public ListOrderAdapter mAdaper;
+
+    private String itemCountStringFormat = "%d";
 
     protected List<String> mWareHouseData = new ArrayList<>();
     protected List<String> mStatusList = new ArrayList<>();
-
     protected int positionWareHouse = 0;
     protected int positionStatus = 0;
 
@@ -45,6 +48,18 @@ public class BaseListOrderPresenter
         SpinnerAdapter<String> adapter2 = new SpinnerAdapter<>(mContext, mStatusList);
         adapter2.setOnItemSelectedListener(getStatusItemSelectedListener());
         statusAdapter.set(adapter2);
+        itemCountStringFormat = getItemCountStringFormat();
+        updateItemCountString();
+    }
+
+    @Override
+    public void onAdapterChangeSize(int size) {
+        super.onAdapterChangeSize(size);
+        updateItemCountString();
+    }
+
+    private void updateItemCountString() {
+        itemCountStringText.set(String.format(itemCountStringFormat, itemCount.get()));
     }
 
     @Override
@@ -54,7 +69,6 @@ public class BaseListOrderPresenter
 
     @Override
     public void onSearchSuccess() {
-
 
     }
 
@@ -93,7 +107,7 @@ public class BaseListOrderPresenter
 
     @Override
     public String getItemCountString() {
-        return mViewModel.getItemCountString();
+        return null;
     }
 
     @Override
@@ -158,5 +172,16 @@ public class BaseListOrderPresenter
     @Override
     public boolean isShowAddButton() {
         return mViewModel.isShowAddButton();
+    }
+
+    @Override
+    public void setItemCountStringFormat(String format) {
+        itemCountStringFormat = format;
+        updateItemCountString();
+    }
+
+    @Override
+    public String getItemCountStringFormat() {
+        return mViewModel.getItemCountStringFormat();
     }
 }

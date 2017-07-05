@@ -1027,6 +1027,7 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="nhanvien_xuattra_label_warehouse_receive_code"><![CDATA[ <font color="#757575">Mã kho nhận </font><font color="#DF0101">*</font> ]]></string>
     <string name="nhanvien_xuattra_label_export_status"><![CDATA[ <font color="#757575">Trạng thái hàng xuất </font><font color="#DF0101">*</font> ]]></string>
     <string name="nhanvien_xuattra_label_export_from">Lập lệnh xuất từ kho %s</string>
+    <string name="nhanvien_xuattra_label_count_cmd_not_approve">Phiếu chưa nhận %s</string>
     <!--xuat kho cho nhan vien-->
     <string name="xuatkhochonhanvien_lablel_chi_tiet_xuat_kho_title">Chi tiết xuất kho cho nhân viên</string>
     <string name="xuatkhochonhanvien_lablel_chi_title">Lập phiếu trả hàng</string>
@@ -1055,4 +1056,6 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="xuatkhocapduoi_create_command_button">Lập lệnh</string>
     <string name="xuatkhocapduoi_create_order_button">Lập phiếu</string>
     <string name="xuatkhocapduoi_error_connect_api">Đã xảy ra lỗi : %s</string>
+
+
 </resources>

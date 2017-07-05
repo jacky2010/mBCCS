@@ -1,20 +1,15 @@
-package com.viettel.mbccs.screen.nhanvientrahang;
+package com.viettel.mbccs.screen.nhanvientrahang.createNote;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Html;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.data.model.SerialPickerModel;
 import com.viettel.mbccs.data.model.StockSerial;
 import com.viettel.mbccs.data.model.StockTotal;
-import com.viettel.mbccs.data.model.StockTransDetail;
 import com.viettel.mbccs.databinding.ActivityLapPhieuXuatTraHangBinding;
 import com.viettel.mbccs.screen.kpp.order.findstock.FindStockActivity;
-import com.viettel.mbccs.screen.nvtrahangcaptren.exportsuccess.ExportSuccessActivity;
 import com.viettel.mbccs.screen.serialpicker.SerialPickerActivity;
-import com.viettel.mbccs.screen.warehousecommon.cmdprepareexportdetail
-        .CmdPrepareExportDetaiActivity;
 import com.viettel.mbccs.screen.warehousecommon.exportsuccess.ExportSuccessDialog;
 import com.viettel.mbccs.utils.GsonUtils;
 import com.viettel.mbccs.variable.Constants;

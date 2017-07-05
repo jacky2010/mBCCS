@@ -40,6 +40,11 @@ public abstract class BaseListOrderActivity
     }
 
     @Override
+    public void setItemCountStringFormat(String format) {
+        mPresenter.setItemCountStringFormat(format);
+    }
+
+    @Override
     public int getPositionStatus() {
         return mPresenter.positionStatus;
     }
@@ -52,7 +57,7 @@ public abstract class BaseListOrderActivity
     public void onSearchSuccess() {
         mPresenter.onSearchSuccess();
         closeForm();
-        mBinding.textCount.setText(getItemCountString());
+        mBinding.textCount.setText(mPresenter.getItemCountString());
     }
 
     @Override

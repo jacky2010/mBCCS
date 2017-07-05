@@ -4,7 +4,7 @@
     <data>
         <variable
             name="presenter"
-            type="com.viettel.mbccs.screen.nhanvientrahang.LapPhieuXuatTraHangPresenter"
+            type="com.viettel.mbccs.screen.nhanvientrahang.createNote.LapPhieuXuatTraHangPresenter"
             />
     </data>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
