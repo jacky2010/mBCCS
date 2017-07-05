@@ -91,6 +91,6 @@ public class StockDeliverPresenter implements StockDeliverContract.Presenter {
     }
 
     public void onAddClick() {
-
+        mViewModel.openCreateCommand();
     }
 }
