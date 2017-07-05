@@ -45,6 +45,8 @@ public class StockTransDetail implements Parcelable {
     @Expose
     private String stateName;
 
+    private int countChoice;
+
     @Expose
     private StockSerial mStockSerial;
 
@@ -164,6 +166,27 @@ public class StockTransDetail implements Parcelable {
     public void setStateName(String stateName) {
         this.stateName = stateName;
     }
+
+    public void addChoice() {
+        if (countChoice < quantity) {
+            countChoice++;
+        }
+    }
+
+    public void subtract() {
+        if (countChoice > 0) {
+            countChoice--;
+        }
+    }
+
+    public int getCountChoice() {
+        return countChoice;
+    }
+
+    public void setCountChoice(int countChoice) {
+        this.countChoice = countChoice;
+    }
+
 
     public StockTransDetail() {
     }

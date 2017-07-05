@@ -284,6 +284,10 @@
         <activity
             android:name=".screen.nhanvientrahang.LapPhieuXuatTraHangActivity"
             android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screen.stockdeliver.createcommand.CreateCommandActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

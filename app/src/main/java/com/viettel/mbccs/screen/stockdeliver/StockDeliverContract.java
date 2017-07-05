@@ -10,6 +10,7 @@ import com.viettel.mbccs.base.BaseView;
 public class StockDeliverContract {
     interface ViewModel extends BaseView<StockDeliverContract.Presenter> {
         void onBackPress();
+        void openCreateCommand();
     }
 
     interface Presenter extends BasePresenter {

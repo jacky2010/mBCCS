@@ -1050,4 +1050,9 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="dialog_text_input_store">Nhập kho</string>
     <string name="xuatkhocapduoi_message_input_store">Bạn muốn nhập kho không?</string>
     <string name="xuatkhocapduoi_message_create_bill_input_store">Bạn có chắc lập phiếu nhập kho?</string>
+    <string name="xuatkhocapduoi_title_create_command">Lập lệnh xuất kho cấp dưới</string>
+    <string name="xuatkhocapduoi_create_command_from"><![CDATA[Lập lệnh từ kho: <b>%s</b>]]></string>
+    <string name="xuatkhocapduoi_create_command_button">Lập lệnh</string>
+    <string name="xuatkhocapduoi_create_order_button">Lập phiếu</string>
+    <string name="xuatkhocapduoi_error_connect_api">Đã xảy ra lỗi : %s</string>
 </resources>
