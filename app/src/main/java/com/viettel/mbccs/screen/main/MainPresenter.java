@@ -5,11 +5,14 @@ import android.content.Intent;
 import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
 import android.text.TextUtils;
+
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseSubMenuActivity;
 import com.viettel.mbccs.data.model.Function;
 import com.viettel.mbccs.data.source.UserRepository;
+import com.viettel.mbccs.variable.Constants;
 import com.viettel.mbccs.widget.BottomNavigationView;
+
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -33,16 +36,14 @@ public class MainPresenter implements MainContract.Presenter {
 
     public ObservableField<String> userTel = new ObservableField<>();
 
-    public MainPresenter(Context context, MainContract.ViewModel viewModel,
-            UserRepository userRepository) {
+    public MainPresenter(Context context, MainContract.ViewModel viewModel, UserRepository
+            userRepository) {
         mContext = context;
         mViewModel = viewModel;
 
-        // TODO: Query menu from api, currently just a fake data.
         mFunctionList = new ArrayList<>();
-        mFunctionList.add(new Function(Function.TopMenu.MENU_DASHBOARD,
-                mContext.getResources().getString(R.string.menu_dashboard),
-                R.drawable.ic_menu_home_selector));
+        mFunctionList.add(new Function(Function.TopMenu.MENU_DASHBOARD, mContext.getResources()
+                .getString(R.string.menu_dashboard), R.drawable.ic_home_new));
         userName.set(userRepository.getUserInfo().getStaffInfo().getStaffName());
         userTel.set(userRepository.getUserInfo().getStaffInfo().getTel());
 
@@ -75,33 +76,32 @@ public class MainPresenter implements MainContract.Presenter {
                             mContext.getString(R.string.menu_quan_ly_cong_viec), 0));
                     break;
                 case Function.TopMenu.MENU_QUAN_LY_KHO:
-                    mFunctionList.add(new Function(Function.TopMenu.MENU_QUAN_LY_KHO,
-                            mContext.getString(R.string.menu_quan_ly_kho), 0));
+                    mFunctionList.add(new Function(Function.TopMenu.MENU_QUAN_LY_KHO, mContext
+                            .getString(R.string.menu_quan_ly_kho), 0));
                     break;
                 case Function.TopMenu.MENU_QUAN_LY_BAO_HANH:
                     mFunctionList.add(new Function(Function.TopMenu.MENU_QUAN_LY_BAO_HANH,
                             mContext.getString(R.string.menu_quan_ly_bao_hanh), 0));
                     break;
                 case Function.TopMenu.MENU_QUAN_LY_CSKH:
-                    mFunctionList.add(new Function(Function.TopMenu.MENU_QUAN_LY_CSKH,
-                            mContext.getString(R.string.menu_quan_ly_cham_soc_kh), 0));
+                    mFunctionList.add(new Function(Function.TopMenu.MENU_QUAN_LY_CSKH, mContext
+                            .getString(R.string.menu_quan_ly_cham_soc_kh), 0));
                     break;
                 case Function.TopMenu.MENU_QUAN_LY_TAI_CHINH:
                     mFunctionList.add(new Function(Function.TopMenu.MENU_QUAN_LY_TAI_CHINH,
                             mContext.getString(R.string.menu_quan_ly_tai_chinh), 0));
                     break;
                 case Function.TopMenu.MENU_BAO_CAO:
-                    mFunctionList.add(new Function(Function.TopMenu.MENU_BAO_CAO,
-                            mContext.getString(R.string.menu_bao_cao), 0));
+                    mFunctionList.add(new Function(Function.TopMenu.MENU_BAO_CAO, mContext
+                            .getString(R.string.menu_bao_cao), 0));
                     break;
             }
         }
 
-        mFunctionList.add(
-                new Function(Function.TopMenu.MENU_HELP, mContext.getString(R.string.menu_help),
-                        R.drawable.ic_help_outline_24dp));
-        mFunctionList.add(new Function(Function.TopMenu.MENU_SETTINGS,
-                mContext.getString(R.string.menu_settings), R.drawable.ic_settings_black_24dp));
+        mFunctionList.add(new Function(Function.TopMenu.MENU_HELP, mContext.getString(R.string
+                .menu_help), R.drawable.ic_help_outline_24dp));
+        mFunctionList.add(new Function(Function.TopMenu.MENU_SETTINGS, mContext.getString(R
+                .string.menu_settings), R.drawable.ic_settings_black_24dp));
     }
 
     @Override
@@ -118,23 +118,21 @@ public class MainPresenter implements MainContract.Presenter {
         return new BottomNavigationView.OnBottomItemClick() {
             @Override
             public void onBottomItemClick(int position) {
-                // TODO: Handle menu item clicked later. Should use menu Id instead of position.
+                // FIXME: 7/5/2017 Hide dashboard
                 switch (position) {
                     case 0:
                         mViewModel.backToMain();
                         mLastIndex.set(position);
                         break;
-                    case 1:
-                    case 2:
-                    case 3:
-                        Intent intent = new Intent(mContext, BaseSubMenuActivity.class);
-                        intent.putExtra(BaseSubMenuActivity.EXTRA_MENU_ITEM,
-                                mFunctionList.get(position));
-                        mContext.startActivity(intent);
-                        break;
-                    case 4:
+                    case Constants.BOTTOM_MENU_COUNT - 1:
                         mViewModel.gotoMenu();
                         mLastIndex.set(position);
+                        break;
+                    default:
+                        Intent intent = new Intent(mContext, BaseSubMenuActivity.class);
+                        intent.putExtra(BaseSubMenuActivity.EXTRA_MENU_ITEM, mFunctionList.get
+                                (position));
+                        mContext.startActivity(intent);
                         break;
                 }
             }
@@ -142,19 +140,19 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
     public List<Function> getBottomListItem() {
-        if (mFunctionList.size() <= 4) return mFunctionList;
-        List<Function> subMenu = mFunctionList.subList(0, 4);
-        subMenu.add(new Function(Function.TopMenu.MENU_MORE,
-                mContext.getResources().getString(R.string.menu_more),
-                R.drawable.ic_menu_more_selector));
+        if (mFunctionList.size() <= Constants.BOTTOM_MENU_COUNT - 1) return mFunctionList;
+        List<Function> subMenu = mFunctionList.subList(0, Constants.BOTTOM_MENU_COUNT - 1);
+        subMenu.add(new Function(Function.TopMenu.MENU_MORE, mContext.getResources().getString(R
+                .string.menu_more), R.drawable.ic_more_new));
         return subMenu;
     }
 
     public ArrayList<Function> getFunctionList() {
         ArrayList<Function> functionList = new ArrayList<>();
-        if (mFunctionList.size() > 5) {
-            functionList.addAll(mFunctionList.subList(1, 4));
-            functionList.addAll(mFunctionList.subList(5, mFunctionList.size()));
+        if (mFunctionList.size() > Constants.BOTTOM_MENU_COUNT) {
+            functionList.addAll(mFunctionList.subList(1, Constants.BOTTOM_MENU_COUNT - 1));
+            functionList.addAll(mFunctionList.subList(Constants.BOTTOM_MENU_COUNT, mFunctionList
+                    .size()));
         } else {
             functionList.addAll(mFunctionList.subList(1, mFunctionList.size()));
         }

@@ -116,6 +116,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         public void bind(HomeModel item) {
             binding.setTextTop(item.getTitle());
             binding.setDone(item.getPercentage());
+            binding.executePendingBindings();
         }
     }
 
