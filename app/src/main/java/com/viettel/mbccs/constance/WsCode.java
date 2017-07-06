@@ -213,9 +213,10 @@ public class WsCode {
     public final static String GetListSaleTrans = "WS_getListSaleTrans";
 
     // 5.1.3.4
+    public final static String GetSaleTransDetail = "WS_getSaleTransDetail";
 
     // 5.5.3.3
-    public final static String CreateInvoice = "WS_CreateInvoice";
+    public final static String CreateInvoice = "WS_createInvoice";
 
     // 5.6.3.1
     public final static String CheckAuthenticate = "WS_CheckAuthenticate";

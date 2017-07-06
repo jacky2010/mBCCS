@@ -7,8 +7,8 @@ import com.viettel.mbccs.base.BaseActivity;
 import com.viettel.mbccs.data.model.StockTrans;
 import com.viettel.mbccs.screen.login.LoginActivity;
 import com.viettel.mbccs.screen.main.MainActivity;
-import com.viettel.mbccs.screen.nhanvientrahang.LapPhieuXuatTraHangActivity;
-import com.viettel.mbccs.screen.nhanvientrahang.NhapKhoCapDuoiDemo;
+import com.viettel.mbccs.screen.nhanvientrahang.createNote.LapPhieuXuatTraHangActivity;
+import com.viettel.mbccs.screen.nhanvientrahang.createNote.NhapKhoCapDuoiDemo;
 import com.viettel.mbccs.screen.xuathangchonhanvien.ChiTietXuatKhoNhanVienActivity;
 import com.viettel.mbccs.variable.Constants;
 

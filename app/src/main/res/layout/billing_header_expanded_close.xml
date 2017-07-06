@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:orientation="vertical">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue_dark"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/dp_6"
+        android:paddingTop="@dimen/dp_10">
+
+        <View
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_2"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/white_grey" />
+
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_5"
+        android:background="@drawable/bg_filter_input"
+        android:orientation="horizontal"
+        android:padding="@dimen/dp_5">
+
+        <ImageView
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_search" />
+
+        <com.viettel.mbccs.widget.CustomEdittext
+            android:id="@+id/text_filer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:lines="1"
+            android:maxLines="1"
+            android:padding="@dimen/dp_3" />
+    </LinearLayout>
+</LinearLayout>

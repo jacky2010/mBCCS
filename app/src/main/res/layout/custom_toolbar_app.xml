@@ -21,6 +21,8 @@
         android:layout_marginLeft="?android:attr/actionBarSize"
         android:layout_marginRight="?android:attr/actionBarSize"
         android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="@dimen/sp_14"
         android:maxLines="1" />
 
 </RelativeLayout>

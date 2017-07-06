@@ -35,7 +35,11 @@ import com.viettel.mbccs.data.source.remote.request.GetListIdImageRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListProductRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListProvinceRequest;
+
 import com.viettel.mbccs.data.source.remote.request.GetListRegTypeRequest;
+
+import com.viettel.mbccs.data.source.remote.request.GetListSearchTransRequest;
+
 import com.viettel.mbccs.data.source.remote.request.GetListSerialRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListShopRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListStockModelRequest;
@@ -51,12 +55,14 @@ import com.viettel.mbccs.data.source.remote.request.GetReasonRequest;
 import com.viettel.mbccs.data.source.remote.request.GetReceiverChangeAddressRequest;
 import com.viettel.mbccs.data.source.remote.request.GetRegisterSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.GetRegisterSubRequest;
+import com.viettel.mbccs.data.source.remote.request.GetSaleTransDetailRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSurveyKPPRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
 import com.viettel.mbccs.data.source.remote.request.GetUserInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.InputOrderRequest;
+import com.viettel.mbccs.data.source.remote.request.GetCreateInvoiceBillRequest;
 import com.viettel.mbccs.data.source.remote.request.IsKPPManagerRequest;
 import com.viettel.mbccs.data.source.remote.request.KPPFeedbackRequest;
 import com.viettel.mbccs.data.source.remote.request.KPPOrderRequest;
@@ -102,6 +108,8 @@ import com.viettel.mbccs.data.source.remote.response.GetListOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListProductResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListProvinceResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListRegTypeResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListSearchTransResponse;
+
 import com.viettel.mbccs.data.source.remote.response.GetListSerialResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListShopResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListStockModelResponse;
@@ -116,6 +124,8 @@ import com.viettel.mbccs.data.source.remote.response.GetReasonResponse;
 import com.viettel.mbccs.data.source.remote.response.GetReceiverChangeAddressResponse;
 import com.viettel.mbccs.data.source.remote.response.GetRegisterSubInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetRegisterSubResponse;
+import com.viettel.mbccs.data.source.remote.response.GetSaleTransDetailResponse;
+
 import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSurveyKPPResponse;
 import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
@@ -413,9 +423,20 @@ public interface MBCSSApi {
             @Body DataRequest<GetListDsLamByTeamIdRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<ServerDataResponse<BaseResponse<GetReceiverChangeAddressResponse>>>
-    receiverChangeAddress(
-            @Body AddressRequest<GetReceiverChangeAddressRequest> request);
+    Observable<ServerDataResponse<BaseResponse<GetReceiverChangeAddressResponse>>> receiverChangeAddress(
+                    @Body AddressRequest<GetReceiverChangeAddressRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<GetListSearchTransResponse>>> getListSearchTrans(
+            @Body DataRequest<GetListSearchTransRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<GetSaleTransDetailResponse>>> getSaleTransDetail(
+            @Body DataRequest<GetSaleTransDetailRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<EmptyObject>>>createInvoiceBill(
+            @Body DataRequest<GetCreateInvoiceBillRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<GetRegisterSubResponse>>> getRegiterSub(
@@ -448,5 +469,6 @@ public interface MBCSSApi {
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<EmptyObject>>> createImportStock(
             @Body DataRequest<CreateImportStockRequest> request);
+
 }
 

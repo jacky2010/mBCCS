@@ -88,6 +88,7 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="order_detail_tax_money">Tiền thuế: </string>
     <string name="order_detail_money">%1$s đ</string>
     <string name="order_detail_cancel">Hủy Giao Dịch</string>
+    <string name="order_detail_ok_1">Lên Giao Dịch</string>
     <string name="order_detail_ok">Bán hàng</string>
 
     <string name="item_order_detail_price_item">%1$s đ</string>
@@ -878,15 +879,10 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     </string>
     <string name="confirm_connect_subscriber_dialog_dang_ky_vas">Tạo đăng ký VAS</string>
     <string name="confirm_connect_subscriber_dialog_bo_qua">Bỏ qua</string>
-    <string name="create_new_connector_information_validate_id_no">Số giấy tờ không thể trống!</string>
-    <string name="create_new_connector_information_validate_birthday">Ngày sinh cần trước ngày hiện tại!</string>
-    <string name="create_new_connector_information_validate_date_id_no">Giấy tờ đã hết hạn!</string>
-    <string name="create_new_connector_information_validate_out_date_id_no">Ngày cấp giấy tờ sau ngày hiện tại hoặc trước ngày hết hạn!</string>
-    <string name="create_new_connector_information_validate_place_id_no">Nơi cấp giấy tờ không thể trống!</string>
-    <string name="create_new_connector_information_validate_address">Địa chỉ không thể trống!</string>
 
     <string name="activity_list_order_warehouse_ngay_lap_lenh">Ngày lập lệnh</string>
     <string name="activity_list_order_warehouse_ma_kho_xuat">Mã kho xuất</string>
+    <string name="activity_list_order_warehouse_trang_thai_lenh">Trạng thái lệnh</string>
     <string name="activity_list_order_warehouse_lenh_chua_lap_phieu">Lệnh chưa lập phiếu (%1$d)</string>
     <string name="list_order_presenter_nhap_kho_cap_duoi">Nhập kho cấp dưới</string>
     <string name="item_nhap_kho_cap_duoi_mat_hang_ma_hang">Mã hàng: %1$s</string>
@@ -1031,6 +1027,7 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="nhanvien_xuattra_label_warehouse_receive_code"><![CDATA[ <font color="#757575">Mã kho nhận </font><font color="#DF0101">*</font> ]]></string>
     <string name="nhanvien_xuattra_label_export_status"><![CDATA[ <font color="#757575">Trạng thái hàng xuất </font><font color="#DF0101">*</font> ]]></string>
     <string name="nhanvien_xuattra_label_export_from">Lập lệnh xuất từ kho %s</string>
+    <string name="nhanvien_xuattra_label_count_cmd_not_approve">Phiếu chưa nhận %s</string>
     <!--xuat kho cho nhan vien-->
     <string name="xuatkhochonhanvien_lablel_chi_tiet_xuat_kho_title">Chi tiết xuất kho cho nhân viên</string>
     <string name="xuatkhochonhanvien_lablel_chi_title">Lập phiếu trả hàng</string>
@@ -1046,7 +1043,7 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="search_products_detail_title_model">Loại máy</string>
     <string name="search_products_detail_title_feature">Tính năng</string>
     <string name="search_products_detail_label_products">Danh sách sản phẩm</string>
-    <string name="search_products_hint_search_product_name">Tìm theo tên</string>
+    <string name="search_products_hint_search_product_name">Tìm theo tên sản phẩm</string>
     <string-array name="search_products_detail_title_tabs">
         <item>Sản phẩm</item>
         <item>So sánh</item>
@@ -1055,11 +1052,11 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="dialog_text_input_store">Nhập kho</string>
     <string name="xuatkhocapduoi_message_input_store">Bạn muốn nhập kho không?</string>
     <string name="xuatkhocapduoi_message_create_bill_input_store">Bạn có chắc lập phiếu nhập kho?</string>
-    <string-array name="search_products_detail_title_tabs_desc">
-        <item>Mô tả sản phẩm</item>
-        <item>Thông số kỹ thuật</item>
-        <item>Đánh giá</item>
-    </string-array>
+    <string name="xuatkhocapduoi_title_create_command">Lập lệnh xuất kho cấp dưới</string>
+    <string name="xuatkhocapduoi_create_command_from"><![CDATA[Lập lệnh từ kho: <b>%s</b>]]></string>
+    <string name="xuatkhocapduoi_create_command_button">Lập lệnh</string>
+    <string name="xuatkhocapduoi_create_order_button">Lập phiếu</string>
+    <string name="xuatkhocapduoi_error_connect_api">Đã xảy ra lỗi : %s</string>
 
-    <string name="view_product_detail_title">Chi tiết sản phẩm</string>
+
 </resources>

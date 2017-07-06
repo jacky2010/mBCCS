@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.viettel.mbccs.R;
+import com.viettel.mbccs.widget.CustomTextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +61,7 @@ public class SpinnerAdapter extends BaseEditSpinnerAdapter implements EditSpinne
         } else {
             root = convertView;
         }
-        TextView mTitle = (TextView) root.findViewById(R.id.tv_title);
+        CustomTextView mTitle = (CustomTextView) root.findViewById(R.id.tv_title);
         mTitle.setText(Html.fromHtml(getItem(position)));
         return root;
     }

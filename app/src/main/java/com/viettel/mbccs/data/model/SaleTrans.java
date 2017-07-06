@@ -56,6 +56,16 @@ public class SaleTrans implements Serializable, Parcelable {
     @Expose
     private String statusName;
 
+    private boolean isCheck;
+
+    public boolean isCheck() {
+        return isCheck;
+    }
+
+    public void setCheck(boolean check) {
+        isCheck = check;
+    }
+
     public long getSaleTransId() {
         return saleTransId;
     }

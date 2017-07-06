@@ -273,7 +273,7 @@
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".screen.nhanvientrahang.NhapKhoCapDuoiDemo"
+            android:name=".screen.nhanvientrahang.createNote.NhapKhoCapDuoiDemo"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.xuathangchonhanvien.ChiTietXuatKhoNhanVienActivity"
@@ -282,7 +282,11 @@
             android:name=".screen.searchproducts.SearchProductsActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".screen.nhanvientrahang.LapPhieuXuatTraHangActivity"
+            android:name=".screen.nhanvientrahang.createNote.LapPhieuXuatTraHangActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screen.stockdeliver.createcommand.CreateCommandActivity"
             android:screenOrientation="portrait"/>
 
         <activity

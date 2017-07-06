@@ -10,7 +10,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tbIconLeft="@drawable/ic_close"
+        app:tbIconLeft="@drawable/ic_arrow_left_white_24dp"
         app:tbTitle="@string/title_confirm" />
 
     <LinearLayout

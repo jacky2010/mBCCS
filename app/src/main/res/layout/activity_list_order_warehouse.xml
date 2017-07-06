@@ -41,7 +41,7 @@
             android:layout_marginTop="?attr/actionBarSize"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_18"
-            bind:textUnderLine="@{ presenter.itemCountString }"
+            bind:textUnderLine="@{ presenter.itemCountStringText}"
             />
 
         <android.support.v7.widget.RecyclerView

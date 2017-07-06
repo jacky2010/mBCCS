@@ -22,10 +22,10 @@ public class ListOrderReturnUpperActivity
     }
 
     @Override
-    public String getItemCountString() {
-        return getString(R.string.activity_list_order_return_upper_co_phieu_chua_nhan,
-                itemCount.get());
+    public String getItemCountStringFormat() {
+        return getString(R.string.activity_list_order_return_upper_co_phieu_chua_nhan);
     }
+
 
     @Override
     public String getToolbarTitle() {
