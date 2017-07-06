@@ -215,12 +215,13 @@ public class Function implements Parcelable {
                 return R.drawable.ic_chuyen_anypay;
 
             case Function.MenuId.MENU_DANG_KY_THONG_TIN:
+                return R.drawable.ic_regist_info;
             case Function.MenuId.MENU_CAP_NHAT_THONG_TIN:
-                break;
+                return R.drawable.ic_update_info;
             case Function.MenuId.MENU_DOI_SIM:
                 return R.drawable.ic_doi_sim;
             case Function.MenuId.MENU_THAY_DOI_DIA_CHI_LAP_DAT:
-                return R.drawable.ic_add_black_24dp;
+                return R.drawable.ic_change_address;
 
             case Function.MenuId.MENU_TAO_KENH_PHAN_PHOI:
             case Function.MenuId.MENU_QUAN_LY_DBHC_BTS_KENH:
@@ -273,8 +274,9 @@ public class Function implements Parcelable {
             case Function.MenuId.MENU_TIEP_NHAN_BH:
                 return R.drawable.ic_accept_bh;
             case Function.MenuId.MENU_CHUYEN_MUC_BH:
+                return R.drawable.ic_chuyen_bao_hanh;
             case Function.MenuId.MENU_TRA_BH:
-                return R.drawable.ic_add_black_24dp;
+                return R.drawable.ic_tra_bao_hanh;
 
             case Function.MenuId.MENU_TRA_CUU_SP:
                 return R.drawable.ic_cskh_search;
@@ -286,15 +288,20 @@ public class Function implements Parcelable {
                 return R.drawable.ic_cskh_feedback;
 
             case Function.MenuId.MENU_TAO_GIAY_NOP_TIEN:
+                return R.drawable.ic_tao_giay_nop_tien;
             case Function.MenuId.MENU_PHE_DUYET_GIAY_NOP_TIEN:
+                return R.drawable.ic_phe_duyet_giay_nop_tien;
             case Function.MenuId.MENU_DOI_SOAT_CONG_NO_GIAY_NOP_TIEN:
+                return R.drawable.ic_doi_soat_giay_nop_tien;
             case Function.MenuId.MENU_KHAI_BAO_GIA_KENH_CHAN_RET:
-                return R.drawable.ic_add_black_24dp;
+                return R.drawable.ic_khai_gia_kenh_ret;
 
             case Function.MenuId.MENU_BAO_CAO_PHAT_TRIEN_THUE_BAO:
             case Function.MenuId.MENU_BAO_CAO_CHAM_SOC_KENH:
             case Function.MenuId.MENU_BAO_CAO_TAN_SUAT_CHAM_SOC_KENH:
+                break;
             case Function.MenuId.MENU_BAO_CAO_TON_KHO:
+                return R.drawable.ic_bao_cao_ton_kho;
             case Function.MenuId.MENU_BAO_CAO_GIAO_CHI_TIEU_BAN_HANG:
                 return R.drawable.ic_add_black_24dp;
 
