@@ -6,18 +6,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.viettel.mbccs.screen.config.ConfigActivity"
     >
+
     <data>
+
         <variable
             name="presenter"
             type="com.viettel.mbccs.screen.config.ConfigPresenter"
             />
     </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/bg_config"
         android:orientation="vertical"
         >
+
         <include
             layout="@layout/toolbar"
             app:background="@{@color/colorAccent}"
@@ -42,12 +46,15 @@
                 android:paddingLeft="@dimen/dp_16"
                 android:paddingRight="@dimen/dp_16"
                 >
+
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="@dimen/dp_24"
+                    android:layout_height="@dimen/dp_24"
+                    android:layout_gravity="center_vertical"
                     android:paddingRight="@dimen/dp_10"
-                    android:src="@drawable/ic_notifications_black_24dp"
+                    android:src="@drawable/ic_settings_notification"
                     />
+
                 <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -57,6 +64,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_14"
                     />
+
                 <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -76,6 +84,7 @@
             app:cardCornerRadius="@dimen/dp_4"
             app:cardElevation="@dimen/dp_2"
             >
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_46"
@@ -83,12 +92,15 @@
                 android:paddingLeft="@dimen/dp_16"
                 android:paddingRight="@dimen/dp_16"
                 >
+
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="@dimen/dp_24"
+                    android:layout_height="@dimen/dp_24"
+                    android:layout_gravity="center_vertical"
                     android:paddingRight="@dimen/dp_10"
-                    android:src="@drawable/ic_notifications_black_24dp"
+                    android:src="@drawable/ic_settings_notification"
                     />
+
                 <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -98,6 +110,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_14"
                     />
+
                 <android.support.v7.widget.SwitchCompat
                     android:id="@+id/switch_notification"
                     android:layout_width="wrap_content"
@@ -121,6 +134,7 @@
             app:cardCornerRadius="@dimen/dp_4"
             app:cardElevation="@dimen/dp_2"
             >
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_46"
@@ -128,12 +142,15 @@
                 android:paddingLeft="@dimen/dp_16"
                 android:paddingRight="@dimen/dp_16"
                 >
+
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="@dimen/dp_24"
+                    android:layout_height="@dimen/dp_24"
+                    android:layout_gravity="center_vertical"
                     android:paddingRight="@dimen/dp_10"
-                    android:src="@drawable/ic_country_black_24dp"
+                    android:src="@drawable/ic_settings_nation"
                     />
+
                 <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -143,18 +160,21 @@
                     android:textSize="@dimen/sp_14"
                     app:textHtml="@{ presenter.nameCurrentCountry }"
                     />
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:onClick="@{ v -> presenter.clickSelectCountry() }"
                     android:orientation="horizontal"
                     >
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/dp_28"
                         android:layout_gravity="center"
                         android:src="@{ presenter.imageCurrentCountry }"
                         />
+
                     <com.viettel.mbccs.widget.CustomTextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -174,6 +194,7 @@
             app:cardCornerRadius="@dimen/dp_4"
             app:cardElevation="@dimen/dp_2"
             >
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_46"
@@ -181,12 +202,15 @@
                 android:paddingLeft="@dimen/dp_16"
                 android:paddingRight="@dimen/dp_16"
                 >
+
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="@dimen/dp_24"
+                    android:layout_height="@dimen/dp_24"
+                    android:layout_gravity="center_vertical"
                     android:paddingRight="@dimen/dp_10"
-                    android:src="@drawable/ic_country_black_24dp"
+                    android:src="@drawable/ic_settings_language"
                     />
+
                 <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -196,6 +220,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_14"
                     />
+
                 <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -216,6 +241,7 @@
             app:cardCornerRadius="@dimen/dp_4"
             app:cardElevation="@dimen/dp_2"
             >
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_46"
@@ -223,12 +249,14 @@
                 android:paddingLeft="@dimen/dp_16"
                 android:paddingRight="@dimen/dp_16"
                 >
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:paddingRight="@dimen/dp_10"
                     android:src="@drawable/ic_home_black_24dp"
                     />
+
                 <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -238,6 +266,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_14"
                     />
+
                 <android.support.v7.widget.SwitchCompat
                     android:id="@+id/switch_display_dash"
                     android:layout_width="wrap_content"
@@ -261,11 +290,13 @@
             app:cardCornerRadius="@dimen/dp_4"
             app:cardElevation="@dimen/dp_2"
             >
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 >
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_46"
@@ -273,12 +304,15 @@
                     android:paddingLeft="@dimen/dp_16"
                     android:paddingRight="@dimen/dp_16"
                     >
+
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_width="@dimen/dp_24"
+                        android:layout_height="@dimen/dp_24"
+                        android:layout_gravity="center_vertical"
                         android:paddingRight="@dimen/dp_10"
-                        android:src="@drawable/ic_sync_black_24dp"
+                        android:src="@drawable/ic_settings_sync"
                         />
+
                     <com.viettel.mbccs.widget.CustomTextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -288,6 +322,7 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_14"
                         />
+
                     <android.support.v7.widget.SwitchCompat
                         android:id="@+id/switch_sync_bccs"
                         android:layout_width="wrap_content"
@@ -302,6 +337,7 @@
                         bind:onCheckedChangedListener="@{ (v, b) -> presenter.onCheckedChanged(v, b) }"
                         />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_36"
@@ -309,6 +345,7 @@
                     android:paddingLeft="@dimen/dp_16"
                     android:paddingRight="@dimen/dp_16"
                     >
+
                     <com.viettel.mbccs.widget.CustomTextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -337,20 +374,23 @@
             app:cardCornerRadius="@dimen/dp_4"
             app:cardElevation="@dimen/dp_2"
             >
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dp_56"
                 android:layout_gravity="center|top"
-                android:orientation="horizontal"
                 android:onClick="@{()->presenter.logout()}"
+                android:orientation="horizontal"
                 android:paddingLeft="@dimen/dp_16"
                 android:paddingRight="@dimen/dp_16"
                 >
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_enter_red_24dp"
                     />
+
                 <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
