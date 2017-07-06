@@ -9,8 +9,18 @@ import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDialog;
 import com.viettel.mbccs.callback.OnListenerItemRecyclerView;
 import com.viettel.mbccs.constance.IconType;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.BillingModel;
+import com.viettel.mbccs.data.model.EmptyObject;
+import com.viettel.mbccs.data.model.SaleTrans;
+import com.viettel.mbccs.data.source.BillingRepository;
+import com.viettel.mbccs.data.source.UserRepository;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
+import com.viettel.mbccs.data.source.remote.request.GetCreateInvoiceBillRequest;
+import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.screen.billing.adapter.BillingConfirmAdapter;
+import com.viettel.mbccs.utils.DialogUtils;
+import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import com.viettel.mbccs.widget.ToolBarView;
 
 import java.util.ArrayList;
@@ -18,6 +28,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import rx.Subscription;
+import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by jacky on 5/20/17.
@@ -31,8 +43,13 @@ public class DialogConfirmBillingFragment extends BaseDialog {
     @BindView(R.id.list)
     RecyclerView mRecyclerView;
 
+    private ArrayList<SaleTrans> mListSaleTransChoose = new ArrayList<>();
+
+    private BillingRepository mBillingRepository;
+    private CompositeSubscription mCompositeSubscription;
     private BillingConfirmAdapter mBillingConfirmAdapter;
     private LinearLayoutManager mLinearLayoutManager;
+    private UserRepository mUserRepository;
 
     @Override
     protected void initView() {
@@ -65,10 +82,17 @@ public class DialogConfirmBillingFragment extends BaseDialog {
 
     @Override
     protected void initData() {
-        mBillingConfirmAdapter = new BillingConfirmAdapter(listFake(), getBaseActivity());
-        mBillingConfirmAdapter.setOnClickItemRecycleView(new OnListenerItemRecyclerView<BillingModel>() {
+        if (getArguments() != null) {
+            mListSaleTransChoose = getArguments().getParcelableArrayList(SaleTrans.class.getName());
+        }
+        mUserRepository = UserRepository.getInstance();
+
+        mBillingRepository = BillingRepository.getInstance();
+        mCompositeSubscription = new CompositeSubscription();
+        mBillingConfirmAdapter = new BillingConfirmAdapter(mListSaleTransChoose, getBaseActivity());
+        mBillingConfirmAdapter.setOnClickItemRecycleView(new OnListenerItemRecyclerView<SaleTrans>() {
             @Override
-            public void onClickItem(BillingModel model, int position) {
+            public void onClickItem(SaleTrans model, int position) {
 
             }
         });
@@ -87,20 +111,43 @@ public class DialogConfirmBillingFragment extends BaseDialog {
                 dismiss();
                 break;
             case R.id.biv_done:
-                getBaseActivity().goToDialogFragment(new DialogSuccessFragment(), null);
-                dismiss();
+                createInvoiceBill();
                 break;
             default:
                 break;
         }
     }
 
-    private List<BillingModel> listFake() {
-        List<BillingModel> mList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            BillingModel model = new BillingModel();
-            mList.add(model);
+    private void createInvoiceBill() {
+        getBaseActivity().showLoadingDialog();
+        final DataRequest<GetCreateInvoiceBillRequest> request = new DataRequest<>();
+        GetCreateInvoiceBillRequest mGetCreateInvoiceBillRequest = new GetCreateInvoiceBillRequest();
+        mGetCreateInvoiceBillRequest.mShopId = Integer.valueOf(mUserRepository.getUserInfo().getShop().getShopId());
+        mGetCreateInvoiceBillRequest.mStaffId = mUserRepository.getUserInfo().getStaffInfo().getStaffId();
+        List<Long> mList = new ArrayList<>();
+        for(SaleTrans saleTrans:mListSaleTransChoose){
+            mList.add(saleTrans.getSaleTransId());
         }
-        return mList;
+        mGetCreateInvoiceBillRequest.mListSaleTrans = mGetCreateInvoiceBillRequest.getListSaleTransFromChoose(mList);
+
+        request.setWsRequest(mGetCreateInvoiceBillRequest);
+        request.setWsCode(WsCode.CreateInvoice);
+
+        Subscription subscription = mBillingRepository.createInvoiceBill(request)
+                .subscribe(new MBCCSSubscribe<EmptyObject>() {
+                    @Override
+                    public void onSuccess(EmptyObject response) {
+                        getBaseActivity().goToDialogFragment(new DialogSuccessFragment(), null);
+                        dismiss();
+                        getBaseActivity().hideLoadingDialog();
+                    }
+
+                    @Override
+                    public void onError(BaseException error) {
+                        DialogUtils.showDialog(getBaseActivity(), null, error.getMessage(), null);
+                        getBaseActivity().hideLoadingDialog();
+                    }
+                });
+        mCompositeSubscription.add(subscription);
     }
 }

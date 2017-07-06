@@ -8,15 +8,20 @@ import android.view.View;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataFragment;
 import com.viettel.mbccs.callback.OnListenerItemRecyclerView;
+import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.constance.WsCode;
 //import com.viettel.mbccs.data.model.ApDomain;
+import com.viettel.mbccs.data.model.ApDomainByType;
 import com.viettel.mbccs.data.model.Customer;
 import com.viettel.mbccs.data.source.QLKhachHangRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 //import com.viettel.mbccs.data.source.remote.request.GetApDomainRequest;
+import com.viettel.mbccs.data.source.remote.request.GetApDomainByTypeRequest;
 import com.viettel.mbccs.data.source.remote.request.GetRegisterSubInfoRequest;
+import com.viettel.mbccs.data.source.remote.response.BaseErrorResponse;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 //import com.viettel.mbccs.data.source.remote.response.GetApDomainResponse;
+import com.viettel.mbccs.data.source.remote.response.GetApDomainByTypeResponse;
 import com.viettel.mbccs.data.source.remote.response.GetRegisterSubInfoResponse;
 import com.viettel.mbccs.screen.change.installation.adapter.InstallationAddressAdapter;
 import com.viettel.mbccs.utils.EditTextUtil;
@@ -77,7 +82,7 @@ public class InstallationAddressFragment extends BaseDataFragment {
         mRecyclerView.addItemDecoration(dividerItemDecoration);
 
         getDataSpinnerPassport();
-        mTypeOfPage.setListSpinner(fakeSearch());
+
 
         EditTextUtil.hideKeyboard(getActivity());
     }
@@ -137,8 +142,8 @@ public class InstallationAddressFragment extends BaseDataFragment {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_search:
-                ///callApiSearch();
-                showSearchInfoCustomer(null);
+                callApiSearch();
+                //showSearchInfoCustomer(null);
                 break;
             default:
                 break;
@@ -175,30 +180,26 @@ public class InstallationAddressFragment extends BaseDataFragment {
 
 
     public void getDataSpinnerPassport() {
-//        getBaseActivity().showLoadingDialog();
-//        DataRequest<GetApDomainRequest> request = new DataRequest<>();
-//        GetApDomainRequest getApDomainRequest = new GetApDomainRequest();
-//        getApDomainRequest.setType(ApDomain.Type.LOAI_GIAY_TO);
-//
-//        request.setWsRequest(getApDomainRequest);
-//        request.setWsCode(ApiCode.GetListBusTypeIdRequire);
-//
-//        Subscription subscription = qlKhachHangRepository.getApDomain(request)
-//                .subscribe(new MBCCSSubscribe<GetApDomainResponse>() {
-//                    @Override
-//                    public void onSuccess(GetApDomainResponse object) {
-//                        if (dataPassportType != null && dataPassportType.size() != 0) {
-//                            dataPassportType.clear();
-//                        }
-//                        dataPassportType = object.getApDomainList();
-//                        getBaseActivity().hideLoadingDialog();
-//                    }
-//
-//                    @Override
-//                    public void onError(BaseException error) {
-//                        getBaseActivity().hideLoadingDialog();
-//                    }
-//                });
-//        subscriptions.add(subscription);
+        getBaseActivity().showLoadingDialog();
+        DataRequest<GetApDomainByTypeRequest> request = new DataRequest<>();
+        GetApDomainByTypeRequest getApDomainRequest = new GetApDomainByTypeRequest();
+        getApDomainRequest.setType(ApDomainByType.Type.LOAI_GIAY_TO);
+
+        request.setWsRequest(getApDomainRequest);
+        request.setWsCode(WsCode.GetApDomainByType);
+
+        Subscription subscription = qlKhachHangRepository.getApDomainByType(request)
+                .subscribe(new MBCCSSubscribe<GetApDomainByTypeResponse>() {
+                    @Override
+                    public void onSuccess(GetApDomainByTypeResponse object) {
+                        getBaseActivity().hideLoadingDialog();
+                    }
+
+                    @Override
+                    public void onError(BaseException error) {
+                        getBaseActivity().hideLoadingDialog();
+                    }
+                });
+        subscriptions.add(subscription);
     }
 }

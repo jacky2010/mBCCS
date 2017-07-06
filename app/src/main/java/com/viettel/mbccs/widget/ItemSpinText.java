@@ -54,6 +54,7 @@ public class ItemSpinText extends LinearLayout implements View.OnClickListener, 
     private ListPopupWindow popupWindow;
     private BaseEditSpinnerAdapter mAdapter;
     private boolean isPopupWindowShowing;
+    private String mTitleTextSpinner;
 
     public void setOnSelectSpinnerListener(OnSelectSpinnerListener mOnSelectSpinnerListener) {
         this.mOnSelectSpinnerListener = mOnSelectSpinnerListener;
@@ -93,11 +94,11 @@ public class ItemSpinText extends LinearLayout implements View.OnClickListener, 
     }
 
     private void initSpinner(TypedArray mTypedArray) {
-        String title = mTypedArray.getString(R.styleable.ItemSpinText_istSpinnerTitle);
+        mTitleTextSpinner = mTypedArray.getString(R.styleable.ItemSpinText_istSpinnerTitle);
         boolean isActive = mTypedArray.getBoolean(R.styleable.ItemSpinText_istSpinner, false);
         boolean isEnable = mTypedArray.getBoolean(R.styleable.ItemSpinText_istSpinnerEnable, true);
         mEditText.setVisibility(isActive ? VISIBLE : GONE);
-        mEditText.setText(title);
+        mEditText.setText(mTitleTextSpinner);
         mEditText.setEnabled(isEnable);
         findViewById(R.id.frame).setVisibility(isEnable ? GONE : VISIBLE);
     }
@@ -246,7 +247,7 @@ public class ItemSpinText extends LinearLayout implements View.OnClickListener, 
     @Override
     public final void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String data = ((BaseEditSpinnerAdapter) parent.getAdapter()).getItemString(position);
-        System.out.println("onItemClick" + position +"--"+ data);
+        System.out.println("onItemClick" + position + "--" + data);
         mEditText.setText(data);
         popupWindow.dismiss();
     }
@@ -288,7 +289,11 @@ public class ItemSpinText extends LinearLayout implements View.OnClickListener, 
         }
     }
 
-    public interface OnSelectSpinnerListener{
-        void onItemSelect(ItemSpinText itemSpinText,int position);
+    public String getStringSpinner() {
+        return mEditText.getText().toString().equals(mTitleTextSpinner) ? "" : mEditText.getText().toString();
+    }
+
+    public interface OnSelectSpinnerListener {
+        void onItemSelect(ItemSpinText itemSpinText, int position);
     }
 }

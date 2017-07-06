@@ -1,23 +1,31 @@
 package com.viettel.mbccs.screen.billing.adapter;
 
 import android.content.Context;
+import android.databinding.generated.callback.OnCheckedChangeListener;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseViewHolder;
 import com.viettel.mbccs.base.GenericRecycleAdapter;
 import com.viettel.mbccs.data.model.BillingModel;
+import com.viettel.mbccs.data.model.SaleTrans;
+import com.viettel.mbccs.data.source.UserRepository;
 
 import java.util.List;
 
 import butterknife.BindView;
 
-public class BillingAdapter extends GenericRecycleAdapter<BillingModel, BillingAdapter.BillingViewHolder> {
+public class BillingAdapter extends GenericRecycleAdapter<SaleTrans, BillingAdapter.BillingViewHolder> {
 
-    public BillingAdapter(List<BillingModel> mList, Context context) {
+    private String mPhone;
+
+    public BillingAdapter(List<SaleTrans> mList, Context context) {
         super(mList, context);
+        mPhone = UserRepository.getInstance().getUserInfo().getStaffInfo().getTel();
     }
 
     @Override
@@ -38,28 +46,42 @@ public class BillingAdapter extends GenericRecycleAdapter<BillingModel, BillingA
     }
 
     @Override
-    public void onItem(BillingModel appInfo, int position) {
+    public void onItem(SaleTrans item, int position) {
         if (mOnClickItemRecycleView != null) {
-            mOnClickItemRecycleView.onClickItem(appInfo,position);
+            mOnClickItemRecycleView.onClickItem(item, position);
         }
     }
 
     @Override
-    public void onSet(BillingModel item, BillingViewHolder holder, int position) {
+    public void onSet(final SaleTrans item, BillingViewHolder holder, int position) {
         System.out.println("BillingModel" + item);
         if (item != null) {
-            holder.mTrans.setText(String.valueOf(item.getSaleTransId()));
-            holder.mTotal.setText("cxcxcx");
-            holder.mDate.setText("cxcxcx");
+            holder.mTrans.setText(mPhone);
+            holder.mTotal.setText("Tổng tiền:" + item.getAmountTax());
+            holder.mDate.setText("Nạp/ chuyển anypay");
+            holder.mCheckItem.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
+                                                             @Override
+                                                             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                                                 item.setCheck(isChecked);
+                                                             }
+                                                         }
+            );
+            holder.mCheckItem.setChecked(item.isCheck());
         }
     }
 
     public class BillingViewHolder extends BaseViewHolder {
 
-        @BindView(R.id.tv_trans) TextView mTrans;
-        @BindView(R.id.tv_total)  TextView mTotal;
-        @BindView(R.id.tv_date)  TextView mDate;
+        @BindView(R.id.tv_trans)
+        TextView mTrans;
+        @BindView(R.id.tv_total)
+        TextView mTotal;
+        @BindView(R.id.tv_date)
+        TextView mDate;
+        @BindView(R.id.cb_item)
+        CheckBox mCheckItem;
+
 
         public BillingViewHolder(View itemView) {
             super(itemView);

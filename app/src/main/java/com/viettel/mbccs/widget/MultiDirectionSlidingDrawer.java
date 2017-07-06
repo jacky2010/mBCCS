@@ -1,5 +1,6 @@
 package com.viettel.mbccs.widget;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -15,9 +16,12 @@ import android.view.SoundEffectConstants;
 import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.accessibility.AccessibilityEvent;
+import android.widget.RelativeLayout;
 
 import com.viettel.mbccs.R;
+import com.viettel.mbccs.utils.ScreenUtils;
 
 
 public class MultiDirectionSlidingDrawer extends ViewGroup {
@@ -136,7 +140,6 @@ public class MultiDirectionSlidingDrawer extends ViewGroup {
                     + "to a valid child.");
         }
 
-
         int headerIdOne = a.getResourceId(R.styleable.MultiDirectionSlidingDrawer_headerOne, 0);
         if (headerIdOne == 0) {
             throw new IllegalArgumentException("The handle attribute is required and must refer "
@@ -183,6 +186,7 @@ public class MultiDirectionSlidingDrawer extends ViewGroup {
         setAlwaysDrawnWithCacheEnabled(false);
     }
 
+    @SuppressLint("MissingSuperCall")
     @Override
     protected void onFinishInflate() {
         mHandle = findViewById(mHandleId);
@@ -204,10 +208,28 @@ public class MultiDirectionSlidingDrawer extends ViewGroup {
                     + " existing child.");
         }
         mContent.setVisibility(View.GONE);
+        mContent.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                mContent.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                System.out.println("mContent"+ mContent.getHeight()+ ScreenUtils.getScreenHeightPixels(getContext()));
+                 //height is ready
+            }
+        });
+        getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                mContent.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                System.out.println("mContent---"+ getHeight()+ ScreenUtils.dpToPx(getContext(),48));
+                //height is ready
+            }
+        });
+
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+
         int widthSpecMode = MeasureSpec.getMode(widthMeasureSpec);
         int widthSpecSize = MeasureSpec.getSize(widthMeasureSpec);
 
@@ -224,6 +246,7 @@ public class MultiDirectionSlidingDrawer extends ViewGroup {
 
         if (mVertical) {
             int height = heightSpecSize - handle.getMeasuredHeight() - mTopOffset;
+            System.out.println("mContent-heightMeasureSpec"+heightSpecSize +"-"+ handle.getMeasuredHeight() +"-"+  mTopOffset );
             mContent.measure(MeasureSpec.makeMeasureSpec(widthSpecSize, MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY));
         } else {
             int width = widthSpecSize - handle.getMeasuredWidth() - mTopOffset;
@@ -708,7 +731,6 @@ public class MultiDirectionSlidingDrawer extends ViewGroup {
         }
         content.getViewTreeObserver().dispatchOnPreDraw();
         content.buildDrawingCache();
-
         content.setVisibility(View.GONE);
     }
 
@@ -819,6 +841,7 @@ public class MultiDirectionSlidingDrawer extends ViewGroup {
         requestLayout();
 
         sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
+        setVisibility(VISIBLE);
     }
 
     /**
@@ -910,6 +933,7 @@ public class MultiDirectionSlidingDrawer extends ViewGroup {
         if (mOnDrawerOpenListener != null) {
             mOnDrawerOpenListener.onDrawerOpened();
         }
+
     }
 
     /**
