@@ -46,7 +46,6 @@
                         android:layout_height="wrap_content"
                         android:background="#b7b7b7"
                         android:minWidth="@dimen/dp_360"
-                        android:padding="@dimen/dp_1"
                         app:tabBackground="@drawable/bg_tab_layout"
                         app:tabIndicatorHeight="0dp"
                         app:tabSelectedTextColor="#0083c2"
@@ -64,7 +63,7 @@
                     android:id="@+id/drawer"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/dp_140"
+                    android:layout_marginBottom="@dimen/dp_120"
                     app:content="@+id/content"
                     app:direction="topToBottom"
                     app:handle="@+id/handle"
@@ -82,7 +81,7 @@
                         android:orientation="vertical"
                         android:paddingLeft="@dimen/dp_16"
                         android:paddingRight="@dimen/dp_16"
-                        android:visibility="@{ presenter.isHideSearch ? View.GONE : View.VISIBLE }"
+                        android:clickable="true"
                         >
                         <com.viettel.mbccs.widget.CustomTextView
                             android:layout_width="match_parent"
@@ -202,8 +201,6 @@
                         <include
                             layout="@layout/item_text_filter"
                             android:id="@+id/view_close"
-                            app:isShow="@{presenter.isHideSearch}"
-                            app:onClick="@{()->presenter.expandSearch()}"
                             app:text="@{presenter.textSearch}"
                             />
 

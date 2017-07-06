@@ -2,6 +2,7 @@ package com.viettel.mbccs.data.source.remote.response;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.viettel.mbccs.data.model.SubType;
 import java.util.List;
 
 /**
@@ -9,15 +10,15 @@ import java.util.List;
  */
 
 public class GetListSubTypeResponse {
-    @SerializedName("data")
+    @SerializedName("listSubType")
     @Expose
-    List<String> data;
+    private List<SubType> subTypeList;
 
-    public List<String> getData() {
-        return data;
+    public List<SubType> getSubTypeList() {
+        return subTypeList;
     }
 
-    public void setData(List<String> data) {
-        this.data = data;
+    public void setSubTypeList(List<SubType> subTypeList) {
+        this.subTypeList = subTypeList;
     }
 }

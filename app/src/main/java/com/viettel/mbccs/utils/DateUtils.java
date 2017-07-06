@@ -155,9 +155,13 @@ public class DateUtils {
         return before.before(after);
     }
 
-    public static Date minDateBirthday() {
+    public static Date maxDateBirthday() {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, calendar.get(Calendar.YEAR) - TUOI);
         return calendar.getTime();
+    }
+
+    public static String getCurrentDate(){
+        return convertDateToString(System.currentTimeMillis(), TIMEZONE_FORMAT_SERVER);
     }
 }

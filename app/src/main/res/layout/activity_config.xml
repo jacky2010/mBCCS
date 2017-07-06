@@ -34,7 +34,7 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_4"
             app:cardCornerRadius="@dimen/dp_4"
             app:cardElevation="@dimen/dp_2"
             >
@@ -80,7 +80,7 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_4"
             app:cardCornerRadius="@dimen/dp_4"
             app:cardElevation="@dimen/dp_2"
             >
@@ -105,7 +105,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="center|left"
+                    android:gravity="center_vertical"
                     android:text="@string/config_notification"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_14"
@@ -130,7 +130,7 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_4"
             app:cardCornerRadius="@dimen/dp_4"
             app:cardElevation="@dimen/dp_2"
             >
@@ -155,7 +155,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="center|left"
+                    android:gravity="center_vertical"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_14"
                     app:textHtml="@{ presenter.nameCurrentCountry }"
@@ -190,7 +190,7 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_4"
             app:cardCornerRadius="@dimen/dp_4"
             app:cardElevation="@dimen/dp_2"
             >
@@ -212,10 +212,11 @@
                     />
 
                 <com.viettel.mbccs.widget.CustomTextView
+                    android:id="@+id/customTextView6"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="center|left"
+                    android:gravity="center_vertical"
                     android:text="@string/config_change_language"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_14"
@@ -237,7 +238,7 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_4"
             app:cardCornerRadius="@dimen/dp_4"
             app:cardElevation="@dimen/dp_2"
             >
@@ -261,7 +262,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="center|left"
+                    android:gravity="center_vertical"
                     android:text="@string/config_display_dashboard"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_14"
@@ -286,7 +287,7 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_4"
             app:cardCornerRadius="@dimen/dp_4"
             app:cardElevation="@dimen/dp_2"
             >
@@ -317,7 +318,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:gravity="center|left"
+                        android:gravity="center_vertical"
                         android:text="@string/config_sync_bccs"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_14"
@@ -340,10 +341,11 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_36"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:paddingLeft="@dimen/dp_16"
                     android:paddingRight="@dimen/dp_16"
+                    android:paddingBottom="@dimen/dp_6"
                     >
 
                     <com.viettel.mbccs.widget.CustomTextView
@@ -370,7 +372,7 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_4"
             app:cardCornerRadius="@dimen/dp_4"
             app:cardElevation="@dimen/dp_2"
             >

@@ -21,6 +21,7 @@ import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.databinding.LayoutSelectAddressBinding;
 import com.viettel.mbccs.utils.StringUtils;
 import com.viettel.mbccs.widget.fragment.DialogInputAddress;
+import com.viettel.mbccs.widget.model.AddressApp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,10 +29,7 @@ import java.util.List;
  * Created by HuyQuyet on 5/30/17.
  */
 @BindingMethods({
-        @BindingMethod(type = CustomSelectAddress.class, attribute = "idProvince", method = "setCurrentProvince"),
-        @BindingMethod(type = CustomSelectAddress.class, attribute = "idDistrict", method = "setCurrentDistrict"),
-        @BindingMethod(type = CustomSelectAddress.class, attribute = "idPrecinct", method = "setCurrentPrecinct"),
-        @BindingMethod(type = CustomSelectAddress.class, attribute = "address", method = "setCurrentAddress")
+        @BindingMethod(type = CustomSelectAddress.class, attribute = "area", method = "setProvideAddress")
 })
 public class CustomSelectAddress extends LinearLayout {
     private Context context;
@@ -45,10 +43,6 @@ public class CustomSelectAddress extends LinearLayout {
     private List<String> dataDistrict;
     private List<String> dataPrecinct;
 
-    private String setProvinceId;
-    private String setDistrictId;
-    private String setPrecinctId;
-    private String setAddress;
     private String txtAddress;
 
     private int positionProvince;
@@ -60,6 +54,8 @@ public class CustomSelectAddress extends LinearLayout {
     public ObservableField<ArrayAdapter<String>> adapterDistrict;
     public ObservableField<ArrayAdapter<String>> adapterPrecinct;
     public ObservableField<String> txtAddressDetail;
+
+    private AddressApp provideAddress;
 
     public CustomSelectAddress(@NonNull Context context) {
         this(context, null);
@@ -74,6 +70,7 @@ public class CustomSelectAddress extends LinearLayout {
         super(context, attrs, defStyleAttr);
         repository = UserRepository.getInstance();
         this.context = context;
+        provideAddress = new AddressApp();
         initView(context, attrs);
     }
 
@@ -82,6 +79,35 @@ public class CustomSelectAddress extends LinearLayout {
                 R.layout.layout_select_address, this, true);
         binding.setPresenter(this);
         address = StringUtils.isEmpty(txtAddress) ? "" : txtAddress + ", ";
+
+        adapterProvince = new ObservableField<>();
+        adapterDistrict = new ObservableField<>();
+        adapterPrecinct = new ObservableField<>();
+        txtAddressDetail = new ObservableField<>();
+
+        dataProvince = new ArrayList<>();
+        dataDistrict = new ArrayList<>();
+        dataPrecinct = new ArrayList<>();
+
+        areaProvinceList = new ArrayList<>();
+        areaDistrictList = new ArrayList<>();
+        areaPrecinctList = new ArrayList<>();
+
+        adapterProvince.set(
+                new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, dataProvince));
+        adapterProvince.get()
+                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        adapterDistrict.set(
+                new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, dataDistrict));
+        adapterDistrict.get()
+                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        adapterPrecinct.set(
+                new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, dataPrecinct));
+        adapterPrecinct.get()
+                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
 
         binding.spinnerLayoutSelectProvince.setOnItemSelectedListener(
                 new AdapterView.OnItemSelectedListener() {
@@ -138,11 +164,6 @@ public class CustomSelectAddress extends LinearLayout {
                             long id) {
                         if (positionPrecinct == position && positionPrecinct != 0) return;
                         positionPrecinct = position;
-//                        if (!StringUtils.isEmpty(setAddress)) {
-//                            txtAddressDetail.set(setAddress);
-//                            setAddress = "";
-//                            return;
-//                        }
                         txtAddressDetail.set(address
                                 + ", "
                                 + areaPrecinctList.get(position).getName()
@@ -157,53 +178,29 @@ public class CustomSelectAddress extends LinearLayout {
 
                     }
                 });
-
-        adapterProvince = new ObservableField<>();
-        adapterDistrict = new ObservableField<>();
-        adapterPrecinct = new ObservableField<>();
-        txtAddressDetail = new ObservableField<>();
-
-        dataProvince = new ArrayList<>();
-        dataDistrict = new ArrayList<>();
-        dataPrecinct = new ArrayList<>();
-
-        areaProvinceList = new ArrayList<>();
-        areaDistrictList = new ArrayList<>();
-        areaPrecinctList = new ArrayList<>();
-
-        adapterProvince.set(
-                new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, dataProvince));
-        adapterProvince.get()
-                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        adapterDistrict.set(
-                new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, dataDistrict));
-        adapterDistrict.get()
-                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        adapterPrecinct.set(
-                new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, dataPrecinct));
-        adapterPrecinct.get()
-                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     }
 
     private void getDataAreaProvince() {
+        if (areaProvinceList != null && areaProvinceList.size() != 0) areaProvinceList.clear();
         areaProvinceList = repository.getListAreaProvince();
+        if (dataProvince.size() != 0) dataProvince.clear();
         for (Area p : areaProvinceList) {
             dataProvince.add(p.getName());
         }
         adapterProvince.get().notifyDataSetChanged();
 
-        if (StringUtils.isEmpty(setProvinceId)) {
+        if (StringUtils.isEmpty(provideAddress.getIdProvince())) {
             binding.spinnerLayoutSelectProvince.setSelection(0);
             return;
         }
 
         int position = 0;
         for (int i = 0; i < areaProvinceList.size(); i++) {
-            if (!setProvinceId.equals(areaProvinceList.get(i).getProvince())) continue;
+            if (!provideAddress.getIdProvince().equals(areaProvinceList.get(i).getProvince())) {
+                continue;
+            }
             position = i;
-            setProvinceId = "";
+            provideAddress.setIdProvince("");
             break;
         }
         binding.spinnerLayoutSelectProvince.setSelection(position);
@@ -218,7 +215,7 @@ public class CustomSelectAddress extends LinearLayout {
         adapterDistrict.get().notifyDataSetChanged();
         positionDistrict = 0;
 
-        if (StringUtils.isEmpty(setDistrictId)) {
+        if (StringUtils.isEmpty(provideAddress.getIdDistrict())) {
             binding.spinnerLayoutSelectDistrict.setSelection(positionDistrict);
             areaPrecinctList.clear();
             dataPrecinct.clear();
@@ -233,10 +230,21 @@ public class CustomSelectAddress extends LinearLayout {
 
         int position = 0;
         for (int i = 0; i < areaDistrictList.size(); i++) {
-            if (!setDistrictId.equals(areaDistrictList.get(i).getDistrict())) continue;
+            if (!provideAddress.getIdDistrict().equals(areaDistrictList.get(i).getDistrict())) {
+                continue;
+            }
             position = i;
-            setDistrictId = "";
+            provideAddress.setIdDistrict("");
             break;
+        }
+        if (position == 0) {
+            areaPrecinctList.clear();
+            dataPrecinct.clear();
+            adapterPrecinct.get().notifyDataSetChanged();
+
+            getDataAreaPrecinct(
+                    areaDistrictList.get(position).getProvince() + areaDistrictList.get(position)
+                            .getDistrict());
         }
         binding.spinnerLayoutSelectDistrict.setSelection(position);
     }
@@ -249,11 +257,13 @@ public class CustomSelectAddress extends LinearLayout {
         adapterPrecinct.get().notifyDataSetChanged();
 
         int position = 0;
-        if (!StringUtils.isEmpty(setPrecinctId)) {
+        if (!StringUtils.isEmpty(provideAddress.getIdPrecinct())) {
             for (int i = 0; i < areaPrecinctList.size(); i++) {
-                if (!setPrecinctId.equals(areaPrecinctList.get(i).getPrecinct())) continue;
+                if (!provideAddress.getIdPrecinct().equals(areaPrecinctList.get(i).getPrecinct())) {
+                    continue;
+                }
                 position = i;
-                setPrecinctId = "";
+                provideAddress.setIdPrecinct("");
                 break;
             }
         }
@@ -267,34 +277,21 @@ public class CustomSelectAddress extends LinearLayout {
                     + areaProvinceList.get(positionProvince).getName());
         }
         binding.spinnerLayoutSelectPrecinct.setSelection(position);
-//        if (!StringUtils.isEmpty(setAddress)) {
-//            txtAddressDetail.set(setAddress);
-//            setAddress = "";
-//
-//        }
     }
 
-    public void setCurrentProvince(String idProvince) {
-        setProvinceId = idProvince;
-    }
-
-    public void setCurrentDistrict(String idDistrict) {
-        setDistrictId = idDistrict;
-    }
-
-    public void setCurrentPrecinct(String idPrecinct) {
-        setPrecinctId = idPrecinct;
-    }
-
-    public void setCurrentAddress(String address) {
+    public void setProvideAddress(AddressApp address) {
+        if (address == null) {
+            provideAddress = new AddressApp();
+        } else {
+            provideAddress = address;
+        }
         getDataAreaProvince();
-        if (StringUtils.isEmpty(address)) return;
-        String[] arr = address.trim().split(",");
+        if (address == null || StringUtils.isEmpty(address.getAddress())) return;
+        String[] arr = address.getAddress().trim().split(",");
         if (arr.length < 3) return;
         for (int i = 0; i < arr.length - 3; i++) {
             txtAddress = txtAddress + arr[i] + ", ";
         }
-        setAddress = address;
     }
 
     private Area getAreaProvince() {
@@ -309,8 +306,8 @@ public class CustomSelectAddress extends LinearLayout {
         return areaPrecinctList.size() != 0 ? areaPrecinctList.get(positionPrecinct) : null;
     }
 
-    public Address getAddress(){
-        Address result = new Address();
+    public AddressApp getAddress() {
+        AddressApp result = new AddressApp();
         result.setAreaProvince(getAreaProvince());
         result.setAreaDistrict(getAreaDistrict());
         result.setAreaPrecinct(getAreaPrecinct());
@@ -339,54 +336,5 @@ public class CustomSelectAddress extends LinearLayout {
         });
         dialog.setCancelable(false);
         dialog.show(((AppCompatActivity) context).getSupportFragmentManager(), "");
-    }
-
-    public class Address {
-        private Area areaProvince;
-        private Area areaDistrict;
-        private Area areaPrecinct;
-        private String address;
-
-        public Address() {
-        }
-
-        public Address(Area areaProvince, Area areaDistrict, Area areaPrecinct, String address) {
-            this.areaProvince = areaProvince;
-            this.areaDistrict = areaDistrict;
-            this.areaPrecinct = areaPrecinct;
-            this.address = address;
-        }
-
-        public Area getAreaProvince() {
-            return areaProvince;
-        }
-
-        public void setAreaProvince(Area areaProvince) {
-            this.areaProvince = areaProvince;
-        }
-
-        public Area getAreaDistrict() {
-            return areaDistrict;
-        }
-
-        public void setAreaDistrict(Area areaDistrict) {
-            this.areaDistrict = areaDistrict;
-        }
-
-        public Area getAreaPrecinct() {
-            return areaPrecinct;
-        }
-
-        public void setAreaPrecinct(Area areaPrecinct) {
-            this.areaPrecinct = areaPrecinct;
-        }
-
-        public String getAddress() {
-            return address;
-        }
-
-        public void setAddress(String address) {
-            this.address = address;
-        }
     }
 }

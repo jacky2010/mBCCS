@@ -27,6 +27,7 @@
     <string name="common_label_dot"> • </string>
     <string name="common_label_yes">Có</string>
     <string name="common_label_no">Không</string>
+    <string name="error_load_data">Error load data</string>
 
 
     <string formatted="false" name="count_serial_selected">
@@ -145,6 +146,7 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="config_title">Cấu hình</string>
     <string name="config_select_language">Chọn ngôn ngữ</string>
     <string name="config_select_country">Chọn quốc gia</string>
+    <string name="config_select_current_language">Tiếng bản địa</string>
     <string name="config_name_country">
         <![CDATA[
         Quốc gia: <b>%1$s</b>
@@ -783,6 +785,9 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="connector_mobile_tim_kiem">Tìm kiếm</string>
     <string name="connector_mobile_danh_sach_yeu_cau">Danh sách yêu cầu (%1$d)</string>
     <string name="connector_mobile_nhap_moi_thong_tin_dau_noi">Nhập mới thông tin đấu nối</string>
+    <string name="connector_mobile_thue_bao_tra_truoc">Thuê bao trả trước</string>
+    <string name="connector_mobile_thue_bao_tra_sau">Thuê bao trả sau</string>
+    <string name="connector_mobile_empty">Trống</string>
     <string name="item_connector_mobile_ma_yeu_cau">Mã yêu cầu: %1$s</string>
     <string name="item_connector_mobile_dich_vu">Dịch vụ: %1$s</string>
     <string name="item_connector_mobile_isdn">Isdn: %1$s</string>
@@ -791,6 +796,7 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="create_new_connector_information_title">Nhập mới thông tin đấu nối</string>
     <string name="create_new_connector_information_khach_hang">1.Khách hàng</string>
     <string name="create_new_connector_information_thue_bao">2.Thuê bao</string>
+    <string name="create_new_connector_information_hop_dong">3.Hợp đồng</string>
     <string formatted="false" name="create_new_connector_information_loai_khach_hang">
         <![CDATA[
         Loai KH<font color="#c42126">*</font>
@@ -879,6 +885,98 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     </string>
     <string name="confirm_connect_subscriber_dialog_dang_ky_vas">Tạo đăng ký VAS</string>
     <string name="confirm_connect_subscriber_dialog_bo_qua">Bỏ qua</string>
+    <string name="create_new_connector_information_postpaid_thong_tin_khach_hang">Thông tin khách hàng</string>
+    <string name="create_new_connector_information_postpaid_ngay_cap">Ngày cấp</string>
+    <string name="create_new_connector_information_postpaid_noi_cap">Nơi cấp</string>
+    <string name="create_new_connector_information_postpaid_so_giay_phep_kinh_đoan">Số giấy phép kinh doanh</string>
+    <string name="create_new_connector_information_postpaid_ma_so_thue">Mã số thuế</string>
+    <string name="create_new_connector_information_postpaid_thong_tin_nguoi_dang_ky">Thông tin người đăng ký</string>
+    <string formatted="false" name="create_new_connector_information_postpaid_ten_nguoi_dang_ky">
+        <![CDATA[
+        Tên người đăng ký<font color="#c42126">*</font>
+        ]]>
+    </string>
+    <string name="create_new_connector_information_postpaid_khuyen_mai">Khuyến mãi</string>
+    <string name="create_new_connector_information_postpaid_dat_coc">Đặt cọc</string>
+    <string name="create_new_connector_information_postpaid_han_muc">Hạn mức</string>
+    <string formatted="false" name="create_new_connector_information_postpaid_hop_dong">
+        <![CDATA[
+        Hợp đồng<font color="#c42126">*</font>
+        ]]>
+    </string>
+    <string name="create_new_connector_information_postpaid_thong_tin_hop_dong">Thông tin hợp đồng</string>
+    <string formatted="false" name="create_new_connector_information_postpaid_loai_hop_dong">
+        <![CDATA[
+        Loại hợp đồng<font color="#c42126">*</font>
+        ]]>
+    </string>
+    <string formatted="false" name="create_new_connector_information_postpaid_nguoi_thanh_toan">
+        <![CDATA[
+        Người thanh toan<font color="#c42126">*</font>
+        ]]>
+    </string>
+    <string formatted="false" name="create_new_connector_information_postpaid_ngay_ky">
+        <![CDATA[
+        Ngày ký<font color="#c42126">*</font>
+        ]]>
+    </string>
+    <string formatted="false" name="create_new_connector_information_postpaid_ngay_hieu_luc">
+        <![CDATA[
+        Ngày hiệu lực<font color="#c42126">*</font>
+        ]]>
+    </string>
+    <string formatted="false" name="create_new_connector_information_postpaid_hinh_thuc_thanh_toan">
+        <![CDATA[
+        Hình thức thanh toán<font color="#c42126">*</font>
+        ]]>
+    </string>
+    <string formatted="false" name="create_new_connector_information_postpaid_chu_ky_cuoc">
+        <![CDATA[
+        Chu kỳ cước<font color="#c42126">*</font>
+        ]]>
+    </string>
+    <string name="create_new_connector_information_postpaid_chi_tiet_in">Chi tiết in</string>
+    <string name="create_new_connector_information_postpaid_thong_tin_ngan_hang">Thông tin ngân hàng</string>
+    <string formatted="false" name="create_new_connector_information_postpaid_ngay_thu">
+        <![CDATA[
+        Ngày thu<font color="#c42126">*</font>
+        ]]>
+    </string>
+    <string name="create_new_connector_information_postpaid_hop_dong_thu">Hợp đồng nhờ thu</string>
+    <string formatted="false" name="create_new_connector_information_postpaid_ten_ngan_hang">
+        <![CDATA[
+        Tên ngân hàng<font color="#c42126">*</font>
+        ]]>
+    </string>
+    <string formatted="false" name="create_new_connector_information_postpaid_so_tai_khoan">
+        <![CDATA[
+        Số tài khoản<font color="#c42126">*</font>
+        ]]>
+    </string>
+    <string formatted="false" name="create_new_connector_information_postpaid_ten_tai_khoan">
+        <![CDATA[
+        Tên tài khoản<font color="#c42126">*</font>
+        ]]>
+    </string>
+    <string name="create_new_connector_information_postpaid_thong_tin_dia_chi_hop_dong">Thông tin địa chỉ hợp đồng</string>
+    <string name="create_new_connector_information_postpaid_thong_bao_va_thanh_toan_cuoc">Thông báo và thanh toán cước</string>
+    <string formatted="false" name="create_new_connector_information_postpaid_hinh_thuc_thong_bao_cuoc">
+        <![CDATA[
+        Hình thức thông báo cước<font color="#c42126">*</font>
+        ]]>
+    </string>
+    <string name="create_new_connector_information_postpaid_dia_chi_thong_bao_cuoc">Địa chỉ thông báo cước</string>
+    <string name="create_new_connector_information_postpaid_thong_tin_dai_dien_hop_dong">Thông tin đại diện hợp đồng</string>
+    <string formatted="false" name="create_new_connector_information_postpaid_ten_nguoi_dai_dien">
+        <![CDATA[
+        Tên người đại diện<font color="#c42126">*</font>
+        ]]>
+    </string>
+    <string name="create_new_connector_information_postpaid_chu_vu">Chức vụ</string>
+    <string name="create_new_connector_information_postpaid_cmtnd_ho_chieu">Số CMND/Hộ chiếu</string>
+    <string name="create_new_connector_information_postpaid_dien_thoai">Điện thoại</string>
+    <string name="create_new_connector_information_postpaid_thong_tin_phu_luc_hop_dong">Thông tin phụ lục hợp đồng</string>
+    <string name="create_new_connector_information_postpaid_phu_luc_hop_dong">Phụ lục hợp đồng</string>
 
     <string name="activity_list_order_warehouse_ngay_lap_lenh">Ngày lập lệnh</string>
     <string name="activity_list_order_warehouse_ma_kho_xuat">Mã kho xuất</string>

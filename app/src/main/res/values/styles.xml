@@ -98,6 +98,12 @@
         <item name="android:textColor">#757575</item>
     </style>
 
+    <style name="tablayoutStyle_16" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:textColor">#757575</item>
+    </style>
+
     <style name="SCBSwitch" parent="Theme.AppCompat.Light">
         <!-- active thumb & track color (30% transparency) -->
         <item name="colorControlActivated">#46bdbf</item>
@@ -258,7 +264,7 @@
     </style>
 
 
-    <style name="textLablel">
+    <style name="textLabel">
         <item name="android:padding">@dimen/dp_5</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">@dimen/sp_14</item>
@@ -334,5 +340,15 @@
         <item name="android:padding">@dimen/dp_5</item>
     </style>
 
-
+    <style name="titleTextGroupInformation">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">@dimen/dp_40</item>
+        <item name="android:layout_marginTop">@dimen/dp_10</item>
+        <item name="android:background">@color/green_three</item>
+        <item name="android:drawableLeft">@drawable/ic_arrow_drop_down_black_36dp</item>
+        <item name="android:drawableStart">@drawable/ic_arrow_drop_down_black_36dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
 </resources>

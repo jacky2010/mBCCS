@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.viettel.mbccs.screen.connector.ConnectMobilePostpaidViewPagerActivity"
+    >
+    <data>
+        <variable
+            name="presenter"
+            type="com.viettel.mbccs.screen.connector.ConnectMobilePostpaidViewPagerActivity"
+            />
+    </data>
+
+    <FrameLayout
+        android:id="@+id/frame_connector_mobile_postpaid_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:ignore="UselessParent"
+            >
+            <include
+                layout="@layout/toolbar"
+                android:id="@+id/toolbar_update_information"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_56"
+                bind:background="@{@color/colorAccent}"
+                bind:isShow="@{true}"
+                bind:leftIcon="@{@drawable/ic_arrow_left_white_24dp}"
+                bind:leftIconClick="@{()->presenter.onCancel()}"
+                bind:title="@{ @string/create_new_connector_information_title }"
+                />
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#b7b7b7"
+                android:minWidth="@dimen/dp_360"
+                app:tabBackground="@drawable/bg_tab_layout"
+                app:tabIndicatorHeight="0dp"
+                app:tabSelectedTextColor="#0083c2"
+                app:tabTextAppearance="@style/tablayoutStyle_16"
+                />
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vpPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                bind:pagerAdapter="@{ presenter.connectMobilePostpaidStatePagerAdapter }"
+                />
+        </LinearLayout>
+    </FrameLayout>
+</layout>
+

@@ -18,13 +18,14 @@ import android.provider.MediaStore;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import com.bumptech.glide.Glide;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.databinding.LayoutSelectImageNoBinding;
-import com.viettel.mbccs.utils.StringUtils;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -36,9 +37,9 @@ import java.util.Locale;
  */
 
 @BindingMethods({
-        @BindingMethod(type = CustomSelectImageNo.class, attribute = "urlImageFront", method = "setUrlImageFront"),
-        @BindingMethod(type = CustomSelectAddress.class, attribute = "urlImageBackside", method = "setUrlImageBackside"),
-        @BindingMethod(type = CustomSelectAddress.class, attribute = "urlImagePortrait", method = "setUrlImagePortrait"),
+        @BindingMethod(type = CustomSelectImageNo.class, attribute = "base64ImageFront", method = "setBase64ImageFront"),
+        @BindingMethod(type = CustomSelectAddress.class, attribute = "base64ImageBackside", method = "setBase64ImageBackside"),
+        @BindingMethod(type = CustomSelectAddress.class, attribute = "base64ImagePortrait", method = "setBase64ImagePortrait"),
         @BindingMethod(type = CustomSelectAddress.class, attribute = "imageFront", method = "setImageFront"),
         @BindingMethod(type = CustomSelectAddress.class, attribute = "imageBackside", method = "setImageBackside"),
         @BindingMethod(type = CustomSelectAddress.class, attribute = "imagePortrait", method = "setImagePortrait")
@@ -59,9 +60,6 @@ public class CustomSelectImageNo extends LinearLayout {
     private LayoutSelectImageNoBinding binding;
     private SelectImageCallback callback;
     private int imageSelect;
-    private boolean checkFront = false;
-    private boolean checkBackside = false;
-    private boolean checkPortrait = false;
 
     public ObservableField<Bitmap> imageFront;
     public ObservableField<Bitmap> imageBackside;
@@ -244,83 +242,75 @@ public class CustomSelectImageNo extends LinearLayout {
         switch (imageSelect) {
             case IMAGE_FRONT:
                 imageFront.set(thumbnail);
+                setImageFront(thumbnail);
                 break;
             case IMAGE_BACKSIDE:
                 imageBackside.set(thumbnail);
+                setImageBackside(thumbnail);
                 break;
             case IMAGE_PORTRAIT:
                 imagePortrait.set(thumbnail);
+                setImagePortrait(thumbnail);
                 break;
         }
     }
 
-    public void setUrlImageFront(String url) {
-        if (checkFront) return;
-        if (StringUtils.isEmpty(url)) {
-            Glide.with(context)
-                    .load(R.drawable.ic_camera_placeholder)
-                    .into(binding.imageFront);
-            return;
-        }
+    public void setBase64ImageFront(String base64) {
         Glide.with(context)
-                .load(url)
-                .placeholder(R.drawable.ic_camera_placeholder)
-                .into(binding.imageBackside);
-    }
-
-    public void setUrlImageBackside(String url) {
-        if (checkBackside) return;
-        if (StringUtils.isEmpty(url)) {
-            Glide.with(context)
-                    .load(R.drawable.ic_camera_placeholder)
-                    .into(binding.imageBackside);
-            return;
-        }
-        Glide.with(context)
-                .load(url)
+                .load(base64 == null ? null : Base64.decode(base64, Base64.DEFAULT))
+                .asBitmap()
                 .placeholder(R.drawable.ic_camera_placeholder)
                 .into(binding.imageFront);
     }
 
-    public void setUrlImagePortrait(String url) {
-        if (checkPortrait) return;
-        if (StringUtils.isEmpty(url)) {
-            Glide.with(context)
-                    .load(R.drawable.ic_camera_placeholder)
-                    .into(binding.imagePortrait);
-            return;
-        }
+    public void setBase64ImageBackside(String base64) {
         Glide.with(context)
-                .load(url)
+                .load(base64 == null ? null : Base64.decode(base64, Base64.DEFAULT))
+                .asBitmap()
+                .placeholder(R.drawable.ic_camera_placeholder)
+                .into(binding.imageBackside);
+
+    }
+
+    public void setBase64ImagePortrait(String base64) {
+        Glide.with(context)
+                .load(base64 == null ? null : Base64.decode(base64, Base64.DEFAULT))
+                .asBitmap()
                 .placeholder(R.drawable.ic_camera_placeholder)
                 .into(binding.imagePortrait);
     }
 
     public void setImageFront(Bitmap bitmap) {
-        if (bitmap == null) {
-            checkFront = false;
-            return;
-        }
-        imageFront.set(bitmap);
-        checkFront = true;
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+
+        Glide.with(context)
+                .load(stream.toByteArray())
+                .placeholder(R.drawable.ic_camera_placeholder)
+                .dontAnimate()
+                .into(binding.imageFront);
     }
 
     public void setImageBackside(Bitmap bitmap) {
-        if (bitmap == null) {
-            checkBackside = false;
-            return;
-        }
-        imageBackside.set(bitmap);
-        checkBackside = true;
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+
+        Glide.with(context)
+                .load(stream.toByteArray())
+                .placeholder(R.drawable.ic_camera_placeholder)
+                .dontAnimate()
+                .into(binding.imageBackside);
     }
 
     public void setImagePortrait(Bitmap bitmap) {
-        if (bitmap == null) {
-            checkPortrait = false;
-            return;
-        }
-        imagePortrait.set(bitmap);
-        checkPortrait = true;
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+
+        Glide.with(context)
+                .load(stream.toByteArray())
+                .placeholder(R.drawable.ic_camera_placeholder)
+                .dontAnimate()
+                .into(binding.imagePortrait);
     }
 
     public Bitmap getBitmapImageFront() {

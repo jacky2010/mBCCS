@@ -63,7 +63,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_below="@+id/text_information"
-                        android:visibility="@{ presenter.contractList.size() == 0 ? View.GONE : View.VISIBLE }"
+                        android:visibility="@{ presenter.isHideContractList ? View.GONE : View.VISIBLE }"
                         bind:recyclerAdapter="@{ presenter.connectorMobileAdapter }"
                         />
 
@@ -76,7 +76,7 @@
                         android:paddingRight="@dimen/dp_20"
                         android:text="@string/connector_mobile_nhap_moi_thong_tin_dau_noi"
                         android:textSize="@dimen/sp_18"
-                        android:visibility="@{ presenter.contractList.size() == 0 ? View.VISIBLE : View.GONE }"
+                        android:visibility="@{ presenter.isHideCreate ? View.GONE : View.VISIBLE }"
                         style="@style/button_positive"
                         />
                 </RelativeLayout>
@@ -85,7 +85,7 @@
                     android:id="@+id/drawer"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/dp_150"
+                    android:layout_marginBottom="@dimen/dp_180"
                     app:content="@+id/content"
                     app:direction="topToBottom"
                     app:handle="@+id/handle"
@@ -102,7 +102,6 @@
                         android:orientation="vertical"
                         android:paddingRight="@dimen/dp_10"
                         android:paddingLeft="@dimen/dp_10"
-                        android:visibility="@{ presenter.hideSearch ? View.VISIBLE : View.GONE }"
                         >
 
                         <com.viettel.mbccs.widget.CustomTextView
@@ -125,7 +124,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:checked="@{ presenter.selectPrepaid }"
+                                android:checked="@={ presenter.selectPrepaid }"
                                 android:text="@string/connector_mobile_tra_truoc"
                                 android:textColor="@color/text_title_input"
                                 android:textSize="@dimen/sp_14"
@@ -135,7 +134,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:checked="@{ presenter.selectPostpaid }"
+                                android:checked="@={ presenter.selectPostpaid }"
                                 android:text="@string/connector_mobile_tra_sau"
                                 android:textColor="@color/text_title_input"
                                 android:textSize="@dimen/sp_14"
@@ -169,7 +168,7 @@
                             style="@style/textTitleInputLight"
                             />
 
-                        <com.viettel.mbccs.widget.CustomEditText
+                        <com.viettel.mbccs.widget.CustomEditTextInput
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
@@ -179,8 +178,10 @@
                             android:paddingLeft="@dimen/dp_6"
                             android:paddingRight="@dimen/dp_10"
                             android:paddingStart="@dimen/dp_6"
-                            style="@style/inputStyleLight"
                             android:inputType="numberSigned"
+                            bind:error="@{ presenter.txtPassportError }"
+                            bind:themeLight="@{true}"
+                            style="@style/inputStyleLight"
                             />
 
                         <com.viettel.mbccs.widget.CustomButton
@@ -207,8 +208,6 @@
                         <include
                             layout="@layout/item_text_filter"
                             android:id="@+id/view_close"
-                            app:isShow="@{presenter.hideSearch}"
-                            app:onClick="@{()->presenter.expandSearch()}"
                             app:text="@{presenter.textSearch}"
                             />
 

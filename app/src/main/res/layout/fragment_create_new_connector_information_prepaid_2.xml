@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/tools"
+    >
+    <data>
+        <variable
+            name="presenter"
+            type="com.viettel.mbccs.screen.connector.fragment.prepaid.CreateNewConnectorInformationPrepaidFragmentPresenter"
+            />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
+            >
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                bind:textHtml="@{ @string/create_new_connector_information_dich_vu }"
+                style="@style/inputTitleName"
+                />
+
+            <com.viettel.mbccs.widget.SpinnerWithBorder
+                android:id="@+id/spinner_create_connector_2_dich_vu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                bind:adapter="@{ presenter.adapterSpinner2DichVu }"
+                    />
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                bind:textHtml="@{ @string/create_new_connector_information_goi_cuoc }"
+                style="@style/inputTitleName"
+                />
+
+
+            <com.viettel.mbccs.widget.SpinnerWithBorder
+                android:id="@+id/spinner_create_connector_2_goi_cuoc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_2"
+                bind:adapter="@{ presenter.adapterSpinner2GoiCuoc }"
+                    />
+
+            <com.viettel.mbccs.widget.CustomSelectAddress
+                android:id="@+id/custom_select_address_create_connector_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                bind:area="@{ presenter.area2 }"
+                />
+
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_4"
+                bind:textHtml="@{ @string/create_new_connector_information_loai_thue_bao }"
+                style="@style/inputTitleName"
+                />
+
+            <com.viettel.mbccs.widget.SpinnerWithBorder
+                android:id="@+id/spinner_create_connector_2_loai_thue_bao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                bind:adapter="@{ presenter.adapterSpinner2LoaiThueBao }"
+                />
+
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_4"
+                bind:textHtml="@{ @string/create_new_connector_information_hinh_thuc_hoa_mang }"
+                style="@style/inputTitleName"
+                />
+
+            <com.viettel.mbccs.widget.SpinnerWithBorder
+                android:id="@+id/spinner_create_connector_2_hinh_thuc_hoa_mang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                bind:adapter="@{ presenter.adapterSpinner2HTHoaMang }"
+                />
+
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_4"
+                bind:textHtml="@{ @string/create_new_connector_information_so_isdn }"
+                style="@style/inputTitleName"
+                />
+
+            <com.viettel.mbccs.widget.CustomEditTextInput
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@={ presenter.isdn }"
+                android:singleLine="true"
+                bind:error="@{ presenter.isdnError }"
+                />
+
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_4"
+                bind:textHtml="@{ @string/create_new_connector_information_serial }"
+                style="@style/inputTitleName"
+                />
+
+            <com.viettel.mbccs.widget.CustomEditTextInput
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@={ presenter.serial }"
+                android:inputType="number"
+                bind:error="@{ presenter.serialError }"
+                />
+
+            <com.viettel.mbccs.widget.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/create_new_connector_information_thong_tin_hang_hoa_di_kem"
+                style="@style/inputTitleName"
+                android:layout_marginTop="@dimen/dp_4"
+                />
+
+            <com.viettel.mbccs.widget.CustomEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@={ presenter.informationStock }"
+                android:drawableEnd="@drawable/ic_search_black_24dp"
+                android:drawableRight="@drawable/ic_search_black_24dp"
+                style="@style/inputStyle"
+                bind:error="@{ presenter.informationStockError }"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_10"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_4"
+                android:paddingRight="@dimen/dp_4"
+                >
+
+                <com.viettel.mbccs.widget.CustomButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="@dimen/dp_6"
+                    android:layout_marginRight="@dimen/dp_6"
+                    android:layout_weight="1"
+                    android:onClick="@{ v -> presenter.onCancelNewView2() }"
+                    android:text="@string/create_new_connector_information_back"
+                    style="@style/button_nagative_grey_seven"
+                    />
+
+                <com.viettel.mbccs.widget.CustomButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="@dimen/dp_6"
+                    android:layout_marginRight="@dimen/dp_6"
+                    android:layout_weight="1"
+                    android:onClick="@{ v -> presenter.onEnter() }"
+                    android:text="@string/create_new_connector_information_enter"
+                    style="@style/button_positive"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</layout>

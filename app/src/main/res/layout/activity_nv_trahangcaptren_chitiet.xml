@@ -24,25 +24,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="asdfasdf"
-            style="@style/textLablel"
+            style="@style/textLabel"
             />
         <com.viettel.mbccs.widget.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="asdfasdf"
-            style="@style/textLablel"
+            style="@style/textLabel"
             />
         <com.viettel.mbccs.widget.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="asdfasdf"
-            style="@style/textLablel"
+            style="@style/textLabel"
             />
         <com.viettel.mbccs.widget.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="asdfasdf"
-            style="@style/textLablel"
+            style="@style/textLabel"
             />
 
         <com.viettel.mbccs.widget.CustomTextView

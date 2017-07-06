@@ -1,6 +1,5 @@
 package com.viettel.mbccs.constance;
 
-import android.support.annotation.StringDef;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,11 +8,6 @@ import java.util.List;
  */
 
 public class Data {
-    @StringDef({ Gender.MALE, Gender.FEMALE })
-    public @interface Gender {
-        String MALE = "M";
-        String FEMALE = "N";
-    }
 
     public static List<DataField> connectorTelServiceType() {
         List<DataField> result = new ArrayList<>();

@@ -37,5 +37,7 @@ public class SellOrdersContract {
         String getStringDateFrom();
 
         void showErrorDate();
+
+        void closeFormSearch();
     }
 }

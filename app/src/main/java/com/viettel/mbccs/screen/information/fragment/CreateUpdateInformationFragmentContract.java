@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import com.viettel.mbccs.base.BasePresenter;
 import com.viettel.mbccs.base.BaseView;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
-import com.viettel.mbccs.widget.CustomSelectAddress;
+import com.viettel.mbccs.widget.model.AddressApp;
 
 /**
  * Created by HuyQuyet on 5/29/17.
@@ -21,7 +21,7 @@ public interface CreateUpdateInformationFragmentContract {
 
         void onCancel();
 
-        CustomSelectAddress.Address getAddress();
+        AddressApp getAddress();
 
         String getBirthDate();
 

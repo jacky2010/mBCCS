@@ -39,6 +39,7 @@
         <include
             layout="@layout/test_content_expanded"
             android:id="@+id/content"
+            android:clickable="true"
             />
 
         <RelativeLayout

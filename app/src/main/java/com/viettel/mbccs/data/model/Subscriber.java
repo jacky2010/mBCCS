@@ -24,7 +24,7 @@ public class Subscriber implements Parcelable {
     // Id hợp đồng
     @SerializedName("contractId")
     @Expose
-    private int contractId;
+    private Integer contractId;
 
     // loại thuê bao
     @SerializedName("subType")
@@ -34,12 +34,12 @@ public class Subscriber implements Parcelable {
     // Id lí do hòa mạng
     @SerializedName("regReasonId")
     @Expose
-    private int regReasonId;
+    private Integer regReasonId;
 
     // Id lí do kết thúc
     @SerializedName("finishReasonId")
     @Expose
-    private int finishReasonId;
+    private Integer finishReasonId;
 
     // mã cửa hàng
     @SerializedName("shopCode")
@@ -79,12 +79,12 @@ public class Subscriber implements Parcelable {
     // trạng thái
     @SerializedName("status")
     @Expose
-    private int status;
+    private Integer status;
 
     // tiền cọc
     @SerializedName("deposit")
     @Expose
-    private int deposit;
+    private Integer deposit;
 
     // Địa chỉ
     @SerializedName("address")
@@ -119,9 +119,9 @@ public class Subscriber implements Parcelable {
     // giới hạn
     @SerializedName("quota")
     @Expose
-    private int quota;
+    private Integer quota;
 
-    // Mã chương trình khuyênn
+    // Mã chương trình khuyến mãi
     @SerializedName("promotionCode")
     @Expose
     private String promotionCode;
@@ -134,7 +134,7 @@ public class Subscriber implements Parcelable {
     // id lí do đặt cọc
     @SerializedName("reasonDepositId")
     @Expose
-    private int reasonDepositId;
+    private Integer reasonDepositId;
 
     // userUsing
     @SerializedName("userUsing")
@@ -149,7 +149,7 @@ public class Subscriber implements Parcelable {
     // Id cán bộ
     @SerializedName("staffId")
     @Expose
-    private int staffId;
+    private Integer staffId;
 
     // password
     @SerializedName("password")
@@ -224,12 +224,17 @@ public class Subscriber implements Parcelable {
     // dịch vụ
     @SerializedName("telecomServiceId")
     @Expose
-    private int telecomServiceId;
+    private Integer telecomServiceId;
+
+    // dịch vụ
+    @SerializedName("serviceType")
+    @Expose
+    private String serviceType;
 
     // paymentOrder
     @SerializedName("paymentOrder")
     @Expose
-    private int paymentOrder;
+    private Integer paymentOrder;
 
     // mã địa chỉ
     @SerializedName("locationCode")
@@ -244,12 +249,12 @@ public class Subscriber implements Parcelable {
     // loại kênh
     @SerializedName("channelTypeId")
     @Expose
-    private int channelTypeId;
+    private Integer channelTypeId;
 
     // hoàn thành
     @SerializedName("isInfoCompleted")
     @Expose
-    private int isInfoCompleted;
+    private Integer isInfoCompleted;
 
     // adslIsdn
     @SerializedName("adslIsdn")
@@ -269,7 +274,7 @@ public class Subscriber implements Parcelable {
     // adslSubId
     @SerializedName("adslSubId")
     @Expose
-    private int adslSubId;
+    private Integer adslSubId;
 
     // địa chỉ lắp đặt
     @SerializedName("deployAddress")
@@ -284,17 +289,17 @@ public class Subscriber implements Parcelable {
     // loại
     @SerializedName("type")
     @Expose
-    private int type;
+    private Integer type;
 
     // operation
     @SerializedName("operation")
     @Expose
-    private int operation;
+    private Integer operation;
 
     // syncStatus
     @SerializedName("syncStatus")
     @Expose
-    private int syncStatus;
+    private Integer syncStatus;
 
     // syncLastUpdateTime
     @SerializedName("syncLastUpdateTime")
@@ -308,6 +313,14 @@ public class Subscriber implements Parcelable {
     @SerializedName("customer")
     @Expose
     private Customer customer;
+
+    @SerializedName("numResetZone")
+    @Expose
+    private Integer numResetZone;
+
+    @SerializedName("payType")
+    @Expose
+    private String payType;
 
     public Subscriber() {
 
@@ -357,6 +370,7 @@ public class Subscriber implements Parcelable {
         home = in.readString();
         productCode = in.readString();
         telecomServiceId = in.readInt();
+        serviceType = in.readString();
         paymentOrder = in.readInt();
         locationCode = in.readString();
         locationName = in.readString();
@@ -373,6 +387,8 @@ public class Subscriber implements Parcelable {
         syncStatus = in.readInt();
         syncLastUpdateTime = in.readString();
         packageName = in.readString();
+        payType = in.readString();
+        numResetZone = in.readInt();
     }
 
     @Override
@@ -420,6 +436,7 @@ public class Subscriber implements Parcelable {
         dest.writeString(home);
         dest.writeString(productCode);
         dest.writeInt(telecomServiceId);
+        dest.writeString(serviceType);
         dest.writeInt(paymentOrder);
         dest.writeString(locationCode);
         dest.writeString(locationName);
@@ -436,6 +453,8 @@ public class Subscriber implements Parcelable {
         dest.writeInt(syncStatus);
         dest.writeString(syncLastUpdateTime);
         dest.writeString(packageName);
+        dest.writeString(payType);
+        dest.writeInt(numResetZone);
     }
 
     @Override
@@ -471,11 +490,11 @@ public class Subscriber implements Parcelable {
         this.custReqId = custReqId;
     }
 
-    public int getContractId() {
+    public Integer getContractId() {
         return contractId;
     }
 
-    public void setContractId(int contractId) {
+    public void setContractId(Integer contractId) {
         this.contractId = contractId;
     }
 
@@ -559,19 +578,19 @@ public class Subscriber implements Parcelable {
         this.userCreated = userCreated;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
-    public int getDeposit() {
+    public Integer getDeposit() {
         return deposit;
     }
 
-    public void setDeposit(int deposit) {
+    public void setDeposit(Integer deposit) {
         this.deposit = deposit;
     }
 
@@ -623,11 +642,11 @@ public class Subscriber implements Parcelable {
         this.addressCode = addressCode;
     }
 
-    public int getQuota() {
+    public Integer getQuota() {
         return quota;
     }
 
-    public void setQuota(int quota) {
+    public void setQuota(Integer quota) {
         this.quota = quota;
     }
 
@@ -647,11 +666,11 @@ public class Subscriber implements Parcelable {
         this.regType = regType;
     }
 
-    public int getReasonDepositId() {
+    public Integer getReasonDepositId() {
         return reasonDepositId;
     }
 
-    public void setReasonDepositId(int reasonDepositId) {
+    public void setReasonDepositId(Integer reasonDepositId) {
         this.reasonDepositId = reasonDepositId;
     }
 
@@ -671,11 +690,11 @@ public class Subscriber implements Parcelable {
         this.userTitle = userTitle;
     }
 
-    public int getStaffId() {
+    public Integer getStaffId() {
         return staffId;
     }
 
-    public void setStaffId(int staffId) {
+    public void setStaffId(Integer staffId) {
         this.staffId = staffId;
     }
 
@@ -791,12 +810,20 @@ public class Subscriber implements Parcelable {
         this.productCode = productCode;
     }
 
-    public int getTelecomServiceId() {
+    public Integer getTelecomServiceId() {
         return telecomServiceId;
     }
 
-    public void setTelecomServiceId(int telecomServiceId) {
+    public void setTelecomServiceId(Integer telecomServiceId) {
         this.telecomServiceId = telecomServiceId;
+    }
+
+    public String getServiceType() {
+        return serviceType;
+    }
+
+    public void setServiceType(String serviceType) {
+        this.serviceType = serviceType;
     }
 
     public int getPaymentOrder() {
@@ -933,5 +960,21 @@ public class Subscriber implements Parcelable {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public Integer getNumResetZone() {
+        return numResetZone;
+    }
+
+    public void setNumResetZone(Integer numResetZone) {
+        this.numResetZone = numResetZone;
+    }
+
+    public String getPayType() {
+        return payType;
+    }
+
+    public void setPayType(String payType) {
+        this.payType = payType;
     }
 }

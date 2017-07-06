@@ -1,16 +1,19 @@
 package com.viettel.mbccs.screen.connector.mobile;
 
-import android.support.v4.app.FragmentTransaction;
+import android.content.Intent;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
+import com.viettel.mbccs.constance.MobileType;
 import com.viettel.mbccs.data.model.Contract;
 import com.viettel.mbccs.data.model.Customer;
+import com.viettel.mbccs.data.source.remote.request.CheckIdNoRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.databinding.ActivityConnectorMobileBinding;
+import com.viettel.mbccs.screen.connector.ConnectMobilePostpaidViewPagerActivity;
+import com.viettel.mbccs.screen.connector.ConnectMobilePrepaidViewPagerActivity;
 import com.viettel.mbccs.screen.connector.adapter.ConnectorMobileAdapter;
-import com.viettel.mbccs.screen.connector.fragment.CreateNewConnectorInformation1Fragment;
-import com.viettel.mbccs.screen.connector.fragment.CreateNewConnectorInformationFragmentPresenter;
 import com.viettel.mbccs.utils.DialogUtils;
+import com.viettel.mbccs.widget.MultiDirectionSlidingDrawer;
 import java.util.List;
 
 public class ConnectorMobileActivity
@@ -20,6 +23,7 @@ public class ConnectorMobileActivity
     private ConnectorMobileAdapter connectorMobileAdapter;
     private Customer customer;
     private List<Contract> contractList;
+    private CheckIdNoRequest checkIdNoRequest;
 
 
     @Override
@@ -32,14 +36,26 @@ public class ConnectorMobileActivity
         mPresenter = new ConnectorMobilePresenter(this, this);
         mPresenter.subscribe();
         mBinding.setPresenter(mPresenter);
+        mBinding.drawer.setOnDrawerCloseListener(
+                new MultiDirectionSlidingDrawer.OnDrawerCloseListener() {
+                    @Override
+                    public void onDrawerClosed() {
+                        mPresenter.setTextHideSearch();
+                    }
+                });
     }
 
     @Override
     protected void onStart() {
-        mPresenter.unSubscribe();
         super.onStart();
+        mPresenter.unSubscribe();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mBinding.drawer.open();
+    }
 
     @Override
     public void showLoading() {
@@ -54,11 +70,6 @@ public class ConnectorMobileActivity
     @Override
     public void onCancel() {
         onBackPressed();
-    }
-
-    @Override
-    public void txtPassportEmpty() {
-        DialogUtils.showDialog(this, getString(R.string.connector_mobile_so_giay_to_trong));
     }
 
     @Override
@@ -77,20 +88,41 @@ public class ConnectorMobileActivity
 
     @Override
     public void onItemClick(int position) {
-        CreateNewConnectorInformation1Fragment fragment;
-        if (position == -1) {
-            fragment = CreateNewConnectorInformation1Fragment.newInstance(null, null);
+        if (checkIdNoRequest.getSubType().equals(MobileType.TRA_TRUOC)) {
+            Intent intent =
+                    new Intent(ConnectorMobileActivity.this, ConnectMobilePrepaidViewPagerActivity.class);
+            intent.putExtra(ConnectMobilePrepaidViewPagerActivity.ARG_CONTRACT,
+                    contractList != null && contractList.size() != 0 ? contractList.get(position)
+                            : null);
+            intent.putExtra(ConnectMobilePrepaidViewPagerActivity.ARG_CUSTOMER, customer);
+            intent.putExtra(ConnectMobilePrepaidViewPagerActivity.ARG_CHECK_ID_NO_REQUEST,
+                    checkIdNoRequest);
+            startActivity(intent);
         } else {
-            fragment = CreateNewConnectorInformation1Fragment.newInstance(customer,
-                    contractList.get(position));
+            Intent intent =
+                    new Intent(ConnectorMobileActivity.this, ConnectMobilePostpaidViewPagerActivity.class);
+            intent.putExtra(ConnectMobilePostpaidViewPagerActivity.ARG_CONTRACT,
+                    contractList != null && contractList.size() != 0 ? contractList.get(position)
+                            : null);
+            intent.putExtra(ConnectMobilePostpaidViewPagerActivity.ARG_CUSTOMER, customer);
+            intent.putExtra(ConnectMobilePostpaidViewPagerActivity.ARG_CHECK_ID_NO_REQUEST,
+                    checkIdNoRequest);
+            startActivity(intent);
         }
-        CreateNewConnectorInformationFragmentPresenter presenter =
-                new CreateNewConnectorInformationFragmentPresenter(this);
-        presenter.setView(fragment);
+    }
 
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_connector_mobile, fragment);
-        transaction.addToBackStack(CreateNewConnectorInformation1Fragment.STRING_NAME);
-        transaction.commit();
+    @Override
+    public void closeFormSearch() {
+        mBinding.drawer.animateClose();
+    }
+
+    @Override
+    public void getCustomerSuccess(Customer customer) {
+        this.customer = customer;
+    }
+
+    @Override
+    public void setDataFormSearch(CheckIdNoRequest checkIdNoRequest) {
+        this.checkIdNoRequest = checkIdNoRequest;
     }
 }

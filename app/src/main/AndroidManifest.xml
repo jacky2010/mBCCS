@@ -32,23 +32,33 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key"/>
-
         <meta-data
             android:name="AA_DB_NAME"
             android:value="mbccs_db"/>
         <meta-data
             android:name="AA_DB_VERSION"
             android:value="2"/>
-
         <meta-data
             android:name="AA_MODELS"
             android:value="com.viettel.mbccs.data.model.Precinct,
-            com.viettel.mbccs.data.model.Province,
-            com.viettel.mbccs.data.model.District,
-            com.viettel.mbccs.data.model.database.AreaDataBase,
-            com.viettel.mbccs.data.model.database.ImageDataBase,
-            com.viettel.mbccs.data.model.UploadImage"/>
+                           com.viettel.mbccs.data.model.Province,
+                           com.viettel.mbccs.data.model.District,
+                           com.viettel.mbccs.data.model.database.AreaDataBase,
+                           com.viettel.mbccs.data.model.database.ImageDataBase,
+                           com.viettel.mbccs.data.model.UploadImage"/>
 
+        <!-- Service -->
+        <service
+            android:name=".service.service.UploadImageService"
+            android:exported="true"/>
+        <service
+            android:name=".service.service.DownloadImageService"
+            android:exported="true"/>
+        <service
+            android:name=".service.service.CreateDataBaseService"
+            android:exported="true"/>
+
+        <receiver android:name=".service.receiver.UploadImageReceiver"/>
 
         <activity
             android:name=".screen.splash.SplashActivity"
@@ -62,11 +72,9 @@
         <activity
             android:name=".screen.TestActivity"
             android:screenOrientation="portrait"/>
-
         <activity
             android:name=".screen.billing.BillingActivity"
             android:screenOrientation="portrait"/>
-
         <activity
             android:name=".screen.resetpass.ResetPasswordActivity"
             android:screenOrientation="portrait"/>
@@ -111,27 +119,21 @@
         <activity
             android:name=".screen.sell.channel.channelpicker.ChannelPickerActivity"
             android:screenOrientation="portrait"/>
-
         <activity
             android:name=".screen.branches.BranchesActivity"
             android:screenOrientation="portrait"/>
-
         <activity
             android:name=".screen.changesim.ChangeSimActivity"
             android:screenOrientation="portrait"/>
-
         <activity
             android:name=".screen.sellanypay.SellAnyPayActivity"
             android:screenOrientation="portrait"/>
-
         <activity
             android:name=".screen.branches.staffpicker.StaffPickerActivity"
             android:screenOrientation="portrait"/>
-
         <activity
             android:name=".screen.transferanypay.TransferAnyPayActivity"
             android:screenOrientation="portrait"/>
-
         <activity
             android:name=".screen.branches.btspicker.BTSPickerActivity"
             android:screenOrientation="portrait"/>
@@ -186,7 +188,6 @@
         <activity
             android:name=".screen.information.CreateUpdateInformationActivity"
             android:screenOrientation="portrait"/>
-
         <activity
             android:name=".screen.nhapkhocapduoi.ListOrderActivity"
             android:screenOrientation="portrait"/>
@@ -217,61 +218,37 @@
         <activity
             android:name=".screen.manager.area.AdministrativeAreaDetailActivity"
             android:screenOrientation="portrait"/>
-
         <activity
             android:name=".screen.survey.SurveyListActivity"
             android:screenOrientation="portrait"/>
-
         <activity
             android:name=".screen.hotnewscskpp.HotNewsCSKPPActivity"
             android:screenOrientation="portrait"/>
-
         <activity
             android:name=".screen.kppfeedback.KPPFeedbackActivity"
             android:screenOrientation="portrait"/>
-
         <activity
             android:name=".screen.uploadimage.UploadImageActivity"
             android:screenOrientation="portrait"/>
-
         <activity
             android:name=".screen.viewwarehouse.ViewWarehouseActivity"
             android:screenOrientation="portrait"/>
-
         <activity
             android:name=".screen.common.picker.KeyValuePickerActivity"
             android:screenOrientation="portrait"/>
-
         <activity
             android:name=".screen.splash.DownloadDataActivity"
             android:screenOrientation="portrait"/>
-
         <activity
             android:name=".screen.stockdeliver.StockDeliverActivity"
             android:screenOrientation="portrait"/>
-
         <activity
             android:name=".screen.stockdeliver.TestStockDeliveryActivity"
             android:screenOrientation="portrait"/>
 
-        <!--Servicew-->
-        <service
-            android:name=".service.service.UploadImageService"
-            android:exported="true"/>
-        <service
-            android:name=".service.service.DownloadImageService"
-            android:exported="true"/>
-
-        <service
-            android:name=".service.service.CreateDataBaseService"
-            android:exported="true"/>
-
-        <receiver android:name=".service.receiver.UploadImageReceiver"/>
-
         <activity
             android:name=".screen.Test"
             android:screenOrientation="portrait"/>
-
         <activity
             android:name=".screen.nhanvientrahang.createNote.NhapKhoCapDuoiDemo"
             android:screenOrientation="portrait"/>
@@ -299,6 +276,13 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.importwarehousefromstaff.importnote.CreateImportStockFromStaffActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screen.connector.ConnectMobilePostpaidViewPagerActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screen.connector.ConnectMobilePrepaidViewPagerActivity"
             android:screenOrientation="portrait"/>
     </application>
 

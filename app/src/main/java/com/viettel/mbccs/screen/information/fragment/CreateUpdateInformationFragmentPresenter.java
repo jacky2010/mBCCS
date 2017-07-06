@@ -5,13 +5,12 @@ import android.content.Intent;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
-import android.graphics.Bitmap;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.AdapterView;
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.constance.Data;
+import com.viettel.mbccs.constance.Gender;
 import com.viettel.mbccs.constance.MobileType;
 import com.viettel.mbccs.constance.TelServiceId;
 import com.viettel.mbccs.constance.WsCode;
@@ -21,7 +20,6 @@ import com.viettel.mbccs.data.model.Contract;
 import com.viettel.mbccs.data.model.Customer;
 import com.viettel.mbccs.data.model.Product;
 import com.viettel.mbccs.data.model.Subscriber;
-import com.viettel.mbccs.data.model.UploadImage;
 import com.viettel.mbccs.data.model.UserInfo;
 import com.viettel.mbccs.data.source.QLKhachHangRepository;
 import com.viettel.mbccs.data.source.UserRepository;
@@ -44,13 +42,13 @@ import com.viettel.mbccs.data.source.remote.response.RegisterCustomerInfoRespons
 import com.viettel.mbccs.data.source.remote.response.SpinnerApDomain;
 import com.viettel.mbccs.data.source.remote.response.UpdateAllSubInfoResponse;
 import com.viettel.mbccs.service.service.UploadImageService;
+import com.viettel.mbccs.utils.DatabaseUtils;
 import com.viettel.mbccs.utils.DateUtils;
-import com.viettel.mbccs.utils.ImageUtils;
 import com.viettel.mbccs.utils.SpinnerAdapter;
 import com.viettel.mbccs.utils.StringUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
-import com.viettel.mbccs.widget.CustomSelectAddress;
 import com.viettel.mbccs.widget.callback.DrawableClickListener;
+import com.viettel.mbccs.widget.model.AddressApp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -107,10 +105,7 @@ public class CreateUpdateInformationFragmentPresenter
     public ObservableField<String> imageUrlFront;
     public ObservableField<String> imageUrlBackside;
     public ObservableField<String> imageUrlPortrait;
-    public ObservableField<String> idProvince;
-    public ObservableField<String> idDistrict;
-    public ObservableField<String> idPrecinct;
-    public ObservableField<String> address;
+    public ObservableField<AddressApp> area;
     public ObservableField<String> textOTP;
     public ObservableField<String> setDate;
 
@@ -159,10 +154,7 @@ public class CreateUpdateInformationFragmentPresenter
         txtNameCustomer = new ObservableField<>();
         txtNumberPassport = new ObservableField<>();
 
-        idProvince = new ObservableField<>();
-        idDistrict = new ObservableField<>();
-        idPrecinct = new ObservableField<>();
-        address = new ObservableField<>();
+        area = new ObservableField<>();
         textOTP = new ObservableField<>();
         setDate = new ObservableField<>();
 
@@ -189,7 +181,7 @@ public class CreateUpdateInformationFragmentPresenter
         selectionHTTT = new ObservableInt();
         selectedGoiCuoc = new ObservableInt();
         maxDateBirthDay = new ObservableField<>(new Date());
-        minDateBirthDay = new ObservableField<>(DateUtils.minDateBirthday());
+        minDateBirthDay = new ObservableField<>(DateUtils.maxDateBirthday());
         stringError = context.getString(R.string.input_empty);
     }
 
@@ -528,7 +520,7 @@ public class CreateUpdateInformationFragmentPresenter
     }
 
     private Customer getDataCustomer() {
-        CustomSelectAddress.Address address = view.getAddress();
+        AddressApp address = view.getAddress();
         Area areaProvince = address.getAreaProvince();
         Area areaDistrict = address.getAreaDistrict();
         Area areaPrecinct = address.getAreaPrecinct();
@@ -558,7 +550,7 @@ public class CreateUpdateInformationFragmentPresenter
 
         customer.setPrecinct(areaPrecinct == null ? StringNull : areaPrecinct.getPrecinct());
         customer.setProvince(areaProvince == null ? StringNull : areaProvince.getProvince());
-        customer.setSex(isCheckFemale.get() ? Data.Gender.FEMALE : Data.Gender.MALE);
+        customer.setSex(isCheckFemale.get() ? Gender.FEMALE : Gender.MALE);
 
         customer.setStatus(customerResponse != null && customerResponse.getStatus() != null
                 ? customerResponse.getStatus() : null);
@@ -621,7 +613,8 @@ public class CreateUpdateInformationFragmentPresenter
         Customer customer = getDataCustomer();
         Subscriber subscriber = getDataSubscriber();
 
-        List<String> data = getBitmapAndSaveDatabase(customer);
+        List<String> data = DatabaseUtils.getBitmapAndSaveDatabase(customer, view.imageFront(),
+                view.imageBackside(), view.imagePortrait());
         if (isSendImage) {
             Intent intent = new Intent(context, UploadImageService.class);
             intent.putStringArrayListExtra(UploadImageService.ARG_DATA_INTENT,
@@ -726,51 +719,6 @@ public class CreateUpdateInformationFragmentPresenter
         }
 
         return validate;
-    }
-
-    private List<String> getBitmapAndSaveDatabase(Customer customer) {
-        List<String> uploadImageList = new ArrayList<>();
-        Bitmap imageFront = view.imageFront();
-        Bitmap imageBackside = view.imageBackside();
-        Bitmap imagePortrait = view.imagePortrait();
-
-        if (imageFront != null) {
-            UploadImage uploadImage =
-                    setDataUploadImage(customer, imageFront, UploadImage.ImageType.FRONT);
-            uploadImage.save();
-            uploadImageList.add(String.valueOf(uploadImage.getIdImage()));
-        }
-
-        if (imageBackside != null) {
-            UploadImage uploadImage =
-                    setDataUploadImage(customer, imageBackside, UploadImage.ImageType.BACKSIDE);
-            uploadImage.save();
-            uploadImageList.add(String.valueOf(uploadImage.getIdImage()));
-        }
-
-        if (imagePortrait != null) {
-            UploadImage uploadImage =
-                    setDataUploadImage(customer, imagePortrait, UploadImage.ImageType.PORTRAIT);
-            uploadImage.save();
-            uploadImageList.add(String.valueOf(uploadImage.getIdImage()));
-        }
-        return uploadImageList;
-    }
-
-    private UploadImage setDataUploadImage(Customer customer, Bitmap bitmap,
-            @UploadImage.ImageType int imageType) {
-        String imageBase64 =
-                ImageUtils.encodeBitmapToBase64(bitmap, Bitmap.CompressFormat.JPEG, 100);
-        UploadImage uploadImage = new UploadImage();
-        uploadImage.setIdImage(System.currentTimeMillis());
-        uploadImage.setActionBusiness("");
-        uploadImage.setObjectId(customer.getCustomerId());
-        uploadImage.setOrder(imageType);
-        uploadImage.setDocType(1);
-        uploadImage.setFileName(String.valueOf(System.currentTimeMillis()));
-        uploadImage.setImageData(imageBase64);
-        uploadImage.setStatus(UploadImage.StatusUpload.WAITING);
-        return uploadImage;
     }
 
     public void onDrawableClick(View v, @DrawableClickListener.DrawablePosition int target) {
@@ -934,7 +882,7 @@ public class CreateUpdateInformationFragmentPresenter
         if (customerResponse != null) {
             txtNameCustomer.set(customerResponse.getName());
             if (customerResponse.getSex() != null && customerResponse.getSex()
-                    .equals(Data.Gender.MALE)) {
+                    .equals(Gender.MALE)) {
                 isCheckMale.set(true);
                 isCheckFemale.set(false);
             } else {
@@ -943,10 +891,13 @@ public class CreateUpdateInformationFragmentPresenter
             }
             isEnabledSelectGender.set(false);
 
-            address.set(customerResponse.getAddress());
-            idProvince.set(customerResponse.getProvince());
-            idDistrict.set(customerResponse.getDistrict());
-            idPrecinct.set(customerResponse.getPrecinct());
+            AddressApp address = new AddressApp();
+            address.setIdProvince(customerResponse.getProvince());
+            address.setIdDistrict(customerResponse.getDistrict());
+            address.setIdPrecinct(customerResponse.getPrecinct());
+            address.setAddress(customerResponse.getAddress());
+            area.set(address);
+
             txtNumberPassport.set(customerResponse.getIdNo());
             if (!StringUtils.isEmpty(customerResponse.getIdNo())) {
                 isEnabledTxtNumberPassport.set(false);

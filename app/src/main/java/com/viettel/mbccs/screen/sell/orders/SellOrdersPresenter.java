@@ -2,8 +2,8 @@ package com.viettel.mbccs.screen.sell.orders;
 
 import android.app.Activity;
 import android.content.Context;
-import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
+import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
 import com.viettel.mbccs.R;
@@ -46,7 +46,6 @@ public class SellOrdersPresenter {
     public ObservableField<Shop> shop;
     public ObservableField<SpinnerAdapter<ChannelInfo>> spinnerAdapterChannel;
     public ObservableField<SellOrdersFragmentAdapter> sellOrdersFragmentAdapter;
-    public ObservableBoolean isHideSearch;
     public ObservableField<String> textSearch;
 
     public SellOrdersPresenter(Context context, SellOrdersContract.View sellOrdersView) {
@@ -62,7 +61,6 @@ public class SellOrdersPresenter {
         staffInfo = new ObservableField<>();
         shop = new ObservableField<>();
         spinnerAdapterChannel = new ObservableField<>();
-        isHideSearch = new ObservableBoolean(false);
         textSearch = new ObservableField<>();
     }
 
@@ -93,11 +91,6 @@ public class SellOrdersPresenter {
                                     return;
                                 }
                                 channelInfoList = object.getChannelInfoList();
-                                //                                for (ChannelInfo c :
-                                // channelInfoList) {
-                                //                                    dataSpinnerChannel.add(c
-                                // .getManagementName());
-                                //                                }
                                 spinnerAdapterChannel.set(
                                         new SpinnerAdapter<>(context, channelInfoList));
                                 spinnerAdapterChannel.get()
@@ -168,6 +161,12 @@ public class SellOrdersPresenter {
                     public void onSuccess(GetListOrderResponse object) {
                         sellOrdersView.setDataResult(object.getSaleOrdersList(), channelInfoSelect);
                         sellOrdersView.hideLoading();
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                sellOrdersView.closeFormSearch();
+                            }
+                        }, 100);
                     }
 
                     @Override
@@ -176,11 +175,6 @@ public class SellOrdersPresenter {
                         sellOrdersView.hideLoading();
                     }
                 });
-    }
-
-    public void expandSearch() {
-        isHideSearch.set(!isHideSearch.get());
-        setTextHideSearch();
     }
 
     public void setTextHideSearch() {
@@ -192,7 +186,4 @@ public class SellOrdersPresenter {
         this.sellOrdersFragmentAdapter.set(sellOrdersFragmentAdapter);
     }
 
-    //    public void setPositionSelectChange(int position) {
-    //        channelInfoSelect = channelInfoList.get(position);
-    //    }
 }

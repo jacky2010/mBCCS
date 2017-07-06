@@ -11,6 +11,7 @@ import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetAllSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.GetApDomainByTypeRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListBusTypeIdRequireRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListBusTypeRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListProductRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListRegTypeRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListSubTypeRequest;
@@ -24,6 +25,7 @@ import com.viettel.mbccs.data.source.remote.response.ConnectSubscriberResponse;
 import com.viettel.mbccs.data.source.remote.response.GetAllSubInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetApDomainByTypeResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListBusTypeIdRequireResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListBusTypeResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListProductResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListRegTypeResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListSubTypeResponse;
@@ -129,5 +131,11 @@ public class QLKhachHangRepository
     public Observable<ConnectSubscriberResponse> connectSubscriber(
             DataRequest<ConnectSubscriberRequest> request) {
         return qLKhachHangRemoteDataSource.connectSubscriber(request);
+    }
+
+    @Override
+    public Observable<GetListBusTypeResponse> getListBusType(
+            DataRequest<GetListBusTypeRequest> request) {
+        return qLKhachHangRemoteDataSource.getListBusType(request);
     }
 }

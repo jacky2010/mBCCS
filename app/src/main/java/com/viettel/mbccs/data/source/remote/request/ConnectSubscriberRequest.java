@@ -39,6 +39,10 @@ public class ConnectSubscriberRequest {
     @Expose
     private String ownerId;
 
+    @SerializedName("channelTypeId")
+    @Expose
+    private String channelTypeId;
+
     public Customer getCustomer() {
         return customer;
     }
@@ -93,5 +97,13 @@ public class ConnectSubscriberRequest {
 
     public void setOwnerId(String ownerId) {
         this.ownerId = ownerId;
+    }
+
+    public String getChannelTypeId() {
+        return channelTypeId;
+    }
+
+    public void setChannelTypeId(String channelTypeId) {
+        this.channelTypeId = channelTypeId;
     }
 }
