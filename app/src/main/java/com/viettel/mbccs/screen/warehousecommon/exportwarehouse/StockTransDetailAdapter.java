@@ -1,4 +1,4 @@
-package com.viettel.mbccs.screen.warehousecommon.cmdprepareexportdetail;
+package com.viettel.mbccs.screen.warehousecommon.exportwarehouse;
 
 import android.content.Context;
 import android.text.TextUtils;

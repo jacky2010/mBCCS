@@ -3,7 +3,7 @@
     <data>
         <variable
             name="presenter"
-            type="com.viettel.mbccs.screen.warehousecommon.cmdprepareexportdetail.ItemStockTransDetailPresenter"
+            type="com.viettel.mbccs.screen.warehousecommon.exportwarehouse.ItemStockTransDetailPresenter"
             />
         />
     </data>

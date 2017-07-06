@@ -1,28 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/tools"
-    xmlns:bind="http://schemas.android.com/apk/res-auto">
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    >
 
     <data>
 
         <variable
             name="presenter"
-            type="com.viettel.mbccs.base.createorder.BaseCreateOrderPresenter" />
+            type="com.viettel.mbccs.base.createorder.BaseCreateOrderPresenter"
+            />
 
-        <import type="android.view.View" />
+        <import type="android.view.View"/>
 
-        <import type="android.text.TextUtils" />
+        <import type="android.text.TextUtils"/>
     </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white_grey"
-        android:paddingBottom="@dimen/dp_8">
+        >
 
         <include
-            android:id="@+id/toolbar"
             layout="@layout/toolbar"
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:background="@{ @color/colorAccent }"
@@ -37,47 +39,53 @@
             android:layout_height="match_parent"
             android:layout_above="@+id/layout_button"
             android:layout_below="@+id/toolbar"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                >
 
                 <com.viettel.mbccs.widget.CustomTextView
-                    style="@style/TextSearchTask"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/dp_16"
                     android:layout_marginStart="@dimen/dp_16"
                     android:layout_marginTop="@dimen/dp_16"
-                    android:text="@{ presenter.orderCode }" />
+                    android:text="@{ presenter.orderCode }"
+                    style="@style/TextSearchTask"
+                    />
 
                 <com.viettel.mbccs.widget.CustomTextView
-                    style="@style/TextSearchTask"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/dp_16"
                     android:layout_marginStart="@dimen/dp_16"
                     android:layout_marginTop="@dimen/dp_8"
-                    android:text="@{ presenter.exportWarehouseCode }" />
+                    android:text="@{ presenter.exportWarehouseCode }"
+                    style="@style/TextSearchTask"
+                    />
 
                 <com.viettel.mbccs.widget.CustomTextView
-                    style="@style/TextSearchTask"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/dp_16"
                     android:layout_marginStart="@dimen/dp_16"
                     android:layout_marginTop="@dimen/dp_8"
                     android:text="@{ presenter.createdDate }"
-                    android:visibility="@{ TextUtils.isEmpty(presenter.createdDate) ? View.GONE : View.VISIBLE }" />
+                    android:visibility="@{ TextUtils.isEmpty(presenter.createdDate) ? View.GONE : View.VISIBLE }"
+                    style="@style/TextSearchTask"
+                    />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_0.6"
                     android:layout_marginTop="@dimen/dp_16"
-                    android:background="@color/default_bg_disabled" />
+                    android:background="@color/default_bg_disabled"
+                    />
             </LinearLayout>
 
             <com.viettel.mbccs.widget.CustomTextView
@@ -89,14 +97,16 @@
                 android:layout_marginStart="@dimen/dp_16"
                 android:layout_marginTop="@dimen/dp_16"
                 android:textColor="@color/black"
-                android:textSize="@dimen/sp_18"
-                bind:textUnderLine="@{ presenter.itemCountString }" />
+                android:textSize="@dimen/sp_14"
+                bind:textUnderLine="@{ presenter.itemCountString }"
+                />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_0.6"
                 android:layout_marginTop="@dimen/dp_8"
-                android:background="@color/default_bg_disabled" />
+                android:background="@color/default_bg_disabled"
+                />
 
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
@@ -105,7 +115,8 @@
                 android:background="@color/white"
                 android:paddingEnd="@dimen/dp_16"
                 android:paddingStart="@dimen/dp_16"
-                bind:addItemDecoration="@{ presenter.itemDecoration }" />
+                bind:addItemDecoration="@{ presenter.itemDecoration }"
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -113,29 +124,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_margin="@dimen/dp_16"
+            android:layout_margin="@dimen/dp_10"
             android:orientation="horizontal"
-            android:visibility="@{ presenter.showButton ? View.VISIBLE : View.GONE }">
+            android:visibility="@{ presenter.showButton ? View.VISIBLE : View.GONE }"
+            >
 
             <com.viettel.mbccs.widget.CustomButton
-                style="@style/button_negative_red2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/dp_4"
                 android:layout_marginRight="@dimen/dp_4"
                 android:layout_weight="1"
                 android:onClick="@{ () -> presenter.reject() }"
-                android:text="@string/activity_create_order_success_tu_choi" />
+                android:text="@string/activity_create_order_success_tu_choi"
+                style="@style/button_negative_red2"
+                />
 
             <com.viettel.mbccs.widget.CustomButton
-                style="@style/button_positive"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_4"
                 android:layout_marginStart="@dimen/dp_4"
                 android:layout_weight="1"
                 android:onClick="@{ () -> presenter.create() }"
-                android:text="@string/activity_create_order_success_lap_phieu" />
+                android:text="@{presenter.buttonTitle}"
+                style="@style/button_positive"
+                />
         </LinearLayout>
 
     </RelativeLayout>

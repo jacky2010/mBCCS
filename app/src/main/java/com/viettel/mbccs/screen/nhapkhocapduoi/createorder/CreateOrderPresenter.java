@@ -5,10 +5,14 @@ import android.support.v7.widget.RecyclerView;
 
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.createorder.BaseCreateOrderPresenter;
+import com.viettel.mbccs.base.createorder.
+        BaseCreateOrderPresenter;
 import com.viettel.mbccs.data.model.StockTotal;
+import com.viettel.mbccs.data.model.StockTransDetail;
 import com.viettel.mbccs.screen.nhapkhocapduoi.adapters.ListGoodsDetailAdapter;
 import com.viettel.mbccs.utils.DateUtils;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import static com.viettel.mbccs.utils.DateUtils.CALENDAR_DATE_FORMAT;
@@ -35,6 +39,16 @@ public class CreateOrderPresenter extends BaseCreateOrderPresenter<StockTotal>
     }
 
     @Override
+    public void rejectCmd(String input) {
+
+    }
+
+    @Override
+    public void approveCmd() {
+
+    }
+
+    @Override
     public boolean getShowButton() {
         return true;
     }
@@ -56,7 +70,8 @@ public class CreateOrderPresenter extends BaseCreateOrderPresenter<StockTotal>
 
     @Override
     public String getExportWarehouseCode() {
-        return mContext.getString(R.string.activity_create_order_success_kho_xuat, "Export Warehouse");
+        return mContext.getString(R.string.activity_create_order_success_kho_xuat,
+                "Export Warehouse");
     }
 
     @Override
@@ -76,7 +91,8 @@ public class CreateOrderPresenter extends BaseCreateOrderPresenter<StockTotal>
                 10, 100, 12, "stateName", 1));
         mList.add(new StockTotal(1, 12, 115, "stockModelCode", "stockModelName", 1, "stockTypeName",
                 10, 100, 12, "stateName", 1));
-        ListGoodsDetailAdapter adapter = new ListGoodsDetailAdapter(mContext, mList);
+        ListGoodsDetailAdapter adapter =
+                new ListGoodsDetailAdapter(mContext, new ArrayList<StockTransDetail>());
         adapter.setOnViewSerialClickListener(this);
         adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
@@ -89,7 +105,7 @@ public class CreateOrderPresenter extends BaseCreateOrderPresenter<StockTotal>
     }
 
     @Override
-    public void onViewSerialClickListener(StockTotal item) {
+    public void onViewSerialClickListener(StockTransDetail item) {
         ((CreateOrderContract.ViewModel) mViewModel).onViewSerialClickListener(item);
     }
 }

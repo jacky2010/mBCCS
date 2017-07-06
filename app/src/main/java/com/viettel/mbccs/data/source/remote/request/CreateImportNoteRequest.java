@@ -4,11 +4,10 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by FRAMGIA\hoang.van.cuong on 04/07/2017.
+ * Created by FRAMGIA\hoang.van.cuong on 07/07/2017.
  */
 
-public class CreateImportStockRequest {
-
+public class CreateImportNoteRequest {
     @SerializedName("stockTransId")
     @Expose
     private Long stockTransId;

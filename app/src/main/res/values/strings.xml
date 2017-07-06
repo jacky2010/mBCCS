@@ -917,6 +917,19 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <!--nhap kho nhan vien-->
     <string name="nhapkhonhanvien_list_title">Nhập kho từ nhân viên</string>
     <string name="nhapkhonhanvien_cmd_detail">Chi tiết lệnh nhập kho từ nhân viên</string>
+    <string name="nhapkhonhanvien_note_detail">Chi tiết phiếu nhập kho từ nhân viên</string>
+    <string name="nhapkhonhanvien_count_not_not">Phiếu chưa lập (%s)</string>
+    <string name="nhapkhonhanvien_count_noted">Phiếu đã lập (%s)</string>
+    <string name="nhapkhonhanvien_count_imported">Phiếu bị nhập (%s)</string>
+    <string name="nhapkhonhanvien_count_canceled">Phiếu bị hủy (%s)</string>
+
+    <string name="commmon_warehouse_action_create_cmd">Lập lệnh</string>
+    <string name="commmon_warehouse_action_create_note">Lập phiếu</string>
+    <string name="commmon_warehouse_action_create_import">Nhập kho</string>
+    <string name="commmon_warehouse_msg_confirm_create_cmd">Bạn có chắc chắn muốn lập lệnh?</string>
+    <string name="commmon_warehouse_msg_confirm_create_import_stock">Bạn có chắc chắn muốn nhập kho?</string>
+    <string name="commmon_warehouse_msg_reject_create_cmd">Từ chối lập lệnh?</string>
+    <string name="commmon_warehouse_msg_reject_create_import_stock">Từ chối xuất kho?</string>
 
     <!-- Area channel -->
     <string name="title_area">Quản lý địa bàn</string>
@@ -1024,7 +1037,8 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="common_cmd_prepare_export_detail_label_stock_code">Mã hàng: %s</string>
     <string name="common_cmd_prepare_export_detail_label_quantity_export">Số lượng xuất: %s</string>
     <string name="common_cmd_prepare_export_detail_msg_error_choose_serial">Hãy chọn đủ số lượng serial của mặt hàng %s</string>
-
+    <string name="common_cmd_prepare_export_msg_detail_reject_export">Từ chối xuất kho</string>
+    <string name="common_cmd_prepare_export_msg_detail_accept_export">Bạn có chắc chắn muốn xuất kho?</string>
 
     <!--cmd prepare import stock-->
     <string name="common_cmd_prepare_import_label_export_warehouse"><![CDATA[<font color="#757575"> Kho xuất :</font><font color="#000000"><b>%s</b></font>]]></string>
@@ -1036,12 +1050,11 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="nhanvien_xuattra_label_export_status"><![CDATA[ <font color="#757575">Trạng thái hàng xuất </font><font color="#DF0101">*</font> ]]></string>
     <string name="nhanvien_xuattra_label_export_from">Lập lệnh xuất từ kho %s</string>
     <string name="nhanvien_xuattra_label_count_cmd_not_approve">Phiếu chưa nhận %s</string>
+
     <!--xuat kho cho nhan vien-->
     <string name="xuatkhochonhanvien_lablel_chi_tiet_xuat_kho_title">Chi tiết xuất kho cho nhân viên</string>
     <string name="xuatkhochonhanvien_lablel_chi_title">Lập phiếu trả hàng</string>
-
     <string name="search_products_title">Tra cứu sản phẩm</string>
-
     <string name="search_products_detail_title">Tra cứu sản phẩm</string>
     <string name="search_products_detail_hint_search_key">Tra cứu tên sản phẩm</string>
     <string name="search_products_detail_title_manufacturer">Nhà sản xuất</string>

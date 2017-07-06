@@ -4,7 +4,6 @@ import android.content.Context;
 import android.databinding.ObservableField;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.WsCode;
-import com.viettel.mbccs.data.model.EmptyObject;
 import com.viettel.mbccs.data.model.SerialBO;
 import com.viettel.mbccs.data.model.StockSerial;
 import com.viettel.mbccs.data.model.StockTrans;
@@ -13,9 +12,10 @@ import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.remote.request.CreateImportStockRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListStockTransDetailRequest;
+import com.viettel.mbccs.data.source.remote.response.BaseCreateCmdNote;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.ListStockTransDetailsReponse;
-import com.viettel.mbccs.screen.warehousecommon.cmdprepareexportdetail.StockTransDetailAdapter;
+import com.viettel.mbccs.screen.warehousecommon.exportwarehouse.StockTransDetailAdapter;
 import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.ArrayList;
@@ -178,7 +178,7 @@ public class CmdPrepareImportDetailPresenter implements CmdPrepareImportDetailCo
         mCreateImportStockRequestDataRequest = new DataRequest<>();
         mCreateImportStockRequestDataRequest.setWsCode(WsCode.CreateExpStock);
         CreateImportStockRequest request = new CreateImportStockRequest();
-        request.setStockTransId(String.valueOf(mStockTrans.getStockTransId()));
+        request.setStockTransId((mStockTrans.getStockTransId()));
         List<StockSerial> stockSerials = new ArrayList<>();
         for (StockTransDetail stockTransDetail : mStockTransDetails) {
             stockSerials.add(stockTransDetail.getStockSerial());
@@ -187,9 +187,9 @@ public class CmdPrepareImportDetailPresenter implements CmdPrepareImportDetailCo
         Subscription subcription = mBanHangKhoTaiChinhRepository.createImportStock(
                 mCreateImportStockRequestDataRequest).subscribe(
 
-                new MBCCSSubscribe<EmptyObject>() {
+                new MBCCSSubscribe<BaseCreateCmdNote>() {
                     @Override
-                    public void onSuccess(EmptyObject object) {
+                    public void onSuccess(BaseCreateCmdNote object) {
 
                         mViewModel.onCreateImportStockSuccess(mStockTransDetails, mStockTrans);
                     }

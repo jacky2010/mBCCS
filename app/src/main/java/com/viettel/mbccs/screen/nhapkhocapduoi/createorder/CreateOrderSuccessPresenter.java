@@ -5,7 +5,9 @@ import android.support.v7.widget.RecyclerView;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.createorder.BaseCreateOrderSuccessPresenter;
 import com.viettel.mbccs.data.model.StockTotal;
+import com.viettel.mbccs.data.model.StockTransDetail;
 import com.viettel.mbccs.screen.nhapkhocapduoi.adapters.ListGoodsDetailAdapter;
+import java.util.ArrayList;
 
 /**
  * Created by FRAMGIA\vu.viet.anh on 14/06/2017.
@@ -72,11 +74,11 @@ public class CreateOrderSuccessPresenter extends BaseCreateOrderSuccessPresenter
                 10, 100, 12, "stateName", 1));
         mList.add(new StockTotal(1, 12, 115, "stockModelCode", "stockModelName", 1, "stockTypeName",
                 10, 100, 12, "stateName", 1));
-        ListGoodsDetailAdapter adapter = new ListGoodsDetailAdapter(mContext, mList);
+        ListGoodsDetailAdapter adapter = new ListGoodsDetailAdapter(mContext, new ArrayList<StockTransDetail>());
         adapter.setOnViewSerialClickListener(
                 new ListGoodsDetailAdapter.OnViewSerialClickListener() {
                     @Override
-                    public void onViewSerialClickListener(StockTotal item) {
+                    public void onViewSerialClickListener(StockTransDetail item) {
                         ((CreateOrderSuccessContract.ViewModel) mViewModel).showSerialViewer(item);
                     }
                 });

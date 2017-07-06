@@ -32,14 +32,13 @@ import com.viettel.mbccs.screen.kppfeedback.KPPFeedbackActivity;
 import com.viettel.mbccs.screen.main.fragments.menu.MenuPresenter;
 import com.viettel.mbccs.screen.nhanvientrahang.list.ListNhanVienTraHangActivity;
 import com.viettel.mbccs.screen.nhapkhocapduoi.ListOrderActivity;
-import com.viettel.mbccs.screen.nvtrahangcaptren.list.NVTraHangCapTrenActivity;
+import com.viettel.mbccs.screen.importwarehousefromstaff.list.ListNhapKhoTuNhanVienActivity;
 import com.viettel.mbccs.screen.searchproducts.SearchProductsActivity;
 import com.viettel.mbccs.screen.sell.channel.SaleChannelActivity;
 import com.viettel.mbccs.screen.sell.orders.SellOrdersActivity;
 import com.viettel.mbccs.screen.sell.retail.SaleRetailActivity;
 import com.viettel.mbccs.screen.sellanypay.SellAnyPayActivity;
 import com.viettel.mbccs.screen.stockdeliver.StockDeliverActivity;
-import com.viettel.mbccs.screen.stockdeliver.TestStockDeliveryActivity;
 import com.viettel.mbccs.screen.survey.SurveyListActivity;
 import com.viettel.mbccs.screen.trahangcaptren.ListOrderReturnUpperActivity;
 import com.viettel.mbccs.screen.transferanypay.TransferAnyPayActivity;
@@ -247,6 +246,8 @@ public class BaseSubMenuActivity
                                     ListNhanVienTraHangActivity.class));
                             break;
                         case Function.MenuId.MENU_NHAP_KHO_TU_NHAN_VIEN:
+                            startActivity(new Intent(BaseSubMenuActivity.this,
+                                    ListNhapKhoTuNhanVienActivity.class));
                             break;
                         case Function.MenuId.MENU_KENH_ORDER_HANG:
                             startActivity(

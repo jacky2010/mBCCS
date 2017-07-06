@@ -48,10 +48,9 @@ public class CreateTicketActivity
         new CustomDialog(this, R.string.confirm,
                 R.string.activity_create_order_success_ban_co_chac_muon_lap_phieu, false,
                 R.string.common_label_close, R.string.activity_create_order_success_lap_phieu, null,
-                new DialogInterface.OnClickListener() {
+                new CustomDialog.OnInputDialogListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // TODO: 5/27/2017 Api call
+                    public void onClick(DialogInterface var1, int var2, String input) {
                         startActivity(new Intent(CreateTicketActivity.this,
                                 CreateTicketSuccessActivity.class));
                         finish();
@@ -64,7 +63,6 @@ public class CreateTicketActivity
         Intent intent = new Intent(this, FindStockActivity.class);
         startActivityForResult(intent, STOCK_TOTAL_PICKER_REQUEST);
     }
-
 
     @Override
     public void showLoading() {
