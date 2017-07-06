@@ -212,12 +212,13 @@ public class Function implements Parcelable {
             case Function.MenuId.MENU_BAN_ANYPAY:
                 return R.drawable.ic_sales_anypay;
             case Function.MenuId.MENU_NAP_CHUYEN_ANYPAY:
-            case Function.MenuId.MENU_TRA_CUU_SP:
-                return R.drawable.ic_add_black_24dp;
+                return R.drawable.ic_chuyen_anypay;
 
             case Function.MenuId.MENU_DANG_KY_THONG_TIN:
             case Function.MenuId.MENU_CAP_NHAT_THONG_TIN:
+                break;
             case Function.MenuId.MENU_DOI_SIM:
+                return R.drawable.ic_doi_sim;
             case Function.MenuId.MENU_THAY_DOI_DIA_CHI_LAP_DAT:
                 return R.drawable.ic_add_black_24dp;
 
@@ -231,8 +232,9 @@ public class Function implements Parcelable {
             case Function.MenuId.MENU_XAC_MINH:
             case Function.MenuId.MENU_GACH_NO:
             case Function.MenuId.MENU_THU_CUOC_NONG:
+                break;
             case Function.MenuId.MENU_QUAN_LY_TIEN_DO_THU_CUOC:
-                return R.drawable.ic_add_black_24dp;
+                return R.drawable.ic_finance;
 
             case Function.MenuId.MENU_GIAO_VIEC_TO_DOI:
                 return R.drawable.ic_assign_group;
@@ -241,7 +243,7 @@ public class Function implements Parcelable {
             case Function.MenuId.MENU_GIAO_VIEC_CS_KPP:
                 return R.drawable.ic_care_kpp;
             case Function.MenuId.MENU_DONG_VIEC:
-                return R.drawable.ic_closetask;
+                return R.drawable.ic_close_task;
 
             case Function.MenuId.MENU_XEM_KHO:
                 return R.drawable.ic_stock_seestock;
@@ -267,16 +269,21 @@ public class Function implements Parcelable {
                 return R.drawable.ic_stock_kpp;
 
             case Function.MenuId.MENU_TRA_CUU:
+                return R.drawable.ic_tra_cuu_bh;
             case Function.MenuId.MENU_TIEP_NHAN_BH:
-                break;
+                return R.drawable.ic_accept_bh;
             case Function.MenuId.MENU_CHUYEN_MUC_BH:
             case Function.MenuId.MENU_TRA_BH:
                 return R.drawable.ic_add_black_24dp;
 
+            case Function.MenuId.MENU_TRA_CUU_SP:
+                return R.drawable.ic_cskh_search;
             case Function.MenuId.MENU_SURVEY_KPP:
+                return R.drawable.ic_cskh_survey;
             case Function.MenuId.MENU_HOTNEW_CS_KPP:
+                return R.drawable.ic_cskh_hotnew;
             case Function.MenuId.MENU_KPP_FEEDBACK:
-                return R.drawable.ic_add_black_24dp;
+                return R.drawable.ic_cskh_feedback;
 
             case Function.MenuId.MENU_TAO_GIAY_NOP_TIEN:
             case Function.MenuId.MENU_PHE_DUYET_GIAY_NOP_TIEN:
@@ -285,7 +292,6 @@ public class Function implements Parcelable {
                 return R.drawable.ic_add_black_24dp;
 
             case Function.MenuId.MENU_BAO_CAO_PHAT_TRIEN_THUE_BAO:
-                break;
             case Function.MenuId.MENU_BAO_CAO_CHAM_SOC_KENH:
             case Function.MenuId.MENU_BAO_CAO_TAN_SUAT_CHAM_SOC_KENH:
             case Function.MenuId.MENU_BAO_CAO_TON_KHO:
@@ -305,7 +311,7 @@ public class Function implements Parcelable {
             case TopMenu.MENU_QUAN_LY_KHO:
                 return R.drawable.ic_stock;
             case TopMenu.MENU_QUAN_LY_BAO_HANH:
-                break;
+                return R.drawable.ic_bao_hanh;
             case TopMenu.MENU_QUAN_LY_CSKH:
                 return R.drawable.ic_call_center;
             case TopMenu.MENU_QUAN_LY_TAI_CHINH:
@@ -347,7 +353,6 @@ public class Function implements Parcelable {
             case Function.MenuId.MENU_DAU_NOI_CO_DINH:
             case Function.MenuId.MENU_BAN_ANYPAY:
             case Function.MenuId.MENU_NAP_CHUYEN_ANYPAY:
-            case Function.MenuId.MENU_TRA_CUU_SP:
                 return TopMenu.MENU_QUAN_LY_BAN_HANG;
 
             case Function.MenuId.MENU_DANG_KY_THONG_TIN:
@@ -370,7 +375,6 @@ public class Function implements Parcelable {
                 return TopMenu.MENU_QUAN_LY_THU_CUOC;
 
             case Function.MenuId.MENU_GIAO_VIEC_TO_DOI:
-                break;
             case Function.MenuId.MENU_GIAO_VIEC_PHAT_SINH:
             case Function.MenuId.MENU_GIAO_VIEC_CS_KPP:
             case Function.MenuId.MENU_DONG_VIEC:
@@ -391,11 +395,11 @@ public class Function implements Parcelable {
 
             case Function.MenuId.MENU_TRA_CUU:
             case Function.MenuId.MENU_TIEP_NHAN_BH:
-                break;
             case Function.MenuId.MENU_CHUYEN_MUC_BH:
             case Function.MenuId.MENU_TRA_BH:
                 return TopMenu.MENU_QUAN_LY_BAO_HANH;
 
+            case Function.MenuId.MENU_TRA_CUU_SP:
             case Function.MenuId.MENU_SURVEY_KPP:
             case Function.MenuId.MENU_HOTNEW_CS_KPP:
             case Function.MenuId.MENU_KPP_FEEDBACK:

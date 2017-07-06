@@ -11,6 +11,7 @@ public class Constants {
 
     public static final int NUM_VISIBLE_THRESOLD = 5;
     public static final int NUM_IMAGE_DOWNLOAD = 10;
+    public static final int BOTTOM_MENU_COUNT = 5;
     public static final String DEFAULT_NUMBER_INPUT = "0";
 
     public class SharePref {
