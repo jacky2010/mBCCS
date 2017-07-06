@@ -66,11 +66,11 @@ public class DialogConfirmBillingFragment extends BaseDialog {
             }
         });
 
-        mLinearLayoutManager = new LinearLayoutManager(getBaseActivity(),
-                LinearLayoutManager.VERTICAL, false);
+        mLinearLayoutManager =
+                new LinearLayoutManager(getBaseActivity(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(),
-                LinearLayoutManager.VERTICAL);
+        DividerItemDecoration dividerItemDecoration =
+                new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL);
 
         mRecyclerView.addItemDecoration(dividerItemDecoration);
     }
@@ -90,12 +90,13 @@ public class DialogConfirmBillingFragment extends BaseDialog {
         mBillingRepository = BillingRepository.getInstance();
         mCompositeSubscription = new CompositeSubscription();
         mBillingConfirmAdapter = new BillingConfirmAdapter(mListSaleTransChoose, getBaseActivity());
-        mBillingConfirmAdapter.setOnClickItemRecycleView(new OnListenerItemRecyclerView<SaleTrans>() {
-            @Override
-            public void onClickItem(SaleTrans model, int position) {
+        mBillingConfirmAdapter.setOnClickItemRecycleView(
+                new OnListenerItemRecyclerView<SaleTrans>() {
+                    @Override
+                    public void onClickItem(SaleTrans model, int position) {
 
-            }
-        });
+                    }
+                });
         mRecyclerView.setAdapter(mBillingConfirmAdapter);
     }
 
@@ -104,7 +105,7 @@ public class DialogConfirmBillingFragment extends BaseDialog {
         return 0;
     }
 
-    @OnClick({R.id.biv_close, R.id.biv_done})
+    @OnClick({ R.id.biv_close, R.id.biv_done })
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.biv_close:
@@ -121,14 +122,18 @@ public class DialogConfirmBillingFragment extends BaseDialog {
     private void createInvoiceBill() {
         getBaseActivity().showLoadingDialog();
         final DataRequest<GetCreateInvoiceBillRequest> request = new DataRequest<>();
-        GetCreateInvoiceBillRequest mGetCreateInvoiceBillRequest = new GetCreateInvoiceBillRequest();
-        mGetCreateInvoiceBillRequest.mShopId = Integer.valueOf(mUserRepository.getUserInfo().getShop().getShopId());
-        mGetCreateInvoiceBillRequest.mStaffId = mUserRepository.getUserInfo().getStaffInfo().getStaffId();
+        GetCreateInvoiceBillRequest mGetCreateInvoiceBillRequest =
+                new GetCreateInvoiceBillRequest();
+        mGetCreateInvoiceBillRequest.mShopId = Integer.valueOf(
+                String.valueOf(mUserRepository.getUserInfo().getShop().getShopId()));
+        mGetCreateInvoiceBillRequest.mStaffId =
+                mUserRepository.getUserInfo().getStaffInfo().getStaffId();
         List<Long> mList = new ArrayList<>();
-        for(SaleTrans saleTrans:mListSaleTransChoose){
+        for (SaleTrans saleTrans : mListSaleTransChoose) {
             mList.add(saleTrans.getSaleTransId());
         }
-        mGetCreateInvoiceBillRequest.mListSaleTrans = mGetCreateInvoiceBillRequest.getListSaleTransFromChoose(mList);
+        mGetCreateInvoiceBillRequest.mListSaleTrans =
+                mGetCreateInvoiceBillRequest.getListSaleTransFromChoose(mList);
 
         request.setWsRequest(mGetCreateInvoiceBillRequest);
         request.setWsCode(WsCode.CreateInvoice);

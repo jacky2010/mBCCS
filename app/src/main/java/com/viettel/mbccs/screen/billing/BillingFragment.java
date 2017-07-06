@@ -82,8 +82,7 @@ public class BillingFragment extends BaseDataFragment {
     private List<SaleTrans> mListSaleTrans;
     private List<ChannelInfo> mChannelInfoList = new ArrayList<>();
 
-
-    @OnClick({R.id.bt_search, R.id.bt_billing})
+    @OnClick({ R.id.bt_search, R.id.bt_billing })
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_search:
@@ -101,11 +100,14 @@ public class BillingFragment extends BaseDataFragment {
                     }
                     if (mListSaleTransChoose.size() > 0) {
                         Bundle mBundle = new Bundle();
-                        mBundle.putParcelableArrayList(SaleTrans.class.getName(), mListSaleTransChoose);
+                        mBundle.putParcelableArrayList(SaleTrans.class.getName(),
+                                mListSaleTransChoose);
                         System.out.println("mListSaleTransChoose" + mListSaleTransChoose.size());
-                        getBaseActivity().goToDialogFragment(new DialogConfirmBillingFragment(), mBundle);
+                        getBaseActivity().goToDialogFragment(new DialogConfirmBillingFragment(),
+                                mBundle);
                     } else {
-                        DialogUtils.showDialog(getBaseActivity(), null, "Bạn chưa chọn giao dịch lập hóa đơn nào?", null);
+                        DialogUtils.showDialog(getBaseActivity(), null,
+                                "Bạn chưa chọn giao dịch lập hóa đơn nào?", null);
                     }
                 }
 
@@ -146,11 +148,11 @@ public class BillingFragment extends BaseDataFragment {
 
     @Override
     protected void initView() {
-        mLinearLayoutManager = new LinearLayoutManager(getBaseActivity(),
-                LinearLayoutManager.VERTICAL, false);
+        mLinearLayoutManager =
+                new LinearLayoutManager(getBaseActivity(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(),
-                LinearLayoutManager.VERTICAL);
+        DividerItemDecoration dividerItemDecoration =
+                new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL);
 
         mRecyclerView.addItemDecoration(dividerItemDecoration);
 
@@ -170,7 +172,8 @@ public class BillingFragment extends BaseDataFragment {
 
         mWrappingSlidingDrawer.open();
 
-        //RelativeLayout.LayoutParams item_title_param = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        //RelativeLayout.LayoutParams item_title_param = new RelativeLayout.LayoutParams
+        // (ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         //item_title_param.setMargins(0,0,0,800);
         //mWrappingSlidingDrawer.setLayoutParams(item_title_param );
     }
@@ -182,7 +185,8 @@ public class BillingFragment extends BaseDataFragment {
     }
 
     private void setAdapterSearch(List<SaleTrans> mListSaleTrans) {
-        mListTrans.setText(String.format(getString(R.string.msg_list_trans), mListSaleTrans.size()));
+        mListTrans.setText(
+                String.format(getString(R.string.msg_list_trans), mListSaleTrans.size()));
         mBillingAdapter = new BillingAdapter(mListSaleTrans, getBaseActivity());
         mBillingAdapter.setOnClickItemRecycleView(new OnListenerItemRecyclerView<SaleTrans>() {
             @Override
@@ -195,7 +199,8 @@ public class BillingFragment extends BaseDataFragment {
         mRecyclerView.setAdapter(mBillingAdapter);
     }
 
-    private Observable<TelecomServiceAndSaleProgramResponse> getObservableTeleComserviceAndSaleProgram() {
+    private Observable<TelecomServiceAndSaleProgramResponse>
+    getObservableTeleComserviceAndSaleProgram() {
         mGetTelecomServiceAndSaleProgramRequest = new DataRequest<>();
         mGetTelecomServiceAndSaleProgramRequest.setWsCode(WsCode.GetTelecomServiceAndSaleProgram);
         GetTelecomServiceAndSaleProgramRequest request =
@@ -210,8 +215,8 @@ public class BillingFragment extends BaseDataFragment {
         mGetListChannelByOwnerTypeIdRequest = new DataRequest<>();
         mGetListChannelByOwnerTypeIdRequest.setWsCode(WsCode.GetListChannelByOwnerTypeId);
         GetListChannelByOwnerTypeIdRequest request = new GetListChannelByOwnerTypeIdRequest();
-        request.setStaffId(
-                String.valueOf(mUserRepository.getUserInfo().getStaffInfo().getStaffId()));
+        request.setStaffId(Long.valueOf(
+                String.valueOf(mUserRepository.getUserInfo().getStaffInfo().getStaffId())));
         //request.setChannelTypeId(mUserRepository.getUserInfo().getStaffInfo().getChannelTypeId());
         request.setLanguage("en");
         mGetListChannelByOwnerTypeIdRequest.setWsRequest(request);
@@ -222,11 +227,16 @@ public class BillingFragment extends BaseDataFragment {
     private void getListSearchTrans(String mFromDate, String mToDate) {
         final DataRequest<GetListSearchTransRequest> request = new DataRequest<>();
         GetListSearchTransRequest mGetListSearchTransRequest = new GetListSearchTransRequest();
-        mGetListSearchTransRequest.mShopId = 7282;//mUserRepository.getUserInfo().getShop().getShopId()
+        mGetListSearchTransRequest.mShopId =
+                7282;//mUserRepository.getUserInfo().getShop().getShopId()
         mGetListSearchTransRequest.mFromDate = mFromDate;
         mGetListSearchTransRequest.mToDate = mToDate;
-        mGetListSearchTransRequest.mSaleTransType = Integer.valueOf(TextUtils.isEmpty(mItemTrans.getStringSpinner()) ? "0" : mItemTrans.getStringSpinner());
-        mGetListSearchTransRequest.mStaffId = getIdChanelId(TextUtils.isEmpty(mItemChannel.getStringSpinner()) ? "0" : mItemChannel.getStringSpinner());
+        mGetListSearchTransRequest.mSaleTransType = Integer.valueOf(
+                TextUtils.isEmpty(mItemTrans.getStringSpinner()) ? "0"
+                        : mItemTrans.getStringSpinner());
+        mGetListSearchTransRequest.mStaffId = getIdChanelId(
+                TextUtils.isEmpty(mItemChannel.getStringSpinner()) ? "0"
+                        : mItemChannel.getStringSpinner());
 
         request.setWsRequest(mGetListSearchTransRequest);
         request.setWsCode(WsCode.GetListSaleTrans);
@@ -255,11 +265,14 @@ public class BillingFragment extends BaseDataFragment {
     private void getListChannelFromServer() {
         getBaseActivity().showLoadingDialog();
         Observable.zip(getObservableTeleComserviceAndSaleProgram(), getObservaleChannelInfors(),
-                new Func2<TelecomServiceAndSaleProgramResponse, GetListChannelByOwnerTypeIdResponse, SaleChannelInitData>() {
+                new Func2<TelecomServiceAndSaleProgramResponse,
+                        GetListChannelByOwnerTypeIdResponse, SaleChannelInitData>() {
                     @Override
                     public SaleChannelInitData call(
-                            TelecomServiceAndSaleProgramResponse telecomServiceAndSaleProgramResponse,
-                            GetListChannelByOwnerTypeIdResponse getListChannelByOwnerTypeIdResponse) {
+                            TelecomServiceAndSaleProgramResponse
+                                    telecomServiceAndSaleProgramResponse,
+                            GetListChannelByOwnerTypeIdResponse
+                                    getListChannelByOwnerTypeIdResponse) {
                         if (telecomServiceAndSaleProgramResponse == null
                                 || getListChannelByOwnerTypeIdResponse == null) {
                             return null;
@@ -273,8 +286,10 @@ public class BillingFragment extends BaseDataFragment {
                 if (object != null
                         && object.getmGetListChannelByOwnerTypeIdResponse() != null
                         && object.getTelecomServiceAndSaleProgramResponse() != null) {
-                    mChannelInfoList = object.getmGetListChannelByOwnerTypeIdResponse().getChannelInfoList();
-                    mItemChannel.setListSpinner(object.getmGetListChannelByOwnerTypeIdResponse().getListDataChannel());
+                    mChannelInfoList =
+                            object.getmGetListChannelByOwnerTypeIdResponse().getChannelInfoList();
+                    mItemChannel.setListSpinner(
+                            object.getmGetListChannelByOwnerTypeIdResponse().getListDataChannel());
                     mItemTrans.setListSpinner(getListTrans());
                 }
             }
