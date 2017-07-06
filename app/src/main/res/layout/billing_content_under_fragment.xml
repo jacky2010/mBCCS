@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+
+    <com.viettel.mbccs.widget.ButtonIconView
+        android:id="@+id/bt_billing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:gravity="center"
+        app:itb_bg="@color/blue"
+        app:itb_bg_pressed="@color/blue_trans"
+        app:itb_padding_left="@dimen/dp_50"
+        app:itb_padding_right="@dimen/dp_50"
+        app:itb_radius="0dp"
+        app:itb_text="@string/billing_title" />
+
+    <LinearLayout
+        android:id="@+id/lyFilterCollapse"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bt_billing"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <com.viettel.mbccs.widget.CustomTextView
+            android:id="@+id/tv_list_trans"
+            style="@style/ItemBilling"
+            android:text="@string/msg_list_trans"
+            android:textSize="@dimen/sp_17"
+            android:textStyle="bold" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/dp_10" />
+
+    </LinearLayout>
+</RelativeLayout>

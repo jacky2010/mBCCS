@@ -9,7 +9,7 @@
        android:id="@+id/toolbar"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       app:tbIconLeft="@drawable/ic_arrow_back_black_24dp"/>
+       app:tbIconLeft="@drawable/ic_arrow_left_white_24dp"/>
 
     <FrameLayout
         android:id="@+id/layout_container"

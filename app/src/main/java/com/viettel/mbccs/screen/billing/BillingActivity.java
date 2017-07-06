@@ -24,7 +24,7 @@ public class BillingActivity extends BaseActivity {
             public void onClickIconLeft(int mIconType) {
                 switch (mIconType){
                     case IconType.LEFT:
-                        finish();
+                        onBackFragment();
                         break;
                     case IconType.RIGHT:
                         break;

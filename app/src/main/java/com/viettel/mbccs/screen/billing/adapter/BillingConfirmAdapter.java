@@ -8,15 +8,20 @@ import android.widget.TextView;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseViewHolder;
 import com.viettel.mbccs.base.GenericRecycleAdapter;
-import com.viettel.mbccs.data.model.BillingModel;
+import com.viettel.mbccs.data.model.SaleTrans;
+import com.viettel.mbccs.data.model.SaleTrans;
+import com.viettel.mbccs.data.source.UserRepository;
 
 import java.util.List;
 import butterknife.BindView;
 
-public class BillingConfirmAdapter extends GenericRecycleAdapter<BillingModel, BillingConfirmAdapter.BillingConfirmViewHolder> {
+public class BillingConfirmAdapter extends GenericRecycleAdapter<SaleTrans, BillingConfirmAdapter.BillingConfirmViewHolder> {
+    
+    public String mPhone;
 
-    public BillingConfirmAdapter(List<BillingModel> mList, Context context) {
+    public BillingConfirmAdapter(List<SaleTrans> mList, Context context) {
         super(mList, context);
+        mPhone = UserRepository.getInstance().getUserInfo().getStaffInfo().getTel();
     }
 
     @Override
@@ -37,19 +42,19 @@ public class BillingConfirmAdapter extends GenericRecycleAdapter<BillingModel, B
     }
 
     @Override
-    public void onItem(BillingModel appInfo, int position) {
+    public void onItem(SaleTrans appInfo, int position) {
         if (mOnClickItemRecycleView != null) {
             mOnClickItemRecycleView.onClickItem(appInfo,position);
         }
     }
 
     @Override
-    public void onSet(BillingModel item, BillingConfirmViewHolder holder, int position) {
+    public void onSet(SaleTrans item, BillingConfirmViewHolder holder, int position) {
         if (item != null) {
-            holder.mTrans.setText(String.valueOf(item.getSaleTransId()));
+            holder.mTrans.setText(mPhone);
             holder.mTotalAmountPayment.setText(String.format(mContext.getString(R.string.msg_total_amount_payable),item.getAmountTax()));
-            holder.mDiscount.setText(String.format(mContext.getString(R.string.msg_discount),item.getAmountTax()));
-            holder.mBeforeTax.setText(String.format(mContext.getString(R.string.msg_before_tax),item.getAmountTax()));
+            holder.mDiscount.setText(String.format(mContext.getString(R.string.msg_discount),item.getDiscount()));
+            holder.mBeforeTax.setText(String.format(mContext.getString(R.string.msg_before_tax),item.getAmountNotTax()));
             holder.mRent.setText(String.format(mContext.getString(R.string.msg_rent),item.getAmountTax()));
         }
     }
