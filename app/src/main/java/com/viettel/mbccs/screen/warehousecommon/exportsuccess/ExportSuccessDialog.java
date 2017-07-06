@@ -17,7 +17,11 @@ import android.view.ViewGroup;
 import android.view.Window;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.StockSerial;
+import com.viettel.mbccs.data.model.StockTotal;
+import com.viettel.mbccs.data.model.StockTrans;
 import com.viettel.mbccs.data.model.StockTransDetail;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
+import com.viettel.mbccs.data.source.remote.request.ViewInforSerialRequest;
 import com.viettel.mbccs.databinding.DialogExportSuccessBinding;
 import com.viettel.mbccs.screen.common.success.DialogViewSerial;
 import com.viettel.mbccs.screen.warehousecommon.cmdprepareexportdetail.StockTransDetailAdapter;
@@ -46,6 +50,7 @@ public class ExportSuccessDialog extends DialogFragment
     private List<StockSerial> mStockSerials = new ArrayList<>();
     private static boolean isFromBundle = false;
     private OnDialogDismissListener mOnDialogDismissListener;
+    private StockTrans mStockTrans;
 
     public OnDialogDismissListener getOnDialogDismissListener() {
         return mOnDialogDismissListener;
@@ -56,10 +61,11 @@ public class ExportSuccessDialog extends DialogFragment
     }
 
     public static ExportSuccessDialog newInstance(ArrayList<StockTransDetail> stockTransDetail,
-            String cmdCodeTitle, String cmdNameTitle) {
+            StockTrans stockTrans, String cmdCodeTitle, String cmdNameTitle) {
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList(Constants.BundleConstant.STOCK_TRANS_DETAIL_LIST,
                 stockTransDetail);
+        bundle.putParcelable(Constants.BundleConstant.STOCK_TRANS, stockTrans);
         bundle.putString(Constants.BundleConstant.CMD_CODE_TITLE, cmdCodeTitle);
         bundle.putString(Constants.BundleConstant.CMD_RECEIVE_TITLE, cmdNameTitle);
         ExportSuccessDialog fragment = new ExportSuccessDialog();
@@ -69,10 +75,12 @@ public class ExportSuccessDialog extends DialogFragment
     }
 
     public static ExportSuccessDialog newInstance(ArrayList<StockTransDetail> stockTransDetail,
-            String cmdCodeTitle, String cmdNameTitle, String cmdSenderTitle) {
+            StockTrans stockTrans, String cmdCodeTitle, String cmdNameTitle,
+            String cmdSenderTitle) {
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList(Constants.BundleConstant.STOCK_TRANS_DETAIL_LIST,
                 stockTransDetail);
+        bundle.putParcelable(Constants.BundleConstant.STOCK_TRANS, stockTrans);
         bundle.putString(Constants.BundleConstant.CMD_CODE_TITLE, cmdCodeTitle);
         bundle.putString(Constants.BundleConstant.CMD_RECEIVE_TITLE, cmdNameTitle);
         bundle.putString(Constants.BundleConstant.CMD_SENDER_TITLE, cmdSenderTitle);
@@ -151,6 +159,7 @@ public class ExportSuccessDialog extends DialogFragment
             }
             mStockTransDetails =
                     bundle.getParcelableArrayList(Constants.BundleConstant.STOCK_TRANS_DETAIL_LIST);
+            mStockTrans = bundle.getParcelable(Constants.BundleConstant.STOCK_TRANS);
             cmdCodeTitle = bundle.getString(Constants.BundleConstant.CMD_CODE_TITLE);
             cmdReceiveTitle = bundle.getString(Constants.BundleConstant.CMD_RECEIVE_TITLE);
             cmdSenderTitle = bundle.getString(Constants.BundleConstant.CMD_SENDER_TITLE);
@@ -204,14 +213,16 @@ public class ExportSuccessDialog extends DialogFragment
 
     @Override
     public void onSerialPickerClick(int position, StockTransDetail stockTransDetail) {
-        StockSerial stockSerial = new StockSerial();
-        stockSerial.setStockModelId(stockTransDetail.getStockModelId());
-        stockSerial.setStockModelName(stockTransDetail.getStockModelName());
-        stockSerial.setStockModelCode(stockTransDetail.getStockModelCode());
-        stockSerial.setQuantity(stockTransDetail.getSerialCount());
-        stockSerial.setSerialBOs(stockTransDetail.getSerialBlocks());
+        if (stockTransDetail == null || mStockTrans == null) {
+            return;
+        }
+        StockTotal stockTotal = new StockTotal();
+        stockTotal.setStateId(stockTransDetail.getStateId());
+        stockTotal.setOwnerId(mStockTrans.getFromOwnerId());
+        stockTotal.setOwnerType(mStockTrans.getFromOwnerType());
+        stockTotal.setStockModelId(stockTransDetail.getStockModelId());
         DialogViewSerial dialogViewSerial = DialogViewSerial.newInstance();
-        dialogViewSerial.setStockSerial(stockSerial);
+        dialogViewSerial.setStockTotal(stockTotal);
         dialogViewSerial.show(mAppCompatActivity.getSupportFragmentManager(), "");
     }
 

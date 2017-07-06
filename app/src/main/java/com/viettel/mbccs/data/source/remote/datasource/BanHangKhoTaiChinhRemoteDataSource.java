@@ -10,6 +10,7 @@ import com.viettel.mbccs.data.source.remote.request.CreateSaleTransFromOrderRequ
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListChannelByOwnerTypeIdRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListExpCmdRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListProvinceRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListSerialRequest;
@@ -26,6 +27,7 @@ import com.viettel.mbccs.data.source.remote.request.InputOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.KPPOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.UpdateSaleOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListSerialRequest;
+import com.viettel.mbccs.data.source.remote.request.ViewInforSerialRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransChannelResponse;
@@ -33,6 +35,7 @@ import com.viettel.mbccs.data.source.remote.response.CreateSaleTransFromOrderRes
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransRetailResponse;
 import com.viettel.mbccs.data.source.remote.response.GetInfoSaleTranResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListChannelByOwnerTypeIdResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListExpCmdResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListProvinceResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListSerialResponse;
@@ -47,6 +50,7 @@ import com.viettel.mbccs.data.source.remote.response.InputOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.ListStockTransDetailsReponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import com.viettel.mbccs.data.source.remote.response.UpdateSaleOrderResponse;
+import com.viettel.mbccs.data.source.remote.response.ViewInforSerialResponse;
 import com.viettel.mbccs.data.source.remote.service.RequestHelper;
 import com.viettel.mbccs.utils.rx.SchedulerUtils;
 import rx.Observable;
@@ -278,5 +282,23 @@ public class BanHangKhoTaiChinhRemoteDataSource implements IBanHangKhoTaiChinhRe
                 .createImportStock(requestDataRequest)
                 .flatMap(SchedulerUtils.<EmptyObject>convertDataFlatMap())
                 .compose(SchedulerUtils.<EmptyObject>applyAsyncSchedulers());
+    }
+
+    @Override
+    public Observable<GetListExpCmdResponse> getListExpCmd(
+            DataRequest<GetListExpCmdRequest> dataRequest) {
+        return RequestHelper.getRequest()
+                .getListExpCmd(dataRequest)
+                .flatMap(SchedulerUtils.<GetListExpCmdResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<GetListExpCmdResponse>applyAsyncSchedulers());
+    }
+
+    @Override
+    public Observable<ViewInforSerialResponse> viewInforSerial(
+            DataRequest<ViewInforSerialRequest> dataRequest) {
+        return RequestHelper.getRequest()
+                .viewInfoSerial(dataRequest)
+                .flatMap(SchedulerUtils.<ViewInforSerialResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<ViewInforSerialResponse>applyAsyncSchedulers());
     }
 }

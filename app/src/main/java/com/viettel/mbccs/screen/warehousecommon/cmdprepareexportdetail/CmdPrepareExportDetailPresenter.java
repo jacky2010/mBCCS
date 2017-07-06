@@ -72,7 +72,7 @@ public class CmdPrepareExportDetailPresenter implements CmdPrepareExportDetailCo
 
         dayCreated.set(String.format(
                 mContext.getString(R.string.common_cmd_prepare_export_detail_label_day_cmd_created),
-                mStockTrans.getCreateDateTime()));
+                mStockTrans.getCreateDatetime()));
 
         status.set(String.format(
                 mContext.getString(R.string.common_cmd_prepare_export_detail_label_status),

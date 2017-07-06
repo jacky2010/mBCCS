@@ -12,6 +12,8 @@ import com.viettel.mbccs.data.model.WarehouseOrder;
 import com.viettel.mbccs.databinding.ItemWarehouseOrderBinding;
 import com.viettel.mbccs.utils.DateUtils;
 
+import com.viettel.mbccs.widget.viewholderbinding.BaseRecyclerViewAdapterBinding;
+import com.viettel.mbccs.widget.viewholderbinding.BaseViewHolderBinding;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,33 +21,13 @@ import java.util.List;
  * Created by Anh Vu Viet on 5/20/2017.
  */
 
-public class ListOrderAdapter extends RecyclerView.Adapter<ListOrderAdapter.OrderViewHolder> {
-
-    private List<StockTrans> mList = new ArrayList<>();
-
-    private Context mContext;
+public class ListOrderAdapter
+        extends BaseRecyclerViewAdapterBinding<ListOrderAdapter.OrderViewHolder, StockTrans> {
 
     private OnOrderClickListener mOnOrderClickListener;
 
     public ListOrderAdapter(Context context, List<StockTrans> list) {
-        mContext = context;
-        mList = list;
-    }
-
-    @Override
-    public OrderViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new OrderViewHolder(
-                ItemWarehouseOrderBinding.inflate(LayoutInflater.from(mContext), parent, false));
-    }
-
-    @Override
-    public void onBindViewHolder(OrderViewHolder holder, int position) {
-        holder.bind(mList.get(position));
-    }
-
-    @Override
-    public int getItemCount() {
-        return mList.size();
+        super(context, list);
     }
 
     public OnOrderClickListener getOnOrderClickListener() {
@@ -56,22 +38,27 @@ public class ListOrderAdapter extends RecyclerView.Adapter<ListOrderAdapter.Orde
         mOnOrderClickListener = onOrderClickListener;
     }
 
-    class OrderViewHolder extends RecyclerView.ViewHolder {
+    @Override
+    protected OrderViewHolder getViewHolder(ViewGroup parent) {
+        return new OrderViewHolder(
+                ItemWarehouseOrderBinding.inflate(LayoutInflater.from(mContext), parent, false));
+    }
 
-        private ItemWarehouseOrderBinding mBinding;
+    class OrderViewHolder extends BaseViewHolderBinding<ItemWarehouseOrderBinding, StockTrans> {
 
         public OrderViewHolder(ItemWarehouseOrderBinding binding) {
-            super(binding.getRoot());
-            mBinding = binding;
+            super(binding);
         }
 
-        public void bind(final StockTrans item) {
+        @Override
+        public void bindData(final StockTrans item) {
+            super.bindData(item);
             mBinding.setTitle(itemView.getContext()
                     .getString(R.string.item_orders_change_code_name,
                             String.valueOf(item.getStockTransId()),
                             String.valueOf(item.getToOwnerId())));
             mBinding.setChannelName(String.valueOf(item.getToOwnerType()));
-            mBinding.setCreatedDate(DateUtils.convertStringToStringFormat(item.getCreateDateTime(),
+            mBinding.setCreatedDate(DateUtils.convertStringToStringFormat(item.getCreateDatetime(),
                     DateUtils.DATE_TIME_FORMAT));
             mBinding.setOnClicked(new View.OnClickListener() {
                 @Override
@@ -79,6 +66,8 @@ public class ListOrderAdapter extends RecyclerView.Adapter<ListOrderAdapter.Orde
                     if (mOnOrderClickListener != null) mOnOrderClickListener.onOrderClick(item);
                 }
             });
+            mBinding.setActionType(item.getActionType());
+            mBinding.setAction(item.getActionName());
         }
     }
 

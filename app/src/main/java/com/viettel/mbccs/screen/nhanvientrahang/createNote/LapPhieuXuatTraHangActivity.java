@@ -70,7 +70,6 @@ public class LapPhieuXuatTraHangActivity extends
 
     @Override
     public void onCreateExpSuccess(ArrayList<StockTotal> stockTotals) {
-
         ArrayList<StockSerial> stockSerials = new ArrayList<>();
         for (StockTotal stockTotal : stockTotals) {
             stockSerials.add(stockTotal.getStockSerial());

@@ -40,19 +40,30 @@
             android:layout_marginStart="@dimen/dp_8"
             android:layout_marginTop="?attr/actionBarSize"
             android:textColor="@color/black"
-            android:textSize="@dimen/sp_18"
+            android:textSize="@dimen/sp_15"
+            android:padding="@dimen/dp_10"
             bind:textUnderLine="@{ presenter.itemCountStringText}"
             />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipeLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@id/text_count"
-            android:adapter="@{ presenter.adapter }"
-            android:visibility="@{ presenter.isEmpty ? View.GONE : View.VISIBLE }"
-            bind:addItemDecoration="@{ presenter.itemDecoration }"
-            />
+            >
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adapter="@{ presenter.adapter }"
+                    bind:addItemDecoration="@{ presenter.itemDecoration }"
+                    />
+            </FrameLayout>
+        </android.support.v4.widget.SwipeRefreshLayout>
+
 
         <View
             android:id="@+id/empty"
@@ -73,7 +84,7 @@
             android:src="@drawable/ic_add_white_24dp"
             android:visibility="@{ presenter.showAddButton ? View.VISIBLE : View.GONE }"
             app:fabSize="auto"
-            app:layout_anchor="@id/recyclerView"
+            app:layout_anchor="@id/swipeLayout"
             app:layout_anchorGravity="bottom|right|end"
             />
 
@@ -97,10 +108,10 @@
                 android:layout_height="wrap_content"
                 bind:adapter="@{ presenter.warehouseAdapter }"
                 bind:adapter2="@{ presenter.statusAdapter }"
+                bind:searchClick="@{() -> presenter.doSearch()}"
                 bind:titleSpinner="@{ @string/activity_list_order_warehouse_ma_kho_xuat }"
                 bind:titleSpinner2="@{ @string/activity_list_order_warehouse_trang_thai_lenh }"
                 bind:titleTime="@{ @string/activity_list_order_warehouse_ngay_lap_lenh }"
-                bind:searchClick="@{() -> presenter.doSearch()}"
                 />
 
             <RelativeLayout

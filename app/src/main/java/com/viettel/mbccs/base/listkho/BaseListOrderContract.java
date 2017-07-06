@@ -2,6 +2,7 @@ package com.viettel.mbccs.base.listkho;
 
 import com.viettel.mbccs.base.searchlistview.BaseSearchListViewContract;
 import com.viettel.mbccs.data.model.StockTrans;
+import com.viettel.mbccs.data.source.remote.response.BaseException;
 import java.util.List;
 
 /**
@@ -18,7 +19,11 @@ public interface BaseListOrderContract {
 
         void setWareHouseData(List<String> wareHouseData);
 
+        List<String> getWareHouseData();
+
         void setStatus(List<String> status);
+
+        List<String> getStatus();
 
         void onAddClick();
 
@@ -40,6 +45,11 @@ public interface BaseListOrderContract {
     }
 
     interface Presenter extends BaseSearchListViewContract.Presenter {
+
+        List<String> getWareHouseData();
+
+        List<String> getStatus();
+
         void doSearch();
 
         void setWareHouseData(List<String> wareHouseData);

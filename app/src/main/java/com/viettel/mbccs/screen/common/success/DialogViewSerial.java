@@ -134,6 +134,10 @@ public class DialogViewSerial extends DialogFragment {
         subscriptions.add(subscription);
     }
 
+    public void getViewInforSerial(){
+
+    }
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

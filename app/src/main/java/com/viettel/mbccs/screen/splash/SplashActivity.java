@@ -60,16 +60,16 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
      * demo xuat kho
      */
     void open() {
-        Intent intent = new Intent(SplashActivity.this, ChiTietXuatKhoNhanVienActivity.class);
-        StockTrans stockTrans = new StockTrans();
-        stockTrans.setStockTransId(1237);
-        stockTrans.setToOwnerId(1232);
-        stockTrans.setCreateDateTime("2017-01-02");
-        stockTrans.setStockTransStatusName("hang moi");
-        Bundle bundle = new Bundle();
-        bundle.putParcelable(Constants.BundleConstant.STOCK_TRANS, stockTrans);
-        intent.putExtras(bundle);
-        startActivity(intent);
+//        Intent intent = new Intent(SplashActivity.this, ChiTietXuatKhoNhanVienActivity.class);
+//        StockTrans stockTrans = new StockTrans();
+//        stockTrans.setStockTransId(1237);
+//        stockTrans.setToOwnerId(1232);
+//        stockTrans.setCreateDateTime("2017-01-02");
+//        stockTrans.setStockTransStatusName("hang moi");
+//        Bundle bundle = new Bundle();
+//        bundle.putParcelable(Constants.BundleConstant.STOCK_TRANS, stockTrans);
+//        intent.putExtras(bundle);
+//        startActivity(intent);
     }
 
     /***
@@ -92,16 +92,16 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
      * demo nhap kho
      */
     void open2() {
-        Intent intent = new Intent(SplashActivity.this, NhapKhoCapDuoiDemo.class);
-        StockTrans stockTrans = new StockTrans();
-        stockTrans.setStockTransId(1237);
-        stockTrans.setToOwnerId(1232);
-        stockTrans.setCreateDateTime("2017-01-02");
-        stockTrans.setStockTransStatusName("hang moi");
-        Bundle bundle = new Bundle();
-        bundle.putParcelable(Constants.BundleConstant.STOCK_TRANS, stockTrans);
-        intent.putExtras(bundle);
-        startActivity(intent);
+//        Intent intent = new Intent(SplashActivity.this, NhapKhoCapDuoiDemo.class);
+//        StockTrans stockTrans = new StockTrans();
+//        stockTrans.setStockTransId(1237);
+//        stockTrans.setToOwnerId(1232);
+//        stockTrans.setCreateDateTime("2017-01-02");
+//        stockTrans.setStockTransStatusName("hang moi");
+//        Bundle bundle = new Bundle();
+//        bundle.putParcelable(Constants.BundleConstant.STOCK_TRANS, stockTrans);
+//        intent.putExtras(bundle);
+//        startActivity(intent);
     }
 
     @Override

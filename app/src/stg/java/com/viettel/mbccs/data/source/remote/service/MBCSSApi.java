@@ -31,6 +31,7 @@ import com.viettel.mbccs.data.source.remote.request.GetKPPFeedbackRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListBusTypeIdRequireRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListChannelByOwnerTypeIdRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListDsLamByTeamIdRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListExpCmdRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListIdImageRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListProductRequest;
@@ -79,6 +80,7 @@ import com.viettel.mbccs.data.source.remote.request.TransferAnyPayRequest;
 import com.viettel.mbccs.data.source.remote.request.UpdateAllSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.UpdateSaleOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.UploadImageRequest;
+import com.viettel.mbccs.data.source.remote.request.ViewInforSerialRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseResponse;
 import com.viettel.mbccs.data.source.remote.response.CheckIdNoResponse;
 import com.viettel.mbccs.data.source.remote.response.CheckOTPResponse;
@@ -104,6 +106,7 @@ import com.viettel.mbccs.data.source.remote.response.GetKPPFeedbackResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListBusTypeIdRequireResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListChannelByOwnerTypeIdResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListDsLamByTeamIdResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListExpCmdResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListIdImageResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListProductResponse;
@@ -146,6 +149,7 @@ import com.viettel.mbccs.data.source.remote.response.TransferAnyPayResponse;
 import com.viettel.mbccs.data.source.remote.response.UpdateAllSubInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.UpdateSaleOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.UploadImageResponse;
+import com.viettel.mbccs.data.source.remote.response.ViewInforSerialResponse;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -424,8 +428,9 @@ public interface MBCSSApi {
             @Body DataRequest<GetListDsLamByTeamIdRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<ServerDataResponse<BaseResponse<GetReceiverChangeAddressResponse>>> receiverChangeAddress(
-                    @Body AddressRequest<GetReceiverChangeAddressRequest> request);
+    Observable<ServerDataResponse<BaseResponse<GetReceiverChangeAddressResponse>>>
+    receiverChangeAddress(
+            @Body AddressRequest<GetReceiverChangeAddressRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<GetListSearchTransResponse>>> getListSearchTrans(
@@ -436,7 +441,7 @@ public interface MBCSSApi {
             @Body DataRequest<GetSaleTransDetailRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<ServerDataResponse<BaseResponse<EmptyObject>>>createInvoiceBill(
+    Observable<ServerDataResponse<BaseResponse<EmptyObject>>> createInvoiceBill(
             @Body DataRequest<GetCreateInvoiceBillRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
@@ -471,5 +476,12 @@ public interface MBCSSApi {
     Observable<ServerDataResponse<BaseResponse<EmptyObject>>> createImportStock(
             @Body DataRequest<CreateImportStockRequest> request);
 
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<GetListExpCmdResponse>>> getListExpCmd(
+            @Body DataRequest<GetListExpCmdRequest> requestDataRequest);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<ViewInforSerialResponse>>> viewInfoSerial(
+            @Body DataRequest<ViewInforSerialRequest> requestDataRequest);
 }
 
