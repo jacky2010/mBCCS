@@ -8,6 +8,7 @@ import com.viettel.mbccs.data.source.remote.request.DownloadImageRequest;
 import com.viettel.mbccs.data.source.remote.request.GetDistrictRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListIdImageRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListOwnerCodeRequest;
 import com.viettel.mbccs.data.source.remote.request.GetPrecinctRequest;
 import com.viettel.mbccs.data.source.remote.request.GetProvinceRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
@@ -22,6 +23,7 @@ import com.viettel.mbccs.data.source.remote.response.DownloadImageResponse;
 import com.viettel.mbccs.data.source.remote.response.GetDistrictResponse;
 import com.viettel.mbccs.data.source.remote.response.GetInfoSaleTranResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListIdImageResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListOwneCodeReponse;
 import com.viettel.mbccs.data.source.remote.response.GetPrecinctResponse;
 import com.viettel.mbccs.data.source.remote.response.GetProvinceResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
@@ -29,6 +31,7 @@ import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
 import com.viettel.mbccs.data.source.remote.response.SendCodeChangePassResponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import com.viettel.mbccs.data.source.remote.response.UploadImageResponse;
+import java.util.List;
 import rx.Observable;
 
 /**
@@ -68,6 +71,8 @@ public interface IUserRemoteDataSource {
 
     Observable<DownloadImageResponse> downloadImage(DataRequest<DownloadImageRequest> request);
 
-    Observable<EmptyObject> resetPassword(
-            PassResetRequest request);
+    Observable<EmptyObject> resetPassword(PassResetRequest request);
+
+    Observable<GetListOwneCodeReponse> getListOwnerCode(
+            DataRequest<GetListOwnerCodeRequest> dataRequest);
 }

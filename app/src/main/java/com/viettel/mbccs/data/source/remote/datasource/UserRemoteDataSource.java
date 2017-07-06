@@ -9,6 +9,7 @@ import com.viettel.mbccs.data.source.remote.request.DownloadImageRequest;
 import com.viettel.mbccs.data.source.remote.request.GetDistrictRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListIdImageRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListOwnerCodeRequest;
 import com.viettel.mbccs.data.source.remote.request.GetPrecinctRequest;
 import com.viettel.mbccs.data.source.remote.request.GetProvinceRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
@@ -24,6 +25,7 @@ import com.viettel.mbccs.data.source.remote.response.DownloadImageResponse;
 import com.viettel.mbccs.data.source.remote.response.GetDistrictResponse;
 import com.viettel.mbccs.data.source.remote.response.GetInfoSaleTranResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListIdImageResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListOwneCodeReponse;
 import com.viettel.mbccs.data.source.remote.response.GetPrecinctResponse;
 import com.viettel.mbccs.data.source.remote.response.GetProvinceResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
@@ -190,5 +192,14 @@ public class UserRemoteDataSource implements IUserRemoteDataSource {
                 .resetPassword(request)
                 .flatMap(SchedulerUtils.<EmptyObject>convertDataFlatMapVTG())
                 .compose(SchedulerUtils.<EmptyObject>applyAsyncSchedulers());
+    }
+
+    @Override
+    public Observable<GetListOwneCodeReponse> getListOwnerCode(
+            DataRequest<GetListOwnerCodeRequest> dataRequest) {
+        return RequestHelper.getRequest()
+                .getListOwnerCode(dataRequest)
+                .flatMap(SchedulerUtils.<GetListOwneCodeReponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<GetListOwneCodeReponse>applyAsyncSchedulers());
     }
 }
