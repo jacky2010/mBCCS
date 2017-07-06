@@ -31,6 +31,8 @@ public class BaseListOrderPresenter
 
     public ObservableField<String> itemCountStringText = new ObservableField<>();
 
+    public ObservableField<String> wareHouseTitle = new ObservableField<>();
+
     public ListOrderAdapter mAdaper;
 
     private String itemCountStringFormat = "%d";
@@ -54,6 +56,7 @@ public class BaseListOrderPresenter
         if (getItemCountStringFormat() != null) {
             itemCountStringFormat = getItemCountStringFormat();
         }
+        wareHouseTitle.set(((BaseListOrderActivity) mContext).getWareHouseTitle());
         updateItemCountString();
         updateTextFilter();
     }

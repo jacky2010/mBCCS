@@ -8,8 +8,7 @@ import com.viettel.mbccs.data.model.StockTrans;
  * Created by Anh Vu Viet on 5/31/2017.
  */
 
-public class ListOrderReturnUpperActivity
-        extends BaseListOrderActivity {
+public class ListOrderReturnUpperActivity extends BaseListOrderActivity {
 
     @Override
     public void doSearch() {
@@ -26,12 +25,9 @@ public class ListOrderReturnUpperActivity
         return getString(R.string.activity_list_order_return_upper_co_phieu_chua_nhan);
     }
 
-
     @Override
     public String getToolbarTitle() {
-        return getString(
-                R.string.activity_list_order_return_upper_xuat_kho_tra_hang_cap_tren);
-
+        return getString(R.string.activity_list_order_return_upper_xuat_kho_tra_hang_cap_tren);
     }
 
     @Override
@@ -47,5 +43,10 @@ public class ListOrderReturnUpperActivity
     @Override
     public void init() {
 
+    }
+
+    @Override
+    public String getWareHouseTitle() {
+        return getString(R.string.activity_list_order_return_upper_kho_nhan);
     }
 }

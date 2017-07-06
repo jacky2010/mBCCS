@@ -116,13 +116,13 @@ public class ListNhanVienTraHangActivity extends BaseListOrderActivity {
                         if (object != null && object.getStockTransDetails() != null) {
                             ExportSuccessDialog exportSuccessDialog =
                                     ExportSuccessDialog.newInstance(
-                                            (ArrayList<StockTransDetail>) object
-                                                    .getStockTransDetails(),
+                                            (ArrayList<StockTransDetail>) object.getStockTransDetails(),
                                             stockTrans, String.format(getString(
                                                     R.string.warehouse_label_export_success_code),
-                                                    stockTrans.getStockTransId()), String.format(
+                                                    String.valueOf(stockTrans.getStockTransId())),
+                                            String.format(
                                                     getString(R.string.warehouse_label_receive),
-                                                    stockTrans.getToOwnerId()));
+                                                    String.valueOf(stockTrans.getToOwnerId())));
                             exportSuccessDialog.setOnDialogDismissListener(
                                     new ExportSuccessDialog.OnDialogDismissListener() {
 
@@ -189,6 +189,11 @@ public class ListNhanVienTraHangActivity extends BaseListOrderActivity {
                 getResources().getStringArray(R.array.nhanvien_tranhang_captren_status)));
         setWareHouseData(
                 Arrays.asList(String.valueOf(mUserRepository.getUserInfo().getShop().getShopId())));
+    }
+
+    @Override
+    public String getWareHouseTitle() {
+        return getString(R.string.activity_list_order_return_upper_kho_nhan);
     }
 
     //fake get detail

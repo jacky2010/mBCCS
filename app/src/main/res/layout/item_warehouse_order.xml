@@ -41,7 +41,7 @@
         android:orientation="vertical"
         >
 
-        <View style="@style/dividerHorizontalStyle"/>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -131,7 +131,7 @@
                     style="@style/TextSearchTask"
                     />
             </LinearLayout>
-
+            <View style="@style/dividerHorizontalStyle"/>
 
         </LinearLayout>
     </LinearLayout>

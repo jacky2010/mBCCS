@@ -39,9 +39,9 @@
             android:layout_marginLeft="@dimen/dp_8"
             android:layout_marginStart="@dimen/dp_8"
             android:layout_marginTop="?attr/actionBarSize"
+            android:padding="@dimen/dp_10"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_15"
-            android:padding="@dimen/dp_10"
             bind:textUnderLine="@{ presenter.itemCountStringText}"
             />
         <android.support.v4.widget.SwipeRefreshLayout
@@ -109,7 +109,7 @@
                 bind:adapter="@{ presenter.warehouseAdapter }"
                 bind:adapter2="@{ presenter.statusAdapter }"
                 bind:searchClick="@{() -> presenter.doSearch()}"
-                bind:titleSpinner="@{ @string/activity_list_order_warehouse_ma_kho_xuat }"
+                bind:titleSpinner="@{ presenter.wareHouseTitle }"
                 bind:titleSpinner2="@{ @string/activity_list_order_warehouse_trang_thai_lenh }"
                 bind:titleTime="@{ @string/activity_list_order_warehouse_ngay_lap_lenh }"
                 />

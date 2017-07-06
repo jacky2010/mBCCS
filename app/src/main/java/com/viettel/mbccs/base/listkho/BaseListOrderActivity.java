@@ -26,6 +26,8 @@ public abstract class BaseListOrderActivity
 
     public abstract void init();
 
+    public abstract String getWareHouseTitle();
+
     public ObservableInt itemCount;
 
     MultiDirectionSlidingDrawer mDrawer;

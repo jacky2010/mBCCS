@@ -927,6 +927,7 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
 
     <string name="activity_list_order_return_upper_ngay_lap_phieu">Ngày lập phiếu</string>
     <string name="activity_list_order_return_upper_kho_nhan">Mã kho nhận</string>
+    <string name="activity_list_order_return_upper_kho_xuat">Mã kho xuất</string>
     <string name="activity_list_order_return_upper_xuat_kho_tra_hang_cap_tren">Xuất kho trả hàng cấp trên</string>
     <string name="activity_list_order_return_upper_co_phieu_chua_nhan">Có %1$d phiếu chưa nhận</string>
     <string name="activity_create_ticket_return_upper_lap_phieu_xuat_kho_tra_hang_cap_tren">Lập phiếu xuất kho trả hàng cấp trên</string>
