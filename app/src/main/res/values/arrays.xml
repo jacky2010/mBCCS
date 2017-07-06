@@ -33,4 +33,11 @@
         <item>Đã xuất kho</item>
         <item>Đã hủy</item>
     </string-array>
+
+    <string-array name="nhapkhonhanvien_status">
+        <item>Đã lập lệnh</item>
+        <item>Đã lập phiếu</item>
+        <item>Đã nhập kho</item>
+        <item>Đã hủy</item>
+    </string-array>
 </resources>

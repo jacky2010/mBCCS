@@ -914,6 +914,10 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="nv_trahangcaptren_list_label_count_exported">Phiếu đã xuất (%d)</string>
     <string name="nv_trahangcaptren_list_label_count_canceled">Phiếu bị hủy (%d)</string>
 
+    <!--nhap kho nhan vien-->
+    <string name="nhapkhonhanvien_list_title">Nhập kho từ nhân viên</string>
+    <string name="nhapkhonhanvien_cmd_detail">Chi tiết lệnh nhập kho từ nhân viên</string>
+
     <!-- Area channel -->
     <string name="title_area">Quản lý địa bàn</string>
     <string name="msg_empty_text"/>
