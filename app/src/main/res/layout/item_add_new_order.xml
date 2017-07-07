@@ -116,7 +116,7 @@
                                 style="@style/button_add_subtract"
                                 />
 
-                            <com.viettel.mbccs.widget.CustomEdittext
+                            <com.viettel.mbccs.widget.CustomEditText
                                 android:id="@+id/input_quantity_choice"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"

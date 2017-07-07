@@ -5,7 +5,6 @@ import com.viettel.mbccs.data.model.EmptyObject;
 import com.viettel.mbccs.data.model.Image;
 import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.model.Precinct;
-import com.viettel.mbccs.data.model.StaffInfo;
 import com.viettel.mbccs.data.model.UploadImage;
 import com.viettel.mbccs.data.model.UserInfo;
 import com.viettel.mbccs.data.model.database.ImageDataBase;
@@ -37,7 +36,6 @@ import com.viettel.mbccs.data.source.remote.response.GetPrecinctResponse;
 import com.viettel.mbccs.data.source.remote.response.GetProvinceResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
 import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
-import com.viettel.mbccs.data.source.remote.response.PassResetResponse;
 import com.viettel.mbccs.data.source.remote.response.SendCodeChangePassResponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import com.viettel.mbccs.data.source.remote.response.UploadImageResponse;
@@ -102,16 +100,6 @@ public class UserRepository implements IUserLocalDataSource, IUserRemoteDataSour
     @Override
     public UserInfo getUserInfo() {
         return mUserLocalDataSource.getUserInfo();
-    }
-
-    @Override
-    public void saveStaffInfoToSharePrefs(StaffInfo staffInfo) {
-        mUserLocalDataSource.saveStaffInfoToSharePrefs(staffInfo);
-    }
-
-    @Override
-    public StaffInfo getStaffInfoFromSharePrefs() {
-        return mUserLocalDataSource.getStaffInfoFromSharePrefs();
     }
 
     @Override
@@ -213,6 +201,16 @@ public class UserRepository implements IUserLocalDataSource, IUserRemoteDataSour
     @Override
     public List<UploadImage> getUploadImage() {
         return mUserLocalDataSource.getUploadImage();
+    }
+
+    @Override
+    public List<UploadImage> getUploadImage(@UploadImage.StatusUpload String status) {
+        return mUserLocalDataSource.getUploadImage(status);
+    }
+
+    @Override
+    public UploadImage getUploadImage(long idImage) {
+        return mUserLocalDataSource.getUploadImage(idImage);
     }
 
     @Override

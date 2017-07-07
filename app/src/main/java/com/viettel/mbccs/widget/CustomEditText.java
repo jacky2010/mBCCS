@@ -22,7 +22,7 @@ import com.viettel.mbccs.widget.callback.DrawableClickListener;
  * Created by FRAMGIA\hoang.van.cuong on 16/05/2017.
  */
 
-public class CustomEdittext extends AppCompatEditText {
+public class CustomEditText extends AppCompatEditText {
 
     private static final String ANDROID_SCHEMA = "http://schemas.android.com/apk/res/android";
     protected static final String STRING_EMPTY = "";
@@ -41,17 +41,17 @@ public class CustomEdittext extends AppCompatEditText {
 
     protected DrawableClickListener clickListener;
 
-    public CustomEdittext(Context context) {
+    public CustomEditText(Context context) {
         super(context);
         applyCustomFont(context, null);
     }
 
-    public CustomEdittext(Context context, @Nullable AttributeSet attrs) {
+    public CustomEditText(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         applyCustomFont(context, attrs);
     }
 
-    public CustomEdittext(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public CustomEditText(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         applyCustomFont(context, attrs);
         getBackground().setColorFilter(R.color.blue, PorterDuff.Mode.DST_IN);
@@ -276,5 +276,37 @@ public class CustomEdittext extends AppCompatEditText {
     public void setEditable(boolean editable) {
         setFocusable(editable);
         setFocusableInTouchMode(editable);
+    }
+
+    public Drawable getDrawableRight() {
+        return drawableRight;
+    }
+
+    public void setDrawableRight(Drawable drawableRight) {
+        this.drawableRight = drawableRight;
+    }
+
+    public Drawable getDrawableLeft() {
+        return drawableLeft;
+    }
+
+    public void setDrawableLeft(Drawable drawableLeft) {
+        this.drawableLeft = drawableLeft;
+    }
+
+    public Drawable getDrawableTop() {
+        return drawableTop;
+    }
+
+    public void setDrawableTop(Drawable drawableTop) {
+        this.drawableTop = drawableTop;
+    }
+
+    public Drawable getDrawableBottom() {
+        return drawableBottom;
+    }
+
+    public void setDrawableBottom(Drawable drawableBottom) {
+        this.drawableBottom = drawableBottom;
     }
 }

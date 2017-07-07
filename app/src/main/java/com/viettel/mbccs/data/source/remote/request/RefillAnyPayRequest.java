@@ -1,6 +1,7 @@
 package com.viettel.mbccs.data.source.remote.request;
 
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by minhnx on 6/7/17.
@@ -8,26 +9,21 @@ import com.google.gson.annotations.Expose;
 
 public class RefillAnyPayRequest {
     @Expose
-    private Long channelId;
+    @SerializedName("channelId")
+    private Integer channelId;
     @Expose
-    private String isdn;
-    @Expose
+    @SerializedName("amount")
     private Double amount;
+    @Expose
+    @SerializedName("isdn")
+    private String isdn;
 
-    public Long getChannelId() {
+    public Integer getChannelId() {
         return channelId;
     }
 
-    public void setChannelId(Long channelId) {
+    public void setChannelId(Integer channelId) {
         this.channelId = channelId;
-    }
-
-    public String getIsdn() {
-        return isdn;
-    }
-
-    public void setIsdn(String isdn) {
-        this.isdn = isdn;
     }
 
     public Double getAmount() {
@@ -36,5 +32,13 @@ public class RefillAnyPayRequest {
 
     public void setAmount(Double amount) {
         this.amount = amount;
+    }
+
+    public String getIsdn() {
+        return isdn;
+    }
+
+    public void setIsdn(String isdn) {
+        this.isdn = isdn;
     }
 }

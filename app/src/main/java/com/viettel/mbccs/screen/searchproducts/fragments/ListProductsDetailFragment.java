@@ -12,7 +12,6 @@ import com.viettel.mbccs.data.model.KeyValue;
 import com.viettel.mbccs.databinding.FragmentListProductsDetailBinding;
 import com.viettel.mbccs.screen.common.picker.KeyValuePickerActivity;
 import com.viettel.mbccs.screen.sellanypay.dialogs.DialogConfirmSellAnyPayFragment;
-import com.viettel.mbccs.screen.viewproduct.ViewProductDetailActivity;
 import com.viettel.mbccs.utils.GsonUtils;
 import com.viettel.mbccs.variable.Constants;
 
@@ -203,18 +202,6 @@ public class ListProductsDetailFragment extends BaseDataBindFragment<FragmentLis
                         .getSerializable(Constants.BundleConstant.RESULT);
                 mPresenter.onGetFeatureSuccess(item);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void changeToDetailScreen(Bundle args) {
-        try {
-            Intent newIntent = new Intent(getContext(), ViewProductDetailActivity.class);
-            newIntent.putExtras(args);
-
-            startActivity(newIntent);
         } catch (Exception e) {
             e.printStackTrace();
         }

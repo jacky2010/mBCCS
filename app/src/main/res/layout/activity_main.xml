@@ -43,7 +43,7 @@
                 android:layout_alignTop="@id/avatar"
                 android:layout_toEndOf="@id/avatar"
                 android:layout_toRightOf="@id/avatar"
-                android:text="Hoàng Văn Cương"
+                android:text="@{ presenter.userName }"
                 android:textColor="@color/white"
                 android:textSize="@dimen/sp_15"
                 android:textStyle="bold"
@@ -56,7 +56,7 @@
                 android:layout_marginTop="@dimen/dp_4"
                 android:layout_toEndOf="@id/avatar"
                 android:layout_toRightOf="@id/avatar"
-                android:text="+84 904032023"
+                android:text="@{ presenter.userTel }"
                 android:textColor="@color/white"
                 android:textSize="@dimen/sp_12"
                 />

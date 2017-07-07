@@ -1,14 +1,13 @@
 package com.viettel.mbccs.widget;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
+import android.support.v4.content.res.ResourcesCompat;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.view.Gravity;
 import android.view.View;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.widget.callback.DrawableClickListener;
@@ -17,9 +16,9 @@ import com.viettel.mbccs.widget.callback.DrawableClickListener;
  * Created by eo_cuong on 7/1/17.
  */
 
-public class CustomEditTextInput extends CustomEdittext {
+public class CustomEditTextInput extends CustomEditText {
 
-    private int mDrawableRightInt = 0;
+    private Drawable mDrawableRight = null;
     private boolean isThemeLight = false;
 
     public CustomEditTextInput(Context context) {
@@ -40,19 +39,29 @@ public class CustomEditTextInput extends CustomEdittext {
     public void setThemeLight(boolean themeLight) {
         if (themeLight) {
             isThemeLight = themeLight;
-            mDrawableRightInt = R.drawable.ic_cancel_grey_1_24dp;
-            setTextColor(getContext().getResources().getColor(R.color.white));
-            setHintTextColor(getContext().getResources().getColor(R.color.white_trans));
-            setBackgroundResource(R.drawable.bg_input_transparent_light);
+            mDrawableRight = ResourcesCompat.getDrawable(getContext().getResources(),
+                    R.drawable.ic_cancel_grey_1_24dp, null);
+            if (!TextUtils.isEmpty(getText())) {
+                setCompoundDrawables(getDrawableBound(getDrawableLeft()),
+                        getDrawableBound(getDrawableTop()), getDrawableBound(mDrawableRight),
+                        getDrawableBound(getDrawableBottom()));
+            } else {
+                setCompoundDrawables(getDrawableBound(getDrawableLeft()),
+                        getDrawableBound(getDrawableTop()), null,
+                        getDrawableBound(getDrawableBottom()));
+            }
         }
+        setTextColor(getContext().getResources().getColor(R.color.white));
+        setHintTextColor(getContext().getResources().getColor(R.color.white_trans));
+        setBackgroundResource(R.drawable.bg_input_transparent_light);
     }
 
     private void init() {
 
         int padding = (int) getContext().getResources().getDimension(R.dimen.dp_5);
         setPadding(padding, padding, padding, padding);
-
-        mDrawableRightInt = R.drawable.ic_cancel_black_24dp;
+        mDrawableRight = ResourcesCompat.getDrawable(getContext().getResources(),
+                R.drawable.ic_cancel_black_24dp, null);
         setTextColor(getContext().getResources().getColor(R.color.black));
         setHintTextColor(getContext().getResources().getColor(R.color.grey_dove));
         setBackgroundResource(R.drawable.bg_input_transparent_black);
@@ -64,13 +73,16 @@ public class CustomEditTextInput extends CustomEdittext {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (isEnabled()){
+                if (isEnabled()) {
                     if (!TextUtils.isEmpty(charSequence)) {
-                        setCompoundDrawablesWithIntrinsicBounds(getDrawableLeftInt(),
-                                getDrawableTopInt(), mDrawableRightInt, getDrawableBottomInt());
+                        setCompoundDrawables(getDrawableBound(getDrawableLeft()),
+                                getDrawableBound(getDrawableTop()),
+                                getDrawableBound(mDrawableRight),
+                                getDrawableBound(getDrawableBottom()));
                     } else {
-                        setCompoundDrawablesWithIntrinsicBounds(getDrawableLeftInt(),
-                                getDrawableTopInt(), 0, getDrawableBottomInt());
+                        setCompoundDrawables(getDrawableBound(getDrawableLeft()),
+                                getDrawableBound(getDrawableTop()), null,
+                                getDrawableBound(getDrawableBottom()));
                     }
                 }
             }
@@ -89,5 +101,16 @@ public class CustomEditTextInput extends CustomEdittext {
                 }
             }
         });
+    }
+
+    private Drawable getDrawableBound(Drawable drawable) {
+        if (drawable == null) {
+            return null;
+        }
+
+        int h = drawable.getIntrinsicHeight();
+        int w = drawable.getIntrinsicWidth();
+        drawable.setBounds(0, 0, w, h);
+        return drawable;
     }
 }

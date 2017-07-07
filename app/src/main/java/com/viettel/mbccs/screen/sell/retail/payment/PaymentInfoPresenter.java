@@ -208,7 +208,7 @@ public class PaymentInfoPresenter implements PaymentInforContract.Presenter {
             request.setSaleProgrameCode((mSaleProgram.getCode()));
         }
         request.setSaleTransType(String.valueOf(SaleTranType.SALE_RETAIL));
-        request.setShopId(Long.parseLong(mUserRepository.getUserInfo().getShop().getShopId()));
+        request.setShopId(mUserRepository.getUserInfo().getShop().getShopId());
         request.setPriceType(PriceType.PRICE_RETAIL);
         request.setStaffId(mUserRepository.getUserInfo().getStaffInfo().getStaffId());
         Customer customer = new Customer();

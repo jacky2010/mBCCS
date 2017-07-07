@@ -77,6 +77,10 @@ public class GetInfoSaleTranRequest implements Parcelable {
     @Expose
     private String couponCode;
 
+    @SerializedName("orderId")
+    @Expose
+    private long orderId;
+
     @SerializedName("language")
     @Expose
     private String language;
@@ -209,6 +213,14 @@ public class GetInfoSaleTranRequest implements Parcelable {
         mCustomer = customer;
     }
 
+    public long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(long orderId) {
+        this.orderId = orderId;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -232,6 +244,7 @@ public class GetInfoSaleTranRequest implements Parcelable {
         dest.writeString(this.discountPolicy);
         dest.writeString(this.couponCode);
         dest.writeString(this.language);
+        dest.writeLong(this.orderId);
     }
 
     public GetInfoSaleTranRequest() {
@@ -255,6 +268,7 @@ public class GetInfoSaleTranRequest implements Parcelable {
         this.discountPolicy = in.readString();
         this.couponCode = in.readString();
         this.language = in.readString();
+        this.orderId = in.readLong();
     }
 
     public static final Creator<GetInfoSaleTranRequest> CREATOR =
@@ -290,6 +304,7 @@ public class GetInfoSaleTranRequest implements Parcelable {
         if (telecomserviceId!=null){
             request.setTelecomserviceId(telecomserviceId);
         }
+        request.setOrderId(orderId);
         return request;
     }
 }

@@ -91,6 +91,7 @@ import com.viettel.mbccs.data.source.remote.response.CheckIdNoResponse;
 import com.viettel.mbccs.data.source.remote.response.CheckOTPResponse;
 import com.viettel.mbccs.data.source.remote.response.ConnectSubscriberResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateDistributedChannelResponse;
+import com.viettel.mbccs.data.source.remote.response.CreateOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransChannelResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransFromOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransRetailResponse;
@@ -266,7 +267,7 @@ public interface MBCSSApi {
             @Body DataRequest<GetListShopRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<ServerDataResponse<BaseResponse<EmptyObject>>> createSaleOrders(
+    Observable<ServerDataResponse<BaseResponse<CreateOrderResponse>>> createSaleOrders(
             @Body DataRequest<KPPOrderRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")

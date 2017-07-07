@@ -41,9 +41,9 @@
                 <com.viettel.mbccs.widget.CustomButton
                     android:id="@+id/btn_close"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dp_10"
+                    android:layout_weight="1"
                     android:onClick="@{()->presenter.onCancel()}"
                     android:text="@string/common_label_close"
                     style="@style/button_negative"
@@ -52,10 +52,10 @@
                 <com.viettel.mbccs.widget.CustomButton
                     android:id="@+id/btn_next"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_margin="@dimen/dp_10"
+                    android:layout_weight="1"
                     android:onClick="@{()->presenter.onNext()}"
                     android:text="@string/next"
                     style="@style/button_positive"
@@ -81,7 +81,6 @@
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     />
-
                 <android.support.v7.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

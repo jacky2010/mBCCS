@@ -61,10 +61,15 @@ public class AddNewOrderActivity
         Intent intent = new Intent(this, OrderSuccessActivity.class);
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList(Constants.BundleConstant.LIST_STOCK_TOTAL, stockTotals);
-        bundle.putString(Constants.BundleConstant.SALE_ORDER_ID, "1");
+        bundle.putString(Constants.BundleConstant.SALE_ORDER_ID, saleOrderId);
         bundle.putString(Constants.BundleConstant.CHANNEL_NAME, channelName);
         intent.putExtras(bundle);
         startActivityForResult(intent, REQUEST_SUCCESS);
+    }
+
+    @Override
+    public void finishScreen() {
+        finish();
     }
 
     @Override

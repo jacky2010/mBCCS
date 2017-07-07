@@ -91,7 +91,7 @@
                 android:layout_marginTop="@dimen/dp_20"
                 android:text="@string/task_title" />
 
-            <com.viettel.mbccs.widget.CustomEdittext
+            <com.viettel.mbccs.widget.CustomEditText
                 style="@style/TextSearchTask"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -109,7 +109,7 @@
                 android:layout_marginTop="@dimen/dp_20"
                 android:text="@string/description" />
 
-            <com.viettel.mbccs.widget.CustomEdittext
+            <com.viettel.mbccs.widget.CustomEditText
                 android:id="@+id/editText"
                 style="@style/TextSearchTask"
                 android:layout_width="match_parent"

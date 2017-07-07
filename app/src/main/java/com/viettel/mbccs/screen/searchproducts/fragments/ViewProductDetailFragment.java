@@ -207,9 +207,4 @@ public class ViewProductDetailFragment extends BaseDataBindFragment<FragmentList
             e.printStackTrace();
         }
     }
-
-    @Override
-    public void changeToDetailScreen(Bundle args) {
-
-    }
 }

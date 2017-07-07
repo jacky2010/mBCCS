@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.ModelSale;
+import com.viettel.mbccs.data.model.StockModel;
 import com.viettel.mbccs.databinding.ItemProductBinding;
 
 import java.util.List;
@@ -96,19 +97,11 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
             mStockItem = item;
             ItemProductPresenter itemProductPresenter = new ItemProductPresenter(mContext, item);
             mBinding.setItem(itemProductPresenter);
-
-            mBinding.llProduct.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if(mListener != null)
-                        mListener.onItemClick(mStockItem);
-                }
-            });
         }
     }
 
     public interface OnItemClickListener {
-        void onItemClick(ModelSale item);
+        void onItemClick(StockModel item, int position);
 
         void onItemFocus();
     }
