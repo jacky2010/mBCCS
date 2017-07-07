@@ -49,6 +49,11 @@ public class ListOrderActivity extends BaseListOrderActivity {
     }
 
     @Override
+    public String getWareHouseTitle() {
+        return getString(R.string.activity_list_order_return_upper_kho_xuat);
+    }
+
+    @Override
     public void onItemClicked(Object object) {
 
     }
@@ -58,9 +63,10 @@ public class ListOrderActivity extends BaseListOrderActivity {
 
         int positionStatus = getPositionStatus();
         int positionWareHouser = getPositionWareHouser();
-        if (positionStatus==1){
-            setItemCountStringFormat(getString(R.string.nhanvien_xuattra_label_count_cmd_not_approve));
-        }else{
+        if (positionStatus == 1) {
+            setItemCountStringFormat(
+                    getString(R.string.nhanvien_xuattra_label_count_cmd_not_approve));
+        } else {
             getString(R.string.activity_list_order_warehouse_lenh_chua_lap_phieu);
         }
         //TODO do search
@@ -69,13 +75,13 @@ public class ListOrderActivity extends BaseListOrderActivity {
         StockTrans stockTrans = new StockTrans();
         stockTrans.setStockTransId(2342352);
         stockTrans.setToOwnerId(234235);
-        stockTrans.setCreateDateTime("2017-07-05T01:28:46+07:00");
+        stockTrans.setCreateDatetime("2017-07-05T01:28:46+07:00");
         stockTrans.setStockTransStatusName("hang moi");
 
         StockTrans stockTrans1 = new StockTrans();
         stockTrans1.setStockTransId(1237);
         stockTrans1.setToOwnerId(23424);
-        stockTrans1.setCreateDateTime("2017-07-05T01:28:46+07:00");
+        stockTrans1.setCreateDatetime("2017-07-05T01:28:46+07:00");
         stockTrans1.setStockTransStatusName("hang moi");
 
         List<StockTrans> stockTranses = new ArrayList<>();

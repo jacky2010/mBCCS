@@ -75,9 +75,10 @@ public abstract class BaseBillInputDetaiActivity extends
         for (StockTransDetail stockTransDetail : stockTransDetails) {
             stockTransDetail.getStockSerial();
         }
-        ExportSuccessDialog exportSuccessDialog = ExportSuccessDialog.newInstance(stockTransDetails,
-                String.format(getString(R.string.warehouse_label_export_success_code), ""),
-                String.format(getString(R.string.warehouse_label_receive), ""));
+        ExportSuccessDialog exportSuccessDialog =
+                ExportSuccessDialog.newInstance(stockTransDetails, null,
+                        String.format(getString(R.string.warehouse_label_export_success_code), ""),
+                        String.format(getString(R.string.warehouse_label_receive), ""));
         exportSuccessDialog.setOnDialogDismissListener(
                 new ExportSuccessDialog.OnDialogDismissListener() {
 

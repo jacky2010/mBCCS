@@ -73,7 +73,7 @@ public class CmdPrepareImportDetailPresenter implements CmdPrepareImportDetailCo
 
         dayCreated.set(String.format(
                 mContext.getString(R.string.common_cmd_prepare_import_label_day_created),
-                mStockTrans.getCreateDateTime()));
+                mStockTrans.getCreateDatetime()));
 
         mAdapter = new StockTransDetailAdapter(mContext, mStockTransDetails,
                 mContext.getString(R.string.item_view_ware_house_view_serial));

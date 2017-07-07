@@ -9,6 +9,7 @@ import com.viettel.mbccs.data.source.remote.request.CreateSaleTransFromOrderRequ
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListChannelByOwnerTypeIdRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListExpCmdRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListProvinceRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListSerialRequest;
@@ -24,12 +25,14 @@ import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
 import com.viettel.mbccs.data.source.remote.request.InputOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.KPPOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.UpdateSaleOrderRequest;
+import com.viettel.mbccs.data.source.remote.request.ViewInforSerialRequest;
 import com.viettel.mbccs.data.source.remote.response.CreateOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransChannelResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransFromOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransRetailResponse;
 import com.viettel.mbccs.data.source.remote.response.GetInfoSaleTranResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListChannelByOwnerTypeIdResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListExpCmdResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListProvinceResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListSerialResponse;
@@ -44,6 +47,7 @@ import com.viettel.mbccs.data.source.remote.response.InputOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.ListStockTransDetailsReponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
 import com.viettel.mbccs.data.source.remote.response.UpdateSaleOrderResponse;
+import com.viettel.mbccs.data.source.remote.response.ViewInforSerialResponse;
 import rx.Observable;
 
 /**
@@ -113,4 +117,9 @@ public interface IBanHangKhoTaiChinhRemoteDataSource {
 
     Observable<EmptyObject> createImportStock(
             DataRequest<CreateImportStockRequest> requestDataRequest);
+
+    Observable<GetListExpCmdResponse> getListExpCmd(DataRequest<GetListExpCmdRequest> dataRequest);
+
+    Observable<ViewInforSerialResponse> viewInforSerial(
+            DataRequest<ViewInforSerialRequest> dataRequest);
 }

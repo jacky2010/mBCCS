@@ -7,7 +7,7 @@
     <data>
         <variable
             name="presenter"
-            type="com.viettel.mbccs.screen.nhapkhocapduoi.ListOrderPresenter"
+            type="com.viettel.mbccs.base.listkho.BaseListOrderPresenter"
             />
 
         <import type="android.view.View"/>
@@ -39,20 +39,31 @@
             android:layout_marginLeft="@dimen/dp_8"
             android:layout_marginStart="@dimen/dp_8"
             android:layout_marginTop="?attr/actionBarSize"
+            android:padding="@dimen/dp_10"
             android:textColor="@color/black"
-            android:textSize="@dimen/sp_18"
+            android:textSize="@dimen/sp_15"
             bind:textUnderLine="@{ presenter.itemCountStringText}"
             />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipeLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@id/text_count"
-            android:adapter="@{ presenter.adapter }"
-            android:visibility="@{ presenter.isEmpty ? View.GONE : View.VISIBLE }"
-            bind:addItemDecoration="@{ presenter.itemDecoration }"
-            />
+            >
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adapter="@{ presenter.adapter }"
+                    bind:addItemDecoration="@{ presenter.itemDecoration }"
+                    />
+            </FrameLayout>
+        </android.support.v4.widget.SwipeRefreshLayout>
+
 
         <View
             android:id="@+id/empty"
@@ -68,12 +79,12 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_margin="16dp"
+            android:layout_margin="@dimen/dp_16"
             android:onClick="@{ () -> presenter.onAddClick() }"
             android:src="@drawable/ic_add_white_24dp"
-            android:visibility="gone"
+            android:visibility="@{ presenter.showAddButton ? View.VISIBLE : View.GONE }"
             app:fabSize="auto"
-            app:layout_anchor="@id/recyclerView"
+            app:layout_anchor="@id/swipeLayout"
             app:layout_anchorGravity="bottom|right|end"
             />
 
@@ -82,6 +93,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/toolbar"
+            android:layout_marginBottom="@dimen/dp_200"
             app:content="@+id/search_form"
             app:direction="topToBottom"
             app:handle="@+id/handle"
@@ -89,23 +101,18 @@
             app:headerOne="@+id/view_open"
             >
 
-            <android.support.v7.widget.CardView
+            <include
+                layout="@layout/repository_base_search_form"
                 android:id="@+id/search_form"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/dp_4"
-                app:cardElevation="@dimen/dp_2"
-                >
-
-                <include
-                    layout="@layout/repository_base_search_form"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    bind:adapter="@{ presenter.warehouseAdapter }"
-                    bind:titleSpinner="@{ @string/activity_list_order_warehouse_ma_kho_xuat }"
-                    bind:titleTime="@{ @string/activity_list_order_warehouse_ngay_lap_lenh }"
-                    />
-            </android.support.v7.widget.CardView>
+                bind:adapter="@{ presenter.warehouseAdapter }"
+                bind:adapter2="@{ presenter.statusAdapter }"
+                bind:searchClick="@{() -> presenter.doSearch()}"
+                bind:titleSpinner="@{ presenter.wareHouseTitle }"
+                bind:titleSpinner2="@{ @string/activity_list_order_warehouse_trang_thai_lenh }"
+                bind:titleTime="@{ @string/activity_list_order_warehouse_ngay_lap_lenh }"
+                />
 
             <RelativeLayout
                 android:id="@+id/handle"
@@ -118,24 +125,14 @@
                     android:id="@+id/view_close"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/filter_height"
+                    app:text="@{presenter.filterText}"
                     bind:isShow="@{ true }"
                     />
 
-                <FrameLayout
+                <include
+                    layout="@layout/header_expanded"
                     android:id="@+id/view_open"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    >
-                    <View
-                        android:layout_width="@dimen/dp_100"
-                        android:layout_height="@dimen/dp_0.6"
-                        android:layout_gravity="center_horizontal|bottom"
-                        android:layout_marginBottom="@dimen/dp_8"
-                        android:layout_marginTop="@dimen/dp_8"
-                        android:background="@color/default_text_color_gray"
-                        />
-                </FrameLayout>
+                    />
             </RelativeLayout>
         </com.viettel.mbccs.widget.MultiDirectionSlidingDrawer>
 

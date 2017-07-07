@@ -5,9 +5,12 @@ import android.databinding.ObservableField;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
+import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.searchlistview.BaseSearchListViewPresenter;
+import com.viettel.mbccs.constance.OrderStatus;
 import com.viettel.mbccs.data.model.StockTrans;
 import com.viettel.mbccs.screen.nhapkhocapduoi.adapters.ListOrderAdapter;
+import com.viettel.mbccs.utils.Common;
 import com.viettel.mbccs.utils.SpinnerAdapter;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +30,8 @@ public class BaseListOrderPresenter
     public ObservableField<String> filterText = new ObservableField<>();
 
     public ObservableField<String> itemCountStringText = new ObservableField<>();
+
+    public ObservableField<String> wareHouseTitle = new ObservableField<>();
 
     public ListOrderAdapter mAdaper;
 
@@ -48,8 +53,12 @@ public class BaseListOrderPresenter
         SpinnerAdapter<String> adapter2 = new SpinnerAdapter<>(mContext, mStatusList);
         adapter2.setOnItemSelectedListener(getStatusItemSelectedListener());
         statusAdapter.set(adapter2);
-        itemCountStringFormat = getItemCountStringFormat();
+        if (getItemCountStringFormat() != null) {
+            itemCountStringFormat = getItemCountStringFormat();
+        }
+        wareHouseTitle.set(((BaseListOrderActivity) mContext).getWareHouseTitle());
         updateItemCountString();
+        updateTextFilter();
     }
 
     @Override
@@ -60,6 +69,16 @@ public class BaseListOrderPresenter
 
     private void updateItemCountString() {
         itemCountStringText.set(String.format(itemCountStringFormat, itemCount.get()));
+    }
+
+    @Override
+    public List<String> getWareHouseData() {
+        return mWareHouseData;
+    }
+
+    @Override
+    public List<String> getStatus() {
+        return mStatusList;
     }
 
     @Override
@@ -183,5 +202,23 @@ public class BaseListOrderPresenter
     @Override
     public String getItemCountStringFormat() {
         return mViewModel.getItemCountStringFormat();
+    }
+
+    public void updateTextFilter() {
+        String text = Common.getDayByLong(
+                ((BaseListOrderActivity) mViewModel).getFromDate().getDateInMilis())
+                + mContext.getString(R.string.common_label_dot)
+                + Common.getDayByLong(
+                ((BaseListOrderActivity) mViewModel).getToDate().getDateInMilis());
+        if (getWareHouseData().size() > 0) {
+            text += mContext.getString(R.string.common_label_dot) + getWareHouseData().get(
+                    positionWareHouse);
+        }
+
+        if (getStatus().size() > 0) {
+            text += mContext.getString(R.string.common_label_dot) + getStatus().get(positionStatus);
+        }
+
+        filterText.set(text);
     }
 }
