@@ -47,32 +47,30 @@ public class CreateArisingTaskActivity extends BaseDataBindActivity<ActivityCrea
 
     @Override
     public void assignTask() {
-        new CustomDialog(this, R.string.confirm,
-                R.string.ban_co_chac_muon_giao_viec_phat_sinh, false,
-                R.string.common_label_close, R.string.assign, null,
-                new DialogInterface.OnClickListener() {
+        new CustomDialog(this, R.string.confirm, R.string.ban_co_chac_muon_giao_viec_phat_sinh,
+                false, R.string.common_label_close, R.string.assign, null, new CustomDialog.OnInputDialogListener() {
+            @Override
+            public void onClick(DialogInterface var1, int var2, String input) {
+                // TODO: 5/27/2017 Api call
+                Dialog dia =
+                        new DialogFullScreen.Builder(CreateArisingTaskActivity.this).setCenterContent(true)
+                                .setAutoClose(true)
+                                .setTitle(getString(R.string.create_arising_task_activity_giao_viec_thanh_cong))
+                                .setContent(getString(R.string.tin_nhan_thong_bao_da_gui_toi_nhan_vien))
+                                .build();
+
+                dia.setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // TODO: 5/27/2017 Api call
-                        Dialog dia =
-                                new DialogFullScreen.Builder(CreateArisingTaskActivity.this).setCenterContent(true)
-                                        .setAutoClose(true)
-                                        .setTitle(getString(R.string.create_arising_task_activity_giao_viec_thanh_cong))
-                                        .setContent(getString(R.string.tin_nhan_thong_bao_da_gui_toi_nhan_vien))
-                                        .build();
-
-                        dia.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                            @Override
-                            public void onDismiss(DialogInterface dialogInterface) {
-                                finish();
-                            }
-                        });
-
-                        dia.setCancelable(false);
-                        dia.setCanceledOnTouchOutside(false);
-
-                        dia.show();
+                    public void onDismiss(DialogInterface dialogInterface) {
+                        finish();
                     }
-                }, null, false, false).show();
+                });
+
+                dia.setCancelable(false);
+                dia.setCanceledOnTouchOutside(false);
+
+                dia.show();
+            }
+        }, null, false, false).show();
     }
 }

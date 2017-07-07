@@ -4,10 +4,13 @@ import com.viettel.mbccs.data.model.EmptyObject;
 import com.viettel.mbccs.data.source.remote.IBanHangKhoTaiChinhRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.request.CreateExpStockNotHaveCmdRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateExpStockRequest;
+import com.viettel.mbccs.data.source.remote.request.CreateImportCmdRequest;
+import com.viettel.mbccs.data.source.remote.request.CreateImportNoteRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateImportStockRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateSaleTransChannelRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateSaleTransFromOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
+import com.viettel.mbccs.data.source.remote.request.DestroyStockTransRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListChannelByOwnerTypeIdRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListExpCmdRequest;
@@ -28,6 +31,7 @@ import com.viettel.mbccs.data.source.remote.request.KPPOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.UpdateSaleOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListSerialRequest;
 import com.viettel.mbccs.data.source.remote.request.ViewInforSerialRequest;
+import com.viettel.mbccs.data.source.remote.response.BaseCreateCmdNote;
 import com.viettel.mbccs.data.source.remote.response.BaseResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransChannelResponse;
@@ -276,12 +280,12 @@ public class BanHangKhoTaiChinhRemoteDataSource implements IBanHangKhoTaiChinhRe
     }
 
     @Override
-    public Observable<EmptyObject> createImportStock(
+    public Observable<BaseCreateCmdNote> createImportStock(
             DataRequest<CreateImportStockRequest> requestDataRequest) {
         return RequestHelper.getRequest()
                 .createImportStock(requestDataRequest)
-                .flatMap(SchedulerUtils.<EmptyObject>convertDataFlatMap())
-                .compose(SchedulerUtils.<EmptyObject>applyAsyncSchedulers());
+                .flatMap(SchedulerUtils.<BaseCreateCmdNote>convertDataFlatMap())
+                .compose(SchedulerUtils.<BaseCreateCmdNote>applyAsyncSchedulers());
     }
 
     @Override
@@ -300,5 +304,32 @@ public class BanHangKhoTaiChinhRemoteDataSource implements IBanHangKhoTaiChinhRe
                 .viewInfoSerial(dataRequest)
                 .flatMap(SchedulerUtils.<ViewInforSerialResponse>convertDataFlatMap())
                 .compose(SchedulerUtils.<ViewInforSerialResponse>applyAsyncSchedulers());
+    }
+
+    @Override
+    public Observable<BaseCreateCmdNote> createImportCmd(
+            DataRequest<CreateImportCmdRequest> dataRequest) {
+        return RequestHelper.getRequest()
+                .createImportCmd(dataRequest)
+                .flatMap(SchedulerUtils.<BaseCreateCmdNote>convertDataFlatMap())
+                .compose(SchedulerUtils.<BaseCreateCmdNote>applyAsyncSchedulers());
+    }
+
+    @Override
+    public Observable<BaseCreateCmdNote> createImportNote(
+            DataRequest<CreateImportNoteRequest> dataRequest) {
+        return RequestHelper.getRequest()
+                .createImportNote(dataRequest)
+                .flatMap(SchedulerUtils.<BaseCreateCmdNote>convertDataFlatMap())
+                .compose(SchedulerUtils.<BaseCreateCmdNote>applyAsyncSchedulers());
+    }
+
+    @Override
+    public Observable<EmptyObject> destroyStockTrans(
+            DataRequest<DestroyStockTransRequest> dataRequest) {
+        return RequestHelper.getRequest()
+                .destroyStockTrans(dataRequest)
+                .flatMap(SchedulerUtils.<EmptyObject>convertDataFlatMap())
+                .compose(SchedulerUtils.<EmptyObject>applyAsyncSchedulers());
     }
 }

@@ -13,8 +13,8 @@ import com.viettel.mbccs.widget.CustomDialog;
  * Created by Anh Vu Viet on 5/28/2017.
  */
 
-public class TaskCSKPPDetailActivity extends
-        BaseDataBindActivity<ActivityTaskCskppDetailBinding, TaskCSKPPDetailPresenter>
+public class TaskCSKPPDetailActivity
+        extends BaseDataBindActivity<ActivityTaskCskppDetailBinding, TaskCSKPPDetailPresenter>
         implements TaskCSKPPDetailContract.ViewModel {
 
     @Override
@@ -25,10 +25,10 @@ public class TaskCSKPPDetailActivity extends
     @Override
     protected void initData() {
         mPresenter = new TaskCSKPPDetailPresenter(this, this,
-                (TaskModel) getIntent().getParcelableExtra(Constants.BundleConstant.TASK_INFO), false);
+                (TaskModel) getIntent().getParcelableExtra(Constants.BundleConstant.TASK_INFO),
+                false);
         mBinding.setPresenter(mPresenter);
     }
-
 
     @Override
     public void showLoading() {
@@ -43,12 +43,11 @@ public class TaskCSKPPDetailActivity extends
     @Override
     public void onReject() {
         // TODO: 5/28/2017 Handle on click
-        new CustomDialog(this, R.string.confirm,
-                R.string.ban_co_chac_muon_tu_choi, false,
+        new CustomDialog(this, R.string.confirm, R.string.ban_co_chac_muon_tu_choi, false,
                 R.string.common_label_close, R.string.reject, null,
-                new DialogInterface.OnClickListener() {
+                new CustomDialog.OnInputDialogListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(DialogInterface var1, int var2, String input) {
 
                     }
                 }, null, false, true).show();
@@ -57,12 +56,11 @@ public class TaskCSKPPDetailActivity extends
     @Override
     public void onAccept() {
         // TODO: 5/28/2017 Handle on click
-        new CustomDialog(this, R.string.confirm,
-                R.string.ban_co_chac_muon_nhan_viec, false,
+        new CustomDialog(this, R.string.confirm, R.string.ban_co_chac_muon_nhan_viec, false,
                 R.string.common_label_close, R.string.nhan_viec, null,
-                new DialogInterface.OnClickListener() {
+                new CustomDialog.OnInputDialogListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(DialogInterface var1, int var2, String input) {
 
                     }
                 }, null, false, false).show();

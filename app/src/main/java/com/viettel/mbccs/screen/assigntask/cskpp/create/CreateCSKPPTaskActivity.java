@@ -30,7 +30,6 @@ public class CreateCSKPPTaskActivity
         mBinding.setPresenter(mPresenter);
     }
 
-
     @Override
     public void showLoading() {
 
@@ -50,12 +49,11 @@ public class CreateCSKPPTaskActivity
     @Override
     public void assignTask() {
         new CustomDialog(this, getString(R.string.confirm),
-                getString(R.string.create_CSKPP_task_activity_ban_co_chac_muon_giao_viec,
-                        "ABC"), false,
-                getString(R.string.common_label_close), getString(R.string.assign), null,
-                new DialogInterface.OnClickListener() {
+                getString(R.string.create_CSKPP_task_activity_ban_co_chac_muon_giao_viec, "ABC"),
+                false, getString(R.string.common_label_close), getString(R.string.assign), null,
+                new CustomDialog.OnInputDialogListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(DialogInterface var1, int var2, String input) {
                         // TODO: 5/27/2017 Api call
                         Dialog dia = new DialogFullScreen.Builder(
                                 CreateCSKPPTaskActivity.this).setCenterContent(true)

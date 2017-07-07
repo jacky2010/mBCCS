@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.viettel.mbccs.R;
 
+import com.viettel.mbccs.base.BasePresenter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +28,7 @@ public abstract class BaseCreateOrderSuccessPresenter<T>
     public ObservableInt itemCount = new ObservableInt();
 
     public ObservableField<RecyclerView.Adapter> adapter = new ObservableField<>();
+
 
     public BaseCreateOrderSuccessPresenter(Context context,
             BaseCreateOrderSuccessContract.ViewModel viewModel) {
