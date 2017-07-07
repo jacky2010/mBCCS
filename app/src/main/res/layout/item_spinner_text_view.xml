@@ -51,7 +51,7 @@
         <!--android:layout_marginLeft="@dimen/dp_5"-->
         <!--android:visibility="visible" />-->
 
-        <com.viettel.mbccs.widget.CustomEdittext
+        <com.viettel.mbccs.widget.CustomEditText
             android:id="@+id/spinner"
             style="@style/edit_main_bg"
             android:layout_width="match_parent"

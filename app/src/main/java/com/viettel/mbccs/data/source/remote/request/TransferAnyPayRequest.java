@@ -7,30 +7,31 @@ import com.google.gson.annotations.SerializedName;
  * Created by minhnx on 6/7/17.
  */
 
-public class TransferAnyPayRequest {
+public class TransferAnyPayRequest{
     @Expose
-    @SerializedName("fromISDN")
-    private String fromIsdn;
+    @SerializedName("fromChannelId")
+    private Integer fromChannelId;
     @Expose
-    @SerializedName("toISDN")
-    private String toIsdn;
+    @SerializedName("toChannelId")
+    private Integer toChannelId;
     @Expose
+    @SerializedName("amount")
     private Double amount;
 
-    public String getFromIsdn() {
-        return fromIsdn;
+    public Integer getFromChannelId() {
+        return fromChannelId;
     }
 
-    public void setFromIsdn(String fromIsdn) {
-        this.fromIsdn = fromIsdn;
+    public void setFromChannelId(Integer fromChannelId) {
+        this.fromChannelId = fromChannelId;
     }
 
-    public String getToIsdn() {
-        return toIsdn;
+    public Integer getToChannelId() {
+        return toChannelId;
     }
 
-    public void setToIsdn(String toIsdn) {
-        this.toIsdn = toIsdn;
+    public void setToChannelId(Integer toChannelId) {
+        this.toChannelId = toChannelId;
     }
 
     public Double getAmount() {

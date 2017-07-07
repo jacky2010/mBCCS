@@ -33,6 +33,7 @@ import com.viettel.mbccs.data.source.remote.request.GetListSerialRequest;
 import com.viettel.mbccs.data.source.remote.request.ViewInforSerialRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseCreateCmdNote;
 import com.viettel.mbccs.data.source.remote.response.BaseResponse;
+import com.viettel.mbccs.data.source.remote.response.CreateOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransChannelResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransFromOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransRetailResponse;
@@ -171,12 +172,12 @@ public class BanHangKhoTaiChinhRemoteDataSource implements IBanHangKhoTaiChinhRe
                 .compose(SchedulerUtils.<GetListShopResponse>applyAsyncSchedulers());
     }
 
-    public Observable<EmptyObject> createSaleOrders(
+    public Observable<CreateOrderResponse> createSaleOrders(
             DataRequest<KPPOrderRequest> requestDataRequest) {
         return RequestHelper.getRequest()
                 .createSaleOrders(requestDataRequest)
-                .flatMap(SchedulerUtils.<EmptyObject>convertDataFlatMap())
-                .compose(SchedulerUtils.<EmptyObject>applyAsyncSchedulers());
+                .flatMap(SchedulerUtils.<CreateOrderResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<CreateOrderResponse>applyAsyncSchedulers());
     }
 
     @Override

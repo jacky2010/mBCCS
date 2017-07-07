@@ -5,5 +5,5 @@ package com.viettel.mbccs.data.source.remote.request;
  */
 
 public class GetListDsLamByTeamIdRequest {
-    public int shopId;
+    public Long shopId;
 }

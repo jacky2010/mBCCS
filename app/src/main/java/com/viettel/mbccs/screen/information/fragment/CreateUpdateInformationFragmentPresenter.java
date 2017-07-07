@@ -7,7 +7,6 @@ import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
 import android.graphics.Bitmap;
 import android.os.Handler;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.AdapterView;
@@ -137,7 +136,7 @@ public class CreateUpdateInformationFragmentPresenter
     public ObservableInt selectionHTTT;
     public ObservableInt selectedGoiCuoc;
     public ObservableField<Date> maxDateBirthDay;
-    public ObservableField<String> minDateBirthDay;
+    public ObservableField<Date> minDateBirthDay;
 
     CreateUpdateInformationFragmentPresenter(Context context,
             CreateUpdateInformationFragmentContract.View view) {
@@ -190,7 +189,7 @@ public class CreateUpdateInformationFragmentPresenter
         selectionHTTT = new ObservableInt();
         selectedGoiCuoc = new ObservableInt();
         maxDateBirthDay = new ObservableField<>(new Date());
-        minDateBirthDay = new ObservableField<>("30/12/1970");
+        minDateBirthDay = new ObservableField<>(DateUtils.minDateBirthday());
         stringError = context.getString(R.string.input_empty);
     }
 
@@ -478,12 +477,6 @@ public class CreateUpdateInformationFragmentPresenter
             return;
         }
 
-        if (StringUtils.isEmpty(customer.getProvince()) || !DateUtils.compareDateToDay(
-                customer.getBirthDate())) {
-            view.customerBirthdayError();
-            return;
-        }
-
         if (typeFragment == CreateUpdateInformationFragment.Type.UPDATE_INFORMATION
                 && getDataSubscriber().getSubType().equals(MobileType.TRA_SAU)) {
             otpError.set(null);
@@ -628,13 +621,12 @@ public class CreateUpdateInformationFragmentPresenter
         Customer customer = getDataCustomer();
         Subscriber subscriber = getDataSubscriber();
 
+        List<String> data = getBitmapAndSaveDatabase(customer);
         if (isSendImage) {
             Intent intent = new Intent(context, UploadImageService.class);
-            intent.putParcelableArrayListExtra(UploadImageService.ARG_DATA_INTENT,
-                    (ArrayList<? extends Parcelable>) getBitmapAndSaveDatabase(customer));
+            intent.putStringArrayListExtra(UploadImageService.ARG_DATA_INTENT,
+                    (ArrayList<String>) data);
             context.startService(intent);
-        } else {
-            getBitmapAndSaveDatabase(getDataCustomer());
         }
 
         if (typeFragment == CreateUpdateInformationFragment.Type.UPDATE_INFORMATION) {
@@ -736,8 +728,8 @@ public class CreateUpdateInformationFragmentPresenter
         return validate;
     }
 
-    private List<UploadImage> getBitmapAndSaveDatabase(Customer customer) {
-        List<UploadImage> uploadImageList = new ArrayList<>();
+    private List<String> getBitmapAndSaveDatabase(Customer customer) {
+        List<String> uploadImageList = new ArrayList<>();
         Bitmap imageFront = view.imageFront();
         Bitmap imageBackside = view.imageBackside();
         Bitmap imagePortrait = view.imagePortrait();
@@ -746,21 +738,21 @@ public class CreateUpdateInformationFragmentPresenter
             UploadImage uploadImage =
                     setDataUploadImage(customer, imageFront, UploadImage.ImageType.FRONT);
             uploadImage.save();
-            uploadImageList.add(uploadImage);
+            uploadImageList.add(String.valueOf(uploadImage.getIdImage()));
         }
 
         if (imageBackside != null) {
             UploadImage uploadImage =
                     setDataUploadImage(customer, imageBackside, UploadImage.ImageType.BACKSIDE);
             uploadImage.save();
-            uploadImageList.add(uploadImage);
+            uploadImageList.add(String.valueOf(uploadImage.getIdImage()));
         }
 
         if (imagePortrait != null) {
             UploadImage uploadImage =
                     setDataUploadImage(customer, imagePortrait, UploadImage.ImageType.PORTRAIT);
             uploadImage.save();
-            uploadImageList.add(uploadImage);
+            uploadImageList.add(String.valueOf(uploadImage.getIdImage()));
         }
         return uploadImageList;
     }

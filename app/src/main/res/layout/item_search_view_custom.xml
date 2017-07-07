@@ -16,7 +16,7 @@
         android:rotation="90"
         android:src="@drawable/ic_search" />
 
-    <com.viettel.mbccs.widget.CustomEdittext
+    <com.viettel.mbccs.widget.CustomEditText
         android:id="@+id/ed_search"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -44,7 +44,7 @@ import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.Function;
 import com.viettel.mbccs.widget.BottomNavigationView;
 import com.viettel.mbccs.widget.CustomEditTextInput;
-import com.viettel.mbccs.widget.CustomEdittext;
+import com.viettel.mbccs.widget.CustomEditText;
 import com.viettel.mbccs.widget.EndlessRecyclerOnScrollListener;
 import com.viettel.mbccs.widget.SpinnerWithBorder;
 import com.viettel.mbccs.widget.callback.DrawableClickListener;
@@ -432,7 +432,7 @@ public class BindingUtils {
     }
 
     @BindingAdapter("customEditTextDrawable")
-    public static void setCustomEditTextDrawable(CustomEdittext v, DrawableClickListener listener) {
+    public static void setCustomEditTextDrawable(CustomEditText v, DrawableClickListener listener) {
         v.setDrawableClickListener(listener);
     }
 
@@ -486,7 +486,7 @@ public class BindingUtils {
         spinnerWithBorder.setSelection(position);
     }
 
-    @BindingAdapter("isThemeLight")
+    @BindingAdapter("themeLight")
     public static void setThemeLightEditText(CustomEditTextInput customEditTextInput,
             boolean isThemeLight) {
         customEditTextInput.setThemeLight(isThemeLight);

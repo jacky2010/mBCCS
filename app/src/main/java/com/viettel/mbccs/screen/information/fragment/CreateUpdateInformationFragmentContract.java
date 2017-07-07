@@ -43,8 +43,6 @@ public interface CreateUpdateInformationFragmentContract {
 
         void selectNoticeChargeError();
 
-        void customerBirthdayError();
-
         void updateAllSubInfoError(BaseException error);
 
         void isSendImage();

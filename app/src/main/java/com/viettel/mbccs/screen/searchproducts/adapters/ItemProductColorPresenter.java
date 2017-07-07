@@ -9,20 +9,14 @@ import android.content.Context;
 public class ItemProductColorPresenter {
 
     private int mColor;
-    private boolean mSelected = false;
     private Context mContext;
 
-    public ItemProductColorPresenter(Context context, int color, boolean selected) {
+    public ItemProductColorPresenter(Context context, int color) {
         mColor = color;
         mContext = context;
-        mSelected = selected;
     }
 
     public int getColor() {
         return mColor;
-    }
-
-    public boolean isSelected() {
-        return mSelected;
     }
 }

@@ -3,7 +3,8 @@ package com.viettel.mbccs.screen.change.installation;
 import android.Manifest;
 import android.support.annotation.NonNull;
 import android.view.View;
-
+import butterknife.BindView;
+import butterknife.OnClick;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.LamModel;
@@ -25,12 +26,8 @@ import com.viettel.mbccs.screen.change.BaseChangeAddressFragment;
 import com.viettel.mbccs.screen.map.DialogMapStationFragment;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import com.viettel.mbccs.widget.ItemSpinText;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.OnClick;
 import rx.Observable;
 import rx.Subscription;
 import rx.functions.Func1;
@@ -112,7 +109,7 @@ public class ChangeSurveyFragment extends BaseChangeAddressFragment {
                 .map(new Func1<Shop, Shop>() {
                     @Override
                     public Shop call(Shop shop) {
-                        mListTeam.add(shop.getShopId());
+                        mListTeam.add(String.valueOf(shop.getShopId()));
                         return shop;
                     }
                 }).toList()
@@ -120,7 +117,7 @@ public class ChangeSurveyFragment extends BaseChangeAddressFragment {
                     @Override
                     public void onSuccess(List<Shop> mShopList) {
                         if (mShopList != null && mListTeam != null) {
-                            getListDsLamByTeamId(Integer.valueOf(mShopList.get(0).getShopId()));
+                            getListDsLamByTeamId(mShopList.get(0).getShopId());
                             mItemTeam.setListSpinner(mListTeam);
                         }else {
                             getBaseActivity().hideLoadingDialog();
@@ -135,7 +132,7 @@ public class ChangeSurveyFragment extends BaseChangeAddressFragment {
 
     }
 
-    private void getListDsLamByTeamId(int shopId) {
+    private void getListDsLamByTeamId(long shopId) {
         getBaseActivity().showLoadingDialog();
 
         DataRequest<GetListDsLamByTeamIdRequest> request = new DataRequest<>();

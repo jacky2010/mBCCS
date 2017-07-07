@@ -15,8 +15,7 @@
         android:layout_height="wrap_content"
         android:descendantFocusability="beforeDescendants"
         android:focusableInTouchMode="true"
-        android:orientation="vertical"
-        android:id="@+id/llProduct">
+        android:orientation="vertical">
 
         <View style="@style/dividerHorizontalStyle" />
 
@@ -59,25 +58,27 @@
                         android:id="@+id/text_good_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:text="@{item.item.stockModelName}"
-                        android:textSize="@dimen/default_label_text_size" />
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
 
                     <com.viettel.mbccs.widget.CustomTextView
                         android:id="@+id/text_good_price"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_2"
+                        android:layout_marginTop="@dimen/dp_4"
                         android:text="@{item.price}"
                         android:textColor="@color/red"
-                        android:textSize="@dimen/default_label_text_size"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
 
                     <com.viettel.mbccs.widget.CustomTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_2"
+                        android:layout_marginTop="@dimen/dp_6"
                         android:text="Description"
-                        android:textSize="@dimen/default_label_text_size" />
+                        android:textSize="12sp" />
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/spAvailableColorsList"

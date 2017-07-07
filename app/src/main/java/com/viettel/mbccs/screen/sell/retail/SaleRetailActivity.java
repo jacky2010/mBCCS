@@ -48,6 +48,7 @@ public class SaleRetailActivity
                 ((SaleRetailPresenter) mPresenter).changeSearchFilter();
             }
         });
+        mMultiDirectionSlidingDrawer.open();
 //        mBinding.spinner.getSpinner()
 //                .setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 //                    @Override

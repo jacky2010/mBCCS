@@ -62,13 +62,11 @@
                         android:text="@string/create_update_information_create_phone_number"
                         style="@style/textTitleInputLight"
                         />
-                    <com.viettel.mbccs.widget.CustomEdittext
+                    <com.viettel.mbccs.widget.CustomEditTextInput
                         android:id="@+id/edit_isdn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableEnd="@drawable/ic_cancel_grey_1_24dp"
                         android:drawableLeft="@drawable/ic_mobile_phone_grey_16x22dp"
-                        android:drawableRight="@drawable/ic_cancel_grey_1_24dp"
                         android:drawableStart="@drawable/ic_mobile_phone_grey_16x22dp"
                         android:gravity="center_vertical"
                         android:inputType="number"
@@ -78,9 +76,8 @@
                         android:paddingRight="@dimen/dp_10"
                         android:paddingStart="@dimen/dp_6"
                         android:text="@={ presenter.isdn }"
-                        bind:customEditTextDrawable="@{ (v, t)  -> presenter.onDrawableClick(v, t) }"
+                        app:themeLight="@{true}"
                         bind:error="@{ presenter.isdnError }"
-                        style="@style/inputStyleLight"
                         />
 
                     <com.viettel.mbccs.widget.CustomTextView
@@ -107,13 +104,11 @@
                         android:text="@string/create_update_information_create_number_passport"
                         style="@style/textTitleInputLight"
                         />
-                    <com.viettel.mbccs.widget.CustomEdittext
+                    <com.viettel.mbccs.widget.CustomEditTextInput
                         android:id="@+id/edit_id_no"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableEnd="@drawable/ic_cancel_grey_1_24dp"
                         android:drawableLeft="@drawable/ic_file_grey_18x22dp"
-                        android:drawableRight="@drawable/ic_cancel_grey_1_24dp"
                         android:drawableStart="@drawable/ic_file_grey_18x22dp"
                         android:gravity="center_vertical"
                         android:inputType="number"
@@ -122,18 +117,17 @@
                         android:paddingLeft="@dimen/dp_6"
                         android:paddingRight="@dimen/dp_10"
                         android:paddingStart="@dimen/dp_6"
+                        app:themeLight="@{true}"
                         android:text="@={ presenter.idNo }"
-                        bind:customEditTextDrawable="@{ (v, t)  -> presenter.onDrawableClick(v, t) }"
                         bind:error="@{ presenter.idNoError }"
-                        style="@style/inputStyleLight"
                         />
 
                     <com.viettel.mbccs.widget.CustomButton
                         android:layout_width="@dimen/dp_300"
                         android:layout_height="@dimen/dp_40"
                         android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/dp_16"
                         android:layout_marginBottom="@dimen/dp_18"
+                        android:layout_marginTop="@dimen/dp_16"
                         android:onClick="@{ v -> presenter.onSearch() }"
                         android:text="@string/create_update_information_create_btn_search"
                         android:textAllCaps="false"
@@ -142,16 +136,16 @@
                 </LinearLayout>
 
                 <com.viettel.mbccs.widget.CustomTextView
+                    android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_40"
                     android:background="@color/grey_five"
-                    android:layout_width="match_parent"
                     android:gravity="center_vertical"
-                    android:text="@string/create_update_information_create_customer_information"
                     android:paddingLeft="@dimen/dp_10"
                     android:paddingRight="@dimen/dp_10"
+                    android:text="@string/create_update_information_create_customer_information"
+                    android:textColor="@color/black_two"
                     android:textSize="@dimen/sp_18"
                     android:textStyle="bold"
-                    android:textColor="@color/black_two"
                     />
                 <View
                     android:layout_width="match_parent"

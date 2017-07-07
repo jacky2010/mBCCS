@@ -58,20 +58,6 @@ public class SellOrdersActivity
         channelInfo = new ChannelInfo();
         titleList = new ArrayList<>();
 
-//        mBinding.spinnerChannelSellOrder.setOnItemSelectedListener(
-//                new AdapterView.OnItemSelectedListener() {
-//                    @Override
-//                    public void onItemSelected(AdapterView<?> parent, View view, int position,
-//                            long id) {
-//                        presenter.setPositionSelectChange(position);
-//                    }
-//
-//                    @Override
-//                    public void onNothingSelected(AdapterView<?> parent) {
-//
-//                    }
-//                });
-
         mBinding.tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         sellOrdersFragmentAdapter = new SellOrdersFragmentAdapter(getSupportFragmentManager());
         sellOrdersFragmentAdapter.setConfirmTransactionSellCancelCallback(this);
@@ -107,8 +93,11 @@ public class SellOrdersActivity
     }
 
     @Override
-    public void setDataResult(List<SaleOrders> saleOrdersList, ChannelInfo channelInfoSelect) {
-        this.saleOrdersList = saleOrdersList;
+    public void setDataResult(List<SaleOrders> saleOrders, ChannelInfo channelInfoSelect) {
+        if (saleOrdersList != null && saleOrdersList.size() != 0) {
+            saleOrdersList.clear();
+        }
+        this.saleOrdersList = saleOrders;
         this.channelInfo = channelInfoSelect;
         int countApp = 0, countPen = 0, countRe = 0;
         if (saleOrdersList == null || saleOrdersList.size() == 0) {
@@ -121,10 +110,10 @@ public class SellOrdersActivity
             return;
         }
 
-        for (SaleOrders saleOrders : this.saleOrdersList) {
-            if (saleOrders.getOrderStatus().equals(OrderStatus.APPROVALS)) {
+        for (SaleOrders saleOrder : this.saleOrdersList) {
+            if (saleOrder.getOrderStatus().equals(OrderStatus.APPROVALS)) {
                 countApp++;
-            } else if (saleOrders.getOrderStatus().equals(OrderStatus.PENDING)) {
+            } else if (saleOrder.getOrderStatus().equals(OrderStatus.PENDING)) {
                 countPen++;
             } else {
                 countRe++;
