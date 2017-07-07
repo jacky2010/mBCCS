@@ -1054,6 +1054,8 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <!--xuat kho cho nhan vien-->
     <string name="xuatkhochonhanvien_lablel_chi_tiet_xuat_kho_title">Chi tiết xuất kho cho nhân viên</string>
     <string name="xuatkhochonhanvien_lablel_chi_title">Lập phiếu trả hàng</string>
+
+    <!--search product-->
     <string name="search_products_title">Tra cứu sản phẩm</string>
     <string name="search_products_detail_title">Tra cứu sản phẩm</string>
     <string name="search_products_detail_hint_search_key">Tra cứu tên sản phẩm</string>
@@ -1064,10 +1066,19 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="search_products_detail_title_model">Loại máy</string>
     <string name="search_products_detail_title_feature">Tính năng</string>
     <string name="search_products_detail_label_products">Danh sách sản phẩm</string>
+    <string name="search_products_hint_search_product_name">Tìm theo tên sản phẩm</string>
     <string-array name="search_products_detail_title_tabs">
         <item>Sản phẩm</item>
         <item>So sánh</item>
     </string-array>
+    <string-array name="search_products_detail_title_tabs_desc">
+        <item>Mô tả sản phẩm</item>
+        <item>Thông số kỹ thuật</item>
+        <item>Đánh giá</item>
+    </string-array>
+
+    <string name="view_product_detail_title">Chi tiết sản phẩm</string>
+
     <!--Xuat kho cap duoi-->
     <string name="dialog_text_input_store">Nhập kho</string>
     <string name="xuatkhocapduoi_message_input_store">Bạn muốn nhập kho không?</string>

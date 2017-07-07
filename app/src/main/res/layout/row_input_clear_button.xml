@@ -52,7 +52,7 @@
             android:layout_weight="1"
             >
 
-            <com.viettel.mbccs.widget.CustomEditText
+            <com.viettel.mbccs.widget.CustomEdittext
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_30"
                 android:layout_marginTop="@dimen/dp_5"

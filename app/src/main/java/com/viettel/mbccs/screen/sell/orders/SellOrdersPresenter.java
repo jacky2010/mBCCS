@@ -40,6 +40,7 @@ public class SellOrdersPresenter {
     private UserRepository userRepository;
     private CompositeSubscription subscriptions;
     private List<ChannelInfo> channelInfoList;
+    //    private List<String> dataSpinnerChannel;
     private ChannelInfo channelInfoSelect;
 
     public ObservableField<StaffInfo> staffInfo;
@@ -55,6 +56,7 @@ public class SellOrdersPresenter {
         banHangKhoTaiChinhRepository = BanHangKhoTaiChinhRepository.getInstance();
         userRepository = UserRepository.getInstance();
         subscriptions = new CompositeSubscription();
+        //        dataSpinnerChannel = new ArrayList<>();
         channelInfoList = new ArrayList<>();
         channelInfoSelect = new ChannelInfo();
 
@@ -73,8 +75,8 @@ public class SellOrdersPresenter {
         shop.set(userInfo.getShop());
 
         GetListChannelByOwnerTypeIdRequest g = new GetListChannelByOwnerTypeIdRequest();
-        g.setStaffId((staffInfo.get().getStaffId()));
-        //        g.setChannelTypeId(staffInfo.get().getChannelTypeId());
+        g.setStaffId(staffInfo.get().getStaffOwnerId());
+        g.setChannelTypeId(staffInfo.get().getChannelTypeId());
 
         DataRequest<GetListChannelByOwnerTypeIdRequest> request = new DataRequest<>();
         request.setWsRequest(g);
@@ -93,10 +95,8 @@ public class SellOrdersPresenter {
                                     return;
                                 }
                                 channelInfoList = object.getChannelInfoList();
-                                //                                for (ChannelInfo c :
-                                // channelInfoList) {
-                                //                                    dataSpinnerChannel.add(c
-                                // .getManagementName());
+                                //                                for (ChannelInfo c : channelInfoList) {
+                                //                                    dataSpinnerChannel.add(c.getManagementName());
                                 //                                }
                                 spinnerAdapterChannel.set(
                                         new SpinnerAdapter<>(context, channelInfoList));
@@ -141,6 +141,7 @@ public class SellOrdersPresenter {
     }
 
     public void clickSearch() {
+        sellOrdersView.showLoading();
         long dateFrom = sellOrdersView.getDateFrom();
         long dateTo = sellOrdersView.getDateTo();
 
@@ -149,14 +150,12 @@ public class SellOrdersPresenter {
             return;
         }
 
-        sellOrdersView.showLoading();
-
         GetListOrderRequest getListOrderRequest = new GetListOrderRequest();
         getListOrderRequest.setShopId(staffInfo.get().getShopId());
-        getListOrderRequest.setStaffId(channelInfoSelect.getChannelId());
+        getListOrderRequest.setStaffId(staffInfo.get().getStaffId());
         getListOrderRequest.setEndDate(sellOrdersView.getStringDateTo());
         getListOrderRequest.setStartDate(sellOrdersView.getStringDateFrom());
-        //        getListOrderRequest.setOrderStatus(staffInfo.get().getStatus());
+//        getListOrderRequest.setOrderStatus(staffInfo.get().getStatus());
 
         DataRequest<GetListOrderRequest> baseRequest = new DataRequest<>();
         baseRequest.setWsCode(WsCode.GetListOrder);
@@ -192,7 +191,7 @@ public class SellOrdersPresenter {
         this.sellOrdersFragmentAdapter.set(sellOrdersFragmentAdapter);
     }
 
-    //    public void setPositionSelectChange(int position) {
-    //        channelInfoSelect = channelInfoList.get(position);
-    //    }
+//    public void setPositionSelectChange(int position) {
+//        channelInfoSelect = channelInfoList.get(position);
+//    }
 }

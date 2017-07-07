@@ -5,6 +5,7 @@ import com.viettel.mbccs.data.model.Area;
 import com.viettel.mbccs.data.model.Image;
 import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.model.Precinct;
+import com.viettel.mbccs.data.model.StaffInfo;
 import com.viettel.mbccs.data.model.UploadImage;
 import com.viettel.mbccs.data.model.UserInfo;
 import com.viettel.mbccs.data.model.database.ImageDataBase;
@@ -29,6 +30,16 @@ public interface IUserLocalDataSource {
     void saveUserInfo(UserInfo userInfo);
 
     UserInfo getUserInfo();
+
+    /**
+     * Save data {@link StaffInfo} in SharedPreferences when user loginServer
+     */
+    void saveStaffInfoToSharePrefs(StaffInfo staffInfo);
+
+    /**
+     * Get data {@link StaffInfo} from SharedPreferences
+     */
+    StaffInfo getStaffInfoFromSharePrefs();
 
     /**
      * Save language in SharedPreferences when user select language in config
@@ -114,10 +125,6 @@ public interface IUserLocalDataSource {
     List<Precinct> getListPrecinctByProvinceAndDistrictId(String provinceId, String districtId);
 
     List<UploadImage> getUploadImage();
-
-    List<UploadImage> getUploadImage(@UploadImage.StatusUpload String status);
-
-    UploadImage getUploadImage(long idImage);
 
     void setUploadImage(List<UploadImage> data);
 

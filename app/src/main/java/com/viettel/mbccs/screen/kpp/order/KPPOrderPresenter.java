@@ -3,7 +3,6 @@ package com.viettel.mbccs.screen.kpp.order;
 import android.app.Activity;
 import android.content.Context;
 import android.databinding.ObservableField;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -49,7 +48,6 @@ public class KPPOrderPresenter implements KPPOrderContract.Presenter {
     private UserRepository mUserRepository;
     private CompositeSubscription mSubscriptions;
     private String status = OrderStatus.PENDING;
-
 
     private DataRequest<GetListOrderRequest> mGetListOrderRequestBaseRequest;
 
@@ -113,13 +111,13 @@ public class KPPOrderPresenter implements KPPOrderContract.Presenter {
         mGetListOrderRequestBaseRequest.setWsCode(WsCode.GetListOrder);
         GetListOrderRequest request = new GetListOrderRequest();
         request.setOrderStatus(status);
-        request.setShopId(mUserRepository.getUserInfo().getShop().getShopId());
+        request.setShopId(Long.parseLong(mUserRepository.getUserInfo().getShop().getShopId()));
         request.setStaffId(mUserRepository.getUserInfo().getStaffInfo().getStaffId());
         request.setIsdnChannel(mUserRepository.getUserInfo().getChannelInfo().getTel());
         request.setStartDate(DateUtils.convertDateToString(mViewModel.getFromDate(),
-                DateUtils.TIMEZONE_FORMAT_SERVER));
+                DateUtils.DATE_TIME_FORMAT));
         request.setEndDate(DateUtils.convertDateToString(mViewModel.getToDate(),
-                DateUtils.TIMEZONE_FORMAT_SERVER));
+                DateUtils.DATE_TIME_FORMAT));
         mGetListOrderRequestBaseRequest.setWsRequest(request);
         Subscription subscription =
                 mBanHangKhoTaiChinhRepository.getListOrder(mGetListOrderRequestBaseRequest)
@@ -134,11 +132,11 @@ public class KPPOrderPresenter implements KPPOrderContract.Presenter {
                                     }
                                     mSaleOrderses.clear();
                                     mSaleOrderses.addAll(object.getSaleOrdersList());
+                                    mKPPOrderAdapter.notifyDataSetChanged();
                                     titleOrderList.set(String.format(
                                             mContext.getString(R.string.order_title_list),
                                             String.valueOf(mSaleOrderses.size())));
                                     mViewModel.collapseForm();
-                                    mKPPOrderAdapter.notifyDataSetChanged();
                                     return;
                                 }
                                 onError(new Throwable());
@@ -155,7 +153,6 @@ public class KPPOrderPresenter implements KPPOrderContract.Presenter {
                             public void onRequestFinish() {
                                 super.onRequestFinish();
                                 mViewModel.hideLoading();
-                                mViewModel.findFinished();
                             }
                         });
 
@@ -190,6 +187,7 @@ public class KPPOrderPresenter implements KPPOrderContract.Presenter {
     }
 
     public void clickSearch() {
+
         find();
     }
 

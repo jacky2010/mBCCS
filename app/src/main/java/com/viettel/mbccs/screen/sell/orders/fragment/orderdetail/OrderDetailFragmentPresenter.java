@@ -1,7 +1,6 @@
 package com.viettel.mbccs.screen.sell.orders.fragment.orderdetail;
 
 import android.content.Context;
-import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.support.v7.app.AppCompatActivity;
 import com.viettel.mbccs.constance.PaymentMethod;
@@ -44,6 +43,7 @@ public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract
     private GetOrderInfoResponse getOrderInfoResponse;
     private SaleTrans saleTrans;
     private ChannelInfo channelInfo;
+    private boolean isGetTranInfo;
 
     public ObservableField<OrderDetailAdapter> adapterOrderDetail;
     public ObservableField<SaleTrans> saleTransField;
@@ -53,7 +53,6 @@ public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract
     public ObservableField<String> discount;
     public ObservableField<String> vAT;
     public ObservableField<String> tax;
-    public ObservableBoolean isGetTranInfo;
 
     public OrderDetailFragmentPresenter(Context context, OrderDetailFragmentContract.View view,
             ChannelInfo channelInfo) {
@@ -72,7 +71,6 @@ public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract
         discount = new ObservableField<>("");
         vAT = new ObservableField<>("");
         tax = new ObservableField<>("");
-        isGetTranInfo = new ObservableBoolean();
     }
 
     @Override
@@ -105,7 +103,7 @@ public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract
 
         GetOrderInfoRequest g = new GetOrderInfoRequest();
         g.setSaleOrderId(saleOrders.getSaleOrdersId());
-        g.setOwnerId(userRepository.getUserInfo().getStaffInfo().getStaffId());
+        g.setOwnerId(saleOrders.getStaffId());
         g.setSaleTransType(SaleTranType.SALE_CHANNEL);
         // TODO: 6/15/17 fix data
         g.setOwnerType("2");
@@ -184,7 +182,7 @@ public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract
             view.checkCountSerialError();
             return;
         }
-        if (!isGetTranInfo.get()) {
+        if (!isGetTranInfo) {
             getTranInfo(stockSerials);
         } else {
             view.onClickSell(saleTrans);
@@ -204,7 +202,7 @@ public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract
         getInfoSaleTranRequest.setPaymentMethod(PaymentMethod.PAYMENT_CASH);
         getInfoSaleTranRequest.setLstSerialSale(stockSerials);
         getInfoSaleTranRequest.setSaleTransType(String.valueOf(SaleTranType.SALE_CHANNEL));
-        getInfoSaleTranRequest.setShopId(userInfo.getShop().getShopId());
+        getInfoSaleTranRequest.setShopId(Long.parseLong(userInfo.getShop().getShopId()));
         getInfoSaleTranRequest.setPriceType(PriceType.PRICE_RETAIL);
         getInfoSaleTranRequest.setStaffId(userInfo.getStaffInfo().getStaffId());
         getInfoSaleTranRequest.setCustomer(customer);
@@ -221,7 +219,7 @@ public class OrderDetailFragmentPresenter implements OrderDetailFragmentContract
                         if (object != null && object.getSaleTrans() != null) {
                             saleTrans = object.getSaleTrans();
                             setDataDisplayMoney();
-                            isGetTranInfo.set(true);
+                            isGetTranInfo = true;
                             return;
                         }
                         onError(new Throwable());

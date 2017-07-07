@@ -83,7 +83,7 @@ public class DialogConfirmTransferAnyPayFragment extends BaseDialog {
             currentArgs = getArguments();
 
             if (currentArgs != null) {
-                tvTrans.setText(getString(R.string.sell_anypay_msg_confirm_transfer_label_cust, currentArgs.getString(Constants.BundleConstant.CUSTOMER_ITEM)));
+                tvTrans.setText(getString(R.string.sell_anypay_msg_confirm_transfer_label_cust, currentArgs.getString(Constants.BundleConstant.ISDN)));
                 tvPreTax.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.PRE_TAX)) + " " + getString(R.string.common_label_currency_suffix));
                 tvTax.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.TAX)) + " " + getString(R.string.common_label_currency_suffix));
                 tvDiscount.setText(Common.formatDouble(currentArgs.getDouble(Constants.BundleConstant.DISCOUNT)) + " " + getString(R.string.common_label_currency_suffix));
@@ -124,10 +124,9 @@ public class DialogConfirmTransferAnyPayFragment extends BaseDialog {
             showLoadingDialog();
 
             TransferAnyPayRequest request = new TransferAnyPayRequest();
-
+            request.setFromIsdn(currentArgs.getString(Constants.BundleConstant.FROM_CHANNEL));
+            request.setToIsdn(currentArgs.getString(Constants.BundleConstant.TO_CHANNEL));
             request.setAmount(currentArgs.getDouble(Constants.BundleConstant.TOTAL));
-            request.setFromChannelId(Integer.parseInt(currentArgs.getString(Constants.BundleConstant.FROM_CHANNEL)));
-            request.setToChannelId(Integer.parseInt(currentArgs.getString(Constants.BundleConstant.TO_CHANNEL)));
 
             transferAnyPayRequest = new DataRequest<>();
             transferAnyPayRequest.setWsCode(WsCode.TransferAnyPay);
@@ -154,10 +153,10 @@ public class DialogConfirmTransferAnyPayFragment extends BaseDialog {
 
                                 @Override
                                 public void onError(BaseException error) {
-//                                    DialogUtils.showDialog(getContext(), null, error.getMessage(),
-//                                            null);
-                                    DialogUtils.showDialog(getContext(), null, getString(R.string.common_msg_error_general),
+                                    DialogUtils.showDialog(getContext(), null, error.getMessage(),
                                             null);
+//                                    DialogUtils.showDialog(getContext(), null, getString(R.string.common_msg_error_general),
+//                                            null);
                                 }
 
                                 @Override

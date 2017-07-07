@@ -2,11 +2,14 @@ package com.viettel.mbccs.screen.searchproducts.fragments;
 
 import android.content.Context;
 import android.databinding.ObservableField;
+import android.os.Bundle;
 
 import com.viettel.mbccs.data.model.KeyValue;
 import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.source.SellAnyPayRepository;
 import com.viettel.mbccs.screen.searchproducts.adapters.ProductsAdapter;
+import com.viettel.mbccs.utils.GsonUtils;
+import com.viettel.mbccs.variable.Constants;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -114,6 +117,29 @@ public class ListProductsDetailPresenter implements ListProductsDetailContract.P
 
             productAdapter = new ProductsAdapter(context, items);
             productAdapter.notifyDataSetChanged();
+            productAdapter.setOnItemClickListener(new ProductsAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(ModelSale item) {
+                    showProductDetail(item);
+                }
+
+                @Override
+                public void onItemFocus() {
+
+                }
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void showProductDetail(ModelSale item) {
+        try {
+            Bundle args = new Bundle();
+            args.putString(Constants.BundleConstant.ITEM_LIST, GsonUtils.Object2String(item));
+
+            viewModel.changeToDetailScreen(args);
         } catch (Exception e) {
             e.printStackTrace();
         }

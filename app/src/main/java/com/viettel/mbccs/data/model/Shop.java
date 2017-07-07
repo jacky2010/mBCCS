@@ -13,7 +13,7 @@ public class Shop implements Parcelable {
 
     @SerializedName("shopId")
     @Expose
-    private Long shopId;
+    private String shopId;
 
     @SerializedName("shopCode")
     @Expose
@@ -59,7 +59,7 @@ public class Shop implements Parcelable {
 
     }
 
-    public Shop(Long shopId, String shopCode, String shopPath, String address,
+    public Shop(String shopId, String shopCode, String shopPath, String address,
             String discountPolicy, String province, String shopName, long channelTypeId,
             long pricePolicy, String createDate, String status) {
         this.shopId = shopId;
@@ -76,7 +76,7 @@ public class Shop implements Parcelable {
     }
 
     protected Shop(Parcel in) {
-        shopId = in.readLong();
+        shopId = in.readString();
         shopCode = in.readString();
         shopPath = in.readString();
         address = in.readString();
@@ -91,7 +91,7 @@ public class Shop implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(shopId);
+        dest.writeString(shopId);
         dest.writeString(shopCode);
         dest.writeString(shopPath);
         dest.writeString(address);
@@ -121,11 +121,11 @@ public class Shop implements Parcelable {
         }
     };
 
-    public Long getShopId() {
+    public String getShopId() {
         return shopId;
     }
 
-    public void setShopId(Long shopId) {
+    public void setShopId(String shopId) {
         this.shopId = shopId;
     }
 

@@ -8,6 +8,7 @@ import com.viettel.mbccs.data.model.Area;
 import com.viettel.mbccs.data.model.Image;
 import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.model.Precinct;
+import com.viettel.mbccs.data.model.StaffInfo;
 import com.viettel.mbccs.data.model.UploadImage;
 import com.viettel.mbccs.data.model.UserInfo;
 import com.viettel.mbccs.data.model.database.AreaDataBase;
@@ -76,6 +77,17 @@ public class UserLocalDataSource implements IUserLocalDataSource {
         String data = sharedPrefs.get(Constants.SharePref.USER_INFO, "");
         if (TextUtils.isEmpty(data)) return null;
         return gson.fromJson(data, UserInfo.class);
+    }
+
+    @Override
+    public void saveStaffInfoToSharePrefs(StaffInfo staffInfo) {
+        sharedPrefs.set(Constants.SharePref.STAFF_INFO, gson.toJson(staffInfo));
+    }
+
+    @Override
+    public StaffInfo getStaffInfoFromSharePrefs() {
+        String data = sharedPrefs.get(Constants.SharePref.STAFF_INFO, "");
+        return gson.fromJson(data, StaffInfo.class);
     }
 
     @Override
@@ -215,16 +227,6 @@ public class UserLocalDataSource implements IUserLocalDataSource {
     @Override
     public List<UploadImage> getUploadImage() {
         return new Select().from(UploadImage.class).execute();
-    }
-
-    @Override
-    public List<UploadImage> getUploadImage(@UploadImage.StatusUpload String status) {
-        return new Select().from(UploadImage.class).where("status = ?", status).execute();
-    }
-
-    @Override
-    public UploadImage getUploadImage(long idImage) {
-        return new Select().from(UploadImage.class).where("id_image = ?", idImage).executeSingle();
     }
 
     @Override

@@ -6,13 +6,13 @@ import com.google.gson.annotations.SerializedName;
 public class GetTelecomServiceAndSaleProgramRequest {
     @Expose
     @SerializedName("shopId")
-    private Long shopId;
+    private String shopId;
 
-    public Long getShopId() {
+    public String getShopId() {
         return shopId;
     }
 
-    public void setShopId(Long shopId) {
+    public void setShopId(String shopId) {
         this.shopId = shopId;
     }
 }

@@ -288,6 +288,10 @@
         <activity
             android:name=".screen.stockdeliver.createcommand.CreateCommandActivity"
             android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screen.viewproduct.ViewProductDetailActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.nhanvientrahang.list.ListNhanVienTraHangActivity"
             android:screenOrientation="portrait"/>

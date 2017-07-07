@@ -15,7 +15,6 @@ import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListStockModelRequest;
 import com.viettel.mbccs.data.source.remote.request.KPPOrderRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
-import com.viettel.mbccs.data.source.remote.response.CreateOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListStockModelResponse;
 import com.viettel.mbccs.utils.ActivityUtils;
 import com.viettel.mbccs.utils.Common;
@@ -90,8 +89,7 @@ public class AddNewOrderPresenter implements AddNewOrderContract.Presenter {
         //request.setStateId(StockTotalType.TYPE_NEW);
         request.setOwnerType(2L);
         request.setSaleTransType(SaleTranType.SALE_CHANNEL);
-        request.setOwnerId(
-                Long.valueOf(mUserRepository.getUserInfo().getStaffInfo().getStaffOwnerId()));
+        request.setOwnerId(mUserRepository.getUserInfo().getStaffInfo().getStaffId());
         mGetListStockModelRequestBaseRequest.setWsRequest(request);
         mViewModel.showLoading();
         Subscription subscription = mBanHangKhoTaiChinhRepository.getListStockModel(
@@ -108,13 +106,7 @@ public class AddNewOrderPresenter implements AddNewOrderContract.Presenter {
                             mAdapter.notifyDataSetChanged();
                             return;
                         }
-                        DialogUtils.showDialog(mContext, R.string.common_msg_no_data,
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        mViewModel.finishScreen();
-                                    }
-                                });
+                        DialogUtils.showDialog(mContext, R.string.common_msg_no_data);
                     }
 
                     @Override
@@ -163,18 +155,13 @@ public class AddNewOrderPresenter implements AddNewOrderContract.Presenter {
         mKPPOrderRequestBaseRequest.setWsRequest(request);
         Subscription subscription =
                 mBanHangKhoTaiChinhRepository.createSaleOrders(mKPPOrderRequestBaseRequest)
-                        .subscribe(new MBCCSSubscribe<CreateOrderResponse>() {
+                        .subscribe(new MBCCSSubscribe<EmptyObject>() {
                             @Override
-                            public void onSuccess(CreateOrderResponse object) {
-                                if (object != null) {
-                                    mViewModel.gotoSuccessScreen(mStockTotals, object.getOrderId(),
-                                            mUserRepository.getUserInfo()
-                                                    .getChannelInfo()
-                                                    .getManagementName());
-                                    return;
-                                }
-
-                                onError(new Throwable());
+                            public void onSuccess(EmptyObject object) {
+                                mViewModel.gotoSuccessScreen(mStockTotals, "1",
+                                        mUserRepository.getUserInfo()
+                                                .getChannelInfo()
+                                                .getChannelName());
                             }
 
                             @Override

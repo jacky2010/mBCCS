@@ -30,6 +30,8 @@ public class ListProductsDetailContract {
         void onChooseModel(List<KeyValue> items);
 
         void onChooseFeature(List<KeyValue> items);
+
+        void changeToDetailScreen(Bundle args);
     }
 
     interface Presenter extends BasePresenter {

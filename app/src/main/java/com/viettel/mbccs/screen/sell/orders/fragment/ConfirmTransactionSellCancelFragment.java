@@ -28,7 +28,6 @@ import com.viettel.mbccs.data.model.SaleOrdersDetail;
 import com.viettel.mbccs.data.model.SaleTrans;
 import com.viettel.mbccs.data.model.StockSerial;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
-import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
 import com.viettel.mbccs.data.source.remote.request.GetReasonRequest;
@@ -63,7 +62,6 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
     private static final String ARG_LIST_DATA = "LIST_DATA";
     private FragmentConfirmTransactionSellCancelBinding binding;
     private BanHangKhoTaiChinhRepository banHangKhoTaiChinhRepository;
-    private UserRepository userRepository;
     private List<Reason> reasonList;
     private Reason reason;
     private List<String> dataSpinnerReason;
@@ -108,7 +106,6 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         banHangKhoTaiChinhRepository = BanHangKhoTaiChinhRepository.getInstance();
-        userRepository = UserRepository.getInstance();
         subscriptions = new CompositeSubscription();
 
         isSell = getArguments().getBoolean(ARG_IS_SELL);
@@ -244,9 +241,8 @@ public class ConfirmTransactionSellCancelFragment extends BaseFragment {
         }
 
         GetInfoSaleTranRequest c = new GetInfoSaleTranRequest();
-        c.setShopId(userRepository.getUserInfo().getShop().getShopId());
-        c.setStaffId(userRepository.getUserInfo().getStaffInfo().getStaffId());
-        c.setOrderId(saleOrders.getSaleOrdersId());
+        c.setShopId(channelInfoSell.getShopId());
+        c.setStaffId(channelInfoSell.getChannelId());
 
         Customer customer = new Customer();
         customer.setCustomerName(channelInfoSell.getChannelName());

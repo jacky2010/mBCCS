@@ -180,7 +180,7 @@
                 android:layout_marginStart="@dimen/dp_1"
                 android:layout_weight="1"
                 android:onClick="@{ v -> presenter.onClickSell() }"
-                android:text="@{ presenter.isGetTranInfo ? @string/order_detail_ok :  @string/order_detail_ok_1}"
+                android:text="@string/order_detail_ok"
                 style="@style/button_positive"
                 />
         </LinearLayout>

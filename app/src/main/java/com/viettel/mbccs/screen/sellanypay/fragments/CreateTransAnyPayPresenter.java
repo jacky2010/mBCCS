@@ -303,16 +303,15 @@ public class CreateTransAnyPayPresenter implements CreateTransAnyPayContract.Pre
             preTax = total - tax;
 
             Bundle args = new Bundle();
-            args.putString(Constants.BundleConstant.CUSTOMER_ITEM, isdn.get().trim());
+            args.putLong(Constants.BundleConstant.CHANNEL, userRepository.getUserInfo() != null && userRepository.getUserInfo().getChannelInfo() != null ? userRepository.getUserInfo().getChannelInfo().getChannelId() : -1l);
+            args.putString(Constants.BundleConstant.PAY_METHOD, payMethod.get());
+            args.putString(Constants.BundleConstant.ISDN, isdn.get());
+            args.putString(Constants.BundleConstant.ISDN_WALLET, walletIsdn.get());
             args.putDouble(Constants.BundleConstant.PRE_TAX, preTax);
             args.putDouble(Constants.BundleConstant.TAX, tax);
             args.putDouble(Constants.BundleConstant.DISCOUNT, DISCOUNT_AMOUNT);
             args.putDouble(Constants.BundleConstant.TOTAL, (total - DISCOUNT_AMOUNT));
             args.putString(Constants.BundleConstant.TRANS_TYPE, customerType.get().equals(CUST_TYPE_CORPORATE) ? CUST_TYPE_CORPORATE : CUST_TYPE_INDIVIDUAL);
-            args.putString(Constants.BundleConstant.ISDN_WALLET, walletIsdn.get());
-            args.putString(Constants.BundleConstant.ISDN, isdn.get());
-            args.putString(Constants.BundleConstant.PAY_METHOD, payMethod.get());
-            args.putLong(Constants.BundleConstant.CHANNEL, userRepository.getUserInfo() != null && userRepository.getUserInfo().getChannelInfo() != null ? userRepository.getUserInfo().getChannelInfo().getChannelId() : -1l);
             args.putLong(Constants.BundleConstant.STAFF, userRepository.getUserInfo() != null && userRepository.getUserInfo().getStaffInfo() != null ? userRepository.getUserInfo().getStaffInfo().getStaffId() : -1l);
 
             viewModel.goToDialogFragment(args);

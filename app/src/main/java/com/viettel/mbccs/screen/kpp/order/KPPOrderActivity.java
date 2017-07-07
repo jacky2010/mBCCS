@@ -1,7 +1,6 @@
 package com.viettel.mbccs.screen.kpp.order;
 
 import android.content.Intent;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.AdapterView;
 import com.viettel.mbccs.R;
@@ -24,7 +23,6 @@ public class KPPOrderActivity
     private CustomDatePicker fromDate;
     private CustomDatePicker toDate;
     private MultiDirectionSlidingDrawer mDrawer;
-    private SwipeRefreshLayout mLayoutRefresh;
 
     @Override
     protected int getIdLayout() {
@@ -45,13 +43,6 @@ public class KPPOrderActivity
         });
         fromDate = mBinding.fromDate;
         toDate = mBinding.toDate;
-        mLayoutRefresh = mBinding.lyRefresh;
-        mLayoutRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mPresenter.clickSearch();
-            }
-        });
         //set selected for Customtextview
 
     }
@@ -95,12 +86,5 @@ public class KPPOrderActivity
     @Override
     public void collapseForm() {
         mDrawer.close();
-    }
-
-    @Override
-    public void findFinished() {
-        if (mLayoutRefresh != null) {
-            mLayoutRefresh.setRefreshing(false);
-        }
     }
 }

@@ -214,7 +214,7 @@ public class PaymentInforChannelPresenter implements PaymentInforChannelContract
         request.setChanelId(mChannelInfo.getChannelId());
         request.setChannelType(mChannelInfo.getChannelType());
         request.setStaffId(mUserRepository.getUserInfo().getStaffInfo().getStaffId());
-        request.setShopId(mUserRepository.getUserInfo().getShop().getShopId());
+        request.setShopId(Long.parseLong(mUserRepository.getUserInfo().getShop().getShopId()));
 
         mGetInfoSaleTranRequestBaseRequest.setWsRequest(request);
 

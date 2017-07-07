@@ -54,7 +54,6 @@ public class SaleChannelActivity
                 mPresenter.changeSearchFilter();
             }
         });
-        mDrawer.open();
     }
 
 

@@ -55,7 +55,7 @@
             android:textStyle="italic"
             />
 
-        <com.viettel.mbccs.widget.CustomEditText
+        <com.viettel.mbccs.widget.CustomEdittext
             android:id="@+id/editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

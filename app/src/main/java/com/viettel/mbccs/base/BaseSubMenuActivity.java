@@ -93,7 +93,6 @@ public class BaseSubMenuActivity
         mMenuAdapter = new SubMenuAdapter(this, mFunctionList);
         mBinding.setPresenter(this);
         mBinding.executePendingBindings();
-        switchView();
     }
 
     public void initMenuList() {

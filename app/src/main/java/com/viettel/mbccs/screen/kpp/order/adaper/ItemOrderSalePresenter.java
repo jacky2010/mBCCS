@@ -48,15 +48,8 @@ public class ItemOrderSalePresenter {
         } else if (mSaleOrders.getOrderStatus().equals(OrderStatus.PENDING)) {
             return mContext.getResources().getString(R.string.order_pending);
         } else {
-            return mContext.getResources().getString(R.string.order_reject);
+            return mContext.getResources().getString(R.string.order_pending);
         }
-    }
-
-    public boolean isShowAmount() {
-        if (mSaleOrders.getOrderStatus().equals(OrderStatus.APPROVALS)) {
-            return true;
-        }
-        return false;
     }
 
     public int getColorText() {

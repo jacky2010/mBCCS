@@ -23,7 +23,7 @@
             android:layout_centerVertical="true"
             android:src="@drawable/triangle"
             />
-        <com.viettel.mbccs.widget.CustomEditText
+        <com.viettel.mbccs.widget.CustomEdittext
             android:id="@+id/text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

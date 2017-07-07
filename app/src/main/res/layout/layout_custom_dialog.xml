@@ -61,7 +61,7 @@
             android:textColor="@color/black"
             android:textSize="@dimen/sp_16" />
 
-        <com.viettel.mbccs.widget.CustomEditText
+        <com.viettel.mbccs.widget.CustomEdittext
             android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

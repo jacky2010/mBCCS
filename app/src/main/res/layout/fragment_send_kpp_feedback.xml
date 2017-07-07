@@ -36,7 +36,7 @@
                 android:text="@string/kpp_feedback_label_content_desc"
                 android:textSize="@dimen/default_label_text_size" />
 
-            <com.viettel.mbccs.widget.CustomEditText
+            <com.viettel.mbccs.widget.CustomEdittext
                 style="@style/inputStyle"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"

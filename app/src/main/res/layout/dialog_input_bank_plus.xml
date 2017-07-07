@@ -54,7 +54,7 @@
                 android:text="@string/phone"
                 />
 
-            <com.viettel.mbccs.widget.CustomEditText
+            <com.viettel.mbccs.widget.CustomEdittext
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dp_5"
@@ -63,7 +63,7 @@
                 style="@style/inputStyle"
                 >
                 <requestFocus/>
-            </com.viettel.mbccs.widget.CustomEditText>
+            </com.viettel.mbccs.widget.CustomEdittext>
 
             <com.viettel.mbccs.widget.CustomButton
                 android:layout_width="match_parent"

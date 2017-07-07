@@ -93,7 +93,7 @@
                         style="@style/inputTitleName"
                         />
 
-                    <com.viettel.mbccs.widget.CustomEditText
+                    <com.viettel.mbccs.widget.CustomEdittext
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_input_tranparent"
@@ -114,7 +114,7 @@
                         style="@style/inputTitleName"
                         />
 
-                    <com.viettel.mbccs.widget.CustomEditText
+                    <com.viettel.mbccs.widget.CustomEdittext
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_input_tranparent"
@@ -136,7 +136,7 @@
                         style="@style/inputTitleName"
                         />
 
-                    <com.viettel.mbccs.widget.CustomEditTextInput
+                    <com.viettel.mbccs.widget.CustomEdittext
                         android:id="@+id/customEdittext"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -160,7 +160,7 @@
                         app:textHtml="@{@string/address}"
                         />
 
-                    <com.viettel.mbccs.widget.CustomEditText
+                    <com.viettel.mbccs.widget.CustomEdittext
                         android:id="@+id/customEdittext2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -337,7 +337,7 @@
                         android:textColor="@color/grey_dove"
                         style="@style/inputTitleName"
                         />
-                    <com.viettel.mbccs.widget.CustomEditTextInput
+                    <com.viettel.mbccs.widget.CustomEdittext
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
