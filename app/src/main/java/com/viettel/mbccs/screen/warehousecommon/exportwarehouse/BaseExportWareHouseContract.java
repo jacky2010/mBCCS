@@ -1,4 +1,4 @@
-package com.viettel.mbccs.screen.warehousecommon.cmdprepareexportdetail;
+package com.viettel.mbccs.screen.warehousecommon.exportwarehouse;
 
 import com.viettel.mbccs.base.BasePresenter;
 import com.viettel.mbccs.base.BaseView;
@@ -11,7 +11,7 @@ import java.util.List;
  * Created by eo_cuong on 6/20/17.
  */
 
-interface CmdPrepareExportDetailContract {
+interface BaseExportWareHouseContract {
 
     interface Presenter extends BasePresenter {
         void onSerialPickerSuccess(List<String> serials);

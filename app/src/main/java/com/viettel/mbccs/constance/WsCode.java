@@ -317,6 +317,10 @@ public class WsCode {
     // 5.21.3.1
     public final static String GetAllDebit = "WS_getAllDebit";
 
+    public static final String CreateCmd = "WS_createCmd";
+
+    public static final String DestroyStockTrans = "WS_destroyStockTrans";
+
     /**
      * ---------------------------
      */

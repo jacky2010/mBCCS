@@ -2,6 +2,8 @@ package com.viettel.mbccs.screen.nhapkhocapduoi.createorder;
 
 import com.viettel.mbccs.base.createorder.BaseCreateOrderSuccessActivity;
 import com.viettel.mbccs.data.model.StockTotal;
+import com.viettel.mbccs.data.model.StockTrans;
+import com.viettel.mbccs.data.model.StockTransDetail;
 import com.viettel.mbccs.screen.common.success.DialogViewSerial;
 
 /**
@@ -17,10 +19,12 @@ public class CreateOrderSuccessActivity extends BaseCreateOrderSuccessActivity
         mBinding.setPresenter(mPresenter);
     }
 
+
     @Override
-    public void showSerialViewer(StockTotal item) {
+    public void showSerialViewer(StockTransDetail item) {
         DialogViewSerial dialog = DialogViewSerial.newInstance();  // dialog title
-        dialog.setStockTotal(item);
+        //TODO
+        dialog.setStockTotal(new StockTotal());
         dialog.show(getSupportFragmentManager(), "");
     }
 }

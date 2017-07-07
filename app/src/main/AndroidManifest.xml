@@ -295,6 +295,15 @@
         <activity
             android:name=".screen.nhanvientrahang.list.ListNhanVienTraHangActivity"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screen.importwarehousefromstaff.list.ListNhapKhoTuNhanVienActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screen.importwarehousefromstaff.importnote.CreateNoteFromStaffActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screen.importwarehousefromstaff.importnote.CreateImportStockFromStaffActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

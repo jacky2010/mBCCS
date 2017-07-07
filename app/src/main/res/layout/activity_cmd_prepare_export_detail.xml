@@ -5,7 +5,7 @@
     <data>
         <variable
             name="presenter"
-            type="com.viettel.mbccs.screen.warehousecommon.cmdprepareexportdetail.CmdPrepareExportDetailPresenter"
+            type="com.viettel.mbccs.screen.warehousecommon.exportwarehouse.BaseExportWareHousePresenter"
             />
         />
     </data>

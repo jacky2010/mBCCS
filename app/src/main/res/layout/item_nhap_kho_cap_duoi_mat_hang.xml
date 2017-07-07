@@ -5,7 +5,7 @@
 
         <variable
             name="item"
-            type="com.viettel.mbccs.data.model.StockTotal"
+            type="com.viettel.mbccs.data.model.StockTransDetail"
             />
     </data>
 

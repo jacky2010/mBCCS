@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.viettel.mbccs.data.model.StockTotal;
+import com.viettel.mbccs.data.model.StockTransDetail;
 import com.viettel.mbccs.databinding.ItemNhapKhoCapDuoiMatHangBinding;
 
 import java.util.ArrayList;
@@ -19,13 +20,13 @@ import java.util.List;
 public class ListGoodsDetailAdapter
         extends RecyclerView.Adapter<ListGoodsDetailAdapter.ViewHolder> {
 
-    private List<StockTotal> mList = new ArrayList<>();
+    private List<StockTransDetail> mList = new ArrayList<>();
 
     private Context mContext;
 
     private OnViewSerialClickListener mOnViewSerialClickListener;
 
-    public ListGoodsDetailAdapter(Context context, List<StockTotal> list) {
+    public ListGoodsDetailAdapter(Context context, List<StockTransDetail> list) {
         mContext = context;
         mList = list;
     }
@@ -63,7 +64,7 @@ public class ListGoodsDetailAdapter
             mBinding = binding;
         }
 
-        public void bind(final StockTotal item) {
+        public void bind(final StockTransDetail item) {
             mBinding.setItem(item);
             mBinding.text3.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -77,6 +78,6 @@ public class ListGoodsDetailAdapter
     }
 
     public interface OnViewSerialClickListener {
-        void onViewSerialClickListener(StockTotal item);
+        void onViewSerialClickListener(StockTransDetail item);
     }
 }

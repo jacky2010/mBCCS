@@ -1,8 +1,7 @@
-package com.viettel.mbccs.screen.warehousecommon.cmdprepareexportdetail;
+package com.viettel.mbccs.screen.warehousecommon.exportwarehouse;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
@@ -21,9 +20,9 @@ import java.util.List;
  * Created by eo_cuong on 6/20/17.
  */
 
-public abstract class CmdPrepareExportDetaiActivity extends
-        BaseDataBindActivity<ActivityCmdPrepareExportDetailBinding, CmdPrepareExportDetailPresenter>
-        implements CmdPrepareExportDetailContract.ViewModel {
+public abstract class BaseExportWareHouseActivity extends
+        BaseDataBindActivity<ActivityCmdPrepareExportDetailBinding, BaseExportWareHousePresenter>
+        implements BaseExportWareHouseContract.ViewModel {
 
     private StockTrans mStockTrans = null;
     public static final int GET_SERIAL = 124;
@@ -42,7 +41,7 @@ public abstract class CmdPrepareExportDetaiActivity extends
         if (mStockTrans == null) {
             return;
         }
-        mPresenter = new CmdPrepareExportDetailPresenter(this, this, mStockTrans);
+        mPresenter = new BaseExportWareHousePresenter(this, this, mStockTrans);
         mBinding.setPresenter(mPresenter);
     }
 

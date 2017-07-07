@@ -1,6 +1,7 @@
-package com.viettel.mbccs.screen.warehousecommon.cmdprepareexportdetail;
+package com.viettel.mbccs.screen.warehousecommon.exportwarehouse;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.databinding.ObservableField;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.WsCode;
@@ -9,13 +10,18 @@ import com.viettel.mbccs.data.model.StockSerial;
 import com.viettel.mbccs.data.model.StockTrans;
 import com.viettel.mbccs.data.model.StockTransDetail;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
+import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.CreateExpStockRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
+import com.viettel.mbccs.data.source.remote.request.DestroyStockTransRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListStockTransDetailRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.ListStockTransDetailsReponse;
+import com.viettel.mbccs.screen.warehousecommon.importcmdnotestock
+        .BaseCreateImportWareHouseActivity;
 import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
+import com.viettel.mbccs.widget.CustomDialog;
 import java.util.ArrayList;
 import java.util.List;
 import rx.Subscription;
@@ -25,17 +31,18 @@ import rx.subscriptions.CompositeSubscription;
  * Created by eo_cuong on 6/20/17.
  */
 
-public class CmdPrepareExportDetailPresenter implements CmdPrepareExportDetailContract.Presenter,
+public class BaseExportWareHousePresenter implements BaseExportWareHouseContract.Presenter,
         StockTransDetailAdapter.OnStockTransDetailAdapterListener {
     public ObservableField<String> title;
     private Context mContext;
-    private CmdPrepareExportDetailContract.ViewModel mViewModel;
+    private BaseExportWareHouseContract.ViewModel mViewModel;
     private StockTrans mStockTrans;
     public ObservableField<String> cmdCode;
     public ObservableField<String> receiveWarehouse;
     public ObservableField<String> dayCreated;
     public ObservableField<String> status;
     private BanHangKhoTaiChinhRepository mBanHangKhoTaiChinhRepository;
+    private UserRepository mUserRepository;
     private DataRequest<GetListStockTransDetailRequest> mDataRequest;
     private DataRequest<CreateExpStockRequest> mCreateExpStockRequest;
     private ArrayList<StockTransDetail> mStockTransDetails = new ArrayList<>();
@@ -43,12 +50,13 @@ public class CmdPrepareExportDetailPresenter implements CmdPrepareExportDetailCo
     private CompositeSubscription mSubscription;
     private int currentPosition = -1;
 
-    public CmdPrepareExportDetailPresenter(Context context,
-            CmdPrepareExportDetailContract.ViewModel viewModel, StockTrans stockTrans) {
+    public BaseExportWareHousePresenter(Context context,
+            BaseExportWareHouseContract.ViewModel viewModel, StockTrans stockTrans) {
         mContext = context;
         mViewModel = viewModel;
         this.mStockTrans = stockTrans;
         mBanHangKhoTaiChinhRepository = BanHangKhoTaiChinhRepository.getInstance();
+        mUserRepository = UserRepository.getInstance();
         mSubscription = new CompositeSubscription();
         initData();
         loadData();
@@ -97,6 +105,9 @@ public class CmdPrepareExportDetailPresenter implements CmdPrepareExportDetailCo
                                 if (object != null && object.getStockTransDetails() != null) {
                                     bindData(object);
                                 }
+
+                                //fake data
+                                bindData(fakeData());
                             }
 
                             @Override
@@ -162,8 +173,16 @@ public class CmdPrepareExportDetailPresenter implements CmdPrepareExportDetailCo
     }
 
     public void export() {
-
-        createExpStock();
+        new CustomDialog(mContext, R.string.confirm,
+                R.string.common_cmd_prepare_export_msg_detail_accept_export, false,
+                R.string.common_label_close, R.string.common_label_export, null,
+                new CustomDialog.OnInputDialogListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int var2, String input) {
+                        dialogInterface.dismiss();
+                        createExpStock();
+                    }
+                }, null, false, false).show();
     }
 
     private void createExpStock() {
@@ -220,7 +239,46 @@ public class CmdPrepareExportDetailPresenter implements CmdPrepareExportDetailCo
     }
 
     public void reject() {
+        new CustomDialog(mContext, R.string.common_cmd_prepare_export_msg_detail_reject_export,
+                R.string.activity_create_order_success_ly_do_tu_choi, true,
+                R.string.common_label_close, R.string.activity_create_order_success_tu_choi, null,
+                new CustomDialog.OnInputDialogListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int var2, String input) {
+                        dialogInterface.dismiss();
+                        rejectExport(input);
+                    }
+                }, null, false, true).show();
+    }
 
+    private void rejectExport(String input) {
+        mViewModel.showLoading();
+        DataRequest<DestroyStockTransRequest> dataRequest = new DataRequest<>();
+        DestroyStockTransRequest request = new DestroyStockTransRequest();
+        request.setStaffId(mUserRepository.getUserInfo().getStaffInfo().getStaffId());
+        request.setStockTransId(mStockTrans.getStockTransId());
+        request.setNote(input);
+        dataRequest.setWsCode(WsCode.DestroyStockTrans);
+        dataRequest.setWsRequest(request);
+        mBanHangKhoTaiChinhRepository.destroyStockTrans(dataRequest)
+                .subscribe(new MBCCSSubscribe<EmptyObject>() {
+
+                    @Override
+                    public void onSuccess(EmptyObject object) {
+                        ((BaseCreateImportWareHouseActivity) mContext).finish();
+                    }
+
+                    @Override
+                    public void onError(BaseException error) {
+                        DialogUtils.showDialogError(mContext, error);
+                    }
+
+                    @Override
+                    public void onRequestFinish() {
+                        super.onRequestFinish();
+                        mViewModel.hideLoading();
+                    }
+                });
     }
 
     public void onCancel() {

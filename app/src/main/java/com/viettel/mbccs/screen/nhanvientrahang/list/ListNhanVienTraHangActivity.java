@@ -3,6 +3,7 @@ package com.viettel.mbccs.screen.nhanvientrahang.list;
 import android.content.Intent;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.listkho.BaseListOrderActivity;
+import com.viettel.mbccs.constance.OwnerType;
 import com.viettel.mbccs.constance.StockTransStatus;
 import com.viettel.mbccs.constance.StockTransType;
 import com.viettel.mbccs.constance.WsCode;
@@ -49,9 +50,9 @@ public class ListNhanVienTraHangActivity extends BaseListOrderActivity {
         mRequest.setStartDate(getFromDateString());
         mRequest.setEndDate(getToDateString());
         mRequest.setFromOwnerId(mUserRepository.getUserInfo().getStaffInfo().getStaffId());
-        mRequest.setFromOwnerType(2L);
+        mRequest.setFromOwnerType(OwnerType.STAFF);
         mRequest.setToOwnerId(Long.parseLong(getWareHouseData().get(getPositionWareHouser())));
-        mRequest.setToOwnerType(1L);
+        mRequest.setToOwnerType(OwnerType.SHOP);
         mDataRequest.setWsCode(WsCode.GetListExpCmd);
         mDataRequest.setWsRequest(mRequest);
         mBanHangKhoTaiChinhRepository.getListExpCmd(mDataRequest)
