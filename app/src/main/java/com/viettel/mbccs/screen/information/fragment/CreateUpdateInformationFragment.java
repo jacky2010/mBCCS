@@ -24,8 +24,8 @@ import com.viettel.mbccs.permission.PermissionsUtil;
 import com.viettel.mbccs.screen.common.success.DialogFullScreen;
 import com.viettel.mbccs.screen.information.CreateUpdateInformationActivity;
 import com.viettel.mbccs.utils.DialogUtils;
-import com.viettel.mbccs.widget.CustomSelectAddress;
 import com.viettel.mbccs.widget.CustomSelectImageNo;
+import com.viettel.mbccs.widget.model.AddressApp;
 
 /**
  * Created by HuyQuyet on 5/29/17.
@@ -116,7 +116,7 @@ public class CreateUpdateInformationFragment extends BaseFragment
     }
 
     @Override
-    public CustomSelectAddress.Address getAddress() {
+    public AddressApp getAddress() {
         return binding.customSelectAddressCreateInformation.getAddress();
     }
 

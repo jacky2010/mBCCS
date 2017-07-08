@@ -3,9 +3,11 @@ package com.viettel.mbccs.screen.connector.mobile;
 import android.content.Context;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
+import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
 import com.viettel.mbccs.BR;
+import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.Data;
 import com.viettel.mbccs.constance.MobileType;
 import com.viettel.mbccs.constance.WsCode;
@@ -37,12 +39,16 @@ public class ConnectorMobilePresenter extends BaseObservable
     private QLKhachHangRepository qlKhachHangRepository;
     private CompositeSubscription subscriptions;
 
-    private boolean isHideSearch = false;
     private boolean isSelectPrepaid;
     private boolean isSelectPostpaid;
+    private String stringPrepaid;
+    private String stringPostpaid;
 
     private String textSearch;
     private String txtPassport;
+    private String txtPassportError;
+    private boolean isHideContractList;
+    private boolean isHideCreate;
 
     private int countResult;
 
@@ -83,6 +89,11 @@ public class ConnectorMobilePresenter extends BaseObservable
         setTextHideSearch();
         setSelectPrepaid(true);
         setSelectPostpaid(false);
+        stringPrepaid = context.getString(R.string.connector_mobile_thue_bao_tra_truoc);
+        stringPostpaid = context.getString(R.string.connector_mobile_thue_bao_tra_sau);
+        setHideContractList(true);
+        setHideCreate(true);
+        setTxtPassport("142411815");
     }
 
     @Override
@@ -90,18 +101,7 @@ public class ConnectorMobilePresenter extends BaseObservable
 
     }
 
-        /* --------------------------- Set Get ---------------------------------- */
-
-    @Bindable
-    public boolean isHideSearch() {
-        return isHideSearch;
-    }
-
-    public void setHideSearch(boolean hideSearch) {
-        isHideSearch = hideSearch;
-        notifyPropertyChanged(BR.hideSearch);
-    }
-
+    /* --------------------------- Set Get ---------------------------------- */
     @Bindable
     public boolean isSelectPrepaid() {
         return isSelectPrepaid;
@@ -183,6 +183,36 @@ public class ConnectorMobilePresenter extends BaseObservable
         notifyPropertyChanged(BR.contractList);
     }
 
+    @Bindable
+    public String getTxtPassportError() {
+        return txtPassportError;
+    }
+
+    public void setTxtPassportError(String txtPassportError) {
+        this.txtPassportError = txtPassportError;
+        notifyPropertyChanged(BR.txtPassportError);
+    }
+
+    @Bindable
+    public boolean isHideContractList() {
+        return isHideContractList;
+    }
+
+    public void setHideContractList(boolean hideContractList) {
+        isHideContractList = hideContractList;
+        notifyPropertyChanged(BR.hideContractList);
+    }
+
+    @Bindable
+    public boolean isHideCreate() {
+        return isHideCreate;
+    }
+
+    public void setHideCreate(boolean hideCreate) {
+        isHideCreate = hideCreate;
+        notifyPropertyChanged(BR.hideCreate);
+    }
+
     /* --------------------------- End Set Get ---------------------------------- */
 
     /* --------------------------- onClick View ---------------------------------- */
@@ -191,27 +221,21 @@ public class ConnectorMobilePresenter extends BaseObservable
         viewConnectorMobile.onCancel();
     }
 
-    public void expandSearch() {
-        setHideSearch(!isHideSearch());
-        setTextHideSearch();
-    }
-
-    private void setTextHideSearch() {
-        setTextSearch((isSelectPrepaid ? "Thuê bao trả trước" : "Thuê bao trả sau")
-                + " - "
-                + "Mobile"
-                + " - "
-                + (StringUtils.isEmpty(txtPassport) ? "Trống" : txtPassport));
+    public void setTextHideSearch() {
+        setTextSearch(
+                (isSelectPrepaid ? stringPrepaid : stringPostpaid) + " - " + mobileServiceList.get(
+                        positionMobileService).getName() + " - " + (StringUtils.isEmpty(txtPassport)
+                        ? context.getString(R.string.connector_mobile_empty) : txtPassport));
     }
 
     public void onSearch() {
         if (StringUtils.isEmpty(txtPassport)) {
-            viewConnectorMobile.txtPassportEmpty();
+            setTxtPassportError(context.getString(R.string.input_empty));
             return;
         }
         viewConnectorMobile.showLoading();
 
-        CheckIdNoRequest checkIdNoRequest = new CheckIdNoRequest();
+        final CheckIdNoRequest checkIdNoRequest = new CheckIdNoRequest();
         checkIdNoRequest.setIdNo(txtPassport);
         checkIdNoRequest.setServiceType(mobileServiceList.get(positionMobileService).getCode());
         checkIdNoRequest.setSubType(isSelectPrepaid() ? MobileType.TRA_TRUOC : MobileType.TRA_SAU);
@@ -220,24 +244,47 @@ public class ConnectorMobilePresenter extends BaseObservable
         request.setWsCode(WsCode.CheckIdNo);
         request.setWsRequest(checkIdNoRequest);
 
-        Subscription subscription = qlKhachHangRepository.checkIdNo(request)
+        final Subscription subscription = qlKhachHangRepository.checkIdNo(request)
                 .subscribe(new MBCCSSubscribe<CheckIdNoResponse>() {
                     @Override
                     public void onSuccess(CheckIdNoResponse object) {
                         if (object == null) {
-
-                        } else {
-                            customer = object.getCustomer();
-                            contractList = object.getContractList();
-                            viewConnectorMobile.checkIdNoSuccess(customer, contractList);
+                            // TODO: 7/4/17
+                            return;
                         }
-                        viewConnectorMobile.hideLoading();
+                        customer = object.getCustomer();
+                        if (customer == null) {
+                            return;
+                        }
+                        contractList = object.getContractList();
+                        if (contractList != null && contractList.size() != 0) {
+                            setHideContractList(false);
+                            setHideCreate(true);
+                            viewConnectorMobile.checkIdNoSuccess(customer, contractList);
+                        } else {
+                            setHideContractList(true);
+                            setHideCreate(false);
+                            viewConnectorMobile.getCustomerSuccess(customer);
+                        }
+
+                        viewConnectorMobile.setDataFormSearch(checkIdNoRequest);
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                viewConnectorMobile.closeFormSearch();
+                            }
+                        }, 100);
                     }
 
                     @Override
                     public void onError(BaseException error) {
-                        viewConnectorMobile.hideLoading();
                         viewConnectorMobile.searchError(error);
+                    }
+
+                    @Override
+                    public void onRequestFinish() {
+                        super.onRequestFinish();
+                        viewConnectorMobile.hideLoading();
                     }
                 });
         subscriptions.add(subscription);

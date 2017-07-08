@@ -4,6 +4,7 @@ import com.viettel.mbccs.base.BasePresenter;
 import com.viettel.mbccs.base.BaseView;
 import com.viettel.mbccs.data.model.Contract;
 import com.viettel.mbccs.data.model.Customer;
+import com.viettel.mbccs.data.source.remote.request.CheckIdNoRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import java.util.List;
 
@@ -20,12 +21,16 @@ public class ConnectorMobileContract {
 
         void onCancel();
 
-        void txtPassportEmpty();
-
         void searchError(BaseException error);
 
         void checkIdNoSuccess(Customer customer, List<Contract> contractList);
 
         void onItemClick(int position);
+
+        void closeFormSearch();
+
+        void getCustomerSuccess(Customer customer);
+
+        void setDataFormSearch(CheckIdNoRequest checkIdNoRequest);
     }
 }

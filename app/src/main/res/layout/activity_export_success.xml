@@ -24,13 +24,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="asdfasdfasdfsafda"
-            style="@style/textLablel"
+            style="@style/textLabel"
             />
         <com.viettel.mbccs.widget.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="kho nhan asdfasdfasdfasfd"
-            style="@style/textLablel"
+            style="@style/textLabel"
             />
 
         <com.viettel.mbccs.widget.CustomTextView
@@ -39,7 +39,7 @@
             android:text="Danh sach mat hang"
             android:textSize="18sp"
             android:textStyle="bold"
-            style="@style/textLablel"
+            style="@style/textLabel"
             />
 
         <RelativeLayout

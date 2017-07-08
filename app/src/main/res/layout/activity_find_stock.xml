@@ -69,6 +69,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/blue_dark"
+                    android:clickable="true"
                     >
                     <LinearLayout
                         xmlns:android="http://schemas.android.com/apk/res/android"

@@ -9,7 +9,7 @@ import java.util.List;
  * Created by HuyQuyet on 6/2/17.
  */
 
-public class GetApDomainByTypeResponse extends DataResponse {
+public class GetApDomainByTypeResponse {
 
     @SerializedName("listApDomain")
     @Expose

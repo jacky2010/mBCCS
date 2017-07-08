@@ -112,6 +112,7 @@
                 bind:titleSpinner="@{ presenter.wareHouseTitle }"
                 bind:titleSpinner2="@{ @string/activity_list_order_warehouse_trang_thai_lenh }"
                 bind:titleTime="@{ @string/activity_list_order_warehouse_ngay_lap_lenh }"
+                android:clickable="true"
                 />
 
             <RelativeLayout

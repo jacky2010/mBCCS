@@ -181,11 +181,12 @@
                     android:id="@+id/custom_select_address_create_information"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    bind:address="@{ presenter.address }"
-                    bind:idDistrict="@{ presenter.idDistrict }"
-                    bind:idPrecinct="@{ presenter.idPrecinct }"
-                    bind:idProvince="@{ presenter.idProvince }"
+                    bind:area="@{ presenter.area }"
                     />
+                <!--bind:address="@{ presenter.address }"-->
+                <!--bind:idDistrict="@{ presenter.idDistrict }"-->
+                <!--bind:idPrecinct="@{ presenter.idPrecinct }"-->
+                <!--bind:idProvince="@{ presenter.idProvince }"-->
                 <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -226,9 +227,9 @@
                     android:id="@+id/image_select"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    bind:urlImageBackside="@{ presenter.imageUrlBackside }"
-                    bind:urlImageFront="@{ presenter.imageUrlFront }"
-                    bind:urlImagePortrait="@{ presenter.imageUrlPortrait }"
+                    bind:base64ImageBackside="@{ presenter.imageUrlBackside }"
+                    bind:base64ImageFront="@{ presenter.imageUrlFront }"
+                    bind:base64ImagePortrait="@{ presenter.imageUrlPortrait }"
                     />
 
                 <LinearLayout

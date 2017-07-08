@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    >
+    <data>
+        <variable
+            name="presenter"
+            type="com.viettel.mbccs.screen.connector.fragment.postpaid.CreateNewConnectorInformationPostpaidFragmentPresenter"
+            />
+        <variable
+            name="viewModel"
+            type="com.viettel.mbccs.screen.connector.fragment.postpaid.CreateNewConnectorInformationPostpaidViewModel"
+            />
+        <import type="android.view.View"/>
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:clickable="true"
+        android:orientation="vertical"
+        >
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_10"
+                >
+                <com.viettel.mbccs.widget.CustomTextView
+                    android:text="@string/create_new_connector_information_postpaid_thong_tin_khach_hang"
+                    style="@style/titleTextGroupInformation"
+                    />
+                <com.viettel.mbccs.widget.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_6"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_14"
+                    bind:textHtml="@{ @string/create_new_connector_information_loai_khach_hang }"
+                    />
+
+                <com.viettel.mbccs.widget.SpinnerWithBorder
+                    android:id="@+id/spinner_create_connector_type_customer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    bind:adapter="@{viewModel.customerAdapterSpinnerCustomerType}"
+                    />
+
+                <com.viettel.mbccs.widget.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_6"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_14"
+                    bind:textHtml="@{ @string/create_new_connector_information_ten_khach_hang }"
+                    />
+
+                <com.viettel.mbccs.widget.CustomEditTextInput
+                    android:id="@+id/edit_name_customer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/dp_36"
+                    android:layout_marginTop="@dimen/dp_2"
+                    android:text="@={ viewModel.customerNameCustomer }"
+                    bind:error="@{ viewModel.customerNameCustomerError }"
+                    />
+
+                <com.viettel.mbccs.widget.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_6"
+                    android:text="@string/create_new_connector_information_ngay_sinh"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_14"
+                    />
+
+                <com.viettel.mbccs.widget.CustomDatePicker
+                    android:id="@+id/birth_date"
+                    android:layout_width="@dimen/dp_200"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_marginTop="@dimen/dp_6"
+                    bind:setDate="@{ viewModel.customerDateBirthday }"
+                    bind:maxDate="@{ viewModel.customerMaxDateBirthday}"
+                    />
+
+                <com.viettel.mbccs.widget.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_6"
+                    android:text="@string/create_new_connector_information_postpaid_ngay_cap"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_14"
+                    />
+
+                <com.viettel.mbccs.widget.CustomDatePicker
+                    android:id="@+id/create_new_connector_information_postpaid_ngay_cap"
+                    android:layout_width="@dimen/dp_200"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_marginTop="@dimen/dp_6"
+                    bind:setDate="@{ viewModel.customerDateCreate }"
+                    bind:minDate="@{ viewModel.customerMinDateCreate }"
+                    />
+
+                <com.viettel.mbccs.widget.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:textColor="@color/black"
+                    android:text="@string/create_new_connector_information_postpaid_noi_cap"
+                    />
+
+                <com.viettel.mbccs.widget.CustomEditTextInput
+                    android:id="@+id/edit_place_create_passport"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_2"
+                    android:minHeight="@dimen/dp_36"
+                    android:text="@={ viewModel.customerPlaceCreatePassport }"
+                    bind:error="@{ viewModel.customerPlaceCreatePassportError }"
+                    />
+
+                <com.viettel.mbccs.widget.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:textColor="@color/black"
+                    android:text="@string/create_new_connector_information_postpaid_so_giay_phep_kinh_đoan"
+                    />
+
+                <com.viettel.mbccs.widget.CustomEditTextInput
+                    android:id="@+id/number_gpkh"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/dp_36"
+                    android:layout_marginTop="@dimen/dp_2"
+                    android:text="@={ viewModel.customerNumberGPKH }"
+                    bind:error="@{ viewModel.customerNumberGPKHError }"
+                    android:inputType="number"
+                    />
+
+                <com.viettel.mbccs.widget.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:textColor="@color/black"
+                    android:text="@string/create_new_connector_information_postpaid_ma_so_thue"
+                    />
+
+                <com.viettel.mbccs.widget.CustomEditTextInput
+                    android:id="@+id/number_ma_so_thue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/dp_36"
+                    android:layout_marginTop="@dimen/dp_2"
+                    android:inputType="number"
+                    android:text="@={ viewModel.customerNumberMaSoThue }"
+                    bind:error="@{ viewModel.customerNumberMaSoThueError }"
+                    />
+
+                <com.viettel.mbccs.widget.CustomSelectAddress
+                    android:id="@+id/custom_select_address_create_connector"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    bind:area="@{ viewModel.customerArea1 }"
+                    android:visibility="visible"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="@{ viewModel.contractLoaiKhachHang == 1 ? View.VISIBLE : View.GONE }"
+                    >
+
+                    <com.viettel.mbccs.widget.CustomTextView
+                        android:text="@string/create_new_connector_information_postpaid_thong_tin_nguoi_dang_ky"
+                        style="@style/titleTextGroupInformation"
+                        />
+
+                    <com.viettel.mbccs.widget.CustomTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_6"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_14"
+                        bind:textHtml="@{ @string/create_new_connector_information_postpaid_ten_nguoi_dang_ky }"
+                        />
+
+                    <com.viettel.mbccs.widget.CustomEditTextInput
+                        android:id="@+id/edit_name_register"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_2"
+                        android:minHeight="@dimen/dp_36"
+                        android:text="@={ viewModel.registerNameRegister }"
+                        bind:error="@{ viewModel.registerNameRegisterError }"
+                        />
+
+                    <com.viettel.mbccs.widget.CustomTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_6"
+                        android:text="@string/create_new_connector_information_ngay_sinh"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_14"
+                        />
+
+                    <com.viettel.mbccs.widget.CustomDatePicker
+                        android:id="@+id/birth_date_register"
+                        android:layout_width="@dimen/dp_200"
+                        android:layout_height="@dimen/dp_40"
+                        android:layout_marginTop="@dimen/dp_6"
+                        bind:maxDate="@{ viewModel.registerMaxDateBirthday}"
+                        bind:setDate="@{ viewModel.registerDateBirthday }"
+                        />
+
+                    <com.viettel.mbccs.widget.CustomTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:text="@string/fragment_create_update_information_create_gioi_tinh"
+                        android:textColor="@color/black"
+                        />
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_40"
+                        android:orientation="horizontal"
+                        >
+                        <RadioButton
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="@dimen/dp_6"
+                            android:layout_marginRight="@dimen/dp_6"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_radio_checked"
+                            android:checked="@={ viewModel.registerCheckMale }"
+                            android:text="@string/fragment_create_update_information_create_gioi_tinh_nam"
+                            />
+                        <RadioButton
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_radio_checked"
+                            android:checked="@={ viewModel.registerCheckFemale }"
+                            android:text="@string/fragment_create_update_information_create_gioi_tinh_nu"
+                            />
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            />
+                    </RadioGroup>
+
+                    <com.viettel.mbccs.widget.CustomTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:text="@string/fragment_create_update_information_create_loai_giay_to"
+                        android:textColor="@color/black"
+                        />
+
+                    <com.viettel.mbccs.widget.SpinnerWithBorder
+                        android:id="@+id/spinner_select_type_passport"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        bind:adapter="@{viewModel.registerAdapterSpinnerPassportType}"
+                        />
+
+                    <com.viettel.mbccs.widget.CustomTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_6"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_14"
+                        bind:textHtml="@{ @string/create_new_connector_information_postpaid_ten_nguoi_dang_ky }"
+                        />
+
+                    <com.viettel.mbccs.widget.CustomEditTextInput
+                        android:id="@+id/edit_id_no_register"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_2"
+                        android:minHeight="@dimen/dp_36"
+                        android:text="@={ viewModel.registerIdNo }"
+                        bind:error="@{ viewModel.registerIdNoError }"
+                        />
+
+                    <com.viettel.mbccs.widget.CustomTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_6"
+                        android:text="@string/create_new_connector_information_postpaid_ngay_cap"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_14"
+                        />
+
+                    <com.viettel.mbccs.widget.CustomDatePicker
+                        android:id="@+id/register_date_create"
+                        android:layout_width="@dimen/dp_200"
+                        android:layout_height="@dimen/dp_40"
+                        android:layout_marginTop="@dimen/dp_6"
+                        bind:setDate="@{ viewModel.registerDateCreate }"
+                        bind:maxDate="@{ viewModel.registerMaxDateCreate }"
+                        />
+
+                    <com.viettel.mbccs.widget.CustomTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:textColor="@color/black"
+                        android:text="@string/create_new_connector_information_postpaid_noi_cap"
+                        />
+
+                    <com.viettel.mbccs.widget.CustomEditTextInput
+                        android:id="@+id/register_edit_place_create_passport"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_2"
+                        android:minHeight="@dimen/dp_36"
+                        android:text="@={ viewModel.registerPlaceCreatePassport }"
+                        bind:error="@{ viewModel.registerPlaceCreatePassportError }"
+                        />
+
+                </LinearLayout>
+
+                <com.viettel.mbccs.widget.CustomSelectImageNo
+                    android:id="@+id/image_select"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    bind:base64ImageBackside="@{ viewModel.imageUrlBackside }"
+                    bind:base64ImageFront="@{ viewModel.imageUrlFront }"
+                    bind:base64ImagePortrait="@{ viewModel.imageUrlPortrait }"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/dp_4"
+                    android:paddingRight="@dimen/dp_4"
+                    >
+                    <com.viettel.mbccs.widget.CustomButton
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="@dimen/dp_6"
+                        android:layout_marginEnd="@dimen/dp_6"
+                        android:layout_weight="1"
+                        android:onClick="@{ v -> presenter.onCancelView1() }"
+                        android:text="@string/create_new_connector_information_dong"
+                        style="@style/button_nagative_grey_seven"
+                        />
+                    <com.viettel.mbccs.widget.CustomButton
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="@dimen/dp_6"
+                        android:layout_marginEnd="@dimen/dp_6"
+                        android:layout_weight="1"
+                        android:onClick="@{ v -> presenter.onNextView1() }"
+                        android:text="@string/create_new_connector_information_next"
+                        style="@style/button_positive"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</layout>

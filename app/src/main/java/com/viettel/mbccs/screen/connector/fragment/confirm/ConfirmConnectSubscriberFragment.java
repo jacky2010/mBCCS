@@ -1,6 +1,7 @@
 package com.viettel.mbccs.screen.connector.fragment.confirm;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,6 +14,8 @@ import com.viettel.mbccs.base.BaseFragment;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.databinding.FragmentConfirmConnectSubscriberBinding;
 import com.viettel.mbccs.screen.common.success.DialogFullScreen;
+import com.viettel.mbccs.screen.connector.ConnectMobileViewPagerBaseActivity;
+import com.viettel.mbccs.screen.connector.listener.OnBackPressActivity;
 import com.viettel.mbccs.screen.connector.mobile.ConnectorMobileActivity;
 import com.viettel.mbccs.utils.DialogUtils;
 
@@ -21,7 +24,7 @@ import com.viettel.mbccs.utils.DialogUtils;
  */
 
 public class ConfirmConnectSubscriberFragment extends BaseFragment
-        implements ConfirmConnectSubscriberContract.View {
+        implements ConfirmConnectSubscriberContract.View, OnBackPressActivity {
     public static final String STRING_NAME = "ConfirmConnectSubscriberFragment";
     private FragmentConfirmConnectSubscriberBinding binding;
     private ConfirmConnectSubscriberPresenter presenter;
@@ -51,17 +54,19 @@ public class ConfirmConnectSubscriberFragment extends BaseFragment
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         presenter.subscribe();
+        ((ConnectMobileViewPagerBaseActivity) getActivity()).setOnBackPressActivity(this);
     }
 
     @Override
     public void onStop() {
         presenter.unSubscribe();
+        ((ConnectMobileViewPagerBaseActivity) getActivity()).removeOnBackPressActivity();
         super.onStop();
     }
 
     @Override
     public void onClose() {
-        getActivity().getSupportFragmentManager().popBackStack();
+        onBackPressActivity();
     }
 
     @Override
@@ -77,6 +82,22 @@ public class ConfirmConnectSubscriberFragment extends BaseFragment
     @Override
     public void setPresenter(ConfirmConnectSubscriberContract.Presenter presenter) {
         this.presenter = (ConfirmConnectSubscriberPresenter) presenter;
+    }
+
+    @Override
+    public void confirmUploadImage() {
+        DialogUtils.showDialog(getActivity(), "Send Image", "Send image now", "OK",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        presenter.clickSendData(true);
+                    }
+                }, "No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        presenter.clickSendData(false);
+                    }
+                });
     }
 
     @Override
@@ -129,5 +150,10 @@ public class ConfirmConnectSubscriberFragment extends BaseFragment
     @Override
     public void connectSubscriberError(BaseException error) {
         DialogUtils.showDialogError(getActivity(), error);
+    }
+
+    @Override
+    public void onBackPressActivity() {
+        getActivity().getSupportFragmentManager().popBackStack();
     }
 }

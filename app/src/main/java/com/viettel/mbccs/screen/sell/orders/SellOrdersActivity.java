@@ -31,6 +31,7 @@ public class SellOrdersActivity
     private List<SaleOrders> saleOrdersList;
     private ChannelInfo channelInfo;
     private List<String> titleList;
+    private MultiDirectionSlidingDrawer mMultiDirectionSlidingDrawer;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,6 +64,17 @@ public class SellOrdersActivity
         sellOrdersFragmentAdapter.setConfirmTransactionSellCancelCallback(this);
         presenter.setSellOrdersFragmentAdapter(sellOrdersFragmentAdapter);
         mBinding.tabLayout.setupWithViewPager(mBinding.vpPager);
+
+        mMultiDirectionSlidingDrawer =
+                (MultiDirectionSlidingDrawer) mBinding.getRoot().findViewById(R.id.drawer);
+        mMultiDirectionSlidingDrawer.setOnDrawerCloseListener(
+                new MultiDirectionSlidingDrawer.OnDrawerCloseListener() {
+                    @Override
+                    public void onDrawerClosed() {
+                        presenter.setTextHideSearch();
+                    }
+                });
+        mMultiDirectionSlidingDrawer.open();
     }
 
     @Override
@@ -179,6 +191,13 @@ public class SellOrdersActivity
     @Override
     public void showErrorDate() {
         DialogUtils.showDialog(this, "Thoi gian toi da 1 thang ");
+    }
+
+    @Override
+    public void closeFormSearch() {
+        if (mMultiDirectionSlidingDrawer != null) {
+            mMultiDirectionSlidingDrawer.animateClose();
+        }
     }
 
     @Override
