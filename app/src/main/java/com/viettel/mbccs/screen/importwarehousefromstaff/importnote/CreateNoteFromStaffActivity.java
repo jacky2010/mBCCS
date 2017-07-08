@@ -18,4 +18,9 @@ public class CreateNoteFromStaffActivity extends BaseCreateImportWareHouseActivi
     public int getActionTypeCreate() {
         return BaseCreateImportWareHouseActivity.ACTION_CREATE_NOTE;
     }
+
+    @Override
+    public int getStepCreate() {
+        return BaseCreateImportWareHouseActivity.STEP_3;
+    }
 }

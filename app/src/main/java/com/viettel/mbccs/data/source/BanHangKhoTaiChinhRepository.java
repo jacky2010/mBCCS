@@ -210,7 +210,7 @@ public class BanHangKhoTaiChinhRepository
         return banHangKhoTaiChinhRemoteDataSource.importInvoiceList(requestDataRequest);
     }
 
-    public Observable<EmptyObject> createExpStockNotHaveCmd(
+    public Observable<BaseCreateCmdNote> createExpStockNotHaveCmd(
             DataRequest<CreateExpStockNotHaveCmdRequest> requestDataRequest) {
         return banHangKhoTaiChinhRemoteDataSource.createExpStockNotHaveCmd(requestDataRequest);
     }
@@ -243,6 +243,12 @@ public class BanHangKhoTaiChinhRepository
     public Observable<BaseCreateCmdNote> createImportNote(
             DataRequest<CreateImportNoteRequest> dataRequest) {
         return banHangKhoTaiChinhRemoteDataSource.createImportNote(dataRequest);
+    }
+
+    @Override
+    public Observable<BaseCreateCmdNote> createImportNoteNoCMD(
+            DataRequest<CreateImportNoteRequest> dataRequest) {
+        return banHangKhoTaiChinhRemoteDataSource.createImportNoteNoCMD(dataRequest);
     }
 
     @Override

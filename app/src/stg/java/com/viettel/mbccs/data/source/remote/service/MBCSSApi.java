@@ -460,7 +460,7 @@ public interface MBCSSApi {
             @Body DataRequest<InputOrderRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<ServerDataResponse<BaseResponse<EmptyObject>>> createExpStockNotHaveCmd(
+    Observable<ServerDataResponse<BaseResponse<BaseCreateCmdNote>>> createExpStockNotHaveCmd(
             @Body DataRequest<CreateExpStockNotHaveCmdRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
@@ -497,6 +497,10 @@ public interface MBCSSApi {
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<BaseCreateCmdNote>>> createImportNote(
+            @Body DataRequest<CreateImportNoteRequest> requestDataRequest);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<BaseCreateCmdNote>>> createImportNoteNoCMD(
             @Body DataRequest<CreateImportNoteRequest> requestDataRequest);
 
       @POST("/JsonAPI/webresources/CoreService/UserRouting")

@@ -7,6 +7,7 @@ import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.data.model.SerialPickerModel;
 import com.viettel.mbccs.data.model.StockSerial;
 import com.viettel.mbccs.data.model.StockTotal;
+import com.viettel.mbccs.data.model.StockTrans;
 import com.viettel.mbccs.databinding.ActivityLapPhieuXuatTraHangBinding;
 import com.viettel.mbccs.screen.kpp.order.findstock.FindStockActivity;
 import com.viettel.mbccs.screen.serialpicker.SerialPickerActivity;
@@ -69,14 +70,18 @@ public class LapPhieuXuatTraHangActivity extends
     }
 
     @Override
-    public void onCreateExpSuccess(ArrayList<StockTotal> stockTotals) {
+    public void onCreateExpSuccess(ArrayList<StockTotal> stockTotals, StockTrans stockTrans) {
         ArrayList<StockSerial> stockSerials = new ArrayList<>();
         for (StockTotal stockTotal : stockTotals) {
             stockSerials.add(stockTotal.getStockSerial());
         }
         ExportSuccessDialog exportSuccessDialog = ExportSuccessDialog.newInstance();
-        exportSuccessDialog.setCmdCodeTitle("Lenh xuat thanh cong ma xxx");
-        exportSuccessDialog.setCmdNameTitle("Kho nhan: YYYY");
+        exportSuccessDialog.setCmdCodeTitle(
+                String.format(getString(R.string.nhanvien_xuattra_lable_cmd_title),
+                        String.valueOf(stockTrans.getStockTransId())));
+        exportSuccessDialog.setCmdNameTitle(
+                String.format(getString(R.string.nhanvien_xuattra_lable_receive_title),
+                        String.valueOf(stockTrans.getToOwnerId())));
         exportSuccessDialog.setStockSerials(stockSerials);
         exportSuccessDialog.show(getSupportFragmentManager(), "");
     }

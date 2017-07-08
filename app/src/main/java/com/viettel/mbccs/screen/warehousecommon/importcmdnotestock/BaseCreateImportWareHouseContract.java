@@ -21,6 +21,8 @@ public interface BaseCreateImportWareHouseContract {
         void rejectNoteSuccess();
 
         int getActionType();
+
+        int getStep();
     }
 
     interface Presenter extends BaseCreateOrderContract.Presenter {

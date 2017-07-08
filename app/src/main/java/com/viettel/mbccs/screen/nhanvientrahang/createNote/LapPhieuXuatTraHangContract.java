@@ -3,6 +3,7 @@ package com.viettel.mbccs.screen.nhanvientrahang.createNote;
 import com.viettel.mbccs.base.BasePresenter;
 import com.viettel.mbccs.base.BaseView;
 import com.viettel.mbccs.data.model.StockTotal;
+import com.viettel.mbccs.data.model.StockTrans;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public interface LapPhieuXuatTraHangContract {
     interface ViewModel extends BaseView {
         void onSerialPicker(StockTotal stockItem);
 
-        void onCreateExpSuccess(ArrayList<StockTotal> stockTotals);
+        void onCreateExpSuccess(ArrayList<StockTotal> stockTotals, StockTrans stockTrans);
 
         void goGoStockPicker(ArrayList<StockTotal> stockTotals);
     }

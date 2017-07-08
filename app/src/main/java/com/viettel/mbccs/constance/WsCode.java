@@ -283,6 +283,7 @@ public class WsCode {
 
     // 5.11.3.3 - 5.13.3
     public final static String CreateImpNote = "WS_createImpNote";
+    public final static String CreateImpNoteNoCMD = "WS_createImpNoteNoCMD";
 
     // 5.11.3.4 - 5.13.3
     public final static String CreateImpStock = "WS_createImpStock";

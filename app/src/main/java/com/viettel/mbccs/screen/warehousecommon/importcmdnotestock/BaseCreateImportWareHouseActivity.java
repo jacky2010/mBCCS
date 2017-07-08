@@ -24,13 +24,17 @@ public abstract class BaseCreateImportWareHouseActivity extends BaseCreateOrderA
     public static final int ACTION_CREATE_NOTE = 1;
     public static final int ACTION_CREATE_IMPORT = 2;
 
-    private int actionType;
+    public static final int STEP_1 = 0;
+    public static final int STEP_2 = 1;
+    public static final int STEP_3 = 2;
 
     private StockTrans mStockTrans;
 
     protected abstract String getTitleToolbar();
 
     public abstract int getActionTypeCreate();
+
+    public abstract int getStepCreate();
 
     @Override
     public void onReject() {
@@ -101,6 +105,11 @@ public abstract class BaseCreateImportWareHouseActivity extends BaseCreateOrderA
     @Override
     public int getActionType() {
         return getActionTypeCreate();
+    }
+
+    @Override
+    public int getStep() {
+        return getStepCreate();
     }
 
     @Override

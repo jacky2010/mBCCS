@@ -19,4 +19,9 @@ public class CreateCmdFromStaffActivity extends BaseCreateImportWareHouseActivit
     public int getActionTypeCreate() {
         return BaseCreateImportWareHouseActivity.ACTION_CREATE_CMD;
     }
+
+    @Override
+    public int getStepCreate() {
+        return BaseCreateImportWareHouseActivity.STEP_3;
+    }
 }

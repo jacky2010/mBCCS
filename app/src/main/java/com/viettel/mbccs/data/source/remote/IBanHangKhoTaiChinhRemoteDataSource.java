@@ -116,7 +116,7 @@ public interface IBanHangKhoTaiChinhRemoteDataSource {
     Observable<InputOrderResponse> importInvoiceList(
             DataRequest<InputOrderRequest> requestDataRequest);
 
-    Observable<EmptyObject> createExpStockNotHaveCmd(
+    Observable<BaseCreateCmdNote> createExpStockNotHaveCmd(
             DataRequest<CreateExpStockNotHaveCmdRequest> requestDataRequest);
 
     Observable<BaseCreateCmdNote> createImportStock(
@@ -130,6 +130,9 @@ public interface IBanHangKhoTaiChinhRemoteDataSource {
     Observable<BaseCreateCmdNote> createImportCmd(DataRequest<CreateImportCmdRequest> dataRequest);
 
     Observable<BaseCreateCmdNote> createImportNote(
+            DataRequest<CreateImportNoteRequest> dataRequest);
+
+    Observable<BaseCreateCmdNote> createImportNoteNoCMD(
             DataRequest<CreateImportNoteRequest> dataRequest);
 
     Observable<EmptyObject> destroyStockTrans(DataRequest<DestroyStockTransRequest> dataRequest);

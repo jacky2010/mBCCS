@@ -123,7 +123,12 @@ public class BaseCreateImportWareHousePresenter extends BaseCreateOrderPresenter
                 createCmd();
                 break;
             case BaseCreateImportWareHouseActivity.ACTION_CREATE_NOTE:
-                createNote();
+                if (viewModel.getStep() == BaseCreateImportWareHouseActivity.STEP_2) {
+                    createNoteNoCMD();
+                } else {
+                    createNote();
+                }
+
                 break;
             case BaseCreateImportWareHouseActivity.ACTION_CREATE_IMPORT:
                 createImport();
@@ -169,7 +174,39 @@ public class BaseCreateImportWareHousePresenter extends BaseCreateOrderPresenter
         CreateImportNoteRequest request = new CreateImportNoteRequest();
         request.setStockTransId(mStockTrans.getStockTransId());
         request.setStaffId(mUserRepository.getUserInfo().getStaffInfo().getStaffId());
-        dataRequest.setWsCode(WsCode.CreateCmd);
+        dataRequest.setWsCode(WsCode.CreateImpNote);
+        dataRequest.setWsRequest(request);
+        mBanHangKhoTaiChinhRepository.createImportNote(dataRequest)
+                .subscribe(new MBCCSSubscribe<BaseCreateCmdNote>() {
+
+                    @Override
+                    public void onSuccess(BaseCreateCmdNote object) {
+                        //fake
+                        if (object != null && object.getStockTrans() != null) {
+                            viewModel.createCmdNoteStockSuccess(object.getStockTrans());
+                        }
+                    }
+
+                    @Override
+                    public void onError(BaseException error) {
+                        DialogUtils.showDialog(mContext, error.getMessage());
+                    }
+
+                    @Override
+                    public void onRequestFinish() {
+                        super.onRequestFinish();
+                        viewModel.hideLoading();
+                    }
+                });
+    }
+
+    private void createNoteNoCMD() {
+        viewModel.showLoading();
+        DataRequest<CreateImportNoteRequest> dataRequest = new DataRequest<>();
+        CreateImportNoteRequest request = new CreateImportNoteRequest();
+        request.setStockTransId(mStockTrans.getStockTransId());
+        request.setStaffId(mUserRepository.getUserInfo().getStaffInfo().getStaffId());
+        dataRequest.setWsCode(WsCode.CreateImpNoteNoCMD);
         dataRequest.setWsRequest(request);
         mBanHangKhoTaiChinhRepository.createImportNote(dataRequest)
                 .subscribe(new MBCCSSubscribe<BaseCreateCmdNote>() {

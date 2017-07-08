@@ -217,14 +217,14 @@ public class BaseSubMenuActivity
                         case Function.MenuId.MENU_XUAT_KHO_CAP_DUOI:
                             Intent stockDelivery = new Intent(BaseSubMenuActivity.this,
                                     StockDeliverActivity.class);
-                            /*StockTrans stockTransData = new StockTrans();
+                            StockTrans stockTransData = new StockTrans();
                             stockTransData.setStockTransId(1237);
                             stockTransData.setToOwnerId(1232);
-                            stockTransData.setCreateDateTime("2017-01-02");
+                            stockTransData.setCreateDatetime("2017-01-02");
                             stockTransData.setStockTransStatusName("hang moi");
                             Bundle stockbundle = new Bundle();
                             stockbundle.putParcelable(Constants.BundleConstant.STOCK_TRANS, stockTransData);
-                            stockDelivery.putExtras(stockbundle);*/
+                            stockDelivery.putExtras(stockbundle);
                             startActivity(stockDelivery);
                             break;
                         case Function.MenuId.MENU_NHAP_KHO_CAP_TREN:
