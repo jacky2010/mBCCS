@@ -14,6 +14,7 @@ import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.CreateExpStockNotHaveCmdRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListStockModelRequest;
+import com.viettel.mbccs.data.source.remote.response.BaseCreateCmdNote;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetListStockModelResponse;
 import com.viettel.mbccs.utils.ActivityUtils;
@@ -181,17 +182,20 @@ public class LapPhieuXuatTraHangPresenter implements LapPhieuXuatTraHangContract
         Subscription subscription =
                 mBanHangKhoTaiChinhRepository.createExpStockNotHaveCmd(dataRequest).subscribe(
 
-                        new MBCCSSubscribe<EmptyObject>() {
+                        new MBCCSSubscribe<BaseCreateCmdNote>() {
                             @Override
-                            public void onSuccess(EmptyObject object) {
-                                mViewModel.onCreateExpSuccess(mStockTotals);
+                            public void onSuccess(BaseCreateCmdNote object) {
+                                if (object != null && object.getStockTrans() != null) {
+                                    mViewModel.onCreateExpSuccess(mStockTotals,
+                                            object.getStockTrans());
+                                }
                             }
 
                             @Override
                             public void onError(BaseException error) {
                                 DialogUtils.showDialogError(mContext, error);
                                 //fake success
-                                mViewModel.onCreateExpSuccess(mStockTotals);
+                                //mViewModel.onCreateExpSuccess(mStockTotals);
                             }
                         });
 

@@ -19,4 +19,9 @@ public class CreateImportStockFromStaffActivity extends BaseCreateImportWareHous
     public int getActionTypeCreate() {
         return BaseCreateImportWareHouseActivity.ACTION_CREATE_IMPORT;
     }
+
+    @Override
+    public int getStepCreate() {
+        return BaseCreateImportWareHouseActivity.STEP_3;
+    }
 }
