@@ -9,26 +9,26 @@ import com.google.gson.annotations.SerializedName;
 
 public class GetStaffToAssignTaskRequest {
 
-    @SerializedName("shopId ")
+    @SerializedName("shopId")
     @Expose
-    private String shopId;
+    private Long shopId;
     @SerializedName("channelTypeId")
     @Expose
-    private String channelTypeId;
+    private Long channelTypeId;
 
-    public String getShopId() {
+    public Long getShopId() {
         return shopId;
     }
 
-    public void setShopId(String shopId) {
+    public void setShopId(Long shopId) {
         this.shopId = shopId;
     }
 
-    public String getChannelTypeId() {
+    public Long getChannelTypeId() {
         return channelTypeId;
     }
 
-    public void setChannelTypeId(String channelTypeId) {
+    public void setChannelTypeId(Long channelTypeId) {
         this.channelTypeId = channelTypeId;
     }
 }

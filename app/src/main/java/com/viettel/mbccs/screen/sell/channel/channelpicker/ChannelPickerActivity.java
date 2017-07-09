@@ -6,6 +6,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import com.viettel.mbccs.base.BaseSearchListPickerActivity;
 import com.viettel.mbccs.data.model.ChannelInfo;
+import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.utils.GsonUtils;
 import com.viettel.mbccs.variable.Constants;
 import java.util.List;
@@ -70,5 +71,10 @@ public class ChannelPickerActivity extends BaseSearchListPickerActivity
         intent.putExtras(bundle);
         setResult(RESULT_OK, intent);
         finish();
+    }
+
+    @Override
+    public void showErrorDialog(BaseException e) {
+
     }
 }

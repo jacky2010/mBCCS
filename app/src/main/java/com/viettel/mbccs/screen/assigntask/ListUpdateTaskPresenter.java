@@ -37,10 +37,8 @@ public class ListUpdateTaskPresenter extends BaseListTaskPresenter<TaskShopManag
         mViewModel.showLoading();
 
         GetInfoTaskForUpdateRequest request = new GetInfoTaskForUpdateRequest();
-        request.setServiceType(null);
         request.setShopCode(mUserRepository.getUserInfo().getShop().getShopCode());
         request.setType(taskType.get());
-        request.setAccount(null);
         request.setFromDate(DateUtils.convertDateToString(fromDate,
                 DateUtils.TIMEZONE_FORMAT_SERVER));
         request.setToDate(DateUtils.convertDateToString(toDate,
@@ -65,7 +63,7 @@ public class ListUpdateTaskPresenter extends BaseListTaskPresenter<TaskShopManag
                     @Override
                     public void onError(BaseException error) {
                         mViewModel.hideLoading();
-                        // TODO: 7/2/2017 Show error
+                        mViewModel.showErrorDialog(error);
                     }
                 });
         mSubscription.add(subscription);

@@ -2,7 +2,9 @@ package com.viettel.mbccs.screen.assigntask;
 
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
+import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.databinding.ActivityTaskSearchListBinding;
+import com.viettel.mbccs.utils.DialogUtils;
 
 /**
  * Created by Anh Vu Viet on 7/2/2017.
@@ -36,5 +38,10 @@ public abstract class BaseListTaskActivity<T extends BaseListTaskPresenter> exte
     @Override
     public long getToDate() {
         return mBinding.toDate.getDateInMilis();
+    }
+
+    @Override
+    public void showErrorDialog(BaseException e) {
+        DialogUtils.showDialogError(this, e);
     }
 }

@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
 public class GetListShopRequest   extends BaseRequest  {
 
     @Expose
-    @SerializedName("parentShopId")
+    @SerializedName("shopId")
     private long parentShopId;
 
     public long getParentShopId() {

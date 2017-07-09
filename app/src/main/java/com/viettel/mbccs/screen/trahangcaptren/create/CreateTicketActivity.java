@@ -6,6 +6,7 @@ import android.content.Intent;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.data.model.StockTotal;
+import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.databinding.ActivityCreateTicketReturnUpperBinding;
 import com.viettel.mbccs.screen.kpp.order.findstock.FindStockActivity;
 import com.viettel.mbccs.variable.Constants;
@@ -40,6 +41,11 @@ public class CreateTicketActivity
 
     @Override
     public void onItemClicked(Object object) {
+
+    }
+
+    @Override
+    public void showErrorDialog(BaseException e) {
 
     }
 

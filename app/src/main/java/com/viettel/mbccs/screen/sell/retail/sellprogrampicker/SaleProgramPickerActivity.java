@@ -7,6 +7,7 @@ import android.text.TextWatcher;
 
 import com.viettel.mbccs.base.BaseSearchListPickerActivity;
 import com.viettel.mbccs.data.model.SaleProgram;
+import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.utils.ActivityUtils;
 import com.viettel.mbccs.utils.GsonUtils;
 import com.viettel.mbccs.variable.Constants;
@@ -73,5 +74,10 @@ public class SaleProgramPickerActivity extends BaseSearchListPickerActivity
         setResult(RESULT_OK, intent);
         ActivityUtils.hideKeyboard(this);
         finish();
+    }
+
+    @Override
+    public void showErrorDialog(BaseException e) {
+
     }
 }
