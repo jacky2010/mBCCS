@@ -272,6 +272,8 @@ public class WsCode {
     // 5.10.3.4 - 5.12.3 - 5.14.3
     public final static String CreateExpNote = "WS_createExpNote";
 
+    public final static String CreateExpNoteNoCMD = "WS_createExpNoteNoCMD";
+
     // 5.10.3.5 - 5.12.3
     public final static String CreateExpStock = "WS_createExpStock";
 
@@ -292,7 +294,7 @@ public class WsCode {
     public final static String CreateImpStockNotHaveCmd = "WS_createImpStockNotHaveCmd";
 
     // 5.16.2.2
-    public final static String CreateExpStockNotHaveCmd = "WS_createExpStockNotHaveCmd";
+    public final static String CreateExpStockNotNote = "WS_createExpStockNotNote";
 
     // 5.18.3.1
     public final static String CreateSaleOrders = "WS_createSaleOrders";

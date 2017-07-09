@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by HuyQuyet on 6/2/17.
  */
 
-public class GetOTPRequest {
+public class GetOTPRequest extends BaseRequest   {
     @SerializedName("isdn")
     @Expose
     private String isdn;
@@ -18,5 +18,9 @@ public class GetOTPRequest {
 
     public void setIsdn(String isdn) {
         this.isdn = isdn;
+    }
+
+    public GetOTPRequest() {
+        super();
     }
 }

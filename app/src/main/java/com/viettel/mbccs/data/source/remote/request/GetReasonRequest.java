@@ -8,7 +8,7 @@ import com.viettel.mbccs.constance.ReasonType;
  * Created by eo_cuong on 5/20/17.
  */
 
-public class GetReasonRequest {
+public class GetReasonRequest  extends BaseRequest  {
 
     // loại reason
     @ReasonType
@@ -23,5 +23,9 @@ public class GetReasonRequest {
 
     public void setReasonType(@ReasonType String reasonType) {
         this.reasonType = reasonType;
+    }
+
+    public GetReasonRequest() {
+        super();
     }
 }

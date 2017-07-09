@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by FRAMGIA\hoang.van.cuong on 06/07/2017.
  */
 
-public class ViewInforSerialRequest  {
+public class ViewInforSerialRequest extends BaseRequest {
 
     @Expose
     @SerializedName("ownerId")
@@ -55,5 +55,9 @@ public class ViewInforSerialRequest  {
 
     public void setStateId(long stateId) {
         this.stateId = stateId;
+    }
+
+    public ViewInforSerialRequest() {
+        super();
     }
 }

@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by eo_cuong on 5/19/17.
  */
 
-public class CheckDebitChangeSimRequest {
+public class CheckDebitChangeSimRequest extends BaseRequest{
 
     @SerializedName("isdn")
     @Expose
@@ -19,5 +19,9 @@ public class CheckDebitChangeSimRequest {
 
     public void setIsdn(String isdn) {
         this.isdn = isdn;
+    }
+
+    public CheckDebitChangeSimRequest() {
+        super();
     }
 }

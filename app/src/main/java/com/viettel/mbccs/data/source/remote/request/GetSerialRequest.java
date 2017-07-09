@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by eo_cuong on 5/18/17.
  */
 
-public class GetSerialRequest {
+public class GetSerialRequest  extends BaseRequest {
 
     @SerializedName("ownerId")
     @Expose
@@ -29,9 +29,6 @@ public class GetSerialRequest {
     @Expose
     private long quantity;
 
-    @SerializedName("language")
-    @Expose
-    private String language;
 
     public long getOwnerId() {
         return ownerId;
@@ -73,12 +70,7 @@ public class GetSerialRequest {
         this.quantity = quantity;
     }
 
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
+    public GetSerialRequest() {
+        super();
     }
 }

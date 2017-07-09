@@ -7,13 +7,10 @@ import com.google.gson.annotations.SerializedName;
  * Created by minhnx on 6/7/17.
  */
 
-public class GetHotNewsCSKPPRequest {
+public class GetHotNewsCSKPPRequest extends BaseRequest {
     @Expose
     @SerializedName("username")
     private String username;
-    @Expose
-    @SerializedName("language")
-    private String language;
     @Expose
     @SerializedName("ownerCode")
     private String ownerCode;
@@ -26,19 +23,15 @@ public class GetHotNewsCSKPPRequest {
         this.username = username;
     }
 
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
     public String getOwnerCode() {
         return ownerCode;
     }
 
     public void setOwnerCode(String ownerCode) {
         this.ownerCode = ownerCode;
+    }
+
+    public GetHotNewsCSKPPRequest() {
+        super();
     }
 }

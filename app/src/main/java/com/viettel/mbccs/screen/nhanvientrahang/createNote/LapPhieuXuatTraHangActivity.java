@@ -97,11 +97,12 @@ public class LapPhieuXuatTraHangActivity extends
 
     @Override
     public void showLoading() {
-
+        showLoadingDialog();
     }
 
     @Override
     public void hideLoading() {
 
+        hideLoadingDialog();
     }
 }

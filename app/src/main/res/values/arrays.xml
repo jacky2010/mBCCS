@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <string-array name="stock_status">
+        <item>NEW</item>
+        <item>OLD</item>
+    </string-array>
     <string-array name="task_type_no_home">
         <item>Chăm sóc kênh phân phối</item>
         <item>Việc phát sinh</item>

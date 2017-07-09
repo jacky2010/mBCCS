@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by eo_cuong on 7/8/17.
  */
 
-public class GetStockTransSerialDetailRequest {
+public class GetStockTransSerialDetailRequest  extends BaseRequest {
 
     @SerializedName("stockTransId")
     @Expose
@@ -19,5 +19,9 @@ public class GetStockTransSerialDetailRequest {
 
     public void setStockTransId(Long stockTransId) {
         this.stockTransId = stockTransId;
+    }
+
+    public GetStockTransSerialDetailRequest() {
+        super();
     }
 }

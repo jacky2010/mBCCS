@@ -8,7 +8,7 @@ import com.viettel.mbccs.constance.ShopLevel;
  * Created by HuyQuyet on 5/23/17.
  */
 
-public class GetListTTKDRequest  {
+public class GetListTTKDRequest  extends BaseRequest   {
     @Expose
     @SerializedName("shopId")
     private long shopId;
@@ -17,10 +17,6 @@ public class GetListTTKDRequest  {
     @SerializedName("shopLevel")
     @ShopLevel
     private long shopLevel;
-
-    @Expose
-    @SerializedName("language")
-    private long language;
 
     public long getShopId() {
         return shopId;
@@ -38,11 +34,7 @@ public class GetListTTKDRequest  {
         this.shopLevel = shopLevel;
     }
 
-    public long getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(long language) {
-        this.language = language;
+    public GetListTTKDRequest() {
+        super();
     }
 }

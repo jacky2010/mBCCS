@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by HuyQuyet on 6/2/17.
  */
 
-public class ChecOTPRequest {
+public class ChecOTPRequest extends BaseRequest {
 
     @SerializedName("isdn")
     @Expose
@@ -31,5 +31,9 @@ public class ChecOTPRequest {
 
     public void setOtp(String otp) {
         this.otp = otp;
+    }
+
+    public ChecOTPRequest() {
+        super();
     }
 }

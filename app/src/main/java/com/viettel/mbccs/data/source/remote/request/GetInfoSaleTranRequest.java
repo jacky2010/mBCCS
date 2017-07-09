@@ -14,7 +14,7 @@ import java.util.List;
  * Created by eo_cuong on 5/19/17.
  */
 
-public class GetInfoSaleTranRequest implements Parcelable {
+public class GetInfoSaleTranRequest extends BaseRequest implements Parcelable {
 
     @SerializedName("shopId")
     @Expose
@@ -81,9 +81,6 @@ public class GetInfoSaleTranRequest implements Parcelable {
     @Expose
     private long orderId;
 
-    @SerializedName("language")
-    @Expose
-    private String language;
 
     public Long getShopId() {
         return shopId;
@@ -197,14 +194,6 @@ public class GetInfoSaleTranRequest implements Parcelable {
         this.couponCode = couponCode;
     }
 
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
     public Customer getCustomer() {
         return mCustomer;
     }
@@ -243,7 +232,6 @@ public class GetInfoSaleTranRequest implements Parcelable {
         dest.writeString(this.pricePolicy);
         dest.writeString(this.discountPolicy);
         dest.writeString(this.couponCode);
-        dest.writeString(this.language);
         dest.writeLong(this.orderId);
     }
 
@@ -267,7 +255,6 @@ public class GetInfoSaleTranRequest implements Parcelable {
         this.pricePolicy = in.readString();
         this.discountPolicy = in.readString();
         this.couponCode = in.readString();
-        this.language = in.readString();
         this.orderId = in.readLong();
     }
 
@@ -292,7 +279,6 @@ public class GetInfoSaleTranRequest implements Parcelable {
         request.setCustomer(mCustomer);
         request.setDiscountPolicy(discountPolicy);
         request.setIsdnPay(IsdnPay);
-        request.setLanguage(language);
         request.setLstSerialSale(lstSerialSale);
         request.setPaymentMethod(paymentMethod);
         request.setPricePolicy(pricePolicy);
@@ -301,7 +287,7 @@ public class GetInfoSaleTranRequest implements Parcelable {
         request.setShopId(shopId);
         request.setSaleProgrameCode(saleProgrameCode);
         request.setSaleTransType(saleTransType);
-        if (telecomserviceId!=null){
+        if (telecomserviceId != null) {
             request.setTelecomserviceId(telecomserviceId);
         }
         request.setOrderId(orderId);

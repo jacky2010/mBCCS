@@ -3,25 +3,30 @@ package com.viettel.mbccs.screen.nhanvientrahang.createNote;
 import android.app.Activity;
 import android.content.Context;
 import android.databinding.ObservableField;
+import android.view.View;
+import android.widget.AdapterView;
 import com.viettel.mbccs.R;
+import com.viettel.mbccs.constance.OwnerType;
 import com.viettel.mbccs.constance.SaleTranType;
+import com.viettel.mbccs.constance.StockStateId;
 import com.viettel.mbccs.constance.WsCode;
-import com.viettel.mbccs.data.model.EmptyObject;
 import com.viettel.mbccs.data.model.StockSerial;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.UserRepository;
-import com.viettel.mbccs.data.source.remote.request.CreateExpStockNotHaveCmdRequest;
+import com.viettel.mbccs.data.source.remote.request.CreateExpStockNotNoteRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListStockModelRequest;
-import com.viettel.mbccs.data.source.remote.response.BaseCreateCmdNote;
+import com.viettel.mbccs.data.source.remote.response.BaseCreateCmdNoteResponse;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetListStockModelResponse;
 import com.viettel.mbccs.utils.ActivityUtils;
+import com.viettel.mbccs.utils.Common;
 import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.SpinnerAdapter;
 import com.viettel.mbccs.utils.StockTotalCompare;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
+import com.viettel.mbccs.variable.Constants;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -49,6 +54,7 @@ public class LapPhieuXuatTraHangPresenter implements LapPhieuXuatTraHangContract
     private BanHangKhoTaiChinhRepository mBanHangKhoTaiChinhRepository;
     private CompositeSubscription mSubscription;
     private int currentPosition = -1;
+    private int positionStatus = 0;
 
     public LapPhieuXuatTraHangPresenter(Context context,
             LapPhieuXuatTraHangContract.ViewModel viewModel) {
@@ -58,27 +64,19 @@ public class LapPhieuXuatTraHangPresenter implements LapPhieuXuatTraHangContract
         mBanHangKhoTaiChinhRepository = BanHangKhoTaiChinhRepository.getInstance();
         mSubscription = new CompositeSubscription();
         init();
-        fake();
         loadData();
     }
 
-    private void fake() {
-        mStockReceiveName.set(mUserRepository.getUserInfo().getChannelInfo().getManagementName());
-        mStatus.addAll(Arrays.asList("NEW", "OLD"));
-    }
-
     public void loadData() {
+        mViewModel.showLoading();
         DataRequest<GetListStockModelRequest> mGetListStockModelRequestBaseRequest =
                 new DataRequest<>();
         mGetListStockModelRequestBaseRequest.setWsCode(WsCode.GetListStockModel);
         GetListStockModelRequest request = new GetListStockModelRequest();
-        //request.setStockTypeId(StockTotalType.TYPE_NEW);
-        //request.setStateId(StockTotalType.TYPE_NEW);
-        request.setOwnerType(2L);
-        request.setSaleTransType(SaleTranType.SALE_CHANNEL);
+        request.setSaleTransType(SaleTranType.SALE_RETAIL);
         request.setOwnerId(mUserRepository.getUserInfo().getStaffInfo().getStaffId());
+        request.setOwnerType(OwnerType.STAFF);
         mGetListStockModelRequestBaseRequest.setWsRequest(request);
-        mViewModel.showLoading();
         Subscription subscription = mBanHangKhoTaiChinhRepository.getListStockModel(
                 mGetListStockModelRequestBaseRequest)
                 .subscribe(new MBCCSSubscribe<GetListStockModelResponse>() {
@@ -124,6 +122,20 @@ public class LapPhieuXuatTraHangPresenter implements LapPhieuXuatTraHangContract
         mStatusAdapter = new SpinnerAdapter<String>(mContext, mStatus);
         mAdapter = new StockLapPhieuAdapter(mContext, mStockTotals);
         mAdapter.setOnStockLapPhieuListener(this);
+
+        mStockReceiveName.set(mUserRepository.getUserInfo().getShop().getShopName());
+        mStatus.addAll(Arrays.asList(mContext.getResources().getStringArray(R.array.stock_status)));
+        mStatusAdapter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                positionStatus = i;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
 
     public void onCancel() {
@@ -148,7 +160,7 @@ public class LapPhieuXuatTraHangPresenter implements LapPhieuXuatTraHangContract
         if (!validate()) {
             return;
         }
-        createExpStockNotHaveCmd();
+        createExpStockNotNote();
     }
 
     private void reloadStockListCount() {
@@ -161,30 +173,41 @@ public class LapPhieuXuatTraHangPresenter implements LapPhieuXuatTraHangContract
         return true;
     }
 
-    private void createExpStockNotHaveCmd() {
+    private void createExpStockNotNote() {
 
-        DataRequest<CreateExpStockNotHaveCmdRequest> dataRequest = new DataRequest<>();
-        dataRequest.setWsCode(WsCode.CreateExpStockNotHaveCmd);
-        CreateExpStockNotHaveCmdRequest request = new CreateExpStockNotHaveCmdRequest();
+        mViewModel.showLoading();
+
+        DataRequest<CreateExpStockNotNoteRequest> dataRequest = new DataRequest<>();
+        dataRequest.setWsCode(WsCode.CreateExpStockNotNote);
+        CreateExpStockNotNoteRequest request = new CreateExpStockNotNoteRequest();
         request.setFromOwnerId(mUserRepository.getUserInfo().getStaffInfo().getStaffId());
-        //TODO define fromOwnerTypeID
-        request.setFromOwnerType(mUserRepository.getUserInfo().getStaffInfo().getChannelTypeId());
-        request.setToOwnerId(mUserRepository.getUserInfo().getChannelInfo().getChannelId());
-        request.setToOwnerType(mUserRepository.getUserInfo().getChannelInfo().getChannelType());
-        request.setStockTransCode("");
-        //        request.setReasonId();
+        request.setFromOwnerType(OwnerType.STAFF);
+        request.setToOwnerId(mUserRepository.getUserInfo().getShop().getShopId());
+        request.setToOwnerType(OwnerType.SHOP);
+        request.setStaffId(mUserRepository.getUserInfo().getStaffInfo().getStaffId());
+        request.setDiscountPolicy(
+                Long.valueOf(mUserRepository.getUserInfo().getStaffInfo().getDiscountPolicy()));
+        request.setReasonId(Constants.FuntionConstant.STAFF_EXPORT_SHOP_REASON_ID);
         List<StockSerial> stockSerials = new ArrayList<>();
         for (StockTotal stockTotal : mStockTotals) {
-            stockSerials.add(stockTotal.getStockSerial());
+            StockSerial stockSerial = stockTotal.getStockSerial();
+            stockSerial.setStateId(
+                    positionStatus == 0 ? StockStateId.TYPE_NEW : StockStateId.TYPE_OLD);
+            stockSerial.setQuantity(
+                    Common.getSerialCountByListSerialBlock(stockTotal.getSerialBlocks()));
+            if (stockSerial.getQuantity() > 0) {
+                stockSerials.add(stockSerial);
+            }
         }
+
         request.setStockSerials(stockSerials);
         dataRequest.setWsRequest(request);
         Subscription subscription =
-                mBanHangKhoTaiChinhRepository.createExpStockNotHaveCmd(dataRequest).subscribe(
+                mBanHangKhoTaiChinhRepository.createExpStockNotNote(dataRequest).subscribe(
 
-                        new MBCCSSubscribe<BaseCreateCmdNote>() {
+                        new MBCCSSubscribe<BaseCreateCmdNoteResponse>() {
                             @Override
-                            public void onSuccess(BaseCreateCmdNote object) {
+                            public void onSuccess(BaseCreateCmdNoteResponse object) {
                                 if (object != null && object.getStockTrans() != null) {
                                     mViewModel.onCreateExpSuccess(mStockTotals,
                                             object.getStockTrans());
@@ -196,6 +219,12 @@ public class LapPhieuXuatTraHangPresenter implements LapPhieuXuatTraHangContract
                                 DialogUtils.showDialogError(mContext, error);
                                 //fake success
                                 //mViewModel.onCreateExpSuccess(mStockTotals);
+                            }
+
+                            @Override
+                            public void onRequestFinish() {
+                                super.onRequestFinish();
+                                mViewModel.hideLoading();
                             }
                         });
 
@@ -235,7 +264,7 @@ public class LapPhieuXuatTraHangPresenter implements LapPhieuXuatTraHangContract
     }
 
     @Override
-    public void onClickItem(Object o, int position) {
+    public void onClickItem(StockTotal o, int position) {
 
     }
 

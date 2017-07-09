@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by minhnx on 6/7/17.
  */
 
-public class GetRegisterSubRequest {
+public class GetRegisterSubRequest extends BaseRequest  {
     @Expose
     @SerializedName("isdn")
     private String isdn;
@@ -40,5 +40,9 @@ public class GetRegisterSubRequest {
 
     public void setIdType(Long idType) {
         this.idType = idType;
+    }
+
+    public GetRegisterSubRequest() {
+        super();
     }
 }

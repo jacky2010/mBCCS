@@ -7,13 +7,10 @@ import com.google.gson.annotations.SerializedName;
  * Created by minhnx on 6/7/17.
  */
 
-public class KPPRespondFeedbackRequest {
+public class KPPRespondFeedbackRequest extends BaseRequest  {
     @Expose
     @SerializedName("username")
     private String username;
-    @Expose
-    @SerializedName("language")
-    private String language;
     @Expose
     @SerializedName("feedbackId")
     private Long feedbackId;
@@ -29,13 +26,6 @@ public class KPPRespondFeedbackRequest {
         this.username = username;
     }
 
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
-    }
 
     public Long getFeedbackId() {
         return feedbackId;
@@ -51,5 +41,9 @@ public class KPPRespondFeedbackRequest {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public KPPRespondFeedbackRequest() {
+        super();
     }
 }

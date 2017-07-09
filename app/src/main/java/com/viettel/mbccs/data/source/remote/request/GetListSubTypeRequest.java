@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by HuyQuyet on 7/3/17.
  */
 
-public class GetListSubTypeRequest {
+public class GetListSubTypeRequest  extends BaseRequest  {
     @SerializedName("serviceType")
     @Expose
     private String serviceType;
@@ -18,5 +18,9 @@ public class GetListSubTypeRequest {
 
     public void setServiceType(String serviceType) {
         this.serviceType = serviceType;
+    }
+
+    public GetListSubTypeRequest() {
+        super();
     }
 }

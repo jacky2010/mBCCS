@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by FRAMGIA\hoang.van.cuong on 07/07/2017.
  */
 
-public class DestroyStockTransRequest {
+public class DestroyStockTransRequest extends BaseRequest {
     @SerializedName("stockTransId")
     @Expose
     private Long stockTransId;
@@ -40,5 +40,9 @@ public class DestroyStockTransRequest {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public DestroyStockTransRequest() {
+        super();
     }
 }

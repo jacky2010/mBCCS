@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by HuyQuyet on 5/23/17.
  */
 
-public class GetListShopRequest  {
+public class GetListShopRequest   extends BaseRequest  {
 
     @Expose
     @SerializedName("parentShopId")
@@ -19,5 +19,9 @@ public class GetListShopRequest  {
 
     public void setParentShopId(long parentShopId) {
         this.parentShopId = parentShopId;
+    }
+
+    public GetListShopRequest() {
+        super();
     }
 }

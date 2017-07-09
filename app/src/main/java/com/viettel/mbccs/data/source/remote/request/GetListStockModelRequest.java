@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by HuyQuyet on 5/22/17.
  */
 
-public class GetListStockModelRequest {
+public class GetListStockModelRequest  extends BaseRequest  {
     @Expose
     @SerializedName("ownerId")
     private Long ownerId;
@@ -31,8 +31,6 @@ public class GetListStockModelRequest {
     @Expose
     @SerializedName("stateId")
     private Long stateId;
-
-    private String language;
 
     @SerializedName("saleTransType")
     @Expose
@@ -86,13 +84,6 @@ public class GetListStockModelRequest {
         this.stateId = stateId;
     }
 
-    public String getLanaguage() {
-        return language;
-    }
-
-    public void setLanaguage(String lanaguage) {
-        this.language = lanaguage;
-    }
 
     public Long getSaleTransType() {
         return saleTransType;
@@ -101,4 +92,10 @@ public class GetListStockModelRequest {
     public void setSaleTransType(Long saleTransType) {
         this.saleTransType = saleTransType;
     }
+
+    public GetListStockModelRequest() {
+        super();
+    }
+
+
 }

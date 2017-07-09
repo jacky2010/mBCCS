@@ -14,12 +14,18 @@ public class ItemStockTransDetailPresenter {
     private Context mContext;
     private StockTransDetail mStockTransDetail;
     public ObservableField<String> action;
+    public ObservableField<Boolean> showSerial;
 
     public ItemStockTransDetailPresenter(Context context, StockTransDetail stockTransDetail) {
         mContext = context;
         mStockTransDetail = stockTransDetail;
         action = new ObservableField<>();
+        showSerial = new ObservableField<>();
         action.set(mContext.getString(R.string.common_label_select_serials));
+    }
+
+    public void setShowSerial(boolean isShowSerial){
+        showSerial.set(isShowSerial);
     }
 
     public void setAction(String actionTitle) {

@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by HuyQuyet on 6/4/17.
  */
 
-public class CheckIdNoRequest implements Parcelable {
+public class CheckIdNoRequest extends BaseRequest implements Parcelable {
 
     // Số giấy tờ
     @SerializedName("idNo")
@@ -27,6 +27,7 @@ public class CheckIdNoRequest implements Parcelable {
     private String serviceType;
 
     public CheckIdNoRequest() {
+        super();
     }
 
     protected CheckIdNoRequest(Parcel in) {

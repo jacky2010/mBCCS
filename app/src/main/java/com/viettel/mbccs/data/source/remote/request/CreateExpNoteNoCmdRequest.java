@@ -8,7 +8,7 @@ import java.util.List;
  * Created by eo_cuong on 7/8/17.
  */
 
-public class CreateExpNoteNoCmdRequest {
+public class CreateExpNoteNoCmdRequest extends BaseRequest {
     @SerializedName("fromOwnerId")
     @Expose
     private Long fromOwnerId;
@@ -99,4 +99,7 @@ public class CreateExpNoteNoCmdRequest {
         this.discountPolicy = discountPolicy;
     }
 
+    public CreateExpNoteNoCmdRequest() {
+        super();
+    }
 }

@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by eo_cuong on 5/18/17.
  */
 
-public class GetTotalStockRequest {
+public class GetTotalStockRequest  extends BaseRequest {
 
     public static final Integer SALE_TRAN_RETAIL = 1;
     public static final Integer SALE_TRAN_CHANNEL = 3;
@@ -37,10 +37,6 @@ public class GetTotalStockRequest {
     @SerializedName("stateId")
     @Expose
     private Long stateId;
-
-    @SerializedName("language")
-    @Expose
-    private String language;
 
     public Long getOwnerId() {
         return ownerId;
@@ -90,11 +86,7 @@ public class GetTotalStockRequest {
         this.stateId = stateId;
     }
 
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
+    public GetTotalStockRequest() {
+        super();
     }
 }

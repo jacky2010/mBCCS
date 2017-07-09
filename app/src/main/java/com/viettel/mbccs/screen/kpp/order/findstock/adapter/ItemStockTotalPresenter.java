@@ -18,6 +18,8 @@ public class ItemStockTotalPresenter {
 
     public ObservableField<Boolean> deleteAble;
 
+    public ObservableField<Boolean> showChooseSerial;
+
     public StockTotal mStockTotal;
 
     public Context mContext;
@@ -26,6 +28,7 @@ public class ItemStockTotalPresenter {
         mStockTotal = stockTotal;
         countChoice = new ObservableField<>();
         deleteAble = new ObservableField<>();
+        showChooseSerial = new ObservableField<>(true);
         deleteAble.set(false);
         countChoice.set(mStockTotal.getCountChoice());
         mContext = context;
@@ -33,6 +36,10 @@ public class ItemStockTotalPresenter {
 
     public void setDeleteAble(boolean deleteAble) {
         this.deleteAble.set(deleteAble);
+    }
+
+    public void setShowChooseSerial(boolean showChooseSerial) {
+        this.showChooseSerial.set(showChooseSerial);
     }
 
     public void addChoice() {
@@ -57,7 +64,8 @@ public class ItemStockTotalPresenter {
 
     public String getImage() {
 
-        File file = FileUtils.getImageFileByIdName(mContext, String.valueOf(mStockTotal.getStockModelId()));
+        File file = FileUtils.getImageFileByIdName(mContext,
+                String.valueOf(mStockTotal.getStockModelId()));
         if (file != null && file.exists()) {
             return file.getAbsolutePath();
         }

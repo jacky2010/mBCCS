@@ -60,21 +60,21 @@ public class ListNhanVienTraHangActivity extends BaseListOrderActivity {
                     @Override
                     public void onSuccess(GetListExpCmdResponse object) {
                         //fake
-                        object = new GetListExpCmdResponse();
-                        List<StockTrans> stockTranses = new ArrayList<StockTrans>();
-                        StockTrans stockTrans = new StockTrans();
-                        stockTrans.setStockTransId(2342352);
-                        stockTrans.setToOwnerId(234235);
-                        stockTrans.setCreateDatetime("2017-07-05T01:28:46+07:00");
-                        stockTrans.setStockTransStatusName("hang moi");
-                        StockTrans stockTrans1 = new StockTrans();
-                        stockTrans1.setStockTransId(1237);
-                        stockTrans1.setToOwnerId(23424);
-                        stockTrans1.setCreateDatetime("2017-07-05T01:28:46+07:00");
-                        stockTrans1.setStockTransStatusName("hang moi");
-                        stockTranses.add(stockTrans);
-                        stockTranses.add(stockTrans1);
-                        object.setStockTranses(stockTranses);
+                        //object = new GetListExpCmdResponse();
+                        //List<StockTrans> stockTranses = new ArrayList<StockTrans>();
+                        //StockTrans stockTrans = new StockTrans();
+                        //stockTrans.setStockTransId(2342352);
+                        //stockTrans.setToOwnerId(234235);
+                        //stockTrans.setCreateDatetime("2017-07-05T01:28:46+07:00");
+                        //stockTrans.setStockTransStatusName("hang moi");
+                        //StockTrans stockTrans1 = new StockTrans();
+                        //stockTrans1.setStockTransId(1237);
+                        //stockTrans1.setToOwnerId(23424);
+                        //stockTrans1.setCreateDatetime("2017-07-05T01:28:46+07:00");
+                        //stockTrans1.setStockTransStatusName("hang moi");
+                        //stockTranses.add(stockTrans);
+                        //stockTranses.add(stockTrans1);
+                        //object.setStockTranses(stockTranses);
 
                         if (object != null && object.getStockTranses() != null) {
                             setDataSearch(object.getStockTranses());
@@ -112,7 +112,7 @@ public class ListNhanVienTraHangActivity extends BaseListOrderActivity {
                     public void onSuccess(ListStockTransDetailsReponse object) {
 
                         //fake
-                        object = fakeData();
+                        //object = fakeData();
 
                         if (object != null && object.getStockTransDetails() != null) {
                             ExportSuccessDialog exportSuccessDialog =

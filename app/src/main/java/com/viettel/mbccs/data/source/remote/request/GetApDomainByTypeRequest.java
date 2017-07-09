@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by HuyQuyet on 6/2/17.
  */
 
-public class GetApDomainByTypeRequest {
+public class GetApDomainByTypeRequest extends BaseRequest {
 
     @SerializedName("type")
     @Expose
@@ -31,5 +31,9 @@ public class GetApDomainByTypeRequest {
 
     public void setSubType(String subType) {
         this.subType = subType;
+    }
+
+    public GetApDomainByTypeRequest() {
+        super();
     }
 }

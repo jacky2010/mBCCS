@@ -10,7 +10,7 @@ import com.viettel.mbccs.data.model.Subscriber;
  * Created by HuyQuyet on 7/3/17.
  */
 
-public class ConnectSubscriberRequest {
+public class ConnectSubscriberRequest extends BaseRequest {
     @SerializedName("customer")
     @Expose
     private Customer customer;
@@ -105,5 +105,9 @@ public class ConnectSubscriberRequest {
 
     public void setChannelTypeId(String channelTypeId) {
         this.channelTypeId = channelTypeId;
+    }
+
+    public ConnectSubscriberRequest() {
+        super();
     }
 }

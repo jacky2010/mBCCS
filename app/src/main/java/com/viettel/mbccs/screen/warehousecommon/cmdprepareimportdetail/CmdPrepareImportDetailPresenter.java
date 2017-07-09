@@ -12,7 +12,7 @@ import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.remote.request.CreateImportStockRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListStockTransDetailRequest;
-import com.viettel.mbccs.data.source.remote.response.BaseCreateCmdNote;
+import com.viettel.mbccs.data.source.remote.response.BaseCreateCmdNoteResponse;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.ListStockTransDetailsReponse;
 import com.viettel.mbccs.screen.warehousecommon.exportwarehouse.StockTransDetailAdapter;
@@ -187,9 +187,9 @@ public class CmdPrepareImportDetailPresenter implements CmdPrepareImportDetailCo
         Subscription subcription = mBanHangKhoTaiChinhRepository.createImportStock(
                 mCreateImportStockRequestDataRequest).subscribe(
 
-                new MBCCSSubscribe<BaseCreateCmdNote>() {
+                new MBCCSSubscribe<BaseCreateCmdNoteResponse>() {
                     @Override
-                    public void onSuccess(BaseCreateCmdNote object) {
+                    public void onSuccess(BaseCreateCmdNoteResponse object) {
 
                         mViewModel.onCreateImportStockSuccess(mStockTransDetails, mStockTrans);
                     }

@@ -18,7 +18,7 @@ import com.viettel.mbccs.data.source.remote.request.CreateImportStockRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.DestroyStockTransRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListStockTransDetailRequest;
-import com.viettel.mbccs.data.source.remote.response.BaseCreateCmdNote;
+import com.viettel.mbccs.data.source.remote.response.BaseCreateCmdNoteResponse;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.ListStockTransDetailsReponse;
 import com.viettel.mbccs.screen.nhapkhocapduoi.adapters.ListGoodsDetailAdapter;
@@ -145,10 +145,10 @@ public class BaseCreateImportWareHousePresenter extends BaseCreateOrderPresenter
         dataRequest.setWsCode(WsCode.CreateCmd);
         dataRequest.setWsRequest(request);
         mBanHangKhoTaiChinhRepository.createImportCmd(dataRequest)
-                .subscribe(new MBCCSSubscribe<BaseCreateCmdNote>() {
+                .subscribe(new MBCCSSubscribe<BaseCreateCmdNoteResponse>() {
 
                     @Override
-                    public void onSuccess(BaseCreateCmdNote object) {
+                    public void onSuccess(BaseCreateCmdNoteResponse object) {
                         //fake
                         if (object != null && object.getStockTrans() != null) {
                             viewModel.createCmdNoteStockSuccess(object.getStockTrans());
@@ -177,10 +177,10 @@ public class BaseCreateImportWareHousePresenter extends BaseCreateOrderPresenter
         dataRequest.setWsCode(WsCode.CreateImpNote);
         dataRequest.setWsRequest(request);
         mBanHangKhoTaiChinhRepository.createImportNote(dataRequest)
-                .subscribe(new MBCCSSubscribe<BaseCreateCmdNote>() {
+                .subscribe(new MBCCSSubscribe<BaseCreateCmdNoteResponse>() {
 
                     @Override
-                    public void onSuccess(BaseCreateCmdNote object) {
+                    public void onSuccess(BaseCreateCmdNoteResponse object) {
                         //fake
                         if (object != null && object.getStockTrans() != null) {
                             viewModel.createCmdNoteStockSuccess(object.getStockTrans());
@@ -209,10 +209,10 @@ public class BaseCreateImportWareHousePresenter extends BaseCreateOrderPresenter
         dataRequest.setWsCode(WsCode.CreateImpNoteNoCMD);
         dataRequest.setWsRequest(request);
         mBanHangKhoTaiChinhRepository.createImportNote(dataRequest)
-                .subscribe(new MBCCSSubscribe<BaseCreateCmdNote>() {
+                .subscribe(new MBCCSSubscribe<BaseCreateCmdNoteResponse>() {
 
                     @Override
-                    public void onSuccess(BaseCreateCmdNote object) {
+                    public void onSuccess(BaseCreateCmdNoteResponse object) {
                         //fake
                         if (object != null && object.getStockTrans() != null) {
                             viewModel.createCmdNoteStockSuccess(object.getStockTrans());
@@ -241,10 +241,10 @@ public class BaseCreateImportWareHousePresenter extends BaseCreateOrderPresenter
         dataRequest.setWsCode(WsCode.CreateImpStock);
         dataRequest.setWsRequest(request);
         mBanHangKhoTaiChinhRepository.createImportStock(dataRequest)
-                .subscribe(new MBCCSSubscribe<BaseCreateCmdNote>() {
+                .subscribe(new MBCCSSubscribe<BaseCreateCmdNoteResponse>() {
 
                     @Override
-                    public void onSuccess(BaseCreateCmdNote object) {
+                    public void onSuccess(BaseCreateCmdNoteResponse object) {
                         //fake
                         if (object != null && object.getStockTrans() != null) {
                             viewModel.createCmdNoteStockSuccess(object.getStockTrans());

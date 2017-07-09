@@ -8,7 +8,7 @@ import java.util.List;
  * Created by FRAMGIA\hoang.van.cuong on 29/06/2017.
  */
 
-public class CreateExpStockNotHaveCmdRequest {
+public class CreateExpStockNotNoteRequest {
 
     @SerializedName("fromOwnerId")
     private Long fromOwnerId;
@@ -23,12 +23,18 @@ public class CreateExpStockNotHaveCmdRequest {
     private Long toOwnerType;
 
     @SerializedName("stockTransCode")
-    private String stockTransCode;
+    private Long stockTransCode;
 
     @SerializedName("reasonId")
     private Long reasonId;
 
-    @SerializedName("mStockSerials")
+    @SerializedName("staffId")
+    private Long staffId;
+
+    @SerializedName("discountPolicy")
+    private Long discountPolicy;
+
+    @SerializedName("lstStockSerial")
     private List<StockSerial> mStockSerials;
 
     public Long getFromOwnerId() {
@@ -63,11 +69,11 @@ public class CreateExpStockNotHaveCmdRequest {
         this.toOwnerType = toOwnerType;
     }
 
-    public String getStockTransCode() {
+    public Long getStockTransCode() {
         return stockTransCode;
     }
 
-    public void setStockTransCode(String stockTransCode) {
+    public void setStockTransCode(Long stockTransCode) {
         this.stockTransCode = stockTransCode;
     }
 
@@ -85,5 +91,25 @@ public class CreateExpStockNotHaveCmdRequest {
 
     public void setStockSerials(List<StockSerial> stockSerials) {
         mStockSerials = stockSerials;
+    }
+
+    public Long getStaffId() {
+        return staffId;
+    }
+
+    public void setStaffId(Long staffId) {
+        this.staffId = staffId;
+    }
+
+    public Long getDiscountPolicy() {
+        return discountPolicy;
+    }
+
+    public void setDiscountPolicy(Long discountPolicy) {
+        this.discountPolicy = discountPolicy;
+    }
+
+    public CreateExpStockNotNoteRequest() {
+        super();
     }
 }

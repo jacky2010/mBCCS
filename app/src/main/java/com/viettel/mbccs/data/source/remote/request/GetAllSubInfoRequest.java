@@ -4,7 +4,7 @@ package com.viettel.mbccs.data.source.remote.request;
  * Created by HuyQuyet on 6/25/17.
  */
 
-public class GetAllSubInfoRequest {
+public class GetAllSubInfoRequest extends BaseRequest {
     // thuê bao
     private String isdn;
 
@@ -46,5 +46,9 @@ public class GetAllSubInfoRequest {
 
     public void setCheckRegisterStatus(String checkRegisterStatus) {
         this.checkRegisterStatus = checkRegisterStatus;
+    }
+
+    public GetAllSubInfoRequest() {
+        super();
     }
 }

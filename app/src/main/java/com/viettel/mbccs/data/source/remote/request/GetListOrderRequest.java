@@ -4,7 +4,7 @@ package com.viettel.mbccs.data.source.remote.request;
  * Created by HuyQuyet on 5/17/17.
  */
 
-public class GetListOrderRequest  {
+public class GetListOrderRequest  extends BaseRequest   {
 
     private Long shopId;
     private Long staffId;
@@ -59,5 +59,9 @@ public class GetListOrderRequest  {
 
     public void setEndDate(String endDate) {
         this.endDate = endDate;
+    }
+
+    public GetListOrderRequest() {
+        super();
     }
 }

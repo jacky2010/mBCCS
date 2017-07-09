@@ -11,7 +11,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class OwnerCode implements Parcelable {
 
-
     @SerializedName("shopCode")
     @Expose
     private String shopCode;
@@ -93,6 +92,11 @@ public class OwnerCode implements Parcelable {
     @Override
     public int describeContents() {
         return 0;
+    }
+
+    @Override
+    public String toString() {
+        return getName();
     }
 
     @Override

@@ -29,6 +29,9 @@ public class StockSerial implements Serializable, Parcelable {
     @Expose
     private long quantity;
 
+    @SerializedName("stateId")
+    private Long stateId;
+
     @SerializedName("lstSerial")
     @Expose
     private List<SerialBO> mSerialBOs;
@@ -73,6 +76,17 @@ public class StockSerial implements Serializable, Parcelable {
         mSerialBOs = serialBOs;
     }
 
+    public StockSerial() {
+    }
+
+    public Long getStateId() {
+        return stateId;
+    }
+
+    public void setStateId(Long stateId) {
+        this.stateId = stateId;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -84,10 +98,8 @@ public class StockSerial implements Serializable, Parcelable {
         dest.writeString(this.stockModelCode);
         dest.writeString(this.stockModelName);
         dest.writeLong(this.quantity);
+        dest.writeValue(this.stateId);
         dest.writeTypedList(this.mSerialBOs);
-    }
-
-    public StockSerial() {
     }
 
     protected StockSerial(Parcel in) {
@@ -95,19 +107,19 @@ public class StockSerial implements Serializable, Parcelable {
         this.stockModelCode = in.readString();
         this.stockModelName = in.readString();
         this.quantity = in.readLong();
+        this.stateId = (Long) in.readValue(Long.class.getClassLoader());
         this.mSerialBOs = in.createTypedArrayList(SerialBO.CREATOR);
     }
 
-    public static final Parcelable.Creator<StockSerial> CREATOR =
-            new Parcelable.Creator<StockSerial>() {
-                @Override
-                public StockSerial createFromParcel(Parcel source) {
-                    return new StockSerial(source);
-                }
+    public static final Creator<StockSerial> CREATOR = new Creator<StockSerial>() {
+        @Override
+        public StockSerial createFromParcel(Parcel source) {
+            return new StockSerial(source);
+        }
 
-                @Override
-                public StockSerial[] newArray(int size) {
-                    return new StockSerial[size];
-                }
-            };
+        @Override
+        public StockSerial[] newArray(int size) {
+            return new StockSerial[size];
+        }
+    };
 }

@@ -8,7 +8,7 @@ import com.viettel.mbccs.data.model.Customer;
  * Created by HuyQuyet on 5/31/17.
  */
 
-public class RegisterCustomerInfoRequest {
+public class RegisterCustomerInfoRequest  extends BaseRequest {
 
     @SerializedName("isdn")
     @Expose
@@ -80,5 +80,9 @@ public class RegisterCustomerInfoRequest {
 
     public void setStaffCode(String staffCode) {
         this.staffCode = staffCode;
+    }
+
+    public RegisterCustomerInfoRequest() {
+        super();
     }
 }

@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by minhnx on 6/7/17.
  */
 
-public class IsKPPManagerRequest {
+public class IsKPPManagerRequest  extends BaseRequest {
     @Expose
     @SerializedName("username")
     private String username;
@@ -19,5 +19,9 @@ public class IsKPPManagerRequest {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public IsKPPManagerRequest() {
+        super();
     }
 }

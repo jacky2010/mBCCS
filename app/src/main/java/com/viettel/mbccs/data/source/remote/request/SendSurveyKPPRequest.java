@@ -8,14 +8,10 @@ import java.util.List;
  * Created by minhnx on 6/7/17.
  */
 
-public class SendSurveyKPPRequest {
+public class SendSurveyKPPRequest  extends BaseRequest {
     @SerializedName("username")
     @Expose
     private String userName;
-
-    @SerializedName("language")
-    @Expose
-    private String language;
 
     @SerializedName("surveyResponse")
     @Expose
@@ -37,13 +33,6 @@ public class SendSurveyKPPRequest {
         this.userName = userName;
     }
 
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
-    }
 
     public static class SurveyResponse {
 
@@ -95,5 +84,9 @@ public class SendSurveyKPPRequest {
         public void setAnswer(String answer) {
             this.answer = answer;
         }
+    }
+
+    public SendSurveyKPPRequest() {
+        super();
     }
 }

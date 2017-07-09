@@ -10,7 +10,7 @@ import java.util.List;
  * Created by jacky on 7/4/17.
  */
 
-public class GetCreateInvoiceBillRequest {
+public class GetCreateInvoiceBillRequest extends BaseRequest {
     @Expose
     @SerializedName("shopId")
     public int mShopId;
@@ -29,6 +29,10 @@ public class GetCreateInvoiceBillRequest {
             mListSaleTrans.add(new SaleTrans(data));
         }
         return mListSaleTrans;
+    }
+
+    public GetCreateInvoiceBillRequest() {
+        super();
     }
 
     public class SaleTrans {

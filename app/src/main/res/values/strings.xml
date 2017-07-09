@@ -1174,9 +1174,17 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="xuatkhocapduoi_message_create_bill_input_store">Bạn có chắc lập phiếu nhập kho?</string>
     <string name="xuatkhocapduoi_title_create_command">Lập lệnh xuất kho cấp dưới</string>
     <string name="xuatkhocapduoi_create_command_from"><![CDATA[Lập lệnh từ kho: <b>%s</b>]]></string>
+    <string name="xuatkhocapduoi_create_note_from"><![CDATA[Lập phiếu từ kho: <b>%s</b>]]></string>
     <string name="xuatkhocapduoi_create_command_button">Lập lệnh</string>
     <string name="xuatkhocapduoi_create_order_button">Lập phiếu</string>
     <string name="xuatkhocapduoi_error_connect_api">Đã xảy ra lỗi : %s</string>
+
+    <string name="common_export_label_create_cmd">Lập lệnh</string>
+    <string name="common_export_msg_create_cmd">Bạn có chắc chắn muốn lập lệnh xuất?</string>
+    <string name="common_export_label_create_note">Lập phiếu</string>
+    <string name="common_export_msg_create_note">Bạn có chắc chắn muốn lập phiếu xuất?</string>
+
+    <string name="export_staff_label_create_cmd_staff">Lập lệnh xuất kho cho nhân viên</string>
 
 
 </resources>

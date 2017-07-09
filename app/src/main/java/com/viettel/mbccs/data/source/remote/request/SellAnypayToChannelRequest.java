@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by minhnx on 6/7/17.
  */
 
-public class SellAnypayToChannelRequest {
+public class SellAnypayToChannelRequest  extends BaseRequest {
     @Expose
     @SerializedName("channelId")
     private int channelId;
@@ -62,5 +62,9 @@ public class SellAnypayToChannelRequest {
 
     public void setStaffId(int staffId) {
         this.staffId = staffId;
+    }
+
+    public SellAnypayToChannelRequest() {
+        super();
     }
 }

@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by minhnx on 5/21/17.
  */
 
-public class SearchBranchKeyRequest implements Parcelable {
+public class SearchBranchKeyRequest extends BaseRequest  implements Parcelable {
     @SerializedName("Field01")
     @Expose
     private String isdn;
@@ -18,7 +18,9 @@ public class SearchBranchKeyRequest implements Parcelable {
     @Expose
     private String documentId;
 
-    public SearchBranchKeyRequest(){}
+    public SearchBranchKeyRequest(){
+        super();
+    }
 
     protected SearchBranchKeyRequest(Parcel in) {
         isdn = in.readString();
@@ -63,4 +65,5 @@ public class SearchBranchKeyRequest implements Parcelable {
     public void setDocumentId(String documentId) {
         this.documentId = documentId;
     }
+
 }

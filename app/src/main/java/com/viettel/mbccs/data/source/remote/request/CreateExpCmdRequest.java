@@ -10,7 +10,7 @@ import java.util.List;
  * Created by eo_cuong on 7/8/17.
  */
 
-public class CreateExpCmdRequest {
+public class CreateExpCmdRequest extends BaseRequest {
     @SerializedName("fromOwnerId")
     @Expose
     private Long fromOwnerId;
@@ -99,6 +99,10 @@ public class CreateExpCmdRequest {
 
     public void setDiscountPolicy(Long discountPolicy) {
         this.discountPolicy = discountPolicy;
+    }
+
+    public CreateExpCmdRequest() {
+        super();
     }
 
     public static class CmdStock {

@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by eo_cuong on 7/8/17.
  */
 
-public class CreateExpNoteRequest {
+public class CreateExpNoteRequest extends BaseRequest {
     @SerializedName("stockTransId")
     @Expose
     private Long stockTransId;
@@ -40,5 +40,9 @@ public class CreateExpNoteRequest {
 
     public void setStaffId(Long staffId) {
         this.staffId = staffId;
+    }
+
+    public CreateExpNoteRequest() {
+        super();
     }
 }

@@ -10,7 +10,7 @@ import java.util.List;
  * Created by HuyQuyet on 5/31/17.
  */
 
-public class CreateSaleTransFromOrderRequest {
+public class CreateSaleTransFromOrderRequest extends BaseRequest {
 
     @SerializedName("shopId")
     @Expose
@@ -190,5 +190,9 @@ public class CreateSaleTransFromOrderRequest {
 
     public void setSaleOrderId(String saleOrderId) {
         this.saleOrderId = saleOrderId;
+    }
+
+    public CreateSaleTransFromOrderRequest() {
+        super();
     }
 }

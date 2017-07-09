@@ -7,7 +7,7 @@ import com.viettel.mbccs.constance.MobileType;
  * Created by HuyQuyet on 6/22/17.
  */
 
-public class GetListProductRequest {
+public class GetListProductRequest  extends BaseRequest  {
     @MobileType
     private String subType;
 
@@ -28,5 +28,9 @@ public class GetListProductRequest {
 
     public void setTelServiceId(int telServiceId) {
         this.telServiceId = telServiceId;
+    }
+
+    public GetListProductRequest() {
+        super();
     }
 }
