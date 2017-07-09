@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by minhnx on 6/7/17.
  */
 
-public class TransferAnyPayRequest{
+public class TransferAnyPayRequest extends BaseRequest {
     @Expose
     @SerializedName("fromChannelId")
     private Integer fromChannelId;
@@ -40,5 +40,9 @@ public class TransferAnyPayRequest{
 
     public void setAmount(Double amount) {
         this.amount = amount;
+    }
+
+    public TransferAnyPayRequest() {
+        super();
     }
 }

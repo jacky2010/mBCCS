@@ -8,7 +8,7 @@ import com.viettel.mbccs.constance.SaleTranType;
  * Created by HuyQuyet on 5/18/17.
  */
 
-public class GetOrderInfoRequest {
+public class GetOrderInfoRequest  extends BaseRequest  {
     @Expose
     @SerializedName("saleOrderId")
     private Long saleOrderId;
@@ -80,5 +80,9 @@ public class GetOrderInfoRequest {
 
     public void setStateId(String stateId) {
         this.stateId = stateId;
+    }
+
+    public GetOrderInfoRequest() {
+        super();
     }
 }

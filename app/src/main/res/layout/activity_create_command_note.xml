@@ -122,6 +122,7 @@
                 android:text="@{String.format(@string/view_ware_house_list_stock, presenter.countProducts)}"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_15"
+
                 android:textStyle="bold"
                 />
 

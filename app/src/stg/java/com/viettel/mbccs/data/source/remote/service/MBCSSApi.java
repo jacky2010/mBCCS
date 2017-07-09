@@ -11,7 +11,10 @@ import com.viettel.mbccs.data.source.remote.request.CheckDebitChangeSimRequest;
 import com.viettel.mbccs.data.source.remote.request.CheckIdNoRequest;
 import com.viettel.mbccs.data.source.remote.request.ConnectSubscriberRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateDistributedChannelRequest;
-import com.viettel.mbccs.data.source.remote.request.CreateExpStockNotHaveCmdRequest;
+import com.viettel.mbccs.data.source.remote.request.CreateExpCmdRequest;
+import com.viettel.mbccs.data.source.remote.request.CreateExpNoteNoCmdRequest;
+import com.viettel.mbccs.data.source.remote.request.CreateExpNoteRequest;
+import com.viettel.mbccs.data.source.remote.request.CreateExpStockNotNoteRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateExpStockRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateImportCmdRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateImportNoteRequest;
@@ -61,6 +64,7 @@ import com.viettel.mbccs.data.source.remote.request.GetRegisterSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.GetRegisterSubRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSaleTransDetailRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
+import com.viettel.mbccs.data.source.remote.request.GetStockTransSerialDetailRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSurveyKPPRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
@@ -83,7 +87,7 @@ import com.viettel.mbccs.data.source.remote.request.UpdateAllSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.UpdateSaleOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.UploadImageRequest;
 import com.viettel.mbccs.data.source.remote.request.ViewInforSerialRequest;
-import com.viettel.mbccs.data.source.remote.response.BaseCreateCmdNote;
+import com.viettel.mbccs.data.source.remote.response.BaseCreateCmdNoteResponse;
 import com.viettel.mbccs.data.source.remote.response.BaseResponse;
 import com.viettel.mbccs.data.source.remote.response.CheckIdNoResponse;
 import com.viettel.mbccs.data.source.remote.response.CheckOTPResponse;
@@ -134,6 +138,7 @@ import com.viettel.mbccs.data.source.remote.response.GetRegisterSubInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetRegisterSubResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSaleTransDetailResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
+import com.viettel.mbccs.data.source.remote.response.GetStockTransSerialDetailResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSurveyKPPResponse;
 import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
 import com.viettel.mbccs.data.source.remote.response.InputOrderResponse;
@@ -181,8 +186,7 @@ public interface MBCSSApi {
             @Body DataRequest<GetListOrderRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<ServerDataResponse<BaseResponse<GetListChannelByOwnerTypeIdResponse>>>
-    getListChannelByOwnerTypeId(
+    Observable<ServerDataResponse<BaseResponse<GetListChannelByOwnerTypeIdResponse>>> getListChannelByOwnerTypeId(
             @Body DataRequest<GetListChannelByOwnerTypeIdRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
@@ -190,8 +194,7 @@ public interface MBCSSApi {
             @Body DataRequest<GetAllInfoRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<ServerDataResponse<BaseResponse<TelecomServiceAndSaleProgramResponse>>>
-    getTelecomserviceAndSaleProgram(
+    Observable<ServerDataResponse<BaseResponse<TelecomServiceAndSaleProgramResponse>>> getTelecomserviceAndSaleProgram(
             @Body DataRequest<GetTelecomServiceAndSaleProgramRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
@@ -207,8 +210,7 @@ public interface MBCSSApi {
             @Body DataRequest<GetReasonRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<ServerDataResponse<BaseResponse<CreateSaleTransFromOrderResponse>>>
-    createSaleTransFromOrder(
+    Observable<ServerDataResponse<BaseResponse<CreateSaleTransFromOrderResponse>>> createSaleTransFromOrder(
             @Body DataRequest<CreateSaleTransFromOrderRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
@@ -224,23 +226,19 @@ public interface MBCSSApi {
             @Body DataRequest<GetInfoSaleTranRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<ServerDataResponse<BaseResponse<CreateSaleTransRetailResponse>>>
-    createSaleTransRetail(
+    Observable<ServerDataResponse<BaseResponse<CreateSaleTransRetailResponse>>> createSaleTransRetail(
             @Body DataRequest<GetInfoSaleTranRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<ServerDataResponse<BaseResponse<GetDistributedChannelResponse>>>
-    getDistributtedChannelInfo(
+    Observable<ServerDataResponse<BaseResponse<GetDistributedChannelResponse>>> getDistributtedChannelInfo(
             @Body SearchBranchRequest request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<ServerDataResponse<BaseResponse<CreateDistributedChannelResponse>>>
-    createDistributtedChannel(
+    Observable<ServerDataResponse<BaseResponse<CreateDistributedChannelResponse>>> createDistributtedChannel(
             @Body DataRequest<CreateDistributedChannelRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<ServerDataResponse<BaseResponse<CreateSaleTransChannelResponse>>>
-    createSaleTransChannel(
+    Observable<ServerDataResponse<BaseResponse<CreateSaleTransChannelResponse>>> createSaleTransChannel(
             @Body DataRequest<CreateSaleTransChannelRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
@@ -276,8 +274,7 @@ public interface MBCSSApi {
             @Body DataRequest<GetRegisterSubInfoRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<ServerDataResponse<BaseResponse<GetListBusTypeIdRequireResponse>>>
-    getListBusTypeIdRequire(
+    Observable<ServerDataResponse<BaseResponse<GetListBusTypeIdRequireResponse>>> getListBusTypeIdRequire(
             @Body DataRequest<GetListBusTypeIdRequireRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
@@ -398,8 +395,7 @@ public interface MBCSSApi {
 
     /*get list stock trans detail by tran id*/
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<ServerDataResponse<BaseResponse<ListStockTransDetailsReponse>>>
-    getListStockTransDetail(
+    Observable<ServerDataResponse<BaseResponse<ListStockTransDetailsReponse>>> getListStockTransDetail(
             @Body DataRequest<GetListStockTransDetailRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
@@ -431,8 +427,7 @@ public interface MBCSSApi {
             @Body DataRequest<GetListDsLamByTeamIdRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<ServerDataResponse<BaseResponse<GetReceiverChangeAddressResponse>>>
-    receiverChangeAddress(
+    Observable<ServerDataResponse<BaseResponse<GetReceiverChangeAddressResponse>>> receiverChangeAddress(
             @Body AddressRequest<GetReceiverChangeAddressRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
@@ -460,8 +455,8 @@ public interface MBCSSApi {
             @Body DataRequest<InputOrderRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<ServerDataResponse<BaseResponse<BaseCreateCmdNote>>> createExpStockNotHaveCmd(
-            @Body DataRequest<CreateExpStockNotHaveCmdRequest> request);
+    Observable<ServerDataResponse<BaseResponse<BaseCreateCmdNoteResponse>>> createExpStockNotNote(
+            @Body DataRequest<CreateExpStockNotNoteRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<GetListRegTypeResponse>>> getListRegType(
@@ -476,7 +471,7 @@ public interface MBCSSApi {
             @Body DataRequest<ConnectSubscriberRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<ServerDataResponse<BaseResponse<BaseCreateCmdNote>>> createImportStock(
+    Observable<ServerDataResponse<BaseResponse<BaseCreateCmdNoteResponse>>> createImportStock(
             @Body DataRequest<CreateImportStockRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
@@ -492,22 +487,34 @@ public interface MBCSSApi {
             @Body DataRequest<GetListOwnerCodeRequest> requestDataRequest);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<ServerDataResponse<BaseResponse<BaseCreateCmdNote>>> createImportCmd(
+    Observable<ServerDataResponse<BaseResponse<BaseCreateCmdNoteResponse>>> createImportCmd(
             @Body DataRequest<CreateImportCmdRequest> requestDataRequest);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<ServerDataResponse<BaseResponse<BaseCreateCmdNote>>> createImportNote(
+    Observable<ServerDataResponse<BaseResponse<BaseCreateCmdNoteResponse>>> createImportNote(
             @Body DataRequest<CreateImportNoteRequest> requestDataRequest);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<ServerDataResponse<BaseResponse<BaseCreateCmdNote>>> createImportNoteNoCMD(
+    Observable<ServerDataResponse<BaseResponse<BaseCreateCmdNoteResponse>>> createImportNoteNoCMD(
             @Body DataRequest<CreateImportNoteRequest> requestDataRequest);
 
-      @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<EmptyObject>>> destroyStockTrans(
             @Body DataRequest<DestroyStockTransRequest> requestDataRequest);
 
     Observable<ServerDataResponse<BaseResponse<GetListBusTypeResponse>>> getListBusType(
             @Body DataRequest<GetListBusTypeRequest> request);
+
+    Observable<ServerDataResponse<BaseResponse<BaseCreateCmdNoteResponse>>> createExpCmd(
+            @Body DataRequest<CreateExpCmdRequest> request);
+
+    Observable<ServerDataResponse<BaseResponse<BaseCreateCmdNoteResponse>>> createExpNote(
+            @Body DataRequest<CreateExpNoteRequest> request);
+
+    Observable<ServerDataResponse<BaseResponse<BaseCreateCmdNoteResponse>>> createExpNoteNoCmd(
+            @Body DataRequest<CreateExpNoteNoCmdRequest> request);
+
+    Observable<ServerDataResponse<BaseResponse<GetStockTransSerialDetailResponse>>> getStockTransDetailSerial(
+            @Body DataRequest<GetStockTransSerialDetailRequest> request);
 }
 

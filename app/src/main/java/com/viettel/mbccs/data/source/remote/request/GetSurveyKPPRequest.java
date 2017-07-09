@@ -7,15 +7,11 @@ import com.google.gson.annotations.SerializedName;
  * Created by minhnx on 6/7/17.
  */
 
-public class GetSurveyKPPRequest {
+public class GetSurveyKPPRequest extends BaseRequest  {
 
     @SerializedName("username")
     @Expose
     private String userName;
-
-    @SerializedName("language")
-    @Expose
-    private String language;
 
     public String getUserName() {
         return userName;
@@ -25,13 +21,7 @@ public class GetSurveyKPPRequest {
         this.userName = userName;
     }
 
-    public String getLanguage() {
-        return language;
+    public GetSurveyKPPRequest() {
+        super();
     }
-
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
-
 }

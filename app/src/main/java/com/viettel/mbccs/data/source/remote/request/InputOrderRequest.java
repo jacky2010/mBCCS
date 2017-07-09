@@ -8,7 +8,7 @@ import java.util.List;
  * Created by FRAMGIA\bui.dinh.viet on 03/07/2017.
  */
 
-public class InputOrderRequest {
+public class InputOrderRequest extends BaseRequest  {
     private Long shopId;
     private Long staffId;
     private String fromDate;
@@ -53,5 +53,9 @@ public class InputOrderRequest {
 
     public void setToDate(String toDate) {
         this.toDate = toDate;
+    }
+
+    public InputOrderRequest() {
+        super();
     }
 }

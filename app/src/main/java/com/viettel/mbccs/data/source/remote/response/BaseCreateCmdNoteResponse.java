@@ -7,7 +7,7 @@ import com.viettel.mbccs.data.model.StockTrans;
  * Created by FRAMGIA\hoang.van.cuong on 07/07/2017.
  */
 
-public class BaseCreateCmdNote {
+public class BaseCreateCmdNoteResponse {
 
     @SerializedName("stockTrans")
     private StockTrans mStockTrans;

@@ -1,7 +1,10 @@
 package com.viettel.mbccs.data.source.remote;
 
 import com.viettel.mbccs.data.model.EmptyObject;
-import com.viettel.mbccs.data.source.remote.request.CreateExpStockNotHaveCmdRequest;
+import com.viettel.mbccs.data.source.remote.request.CreateExpCmdRequest;
+import com.viettel.mbccs.data.source.remote.request.CreateExpNoteNoCmdRequest;
+import com.viettel.mbccs.data.source.remote.request.CreateExpNoteRequest;
+import com.viettel.mbccs.data.source.remote.request.CreateExpStockNotNoteRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateExpStockRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateImportCmdRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateImportNoteRequest;
@@ -23,13 +26,14 @@ import com.viettel.mbccs.data.source.remote.request.GetListTTKDRequest;
 import com.viettel.mbccs.data.source.remote.request.GetOrderInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.GetReasonRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
+import com.viettel.mbccs.data.source.remote.request.GetStockTransSerialDetailRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
 import com.viettel.mbccs.data.source.remote.request.InputOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.KPPOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.UpdateSaleOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.ViewInforSerialRequest;
-import com.viettel.mbccs.data.source.remote.response.BaseCreateCmdNote;
+import com.viettel.mbccs.data.source.remote.response.BaseCreateCmdNoteResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransChannelResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransFromOrderResponse;
@@ -46,6 +50,7 @@ import com.viettel.mbccs.data.source.remote.response.GetListTTKDResponse;
 import com.viettel.mbccs.data.source.remote.response.GetOrderInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetReasonResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
+import com.viettel.mbccs.data.source.remote.response.GetStockTransSerialDetailResponse;
 import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
 import com.viettel.mbccs.data.source.remote.response.InputOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.ListStockTransDetailsReponse;
@@ -116,10 +121,10 @@ public interface IBanHangKhoTaiChinhRemoteDataSource {
     Observable<InputOrderResponse> importInvoiceList(
             DataRequest<InputOrderRequest> requestDataRequest);
 
-    Observable<BaseCreateCmdNote> createExpStockNotHaveCmd(
-            DataRequest<CreateExpStockNotHaveCmdRequest> requestDataRequest);
+    Observable<BaseCreateCmdNoteResponse> createExpStockNotNote(
+            DataRequest<CreateExpStockNotNoteRequest> requestDataRequest);
 
-    Observable<BaseCreateCmdNote> createImportStock(
+    Observable<BaseCreateCmdNoteResponse> createImportStock(
             DataRequest<CreateImportStockRequest> requestDataRequest);
 
     Observable<GetListExpCmdResponse> getListExpCmd(DataRequest<GetListExpCmdRequest> dataRequest);
@@ -127,13 +132,26 @@ public interface IBanHangKhoTaiChinhRemoteDataSource {
     Observable<ViewInforSerialResponse> viewInforSerial(
             DataRequest<ViewInforSerialRequest> dataRequest);
 
-    Observable<BaseCreateCmdNote> createImportCmd(DataRequest<CreateImportCmdRequest> dataRequest);
+    Observable<BaseCreateCmdNoteResponse> createImportCmd(
+            DataRequest<CreateImportCmdRequest> dataRequest);
 
-    Observable<BaseCreateCmdNote> createImportNote(
+    Observable<BaseCreateCmdNoteResponse> createImportNote(
             DataRequest<CreateImportNoteRequest> dataRequest);
 
-    Observable<BaseCreateCmdNote> createImportNoteNoCMD(
+    Observable<BaseCreateCmdNoteResponse> createImportNoteNoCMD(
             DataRequest<CreateImportNoteRequest> dataRequest);
 
     Observable<EmptyObject> destroyStockTrans(DataRequest<DestroyStockTransRequest> dataRequest);
+
+    Observable<BaseCreateCmdNoteResponse> createExpCmd(
+            DataRequest<CreateExpCmdRequest> dataRequest);
+
+    Observable<BaseCreateCmdNoteResponse> createExpNote(
+            DataRequest<CreateExpNoteRequest> dataRequest);
+
+    Observable<BaseCreateCmdNoteResponse> createExpNoteNoCmd(
+            DataRequest<CreateExpNoteNoCmdRequest> dataRequest);
+
+    Observable<GetStockTransSerialDetailResponse> getStockTransDetailSerial(
+            DataRequest<GetStockTransSerialDetailRequest> dataRequest);
 }

@@ -4,12 +4,12 @@ package com.viettel.mbccs.data.source.remote.request;
  * Created by HuyQuyet on 5/30/17.
  */
 
-public class GetAllInfoRequest {
+public class GetAllInfoRequest extends BaseRequest {
 
     public long shopId;
     public long staffId;
     public long channelTypeId;
-    public String language;
+
 
     public long getShopId() {
         return shopId;
@@ -35,11 +35,7 @@ public class GetAllInfoRequest {
         this.channelTypeId = channelTypeId;
     }
 
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
+    public GetAllInfoRequest() {
+        super();
     }
 }

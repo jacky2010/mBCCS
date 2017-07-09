@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by HuyQuyet on 6/1/17.
  */
 
-public class GetListBusTypeIdRequireRequest {
+public class GetListBusTypeIdRequireRequest extends BaseRequest {
 
     @SerializedName("type")
     @Expose
@@ -19,5 +19,9 @@ public class GetListBusTypeIdRequireRequest {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public GetListBusTypeIdRequireRequest() {
+        super();
     }
 }

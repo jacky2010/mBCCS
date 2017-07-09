@@ -7,16 +7,17 @@ import com.google.gson.annotations.SerializedName;
  * Created by minhnx on 6/7/17.
  */
 
-public class GetKPPFeedbackRequest {
+public class GetKPPFeedbackRequest extends BaseRequest {
     @Expose
     @SerializedName("username")
     private String username;
     @Expose
-    @SerializedName("language")
-    private String language;
-    @Expose
     @SerializedName("ownerCode")
     private String ownerCode;
+
+    public GetKPPFeedbackRequest() {
+        super();
+    }
 
     public String getUsername() {
         return username;
@@ -24,14 +25,6 @@ public class GetKPPFeedbackRequest {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
     }
 
     public String getOwnerCode() {

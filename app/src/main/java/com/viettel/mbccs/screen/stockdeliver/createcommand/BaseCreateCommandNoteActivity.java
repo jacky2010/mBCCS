@@ -6,43 +6,115 @@ import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.model.StockTrans;
-import com.viettel.mbccs.databinding.ActivityCreateCommandBinding;
+import com.viettel.mbccs.data.source.UserRepository;
+import com.viettel.mbccs.databinding.ActivityCreateCommandNoteBinding;
 import com.viettel.mbccs.screen.kpp.order.findstock.FindStockActivity;
 import com.viettel.mbccs.screen.kpp.order.ordersuccess.OrderSuccessActivity;
 import com.viettel.mbccs.variable.Constants;
 import java.util.ArrayList;
+import java.util.List;
 
-public class CreateCommandActivity
-        extends BaseDataBindActivity<ActivityCreateCommandBinding, CreateCommandContract.Presenter>
-        implements CreateCommandContract.ViewModel {
+/***
+ *
+ * @param <T> object receiver warehouse
+ */
+public abstract class BaseCreateCommandNoteActivity<T> extends
+        BaseDataBindActivity<ActivityCreateCommandNoteBinding, CreateCommandContract.Presenter>
+        implements CreateCommandContract.ViewModel<T> {
 
     public static final int STOCK_TOTAL_PICKER_REQUEST = 123;
     public static final int REQUEST_SUCCESS = 125;
-    public static final String CREATE_COMMAND_MODE = "create_command_mode";
-    public static final String CREATE_ORDER_MODE = "create_order_mode";
-    public static final String FUNCTION = "function";
-    public static final String NAME_SCREEN = "name_screen";
+    public static final int ACTION_CREATE_CMD = 0;
+    public static final int ACTION_CREATE_NOTE = 1;
 
-    private String mNameScreen;
-    private String mFunctionMode;
+    public static final int STEP_2 = 2;
+    public static final int STEP_3 = 3;
+
     private StockTrans mStockTrans = null;
+
+    public abstract void init();
+
+    public abstract int getActionType();
+
+    public abstract int getStepType();
+
+    public abstract String getTitleName();
+
+    public abstract long getOwnerIdStock();
+
+    public abstract long getFromOwnerId();
+
+    public abstract long getFromOwnerType();
+
+    public abstract long getToOwnerId();
+
+    public abstract long getToOwnerType();
+
+    public UserRepository mUserRepository;
+
+    @Override
+    public int getAction() {
+        return getActionType();
+    }
+
+    @Override
+    public int getStep() {
+        return getStepType();
+    }
+
+    @Override
+    public int getPositionReceicerWareHouse() {
+        return mPresenter.getPositionReceicerWareHouse();
+    }
+
+    @Override
+    public long getOwnerStockList() {
+        return getOwnerIdStock();
+    }
+
+    @Override
+    public long getFromOwnerIdCreate() {
+        return getFromOwnerId();
+    }
+
+    @Override
+    public long getFromOwnerTypeCreate() {
+        return getFromOwnerType();
+    }
+
+    @Override
+    public long getToOwnerIdCreate() {
+        return getToOwnerId();
+    }
+
+    @Override
+    public long getToOwnerTypeCreate() {
+        return getToOwnerType();
+    }
+
+    @Override
+    public void setListReceiverWareHouser(List<T> listReceiverWareHouser) {
+        mPresenter.setListReceiverWareHouser(listReceiverWareHouser);
+    }
 
     @Override
     protected int getIdLayout() {
-        return R.layout.activity_create_command;
+        return R.layout.activity_create_command_note;
     }
 
     @Override
     protected void initData() {
-        mFunctionMode = getIntent().getStringExtra(FUNCTION);
-        mNameScreen = getIntent().getStringExtra(NAME_SCREEN);
+        mUserRepository = UserRepository.getInstance();
         Bundle bundle = getIntent().getExtras();
-        mStockTrans = bundle.getParcelable(Constants.BundleConstant.STOCK_TRANS);
-        if (mStockTrans == null) {
-            return;
+        try {
+            mStockTrans = bundle.getParcelable(Constants.BundleConstant.STOCK_TRANS);
+        } catch (Exception e) {
+            mStockTrans = null;
         }
+
         mPresenter = new CreateCommandPresenter(this, this, mStockTrans);
         mBinding.setPresenter((CreateCommandPresenter) mPresenter);
+        init();
     }
 
     @Override
@@ -66,18 +138,6 @@ public class CreateCommandActivity
     }
 
     @Override
-    public void gotoSuccessScreen(ArrayList<StockTotal> stockTotals, String saleOrderId,
-            String channelName) {
-        Intent intent = new Intent(this, OrderSuccessActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList(Constants.BundleConstant.LIST_STOCK_TOTAL, stockTotals);
-        bundle.putString(Constants.BundleConstant.SALE_ORDER_ID, saleOrderId);
-        bundle.putString(Constants.BundleConstant.CHANNEL_NAME, channelName);
-        intent.putExtras(bundle);
-        startActivityForResult(intent, REQUEST_SUCCESS);
-    }
-
-    @Override
     public void finishScreen() {
         finish();
     }
@@ -98,8 +158,7 @@ public class CreateCommandActivity
 
     @Override
     public String getScreenTitle() {
-        //        return getHeaderTitle();
-        return mNameScreen;
+        return getTitleName();
     }
 
     @Override

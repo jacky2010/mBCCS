@@ -10,7 +10,7 @@ import com.viettel.mbccs.data.model.Subscriber;
  * Created by HuyQuyet on 6/2/17.
  */
 
-public class UpdateAllSubInfoRequest {
+public class UpdateAllSubInfoRequest  extends BaseRequest {
     @SerializedName("customer")
     @Expose
     private Customer customer;
@@ -45,5 +45,9 @@ public class UpdateAllSubInfoRequest {
 
     public void setContract(Contract contract) {
         this.contract = contract;
+    }
+
+    public UpdateAllSubInfoRequest() {
+        super();
     }
 }

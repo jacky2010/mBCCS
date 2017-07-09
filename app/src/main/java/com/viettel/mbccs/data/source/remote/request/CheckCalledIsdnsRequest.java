@@ -9,7 +9,7 @@ import java.util.List;
  * Created by eo_cuong on 5/19/17.
  */
 
-public class CheckCalledIsdnsRequest {
+public class CheckCalledIsdnsRequest extends BaseRequest{
 
     @SerializedName("isdn")
     @Expose
@@ -43,5 +43,9 @@ public class CheckCalledIsdnsRequest {
 
     public void setSubType(String subType) {
         this.subType = subType;
+    }
+
+    public CheckCalledIsdnsRequest() {
+        super();
     }
 }

@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by minhnx on 6/7/17.
  */
 
-public class RefillAnyPayRequest {
+public class RefillAnyPayRequest  extends BaseRequest {
     @Expose
     @SerializedName("channelId")
     private Integer channelId;
@@ -40,5 +40,9 @@ public class RefillAnyPayRequest {
 
     public void setIsdn(String isdn) {
         this.isdn = isdn;
+    }
+
+    public RefillAnyPayRequest() {
+        super();
     }
 }

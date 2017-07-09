@@ -10,7 +10,7 @@ import java.util.List;
  * Created by eo_cuong on 5/28/17.
  */
 
-public class CreateSaleTransChannelRequest extends DataRequest {
+public class CreateSaleTransChannelRequest extends BaseRequest {
 
     @SerializedName("shopId")
     @Expose
@@ -75,10 +75,6 @@ public class CreateSaleTransChannelRequest extends DataRequest {
     @SerializedName("orderId")
     @Expose
     private long orderId;
-
-    @SerializedName("language")
-    @Expose
-    private String language;
 
     public long getShopId() {
         return shopId;
@@ -192,14 +188,6 @@ public class CreateSaleTransChannelRequest extends DataRequest {
         this.couponCode = couponCode;
     }
 
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
     public Customer getCustomer() {
         return mCustomer;
     }
@@ -214,5 +202,9 @@ public class CreateSaleTransChannelRequest extends DataRequest {
 
     public void setOrderId(long orderId) {
         this.orderId = orderId;
+    }
+
+    public CreateSaleTransChannelRequest() {
+        super();
     }
 }

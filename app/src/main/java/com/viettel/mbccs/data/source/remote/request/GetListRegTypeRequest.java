@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by HuyQuyet on 7/3/17.
  */
 
-public class GetListRegTypeRequest {
+public class GetListRegTypeRequest  extends BaseRequest  {
 
     @SerializedName("subType")
     @Expose
@@ -55,5 +55,9 @@ public class GetListRegTypeRequest {
 
     public void setChannelTypeId(String channelTypeId) {
         this.channelTypeId = channelTypeId;
+    }
+
+    public GetListRegTypeRequest() {
+        super();
     }
 }

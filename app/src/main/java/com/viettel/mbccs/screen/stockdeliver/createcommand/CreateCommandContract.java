@@ -6,23 +6,44 @@ import com.viettel.mbccs.data.model.StockTotal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CreateCommandContract {
+public interface CreateCommandContract {
 
-    interface Presenter extends BasePresenter {
+    interface Presenter<T> extends BasePresenter {
 
         void pickStockTotalListSuccess(List<StockTotal> stockTotals);
+
         String getActivityTitle();
+
+        void setListReceiverWareHouser(List<T> listReceiverWareHouser);
+
+        int getPositionReceicerWareHouse();
     }
 
-    interface ViewModel extends BaseView<Presenter> {
+    interface ViewModel<T> extends BaseView<Presenter> {
 
         String getScreenTitle();
 
         void goGoStockPicker(ArrayList<StockTotal> stockTotals);
 
-        void gotoSuccessScreen(ArrayList<StockTotal> stockTotals, String saleOrderId,
-                String channelName);
-
         void finishScreen();
+
+        int getAction();
+
+        int getStep();
+
+        void setListReceiverWareHouser(List<T> listReceiverWareHouser);
+
+        int getPositionReceicerWareHouse();
+
+
+        long getOwnerStockList();
+
+        long getFromOwnerIdCreate();
+
+        long getFromOwnerTypeCreate();
+
+        long getToOwnerIdCreate();
+
+        long getToOwnerTypeCreate();
     }
 }

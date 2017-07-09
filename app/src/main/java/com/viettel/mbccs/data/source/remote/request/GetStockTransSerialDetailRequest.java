@@ -4,16 +4,14 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by FRAMGIA\hoang.van.cuong on 07/07/2017.
+ * Created by eo_cuong on 7/8/17.
  */
 
-public class CreateImportCmdRequest extends BaseRequest {
+public class GetStockTransSerialDetailRequest  extends BaseRequest {
+
     @SerializedName("stockTransId")
     @Expose
     private Long stockTransId;
-    @SerializedName("staffId")
-    @Expose
-    private Long staffId;
 
     public Long getStockTransId() {
         return stockTransId;
@@ -23,15 +21,7 @@ public class CreateImportCmdRequest extends BaseRequest {
         this.stockTransId = stockTransId;
     }
 
-    public Long getStaffId() {
-        return staffId;
-    }
-
-    public void setStaffId(Long staffId) {
-        this.staffId = staffId;
-    }
-
-    public CreateImportCmdRequest() {
+    public GetStockTransSerialDetailRequest() {
         super();
     }
 }

@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by FRAMGIA\hoang.van.cuong on 04/07/2017.
  */
 
-public class CreateImportStockRequest {
+public class CreateImportStockRequest extends BaseRequest {
 
     @SerializedName("stockTransId")
     @Expose
@@ -30,5 +30,9 @@ public class CreateImportStockRequest {
 
     public void setStaffId(Long staffId) {
         this.staffId = staffId;
+    }
+
+    public CreateImportStockRequest() {
+        super();
     }
 }

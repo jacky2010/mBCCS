@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by HuyQuyet on 5/22/17.
  */
 
-public class GetListSerialRequest extends DataRequest {
+public class GetListSerialRequest  extends BaseRequest  {
 
     @Expose
     @SerializedName("ownerId")
@@ -67,5 +67,9 @@ public class GetListSerialRequest extends DataRequest {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public GetListSerialRequest() {
+        super();
     }
 }

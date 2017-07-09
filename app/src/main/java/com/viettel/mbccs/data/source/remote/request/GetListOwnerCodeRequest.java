@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by eo_cuong on 7/6/17.
  */
 
-public class GetListOwnerCodeRequest {
+public class GetListOwnerCodeRequest  extends BaseRequest  {
 
     @SerializedName("shopId")
     @Expose
@@ -19,5 +19,9 @@ public class GetListOwnerCodeRequest {
 
     public void setShopId(String shopId) {
         this.shopId = shopId;
+    }
+
+    public GetListOwnerCodeRequest() {
+        super();
     }
 }

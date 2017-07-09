@@ -7,6 +7,7 @@ import android.support.annotation.IntDef;
  */
 @IntDef({ StockStateId.TYPE_FAIL, StockStateId.TYPE_NEW })
 public @interface StockStateId {
-    int TYPE_NEW = 1;
-    int TYPE_FAIL = 3;
+    long TYPE_NEW = 1;
+    long TYPE_OLD = 2;
+    long TYPE_FAIL = 3;
 }

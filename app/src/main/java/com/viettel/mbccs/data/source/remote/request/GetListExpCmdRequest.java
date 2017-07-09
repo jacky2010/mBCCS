@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by eo_cuong on 7/5/17.
  */
 
-public class GetListExpCmdRequest {
+public class GetListExpCmdRequest extends BaseRequest  {
 
     @SerializedName("fromOwnerId")
     @Expose
@@ -98,4 +98,7 @@ public class GetListExpCmdRequest {
         this.stockTransType = stockTransType;
     }
 
+    public GetListExpCmdRequest() {
+        super();
+    }
 }

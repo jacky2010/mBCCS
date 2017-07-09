@@ -263,9 +263,6 @@
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".screen.stockdeliver.createcommand.CreateCommandActivity"
-            android:screenOrientation="portrait"/>
-        <activity
             android:name=".screen.nhanvientrahang.list.ListNhanVienTraHangActivity"
             android:screenOrientation="portrait"/>
         <activity
@@ -284,6 +281,10 @@
         <activity
             android:name=".screen.connector.ConnectMobilePrepaidViewPagerActivity"
             android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screen.warehousecommon.CreateExpCmdToStaffActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

@@ -8,7 +8,7 @@ import java.util.List;
  * Created by HuyQuyet on 6/16/17.
  */
 
-public class DownloadImageRequest {
+public class DownloadImageRequest extends BaseRequest {
 
     @SerializedName("listImageName")
     @Expose
@@ -20,5 +20,9 @@ public class DownloadImageRequest {
 
     public void setListIdImage(List<String> listIdImage) {
         this.listIdImage = listIdImage;
+    }
+
+    public DownloadImageRequest() {
+        super();
     }
 }

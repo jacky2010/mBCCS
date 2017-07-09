@@ -43,6 +43,7 @@ import com.viettel.mbccs.screen.survey.SurveyListActivity;
 import com.viettel.mbccs.screen.trahangcaptren.ListOrderReturnUpperActivity;
 import com.viettel.mbccs.screen.transferanypay.TransferAnyPayActivity;
 import com.viettel.mbccs.screen.viewwarehouse.ViewWarehouseActivity;
+import com.viettel.mbccs.screen.warehousecommon.CreateExpCmdToStaffActivity;
 import com.viettel.mbccs.screen.xuathangchonhanvien.ChiTietXuatKhoNhanVienActivity;
 import com.viettel.mbccs.variable.Constants;
 import java.util.ArrayList;
@@ -223,7 +224,8 @@ public class BaseSubMenuActivity
                             stockTransData.setCreateDatetime("2017-01-02");
                             stockTransData.setStockTransStatusName("hang moi");
                             Bundle stockbundle = new Bundle();
-                            stockbundle.putParcelable(Constants.BundleConstant.STOCK_TRANS, stockTransData);
+                            stockbundle.putParcelable(Constants.BundleConstant.STOCK_TRANS,
+                                    stockTransData);
                             stockDelivery.putExtras(stockbundle);
                             startActivity(stockDelivery);
                             break;
@@ -298,9 +300,7 @@ public class BaseSubMenuActivity
                         case Function.MenuId.MENU_BAO_CAO_TAN_SUAT_CHAM_SOC_KENH:
                             break;
                         case Function.MenuId.MENU_BAO_CAO_TON_KHO:
-                            break;
-                        case Function.MenuId.MENU_BAO_CAO_GIAO_CHI_TIEU_BAN_HANG:
-                            Intent intent = new Intent(BaseSubMenuActivity.this,
+                            Intent intent1 = new Intent(BaseSubMenuActivity.this,
                                     ChiTietXuatKhoNhanVienActivity.class);
                             StockTrans stockTrans = new StockTrans();
                             stockTrans.setStockTransId(1237);
@@ -309,7 +309,26 @@ public class BaseSubMenuActivity
                             stockTrans.setStockTransStatusName("hang moi");
                             Bundle bundle = new Bundle();
                             bundle.putParcelable(Constants.BundleConstant.STOCK_TRANS, stockTrans);
-                            intent.putExtras(bundle);
+                            intent1.putExtras(bundle);
+                            startActivity(intent1);
+
+
+                            break;
+                        case Function.MenuId.MENU_BAO_CAO_GIAO_CHI_TIEU_BAN_HANG:
+                            //Intent intent = new Intent(BaseSubMenuActivity.this,
+                            //        ChiTietXuatKhoNhanVienActivity.class);
+                            //StockTrans stockTrans = new StockTrans();
+                            //stockTrans.setStockTransId(1237);
+                            //stockTrans.setToOwnerId(1232);
+                            //stockTrans.setCreateDatetime("2017-01-02");
+                            //stockTrans.setStockTransStatusName("hang moi");
+                            //Bundle bundle = new Bundle();
+                            //bundle.putParcelable(Constants.BundleConstant.STOCK_TRANS, stockTrans);
+                            //intent.putExtras(bundle);
+                            //startActivity(intent);
+
+                            Intent intent = new Intent(BaseSubMenuActivity.this,
+                                    CreateExpCmdToStaffActivity.class);
                             startActivity(intent);
                             break;
                     }

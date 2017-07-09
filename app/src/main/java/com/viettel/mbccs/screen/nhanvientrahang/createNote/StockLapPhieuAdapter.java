@@ -22,12 +22,19 @@ public class StockLapPhieuAdapter extends
         BaseRecyclerViewAdapterBinding<StockLapPhieuAdapter.StockLapPhieuViewHolder, StockTotal> {
     private OnStockLapPhieuListener mOnStockLapPhieuListener;
 
+    private boolean showSerial = true;
+
     public void setOnStockLapPhieuListener(OnStockLapPhieuListener onStockLapPhieuListener) {
         mOnStockLapPhieuListener = onStockLapPhieuListener;
     }
 
     public StockLapPhieuAdapter(Context context, List<StockTotal> list) {
         super(context, list);
+    }
+
+    public StockLapPhieuAdapter(Context context, List<StockTotal> list, boolean showChooserial) {
+        super(context, list);
+        this.showSerial = showChooserial;
     }
 
     @Override
@@ -112,11 +119,12 @@ public class StockLapPhieuAdapter extends
             mStockTotal = stockTotal;
             ItemStockTotalPresenter itemStockTotalPresenter =
                     new ItemStockTotalPresenter(mContext, stockTotal);
+            itemStockTotalPresenter.setShowChooseSerial(showSerial);
             mBinding.setData(itemStockTotalPresenter);
         }
     }
 
-    public interface OnStockLapPhieuListener extends OnListenerItemRecyclerView {
+    public interface OnStockLapPhieuListener extends OnListenerItemRecyclerView<StockTotal> {
         void onSerialPickerClick(int position, StockTotal stockTotal);
 
         void onRemoveStock();

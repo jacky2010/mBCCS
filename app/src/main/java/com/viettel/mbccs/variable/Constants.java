@@ -162,4 +162,8 @@ public class Constants {
         public static final String RESPONSE_OK = "0";
         public static final String SURVEY_QUESTION = "survey_question";
     }
+
+    public class FuntionConstant {
+        public static final long STAFF_EXPORT_SHOP_REASON_ID = 200383L;
+    }
 }

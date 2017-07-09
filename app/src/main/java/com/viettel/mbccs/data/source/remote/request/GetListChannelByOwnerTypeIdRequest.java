@@ -4,11 +4,10 @@ package com.viettel.mbccs.data.source.remote.request;
  * Created by HuyQuyet on 5/18/17.
  */
 
-public class GetListChannelByOwnerTypeIdRequest {
+public class GetListChannelByOwnerTypeIdRequest extends BaseRequest {
 
     public Long staffId;
     public Long channelTypeId;
-    public String language;
 
     public Long getStaffId() {
         return staffId;
@@ -26,11 +25,7 @@ public class GetListChannelByOwnerTypeIdRequest {
         this.channelTypeId = channelTypeId;
     }
 
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
+    public GetListChannelByOwnerTypeIdRequest() {
+        super();
     }
 }

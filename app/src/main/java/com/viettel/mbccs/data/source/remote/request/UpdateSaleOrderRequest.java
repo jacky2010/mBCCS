@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by HuyQuyet on 5/31/17.
  */
 
-public class UpdateSaleOrderRequest {
+public class UpdateSaleOrderRequest  extends BaseRequest {
 
     @SerializedName("saleOrderId")
     @Expose
@@ -55,5 +55,9 @@ public class UpdateSaleOrderRequest {
 
     public void setSaleTransId(long saleTransId) {
         this.saleTransId = saleTransId;
+    }
+
+    public UpdateSaleOrderRequest() {
+        super();
     }
 }

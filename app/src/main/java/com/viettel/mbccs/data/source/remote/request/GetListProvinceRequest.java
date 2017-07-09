@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by HuyQuyet on 5/23/17.
  */
 
-public class GetListProvinceRequest  {
+public class GetListProvinceRequest  extends BaseRequest   {
 
     @Expose
     @SerializedName("provinceCode")
@@ -19,5 +19,9 @@ public class GetListProvinceRequest  {
 
     public void setProvinceCode(String provinceCode) {
         this.provinceCode = provinceCode;
+    }
+
+    public GetListProvinceRequest() {
+        super();
     }
 }

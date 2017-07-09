@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by FRAMGIA\vu.viet.anh on 12/06/2017.
  */
 
-public class GetUserInfoRequest {
+public class GetUserInfoRequest extends BaseRequest  {
     @Expose
     @SerializedName("staffCode")
     private String staffCode;
@@ -18,5 +18,9 @@ public class GetUserInfoRequest {
 
     public void setStaffCode(String staffCode) {
         this.staffCode = staffCode;
+    }
+
+    public GetUserInfoRequest() {
+        super();
     }
 }

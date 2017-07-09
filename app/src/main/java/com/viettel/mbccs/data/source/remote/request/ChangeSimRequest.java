@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by eo_cuong on 5/19/17.
  */
 
-public class ChangeSimRequest extends DataRequest {
+public class ChangeSimRequest extends BaseRequest {
 
     @SerializedName("isdn")
     @Expose
@@ -41,5 +41,9 @@ public class ChangeSimRequest extends DataRequest {
 
     public void setSubType(String subType) {
         this.subType = subType;
+    }
+
+    public ChangeSimRequest() {
+        super();
     }
 }

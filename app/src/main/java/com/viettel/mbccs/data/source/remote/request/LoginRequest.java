@@ -7,7 +7,7 @@ import com.viettel.mbccs.config.Config;
  * Created by eo_cuong on 5/10/17.
  */
 
-public class LoginRequest {
+public class LoginRequest extends BaseRequest  {
 
     @SerializedName("username")
     private String username;
@@ -22,6 +22,7 @@ public class LoginRequest {
     private String appCode;
 
     public LoginRequest() {
+        super();
         prefix = Config.PREFIX;
         appCode = Config.APPCODE;
     }

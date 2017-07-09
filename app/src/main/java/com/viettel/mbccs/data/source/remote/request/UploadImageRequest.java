@@ -4,7 +4,7 @@ package com.viettel.mbccs.data.source.remote.request;
  * Created by HuyQuyet on 6/8/17.
  */
 
-public class UploadImageRequest {
+public class UploadImageRequest extends BaseRequest  {
     private String actionBusiness;
     private String objectId;
     private int order;
@@ -67,5 +67,9 @@ public class UploadImageRequest {
 
     public void setTransDate(String transDate) {
         this.transDate = transDate;
+    }
+
+    public UploadImageRequest() {
+        super();
     }
 }

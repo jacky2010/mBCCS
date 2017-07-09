@@ -5,7 +5,10 @@ import com.viettel.mbccs.data.source.local.IBanHangKhoTaiChinhLocalDataSource;
 import com.viettel.mbccs.data.source.local.datasource.BanHangKhoTaiChinhLocalDataSource;
 import com.viettel.mbccs.data.source.remote.IBanHangKhoTaiChinhRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.datasource.BanHangKhoTaiChinhRemoteDataSource;
-import com.viettel.mbccs.data.source.remote.request.CreateExpStockNotHaveCmdRequest;
+import com.viettel.mbccs.data.source.remote.request.CreateExpCmdRequest;
+import com.viettel.mbccs.data.source.remote.request.CreateExpNoteNoCmdRequest;
+import com.viettel.mbccs.data.source.remote.request.CreateExpNoteRequest;
+import com.viettel.mbccs.data.source.remote.request.CreateExpStockNotNoteRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateExpStockRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateImportCmdRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateImportNoteRequest;
@@ -27,14 +30,14 @@ import com.viettel.mbccs.data.source.remote.request.GetListTTKDRequest;
 import com.viettel.mbccs.data.source.remote.request.GetOrderInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.GetReasonRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
+import com.viettel.mbccs.data.source.remote.request.GetStockTransSerialDetailRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
 import com.viettel.mbccs.data.source.remote.request.InputOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.KPPOrderRequest;
 import com.viettel.mbccs.data.source.remote.request.UpdateSaleOrderRequest;
-import com.viettel.mbccs.data.source.remote.request.GetListSerialRequest;
 import com.viettel.mbccs.data.source.remote.request.ViewInforSerialRequest;
-import com.viettel.mbccs.data.source.remote.response.BaseCreateCmdNote;
+import com.viettel.mbccs.data.source.remote.response.BaseCreateCmdNoteResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransChannelResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransFromOrderResponse;
@@ -51,6 +54,7 @@ import com.viettel.mbccs.data.source.remote.response.GetListTTKDResponse;
 import com.viettel.mbccs.data.source.remote.response.GetOrderInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetReasonResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
+import com.viettel.mbccs.data.source.remote.response.GetStockTransSerialDetailResponse;
 import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
 import com.viettel.mbccs.data.source.remote.response.InputOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.ListStockTransDetailsReponse;
@@ -210,13 +214,13 @@ public class BanHangKhoTaiChinhRepository
         return banHangKhoTaiChinhRemoteDataSource.importInvoiceList(requestDataRequest);
     }
 
-    public Observable<BaseCreateCmdNote> createExpStockNotHaveCmd(
-            DataRequest<CreateExpStockNotHaveCmdRequest> requestDataRequest) {
-        return banHangKhoTaiChinhRemoteDataSource.createExpStockNotHaveCmd(requestDataRequest);
+    public Observable<BaseCreateCmdNoteResponse> createExpStockNotNote(
+            DataRequest<CreateExpStockNotNoteRequest> requestDataRequest) {
+        return banHangKhoTaiChinhRemoteDataSource.createExpStockNotNote(requestDataRequest);
     }
 
     @Override
-    public Observable<BaseCreateCmdNote> createImportStock(
+    public Observable<BaseCreateCmdNoteResponse> createImportStock(
             DataRequest<CreateImportStockRequest> requestDataRequest) {
         return banHangKhoTaiChinhRemoteDataSource.createImportStock(requestDataRequest);
     }
@@ -234,19 +238,19 @@ public class BanHangKhoTaiChinhRepository
     }
 
     @Override
-    public Observable<BaseCreateCmdNote> createImportCmd(
+    public Observable<BaseCreateCmdNoteResponse> createImportCmd(
             DataRequest<CreateImportCmdRequest> dataRequest) {
         return banHangKhoTaiChinhRemoteDataSource.createImportCmd(dataRequest);
     }
 
     @Override
-    public Observable<BaseCreateCmdNote> createImportNote(
+    public Observable<BaseCreateCmdNoteResponse> createImportNote(
             DataRequest<CreateImportNoteRequest> dataRequest) {
         return banHangKhoTaiChinhRemoteDataSource.createImportNote(dataRequest);
     }
 
     @Override
-    public Observable<BaseCreateCmdNote> createImportNoteNoCMD(
+    public Observable<BaseCreateCmdNoteResponse> createImportNoteNoCMD(
             DataRequest<CreateImportNoteRequest> dataRequest) {
         return banHangKhoTaiChinhRemoteDataSource.createImportNoteNoCMD(dataRequest);
     }
@@ -255,5 +259,29 @@ public class BanHangKhoTaiChinhRepository
     public Observable<EmptyObject> destroyStockTrans(
             DataRequest<DestroyStockTransRequest> dataRequest) {
         return banHangKhoTaiChinhRemoteDataSource.destroyStockTrans(dataRequest);
+    }
+
+    @Override
+    public Observable<BaseCreateCmdNoteResponse> createExpCmd(
+            DataRequest<CreateExpCmdRequest> dataRequest) {
+        return banHangKhoTaiChinhRemoteDataSource.createExpCmd(dataRequest);
+    }
+
+    @Override
+    public Observable<BaseCreateCmdNoteResponse> createExpNote(
+            DataRequest<CreateExpNoteRequest> dataRequest) {
+        return banHangKhoTaiChinhRemoteDataSource.createExpNote(dataRequest);
+    }
+
+    @Override
+    public Observable<BaseCreateCmdNoteResponse> createExpNoteNoCmd(
+            DataRequest<CreateExpNoteNoCmdRequest> dataRequest) {
+        return banHangKhoTaiChinhRemoteDataSource.createExpNoteNoCmd(dataRequest);
+    }
+
+    @Override
+    public Observable<GetStockTransSerialDetailResponse> getStockTransDetailSerial(
+            DataRequest<GetStockTransSerialDetailRequest> dataRequest) {
+        return banHangKhoTaiChinhRemoteDataSource.getStockTransDetailSerial(dataRequest);
     }
 }

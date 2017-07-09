@@ -9,7 +9,7 @@ import com.viettel.mbccs.data.source.UserRepository;
  * Created by jacky on 6/24/17.
  */
 
-public class AddressRequest <T> {
+public class AddressRequest <T> extends BaseRequest{
 
     @Expose
     @SerializedName("sessionId")
@@ -48,7 +48,7 @@ public class AddressRequest <T> {
     private int hasNIMS;
 
     public AddressRequest() {
-
+        super();
         userName =  UserRepository.getInstance().getLoginUserName();
         mSession =  UserRepository.getInstance().getUser().getSessionId();
         apiKey = Config.API_KEY;

@@ -20,6 +20,7 @@ public class StockTransDetailAdapter extends
 
     private OnStockTransDetailAdapterListener mOnStockTransAdapterListerner;
     private String action;
+    private boolean showSerial = true;
 
     public void setOnStockTransAdapterListerner(
             OnStockTransDetailAdapterListener onStockTransAdapterListerner) {
@@ -41,7 +42,12 @@ public class StockTransDetailAdapter extends
         this.action = action;
     }
 
-
+    public StockTransDetailAdapter(Context context, List<StockTransDetail> list, String action,
+            boolean isShowSerial) {
+        super(context, list);
+        this.action = action;
+        this.showSerial = isShowSerial;
+    }
 
     class StockTransDetailViewHolder
             extends BaseViewHolderBinding<ItemStockTransDetailBinding, StockTransDetail> {
@@ -76,6 +82,7 @@ public class StockTransDetailAdapter extends
             if (!TextUtils.isEmpty(action)) {
                 itemStockTransDetailPresenter.setAction(action);
             }
+            itemStockTransDetailPresenter.setShowSerial(showSerial);
             mBinding.setPresenter(itemStockTransDetailPresenter);
         }
     }

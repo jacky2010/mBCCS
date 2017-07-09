@@ -1,35 +1,47 @@
 package com.viettel.mbccs.data.source.remote.request;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.viettel.mbccs.data.model.StockSerial;
 import java.util.List;
 
 /**
- * Created by FRAMGIA\hoang.van.cuong on 29/06/2017.
+ * Created by eo_cuong on 7/8/17.
  */
 
-public class CreateExpStockNotHaveCmdRequest {
-
+public class CreateExpNoteNoCmdRequest extends BaseRequest {
     @SerializedName("fromOwnerId")
+    @Expose
     private Long fromOwnerId;
-
     @SerializedName("fromOwnerType")
+    @Expose
     private Long fromOwnerType;
-
     @SerializedName("toOwnerId")
+    @Expose
     private Long toOwnerId;
-
     @SerializedName("toOwnerType")
+    @Expose
     private Long toOwnerType;
-
-    @SerializedName("stockTransCode")
-    private String stockTransCode;
-
     @SerializedName("reasonId")
+    @Expose
     private Long reasonId;
+    @SerializedName("staffId")
+    @Expose
+    private Long staffId;
+    @SerializedName("discountPolicy")
+    @Expose
+    private Long discountPolicy;
 
-    @SerializedName("mStockSerials")
-    private List<StockSerial> mStockSerials;
+    @SerializedName("lstStockModel")
+    @Expose
+    private List<CreateExpCmdRequest.CmdStock> mCmdStocks;
+
+    public List<CreateExpCmdRequest.CmdStock> getCmdStocks() {
+        return mCmdStocks;
+    }
+
+    public void setCmdStocks(List<CreateExpCmdRequest.CmdStock> cmdStocks) {
+        mCmdStocks = cmdStocks;
+    }
 
     public Long getFromOwnerId() {
         return fromOwnerId;
@@ -63,14 +75,6 @@ public class CreateExpStockNotHaveCmdRequest {
         this.toOwnerType = toOwnerType;
     }
 
-    public String getStockTransCode() {
-        return stockTransCode;
-    }
-
-    public void setStockTransCode(String stockTransCode) {
-        this.stockTransCode = stockTransCode;
-    }
-
     public Long getReasonId() {
         return reasonId;
     }
@@ -79,11 +83,23 @@ public class CreateExpStockNotHaveCmdRequest {
         this.reasonId = reasonId;
     }
 
-    public List<StockSerial> getStockSerials() {
-        return mStockSerials;
+    public Long getStaffId() {
+        return staffId;
     }
 
-    public void setStockSerials(List<StockSerial> stockSerials) {
-        mStockSerials = stockSerials;
+    public void setStaffId(Long staffId) {
+        this.staffId = staffId;
+    }
+
+    public Long getDiscountPolicy() {
+        return discountPolicy;
+    }
+
+    public void setDiscountPolicy(Long discountPolicy) {
+        this.discountPolicy = discountPolicy;
+    }
+
+    public CreateExpNoteNoCmdRequest() {
+        super();
     }
 }
