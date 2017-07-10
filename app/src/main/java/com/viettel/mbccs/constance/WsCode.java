@@ -77,6 +77,7 @@ public class WsCode {
 
     // 3.3.3.1
     public final static String GetRegisterSubInfo = "WS_getRegiterSubInfo";
+    public final static String GetRegisterSub = "WS_getRegisterSub";
 
     // 3.3.3.2
     public final static String RegisterCustomerInfo = "WS_registerCustomerInfo";

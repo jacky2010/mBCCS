@@ -34,8 +34,8 @@
             android:layout_gravity="center"
             android:src="@drawable/ic_search" />
 
-        <com.viettel.mbccs.widget.CustomEdittext
-            android:id="@+id/text_filer"
+        <com.viettel.mbccs.widget.CustomEditText
+            android:id="@+id/ed_date_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"

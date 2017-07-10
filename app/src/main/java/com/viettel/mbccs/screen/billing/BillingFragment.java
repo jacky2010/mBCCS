@@ -36,6 +36,7 @@ import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.EditTextUtil;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import com.viettel.mbccs.widget.CustomDatePicker;
+import com.viettel.mbccs.widget.CustomEditText;
 import com.viettel.mbccs.widget.ItemSpinText;
 import com.viettel.mbccs.widget.MultiDirectionSlidingDrawer;
 
@@ -69,6 +70,8 @@ public class BillingFragment extends BaseDataFragment {
     ItemSpinText mItemTrans;
     @BindView(R.id.drawer)
     MultiDirectionSlidingDrawer mWrappingSlidingDrawer;
+    @BindView(R.id.ed_date_search)
+    CustomEditText mDateSearch;
 
     private BillingAdapter mBillingAdapter;
     private LinearLayoutManager mLinearLayoutManager;
@@ -82,7 +85,7 @@ public class BillingFragment extends BaseDataFragment {
     private List<SaleTrans> mListSaleTrans;
     private List<ChannelInfo> mChannelInfoList = new ArrayList<>();
 
-    @OnClick({ R.id.bt_search, R.id.bt_billing })
+    @OnClick({R.id.bt_search, R.id.bt_billing})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_search:
@@ -193,7 +196,7 @@ public class BillingFragment extends BaseDataFragment {
             public void onClickItem(SaleTrans model, int position) {
                 Bundle mBundle = new Bundle();
                 mBundle.putParcelable(SaleTrans.class.getName(), model);
-                getBaseActivity().goToFragment(new TransDetailFragment(), mBundle);
+                //getBaseActivity().goToFragment(new TransDetailFragment(), mBundle);
             }
         });
         mRecyclerView.setAdapter(mBillingAdapter);
@@ -224,13 +227,13 @@ public class BillingFragment extends BaseDataFragment {
                 mGetListChannelByOwnerTypeIdRequest);
     }
 
-    private void getListSearchTrans(String mFromDate, String mToDate) {
+    private void getListSearchTrans(final String fromDate, String toDate) {
         final DataRequest<GetListSearchTransRequest> request = new DataRequest<>();
         GetListSearchTransRequest mGetListSearchTransRequest = new GetListSearchTransRequest();
         mGetListSearchTransRequest.mShopId =
                 7282;//mUserRepository.getUserInfo().getShop().getShopId()
-        mGetListSearchTransRequest.mFromDate = mFromDate;
-        mGetListSearchTransRequest.mToDate = mToDate;
+        mGetListSearchTransRequest.mFromDate = fromDate;
+        mGetListSearchTransRequest.mToDate = toDate;
         mGetListSearchTransRequest.mSaleTransType = Integer.valueOf(
                 TextUtils.isEmpty(mItemTrans.getStringSpinner()) ? "0"
                         : mItemTrans.getStringSpinner());
@@ -249,6 +252,7 @@ public class BillingFragment extends BaseDataFragment {
                             if (mListSaleTrans != null) mListSaleTrans.clear();
                             mListSaleTrans = response.mListSaleTrans;
                             setAdapterSearch(mListSaleTrans);
+                            mDateSearch.setText(mFormDate.getStringFormatDDMMYY() + "->" + mToDate.getStringFormatDDMMYY());
                             mWrappingSlidingDrawer.close();
                         }
                         getBaseActivity().hideLoadingDialog();
