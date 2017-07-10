@@ -7,10 +7,12 @@ import android.content.Intent;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.data.model.StaffInfo;
+import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.databinding.ActivityCreateCskppTaskBinding;
 import com.viettel.mbccs.screen.assigntask.arising.create.CreateArisingTaskActivity;
 import com.viettel.mbccs.screen.assigntask.staffpicker.StaffPickerActivity;
 import com.viettel.mbccs.screen.common.success.DialogFullScreen;
+import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.variable.Constants;
 import com.viettel.mbccs.widget.CustomDialog;
 
@@ -108,5 +110,10 @@ public class CreateCSKPPTaskActivity
     @Override
     public StaffInfo getStaff() {
         return mSelectedStaff;
+    }
+
+    @Override
+    public void showErrorDialog(BaseException e) {
+        DialogUtils.showDialogError(this, e);
     }
 }

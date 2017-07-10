@@ -3,9 +3,10 @@ package com.viettel.mbccs.screen.assigntask.staffpicker;
 import android.content.Intent;
 import android.text.Editable;
 import android.text.TextWatcher;
-
 import com.viettel.mbccs.base.BaseSearchListPickerActivity;
 import com.viettel.mbccs.data.model.StaffInfo;
+import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.variable.Constants;
 
 /**
@@ -53,5 +54,10 @@ public class StaffPickerActivity extends BaseSearchListPickerActivity
         intent.putExtra(Constants.BundleConstant.STAFF_INFO, (StaffInfo) object);
         setResult(RESULT_OK, intent);
         finish();
+    }
+
+    @Override
+    public void showErrorDialog(BaseException e) {
+        DialogUtils.showDialogError(this, e);
     }
 }

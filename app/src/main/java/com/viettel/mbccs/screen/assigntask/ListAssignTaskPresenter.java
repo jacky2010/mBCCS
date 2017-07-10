@@ -36,12 +36,9 @@ public class ListAssignTaskPresenter extends BaseListTaskPresenter<TaskShopManag
         }
         mViewModel.showLoading();
 
-        // FIXME: 10/07/2017 Account and serviceType
         GetTaskPrepareAssignStaffRequest request = new GetTaskPrepareAssignStaffRequest();
-        request.setServiceType("1");
         request.setShopCode(mUserRepository.getUserInfo().getShop().getShopCode());
         request.setType(String.valueOf(taskType.get()));
-        request.setAccount(mUserRepository.getUserInfo().getStaffInfo().getTel());
         request.setFromDate(DateUtils.convertDateToString(fromDate,
                 DateUtils.TIMEZONE_FORMAT_SERVER));
         request.setToDate(DateUtils.convertDateToString(toDate,
@@ -66,6 +63,7 @@ public class ListAssignTaskPresenter extends BaseListTaskPresenter<TaskShopManag
                     @Override
                     public void onError(BaseException error) {
                         mViewModel.hideLoading();
+                        mViewModel.showErrorDialog(error);
                     }
                 });
         mSubscription.add(subscription);

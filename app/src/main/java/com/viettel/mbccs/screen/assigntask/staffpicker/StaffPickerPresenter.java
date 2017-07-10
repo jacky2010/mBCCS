@@ -3,7 +3,6 @@ package com.viettel.mbccs.screen.assigntask.staffpicker;
 import android.content.Context;
 import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
-
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseSearchListPickerPresenter;
 import com.viettel.mbccs.base.searchlistview.BaseSearchListViewContract;
@@ -17,7 +16,7 @@ import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetStaffToAssignTaskResponse;
 import com.viettel.mbccs.screen.assigntask.adapters.StaffAdapter;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
-
+import com.viettel.mbccs.variable.Constants;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,27 +37,31 @@ public class StaffPickerPresenter extends BaseSearchListPickerPresenter<StaffInf
 
         viewModel.showLoading();
         GetStaffToAssignTaskRequest request = new GetStaffToAssignTaskRequest();
-        request.setShopId(String.valueOf(userRepository.getUserInfo().getShop().getShopId()));
-        request.setChannelTypeId(String.valueOf(userRepository.getUserInfo().getChannelInfo().getChannelType()));
+        request.setShopId(userRepository.getUserInfo().getShop().getShopId());
+        request.setChannelTypeId(Constants.AssignTask.CHANNEL_TYPE_ID);
 
         DataRequest<GetStaffToAssignTaskRequest> dataRequest = new DataRequest<>();
         dataRequest.setWsCode(WsCode.GetStaffToAssignTask);
         dataRequest.setWsRequest(request);
 
-        congViecRepository.getStaffToAssignTask(dataRequest).subscribe(new MBCCSSubscribe<GetStaffToAssignTaskResponse>() {
-            @Override
-            public void onSuccess(GetStaffToAssignTaskResponse object) {
-                mViewModel.hideLoading();
-                listData.addAll(object.getLstStaff());
-                mFilter.addAll(listData);
-            }
+        congViecRepository.getStaffToAssignTask(dataRequest)
+                .subscribe(new MBCCSSubscribe<GetStaffToAssignTaskResponse>() {
+                    @Override
+                    public void onSuccess(GetStaffToAssignTaskResponse object) {
+                        if (object != null && object.getLstStaff() != null && !object.getLstStaff()
+                                .isEmpty()) {
+                            listData.addAll(object.getLstStaff());
+                            mFilter.addAll(listData);
+                        }
+                        mViewModel.hideLoading();
+                    }
 
-            @Override
-            public void onError(BaseException error) {
-                mViewModel.hideLoading();
-                // TODO: 7/2/2017 Show error
-            }
-        });
+                    @Override
+                    public void onError(BaseException error) {
+                        mViewModel.hideLoading();
+                        mViewModel.showErrorDialog(error);
+                    }
+                });
     }
 
     @Override
@@ -99,8 +102,7 @@ public class StaffPickerPresenter extends BaseSearchListPickerPresenter<StaffInf
 
     @Override
     protected RecyclerView.Adapter getListAdapter() {
-        if (mFilter == null)
-            mFilter = new ArrayList<>();
+        if (mFilter == null) mFilter = new ArrayList<>();
         StaffAdapter adapter = new StaffAdapter(mFilter);
         adapter.setOnStaffPickListener(this);
         return adapter;

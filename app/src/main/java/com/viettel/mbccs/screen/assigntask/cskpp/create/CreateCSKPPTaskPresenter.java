@@ -1,7 +1,6 @@
 package com.viettel.mbccs.screen.assigntask.cskpp.create;
 
 import android.content.Context;
-
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.TaskShopManagement;
@@ -13,7 +12,6 @@ import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.CreateTaskExtendResponse;
 import com.viettel.mbccs.utils.DateUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
-
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
@@ -77,13 +75,17 @@ public class CreateCSKPPTaskPresenter implements CreatingCSKPPTaskContract.Prese
             return;
         }
 
+        if (mViewModel.getStaff() == null) {
+            // TODO: 10/07/2017 Show error
+            return;
+        }
+
         CreateTaskExtendRequest request = new CreateTaskExtendRequest();
         request.setShopId(String.valueOf(mUserRepository.getUserInfo().getShop().getShopId()));
         request.setChannelCode(mUserRepository.getUserInfo().getChannelInfo().getChannelCode());
-        request.setFromDate(DateUtils.convertDateToString(fromDate,
-                DateUtils.TIMEZONE_FORMAT_SERVER));
-        request.setToDate(DateUtils.convertDateToString(toDate,
-                DateUtils.TIMEZONE_FORMAT_SERVER));
+        request.setFromDate(
+                DateUtils.convertDateToString(fromDate, DateUtils.TIMEZONE_FORMAT_SERVER));
+        request.setToDate(DateUtils.convertDateToString(toDate, DateUtils.TIMEZONE_FORMAT_SERVER));
         request.setJobDescription("");
         request.setJobName("");
         request.setShopCodeCreate(mUserRepository.getUserInfo().getShop().getShopCode());
@@ -104,7 +106,8 @@ public class CreateCSKPPTaskPresenter implements CreatingCSKPPTaskContract.Prese
 
                     @Override
                     public void onError(BaseException error) {
-                        // TODO: 7/2/2017 onError
+                        mViewModel.hideLoading();
+                        mViewModel.showErrorDialog(error);
                     }
                 });
         mSubscription.add(subscription);

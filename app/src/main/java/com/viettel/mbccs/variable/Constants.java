@@ -166,4 +166,8 @@ public class Constants {
     public class FuntionConstant {
         public static final long STAFF_EXPORT_SHOP_REASON_ID = 200383L;
     }
+
+    public interface AssignTask {
+        long CHANNEL_TYPE_ID = 14;
+    }
 }

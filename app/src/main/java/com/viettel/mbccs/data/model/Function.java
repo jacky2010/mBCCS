@@ -115,7 +115,7 @@ public class Function implements Parcelable {
         String MENU_XEM_KHO = "XEMKH";
         String MENU_NHAP_HOA_DON = "NHAPHD";
         String MENU_XUAT_KHO_CAP_DUOI = "XUATCD";
-        String MENU_NHAP_KHO_CAP_TREN = "NHAPCT";
+        String MENU_NHAP_KHO_CAP_TREN = "XUATCT";
         String MENU_TRA_HANG_CAP_TREN = "TRACT";
         String MENU_NHAP_KHO_CAP_DUOI = "NHAPCD";
         String MENU_XUAT_KHO_CHO_NHAN_VIEN = "XUATNV";

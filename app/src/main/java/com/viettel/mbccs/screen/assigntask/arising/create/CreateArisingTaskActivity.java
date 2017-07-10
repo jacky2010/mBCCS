@@ -7,9 +7,11 @@ import android.content.Intent;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.data.model.StaffInfo;
+import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.databinding.ActivityCreateArisingTaskBinding;
 import com.viettel.mbccs.screen.assigntask.staffpicker.StaffPickerActivity;
 import com.viettel.mbccs.screen.common.success.DialogFullScreen;
+import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.variable.Constants;
 import com.viettel.mbccs.widget.CustomDialog;
 
@@ -19,7 +21,7 @@ import com.viettel.mbccs.widget.CustomDialog;
 
 public class CreateArisingTaskActivity extends
         BaseDataBindActivity<ActivityCreateArisingTaskBinding, CreateArisingTaskPresenter>
-        implements CreatingArisingTaskContract.ViewModel {
+        implements CreateArisingTaskContract.ViewModel {
 
     public static final int REQUEST_STAFF_INFO = 1002;
 
@@ -104,5 +106,10 @@ public class CreateArisingTaskActivity extends
     @Override
     public StaffInfo getStaff() {
         return mSelectedStaff;
+    }
+
+    @Override
+    public void showErrorDialog(BaseException e) {
+        DialogUtils.showDialogError(this, e);
     }
 }

@@ -13,7 +13,6 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
-
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.databinding.LayoutCustomDialogBinding;
 
@@ -118,22 +117,20 @@ public class CustomDialog extends AlertDialog {
         mBinding.reject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (onReject == null) {
-                    dismiss();
-                    return;
+                if (onReject != null) {
+                    onReject.onClick(CustomDialog.this, BUTTON_NEGATIVE);
                 }
-                onReject.onClick(CustomDialog.this, BUTTON_NEGATIVE);
+                dismiss();
             }
         });
         mBinding.accept.setText(accept);
         mBinding.accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (onAccept == null) {
-                    dismiss();
-                    return;
+                if (onAccept != null) {
+                    onAccept.onClick(CustomDialog.this, BUTTON_POSITIVE, getInput());
                 }
-                onAccept.onClick(CustomDialog.this, BUTTON_POSITIVE, getInput());
+                dismiss();
             }
         });
         mBinding.close.setOnClickListener(new View.OnClickListener() {

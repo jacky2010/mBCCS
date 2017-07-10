@@ -26,13 +26,13 @@
         <item>-Chọn trạng thái công việc-</item>
     </string-array>
 
+
     <string-array name="store_order_status">
         <item>Đã lập lệnh</item>
         <item>Đã lập phiếu</item>
         <item>Đã xuất kho</item>
         <item>Đã hủy</item>
     </string-array>
-
 
     <string-array name="nhanvien_tranhang_captren_status">
         <item>Đã xuất kho</item>

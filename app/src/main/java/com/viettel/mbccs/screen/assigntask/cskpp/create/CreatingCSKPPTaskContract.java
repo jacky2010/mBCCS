@@ -3,6 +3,7 @@ package com.viettel.mbccs.screen.assigntask.cskpp.create;
 import com.viettel.mbccs.base.BasePresenter;
 import com.viettel.mbccs.base.BaseView;
 import com.viettel.mbccs.data.model.StaffInfo;
+import com.viettel.mbccs.data.source.remote.response.BaseException;
 
 /**
  * Created by Anh Vu Viet on 5/23/2017.
@@ -25,6 +26,8 @@ public interface CreatingCSKPPTaskContract {
         long getToDate();
 
         StaffInfo getStaff();
+
+        void showErrorDialog(BaseException e);
     }
 
     interface Presenter extends BasePresenter {
