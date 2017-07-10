@@ -408,4 +408,53 @@ public interface MBCSSApi {
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<EmptyObject>>> createExpStockNotHaveCmd(
             @Body DataRequest<CreateExpStockNotHaveCmdRequest> request);
+
+    // Assign Task
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<GetTaskPrepareAssignStaffResponse>>> getTaskPrepareAssignStaff(
+            @Body DataRequest<GetTaskPrepareAssignStaffRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<AssignTaskForStaffResponse>>> assignTaskForStaff(
+            @Body DataRequest<AssignTaskForStaffRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<GetInfoTaskForUpdateResponse>>> getInfoTaskForUpdate(
+            @Body DataRequest<GetInfoTaskForUpdateRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<GetAccessoryForUpdateTaskResponse>>> getAccessoryForUpdateTask(
+            @Body DataRequest<GetAccessoryForUpdateTaskRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<GetStockModelForUpdateTaskResponse>>> getStockModelForUpdateTask(
+            @Body DataRequest<GetStockModelForUpdateTaskRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<UpdateTaskResponse>>> updateTask(
+            @Body DataRequest<UpdateTaskRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<CloseTaskResponse>>> closeTask(
+            @Body DataRequest<CloseTaskRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<GetStaffToAssignTaskResponse>>> getStaffToAssignTask(
+            @Body DataRequest<GetStaffToAssignTaskRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<GetChannelRouterResponse>>> getChannelRouter(
+            @Body DataRequest<GetChannelRouterRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<GetChannelWorkTypeResponse>>> getChannelWorkType(
+            @Body DataRequest<GetChannelWorkTypeRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<GetListChannelResponse>>> getListChannel(
+            @Body DataRequest<GetListChannelRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<CreateTaskExtendResponse>>> createTaskExtend(
+            @Body DataRequest<CreateTaskExtendRequest> request);
 }

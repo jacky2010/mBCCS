@@ -1,97 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    >
 
     <data>
 
         <variable
             name="taskTitle"
-            type="String" />
+            type="String"
+            />
 
         <variable
             name="taskType"
-            type="String" />
+            type="String"
+            />
 
         <variable
             name="createdDate"
-            type="String" />
+            type="String"
+            />
 
         <variable
             name="taskStatus"
-            type="String" />
+            type="String"
+            />
 
         <variable
             name="statusBackground"
-            type="int" />
+            type="int"
+            />
 
         <variable
             name="statusBackgroundLight"
-            type="boolean" />
+            type="boolean"
+            />
 
         <variable
             name="onClicked"
-            type="android.view.View.OnClickListener" />
+            type="android.view.View.OnClickListener"
+            />
     </data>
 
-    <android.support.v7.widget.CardView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="@dimen/dp_4"
-        app:cardElevation="@dimen/dp_2">
+        android:onClick="@{ onClicked }"
+        android:padding="@dimen/dp_8"
+        >
 
-        <RelativeLayout
+        <com.viettel.mbccs.widget.CustomTextView
+            android:id="@+id/text1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="@{ onClicked }"
-            android:padding="@dimen/dp_8">
+            android:text="@{ taskTitle }"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_20"
+            />
 
-            <com.viettel.mbccs.widget.CustomTextView
-                android:id="@+id/text1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@{ taskTitle }"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp_20" />
+        <com.viettel.mbccs.widget.CustomTextView
+            android:id="@+id/text2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text1"
+            android:layout_marginTop="@dimen/dp_4"
+            android:text="@{ taskType }"
+            android:textColor="@color/default_text_color_gray"
+            android:textSize="@dimen/sp_14"
+            />
 
-            <com.viettel.mbccs.widget.CustomTextView
-                android:id="@+id/text2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/text1"
-                android:layout_marginTop="@dimen/dp_4"
-                android:text="@{ taskType }"
-                android:textColor="@color/default_text_color_gray"
-                android:textSize="@dimen/sp_14" />
+        <com.viettel.mbccs.widget.CustomTextView
+            android:id="@+id/text3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text2"
+            android:layout_marginEnd="@dimen/dp_4"
+            android:layout_marginRight="@dimen/dp_4"
+            android:layout_marginTop="@dimen/dp_4"
+            android:layout_toLeftOf="@+id/text4"
+            android:layout_toStartOf="@+id/text4"
+            android:text="@{ createdDate }"
+            android:textColor="@color/default_text_color_gray"
+            android:textSize="@dimen/sp_14"
+            />
 
-            <com.viettel.mbccs.widget.CustomTextView
-                android:id="@+id/text3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/text2"
-                android:layout_marginEnd="@dimen/dp_4"
-                android:layout_marginRight="@dimen/dp_4"
-                android:layout_marginTop="@dimen/dp_4"
-                android:layout_toStartOf="@+id/text4"
-                android:layout_toLeftOf="@+id/text4"
-                android:text="@{ createdDate }"
-                android:textColor="@color/default_text_color_gray"
-                android:textSize="@dimen/sp_14" />
-
-            <com.viettel.mbccs.widget.CustomTextView
-                android:id="@+id/text4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignTop="@id/text3"
-                android:background="@{ statusBackground }"
-                android:paddingBottom="@dimen/dp_4"
-                android:paddingEnd="@dimen/dp_8"
-                android:paddingStart="@dimen/dp_8"
-                android:paddingTop="@dimen/dp_4"
-                android:text="@{ taskStatus }"
-                android:textColor="@{ statusBackgroundLight ? @color/black : @color/white }"
-                android:textSize="@dimen/sp_14" />
-        </RelativeLayout>
-    </android.support.v7.widget.CardView>
+        <com.viettel.mbccs.widget.CustomTextView
+            android:id="@+id/text4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/text3"
+            android:background="@{ statusBackground }"
+            android:paddingBottom="@dimen/dp_4"
+            android:paddingEnd="@dimen/dp_8"
+            android:paddingStart="@dimen/dp_8"
+            android:paddingTop="@dimen/dp_4"
+            android:text="@{ taskStatus }"
+            android:textColor="@{ statusBackgroundLight ? @color/black : @color/white }"
+            android:textSize="@dimen/sp_14"
+            />
+    </RelativeLayout>
 </layout>

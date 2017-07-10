@@ -4,11 +4,13 @@ import com.viettel.mbccs.data.model.EmptyObject;
 import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.model.UserInfo;
 import com.viettel.mbccs.data.source.remote.request.AddressRequest;
+import com.viettel.mbccs.data.source.remote.request.AssignTaskForStaffRequest;
 import com.viettel.mbccs.data.source.remote.request.ChangeSimRequest;
 import com.viettel.mbccs.data.source.remote.request.ChecOTPRequest;
 import com.viettel.mbccs.data.source.remote.request.CheckCalledIsdnsRequest;
 import com.viettel.mbccs.data.source.remote.request.CheckDebitChangeSimRequest;
 import com.viettel.mbccs.data.source.remote.request.CheckIdNoRequest;
+import com.viettel.mbccs.data.source.remote.request.CloseTaskRequest;
 import com.viettel.mbccs.data.source.remote.request.ConnectSubscriberRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateDistributedChannelRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateExpCmdRequest;
@@ -21,23 +23,29 @@ import com.viettel.mbccs.data.source.remote.request.CreateImportNoteRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateImportStockRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateSaleTransChannelRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateSaleTransFromOrderRequest;
+import com.viettel.mbccs.data.source.remote.request.CreateTaskExtendRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.DestroyStockTransRequest;
 import com.viettel.mbccs.data.source.remote.request.DownloadImageRequest;
+import com.viettel.mbccs.data.source.remote.request.GetAccessoryForUpdateTaskRequest;
 import com.viettel.mbccs.data.source.remote.request.GetAllInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.GetAllSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.GetAnypayAuthorizeRequest;
 import com.viettel.mbccs.data.source.remote.request.GetApDomainByTypeRequest;
+import com.viettel.mbccs.data.source.remote.request.GetChannelRouterRequest;
+import com.viettel.mbccs.data.source.remote.request.GetChannelWorkTypeRequest;
 import com.viettel.mbccs.data.source.remote.request.GetCreateInvoiceBillRequest;
 import com.viettel.mbccs.data.source.remote.request.GetDistrictRequest;
 import com.viettel.mbccs.data.source.remote.request.GetHotNewsCSKPPRequest;
 import com.viettel.mbccs.data.source.remote.request.GetHotNewsInfoCSKPPRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
+import com.viettel.mbccs.data.source.remote.request.GetInfoTaskForUpdateRequest;
 import com.viettel.mbccs.data.source.remote.request.GetKPPFeedbackInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.GetKPPFeedbackRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListBusTypeIdRequireRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListBusTypeRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListChannelByOwnerTypeIdRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListChannelRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListDsLamByTeamIdRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListExpCmdRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListIdImageRequest;
@@ -64,8 +72,11 @@ import com.viettel.mbccs.data.source.remote.request.GetRegisterSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.GetRegisterSubRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSaleTransDetailRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
+import com.viettel.mbccs.data.source.remote.request.GetStaffToAssignTaskRequest;
+import com.viettel.mbccs.data.source.remote.request.GetStockModelForUpdateTaskRequest;
 import com.viettel.mbccs.data.source.remote.request.GetStockTransSerialDetailRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSurveyKPPRequest;
+import com.viettel.mbccs.data.source.remote.request.GetTaskPrepareAssignStaffRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
 import com.viettel.mbccs.data.source.remote.request.GetUserInfoRequest;
@@ -85,34 +96,43 @@ import com.viettel.mbccs.data.source.remote.request.SendSurveyKPPRequest;
 import com.viettel.mbccs.data.source.remote.request.TransferAnyPayRequest;
 import com.viettel.mbccs.data.source.remote.request.UpdateAllSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.UpdateSaleOrderRequest;
+import com.viettel.mbccs.data.source.remote.request.UpdateTaskRequest;
 import com.viettel.mbccs.data.source.remote.request.UploadImageRequest;
 import com.viettel.mbccs.data.source.remote.request.ViewInforSerialRequest;
+import com.viettel.mbccs.data.source.remote.response.AssignTaskForStaffResponse;
 import com.viettel.mbccs.data.source.remote.response.BaseCreateCmdNoteResponse;
 import com.viettel.mbccs.data.source.remote.response.BaseResponse;
 import com.viettel.mbccs.data.source.remote.response.CheckIdNoResponse;
 import com.viettel.mbccs.data.source.remote.response.CheckOTPResponse;
+import com.viettel.mbccs.data.source.remote.response.CloseTaskResponse;
 import com.viettel.mbccs.data.source.remote.response.ConnectSubscriberResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateDistributedChannelResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransChannelResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransFromOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.CreateSaleTransRetailResponse;
+import com.viettel.mbccs.data.source.remote.response.CreateTaskExtendResponse;
 import com.viettel.mbccs.data.source.remote.response.DataResponse;
 import com.viettel.mbccs.data.source.remote.response.DownloadImageResponse;
+import com.viettel.mbccs.data.source.remote.response.GetAccessoryForUpdateTaskResponse;
 import com.viettel.mbccs.data.source.remote.response.GetAllInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetAllSubInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetAnypayAuthorizeResponse;
 import com.viettel.mbccs.data.source.remote.response.GetApDomainByTypeResponse;
+import com.viettel.mbccs.data.source.remote.response.GetChannelRouterResponse;
+import com.viettel.mbccs.data.source.remote.response.GetChannelWorkTypeResponse;
 import com.viettel.mbccs.data.source.remote.response.GetDistributedChannelResponse;
 import com.viettel.mbccs.data.source.remote.response.GetDistrictResponse;
 import com.viettel.mbccs.data.source.remote.response.GetHotNewsCSKPPResponse;
 import com.viettel.mbccs.data.source.remote.response.GetHotNewsInfoCSKPPResponse;
 import com.viettel.mbccs.data.source.remote.response.GetInfoSaleTranResponse;
+import com.viettel.mbccs.data.source.remote.response.GetInfoTaskForUpdateResponse;
 import com.viettel.mbccs.data.source.remote.response.GetKPPFeedbackInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetKPPFeedbackResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListBusTypeIdRequireResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListBusTypeResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListChannelByOwnerTypeIdResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListChannelResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListDsLamByTeamIdResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListExpCmdResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListIdImageResponse;
@@ -138,8 +158,11 @@ import com.viettel.mbccs.data.source.remote.response.GetRegisterSubInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetRegisterSubResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSaleTransDetailResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSerialsResponse;
+import com.viettel.mbccs.data.source.remote.response.GetStaffToAssignTaskResponse;
+import com.viettel.mbccs.data.source.remote.response.GetStockModelForUpdateTaskResponse;
 import com.viettel.mbccs.data.source.remote.response.GetStockTransSerialDetailResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSurveyKPPResponse;
+import com.viettel.mbccs.data.source.remote.response.GetTaskPrepareAssignStaffResponse;
 import com.viettel.mbccs.data.source.remote.response.GetTotalStockResponse;
 import com.viettel.mbccs.data.source.remote.response.InputOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.KPPFeedbackResponse;
@@ -156,6 +179,7 @@ import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgra
 import com.viettel.mbccs.data.source.remote.response.TransferAnyPayResponse;
 import com.viettel.mbccs.data.source.remote.response.UpdateAllSubInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.UpdateSaleOrderResponse;
+import com.viettel.mbccs.data.source.remote.response.UpdateTaskResponse;
 import com.viettel.mbccs.data.source.remote.response.UploadImageResponse;
 import com.viettel.mbccs.data.source.remote.response.ViewInforSerialResponse;
 import retrofit2.http.Body;
@@ -516,5 +540,54 @@ public interface MBCSSApi {
 
     Observable<ServerDataResponse<BaseResponse<GetStockTransSerialDetailResponse>>> getStockTransDetailSerial(
             @Body DataRequest<GetStockTransSerialDetailRequest> request);
+
+    // Assign Task
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<GetTaskPrepareAssignStaffResponse>>> getTaskPrepareAssignStaff(
+            @Body DataRequest<GetTaskPrepareAssignStaffRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<AssignTaskForStaffResponse>>> assignTaskForStaff(
+            @Body DataRequest<AssignTaskForStaffRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<GetInfoTaskForUpdateResponse>>> getInfoTaskForUpdate(
+            @Body DataRequest<GetInfoTaskForUpdateRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<GetAccessoryForUpdateTaskResponse>>> getAccessoryForUpdateTask(
+            @Body DataRequest<GetAccessoryForUpdateTaskRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<GetStockModelForUpdateTaskResponse>>> getStockModelForUpdateTask(
+            @Body DataRequest<GetStockModelForUpdateTaskRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<UpdateTaskResponse>>> updateTask(
+            @Body DataRequest<UpdateTaskRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<CloseTaskResponse>>> closeTask(
+            @Body DataRequest<CloseTaskRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<GetStaffToAssignTaskResponse>>> getStaffToAssignTask(
+            @Body DataRequest<GetStaffToAssignTaskRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<GetChannelRouterResponse>>> getChannelRouter(
+            @Body DataRequest<GetChannelRouterRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<GetChannelWorkTypeResponse>>> getChannelWorkType(
+            @Body DataRequest<GetChannelWorkTypeRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<GetListChannelResponse>>> getListChannel(
+            @Body DataRequest<GetListChannelRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<CreateTaskExtendResponse>>> createTaskExtend(
+            @Body DataRequest<CreateTaskExtendRequest> request);
 }
 

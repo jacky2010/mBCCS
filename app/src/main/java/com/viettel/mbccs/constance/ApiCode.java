@@ -420,4 +420,19 @@ public class ApiCode {
     public final static String GetDetailImageOfProduct = "WS_getDetailImageOfProduct";
     public final static String IsKPPManager = "WS_isManager";
     public final static String GetRegisterSub = "WS_getRegisterSub";
+
+    // Task
+    public final static String GetTaskPrepareAssignStaff = "WS_getTaskPrepareAssignStaff";
+    public final static String AssignTaskForStaff = "WS_assignTaskForStaff";
+    public final static String GetInfoTaskForUpdate = "WS_getInfoTaskForUpdate";
+    public final static String GetAccessoryForUpdateTask = "WS_getAccessoryForUpdateTask";
+    public final static String GetStockModelForUpdateTask = "WS_getStockModelForUpdateTask";
+    public final static String UpdateTask = "WS_updateTask";
+    public final static String CloseTask = "WS_cloaseTask";
+
+    public static final String GetStaffToAssignTask = "WS_getStaffToAssignTask";
+    public static final String GetChannelRouter = "WS_getChannelRouter";
+    public static final String GetChannelWorkType = "WS_getChannelWorkType";
+    public static final String GetListChannel = "WS_getListChannel";
+    public static final String CreateTaskExtend = "WS_createTaskExtend";
 }

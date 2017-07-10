@@ -1,16 +1,12 @@
 package com.viettel.mbccs.screen.assigntask.staffpicker;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 
 import com.viettel.mbccs.base.BaseSearchListPickerActivity;
 import com.viettel.mbccs.data.model.StaffInfo;
 import com.viettel.mbccs.variable.Constants;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Anh Vu Viet on 5/27/2017.
@@ -19,14 +15,9 @@ import java.util.List;
 public class StaffPickerActivity extends BaseSearchListPickerActivity
         implements StaffPickerContract.ViewModel {
 
-    private List<StaffInfo> mStaffInfo;
-
     @Override
     protected void initData() {
-        mStaffInfo = new ArrayList<>();
-        // TODO: 6/12/17 setdata
-
-        mPresenter = new StaffPickerPresenter(this, this, mStaffInfo);
+        mPresenter = new StaffPickerPresenter(this, this);
         mBinding.setPresenter(mPresenter);
         mBinding.searchInput.addOnTextChange(new TextWatcher() {
             @Override
@@ -48,20 +39,18 @@ public class StaffPickerActivity extends BaseSearchListPickerActivity
 
     @Override
     public void showLoading() {
-
+        showLoadingDialog();
     }
 
     @Override
     public void hideLoading() {
-
+        hideLoadingDialog();
     }
 
     @Override
     public void onItemClicked(Object object) {
         Intent intent = new Intent();
-        Bundle bundle = new Bundle();
-        bundle.putParcelable(Constants.BundleConstant.STAFF_INFO, (StaffInfo) object);
-        intent.putExtras(bundle);
+        intent.putExtra(Constants.BundleConstant.STAFF_INFO, (StaffInfo) object);
         setResult(RESULT_OK, intent);
         finish();
     }

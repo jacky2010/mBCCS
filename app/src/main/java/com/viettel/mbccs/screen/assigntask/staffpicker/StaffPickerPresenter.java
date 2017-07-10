@@ -7,8 +7,16 @@ import android.support.v7.widget.RecyclerView;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseSearchListPickerPresenter;
 import com.viettel.mbccs.base.searchlistview.BaseSearchListViewContract;
+import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.StaffInfo;
+import com.viettel.mbccs.data.source.CongViecRepository;
+import com.viettel.mbccs.data.source.UserRepository;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
+import com.viettel.mbccs.data.source.remote.request.GetStaffToAssignTaskRequest;
+import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.GetStaffToAssignTaskResponse;
 import com.viettel.mbccs.screen.assigntask.adapters.StaffAdapter;
+import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +31,34 @@ public class StaffPickerPresenter extends BaseSearchListPickerPresenter<StaffInf
     private List<StaffInfo> mFilter;
     private Handler handler = new Handler();
 
-    public StaffPickerPresenter(Context context, BaseSearchListViewContract.ViewModel viewModel,
-                                List<StaffInfo> staffs) {
+    public StaffPickerPresenter(Context context, BaseSearchListViewContract.ViewModel viewModel) {
         super(context, viewModel);
-        listData.addAll(staffs);
-        mFilter.addAll(listData);
+        CongViecRepository congViecRepository = CongViecRepository.getInstance();
+        UserRepository userRepository = UserRepository.getInstance();
+
+        viewModel.showLoading();
+        GetStaffToAssignTaskRequest request = new GetStaffToAssignTaskRequest();
+        request.setShopId(String.valueOf(userRepository.getUserInfo().getShop().getShopId()));
+        request.setChannelTypeId(String.valueOf(userRepository.getUserInfo().getChannelInfo().getChannelType()));
+
+        DataRequest<GetStaffToAssignTaskRequest> dataRequest = new DataRequest<>();
+        dataRequest.setWsCode(ApiCode.GetStaffToAssignTask);
+        dataRequest.setWsRequest(request);
+
+        congViecRepository.getStaffToAssignTask(dataRequest).subscribe(new MBCCSSubscribe<GetStaffToAssignTaskResponse>() {
+            @Override
+            public void onSuccess(GetStaffToAssignTaskResponse object) {
+                mViewModel.hideLoading();
+                listData.addAll(object.getLstStaff());
+                mFilter.addAll(listData);
+            }
+
+            @Override
+            public void onError(BaseException error) {
+                mViewModel.hideLoading();
+                // TODO: 7/2/2017 Show error
+            }
+        });
     }
 
     @Override

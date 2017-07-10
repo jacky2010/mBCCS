@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.ChannelInfo;
-import com.viettel.mbccs.data.model.TaskModel;
+import com.viettel.mbccs.data.model.TaskShopManagement;
 import com.viettel.mbccs.screen.assigntask.adapters.TaskCSKPPDetailAdapter;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,37 +43,37 @@ public class TaskCSKPPDetailPresenter implements TaskCSKPPDetailContract.Present
 
     private TaskCSKPPDetailContract.ViewModel mViewModel;
 
-    private TaskModel mTaskModel;
+    private TaskShopManagement mTaskShopManagement;
 
     public TaskCSKPPDetailPresenter(Context context, TaskCSKPPDetailContract.ViewModel viewModel,
-            TaskModel taskModel, boolean update) {
+                                    TaskShopManagement taskShopManagement, boolean update) {
         mContext = context;
         mViewModel = viewModel;
-        mTaskModel = taskModel;
+        mTaskShopManagement = taskShopManagement;
         this.update.set(update);
-        title.set(mContext.getString(R.string.chi_tiet_cong_viec, mTaskModel.getTitle()));
-        switch (mTaskModel.getStatus()) {
-            case TaskModel.TaskStatus.INPROGRESS:
+        title.set(mContext.getString(R.string.chi_tiet_cong_viec, mTaskShopManagement.getDescription()));
+        switch (mTaskShopManagement.getStatus()) {
+            case TaskShopManagement.TaskStaffStatus.STATUS_INPROGRESS:
                 status.set(mContext.getString(R.string.inprogress));
                 break;
-            case TaskModel.TaskStatus.NOT_ACCEPTED:
+            case TaskShopManagement.TaskStaffStatus.STATUS_NEW:
                 status.set(mContext.getString(R.string.not_accepted));
             default:
                 break;
         }
-        taskName.set(mTaskModel.getTitle());
-        switch (mTaskModel.getType()) {
-            case TaskModel.TaskType.TYPE_ARISING:
-                taskType.set(mContext.getString(R.string.task_arising));
-                break;
-            case TaskModel.TaskType.TYPE_CSKPP:
-                taskType.set(mContext.getString(R.string.task_cskpp));
-                break;
-            case TaskModel.TaskType.TYPE_TEAM:
-            default:
-                taskType.set(mContext.getString(R.string.task_team));
-                break;
-        }
+//        taskName.set(mTaskShopManagement.getTitle());
+//        switch (mTaskShopManagement.getType()) {
+//            case TaskShopManagement.TaskType.TYPE_PHAT_SINH:
+//                taskType.set(mContext.getString(R.string.task_arising));
+//                break;
+//            case TaskShopManagement.TaskType.TYPE_CSKPP:
+//                taskType.set(mContext.getString(R.string.task_cskpp));
+//                break;
+//            case TaskShopManagement.TaskType.TYPE_TEAM:
+//            default:
+//                taskType.set(mContext.getString(R.string.task_team));
+//                break;
+//        }
     }
 
     @Override
@@ -87,15 +87,15 @@ public class TaskCSKPPDetailPresenter implements TaskCSKPPDetailContract.Present
     }
 
     public int getStatusBg() {
-        switch (mTaskModel.getStatus()) {
-            case TaskModel.TaskStatus.INPROGRESS:
+        switch (mTaskShopManagement.getStatus()) {
+            case TaskShopManagement.TaskStaffStatus.STATUS_INPROGRESS:
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     return mContext.getResources()
                             .getColor(android.R.color.holo_orange_light, null);
                 } else {
                     return mContext.getResources().getColor(android.R.color.holo_orange_light);
                 }
-            case TaskModel.TaskStatus.NOT_ACCEPTED:
+            case TaskShopManagement.TaskStaffStatus.STATUS_NEW:
             default:
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     return mContext.getResources().getColor(android.R.color.darker_gray, null);

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <variable
             name="presenter"
-            type="com.viettel.mbccs.screen.assigntask.arising.create.CreateArisingTaskPresenter" />
+            type="com.viettel.mbccs.screen.assigntask.arising.create.CreateArisingTaskPresenter"/>
 
-        <import type="android.view.View" />
+        <import type="android.view.View"/>
     </data>
 
     <RelativeLayout
@@ -24,8 +24,7 @@
             app:isShow="@{ true }"
             app:leftIcon="@{ @drawable/ic_arrow_left_white_24dp }"
             app:leftIconClick="@{ () -> presenter.close() }"
-            app:title="@{ presenter.toolbarTitle }"
-            />
+            app:title="@{ presenter.toolbarTitle }"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,7 +38,7 @@
                 style="@style/TextSearchTask"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/task_duration" />
+                android:text="@string/task_duration"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -48,23 +47,27 @@
                 android:orientation="horizontal">
 
                 <com.viettel.mbccs.widget.CustomDatePicker
+                    android:id="@+id/from_date"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="center" />
+                    android:gravity="center"/>
 
-                <ImageView
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginEnd="@dimen/dp_8"
                     android:layout_marginStart="@dimen/dp_8"
-                    android:src="@drawable/ic_play_arrow_black_24dp" />
+                    android:text="-"
+                    android:textSize="@dimen/sp_28"/>
 
                 <com.viettel.mbccs.widget.CustomDatePicker
+                    android:id="@+id/to_date"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="center" />
+                    android:gravity="center"/>
             </LinearLayout>
 
             <com.viettel.mbccs.widget.CustomTextView
@@ -72,7 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_20"
-                android:text="@string/staff" />
+                android:text="@string/staff"/>
 
             <com.viettel.mbccs.widget.CustomTextView
                 style="@style/TextSearchTask"
@@ -82,14 +85,14 @@
                 android:background="@drawable/bg_input"
                 android:drawableEnd="@drawable/ic_arrow_drop_down_black_24dp"
                 android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
-                android:onClick="@{ () -> presenter.onSelectStaffClick() }" />
+                android:onClick="@{ () -> presenter.onSelectStaffClick() }"/>
 
             <com.viettel.mbccs.widget.CustomTextView
                 style="@style/TextSearchTask"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_20"
-                android:text="@string/task_title" />
+                android:text="@string/task_title"/>
 
             <com.viettel.mbccs.widget.CustomEditText
                 style="@style/TextSearchTask"
@@ -100,14 +103,14 @@
                 android:minHeight="@dimen/dp_28"
                 android:paddingEnd="@dimen/dp_4"
                 android:paddingStart="@dimen/dp_4"
-                android:text="@={ presenter.taskName }" />
+                android:text="@={ presenter.taskName }"/>
 
             <com.viettel.mbccs.widget.CustomTextView
                 style="@style/TextSearchTask"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_20"
-                android:text="@string/description" />
+                android:text="@string/description"/>
 
             <com.viettel.mbccs.widget.CustomEditText
                 android:id="@+id/editText"
@@ -116,11 +119,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_20"
                 android:background="@drawable/bg_input"
+                android:gravity="start|top"
                 android:inputType="textMultiLine"
                 android:lines="5"
-                android:paddingEnd="@dimen/dp_4"
-                android:paddingStart="@dimen/dp_4"
-                android:text="@={ presenter.taskDescription }" />
+                android:padding="@dimen/dp_8"
+                android:text="@={ presenter.taskDescription }"/>
         </LinearLayout>
 
         <LinearLayout
@@ -135,21 +138,23 @@
                 style="@style/button_negative"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_marginEnd="@dimen/dp_4"
                 android:layout_marginRight="@dimen/dp_4"
                 android:layout_weight="1"
                 android:onClick="@{ () -> presenter.close() }"
-                android:text="@string/common_label_close" />
+                android:text="@string/common_label_close"/>
 
             <com.viettel.mbccs.widget.CustomButton
                 style="@style/button_positive"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dp_4"
                 android:layout_marginStart="@dimen/dp_4"
                 android:layout_weight="1"
                 android:onClick="@{ () -> presenter.assign() }"
-                android:text="@string/assign_task" />
+                android:text="@string/assign_task"/>
         </LinearLayout>
     </RelativeLayout>
 </layout>

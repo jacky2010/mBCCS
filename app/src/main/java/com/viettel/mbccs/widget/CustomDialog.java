@@ -129,6 +129,10 @@ public class CustomDialog extends AlertDialog {
         mBinding.accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (onAccept == null) {
+                    dismiss();
+                    return;
+                }
                 onAccept.onClick(CustomDialog.this, BUTTON_POSITIVE, getInput());
             }
         });

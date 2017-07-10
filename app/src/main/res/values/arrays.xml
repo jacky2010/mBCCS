@@ -8,21 +8,21 @@
     <string-array name="task_type_no_home">
         <item>Chăm sóc kênh phân phối</item>
         <item>Việc phát sinh</item>
-        <item>Việc tổ đội</item>
+        <!--<item>Việc tổ đội</item>-->
     </string-array>
 
     <string-array name="task_type">
         <item>Chăm sóc kênh phân phối</item>
         <item>Việc phát sinh</item>
-        <item>Việc tổ đội</item>
+        <!--<item>Việc tổ đội</item>-->
         <item>-Chọn loại công việc-</item>
     </string-array>
 
     <string-array name="task_status">
-        <item>Từ chối</item>
-        <item>Chưa nhận</item>
-        <item>Đang thực hiện</item>
+        <item>Chưa giao</item>
+        <item>Đã giao</item>
         <item>Hoàn thành</item>
+        <item>Từ chối</item>
         <item>-Chọn trạng thái công việc-</item>
     </string-array>
 

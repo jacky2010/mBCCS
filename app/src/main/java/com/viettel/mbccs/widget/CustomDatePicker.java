@@ -18,10 +18,12 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.databinding.LayoutDatePickerBinding;
 import com.viettel.mbccs.utils.DateUtils;
 import com.viettel.mbccs.utils.StringUtils;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;

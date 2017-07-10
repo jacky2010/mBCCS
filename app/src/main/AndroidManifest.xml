@@ -155,6 +155,9 @@
             android:name=".screen.assigntask.ListAssignTaskActivity"
             android:screenOrientation="portrait"/>
         <activity
+            android:name=".screen.assigntask.ListUpdateTaskActivity"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".screen.assigntask.arising.create.CreateArisingTaskActivity"
             android:screenOrientation="portrait"/>
         <activity
