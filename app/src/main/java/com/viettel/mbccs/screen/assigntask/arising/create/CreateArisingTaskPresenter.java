@@ -4,6 +4,7 @@ import android.content.Context;
 import android.databinding.ObservableField;
 
 import com.viettel.mbccs.R;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.TaskShopManagement;
 import com.viettel.mbccs.data.source.CongViecRepository;
 import com.viettel.mbccs.data.source.UserRepository;
@@ -97,7 +98,7 @@ public class CreateArisingTaskPresenter implements CreatingArisingTaskContract.P
         request.setUserCreate(mUserRepository.getUserInfo().getStaffInfo().getStaffCode());
 
         DataRequest<CreateTaskExtendRequest> dataRequest = new DataRequest<>();
-        dataRequest.setWsCode(ApiCode.CreateTaskExtend);
+        dataRequest.setWsCode(WsCode.CreateTaskExtend);
         dataRequest.setWsRequest(request);
 
         Subscription subscription = mCongViecRepository.createTaskExtend(dataRequest)

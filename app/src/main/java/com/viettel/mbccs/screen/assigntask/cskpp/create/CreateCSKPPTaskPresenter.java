@@ -3,6 +3,7 @@ package com.viettel.mbccs.screen.assigntask.cskpp.create;
 import android.content.Context;
 
 import com.viettel.mbccs.R;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.TaskShopManagement;
 import com.viettel.mbccs.data.source.CongViecRepository;
 import com.viettel.mbccs.data.source.UserRepository;
@@ -91,7 +92,7 @@ public class CreateCSKPPTaskPresenter implements CreatingCSKPPTaskContract.Prese
         request.setUserCreate(mUserRepository.getUserInfo().getStaffInfo().getStaffCode());
 
         DataRequest<CreateTaskExtendRequest> dataRequest = new DataRequest<>();
-        dataRequest.setWsCode(ApiCode.CreateTaskExtend);
+        dataRequest.setWsCode(WsCode.CreateTaskExtend);
         dataRequest.setWsRequest(request);
 
         Subscription subscription = mCongViecRepository.createTaskExtend(dataRequest)

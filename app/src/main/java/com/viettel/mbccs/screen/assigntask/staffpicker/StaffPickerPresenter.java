@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseSearchListPickerPresenter;
 import com.viettel.mbccs.base.searchlistview.BaseSearchListViewContract;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.StaffInfo;
 import com.viettel.mbccs.data.source.CongViecRepository;
 import com.viettel.mbccs.data.source.UserRepository;
@@ -41,7 +42,7 @@ public class StaffPickerPresenter extends BaseSearchListPickerPresenter<StaffInf
         request.setChannelTypeId(String.valueOf(userRepository.getUserInfo().getChannelInfo().getChannelType()));
 
         DataRequest<GetStaffToAssignTaskRequest> dataRequest = new DataRequest<>();
-        dataRequest.setWsCode(ApiCode.GetStaffToAssignTask);
+        dataRequest.setWsCode(WsCode.GetStaffToAssignTask);
         dataRequest.setWsRequest(request);
 
         congViecRepository.getStaffToAssignTask(dataRequest).subscribe(new MBCCSSubscribe<GetStaffToAssignTaskResponse>() {

@@ -77,7 +77,6 @@ public class WsCode {
 
     // 3.3.3.1
     public final static String GetRegisterSubInfo = "WS_getRegiterSubInfo";
-    public final static String GetRegisterSub = "WS_getRegisterSub";
 
     // 3.3.3.2
     public final static String RegisterCustomerInfo = "WS_registerCustomerInfo";
@@ -431,4 +430,8 @@ public class WsCode {
     public final static String GetDetailImageOfProduct = "WS_getDetailImageOfProduct";
     public final static String IsKPPManager = "WS_isManager";
     public final static String GetRegisterSub = "WS_getRegisterSub";
+    public final static String GetInfoTaskForUpdate = "WS_getInfoTaskForUpdate";
+    public final static String GetTaskPrepareAssignStaff = "WS_getTaskPrepareAssignStaff";
+    public final static String GetStaffToAssignTask = "WS_getStaffToAssignTask";
+    public final static String CreateTaskExtend = "WS_createTaskExtend";
 }

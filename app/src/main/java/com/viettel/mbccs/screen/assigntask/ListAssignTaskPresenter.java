@@ -3,6 +3,7 @@ package com.viettel.mbccs.screen.assigntask;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.TaskShopManagement;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTaskPrepareAssignStaffRequest;
@@ -49,7 +50,7 @@ public class ListAssignTaskPresenter extends BaseListTaskPresenter<TaskShopManag
         request.setStatus(String.valueOf(taskStatus.get()));
 
         DataRequest<GetTaskPrepareAssignStaffRequest> dataRequest = new DataRequest<>();
-        dataRequest.setWsCode(ApiCode.GetTaskPrepareAssignStaff);
+        dataRequest.setWsCode(WsCode.GetTaskPrepareAssignStaff);
         dataRequest.setWsRequest(request);
 
         Subscription subscription = mRepository.getTaskPrepareAssignStaff(dataRequest)
