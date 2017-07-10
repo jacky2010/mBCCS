@@ -71,14 +71,10 @@ public abstract class BaseBillInputDetaiActivity extends
     }
 
     @Override
-    public void onCreateExpStockSuccess(ArrayList<StockTransDetail> stockTransDetails) {
-        for (StockTransDetail stockTransDetail : stockTransDetails) {
-            stockTransDetail.getStockSerial();
-        }
-        ExportSuccessDialog exportSuccessDialog =
-                ExportSuccessDialog.newInstance(stockTransDetails, null,
-                        String.format(getString(R.string.warehouse_label_export_success_code), ""),
-                        String.format(getString(R.string.warehouse_label_receive), ""));
+    public void onCreateExpStockSuccess(StockTrans stockTrans) {
+        ExportSuccessDialog exportSuccessDialog = ExportSuccessDialog.newInstance(stockTrans,
+                String.format(getString(R.string.warehouse_label_export_success_code), ""),
+                String.format(getString(R.string.warehouse_label_receive), ""));
         exportSuccessDialog.setOnDialogDismissListener(
                 new ExportSuccessDialog.OnDialogDismissListener() {
 

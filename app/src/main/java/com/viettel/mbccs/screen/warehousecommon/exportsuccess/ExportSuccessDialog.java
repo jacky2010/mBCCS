@@ -16,16 +16,31 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import com.viettel.mbccs.R;
+import com.viettel.mbccs.constance.WsCode;
+import com.viettel.mbccs.data.model.SerialBO;
 import com.viettel.mbccs.data.model.StockSerial;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.model.StockTrans;
 import com.viettel.mbccs.data.model.StockTransDetail;
+import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
+import com.viettel.mbccs.data.source.UserRepository;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListStockTransDetailRequest;
+import com.viettel.mbccs.data.source.remote.request.GetStockTransSerialDetailRequest;
+import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.GetStockTransSerialDetailResponse;
+import com.viettel.mbccs.data.source.remote.response.ListStockTransDetailsReponse;
 import com.viettel.mbccs.databinding.DialogExportSuccessBinding;
 import com.viettel.mbccs.screen.common.success.DialogViewSerial;
 import com.viettel.mbccs.screen.warehousecommon.exportwarehouse.StockTransDetailAdapter;
+import com.viettel.mbccs.utils.Common;
+import com.viettel.mbccs.utils.DialogUtils;
+import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import com.viettel.mbccs.variable.Constants;
 import java.util.ArrayList;
 import java.util.List;
+import rx.Subscription;
+import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by eo_cuong on 6/21/17.
@@ -35,20 +50,21 @@ public class ExportSuccessDialog extends DialogFragment
         implements StockTransDetailAdapter.OnStockTransDetailAdapterListener {
 
     private StockTransDetailAdapter mAdapter;
-
     public ObservableField<String> cmdCode;
     public ObservableField<String> cmdReceive;
     public ObservableField<String> cmdSender;
-    private List<StockTransDetail> mStockTransDetails;
+    private List<StockTransDetail> mStockTransDetails = new ArrayList<>();
     private String cmdCodeTitle;
     private String cmdReceiveTitle;
     private String cmdSenderTitle;
     DialogExportSuccessBinding mBinding;
     private AppCompatActivity mAppCompatActivity;
     private List<StockSerial> mStockSerials = new ArrayList<>();
-    private static boolean isFromBundle = false;
     private OnDialogDismissListener mOnDialogDismissListener;
     private StockTrans mStockTrans;
+    private UserRepository mUserRepository;
+    private BanHangKhoTaiChinhRepository mBanHangKhoTaiChinhRepository;
+    private CompositeSubscription mSubscription;
 
     public OnDialogDismissListener getOnDialogDismissListener() {
         return mOnDialogDismissListener;
@@ -58,33 +74,26 @@ public class ExportSuccessDialog extends DialogFragment
         mOnDialogDismissListener = onDialogDismissListener;
     }
 
-    public static ExportSuccessDialog newInstance(ArrayList<StockTransDetail> stockTransDetail,
-            StockTrans stockTrans, String cmdCodeTitle, String cmdNameTitle) {
+    public static ExportSuccessDialog newInstance(StockTrans stockTrans, String cmdCodeTitle,
+            String cmdNameTitle) {
         Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList(Constants.BundleConstant.STOCK_TRANS_DETAIL_LIST,
-                stockTransDetail);
         bundle.putParcelable(Constants.BundleConstant.STOCK_TRANS, stockTrans);
         bundle.putString(Constants.BundleConstant.CMD_CODE_TITLE, cmdCodeTitle);
         bundle.putString(Constants.BundleConstant.CMD_RECEIVE_TITLE, cmdNameTitle);
         ExportSuccessDialog fragment = new ExportSuccessDialog();
         fragment.setArguments(bundle);
-        isFromBundle = true;
         return fragment;
     }
 
-    public static ExportSuccessDialog newInstance(ArrayList<StockTransDetail> stockTransDetail,
-            StockTrans stockTrans, String cmdCodeTitle, String cmdNameTitle,
-            String cmdSenderTitle) {
+    public static ExportSuccessDialog newInstance(StockTrans stockTrans, String cmdCodeTitle,
+            String cmdNameTitle, String cmdSenderTitle) {
         Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList(Constants.BundleConstant.STOCK_TRANS_DETAIL_LIST,
-                stockTransDetail);
         bundle.putParcelable(Constants.BundleConstant.STOCK_TRANS, stockTrans);
         bundle.putString(Constants.BundleConstant.CMD_CODE_TITLE, cmdCodeTitle);
         bundle.putString(Constants.BundleConstant.CMD_RECEIVE_TITLE, cmdNameTitle);
         bundle.putString(Constants.BundleConstant.CMD_SENDER_TITLE, cmdSenderTitle);
         ExportSuccessDialog fragment = new ExportSuccessDialog();
         fragment.setArguments(bundle);
-        isFromBundle = true;
         return fragment;
     }
 
@@ -110,7 +119,6 @@ public class ExportSuccessDialog extends DialogFragment
     }
 
     public static ExportSuccessDialog newInstance() {
-        isFromBundle = false;
         return new ExportSuccessDialog();
     }
 
@@ -150,31 +158,17 @@ public class ExportSuccessDialog extends DialogFragment
 
     protected void initData() {
 
-        if (isFromBundle) {
-            Bundle bundle = getArguments();
-            if (bundle == null) {
-                return;
-            }
-            mStockTransDetails =
-                    bundle.getParcelableArrayList(Constants.BundleConstant.STOCK_TRANS_DETAIL_LIST);
-            mStockTrans = bundle.getParcelable(Constants.BundleConstant.STOCK_TRANS);
-            cmdCodeTitle = bundle.getString(Constants.BundleConstant.CMD_CODE_TITLE);
-            cmdReceiveTitle = bundle.getString(Constants.BundleConstant.CMD_RECEIVE_TITLE);
-            cmdSenderTitle = bundle.getString(Constants.BundleConstant.CMD_SENDER_TITLE);
-        } else {
-            if (mStockTransDetails == null && mStockSerials != null) {
-                mStockTransDetails = new ArrayList<>();
-                for (StockSerial stockSerial : mStockSerials) {
-                    StockTransDetail stockTransDetail = new StockTransDetail();
-                    stockTransDetail.setStockModelId(stockSerial.getStockModelId());
-                    stockTransDetail.setQuantity(stockSerial.getQuantity());
-                    stockTransDetail.setSerialBlocks(stockSerial.getSerialBOs());
-                    stockTransDetail.setStockModelCode(stockSerial.getStockModelCode());
-                    stockTransDetail.setStockModelName(stockSerial.getStockModelName());
-                    mStockTransDetails.add(stockTransDetail);
-                }
-            }
+        mUserRepository = UserRepository.getInstance();
+        mBanHangKhoTaiChinhRepository = BanHangKhoTaiChinhRepository.getInstance();
+        mSubscription = new CompositeSubscription();
+        Bundle bundle = getArguments();
+        if (bundle == null) {
+            return;
         }
+        mStockTrans = bundle.getParcelable(Constants.BundleConstant.STOCK_TRANS);
+        cmdCodeTitle = bundle.getString(Constants.BundleConstant.CMD_CODE_TITLE);
+        cmdReceiveTitle = bundle.getString(Constants.BundleConstant.CMD_RECEIVE_TITLE);
+        cmdSenderTitle = bundle.getString(Constants.BundleConstant.CMD_SENDER_TITLE);
         mAdapter = new StockTransDetailAdapter(getActivity(), mStockTransDetails,
                 getActivity().getString(R.string.item_nhap_kho_cap_duoi_mat_hang_xem_serial));
         mAdapter.setOnStockTransAdapterListerner(this);
@@ -190,9 +184,34 @@ public class ExportSuccessDialog extends DialogFragment
         cmdReceive.set(cmdReceiveTitle);
         cmdSender.set(cmdSenderTitle);
 
-        //        cmdCode.set(String.format(getString(R.string
-        // .warehouse_label_export_success_code), ""));
-        //        cmdReceive.set(String.format(getString(R.string.warehouse_label_receive), ""));
+        getStockTransDetail();
+    }
+
+    private void getStockTransDetail() {
+        DataRequest mDataRequest = new DataRequest<>();
+        mDataRequest.setWsCode(WsCode.GetListStockTransDetail);
+        GetListStockTransDetailRequest request = new GetListStockTransDetailRequest();
+        request.setStockTransId(mStockTrans.getStockTransId());
+        mDataRequest.setWsRequest(request);
+        Subscription subscription =
+                mBanHangKhoTaiChinhRepository.getListStockTransDetail(mDataRequest).subscribe(
+
+                        new MBCCSSubscribe<ListStockTransDetailsReponse>() {
+                            @Override
+                            public void onSuccess(ListStockTransDetailsReponse object) {
+                                if (object != null && object.getStockTransDetails() != null) {
+                                    mStockTransDetails.clear();
+                                    mStockTransDetails.addAll(object.getStockTransDetails());
+                                    mAdapter.notifyDataSetChanged();
+                                }
+                            }
+
+                            @Override
+                            public void onError(BaseException error) {
+                                DialogUtils.showDialogError(mAppCompatActivity, error);
+                            }
+                        });
+        mSubscription.add(subscription);
     }
 
     public StockTransDetailAdapter getAdapter() {
@@ -210,18 +229,51 @@ public class ExportSuccessDialog extends DialogFragment
     }
 
     @Override
-    public void onSerialPickerClick(int position, StockTransDetail stockTransDetail) {
+    public void onSerialPickerClick(int position, final StockTransDetail stockTransDetail) {
         if (stockTransDetail == null || mStockTrans == null) {
             return;
         }
-        StockTotal stockTotal = new StockTotal();
-        stockTotal.setStateId(stockTransDetail.getStateId());
-        stockTotal.setOwnerId(mStockTrans.getFromOwnerId());
-        stockTotal.setOwnerType(mStockTrans.getFromOwnerType());
-        stockTotal.setStockModelId(stockTransDetail.getStockModelId());
-        DialogViewSerial dialogViewSerial = DialogViewSerial.newInstance();
-        dialogViewSerial.setStockTotal(stockTotal);
-        dialogViewSerial.show(mAppCompatActivity.getSupportFragmentManager(), "");
+        DataRequest<GetStockTransSerialDetailRequest> dataRequest = new DataRequest<>();
+        GetStockTransSerialDetailRequest request = new GetStockTransSerialDetailRequest();
+        request.setStockTransId(mStockTrans.getStockTransId());
+        request.setStockModelId(stockTransDetail.getStockModelId());
+        dataRequest.setWsCode(WsCode.GetStockTransSerialDetail);
+        dataRequest.setWsRequest(request);
+        Subscription subscription =
+                mBanHangKhoTaiChinhRepository.getStockTransDetailSerial(dataRequest).subscribe(
+
+                        new MBCCSSubscribe<GetStockTransSerialDetailResponse>() {
+                            @Override
+                            public void onSuccess(GetStockTransSerialDetailResponse object) {
+                                if (object != null && object.getSerialBOList() != null) {
+                                    StockSerial stockSerial = new StockSerial();
+                                    stockSerial.setSerialBOs(object.getSerialBOList());
+                                    stockSerial.setStockModelId(stockTransDetail.getStockModelId());
+                                    stockSerial.setStockModelName(
+                                            stockTransDetail.getStockModelName());
+                                    stockSerial.setQuantity(Common.getSerialCountByListSerialBlock(
+                                            stockSerial.getSerialBOs()));
+                                    DialogViewSerial dialogViewSerial =
+                                            DialogViewSerial.newInstance();
+                                    dialogViewSerial.setStockSerial(stockSerial);
+                                    dialogViewSerial.show(
+                                            mAppCompatActivity.getSupportFragmentManager(), "");
+                                }
+                            }
+
+                            @Override
+                            public void onError(BaseException error) {
+
+                                DialogUtils.showDialogError(mAppCompatActivity, error);
+                            }
+                        });
+        mSubscription.add(subscription);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mSubscription.clear();
     }
 
     @Override

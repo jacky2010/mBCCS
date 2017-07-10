@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.viettel.mbccs.R;
+import com.viettel.mbccs.constance.StockTransType;
 import com.viettel.mbccs.data.model.StockTrans;
 import com.viettel.mbccs.data.model.WarehouseOrder;
 import com.viettel.mbccs.databinding.ItemWarehouseOrderBinding;
@@ -57,7 +58,12 @@ public class ListOrderAdapter
                     .getString(R.string.item_orders_change_code_name,
                             String.valueOf(item.getStockTransId()),
                             String.valueOf(item.getToOwnerId())));
-            mBinding.setChannelName(String.valueOf(item.getToOwnerType()));
+            if (item.getActionType()== StockTransType.TRANS_EXPORT){
+                mBinding.setChannelName(String.valueOf(item.getToOwnerType()));
+            }else{
+                mBinding.setChannelName(String.valueOf(item.getFromOwnerId()));
+            }
+
             mBinding.setCreatedDate(DateUtils.convertStringToStringFormat(item.getCreateDatetime(),
                     DateUtils.DATE_TIME_FORMAT));
             mBinding.setOnClicked(new View.OnClickListener() {

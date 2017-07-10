@@ -33,7 +33,7 @@ public class StockTransDetail implements Parcelable {
     @Expose
     private String stockModelName;
 
-    @SerializedName("quantity")
+    @SerializedName("quantityRes")
     @Expose
     private long quantity;
 

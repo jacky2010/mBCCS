@@ -42,7 +42,7 @@ public class ListNhanVienTraHangActivity extends BaseListOrderActivity {
         }
 
         if (getPositionStatus() == 1) {
-            mRequest.setStockTransStatus(StockTransStatus.TRANS_CANCEL);
+            mRequest.setStockTransStatus(StockTransStatus.TRANS_REJECT);
             setItemCountStringFormat(
                     getString(R.string.nv_trahangcaptren_list_label_count_canceled));
         }
@@ -59,23 +59,6 @@ public class ListNhanVienTraHangActivity extends BaseListOrderActivity {
                 .subscribe(new MBCCSSubscribe<GetListExpCmdResponse>() {
                     @Override
                     public void onSuccess(GetListExpCmdResponse object) {
-                        //fake
-                        //object = new GetListExpCmdResponse();
-                        //List<StockTrans> stockTranses = new ArrayList<StockTrans>();
-                        //StockTrans stockTrans = new StockTrans();
-                        //stockTrans.setStockTransId(2342352);
-                        //stockTrans.setToOwnerId(234235);
-                        //stockTrans.setCreateDatetime("2017-07-05T01:28:46+07:00");
-                        //stockTrans.setStockTransStatusName("hang moi");
-                        //StockTrans stockTrans1 = new StockTrans();
-                        //stockTrans1.setStockTransId(1237);
-                        //stockTrans1.setToOwnerId(23424);
-                        //stockTrans1.setCreateDatetime("2017-07-05T01:28:46+07:00");
-                        //stockTrans1.setStockTransStatusName("hang moi");
-                        //stockTranses.add(stockTrans);
-                        //stockTranses.add(stockTrans1);
-                        //object.setStockTranses(stockTranses);
-
                         if (object != null && object.getStockTranses() != null) {
                             setDataSearch(object.getStockTranses());
                         } else {
@@ -116,11 +99,9 @@ public class ListNhanVienTraHangActivity extends BaseListOrderActivity {
 
                         if (object != null && object.getStockTransDetails() != null) {
                             ExportSuccessDialog exportSuccessDialog =
-                                    ExportSuccessDialog.newInstance(
-                                            (ArrayList<StockTransDetail>) object.getStockTransDetails(),
-                                            stockTrans, String.format(getString(
-                                                    R.string.warehouse_label_export_success_code),
-                                                    String.valueOf(stockTrans.getStockTransId())),
+                                    ExportSuccessDialog.newInstance(stockTrans, String.format(
+                                            getString(R.string.warehouse_label_export_success_code),
+                                            String.valueOf(stockTrans.getStockTransId())),
                                             String.format(
                                                     getString(R.string.warehouse_label_receive),
                                                     String.valueOf(stockTrans.getToOwnerId())));

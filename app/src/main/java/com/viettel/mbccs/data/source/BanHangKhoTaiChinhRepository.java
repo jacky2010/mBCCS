@@ -197,7 +197,7 @@ public class BanHangKhoTaiChinhRepository
     }
 
     @Override
-    public Observable<EmptyObject> createExpStock(
+    public Observable<BaseCreateCmdNoteResponse> createExpStock(
             DataRequest<CreateExpStockRequest> requestDataRequest) {
         return banHangKhoTaiChinhRemoteDataSource.createExpStock(requestDataRequest);
     }

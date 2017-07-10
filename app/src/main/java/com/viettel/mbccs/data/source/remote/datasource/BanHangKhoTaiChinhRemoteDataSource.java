@@ -190,7 +190,8 @@ public class BanHangKhoTaiChinhRemoteDataSource implements IBanHangKhoTaiChinhRe
                 .getTelecomserviceAndSaleProgram(request)
                 .flatMap(SchedulerUtils.<TelecomServiceAndSaleProgramResponse>convertDataFlatMap())
                 .compose(
-                        SchedulerUtils.<TelecomServiceAndSaleProgramResponse>applyAsyncSchedulers());
+                        SchedulerUtils.<TelecomServiceAndSaleProgramResponse>applyAsyncSchedulers
+                                ());
     }
 
     @Override
@@ -247,12 +248,12 @@ public class BanHangKhoTaiChinhRemoteDataSource implements IBanHangKhoTaiChinhRe
     }
 
     @Override
-    public Observable<EmptyObject> createExpStock(
+    public Observable<BaseCreateCmdNoteResponse> createExpStock(
             DataRequest<CreateExpStockRequest> requestDataRequest) {
         return RequestHelper.getRequest()
                 .createExpStock(requestDataRequest)
-                .flatMap(SchedulerUtils.<EmptyObject>convertDataFlatMap())
-                .compose(SchedulerUtils.<EmptyObject>applyAsyncSchedulers());
+                .flatMap(SchedulerUtils.<BaseCreateCmdNoteResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<BaseCreateCmdNoteResponse>applyAsyncSchedulers());
     }
 
     @Override

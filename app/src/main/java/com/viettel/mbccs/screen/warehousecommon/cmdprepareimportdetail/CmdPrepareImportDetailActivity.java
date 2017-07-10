@@ -74,14 +74,13 @@ public abstract class CmdPrepareImportDetailActivity extends
         for (StockTransDetail stockTransDetail : stockTransDetails) {
             stockTransDetail.getStockSerial();
         }
-        ExportSuccessDialog exportSuccessDialog =
-                ExportSuccessDialog.newInstance(stockTransDetails, stockTrans,
-                        String.format(getString(R.string.warehouse_label_export_success_code),
-                                String.valueOf(stockTrans.getStockTransId())),
-                        String.format(getString(R.string.warehouse_label_receive),
-                                String.valueOf(stockTrans.getToOwnerId())),
-                        String.format(getString(R.string.warehouse_label_sender),
-                                String.valueOf(stockTrans.getFromOwnerId())));
+        ExportSuccessDialog exportSuccessDialog = ExportSuccessDialog.newInstance(stockTrans,
+                String.format(getString(R.string.warehouse_label_export_success_code),
+                        String.valueOf(stockTrans.getStockTransId())),
+                String.format(getString(R.string.warehouse_label_receive),
+                        String.valueOf(stockTrans.getToOwnerId())),
+                String.format(getString(R.string.warehouse_label_sender),
+                        String.valueOf(stockTrans.getFromOwnerId())));
         exportSuccessDialog.setOnDialogDismissListener(
                 new ExportSuccessDialog.OnDialogDismissListener() {
 

@@ -71,17 +71,12 @@ public abstract class BaseExportWareHouseActivity extends
     }
 
     @Override
-    public void onCreateExpStockSuccess(ArrayList<StockTransDetail> stockTransDetails,
-            StockTrans stockTrans) {
-        for (StockTransDetail stockTransDetail : stockTransDetails) {
-            stockTransDetail.getStockSerial();
-        }
-        ExportSuccessDialog exportSuccessDialog =
-                ExportSuccessDialog.newInstance(stockTransDetails, mStockTrans,
-                        String.format(getString(R.string.warehouse_label_export_success_code),
-                                stockTrans.getStockTransId()),
-                        String.format(getString(R.string.warehouse_label_receive),
-                                stockTrans.getToOwnerId()));
+    public void onCreateExpStockSuccess(StockTrans stockTrans) {
+        ExportSuccessDialog exportSuccessDialog = ExportSuccessDialog.newInstance(mStockTrans,
+                String.format(getString(R.string.warehouse_label_export_success_code),
+                        stockTrans.getStockTransId()),
+                String.format(getString(R.string.warehouse_label_receive),
+                        stockTrans.getToOwnerId()));
         exportSuccessDialog.setOnDialogDismissListener(
                 new ExportSuccessDialog.OnDialogDismissListener() {
 

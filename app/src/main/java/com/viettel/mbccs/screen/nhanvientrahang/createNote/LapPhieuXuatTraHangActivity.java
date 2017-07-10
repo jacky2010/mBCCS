@@ -5,7 +5,6 @@ import android.os.Bundle;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
 import com.viettel.mbccs.data.model.SerialPickerModel;
-import com.viettel.mbccs.data.model.StockSerial;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.model.StockTrans;
 import com.viettel.mbccs.databinding.ActivityLapPhieuXuatTraHangBinding;
@@ -71,18 +70,20 @@ public class LapPhieuXuatTraHangActivity extends
 
     @Override
     public void onCreateExpSuccess(ArrayList<StockTotal> stockTotals, StockTrans stockTrans) {
-        ArrayList<StockSerial> stockSerials = new ArrayList<>();
-        for (StockTotal stockTotal : stockTotals) {
-            stockSerials.add(stockTotal.getStockSerial());
-        }
-        ExportSuccessDialog exportSuccessDialog = ExportSuccessDialog.newInstance();
-        exportSuccessDialog.setCmdCodeTitle(
+        ExportSuccessDialog exportSuccessDialog = ExportSuccessDialog.newInstance(stockTrans,
                 String.format(getString(R.string.nhanvien_xuattra_lable_cmd_title),
-                        String.valueOf(stockTrans.getStockTransId())));
-        exportSuccessDialog.setCmdNameTitle(
+                        String.valueOf(stockTrans.getStockTransId())),
                 String.format(getString(R.string.nhanvien_xuattra_lable_receive_title),
                         String.valueOf(stockTrans.getToOwnerId())));
-        exportSuccessDialog.setStockSerials(stockSerials);
+        exportSuccessDialog.setOnDialogDismissListener(
+                new ExportSuccessDialog.OnDialogDismissListener() {
+
+                    @Override
+                    public void onDialogDissmis() {
+                        finish();
+                        setResult(RESULT_OK);
+                    }
+                });
         exportSuccessDialog.show(getSupportFragmentManager(), "");
     }
 

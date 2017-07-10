@@ -4,6 +4,7 @@ import com.viettel.mbccs.base.BasePresenter;
 import com.viettel.mbccs.base.BaseView;
 import com.viettel.mbccs.data.model.StockSerial;
 import com.viettel.mbccs.data.model.StockTotal;
+import com.viettel.mbccs.data.model.StockTrans;
 import com.viettel.mbccs.data.model.StockTransDetail;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,6 @@ interface BaseBillInputDetailContract {
 
         void onSerialPicker(StockTransDetail stockTransDetail);
 
-        void onCreateExpStockSuccess(ArrayList<StockTransDetail> stockTransDetails);
+        void onCreateExpStockSuccess(StockTrans stockTrans);
     }
 }
