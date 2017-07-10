@@ -1,17 +1,17 @@
 package com.viettel.mbccs.base.listkho;
 
-import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
 import android.support.v4.widget.SwipeRefreshLayout;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
-import com.viettel.mbccs.base.searchlistview.BaseSearchListViewContract;
+import com.viettel.mbccs.constance.StockTransStatus;
 import com.viettel.mbccs.data.model.StockTrans;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.databinding.ActivityListOrderWarehouseBinding;
 import com.viettel.mbccs.utils.DialogUtils;
+import com.viettel.mbccs.variable.Constants;
 import com.viettel.mbccs.widget.CustomDatePicker;
 import com.viettel.mbccs.widget.MultiDirectionSlidingDrawer;
 import java.util.List;
@@ -95,11 +95,6 @@ public abstract class BaseListOrderActivity
     }
 
     @Override
-    public void setItemCountStringFormat(String format) {
-        mPresenter.setItemCountStringFormat(format);
-    }
-
-    @Override
     public int getPositionStatus() {
         return mPresenter.positionStatus;
     }
@@ -115,7 +110,6 @@ public abstract class BaseListOrderActivity
     public void onSearchSuccess() {
         mPresenter.onSearchSuccess();
         closeForm();
-        mBinding.textCount.setText(mPresenter.getItemCountString());
         swipeLayout.setRefreshing(false);
     }
 
@@ -126,9 +120,6 @@ public abstract class BaseListOrderActivity
 
     @Override
     public void setDataSearch(List<StockTrans> stockTranses) {
-        for (StockTrans stockTrans : stockTranses) {
-            stockTrans.setActionName(getString(R.string.nv_trahangcaptren_action_detail));
-        }
         mPresenter.setDataSearch(stockTranses);
     }
 

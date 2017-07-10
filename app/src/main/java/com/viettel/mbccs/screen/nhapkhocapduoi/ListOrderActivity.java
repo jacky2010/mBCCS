@@ -124,34 +124,23 @@ public class ListOrderActivity extends BaseListOrderActivity {
     @Override
     public void doSearch() {
         int positionStatus = getPositionStatus();
-        if (positionStatus == 1) {
-            setItemCountStringFormat(
-                    getString(R.string.nhanvien_xuattra_label_count_cmd_not_approve));
-        } else {
-            getString(R.string.activity_list_order_warehouse_lenh_chua_lap_phieu);
-        }
-
         showLoading();
         DataRequest<GetListExpCmdRequest> dataRequest = new DataRequest<>();
         GetListExpCmdRequest request = new GetListExpCmdRequest();
         if (getPositionStatus() == 0) {
             request.setStockTransStatus(StockTransStatus.TRANS_NON_NOTE);
-            setItemCountStringFormat(getString(R.string.nhapkhonhanvien_count_not_not));
         }
 
         if (getPositionStatus() == 1) {
             request.setStockTransStatus(StockTransStatus.TRANS_NOTED);
-            setItemCountStringFormat(getString(R.string.nhapkhonhanvien_count_noted));
         }
 
         if (getPositionStatus() == 2) {
             request.setStockTransStatus(StockTransStatus.TRANS_DONE);
-            setItemCountStringFormat(getString(R.string.nhapkhonhanvien_count_not_not));
         }
 
         if (getPositionStatus() == 3) {
             request.setStockTransStatus(StockTransStatus.TRANS_CANCEL);
-            setItemCountStringFormat(getString(R.string.nhapkhonhanvien_count_canceled));
         }
 
         request.setStockTransType(StockTransType.TRANS_EXPORT);
@@ -207,7 +196,6 @@ public class ListOrderActivity extends BaseListOrderActivity {
                         hideLoadingDialog();
                     }
                 });
-
         onSearchSuccess();
     }
 

@@ -30,25 +30,12 @@
             app:title="@{ presenter.toolbarTitle }"
             />
 
-        <com.viettel.mbccs.widget.CustomTextView
-            android:id="@+id/text_count"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/toolbar"
-            android:layout_marginBottom="@dimen/dp_16"
-            android:layout_marginLeft="@dimen/dp_8"
-            android:layout_marginStart="@dimen/dp_8"
-            android:layout_marginTop="?attr/actionBarSize"
-            android:padding="@dimen/dp_10"
-            android:textColor="@color/black"
-            android:textSize="@dimen/sp_15"
-            bind:textUnderLine="@{ presenter.itemCountStringText}"
-            />
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipeLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/text_count"
+            android:layout_below="@id/toolbar"
+            android:layout_marginTop="?attr/actionBarSize"
             >
             <FrameLayout
                 android:layout_width="match_parent"
@@ -63,15 +50,6 @@
                     />
             </FrameLayout>
         </android.support.v4.widget.SwipeRefreshLayout>
-
-
-        <View
-            android:id="@+id/empty"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/text_count"
-            android:visibility="@{ presenter.isEmpty ? View.VISIBLE : View.GONE }"
-            />
 
         <android.support.design.widget.FloatingActionButton
             android:layout_width="wrap_content"
@@ -106,13 +84,13 @@
                 android:id="@+id/search_form"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:clickable="true"
                 bind:adapter="@{ presenter.warehouseAdapter }"
                 bind:adapter2="@{ presenter.statusAdapter }"
                 bind:searchClick="@{() -> presenter.doSearch()}"
                 bind:titleSpinner="@{ presenter.wareHouseTitle }"
                 bind:titleSpinner2="@{ @string/activity_list_order_warehouse_trang_thai_lenh }"
                 bind:titleTime="@{ @string/activity_list_order_warehouse_ngay_lap_lenh }"
-                android:clickable="true"
                 />
 
             <RelativeLayout

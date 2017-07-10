@@ -31,8 +31,6 @@ public interface BaseListOrderContract {
 
         void setDataSearch(List<StockTrans> stockTranses);
 
-        void setItemCountStringFormat(String format);
-
         String getItemCountStringFormat();
 
         String getToolbarTitle();

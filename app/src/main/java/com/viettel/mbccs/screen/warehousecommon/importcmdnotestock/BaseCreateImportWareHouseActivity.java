@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.createorder.BaseCreateOrderActivity;
+import com.viettel.mbccs.constance.StockTransStatus;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.model.StockTrans;
 import com.viettel.mbccs.data.model.StockTransDetail;
 import com.viettel.mbccs.screen.common.success.DialogViewSerial;
 import com.viettel.mbccs.screen.nhapkhocapduoi.createorder.CreateOrderSuccessActivity;
+import com.viettel.mbccs.screen.warehousecommon.exportsuccess.ExportSuccessDialog;
 import com.viettel.mbccs.variable.Constants;
 import com.viettel.mbccs.widget.CustomDialog;
 
@@ -145,8 +147,36 @@ public abstract class BaseCreateImportWareHouseActivity extends BaseCreateOrderA
 
     @Override
     public void createCmdNoteStockSuccess(StockTrans stockTrans) {
-        startActivity(new Intent(BaseCreateImportWareHouseActivity.this,
-                CreateOrderSuccessActivity.class));
+        String title = null;
+        if (stockTrans.getStockTransStatus() == StockTransStatus.TRANS_NON_NOTE) {
+            title = String.format(getString(R.string.common_import_label_import_cmd),
+                    String.valueOf(stockTrans.getStockTransId()));
+        }
+
+        if (stockTrans.getStockTransStatus() == StockTransStatus.TRANS_NOTED) {
+            title = String.format(getString(R.string.common_import_label_import_note),
+                    String.valueOf(stockTrans.getStockTransId()));
+        }
+
+        if (stockTrans.getStockTransStatus() == StockTransStatus.TRANS_DONE) {
+            title = String.format(getString(R.string.common_import_label_import_stock),
+                    String.valueOf(stockTrans.getStockTransId()));
+        }
+
+        ExportSuccessDialog exportSuccessDialog = ExportSuccessDialog.newInstance(stockTrans, title,
+                String.format(getString(R.string.nhanvien_xuattra_lable_receive_title),
+                        String.valueOf(stockTrans.getFromOwnerId())),
+                String.format(getString(R.string.warehouse_label_receive),
+                        String.valueOf(stockTrans.getToOwnerId())));
+        exportSuccessDialog.setOnDialogDismissListener(new ExportSuccessDialog.OnDialogDismissListener() {
+
+            @Override
+            public void onDialogDissmis() {
+                finish();
+                setResult(RESULT_OK);
+            }
+        });
+        exportSuccessDialog.show(getSupportFragmentManager(), "");
     }
 
     @Override

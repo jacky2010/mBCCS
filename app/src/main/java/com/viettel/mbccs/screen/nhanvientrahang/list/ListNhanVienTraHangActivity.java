@@ -35,17 +35,6 @@ public class ListNhanVienTraHangActivity extends BaseListOrderActivity {
         DataRequest<GetListExpCmdRequest> mDataRequest = new DataRequest<>();
         GetListExpCmdRequest mRequest = new GetListExpCmdRequest();
         showLoading();
-        if (getPositionStatus() == 0) {
-            mRequest.setStockTransStatus(StockTransStatus.TRANS_DONE);
-            setItemCountStringFormat(
-                    getString(R.string.nv_trahangcaptren_list_label_count_exported));
-        }
-
-        if (getPositionStatus() == 1) {
-            mRequest.setStockTransStatus(StockTransStatus.TRANS_REJECT);
-            setItemCountStringFormat(
-                    getString(R.string.nv_trahangcaptren_list_label_count_canceled));
-        }
         mRequest.setStockTransType(StockTransType.TRANS_EXPORT);
         mRequest.setStartDate(getFromDateString());
         mRequest.setEndDate(getToDateString());

@@ -20,6 +20,9 @@ import com.viettel.mbccs.screen.importwarehousefromstaff.importnote.CreateCmdFro
 import com.viettel.mbccs.screen.importwarehousefromstaff.importnote
         .CreateImportStockFromStaffActivity;
 import com.viettel.mbccs.screen.importwarehousefromstaff.importnote.CreateNoteFromStaffActivity;
+import com.viettel.mbccs.screen.importwarehousefromstaff.importnote
+        .CreateNoteNoCmdStockFromStaffActivity;
+import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import com.viettel.mbccs.variable.Constants;
 import java.util.ArrayList;
@@ -32,6 +35,8 @@ import java.util.List;
 
 public class ListNhapKhoTuNhanVienActivity extends BaseListOrderActivity {
 
+    public static final int CODE = 123;
+
     List<String> staffListName = new ArrayList<>();
     List<OwnerCode> mOwnerCodes = new ArrayList<>();
 
@@ -42,31 +47,62 @@ public class ListNhapKhoTuNhanVienActivity extends BaseListOrderActivity {
 
     @Override
     public void doSearch() {
+        if (mOwnerCodes.size() == 0) {
+            DialogUtils.showDialogError(ListNhapKhoTuNhanVienActivity.this,
+                    new BaseException(BaseException.Type.UNEXPECTED, new Throwable()));
+            return;
+        }
 
         DataRequest<GetListExpCmdRequest> mDataRequest = new DataRequest<>();
         GetListExpCmdRequest mRequest = new GetListExpCmdRequest();
         showLoading();
-        if (getPositionStatus() == 0) {
-            mRequest.setStockTransStatus(StockTransStatus.TRANS_NON_NOTE);
-            setItemCountStringFormat(getString(R.string.nhapkhonhanvien_count_not_not));
+        if (Constants.FuntionConstant.IMPORT_FROM_STAFF_STEP == 2) {
+            if (getPositionStatus() == 0) {
+                mRequest.setStockTransStatus(StockTransStatus.TRANS_DONE);
+                mRequest.setStockTransType(StockTransType.TRANS_EXPORT);
+            }
+
+            if (getPositionStatus() == 1) {
+                mRequest.setStockTransStatus(StockTransStatus.TRANS_NOTED);
+                mRequest.setStockTransType(StockTransType.TRANS_IMPORT);
+            }
+
+            if (getPositionStatus() == 2) {
+                mRequest.setStockTransStatus(StockTransStatus.TRANS_DONE);
+                mRequest.setStockTransType(StockTransType.TRANS_IMPORT);
+            }
+
+            if (getPositionStatus() == 3) {
+                mRequest.setStockTransStatus(StockTransStatus.TRANS_CANCEL);
+                mRequest.setStockTransType(StockTransType.TRANS_IMPORT);
+            }
+        } else {
+            if (getPositionStatus() == 0) {
+                mRequest.setStockTransStatus(StockTransStatus.TRANS_DONE);
+                mRequest.setStockTransType(StockTransType.TRANS_EXPORT);
+            }
+
+            if (getPositionStatus() == 1) {
+                mRequest.setStockTransStatus(StockTransStatus.TRANS_NON_NOTE);
+                mRequest.setStockTransType(StockTransType.TRANS_IMPORT);
+            }
+
+            if (getPositionStatus() == 2) {
+                mRequest.setStockTransStatus(StockTransStatus.TRANS_NOTED);
+                mRequest.setStockTransType(StockTransType.TRANS_IMPORT);
+            }
+
+            if (getPositionStatus() == 3) {
+                mRequest.setStockTransStatus(StockTransStatus.TRANS_DONE);
+                mRequest.setStockTransType(StockTransType.TRANS_IMPORT);
+            }
+
+            if (getPositionStatus() == 4) {
+                mRequest.setStockTransStatus(StockTransStatus.TRANS_CANCEL);
+                mRequest.setStockTransType(StockTransType.TRANS_IMPORT);
+            }
         }
 
-        if (getPositionStatus() == 1) {
-            mRequest.setStockTransStatus(StockTransStatus.TRANS_NOTED);
-            setItemCountStringFormat(getString(R.string.nhapkhonhanvien_count_noted));
-        }
-
-        if (getPositionStatus() == 2) {
-            mRequest.setStockTransStatus(StockTransStatus.TRANS_DONE);
-            setItemCountStringFormat(getString(R.string.nhapkhonhanvien_count_not_not));
-        }
-
-        if (getPositionStatus() == 3) {
-            mRequest.setStockTransStatus(StockTransStatus.TRANS_CANCEL);
-            setItemCountStringFormat(getString(R.string.nhapkhonhanvien_count_canceled));
-        }
-
-        mRequest.setStockTransType(StockTransType.TRANS_IMPORT);
         mRequest.setStartDate(getFromDateString());
         mRequest.setEndDate(getToDateString());
         mRequest.setFromOwnerId(mOwnerCodes.get(getPositionWareHouser()).getStaffId());
@@ -79,29 +115,39 @@ public class ListNhapKhoTuNhanVienActivity extends BaseListOrderActivity {
                 .subscribe(new MBCCSSubscribe<GetListExpCmdResponse>() {
                     @Override
                     public void onSuccess(GetListExpCmdResponse object) {
-                        //fake
-                        object = new GetListExpCmdResponse();
-                        List<StockTrans> stockTranses = new ArrayList<StockTrans>();
-                        StockTrans stockTrans = new StockTrans();
-                        stockTrans.setStockTransId(2342352);
-                        stockTrans.setToOwnerId(234235);
-                        stockTrans.setCreateDatetime("2017-07-05T01:28:46+07:00");
-                        stockTrans.setStockTransStatusName("hang moi");
-                        stockTrans.setStockTransStatus(StockTransStatus.TRANS_NON_NOTE);
-
-                        StockTrans stockTrans1 = new StockTrans();
-                        stockTrans1.setStockTransId(1237);
-                        stockTrans1.setToOwnerId(23424);
-                        stockTrans1.setCreateDatetime("2017-07-05T01:28:46+07:00");
-                        stockTrans1.setStockTransStatusName("hang moi");
-                        stockTrans1.setStockTransStatus(StockTransStatus.TRANS_NOTED);
-                        stockTranses.add(stockTrans);
-                        stockTranses.add(stockTrans1);
-
-                        object.setStockTranses(stockTranses);
-
-
                         if (object != null && object.getStockTranses() != null) {
+                            for (StockTrans stockTrans : object.getStockTranses()) {
+                                //set action
+                                switch ((int) stockTrans.getStockTransStatus()) {
+                                    case (int) StockTransStatus.TRANS_DONE:
+                                        if (Constants.FuntionConstant.IMPORT_FROM_STAFF_STEP == 3) {
+                                            stockTrans.setActionName(getString(
+                                                    R.string.commmon_warehouse_action_create_cmd));
+                                        } else {
+                                            stockTrans.setActionName(getString(
+                                                    R.string.commmon_warehouse_action_create_note));
+                                        }
+
+                                        if (stockTrans.getStockTransType()
+                                                == StockTransType.TRANS_IMPORT) {
+                                            stockTrans.setActionName(getString(
+                                                    R.string.nv_trahangcaptren_action_detail));
+                                        }
+
+                                        break;
+                                    case (int) StockTransStatus.TRANS_NON_NOTE:
+                                        stockTrans.setActionName(getString(
+                                                R.string.commmon_warehouse_action_create_note));
+                                        break;
+                                    case (int) StockTransStatus.TRANS_NOTED:
+                                        stockTrans.setActionName(getString(
+                                                R.string.commmon_warehouse_action_create_import));
+                                        break;
+                                    default:
+                                        stockTrans.setActionName(getString(
+                                                R.string.nv_trahangcaptren_action_detail));
+                                }
+                            }
                             setDataSearch(object.getStockTranses());
                         } else {
                             setDataSearch(new ArrayList<StockTrans>());
@@ -127,11 +173,20 @@ public class ListNhapKhoTuNhanVienActivity extends BaseListOrderActivity {
         Intent intent;
         switch ((int) stockTrans.getStockTransStatus()) {
             case (int) StockTransStatus.TRANS_DONE:
-                intent = new Intent(this, CreateCmdFromStaffActivity.class);
+                if (Constants.FuntionConstant.IMPORT_FROM_STAFF_STEP == 3) {
+                    intent = new Intent(this, CreateCmdFromStaffActivity.class);
+                } else {
+                    intent = new Intent(this, CreateNoteNoCmdStockFromStaffActivity.class);
+                }
+
+                break;
             case (int) StockTransStatus.TRANS_NON_NOTE:
                 intent = new Intent(this, CreateNoteFromStaffActivity.class);
                 break;
             case (int) StockTransStatus.TRANS_NOTED:
+                intent = new Intent(this, CreateImportStockFromStaffActivity.class);
+                break;
+            case (int) StockTransStatus.TRANS_EXP_IMPED:
                 intent = new Intent(this, CreateImportStockFromStaffActivity.class);
                 break;
             default:
@@ -140,7 +195,15 @@ public class ListNhapKhoTuNhanVienActivity extends BaseListOrderActivity {
         Bundle bundle = new Bundle();
         bundle.putParcelable(Constants.BundleConstant.STOCK_TRANS, stockTrans);
         intent.putExtras(bundle);
-        startActivity(intent);
+        startActivityForResult(intent, CODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CODE && resultCode == RESULT_OK) {
+            doSearch();
+        }
     }
 
     @Override
@@ -193,7 +256,14 @@ public class ListNhapKhoTuNhanVienActivity extends BaseListOrderActivity {
 
     @Override
     public void init() {
-        setStatus(Arrays.asList(getResources().getStringArray(R.array.nhapkhonhanvien_status)));
+        if (Constants.FuntionConstant.IMPORT_FROM_STAFF_STEP == 2) {
+            setStatus(Arrays.asList(
+                    getResources().getStringArray(R.array.import_from_staff_2_step_status)));
+        } else {
+            setStatus(Arrays.asList(
+                    getResources().getStringArray(R.array.import_from_staff_3_step_status)));
+        }
+
         loadStaffList();
     }
 

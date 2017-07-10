@@ -54,4 +54,20 @@
         <item>Đã hủy</item>
         <item>Tất cả</item>
     </string-array>
+    <string-array name="import_from_staff_3_step_status">
+        <item>Chưa lập lệnh</item>
+        <item>Đã lập lệnh</item>
+        <item>Đã lập phiếu</item>
+        <item>Đã nhập kho</item>
+        <item>Đã hủy</item>
+        <item>Tất cả</item>
+    </string-array>
+
+    <string-array name="import_from_staff_2_step_status">
+        <item>Chưa lập phiếu</item>
+        <item>Đã lập phiếu</item>
+        <item>Đã nhập kho</item>
+        <item>Đã hủy</item>
+        <item>Tất cả</item>
+    </string-array>
 </resources>
