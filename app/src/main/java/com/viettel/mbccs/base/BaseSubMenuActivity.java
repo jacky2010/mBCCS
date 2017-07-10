@@ -26,6 +26,7 @@ import com.viettel.mbccs.screen.change.installation.InstallationAddressActivity;
 import com.viettel.mbccs.screen.changesim.ChangeSimActivity;
 import com.viettel.mbccs.screen.connector.mobile.ConnectorMobileActivity;
 import com.viettel.mbccs.screen.hotnewscskpp.HotNewsCSKPPActivity;
+import com.viettel.mbccs.screen.importwarehousefromstaff.list.ListNhapKhoTuNhanVienActivity;
 import com.viettel.mbccs.screen.information.CreateUpdateInformationActivity;
 import com.viettel.mbccs.screen.inputorder.InputOrderActivity;
 import com.viettel.mbccs.screen.kpp.order.KPPOrderActivity;
@@ -33,7 +34,7 @@ import com.viettel.mbccs.screen.kppfeedback.KPPFeedbackActivity;
 import com.viettel.mbccs.screen.main.fragments.menu.MenuPresenter;
 import com.viettel.mbccs.screen.nhanvientrahang.list.ListNhanVienTraHangActivity;
 import com.viettel.mbccs.screen.nhapkhocapduoi.ListOrderActivity;
-import com.viettel.mbccs.screen.importwarehousefromstaff.list.ListNhapKhoTuNhanVienActivity;
+import com.viettel.mbccs.screen.nvxacnhanhang.NvXacNhanHangActivity;
 import com.viettel.mbccs.screen.searchproducts.SearchProductsActivity;
 import com.viettel.mbccs.screen.sell.channel.SaleChannelActivity;
 import com.viettel.mbccs.screen.sell.orders.SellOrdersActivity;
@@ -246,6 +247,8 @@ public class BaseSubMenuActivity
                         case Function.MenuId.MENU_XUAT_KHO_CHO_NHAN_VIEN:
                             break;
                         case Function.MenuId.MENU_NV_XAC_NHAN_HANG:
+                            startActivity(
+                                    new Intent(BaseSubMenuActivity.this, NvXacNhanHangActivity.class));
                             break;
                         case Function.MenuId.MENU_NHAN_VIEN_TRA_HANG_CAP_TREN:
                             startActivity(new Intent(BaseSubMenuActivity.this,

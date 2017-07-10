@@ -25,12 +25,12 @@
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#b7b7b7"
+            android:background="@color/grey_seven"
             android:minWidth="@dimen/dp_360"
             android:padding="@dimen/dp_1"
             app:tabBackground="@drawable/bg_tab_layout"
             app:tabIndicatorHeight="0dp"
-            app:tabSelectedTextColor="#0083c2"
+            app:tabSelectedTextColor="@color/blue_two"
             app:tabTextAppearance="@style/tablayoutStyle" />
 
         <com.viettel.mbccs.widget.NonSwipeViewPager

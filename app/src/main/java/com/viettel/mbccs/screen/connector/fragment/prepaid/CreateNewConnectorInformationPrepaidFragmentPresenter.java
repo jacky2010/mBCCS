@@ -14,6 +14,7 @@ import com.viettel.mbccs.constance.Gender;
 import com.viettel.mbccs.constance.MobileType;
 import com.viettel.mbccs.constance.TelServiceId;
 import com.viettel.mbccs.constance.TelServiceType;
+import com.viettel.mbccs.constance.WarehouseType;
 import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.ApDomainByType;
 import com.viettel.mbccs.data.model.BusType;
@@ -457,9 +458,10 @@ public class CreateNewConnectorInformationPrepaidFragmentPresenter extends BaseO
         connectSubscriberRequest.setSubscriber(subscriberCurrent);
         connectSubscriberRequest.setStaffCode(userInfo.getStaffInfo().getStaffCode());
         connectSubscriberRequest.setShopCode(userInfo.getShop().getShopCode());
-        connectSubscriberRequest.setOnwerType("2");
-        connectSubscriberRequest.setOwnerId(userInfo.getStaffInfo().getStaffCode());
+        connectSubscriberRequest.setOwnerType(WarehouseType.KHO_NHAN_VIEN);
+        connectSubscriberRequest.setOwnerId(userInfo.getStaffInfo().getStaffId());
         connectSubscriberRequest.setChannelTypeId(null);
+        connectSubscriberRequest.setSubType(checkIdNoRequest.getSubType());
 
         List<String> dataImage =
                 DatabaseUtils.getBitmapAndSaveDatabase(customer, customerCurrentImageFront,

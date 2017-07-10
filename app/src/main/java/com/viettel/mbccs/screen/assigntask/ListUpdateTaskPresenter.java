@@ -3,7 +3,6 @@ package com.viettel.mbccs.screen.assigntask;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 
-import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.TaskShopManagement;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetInfoTaskForUpdateRequest;

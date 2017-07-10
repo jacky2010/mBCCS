@@ -12,7 +12,9 @@ public class ApDomainByType {
     @StringDef({ Type.LOAI_GIAY_TO, Type.HINH_THUC_THANH_TOAN, Type.HINH_THUC_NHAN_THONG_BAO_CUOC })
     public @interface Type {
         String LOAI_GIAY_TO = "301";
+        String CHI_TIET_IN = "302";
         String HINH_THUC_THANH_TOAN = "303";
+        String DAT_COC = "305";
         String HINH_THUC_NHAN_THONG_BAO_CUOC = "308";
     }
 

@@ -88,14 +88,9 @@ dependencies {
   //Glide library load image
   compile "com.github.bumptech.glide:glide:$rootProject.ext.glideVersion"
   //Zbar
-  compile 'me.dm7.barcodescanner:zbar:1.9.1'
   //TableView
-  compile 'de.codecrafters.tableview:tableview:2.6.0'
   //Chart
-  compile 'com.txusballesteros:FitChart:1.0'
-  compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
   // Circle image view
-  compile 'de.hdodenhof:circleimageview:2.1.0'
   // Butter Knife
   compile "com.jakewharton:butterknife:$rootProject.ext.butterknifeVersion"
   annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknifeVersion"
@@ -103,9 +98,15 @@ dependencies {
   compile "com.google.android.gms:play-services-maps:$rootProject.ext.mapVersion"
   compile "com.google.android.gms:play-services-location:$rootProject.ext.mapVersion"
   compile "com.google.android.gms:play-services-places:$rootProject.ext.mapVersion"
+  compile 'me.dm7.barcodescanner:zbar:1.9.1'
+  compile 'de.codecrafters.tableview:tableview:2.6.0'
+  compile 'com.txusballesteros:FitChart:1.0'
+  compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
+  compile 'de.hdodenhof:circleimageview:2.1.0'
   compile 'org.jetbrains:annotations-java5:15.0'
   compile 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
   compile 'com.android.support:multidex:1.0.1'
   compile 'com.romandanylyk:pageindicatorview:0.2.0@aar'
+  compile 'com.android.support.constraint:constraint-layout:1.0.2'
 }
 apply plugin: 'announce'

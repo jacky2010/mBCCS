@@ -39,7 +39,7 @@
                 android:id="@+id/tabLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#b7b7b7"
+                android:background="@color/grey_seven"
                 android:minWidth="@dimen/dp_360"
                 app:tabBackground="@drawable/bg_tab_layout"
                 app:tabIndicatorHeight="0dp"

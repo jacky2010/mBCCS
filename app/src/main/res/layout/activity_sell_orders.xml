@@ -44,14 +44,14 @@
                         android:id="@+id/tabLayout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="#b7b7b7"
+                        android:background="@color/grey_seven"
                         android:minWidth="@dimen/dp_360"
                         app:tabBackground="@drawable/bg_tab_layout"
                         app:tabIndicatorHeight="0dp"
-                        app:tabSelectedTextColor="#0083c2"
+                        app:tabSelectedTextColor="@color/blue_two"
                         app:tabTextAppearance="@style/tablayoutStyle"
                         />
-                    <com.viettel.mbccs.widget.NonSwipeViewPager
+                    <android.support.v4.view.ViewPager
                         android:id="@+id/vpPager"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -63,7 +63,7 @@
                     android:id="@+id/drawer"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/dp_120"
+                    android:layout_marginBottom="@dimen/dp_140"
                     app:content="@+id/content"
                     app:direction="topToBottom"
                     app:handle="@+id/handle"
@@ -106,14 +106,13 @@
                                 app:dateTextColor="@color/white"
                                 app:underLineColor="@color/white_light_theme"
                                 />
-                            <com.viettel.mbccs.widget.CustomTextView
+
+                            <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="@dimen/dp_10"
-                                android:layout_marginLeft="@dimen/dp_10"
-                                android:layout_marginRight="@dimen/dp_10"
-                                android:layout_marginStart="@dimen/dp_10"
-                                android:text="-"
+                                android:layout_marginEnd="@dimen/dp_8"
+                                android:layout_marginStart="@dimen/dp_8"
+                                android:src="@drawable/ic_play_arrow_black_24dp"
                                 />
                             <com.viettel.mbccs.widget.CustomDatePicker
                                 android:id="@+id/date_to"
@@ -175,7 +174,8 @@
                         <com.viettel.mbccs.widget.SpinnerWithBorder
                             android:id="@+id/spinner_channel_sell_order"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/dp_40"
+                            android:layout_height="wrap_content"
+                            android:minHeight="@dimen/dp_40"
                             app:adapter="@{ presenter.spinnerAdapterChannel }"
                             app:themeLight="@{true}"
                             />
@@ -184,7 +184,7 @@
                             android:layout_width="@dimen/dp_300"
                             android:layout_height="@dimen/dp_40"
                             android:layout_gravity="center"
-                            android:layout_marginTop="@dimen/dp_6"
+                            android:layout_marginTop="@dimen/dp_10"
                             android:gravity="center"
                             android:onClick="@{ v -> presenter.clickSearch() }"
                             android:text="@string/sell_orders_search"

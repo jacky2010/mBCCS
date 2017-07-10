@@ -49,7 +49,8 @@ import java.util.List;
 import rx.Observable;
 import rx.Subscription;
 import rx.functions.Func1;
-import rx.functions.Func9;
+import rx.functions.Func3;
+import rx.functions.Func7;
 import rx.subscriptions.CompositeSubscription;
 
 /**
@@ -78,7 +79,6 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
     private Customer customerCurrent;
     private Subscriber subscriberCurrent;
     private Contract contractCurrent;
-    private int contractLoaiKhachHang;
 
     //region Fragment 1
     /**
@@ -91,9 +91,9 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
 
     private AddressApp customerArea1;
 
-    private SpinnerAdapter<ApDomainByType> registerAdapterSpinnerPassportType;
-    private List<ApDomainByType> registerDataSpinnerPassportType;
-    private int registerPositionSpinnerPassportType;
+    private SpinnerAdapter<ApDomainByType> registerAdapterSpinnerLoaiGiayTo;
+    private List<ApDomainByType> registerDataSpinnerLoaiGiayTo;
+    private int registerPositionSpinnerLoaiGiayTo;
 
     private Bitmap customerCurrentImageFront;
     private Bitmap customerCurrentImageBackside;
@@ -110,23 +110,20 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
     private SpinnerAdapter<Product> subscriberAdapterSpinner2GoiCuoc;
     private SpinnerAdapter<SubType> subscriberAdapterSpinner2LoaiThueBao;
     private SpinnerAdapter<RegType> subscriberAdapterSpinner2HTHoaMang;
-    private SpinnerAdapter<RegType> subscriberAdapterSpinner2KhuyenMai;
-    private SpinnerAdapter<RegType> subscriberAdapterSpinner2DatCoc;
-    private SpinnerAdapter<RegType> subscriberAdapterSpinner2HanMuc;
+    private SpinnerAdapter<ApDomainByType> subscriberAdapterSpinner2DatCoc;
+    private SpinnerAdapter<ApDomainByType> subscriberAdapterSpinner2HanMuc;
 
     private List<Data.DataField> subscriberDataSpinner2DichVu;
     private List<Product> subscriberDataSpinner2GoiCuoc;
     private List<SubType> subscriberDataSpinner2LoaiThueBao;
     private List<RegType> subscriberDataSpinner2HTHoaMang;
-    private List<RegType> subscriberDataSpinner2KhuyenMai;
-    private List<RegType> subscriberDataSpinner2DatCoc;
-    private List<RegType> subscriberDataSpinner2HanMuc;
+    private List<ApDomainByType> subscriberDataSpinner2DatCoc;
+    private List<ApDomainByType> subscriberDataSpinner2HanMuc;
 
     private int subscriberPositionSpinner2DichVu;
     private int subscriberPositionSpinner2GoiCuoc;
     private int subscriberPositionSpinner2LoaiThueBao;
     private int subscriberPositionSpinner2HTHoaMang;
-    private int subscriberPositionSpinner2KhuyenMai;
     private int subscriberPositionSpinner2DatCoc;
     private int subscriberPositionSpinner2HanMuc;
 
@@ -138,24 +135,21 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
      * Fragment 3
      */
 
-    private SpinnerAdapter<RegType> contractAdapterSpinner3TypeContract;
-    private SpinnerAdapter<RegType> contractAdapterSpinner3Payer;
-    private SpinnerAdapter<RegType> contractAdapterSpinner3HinhThucThanhToan;
+    private SpinnerAdapter<RegType> contractAdapterSpinner3LoaiHopDong;
+    private SpinnerAdapter<ApDomainByType> contractAdapterSpinner3HinhThucThanhToan;
     private SpinnerAdapter<RegType> contractAdapterSpinner3ChuKyCuoc;
-    private SpinnerAdapter<RegType> contractAdapterSpinner3ChiTietIn;
+    private SpinnerAdapter<ApDomainByType> contractAdapterSpinner3ChiTietIn;
     private SpinnerAdapter<RegType> contractAdapterSpinner3TenNganHang;
-    private SpinnerAdapter<RegType> contractAdapterSpinner3HinhThucThongBaoCuoc;
+    private SpinnerAdapter<ApDomainByType> contractAdapterSpinner3HinhThucThongBaoCuoc;
 
-    private List<RegType> contractDataSpinner3TypeContract;
-    private List<RegType> contractDataSpinner3Payer;
-    private List<RegType> contractDataSpinner3HinhThucThanhToan;
+    private List<RegType> contractDataSpinner3LoaiHopDong;
+    private List<ApDomainByType> contractDataSpinner3HinhThucThanhToan;
     private List<RegType> contractDataSpinner3ChuKyCuoc;
-    private List<RegType> contractDataSpinner3ChiTietIn;
+    private List<ApDomainByType> contractDataSpinner3ChiTietIn;
     private List<RegType> contractDataSpinner3TenNganHang;
-    private List<RegType> contractDataSpinner3HinhThucThongBaoCuoc;
+    private List<ApDomainByType> contractDataSpinner3HinhThucThongBaoCuoc;
 
-    private int contractPositionSpinner3TypeContract;
-    private int contractPositionSpinner3Payer;
+    private int contractPositionSpinner3LoaiHopDong;
     private int contractPositionSpinner3HinhThucThanhToan;
     private int contractPositionSpinner3ChuKyCuoc;
     private int contractPositionSpinner3ChiTietIn;
@@ -212,33 +206,60 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
 
     void loadDataCreateBaseView() {
         createNewView1.showLoading();
-        Subscription subscription = observableDataSpinnerBaseView().subscribe(
+        Subscription subscription = observableDataSpinnerBaseView(MobileType.TRA_SAU).subscribe(
                 new MBCCSSubscribe<DataSpinnerBaseView>() {
                     @Override
                     public void onSuccess(DataSpinnerBaseView object) {
                         subscriberDataSpinner2GoiCuoc =
                                 object.getSubscriberDataSpinner2GoiCuoc().getListProduct();
+
                         subscriberDataSpinner2LoaiThueBao =
                                 object.getSubscriberDataSpinner2LoaiThueBao().getSubTypeList();
-                        subscriberDataSpinner2KhuyenMai =
-                                object.getSubscriberDataSpinner2KhuyenMai().getRegTypeList();
 
                         subscriberDataSpinner2DichVu = Data.connectorTelServiceType();
 
-                        contractDataSpinner3TypeContract =
-                                object.getContractDataSpinner3TypeContract().getRegTypeList();
-                        contractDataSpinner3Payer =
-                                object.getContractDataSpinner3Payer().getRegTypeList();
+                        contractDataSpinner3LoaiHopDong =
+                                object.getContractDataSpinner3LoaiHopDong().getRegTypeList();
+
                         contractDataSpinner3HinhThucThanhToan =
-                                object.getContractDataSpinner3HinhThucThanhToan().getRegTypeList();
+                                object.getContractDataSpinner3HinhThucThanhToan()
+                                        .getApDomainByTypeList();
+
                         contractDataSpinner3ChuKyCuoc =
                                 object.getContractDataSpinner3ChuKyCuoc().getRegTypeList();
+
                         contractDataSpinner3ChiTietIn =
-                                object.getContractDataSpinner3ChiTietIn().getRegTypeList();
+                                object.getContractDataSpinner3ChiTietIn().getApDomainByTypeList();
+
                         contractDataSpinner3HinhThucThongBaoCuoc =
                                 object.getContractDataSpinner3HinhThucThongBaoCuoc()
-                                        .getRegTypeList();
+                                        .getApDomainByTypeList();
+
                         setDataCreateView();
+                    }
+
+                    @Override
+                    public void onError(BaseException error) {
+                        createNewView1.hideLoading();
+                        createNewView1.loadDataSpinnerError(error);
+                    }
+                });
+        subscriptions.add(subscription);
+    }
+
+    private void getDataKhachHangDN() {
+        createNewView1.showLoading();
+        Subscription subscription = observableDataSpinnerDNView(MobileType.TRA_SAU).subscribe(
+                new MBCCSSubscribe<DataSpinnerDNView>() {
+                    @Override
+                    public void onSuccess(DataSpinnerDNView object) {
+                        registerDataSpinnerLoaiGiayTo = object.getCustomerAdapterSpinnerLoaiGiayTo()
+                                .getApDomainByTypeList();
+                        subscriberDataSpinner2DatCoc =
+                                object.getSubscriberDataSpinner2DatCoc().getApDomainByTypeList();
+                        subscriberDataSpinner2HanMuc =
+                                object.getSubscriberDataSpinnerHanMuc().getApDomainByTypeList();
+                        setDataCreateDNView();
                     }
 
                     @Override
@@ -257,16 +278,74 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
         createNewView1.hideLoading();
     }
 
+    private void setDataCreateDNView() {
+        registerAdapterSpinnerLoaiGiayTo =
+                new SpinnerAdapter<>(context, registerDataSpinnerLoaiGiayTo);
+        registerAdapterSpinnerLoaiGiayTo.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position,
+                            long id) {
+                        registerPositionSpinnerLoaiGiayTo = position;
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+        viewModel.setRegisterAdapterSpinnerLoaiGiayTo(registerAdapterSpinnerLoaiGiayTo);
+
+        subscriberAdapterSpinner2DatCoc =
+                new SpinnerAdapter<>(context, subscriberDataSpinner2DatCoc);
+        subscriberAdapterSpinner2DatCoc.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position,
+                            long id) {
+                        subscriberPositionSpinner2DatCoc = position;
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+        viewModel.setSubscriberAdapterSpinner2DatCoc(subscriberAdapterSpinner2DatCoc);
+
+        subscriberAdapterSpinner2HanMuc =
+                new SpinnerAdapter<>(context, subscriberDataSpinner2HanMuc);
+        subscriberAdapterSpinner2HanMuc.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position,
+                            long id) {
+                        subscriberPositionSpinner2HanMuc = position;
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+        viewModel.setSubscriberAdapterSpinner2HanMuc(subscriberAdapterSpinner2HanMuc);
+
+        createNewView1.hideLoading();
+    }
+
     private void setDataCreateView1() {
         customerDataAdapterSpinnerCustomerType = new ArrayList<>();
         BusType busTypeCN = new BusType();
         busTypeCN.setBusType("0");
         busTypeCN.setBusTypeId(0);
-        busTypeCN.setName("Cá Nhân");
+        busTypeCN.setName(context.getString(
+                R.string.create_new_connector_information_postpaid_khach_hang_ca_nhan));
         BusType busTypeDN = new BusType();
         busTypeDN.setBusType("1");
         busTypeDN.setBusTypeId(1);
-        busTypeDN.setName("Doanh Nghiệp");
+        busTypeDN.setName(context.getString(
+                R.string.create_new_connector_information_postpaid_khach_hang_doanh_nghiep));
+
         customerDataAdapterSpinnerCustomerType.add(busTypeCN);
         customerDataAdapterSpinnerCustomerType.add(busTypeDN);
 
@@ -362,34 +441,18 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
                     }
                 });
         viewModel.setSubscriberAdapterSpinner2LoaiThueBao(subscriberAdapterSpinner2LoaiThueBao);
-
-        subscriberAdapterSpinner2KhuyenMai =
-                new SpinnerAdapter<>(context, subscriberDataSpinner2KhuyenMai);
-        subscriberAdapterSpinner2KhuyenMai.setOnItemSelectedListener(
-                new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position,
-                            long id) {
-                        subscriberPositionSpinner2KhuyenMai = position;
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                });
-        viewModel.setSubscriberAdapterSpinner2KhuyenMai(subscriberAdapterSpinner2KhuyenMai);
     }
 
     private void setDataCreateView3() {
-        contractAdapterSpinner3TypeContract =
-                new SpinnerAdapter<>(context, contractDataSpinner3TypeContract);
-        contractAdapterSpinner3TypeContract.setOnItemSelectedListener(
+
+        contractAdapterSpinner3LoaiHopDong =
+                new SpinnerAdapter<>(context, contractDataSpinner3LoaiHopDong);
+        contractAdapterSpinner3LoaiHopDong.setOnItemSelectedListener(
                 new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position,
                             long id) {
-                        contractPositionSpinner3TypeContract = position;
+                        contractPositionSpinner3LoaiHopDong = position;
                     }
 
                     @Override
@@ -397,23 +460,7 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
 
                     }
                 });
-        viewModel.setContractAdapterSpinner3TypeContract(contractAdapterSpinner3TypeContract);
-
-        contractAdapterSpinner3Payer = new SpinnerAdapter<>(context, contractDataSpinner3Payer);
-        contractAdapterSpinner3Payer.setOnItemSelectedListener(
-                new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position,
-                            long id) {
-                        contractPositionSpinner3Payer = position;
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                });
-        viewModel.setContractAdapterSpinner3Payer(contractAdapterSpinner3Payer);
+        viewModel.setContractAdapterSpinner3LoaiHopDong(contractAdapterSpinner3LoaiHopDong);
 
         contractAdapterSpinner3HinhThucThanhToan =
                 new SpinnerAdapter<>(context, contractDataSpinner3HinhThucThanhToan);
@@ -491,29 +538,6 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
                 });
         viewModel.setContractAdapterSpinner3HinhThucThongBaoCuoc(
                 contractAdapterSpinner3HinhThucThongBaoCuoc);
-    }
-
-    private void getDataKhachHangDN() {
-        //        createNewView1.showLoading();
-        //        Subscription subscription =
-        //                observableDataSpinnerBaseView().subscribe(new MBCCSSubscribe<DataSpinnerBaseView>() {
-        //                    @Override
-        //                    public void onSuccess(DataSpinnerBaseView object) {
-        //                        subscriberDataSpinner2GoiCuoc =
-        //                                object.getSpinner2GoiCuoc().getListProduct();
-        //                        subscriberDataSpinner2LoaiThueBao =
-        //                                object.getSpinner2LoaiThueBao().getSubTypeList();
-        //                        subscriberDataSpinner2DichVu = Data.connectorTelServiceType();
-        //                        setDataCreateView();
-        //                    }
-        //
-        //                    @Override
-        //                    public void onError(BaseException error) {
-        //                        createNewView1.hideLoading();
-        //                        createNewView1.loadDataSpinnerError(error);
-        //                    }
-        //                });
-        //        subscriptions.add(subscription);
     }
 
     private void getDataHTHoaMang() {
@@ -623,17 +647,7 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
         viewModel.setContractAdapterSpinner3TenNganHang(contractAdapterSpinner3TenNganHang);
     }
 
-    private Observable<GetApDomainByTypeResponse> getDataRegisterSpinnerPassportType() {
-        DataRequest<GetApDomainByTypeRequest> request = new DataRequest<>();
-        GetApDomainByTypeRequest apDomainRequest = new GetApDomainByTypeRequest();
-        apDomainRequest.setType(ApDomainByType.Type.LOAI_GIAY_TO);
-        apDomainRequest.setSubType(MobileType.TRA_TRUOC);
-
-        request.setWsRequest(apDomainRequest);
-        request.setWsCode(WsCode.GetApDomainByType);
-
-        return qlKhachHangRepository.getApDomainByType(request);
-    }
+    //region getDataBase
 
     private Observable<GetListProductResponse> getDataSpinner2GoiCuoc() {
         GetListProductRequest getListProductRequest = new GetListProductRequest();
@@ -657,7 +671,7 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
         return qlKhachHangRepository.getListSubType(request);
     }
 
-    private Observable<GetListRegTypeResponse> getDataSpinner2KhuyenMai() {
+    private Observable<GetListRegTypeResponse> getDataSpinner3LoaiHopDong() {
         GetListRegTypeRequest getListRegTypeRequest = new GetListRegTypeRequest();
 
         DataRequest<GetListRegTypeRequest> request = new DataRequest<>();
@@ -667,34 +681,16 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
         return qlKhachHangRepository.getListRegType(request);
     }
 
-    private Observable<GetListRegTypeResponse> getDataSpinner3TypeContract() {
-        GetListRegTypeRequest getListRegTypeRequest = new GetListRegTypeRequest();
+    private Observable<GetApDomainByTypeResponse> getDataSpinner3HinhThucThanhToan(String subType) {
+        DataRequest<GetApDomainByTypeRequest> request = new DataRequest<>();
+        GetApDomainByTypeRequest apDomainRequest = new GetApDomainByTypeRequest();
+        apDomainRequest.setType(ApDomainByType.Type.HINH_THUC_THANH_TOAN);
+        apDomainRequest.setSubType(subType);
 
-        DataRequest<GetListRegTypeRequest> request = new DataRequest<>();
-        request.setWsRequest(getListRegTypeRequest);
-        request.setWsCode(WsCode.GetListRegType);
+        request.setWsRequest(apDomainRequest);
+        request.setWsCode(WsCode.GetApDomainByType);
 
-        return qlKhachHangRepository.getListRegType(request);
-    }
-
-    private Observable<GetListRegTypeResponse> getDataSpinner3Payer() {
-        GetListRegTypeRequest getListRegTypeRequest = new GetListRegTypeRequest();
-
-        DataRequest<GetListRegTypeRequest> request = new DataRequest<>();
-        request.setWsRequest(getListRegTypeRequest);
-        request.setWsCode(WsCode.GetListRegType);
-
-        return qlKhachHangRepository.getListRegType(request);
-    }
-
-    private Observable<GetListRegTypeResponse> getDataSpinner3HinhThucThanhToan() {
-        GetListRegTypeRequest getListRegTypeRequest = new GetListRegTypeRequest();
-
-        DataRequest<GetListRegTypeRequest> request = new DataRequest<>();
-        request.setWsRequest(getListRegTypeRequest);
-        request.setWsCode(WsCode.GetListRegType);
-
-        return qlKhachHangRepository.getListRegType(request);
+        return qlKhachHangRepository.getApDomainByType(request);
     }
 
     private Observable<GetListRegTypeResponse> getDataSpinner3ChuKyCuoc() {
@@ -707,24 +703,29 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
         return qlKhachHangRepository.getListRegType(request);
     }
 
-    private Observable<GetListRegTypeResponse> getDataSpinner3ChiTietIn() {
-        GetListRegTypeRequest getListRegTypeRequest = new GetListRegTypeRequest();
+    private Observable<GetApDomainByTypeResponse> getDataSpinner3ChiTietIn(String subType) {
+        DataRequest<GetApDomainByTypeRequest> request = new DataRequest<>();
+        GetApDomainByTypeRequest apDomainRequest = new GetApDomainByTypeRequest();
+        apDomainRequest.setType(ApDomainByType.Type.CHI_TIET_IN);
+        apDomainRequest.setSubType(subType);
 
-        DataRequest<GetListRegTypeRequest> request = new DataRequest<>();
-        request.setWsRequest(getListRegTypeRequest);
-        request.setWsCode(WsCode.GetListRegType);
+        request.setWsRequest(apDomainRequest);
+        request.setWsCode(WsCode.GetApDomainByType);
 
-        return qlKhachHangRepository.getListRegType(request);
+        return qlKhachHangRepository.getApDomainByType(request);
     }
 
-    private Observable<GetListRegTypeResponse> getDataSpinner3HinhThucThongBaoCuoc() {
-        GetListRegTypeRequest getListRegTypeRequest = new GetListRegTypeRequest();
+    private Observable<GetApDomainByTypeResponse> getDataSpinner3HinhThucThongBaoCuoc(
+            String subType) {
+        DataRequest<GetApDomainByTypeRequest> request = new DataRequest<>();
+        GetApDomainByTypeRequest apDomainRequest = new GetApDomainByTypeRequest();
+        apDomainRequest.setType(ApDomainByType.Type.HINH_THUC_NHAN_THONG_BAO_CUOC);
+        apDomainRequest.setSubType(subType);
 
-        DataRequest<GetListRegTypeRequest> request = new DataRequest<>();
-        request.setWsRequest(getListRegTypeRequest);
-        request.setWsCode(WsCode.GetListRegType);
+        request.setWsRequest(apDomainRequest);
+        request.setWsCode(WsCode.GetApDomainByType);
 
-        return qlKhachHangRepository.getListRegType(request);
+        return qlKhachHangRepository.getApDomainByType(request);
     }
 
     private Observable<GetListRegTypeResponse> getDataSpinner2HTHoaMang() {
@@ -745,6 +746,47 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
         return qlKhachHangRepository.getListRegType(request);
     }
 
+    //endregion getDataBase
+
+    //region getDataDoanhNghiep
+
+    private Observable<GetApDomainByTypeResponse> getDataRegisterSpinnerLoaiGiayTo(String subType) {
+        DataRequest<GetApDomainByTypeRequest> request = new DataRequest<>();
+        GetApDomainByTypeRequest apDomainRequest = new GetApDomainByTypeRequest();
+        apDomainRequest.setType(ApDomainByType.Type.LOAI_GIAY_TO);
+        apDomainRequest.setSubType(subType);
+
+        request.setWsRequest(apDomainRequest);
+        request.setWsCode(WsCode.GetApDomainByType);
+
+        return qlKhachHangRepository.getApDomainByType(request);
+    }
+
+    private Observable<GetApDomainByTypeResponse> getDataRegisterSpinnerDatCoc(String subType) {
+        DataRequest<GetApDomainByTypeRequest> request = new DataRequest<>();
+        GetApDomainByTypeRequest apDomainRequest = new GetApDomainByTypeRequest();
+        apDomainRequest.setType(ApDomainByType.Type.DAT_COC);
+        apDomainRequest.setSubType(subType);
+
+        request.setWsRequest(apDomainRequest);
+        request.setWsCode(WsCode.GetApDomainByType);
+
+        return qlKhachHangRepository.getApDomainByType(request);
+    }
+
+    private Observable<GetApDomainByTypeResponse> getDataRegisterSpinnerHanMuc(String subType) {
+        DataRequest<GetApDomainByTypeRequest> request = new DataRequest<>();
+        GetApDomainByTypeRequest apDomainRequest = new GetApDomainByTypeRequest();
+        apDomainRequest.setType(ApDomainByType.Type.LOAI_GIAY_TO);
+        apDomainRequest.setSubType(subType);
+
+        request.setWsRequest(apDomainRequest);
+        request.setWsCode(WsCode.GetApDomainByType);
+
+        return qlKhachHangRepository.getApDomainByType(request);
+    }
+    //endregion getDataDoanhNghiep
+
     private Observable<GetListRegTypeResponse> getDataSpinner3TenNganHang() {
         GetListRegTypeRequest getListRegTypeRequest = new GetListRegTypeRequest();
         getListRegTypeRequest.setSubType(
@@ -763,7 +805,7 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
         return qlKhachHangRepository.getListRegType(request);
     }
 
-    /*---------------------------------- onClick View ---------------------------------------*/
+    //region onClick View
     public void onCancelView1() {
         if (createNewView1 != null) createNewView1.onCancel();
     }
@@ -828,6 +870,7 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
         connectSubscriberRequest.setSubscriber(subscriberCurrent);
         connectSubscriberRequest.setStaffCode(userInfo.getStaffInfo().getStaffCode());
         connectSubscriberRequest.setShopCode(userInfo.getShop().getShopCode());
+        connectSubscriberRequest.setSubType(checkIdNoRequest.getSubType());
 
         List<String> dataImage =
                 DatabaseUtils.getBitmapAndSaveDatabase(customer, customerCurrentImageFront,
@@ -969,8 +1012,7 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
         return validate;
     }
 
-
-    /*---------------------------------- End onClick View ---------------------------------------*/
+    //endregion onClick View
 
     private void setDataCustomer() {
         if (customer == null) return;
@@ -1001,26 +1043,25 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
 
     }
 
-    private Observable<DataSpinnerBaseView> observableDataSpinnerBaseView() {
+    private Observable<DataSpinnerBaseView> observableDataSpinnerBaseView(String subType) {
         return Observable.zip(getDataSpinner2GoiCuoc(), getDataSpinner2LoaiThueBao(),
-                getDataSpinner2KhuyenMai(), getDataSpinner3TypeContract(), getDataSpinner3Payer(),
-                getDataSpinner3HinhThucThanhToan(), getDataSpinner3ChuKyCuoc(),
-                getDataSpinner3ChiTietIn(), getDataSpinner3HinhThucThongBaoCuoc(),
-                new Func9<GetListProductResponse, GetListSubTypeResponse, GetListRegTypeResponse, GetListRegTypeResponse, GetListRegTypeResponse, GetListRegTypeResponse, GetListRegTypeResponse, GetListRegTypeResponse, GetListRegTypeResponse, DataSpinnerBaseView>() {
+                getDataSpinner3LoaiHopDong(), getDataSpinner3HinhThucThanhToan(subType),
+                getDataSpinner3ChuKyCuoc(), getDataSpinner3ChiTietIn(subType),
+                getDataSpinner3HinhThucThongBaoCuoc(subType),
+                new Func7<GetListProductResponse, GetListSubTypeResponse, GetListRegTypeResponse, GetApDomainByTypeResponse, GetListRegTypeResponse, GetApDomainByTypeResponse, GetApDomainByTypeResponse, DataSpinnerBaseView>() {
                     @Override
                     public DataSpinnerBaseView call(GetListProductResponse dataSpinner2GoiCuoc,
                             GetListSubTypeResponse dataSpinner2LoaiThueBao,
-                            GetListRegTypeResponse dataSpinner2KhuyenMai,
                             GetListRegTypeResponse dataSpinner3TypeContract,
-                            GetListRegTypeResponse dataSpinner3Payer,
-                            GetListRegTypeResponse dataSpinner3HinhThucThanhToan,
+                            GetApDomainByTypeResponse dataSpinner3HinhThucThanhToan,
                             GetListRegTypeResponse dataSpinner3ChuKyCuoc,
-                            GetListRegTypeResponse dataSpinner3ChiTietIn,
-                            GetListRegTypeResponse dataSpinner3HinhThucThongBaoCuoc) {
+                            GetApDomainByTypeResponse dataSpinner3ChiTietIn,
+                            GetApDomainByTypeResponse dataSpinner3HinhThucThongBaoCuoc) {
                         return new DataSpinnerBaseView(dataSpinner2GoiCuoc, dataSpinner2LoaiThueBao,
-                                dataSpinner2KhuyenMai, dataSpinner3TypeContract, dataSpinner3Payer,
+                                dataSpinner3TypeContract,
                                 dataSpinner3HinhThucThanhToan, dataSpinner3ChuKyCuoc,
                                 dataSpinner3ChiTietIn, dataSpinner3HinhThucThongBaoCuoc);
+                        //
                     }
                 }).flatMap(new Func1<DataSpinnerBaseView, Observable<DataSpinnerBaseView>>() {
             @Override
@@ -1029,18 +1070,15 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
                         spinner.getSubscriberDataSpinner2GoiCuoc();
                 GetListSubTypeResponse dataSpinner2LoaiThueBao =
                         spinner.getSubscriberDataSpinner2LoaiThueBao();
-                GetListRegTypeResponse dataSpinner2KhuyenMai =
-                        spinner.getSubscriberDataSpinner2KhuyenMai();
-                GetListRegTypeResponse dataSpinner3TypeContract =
-                        spinner.getContractDataSpinner3TypeContract();
-                GetListRegTypeResponse dataSpinner3Payer = spinner.getContractDataSpinner3Payer();
-                GetListRegTypeResponse dataSpinner3HinhThucThanhToan =
+                GetListRegTypeResponse dataSpinner3LoaiHopDong =
+                        spinner.getContractDataSpinner3LoaiHopDong();
+                GetApDomainByTypeResponse dataSpinner3HinhThucThanhToan =
                         spinner.getContractDataSpinner3HinhThucThanhToan();
                 GetListRegTypeResponse dataSpinner3ChuKyCuoc =
                         spinner.getContractDataSpinner3ChuKyCuoc();
-                GetListRegTypeResponse dataSpinner3ChiTietIn =
+                GetApDomainByTypeResponse dataSpinner3ChiTietIn =
                         spinner.getContractDataSpinner3ChiTietIn();
-                GetListRegTypeResponse dataSpinner3HinhThucThongBaoCuoc =
+                GetApDomainByTypeResponse dataSpinner3HinhThucThongBaoCuoc =
                         spinner.getContractDataSpinner3HinhThucThongBaoCuoc();
 
                 if (dataSpinner2GoiCuoc == null
@@ -1051,33 +1089,25 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
                         || dataSpinner2LoaiThueBao.getSubTypeList() == null
                         || dataSpinner2LoaiThueBao.getSubTypeList().size() == 0
 
-                        || dataSpinner2KhuyenMai == null
-                        || dataSpinner2KhuyenMai.getRegTypeList() == null
-                        || dataSpinner2KhuyenMai.getRegTypeList().size() == 0
-
-                        || dataSpinner3TypeContract == null
-                        || dataSpinner3TypeContract.getRegTypeList() == null
-                        || dataSpinner3TypeContract.getRegTypeList().size() == 0
-
-                        || dataSpinner3Payer == null
-                        || dataSpinner3Payer.getRegTypeList() == null
-                        || dataSpinner3Payer.getRegTypeList().size() == 0
+                        || dataSpinner3LoaiHopDong == null
+                        || dataSpinner3LoaiHopDong.getRegTypeList() == null
+                        || dataSpinner3LoaiHopDong.getRegTypeList().size() == 0
 
                         || dataSpinner3HinhThucThanhToan == null
-                        || dataSpinner3HinhThucThanhToan.getRegTypeList() == null
-                        || dataSpinner3HinhThucThanhToan.getRegTypeList().size() == 0
+                        || dataSpinner3HinhThucThanhToan.getApDomainByTypeList() == null
+                        || dataSpinner3HinhThucThanhToan.getApDomainByTypeList().size() == 0
 
                         || dataSpinner3ChuKyCuoc == null
                         || dataSpinner3ChuKyCuoc.getRegTypeList() == null
                         || dataSpinner3ChuKyCuoc.getRegTypeList().size() == 0
 
                         || dataSpinner3ChiTietIn == null
-                        || dataSpinner3ChiTietIn.getRegTypeList() == null
-                        || dataSpinner3ChiTietIn.getRegTypeList().size() == 0
+                        || dataSpinner3ChiTietIn.getApDomainByTypeList() == null
+                        || dataSpinner3ChiTietIn.getApDomainByTypeList().size() == 0
 
                         || dataSpinner3HinhThucThongBaoCuoc == null
-                        || dataSpinner3HinhThucThongBaoCuoc.getRegTypeList() == null
-                        || dataSpinner3HinhThucThongBaoCuoc.getRegTypeList().size() == 0
+                        || dataSpinner3HinhThucThongBaoCuoc.getApDomainByTypeList() == null
+                        || dataSpinner3HinhThucThongBaoCuoc.getApDomainByTypeList().size() == 0
 
                         ) {
                     BaseErrorResponse baseErrorResponse = new BaseErrorResponse();
@@ -1085,6 +1115,45 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
                     return Observable.error(BaseException.toServerError(baseErrorResponse));
                 } else {
                     return Observable.just(spinner);
+                }
+            }
+        });
+    }
+
+    private Observable<DataSpinnerDNView> observableDataSpinnerDNView(String subType) {
+        return Observable.zip(getDataRegisterSpinnerLoaiGiayTo(subType),
+                getDataRegisterSpinnerDatCoc(subType), getDataRegisterSpinnerHanMuc(subType),
+                new Func3<GetApDomainByTypeResponse, GetApDomainByTypeResponse, GetApDomainByTypeResponse, DataSpinnerDNView>() {
+                    @Override
+                    public DataSpinnerDNView call(GetApDomainByTypeResponse loaiGiayTo,
+                            GetApDomainByTypeResponse datCoc, GetApDomainByTypeResponse hanMuc) {
+                        return new DataSpinnerDNView(loaiGiayTo, datCoc, hanMuc);
+                    }
+                }).flatMap(new Func1<DataSpinnerDNView, Observable<DataSpinnerDNView>>() {
+            @Override
+            public Observable<DataSpinnerDNView> call(DataSpinnerDNView object) {
+
+                GetApDomainByTypeResponse loaiGiayTo = object.getCustomerAdapterSpinnerLoaiGiayTo();
+                GetApDomainByTypeResponse datCoc = object.getSubscriberDataSpinner2DatCoc();
+                GetApDomainByTypeResponse hanMuc = object.getSubscriberDataSpinnerHanMuc();
+
+                if (loaiGiayTo == null
+                        || loaiGiayTo.getApDomainByTypeList() == null
+                        || loaiGiayTo.getApDomainByTypeList().size() == 0
+
+                        || datCoc == null
+                        || datCoc.getApDomainByTypeList() == null
+                        || datCoc.getApDomainByTypeList().size() == 0
+
+                        || hanMuc == null
+                        || hanMuc.getApDomainByTypeList() == null
+                        || hanMuc.getApDomainByTypeList().size() == 0) {
+
+                    BaseErrorResponse baseErrorResponse = new BaseErrorResponse();
+                    baseErrorResponse.setError(201, stringLoadDataError);
+                    return Observable.error(BaseException.toServerError(baseErrorResponse));
+                } else {
+                    return Observable.just(object);
                 }
             }
         });
@@ -1102,32 +1171,26 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
     private class DataSpinnerBaseView {
         private GetListProductResponse subscriberDataSpinner2GoiCuoc;
         private GetListSubTypeResponse subscriberDataSpinner2LoaiThueBao;
-        private GetListRegTypeResponse subscriberDataSpinner2KhuyenMai;
-        private GetListRegTypeResponse contractDataSpinner3TypeContract;
-        private GetListRegTypeResponse contractDataSpinner3Payer;
-        private GetListRegTypeResponse contractDataSpinner3HinhThucThanhToan;
+        private GetListRegTypeResponse contractDataSpinner3LoaiHopDong;
+        private GetApDomainByTypeResponse contractDataSpinner3HinhThucThanhToan;
         private GetListRegTypeResponse contractDataSpinner3ChuKyCuoc;
-        private GetListRegTypeResponse contractDataSpinner3ChiTietIn;
-        private GetListRegTypeResponse contractDataSpinner3HinhThucThongBaoCuoc;
+        private GetApDomainByTypeResponse contractDataSpinner3ChiTietIn;
+        private GetApDomainByTypeResponse contractDataSpinner3HinhThucThongBaoCuoc;
 
         public DataSpinnerBaseView() {
         }
 
         DataSpinnerBaseView(GetListProductResponse subscriberDataSpinner2GoiCuoc,
                 GetListSubTypeResponse subscriberDataSpinner2LoaiThueBao,
-                GetListRegTypeResponse subscriberDataSpinner2KhuyenMai,
-                GetListRegTypeResponse contractDataSpinner3TypeContract,
-                GetListRegTypeResponse contractDataSpinner3Payer,
-                GetListRegTypeResponse contractDataSpinner3HinhThucThanhToan,
+                GetListRegTypeResponse contractDataSpinner3LoaiHopDong,
+                GetApDomainByTypeResponse contractDataSpinner3HinhThucThanhToan,
                 GetListRegTypeResponse contractDataSpinner3ChuKyCuoc,
-                GetListRegTypeResponse contractDataSpinner3ChiTietIn,
-                GetListRegTypeResponse contractDataSpinner3HinhThucThongBaoCuoc) {
+                GetApDomainByTypeResponse contractDataSpinner3ChiTietIn,
+                GetApDomainByTypeResponse contractDataSpinner3HinhThucThongBaoCuoc) {
 
             this.subscriberDataSpinner2GoiCuoc = subscriberDataSpinner2GoiCuoc;
             this.subscriberDataSpinner2LoaiThueBao = subscriberDataSpinner2LoaiThueBao;
-            this.subscriberDataSpinner2KhuyenMai = subscriberDataSpinner2KhuyenMai;
-            this.contractDataSpinner3TypeContract = contractDataSpinner3TypeContract;
-            this.contractDataSpinner3Payer = contractDataSpinner3Payer;
+            this.contractDataSpinner3LoaiHopDong = contractDataSpinner3LoaiHopDong;
             this.contractDataSpinner3HinhThucThanhToan = contractDataSpinner3HinhThucThanhToan;
             this.contractDataSpinner3ChuKyCuoc = contractDataSpinner3ChuKyCuoc;
             this.contractDataSpinner3ChiTietIn = contractDataSpinner3ChiTietIn;
@@ -1153,38 +1216,21 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
             this.subscriberDataSpinner2LoaiThueBao = subscriberDataSpinner2LoaiThueBao;
         }
 
-        public GetListRegTypeResponse getSubscriberDataSpinner2KhuyenMai() {
-            return subscriberDataSpinner2KhuyenMai;
+        public GetListRegTypeResponse getContractDataSpinner3LoaiHopDong() {
+            return contractDataSpinner3LoaiHopDong;
         }
 
-        public void setSubscriberDataSpinner2KhuyenMai(
-                GetListRegTypeResponse subscriberDataSpinner2KhuyenMai) {
-            this.subscriberDataSpinner2KhuyenMai = subscriberDataSpinner2KhuyenMai;
+        public void setContractDataSpinner3LoaiHopDong(
+                GetListRegTypeResponse contractDataSpinner3LoaiHopDong) {
+            this.contractDataSpinner3LoaiHopDong = contractDataSpinner3LoaiHopDong;
         }
 
-        public GetListRegTypeResponse getContractDataSpinner3TypeContract() {
-            return contractDataSpinner3TypeContract;
-        }
-
-        public void setContractDataSpinner3TypeContract(
-                GetListRegTypeResponse contractDataSpinner3TypeContract) {
-            this.contractDataSpinner3TypeContract = contractDataSpinner3TypeContract;
-        }
-
-        public GetListRegTypeResponse getContractDataSpinner3Payer() {
-            return contractDataSpinner3Payer;
-        }
-
-        public void setContractDataSpinner3Payer(GetListRegTypeResponse contractDataSpinner3Payer) {
-            this.contractDataSpinner3Payer = contractDataSpinner3Payer;
-        }
-
-        public GetListRegTypeResponse getContractDataSpinner3HinhThucThanhToan() {
+        public GetApDomainByTypeResponse getContractDataSpinner3HinhThucThanhToan() {
             return contractDataSpinner3HinhThucThanhToan;
         }
 
         public void setContractDataSpinner3HinhThucThanhToan(
-                GetListRegTypeResponse contractDataSpinner3HinhThucThanhToan) {
+                GetApDomainByTypeResponse contractDataSpinner3HinhThucThanhToan) {
             this.contractDataSpinner3HinhThucThanhToan = contractDataSpinner3HinhThucThanhToan;
         }
 
@@ -1197,23 +1243,67 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
             this.contractDataSpinner3ChuKyCuoc = contractDataSpinner3ChuKyCuoc;
         }
 
-        public GetListRegTypeResponse getContractDataSpinner3ChiTietIn() {
+        public GetApDomainByTypeResponse getContractDataSpinner3ChiTietIn() {
             return contractDataSpinner3ChiTietIn;
         }
 
         public void setContractDataSpinner3ChiTietIn(
-                GetListRegTypeResponse contractDataSpinner3ChiTietIn) {
+                GetApDomainByTypeResponse contractDataSpinner3ChiTietIn) {
             this.contractDataSpinner3ChiTietIn = contractDataSpinner3ChiTietIn;
         }
 
-        public GetListRegTypeResponse getContractDataSpinner3HinhThucThongBaoCuoc() {
+        public GetApDomainByTypeResponse getContractDataSpinner3HinhThucThongBaoCuoc() {
             return contractDataSpinner3HinhThucThongBaoCuoc;
         }
 
         public void setContractDataSpinner3HinhThucThongBaoCuoc(
-                GetListRegTypeResponse contractDataSpinner3HinhThucThongBaoCuoc) {
+                GetApDomainByTypeResponse contractDataSpinner3HinhThucThongBaoCuoc) {
             this.contractDataSpinner3HinhThucThongBaoCuoc =
                     contractDataSpinner3HinhThucThongBaoCuoc;
+        }
+    }
+
+    private class DataSpinnerDNView {
+        private GetApDomainByTypeResponse customerAdapterSpinnerLoaiGiayTo;
+        private GetApDomainByTypeResponse subscriberDataSpinner2DatCoc;
+        private GetApDomainByTypeResponse subscriberDataSpinnerHanMuc;
+
+        public DataSpinnerDNView() {
+        }
+
+        public DataSpinnerDNView(GetApDomainByTypeResponse customerAdapterSpinnerLoaiGiayTo,
+                GetApDomainByTypeResponse subscriberDataSpinner2DatCoc,
+                GetApDomainByTypeResponse subscriberDataSpinnerHanMuc) {
+            this.customerAdapterSpinnerLoaiGiayTo = customerAdapterSpinnerLoaiGiayTo;
+            this.subscriberDataSpinner2DatCoc = subscriberDataSpinner2DatCoc;
+            this.subscriberDataSpinnerHanMuc = subscriberDataSpinnerHanMuc;
+        }
+
+        public GetApDomainByTypeResponse getCustomerAdapterSpinnerLoaiGiayTo() {
+            return customerAdapterSpinnerLoaiGiayTo;
+        }
+
+        public void setCustomerAdapterSpinnerLoaiGiayTo(
+                GetApDomainByTypeResponse customerAdapterSpinnerLoaiGiayTo) {
+            this.customerAdapterSpinnerLoaiGiayTo = customerAdapterSpinnerLoaiGiayTo;
+        }
+
+        public GetApDomainByTypeResponse getSubscriberDataSpinner2DatCoc() {
+            return subscriberDataSpinner2DatCoc;
+        }
+
+        public void setSubscriberDataSpinner2DatCoc(
+                GetApDomainByTypeResponse subscriberDataSpinner2DatCoc) {
+            this.subscriberDataSpinner2DatCoc = subscriberDataSpinner2DatCoc;
+        }
+
+        public GetApDomainByTypeResponse getSubscriberDataSpinnerHanMuc() {
+            return subscriberDataSpinnerHanMuc;
+        }
+
+        public void setSubscriberDataSpinnerHanMuc(
+                GetApDomainByTypeResponse subscriberDataSpinnerHanMuc) {
+            this.subscriberDataSpinnerHanMuc = subscriberDataSpinnerHanMuc;
         }
     }
 

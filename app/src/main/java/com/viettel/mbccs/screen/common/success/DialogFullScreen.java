@@ -26,6 +26,8 @@ public class DialogFullScreen extends Dialog {
 
     private String content = "";
 
+    private String description = "";
+
     private String positiveButton = "";
 
     private String negativeButton = "";
@@ -47,6 +49,8 @@ public class DialogFullScreen extends Dialog {
         private String title;
 
         private String content;
+
+        private String description;
 
         private boolean isShowToolbar;
 
@@ -105,6 +109,11 @@ public class DialogFullScreen extends Dialog {
             return this;
         }
 
+        public Builder setDescription(String description) {
+            this.description = description;
+            return this;
+        }
+
         public Builder setAutoClose(boolean autoClose) {
             isAutoClose = autoClose;
             return this;
@@ -126,6 +135,7 @@ public class DialogFullScreen extends Dialog {
             successDialog.setListener(mListener);
             setCenterContent(isCenterContent);
             successDialog.setAutoClose(isAutoClose);
+            successDialog.setDescription(description);
 
             return successDialog;
         }
@@ -248,6 +258,14 @@ public class DialogFullScreen extends Dialog {
         if (mListener != null) {
             mListener.onNegativeButtonClick(this);
         }
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public interface SuccessDialogListener {

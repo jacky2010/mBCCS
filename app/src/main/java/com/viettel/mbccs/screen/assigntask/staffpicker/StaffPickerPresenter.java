@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseSearchListPickerPresenter;
 import com.viettel.mbccs.base.searchlistview.BaseSearchListViewContract;
-import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.StaffInfo;
 import com.viettel.mbccs.data.source.CongViecRepository;
 import com.viettel.mbccs.data.source.UserRepository;
