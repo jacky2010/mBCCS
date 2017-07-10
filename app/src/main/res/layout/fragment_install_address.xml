@@ -26,6 +26,7 @@
         app:istIconRightBg="@drawable/ic_arrow_drop_down_black_24dp"
         app:istSpinner="true"
         app:istSpinnerEnable="false"
+        android:visibility="gone"
         app:istTextView="true"
         app:istSpinnerTitle="@string/title_type_page"
         app:istTextViewTitle="@string/title_type_page" />
@@ -38,6 +39,7 @@
         app:istIconRight="true"
         app:istIconRightBg="@drawable/ic_close"
         app:istSpinner="true"
+        android:visibility="gone"
         app:istTextView="true"
         app:istTextViewTitle="@string/title_total_page" />
 

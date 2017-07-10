@@ -125,6 +125,11 @@ public class CustomDatePicker extends LinearLayout {
                 DateUtils.TIMEZONE_FORMAT_SERVER, null);
     }
 
+    public String getStringFormatDDMMYY() {
+        return DateUtils.timestampToString(mCalendar.getTimeInMillis(),
+                DateUtils.CALENDAR_DATE_FORMAT_DD_MM_YY, null);
+    }
+
     public void setDateToCalendar(String dateString) {
         if (StringUtils.isEmpty(dateString)) return;
 

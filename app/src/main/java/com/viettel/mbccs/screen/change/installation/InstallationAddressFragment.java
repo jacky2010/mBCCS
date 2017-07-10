@@ -153,12 +153,14 @@ public class InstallationAddressFragment extends BaseDataFragment {
     private void callApiSearch() {
         getBaseActivity().showLoadingDialog();
         GetRegisterSubInfoRequest getRegisterSubInfoRequest = new GetRegisterSubInfoRequest();
-        getRegisterSubInfoRequest.setIsdn(mPhoneNumber.getStringEditText());
-        getRegisterSubInfoRequest.setIdNo(mTypeOfPage.getStringEditText());
-        getRegisterSubInfoRequest.setIdType(mNumberOfPage.getStringEditText());
-
+//        getRegisterSubInfoRequest.setIsdn(mPhoneNumber.getStringEditText());
+//        getRegisterSubInfoRequest.setIdNo(mTypeOfPage.getStringEditText());
+//        getRegisterSubInfoRequest.setIdType(mNumberOfPage.getStringEditText());
+        getRegisterSubInfoRequest.setIsdn("620103022");
+        getRegisterSubInfoRequest.setIdNo("145079102");
+        getRegisterSubInfoRequest.setIdType("1");
         DataRequest<GetRegisterSubInfoRequest> request = new DataRequest<>();
-        request.setWsCode(WsCode.GetRegisterSubInfo);
+        request.setWsCode(WsCode.GetRegisterSub);
         request.setWsRequest(getRegisterSubInfoRequest);
         //
         Subscription subscription = qlKhachHangRepository.getRegiterSubInfo(request)
@@ -167,11 +169,13 @@ public class InstallationAddressFragment extends BaseDataFragment {
                     public void onSuccess(GetRegisterSubInfoResponse object) {
                         showSearchInfoCustomer(object);
                         getBaseActivity().hideLoadingDialog();
+                        System.out.println("hideLoadingDialog" +111);
                     }
 
                     @Override
                     public void onError(BaseException error) {
                         getBaseActivity().hideLoadingDialog();
+                        System.out.println("hideLoadingDialog"+404);
                     }
                 });
         subscriptions.add(subscription);
