@@ -2,7 +2,6 @@ package com.viettel.mbccs.screen.connector.fragment.confirm;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -16,7 +15,6 @@ import com.viettel.mbccs.databinding.FragmentConfirmConnectSubscriberBinding;
 import com.viettel.mbccs.screen.common.success.DialogFullScreen;
 import com.viettel.mbccs.screen.connector.ConnectMobileViewPagerBaseActivity;
 import com.viettel.mbccs.screen.connector.listener.OnBackPressActivity;
-import com.viettel.mbccs.screen.connector.mobile.ConnectorMobileActivity;
 import com.viettel.mbccs.utils.DialogUtils;
 
 /**
@@ -106,19 +104,20 @@ public class ConfirmConnectSubscriberFragment extends BaseFragment
                 .setTitle(getString(R.string.confirm_connect_subscriber_dialog_dau_noi_thanh_cong))
                 .setContent(getString(R.string.confirm_connect_subscriber_dialog_gui_tin_nhan))
                 .setPositiveButton(
-                        getString(R.string.confirm_connect_subscriber_dialog_dang_ky_vas))
+                        getString(R.string.confirm_connect_subscriber_dialog_toi_dang_ky_vas))
                 .setNegativeButton(getString(R.string.confirm_connect_subscriber_dialog_bo_qua))
+                .setDescription(getString(R.string.confirm_connect_subscriber_dialog_dang_ky_vas))
                 .setListener(new DialogFullScreen.SuccessDialogListener() {
                     @Override
                     public void onPositiveButtonClick(Dialog dialog) {
                         // TODO: 7/4/17 fake
                         dialog.dismiss();
-                        getActivity().finish();
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                startActivity(
-                                        new Intent(getActivity(), ConnectorMobileActivity.class));
+//                                startActivity(
+//                                        new Intent(getActivity(), ConnectorMobileActivity.class));
+                                getActivity().finish();
                             }
                         }, 200);
                     }
@@ -126,12 +125,12 @@ public class ConfirmConnectSubscriberFragment extends BaseFragment
                     @Override
                     public void onNegativeButtonClick(Dialog dialog) {
                         dialog.dismiss();
-                        getActivity().finish();
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                startActivity(
-                                        new Intent(getActivity(), ConnectorMobileActivity.class));
+//                                startActivity(
+//                                        new Intent(getActivity(), ConnectorMobileActivity.class));
+                                getActivity().finish();
                             }
                         }, 200);
                     }

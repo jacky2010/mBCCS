@@ -44,7 +44,7 @@
                 android:id="@+id/spinner_create_connector_3_loai_hop_dong"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                bind:adapter="@{ viewModel.contractAdapterSpinner3TypeContract }"
+                bind:adapter="@{ viewModel.contractAdapterSpinner3LoaiHopDong }"
                 />
 
             <com.viettel.mbccs.widget.CustomTextView
@@ -54,11 +54,12 @@
                 style="@style/textTitleInput"
                 />
 
-            <com.viettel.mbccs.widget.SpinnerWithBorder
-                android:id="@+id/spinner_create_connector_3_nguoi_thanh_toan"
+            <com.viettel.mbccs.widget.CustomEditTextInput
+                android:id="@+id/create_new_connector_information_postpaid_nguoi_thanh_toan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                bind:adapter="@{ viewModel.contractAdapterSpinner3Payer }"
+                android:text="@={ viewModel.contractNguoiThanhToan }"
+                bind:error="@{ viewModel.contractNguoiThanhToanError }"
                 />
 
             <com.viettel.mbccs.widget.CustomTextView

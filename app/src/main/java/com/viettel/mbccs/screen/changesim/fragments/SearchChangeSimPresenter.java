@@ -7,9 +7,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
-
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.ApDomainByType;
 import com.viettel.mbccs.data.model.ChangeSimInfo;
@@ -32,10 +30,8 @@ import com.viettel.mbccs.utils.GsonUtils;
 import com.viettel.mbccs.utils.SpinnerAdapter;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import com.viettel.mbccs.variable.Constants;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
@@ -206,7 +202,7 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
             viewModel.showLoading();
 
             DataRequest<GetApDomainByTypeRequest> baseRequest = new DataRequest<>();
-            baseRequest.setWsCode(ApiCode.GetApDomainByType);
+            baseRequest.setWsCode(WsCode.GetApDomainByType);
             GetApDomainByTypeRequest request = new GetApDomainByTypeRequest();
             request.setType(ApDomainByType.Type.LOAI_GIAY_TO);
             baseRequest.setWsRequest(request);
@@ -296,7 +292,7 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
             viewModel.showLoading();
 
             DataRequest<GetRegisterSubRequest> baseRequest = new DataRequest<>();
-            baseRequest.setWsCode(ApiCode.GetRegisterSub);
+            baseRequest.setWsCode(WsCode.GetRegisterSub);
             GetRegisterSubRequest request = new GetRegisterSubRequest();
             request.setIsdn(isdn.get());
             request.setIdNo(documentId.get());

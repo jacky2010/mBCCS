@@ -94,20 +94,20 @@
                 bind:adapter="@{ viewModel.subscriberAdapterSpinner2HTHoaMang }"
                 />
 
-            <com.viettel.mbccs.widget.CustomTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_4"
-                android:text="@string/create_new_connector_information_postpaid_khuyen_mai"
-                style="@style/textTitleInput"
-                />
+            <!--<com.viettel.mbccs.widget.CustomTextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="@dimen/dp_4"-->
+                <!--android:text="@string/create_new_connector_information_postpaid_khuyen_mai"-->
+                <!--style="@style/textTitleInput"-->
+                <!--/>-->
 
-            <com.viettel.mbccs.widget.SpinnerWithBorder
-                android:id="@+id/spinner_create_connector_2_khuyen_mai"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                bind:adapter="@{ viewModel.subscriberAdapterSpinner2KhuyenMai }"
-                />
+            <!--<com.viettel.mbccs.widget.SpinnerWithBorder-->
+                <!--android:id="@+id/spinner_create_connector_2_khuyen_mai"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--bind:adapter="@{ viewModel.subscriberAdapterSpinner2KhuyenMai }"-->
+                <!--/>-->
 
             <LinearLayout
                 android:layout_width="match_parent"

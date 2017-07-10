@@ -270,7 +270,7 @@
                         android:id="@+id/spinner_select_type_passport"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        bind:adapter="@{viewModel.registerAdapterSpinnerPassportType}"
+                        bind:adapter="@{viewModel.registerAdapterSpinnerLoaiGiayTo}"
                         />
 
                     <com.viettel.mbccs.widget.CustomTextView

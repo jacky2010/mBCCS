@@ -883,8 +883,9 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="confirm_connect_subscriber_dialog_gui_tin_nhan">
         Tin nhắn thông báo đã gửi tới SĐT của kênh phân phối đặt hàng và kênh bán
     </string>
-    <string name="confirm_connect_subscriber_dialog_dang_ky_vas">Tạo đăng ký VAS</string>
+    <string name="confirm_connect_subscriber_dialog_toi_dang_ky_vas">Tới đăng ký VAS</string>
     <string name="confirm_connect_subscriber_dialog_bo_qua">Bỏ qua</string>
+    <string name="confirm_connect_subscriber_dialog_dang_ky_vas">Bạn có muốn đăng ký dịch vụ VAS cho thuê bao không?</string>
     <string name="create_new_connector_information_postpaid_thong_tin_khach_hang">Thông tin khách hàng</string>
     <string name="create_new_connector_information_postpaid_ngay_cap">Ngày cấp</string>
     <string name="create_new_connector_information_postpaid_noi_cap">Nơi cấp</string>
@@ -977,6 +978,8 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="create_new_connector_information_postpaid_dien_thoai">Điện thoại</string>
     <string name="create_new_connector_information_postpaid_thong_tin_phu_luc_hop_dong">Thông tin phụ lục hợp đồng</string>
     <string name="create_new_connector_information_postpaid_phu_luc_hop_dong">Phụ lục hợp đồng</string>
+    <string name="create_new_connector_information_postpaid_khach_hang_doanh_nghiep">Doanh nghiệp</string>
+    <string name="create_new_connector_information_postpaid_khach_hang_ca_nhan">Cá nhân</string>
 
     <string name="activity_list_order_warehouse_ngay_lap_lenh">Ngày lập lệnh</string>
     <string name="activity_list_order_warehouse_ma_kho_xuat">Mã kho xuất</string>
@@ -1179,6 +1182,9 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="xuatkhocapduoi_create_command_button">Lập lệnh</string>
     <string name="xuatkhocapduoi_create_order_button">Lập phiếu</string>
     <string name="xuatkhocapduoi_error_connect_api">Đã xảy ra lỗi : %s</string>
+    
+    <string name="nv_xac_nhan_hang_title">Nhân viên xác nhận hàng</string>
+    <string name="nv_xac_nhan_hang_ma_kho_xuat">Mã kho xuất</string>
 
     <string name="common_export_label_create_cmd">Lập lệnh</string>
     <string name="common_export_msg_create_cmd">Bạn có chắc chắn muốn lập lệnh xuất?</string>

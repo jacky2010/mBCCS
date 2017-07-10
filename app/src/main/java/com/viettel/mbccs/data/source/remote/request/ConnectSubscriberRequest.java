@@ -31,17 +31,21 @@ public class ConnectSubscriberRequest extends BaseRequest {
     @Expose
     private String staffCode;
 
-    @SerializedName("onwerType")
+    @SerializedName("ownerType")
     @Expose
-    private String onwerType;
+    private Integer ownerType;
 
     @SerializedName("ownerId")
     @Expose
-    private String ownerId;
+    private Long ownerId;
 
     @SerializedName("channelTypeId")
     @Expose
     private String channelTypeId;
+
+    @SerializedName("subType")
+    @Expose
+    private String subType;
 
     public Customer getCustomer() {
         return customer;
@@ -83,19 +87,19 @@ public class ConnectSubscriberRequest extends BaseRequest {
         this.staffCode = staffCode;
     }
 
-    public String getOnwerType() {
-        return onwerType;
+    public Integer getOwnerType() {
+        return ownerType;
     }
 
-    public void setOnwerType(String onwerType) {
-        this.onwerType = onwerType;
+    public void setOwnerType(Integer ownerType) {
+        this.ownerType = ownerType;
     }
 
-    public String getOwnerId() {
+    public Long getOwnerId() {
         return ownerId;
     }
 
-    public void setOwnerId(String ownerId) {
+    public void setOwnerId(Long ownerId) {
         this.ownerId = ownerId;
     }
 
@@ -105,6 +109,14 @@ public class ConnectSubscriberRequest extends BaseRequest {
 
     public void setChannelTypeId(String channelTypeId) {
         this.channelTypeId = channelTypeId;
+    }
+
+    public String getSubType() {
+        return subType;
+    }
+
+    public void setSubType(String subType) {
+        this.subType = subType;
     }
 
     public ConnectSubscriberRequest() {

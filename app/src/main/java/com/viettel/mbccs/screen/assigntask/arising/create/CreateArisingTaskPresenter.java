@@ -4,7 +4,6 @@ import android.content.Context;
 import android.databinding.ObservableField;
 
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.constance.ApiCode;
 import com.viettel.mbccs.data.model.TaskShopManagement;
 import com.viettel.mbccs.data.source.CongViecRepository;
 import com.viettel.mbccs.data.source.UserRepository;

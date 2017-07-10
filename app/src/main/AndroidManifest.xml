@@ -40,12 +40,7 @@
             android:value="2"/>
         <meta-data
             android:name="AA_MODELS"
-            android:value="com.viettel.mbccs.data.model.Precinct,
-                           com.viettel.mbccs.data.model.Province,
-                           com.viettel.mbccs.data.model.District,
-                           com.viettel.mbccs.data.model.database.AreaDataBase,
-                           com.viettel.mbccs.data.model.database.ImageDataBase,
-                           com.viettel.mbccs.data.model.UploadImage"/>
+            android:value="com.viettel.mbccs.data.model.Precinct,                            com.viettel.mbccs.data.model.Province,                            com.viettel.mbccs.data.model.District,                            com.viettel.mbccs.data.model.database.AreaDataBase,                            com.viettel.mbccs.data.model.database.ImageDataBase,                            com.viettel.mbccs.data.model.UploadImage"/>
 
         <!-- Service -->
         <service
@@ -248,7 +243,6 @@
         <activity
             android:name=".screen.stockdeliver.TestStockDeliveryActivity"
             android:screenOrientation="portrait"/>
-
         <activity
             android:name=".screen.Test"
             android:screenOrientation="portrait"/>
@@ -264,7 +258,6 @@
         <activity
             android:name=".screen.nhanvientrahang.createNote.LapPhieuXuatTraHangActivity"
             android:screenOrientation="portrait"/>
-
         <activity
             android:name=".screen.nhanvientrahang.list.ListNhanVienTraHangActivity"
             android:screenOrientation="portrait"/>
@@ -277,17 +270,18 @@
         <activity
             android:name=".screen.importwarehousefromstaff.importnote.CreateImportStockFromStaffActivity"
             android:screenOrientation="portrait"/>
-
         <activity
             android:name=".screen.connector.ConnectMobilePostpaidViewPagerActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.connector.ConnectMobilePrepaidViewPagerActivity"
             android:screenOrientation="portrait"/>
-
         <activity
             android:name=".screen.warehousecommon.CreateExpCmdToStaffActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".screen.nvxacnhanhang.NvXacNhanHangActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
