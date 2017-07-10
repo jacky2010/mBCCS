@@ -178,7 +178,6 @@ public class ListNhapKhoTuNhanVienActivity extends BaseListOrderActivity {
                 } else {
                     intent = new Intent(this, CreateNoteNoCmdStockFromStaffActivity.class);
                 }
-
                 break;
             case (int) StockTransStatus.TRANS_NON_NOTE:
                 intent = new Intent(this, CreateNoteFromStaffActivity.class);

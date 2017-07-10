@@ -24,4 +24,10 @@ public class CreateNoteNoCmdStockFromStaffActivity extends BaseCreateImportWareH
     public int getStepCreate() {
         return BaseCreateImportWareHouseActivity.STEP_2;
     }
+
+    @Override
+    public void onImportSuccess() {
+        setResult(RESULT_OK);
+        finish();
+    }
 }

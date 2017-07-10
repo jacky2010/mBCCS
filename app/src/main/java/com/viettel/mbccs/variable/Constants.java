@@ -165,7 +165,7 @@ public class Constants {
 
     public class FuntionConstant {
         public static final long STAFF_EXPORT_SHOP_REASON_ID = 200383L;
-        public static final long IMPORT_FROM_STAFF_STEP = 3;
+        public static final long IMPORT_FROM_STAFF_STEP = 2;
     }
 
     public interface AssignTask {

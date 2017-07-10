@@ -32,7 +32,7 @@
             android:paddingLeft="@dimen/dp_16"
             android:paddingRight="@dimen/dp_16"
             android:textColor="@color/black"
-            android:textSize="@dimen/sp_18"
+            android:textSize="@dimen/sp_15"
             app:textHtml="@{ @string/dialog_view_serial_detail_serial( presenter.codeStock) }"
             />
         <LinearLayout

@@ -32,9 +32,18 @@ public class ListNhanVienTraHangActivity extends BaseListOrderActivity {
 
     @Override
     public void doSearch() {
+
+        showLoading();
         DataRequest<GetListExpCmdRequest> mDataRequest = new DataRequest<>();
         GetListExpCmdRequest mRequest = new GetListExpCmdRequest();
-        showLoading();
+        if (getPositionStatus() == 0) {
+            mRequest.setStockTransStatus(StockTransStatus.TRANS_EXP_IMPED);
+        }
+
+        if (getPositionStatus() == 1) {
+            mRequest.setStockTransStatus(StockTransStatus.TRANS_REJECT);
+        }
+
         mRequest.setStockTransType(StockTransType.TRANS_EXPORT);
         mRequest.setStartDate(getFromDateString());
         mRequest.setEndDate(getToDateString());
@@ -49,6 +58,11 @@ public class ListNhanVienTraHangActivity extends BaseListOrderActivity {
                     @Override
                     public void onSuccess(GetListExpCmdResponse object) {
                         if (object != null && object.getStockTranses() != null) {
+                            for (StockTrans stockTrans : object.getStockTranses()) {
+                                stockTrans.setActionName(
+                                        getString(R.string.nv_trahangcaptren_action_detail));
+                            }
+
                             setDataSearch(object.getStockTranses());
                         } else {
                             setDataSearch(new ArrayList<StockTrans>());
@@ -82,10 +96,6 @@ public class ListNhanVienTraHangActivity extends BaseListOrderActivity {
 
                     @Override
                     public void onSuccess(ListStockTransDetailsReponse object) {
-
-                        //fake
-                        //object = fakeData();
-
                         if (object != null && object.getStockTransDetails() != null) {
                             ExportSuccessDialog exportSuccessDialog =
                                     ExportSuccessDialog.newInstance(stockTrans, String.format(

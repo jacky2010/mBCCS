@@ -28,12 +28,14 @@
             android:visibility="@{ presenter.adapter.itemCount != 0 ? View.VISIBLE : View.GONE }"
             />
 
-        <com.viettel.mbccs.widget.AppButton
+        <com.viettel.mbccs.widget.CustomButton
             android:id="@+id/btn_input_order"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_gravity="end"
+            android:layout_margin="@dimen/dp_10"
+            style="@style/button_positive"
             android:layout_marginTop="@dimen/dp_10"
             android:onClick="@{() -> presenter.onInputOrderClick()}"
             android:text="@string/btn_input_order"

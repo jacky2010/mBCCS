@@ -37,6 +37,7 @@
     <string-array name="nhanvien_tranhang_captren_status">
         <item>Đã xuất kho</item>
         <item>Đã hủy</item>
+        <item>Tất cả</item>
     </string-array>
 
     <string-array name="nhapkhonhanvien_status">

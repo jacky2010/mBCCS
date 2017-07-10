@@ -38,6 +38,8 @@ public abstract class BaseCreateImportWareHouseActivity extends BaseCreateOrderA
 
     public abstract int getStepCreate();
 
+    public abstract void onImportSuccess();
+
     @Override
     public void onReject() {
         int title = 0;
@@ -168,14 +170,14 @@ public abstract class BaseCreateImportWareHouseActivity extends BaseCreateOrderA
                         String.valueOf(stockTrans.getFromOwnerId())),
                 String.format(getString(R.string.warehouse_label_receive),
                         String.valueOf(stockTrans.getToOwnerId())));
-        exportSuccessDialog.setOnDialogDismissListener(new ExportSuccessDialog.OnDialogDismissListener() {
+        exportSuccessDialog.setOnDialogDismissListener(
+                new ExportSuccessDialog.OnDialogDismissListener() {
 
-            @Override
-            public void onDialogDissmis() {
-                finish();
-                setResult(RESULT_OK);
-            }
-        });
+                    @Override
+                    public void onDialogDissmis() {
+                        onImportSuccess();
+                    }
+                });
         exportSuccessDialog.show(getSupportFragmentManager(), "");
     }
 
