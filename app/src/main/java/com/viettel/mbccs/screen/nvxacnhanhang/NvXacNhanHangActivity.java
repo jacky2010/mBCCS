@@ -30,14 +30,10 @@ public class NvXacNhanHangActivity extends BaseListOrderActivity {
         showLoading();
         if (getPositionStatus() == 0) {
             mRequest.setStockTransStatus(StockTransStatus.TRANS_DONE);
-            setItemCountStringFormat(
-                    getString(R.string.nv_trahangcaptren_list_label_count_exported));
         }
 
         if (getPositionStatus() == 1) {
             mRequest.setStockTransStatus(StockTransStatus.TRANS_CANCEL);
-            setItemCountStringFormat(
-                    getString(R.string.nv_trahangcaptren_list_label_count_canceled));
         }
         mRequest.setStockTransType(StockTransType.TRANS_EXPORT);
         mRequest.setStartDate(getFromDateString());

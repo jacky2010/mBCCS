@@ -14,7 +14,7 @@ public class BaseException extends RuntimeException {
     @Nullable
     private Response response;
 
-    private BaseException(Type type, Throwable cause) {
+    public BaseException(Type type, Throwable cause) {
         super(cause.getMessage(), cause);
         this.type = type;
     }

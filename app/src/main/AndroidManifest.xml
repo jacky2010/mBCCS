@@ -290,6 +290,13 @@
         <activity
             android:name=".screen.nhapkhocapduoi.createorder.CreateImportStockFromStaffActivity"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screen.importwarehousefromstaff.importnote.CreateNoteNoCmdStockFromStaffActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screen.importwarehousefromstaff.importnote.CreateCmdFromStaffActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

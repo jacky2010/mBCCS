@@ -41,22 +41,18 @@ public class StockDeliverActivity extends BaseListOrderActivity {
         showLoading();
         if (getPositionStatus() == 0) {
             mRequest.setStockTransStatus(StockTransStatus.TRANS_NON_NOTE);
-            setItemCountStringFormat(getString(R.string.nhapkhonhanvien_count_not_not));
         }
 
         if (getPositionStatus() == 1) {
             mRequest.setStockTransStatus(StockTransStatus.TRANS_NOTED);
-            setItemCountStringFormat(getString(R.string.nhapkhonhanvien_count_noted));
         }
 
         if (getPositionStatus() == 2) {
             mRequest.setStockTransStatus(StockTransStatus.TRANS_DONE);
-            setItemCountStringFormat(getString(R.string.nhapkhonhanvien_count_not_not));
         }
 
         if (getPositionStatus() == 3) {
             mRequest.setStockTransStatus(StockTransStatus.TRANS_CANCEL);
-            setItemCountStringFormat(getString(R.string.nhapkhonhanvien_count_canceled));
         }
 
         mRequest.setStockTransType(StockTransType.TRANS_IMPORT);

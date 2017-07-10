@@ -25,21 +25,28 @@ public abstract class BaseCreateOrderSuccessPresenter<T>
 
     protected List<T> mList = new ArrayList<>();
 
+    public ObservableField<String> itemCountString = new ObservableField<>();
+
     public ObservableInt itemCount = new ObservableInt();
 
     public ObservableField<RecyclerView.Adapter> adapter = new ObservableField<>();
-
 
     public BaseCreateOrderSuccessPresenter(Context context,
             BaseCreateOrderSuccessContract.ViewModel viewModel) {
         mContext = context;
         mViewModel = viewModel;
         adapter.set(getListAdapter());
+        itemCountString.set(mContext.getString(
+                R.string.activity_create_order_success_danh_sach_mat_hang,
+                itemCount.get()));
         adapter.get().registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onChanged() {
                 super.onChanged();
                 itemCount.set(mList.size());
+                itemCountString.set(mContext.getString(
+                        R.string.activity_create_order_success_danh_sach_mat_hang,
+                        itemCount.get()));
             }
         });
     }
@@ -63,10 +70,6 @@ public abstract class BaseCreateOrderSuccessPresenter<T>
     public abstract String getExportWarehouseCode();
 
     public abstract String getCreatedDate();
-
-    public String getItemCountString() {
-        return mContext.getString(R.string.activity_create_order_success_danh_sach_mat_hang, itemCount.get());
-    }
 
     public abstract RecyclerView.Adapter getListAdapter();
 
