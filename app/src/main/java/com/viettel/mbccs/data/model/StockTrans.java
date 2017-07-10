@@ -42,6 +42,8 @@ public class StockTrans implements Parcelable {
     @Expose
     private String stockTransStatusName;
 
+    private String actionName;
+
     public String getStockTransStatusName() {
         return stockTransStatusName;
     }
@@ -125,9 +127,12 @@ public class StockTrans implements Parcelable {
         }
     }
 
+    public void setActionName(String actionName) {
+        this.actionName = actionName;
+    }
+
     public String getActionName() {
-        //TODO phân quyền
-        return "action";
+        return this.actionName;
     }
 
     public StockTrans() {

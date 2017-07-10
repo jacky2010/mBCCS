@@ -423,7 +423,7 @@ public interface MBCSSApi {
             @Body DataRequest<GetListStockTransDetailRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<ServerDataResponse<BaseResponse<EmptyObject>>> createExpStock(
+    Observable<ServerDataResponse<BaseResponse<BaseCreateCmdNoteResponse>>> createExpStock(
             @Body DataRequest<CreateExpStockRequest> requestDataRequest);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
@@ -526,18 +526,23 @@ public interface MBCSSApi {
     Observable<ServerDataResponse<BaseResponse<EmptyObject>>> destroyStockTrans(
             @Body DataRequest<DestroyStockTransRequest> requestDataRequest);
 
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<GetListBusTypeResponse>>> getListBusType(
             @Body DataRequest<GetListBusTypeRequest> request);
 
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<BaseCreateCmdNoteResponse>>> createExpCmd(
             @Body DataRequest<CreateExpCmdRequest> request);
 
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<BaseCreateCmdNoteResponse>>> createExpNote(
             @Body DataRequest<CreateExpNoteRequest> request);
 
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<BaseCreateCmdNoteResponse>>> createExpNoteNoCmd(
             @Body DataRequest<CreateExpNoteNoCmdRequest> request);
 
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<GetStockTransSerialDetailResponse>>> getStockTransDetailSerial(
             @Body DataRequest<GetStockTransSerialDetailRequest> request);
 

@@ -15,6 +15,7 @@ import com.viettel.mbccs.data.source.remote.request.CreateExpStockRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.DestroyStockTransRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListStockTransDetailRequest;
+import com.viettel.mbccs.data.source.remote.response.BaseCreateCmdNoteResponse;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.ListStockTransDetailsReponse;
 import com.viettel.mbccs.screen.warehousecommon.importcmdnotestock
@@ -203,17 +204,15 @@ public class BaseExportWareHousePresenter implements BaseExportWareHouseContract
         Subscription subcription =
                 mBanHangKhoTaiChinhRepository.createExpStock(mCreateExpStockRequest).subscribe(
 
-                        new MBCCSSubscribe<EmptyObject>() {
+                        new MBCCSSubscribe<BaseCreateCmdNoteResponse>() {
                             @Override
-                            public void onSuccess(EmptyObject object) {
-                                mViewModel.onCreateExpStockSuccess(mStockTransDetails, mStockTrans);
+                            public void onSuccess(BaseCreateCmdNoteResponse object) {
+                                mViewModel.onCreateExpStockSuccess(mStockTrans);
                             }
 
                             @Override
                             public void onError(BaseException error) {
-
                                 DialogUtils.showDialog(mContext, null, error.getMessage(), null);
-                                mViewModel.onCreateExpStockSuccess(mStockTransDetails, mStockTrans);
                             }
 
                             @Override

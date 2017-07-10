@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ListStockTransDetailsReponse extends DataResponse {
 
-    @SerializedName("listStockTransDetail")
+    @SerializedName("lstStockTransDetail")
     @Expose
     List<StockTransDetail> mStockTransDetails;
 

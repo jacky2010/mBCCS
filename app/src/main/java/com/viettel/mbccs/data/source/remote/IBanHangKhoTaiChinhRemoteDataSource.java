@@ -113,7 +113,7 @@ public interface IBanHangKhoTaiChinhRemoteDataSource {
     Observable<ListStockTransDetailsReponse> getListStockTransDetail(
             DataRequest<GetListStockTransDetailRequest> request);
 
-    Observable<EmptyObject> createExpStock(DataRequest<CreateExpStockRequest> requestDataRequest);
+    Observable<BaseCreateCmdNoteResponse> createExpStock(DataRequest<CreateExpStockRequest> requestDataRequest);
 
     Observable<InputOrderResponse> getListInvoice(
             DataRequest<InputOrderRequest> requestDataRequest);

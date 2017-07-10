@@ -126,6 +126,9 @@ public abstract class BaseListOrderActivity
 
     @Override
     public void setDataSearch(List<StockTrans> stockTranses) {
+        for (StockTrans stockTrans : stockTranses) {
+            stockTrans.setActionName(getString(R.string.nv_trahangcaptren_action_detail));
+        }
         mPresenter.setDataSearch(stockTranses);
     }
 

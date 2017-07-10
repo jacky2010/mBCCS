@@ -30,6 +30,7 @@ import com.viettel.mbccs.data.source.remote.response.GetListSerialResponse;
 import com.viettel.mbccs.databinding.DialogViewSerialBinding;
 import com.viettel.mbccs.databinding.ItemViewSerialBinding;
 import com.viettel.mbccs.dialog.LoadingDialog;
+import com.viettel.mbccs.utils.Common;
 import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.List;
@@ -66,6 +67,7 @@ public class DialogViewSerial extends DialogFragment {
     public void setStockSerial(StockSerial stockSerial) {
         this.stockSerial = stockSerial;
     }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,13 +130,13 @@ public class DialogViewSerial extends DialogFragment {
                                     public void onClick(DialogInterface dialog, int which) {
                                         dismiss();
                                     }
-                                },false);
+                                }, false);
                     }
                 });
         subscriptions.add(subscription);
     }
 
-    public void getViewInforSerial(){
+    public void getViewInforSerial() {
 
     }
 
@@ -172,8 +174,8 @@ public class DialogViewSerial extends DialogFragment {
     public void setData(StockSerial data) {
         stockSerial = data;
         adapterViewSerial.set(new ViewViewSerialAdapter(data.getSerialBOs(), getActivity()));
-        totalSerial.set(stockSerial.getSerialBOs().size());
-        codeStock.set(stockSerial.getStockModelCode());
+        totalSerial.set(Common.getSerialCountByListSerialBlock(stockSerial.getSerialBOs()));
+        codeStock.set(stockSerial.getStockModelName());
     }
 
     public class ViewViewSerialAdapter

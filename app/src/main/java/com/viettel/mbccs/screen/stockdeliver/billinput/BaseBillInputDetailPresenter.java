@@ -14,6 +14,7 @@ import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.remote.request.CreateExpStockRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListStockTransDetailRequest;
+import com.viettel.mbccs.data.source.remote.response.BaseCreateCmdNoteResponse;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.ListStockTransDetailsReponse;
 import com.viettel.mbccs.screen.stockdeliver.billinput.adapter.StockTransDetailAdapter;
@@ -209,19 +210,18 @@ public class BaseBillInputDetailPresenter implements BaseBillInputDetailContract
         Subscription subcription =
                 mBanHangKhoTaiChinhRepository.createExpStock(mCreateExpStockRequest).subscribe(
 
-                        new MBCCSSubscribe<EmptyObject>() {
+                        new MBCCSSubscribe<BaseCreateCmdNoteResponse>() {
                             @Override
-                            public void onSuccess(EmptyObject object) {
-
-                                mViewModel.onCreateExpStockSuccess(mStockTransDetails);
-                                billCreateSuccess();
+                            public void onSuccess(BaseCreateCmdNoteResponse object) {
+                                if (object != null && object.getStockTrans() != null) {
+                                    mViewModel.onCreateExpStockSuccess(object.getStockTrans());
+                                    billCreateSuccess();
+                                }
                             }
 
                             @Override
                             public void onError(BaseException error) {
-
                                 DialogUtils.showDialog(mContext, null, error.getMessage(), null);
-                                mViewModel.onCreateExpStockSuccess(mStockTransDetails);
                                 billCreateSuccess();
                             }
 

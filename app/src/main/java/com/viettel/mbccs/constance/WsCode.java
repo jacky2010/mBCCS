@@ -270,6 +270,8 @@ public class WsCode {
     // 5.10.3.3 - 5.12.3 - 5.13.3 - 5.14.3 - 5.15.3
     public final static String GetListStockTransDetail = "WS_getListStockTransDetail";
 
+    public final static String GetStockTransSerialDetail = "WS_getStockTranSerialDetail";
+
     // 5.10.3.4 - 5.12.3 - 5.14.3
     public final static String CreateExpNote = "WS_createExpNote";
 
