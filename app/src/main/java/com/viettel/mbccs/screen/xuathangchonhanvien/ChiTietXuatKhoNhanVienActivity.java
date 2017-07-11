@@ -24,4 +24,9 @@ public class ChiTietXuatKhoNhanVienActivity extends BaseExportWareHouseActivity 
     public String getHeaderTitle() {
         return getString(R.string.xuatkhochonhanvien_lablel_chi_tiet_xuat_kho_title);
     }
+
+    @Override
+    public void onExportSuccess() {
+
+    }
 }
