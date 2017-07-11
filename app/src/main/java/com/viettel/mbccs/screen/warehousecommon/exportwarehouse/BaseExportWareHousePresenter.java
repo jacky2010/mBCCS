@@ -18,8 +18,7 @@ import com.viettel.mbccs.data.source.remote.request.GetListStockTransDetailReque
 import com.viettel.mbccs.data.source.remote.response.BaseCreateCmdNoteResponse;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.ListStockTransDetailsReponse;
-import com.viettel.mbccs.screen.warehousecommon.importcmdnotestock
-        .BaseCreateImportWareHouseActivity;
+import com.viettel.mbccs.screen.warehousecommon.importcmdnotestock.BaseCreateImportWareHouseActivity;
 import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import com.viettel.mbccs.widget.CustomDialog;
@@ -106,15 +105,11 @@ public class BaseExportWareHousePresenter implements BaseExportWareHouseContract
                                 if (object != null && object.getStockTransDetails() != null) {
                                     bindData(object);
                                 }
-
-                                //fake data
                             }
 
                             @Override
                             public void onError(BaseException error) {
-                                //                                DialogUtils.showDialog
-                                // (mContext, error.getMessage());
-                                bindData(fakeData());
+                                DialogUtils.showDialog(mContext, error.getMessage());
                             }
                         });
         mSubscription.add(subscription);
@@ -126,38 +121,6 @@ public class BaseExportWareHousePresenter implements BaseExportWareHouseContract
         mAdapter.notifyDataSetChanged();
     }
 
-    public ListStockTransDetailsReponse fakeData() {
-
-        ListStockTransDetailsReponse reponse = new ListStockTransDetailsReponse();
-
-        List<StockTransDetail> listFake = new ArrayList<>();
-
-        StockTransDetail stockTransDetail1 = new StockTransDetail();
-        stockTransDetail1.setQuantity(12);
-        stockTransDetail1.setStockModelCode("AA-SS");
-        stockTransDetail1.setStockModelId(1000554);
-        stockTransDetail1.setStockModelName("SP1");
-
-        StockTransDetail stockTransDetail2 = new StockTransDetail();
-        stockTransDetail2.setQuantity(12);
-        stockTransDetail2.setStockModelCode("FF-SS");
-        stockTransDetail2.setStockModelId(1000554);
-        stockTransDetail2.setStockModelName("SP1");
-
-        StockTransDetail stockTransDetail3 = new StockTransDetail();
-        stockTransDetail3.setQuantity(18);
-        stockTransDetail3.setStockModelCode("CCC-SS");
-        stockTransDetail3.setStockModelId(1000554);
-        stockTransDetail3.setStockModelName("SP1");
-
-        listFake.add(stockTransDetail1);
-        listFake.add(stockTransDetail2);
-        listFake.add(stockTransDetail3);
-        mStockTransDetails.clear();
-        mStockTransDetails.addAll(listFake);
-        reponse.setStockTransDetails(listFake);
-        return reponse;
-    }
 
     public StockTransDetailAdapter getAdapter() {
         return mAdapter;

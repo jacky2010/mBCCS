@@ -4,6 +4,7 @@ import android.content.Context;
 import android.databinding.ObservableField;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.StockTransDetail;
+import com.viettel.mbccs.utils.Common;
 
 /**
  * Created by FRAMGIA\hoang.van.cuong on 21/06/2017.
@@ -15,16 +16,20 @@ public class ItemStockTransDetailPresenter {
     private StockTransDetail mStockTransDetail;
     public ObservableField<String> action;
     public ObservableField<Boolean> showSerial;
+    public ObservableField<String> countChoiceSerial;
 
     public ItemStockTransDetailPresenter(Context context, StockTransDetail stockTransDetail) {
         mContext = context;
         mStockTransDetail = stockTransDetail;
         action = new ObservableField<>();
         showSerial = new ObservableField<>();
+        countChoiceSerial = new ObservableField<>();
         action.set(mContext.getString(R.string.common_label_select_serials));
+        countChoiceSerial.set(String.format(mContext.getString(R.string.serial_count),
+                Common.getSerialCountByListSerialBlock(stockTransDetail.getSerialBlocks())));
     }
 
-    public void setShowSerial(boolean isShowSerial){
+    public void setShowSerial(boolean isShowSerial) {
         showSerial.set(isShowSerial);
     }
 

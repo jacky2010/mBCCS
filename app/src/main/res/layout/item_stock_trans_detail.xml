@@ -11,11 +11,11 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingRight="@dimen/dp_10"
-        android:paddingLeft="@dimen/dp_10"
-        android:paddingTop="@dimen/dp_10"
         android:background="@color/white"
         android:orientation="vertical"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_10"
         >
         <com.viettel.mbccs.widget.CustomTextView
             android:layout_width="match_parent"
@@ -39,17 +39,35 @@
                 android:textColor="@color/grey_bright"
                 android:textSize="@dimen/sp_14"
                 />
-            <com.viettel.mbccs.widget.CustomTextView
-                android:id="@+id/button_choose_serial"
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="right|center_vertical"
-                app:textUnderLine="@{presenter.action}"
-                android:textColor="@color/blue"
-                android:textSize="@dimen/sp_14"
-                />
+                android:orientation="vertical"
+                >
+                <com.viettel.mbccs.widget.CustomTextView
+                    android:id="@+id/button_choose_serial"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right|center_vertical"
+                    android:textColor="@color/blue"
+                    android:textSize="@dimen/sp_14"
+                    app:textUnderLine="@{presenter.action}"
+                    />
+                <com.viettel.mbccs.widget.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right|center_vertical"
+                    android:textColor="@color/blue"
+                    android:textSize="@dimen/sp_14"
+                    android:text="@{presenter.action}"
+                    />
+            </LinearLayout>
         </LinearLayout>
-        <View style="@style/dividerHorizontalStyle" android:layout_marginTop="@dimen/dp_10"/>
+        <View
+            android:layout_marginTop="@dimen/dp_10"
+            style="@style/dividerHorizontalStyle"
+            />
     </LinearLayout>
 </layout>

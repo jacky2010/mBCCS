@@ -29,6 +29,8 @@ public abstract class BaseExportWareHouseActivity extends
 
     public abstract String getHeaderTitle();
 
+    public abstract void onExportSuccess();
+
     @Override
     protected int getIdLayout() {
         return R.layout.activity_cmd_prepare_export_detail;
@@ -74,15 +76,15 @@ public abstract class BaseExportWareHouseActivity extends
     public void onCreateExpStockSuccess(StockTrans stockTrans) {
         ExportSuccessDialog exportSuccessDialog = ExportSuccessDialog.newInstance(mStockTrans,
                 String.format(getString(R.string.warehouse_label_export_success_code),
-                        stockTrans.getStockTransId()),
+                        String.valueOf(stockTrans.getStockTransId())),
                 String.format(getString(R.string.warehouse_label_receive),
-                        stockTrans.getToOwnerId()));
+                        String.valueOf(stockTrans.getToOwnerId())));
         exportSuccessDialog.setOnDialogDismissListener(
                 new ExportSuccessDialog.OnDialogDismissListener() {
 
                     @Override
                     public void onDialogDissmis() {
-                        finish();
+                        onExportSuccess();
                     }
                 });
         exportSuccessDialog.show(getSupportFragmentManager(), "");

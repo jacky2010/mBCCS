@@ -193,9 +193,6 @@ public class CreateCommandPresenter<T> implements CreateCommandContract.Presente
                             @Override
                             public void onError(BaseException error) {
                                 showError(error);
-
-                                //fake
-                                bindData(fakeDataListStockTransDetailsReponse());
                             }
                         });
         mCompositeSubscription.add(subscription);
