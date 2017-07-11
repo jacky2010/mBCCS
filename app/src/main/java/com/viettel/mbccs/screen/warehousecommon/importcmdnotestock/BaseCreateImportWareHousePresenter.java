@@ -5,9 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.createorder.BaseCreateOrderPresenter;
+import com.viettel.mbccs.constance.RejectWareHouseVisible;
 import com.viettel.mbccs.constance.StockTransStatus;
 import com.viettel.mbccs.constance.StockTransType;
 import com.viettel.mbccs.constance.WsCode;
+import com.viettel.mbccs.data.model.Apis;
 import com.viettel.mbccs.data.model.EmptyObject;
 import com.viettel.mbccs.data.model.StockSerial;
 import com.viettel.mbccs.data.model.StockTrans;
@@ -63,6 +65,12 @@ public class BaseCreateImportWareHousePresenter extends BaseCreateOrderPresenter
         mBanHangKhoTaiChinhRepository = BanHangKhoTaiChinhRepository.getInstance();
         mUserRepository = UserRepository.getInstance();
         mSubscription = new CompositeSubscription();
+        for (Apis apis : mUserRepository.getUser().getApi()) {
+            if (apis.getApiCode().equals(RejectWareHouseVisible.REJECT_IMPORT)) {
+                setShowRejectButton(true);
+                break;
+            }
+        }
         init();
         getStockTransDetail();
     }
@@ -320,8 +328,7 @@ public class BaseCreateImportWareHousePresenter extends BaseCreateOrderPresenter
                                             DialogViewSerial.newInstance();
                                     dialogViewSerial.setStockSerial(stockSerial);
                                     dialogViewSerial.show(
-                                            ((AppCompatActivity) mContext)
-                                                    .getSupportFragmentManager(),
+                                            ((AppCompatActivity) mContext).getSupportFragmentManager(),
                                             "");
                                 }
                             }

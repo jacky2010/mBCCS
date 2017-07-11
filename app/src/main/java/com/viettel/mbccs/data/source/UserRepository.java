@@ -2,6 +2,7 @@ package com.viettel.mbccs.data.source;
 
 import com.viettel.mbccs.data.model.Area;
 import com.viettel.mbccs.data.model.EmptyObject;
+import com.viettel.mbccs.data.model.Function;
 import com.viettel.mbccs.data.model.Image;
 import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.model.Precinct;
@@ -80,6 +81,11 @@ public class UserRepository implements IUserLocalDataSource, IUserRemoteDataSour
     @Override
     public LoginInfo getUser() {
         return mUserLocalDataSource.getUser();
+    }
+
+    @Override
+    public List<String> getFunctionsCodes() {
+        return mUserLocalDataSource.getFunctionsCodes();
     }
 
     @Override

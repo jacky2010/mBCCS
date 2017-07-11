@@ -22,6 +22,8 @@ public interface IUserLocalDataSource {
 
     LoginInfo getUser();
 
+    List<String> getFunctionsCodes();
+
     void saveLoginUserName(String name);
 
     String getLoginUserName();
@@ -140,5 +142,4 @@ public interface IUserLocalDataSource {
     Image getImageFromDatabase(String id);
 
     ImageDataBase getDataImageFromDatabase(String id);
-
 }

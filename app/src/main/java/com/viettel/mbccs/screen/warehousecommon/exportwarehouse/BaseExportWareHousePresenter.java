@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.databinding.ObservableField;
 import com.viettel.mbccs.R;
+import com.viettel.mbccs.constance.RejectWareHouseVisible;
 import com.viettel.mbccs.constance.WsCode;
+import com.viettel.mbccs.data.model.Apis;
 import com.viettel.mbccs.data.model.EmptyObject;
 import com.viettel.mbccs.data.model.StockSerial;
 import com.viettel.mbccs.data.model.StockTrans;
@@ -49,6 +51,7 @@ public class BaseExportWareHousePresenter implements BaseExportWareHouseContract
     private StockTransDetailAdapter mAdapter;
     private CompositeSubscription mSubscription;
     private int currentPosition = -1;
+    public ObservableField<Boolean> showReject = new ObservableField<>(false);
 
     public BaseExportWareHousePresenter(Context context,
             BaseExportWareHouseContract.ViewModel viewModel, StockTrans stockTrans) {
@@ -88,6 +91,13 @@ public class BaseExportWareHousePresenter implements BaseExportWareHouseContract
 
         mAdapter = new StockTransDetailAdapter(mContext, mStockTransDetails);
         mAdapter.setOnStockTransAdapterListerner(this);
+
+        for (Apis apis : mUserRepository.getUser().getApi()) {
+            if (apis.getApiCode().equals(RejectWareHouseVisible.REJECT_EXPORT)) {
+                showReject.set(true);
+                break;
+            }
+        }
     }
 
     private void loadData() {
@@ -120,7 +130,6 @@ public class BaseExportWareHousePresenter implements BaseExportWareHouseContract
         mStockTransDetails.addAll(object.getStockTransDetails());
         mAdapter.notifyDataSetChanged();
     }
-
 
     public StockTransDetailAdapter getAdapter() {
         return mAdapter;
