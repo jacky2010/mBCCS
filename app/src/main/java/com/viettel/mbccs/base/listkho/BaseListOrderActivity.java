@@ -1,17 +1,16 @@
 package com.viettel.mbccs.base.listkho;
 
+import android.content.DialogInterface;
 import android.databinding.ObservableInt;
 import android.support.v4.widget.SwipeRefreshLayout;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
-import com.viettel.mbccs.constance.StockTransStatus;
 import com.viettel.mbccs.data.model.StockTrans;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.databinding.ActivityListOrderWarehouseBinding;
 import com.viettel.mbccs.utils.DialogUtils;
-import com.viettel.mbccs.variable.Constants;
 import com.viettel.mbccs.widget.CustomDatePicker;
 import com.viettel.mbccs.widget.MultiDirectionSlidingDrawer;
 import java.util.List;
@@ -91,7 +90,11 @@ public abstract class BaseListOrderActivity
     }
 
     public void showErrorDialog(BaseException e) {
-        DialogUtils.showDialogError(BaseListOrderActivity.this, e);
+        DialogUtils.showDialogError(this, e);
+    }
+
+    public void showErrorDialog(BaseException e, DialogInterface.OnClickListener onClickListener) {
+        DialogUtils.showDialogError(this, e, onClickListener);
     }
 
     @Override

@@ -2,7 +2,7 @@ package com.viettel.mbccs.data.source.remote.response;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.viettel.mbccs.data.model.ChannelWorkType;
+import com.viettel.mbccs.data.model.ChannelRouterWorkType;
 
 import java.util.List;
 
@@ -12,15 +12,15 @@ import java.util.List;
 
 public class GetChannelWorkTypeResponse {
 
-    @SerializedName("lstChannelWorkType")
+    @SerializedName("lstChannelRouterWorkType")
     @Expose
-    private List<ChannelWorkType> lstChannelWorkType;
+    private List<ChannelRouterWorkType> mLstChannelRouterWorkType;
 
-    public List<ChannelWorkType> getLstChannelWorkType() {
-        return lstChannelWorkType;
+    public List<ChannelRouterWorkType> getLstChannelRouterWorkType() {
+        return mLstChannelRouterWorkType;
     }
 
-    public void setLstChannelWorkType(List<ChannelWorkType> lstChannelWorkType) {
-        this.lstChannelWorkType = lstChannelWorkType;
+    public void setLstChannelRouterWorkType(List<ChannelRouterWorkType> lstChannelRouterWorkType) {
+        this.mLstChannelRouterWorkType = lstChannelRouterWorkType;
     }
 }

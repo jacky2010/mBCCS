@@ -96,7 +96,7 @@ public class CreateArisingTaskPresenter implements CreateArisingTaskContract.Pre
         request.setJobName(taskName.get());
         request.setShopCodeCreate(mUserRepository.getUserInfo().getShop().getShopCode());
         request.setStaffId(String.valueOf(mViewModel.getStaff().getStaffId()));
-        request.setType(TaskShopManagement.TaskType.TYPE_PHAT_SINH);
+        request.setType(String.valueOf(TaskShopManagement.TaskType.TYPE_PHAT_SINH));
         request.setUserCreate(mUserRepository.getUserInfo().getStaffInfo().getStaffCode());
 
         DataRequest<CreateTaskExtendRequest> dataRequest = new DataRequest<>();
@@ -107,7 +107,8 @@ public class CreateArisingTaskPresenter implements CreateArisingTaskContract.Pre
                 .subscribe(new MBCCSSubscribe<CreateTaskExtendResponse>() {
                     @Override
                     public void onSuccess(CreateTaskExtendResponse object) {
-                        assignTask();
+                        mViewModel.hideLoading();
+                        mViewModel.showSuccessDialog();
                     }
 
                     @Override
@@ -117,11 +118,5 @@ public class CreateArisingTaskPresenter implements CreateArisingTaskContract.Pre
                     }
                 });
         mSubscription.add(subscription);
-    }
-
-    private void assignTask() {
-        // TODO: 7/2/2017 Assign task after create
-        mViewModel.hideLoading();
-        mViewModel.showSuccessDialog();
     }
 }

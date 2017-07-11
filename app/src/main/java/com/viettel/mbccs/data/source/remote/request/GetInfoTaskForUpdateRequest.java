@@ -2,7 +2,6 @@ package com.viettel.mbccs.data.source.remote.request;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.viettel.mbccs.data.model.TaskShopManagement;
 
 /**
  * Created by Anh Vu Viet on 7/2/2017.
@@ -20,18 +19,17 @@ public class GetInfoTaskForUpdateRequest extends BaseRequest{
 
     @SerializedName("type")
     @Expose
-    @TaskShopManagement.TaskType
-    private Integer type;
+    private String type;
 
     @SerializedName("account")
     @Expose
     private String account;
 
-    @SerializedName("fromDate")
+    @SerializedName("startDate")
     @Expose
     private String fromDate;
 
-    @SerializedName("toDate")
+    @SerializedName("endDate")
     @Expose
     private String toDate;
 
@@ -41,7 +39,7 @@ public class GetInfoTaskForUpdateRequest extends BaseRequest{
 
     @SerializedName("status")
     @Expose
-    private Integer status;
+    private String status;
 
     public String getServiceType() {
         return serviceType;
@@ -59,12 +57,11 @@ public class GetInfoTaskForUpdateRequest extends BaseRequest{
         this.shopCode = shopCode;
     }
 
-    @TaskShopManagement.TaskType
-    public Integer getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(@TaskShopManagement.TaskType int type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -100,11 +97,11 @@ public class GetInfoTaskForUpdateRequest extends BaseRequest{
         this.staffCode = staffCode;
     }
 
-    public Integer getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 }

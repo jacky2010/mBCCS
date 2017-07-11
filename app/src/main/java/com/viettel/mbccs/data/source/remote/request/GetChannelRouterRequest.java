@@ -11,13 +11,13 @@ public class GetChannelRouterRequest extends BaseRequest{
 
     @SerializedName("channelTypeId")
     @Expose
-    private Integer channelTypeId;
+    private String channelTypeId;
 
-    public Integer getChannelTypeId() {
+    public String getChannelTypeId() {
         return channelTypeId;
     }
 
-    public void setChannelTypeId(Integer channelTypeId) {
+    public void setChannelTypeId(String channelTypeId) {
         this.channelTypeId = channelTypeId;
     }
 }

@@ -5,16 +5,4 @@ package com.viettel.mbccs.data.source.remote.request;
  */
 
 public class GetChannelWorkTypeRequest extends BaseRequest{
-
-//    @SerializedName("shopId ")
-//    @Expose
-//    private String shopId;
-//
-//    public String getShopId() {
-//        return shopId;
-//    }
-//
-//    public void setShopId(String shopId) {
-//        this.shopId = shopId;
-//    }
 }

@@ -25,11 +25,11 @@ public class GetTaskPrepareAssignStaffRequest extends BaseRequest{
     @Expose
     private String account;
 
-    @SerializedName("fromDate")
+    @SerializedName("startDate")
     @Expose
     private String fromDate;
 
-    @SerializedName("toDate")
+    @SerializedName("endDate")
     @Expose
     private String toDate;
 

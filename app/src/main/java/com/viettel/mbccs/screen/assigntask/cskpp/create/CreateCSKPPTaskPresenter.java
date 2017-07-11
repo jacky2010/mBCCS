@@ -8,8 +8,10 @@ import com.viettel.mbccs.data.source.CongViecRepository;
 import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.CreateTaskExtendRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
+import com.viettel.mbccs.data.source.remote.request.GetChannelWorkTypeRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.CreateTaskExtendResponse;
+import com.viettel.mbccs.data.source.remote.response.GetChannelWorkTypeResponse;
 import com.viettel.mbccs.utils.DateUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import rx.Subscription;
@@ -38,6 +40,28 @@ public class CreateCSKPPTaskPresenter implements CreatingCSKPPTaskContract.Prese
         mCongViecRepository = CongViecRepository.getInstance();
         mUserRepository = UserRepository.getInstance();
         mSubscription = new CompositeSubscription();
+
+        mViewModel.showLoading();
+        GetChannelWorkTypeRequest request = new GetChannelWorkTypeRequest();
+
+        DataRequest<GetChannelWorkTypeRequest> dataRequest = new DataRequest<>();
+        dataRequest.setWsCode(WsCode.GetChannelWorkType);
+        dataRequest.setWsRequest(request);
+
+        Subscription subscription = mCongViecRepository.getChannelWorkType(dataRequest)
+                .subscribe(new MBCCSSubscribe<GetChannelWorkTypeResponse>() {
+                    @Override
+                    public void onSuccess(GetChannelWorkTypeResponse object) {
+                        mViewModel.hideLoading();
+                    }
+
+                    @Override
+                    public void onError(BaseException error) {
+                        mViewModel.hideLoading();
+                        mViewModel.showErrorDialog(error);
+                    }
+                });
+        mSubscription.add(subscription);
     }
 
     @Override
@@ -90,7 +114,7 @@ public class CreateCSKPPTaskPresenter implements CreatingCSKPPTaskContract.Prese
         request.setJobName("");
         request.setShopCodeCreate(mUserRepository.getUserInfo().getShop().getShopCode());
         request.setStaffId(String.valueOf(mViewModel.getStaff().getStaffId()));
-        request.setType(TaskShopManagement.TaskType.TYPE_CSKPP);
+        request.setType(String.valueOf(TaskShopManagement.TaskType.TYPE_CSKPP));
         request.setUserCreate(mUserRepository.getUserInfo().getStaffInfo().getStaffCode());
 
         DataRequest<CreateTaskExtendRequest> dataRequest = new DataRequest<>();
@@ -101,7 +125,8 @@ public class CreateCSKPPTaskPresenter implements CreatingCSKPPTaskContract.Prese
                 .subscribe(new MBCCSSubscribe<CreateTaskExtendResponse>() {
                     @Override
                     public void onSuccess(CreateTaskExtendResponse object) {
-                        assignTask();
+                        mViewModel.hideLoading();
+                        mViewModel.showSuccessDialog();
                     }
 
                     @Override
@@ -111,11 +136,5 @@ public class CreateCSKPPTaskPresenter implements CreatingCSKPPTaskContract.Prese
                     }
                 });
         mSubscription.add(subscription);
-    }
-
-    private void assignTask() {
-        // TODO: 7/2/2017 Assign task after create
-        mViewModel.hideLoading();
-        mViewModel.showSuccessDialog();
     }
 }

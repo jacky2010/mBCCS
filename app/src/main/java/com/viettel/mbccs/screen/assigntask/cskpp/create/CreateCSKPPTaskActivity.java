@@ -56,6 +56,7 @@ public class CreateCSKPPTaskActivity
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CreateArisingTaskActivity.REQUEST_STAFF_INFO && resultCode == RESULT_OK && data != null) {
             mSelectedStaff = data.getParcelableExtra(Constants.BundleConstant.STAFF_INFO);
+            mBinding.textNhanVien.setText(mSelectedStaff.getStaffName());
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
