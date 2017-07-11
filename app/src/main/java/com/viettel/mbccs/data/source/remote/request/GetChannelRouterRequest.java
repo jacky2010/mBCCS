@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by Anh Vu Viet on 7/2/2017.
  */
 
-public class GetChannelRouterRequest {
+public class GetChannelRouterRequest extends BaseRequest{
 
     @SerializedName("channelTypeId")
     @Expose

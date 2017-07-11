@@ -8,7 +8,7 @@ import com.viettel.mbccs.data.model.TaskShopManagement;
  * Created by Anh Vu Viet on 7/2/2017.
  */
 
-public class GetInfoTaskForUpdateRequest {
+public class GetInfoTaskForUpdateRequest extends BaseRequest{
 
     @SerializedName("serviceType")
     @Expose

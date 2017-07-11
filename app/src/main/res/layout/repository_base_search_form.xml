@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/dp_8"
                 android:layout_marginStart="@dimen/dp_8"
-                android:src="@drawable/ic_play_arrow_black_24dp"
+                android:src="@drawable/ic_play_arrow_white_24dp"
                 android:visibility="@{ isShowFrom ? View.GONE : View.VISIBLE }"
                 />
 

@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by Anh Vu Viet on 6/25/2017.
  */
 
-public class UpdateTaskRequest {
+public class UpdateTaskRequest extends BaseRequest{
 
     @SerializedName("taskStaffMngtId")
     @Expose

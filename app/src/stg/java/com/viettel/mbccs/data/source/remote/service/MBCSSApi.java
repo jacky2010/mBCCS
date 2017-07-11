@@ -32,9 +32,11 @@ import com.viettel.mbccs.data.source.remote.request.GetAllInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.GetAllSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.GetAnypayAuthorizeRequest;
 import com.viettel.mbccs.data.source.remote.request.GetApDomainByTypeRequest;
+import com.viettel.mbccs.data.source.remote.request.GetBankInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.GetChannelRouterRequest;
 import com.viettel.mbccs.data.source.remote.request.GetChannelWorkTypeRequest;
 import com.viettel.mbccs.data.source.remote.request.GetCreateInvoiceBillRequest;
+import com.viettel.mbccs.data.source.remote.request.GetCurrBillCycleRequest;
 import com.viettel.mbccs.data.source.remote.request.GetDistrictRequest;
 import com.viettel.mbccs.data.source.remote.request.GetHotNewsCSKPPRequest;
 import com.viettel.mbccs.data.source.remote.request.GetHotNewsInfoCSKPPRequest;
@@ -66,6 +68,7 @@ import com.viettel.mbccs.data.source.remote.request.GetOTPRequest;
 import com.viettel.mbccs.data.source.remote.request.GetOrderInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.GetPrecinctRequest;
 import com.viettel.mbccs.data.source.remote.request.GetProvinceRequest;
+import com.viettel.mbccs.data.source.remote.request.GetQuotaByProductCodeRequest;
 import com.viettel.mbccs.data.source.remote.request.GetReasonRequest;
 import com.viettel.mbccs.data.source.remote.request.GetReceiverChangeAddressRequest;
 import com.viettel.mbccs.data.source.remote.request.GetRegisterSubInfoRequest;
@@ -119,8 +122,10 @@ import com.viettel.mbccs.data.source.remote.response.GetAllInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetAllSubInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetAnypayAuthorizeResponse;
 import com.viettel.mbccs.data.source.remote.response.GetApDomainByTypeResponse;
+import com.viettel.mbccs.data.source.remote.response.GetBankInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetChannelRouterResponse;
 import com.viettel.mbccs.data.source.remote.response.GetChannelWorkTypeResponse;
+import com.viettel.mbccs.data.source.remote.response.GetCurrBillCycleResponse;
 import com.viettel.mbccs.data.source.remote.response.GetDistributedChannelResponse;
 import com.viettel.mbccs.data.source.remote.response.GetDistrictResponse;
 import com.viettel.mbccs.data.source.remote.response.GetHotNewsCSKPPResponse;
@@ -152,6 +157,7 @@ import com.viettel.mbccs.data.source.remote.response.GetOTPResponse;
 import com.viettel.mbccs.data.source.remote.response.GetOrderInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetPrecinctResponse;
 import com.viettel.mbccs.data.source.remote.response.GetProvinceResponse;
+import com.viettel.mbccs.data.source.remote.response.GetQuotaByProductCodeResponse;
 import com.viettel.mbccs.data.source.remote.response.GetReasonResponse;
 import com.viettel.mbccs.data.source.remote.response.GetReceiverChangeAddressResponse;
 import com.viettel.mbccs.data.source.remote.response.GetRegisterSubInfoResponse;
@@ -594,5 +600,17 @@ public interface MBCSSApi {
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<CreateTaskExtendResponse>>> createTaskExtend(
             @Body DataRequest<CreateTaskExtendRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<GetQuotaByProductCodeResponse>>> getQuotaByProductCode(
+            @Body DataRequest<GetQuotaByProductCodeRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<GetBankInfoResponse>>> getBankInfo(
+            @Body DataRequest<GetBankInfoRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<GetCurrBillCycleResponse>>> getCurrBillCycle(
+            @Body DataRequest<GetCurrBillCycleRequest> request);
 }
 

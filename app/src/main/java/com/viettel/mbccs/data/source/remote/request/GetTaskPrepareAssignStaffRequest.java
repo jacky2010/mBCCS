@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by Anh Vu Viet on 6/23/2017.
  */
 
-public class GetTaskPrepareAssignStaffRequest {
+public class GetTaskPrepareAssignStaffRequest extends BaseRequest{
 
     @SerializedName("serviceType")
     @Expose

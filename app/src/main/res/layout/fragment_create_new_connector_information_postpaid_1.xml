@@ -51,6 +51,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     bind:adapter="@{viewModel.customerAdapterSpinnerCustomerType}"
+                    bind:selectedPosition="@{ viewModel.selectedPosition1CustomerType }"
                     />
 
                 <com.viettel.mbccs.widget.CustomTextView

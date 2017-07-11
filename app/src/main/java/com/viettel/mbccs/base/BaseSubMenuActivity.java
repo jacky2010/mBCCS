@@ -45,8 +45,9 @@ import com.viettel.mbccs.screen.survey.SurveyListActivity;
 import com.viettel.mbccs.screen.trahangcaptren.ListOrderReturnUpperActivity;
 import com.viettel.mbccs.screen.transferanypay.TransferAnyPayActivity;
 import com.viettel.mbccs.screen.viewwarehouse.ViewWarehouseActivity;
-import com.viettel.mbccs.screen.warehousecommon.CreateExpCmdToStaffActivity;
 import com.viettel.mbccs.screen.xuathangchonhanvien.ChiTietXuatKhoNhanVienActivity;
+import com.viettel.mbccs.screen.xuatkhochonhanvien.LapLenhXuatKhoChoNhanVienActivity;
+import com.viettel.mbccs.screen.xuatkhochonhanvien.XuatKhoChoNhanVienActivity;
 import com.viettel.mbccs.variable.Constants;
 import java.util.ArrayList;
 import java.util.List;
@@ -245,6 +246,8 @@ public class BaseSubMenuActivity
                                     new Intent(BaseSubMenuActivity.this, ListOrderActivity.class));
                             break;
                         case Function.MenuId.MENU_XUAT_KHO_CHO_NHAN_VIEN:
+                            startActivity(
+                                    new Intent(BaseSubMenuActivity.this, XuatKhoChoNhanVienActivity.class));
                             break;
                         case Function.MenuId.MENU_NV_XAC_NHAN_HANG:
                             startActivity(
@@ -335,7 +338,7 @@ public class BaseSubMenuActivity
                             //startActivity(intent);
 
                             Intent intent = new Intent(BaseSubMenuActivity.this,
-                                    CreateExpCmdToStaffActivity.class);
+                                    LapLenhXuatKhoChoNhanVienActivity.class);
                             startActivity(intent);
                             break;
                     }

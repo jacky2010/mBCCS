@@ -445,4 +445,7 @@ public class WsCode {
     public static final String GetChannelWorkType = "WS_getChannelWorkType";
     public static final String GetListChannel = "WS_getListChannel";
     public static final String CreateTaskExtend = "WS_createTaskExtend";
+    public static final String GetQuotaByProductCode = "WS_getQuotaByProductCode";
+    public static final String GetBankInfo = "WS_getBankInfo";
+    public static final String GetCurrBillCycle = "WS_getCurrBillCycle";
 }

@@ -206,6 +206,126 @@ public class Customer implements Parcelable {
     @Expose
     private int notes;
 
+    @SerializedName("birthPlace")
+    @Expose
+    private String birthPlace;
+
+    @SerializedName("certificate")
+    @Expose
+    private String certificate;
+
+    @SerializedName("fileBusinessLic")
+    @Expose
+    private String fileBusinessLic;
+
+    @SerializedName("fileCertificate")
+    @Expose
+    private String fileCertificate;
+
+    @SerializedName("fileContract")
+    @Expose
+    private String fileContract;
+
+    @SerializedName("fileIdRepre")
+    @Expose
+    private String fileIdRepre;
+
+    @SerializedName("fileTin")
+    @Expose
+    private String fileTin;
+
+    @SerializedName("fileVas")
+    @Expose
+    private String fileVas;
+
+    @SerializedName("ftpHost")
+    @Expose
+    private String ftpHost;
+
+    @SerializedName("ftpHostBusiness")
+    @Expose
+    private String ftpHostBusiness;
+
+    @SerializedName("ftpPass")
+    @Expose
+    private String ftpPass;
+
+    @SerializedName("ftpPassBusiness")
+    @Expose
+    private String ftpPassBusiness;
+
+    @SerializedName("ftpUser")
+    @Expose
+    private String ftpUser;
+
+    @SerializedName("nftpUserBusinessotes")
+    @Expose
+    private String ftpUserBusiness;
+
+    @SerializedName("imageName")
+    @Expose
+    private String imageName;
+
+    @SerializedName("imageNameNo1")
+    @Expose
+    private String imageNameNo1;
+
+    @SerializedName("imageNameNo2")
+    @Expose
+    private String imageNameNo2;
+
+    @SerializedName("noimageSignaltes")
+    @Expose
+    private String imageSignal;
+
+    @SerializedName("pathFileBusiness")
+    @Expose
+    private String pathFileBusiness;
+
+    @SerializedName("pathName")
+    @Expose
+    private String pathName;
+
+    @SerializedName("repreCustBirthDate")
+    @Expose
+    private String repreCustBirthDate;
+
+    @SerializedName("repreCustIdExpireDate")
+    @Expose
+    private String repreCustIdExpireDate;
+
+    @SerializedName("repreCustIdIssuePlace")
+    @Expose
+    private String repreCustIdIssuePlace;
+
+    @SerializedName("repreCustIdNo")
+    @Expose
+    private String repreCustIdNo;
+
+    @SerializedName("repreCustIdType")
+    @Expose
+    private Long repreCustIdType;
+
+    @SerializedName("repreCustName")
+    @Expose
+    private String repreCustName;
+
+    @SerializedName("repreCustTelFax")
+    @Expose
+    private String repreCustTelFax;
+
+    @SerializedName("updatedTime")
+    @Expose
+    private String updatedTime;
+
+    @SerializedName("updatedUser")
+    @Expose
+    private String updatedUser;
+
+    @SerializedName("vasRegistration")
+    @Expose
+    private String vasRegistration;
+
     public Customer() {
     }
 
@@ -214,7 +334,6 @@ public class Customer implements Parcelable {
         customerName = in.readString();
         address = in.readString();
         tin = in.readString();
-        custId = in.readInt();
         busType = in.readString();
         custTypeId = in.readInt();
         idType = in.readString();
@@ -244,12 +363,40 @@ public class Customer implements Parcelable {
         streetBlockName = in.readString();
         home = in.readString();
         vip = in.readString();
-        status = in.readInt();
         addedUser = in.readString();
         addedDate = in.readString();
         updUser = in.readString();
         updTime = in.readString();
         notes = in.readInt();
+        birthPlace = in.readString();
+        certificate = in.readString();
+        fileBusinessLic = in.readString();
+        fileCertificate = in.readString();
+        fileContract = in.readString();
+        fileIdRepre = in.readString();
+        fileTin = in.readString();
+        fileVas = in.readString();
+        ftpHost = in.readString();
+        ftpHostBusiness = in.readString();
+        ftpPass = in.readString();
+        ftpPassBusiness = in.readString();
+        ftpUser = in.readString();
+        ftpUserBusiness = in.readString();
+        imageName = in.readString();
+        imageNameNo1 = in.readString();
+        imageNameNo2 = in.readString();
+        imageSignal = in.readString();
+        pathFileBusiness = in.readString();
+        pathName = in.readString();
+        repreCustBirthDate = in.readString();
+        repreCustIdExpireDate = in.readString();
+        repreCustIdIssuePlace = in.readString();
+        repreCustIdNo = in.readString();
+        repreCustName = in.readString();
+        repreCustTelFax = in.readString();
+        updatedTime = in.readString();
+        updatedUser = in.readString();
+        vasRegistration = in.readString();
     }
 
     @Override
@@ -258,7 +405,6 @@ public class Customer implements Parcelable {
         dest.writeString(customerName);
         dest.writeString(address);
         dest.writeString(tin);
-        dest.writeInt(custId);
         dest.writeString(busType);
         dest.writeInt(custTypeId);
         dest.writeString(idType);
@@ -288,12 +434,40 @@ public class Customer implements Parcelable {
         dest.writeString(streetBlockName);
         dest.writeString(home);
         dest.writeString(vip);
-        dest.writeInt(status);
         dest.writeString(addedUser);
         dest.writeString(addedDate);
         dest.writeString(updUser);
         dest.writeString(updTime);
         dest.writeInt(notes);
+        dest.writeString(birthPlace);
+        dest.writeString(certificate);
+        dest.writeString(fileBusinessLic);
+        dest.writeString(fileCertificate);
+        dest.writeString(fileContract);
+        dest.writeString(fileIdRepre);
+        dest.writeString(fileTin);
+        dest.writeString(fileVas);
+        dest.writeString(ftpHost);
+        dest.writeString(ftpHostBusiness);
+        dest.writeString(ftpPass);
+        dest.writeString(ftpPassBusiness);
+        dest.writeString(ftpUser);
+        dest.writeString(ftpUserBusiness);
+        dest.writeString(imageName);
+        dest.writeString(imageNameNo1);
+        dest.writeString(imageNameNo2);
+        dest.writeString(imageSignal);
+        dest.writeString(pathFileBusiness);
+        dest.writeString(pathName);
+        dest.writeString(repreCustBirthDate);
+        dest.writeString(repreCustIdExpireDate);
+        dest.writeString(repreCustIdIssuePlace);
+        dest.writeString(repreCustIdNo);
+        dest.writeString(repreCustName);
+        dest.writeString(repreCustTelFax);
+        dest.writeString(updatedTime);
+        dest.writeString(updatedUser);
+        dest.writeString(vasRegistration);
     }
 
     @Override
@@ -662,5 +836,245 @@ public class Customer implements Parcelable {
 
     public void setNotes(int notes) {
         this.notes = notes;
+    }
+
+    public String getBirthPlace() {
+        return birthPlace;
+    }
+
+    public void setBirthPlace(String birthPlace) {
+        this.birthPlace = birthPlace;
+    }
+
+    public String getCertificate() {
+        return certificate;
+    }
+
+    public void setCertificate(String certificate) {
+        this.certificate = certificate;
+    }
+
+    public String getFileBusinessLic() {
+        return fileBusinessLic;
+    }
+
+    public void setFileBusinessLic(String fileBusinessLic) {
+        this.fileBusinessLic = fileBusinessLic;
+    }
+
+    public String getFileCertificate() {
+        return fileCertificate;
+    }
+
+    public void setFileCertificate(String fileCertificate) {
+        this.fileCertificate = fileCertificate;
+    }
+
+    public String getFileContract() {
+        return fileContract;
+    }
+
+    public void setFileContract(String fileContract) {
+        this.fileContract = fileContract;
+    }
+
+    public String getFileIdRepre() {
+        return fileIdRepre;
+    }
+
+    public void setFileIdRepre(String fileIdRepre) {
+        this.fileIdRepre = fileIdRepre;
+    }
+
+    public String getFileTin() {
+        return fileTin;
+    }
+
+    public void setFileTin(String fileTin) {
+        this.fileTin = fileTin;
+    }
+
+    public String getFileVas() {
+        return fileVas;
+    }
+
+    public void setFileVas(String fileVas) {
+        this.fileVas = fileVas;
+    }
+
+    public String getFtpHost() {
+        return ftpHost;
+    }
+
+    public void setFtpHost(String ftpHost) {
+        this.ftpHost = ftpHost;
+    }
+
+    public String getFtpHostBusiness() {
+        return ftpHostBusiness;
+    }
+
+    public void setFtpHostBusiness(String ftpHostBusiness) {
+        this.ftpHostBusiness = ftpHostBusiness;
+    }
+
+    public String getFtpPass() {
+        return ftpPass;
+    }
+
+    public void setFtpPass(String ftpPass) {
+        this.ftpPass = ftpPass;
+    }
+
+    public String getFtpPassBusiness() {
+        return ftpPassBusiness;
+    }
+
+    public void setFtpPassBusiness(String ftpPassBusiness) {
+        this.ftpPassBusiness = ftpPassBusiness;
+    }
+
+    public String getFtpUser() {
+        return ftpUser;
+    }
+
+    public void setFtpUser(String ftpUser) {
+        this.ftpUser = ftpUser;
+    }
+
+    public String getFtpUserBusiness() {
+        return ftpUserBusiness;
+    }
+
+    public void setFtpUserBusiness(String ftpUserBusiness) {
+        this.ftpUserBusiness = ftpUserBusiness;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
+    public String getImageNameNo1() {
+        return imageNameNo1;
+    }
+
+    public void setImageNameNo1(String imageNameNo1) {
+        this.imageNameNo1 = imageNameNo1;
+    }
+
+    public String getImageNameNo2() {
+        return imageNameNo2;
+    }
+
+    public void setImageNameNo2(String imageNameNo2) {
+        this.imageNameNo2 = imageNameNo2;
+    }
+
+    public String getImageSignal() {
+        return imageSignal;
+    }
+
+    public void setImageSignal(String imageSignal) {
+        this.imageSignal = imageSignal;
+    }
+
+    public String getPathFileBusiness() {
+        return pathFileBusiness;
+    }
+
+    public void setPathFileBusiness(String pathFileBusiness) {
+        this.pathFileBusiness = pathFileBusiness;
+    }
+
+    public String getPathName() {
+        return pathName;
+    }
+
+    public void setPathName(String pathName) {
+        this.pathName = pathName;
+    }
+
+    public String getRepreCustBirthDate() {
+        return repreCustBirthDate;
+    }
+
+    public void setRepreCustBirthDate(String repreCustBirthDate) {
+        this.repreCustBirthDate = repreCustBirthDate;
+    }
+
+    public String getRepreCustIdExpireDate() {
+        return repreCustIdExpireDate;
+    }
+
+    public void setRepreCustIdExpireDate(String repreCustIdExpireDate) {
+        this.repreCustIdExpireDate = repreCustIdExpireDate;
+    }
+
+    public String getRepreCustIdIssuePlace() {
+        return repreCustIdIssuePlace;
+    }
+
+    public void setRepreCustIdIssuePlace(String repreCustIdIssuePlace) {
+        this.repreCustIdIssuePlace = repreCustIdIssuePlace;
+    }
+
+    public String getRepreCustIdNo() {
+        return repreCustIdNo;
+    }
+
+    public void setRepreCustIdNo(String repreCustIdNo) {
+        this.repreCustIdNo = repreCustIdNo;
+    }
+
+    public Long getRepreCustIdType() {
+        return repreCustIdType;
+    }
+
+    public void setRepreCustIdType(Long repreCustIdType) {
+        this.repreCustIdType = repreCustIdType;
+    }
+
+    public String getRepreCustName() {
+        return repreCustName;
+    }
+
+    public void setRepreCustName(String repreCustName) {
+        this.repreCustName = repreCustName;
+    }
+
+    public String getRepreCustTelFax() {
+        return repreCustTelFax;
+    }
+
+    public void setRepreCustTelFax(String repreCustTelFax) {
+        this.repreCustTelFax = repreCustTelFax;
+    }
+
+    public String getUpdatedTime() {
+        return updatedTime;
+    }
+
+    public void setUpdatedTime(String updatedTime) {
+        this.updatedTime = updatedTime;
+    }
+
+    public String getUpdatedUser() {
+        return updatedUser;
+    }
+
+    public void setUpdatedUser(String updatedUser) {
+        this.updatedUser = updatedUser;
+    }
+
+    public String getVasRegistration() {
+        return vasRegistration;
+    }
+
+    public void setVasRegistration(String vasRegistration) {
+        this.vasRegistration = vasRegistration;
     }
 }

@@ -2,6 +2,7 @@ package com.viettel.mbccs.data.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import com.activeandroid.annotation.Column;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -14,7 +15,7 @@ public class Subscriber implements Parcelable {
     // Id thuê bao
     @SerializedName("subID")
     @Expose
-    private Integer subID;
+    private Long subId;
 
     // custReqId
     @SerializedName("custReqId")
@@ -84,7 +85,7 @@ public class Subscriber implements Parcelable {
     // tiền cọc
     @SerializedName("deposit")
     @Expose
-    private Integer deposit;
+    private String deposit;
 
     // Địa chỉ
     @SerializedName("address")
@@ -116,10 +117,10 @@ public class Subscriber implements Parcelable {
     @Expose
     private String addressCode;
 
-    // giới hạn
+    // Hạn mức
     @SerializedName("quota")
     @Expose
-    private Integer quota;
+    private Long quota;
 
     // Mã chương trình khuyến mãi
     @SerializedName("promotionCode")
@@ -322,17 +323,48 @@ public class Subscriber implements Parcelable {
     @Expose
     private String payType;
 
+    @SerializedName("cardType")
+    @Expose
+    private String cardType;
+
+    @SerializedName("changeDatetime")
+    @Expose
+    private String  changeDatetime;
+
+    @SerializedName("isTransfer")
+    @Expose
+    private String isTransfer;
+
+    @SerializedName("language")
+    @Expose
+    private String language;
+
+    @SerializedName("manageInvoiceId")
+    @Expose
+    private Long manageInvoiceId;
+
+    @SerializedName("payIsdn")
+    @Expose
+    private String payIsdn;
+
+    @SerializedName("payMethod")
+    @Expose
+    private String payMethod;
+
+    @SerializedName("payTransCode")
+    @Expose
+    private String payTransCode;
+
+    @SerializedName("shopInvoiceId")
+    @Expose
+    private Long shopInvoiceId;
+
     public Subscriber() {
 
     }
 
     protected Subscriber(Parcel in) {
-        subID = in.readInt();
-        custReqId = in.readInt();
-        contractId = in.readInt();
         subType = in.readString();
-        regReasonId = in.readInt();
-        finishReasonId = in.readInt();
         shopCode = in.readString();
         endDatetime = in.readString();
         staDatetime = in.readString();
@@ -340,21 +372,17 @@ public class Subscriber implements Parcelable {
         vip = in.readString();
         createDate = in.readString();
         userCreated = in.readString();
-        status = in.readInt();
-        deposit = in.readInt();
+        deposit = in.readString();
         address = in.readString();
         isdn = in.readString();
         imsi = in.readString();
         serial = in.readString();
         data = in.readString();
         addressCode = in.readString();
-        quota = in.readInt();
         promotionCode = in.readString();
         regType = in.readString();
-        reasonDepositId = in.readInt();
         userUsing = in.readString();
         userTitle = in.readString();
-        staffId = in.readInt();
         password = in.readString();
         passwordAtm = in.readString();
         birthDate = in.readString();
@@ -369,36 +397,30 @@ public class Subscriber implements Parcelable {
         streetBlockName = in.readString();
         home = in.readString();
         productCode = in.readString();
-        telecomServiceId = in.readInt();
         serviceType = in.readString();
-        paymentOrder = in.readInt();
         locationCode = in.readString();
         locationName = in.readString();
-        channelTypeId = in.readInt();
-        isInfoCompleted = in.readInt();
         adslIsdn = in.readString();
         firstConnect = in.readString();
         deployAreaCode = in.readString();
-        adslSubId = in.readInt();
         deployAddress = in.readString();
         deployAddressEnd = in.readString();
-        type = in.readInt();
-        operation = in.readInt();
-        syncStatus = in.readInt();
         syncLastUpdateTime = in.readString();
         packageName = in.readString();
+        customer = in.readParcelable(Customer.class.getClassLoader());
         payType = in.readString();
-        numResetZone = in.readInt();
+        cardType = in.readString();
+        changeDatetime = in.readString();
+        isTransfer = in.readString();
+        language = in.readString();
+        payIsdn = in.readString();
+        payMethod = in.readString();
+        payTransCode = in.readString();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(subID);
-        dest.writeInt(custReqId);
-        dest.writeInt(contractId);
         dest.writeString(subType);
-        dest.writeInt(regReasonId);
-        dest.writeInt(finishReasonId);
         dest.writeString(shopCode);
         dest.writeString(endDatetime);
         dest.writeString(staDatetime);
@@ -406,21 +428,17 @@ public class Subscriber implements Parcelable {
         dest.writeString(vip);
         dest.writeString(createDate);
         dest.writeString(userCreated);
-        dest.writeInt(status);
-        dest.writeInt(deposit);
+        dest.writeString(deposit);
         dest.writeString(address);
         dest.writeString(isdn);
         dest.writeString(imsi);
         dest.writeString(serial);
         dest.writeString(data);
         dest.writeString(addressCode);
-        dest.writeInt(quota);
         dest.writeString(promotionCode);
         dest.writeString(regType);
-        dest.writeInt(reasonDepositId);
         dest.writeString(userUsing);
         dest.writeString(userTitle);
-        dest.writeInt(staffId);
         dest.writeString(password);
         dest.writeString(passwordAtm);
         dest.writeString(birthDate);
@@ -435,26 +453,25 @@ public class Subscriber implements Parcelable {
         dest.writeString(streetBlockName);
         dest.writeString(home);
         dest.writeString(productCode);
-        dest.writeInt(telecomServiceId);
         dest.writeString(serviceType);
-        dest.writeInt(paymentOrder);
         dest.writeString(locationCode);
         dest.writeString(locationName);
-        dest.writeInt(channelTypeId);
-        dest.writeInt(isInfoCompleted);
         dest.writeString(adslIsdn);
         dest.writeString(firstConnect);
         dest.writeString(deployAreaCode);
-        dest.writeInt(adslSubId);
         dest.writeString(deployAddress);
         dest.writeString(deployAddressEnd);
-        dest.writeInt(type);
-        dest.writeInt(operation);
-        dest.writeInt(syncStatus);
         dest.writeString(syncLastUpdateTime);
         dest.writeString(packageName);
+        dest.writeParcelable(customer, flags);
         dest.writeString(payType);
-        dest.writeInt(numResetZone);
+        dest.writeString(cardType);
+        dest.writeString(changeDatetime);
+        dest.writeString(isTransfer);
+        dest.writeString(language);
+        dest.writeString(payIsdn);
+        dest.writeString(payMethod);
+        dest.writeString(payTransCode);
     }
 
     @Override
@@ -474,12 +491,12 @@ public class Subscriber implements Parcelable {
         }
     };
 
-    public Integer getSubID() {
-        return subID;
+    public Long getSubId() {
+        return subId;
     }
 
-    public void setSubID(Integer subID) {
-        this.subID = subID;
+    public void setSubId(Long subId) {
+        this.subId = subId;
     }
 
     public Integer getCustReqId() {
@@ -586,11 +603,11 @@ public class Subscriber implements Parcelable {
         this.status = status;
     }
 
-    public Integer getDeposit() {
+    public String getDeposit() {
         return deposit;
     }
 
-    public void setDeposit(Integer deposit) {
+    public void setDeposit(String deposit) {
         this.deposit = deposit;
     }
 
@@ -642,11 +659,11 @@ public class Subscriber implements Parcelable {
         this.addressCode = addressCode;
     }
 
-    public Integer getQuota() {
+    public Long getQuota() {
         return quota;
     }
 
-    public void setQuota(Integer quota) {
+    public void setQuota(Long quota) {
         this.quota = quota;
     }
 
@@ -976,5 +993,113 @@ public class Subscriber implements Parcelable {
 
     public void setPayType(String payType) {
         this.payType = payType;
+    }
+
+    public void setRegReasonId(Integer regReasonId) {
+        this.regReasonId = regReasonId;
+    }
+
+    public void setFinishReasonId(Integer finishReasonId) {
+        this.finishReasonId = finishReasonId;
+    }
+
+    public void setPaymentOrder(Integer paymentOrder) {
+        this.paymentOrder = paymentOrder;
+    }
+
+    public void setChannelTypeId(Integer channelTypeId) {
+        this.channelTypeId = channelTypeId;
+    }
+
+    public void setIsInfoCompleted(Integer isInfoCompleted) {
+        this.isInfoCompleted = isInfoCompleted;
+    }
+
+    public void setAdslSubId(Integer adslSubId) {
+        this.adslSubId = adslSubId;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public void setOperation(Integer operation) {
+        this.operation = operation;
+    }
+
+    public void setSyncStatus(Integer syncStatus) {
+        this.syncStatus = syncStatus;
+    }
+
+    public String getCardType() {
+        return cardType;
+    }
+
+    public void setCardType(String cardType) {
+        this.cardType = cardType;
+    }
+
+    public String getChangeDatetime() {
+        return changeDatetime;
+    }
+
+    public void setChangeDatetime(String changeDatetime) {
+        this.changeDatetime = changeDatetime;
+    }
+
+    public String getIsTransfer() {
+        return isTransfer;
+    }
+
+    public void setIsTransfer(String isTransfer) {
+        this.isTransfer = isTransfer;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public Long getManageInvoiceId() {
+        return manageInvoiceId;
+    }
+
+    public void setManageInvoiceId(Long manageInvoiceId) {
+        this.manageInvoiceId = manageInvoiceId;
+    }
+
+    public String getPayIsdn() {
+        return payIsdn;
+    }
+
+    public void setPayIsdn(String payIsdn) {
+        this.payIsdn = payIsdn;
+    }
+
+    public String getPayMethod() {
+        return payMethod;
+    }
+
+    public void setPayMethod(String payMethod) {
+        this.payMethod = payMethod;
+    }
+
+    public String getPayTransCode() {
+        return payTransCode;
+    }
+
+    public void setPayTransCode(String payTransCode) {
+        this.payTransCode = payTransCode;
+    }
+
+    public Long getShopInvoiceId() {
+        return shopInvoiceId;
+    }
+
+    public void setShopInvoiceId(Long shopInvoiceId) {
+        this.shopInvoiceId = shopInvoiceId;
     }
 }

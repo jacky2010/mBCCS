@@ -3,6 +3,7 @@ package com.viettel.mbccs.screen.connector.fragment.postpaid;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Handler;
+import android.support.annotation.IntDef;
 import android.view.View;
 import android.widget.AdapterView;
 import com.viettel.mbccs.R;
@@ -13,10 +14,14 @@ import com.viettel.mbccs.constance.TelServiceId;
 import com.viettel.mbccs.constance.TelServiceType;
 import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.ApDomainByType;
+import com.viettel.mbccs.data.model.Bank;
 import com.viettel.mbccs.data.model.BusType;
 import com.viettel.mbccs.data.model.Contract;
+import com.viettel.mbccs.data.model.ContractBank;
+import com.viettel.mbccs.data.model.CurrBillCycle;
 import com.viettel.mbccs.data.model.Customer;
 import com.viettel.mbccs.data.model.Product;
+import com.viettel.mbccs.data.model.Quota;
 import com.viettel.mbccs.data.model.RegType;
 import com.viettel.mbccs.data.model.SubType;
 import com.viettel.mbccs.data.model.Subscriber;
@@ -27,15 +32,21 @@ import com.viettel.mbccs.data.source.remote.request.CheckIdNoRequest;
 import com.viettel.mbccs.data.source.remote.request.ConnectSubscriberRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetApDomainByTypeRequest;
+import com.viettel.mbccs.data.source.remote.request.GetBankInfoRequest;
+import com.viettel.mbccs.data.source.remote.request.GetCurrBillCycleRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListProductRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListRegTypeRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListSubTypeRequest;
+import com.viettel.mbccs.data.source.remote.request.GetQuotaByProductCodeRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseErrorResponse;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetApDomainByTypeResponse;
+import com.viettel.mbccs.data.source.remote.response.GetBankInfoResponse;
+import com.viettel.mbccs.data.source.remote.response.GetCurrBillCycleResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListProductResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListRegTypeResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListSubTypeResponse;
+import com.viettel.mbccs.data.source.remote.response.GetQuotaByProductCodeResponse;
 import com.viettel.mbccs.screen.connector.listener.OnPageChange;
 import com.viettel.mbccs.utils.DatabaseUtils;
 import com.viettel.mbccs.utils.DateUtils;
@@ -60,6 +71,11 @@ import rx.subscriptions.CompositeSubscription;
 public class CreateNewConnectorInformationPostpaidFragmentPresenter
         implements CreateNewConnectorInformationPostpaidFragmentContract.Presenter {
 
+    @IntDef({ LoaiKhachHang.CA_NHAN, LoaiKhachHang.DOANH_NGHIEP })
+    public @interface LoaiKhachHang {
+        int CA_NHAN = 0;
+        int DOANH_NGHIEP = 1;
+    }
     private Context context;
     private CreateNewConnectorInformationPostpaidViewModel viewModel;
     private CreateNewConnectorInformationPostpaidFragmentContract.ViewFragment1 createNewView1;
@@ -111,14 +127,14 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
     private SpinnerAdapter<SubType> subscriberAdapterSpinner2LoaiThueBao;
     private SpinnerAdapter<RegType> subscriberAdapterSpinner2HTHoaMang;
     private SpinnerAdapter<ApDomainByType> subscriberAdapterSpinner2DatCoc;
-    private SpinnerAdapter<ApDomainByType> subscriberAdapterSpinner2HanMuc;
+    private SpinnerAdapter<Quota> subscriberAdapterSpinner2HanMuc;
 
     private List<Data.DataField> subscriberDataSpinner2DichVu;
     private List<Product> subscriberDataSpinner2GoiCuoc;
     private List<SubType> subscriberDataSpinner2LoaiThueBao;
     private List<RegType> subscriberDataSpinner2HTHoaMang;
     private List<ApDomainByType> subscriberDataSpinner2DatCoc;
-    private List<ApDomainByType> subscriberDataSpinner2HanMuc;
+    private List<Quota> subscriberDataSpinner2HanMuc;
 
     private int subscriberPositionSpinner2DichVu;
     private int subscriberPositionSpinner2GoiCuoc;
@@ -135,18 +151,18 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
      * Fragment 3
      */
 
-    private SpinnerAdapter<RegType> contractAdapterSpinner3LoaiHopDong;
+    private SpinnerAdapter<ApDomainByType> contractAdapterSpinner3LoaiHopDong;
     private SpinnerAdapter<ApDomainByType> contractAdapterSpinner3HinhThucThanhToan;
-    private SpinnerAdapter<RegType> contractAdapterSpinner3ChuKyCuoc;
+    private SpinnerAdapter<CurrBillCycle> contractAdapterSpinner3ChuKyCuoc;
     private SpinnerAdapter<ApDomainByType> contractAdapterSpinner3ChiTietIn;
-    private SpinnerAdapter<RegType> contractAdapterSpinner3TenNganHang;
+    private SpinnerAdapter<Bank> contractAdapterSpinner3TenNganHang;
     private SpinnerAdapter<ApDomainByType> contractAdapterSpinner3HinhThucThongBaoCuoc;
 
-    private List<RegType> contractDataSpinner3LoaiHopDong;
+    private List<ApDomainByType> contractDataSpinner3LoaiHopDong;
     private List<ApDomainByType> contractDataSpinner3HinhThucThanhToan;
-    private List<RegType> contractDataSpinner3ChuKyCuoc;
+    private List<CurrBillCycle> contractDataSpinner3ChuKyCuoc;
     private List<ApDomainByType> contractDataSpinner3ChiTietIn;
-    private List<RegType> contractDataSpinner3TenNganHang;
+    private List<Bank> contractDataSpinner3TenNganHang;
     private List<ApDomainByType> contractDataSpinner3HinhThucThongBaoCuoc;
 
     private int contractPositionSpinner3LoaiHopDong;
@@ -219,14 +235,14 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
                         subscriberDataSpinner2DichVu = Data.connectorTelServiceType();
 
                         contractDataSpinner3LoaiHopDong =
-                                object.getContractDataSpinner3LoaiHopDong().getRegTypeList();
+                                object.getContractDataSpinner3LoaiHopDong().getApDomainByTypeList();
 
                         contractDataSpinner3HinhThucThanhToan =
                                 object.getContractDataSpinner3HinhThucThanhToan()
                                         .getApDomainByTypeList();
 
                         contractDataSpinner3ChuKyCuoc =
-                                object.getContractDataSpinner3ChuKyCuoc().getRegTypeList();
+                                object.getContractDataSpinner3ChuKyCuoc().getBillCycleList();
 
                         contractDataSpinner3ChiTietIn =
                                 object.getContractDataSpinner3ChiTietIn().getApDomainByTypeList();
@@ -249,7 +265,10 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
 
     private void getDataKhachHangDN() {
         createNewView1.showLoading();
-        Subscription subscription = observableDataSpinnerDNView(MobileType.TRA_SAU).subscribe(
+        String offerCode =
+                subscriberDataSpinner2GoiCuoc.get(subscriberPositionSpinner2GoiCuoc).getOfferCode();
+        Subscription subscription =
+                observableDataSpinnerDNView(MobileType.TRA_SAU, offerCode).subscribe(
                 new MBCCSSubscribe<DataSpinnerDNView>() {
                     @Override
                     public void onSuccess(DataSpinnerDNView object) {
@@ -258,14 +277,15 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
                         subscriberDataSpinner2DatCoc =
                                 object.getSubscriberDataSpinner2DatCoc().getApDomainByTypeList();
                         subscriberDataSpinner2HanMuc =
-                                object.getSubscriberDataSpinnerHanMuc().getApDomainByTypeList();
+                                object.getSubscriberDataSpinnerHanMuc().getQuotaList();
                         setDataCreateDNView();
                     }
 
                     @Override
                     public void onError(BaseException error) {
                         createNewView1.hideLoading();
-                        createNewView1.loadDataSpinnerError(error);
+                        createNewView1.loadDataSpinnerDNError(error);
+                        viewModel.setSelectedPosition1CustomerType(0);
                     }
                 });
         subscriptions.add(subscription);
@@ -335,19 +355,7 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
 
     private void setDataCreateView1() {
         customerDataAdapterSpinnerCustomerType = new ArrayList<>();
-        BusType busTypeCN = new BusType();
-        busTypeCN.setBusType("0");
-        busTypeCN.setBusTypeId(0);
-        busTypeCN.setName(context.getString(
-                R.string.create_new_connector_information_postpaid_khach_hang_ca_nhan));
-        BusType busTypeDN = new BusType();
-        busTypeDN.setBusType("1");
-        busTypeDN.setBusTypeId(1);
-        busTypeDN.setName(context.getString(
-                R.string.create_new_connector_information_postpaid_khach_hang_doanh_nghiep));
-
-        customerDataAdapterSpinnerCustomerType.add(busTypeCN);
-        customerDataAdapterSpinnerCustomerType.add(busTypeDN);
+        customerDataAdapterSpinnerCustomerType.addAll(getListLoaiKhachHang());
 
         customerAdapterSpinnerCustomerType =
                 new SpinnerAdapter<>(context, customerDataAdapterSpinnerCustomerType);
@@ -390,11 +398,14 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
                 new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                subscriberPositionSpinner2DichVu = position;
-                if (subscriberDataSpinner2HTHoaMang != null) {
-                    subscriberDataSpinner2HTHoaMang.clear();
-                    subscriberAdapterSpinner2HTHoaMang.notifyDataSetChanged();
+
+                if (subscriberPositionSpinner2DichVu != position) {
+                    if (subscriberDataSpinner2HTHoaMang != null) {
+                        subscriberDataSpinner2HTHoaMang.clear();
+                        subscriberAdapterSpinner2HTHoaMang.notifyDataSetChanged();
+                    }
                 }
+                subscriberPositionSpinner2DichVu = position;
             }
 
             @Override
@@ -410,11 +421,17 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
                 new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                subscriberPositionSpinner2GoiCuoc = position;
-                if (subscriberDataSpinner2HTHoaMang != null) {
-                    subscriberDataSpinner2HTHoaMang.clear();
-                    subscriberAdapterSpinner2HTHoaMang.notifyDataSetChanged();
+                if (subscriberPositionSpinner2GoiCuoc != position) {
+                    if (viewModel.getContractLoaiKhachHang() == LoaiKhachHang.DOANH_NGHIEP) {
+                        setViewSpinner2HanMuc(subscriberPositionSpinner2GoiCuoc, position);
+                    }
+                    if (subscriberDataSpinner2HTHoaMang != null) {
+                        subscriberDataSpinner2HTHoaMang.clear();
+                        subscriberAdapterSpinner2HTHoaMang.notifyDataSetChanged();
+                    }
                 }
+
+                subscriberPositionSpinner2GoiCuoc = position;
             }
 
                     @Override
@@ -597,17 +614,17 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
     private void getDataTenNganHang() {
         if (createNewView3.getFragmentVisible()) createNewView3.showLoading();
         Subscription subscription = getDataSpinner3TenNganHang().subscribe(
-                new MBCCSSubscribe<GetListRegTypeResponse>() {
+                new MBCCSSubscribe<GetBankInfoResponse>() {
                     @Override
-                    public void onSuccess(GetListRegTypeResponse object) {
+                    public void onSuccess(GetBankInfoResponse object) {
                         if (object == null
-                                || object.getRegTypeList() == null
-                                || object.getRegTypeList().size() == 0) {
+                                || object.getBankList() == null
+                                || object.getBankList().size() == 0) {
                             BaseErrorResponse baseErrorResponse = new BaseErrorResponse();
                             baseErrorResponse.setError(201, stringLoadDataError);
                             onError(BaseException.toServerError(baseErrorResponse));
                         }
-                        contractDataSpinner3TenNganHang = object.getRegTypeList();
+                        contractDataSpinner3TenNganHang = object.getBankList();
                         setViewSpinner3TenNganHang();
                     }
 
@@ -647,6 +664,73 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
         viewModel.setContractAdapterSpinner3TenNganHang(contractAdapterSpinner3TenNganHang);
     }
 
+    private void setViewSpinner2HanMuc(final int currentPosition, int newPosition) {
+        if (createNewView2 != null) {
+            createNewView2.showLoading();
+        }
+
+        Subscription subscription = getDataRegisterSpinnerHanMuc(
+                subscriberDataSpinner2DichVu.get(newPosition).getCode()).flatMap(
+                new Func1<GetQuotaByProductCodeResponse, Observable<GetQuotaByProductCodeResponse>>() {
+                    @Override
+                    public Observable<GetQuotaByProductCodeResponse> call(
+                            GetQuotaByProductCodeResponse response) {
+                        if (response == null
+                                || response.getQuotaList() == null
+                                || response.getQuotaList().size() == 0) {
+                            BaseErrorResponse baseErrorResponse = new BaseErrorResponse();
+                            baseErrorResponse.setError(201, stringLoadDataError);
+                            return Observable.error(BaseException.toServerError(baseErrorResponse));
+                        } else {
+                            return Observable.just(response);
+                        }
+                    }
+                }).subscribe(new MBCCSSubscribe<GetQuotaByProductCodeResponse>() {
+            @Override
+            public void onSuccess(GetQuotaByProductCodeResponse object) {
+                if (subscriberDataSpinner2HanMuc != null
+                        && subscriberDataSpinner2HanMuc.size() != 0) {
+                    subscriberDataSpinner2HanMuc.clear();
+
+                    subscriberDataSpinner2HanMuc = object.getQuotaList();
+                    subscriberAdapterSpinner2HanMuc.notifyDataSetChanged();
+                } else {
+                    subscriberDataSpinner2HanMuc = new ArrayList<>();
+                    subscriberAdapterSpinner2HanMuc =
+                            new SpinnerAdapter<>(context, subscriberDataSpinner2HanMuc);
+                    subscriberAdapterSpinner2HanMuc.setOnItemSelectedListener(
+                            new AdapterView.OnItemSelectedListener() {
+                                @Override
+                                public void onItemSelected(AdapterView<?> parent, View view,
+                                        int position, long id) {
+                                    subscriberPositionSpinner2HanMuc = position;
+                                }
+
+                                @Override
+                                public void onNothingSelected(AdapterView<?> parent) {
+
+                                }
+                            });
+                    viewModel.setSubscriberAdapterSpinner2HanMuc(subscriberAdapterSpinner2HanMuc);
+                }
+            }
+
+            @Override
+            public void onError(BaseException error) {
+                createNewView2.loadDataSpinnerHanMucError(error);
+                viewModel.setSelectedPosition2GoiCuoc(currentPosition);
+            }
+
+            @Override
+            public void onRequestFinish() {
+                super.onRequestFinish();
+                createNewView2.hideLoading();
+            }
+        });
+
+        subscriptions.add(subscription);
+    }
+
     //region getDataBase
 
     private Observable<GetListProductResponse> getDataSpinner2GoiCuoc() {
@@ -671,14 +755,16 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
         return qlKhachHangRepository.getListSubType(request);
     }
 
-    private Observable<GetListRegTypeResponse> getDataSpinner3LoaiHopDong() {
-        GetListRegTypeRequest getListRegTypeRequest = new GetListRegTypeRequest();
+    private Observable<GetApDomainByTypeResponse> getDataSpinner3LoaiHopDong(String subType) {
+        DataRequest<GetApDomainByTypeRequest> request = new DataRequest<>();
+        GetApDomainByTypeRequest apDomainRequest = new GetApDomainByTypeRequest();
+        apDomainRequest.setType(ApDomainByType.Type.LOAI_HOP_DONG);
+        apDomainRequest.setSubType(subType);
 
-        DataRequest<GetListRegTypeRequest> request = new DataRequest<>();
-        request.setWsRequest(getListRegTypeRequest);
-        request.setWsCode(WsCode.GetListRegType);
+        request.setWsRequest(apDomainRequest);
+        request.setWsCode(WsCode.GetApDomainByType);
 
-        return qlKhachHangRepository.getListRegType(request);
+        return qlKhachHangRepository.getApDomainByType(request);
     }
 
     private Observable<GetApDomainByTypeResponse> getDataSpinner3HinhThucThanhToan(String subType) {
@@ -693,14 +779,14 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
         return qlKhachHangRepository.getApDomainByType(request);
     }
 
-    private Observable<GetListRegTypeResponse> getDataSpinner3ChuKyCuoc() {
-        GetListRegTypeRequest getListRegTypeRequest = new GetListRegTypeRequest();
+    private Observable<GetCurrBillCycleResponse> getDataSpinner3ChuKyCuoc() {
+        GetCurrBillCycleRequest getCurrBillCycleRequest = new GetCurrBillCycleRequest();
 
-        DataRequest<GetListRegTypeRequest> request = new DataRequest<>();
-        request.setWsRequest(getListRegTypeRequest);
-        request.setWsCode(WsCode.GetListRegType);
+        DataRequest<GetCurrBillCycleRequest> request = new DataRequest<>();
+        request.setWsRequest(getCurrBillCycleRequest);
+        request.setWsCode(WsCode.GetCurrBillCycle);
 
-        return qlKhachHangRepository.getListRegType(request);
+        return qlKhachHangRepository.getCurrBillCycle(request);
     }
 
     private Observable<GetApDomainByTypeResponse> getDataSpinner3ChiTietIn(String subType) {
@@ -774,35 +860,28 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
         return qlKhachHangRepository.getApDomainByType(request);
     }
 
-    private Observable<GetApDomainByTypeResponse> getDataRegisterSpinnerHanMuc(String subType) {
-        DataRequest<GetApDomainByTypeRequest> request = new DataRequest<>();
-        GetApDomainByTypeRequest apDomainRequest = new GetApDomainByTypeRequest();
-        apDomainRequest.setType(ApDomainByType.Type.LOAI_GIAY_TO);
-        apDomainRequest.setSubType(subType);
+    private Observable<GetQuotaByProductCodeResponse> getDataRegisterSpinnerHanMuc(
+            String offerCode) {
+        GetQuotaByProductCodeRequest getQuotaByProductCodeRequest =
+                new GetQuotaByProductCodeRequest();
+        getQuotaByProductCodeRequest.setProductCode(offerCode);
 
-        request.setWsRequest(apDomainRequest);
-        request.setWsCode(WsCode.GetApDomainByType);
+        DataRequest<GetQuotaByProductCodeRequest> request = new DataRequest<>();
+        request.setWsRequest(getQuotaByProductCodeRequest);
+        request.setWsCode(WsCode.GetQuotaByProductCode);
 
-        return qlKhachHangRepository.getApDomainByType(request);
+        return qlKhachHangRepository.getQuotaByProductCode(request);
     }
     //endregion getDataDoanhNghiep
 
-    private Observable<GetListRegTypeResponse> getDataSpinner3TenNganHang() {
-        GetListRegTypeRequest getListRegTypeRequest = new GetListRegTypeRequest();
-        getListRegTypeRequest.setSubType(
-                subscriberDataSpinner2LoaiThueBao.get(subscriberPositionSpinner2LoaiThueBao)
-                        .getSubType());
-        getListRegTypeRequest.setTelServiceId(
-                subscriberDataSpinner2DichVu.get(subscriberPositionSpinner2DichVu).getId());
-        getListRegTypeRequest.setProductCode(
-                subscriberDataSpinner2GoiCuoc.get(subscriberPositionSpinner2GoiCuoc)
-                        .getOfferCode());
-        getListRegTypeRequest.setChannelTypeId("");
+    private Observable<GetBankInfoResponse> getDataSpinner3TenNganHang() {
+        GetBankInfoRequest getBankInfoRequest = new GetBankInfoRequest();
 
-        DataRequest<GetListRegTypeRequest> request = new DataRequest<>();
-        request.setWsRequest(getListRegTypeRequest);
-        request.setWsCode(WsCode.GetListRegType);
-        return qlKhachHangRepository.getListRegType(request);
+        DataRequest<GetBankInfoRequest> request = new DataRequest<>();
+        request.setWsRequest(getBankInfoRequest);
+        request.setWsCode(WsCode.GetBankInfo);
+
+        return qlKhachHangRepository.getBankInfo(request);
     }
 
     //region onClick View
@@ -892,26 +971,38 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
     private void getCustomer() {
         if (customerCurrent == null) customerCurrent = new Customer();
         AddressApp address = createNewView1.getAddress();
-        customerCurrent.setAddress(address.getAddress());
-        customerCurrent.setAreaCode(address.getAreaPrecinct().getAreaCode());
-        customerCurrent.setBirthDate(createNewView1.getBirthDate());
-        customerCurrent.setBusType(customerDataAdapterSpinnerCustomerType.get(
-                customerPositionAdapterSpinnerCustomerType).getBusType());
+
+        if (customerDataAdapterSpinnerCustomerType != null
+                && customerDataAdapterSpinnerCustomerType.size()
+                >= customerPositionAdapterSpinnerCustomerType) {
+            customerCurrent.setBusType(customerDataAdapterSpinnerCustomerType.get(
+                    customerPositionAdapterSpinnerCustomerType).getBusType());
+        }
+        customerCurrent.setName(viewModel.getCustomerNameCustomer());
         customerCurrent.setCustId(customer.getCustId());
-        customerCurrent.setDistrict(address.getAreaDistrict().getDistrict());
+        customerCurrent.setBirthDate(createNewView1.getBirthDate());
         customerCurrent.setIdIssueDate(createNewView1.getDateCreatePassport());
         customerCurrent.setIdIssuePlace(viewModel.getCustomerPlaceCreatePassport());
         customerCurrent.setIdNo(viewModel.getCustomerNumberGPKH());
+        customerCurrent.setTin(viewModel.getCustomerNumberMaSoThue());
+        customerCurrent.setNationality(customer.getNationality());
+        customerCurrent.setProvince(address.getAreaProvince().getProvince());
+        customerCurrent.setDistrict(address.getAreaDistrict().getDistrict());
+        customerCurrent.setPrecinct(address.getAreaPrecinct().getPrecinct());
+        customerCurrent.setAddress(address.getAddress());
+        customerCurrent.setAreaCode(address.getAreaPrecinct().getAreaCode());
+        customerCurrent.setStatus(customer.getStatus());
         //        customerCurrent.setIdType(
         //                dataSpinnerPassportType.get(positionSpinnerPassportType).getCode());
-        customerCurrent.setName(viewModel.getCustomerNameCustomer());
-        customerCurrent.setNationality(customer.getNationality());
-        customerCurrent.setPrecinct(address.getAreaPrecinct().getPrecinct());
-        customerCurrent.setProvince(address.getAreaProvince().getProvince());
-        customerCurrent.setSex(viewModel.isRegisterCheckMale() ? Gender.MALE : Gender.FEMALE);
-        customerCurrent.setStatus(customer.getStatus());
-
         customerCurrent.setIdExpireDate(null);
+
+        if (viewModel.getContractLoaiKhachHang() == LoaiKhachHang.DOANH_NGHIEP) {
+            customerCurrent.setSex(viewModel.isRegisterCheckMale() ? Gender.MALE : Gender.FEMALE);
+            customerCurrent.setRepreCustName(viewModel.getRegisterNameRegister());
+            customerCurrent.setRepreCustBirthDate(createNewView1.getBirthDateRegister());
+            customerCurrent.setRepreCustIdNo(viewModel.getRegisterIdNo());
+            customerCurrent.setRepreCustIdExpireDate(createNewView1.getDateCreateRegister());
+        }
 
         customerCurrentImageFront = createNewView1.imageFront();
         customerCurrentImageBackside = createNewView1.imageBackside();
@@ -932,29 +1023,63 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
         subscriberCurrent.setIsdn(viewModel.getSubscriberIsdn());
         subscriberCurrent.setNumResetZone(null);
         subscriberCurrent.setPayType(null);
-        subscriberCurrent.setProductCode(
-                subscriberDataSpinner2GoiCuoc.get(subscriberPositionSpinner2GoiCuoc)
-                        .getOfferCode());
+
+        if (subscriberDataSpinner2GoiCuoc != null
+                && subscriberDataSpinner2GoiCuoc.size() >= subscriberPositionSpinner2GoiCuoc) {
+            subscriberCurrent.setProductCode(
+                    subscriberDataSpinner2GoiCuoc.get(subscriberPositionSpinner2GoiCuoc)
+                            .getOfferCode());
+        }
         subscriberCurrent.setPromotionCode(null);
         subscriberCurrent.setQuota(null);
         subscriberCurrent.setReasonDepositId(null);
-        subscriberCurrent.setRegType(
-                subscriberDataSpinner2HTHoaMang.get(subscriberPositionSpinner2HTHoaMang).getType());
+
+        if (subscriberDataSpinner2HTHoaMang != null
+                && subscriberDataSpinner2HTHoaMang.size() >= subscriberPositionSpinner2HTHoaMang) {
+            subscriberCurrent.setRegType(
+                    subscriberDataSpinner2HTHoaMang.get(subscriberPositionSpinner2HTHoaMang)
+                            .getType());
+        }
         subscriberCurrent.setSerial(viewModel.getSubscriberSerial());
-        subscriberCurrent.setServiceType(
-                subscriberDataSpinner2DichVu.get(subscriberPositionSpinner2DichVu).getCode());
-        subscriberCurrent.setTelecomServiceId(
-                subscriberDataSpinner2DichVu.get(subscriberPositionSpinner2DichVu).getId());
+        if (subscriberDataSpinner2DichVu != null
+                && subscriberDataSpinner2DichVu.size() >= subscriberPositionSpinner2DichVu) {
+
+            subscriberCurrent.setServiceType(
+                    subscriberDataSpinner2DichVu.get(subscriberPositionSpinner2DichVu).getCode());
+
+            subscriberCurrent.setTelecomServiceId(
+                    subscriberDataSpinner2DichVu.get(subscriberPositionSpinner2DichVu).getId());
+        }
+
         subscriberCurrent.setShopCode(null);
         subscriberCurrent.setStaDatetime(DateUtils.getCurrentDate());
         subscriberCurrent.setStaffId(null);
         subscriberCurrent.setStatus(null);
-        subscriberCurrent.setSubID(null);
+        subscriberCurrent.setSubId(null);
         subscriberCurrent.setUserCreated(null);
         subscriberCurrent.setUserUsing(null);
-        subscriberCurrent.setSubType(
-                subscriberDataSpinner2LoaiThueBao.get(subscriberPositionSpinner2LoaiThueBao)
-                        .getSubType());
+        if (subscriberDataSpinner2LoaiThueBao != null
+                && subscriberDataSpinner2LoaiThueBao.size()
+                >= subscriberPositionSpinner2LoaiThueBao) {
+            subscriberCurrent.setSubType(
+                    subscriberDataSpinner2LoaiThueBao.get(subscriberPositionSpinner2LoaiThueBao)
+                            .getSubType());
+        }
+
+        if (viewModel.getContractLoaiKhachHang() == LoaiKhachHang.DOANH_NGHIEP) {
+            if (subscriberDataSpinner2DatCoc != null
+                    && subscriberDataSpinner2DatCoc.size() >= subscriberPositionSpinner2DatCoc) {
+                subscriberCurrent.setDeposit(
+                        subscriberDataSpinner2DatCoc.get(subscriberPositionSpinner2DatCoc)
+                                .getCode());
+            }
+            if (subscriberDataSpinner2HanMuc != null
+                    && subscriberDataSpinner2HanMuc.size() >= subscriberPositionSpinner2HanMuc) {
+                subscriberCurrent.setQuota(
+                        subscriberDataSpinner2HanMuc.get(subscriberPositionSpinner2HanMuc)
+                                .getQuotaId());
+            }
+        }
 
         subscriberCurrent.setAddress(address.getAddress());
         subscriberCurrent.setProvince(address.getAreaProvince().getProvince());
@@ -963,22 +1088,92 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
     }
 
     private void getContract() {
+        AddressApp addressApp3 = createNewView3.getAddressApp();
+
         if (contractCurrent == null) contractCurrent = new Contract();
+        if (contractDataSpinner3LoaiHopDong != null
+                && contractDataSpinner3LoaiHopDong.size() >= contractPositionSpinner3LoaiHopDong) {
+            contractCurrent.setContractTypeCode(
+                    contractDataSpinner3LoaiHopDong.get(contractPositionSpinner3LoaiHopDong)
+                            .getCode());
+        }
+        contractCurrent.setPayer(viewModel.getContractNguoiThanhToan());
+        contractCurrent.setDateCreate(null);
+        contractCurrent.setSignDate(createNewView3.getNgayDangKy());
+        contractCurrent.setEffectDate(createNewView3.getNgayHieuLuc());
+        contractCurrent.setEndDatetime(createNewView3.getNgayHetHan());
+
+        if (contractDataSpinner3HinhThucThanhToan != null
+                && contractDataSpinner3HinhThucThanhToan.size()
+                >= contractPositionSpinner3HinhThucThanhToan) {
+            contractCurrent.setPayMethodCode(contractDataSpinner3HinhThucThanhToan.get(
+                    contractPositionSpinner3HinhThucThanhToan).getCode());
+        }
+
+        if (contractDataSpinner3ChuKyCuoc != null
+                && contractDataSpinner3ChuKyCuoc.size() >= contractPositionSpinner3ChuKyCuoc) {
+            contractCurrent.setBillCycleFrom(String.valueOf(
+                    contractDataSpinner3ChuKyCuoc.get(contractPositionSpinner3ChuKyCuoc)
+                            .getBillCycleCode()));
+        }
+
+        if (contractDataSpinner3ChiTietIn != null
+                && contractDataSpinner3ChiTietIn.size() >= contractPositionSpinner3ChiTietIn) {
+            contractCurrent.setPrintMethodCode(
+                    contractDataSpinner3ChiTietIn.get(contractPositionSpinner3ChiTietIn).getCode());
+        }
+
+        if (viewModel.isViewThongTinNganHang()) {
+            ContractBank contractBank = new ContractBank();
+            contractBank.setBankContractDate(createNewView3.getNgayThu());
+            contractBank.setBankContractNo(viewModel.getContractHopDongThu());
+            if (contractDataSpinner3TenNganHang != null
+                    && contractDataSpinner3TenNganHang.size()
+                    >= contractPositionSpinner3TenNganHang) {
+                contractBank.setBankCode(
+                        contractDataSpinner3TenNganHang.get(contractPositionSpinner3TenNganHang)
+                                .getBankCode());
+            }
+            contractBank.setAccount(viewModel.getContractSoTaiKhoan());
+            contractBank.setAccountName(viewModel.getContractTenTaiKhoan());
+            contractCurrent.setContractBank(contractBank);
+        }
+
+        contractCurrent.setProvince(addressApp3.getAreaProvince().getProvince());
+        contractCurrent.setDistrict(addressApp3.getAreaDistrict().getDistrict());
+        contractCurrent.setPrecinct(addressApp3.getAreaPrecinct().getPrecinct());
+        contractCurrent.setAddress(addressApp3.getAddress());
+
+        if (viewModel.getContractLoaiKhachHang() == LoaiKhachHang.DOANH_NGHIEP) {
+            contractCurrent.setContactName(viewModel.getContractTenNguoiDaiDien());
+            contractCurrent.setContactTitle(viewModel.getContractChucVu());
+            contractCurrent.setIdNo(viewModel.getContractCMTNDHoCHieu());
+            contractCurrent.setIsdn(viewModel.getContractDienThoai());
+        }
+
+        if (contractDataSpinner3HinhThucThongBaoCuoc != null
+                && contractDataSpinner3HinhThucThongBaoCuoc.size()
+                >= contractPositionSpinner3HinhThucThongBaoCuoc) {
+            List<String> noticeCharge = new ArrayList<>();
+            noticeCharge.add(contractDataSpinner3HinhThucThongBaoCuoc.get(
+                    contractPositionSpinner3HinhThucThongBaoCuoc).getCode());
+            contractCurrent.setNoticeCharge(noticeCharge);
+        }
+
+        //        contractCurrent.setPayAreaCode();
+
     }
 
     boolean validateCustomer() {
         getCustomer();
         boolean validate = true;
 
-        //        if (StringUtils.isEmpty(customerCurrent.getIdIssuePlace())) {
-        //            setPlaceCreatePassportError(stringError);
-        //            validate = false;
-        //        }
-        //
-        //        if (StringUtils.isEmpty(customerCurrent.getIdNo())) {
-        //            setTxtNumberPassportError(stringError);
-        //            validate = false;
-        //        }
+        if (viewModel.getContractLoaiKhachHang() == LoaiKhachHang.DOANH_NGHIEP
+                && StringUtils.isEmpty(customerCurrent.getRepreCustName())) {
+            viewModel.setRegisterNameRegisterError(
+                    context.getString(R.string.create_new_connector_information_validate_name));
+            validate = false;
+        }
 
         if (!PatternUtils.validateString(customerCurrent.getName(),
                 PatternUtils.PATTERN_TEXT_LENGTH_100)) {
@@ -1008,7 +1203,16 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
     private boolean validateContract() {
         getContract();
         boolean validate = true;
+        if (viewModel.getContractLoaiKhachHang() == LoaiKhachHang.DOANH_NGHIEP
+                && StringUtils.isEmpty(contractCurrent.getContactName())) {
+            viewModel.setContractNguoiThanhToanError(
+                    context.getString(R.string.create_new_connector_information_validate_name));
+        }
 
+        if (StringUtils.isEmpty(contractCurrent.getPayer())) {
+            viewModel.setContractNguoiThanhToanError(
+                    context.getString(R.string.create_new_connector_information_validate_name));
+        }
         return validate;
     }
 
@@ -1045,20 +1249,20 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
 
     private Observable<DataSpinnerBaseView> observableDataSpinnerBaseView(String subType) {
         return Observable.zip(getDataSpinner2GoiCuoc(), getDataSpinner2LoaiThueBao(),
-                getDataSpinner3LoaiHopDong(), getDataSpinner3HinhThucThanhToan(subType),
+                getDataSpinner3LoaiHopDong(subType), getDataSpinner3HinhThucThanhToan(subType),
                 getDataSpinner3ChuKyCuoc(), getDataSpinner3ChiTietIn(subType),
                 getDataSpinner3HinhThucThongBaoCuoc(subType),
-                new Func7<GetListProductResponse, GetListSubTypeResponse, GetListRegTypeResponse, GetApDomainByTypeResponse, GetListRegTypeResponse, GetApDomainByTypeResponse, GetApDomainByTypeResponse, DataSpinnerBaseView>() {
+                new Func7<GetListProductResponse, GetListSubTypeResponse, GetApDomainByTypeResponse, GetApDomainByTypeResponse, GetCurrBillCycleResponse, GetApDomainByTypeResponse, GetApDomainByTypeResponse, DataSpinnerBaseView>() {
                     @Override
                     public DataSpinnerBaseView call(GetListProductResponse dataSpinner2GoiCuoc,
                             GetListSubTypeResponse dataSpinner2LoaiThueBao,
-                            GetListRegTypeResponse dataSpinner3TypeContract,
+                            GetApDomainByTypeResponse dataSpinner3LoaiHopDong,
                             GetApDomainByTypeResponse dataSpinner3HinhThucThanhToan,
-                            GetListRegTypeResponse dataSpinner3ChuKyCuoc,
+                            GetCurrBillCycleResponse dataSpinner3ChuKyCuoc,
                             GetApDomainByTypeResponse dataSpinner3ChiTietIn,
                             GetApDomainByTypeResponse dataSpinner3HinhThucThongBaoCuoc) {
                         return new DataSpinnerBaseView(dataSpinner2GoiCuoc, dataSpinner2LoaiThueBao,
-                                dataSpinner3TypeContract,
+                                dataSpinner3LoaiHopDong,
                                 dataSpinner3HinhThucThanhToan, dataSpinner3ChuKyCuoc,
                                 dataSpinner3ChiTietIn, dataSpinner3HinhThucThongBaoCuoc);
                         //
@@ -1070,11 +1274,11 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
                         spinner.getSubscriberDataSpinner2GoiCuoc();
                 GetListSubTypeResponse dataSpinner2LoaiThueBao =
                         spinner.getSubscriberDataSpinner2LoaiThueBao();
-                GetListRegTypeResponse dataSpinner3LoaiHopDong =
+                GetApDomainByTypeResponse dataSpinner3LoaiHopDong =
                         spinner.getContractDataSpinner3LoaiHopDong();
                 GetApDomainByTypeResponse dataSpinner3HinhThucThanhToan =
                         spinner.getContractDataSpinner3HinhThucThanhToan();
-                GetListRegTypeResponse dataSpinner3ChuKyCuoc =
+                GetCurrBillCycleResponse dataSpinner3ChuKyCuoc =
                         spinner.getContractDataSpinner3ChuKyCuoc();
                 GetApDomainByTypeResponse dataSpinner3ChiTietIn =
                         spinner.getContractDataSpinner3ChiTietIn();
@@ -1090,16 +1294,16 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
                         || dataSpinner2LoaiThueBao.getSubTypeList().size() == 0
 
                         || dataSpinner3LoaiHopDong == null
-                        || dataSpinner3LoaiHopDong.getRegTypeList() == null
-                        || dataSpinner3LoaiHopDong.getRegTypeList().size() == 0
+                        || dataSpinner3LoaiHopDong.getApDomainByTypeList() == null
+                        || dataSpinner3LoaiHopDong.getApDomainByTypeList().size() == 0
 
                         || dataSpinner3HinhThucThanhToan == null
                         || dataSpinner3HinhThucThanhToan.getApDomainByTypeList() == null
                         || dataSpinner3HinhThucThanhToan.getApDomainByTypeList().size() == 0
 
                         || dataSpinner3ChuKyCuoc == null
-                        || dataSpinner3ChuKyCuoc.getRegTypeList() == null
-                        || dataSpinner3ChuKyCuoc.getRegTypeList().size() == 0
+                        || dataSpinner3ChuKyCuoc.getBillCycleList() == null
+                        || dataSpinner3ChuKyCuoc.getBillCycleList().size() == 0
 
                         || dataSpinner3ChiTietIn == null
                         || dataSpinner3ChiTietIn.getApDomainByTypeList() == null
@@ -1120,13 +1324,15 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
         });
     }
 
-    private Observable<DataSpinnerDNView> observableDataSpinnerDNView(String subType) {
+    private Observable<DataSpinnerDNView> observableDataSpinnerDNView(String subType,
+            String offerCode) {
         return Observable.zip(getDataRegisterSpinnerLoaiGiayTo(subType),
-                getDataRegisterSpinnerDatCoc(subType), getDataRegisterSpinnerHanMuc(subType),
-                new Func3<GetApDomainByTypeResponse, GetApDomainByTypeResponse, GetApDomainByTypeResponse, DataSpinnerDNView>() {
+                getDataRegisterSpinnerDatCoc(subType), getDataRegisterSpinnerHanMuc(offerCode),
+                new Func3<GetApDomainByTypeResponse, GetApDomainByTypeResponse, GetQuotaByProductCodeResponse, DataSpinnerDNView>() {
                     @Override
                     public DataSpinnerDNView call(GetApDomainByTypeResponse loaiGiayTo,
-                            GetApDomainByTypeResponse datCoc, GetApDomainByTypeResponse hanMuc) {
+                            GetApDomainByTypeResponse datCoc,
+                            GetQuotaByProductCodeResponse hanMuc) {
                         return new DataSpinnerDNView(loaiGiayTo, datCoc, hanMuc);
                     }
                 }).flatMap(new Func1<DataSpinnerDNView, Observable<DataSpinnerDNView>>() {
@@ -1135,7 +1341,7 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
 
                 GetApDomainByTypeResponse loaiGiayTo = object.getCustomerAdapterSpinnerLoaiGiayTo();
                 GetApDomainByTypeResponse datCoc = object.getSubscriberDataSpinner2DatCoc();
-                GetApDomainByTypeResponse hanMuc = object.getSubscriberDataSpinnerHanMuc();
+                GetQuotaByProductCodeResponse hanMuc = object.getSubscriberDataSpinnerHanMuc();
 
                 if (loaiGiayTo == null
                         || loaiGiayTo.getApDomainByTypeList() == null
@@ -1146,8 +1352,8 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
                         || datCoc.getApDomainByTypeList().size() == 0
 
                         || hanMuc == null
-                        || hanMuc.getApDomainByTypeList() == null
-                        || hanMuc.getApDomainByTypeList().size() == 0) {
+                        || hanMuc.getQuotaList() == null
+                        || hanMuc.getQuotaList().size() == 0) {
 
                     BaseErrorResponse baseErrorResponse = new BaseErrorResponse();
                     baseErrorResponse.setError(201, stringLoadDataError);
@@ -1171,9 +1377,9 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
     private class DataSpinnerBaseView {
         private GetListProductResponse subscriberDataSpinner2GoiCuoc;
         private GetListSubTypeResponse subscriberDataSpinner2LoaiThueBao;
-        private GetListRegTypeResponse contractDataSpinner3LoaiHopDong;
+        private GetApDomainByTypeResponse contractDataSpinner3LoaiHopDong;
         private GetApDomainByTypeResponse contractDataSpinner3HinhThucThanhToan;
-        private GetListRegTypeResponse contractDataSpinner3ChuKyCuoc;
+        private GetCurrBillCycleResponse contractDataSpinner3ChuKyCuoc;
         private GetApDomainByTypeResponse contractDataSpinner3ChiTietIn;
         private GetApDomainByTypeResponse contractDataSpinner3HinhThucThongBaoCuoc;
 
@@ -1182,9 +1388,9 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
 
         DataSpinnerBaseView(GetListProductResponse subscriberDataSpinner2GoiCuoc,
                 GetListSubTypeResponse subscriberDataSpinner2LoaiThueBao,
-                GetListRegTypeResponse contractDataSpinner3LoaiHopDong,
+                GetApDomainByTypeResponse contractDataSpinner3LoaiHopDong,
                 GetApDomainByTypeResponse contractDataSpinner3HinhThucThanhToan,
-                GetListRegTypeResponse contractDataSpinner3ChuKyCuoc,
+                GetCurrBillCycleResponse contractDataSpinner3ChuKyCuoc,
                 GetApDomainByTypeResponse contractDataSpinner3ChiTietIn,
                 GetApDomainByTypeResponse contractDataSpinner3HinhThucThongBaoCuoc) {
 
@@ -1216,12 +1422,12 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
             this.subscriberDataSpinner2LoaiThueBao = subscriberDataSpinner2LoaiThueBao;
         }
 
-        public GetListRegTypeResponse getContractDataSpinner3LoaiHopDong() {
+        public GetApDomainByTypeResponse getContractDataSpinner3LoaiHopDong() {
             return contractDataSpinner3LoaiHopDong;
         }
 
         public void setContractDataSpinner3LoaiHopDong(
-                GetListRegTypeResponse contractDataSpinner3LoaiHopDong) {
+                GetApDomainByTypeResponse contractDataSpinner3LoaiHopDong) {
             this.contractDataSpinner3LoaiHopDong = contractDataSpinner3LoaiHopDong;
         }
 
@@ -1234,12 +1440,12 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
             this.contractDataSpinner3HinhThucThanhToan = contractDataSpinner3HinhThucThanhToan;
         }
 
-        public GetListRegTypeResponse getContractDataSpinner3ChuKyCuoc() {
+        public GetCurrBillCycleResponse getContractDataSpinner3ChuKyCuoc() {
             return contractDataSpinner3ChuKyCuoc;
         }
 
         public void setContractDataSpinner3ChuKyCuoc(
-                GetListRegTypeResponse contractDataSpinner3ChuKyCuoc) {
+                GetCurrBillCycleResponse contractDataSpinner3ChuKyCuoc) {
             this.contractDataSpinner3ChuKyCuoc = contractDataSpinner3ChuKyCuoc;
         }
 
@@ -1266,14 +1472,14 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
     private class DataSpinnerDNView {
         private GetApDomainByTypeResponse customerAdapterSpinnerLoaiGiayTo;
         private GetApDomainByTypeResponse subscriberDataSpinner2DatCoc;
-        private GetApDomainByTypeResponse subscriberDataSpinnerHanMuc;
+        private GetQuotaByProductCodeResponse subscriberDataSpinnerHanMuc;
 
         public DataSpinnerDNView() {
         }
 
         public DataSpinnerDNView(GetApDomainByTypeResponse customerAdapterSpinnerLoaiGiayTo,
                 GetApDomainByTypeResponse subscriberDataSpinner2DatCoc,
-                GetApDomainByTypeResponse subscriberDataSpinnerHanMuc) {
+                GetQuotaByProductCodeResponse subscriberDataSpinnerHanMuc) {
             this.customerAdapterSpinnerLoaiGiayTo = customerAdapterSpinnerLoaiGiayTo;
             this.subscriberDataSpinner2DatCoc = subscriberDataSpinner2DatCoc;
             this.subscriberDataSpinnerHanMuc = subscriberDataSpinnerHanMuc;
@@ -1297,12 +1503,12 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
             this.subscriberDataSpinner2DatCoc = subscriberDataSpinner2DatCoc;
         }
 
-        public GetApDomainByTypeResponse getSubscriberDataSpinnerHanMuc() {
+        public GetQuotaByProductCodeResponse getSubscriberDataSpinnerHanMuc() {
             return subscriberDataSpinnerHanMuc;
         }
 
         public void setSubscriberDataSpinnerHanMuc(
-                GetApDomainByTypeResponse subscriberDataSpinnerHanMuc) {
+                GetQuotaByProductCodeResponse subscriberDataSpinnerHanMuc) {
             this.subscriberDataSpinnerHanMuc = subscriberDataSpinnerHanMuc;
         }
     }
@@ -1315,5 +1521,23 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
         if (onPageChange != null) {
             this.onPageChange.onPageChange(position);
         }
+    }
+
+    private List<BusType> getListLoaiKhachHang() {
+        BusType busTypeCN = new BusType();
+        busTypeCN.setBusType("0");
+        busTypeCN.setBusTypeId(LoaiKhachHang.CA_NHAN);
+        busTypeCN.setName(context.getString(
+                R.string.create_new_connector_information_postpaid_khach_hang_ca_nhan));
+        BusType busTypeDN = new BusType();
+        busTypeDN.setBusType("1");
+        busTypeDN.setBusTypeId(LoaiKhachHang.DOANH_NGHIEP);
+        busTypeDN.setName(context.getString(
+                R.string.create_new_connector_information_postpaid_khach_hang_doanh_nghiep));
+
+        List<BusType> listLoaiKhachHang = new ArrayList<>();
+        listLoaiKhachHang.add(busTypeCN);
+        listLoaiKhachHang.add(busTypeDN);
+        return listLoaiKhachHang;
     }
 }

@@ -93,6 +93,15 @@ public class CreateNewConnectorInformationPostpaid2Fragment extends BaseFragment
     }
 
     @Override
+    public void loadDataSpinnerHanMucError(BaseException error) {
+        DialogUtils.showDialogError(getActivity(), error, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        }, false);
+    }
+
+    @Override
     public void onCancel() {
         getActivity().onBackPressed();
     }
@@ -109,10 +118,6 @@ public class CreateNewConnectorInformationPostpaid2Fragment extends BaseFragment
             presenter.setAddressView2();
             isFirst = false;
         }
-
-//        if (!isFirst && !isVisibleToUser && !presenter.validateSubscriber()) {
-//            presenter.onPageChange(1);
-//        }
     }
 
     @Override

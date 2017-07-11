@@ -562,8 +562,8 @@ public class CreateUpdateInformationFragmentPresenter
 
     private Subscriber getDataSubscriber() {
         Subscriber subscriber = new Subscriber();
-        subscriber.setSubID(
-                subscriberResponse == null ? IntegerNull : subscriberResponse.getSubID());
+        subscriber.setSubId(
+                subscriberResponse == null ? IntegerNull : subscriberResponse.getSubId());
         subscriber.setIsdn(txtPhoneNumber.get());
         subscriber.setCustReqId(
                 subscriberResponse == null ? IntegerNull : subscriberResponse.getCustReqId());
