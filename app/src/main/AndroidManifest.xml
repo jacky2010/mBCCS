@@ -273,9 +273,6 @@
         <activity
             android:name=".screen.connector.ConnectMobilePrepaidViewPagerActivity"
             android:screenOrientation="portrait"/>
-        <activity
-            android:name=".screen.warehousecommon.CreateExpCmdToStaffActivity"
-            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".screen.nvxacnhanhang.NvXacNhanHangActivity"
@@ -294,6 +291,17 @@
         <activity
             android:name=".screen.importwarehousefromstaff.importnote.CreateCmdFromStaffActivity"
             android:screenOrientation="portrait"/>
+
+        <!-- Xuất kho cho nhân viên -->
+        <activity
+            android:name=".screen.xuatkhochonhanvien.XuatKhoChoNhanVienActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screen.xuatkhochonhanvien.LapLenhXuatKhoChoNhanVienActivity"
+            android:screenOrientation="portrait"/>
+        <!-- End Xuất kho cho nhân viên -->
+
     </application>
 
 </manifest>

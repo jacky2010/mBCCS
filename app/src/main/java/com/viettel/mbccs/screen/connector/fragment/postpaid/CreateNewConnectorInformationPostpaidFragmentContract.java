@@ -31,8 +31,8 @@ public interface CreateNewConnectorInformationPostpaidFragmentContract {
         AddressApp getAddress();
 
         boolean getFragmentVisible();
-    }
 
+    }
     interface ViewFragment1 extends View {
 
         Bitmap imageFront();
@@ -48,13 +48,25 @@ public interface CreateNewConnectorInformationPostpaidFragmentContract {
         String getBirthDateRegister();
 
         String getDateCreateRegister();
+
+        void loadDataSpinnerDNError(BaseException error);
     }
 
     interface ViewFragment2 extends View {
-
+        void loadDataSpinnerHanMucError(BaseException error);
     }
 
     interface ViewFragment3 extends View {
+
+        String getNgayDangKy();
+
+        String getNgayHieuLuc();
+
+        String getNgayHetHan();
+
+        String getNgayThu();
+
+        AddressApp getAddressApp();
 
         void connectSubscriber(ConnectSubscriberRequest request, UserInfo info, List<String> dataImage);
 

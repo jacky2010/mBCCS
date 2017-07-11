@@ -8,7 +8,7 @@ import java.util.List;
  * Created by FRAMGIA\hoang.van.cuong on 29/06/2017.
  */
 
-public class CreateExpStockNotNoteRequest {
+public class CreateExpStockNotNoteRequest  extends BaseRequest{
 
     @SerializedName("fromOwnerId")
     private Long fromOwnerId;

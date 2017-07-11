@@ -11,7 +11,7 @@ import java.util.List;
  * Created by Anh Vu Viet on 6/25/2017.
  */
 
-public class CloseTaskRequest {
+public class CloseTaskRequest extends BaseRequest{
 
     @SerializedName("taskStaffMngtId ")
     @Expose

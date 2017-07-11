@@ -540,7 +540,7 @@ public class CreateNewConnectorInformationPrepaidFragmentPresenter extends BaseO
         subscriberCurrent.setStaDatetime(DateUtils.getCurrentDate());
         subscriberCurrent.setStaffId(null);
         subscriberCurrent.setStatus(null);
-        subscriberCurrent.setSubID(null);
+        subscriberCurrent.setSubId(null);
         subscriberCurrent.setUserCreated(null);
         subscriberCurrent.setUserUsing(null);
         subscriberCurrent.setSubType(

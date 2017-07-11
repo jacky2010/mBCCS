@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by Anh Vu Viet on 6/25/2017.
  */
 
-public class GetAccessoryForUpdateTaskRequest {
+public class GetAccessoryForUpdateTaskRequest extends BaseRequest{
 
     @SerializedName("type")
     @Expose

@@ -115,6 +115,31 @@ public class CreateNewConnectorInformationPostpaid3Fragment extends BaseFragment
     }
 
     @Override
+    public String getNgayDangKy() {
+        return binding.dateNgayKy.getStringDate();
+    }
+
+    @Override
+    public String getNgayHieuLuc() {
+        return binding.dateFromNgayHieuLuc.getStringDate();
+    }
+
+    @Override
+    public String getNgayHetHan() {
+        return binding.dateToNgayHieuLuc.getStringDate();
+    }
+
+    @Override
+    public String getNgayThu() {
+        return binding.dateNgayThu.getStringDate();
+    }
+
+    @Override
+    public AddressApp getAddressApp() {
+        return binding.customSelectAddressCreateConnector3.getAddress();
+    }
+
+    @Override
     public void connectSubscriber(ConnectSubscriberRequest request, UserInfo userInfo,
             List<String> dataImage) {
         ConfirmConnectSubscriberFragment fragment = ConfirmConnectSubscriberFragment.newInstance();

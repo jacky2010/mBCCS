@@ -236,6 +236,7 @@ public class GetInfoSaleTranRequest extends BaseRequest implements Parcelable {
     }
 
     public GetInfoSaleTranRequest() {
+        super();
     }
 
     protected GetInfoSaleTranRequest(Parcel in) {

@@ -131,6 +131,15 @@ public class CreateNewConnectorInformationPostpaid1Fragment extends BaseFragment
     }
 
     @Override
+    public void loadDataSpinnerDNError(BaseException error) {
+        DialogUtils.showDialogError(getActivity(), error, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        }, false);
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {

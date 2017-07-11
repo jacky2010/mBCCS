@@ -5,7 +5,4 @@ package com.viettel.mbccs.data.source.remote.request;
  */
 
 public class GetListBusTypeRequest extends BaseRequest  {
-    public GetListBusTypeRequest() {
-        super();
-    }
 }

@@ -5,8 +5,11 @@ import android.databinding.Bindable;
 import com.viettel.mbccs.BR;
 import com.viettel.mbccs.constance.Data;
 import com.viettel.mbccs.data.model.ApDomainByType;
+import com.viettel.mbccs.data.model.Bank;
 import com.viettel.mbccs.data.model.BusType;
+import com.viettel.mbccs.data.model.CurrBillCycle;
 import com.viettel.mbccs.data.model.Product;
+import com.viettel.mbccs.data.model.Quota;
 import com.viettel.mbccs.data.model.RegType;
 import com.viettel.mbccs.data.model.SubType;
 import com.viettel.mbccs.utils.SpinnerAdapter;
@@ -20,6 +23,10 @@ import java.util.Date;
 public class CreateNewConnectorInformationPostpaidViewModel extends BaseObservable {
     private int contractLoaiKhachHang;
     private boolean isViewThongTinNganHang;
+    private int selectedPosition2HanMuc;
+    private int selectedPosition2GoiCuoc;
+    private int selectedPosition1CustomerType;
+
 
     //region Fragment 1
     /**
@@ -92,7 +99,7 @@ public class CreateNewConnectorInformationPostpaidViewModel extends BaseObservab
     private SpinnerAdapter<RegType> subscriberAdapterSpinner2HTHoaMang;
     private SpinnerAdapter<RegType> subscriberAdapterSpinner2KhuyenMai;
     private SpinnerAdapter<ApDomainByType> subscriberAdapterSpinner2DatCoc;
-    private SpinnerAdapter<ApDomainByType> subscriberAdapterSpinner2HanMuc;
+    private SpinnerAdapter<Quota> subscriberAdapterSpinner2HanMuc;
 
     private AddressApp subscriberArea2;
     //endregion Fragment 2
@@ -110,7 +117,6 @@ public class CreateNewConnectorInformationPostpaidViewModel extends BaseObservab
     private String contractCMTNDHoCHieu;
     private String contractDienThoai;
     private String contractDiaChiThongBaoCuoc;
-    private String contractPhuLucHopDong;
 
     private String contractNguoiThanhToanError;
     private String contractHopDongThuError;
@@ -121,14 +127,12 @@ public class CreateNewConnectorInformationPostpaidViewModel extends BaseObservab
     private String contractCMTNDHoCHieuError;
     private String contractDienThoaiError;
     private String contractDiaChiThongBaoCuocError;
-    private String contractPhuLucHopDongError;
 
-    private SpinnerAdapter<RegType> contractAdapterSpinner3LoaiHopDong;
-    //    private SpinnerAdapter<RegType> contractAdapterSpinner3Payer;
+    private SpinnerAdapter<ApDomainByType> contractAdapterSpinner3LoaiHopDong;
     private SpinnerAdapter<ApDomainByType> contractAdapterSpinner3HinhThucThanhToan;
-    private SpinnerAdapter<RegType> contractAdapterSpinner3ChuKyCuoc;
+    private SpinnerAdapter<CurrBillCycle> contractAdapterSpinner3ChuKyCuoc;
     private SpinnerAdapter<ApDomainByType> contractAdapterSpinner3ChiTietIn;
-    private SpinnerAdapter<RegType> contractAdapterSpinner3TenNganHang;
+    private SpinnerAdapter<Bank> contractAdapterSpinner3TenNganHang;
     private SpinnerAdapter<ApDomainByType> contractAdapterSpinner3HinhThucThongBaoCuoc;
 
     private Date contractMaxDateNgayKy;
@@ -158,12 +162,44 @@ public class CreateNewConnectorInformationPostpaidViewModel extends BaseObservab
         notifyPropertyChanged(BR.contractLoaiKhachHang);
     }
 
+    @Bindable
     public boolean isViewThongTinNganHang() {
         return isViewThongTinNganHang;
     }
 
     public void setViewThongTinNganHang(boolean viewThongTinNganHang) {
         isViewThongTinNganHang = viewThongTinNganHang;
+        notifyPropertyChanged(BR.viewThongTinNganHang);
+    }
+
+    @Bindable
+    public int getSelectedPosition2HanMuc() {
+        return selectedPosition2HanMuc;
+    }
+
+    public void setSelectedPosition2HanMuc(int selectedPosition2HanMuc) {
+        this.selectedPosition2HanMuc = selectedPosition2HanMuc;
+        notifyPropertyChanged(BR.selectedPosition2HanMuc);
+    }
+
+    @Bindable
+    public int getSelectedPosition2GoiCuoc() {
+        return selectedPosition2GoiCuoc;
+    }
+
+    public void setSelectedPosition2GoiCuoc(int selectedPosition2GoiCuoc) {
+        this.selectedPosition2GoiCuoc = selectedPosition2GoiCuoc;
+        notifyPropertyChanged(BR.selectedPosition2GoiCuoc);
+    }
+
+    @Bindable
+    public int getSelectedPosition1CustomerType() {
+        return selectedPosition1CustomerType;
+    }
+
+    public void setSelectedPosition1CustomerType(int selectedPosition1CustomerType) {
+        this.selectedPosition1CustomerType = selectedPosition1CustomerType;
+        notifyPropertyChanged(BR.selectedPosition1CustomerType);
     }
 
     //region Set - Get Fragment 1
@@ -619,12 +655,12 @@ public class CreateNewConnectorInformationPostpaidViewModel extends BaseObservab
     }
 
     @Bindable
-    public SpinnerAdapter<ApDomainByType> getSubscriberAdapterSpinner2HanMuc() {
+    public SpinnerAdapter<Quota> getSubscriberAdapterSpinner2HanMuc() {
         return subscriberAdapterSpinner2HanMuc;
     }
 
     public void setSubscriberAdapterSpinner2HanMuc(
-            SpinnerAdapter<ApDomainByType> subscriberAdapterSpinner2HanMuc) {
+            SpinnerAdapter<Quota> subscriberAdapterSpinner2HanMuc) {
         this.subscriberAdapterSpinner2HanMuc = subscriberAdapterSpinner2HanMuc;
         notifyPropertyChanged(BR.subscriberAdapterSpinner2HanMuc);
     }
@@ -731,16 +767,6 @@ public class CreateNewConnectorInformationPostpaidViewModel extends BaseObservab
         notifyPropertyChanged(BR.contractDiaChiThongBaoCuoc);
     }
 
-    @Bindable
-    public String getContractPhuLucHopDong() {
-        return contractPhuLucHopDong;
-    }
-
-    public void setContractPhuLucHopDong(String contractPhuLucHopDong) {
-        this.contractPhuLucHopDong = contractPhuLucHopDong;
-        notifyPropertyChanged(BR.contractPhuLucHopDong);
-    }
-
     public String getContractNguoiThanhToanError() {
         return contractNguoiThanhToanError;
     }
@@ -830,36 +856,15 @@ public class CreateNewConnectorInformationPostpaidViewModel extends BaseObservab
     }
 
     @Bindable
-    public String getContractPhuLucHopDongError() {
-        return contractPhuLucHopDongError;
-    }
-
-    public void setContractPhuLucHopDongError(String contractPhuLucHopDongError) {
-        this.contractPhuLucHopDongError = contractPhuLucHopDongError;
-        notifyPropertyChanged(BR.contractPhuLucHopDongError);
-    }
-
-    @Bindable
-    public SpinnerAdapter<RegType> getContractAdapterSpinner3LoaiHopDong() {
+    public SpinnerAdapter<ApDomainByType> getContractAdapterSpinner3LoaiHopDong() {
         return contractAdapterSpinner3LoaiHopDong;
     }
 
     public void setContractAdapterSpinner3LoaiHopDong(
-            SpinnerAdapter<RegType> contractAdapterSpinner3LoaiHopDong) {
+            SpinnerAdapter<ApDomainByType> contractAdapterSpinner3LoaiHopDong) {
         this.contractAdapterSpinner3LoaiHopDong = contractAdapterSpinner3LoaiHopDong;
         notifyPropertyChanged(BR.contractAdapterSpinner3LoaiHopDong);
     }
-
-    //    @Bindable
-    //    public SpinnerAdapter<RegType> getContractAdapterSpinner3Payer() {
-    //        return contractAdapterSpinner3Payer;
-    //    }
-    //
-    //    public void setContractAdapterSpinner3Payer(
-    //            SpinnerAdapter<RegType> contractAdapterSpinner3Payer) {
-    //        this.contractAdapterSpinner3Payer = contractAdapterSpinner3Payer;
-    //        notifyPropertyChanged(BR.contractAdapterSpinner3Payer);
-    //    }
 
     @Bindable
     public SpinnerAdapter<ApDomainByType> getContractAdapterSpinner3HinhThucThanhToan() {
@@ -873,12 +878,12 @@ public class CreateNewConnectorInformationPostpaidViewModel extends BaseObservab
     }
 
     @Bindable
-    public SpinnerAdapter<RegType> getContractAdapterSpinner3ChuKyCuoc() {
+    public SpinnerAdapter<CurrBillCycle> getContractAdapterSpinner3ChuKyCuoc() {
         return contractAdapterSpinner3ChuKyCuoc;
     }
 
     public void setContractAdapterSpinner3ChuKyCuoc(
-            SpinnerAdapter<RegType> contractAdapterSpinner3ChuKyCuoc) {
+            SpinnerAdapter<CurrBillCycle> contractAdapterSpinner3ChuKyCuoc) {
         this.contractAdapterSpinner3ChuKyCuoc = contractAdapterSpinner3ChuKyCuoc;
         notifyPropertyChanged(BR.contractAdapterSpinner3ChuKyCuoc);
     }
@@ -895,12 +900,12 @@ public class CreateNewConnectorInformationPostpaidViewModel extends BaseObservab
     }
 
     @Bindable
-    public SpinnerAdapter<RegType> getContractAdapterSpinner3TenNganHang() {
+    public SpinnerAdapter<Bank> getContractAdapterSpinner3TenNganHang() {
         return contractAdapterSpinner3TenNganHang;
     }
 
     public void setContractAdapterSpinner3TenNganHang(
-            SpinnerAdapter<RegType> contractAdapterSpinner3TenNganHang) {
+            SpinnerAdapter<Bank> contractAdapterSpinner3TenNganHang) {
         this.contractAdapterSpinner3TenNganHang = contractAdapterSpinner3TenNganHang;
         notifyPropertyChanged(BR.contractAdapterSpinner3TenNganHang);
     }
