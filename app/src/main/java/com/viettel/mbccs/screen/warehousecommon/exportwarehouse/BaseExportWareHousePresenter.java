@@ -108,7 +108,6 @@ public class BaseExportWareHousePresenter implements BaseExportWareHouseContract
                                 }
 
                                 //fake data
-                                bindData(fakeData());
                             }
 
                             @Override

@@ -9,7 +9,6 @@ import com.viettel.mbccs.data.model.StockTrans;
 import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.databinding.ActivityCreateCommandNoteBinding;
 import com.viettel.mbccs.screen.kpp.order.findstock.FindStockActivity;
-import com.viettel.mbccs.screen.kpp.order.ordersuccess.OrderSuccessActivity;
 import com.viettel.mbccs.variable.Constants;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,8 +35,6 @@ public abstract class BaseCreateCommandNoteActivity<T> extends
 
     public abstract int getActionType();
 
-    public abstract int getStepType();
-
     public abstract String getTitleName();
 
     public abstract long getOwnerIdStock();
@@ -59,7 +56,11 @@ public abstract class BaseCreateCommandNoteActivity<T> extends
 
     @Override
     public int getStep() {
-        return getStepType();
+        if (Constants.FuntionConstant.ENVIROMENT_STEP == STEP_2) {
+            return STEP_2;
+        }
+
+        return STEP_3;
     }
 
     @Override

@@ -20,11 +20,6 @@ public class CreateNoteFromStaffActivity extends BaseCreateImportWareHouseActivi
     }
 
     @Override
-    public int getStepCreate() {
-        return BaseCreateImportWareHouseActivity.STEP_3;
-    }
-
-    @Override
     public void onImportSuccess() {
         setResult(RESULT_OK);
         finish();

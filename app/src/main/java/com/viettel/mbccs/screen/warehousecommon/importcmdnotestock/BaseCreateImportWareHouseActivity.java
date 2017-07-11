@@ -1,7 +1,6 @@
 package com.viettel.mbccs.screen.warehousecommon.importcmdnotestock;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.createorder.BaseCreateOrderActivity;
@@ -10,7 +9,6 @@ import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.model.StockTrans;
 import com.viettel.mbccs.data.model.StockTransDetail;
 import com.viettel.mbccs.screen.common.success.DialogViewSerial;
-import com.viettel.mbccs.screen.nhapkhocapduoi.createorder.CreateOrderSuccessActivity;
 import com.viettel.mbccs.screen.warehousecommon.exportsuccess.ExportSuccessDialog;
 import com.viettel.mbccs.variable.Constants;
 import com.viettel.mbccs.widget.CustomDialog;
@@ -36,9 +34,14 @@ public abstract class BaseCreateImportWareHouseActivity extends BaseCreateOrderA
 
     public abstract int getActionTypeCreate();
 
-    public abstract int getStepCreate();
-
     public abstract void onImportSuccess();
+
+    public boolean viewOnly = false;
+
+    @Override
+    public boolean isViewOnly() {
+        return viewOnly;
+    }
 
     @Override
     public void onReject() {
@@ -113,7 +116,11 @@ public abstract class BaseCreateImportWareHouseActivity extends BaseCreateOrderA
 
     @Override
     public int getStep() {
-        return getStepCreate();
+        if (Constants.FuntionConstant.ENVIROMENT_STEP == STEP_2) {
+            return STEP_2;
+        }
+
+        return STEP_3;
     }
 
     @Override
@@ -139,6 +146,7 @@ public abstract class BaseCreateImportWareHouseActivity extends BaseCreateOrderA
         if (bundle == null) {
             return;
         }
+        viewOnly = bundle.getBoolean(Constants.BundleConstant.STOCK_VIEW_ONLY);
         mStockTrans = bundle.getParcelable(Constants.BundleConstant.STOCK_TRANS);
         if (mStockTrans == null) {
             return;

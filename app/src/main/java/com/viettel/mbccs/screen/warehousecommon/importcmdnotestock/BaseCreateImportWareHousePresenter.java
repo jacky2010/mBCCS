@@ -9,7 +9,6 @@ import com.viettel.mbccs.constance.StockTransStatus;
 import com.viettel.mbccs.constance.StockTransType;
 import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.EmptyObject;
-import com.viettel.mbccs.data.model.SerialBO;
 import com.viettel.mbccs.data.model.StockSerial;
 import com.viettel.mbccs.data.model.StockTrans;
 import com.viettel.mbccs.data.model.StockTransDetail;
@@ -368,10 +367,14 @@ public class BaseCreateImportWareHousePresenter extends BaseCreateOrderPresenter
             return false;
         }
 
-
         if (mStockTrans.getStockTransStatus() == StockTransStatus.TRANS_EXP_IMPED) {
             return false;
         }
+
+        if (viewModel.isViewOnly()) {
+            return false;
+        }
+
         return true;
     }
 

@@ -74,9 +74,8 @@
                     >
 
                     <com.viettel.mbccs.widget.CustomTextView
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="2"
                         android:text="@{ action }"
                         android:textColor="@color/red"
                         android:textSize="@dimen/sp_14"

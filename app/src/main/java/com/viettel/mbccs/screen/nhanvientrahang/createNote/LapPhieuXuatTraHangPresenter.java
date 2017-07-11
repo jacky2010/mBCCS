@@ -118,7 +118,7 @@ public class LapPhieuXuatTraHangPresenter implements LapPhieuXuatTraHangContract
         titleExportFrom = new ObservableField<>();
         titleExportFrom.set(
                 String.format(mContext.getString(R.string.nhanvien_xuattra_label_export_from),
-                        mUserRepository.getUserInfo().getChannelInfo().getChannelName()));
+                        mUserRepository.getUserInfo().getStaffInfo().getStaffName()));
         mStatusAdapter = new SpinnerAdapter<String>(mContext, mStatus);
         mAdapter = new StockLapPhieuAdapter(mContext, mStockTotals);
         mAdapter.setOnStockLapPhieuListener(this);

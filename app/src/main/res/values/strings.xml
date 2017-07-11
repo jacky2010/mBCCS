@@ -1034,6 +1034,8 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="commmon_warehouse_msg_confirm_create_import_stock">Bạn có chắc chắn muốn nhập kho?</string>
     <string name="commmon_warehouse_msg_reject_create_cmd">Từ chối lập lệnh?</string>
     <string name="commmon_warehouse_msg_reject_create_import_stock">Từ chối xuất kho?</string>
+    <string name="commmon_warehouse_label_canceled">Đã hủy</string>
+    <string name="commmon_warehouse_label_rejected">Đã từ chối</string>
 
     <!-- Area channel -->
     <string name="title_area">Quản lý địa bàn</string>
@@ -1190,7 +1192,7 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="xuatkhocapduoi_create_command_button">Lập lệnh</string>
     <string name="xuatkhocapduoi_create_order_button">Lập phiếu</string>
     <string name="xuatkhocapduoi_error_connect_api">Đã xảy ra lỗi : %s</string>
-    
+
     <string name="nv_xac_nhan_hang_title">Nhân viên xác nhận hàng</string>
     <string name="nv_xac_nhan_hang_ma_kho_xuat">Mã kho xuất</string>
 
