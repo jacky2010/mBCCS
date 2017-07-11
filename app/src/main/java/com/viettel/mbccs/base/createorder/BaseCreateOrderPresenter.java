@@ -12,12 +12,18 @@ public abstract class BaseCreateOrderPresenter<T> extends BaseCreateOrderSuccess
 
     public ObservableField<String> buttonTitle = new ObservableField<>();
 
+    public ObservableField<Boolean> showRejectButton = new ObservableField<>(false);
+
     public BaseCreateOrderPresenter(Context context, BaseCreateOrderContract.ViewModel viewModel) {
         super(context, viewModel);
     }
 
     public void setButtonTitle(String st) {
         buttonTitle.set(st);
+    }
+
+    public void setShowRejectButton(boolean isShow) {
+        showRejectButton.set(isShow);
     }
 
     public abstract void reject();

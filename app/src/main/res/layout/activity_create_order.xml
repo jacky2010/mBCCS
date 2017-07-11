@@ -137,6 +137,7 @@
                 android:layout_weight="1"
                 android:onClick="@{ () -> presenter.reject() }"
                 android:text="@string/activity_create_order_success_tu_choi"
+                android:visibility="@{presenter.showRejectButton ? View.VISIBLE : View.GONE}"
                 style="@style/button_negative_red2"
                 />
 

@@ -5,6 +5,7 @@ import com.activeandroid.query.Select;
 import com.google.gson.Gson;
 import com.viettel.mbccs.MBCCSApplication;
 import com.viettel.mbccs.data.model.Area;
+import com.viettel.mbccs.data.model.Function;
 import com.viettel.mbccs.data.model.Image;
 import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.model.Precinct;
@@ -54,6 +55,16 @@ public class UserLocalDataSource implements IUserLocalDataSource {
         String data = sharedPrefs.get(Constants.SharePref.LOGIN_INFO, "");
         if (TextUtils.isEmpty(data)) return null;
         return gson.fromJson(data, LoginInfo.class);
+    }
+
+    @Override
+    public List<String> getFunctionsCodes() {
+        List<Function> functions = getUser().getFunction();
+        List<String> functionCodes = new ArrayList<>();
+        for (Function function : functions) {
+            functionCodes.add(function.getFunctionCode());
+        }
+        return functionCodes;
     }
 
     @Override

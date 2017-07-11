@@ -8,6 +8,7 @@
             type="com.viettel.mbccs.screen.warehousecommon.exportwarehouse.BaseExportWareHousePresenter"
             />
         />
+        <import type="android.view.View"/>
     </data>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -25,8 +26,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:background="@color/white"
+            android:orientation="vertical"
             android:padding="@dimen/dp_10"
             >
             <com.viettel.mbccs.widget.CustomTextView
@@ -93,7 +94,7 @@
                     android:padding="@dimen/dp_5"
                     android:text="@string/common_label_reject"
                     android:textSize="@dimen/sp_15"
-                    android:textStyle="bold"
+                    android:visibility="@{presenter.showReject ? View.VISIBLE : View.GONE}"
                     style="@style/button_negative_red2"
                     />
                 <com.viettel.mbccs.widget.CustomButton
@@ -105,7 +106,6 @@
                     android:padding="@dimen/dp_5"
                     android:text="@string/common_label_export"
                     android:textSize="@dimen/sp_15"
-                    android:textStyle="bold"
                     style="@style/button_positive"
                     />
             </LinearLayout>

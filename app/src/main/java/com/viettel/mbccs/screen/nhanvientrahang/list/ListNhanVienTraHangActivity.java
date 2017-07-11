@@ -4,6 +4,7 @@ import android.content.Intent;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.listkho.BaseListOrderActivity;
 import com.viettel.mbccs.constance.OwnerType;
+import com.viettel.mbccs.constance.RoleWareHouse;
 import com.viettel.mbccs.constance.StockTransStatus;
 import com.viettel.mbccs.constance.StockTransType;
 import com.viettel.mbccs.constance.WsCode;
@@ -37,14 +38,20 @@ public class ListNhanVienTraHangActivity extends BaseListOrderActivity {
         DataRequest<GetListExpCmdRequest> mDataRequest = new DataRequest<>();
         GetListExpCmdRequest mRequest = new GetListExpCmdRequest();
         if (getPositionStatus() == 0) {
-            mRequest.setStockTransStatus(StockTransStatus.TRANS_EXP_IMPED);
+            mRequest.setStockTransStatus(StockTransStatus.TRANS_DONE);
+            mRequest.setStockTransType(StockTransType.TRANS_EXPORT);
         }
 
         if (getPositionStatus() == 1) {
-            mRequest.setStockTransStatus(StockTransStatus.TRANS_REJECT);
+            mRequest.setStockTransStatus(StockTransStatus.TRANS_EXP_IMPED);
+            mRequest.setStockTransType(StockTransType.TRANS_EXPORT);
         }
 
-        mRequest.setStockTransType(StockTransType.TRANS_EXPORT);
+        if (getPositionStatus() == 2) {
+            mRequest.setStockTransStatus(StockTransStatus.TRANS_REJECT);
+            mRequest.setStockTransType(StockTransType.TRANS_IMPORT);
+        }
+
         mRequest.setStartDate(getFromDateString());
         mRequest.setEndDate(getToDateString());
         mRequest.setFromOwnerId(mUserRepository.getUserInfo().getStaffInfo().getStaffId());
@@ -140,6 +147,10 @@ public class ListNhanVienTraHangActivity extends BaseListOrderActivity {
 
     @Override
     public boolean isShowAddButton() {
+        List<String> functionCodes = mUserRepository.getFunctionsCodes();
+        if (!functionCodes.contains(RoleWareHouse.XUAT_KHO)) {
+            return false;
+        }
         return true;
     }
 
@@ -175,37 +186,5 @@ public class ListNhanVienTraHangActivity extends BaseListOrderActivity {
     @Override
     public String getWareHouseTitle() {
         return getString(R.string.activity_list_order_return_upper_kho_nhan);
-    }
-
-    //fake get detail
-    public ListStockTransDetailsReponse fakeData() {
-
-        ListStockTransDetailsReponse reponse = new ListStockTransDetailsReponse();
-
-        List<StockTransDetail> listFake = new ArrayList<>();
-
-        StockTransDetail stockTransDetail1 = new StockTransDetail();
-        stockTransDetail1.setQuantity(12);
-        stockTransDetail1.setStockModelCode("AA-SS");
-        stockTransDetail1.setStockModelId(1000554);
-        stockTransDetail1.setStockModelName("SP1");
-
-        StockTransDetail stockTransDetail2 = new StockTransDetail();
-        stockTransDetail2.setQuantity(12);
-        stockTransDetail2.setStockModelCode("FF-SS");
-        stockTransDetail2.setStockModelId(1000554);
-        stockTransDetail2.setStockModelName("SP1");
-
-        StockTransDetail stockTransDetail3 = new StockTransDetail();
-        stockTransDetail3.setQuantity(18);
-        stockTransDetail3.setStockModelCode("CCC-SS");
-        stockTransDetail3.setStockModelId(1000554);
-        stockTransDetail3.setStockModelName("SP1");
-
-        listFake.add(stockTransDetail1);
-        listFake.add(stockTransDetail2);
-        listFake.add(stockTransDetail3);
-        reponse.setStockTransDetails(listFake);
-        return reponse;
     }
 }

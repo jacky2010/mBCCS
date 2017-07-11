@@ -11,8 +11,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
 import com.viettel.mbccs.R;
+import com.viettel.mbccs.constance.RejectWareHouseVisible;
 import com.viettel.mbccs.constance.SaleTranType;
 import com.viettel.mbccs.constance.WsCode;
+import com.viettel.mbccs.data.model.Apis;
+import com.viettel.mbccs.data.model.EmptyObject;
 import com.viettel.mbccs.data.model.SerialBO;
 import com.viettel.mbccs.data.model.StockSerial;
 import com.viettel.mbccs.data.model.StockTotal;
@@ -24,6 +27,7 @@ import com.viettel.mbccs.data.source.remote.request.CreateExpCmdRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateExpNoteNoCmdRequest;
 import com.viettel.mbccs.data.source.remote.request.CreateExpNoteRequest;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
+import com.viettel.mbccs.data.source.remote.request.DestroyStockTransRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListStockModelRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListStockTransDetailRequest;
 import com.viettel.mbccs.data.source.remote.request.KPPOrderRequest;
@@ -34,6 +38,7 @@ import com.viettel.mbccs.data.source.remote.response.GetListStockModelResponse;
 import com.viettel.mbccs.data.source.remote.response.ListStockTransDetailsReponse;
 import com.viettel.mbccs.screen.nhanvientrahang.createNote.StockLapPhieuAdapter;
 import com.viettel.mbccs.screen.warehousecommon.exportwarehouse.StockTransDetailAdapter;
+import com.viettel.mbccs.screen.warehousecommon.importcmdnotestock.BaseCreateImportWareHouseActivity;
 import com.viettel.mbccs.utils.ActivityUtils;
 import com.viettel.mbccs.utils.Common;
 import com.viettel.mbccs.utils.DialogUtils;
@@ -71,6 +76,8 @@ public class CreateCommandPresenter<T> implements CreateCommandContract.Presente
     protected List<String> listProductState = new ArrayList<>();
     private int positionReceiveWareHouse = 0;
     private int positionStatus = 0;
+    public ObservableField<Boolean> showReject = new ObservableField<>(false);
+    public ObservableField<Boolean> showClose = new ObservableField<>(false);
 
     public CreateCommandPresenter(Context context, CreateCommandContract.ViewModel viewModel,
             StockTrans stockTrans) {
@@ -130,6 +137,25 @@ public class CreateCommandPresenter<T> implements CreateCommandContract.Presente
         } else {
             showAddButton.set(false);
             loadStockTransDetail();
+        }
+
+        //check show close button for create cmd
+        if (mViewModel.getAction() == BaseCreateCommandNoteActivity.ACTION_CREATE_CMD) {
+            showClose.set(true);
+        }
+
+        //check to show reject button
+        boolean checkRole = false;
+        for (Apis apis : mUserRepository.getUser().getApi()) {
+            if (apis.getApiCode().equals(RejectWareHouseVisible.REJECT_EXPORT)) {
+                checkRole = true;
+                break;
+            }
+        }
+
+        if (mViewModel.getAction() == BaseCreateCommandNoteActivity.ACTION_CREATE_NOTE
+                && checkRole) {
+            showReject.set(true);
         }
     }
 
@@ -204,48 +230,6 @@ public class CreateCommandPresenter<T> implements CreateCommandContract.Presente
         mStockTransDetailAdapter.notifyDataSetChanged();
     }
 
-    public ListStockTransDetailsReponse fakeDataListStockTransDetailsReponse() {
-
-        StockSerial stockSerial = new StockSerial();
-        List<SerialBO> serialBOs = new ArrayList<>();
-        serialBOs.add(new SerialBO("111111", "111115"));
-        serialBOs.add(new SerialBO("111117", "111119"));
-        stockSerial.setSerialBOs(serialBOs);
-
-        ListStockTransDetailsReponse reponse = new ListStockTransDetailsReponse();
-
-        List<StockTransDetail> listFake = new ArrayList<>();
-
-        StockTransDetail stockTransDetail1 = new StockTransDetail();
-        stockTransDetail1.setQuantity(12);
-        stockTransDetail1.setStockModelCode("AA-SS");
-        stockTransDetail1.setStockModelId(1000554);
-        stockTransDetail1.setStockModelName("SP1");
-        stockTransDetail1.setStockSerial(stockSerial);
-
-        StockTransDetail stockTransDetail2 = new StockTransDetail();
-        stockTransDetail2.setQuantity(12);
-        stockTransDetail2.setStockModelCode("FF-SS");
-        stockTransDetail2.setStockModelId(1000554);
-        stockTransDetail2.setStockModelName("SP1");
-        stockTransDetail2.setStockSerial(stockSerial);
-
-        StockTransDetail stockTransDetail3 = new StockTransDetail();
-        stockTransDetail3.setQuantity(18);
-        stockTransDetail3.setStockModelCode("CCC-SS");
-        stockTransDetail3.setStockModelId(1000554);
-        stockTransDetail3.setStockModelName("SP1");
-        stockTransDetail3.setStockSerial(stockSerial);
-
-        listFake.add(stockTransDetail1);
-        listFake.add(stockTransDetail2);
-        listFake.add(stockTransDetail3);
-        mStockTransDetails.clear();
-        mStockTransDetails.addAll(listFake);
-        reponse.setStockTransDetails(listFake);
-        return reponse;
-    }
-
     public void cancelClick() {
         ((Activity) mContext).finish();
     }
@@ -309,6 +293,18 @@ public class CreateCommandPresenter<T> implements CreateCommandContract.Presente
 
         new CustomDialog(mContext, R.string.confirm, title, false, R.string.common_label_close,
                 titleButton, null, listener, null, false, false).show();
+    }
+
+    public void showDialogReject() {
+        new CustomDialog(mContext, R.string.confirm,
+                R.string.commmon_warehouse_msg_reject_create_note, false,
+                R.string.common_label_close, R.string.activity_create_order_success_tu_choi, null,
+                new CustomDialog.OnInputDialogListener() {
+                    @Override
+                    public void onClick(DialogInterface var1, int var2, String input) {
+                        reject(input);
+                    }
+                }, null, false, false).show();
     }
 
     private void createCmd() {
@@ -421,6 +417,36 @@ public class CreateCommandPresenter<T> implements CreateCommandContract.Presente
                 });
 
         mCompositeSubscription.add(subscription);
+    }
+
+    public void reject(String input) {
+        mViewModel.showLoading();
+        DataRequest<DestroyStockTransRequest> dataRequest = new DataRequest<>();
+        DestroyStockTransRequest request = new DestroyStockTransRequest();
+        request.setStaffId(mUserRepository.getUserInfo().getStaffInfo().getStaffId());
+        request.setStockTransId(mStockTrans.getStockTransId());
+        request.setNote(input);
+        dataRequest.setWsCode(WsCode.DestroyStockTrans);
+        dataRequest.setWsRequest(request);
+        mBanHangKhoTaiChinhRepository.destroyStockTrans(dataRequest)
+                .subscribe(new MBCCSSubscribe<EmptyObject>() {
+
+                    @Override
+                    public void onSuccess(EmptyObject object) {
+                        ((BaseCreateImportWareHouseActivity) mContext).finish();
+                    }
+
+                    @Override
+                    public void onError(BaseException error) {
+                        DialogUtils.showDialogError(mContext, error);
+                    }
+
+                    @Override
+                    public void onRequestFinish() {
+                        super.onRequestFinish();
+                        mViewModel.hideLoading();
+                    }
+                });
     }
 
     private void onCreateCmdNoteSuccess(BaseCreateCmdNoteResponse obj) {

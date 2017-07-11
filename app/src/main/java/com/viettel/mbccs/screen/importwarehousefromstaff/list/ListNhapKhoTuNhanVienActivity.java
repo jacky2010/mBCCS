@@ -5,10 +5,12 @@ import android.os.Bundle;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.listkho.BaseListOrderActivity;
 import com.viettel.mbccs.constance.OwnerType;
+import com.viettel.mbccs.constance.RoleWareHouse;
 import com.viettel.mbccs.constance.STEP_WAREHOUSE;
 import com.viettel.mbccs.constance.StockTransStatus;
 import com.viettel.mbccs.constance.StockTransType;
 import com.viettel.mbccs.constance.WsCode;
+import com.viettel.mbccs.data.model.Function;
 import com.viettel.mbccs.data.model.OwnerCode;
 import com.viettel.mbccs.data.model.StockTrans;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
@@ -18,14 +20,14 @@ import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetListExpCmdResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListOwneCodeReponse;
 import com.viettel.mbccs.screen.importwarehousefromstaff.importnote.CreateCmdFromStaffActivity;
-import com.viettel.mbccs.screen.importwarehousefromstaff.importnote
-        .CreateImportStockFromStaffActivity;
+import com.viettel.mbccs.screen.importwarehousefromstaff.importnote.CreateImportStockFromStaffActivity;
 import com.viettel.mbccs.screen.importwarehousefromstaff.importnote.CreateNoteFromStaffActivity;
 import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import com.viettel.mbccs.variable.Constants;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.FormatFlagsConversionMismatchException;
 import java.util.List;
 
 /**
@@ -37,10 +39,7 @@ public class ListNhapKhoTuNhanVienActivity extends BaseListOrderActivity {
     public static final int CODE = 123;
     List<String> staffListName = new ArrayList<>();
     List<OwnerCode> mOwnerCodes = new ArrayList<>();
-
-    //fake role
-    private long role = Constants.FuntionConstant.ROLE_FINANCE;
-
+    List<String> funtions = new ArrayList<>();
     @Override
     public void onItemClicked(Object object) {
     }
@@ -116,51 +115,35 @@ public class ListNhapKhoTuNhanVienActivity extends BaseListOrderActivity {
                     @Override
                     public void onSuccess(GetListExpCmdResponse object) {
                         if (object != null && object.getStockTranses() != null) {
+
                             for (StockTrans stockTrans : object.getStockTranses()) {
-                                //role sale
-                                if (role == Constants.FuntionConstant.ROLE_SALE) {
+                                //check for 3 step
+                                if (Constants.FuntionConstant.ENVIROMENT_STEP
+                                        == STEP_WAREHOUSE.STEP_3) {
+                                    stockTrans.setActionName(
+                                            getString(R.string.nv_trahangcaptren_action_detail));
+
                                     switch ((int) stockTrans.getStockTransStatus()) {
                                         case (int) StockTransStatus.TRANS_DONE:
-                                            if (Constants.FuntionConstant.ENVIROMENT_STEP == STEP_WAREHOUSE.STEP_3) {
+                                            if (funtions.contains(RoleWareHouse.LAP_LENH_NHAP)
+                                                    && stockTrans.getActionType()
+                                                    == StockTransType.TRANS_EXPORT) {
                                                 stockTrans.setActionName(getString(
                                                         R.string.commmon_warehouse_action_create_cmd));
-                                            }
-
-                                            if (stockTrans.getStockTransType()
-                                                    == StockTransType.TRANS_IMPORT) {
-                                                stockTrans.setActionName(getString(
-                                                        R.string.nv_trahangcaptren_action_detail));
-                                            }
-
-                                            break;
-                                        default:
-                                            stockTrans.setActionName(getString(
-                                                    R.string.nv_trahangcaptren_action_detail));
-                                    }
-                                }
-
-                                if (role == Constants.FuntionConstant.ROLE_FINANCE) {
-                                    switch ((int) stockTrans.getStockTransStatus()) {
-                                        case (int) StockTransStatus.TRANS_DONE:
-                                            if (Constants.FuntionConstant.ENVIROMENT_STEP
-                                                    == STEP_WAREHOUSE.STEP_2) {
-                                                stockTrans.setActionName(getString(
-                                                        R.string.commmon_warehouse_action_create_note));
-                                            } else {
-                                                stockTrans.setActionName(getString(
-                                                        R.string.commmon_warehouse_action_create_cmd));
-                                            }
-
-                                            if (stockTrans.getStockTransType()
-                                                    == StockTransType.TRANS_IMPORT) {
-                                                stockTrans.setActionName(getString(
-                                                        R.string.nv_trahangcaptren_action_detail));
                                             }
 
                                             break;
                                         case (int) StockTransStatus.TRANS_NON_NOTE:
-                                            stockTrans.setActionName(getString(
-                                                    R.string.commmon_warehouse_action_create_note));
+                                            if (funtions.contains(RoleWareHouse.LAP_PHIEU_NHAP)) {
+                                                stockTrans.setActionName(getString(
+                                                        R.string.commmon_warehouse_action_create_note));
+                                            }
+                                            break;
+                                        case (int) StockTransStatus.TRANS_NOTED:
+                                            if (funtions.contains(RoleWareHouse.NHAP_KHO)) {
+                                                stockTrans.setActionName(getString(
+                                                        R.string.commmon_warehouse_action_create_import));
+                                            }
                                             break;
                                         default:
                                             stockTrans.setActionName(getString(
@@ -168,11 +151,28 @@ public class ListNhapKhoTuNhanVienActivity extends BaseListOrderActivity {
                                     }
                                 }
 
-                                if (role == Constants.FuntionConstant.ROLE_STOCK) {
+                                //check for 2 step
+
+                                if (Constants.FuntionConstant.ENVIROMENT_STEP
+                                        == STEP_WAREHOUSE.STEP_2) {
+                                    stockTrans.setActionName(
+                                            getString(R.string.nv_trahangcaptren_action_detail));
+
                                     switch ((int) stockTrans.getStockTransStatus()) {
+                                        case (int) StockTransStatus.TRANS_DONE:
+                                            if (funtions.contains(RoleWareHouse.LAP_PHIEU_NHAP)
+                                                    && stockTrans.getActionType()
+                                                    == StockTransType.TRANS_EXPORT) {
+                                                stockTrans.setActionName(getString(
+                                                        R.string.commmon_warehouse_action_create_note));
+                                            }
+
+                                            break;
                                         case (int) StockTransStatus.TRANS_NOTED:
-                                            stockTrans.setActionName(getString(
-                                                    R.string.commmon_warehouse_action_create_import));
+                                            if (funtions.contains(RoleWareHouse.NHAP_KHO)) {
+                                                stockTrans.setActionName(getString(
+                                                        R.string.commmon_warehouse_action_create_import));
+                                            }
                                             break;
                                         default:
                                             stockTrans.setActionName(getString(
@@ -180,6 +180,7 @@ public class ListNhapKhoTuNhanVienActivity extends BaseListOrderActivity {
                                     }
                                 }
                             }
+
                             setDataSearch(object.getStockTranses());
                         } else {
                             setDataSearch(new ArrayList<StockTrans>());
@@ -202,53 +203,63 @@ public class ListNhapKhoTuNhanVienActivity extends BaseListOrderActivity {
 
     @Override
     public void onItemStockTransClick(StockTrans stockTrans) {
-        Intent intent = null;
+
+        Intent intent = new Intent(this, CreateCmdFromStaffActivity.class);
         Bundle bundle = new Bundle();
         bundle.putParcelable(Constants.BundleConstant.STOCK_TRANS, stockTrans);
-        if (role == Constants.FuntionConstant.ROLE_SALE) {
-            intent = new Intent(this, CreateCmdFromStaffActivity.class);
-            switch ((int) stockTrans.getStockTransStatus()) {
-                case (int) StockTransStatus.TRANS_DONE:
-                    if (stockTrans.getStockTransType() == StockTransType.TRANS_IMPORT) {
-                        bundle.putBoolean(Constants.BundleConstant.STOCK_VIEW_ONLY, true);
-                    }
-                    break;
-                default:
-                    bundle.putBoolean(Constants.BundleConstant.STOCK_VIEW_ONLY, true);
-            }
-        }
+        bundle.putBoolean(Constants.BundleConstant.STOCK_VIEW_ONLY, true);
+        if (Constants.FuntionConstant.ENVIROMENT_STEP == STEP_WAREHOUSE.STEP_3) {
 
-        if (role == Constants.FuntionConstant.ROLE_FINANCE) {
             switch ((int) stockTrans.getStockTransStatus()) {
                 case (int) StockTransStatus.TRANS_DONE:
-                    if (Constants.FuntionConstant.ENVIROMENT_STEP == STEP_WAREHOUSE.STEP_2) {
-                        intent = new Intent(this, CreateNoteFromStaffActivity.class);
-                    } else {
+                    if (funtions.contains(RoleWareHouse.LAP_LENH_NHAP)
+                            && stockTrans.getActionType() == StockTransType.TRANS_EXPORT) {
                         intent = new Intent(this, CreateCmdFromStaffActivity.class);
-                    }
-                    if (stockTrans.getStockTransType() == StockTransType.TRANS_IMPORT) {
-                        bundle.putBoolean(Constants.BundleConstant.STOCK_VIEW_ONLY, true);
+                        bundle.putBoolean(Constants.BundleConstant.STOCK_VIEW_ONLY, false);
                     }
 
                     break;
                 case (int) StockTransStatus.TRANS_NON_NOTE:
-                    intent = new Intent(this, CreateNoteFromStaffActivity.class);
+                    if (funtions.contains(RoleWareHouse.LAP_PHIEU_NHAP)) {
+                        intent = new Intent(this, CreateNoteFromStaffActivity.class);
+                        bundle.putBoolean(Constants.BundleConstant.STOCK_VIEW_ONLY, false);
+                    }
+                    break;
+                case (int) StockTransStatus.TRANS_NOTED:
+                    if (funtions.contains(RoleWareHouse.NHAP_KHO)) {
+                        intent = new Intent(this, CreateImportStockFromStaffActivity.class);
+                        bundle.putBoolean(Constants.BundleConstant.STOCK_VIEW_ONLY, false);
+                    }
                     break;
                 default:
-                    intent = new Intent(this, CreateNoteFromStaffActivity.class);
-                    bundle.putBoolean(Constants.BundleConstant.STOCK_VIEW_ONLY, true);
+                    stockTrans.setActionName(getString(R.string.nv_trahangcaptren_action_detail));
             }
         }
 
-        if (role == Constants.FuntionConstant.ROLE_STOCK) {
-            intent = new Intent(this, CreateImportStockFromStaffActivity.class);
+        //check for 2 step
+
+        if (Constants.FuntionConstant.ENVIROMENT_STEP == STEP_WAREHOUSE.STEP_2) {
+            stockTrans.setActionName(getString(R.string.nv_trahangcaptren_action_detail));
             switch ((int) stockTrans.getStockTransStatus()) {
+                case (int) StockTransStatus.TRANS_DONE:
+                    if (funtions.contains(RoleWareHouse.LAP_PHIEU_NHAP)
+                            && stockTrans.getActionType() == StockTransType.TRANS_EXPORT) {
+                        intent = new Intent(this, CreateNoteFromStaffActivity.class);
+                        bundle.putBoolean(Constants.BundleConstant.STOCK_VIEW_ONLY, false);
+                    }
+
+                    break;
                 case (int) StockTransStatus.TRANS_NOTED:
+                    if (funtions.contains(RoleWareHouse.NHAP_KHO)) {
+                        intent = new Intent(this, CreateImportStockFromStaffActivity.class);
+                        bundle.putBoolean(Constants.BundleConstant.STOCK_VIEW_ONLY, false);
+                    }
                     break;
                 default:
-                    bundle.putBoolean(Constants.BundleConstant.STOCK_VIEW_ONLY, true);
+                    bundle.putBoolean(Constants.BundleConstant.STOCK_VIEW_ONLY, false);
             }
         }
+
         intent.putExtras(bundle);
         startActivityForResult(intent, CODE);
     }
@@ -318,8 +329,8 @@ public class ListNhapKhoTuNhanVienActivity extends BaseListOrderActivity {
             setStatus(Arrays.asList(
                     getResources().getStringArray(R.array.import_from_staff_3_step_status)));
         }
-
         loadStaffList();
+        funtions = mUserRepository.getFunctionsCodes();
     }
 
     @Override

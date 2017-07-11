@@ -168,9 +168,6 @@ public class Constants {
     public class FuntionConstant {
         public static final long STAFF_EXPORT_SHOP_REASON_ID = 200383L;
         public static final long ENVIROMENT_STEP = STEP_WAREHOUSE.STEP_3;
-        public static final long ROLE_SALE = 123;
-        public static final long ROLE_FINANCE = 124;
-        public static final long ROLE_STOCK = 125;
     }
 
     public interface AssignTask {

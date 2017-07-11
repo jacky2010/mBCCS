@@ -10,6 +10,7 @@
             name="presenter"
             type="com.viettel.mbccs.screen.stockdeliver.createcommand.CreateCommandPresenter"
             />
+        <import type="android.view.View"/>
     </data>
     <LinearLayout
         android:layout_width="match_parent"
@@ -77,15 +78,34 @@
                 android:orientation="horizontal"
                 android:padding="@dimen/dp_5"
                 >
-                <com.viettel.mbccs.widget.CustomButton
+
+                <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dp_3"
                     android:layout_weight="1"
-                    android:onClick="@{()->presenter.cancelClick()}"
-                    android:text="@string/common_label_close"
-                    style="@style/button_negative"
-                    />
+                    android:visibility="@{presenter.showClose || presenter.showReject ? View.VISIBLE : View.GONE}"
+                    >
+                    <com.viettel.mbccs.widget.CustomButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dp_3"
+                        android:onClick="@{()->presenter.cancelClick()}"
+                        android:text="@string/common_label_close"
+                        android:visibility="@{presenter.showClose ? View.VISIBLE : View.GONE}"
+                        style="@style/button_negative"
+                        />
+
+                    <com.viettel.mbccs.widget.CustomButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dp_3"
+                        android:onClick="@{()->presenter.showDialogReject()}"
+                        android:text="@string/common_label_close"
+                        android:visibility="@{presenter.showReject ? View.VISIBLE : View.GONE}"
+                        style="@style/button_negative_red2"
+                        />
+                </RelativeLayout>
+
                 <com.viettel.mbccs.widget.CustomButton
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -115,8 +135,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_16"
-                android:padding="@dimen/dp_5"
                 android:background="@color/progress_gray"
+                android:padding="@dimen/dp_5"
                 android:paddingLeft="@dimen/dp_16"
                 android:paddingRight="@dimen/dp_16"
                 android:text="@{String.format(@string/view_ware_house_list_stock, presenter.countProducts)}"
