@@ -23,6 +23,8 @@ public interface BaseCreateImportWareHouseContract {
         int getActionType();
 
         int getStep();
+
+        boolean isViewOnly();
     }
 
     interface Presenter extends BaseCreateOrderContract.Presenter {

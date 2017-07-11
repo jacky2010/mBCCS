@@ -4,6 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.viettel.mbccs.MBCCSApplication;
+import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.ActionType;
 import com.viettel.mbccs.constance.StockTransStatus;
 
@@ -132,7 +134,14 @@ public class StockTrans implements Parcelable {
     }
 
     public String getActionName() {
-        return this.actionName;
+        switch ((int) stockTransStatus) {
+            case (int) StockTransStatus.TRANS_CANCEL:
+                return MBCCSApplication.self().getString(R.string.commmon_warehouse_label_canceled);
+            case (int) StockTransStatus.TRANS_REJECT:
+                return MBCCSApplication.self().getString(R.string.commmon_warehouse_label_rejected);
+            default:
+                return actionName;
+        }
     }
 
     public StockTrans() {

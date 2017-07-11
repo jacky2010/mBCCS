@@ -140,4 +140,5 @@ public interface IUserLocalDataSource {
     Image getImageFromDatabase(String id);
 
     ImageDataBase getDataImageFromDatabase(String id);
+
 }

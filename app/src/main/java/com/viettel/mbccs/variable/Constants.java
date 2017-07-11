@@ -1,5 +1,6 @@
 package com.viettel.mbccs.variable;
 
+import com.viettel.mbccs.constance.STEP_WAREHOUSE;
 import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.model.UserInfo;
 
@@ -139,6 +140,7 @@ public class Constants {
         /*import importStock warehouse*/
         public static final String STOCK_TRANS_ID = "stock_trans_id";
         public static final String STOCK_TRANS = "stock_trans";
+        public static final String STOCK_VIEW_ONLY = "view_only";
         public static final String STOCK_TRANS_DETAIL_LIST = "stock_trans_detail_list";
         public static final String CMD_CODE_TITLE = "cmd_code_title";
         public static final String CMD_RECEIVE_TITLE = "cmd_receive_title";
@@ -165,7 +167,10 @@ public class Constants {
 
     public class FuntionConstant {
         public static final long STAFF_EXPORT_SHOP_REASON_ID = 200383L;
-        public static final long IMPORT_FROM_STAFF_STEP = 2;
+        public static final long ENVIROMENT_STEP = STEP_WAREHOUSE.STEP_3;
+        public static final long ROLE_SALE = 123;
+        public static final long ROLE_FINANCE = 124;
+        public static final long ROLE_STOCK = 125;
     }
 
     public interface AssignTask {

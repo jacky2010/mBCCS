@@ -60,11 +60,6 @@ public class CreateExpCmdToStaffActivity extends BaseCreateCommandNoteActivity<O
     }
 
     @Override
-    public int getStepType() {
-        return BaseCreateCommandNoteActivity.STEP_3;
-    }
-
-    @Override
     public String getTitleName() {
         return getString(R.string.export_staff_label_create_cmd_staff);
     }
