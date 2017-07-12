@@ -26,6 +26,7 @@ import com.viettel.mbccs.screen.change.installation.InstallationAddressActivity;
 import com.viettel.mbccs.screen.changesim.ChangeSimActivity;
 import com.viettel.mbccs.screen.connector.mobile.ConnectorMobileActivity;
 import com.viettel.mbccs.screen.hotnewscskpp.HotNewsCSKPPActivity;
+import com.viettel.mbccs.screen.importhighstore.ImpHighStoreActivity;
 import com.viettel.mbccs.screen.importwarehousefromstaff.list.ListNhapKhoTuNhanVienActivity;
 import com.viettel.mbccs.screen.information.CreateUpdateInformationActivity;
 import com.viettel.mbccs.screen.inputorder.InputOrderActivity;
@@ -222,20 +223,12 @@ public class BaseSubMenuActivity
                                     new Intent(BaseSubMenuActivity.this, InputOrderActivity.class));
                             break;
                         case Function.MenuId.MENU_XUAT_KHO_CAP_DUOI:
-                            Intent stockDelivery = new Intent(BaseSubMenuActivity.this,
-                                    StockDeliverActivity.class);
-                            StockTrans stockTransData = new StockTrans();
-                            stockTransData.setStockTransId(1237);
-                            stockTransData.setToOwnerId(1232);
-                            stockTransData.setCreateDatetime("2017-01-02");
-                            stockTransData.setStockTransStatusName("hang moi");
-                            Bundle stockbundle = new Bundle();
-                            stockbundle.putParcelable(Constants.BundleConstant.STOCK_TRANS,
-                                    stockTransData);
-                            stockDelivery.putExtras(stockbundle);
-                            startActivity(stockDelivery);
+                            startActivity(new Intent(BaseSubMenuActivity.this,
+                                    StockDeliverActivity.class));
                             break;
                         case Function.MenuId.MENU_NHAP_KHO_CAP_TREN:
+                            startActivity(new Intent(BaseSubMenuActivity.this,
+                                    ImpHighStoreActivity.class));
                             break;
                         case Function.MenuId.MENU_TRA_HANG_CAP_TREN:
                             startActivity(new Intent(BaseSubMenuActivity.this,
@@ -246,12 +239,12 @@ public class BaseSubMenuActivity
                                     new Intent(BaseSubMenuActivity.this, ListOrderActivity.class));
                             break;
                         case Function.MenuId.MENU_XUAT_KHO_CHO_NHAN_VIEN:
-                            startActivity(
-                                    new Intent(BaseSubMenuActivity.this, XuatKhoChoNhanVienActivity.class));
+                            startActivity(new Intent(BaseSubMenuActivity.this,
+                                    XuatKhoChoNhanVienActivity.class));
                             break;
                         case Function.MenuId.MENU_NV_XAC_NHAN_HANG:
-                            startActivity(
-                                    new Intent(BaseSubMenuActivity.this, NvXacNhanHangActivity.class));
+                            startActivity(new Intent(BaseSubMenuActivity.this,
+                                    NvXacNhanHangActivity.class));
                             break;
                         case Function.MenuId.MENU_NHAN_VIEN_TRA_HANG_CAP_TREN:
                             startActivity(new Intent(BaseSubMenuActivity.this,
@@ -321,7 +314,6 @@ public class BaseSubMenuActivity
                             bundle.putParcelable(Constants.BundleConstant.STOCK_TRANS, stockTrans);
                             intent1.putExtras(bundle);
                             startActivity(intent1);
-
 
                             break;
                         case Function.MenuId.MENU_BAO_CAO_GIAO_CHI_TIEU_BAN_HANG:

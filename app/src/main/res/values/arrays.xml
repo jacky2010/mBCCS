@@ -49,10 +49,9 @@
     </string-array>
 
     <string-array name="xuatkhocd_status">
-        <item>Chưa lập lệnh</item>
         <item>Đã lập lênh</item>
         <item>Đã lập phiếu</item>
-        <item>Đã nhập kho</item>
+        <item>Đã xuất kho</item>
         <item>Đã hủy</item>
         <item>Tất cả</item>
     </string-array>

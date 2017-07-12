@@ -302,6 +302,29 @@
             android:screenOrientation="portrait"/>
         <!-- End Xuất kho cho nhân viên -->
 
+        <!--Xuat kho cap duoi-->
+        <activity
+            android:name=".screen.stockdeliver.CreateCmdExpShopActivity"
+            android:screenOrientation="portrait"/>
+
+        <!--End Xuat kho cap duoi-->
+
+        <!--Nhap kho cap tren-->
+        <activity
+            android:name=".screen.importhighstore.ImpHighStoreActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screen.importhighstore.createimp.CreateCmdFromStaffActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screen.importhighstore.createimp.CreateNoteFromStaffActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screen.importhighstore.createimp.CreateImportStockFromStaffActivity"
+            android:screenOrientation="portrait"/>
+
+        <!--End Nhap kho cap tren-->
     </application>
 
 </manifest>

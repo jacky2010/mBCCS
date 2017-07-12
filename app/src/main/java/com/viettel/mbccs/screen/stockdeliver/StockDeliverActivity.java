@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.listkho.BaseListOrderActivity;
 import com.viettel.mbccs.constance.OwnerType;
+import com.viettel.mbccs.constance.RoleWareHouse;
 import com.viettel.mbccs.constance.StockTransStatus;
 import com.viettel.mbccs.constance.StockTransType;
 import com.viettel.mbccs.constance.WsCode;
@@ -143,6 +144,10 @@ public class StockDeliverActivity extends BaseListOrderActivity {
 
     @Override
     public boolean isShowAddButton() {
+        List<String> functionCode = mUserRepository.getFunctionsCodes();
+        if (functionCode.contains(RoleWareHouse.LAP_LENH_XUAT)) {
+            return true;
+        }
         return true;
     }
 
@@ -160,6 +165,12 @@ public class StockDeliverActivity extends BaseListOrderActivity {
     @Override
     public String getWareHouseTitle() {
         return getString(R.string.activity_list_order_return_upper_kho_xuat);
+    }
+
+    @Override
+    public void onAddClick() {
+        Intent intent = new Intent(StockDeliverActivity.this, CreateCmdExpShopActivity.class);
+        startActivity(intent);
     }
 
 
