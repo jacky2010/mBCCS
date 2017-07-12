@@ -8,7 +8,7 @@
     <data>
         <variable
             name="presenter"
-            type="com.viettel.mbccs.screen.stockdeliver.createcommand.CreateCommandPresenter"
+            type="com.viettel.mbccs.screen.warehousecommon.basecreatecmdnote.CreateCommandPresenter"
             />
         <import type="android.view.View"/>
     </data>
@@ -80,12 +80,13 @@
                 android:id="@+id/add_new_product"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_above="@id/layout_bottom"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:layout_marginRight="@dimen/dp_10"
-                android:layout_above="@id/layout_bottom"
                 android:onClick="@{()->presenter.addNewStock()}"
                 android:padding="@dimen/dp_5"
                 android:text="@string/add_new_sale_model"
+                android:visibility="@{presenter.showAddButton ? View.VISIBLE : View.GONE}"
                 style="@style/button_positive"
                 />
 
@@ -101,45 +102,87 @@
                     android:orientation="vertical"
                     >
 
-                    <com.viettel.mbccs.widget.CustomTextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/progress_gray"
-                        android:padding="@dimen/dp_5"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_16"
-                        app:textHtml="@{presenter.titleOrder}"
-                        tools:text="@string/order_from_kpp"
-                        />
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        android:visibility="@{presenter.showAddButton ? View.GONE : View.VISIBLE}"
+                        android:padding="@dimen/dp_10"
+                        >
+                        <com.viettel.mbccs.widget.CustomTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dp_5"
+                            android:textColor="@color/grey"
+                            android:textSize="@dimen/sp_13"
+                            app:textHtml="@{presenter.cmdCode}"
+                            />
+                        <com.viettel.mbccs.widget.CustomTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dp_5"
+                            android:textColor="@color/grey"
+                            android:textSize="@dimen/sp_13"
+                            app:textHtml="@{presenter.receiveWarehouse}"
+                            />
+                        <com.viettel.mbccs.widget.CustomTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dp_5"
+                            android:textColor="@color/grey"
+                            android:textSize="@dimen/sp_13"
+                            app:textHtml="@{presenter.dayCreated}"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="@{presenter.showAddButton ? View.VISIBLE : View.GONE}"
+                        >
+                        <com.viettel.mbccs.widget.CustomTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/progress_gray"
+                            android:padding="@dimen/dp_5"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_16"
+                            app:textHtml="@{presenter.titleOrder}"
+                            tools:text="@string/order_from_kpp"
+                            />
 
 
-                    <com.viettel.mbccs.widget.CustomTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dp_10"
-                        app:textHtml="@{@string/nhanvien_xuattra_label_warehouse_receive_code}"
-                        style="@style/textTitleInput"
-                        />
-                    <com.viettel.mbccs.widget.SpinnerWithBorder
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/dp_10"
-                        app:adapter="@{presenter.spinnerReceiveWareHouse}"
-                        />
-                    <com.viettel.mbccs.widget.CustomTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dp_10"
-                        app:textHtml="@{@string/nhanvien_xuattra_label_export_status}"
-                        style="@style/textTitleInput"
-                        />
+                        <com.viettel.mbccs.widget.CustomTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dp_10"
+                            app:textHtml="@{@string/nhanvien_xuattra_label_warehouse_receive_code}"
+                            style="@style/textTitleInput"
+                            />
+                        <com.viettel.mbccs.widget.SpinnerWithBorder
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/dp_10"
+                            app:adapter="@{presenter.spinnerReceiveWareHouse}"
+                            />
+                        <com.viettel.mbccs.widget.CustomTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dp_10"
+                            app:textHtml="@{@string/nhanvien_xuattra_label_export_status}"
+                            style="@style/textTitleInput"
+                            />
 
-                    <com.viettel.mbccs.widget.SpinnerWithBorder
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/dp_10"
-                        app:adapter="@{presenter.spinnerAdapterStatus}"
-                        />
+                        <com.viettel.mbccs.widget.SpinnerWithBorder
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/dp_10"
+                            app:adapter="@{presenter.spinnerAdapterStatus}"
+                            />
+                    </LinearLayout>
+
 
                     <RelativeLayout
                         android:layout_width="match_parent"

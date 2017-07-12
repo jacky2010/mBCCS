@@ -24,4 +24,9 @@ public class CreateNoteFromStaffActivity extends BaseCreateImportWareHouseActivi
         setResult(RESULT_OK);
         finish();
     }
+
+    @Override
+    public int getStepType() {
+        return STEP_2;
+    }
 }

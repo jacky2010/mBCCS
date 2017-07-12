@@ -36,6 +36,8 @@ public abstract class BaseCreateImportWareHouseActivity extends BaseCreateOrderA
 
     public abstract void onImportSuccess();
 
+    public abstract int getStepType();
+
     public boolean viewOnly = false;
 
     @Override
@@ -116,11 +118,7 @@ public abstract class BaseCreateImportWareHouseActivity extends BaseCreateOrderA
 
     @Override
     public int getStep() {
-        if (Constants.FuntionConstant.ENVIROMENT_STEP == STEP_2) {
-            return STEP_2;
-        }
-
-        return STEP_3;
+        return getStepType();
     }
 
     @Override

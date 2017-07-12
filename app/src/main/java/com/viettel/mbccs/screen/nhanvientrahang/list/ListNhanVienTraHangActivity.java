@@ -135,10 +135,6 @@ public class ListNhanVienTraHangActivity extends BaseListOrderActivity {
                 });
     }
 
-    @Override
-    public String getItemCountStringFormat() {
-        return getString(R.string.nv_trahangcaptren_list_label_count_exported);
-    }
 
     @Override
     public String getToolbarTitle() {

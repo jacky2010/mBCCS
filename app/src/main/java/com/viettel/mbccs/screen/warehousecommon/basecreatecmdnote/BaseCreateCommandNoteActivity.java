@@ -1,4 +1,4 @@
-package com.viettel.mbccs.screen.stockdeliver.createcommand;
+package com.viettel.mbccs.screen.warehousecommon.basecreatecmdnote;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -49,6 +49,12 @@ public abstract class BaseCreateCommandNoteActivity<T> extends
 
     public abstract long getToOwnerType();
 
+    public abstract int getStepType();
+
+    public abstract void onRejectSuccess();
+
+    public abstract void onCreateSuccess();
+
     public UserRepository mUserRepository;
 
     @Override
@@ -58,11 +64,7 @@ public abstract class BaseCreateCommandNoteActivity<T> extends
 
     @Override
     public int getStep() {
-        if (Constants.FuntionConstant.ENVIROMENT_STEP == STEP_2) {
-            return STEP_2;
-        }
-
-        return STEP_3;
+        return getStepType();
     }
 
     @Override
@@ -103,6 +105,16 @@ public abstract class BaseCreateCommandNoteActivity<T> extends
     @Override
     public void setListReceiverWareHouser(List<T> listReceiverWareHouser) {
         mPresenter.setListReceiverWareHouser(listReceiverWareHouser);
+    }
+
+    @Override
+    public void onRejectExportSuccess() {
+        onRejectSuccess();
+    }
+
+    @Override
+    public void onCreateExportSuccess() {
+        onCreateSuccess();
     }
 
     @Override

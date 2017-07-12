@@ -26,8 +26,8 @@ import com.viettel.mbccs.screen.change.installation.InstallationAddressActivity;
 import com.viettel.mbccs.screen.changesim.ChangeSimActivity;
 import com.viettel.mbccs.screen.connector.mobile.ConnectorMobileActivity;
 import com.viettel.mbccs.screen.hotnewscskpp.HotNewsCSKPPActivity;
-import com.viettel.mbccs.screen.importhighstore.ImpHighStoreActivity;
-import com.viettel.mbccs.screen.importwarehousefromstaff.list.ListNhapKhoTuNhanVienActivity;
+import com.viettel.mbccs.screen.nhapkhocaptren.ListNhapKhoCapTren;
+import com.viettel.mbccs.screen.nhapkhotunhanvien.list.ListNhapKhoTuNhanVienActivity;
 import com.viettel.mbccs.screen.information.CreateUpdateInformationActivity;
 import com.viettel.mbccs.screen.inputorder.InputOrderActivity;
 import com.viettel.mbccs.screen.kpp.order.KPPOrderActivity;
@@ -41,7 +41,7 @@ import com.viettel.mbccs.screen.sell.channel.SaleChannelActivity;
 import com.viettel.mbccs.screen.sell.orders.SellOrdersActivity;
 import com.viettel.mbccs.screen.sell.retail.SaleRetailActivity;
 import com.viettel.mbccs.screen.sellanypay.SellAnyPayActivity;
-import com.viettel.mbccs.screen.stockdeliver.StockDeliverActivity;
+import com.viettel.mbccs.screen.xuatkhocapduoi.ListXuatKhoCapDuoi;
 import com.viettel.mbccs.screen.survey.SurveyListActivity;
 import com.viettel.mbccs.screen.trahangcaptren.ListOrderReturnUpperActivity;
 import com.viettel.mbccs.screen.transferanypay.TransferAnyPayActivity;
@@ -224,11 +224,11 @@ public class BaseSubMenuActivity
                             break;
                         case Function.MenuId.MENU_XUAT_KHO_CAP_DUOI:
                             startActivity(new Intent(BaseSubMenuActivity.this,
-                                    StockDeliverActivity.class));
+                                    ListXuatKhoCapDuoi.class));
                             break;
                         case Function.MenuId.MENU_NHAP_KHO_CAP_TREN:
                             startActivity(new Intent(BaseSubMenuActivity.this,
-                                    ImpHighStoreActivity.class));
+                                    ListNhapKhoCapTren.class));
                             break;
                         case Function.MenuId.MENU_TRA_HANG_CAP_TREN:
                             startActivity(new Intent(BaseSubMenuActivity.this,

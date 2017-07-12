@@ -1,9 +1,9 @@
-package com.viettel.mbccs.screen.stockdeliver;
+package com.viettel.mbccs.screen.nhapkhocaptren;
 
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.screen.warehousecommon.importcmdnotestock.BaseCreateImportWareHouseActivity;
 
-public class StockDeliveryCreateNoteFromStaffActivity extends BaseCreateImportWareHouseActivity {
+public class LapPhieuNhapKhoCapTrenActivity extends BaseCreateImportWareHouseActivity {
 
     @Override
     protected String getTitleToolbar() {
@@ -19,5 +19,10 @@ public class StockDeliveryCreateNoteFromStaffActivity extends BaseCreateImportWa
     public void onImportSuccess() {
         setResult(RESULT_OK);
         finish();
+    }
+
+    @Override
+    public int getStepType() {
+        return BaseCreateImportWareHouseActivity.STEP_2;
     }
 }

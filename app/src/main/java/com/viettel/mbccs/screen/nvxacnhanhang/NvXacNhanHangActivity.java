@@ -91,10 +91,6 @@ public class NvXacNhanHangActivity extends BaseListOrderActivity {
 
     }
 
-    @Override
-    public String getItemCountStringFormat() {
-        return null;
-    }
 
     @Override
     public String getToolbarTitle() {

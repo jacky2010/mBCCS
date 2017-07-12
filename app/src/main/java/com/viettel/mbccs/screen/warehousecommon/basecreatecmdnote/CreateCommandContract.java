@@ -1,4 +1,4 @@
-package com.viettel.mbccs.screen.stockdeliver.createcommand;
+package com.viettel.mbccs.screen.warehousecommon.basecreatecmdnote;
 
 import com.viettel.mbccs.base.BasePresenter;
 import com.viettel.mbccs.base.BaseView;
@@ -35,7 +35,6 @@ public interface CreateCommandContract {
 
         int getPositionReceicerWareHouse();
 
-
         long getOwnerStockIdCreate();
 
         long getOwnerStockTypeCreate();
@@ -47,5 +46,9 @@ public interface CreateCommandContract {
         long getToOwnerIdCreate();
 
         long getToOwnerTypeCreate();
+
+        void onRejectExportSuccess();
+
+        void onCreateExportSuccess();
     }
 }

@@ -63,6 +63,16 @@ public abstract class BaseExportWareHouseActivity extends
     }
 
     @Override
+    public void showLoading() {
+        showLoadingDialog();
+    }
+
+    @Override
+    public void hideLoading() {
+        hideLoadingDialog();
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == GET_SERIAL && resultCode == RESULT_OK) {
