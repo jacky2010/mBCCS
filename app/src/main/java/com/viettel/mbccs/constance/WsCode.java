@@ -218,21 +218,6 @@ public class WsCode {
     // 5.5.3.3
     public final static String CreateInvoice = "WS_createInvoice";
 
-    // 5.6.3.1
-    public final static String CheckAuthenticate = "WS_CheckAuthenticate";
-
-    // 5.6.3.2
-    public final static String SaleAnyPayToCustomer = "WS_SaleAnyPayToCustomer";
-
-    // 5.6.3.3
-    public final static String SaleAnyPayToChannel = "WS_SaleAnyPayToChannel";
-
-    // 5.7.3.1
-    public final static String TransReloadAnypay = "WS_TransReloadAnypay";
-
-    // 5.7.3.2
-    public final static String TransferAnypay = "WS_TransferAnypay";
-
     // 5.8.3.1 - 5.14.3 - 5.18.3
     public final static String GetListStockModel = "WS_getListStockModel";
 
@@ -410,10 +395,10 @@ public class WsCode {
     public final static String GetUserInfo = "getUserInfo";
 
     public final static String GetAnyPay = "WS_CheckAuthenticate";
-    public final static String SellAnyPayToCustomer = "WS_SaleAnyPayToCustomer";
-    public final static String SellAnyPayToChannel = "WS_SaleAnyPayToChannel";
-    public final static String RefillAnyPay = "WS_TransReloadAnypay";
-    public final static String TransferAnyPay = "WS_TransferAnypay";
+    public final static String SellAnyPayToCustomer = "WS_saleAnyPayToCustomer";
+    public final static String SellAnyPayToChannel = "WS_saleAnyPayToChannel";
+    public final static String RefillAnyPay = "WS_transReloadAnypay";
+    public final static String TransferAnyPay = "WS_transferAnypay";
     public final static String SendSurveyKPP = "WS_sendSurvey";
     public final static String GetSurveyKPP = "WS_getListSurvey";
 
