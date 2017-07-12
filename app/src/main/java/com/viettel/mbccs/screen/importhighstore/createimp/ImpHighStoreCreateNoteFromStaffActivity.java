@@ -3,16 +3,16 @@ package com.viettel.mbccs.screen.importhighstore.createimp;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.screen.warehousecommon.importcmdnotestock.BaseCreateImportWareHouseActivity;
 
-public class CreateCmdFromStaffActivity extends BaseCreateImportWareHouseActivity {
+public class ImpHighStoreCreateNoteFromStaffActivity extends BaseCreateImportWareHouseActivity {
 
     @Override
     protected String getTitleToolbar() {
-        return getString(R.string.nhap_kho_cap_duoi_chi_tiet_lenh_nhap);
+        return getString(R.string.nhap_kho_cap_duoi_chi_tiet_phieu_nhap);
     }
 
     @Override
     public int getActionTypeCreate() {
-        return BaseCreateImportWareHouseActivity.ACTION_CREATE_CMD;
+        return BaseCreateImportWareHouseActivity.ACTION_CREATE_NOTE;
     }
 
     @Override

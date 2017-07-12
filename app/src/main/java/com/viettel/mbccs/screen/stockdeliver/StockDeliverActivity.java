@@ -14,9 +14,9 @@ import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListExpCmdRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetListExpCmdResponse;
-import com.viettel.mbccs.screen.importwarehousefromstaff.importnote.CreateCmdFromStaffActivity;
 import com.viettel.mbccs.screen.importwarehousefromstaff.importnote.CreateImportStockFromStaffActivity;
 import com.viettel.mbccs.screen.importwarehousefromstaff.importnote.CreateNoteFromStaffActivity;
+import com.viettel.mbccs.screen.warehousecommon.exportsuccess.ExportSuccessDialog;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import com.viettel.mbccs.variable.Constants;
 import java.util.ArrayList;
@@ -28,6 +28,7 @@ import java.util.List;
  */
 
 public class StockDeliverActivity extends BaseListOrderActivity {
+    List<String> funtions = new ArrayList<>();
 
     @Override
     public void onItemClicked(Object object) {
@@ -40,6 +41,7 @@ public class StockDeliverActivity extends BaseListOrderActivity {
         DataRequest<GetListExpCmdRequest> mDataRequest = new DataRequest<>();
         GetListExpCmdRequest mRequest = new GetListExpCmdRequest();
         showLoading();
+        mRequest.setStockTransType(StockTransType.TRANS_EXPORT);
         if (getPositionStatus() == 0) {
             mRequest.setStockTransStatus(StockTransStatus.TRANS_NON_NOTE);
         }
@@ -53,10 +55,19 @@ public class StockDeliverActivity extends BaseListOrderActivity {
         }
 
         if (getPositionStatus() == 3) {
+            mRequest.setStockTransStatus(StockTransStatus.TRANS_EXP_IMPED);
+        }
+
+        if (getPositionStatus() == 4) {
             mRequest.setStockTransStatus(StockTransStatus.TRANS_CANCEL);
         }
 
-        mRequest.setStockTransType(StockTransType.TRANS_IMPORT);
+        if (getPositionStatus() == 5) {
+            //TODO: will confirm after
+            mRequest.setStockTransType(StockTransType.TRANS_EXPORT);
+            mRequest.setStockTransStatus(StockTransStatus.TRANS_REJECT);
+        }
+
         mRequest.setStartDate(getFromDateString());
         mRequest.setEndDate(getToDateString());
         mRequest.setFromOwnerId(loadShopId());
@@ -69,28 +80,11 @@ public class StockDeliverActivity extends BaseListOrderActivity {
                 .subscribe(new MBCCSSubscribe<GetListExpCmdResponse>() {
                     @Override
                     public void onSuccess(GetListExpCmdResponse object) {
-                        //fake
-                        object = new GetListExpCmdResponse();
-                        List<StockTrans> stockTranses = new ArrayList<StockTrans>();
-                        StockTrans stockTrans = new StockTrans();
-                        stockTrans.setStockTransId(2342352);
-                        stockTrans.setToOwnerId(234235);
-                        stockTrans.setCreateDatetime("2017-07-05T01:28:46+07:00");
-                        stockTrans.setStockTransStatusName("hang moi");
-                        stockTrans.setStockTransStatus(StockTransStatus.TRANS_NON_NOTE);
-
-                        StockTrans stockTrans1 = new StockTrans();
-                        stockTrans1.setStockTransId(1237);
-                        stockTrans1.setToOwnerId(23424);
-                        stockTrans1.setCreateDatetime("2017-07-05T01:28:46+07:00");
-                        stockTrans1.setStockTransStatusName("hang moi");
-                        stockTrans1.setStockTransStatus(StockTransStatus.TRANS_NOTED);
-                        stockTranses.add(stockTrans);
-                        stockTranses.add(stockTrans1);
-
-                        object.setStockTranses(stockTranses);
 
                         if (object != null && object.getStockTranses() != null) {
+                            for (StockTrans stockTrans : object.getStockTranses()) {
+                                setActionName3Step(stockTrans);
+                            }
                             setDataSearch(object.getStockTranses());
                         } else {
                             setDataSearch(new ArrayList<StockTrans>());
@@ -111,20 +105,57 @@ public class StockDeliverActivity extends BaseListOrderActivity {
                 });
     }
 
-    @Override
-    public void onItemStockTransClick(StockTrans stockTrans) {
-        Intent intent;
+    private void setActionName3Step(StockTrans stockTrans) {
         switch ((int) stockTrans.getStockTransStatus()) {
-            case (int) StockTransStatus.TRANS_DONE:
-                intent = new Intent(this, CreateCmdFromStaffActivity.class);
             case (int) StockTransStatus.TRANS_NON_NOTE:
-                intent = new Intent(this, CreateNoteFromStaffActivity.class);
+                if (funtions.contains(RoleWareHouse.LAP_PHIEU_XUAT)) {
+                    stockTrans.setActionName(
+                            getString(R.string.commmon_warehouse_action_create_note));
+                }
+
                 break;
             case (int) StockTransStatus.TRANS_NOTED:
-                intent = new Intent(this, CreateImportStockFromStaffActivity.class);
+                if (funtions.contains(RoleWareHouse.XUAT_KHO)) {
+                    stockTrans.setActionName(getString(R.string.common_label_export));
+                }
                 break;
             default:
-                return;
+                stockTrans.setActionName(getString(R.string.nv_trahangcaptren_action_detail));
+                break;
+        }
+    }
+
+    @Override
+    public void onItemStockTransClick(StockTrans stockTrans) {
+        Intent intent = null;
+        switch ((int) stockTrans.getStockTransStatus()) {
+            case (int) StockTransStatus.TRANS_NON_NOTE:
+                if (funtions.contains(RoleWareHouse.LAP_PHIEU_XUAT)) {
+                    intent = new Intent(this, CreateNoteFromStaffActivity.class);
+                }
+
+                break;
+            case (int) StockTransStatus.TRANS_NOTED:
+                if (funtions.contains(RoleWareHouse.XUAT_KHO)) {
+                    intent = new Intent(this, CreateImportStockFromStaffActivity.class);
+                }
+                break;
+            default:
+                ExportSuccessDialog exportSuccessDialog =
+                        ExportSuccessDialog.newInstance(stockTrans, String.format(
+                                getString(R.string.warehouse_label_export_success_code),
+                                String.valueOf(stockTrans.getStockTransId())),
+                                String.format(getString(R.string.warehouse_label_receive),
+                                        String.valueOf(stockTrans.getToOwnerId())));
+                exportSuccessDialog.setOnDialogDismissListener(
+                        new ExportSuccessDialog.OnDialogDismissListener() {
+
+                            @Override
+                            public void onDialogDissmis() {
+                            }
+                        });
+                exportSuccessDialog.show(getSupportFragmentManager(), "");
+                break;
         }
         Bundle bundle = new Bundle();
         bundle.putParcelable(Constants.BundleConstant.STOCK_TRANS, stockTrans);
@@ -144,11 +175,11 @@ public class StockDeliverActivity extends BaseListOrderActivity {
 
     @Override
     public boolean isShowAddButton() {
-        List<String> functionCode = mUserRepository.getFunctionsCodes();
-        if (functionCode.contains(RoleWareHouse.LAP_LENH_XUAT)) {
+        funtions = mUserRepository.getFunctionsCodes();
+        if (funtions.contains(RoleWareHouse.LAP_LENH_XUAT)) {
             return true;
         }
-        return true;
+        return false;
     }
 
     private long loadShopId() {
@@ -157,6 +188,7 @@ public class StockDeliverActivity extends BaseListOrderActivity {
 
     @Override
     public void init() {
+        funtions = mUserRepository.getFunctionsCodes();
         setStatus(Arrays.asList(getResources().getStringArray(R.array.xuatkhocd_status)));
         String shopName = mUserRepository.getUserInfo().getShop().getShopName();
         setWareHouseData(Arrays.asList(String.valueOf(shopName)));
@@ -172,22 +204,4 @@ public class StockDeliverActivity extends BaseListOrderActivity {
         Intent intent = new Intent(StockDeliverActivity.this, CreateCmdExpShopActivity.class);
         startActivity(intent);
     }
-
-
-
-     /*@Override
-    public void openCreateCommand() {
-//        Intent intent = new Intent(this, BaseCreateCommandNoteActivity.class);
-//        StockTrans stockTrans = new StockTrans();
-//        stockTrans.setStockTransId(1237);
-//        stockTrans.setToOwnerId(1232);
-//        stockTrans.setCreateDatetime("2017-01-02");
-//        stockTrans.setStockTransStatusName("hang moi");
-//        Bundle bundle = new Bundle();
-//        bundle.putParcelable(Constants.BundleConstant.STOCK_TRANS, stockTrans);
-//        intent.putExtras(bundle);
-//        intent.putExtra(BaseCreateCommandNoteActivity.NAME_SCREEN, getString(R.string.xuatkhocapduoi_title_create_command));
-//        intent.putExtra(BaseCreateCommandNoteActivity.FUNCTION, BaseCreateCommandNoteActivity.ACTION_CREATE_CMD);
-//        startActivity(intent);
-    }*/
 }

@@ -238,9 +238,6 @@
             android:name=".screen.stockdeliver.StockDeliverActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".screen.stockdeliver.TestStockDeliveryActivity"
-            android:screenOrientation="portrait"/>
-        <activity
             android:name=".screen.Test"
             android:screenOrientation="portrait"/>
         <activity
@@ -315,13 +312,16 @@
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".screen.importhighstore.createimp.CreateCmdFromStaffActivity"
+            android:name=".screen.importhighstore.createimp.ImpHighStoreCreateCmdFromStaffActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".screen.importhighstore.createimp.CreateNoteFromStaffActivity"
+            android:name=".screen.importhighstore.createimp.ImpHighStoreCreateNoteFromStaffActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".screen.importhighstore.createimp.CreateImportStockFromStaffActivity"
+            android:name=".screen.importhighstore.createimp.ImpHighStoreCreateImportStockFromStaffActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".screen.importhighstore.CreateImpCmdHighStoreActivity"
             android:screenOrientation="portrait"/>
 
         <!--End Nhap kho cap tren-->

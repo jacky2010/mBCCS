@@ -6,7 +6,6 @@ import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.listkho.BaseListOrderActivity;
 import com.viettel.mbccs.constance.OwnerType;
 import com.viettel.mbccs.constance.RoleWareHouse;
-import com.viettel.mbccs.constance.STEP_WAREHOUSE;
 import com.viettel.mbccs.constance.StockTransStatus;
 import com.viettel.mbccs.constance.StockTransType;
 import com.viettel.mbccs.constance.WsCode;
@@ -18,9 +17,9 @@ import com.viettel.mbccs.data.source.remote.request.GetListOwnerCodeRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetListExpCmdResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListOwneCodeReponse;
-import com.viettel.mbccs.screen.importhighstore.createimp.CreateCmdFromStaffActivity;
-import com.viettel.mbccs.screen.importhighstore.createimp.CreateImportStockFromStaffActivity;
-import com.viettel.mbccs.screen.importhighstore.createimp.CreateNoteFromStaffActivity;
+import com.viettel.mbccs.screen.importhighstore.createimp.ImpHighStoreCreateCmdFromStaffActivity;
+import com.viettel.mbccs.screen.importhighstore.createimp.ImpHighStoreCreateImportStockFromStaffActivity;
+import com.viettel.mbccs.screen.importhighstore.createimp.ImpHighStoreCreateNoteFromStaffActivity;
 import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import com.viettel.mbccs.variable.Constants;
@@ -55,7 +54,7 @@ public class ImpHighStoreActivity extends BaseListOrderActivity {
         GetListExpCmdRequest mRequest = new GetListExpCmdRequest();
         showLoading();
 
-        setStockTran3StepRequest(mRequest);
+        setStockTran2StepRequest(mRequest);
         mRequest.setStartDate(getFromDateString());
         mRequest.setEndDate(getToDateString());
         mRequest.setFromOwnerId(mOwnerCodes.get(getPositionWareHouser()).getStaffId());
@@ -72,10 +71,7 @@ public class ImpHighStoreActivity extends BaseListOrderActivity {
 
                             for (StockTrans stockTrans : object.getStockTranses()) {
                                 //check for 3 step
-                                if (Constants.FuntionConstant.ENVIROMENT_STEP
-                                        == STEP_WAREHOUSE.STEP_3) {
-                                    setActionName3Step(stockTrans);
-                                }
+                                setActionName2Step(stockTrans);
                             }
 
                             setDataSearch(object.getStockTranses());
@@ -98,48 +94,39 @@ public class ImpHighStoreActivity extends BaseListOrderActivity {
                 });
     }
 
-    private void setStockTran3StepRequest(GetListExpCmdRequest mRequest) {
+    private void setStockTran2StepRequest(GetListExpCmdRequest mRequest) {
         if (getPositionStatus() == 0) {
             mRequest.setStockTransStatus(StockTransStatus.TRANS_DONE);
             mRequest.setStockTransType(StockTransType.TRANS_EXPORT);
         }
 
         if (getPositionStatus() == 1) {
-            mRequest.setStockTransStatus(StockTransStatus.TRANS_NON_NOTE);
-            mRequest.setStockTransType(StockTransType.TRANS_IMPORT);
-        }
-
-        if (getPositionStatus() == 2) {
             mRequest.setStockTransStatus(StockTransStatus.TRANS_NOTED);
             mRequest.setStockTransType(StockTransType.TRANS_IMPORT);
         }
 
-        if (getPositionStatus() == 3) {
+        if (getPositionStatus() == 2) {
             mRequest.setStockTransStatus(StockTransStatus.TRANS_DONE);
             mRequest.setStockTransType(StockTransType.TRANS_IMPORT);
         }
 
-        if (getPositionStatus() == 4) {
+        if (getPositionStatus() == 3) {
             mRequest.setStockTransStatus(StockTransStatus.TRANS_CANCEL);
             mRequest.setStockTransType(StockTransType.TRANS_IMPORT);
         }
     }
 
-    private void setActionName3Step(StockTrans stockTrans) {
+    private void setActionName2Step(StockTrans stockTrans) {
+        stockTrans.setActionName(getString(R.string.nv_trahangcaptren_action_detail));
+
         switch ((int) stockTrans.getStockTransStatus()) {
             case (int) StockTransStatus.TRANS_DONE:
-                if (funtions.contains(RoleWareHouse.LAP_LENH_NHAP)
+                if (funtions.contains(RoleWareHouse.LAP_PHIEU_NHAP)
                         && stockTrans.getActionType() == StockTransType.TRANS_EXPORT) {
-                    stockTrans.setActionName(
-                            getString(R.string.commmon_warehouse_action_create_cmd));
-                }
-
-                break;
-            case (int) StockTransStatus.TRANS_NON_NOTE:
-                if (funtions.contains(RoleWareHouse.LAP_PHIEU_NHAP)) {
                     stockTrans.setActionName(
                             getString(R.string.commmon_warehouse_action_create_note));
                 }
+
                 break;
             case (int) StockTransStatus.TRANS_NOTED:
                 if (funtions.contains(RoleWareHouse.NHAP_KHO)) {
@@ -149,48 +136,40 @@ public class ImpHighStoreActivity extends BaseListOrderActivity {
                 break;
             default:
                 stockTrans.setActionName(getString(R.string.nv_trahangcaptren_action_detail));
-                break;
         }
     }
 
     private void itemActionListener(StockTrans stockTrans, Intent intent, Bundle bundle) {
+        stockTrans.setActionName(getString(R.string.nv_trahangcaptren_action_detail));
         switch ((int) stockTrans.getStockTransStatus()) {
             case (int) StockTransStatus.TRANS_DONE:
-                if (funtions.contains(RoleWareHouse.LAP_LENH_NHAP)
+                if (funtions.contains(RoleWareHouse.LAP_PHIEU_NHAP)
                         && stockTrans.getActionType() == StockTransType.TRANS_EXPORT) {
-                    intent = new Intent(this, CreateCmdFromStaffActivity.class);
+                    intent = new Intent(this, ImpHighStoreCreateNoteFromStaffActivity.class);
                     bundle.putBoolean(Constants.BundleConstant.STOCK_VIEW_ONLY, false);
                 }
 
                 break;
-            case (int) StockTransStatus.TRANS_NON_NOTE:
-                if (funtions.contains(RoleWareHouse.LAP_PHIEU_NHAP)) {
-                    intent = new Intent(this, CreateNoteFromStaffActivity.class);
-                    bundle.putBoolean(Constants.BundleConstant.STOCK_VIEW_ONLY, false);
-                }
-                break;
             case (int) StockTransStatus.TRANS_NOTED:
                 if (funtions.contains(RoleWareHouse.NHAP_KHO)) {
-                    intent = new Intent(this, CreateImportStockFromStaffActivity.class);
+                    intent = new Intent(this, ImpHighStoreCreateImportStockFromStaffActivity.class);
                     bundle.putBoolean(Constants.BundleConstant.STOCK_VIEW_ONLY, false);
                 }
                 break;
             default:
-                stockTrans.setActionName(getString(R.string.nv_trahangcaptren_action_detail));
+                bundle.putBoolean(Constants.BundleConstant.STOCK_VIEW_ONLY, false);
+                break;
         }
     }
 
     @Override
     public void onItemStockTransClick(StockTrans stockTrans) {
 
-        Intent intent = new Intent(this, CreateCmdFromStaffActivity.class);
+        Intent intent = new Intent(this, ImpHighStoreCreateCmdFromStaffActivity.class);
         Bundle bundle = new Bundle();
         bundle.putParcelable(Constants.BundleConstant.STOCK_TRANS, stockTrans);
         bundle.putBoolean(Constants.BundleConstant.STOCK_VIEW_ONLY, true);
-        if (Constants.FuntionConstant.ENVIROMENT_STEP == STEP_WAREHOUSE.STEP_3) {
-            itemActionListener(stockTrans, intent, bundle);
-        }
-
+        itemActionListener(stockTrans, intent, bundle);
         intent.putExtras(bundle);
         startActivityForResult(intent, CODE);
     }
@@ -210,16 +189,12 @@ public class ImpHighStoreActivity extends BaseListOrderActivity {
 
     @Override
     public String getToolbarTitle() {
-        return getString(R.string.nhapkhonhanvien_list_title);
+        return getString(R.string.import_high_store_title);
     }
 
     @Override
     public boolean isShowAddButton() {
-        List<String> functionCode = mUserRepository.getFunctionsCodes();
-        if (functionCode.contains(RoleWareHouse.LAP_LENH_NHAP)) {
-            return true;
-        }
-        return true;
+        return false;
     }
 
     private void loadStaffList() {
@@ -258,7 +233,7 @@ public class ImpHighStoreActivity extends BaseListOrderActivity {
     @Override
     public void init() {
         setStatus(Arrays.asList(
-                getResources().getStringArray(R.array.import_from_staff_3_step_status)));
+                getResources().getStringArray(R.array.import_from_staff_2_step_status)));
         loadStaffList();
         funtions = mUserRepository.getFunctionsCodes();
     }
