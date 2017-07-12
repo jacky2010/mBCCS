@@ -17,6 +17,7 @@ public class OrderSuccessPresenter implements OrderSuccessContract.Presenter {
     private OrderSuccessContract.ViewModel mViewModel;
     private OrderSuccessAdapter mAdapter;
     private ArrayList<StockTotal> mList;
+    private ArrayList<StockTotal> filerList = new ArrayList<>();
     public ObservableField<String> saleOrderId;
     public ObservableField<String> saleOrderReceive;
 
@@ -43,11 +44,17 @@ public class OrderSuccessPresenter implements OrderSuccessContract.Presenter {
     }
 
     private void init() {
+        for (StockTotal stockTotal : mList) {
+            if (stockTotal.getCountChoice() > 0) {
+                filerList.add(stockTotal);
+            }
+        }
+
         titleCode = new ObservableField<>();
         titleStaffName = new ObservableField<>();
         saleOrderId = new ObservableField<>();
         saleOrderReceive = new ObservableField<>();
-        mAdapter = new OrderSuccessAdapter(mContext, mList);
+        mAdapter = new OrderSuccessAdapter(mContext, filerList);
     }
 
     public void closeClick() {

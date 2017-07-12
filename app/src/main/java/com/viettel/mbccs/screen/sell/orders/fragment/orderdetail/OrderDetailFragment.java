@@ -13,12 +13,14 @@ import android.widget.Toast;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseFragment;
 import com.viettel.mbccs.constance.OrderStatus;
+import com.viettel.mbccs.constance.OwnerType;
 import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.SaleOrders;
 import com.viettel.mbccs.data.model.SaleOrdersDetail;
 import com.viettel.mbccs.data.model.SaleTrans;
 import com.viettel.mbccs.data.model.SerialBO;
 import com.viettel.mbccs.data.model.SerialPickerModel;
+import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetOrderInfoResponse;
 import com.viettel.mbccs.databinding.FragmentOrderDetailBinding;
@@ -126,8 +128,10 @@ public class OrderDetailFragment extends BaseFragment
         serialPickerModel.setStockModelId(saleOrdersDetail.getStockModelId());
         serialPickerModel.setStockMoldeName(saleOrdersDetail.getStockModelName());
         serialPickerModel.setQuantity(saleOrdersDetail.getQuantity());
+        serialPickerModel.setOwnwerType(OwnerType.STAFF);
+        serialPickerModel.setOwnerId(
+                UserRepository.getInstance().getUserInfo().getStaffInfo().getStaffId());
         serialPickerModel.setLstSerial(saleOrdersDetail.getLstSerial());
-
         Bundle bundle = new Bundle();
         bundle.putSerializable(Constants.BundleConstant.SERIAL_PICKER_MODEL, serialPickerModel);
         intent.putExtras(bundle);

@@ -10,7 +10,6 @@ import com.viettel.mbccs.constance.STEP_WAREHOUSE;
 import com.viettel.mbccs.constance.StockTransStatus;
 import com.viettel.mbccs.constance.StockTransType;
 import com.viettel.mbccs.constance.WsCode;
-import com.viettel.mbccs.data.model.Function;
 import com.viettel.mbccs.data.model.OwnerCode;
 import com.viettel.mbccs.data.model.StockTrans;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
@@ -20,14 +19,14 @@ import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetListExpCmdResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListOwneCodeReponse;
 import com.viettel.mbccs.screen.importwarehousefromstaff.importnote.CreateCmdFromStaffActivity;
-import com.viettel.mbccs.screen.importwarehousefromstaff.importnote.CreateImportStockFromStaffActivity;
+import com.viettel.mbccs.screen.importwarehousefromstaff.importnote
+        .CreateImportStockFromStaffActivity;
 import com.viettel.mbccs.screen.importwarehousefromstaff.importnote.CreateNoteFromStaffActivity;
 import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import com.viettel.mbccs.variable.Constants;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.FormatFlagsConversionMismatchException;
 import java.util.List;
 
 /**
@@ -40,6 +39,7 @@ public class ListNhapKhoTuNhanVienActivity extends BaseListOrderActivity {
     List<String> staffListName = new ArrayList<>();
     List<OwnerCode> mOwnerCodes = new ArrayList<>();
     List<String> funtions = new ArrayList<>();
+
     @Override
     public void onItemClicked(Object object) {
     }
@@ -55,7 +55,7 @@ public class ListNhapKhoTuNhanVienActivity extends BaseListOrderActivity {
         DataRequest<GetListExpCmdRequest> mDataRequest = new DataRequest<>();
         GetListExpCmdRequest mRequest = new GetListExpCmdRequest();
         showLoading();
-        if (Constants.FuntionConstant.ENVIROMENT_STEP == 2) {
+        if (Constants.FuntionConstant.ENVIROMENT_STEP == STEP_WAREHOUSE.STEP_2) {
             if (getPositionStatus() == 0) {
                 mRequest.setStockTransStatus(StockTransStatus.TRANS_DONE);
                 mRequest.setStockTransType(StockTransType.TRANS_EXPORT);

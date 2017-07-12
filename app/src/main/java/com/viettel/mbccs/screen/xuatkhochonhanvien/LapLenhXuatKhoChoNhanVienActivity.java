@@ -56,7 +56,7 @@ public class LapLenhXuatKhoChoNhanVienActivity extends BaseCreateCommandNoteActi
 
     @Override
     public int getActionType() {
-        return BaseCreateCommandNoteActivity.ACTION_CREATE_CMD;
+        return BaseCreateCommandNoteActivity.ACTION_CREATE_NOTE;
     }
 
     @Override
@@ -66,7 +66,12 @@ public class LapLenhXuatKhoChoNhanVienActivity extends BaseCreateCommandNoteActi
 
     @Override
     public long getOwnerIdStock() {
-        return mUserRepository.getUserInfo().getStaffInfo().getStaffId();
+        return mUserRepository.getUserInfo().getShop().getShopId();
+    }
+
+    @Override
+    public long getOwnerTypeStock() {
+        return OwnerType.SHOP;
     }
 
     @Override

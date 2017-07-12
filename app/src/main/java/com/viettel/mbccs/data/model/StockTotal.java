@@ -69,6 +69,9 @@ public class StockTotal implements Parcelable {
     @SerializedName("pathImage2")
     private String pathImage2;
 
+    @SerializedName("checkSerial")
+    @Expose
+    private double checkSerial;
 
     @Expose
     @SerializedName("pathImage3")
@@ -284,6 +287,14 @@ public class StockTotal implements Parcelable {
         this.pathImage2 = pathImage2;
     }
 
+    public double getCheckSerial() {
+        return checkSerial;
+    }
+
+    public void setCheckSerial(double checkSerial) {
+        this.checkSerial = checkSerial;
+    }
+
     @Override
     public boolean equals(Object obj) {
         return (this.stockModelId == ((StockTotal) obj).getStockModelId()
@@ -315,7 +326,11 @@ public class StockTotal implements Parcelable {
         dest.writeFloat(this.price);
         dest.writeString(this.pathImage1);
         dest.writeString(this.pathImage2);
+        dest.writeDouble(this.checkSerial);
         dest.writeString(this.pathImage3);
+        dest.writeParcelable(this.mStockSerial, flags);
+        dest.writeStringList(this.mSerials);
+        dest.writeTypedList(this.mSerialBlocks);
         dest.writeInt(this.countChoice);
     }
 
@@ -334,7 +349,11 @@ public class StockTotal implements Parcelable {
         this.price = in.readFloat();
         this.pathImage1 = in.readString();
         this.pathImage2 = in.readString();
+        this.checkSerial = in.readDouble();
         this.pathImage3 = in.readString();
+        this.mStockSerial = in.readParcelable(StockSerial.class.getClassLoader());
+        this.mSerials = in.createStringArrayList();
+        this.mSerialBlocks = in.createTypedArrayList(SerialBO.CREATOR);
         this.countChoice = in.readInt();
     }
 

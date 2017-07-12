@@ -259,7 +259,7 @@ public class WsCode {
     // 5.10.3.4 - 5.12.3 - 5.14.3
     public final static String CreateExpNote = "WS_createExpNote";
 
-    public final static String CreateExpNoteNoCMD = "WS_createExpNoteNoCMD";
+    public final static String CreateExpNoteNoCMD = "WS_createExpNoteNotCMD";
 
     // 5.10.3.5 - 5.12.3
     public final static String CreateExpStock = "WS_createExpStock";

@@ -39,6 +39,8 @@ public abstract class BaseCreateCommandNoteActivity<T> extends
 
     public abstract long getOwnerIdStock();
 
+    public abstract long getOwnerTypeStock();
+
     public abstract long getFromOwnerId();
 
     public abstract long getFromOwnerType();
@@ -69,7 +71,7 @@ public abstract class BaseCreateCommandNoteActivity<T> extends
     }
 
     @Override
-    public long getOwnerStockList() {
+    public long getOwnerStockIdCreate() {
         return getOwnerIdStock();
     }
 
@@ -91,6 +93,11 @@ public abstract class BaseCreateCommandNoteActivity<T> extends
     @Override
     public long getToOwnerTypeCreate() {
         return getToOwnerType();
+    }
+
+    @Override
+    public long getOwnerStockTypeCreate() {
+        return getOwnerTypeStock();
     }
 
     @Override

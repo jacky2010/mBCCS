@@ -4,16 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
+import com.viettel.mbccs.constance.OwnerType;
 import com.viettel.mbccs.data.model.ChannelInfo;
 import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.model.SaleProgram;
 import com.viettel.mbccs.data.model.SerialPickerModel;
 import com.viettel.mbccs.data.model.StockSerial;
 import com.viettel.mbccs.data.model.TelecomService;
+import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.databinding.ActivitySaleChannelBinding;
 import com.viettel.mbccs.screen.goodsconfirm.SaleReviewActivity;
 import com.viettel.mbccs.screen.sell.channel.channelpicker.ChannelPickerActivity;
-import com.viettel.mbccs.screen.sell.retail.SaleRetailContract;
 import com.viettel.mbccs.screen.sell.retail.sellprogrampicker.SaleProgramPickerActivity;
 import com.viettel.mbccs.screen.serialpicker.SerialPickerActivity;
 import com.viettel.mbccs.utils.Common;
@@ -56,7 +57,6 @@ public class SaleChannelActivity
         });
         mDrawer.open();
     }
-
 
     @Override
     public void showLoading() {
@@ -118,6 +118,9 @@ public class SaleChannelActivity
         serialPickerModel.setStockMoldeName(stockItem.getStockModelName());
         serialPickerModel.setQuantity(stockItem.getChoiceCount());
         serialPickerModel.setLstSerial(stockItem.getSerialBlocks());
+        serialPickerModel.setOwnwerType(OwnerType.STAFF);
+        serialPickerModel.setOwnerId(
+                UserRepository.getInstance().getUserInfo().getStaffInfo().getStaffId());
         Bundle bundle = new Bundle();
         bundle.putSerializable(Constants.BundleConstant.SERIAL_PICKER_MODEL, serialPickerModel);
         intent.putExtras(bundle);
