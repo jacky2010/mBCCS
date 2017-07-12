@@ -232,7 +232,8 @@ public class ListNhapKhoTuNhanVienActivity extends BaseListOrderActivity {
                     }
                     break;
                 default:
-                    stockTrans.setActionName(getString(R.string.nv_trahangcaptren_action_detail));
+                    bundle.putBoolean(Constants.BundleConstant.STOCK_VIEW_ONLY, true);
+                    break;
             }
         }
 

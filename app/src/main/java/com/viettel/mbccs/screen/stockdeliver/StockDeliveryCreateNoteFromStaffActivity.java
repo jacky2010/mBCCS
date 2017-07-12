@@ -1,9 +1,9 @@
-package com.viettel.mbccs.screen.importhighstore.createimp;
+package com.viettel.mbccs.screen.stockdeliver;
 
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.screen.warehousecommon.importcmdnotestock.BaseCreateImportWareHouseActivity;
 
-public class CreateNoteFromStaffActivity extends BaseCreateImportWareHouseActivity {
+public class StockDeliveryCreateNoteFromStaffActivity extends BaseCreateImportWareHouseActivity {
 
     @Override
     protected String getTitleToolbar() {

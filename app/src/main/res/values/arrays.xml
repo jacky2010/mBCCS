@@ -49,11 +49,13 @@
     </string-array>
 
     <string-array name="xuatkhocd_status">
-        <item>Đã lập lênh</item>
-        <item>Đã lập phiếu</item>
-        <item>Đã xuất kho</item>
-        <item>Đã hủy</item>
-        <item>Tất cả</item>
+        <item>Chưa lập phiếu</item> <!--Not note type exp-->
+        <item>Đã lập phiếu</item> <!--Noted-->
+        <item>Đã xuất</item> <!--tran done-->
+        <item>Phiếu xuất đã lập lệnh nhập</item> <!--implement-->
+        <item>Đã hủy</item> <!--cancel-->
+        <item>Đã bị từ chối</item> <!--reject-->
+        <item>Tất cả</item> <!--empty-->
     </string-array>
     <string-array name="import_from_staff_3_step_status">
         <item>Chưa lập lệnh</item>

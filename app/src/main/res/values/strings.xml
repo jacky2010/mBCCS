@@ -1129,6 +1129,7 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     
     <!--Import High Store-->
     <string name="import_high_store_note_detail">Lệnh phiếu nhập kho cấp trên</string>
+    <string name="import_high_store_title">Nhập kho cấp trên</string>
 
     <!-- Download Image -->
     <string name="download_image_text">Download Image : %1$d</string>
@@ -1215,6 +1216,7 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="common_export_msg_create_note">Bạn có chắc chắn muốn lập phiếu xuất?</string>
 
     <string name="export_staff_label_create_cmd_staff">Lập lệnh xuất kho cho nhân viên</string>
+    <string name="import_staff_label_create_cmd_staff">Lập lệnh nhập kho cho nhân viên</string>
 
 
 </resources>
