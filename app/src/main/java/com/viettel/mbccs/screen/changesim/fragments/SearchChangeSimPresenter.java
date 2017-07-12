@@ -205,6 +205,7 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
             baseRequest.setWsCode(WsCode.GetApDomainByType);
             GetApDomainByTypeRequest request = new GetApDomainByTypeRequest();
             request.setType(ApDomainByType.Type.LOAI_GIAY_TO);
+            request.setSubType(ApDomainByType.SubType.POSTPAID);
             baseRequest.setWsRequest(request);
 
             Subscription subscription =
