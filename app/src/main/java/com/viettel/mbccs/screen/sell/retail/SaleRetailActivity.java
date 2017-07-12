@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
+import com.viettel.mbccs.constance.OwnerType;
 import com.viettel.mbccs.data.model.ModelSale;
 import com.viettel.mbccs.data.model.SaleProgram;
 import com.viettel.mbccs.data.model.SerialPickerModel;
 import com.viettel.mbccs.data.model.StockSerial;
 import com.viettel.mbccs.data.model.TelecomService;
+import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.databinding.ActivitySellRetailBinding;
 import com.viettel.mbccs.screen.goodsconfirm.SaleReviewActivity;
 import com.viettel.mbccs.screen.sell.retail.sellprogrampicker.SaleProgramPickerActivity;
@@ -120,6 +122,9 @@ public class SaleRetailActivity
         serialPickerModel.setStockModelId(stockItem.getStockModelId());
         serialPickerModel.setStockMoldeName(stockItem.getStockModelName());
         serialPickerModel.setQuantity(stockItem.getChoiceCount());
+        serialPickerModel.setOwnwerType(OwnerType.STAFF);
+        serialPickerModel.setOwnerId(
+                UserRepository.getInstance().getUserInfo().getStaffInfo().getStaffId());
         serialPickerModel.setLstSerial(stockItem.getSerialBlocks());
         Bundle bundle = new Bundle();
         bundle.putSerializable(Constants.BundleConstant.SERIAL_PICKER_MODEL, serialPickerModel);

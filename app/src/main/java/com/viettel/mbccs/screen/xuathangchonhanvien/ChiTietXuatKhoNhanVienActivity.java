@@ -27,6 +27,13 @@ public class ChiTietXuatKhoNhanVienActivity extends BaseExportWareHouseActivity 
 
     @Override
     public void onExportSuccess() {
+        finish();
+        setResult(RESULT_OK);
+    }
 
+    @Override
+    public void rejectFinish() {
+        finish();
+        setResult(RESULT_OK);
     }
 }

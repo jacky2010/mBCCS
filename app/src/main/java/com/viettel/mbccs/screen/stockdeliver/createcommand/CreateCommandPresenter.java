@@ -16,8 +16,6 @@ import com.viettel.mbccs.constance.SaleTranType;
 import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.Apis;
 import com.viettel.mbccs.data.model.EmptyObject;
-import com.viettel.mbccs.data.model.SerialBO;
-import com.viettel.mbccs.data.model.StockSerial;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.model.StockTrans;
 import com.viettel.mbccs.data.model.StockTransDetail;
@@ -30,17 +28,15 @@ import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.DestroyStockTransRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListStockModelRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListStockTransDetailRequest;
-import com.viettel.mbccs.data.source.remote.request.KPPOrderRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseCreateCmdNoteResponse;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
-import com.viettel.mbccs.data.source.remote.response.CreateOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListStockModelResponse;
 import com.viettel.mbccs.data.source.remote.response.ListStockTransDetailsReponse;
 import com.viettel.mbccs.screen.nhanvientrahang.createNote.StockLapPhieuAdapter;
 import com.viettel.mbccs.screen.warehousecommon.exportwarehouse.StockTransDetailAdapter;
-import com.viettel.mbccs.screen.warehousecommon.importcmdnotestock.BaseCreateImportWareHouseActivity;
+import com.viettel.mbccs.screen.warehousecommon.importcmdnotestock
+        .BaseCreateImportWareHouseActivity;
 import com.viettel.mbccs.utils.ActivityUtils;
-import com.viettel.mbccs.utils.Common;
 import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.SpinnerAdapter;
 import com.viettel.mbccs.utils.StockTotalCompare;
@@ -69,15 +65,15 @@ public class CreateCommandPresenter<T> implements CreateCommandContract.Presente
     public ObservableInt countProducts;
     private StockTrans mStockTrans;
     private DataRequest mDataRequest;
-    public ObservableField<SpinnerAdapter<String>> adapterProductState = new ObservableField<>();
     public List<T> mListReceiveWareHouse = new ArrayList<>();
-    public SpinnerAdapter<T> mSpinnerAdapterReceiveHouser;
-    public SpinnerAdapter mSpinnerAdapterStatus;
+    public SpinnerAdapter<T> spinnerReceiveWareHouse;
+    public SpinnerAdapter spinnerAdapterStatus;
     protected List<String> listProductState = new ArrayList<>();
     private int positionReceiveWareHouse = 0;
     private int positionStatus = 0;
     public ObservableField<Boolean> showReject = new ObservableField<>(false);
     public ObservableField<Boolean> showClose = new ObservableField<>(false);
+    public ObservableField<String> titleButtonCreate = new ObservableField<>();
 
     public CreateCommandPresenter(Context context, CreateCommandContract.ViewModel viewModel,
             StockTrans stockTrans) {
@@ -126,6 +122,12 @@ public class CreateCommandPresenter<T> implements CreateCommandContract.Presente
 
         mStockTransDetailAdapter = new StockTransDetailAdapter(mContext, mStockTransDetails);
 
+        if (mViewModel.getAction() == BaseCreateCommandNoteActivity.ACTION_CREATE_CMD) {
+            titleButtonCreate.set(mContext.getString(R.string.common_export_label_create_cmd));
+        } else {
+            titleButtonCreate.set(mContext.getString(R.string.common_export_label_create_note));
+        }
+
         //define showbutton
         if ((mViewModel.getStep() == BaseCreateCommandNoteActivity.STEP_3
                 && mViewModel.getAction() == BaseCreateCommandNoteActivity.ACTION_CREATE_CMD) || (
@@ -162,11 +164,11 @@ public class CreateCommandPresenter<T> implements CreateCommandContract.Presente
     private void createSpinnerAdapter() {
         listProductState =
                 Arrays.asList(mContext.getResources().getStringArray(R.array.stock_status));
-        mSpinnerAdapterStatus = new SpinnerAdapter(mContext, listProductState);
-        mSpinnerAdapterStatus.setOnItemSelectedListener(getStatusItemSelectedListener());
+        spinnerAdapterStatus = new SpinnerAdapter(mContext, listProductState);
+        spinnerAdapterStatus.setOnItemSelectedListener(getStatusItemSelectedListener());
 
-        mSpinnerAdapterReceiveHouser = new SpinnerAdapter<T>(mContext, mListReceiveWareHouse);
-        mSpinnerAdapterReceiveHouser.setOnItemSelectedListener(getWareHouseItemSelectedListener());
+        spinnerReceiveWareHouse = new SpinnerAdapter<T>(mContext, mListReceiveWareHouse);
+        spinnerReceiveWareHouse.setOnItemSelectedListener(getWareHouseItemSelectedListener());
     }
 
     protected AdapterView.OnItemSelectedListener getWareHouseItemSelectedListener() {
@@ -200,6 +202,9 @@ public class CreateCommandPresenter<T> implements CreateCommandContract.Presente
     }
 
     private void loadStockTransDetail() {
+        if (mStockTrans == null) {
+            return;
+        }
         mDataRequest = new DataRequest<>();
         mDataRequest.setWsCode(WsCode.GetListStockTransDetail);
         GetListStockTransDetailRequest request = new GetListStockTransDetailRequest();
@@ -322,7 +327,9 @@ public class CreateCommandPresenter<T> implements CreateCommandContract.Presente
         for (StockTotal stockTotal : mStockTotals) {
             CreateExpCmdRequest.CmdStock cmdStock = new CreateExpCmdRequest.CmdStock();
             cmdStock.cloneFromStockTotal(stockTotal);
-            cmdStocks.add(cmdStock);
+            if (cmdStock.getQuantity()>0){
+                cmdStocks.add(cmdStock);
+            }
         }
         request.setCmdStocks(cmdStocks);
         mDataRequest.setWsRequest(request);
@@ -363,7 +370,9 @@ public class CreateCommandPresenter<T> implements CreateCommandContract.Presente
         for (StockTotal stockTotal : mStockTotals) {
             CreateExpCmdRequest.CmdStock cmdStock = new CreateExpCmdRequest.CmdStock();
             cmdStock.cloneFromStockTotal(stockTotal);
-            cmdStocks.add(cmdStock);
+            if (cmdStock.getQuantity()>0){
+                cmdStocks.add(cmdStock);
+            }
         }
         request.setCmdStocks(cmdStocks);
         mDataRequest.setWsRequest(request);
@@ -467,10 +476,9 @@ public class CreateCommandPresenter<T> implements CreateCommandContract.Presente
         GetListStockModelRequest request = new GetListStockModelRequest();
         //request.setStockTypeId(StockTotalType.TYPE_NEW);
         //request.setStateId(StockTotalType.TYPE_NEW);
-        request.setOwnerType(mViewModel.getOwnerStockList());
+        request.setOwnerType(mViewModel.getOwnerStockTypeCreate());
         request.setSaleTransType(SaleTranType.SALE_RETAIL);
-        request.setOwnerId(
-                Long.valueOf(mUserRepository.getUserInfo().getStaffInfo().getStaffOwnerId()));
+        request.setOwnerId(mViewModel.getOwnerStockIdCreate());
         mGetListStockModelRequestBaseRequest.setWsRequest(request);
         Subscription subscription = mBanHangKhoTaiChinhRepository.getListStockModel(
                 mGetListStockModelRequestBaseRequest)
@@ -577,7 +585,7 @@ public class CreateCommandPresenter<T> implements CreateCommandContract.Presente
     public void setListReceiverWareHouser(List<T> listReceiverWareHouser) {
         mListReceiveWareHouse.clear();
         mListReceiveWareHouse.addAll(listReceiverWareHouser);
-        mSpinnerAdapterReceiveHouser.notifyDataSetChanged();
+        spinnerReceiveWareHouse.notifyDataSetChanged();
     }
 
     @Override

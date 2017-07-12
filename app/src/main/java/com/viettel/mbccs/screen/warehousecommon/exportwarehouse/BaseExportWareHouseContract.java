@@ -23,5 +23,7 @@ interface BaseExportWareHouseContract {
         void onSerialPicker(StockTransDetail stockTransDetail);
 
         void onCreateExpStockSuccess(StockTrans stockTrans);
+
+        void rejectFinish();
     }
 }

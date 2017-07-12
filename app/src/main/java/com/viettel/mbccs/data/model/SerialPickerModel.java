@@ -28,9 +28,29 @@ public class SerialPickerModel implements Serializable {
     @Expose
     private List<SerialBO> lstSerial;
 
+    private long ownerId;
+
+    private long ownwerType;
+
     public SerialPickerModel() {
         lstSerial = new ArrayList<>();
         stockMoldeName = "";
+    }
+
+    public long getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(long ownerId) {
+        this.ownerId = ownerId;
+    }
+
+    public long getOwnwerType() {
+        return ownwerType;
+    }
+
+    public void setOwnwerType(long ownwerType) {
+        this.ownwerType = ownwerType;
     }
 
     public long getStockModelId() {

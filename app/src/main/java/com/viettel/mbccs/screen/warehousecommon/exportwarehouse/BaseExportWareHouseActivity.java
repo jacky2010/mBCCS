@@ -13,7 +13,6 @@ import com.viettel.mbccs.screen.serialpicker.SerialPickerActivity;
 import com.viettel.mbccs.screen.warehousecommon.exportsuccess.ExportSuccessDialog;
 import com.viettel.mbccs.utils.GsonUtils;
 import com.viettel.mbccs.variable.Constants;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -54,6 +53,8 @@ public abstract class BaseExportWareHouseActivity extends
         serialPickerModel.setStockModelId(stockTransDetail.getStockModelId());
         serialPickerModel.setStockMoldeName(stockTransDetail.getStockModelName());
         serialPickerModel.setQuantity(stockTransDetail.getQuantity());
+        serialPickerModel.setOwnerId(mStockTrans.getFromOwnerId());
+        serialPickerModel.setOwnwerType(mStockTrans.getFromOwnerType());
         serialPickerModel.setLstSerial(stockTransDetail.getSerialBlocks());
         Bundle bundle = new Bundle();
         bundle.putSerializable(Constants.BundleConstant.SERIAL_PICKER_MODEL, serialPickerModel);

@@ -20,7 +20,6 @@ import com.viettel.mbccs.data.source.remote.request.GetListStockTransDetailReque
 import com.viettel.mbccs.data.source.remote.response.BaseCreateCmdNoteResponse;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.ListStockTransDetailsReponse;
-import com.viettel.mbccs.screen.warehousecommon.importcmdnotestock.BaseCreateImportWareHouseActivity;
 import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import com.viettel.mbccs.widget.CustomDialog;
@@ -168,7 +167,9 @@ public class BaseExportWareHousePresenter implements BaseExportWareHouseContract
         request.setStockTransId(mStockTrans.getStockTransId());
         List<StockSerial> stockSerials = new ArrayList<>();
         for (StockTransDetail stockTransDetail : mStockTransDetails) {
-            stockSerials.add(stockTransDetail.getStockSerial());
+            if (stockTransDetail.getCountChoice() > 0) {
+                stockSerials.add(stockTransDetail.getStockSerial());
+            }
         }
         request.setStockSerials(stockSerials);
         mCreateExpStockRequest.setWsRequest(request);
@@ -235,7 +236,7 @@ public class BaseExportWareHousePresenter implements BaseExportWareHouseContract
 
                     @Override
                     public void onSuccess(EmptyObject object) {
-                        ((BaseCreateImportWareHouseActivity) mContext).finish();
+                        mViewModel.rejectFinish();
                     }
 
                     @Override

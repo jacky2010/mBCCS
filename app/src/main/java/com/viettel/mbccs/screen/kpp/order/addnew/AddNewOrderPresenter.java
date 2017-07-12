@@ -8,6 +8,7 @@ import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.constance.SaleTranType;
 import com.viettel.mbccs.data.model.EmptyObject;
+import com.viettel.mbccs.data.model.StockModel;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.UserRepository;
@@ -152,14 +153,20 @@ public class AddNewOrderPresenter implements AddNewOrderContract.Presenter {
     }
 
     private void createOrder() {
-
         mViewModel.showLoading();
         mKPPOrderRequestBaseRequest = new DataRequest<>();
         mKPPOrderRequestBaseRequest.setWsCode(WsCode.CreateSaleOrders);
         final KPPOrderRequest request = new KPPOrderRequest();
         request.setStaffId(mUserRepository.getUserInfo().getStaffInfo().getStaffId());
         request.setChannelStaffId(mUserRepository.getUserInfo().getChannelInfo().getChannelId());
-        request.setListStockModel(Common.convertStockTotalsToStockModels(mStockTotals));
+        List<StockModel> stockModels = Common.convertStockTotalsToStockModels(mStockTotals);
+        List<StockModel> filteredStockModel = new ArrayList<>();
+        for (StockModel stockModel : stockModels) {
+            if (stockModel.getQuantity() > 0) {
+                filteredStockModel.add(stockModel);
+            }
+        }
+        request.setListStockModel(filteredStockModel);
         mKPPOrderRequestBaseRequest.setWsRequest(request);
         Subscription subscription =
                 mBanHangKhoTaiChinhRepository.createSaleOrders(mKPPOrderRequestBaseRequest)

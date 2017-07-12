@@ -36,7 +36,9 @@ public interface CreateCommandContract {
         int getPositionReceicerWareHouse();
 
 
-        long getOwnerStockList();
+        long getOwnerStockIdCreate();
+
+        long getOwnerStockTypeCreate();
 
         long getFromOwnerIdCreate();
 

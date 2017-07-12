@@ -73,8 +73,8 @@ public class SerialPickerPresenter
     private void loadSerial() {
         mViewModel.showLoading();
         GetSerialRequest mSerialRequest = new GetSerialRequest();
-        mSerialRequest.setOwnerType(2);
-        mSerialRequest.setOwnerId(mUserRepository.getUserInfo().getStaffInfo().getStaffId());//TODO
+        mSerialRequest.setOwnerType(mSerialPickerModel.getOwnwerType());
+        mSerialRequest.setOwnerId(mSerialPickerModel.getOwnerId());//TODO
         mSerialRequest.setStateId(SerialStateType.TYPE_NEW);
         mSerialRequest.setQuantity(mSerialPickerModel.getQuantity());
         mSerialRequest.setStockModelId(mSerialPickerModel.getStockModelId());
