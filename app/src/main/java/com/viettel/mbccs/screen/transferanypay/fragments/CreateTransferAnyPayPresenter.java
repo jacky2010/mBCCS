@@ -12,6 +12,7 @@ import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.DefaultPaymentAmount;
 import com.viettel.mbccs.data.model.KeyValue;
 import com.viettel.mbccs.data.source.TransferAnyPayRepository;
+import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.screen.common.adapter.PayAmountListAdapter;
 import com.viettel.mbccs.utils.ValidateUtils;
 import com.viettel.mbccs.variable.Constants;
@@ -52,7 +53,8 @@ public class CreateTransferAnyPayPresenter implements CreateTransferAnyPayContra
 
     private List<DefaultPaymentAmount> lstPayAmount;
 
-    private TransferAnyPayRepository repository;
+    private TransferAnyPayRepository transferRepository;
+    private UserRepository userRepository;
     private String selectedDefaultAmount;
 
     public CreateTransferAnyPayPresenter(Context context, final CreateTransferAnyPayContract.ViewModel viewModel) {
@@ -81,10 +83,11 @@ public class CreateTransferAnyPayPresenter implements CreateTransferAnyPayContra
 
     private void initData() {
         try {
-            repository = TransferAnyPayRepository.getInstance();
+            transferRepository = TransferAnyPayRepository.getInstance();
+            userRepository = UserRepository.getInstance();
 
             lstPayAmount = new ArrayList<>();
-            List<KeyValue> tempDefaultAmount = repository.getDefaultAmounts();
+            List<KeyValue> tempDefaultAmount = transferRepository.getDefaultAmounts();
 
             if (tempDefaultAmount.size() > MAX_DEFAULT_AMOUNT_ITEM - 1) {
                 for (int i = 0; i < MAX_DEFAULT_AMOUNT_ITEM; i++) {
@@ -194,12 +197,10 @@ public class CreateTransferAnyPayPresenter implements CreateTransferAnyPayContra
             args.putDouble(Constants.BundleConstant.DISCOUNT, DISCOUNT_AMOUNT);
             args.putDouble(Constants.BundleConstant.TOTAL, (total - DISCOUNT_AMOUNT));
             args.putString(Constants.BundleConstant.ISDN, isdn.get());
+            args.putLong(Constants.BundleConstant.CHANNEL, userRepository.getUserInfo().getChannelInfo().getChannelId());
+            args.putString(Constants.BundleConstant.FROM_ISDN, userRepository.getUserInfo().getStaffInfo().getTel());
+            args.putString(Constants.BundleConstant.TO_ISDN, isdn.get());
 
-            //TODO minhnx test
-            args.putString(Constants.BundleConstant.CHANNEL, "0");
-            args.putString(Constants.BundleConstant.FROM_CHANNEL, "0");
-            args.putString(Constants.BundleConstant.TO_CHANNEL, "0");
-            //minhnx test
 
             viewModel.goToDialogFragment(isRefill.get(), args);
 

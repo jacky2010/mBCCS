@@ -3,7 +3,6 @@ package com.viettel.mbccs.screen.hotnewscskpp.fragments;
 import android.content.Context;
 import android.databinding.ObservableField;
 
-import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.HotNewsCSKPPItem;
 import com.viettel.mbccs.data.source.HotNewsCSKPPRepository;
@@ -112,7 +111,7 @@ public class ViewHotNewsCSKPPPresenter implements ViewHotNewsCSKPPContract.Prese
                                 public void onError(BaseException error) {
 //                                    DialogUtils.showDialog(context, null, error.getMessage(),
 //                                            null);
-                                    DialogUtils.showDialog(context, null, context.getString(R.string.common_msg_error_general),
+                                    DialogUtils.showDialog(context, null, error.getMessage(),
                                             null);
                                 }
 

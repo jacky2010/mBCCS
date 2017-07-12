@@ -5,7 +5,6 @@ import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.view.View;
 
-import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.KPPFeedback;
 import com.viettel.mbccs.data.source.KPPFeedbackRepository;
@@ -132,7 +131,7 @@ public class SearchKPPFeedbackPresenter implements SearchKPPFeedbackContract.Pre
                                 public void onError(BaseException error) {
 //                                    DialogUtils.showDialog(context, null, error.getMessage(),
 //                                            null);
-                                    DialogUtils.showDialog(context, null, context.getString(R.string.common_msg_error_general),
+                                    DialogUtils.showDialog(context, null, error.getMessage(),
                                             null);
                                 }
 
