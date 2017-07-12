@@ -1,4 +1,4 @@
-package com.viettel.mbccs.screen.stockdeliver.createcommand;
+package com.viettel.mbccs.screen.warehousecommon.basecreatecmdnote;
 
 import android.app.Activity;
 import android.content.Context;
@@ -34,9 +34,9 @@ import com.viettel.mbccs.data.source.remote.response.GetListStockModelResponse;
 import com.viettel.mbccs.data.source.remote.response.ListStockTransDetailsReponse;
 import com.viettel.mbccs.screen.nhanvientrahang.createNote.StockLapPhieuAdapter;
 import com.viettel.mbccs.screen.warehousecommon.exportwarehouse.StockTransDetailAdapter;
-import com.viettel.mbccs.screen.warehousecommon.importcmdnotestock
-        .BaseCreateImportWareHouseActivity;
+import com.viettel.mbccs.screen.warehousecommon.importcmdnotestock.BaseCreateImportWareHouseActivity;
 import com.viettel.mbccs.utils.ActivityUtils;
+import com.viettel.mbccs.utils.DateUtils;
 import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.SpinnerAdapter;
 import com.viettel.mbccs.utils.StockTotalCompare;
@@ -74,6 +74,9 @@ public class CreateCommandPresenter<T> implements CreateCommandContract.Presente
     public ObservableField<Boolean> showReject = new ObservableField<>(false);
     public ObservableField<Boolean> showClose = new ObservableField<>(false);
     public ObservableField<String> titleButtonCreate = new ObservableField<>();
+    public ObservableField<String> cmdCode = new ObservableField<>();
+    public ObservableField<String> receiveWarehouse = new ObservableField<>();
+    public ObservableField<String> dayCreated = new ObservableField<>();
 
     public CreateCommandPresenter(Context context, CreateCommandContract.ViewModel viewModel,
             StockTrans stockTrans) {
@@ -93,12 +96,27 @@ public class CreateCommandPresenter<T> implements CreateCommandContract.Presente
 
         if (mViewModel.getAction() == BaseCreateCommandNoteActivity.ACTION_CREATE_CMD) {
             titleOrder.set(
-                    String.format(mContext.getString(R.string.xuatkhocapduoi_create_command_from),
+                    String.format(mContext.getString(R.string.common_export_label_create_cmd_from),
                             mUserRepository.getUserInfo().getShop().getShopName()));
         } else {
             titleOrder.set(
-                    String.format(mContext.getString(R.string.xuatkhocapduoi_create_note_from),
+                    String.format(mContext.getString(R.string.common_export_label_create_note_from),
                             mUserRepository.getUserInfo().getShop().getShopName()));
+        }
+
+        if (mStockTrans != null) {
+            cmdCode.set(String.format(
+                    mContext.getString(R.string.common_cmd_prepare_export_detail_label_cmd_code),
+                    String.valueOf(mStockTrans.getStockTransId())));
+
+            receiveWarehouse.set(String.format(mContext.getString(
+                    R.string.common_cmd_prepare_export_detail_label_receive_warehouse),
+                    String.valueOf(mStockTrans.getToOwnerId())));
+
+            dayCreated.set(String.format(mContext.getString(
+                    R.string.common_cmd_prepare_export_detail_label_day_cmd_created),
+                    DateUtils.convertStringToStringFormat(mStockTrans.getCreateDatetime(),
+                            DateUtils.CALENDAR_DATE_FORMAT_DD_MM_YY)));
         }
 
         mStockLapPhieuAdapter = new StockLapPhieuAdapter(mContext, mStockTotals, false);
@@ -129,8 +147,7 @@ public class CreateCommandPresenter<T> implements CreateCommandContract.Presente
         }
 
         //define showbutton
-        if ((mViewModel.getStep() == BaseCreateCommandNoteActivity.STEP_3
-                && mViewModel.getAction() == BaseCreateCommandNoteActivity.ACTION_CREATE_CMD) || (
+        if ((mViewModel.getAction() == BaseCreateCommandNoteActivity.ACTION_CREATE_CMD) || (
                 mViewModel.getStep() == BaseCreateCommandNoteActivity.STEP_2
                         && mViewModel.getAction()
                         == BaseCreateCommandNoteActivity.ACTION_CREATE_NOTE)) {
@@ -327,7 +344,7 @@ public class CreateCommandPresenter<T> implements CreateCommandContract.Presente
         for (StockTotal stockTotal : mStockTotals) {
             CreateExpCmdRequest.CmdStock cmdStock = new CreateExpCmdRequest.CmdStock();
             cmdStock.cloneFromStockTotal(stockTotal);
-            if (cmdStock.getQuantity()>0){
+            if (cmdStock.getQuantity() > 0) {
                 cmdStocks.add(cmdStock);
             }
         }
@@ -337,7 +354,7 @@ public class CreateCommandPresenter<T> implements CreateCommandContract.Presente
                 .subscribe(new MBCCSSubscribe<BaseCreateCmdNoteResponse>() {
                     @Override
                     public void onSuccess(BaseCreateCmdNoteResponse object) {
-                        onSuccess(object);
+                        onCreateCmdNoteSuccess(object);
                     }
 
                     @Override
@@ -370,7 +387,7 @@ public class CreateCommandPresenter<T> implements CreateCommandContract.Presente
         for (StockTotal stockTotal : mStockTotals) {
             CreateExpCmdRequest.CmdStock cmdStock = new CreateExpCmdRequest.CmdStock();
             cmdStock.cloneFromStockTotal(stockTotal);
-            if (cmdStock.getQuantity()>0){
+            if (cmdStock.getQuantity() > 0) {
                 cmdStocks.add(cmdStock);
             }
         }
@@ -380,7 +397,7 @@ public class CreateCommandPresenter<T> implements CreateCommandContract.Presente
                 .subscribe(new MBCCSSubscribe<BaseCreateCmdNoteResponse>() {
                     @Override
                     public void onSuccess(BaseCreateCmdNoteResponse object) {
-                        onSuccess(object);
+                        onCreateCmdNoteSuccess(object);
                     }
 
                     @Override
@@ -442,7 +459,7 @@ public class CreateCommandPresenter<T> implements CreateCommandContract.Presente
 
                     @Override
                     public void onSuccess(EmptyObject object) {
-                        ((BaseCreateImportWareHouseActivity) mContext).finish();
+                        mViewModel.onRejectExportSuccess();
                     }
 
                     @Override
@@ -465,6 +482,8 @@ public class CreateCommandPresenter<T> implements CreateCommandContract.Presente
         //TODO show chi tiet lenh xuat
 
         //TODO show lap phieu thanh cong
+
+        mViewModel.onCreateExportSuccess();
         Toast.makeText(mContext, "show dialog success", Toast.LENGTH_SHORT).show();
     }
 

@@ -8,7 +8,7 @@ import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListOwnerCodeRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetListOwneCodeReponse;
-import com.viettel.mbccs.screen.stockdeliver.createcommand.BaseCreateCommandNoteActivity;
+import com.viettel.mbccs.screen.warehousecommon.basecreatecmdnote.BaseCreateCommandNoteActivity;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.ArrayList;
 import java.util.List;
@@ -92,5 +92,22 @@ public class LapLenhXuatKhoChoNhanVienActivity extends BaseCreateCommandNoteActi
     @Override
     public long getToOwnerType() {
         return OwnerType.STAFF;
+    }
+
+    @Override
+    public int getStepType() {
+        return STEP_3;
+    }
+
+    @Override
+    public void onRejectSuccess() {
+        setResult(RESULT_OK);
+        finish();
+    }
+
+    @Override
+    public void onCreateSuccess() {
+        setResult(RESULT_OK);
+        finish();
     }
 }

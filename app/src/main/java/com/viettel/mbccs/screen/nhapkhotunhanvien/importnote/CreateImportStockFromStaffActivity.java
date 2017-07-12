@@ -1,4 +1,4 @@
-package com.viettel.mbccs.screen.importwarehousefromstaff.importnote;
+package com.viettel.mbccs.screen.nhapkhotunhanvien.importnote;
 
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.screen.warehousecommon.importcmdnotestock
@@ -20,5 +20,10 @@ public class CreateImportStockFromStaffActivity extends BaseCreateImportWareHous
     public void onImportSuccess() {
         setResult(RESULT_OK);
         finish();
+    }
+
+    @Override
+    public int getStepType() {
+        return STEP_3;
     }
 }

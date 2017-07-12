@@ -1,13 +1,17 @@
-package com.viettel.mbccs.screen.importhighstore.createimp;
+package com.viettel.mbccs.screen.nhapkhotunhanvien.importnote;
 
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.screen.warehousecommon.importcmdnotestock.BaseCreateImportWareHouseActivity;
 
-public class ImpHighStoreCreateNoteFromStaffActivity extends BaseCreateImportWareHouseActivity {
+/**
+ * Created by eo_cuong on 7/7/17.
+ */
+
+public class CreateNote3StepFromStaffActivity extends BaseCreateImportWareHouseActivity {
 
     @Override
     protected String getTitleToolbar() {
-        return getString(R.string.nhap_kho_cap_duoi_chi_tiet_phieu_nhap);
+        return getString(R.string.nhapkhonhanvien_cmd_detail);
     }
 
     @Override
@@ -19,5 +23,10 @@ public class ImpHighStoreCreateNoteFromStaffActivity extends BaseCreateImportWar
     public void onImportSuccess() {
         setResult(RESULT_OK);
         finish();
+    }
+
+    @Override
+    public int getStepType() {
+        return STEP_3;
     }
 }

@@ -95,11 +95,6 @@ public class XuatKhoChoNhanVienActivity extends BaseListOrderActivity {
     }
 
     @Override
-    public String getItemCountStringFormat() {
-        return null;
-    }
-
-    @Override
     public String getToolbarTitle() {
         return getString(R.string.xuat_kho_cho_nhan_vien_title);
     }

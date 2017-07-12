@@ -31,8 +31,6 @@ public interface BaseListOrderContract {
 
         void setDataSearch(List<StockTrans> stockTranses);
 
-        String getItemCountStringFormat();
-
         String getToolbarTitle();
 
         boolean isShowAddButton();
@@ -62,8 +60,5 @@ public interface BaseListOrderContract {
 
         boolean isShowAddButton();
 
-        void setItemCountStringFormat(String format);
-
-        String getItemCountStringFormat();
     }
 }

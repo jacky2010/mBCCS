@@ -256,13 +256,13 @@
             android:name=".screen.nhanvientrahang.list.ListNhanVienTraHangActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".screen.importwarehousefromstaff.list.ListNhapKhoTuNhanVienActivity"
+            android:name=".screen.nhapkhotunhanvien.list.ListNhapKhoTuNhanVienActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".screen.importwarehousefromstaff.importnote.CreateNoteFromStaffActivity"
+            android:name=".screen.nhapkhotunhanvien.importnote.CreateNote3StepFromStaffActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".screen.importwarehousefromstaff.importnote.CreateImportStockFromStaffActivity"
+            android:name=".screen.nhapkhotunhanvien.importnote.CreateImportStockFromStaffActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.connector.ConnectMobilePostpaidViewPagerActivity"
@@ -286,7 +286,7 @@
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".screen.importwarehousefromstaff.importnote.CreateCmdFromStaffActivity"
+            android:name=".screen.nhapkhotunhanvien.importnote.CreateCmdFromStaffActivity"
             android:screenOrientation="portrait"/>
 
         <!-- Xuất kho cho nhân viên -->
@@ -301,28 +301,24 @@
 
         <!--Xuat kho cap duoi-->
         <activity
-            android:name=".screen.stockdeliver.CreateCmdExpShopActivity"
+            android:name=".screen.xuatkhocapduoi.LapLenhXuatKhoCapDuoiActivity"
             android:screenOrientation="portrait"/>
 
         <!--End Xuat kho cap duoi-->
 
         <!--Nhap kho cap tren-->
         <activity
-            android:name=".screen.importhighstore.ImpHighStoreActivity"
+            android:name=".screen.nhapkhocaptren.ListNhapKhoCapTren"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".screen.importhighstore.createimp.ImpHighStoreCreateCmdFromStaffActivity"
+            android:name=".screen.nhapkhocaptren.LapPhieuNhapKhoCapTrenActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".screen.importhighstore.createimp.ImpHighStoreCreateNoteFromStaffActivity"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".screen.importhighstore.createimp.ImpHighStoreCreateImportStockFromStaffActivity"
+            android:name=".screen.nhapkhocaptren.NhapKhoTuCapTren"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".screen.importhighstore.CreateImpCmdHighStoreActivity"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".screen.xuatkhocapduoi.ListXuatKhoCapDuoi" android:screenOrientation="portrait"/>
 
         <!--End Nhap kho cap tren-->
     </application>

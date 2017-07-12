@@ -1,13 +1,13 @@
-package com.viettel.mbccs.screen.importwarehousefromstaff.importnote;
+package com.viettel.mbccs.screen.nhapkhotunhanvien.importnote;
 
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.screen.warehousecommon.importcmdnotestock.BaseCreateImportWareHouseActivity;
 
 /**
- * Created by eo_cuong on 7/7/17.
+ * Created by eo_cuong on 7/12/17.
  */
 
-public class CreateNoteFromStaffActivity extends BaseCreateImportWareHouseActivity {
+public class CreateNote2StepFromStaffActivity extends BaseCreateImportWareHouseActivity {
 
     @Override
     protected String getTitleToolbar() {
@@ -23,5 +23,10 @@ public class CreateNoteFromStaffActivity extends BaseCreateImportWareHouseActivi
     public void onImportSuccess() {
         setResult(RESULT_OK);
         finish();
+    }
+
+    @Override
+    public int getStepType() {
+        return STEP_2;
     }
 }

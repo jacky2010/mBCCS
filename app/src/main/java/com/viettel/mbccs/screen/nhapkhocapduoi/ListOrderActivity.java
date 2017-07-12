@@ -72,11 +72,6 @@ public class ListOrderActivity extends BaseListOrderActivity {
     }
 
     @Override
-    public String getItemCountStringFormat() {
-        return getString(R.string.activity_list_order_warehouse_lenh_chua_lap_phieu);
-    }
-
-    @Override
     public String getToolbarTitle() {
         return getString(R.string.list_order_presenter_nhap_kho_cap_duoi);
     }

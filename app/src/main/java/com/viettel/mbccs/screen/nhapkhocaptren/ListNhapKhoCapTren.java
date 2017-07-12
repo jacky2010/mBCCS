@@ -1,4 +1,4 @@
-package com.viettel.mbccs.screen.importhighstore;
+package com.viettel.mbccs.screen.nhapkhocaptren;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,9 +17,6 @@ import com.viettel.mbccs.data.source.remote.request.GetListOwnerCodeRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetListExpCmdResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListOwneCodeReponse;
-import com.viettel.mbccs.screen.importhighstore.createimp.ImpHighStoreCreateCmdFromStaffActivity;
-import com.viettel.mbccs.screen.importhighstore.createimp.ImpHighStoreCreateImportStockFromStaffActivity;
-import com.viettel.mbccs.screen.importhighstore.createimp.ImpHighStoreCreateNoteFromStaffActivity;
 import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import com.viettel.mbccs.variable.Constants;
@@ -31,11 +28,9 @@ import java.util.List;
  * Created by FRAMGIA\bui.dinh.viet on 12/07/2017.
  */
 
-public class ImpHighStoreActivity extends BaseListOrderActivity {
+public class ListNhapKhoCapTren extends BaseListOrderActivity {
 
     public static final int CODE = 123;
-    List<String> staffListName = new ArrayList<>();
-    List<OwnerCode> mOwnerCodes = new ArrayList<>();
     List<String> funtions = new ArrayList<>();
 
     @Override
@@ -44,11 +39,8 @@ public class ImpHighStoreActivity extends BaseListOrderActivity {
 
     @Override
     public void doSearch() {
-        if (mOwnerCodes.size() == 0) {
-            DialogUtils.showDialogError(ImpHighStoreActivity.this,
-                    new BaseException(BaseException.Type.UNEXPECTED, new Throwable()));
-            return;
-        }
+
+
 
         DataRequest<GetListExpCmdRequest> mDataRequest = new DataRequest<>();
         GetListExpCmdRequest mRequest = new GetListExpCmdRequest();
@@ -57,7 +49,9 @@ public class ImpHighStoreActivity extends BaseListOrderActivity {
         setStockTran2StepRequest(mRequest);
         mRequest.setStartDate(getFromDateString());
         mRequest.setEndDate(getToDateString());
-        mRequest.setFromOwnerId(mOwnerCodes.get(getPositionWareHouser()).getStaffId());
+
+        //get parent id
+        mRequest.setFromOwnerId(mUserRepository.getUserInfo().getShop().getParentShopId());
         mRequest.setFromOwnerType(OwnerType.SHOP);
         mRequest.setToOwnerId(mUserRepository.getUserInfo().getShop().getShopId());
         mRequest.setToOwnerType(OwnerType.SHOP);
@@ -139,20 +133,24 @@ public class ImpHighStoreActivity extends BaseListOrderActivity {
         }
     }
 
-    private void itemActionListener(StockTrans stockTrans, Intent intent, Bundle bundle) {
-        stockTrans.setActionName(getString(R.string.nv_trahangcaptren_action_detail));
+    @Override
+    public void onItemStockTransClick(StockTrans stockTrans) {
+        Intent intent = new Intent(this, LapPhieuNhapKhoCapTrenActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(Constants.BundleConstant.STOCK_TRANS, stockTrans);
+        bundle.putBoolean(Constants.BundleConstant.STOCK_VIEW_ONLY, true);
         switch ((int) stockTrans.getStockTransStatus()) {
             case (int) StockTransStatus.TRANS_DONE:
                 if (funtions.contains(RoleWareHouse.LAP_PHIEU_NHAP)
                         && stockTrans.getActionType() == StockTransType.TRANS_EXPORT) {
-                    intent = new Intent(this, ImpHighStoreCreateNoteFromStaffActivity.class);
+                    intent = new Intent(this, LapPhieuNhapKhoCapTrenActivity.class);
                     bundle.putBoolean(Constants.BundleConstant.STOCK_VIEW_ONLY, false);
                 }
 
                 break;
             case (int) StockTransStatus.TRANS_NOTED:
                 if (funtions.contains(RoleWareHouse.NHAP_KHO)) {
-                    intent = new Intent(this, ImpHighStoreCreateImportStockFromStaffActivity.class);
+                    intent = new Intent(this, NhapKhoTuCapTren.class);
                     bundle.putBoolean(Constants.BundleConstant.STOCK_VIEW_ONLY, false);
                 }
                 break;
@@ -160,16 +158,7 @@ public class ImpHighStoreActivity extends BaseListOrderActivity {
                 bundle.putBoolean(Constants.BundleConstant.STOCK_VIEW_ONLY, false);
                 break;
         }
-    }
 
-    @Override
-    public void onItemStockTransClick(StockTrans stockTrans) {
-
-        Intent intent = new Intent(this, ImpHighStoreCreateCmdFromStaffActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putParcelable(Constants.BundleConstant.STOCK_TRANS, stockTrans);
-        bundle.putBoolean(Constants.BundleConstant.STOCK_VIEW_ONLY, true);
-        itemActionListener(stockTrans, intent, bundle);
         intent.putExtras(bundle);
         startActivityForResult(intent, CODE);
     }
@@ -183,11 +172,6 @@ public class ImpHighStoreActivity extends BaseListOrderActivity {
     }
 
     @Override
-    public String getItemCountStringFormat() {
-        return getString(R.string.nhapkhonhanvien_count_noted);
-    }
-
-    @Override
     public String getToolbarTitle() {
         return getString(R.string.import_high_store_title);
     }
@@ -197,44 +181,12 @@ public class ImpHighStoreActivity extends BaseListOrderActivity {
         return false;
     }
 
-    private void loadStaffList() {
-        showLoading();
-        DataRequest<GetListOwnerCodeRequest> dataRequest = new DataRequest<>();
-        GetListOwnerCodeRequest request = new GetListOwnerCodeRequest();
-        request.setShopId(String.valueOf(mUserRepository.getUserInfo().getShop().getShopId()));
-        dataRequest.setWsCode(WsCode.GetListOwnerCode);
-        dataRequest.setWsRequest(request);
-        mUserRepository.getListOwnerCode(dataRequest)
-                .subscribe(new MBCCSSubscribe<GetListOwneCodeReponse>() {
-                    @Override
-                    public void onSuccess(GetListOwneCodeReponse object) {
-                        if (object != null && object.getOwnerCodes() != null) {
-                            mOwnerCodes.addAll(object.getOwnerCodes());
-                            for (OwnerCode ownerCode : mOwnerCodes) {
-                                staffListName.add(ownerCode.getName());
-                            }
-                            setWareHouseData(staffListName);
-                        }
-                    }
-
-                    @Override
-                    public void onError(BaseException error) {
-
-                    }
-
-                    @Override
-                    public void onRequestFinish() {
-                        super.onRequestFinish();
-                        hideLoading();
-                    }
-                });
-    }
-
     @Override
     public void init() {
         setStatus(Arrays.asList(
                 getResources().getStringArray(R.array.import_from_staff_2_step_status)));
-        loadStaffList();
+        setWareHouseData(
+                Arrays.asList(String.valueOf(mUserRepository.getUserInfo().getShop().getParentShopId())));
         funtions = mUserRepository.getFunctionsCodes();
     }
 

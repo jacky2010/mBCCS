@@ -1,4 +1,4 @@
-package com.viettel.mbccs.screen.importwarehousefromstaff.list;
+package com.viettel.mbccs.screen.nhapkhotunhanvien.list;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,10 +18,11 @@ import com.viettel.mbccs.data.source.remote.request.GetListOwnerCodeRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetListExpCmdResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListOwneCodeReponse;
-import com.viettel.mbccs.screen.importwarehousefromstaff.importnote.CreateCmdFromStaffActivity;
-import com.viettel.mbccs.screen.importwarehousefromstaff.importnote
+import com.viettel.mbccs.screen.nhapkhotunhanvien.importnote.CreateCmdFromStaffActivity;
+import com.viettel.mbccs.screen.nhapkhotunhanvien.importnote
         .CreateImportStockFromStaffActivity;
-import com.viettel.mbccs.screen.importwarehousefromstaff.importnote.CreateNoteFromStaffActivity;
+import com.viettel.mbccs.screen.nhapkhotunhanvien.importnote.CreateNote2StepFromStaffActivity;
+import com.viettel.mbccs.screen.nhapkhotunhanvien.importnote.CreateNote3StepFromStaffActivity;
 import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import com.viettel.mbccs.variable.Constants;
@@ -221,7 +222,7 @@ public class ListNhapKhoTuNhanVienActivity extends BaseListOrderActivity {
                     break;
                 case (int) StockTransStatus.TRANS_NON_NOTE:
                     if (funtions.contains(RoleWareHouse.LAP_PHIEU_NHAP)) {
-                        intent = new Intent(this, CreateNoteFromStaffActivity.class);
+                        intent = new Intent(this, CreateNote3StepFromStaffActivity.class);
                         bundle.putBoolean(Constants.BundleConstant.STOCK_VIEW_ONLY, false);
                     }
                     break;
@@ -245,7 +246,7 @@ public class ListNhapKhoTuNhanVienActivity extends BaseListOrderActivity {
                 case (int) StockTransStatus.TRANS_DONE:
                     if (funtions.contains(RoleWareHouse.LAP_PHIEU_NHAP)
                             && stockTrans.getActionType() == StockTransType.TRANS_EXPORT) {
-                        intent = new Intent(this, CreateNoteFromStaffActivity.class);
+                        intent = new Intent(this, CreateNote2StepFromStaffActivity.class);
                         bundle.putBoolean(Constants.BundleConstant.STOCK_VIEW_ONLY, false);
                     }
 
@@ -271,11 +272,6 @@ public class ListNhapKhoTuNhanVienActivity extends BaseListOrderActivity {
         if (requestCode == CODE && resultCode == RESULT_OK) {
             doSearch();
         }
-    }
-
-    @Override
-    public String getItemCountStringFormat() {
-        return getString(R.string.nhapkhonhanvien_count_noted);
     }
 
     @Override

@@ -24,4 +24,9 @@ public class CreateImportStockFromStaffActivity extends BaseCreateImportWareHous
         setResult(RESULT_OK);
         finish();
     }
+
+    @Override
+    public int getStepType() {
+        return STEP_2;
+    }
 }

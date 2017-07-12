@@ -1,4 +1,4 @@
-package com.viettel.mbccs.screen.stockdeliver;
+package com.viettel.mbccs.screen.xuatkhocapduoi;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,14 +9,17 @@ import com.viettel.mbccs.constance.RoleWareHouse;
 import com.viettel.mbccs.constance.StockTransStatus;
 import com.viettel.mbccs.constance.StockTransType;
 import com.viettel.mbccs.constance.WsCode;
+import com.viettel.mbccs.data.model.Shop;
 import com.viettel.mbccs.data.model.StockTrans;
+import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListExpCmdRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListShopRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetListExpCmdResponse;
-import com.viettel.mbccs.screen.importwarehousefromstaff.importnote.CreateImportStockFromStaffActivity;
-import com.viettel.mbccs.screen.importwarehousefromstaff.importnote.CreateNoteFromStaffActivity;
+import com.viettel.mbccs.data.source.remote.response.GetListShopResponse;
 import com.viettel.mbccs.screen.warehousecommon.exportsuccess.ExportSuccessDialog;
+import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import com.viettel.mbccs.variable.Constants;
 import java.util.ArrayList;
@@ -27,8 +30,11 @@ import java.util.List;
  * Created by buidinhviet on 6/13/17.
  */
 
-public class StockDeliverActivity extends BaseListOrderActivity {
+public class ListXuatKhoCapDuoi extends BaseListOrderActivity {
+
     List<String> funtions = new ArrayList<>();
+    List<String> shopNames = new ArrayList<>();
+    List<Shop> mListShop = new ArrayList<>();
 
     @Override
     public void onItemClicked(Object object) {
@@ -64,7 +70,6 @@ public class StockDeliverActivity extends BaseListOrderActivity {
 
         if (getPositionStatus() == 5) {
             //TODO: will confirm after
-            mRequest.setStockTransType(StockTransType.TRANS_EXPORT);
             mRequest.setStockTransStatus(StockTransStatus.TRANS_REJECT);
         }
 
@@ -72,7 +77,7 @@ public class StockDeliverActivity extends BaseListOrderActivity {
         mRequest.setEndDate(getToDateString());
         mRequest.setFromOwnerId(loadShopId());
         mRequest.setFromOwnerType(OwnerType.SHOP);
-        mRequest.setToOwnerId(mUserRepository.getUserInfo().getShop().getShopId());
+        mRequest.setToOwnerId(mListShop.get(getPositionWareHouser()).getShopId());
         mRequest.setToOwnerType(OwnerType.SHOP);
         mDataRequest.setWsCode(WsCode.GetListExpCmd);
         mDataRequest.setWsRequest(mRequest);
@@ -131,13 +136,13 @@ public class StockDeliverActivity extends BaseListOrderActivity {
         switch ((int) stockTrans.getStockTransStatus()) {
             case (int) StockTransStatus.TRANS_NON_NOTE:
                 if (funtions.contains(RoleWareHouse.LAP_PHIEU_XUAT)) {
-                    intent = new Intent(this, CreateNoteFromStaffActivity.class);
+                    intent = new Intent(this, LapPhieuXuatKhoCapDuoiActivity.class);
                 }
 
                 break;
             case (int) StockTransStatus.TRANS_NOTED:
                 if (funtions.contains(RoleWareHouse.XUAT_KHO)) {
-                    intent = new Intent(this, CreateImportStockFromStaffActivity.class);
+                    intent = new Intent(this, XuatKhoCapDuoiActivity.class);
                 }
                 break;
             default:
@@ -164,11 +169,6 @@ public class StockDeliverActivity extends BaseListOrderActivity {
     }
 
     @Override
-    public String getItemCountStringFormat() {
-        return getString(R.string.stock_deliver_shipment);
-    }
-
-    @Override
     public String getToolbarTitle() {
         return getString(R.string.stock_delivery_title);
     }
@@ -186,12 +186,45 @@ public class StockDeliverActivity extends BaseListOrderActivity {
         return mUserRepository.getUserInfo().getShop().getShopId();
     }
 
+    private void loadStaffList() {
+        showLoading();
+        DataRequest<GetListShopRequest> dataRequest = new DataRequest<>();
+        GetListShopRequest request = new GetListShopRequest();
+        request.setParentShopId((mUserRepository.getUserInfo().getShop().getShopId()));
+        dataRequest.setWsCode(WsCode.GetListShop);
+        dataRequest.setWsRequest(request);
+        BanHangKhoTaiChinhRepository.getInstance()
+                .getListShop(dataRequest)
+                .subscribe(new MBCCSSubscribe<GetListShopResponse>() {
+                    @Override
+                    public void onSuccess(GetListShopResponse object) {
+                        if (object != null && object.getShopList() != null) {
+                            mListShop.addAll(object.getShopList());
+                            for (Shop shop : mListShop) {
+                                shopNames.add(shop.getShopName());
+                            }
+                            setWareHouseData(shopNames);
+                        }
+                    }
+
+                    @Override
+                    public void onError(BaseException error) {
+                        DialogUtils.showDialogError(ListXuatKhoCapDuoi.this, error);
+                    }
+
+                    @Override
+                    public void onRequestFinish() {
+                        super.onRequestFinish();
+                        hideLoading();
+                    }
+                });
+    }
+
     @Override
     public void init() {
         funtions = mUserRepository.getFunctionsCodes();
         setStatus(Arrays.asList(getResources().getStringArray(R.array.xuatkhocd_status)));
-        String shopName = mUserRepository.getUserInfo().getShop().getShopName();
-        setWareHouseData(Arrays.asList(String.valueOf(shopName)));
+        loadStaffList();
     }
 
     @Override
@@ -201,7 +234,7 @@ public class StockDeliverActivity extends BaseListOrderActivity {
 
     @Override
     public void onAddClick() {
-        Intent intent = new Intent(StockDeliverActivity.this, CreateCmdExpShopActivity.class);
+        Intent intent = new Intent(ListXuatKhoCapDuoi.this, LapLenhXuatKhoCapDuoiActivity.class);
         startActivity(intent);
     }
 }
