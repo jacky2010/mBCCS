@@ -2,7 +2,6 @@ package com.viettel.mbccs.screen.assigntask;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-
 import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.TaskShopManagement;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
@@ -12,7 +11,6 @@ import com.viettel.mbccs.data.source.remote.response.GetTaskPrepareAssignStaffRe
 import com.viettel.mbccs.screen.assigntask.adapters.AssignTaskAdapter;
 import com.viettel.mbccs.utils.DateUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
-
 import rx.Subscription;
 
 /**
@@ -30,7 +28,7 @@ public class ListAssignTaskPresenter extends BaseListTaskPresenter<TaskShopManag
     public void doSearch() {
         long fromDate = ((ListAssignTaskContract.ViewModel) mViewModel).getFromDate();
         long toDate = ((ListAssignTaskContract.ViewModel) mViewModel).getToDate();
-        if (fromDate > toDate){
+        if (fromDate > toDate) {
             // TODO: 7/2/2017 Show error
             return;
         }
@@ -39,10 +37,9 @@ public class ListAssignTaskPresenter extends BaseListTaskPresenter<TaskShopManag
         GetTaskPrepareAssignStaffRequest request = new GetTaskPrepareAssignStaffRequest();
         request.setShopCode(mUserRepository.getUserInfo().getShop().getShopCode());
         request.setType(String.valueOf(taskType.get()));
-        request.setFromDate(DateUtils.convertDateToString(fromDate,
-                DateUtils.TIMEZONE_FORMAT_SERVER));
-        request.setToDate(DateUtils.convertDateToString(toDate,
-                DateUtils.TIMEZONE_FORMAT_SERVER));
+        request.setFromDate(
+                DateUtils.convertDateToString(fromDate, DateUtils.TIMEZONE_FORMAT_SERVER));
+        request.setToDate(DateUtils.convertDateToString(toDate, DateUtils.TIMEZONE_FORMAT_SERVER));
         request.setStaffCode(mUserRepository.getUserInfo().getStaffInfo().getStaffCode());
         request.setStatus(String.valueOf(taskStatus.get()));
 
@@ -74,5 +71,10 @@ public class ListAssignTaskPresenter extends BaseListTaskPresenter<TaskShopManag
         AssignTaskAdapter adapter = new AssignTaskAdapter(mContext, listData);
         adapter.setOnTaskClickListener(this);
         return adapter;
+    }
+
+    @Override
+    public boolean getShouldShowAdd() {
+        return true;
     }
 }

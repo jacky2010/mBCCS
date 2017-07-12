@@ -86,6 +86,10 @@ public abstract class BaseSearchListViewPresenter<T, K extends BaseSearchListVie
 
     public abstract void onAddClick();
 
+    public boolean getShouldShowAdd() {
+        return false;
+    }
+
     public RecyclerView.ItemDecoration getItemDecoration() {
         return new SpacesItemDecoration((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX,
                 mContext.getResources().getDimension(R.dimen.dp_6),

@@ -55,24 +55,12 @@ public class Shop implements Parcelable {
     @Expose
     private String status;
 
+    @SerializedName("parentShopId")
+    @Expose
+    private long parentShopId;
+
     public Shop() {
 
-    }
-
-    public Shop(Long shopId, String shopCode, String shopPath, String address,
-            String discountPolicy, String province, String shopName, long channelTypeId,
-            long pricePolicy, String createDate, String status) {
-        this.shopId = shopId;
-        this.shopCode = shopCode;
-        this.shopPath = shopPath;
-        this.address = address;
-        this.discountPolicy = discountPolicy;
-        this.province = province;
-        this.shopName = shopName;
-        this.channelTypeId = channelTypeId;
-        this.pricePolicy = pricePolicy;
-        this.createDate = createDate;
-        this.status = status;
     }
 
     protected Shop(Parcel in) {
@@ -87,6 +75,7 @@ public class Shop implements Parcelable {
         pricePolicy = in.readLong();
         createDate = in.readString();
         status = in.readString();
+        parentShopId = in.readLong();
     }
 
     @Override
@@ -102,6 +91,7 @@ public class Shop implements Parcelable {
         dest.writeLong(pricePolicy);
         dest.writeString(createDate);
         dest.writeString(status);
+        dest.writeLong(parentShopId);
     }
 
     @Override
@@ -207,6 +197,14 @@ public class Shop implements Parcelable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public long getParentShopId() {
+        return parentShopId;
+    }
+
+    public void setParentShopId(long parentShopId) {
+        this.parentShopId = parentShopId;
     }
 
     @Override

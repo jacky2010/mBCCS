@@ -481,6 +481,7 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="task_title">Tên công việc</string>
     <string name="description">Mô tả</string>
     <string name="assign_task">Giao việc</string>
+    <string name="assign_task_chon_nhan_vien">Chọn nhân viên</string>
 
     <string name="help_title">Trợ giúp</string>
     <string name="help_quan_ly_ban_hang">1. Làm thế nào để có thể quản lý bán hàng?</string>
@@ -1217,6 +1218,5 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
 
     <string name="export_staff_label_create_cmd_staff">Lập lệnh xuất kho cho nhân viên</string>
     <string name="import_staff_label_create_cmd_staff">Lập lệnh nhập kho cho nhân viên</string>
-
 
 </resources>

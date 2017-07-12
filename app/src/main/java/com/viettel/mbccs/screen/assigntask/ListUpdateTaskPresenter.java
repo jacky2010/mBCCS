@@ -38,13 +38,15 @@ public class ListUpdateTaskPresenter extends BaseListTaskPresenter<TaskShopManag
 
         GetInfoTaskForUpdateRequest request = new GetInfoTaskForUpdateRequest();
         request.setShopCode(mUserRepository.getUserInfo().getShop().getShopCode());
-        request.setType(taskType.get());
+        request.setType(String.valueOf(taskType.get()));
         request.setFromDate(DateUtils.convertDateToString(fromDate,
                 DateUtils.TIMEZONE_FORMAT_SERVER));
         request.setToDate(DateUtils.convertDateToString(toDate,
                 DateUtils.TIMEZONE_FORMAT_SERVER));
         request.setStaffCode(mUserRepository.getUserInfo().getStaffInfo().getStaffCode());
-        request.setStatus(taskStatus.get());
+        request.setStatus(String.valueOf(taskStatus.get()));
+        request.setAccount("ds_llkt_mhtlc");
+        request.setServiceType("W");
 
         DataRequest<GetInfoTaskForUpdateRequest> dataRequest = new DataRequest<>();
         dataRequest.setWsCode(WsCode.GetInfoTaskForUpdate);

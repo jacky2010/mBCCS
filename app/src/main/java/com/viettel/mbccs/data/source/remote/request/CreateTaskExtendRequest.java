@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class CreateTaskExtendRequest extends BaseRequest{
 
-    @SerializedName("shopId ")
+    @SerializedName("shopId")
     @Expose
     private String shopId;
 
@@ -23,9 +23,9 @@ public class CreateTaskExtendRequest extends BaseRequest{
 
     @SerializedName("type")
     @Expose
-    private Integer type;
+    private String type;
 
-    @SerializedName("userCreate ")
+    @SerializedName("userCreate")
     @Expose
     private String userCreate;
 
@@ -37,15 +37,15 @@ public class CreateTaskExtendRequest extends BaseRequest{
     @Expose
     private String jobName;
 
-    @SerializedName(" jobDescription ")
+    @SerializedName("jobDescription")
     @Expose
     private String jobDescription;
 
-    @SerializedName(" fromDate ")
+    @SerializedName("startDate")
     @Expose
     private String fromDate;
 
-    @SerializedName(" toDate ")
+    @SerializedName("endDate")
     @Expose
     private String toDate;
 
@@ -73,11 +73,11 @@ public class CreateTaskExtendRequest extends BaseRequest{
         this.channelCode = channelCode;
     }
 
-    public Integer getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(Integer type) {
+    public void setType(String type) {
         this.type = type;
     }
 
