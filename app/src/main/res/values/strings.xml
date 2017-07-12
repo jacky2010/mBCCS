@@ -1126,6 +1126,9 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="stock_deliver_shipment">Phiếu chưa xuất kho (%d)</string>
     <string name="activity_finish_task_ngay_hoan_thanh">Ngày hoàn thành</string>
     <string name="activity_finish_task_due_date">Due date</string>
+    
+    <!--Import High Store-->
+    <string name="import_high_store_note_detail">Lệnh phiếu nhập kho cấp trên</string>
 
     <!-- Download Image -->
     <string name="download_image_text">Download Image : %1$d</string>
