@@ -125,7 +125,7 @@ public class DialogConfirmRefillAnyPayFragment extends BaseDialog {
             RefillAnyPayRequest request = new RefillAnyPayRequest();
 
             request.setAmount(currentArgs.getDouble(Constants.BundleConstant.TOTAL));
-            request.setChannelId(Integer.parseInt(currentArgs.getString(Constants.BundleConstant.CHANNEL)));
+            request.setChannelId(currentArgs.getLong(Constants.BundleConstant.CHANNEL));
             request.setIsdn(currentArgs.getString(Constants.BundleConstant.ISDN));
 
             refillAnyPayRequest = new DataRequest<>();
@@ -155,7 +155,7 @@ public class DialogConfirmRefillAnyPayFragment extends BaseDialog {
                                 public void onError(BaseException error) {
 //                                    DialogUtils.showDialog(getContext(), null, error.getMessage(),
 //                                            null);
-                                    DialogUtils.showDialog(getContext(), null, getString(R.string.common_msg_error_general),
+                                    DialogUtils.showDialog(getContext(), null, error.getMessage(),
                                             null);
                                 }
 

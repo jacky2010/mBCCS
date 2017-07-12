@@ -150,10 +150,10 @@ public class SearchChangeSimPresenter implements SearchChangeSimContract.Present
         initListeners();
         initData();
 
-        //TODO minhnx test
-        isdn.set("620103022");
-        documentType.set("0");
-        documentId.set("145079102");
+//        //TODO minhnx test
+//        isdn.set("620103022");
+//        documentType.set("0");
+//        documentId.set("145079102");
     }
 
     private void goToPreAction(String action, ChangeSimItem item) {

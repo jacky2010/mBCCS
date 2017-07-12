@@ -13,7 +13,7 @@ public class SellAnypayToCustomerRequest extends BaseRequest {
     @SerializedName("isdn")
     private String isdn;
     @Expose
-    @SerializedName("paymethod")
+    @SerializedName("payMethod")
     private String payMethod;
     @Expose
     @SerializedName("isdnVi")

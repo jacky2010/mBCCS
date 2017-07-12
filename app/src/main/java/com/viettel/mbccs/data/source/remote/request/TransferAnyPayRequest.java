@@ -9,29 +9,29 @@ import com.google.gson.annotations.SerializedName;
 
 public class TransferAnyPayRequest extends BaseRequest {
     @Expose
-    @SerializedName("fromChannelId")
-    private Integer fromChannelId;
+    @SerializedName("fromISDN")
+    private String fromIsdn;
     @Expose
-    @SerializedName("toChannelId")
-    private Integer toChannelId;
+    @SerializedName("toISDN")
+    private String toIsdn;
     @Expose
     @SerializedName("amount")
     private Double amount;
 
-    public Integer getFromChannelId() {
-        return fromChannelId;
+    public String getFromIsdn() {
+        return fromIsdn;
     }
 
-    public void setFromChannelId(Integer fromChannelId) {
-        this.fromChannelId = fromChannelId;
+    public void setFromIsdn(String fromIsdn) {
+        this.fromIsdn = fromIsdn;
     }
 
-    public Integer getToChannelId() {
-        return toChannelId;
+    public String getToIsdn() {
+        return toIsdn;
     }
 
-    public void setToChannelId(Integer toChannelId) {
-        this.toChannelId = toChannelId;
+    public void setToIsdn(String toIsdn) {
+        this.toIsdn = toIsdn;
     }
 
     public Double getAmount() {

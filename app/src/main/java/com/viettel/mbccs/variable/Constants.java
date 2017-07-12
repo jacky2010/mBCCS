@@ -149,6 +149,9 @@ public class Constants {
 
         /*survey*/
         public static final String SURVEY = "survey";
+
+        public static final String FROM_ISDN = "from_isdn";
+        public static final String TO_ISDN = "to_isdn";
     }
 
     public class Tax {

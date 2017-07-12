@@ -195,12 +195,12 @@ public class DialogConfirmSellAnyPayFragment extends BaseDialog {
                                     @Override
                                     public void onSuccess(SellAnypayToCustomerResponse object) {
                                         try {
-                                            if (Constants.Service.RESPONSE_OK.equals(object.getErrorCode())) {
-                                                showSuccessDialog();
-                                            } else {
-                                                DialogUtils.showDialog(getContext(), null, getString(R.string.common_msg_error_general),
-                                                        null);
-                                            }
+
+                                            showSuccessDialog();
+//                                            } else {
+//                                                DialogUtils.showDialog(getContext(), null, getString(R.string.common_msg_error_general),
+//                                                        null);
+//                                            }
                                         } catch (Exception e) {
                                             e.printStackTrace();
                                             DialogUtils.showDialog(getContext(), null, getString(R.string.common_msg_error_general),

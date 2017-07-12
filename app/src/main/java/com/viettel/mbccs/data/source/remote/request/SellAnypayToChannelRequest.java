@@ -12,7 +12,7 @@ public class SellAnypayToChannelRequest  extends BaseRequest {
     @SerializedName("channelId")
     private int channelId;
     @Expose
-    @SerializedName("paymethod")
+    @SerializedName("payMethod")
     private String payMethod;
     @Expose
     @SerializedName("isdnVi")

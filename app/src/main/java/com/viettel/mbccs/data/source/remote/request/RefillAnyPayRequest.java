@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
 public class RefillAnyPayRequest  extends BaseRequest {
     @Expose
     @SerializedName("channelId")
-    private Integer channelId;
+    private Long channelId;
     @Expose
     @SerializedName("amount")
     private Double amount;
@@ -18,11 +18,11 @@ public class RefillAnyPayRequest  extends BaseRequest {
     @SerializedName("isdn")
     private String isdn;
 
-    public Integer getChannelId() {
+    public Long getChannelId() {
         return channelId;
     }
 
-    public void setChannelId(Integer channelId) {
+    public void setChannelId(Long channelId) {
         this.channelId = channelId;
     }
 

@@ -121,7 +121,7 @@ public class RespondKPPFeedbackPresenter implements RespondKPPFeedbackContract.P
                                 public void onError(BaseException error) {
 //                                    DialogUtils.showDialog(context, null, error.getMessage(),
 //                                            null);
-                                    DialogUtils.showDialog(context, null, context.getString(R.string.common_msg_error_general),
+                                    DialogUtils.showDialog(context, null, error.getMessage(),
                                             null);
                                 }
 
@@ -191,7 +191,7 @@ public class RespondKPPFeedbackPresenter implements RespondKPPFeedbackContract.P
                                 public void onError(BaseException error) {
 //                                    DialogUtils.showDialog(context, null, error.getMessage(),
 //                                            null);
-                                    DialogUtils.showDialog(context, null, context.getString(R.string.common_msg_error_general),
+                                    DialogUtils.showDialog(context, null, error.getMessage(),
                                             null);
                                 }
 

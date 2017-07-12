@@ -6,6 +6,7 @@ import android.databinding.ObservableField;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.source.SellAnyPayRepository;
+import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetAnypayAuthorizeRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
@@ -27,6 +28,7 @@ public class SellAnyPayPresenter implements SellAnyPayContract.Presenter {
     public ObservableField<String> title;
 
     private SellAnyPayRepository sellAnyPayRepository;
+    private UserRepository userRepository;
     private DataRequest<GetAnypayAuthorizeRequest> baseRequest;
     private CompositeSubscription mSubscriptions;
 
@@ -43,6 +45,7 @@ public class SellAnyPayPresenter implements SellAnyPayContract.Presenter {
 
             title = new ObservableField<>(context.getString(R.string.sell_anypay_title));
             sellAnyPayRepository = SellAnyPayRepository.getInstance();
+            userRepository = UserRepository.getInstance();
 
             checkPermission();
         } catch (Exception e) {
@@ -53,15 +56,13 @@ public class SellAnyPayPresenter implements SellAnyPayContract.Presenter {
     private void checkPermission() {
         try {
 
-            viewModel.changeToSearchTab();
-            if (2 - 1 == 1)
-                return;//TODO minhnx test
-
             viewModel.showLoading();
 
             baseRequest = new DataRequest<>();
             baseRequest.setWsCode(WsCode.GetAnyPay);
             GetAnypayAuthorizeRequest request = new GetAnypayAuthorizeRequest();
+            request.setStaffCode(userRepository.getUserInfo().getStaffInfo().getStaffCode());
+            request.setActionCode("ANYPY");
             baseRequest.setWsRequest(request);
 
             Subscription subscription =
