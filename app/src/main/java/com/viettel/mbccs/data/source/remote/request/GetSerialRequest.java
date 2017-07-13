@@ -11,15 +11,15 @@ public class GetSerialRequest  extends BaseRequest {
 
     @SerializedName("ownerId")
     @Expose
-    private long ownerId;
+    private Long ownerId;
 
     @SerializedName("ownerType")
     @Expose
-    private long ownerType;
+    private Long ownerType;
 
     @SerializedName("stockModelId")
     @Expose
-    private long stockModelId;
+    private Long stockModelId;
 
     @SerializedName("stateId")
     @Expose
@@ -27,7 +27,7 @@ public class GetSerialRequest  extends BaseRequest {
 
     @SerializedName("quantity")
     @Expose
-    private long quantity;
+    private Long quantity;
 
 
     public long getOwnerId() {

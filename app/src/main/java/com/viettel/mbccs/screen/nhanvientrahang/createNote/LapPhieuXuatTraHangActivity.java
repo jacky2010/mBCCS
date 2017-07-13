@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
+import com.viettel.mbccs.constance.OwnerType;
 import com.viettel.mbccs.data.model.SerialPickerModel;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.model.StockTrans;
+import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.databinding.ActivityLapPhieuXuatTraHangBinding;
 import com.viettel.mbccs.screen.kpp.order.findstock.FindStockActivity;
 import com.viettel.mbccs.screen.serialpicker.SerialPickerActivity;
@@ -61,6 +63,9 @@ public class LapPhieuXuatTraHangActivity extends
         serialPickerModel.setStockModelId(stockItem.getStockModelId());
         serialPickerModel.setStockMoldeName(stockItem.getStockModelName());
         serialPickerModel.setQuantity(stockItem.getCountChoice());
+        serialPickerModel.setOwnerId(
+                UserRepository.getInstance().getUserInfo().getStaffInfo().getStaffId());
+        serialPickerModel.setOwnwerType(OwnerType.STAFF);
         serialPickerModel.setLstSerial(stockItem.getSerialBlocks());
         Bundle bundle = new Bundle();
         bundle.putSerializable(Constants.BundleConstant.SERIAL_PICKER_MODEL, serialPickerModel);

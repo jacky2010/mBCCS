@@ -149,6 +149,7 @@ import com.viettel.mbccs.data.source.remote.response.GetListRegTypeResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListSearchTransResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListSerialResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListShopResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListStockModelAllResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListStockModelResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListSubTypeResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListTTKDResponse;
@@ -273,6 +274,10 @@ public interface MBCSSApi {
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<GetListStockModelResponse>>> getListStockModel(
+            @Body DataRequest<GetListStockModelRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<GetListStockModelAllResponse>>> getListStockModelAll(
             @Body DataRequest<GetListStockModelRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")

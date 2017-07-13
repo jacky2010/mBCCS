@@ -49,6 +49,7 @@ import com.viettel.mbccs.data.source.remote.response.GetListOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListProvinceResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListSerialResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListShopResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListStockModelAllResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListStockModelResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListTTKDResponse;
 import com.viettel.mbccs.data.source.remote.response.GetOrderInfoResponse;
@@ -126,6 +127,12 @@ public class BanHangKhoTaiChinhRepository
     public Observable<GetListStockModelResponse> getListStockModel(
             DataRequest<GetListStockModelRequest> request) {
         return banHangKhoTaiChinhRemoteDataSource.getListStockModel(request);
+    }
+
+    @Override
+    public Observable<GetListStockModelAllResponse> getListStockModelAll(
+            DataRequest<GetListStockModelRequest> request) {
+        return banHangKhoTaiChinhRemoteDataSource.getListStockModelAll(request);
     }
 
     @Override

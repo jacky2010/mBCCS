@@ -7,7 +7,7 @@ package com.viettel.mbccs.constance;
 public @interface RoleWareHouse {
     String LAP_LENH_NHAP = "LLNHA";
     String LAP_PHIEU_NHAP = "LPNHA";
-    String NHAP_KHO = "NHAPK";
+    String NHAP_KHO = "NHAKH";
     String LAP_LENH_XUAT = "LLXUA";
     String LAP_PHIEU_XUAT = "LPXUA";
     String XUAT_KHO = "XUAKH";

@@ -39,7 +39,12 @@ public class ItemStockTotalPresenter {
     }
 
     public void setShowChooseSerial(boolean showChooseSerial) {
-        this.showChooseSerial.set(showChooseSerial);
+        if (showChooseSerial) {
+            this.showChooseSerial.set(showChooseSerial && mStockTotal.getCheckSerial() == 1);
+        }else{
+            this.showChooseSerial.set(showChooseSerial);
+        }
+
     }
 
     public void addChoice() {
