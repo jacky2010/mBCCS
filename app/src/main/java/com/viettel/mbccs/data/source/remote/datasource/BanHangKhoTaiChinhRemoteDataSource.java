@@ -266,12 +266,12 @@ public class BanHangKhoTaiChinhRemoteDataSource implements IBanHangKhoTaiChinhRe
     }
 
     @Override
-    public Observable<InputOrderResponse> importInvoiceList(
+    public Observable<EmptyObject> importInvoiceList(
             DataRequest<InputOrderRequest> requestDataRequest) {
         return RequestHelper.getRequest()
                 .importInvoiceList(requestDataRequest)
-                .flatMap(SchedulerUtils.<InputOrderResponse>convertDataFlatMap())
-                .compose(SchedulerUtils.<InputOrderResponse>applyAsyncSchedulers());
+                .flatMap(SchedulerUtils.<EmptyObject>convertDataFlatMap())
+                .compose(SchedulerUtils.<EmptyObject>applyAsyncSchedulers());
     }
 
     @Override

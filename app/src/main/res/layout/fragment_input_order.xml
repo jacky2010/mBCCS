@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/btn_input_order"
-            android:visibility="@{ presenter.adapter.itemCount != 0 ? View.VISIBLE : View.GONE }"
+            android:visibility="@{ presenter.isEmptyData ? View.VISIBLE : View.GONE }"
             />
 
         <com.viettel.mbccs.widget.CustomButton
@@ -35,12 +35,13 @@
             android:layout_alignParentBottom="true"
             android:layout_gravity="end"
             android:layout_margin="@dimen/dp_10"
-            style="@style/button_positive"
             android:layout_marginTop="@dimen/dp_10"
             android:onClick="@{() -> presenter.onInputOrderClick()}"
             android:text="@string/btn_input_order"
             android:textAllCaps="false"
+            android:visibility="@{ presenter.isHideInputButton ? View.GONE : View.VISIBLE }"
             app:type="default"
+            style="@style/button_positive"
             />
 
     </RelativeLayout>

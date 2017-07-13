@@ -608,12 +608,12 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
 
     <!--Input Order screen-->
     <string name="title_input_order_screen">Quản lý nhập hoá đơn</string>
-    <string name="move_product_high">Chuyển hàng cấp trên</string>
+    <string name="move_product_high">Cấp trên chuyển xuống</string>
     <string name="move_product_slow">Chuyển cấp dưới</string>
     <string name="btn_input_order">Nhập hoá đơn</string>
     <string name="input_order_received">Đã nhận</string>
     <string name="input_order_not_receive">Chưa nhận</string>
-    <string name="bill_range_text">Dải hóa đơn: %1$s - %2$s</string>
+    <string name="bill_range_text">Dải hóa đơn: %1$d - %2$d</string>
     <string name="input_order_count">Số lượng: %d</string>
     <string name="input_order_date">Ngày chuyển: %s</string>
     <string name="input_order_store_name">Kho nhận: %s</string>

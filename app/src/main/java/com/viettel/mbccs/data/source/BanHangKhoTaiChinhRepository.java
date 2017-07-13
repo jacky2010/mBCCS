@@ -209,7 +209,7 @@ public class BanHangKhoTaiChinhRepository
     }
 
     @Override
-    public Observable<InputOrderResponse> importInvoiceList(
+    public Observable<EmptyObject> importInvoiceList(
             DataRequest<InputOrderRequest> requestDataRequest) {
         return banHangKhoTaiChinhRemoteDataSource.importInvoiceList(requestDataRequest);
     }

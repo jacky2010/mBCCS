@@ -11,9 +11,11 @@ import com.viettel.mbccs.databinding.ItemBillRangeBinding;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.R.string.no;
+
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> {
 
-    private List<InvoiceList> mInvoiceListList;
+    private List<InvoiceList> mInvoiceListList = new ArrayList<>();
     private boolean isLastItems;
 
     public OrderAdapter() {
@@ -27,9 +29,14 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         if (mInvoiceListList == null) {
             mInvoiceListList = new ArrayList<>();
         }
-        int sizeList = mInvoiceListList.size();
+        mInvoiceListList.clear();
         mInvoiceListList.addAll(list);
-        notifyItemInserted(sizeList);
+        notifyDataSetChanged();
+    }
+
+    public void refreshData() {
+        this.mInvoiceListList.clear();
+        notifyDataSetChanged();
     }
 
     @Override
@@ -48,7 +55,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return mInvoiceListList == null ? 0 : mInvoiceListList.size();
+        return mInvoiceListList.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
