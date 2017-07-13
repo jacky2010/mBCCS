@@ -70,4 +70,9 @@ public class CreateTicketActivity extends BaseCreateCommandNoteActivity {
         setResult(RESULT_OK);
         finish();
     }
+
+    @Override
+    public long getReasonId() {
+        return 0;
+    }
 }

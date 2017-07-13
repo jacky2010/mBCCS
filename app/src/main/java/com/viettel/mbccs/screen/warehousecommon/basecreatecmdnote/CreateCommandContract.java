@@ -50,5 +50,7 @@ public interface CreateCommandContract {
         void onRejectExportSuccess();
 
         void onCreateExportSuccess();
+
+        long getReasonId();
     }
 }

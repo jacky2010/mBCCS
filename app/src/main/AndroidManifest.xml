@@ -297,6 +297,10 @@
         <activity
             android:name=".screen.xuatkhochonhanvien.LapLenhXuatKhoChoNhanVienActivity"
             android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screen.xuatkhochonhanvien.LapPhieuXuatKhoChoNhanVienActivity"
+            android:screenOrientation="portrait"/>
         <!-- End Xuất kho cho nhân viên -->
 
         <!--Xuat kho cap duoi-->

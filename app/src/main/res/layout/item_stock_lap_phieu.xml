@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
     <data>
@@ -59,7 +58,6 @@
 
             </LinearLayout>
         </RelativeLayout>
-
 
         <com.viettel.mbccs.widget.CustomTextView
             android:layout_width="match_parent"
@@ -157,9 +155,8 @@
             </LinearLayout>
         </RelativeLayout>
 
-
         <View
-            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
             style="@style/dividerHorizontalStyle"
             />
     </LinearLayout>

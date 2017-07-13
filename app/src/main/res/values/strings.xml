@@ -1209,6 +1209,7 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <!-- Xuất kho cho nhân viên -->
     <string name="xuat_kho_cho_nhan_vien_title">Quản lý xuất kho cho nhân viên</string>
     <string name="xuat_kho_cho_nhan_vien_ma_kho_nhan">Mã kho nhận</string>
+    <string name="xuat_kho_cho_nhan_vien_xuat_kho">Xuất kho</string>
 
 
     <string name="common_export_label_create_cmd">Lập lệnh</string>

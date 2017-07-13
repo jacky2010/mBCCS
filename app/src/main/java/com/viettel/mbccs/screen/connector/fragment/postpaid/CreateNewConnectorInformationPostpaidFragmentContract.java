@@ -45,10 +45,6 @@ public interface CreateNewConnectorInformationPostpaidFragmentContract {
 
         String getDateCreatePassport();
 
-        String getBirthDateRegister();
-
-        String getDateCreateRegister();
-
         void loadDataSpinnerDNError(BaseException error);
     }
 

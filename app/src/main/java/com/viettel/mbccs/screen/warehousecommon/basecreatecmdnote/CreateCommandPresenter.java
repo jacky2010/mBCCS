@@ -35,7 +35,6 @@ import com.viettel.mbccs.data.source.remote.response.GetListStockModelResponse;
 import com.viettel.mbccs.data.source.remote.response.ListStockTransDetailsReponse;
 import com.viettel.mbccs.screen.nhanvientrahang.createNote.StockLapPhieuAdapter;
 import com.viettel.mbccs.screen.warehousecommon.exportwarehouse.StockTransDetailAdapter;
-import com.viettel.mbccs.screen.warehousecommon.importcmdnotestock.BaseCreateImportWareHouseActivity;
 import com.viettel.mbccs.utils.ActivityUtils;
 import com.viettel.mbccs.utils.DateUtils;
 import com.viettel.mbccs.utils.DialogUtils;
@@ -339,6 +338,7 @@ public class CreateCommandPresenter<T> implements CreateCommandContract.Presente
         request.setFromOwnerType(mViewModel.getFromOwnerTypeCreate());
         request.setToOwnerId(mViewModel.getToOwnerIdCreate());
         request.setToOwnerType(mViewModel.getToOwnerTypeCreate());
+        request.setReasonId(mViewModel.getReasonId());
         request.setDiscountPolicy(
                 Long.valueOf(mUserRepository.getUserInfo().getStaffInfo().getDiscountPolicy()));
         List<CreateExpCmdRequest.CmdStock> cmdStocks = new ArrayList<>();
@@ -382,6 +382,7 @@ public class CreateCommandPresenter<T> implements CreateCommandContract.Presente
         request.setFromOwnerType(mViewModel.getFromOwnerTypeCreate());
         request.setToOwnerId(mViewModel.getToOwnerIdCreate());
         request.setToOwnerType(mViewModel.getToOwnerTypeCreate());
+        request.setReasonId(mViewModel.getReasonId());
         request.setDiscountPolicy(
                 Long.valueOf(mUserRepository.getUserInfo().getStaffInfo().getDiscountPolicy()));
         List<CreateExpCmdRequest.CmdStock> cmdStocks = new ArrayList<>();

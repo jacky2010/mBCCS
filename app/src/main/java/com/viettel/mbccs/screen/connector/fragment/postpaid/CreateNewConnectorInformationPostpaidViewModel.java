@@ -38,10 +38,20 @@ public class CreateNewConnectorInformationPostpaidViewModel extends BaseObservab
     private String customerNumberGPKH;
     private String customerNumberMaSoThue;
 
+    private String customerContractTenNguoiDaiDien;
+    private String customerContractChucVu;
+    private String customerContractCMTNDHoCHieu;
+    private String customerContractInformationDienThoai;
+
     private String customerNameCustomerError;
     private String customerPlaceCreatePassportError;
     private String customerNumberGPKHError;
     private String customerNumberMaSoThueError;
+
+    private String customerContractTenNguoiDaiDienError;
+    private String customerContractChucVuError;
+    private String customerContractCMTNDHoCHieuError;
+    private String customerContractInformationDienThoaiError;
 
     private String customerDateCreate;
     private String customerDateBirthday;
@@ -53,25 +63,6 @@ public class CreateNewConnectorInformationPostpaidViewModel extends BaseObservab
 
     private AddressApp customerArea1;
 
-    // Register
-    private String registerNameRegister;
-    private String registerIdNo;
-    private String registerPlaceCreatePassport;
-
-    private String registerNameRegisterError;
-    private String registerIdNoError;
-    private String registerPlaceCreatePassportError;
-
-    private String registerDateBirthday;
-    private String registerDateCreate;
-
-    private Date registerMaxDateBirthday;
-    private Date registerMaxDateCreate;
-
-    private boolean isRegisterCheckMale = true;
-    private boolean isRegisterCheckFemale;
-
-    private SpinnerAdapter<ApDomainByType> registerAdapterSpinnerLoaiGiayTo;
 
     private String imageUrlFront;
     private String imageUrlBackside;
@@ -112,21 +103,11 @@ public class CreateNewConnectorInformationPostpaidViewModel extends BaseObservab
     private String contractHopDongThu;
     private String contractSoTaiKhoan;
     private String contractTenTaiKhoan;
-    private String contractTenNguoiDaiDien;
-    private String contractChucVu;
-    private String contractCMTNDHoCHieu;
-    private String contractDienThoai;
-    private String contractDiaChiThongBaoCuoc;
 
     private String contractNguoiThanhToanError;
     private String contractHopDongThuError;
     private String contractSoTaiKhoanError;
     private String contractTenTaiKhoanError;
-    private String contractTenNguoiDaiDienError;
-    private String contractChucVuError;
-    private String contractCMTNDHoCHieuError;
-    private String contractDienThoaiError;
-    private String contractDiaChiThongBaoCuocError;
 
     private SpinnerAdapter<ApDomainByType> contractAdapterSpinner3LoaiHopDong;
     private SpinnerAdapter<ApDomainByType> contractAdapterSpinner3HinhThucThanhToan;
@@ -342,137 +323,6 @@ public class CreateNewConnectorInformationPostpaidViewModel extends BaseObservab
     public void setCustomerArea1(AddressApp customerArea1) {
         this.customerArea1 = customerArea1;
         notifyPropertyChanged(BR.customerArea1);
-    }
-
-    @Bindable
-    public String getRegisterNameRegister() {
-        return registerNameRegister;
-    }
-
-    public void setRegisterNameRegister(String registerNameRegister) {
-        this.registerNameRegister = registerNameRegister;
-        notifyPropertyChanged(BR.registerNameRegister);
-    }
-
-    @Bindable
-    public String getRegisterIdNo() {
-        return registerIdNo;
-    }
-
-    public void setRegisterIdNo(String registerIdNo) {
-        this.registerIdNo = registerIdNo;
-        notifyPropertyChanged(BR.registerIdNo);
-    }
-
-    @Bindable
-    public String getRegisterPlaceCreatePassport() {
-        return registerPlaceCreatePassport;
-    }
-
-    public void setRegisterPlaceCreatePassport(String registerPlaceCreatePassport) {
-        this.registerPlaceCreatePassport = registerPlaceCreatePassport;
-        notifyPropertyChanged(BR.registerPlaceCreatePassport);
-    }
-
-    @Bindable
-    public String getRegisterNameRegisterError() {
-        return registerNameRegisterError;
-    }
-
-    public void setRegisterNameRegisterError(String registerNameRegisterError) {
-        this.registerNameRegisterError = registerNameRegisterError;
-        notifyPropertyChanged(BR.registerNameRegisterError);
-    }
-
-    @Bindable
-    public String getRegisterIdNoError() {
-        return registerIdNoError;
-    }
-
-    public void setRegisterIdNoError(String registerIdNoError) {
-        this.registerIdNoError = registerIdNoError;
-        notifyPropertyChanged(BR.registerIdNoError);
-    }
-
-    @Bindable
-    public String getRegisterPlaceCreatePassportError() {
-        return registerPlaceCreatePassportError;
-    }
-
-    public void setRegisterPlaceCreatePassportError(String registerPlaceCreatePassportError) {
-        this.registerPlaceCreatePassportError = registerPlaceCreatePassportError;
-        notifyPropertyChanged(BR.registerPlaceCreatePassportError);
-    }
-
-    @Bindable
-    public String getRegisterDateBirthday() {
-        return registerDateBirthday;
-    }
-
-    public void setRegisterDateBirthday(String registerDateBirthday) {
-        this.registerDateBirthday = registerDateBirthday;
-        notifyPropertyChanged(BR.registerDateBirthday);
-    }
-
-    @Bindable
-    public String getRegisterDateCreate() {
-        return registerDateCreate;
-    }
-
-    public void setRegisterDateCreate(String registerDateCreate) {
-        this.registerDateCreate = registerDateCreate;
-        notifyPropertyChanged(BR.registerDateCreate);
-    }
-
-    @Bindable
-    public Date getRegisterMaxDateBirthday() {
-        return registerMaxDateBirthday;
-    }
-
-    public void setRegisterMaxDateBirthday(Date registerMaxDateBirthday) {
-        this.registerMaxDateBirthday = registerMaxDateBirthday;
-        notifyPropertyChanged(BR.registerMaxDateBirthday);
-    }
-
-    @Bindable
-    public Date getRegisterMaxDateCreate() {
-        return registerMaxDateCreate;
-    }
-
-    public void setRegisterMaxDateCreate(Date registerMaxDateCreate) {
-        this.registerMaxDateCreate = registerMaxDateCreate;
-        notifyPropertyChanged(BR.registerMaxDateCreate);
-    }
-
-    @Bindable
-    public boolean isRegisterCheckMale() {
-        return isRegisterCheckMale;
-    }
-
-    public void setRegisterCheckMale(boolean registerCheckMale) {
-        isRegisterCheckMale = registerCheckMale;
-        notifyPropertyChanged(BR.registerCheckMale);
-    }
-
-    @Bindable
-    public boolean isRegisterCheckFemale() {
-        return isRegisterCheckFemale;
-    }
-
-    public void setRegisterCheckFemale(boolean registerCheckFemale) {
-        isRegisterCheckFemale = registerCheckFemale;
-        notifyPropertyChanged(BR.registerCheckFemale);
-    }
-
-    @Bindable
-    public SpinnerAdapter<ApDomainByType> getRegisterAdapterSpinnerLoaiGiayTo() {
-        return registerAdapterSpinnerLoaiGiayTo;
-    }
-
-    public void setRegisterAdapterSpinnerLoaiGiayTo(
-            SpinnerAdapter<ApDomainByType> registerAdapterSpinnerLoaiGiayTo) {
-        this.registerAdapterSpinnerLoaiGiayTo = registerAdapterSpinnerLoaiGiayTo;
-        notifyPropertyChanged(BR.registerAdapterSpinnerLoaiGiayTo);
     }
 
     @Bindable
@@ -718,53 +568,43 @@ public class CreateNewConnectorInformationPostpaidViewModel extends BaseObservab
     }
 
     @Bindable
-    public String getContractTenNguoiDaiDien() {
-        return contractTenNguoiDaiDien;
+    public String getCustomerContractTenNguoiDaiDien() {
+        return customerContractTenNguoiDaiDien;
     }
 
-    public void setContractTenNguoiDaiDien(String contractTenNguoiDaiDien) {
-        this.contractTenNguoiDaiDien = contractTenNguoiDaiDien;
-        notifyPropertyChanged(BR.contractTenNguoiDaiDien);
-    }
-
-    @Bindable
-    public String getContractChucVu() {
-        return contractChucVu;
-    }
-
-    public void setContractChucVu(String contractChucVu) {
-        this.contractChucVu = contractChucVu;
-        notifyPropertyChanged(BR.contractChucVu);
+    public void setCustomerContractTenNguoiDaiDien(String customerContractTenNguoiDaiDien) {
+        this.customerContractTenNguoiDaiDien = customerContractTenNguoiDaiDien;
+        notifyPropertyChanged(BR.customerContractTenNguoiDaiDien);
     }
 
     @Bindable
-    public String getContractCMTNDHoCHieu() {
-        return contractCMTNDHoCHieu;
+    public String getCustomerContractChucVu() {
+        return customerContractChucVu;
     }
 
-    public void setContractCMTNDHoCHieu(String contractCMTNDHoCHieu) {
-        this.contractCMTNDHoCHieu = contractCMTNDHoCHieu;
-        notifyPropertyChanged(BR.contractCMTNDHoCHieu);
-    }
-
-    @Bindable
-    public String getContractDienThoai() {
-        return contractDienThoai;
-    }
-
-    public void setContractDienThoai(String contractDienThoai) {
-        this.contractDienThoai = contractDienThoai;
-        notifyPropertyChanged(BR.contractDienThoai);
+    public void setCustomerContractChucVu(String customerContractChucVu) {
+        this.customerContractChucVu = customerContractChucVu;
+        notifyPropertyChanged(BR.customerContractChucVu);
     }
 
     @Bindable
-    public String getContractDiaChiThongBaoCuoc() {
-        return contractDiaChiThongBaoCuoc;
+    public String getCustomerContractCMTNDHoCHieu() {
+        return customerContractCMTNDHoCHieu;
     }
 
-    public void setContractDiaChiThongBaoCuoc(String contractDiaChiThongBaoCuoc) {
-        this.contractDiaChiThongBaoCuoc = contractDiaChiThongBaoCuoc;
-        notifyPropertyChanged(BR.contractDiaChiThongBaoCuoc);
+    public void setCustomerContractCMTNDHoCHieu(String customerContractCMTNDHoCHieu) {
+        this.customerContractCMTNDHoCHieu = customerContractCMTNDHoCHieu;
+        notifyPropertyChanged(BR.customerContractCMTNDHoCHieu);
+    }
+
+    @Bindable
+    public String getCustomerContractInformationDienThoai() {
+        return customerContractInformationDienThoai;
+    }
+
+    public void setCustomerContractInformationDienThoai(String customerContractInformationDienThoai) {
+        this.customerContractInformationDienThoai = customerContractInformationDienThoai;
+        notifyPropertyChanged(BR.customerContractInformationDienThoai);
     }
 
     public String getContractNguoiThanhToanError() {
@@ -806,53 +646,43 @@ public class CreateNewConnectorInformationPostpaidViewModel extends BaseObservab
     }
 
     @Bindable
-    public String getContractTenNguoiDaiDienError() {
-        return contractTenNguoiDaiDienError;
+    public String getCustomerContractTenNguoiDaiDienError() {
+        return customerContractTenNguoiDaiDienError;
     }
 
-    public void setContractTenNguoiDaiDienError(String contractTenNguoiDaiDienError) {
-        this.contractTenNguoiDaiDienError = contractTenNguoiDaiDienError;
-        notifyPropertyChanged(BR.contractTenNguoiDaiDienError);
-    }
-
-    @Bindable
-    public String getContractChucVuError() {
-        return contractChucVuError;
-    }
-
-    public void setContractChucVuError(String contractChucVuError) {
-        this.contractChucVuError = contractChucVuError;
-        notifyPropertyChanged(BR.contractChucVuError);
+    public void setCustomerContractTenNguoiDaiDienError(String customerContractTenNguoiDaiDienError) {
+        this.customerContractTenNguoiDaiDienError = customerContractTenNguoiDaiDienError;
+        notifyPropertyChanged(BR.customerContractTenNguoiDaiDienError);
     }
 
     @Bindable
-    public String getContractCMTNDHoCHieuError() {
-        return contractCMTNDHoCHieuError;
+    public String getCustomerContractChucVuError() {
+        return customerContractChucVuError;
     }
 
-    public void setContractCMTNDHoCHieuError(String contractCMTNDHoCHieuError) {
-        this.contractCMTNDHoCHieuError = contractCMTNDHoCHieuError;
-        notifyPropertyChanged(BR.contractCMTNDHoCHieuError);
-    }
-
-    @Bindable
-    public String getContractDienThoaiError() {
-        return contractDienThoaiError;
-    }
-
-    public void setContractDienThoaiError(String contractDienThoaiError) {
-        this.contractDienThoaiError = contractDienThoaiError;
-        notifyPropertyChanged(BR.contractDienThoaiError);
+    public void setCustomerContractChucVuError(String customerContractChucVuError) {
+        this.customerContractChucVuError = customerContractChucVuError;
+        notifyPropertyChanged(BR.customerContractChucVuError);
     }
 
     @Bindable
-    public String getContractDiaChiThongBaoCuocError() {
-        return contractDiaChiThongBaoCuocError;
+    public String getCustomerContractCMTNDHoCHieuError() {
+        return customerContractCMTNDHoCHieuError;
     }
 
-    public void setContractDiaChiThongBaoCuocError(String contractDiaChiThongBaoCuocError) {
-        this.contractDiaChiThongBaoCuocError = contractDiaChiThongBaoCuocError;
-        notifyPropertyChanged(BR.contractDiaChiThongBaoCuocError);
+    public void setCustomerContractCMTNDHoCHieuError(String customerContractCMTNDHoCHieuError) {
+        this.customerContractCMTNDHoCHieuError = customerContractCMTNDHoCHieuError;
+        notifyPropertyChanged(BR.customerContractCMTNDHoCHieuError);
+    }
+
+    @Bindable
+    public String getCustomerContractInformationDienThoaiError() {
+        return customerContractInformationDienThoaiError;
+    }
+
+    public void setCustomerContractInformationDienThoaiError(String customerContractInformationDienThoaiError) {
+        this.customerContractInformationDienThoaiError = customerContractInformationDienThoaiError;
+        notifyPropertyChanged(BR.customerContractInformationDienThoaiError);
     }
 
     @Bindable

@@ -172,16 +172,6 @@ public class CreateNewConnectorInformationPostpaid1Fragment extends BaseFragment
     }
 
     @Override
-    public String getBirthDateRegister() {
-        return binding.birthDateRegister.getStringDate();
-    }
-
-    @Override
-    public String getDateCreateRegister() {
-        return binding.registerDateCreate.getStringDate();
-    }
-
-    @Override
     public AddressApp getAddress() {
         return binding.customSelectAddressCreateConnector.getAddress();
     }
