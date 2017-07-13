@@ -87,6 +87,7 @@ public class SurveyQuestionAdapter
                     currentSelect = getAdapterPosition();
                     if (mSurveyQuestion.getType() == SurveyType.MULTI_CHOICE) {
                         mAnswer.setSelect(!mAnswer.isSelect());
+                        mBinding.layoutQuestion.setSelected(mAnswer.isSelect());
                     }
                     notifyDataSetChanged();
                 }
@@ -97,6 +98,7 @@ public class SurveyQuestionAdapter
             mAnswer = answer;
             if (mSurveyQuestion.getType() == SurveyType.SINGLE_CHOICE) {
                 answer.setSelect(selected);
+                mBinding.layoutQuestion.setSelected(mAnswer.isSelect());
             }
             mBinding.setItem(mSurveyQuestion);
             mBinding.setAnswer(answer);

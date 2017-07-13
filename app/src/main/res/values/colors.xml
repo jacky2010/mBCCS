@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#0082c2</color>
+    <color name="colorAccent">#0084ff</color>
     <color name="blue_vice">#09577E</color>
     <color name="black_opacity_30">#4D000000</color>
     <color name="grey">#585858</color>
@@ -47,7 +47,7 @@
     <color name="orange">#E9B252</color>
     <color name="bg_config">#e6e6e6</color>
     <color name="yellow">#FBD036</color>
-    <color name="ice_berg">#DDEFF7</color>
+    <color name="ice_berg">#DAEEF7</color>
     <color name="grey_bright">#757575</color>
     <color name="grey_dove">#707070</color>
     <color name="alto">#D9D9D9</color>

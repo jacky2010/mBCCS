@@ -111,6 +111,7 @@ public class ListXuatKhoCapDuoi extends BaseListOrderActivity {
     }
 
     private void setActionName3Step(StockTrans stockTrans) {
+        stockTrans.setActionName(getString(R.string.nv_trahangcaptren_action_detail));
         switch ((int) stockTrans.getStockTransStatus()) {
             case (int) StockTransStatus.TRANS_NON_NOTE:
                 if (funtions.contains(RoleWareHouse.LAP_PHIEU_XUAT)) {
@@ -137,51 +138,62 @@ public class ListXuatKhoCapDuoi extends BaseListOrderActivity {
             case (int) StockTransStatus.TRANS_NON_NOTE:
                 if (funtions.contains(RoleWareHouse.LAP_PHIEU_XUAT)) {
                     intent = new Intent(this, LapPhieuXuatKhoCapDuoiActivity.class);
+                } else {
+                    showDialogExportSuccess(
+                            String.format(getString(R.string.common_import_label_import_cmd),
+                                    String.valueOf(stockTrans.getStockTransId())), stockTrans,
+                            false);
+                    return;
                 }
 
                 break;
             case (int) StockTransStatus.TRANS_NOTED:
                 if (funtions.contains(RoleWareHouse.XUAT_KHO)) {
                     intent = new Intent(this, XuatKhoCapDuoiActivity.class);
+                } else {
+                    showDialogExportSuccess(
+                            String.format(getString(R.string.common_import_label_import_note),
+                                    String.valueOf(stockTrans.getStockTransId())), stockTrans,
+                            false);
+                    return;
                 }
                 break;
+            case (int) StockTransStatus.TRANS_DONE:
+                showDialogExportSuccess(
+                        String.format(getString(R.string.warehouse_label_export_success_code),
+                                String.valueOf(stockTrans.getStockTransId())), stockTrans, true);
+                return;
             case (int) StockTransStatus.TRANS_CANCEL:
-                ExportSuccessDialog exportSuccessDialog =
-                        ExportSuccessDialog.newInstance(stockTrans, String.format(
-                                getString(R.string.warehouse_label_export_success_code),
-                                String.valueOf(stockTrans.getStockTransId())),
-                                String.format(getString(R.string.warehouse_label_receive),
-                                        String.valueOf(stockTrans.getToOwnerId())));
-                exportSuccessDialog.setOnDialogDismissListener(
-                        new ExportSuccessDialog.OnDialogDismissListener() {
-
-                            @Override
-                            public void onDialogDissmis() {
-                            }
-                        });
-                exportSuccessDialog.show(getSupportFragmentManager(), "");
+                showDialogExportSuccess(
+                        String.format(getString(R.string.common_import_label_import_cmd),
+                                String.valueOf(stockTrans.getStockTransId())), stockTrans, false);
                 return;
             default:
-                ExportSuccessDialog exportSuccessDialog1 =
-                        ExportSuccessDialog.newInstance(stockTrans, String.format(
-                                getString(R.string.warehouse_label_export_success_code),
-                                String.valueOf(stockTrans.getStockTransId())),
-                                String.format(getString(R.string.warehouse_label_receive),
-                                        String.valueOf(stockTrans.getToOwnerId())));
-                exportSuccessDialog1.setOnDialogDismissListener(
-                        new ExportSuccessDialog.OnDialogDismissListener() {
-
-                            @Override
-                            public void onDialogDissmis() {
-                            }
-                        });
-                exportSuccessDialog1.show(getSupportFragmentManager(), "");
-               return;
+                showDialogExportSuccess(
+                        String.format(getString(R.string.common_import_label_import_cmd),
+                                String.valueOf(stockTrans.getStockTransId())), stockTrans, true);
+                return;
         }
         Bundle bundle = new Bundle();
         bundle.putParcelable(Constants.BundleConstant.STOCK_TRANS, stockTrans);
         intent.putExtras(bundle);
         startActivity(intent);
+    }
+
+    private void showDialogExportSuccess(String title, StockTrans stockTrans,
+            boolean isShowSerial) {
+        ExportSuccessDialog exportSuccessDialog1 =
+                ExportSuccessDialog.newInstance(stockTrans, title,
+                        String.format(getString(R.string.warehouse_label_receive),
+                                String.valueOf(stockTrans.getToOwnerId())), isShowSerial);
+        exportSuccessDialog1.setOnDialogDismissListener(
+                new ExportSuccessDialog.OnDialogDismissListener() {
+
+                    @Override
+                    public void onDialogDissmis() {
+                    }
+                });
+        exportSuccessDialog1.show(getSupportFragmentManager(), "");
     }
 
     @Override

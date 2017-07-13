@@ -11,6 +11,7 @@ import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetListShopResponse;
 import com.viettel.mbccs.screen.warehousecommon.basecreatecmdnote.BaseCreateCommandNoteActivity;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
+import com.viettel.mbccs.variable.Constants;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -113,6 +114,6 @@ public class LapLenhXuatKhoCapDuoiActivity extends BaseCreateCommandNoteActivity
 
     @Override
     public long getReasonId() {
-        return 0;
+        return Constants.FuntionConstant.STAFF_EXPORT_SHOP_REASON_ID;
     }
 }

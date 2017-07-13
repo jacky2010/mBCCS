@@ -5,7 +5,7 @@
             name="presenter"
             type="com.viettel.mbccs.screen.warehousecommon.exportwarehouse.ItemStockTransDetailPresenter"
             />
-        />
+        <import type="android.view.View"/>
     </data>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/container"
@@ -53,6 +53,7 @@
                     android:gravity="right|center_vertical"
                     android:textColor="@color/blue"
                     android:textSize="@dimen/sp_14"
+                    android:visibility="@{presenter.showSerial ? View.VISIBLE : View.GONE}"
                     app:textUnderLine="@{presenter.action}"
                     />
             </LinearLayout>

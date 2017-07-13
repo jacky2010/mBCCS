@@ -172,7 +172,7 @@ public abstract class BaseCreateImportWareHouseActivity extends BaseCreateOrderA
         }
 
         ExportSuccessDialog exportSuccessDialog = ExportSuccessDialog.newInstance(stockTrans, title,
-                String.format(getString(R.string.nhanvien_xuattra_lable_receive_title),
+                String.format(getString(R.string.warehouse_label_sender),
                         String.valueOf(stockTrans.getFromOwnerId())),
                 String.format(getString(R.string.warehouse_label_receive),
                         String.valueOf(stockTrans.getToOwnerId())));
