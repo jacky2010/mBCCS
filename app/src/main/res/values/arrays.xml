@@ -73,14 +73,4 @@
         <item>Đã hủy</item>
         <item>Tất cả</item>
     </string-array>
-
-    <string-array name="export_from_staff_3_step_status">
-        <item>Chưa lập phiếu</item>
-        <item>Đã lập phiếu</item>
-        <item>Đã xuất kho</item>
-        <item>Phiếu xuất đã lập lệnh nhập</item>
-        <item>Đã hủy</item>
-        <item>Đã bị từ chối nhập</item>
-        <item>Tất cả</item>
-    </string-array>
 </resources>

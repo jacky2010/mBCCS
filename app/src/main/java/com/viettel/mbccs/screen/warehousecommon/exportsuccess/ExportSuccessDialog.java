@@ -17,9 +17,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.WsCode;
-import com.viettel.mbccs.data.model.SerialBO;
 import com.viettel.mbccs.data.model.StockSerial;
-import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.model.StockTrans;
 import com.viettel.mbccs.data.model.StockTransDetail;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
@@ -65,6 +63,7 @@ public class ExportSuccessDialog extends DialogFragment
     private UserRepository mUserRepository;
     private BanHangKhoTaiChinhRepository mBanHangKhoTaiChinhRepository;
     private CompositeSubscription mSubscription;
+    private boolean isShowSerial = true;
 
     public OnDialogDismissListener getOnDialogDismissListener() {
         return mOnDialogDismissListener;
@@ -86,12 +85,37 @@ public class ExportSuccessDialog extends DialogFragment
     }
 
     public static ExportSuccessDialog newInstance(StockTrans stockTrans, String cmdCodeTitle,
+            String cmdNameTitle, boolean isShowSerial) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(Constants.BundleConstant.STOCK_TRANS, stockTrans);
+        bundle.putString(Constants.BundleConstant.CMD_CODE_TITLE, cmdCodeTitle);
+        bundle.putString(Constants.BundleConstant.CMD_RECEIVE_TITLE, cmdNameTitle);
+        bundle.putBoolean(Constants.BundleConstant.SHOW_SERIAL, isShowSerial);
+        ExportSuccessDialog fragment = new ExportSuccessDialog();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
+    public static ExportSuccessDialog newInstance(StockTrans stockTrans, String cmdCodeTitle,
             String cmdNameTitle, String cmdSenderTitle) {
         Bundle bundle = new Bundle();
         bundle.putParcelable(Constants.BundleConstant.STOCK_TRANS, stockTrans);
         bundle.putString(Constants.BundleConstant.CMD_CODE_TITLE, cmdCodeTitle);
         bundle.putString(Constants.BundleConstant.CMD_RECEIVE_TITLE, cmdNameTitle);
         bundle.putString(Constants.BundleConstant.CMD_SENDER_TITLE, cmdSenderTitle);
+        ExportSuccessDialog fragment = new ExportSuccessDialog();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
+    public static ExportSuccessDialog newInstance(StockTrans stockTrans, String cmdCodeTitle,
+            String cmdNameTitle, String cmdSenderTitle, boolean isShowSerial) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(Constants.BundleConstant.STOCK_TRANS, stockTrans);
+        bundle.putString(Constants.BundleConstant.CMD_CODE_TITLE, cmdCodeTitle);
+        bundle.putString(Constants.BundleConstant.CMD_RECEIVE_TITLE, cmdNameTitle);
+        bundle.putString(Constants.BundleConstant.CMD_SENDER_TITLE, cmdSenderTitle);
+        bundle.putBoolean(Constants.BundleConstant.SHOW_SERIAL, isShowSerial);
         ExportSuccessDialog fragment = new ExportSuccessDialog();
         fragment.setArguments(bundle);
         return fragment;
@@ -169,8 +193,10 @@ public class ExportSuccessDialog extends DialogFragment
         cmdCodeTitle = bundle.getString(Constants.BundleConstant.CMD_CODE_TITLE);
         cmdReceiveTitle = bundle.getString(Constants.BundleConstant.CMD_RECEIVE_TITLE);
         cmdSenderTitle = bundle.getString(Constants.BundleConstant.CMD_SENDER_TITLE);
+        isShowSerial = bundle.getBoolean(Constants.BundleConstant.SHOW_SERIAL, true);
         mAdapter = new StockTransDetailAdapter(getActivity(), mStockTransDetails,
-                getActivity().getString(R.string.item_nhap_kho_cap_duoi_mat_hang_xem_serial));
+                getActivity().getString(R.string.item_nhap_kho_cap_duoi_mat_hang_xem_serial),
+                isShowSerial);
         mAdapter.setOnStockTransAdapterListerner(this);
         init();
         mBinding.setDialog(this);

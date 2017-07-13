@@ -27,6 +27,6 @@ public class CreateNoteFromStaffActivity extends BaseCreateImportWareHouseActivi
 
     @Override
     public int getStepType() {
-        return STEP_2;
+        return STEP_3;
     }
 }

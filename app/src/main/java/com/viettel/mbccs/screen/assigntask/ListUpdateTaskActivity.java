@@ -16,6 +16,7 @@ public class ListUpdateTaskActivity extends BaseListTaskActivity<ListUpdateTaskP
     protected void initData() {
         mPresenter = new ListUpdateTaskPresenter(this, this);
         mBinding.setPresenter(mPresenter);
+        mBinding.drawer.animateOpen();
     }
 
     @Override

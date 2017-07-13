@@ -18,16 +18,16 @@ import rx.Subscription;
  */
 
 public class ListAssignTaskPresenter extends BaseListTaskPresenter<TaskShopManagement>
-        implements ListAssignTaskContract.Presenter {
+        implements BaseListTaskContract.Presenter {
 
-    public ListAssignTaskPresenter(Context context, ListAssignTaskContract.ViewModel viewModel) {
+    public ListAssignTaskPresenter(Context context, BaseListTaskContract.ViewModel viewModel) {
         super(context, viewModel);
     }
 
     @Override
     public void doSearch() {
-        long fromDate = ((ListAssignTaskContract.ViewModel) mViewModel).getFromDate();
-        long toDate = ((ListAssignTaskContract.ViewModel) mViewModel).getToDate();
+        long fromDate = ((BaseListTaskContract.ViewModel) mViewModel).getFromDate();
+        long toDate = ((BaseListTaskContract.ViewModel) mViewModel).getToDate();
         if (fromDate > toDate) {
             // TODO: 7/2/2017 Show error
             return;
@@ -55,6 +55,7 @@ public class ListAssignTaskPresenter extends BaseListTaskPresenter<TaskShopManag
                         if (object == null) return;
 
                         listData.addAll(object.getLstTaskShopManagement());
+                        ((BaseListTaskContract.ViewModel) mViewModel).closeDrawer();
                     }
 
                     @Override
