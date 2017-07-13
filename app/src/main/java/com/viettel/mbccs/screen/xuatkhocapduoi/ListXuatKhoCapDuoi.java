@@ -145,7 +145,7 @@ public class ListXuatKhoCapDuoi extends BaseListOrderActivity {
                     intent = new Intent(this, XuatKhoCapDuoiActivity.class);
                 }
                 break;
-            default:
+            case (int) StockTransStatus.TRANS_CANCEL:
                 ExportSuccessDialog exportSuccessDialog =
                         ExportSuccessDialog.newInstance(stockTrans, String.format(
                                 getString(R.string.warehouse_label_export_success_code),
@@ -160,7 +160,23 @@ public class ListXuatKhoCapDuoi extends BaseListOrderActivity {
                             }
                         });
                 exportSuccessDialog.show(getSupportFragmentManager(), "");
-                break;
+                return;
+            default:
+                ExportSuccessDialog exportSuccessDialog1 =
+                        ExportSuccessDialog.newInstance(stockTrans, String.format(
+                                getString(R.string.warehouse_label_export_success_code),
+                                String.valueOf(stockTrans.getStockTransId())),
+                                String.format(getString(R.string.warehouse_label_receive),
+                                        String.valueOf(stockTrans.getToOwnerId())));
+                exportSuccessDialog1.setOnDialogDismissListener(
+                        new ExportSuccessDialog.OnDialogDismissListener() {
+
+                            @Override
+                            public void onDialogDissmis() {
+                            }
+                        });
+                exportSuccessDialog1.show(getSupportFragmentManager(), "");
+               return;
         }
         Bundle bundle = new Bundle();
         bundle.putParcelable(Constants.BundleConstant.STOCK_TRANS, stockTrans);

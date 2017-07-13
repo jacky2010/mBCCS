@@ -92,47 +92,21 @@ public class ListNhanVienTraHangActivity extends BaseListOrderActivity {
 
     @Override
     public void onItemStockTransClick(final StockTrans stockTrans) {
-        showLoading();
-        DataRequest<GetListStockTransDetailRequest> dataRequest = new DataRequest<>();
-        GetListStockTransDetailRequest request = new GetListStockTransDetailRequest();
-        request.setStockTransId(stockTrans.getStockTransId());
-        dataRequest.setWsCode(WsCode.GetListStockTransDetail);
-        dataRequest.setWsRequest(request);
-        mBanHangKhoTaiChinhRepository.getListStockTransDetail(dataRequest)
-                .subscribe(new MBCCSSubscribe<ListStockTransDetailsReponse>() {
+        ExportSuccessDialog exportSuccessDialog =
+                ExportSuccessDialog.newInstance(stockTrans, String.format(
+                        getString(R.string.warehouse_label_export_success_code),
+                        String.valueOf(stockTrans.getStockTransId())),
+                        String.format(
+                                getString(R.string.warehouse_label_receive),
+                                String.valueOf(stockTrans.getToOwnerId())));
+        exportSuccessDialog.setOnDialogDismissListener(
+                new ExportSuccessDialog.OnDialogDismissListener() {
 
                     @Override
-                    public void onSuccess(ListStockTransDetailsReponse object) {
-                        if (object != null && object.getStockTransDetails() != null) {
-                            ExportSuccessDialog exportSuccessDialog =
-                                    ExportSuccessDialog.newInstance(stockTrans, String.format(
-                                            getString(R.string.warehouse_label_export_success_code),
-                                            String.valueOf(stockTrans.getStockTransId())),
-                                            String.format(
-                                                    getString(R.string.warehouse_label_receive),
-                                                    String.valueOf(stockTrans.getToOwnerId())));
-                            exportSuccessDialog.setOnDialogDismissListener(
-                                    new ExportSuccessDialog.OnDialogDismissListener() {
-
-                                        @Override
-                                        public void onDialogDissmis() {
-                                        }
-                                    });
-                            exportSuccessDialog.show(getSupportFragmentManager(), "");
-                        }
-                    }
-
-                    @Override
-                    public void onError(BaseException error) {
-                        showErrorDialog(error);
-                    }
-
-                    @Override
-                    public void onRequestFinish() {
-                        super.onRequestFinish();
-                        hideLoading();
+                    public void onDialogDissmis() {
                     }
                 });
+        exportSuccessDialog.show(getSupportFragmentManager(), "");
     }
 
 
