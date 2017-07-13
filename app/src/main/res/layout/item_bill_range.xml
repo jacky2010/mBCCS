@@ -7,6 +7,7 @@
             name="presenter"
             type="com.viettel.mbccs.screen.inputorder.fragment.adapter.BillRangePresenter"
             />
+        <import type="android.view.View"/>
     </data>
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,10 +21,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:text="@{presenter.isReceived ? @string/input_order_received : @string/input_order_not_receive}"
-            android:textColor="@{presenter.isReceived ? @color/green : @color/orange}"
+            android:text="@{presenter.status == 1 ? @string/input_order_received : @string/input_order_not_receive}"
+            android:textColor="@{presenter.status == 1 ? @color/green : @color/orange}"
             android:textSize="@dimen/sp_15"
             android:textStyle="bold"
+            android:visibility="@{ presenter.isInvoiceImport ? View.GONE : View.VISIBLE }"
             tools:text="@string/input_order_received"
             />
 
@@ -68,7 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/dp_5"
-            android:text="@{String.format(@string/input_order_store_name, presenter.nameStore)}"
+            android:text="@{String.format(@string/input_order_store_name, presenter.billOwnerName)}"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_15"
             tools:text="@string/input_order_store_name"

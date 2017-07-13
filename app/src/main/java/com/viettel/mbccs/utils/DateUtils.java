@@ -63,6 +63,14 @@ public class DateUtils {
         return date.getTime();
     }
 
+    public static String getTimeFromDate(String time) {
+        if (TextUtils.isEmpty(time)) {
+            return "";
+        }
+        long timeLong = timezoneToLong(time);
+        return convertDateToString(timeLong, BIRTHDAY_TIME_FORMAT);
+    }
+
     public static String timestampToString(long timestamp, String format, @Nullable Locale locale) {
         SimpleDateFormat simpleDateFormat =
                 new SimpleDateFormat(format, locale == null ? Locale.getDefault() : locale);
@@ -161,7 +169,7 @@ public class DateUtils {
         return calendar.getTime();
     }
 
-    public static String getCurrentDate(){
+    public static String getCurrentDate() {
         return convertDateToString(System.currentTimeMillis(), TIMEZONE_FORMAT_SERVER);
     }
 }

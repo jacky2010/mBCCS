@@ -11,8 +11,6 @@ import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseFragment;
 import com.viettel.mbccs.databinding.FragmentInputOrderBinding;
 import com.viettel.mbccs.screen.common.success.DialogFullScreen;
-import com.viettel.mbccs.screen.inputorder.InputOrderContract;
-import com.viettel.mbccs.screen.inputorder.fragment.adapter.OrderAdapter;
 
 public class OrderFragment extends BaseFragment implements OrderContract.ViewModel {
 
@@ -21,7 +19,6 @@ public class OrderFragment extends BaseFragment implements OrderContract.ViewMod
     private static final String ARG_INDEX_TAB = "index_order";
     private FragmentInputOrderBinding mBinding;
     private OrderPresenter mPresenter;
-    private OrderAdapter mAdapter;
 
     public static OrderFragment newInstance(int index) {
         OrderFragment orderFragment = new OrderFragment();
@@ -37,8 +34,7 @@ public class OrderFragment extends BaseFragment implements OrderContract.ViewMod
             @Nullable Bundle savedInstanceState) {
         mBinding =
                 DataBindingUtil.inflate(inflater, R.layout.fragment_input_order, container, false);
-        mAdapter = new OrderAdapter();
-        mPresenter = new OrderPresenter(this, getIndexTab());
+        mPresenter = new OrderPresenter(getContext(), this, getIndexTab());
         mBinding.setPresenter(mPresenter);
         mPresenter.subscribe();
         return mBinding.getRoot();
@@ -62,6 +58,14 @@ public class OrderFragment extends BaseFragment implements OrderContract.ViewMod
     public void onStop() {
         mPresenter.unSubscribe();
         super.onStop();
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser && mPresenter != null) {
+            mPresenter.subscribe();
+        }
     }
 
     @Override

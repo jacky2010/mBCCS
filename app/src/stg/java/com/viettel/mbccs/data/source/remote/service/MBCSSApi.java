@@ -481,7 +481,7 @@ public interface MBCSSApi {
             @Body DataRequest<InputOrderRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<ServerDataResponse<BaseResponse<InputOrderResponse>>> importInvoiceList(
+    Observable<ServerDataResponse<BaseResponse<EmptyObject>>> importInvoiceList(
             @Body DataRequest<InputOrderRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")

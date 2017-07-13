@@ -1,98 +1,43 @@
 package com.viettel.mbccs.data.model;
 
-import java.util.Date;
-
 public class InvoiceList {
-    private long shopId;
-    private long staffId;
+    private long invoiceListId;
     private String fromDate;
     private String toDate;
-    private String codeFrom;
-    private String codeTo;
-    private long count;
-    private String date;
-    private String nameStore;
-    private boolean isReceived;
     private String serialNo;
     private String blockNo;
     private String bockNoName;
     private long fromInvoice;
     private long toInvoice;
     private long currInvoiceNo;
-    private Date dateAssign;
+    private String dateAssign;
     private long quantity;
+    private String billOwnerName;
     private long status;
+    private boolean isInvoiceImport;
 
-    public InvoiceList(String codeFrom, String codeTo, long count, String date, String nameStore) {
-        this.codeFrom = codeFrom;
-        this.codeTo = codeTo;
-        this.count = count;
-        this.date = date;
-        this.nameStore = nameStore;
+    public String getBillOwnerName() {
+        return billOwnerName;
     }
 
-    public String getCodeFrom() {
-        return codeFrom;
+    public void setBillOwnerName(String billOwnerName) {
+        this.billOwnerName = billOwnerName;
     }
 
-    public void setCodeFrom(String codeFrom) {
-        this.codeFrom = codeFrom;
+    public boolean isInvoiceImport() {
+        return isInvoiceImport;
     }
 
-    public String getCodeTo() {
-        return codeTo;
+    public void setInvoiceImport(boolean invoiceImport) {
+        isInvoiceImport = invoiceImport;
     }
 
-    public void setCodeTo(String codeTo) {
-        this.codeTo = codeTo;
+    public long getInvoiceListId() {
+        return invoiceListId;
     }
 
-    public long getCount() {
-        return count;
-    }
-
-    public void setCount(long count) {
-        this.count = count;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getNameStore() {
-        return nameStore;
-    }
-
-    public void setNameStore(String nameStore) {
-        this.nameStore = nameStore;
-    }
-
-    public boolean isReceived() {
-        return isReceived;
-    }
-
-    public void setReceived(boolean received) {
-        isReceived = received;
-    }
-
-    public long getShopId() {
-        return shopId;
-    }
-
-    public void setShopId(long shopId) {
-        this.shopId = shopId;
-    }
-
-    public long getStaffId() {
-        return staffId;
-    }
-
-    public void setStaffId(long staffId) {
-        this.staffId = staffId;
+    public void setInvoiceListId(long invoiceListId) {
+        this.invoiceListId = invoiceListId;
     }
 
     public String getFromDate() {
@@ -159,11 +104,11 @@ public class InvoiceList {
         this.currInvoiceNo = currInvoiceNo;
     }
 
-    public Date getDateAssign() {
+    public String getDateAssign() {
         return dateAssign;
     }
 
-    public void setDateAssign(Date dateAssign) {
+    public void setDateAssign(String dateAssign) {
         this.dateAssign = dateAssign;
     }
 

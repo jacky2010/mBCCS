@@ -118,7 +118,7 @@ public interface IBanHangKhoTaiChinhRemoteDataSource {
     Observable<InputOrderResponse> getListInvoice(
             DataRequest<InputOrderRequest> requestDataRequest);
 
-    Observable<InputOrderResponse> importInvoiceList(
+    Observable<EmptyObject> importInvoiceList(
             DataRequest<InputOrderRequest> requestDataRequest);
 
     Observable<BaseCreateCmdNoteResponse> createExpStockNotNote(

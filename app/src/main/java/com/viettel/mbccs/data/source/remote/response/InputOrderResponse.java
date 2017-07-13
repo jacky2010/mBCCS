@@ -1,5 +1,7 @@
 package com.viettel.mbccs.data.source.remote.response;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import com.viettel.mbccs.data.model.InvoiceList;
 import java.util.List;
 
@@ -8,6 +10,8 @@ import java.util.List;
  */
 
 public class InputOrderResponse extends DataResponse {
+    @Expose
+    @SerializedName("lstInvoice")
     private List<InvoiceList> mInvoiceLists;
 
     public List<InvoiceList> getInvoiceLists() {
