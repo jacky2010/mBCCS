@@ -6,11 +6,9 @@ import com.viettel.mbccs.base.createorder.BaseCreateOrderSuccessActivity;
  * Created by FRAMGIA\vu.viet.anh on 13/06/2017.
  */
 
-public class CreateTicketSuccessActivity extends BaseCreateOrderSuccessActivity
-        implements CreateTicketSuccessContract.ViewModel {
+public class CreateTicketSuccessActivity extends BaseCreateOrderSuccessActivity {
     @Override
-    protected void initData() {
-        mPresenter = new CreateTicketSuccessPresenter(this, this);
-        mBinding.setPresenter(mPresenter);
+    public int getActionTypeCreate() {
+        return 0;
     }
 }

@@ -27,6 +27,6 @@ public class CreateCmdFromStaffActivity extends BaseCreateImportWareHouseActivit
 
     @Override
     public int getStepType() {
-        return BaseCreateImportWareHouseActivity.STEP_2;
+        return BaseCreateImportWareHouseActivity.STEP_3;
     }
 }

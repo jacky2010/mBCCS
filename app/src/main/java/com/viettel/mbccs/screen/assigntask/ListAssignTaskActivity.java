@@ -24,6 +24,7 @@ public class ListAssignTaskActivity
     protected void initData() {
         mPresenter = new ListAssignTaskPresenter(this, this);
         mBinding.setPresenter(mPresenter);
+        mBinding.drawer.animateOpen();
     }
 
     @Override

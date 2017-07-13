@@ -152,6 +152,7 @@ public class Constants {
 
         public static final String FROM_ISDN = "from_isdn";
         public static final String TO_ISDN = "to_isdn";
+        public static final String SHOW_SERIAL = "show_serial";
     }
 
     public class Tax {

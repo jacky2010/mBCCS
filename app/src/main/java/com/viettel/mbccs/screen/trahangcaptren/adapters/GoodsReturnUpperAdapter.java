@@ -4,10 +4,8 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-
-import com.viettel.mbccs.data.model.StockTotal;
+import com.viettel.mbccs.data.model.StockTransDetail;
 import com.viettel.mbccs.databinding.ItemExportModelBinding;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,13 +13,14 @@ import java.util.List;
  * Created by Anh Vu Viet on 6/13/2017.
  */
 
-public class GoodsReturnUpperAdapter extends RecyclerView.Adapter<GoodsReturnUpperAdapter.GoodsReturnUpperViewHolder> {
+public class GoodsReturnUpperAdapter
+        extends RecyclerView.Adapter<GoodsReturnUpperAdapter.GoodsReturnUpperViewHolder> {
 
-    private List<StockTotal> mList = new ArrayList<>();
+    private List<StockTransDetail> mList = new ArrayList<>();
 
     private Context mContext;
 
-    public GoodsReturnUpperAdapter(Context context, List<StockTotal> list) {
+    public GoodsReturnUpperAdapter(Context context, List<StockTransDetail> list) {
         mContext = context;
         mList = list;
     }
@@ -51,8 +50,8 @@ public class GoodsReturnUpperAdapter extends RecyclerView.Adapter<GoodsReturnUpp
             mBinding = binding;
         }
 
-        public void bind(StockTotal item) {
-            mBinding.setName(item.getStockModelName());
+        public void bind(StockTransDetail item) {
+            mBinding.setCode(item.getStockModelCode());
             mBinding.setNumber(item.getCountChoice());
             mBinding.setTotal((int) item.getQuantity());
         }

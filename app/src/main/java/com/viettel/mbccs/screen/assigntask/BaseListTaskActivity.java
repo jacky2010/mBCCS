@@ -10,8 +10,9 @@ import com.viettel.mbccs.utils.DialogUtils;
  * Created by Anh Vu Viet on 7/2/2017.
  */
 
-public abstract class BaseListTaskActivity<T extends BaseListTaskPresenter> extends BaseDataBindActivity<ActivityTaskSearchListBinding, T>
-        implements ListAssignTaskContract.ViewModel {
+public abstract class BaseListTaskActivity<T extends BaseListTaskPresenter>
+        extends BaseDataBindActivity<ActivityTaskSearchListBinding, T>
+        implements BaseListTaskContract.ViewModel {
 
     public static final int REQUEST_CODE_TASK_INFO = 57;
 
@@ -43,5 +44,10 @@ public abstract class BaseListTaskActivity<T extends BaseListTaskPresenter> exte
     @Override
     public void showErrorDialog(BaseException e) {
         DialogUtils.showDialogError(this, e);
+    }
+
+    @Override
+    public void closeDrawer() {
+        mBinding.drawer.animateClose();
     }
 }

@@ -4,7 +4,7 @@
     <data>
 
         <variable
-            name="name"
+            name="code"
             type="String" />
 
         <variable
@@ -30,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dp_5"
-                android:text="@{ name }"
+                android:text="@{ @string/common_cmd_prepare_export_detail_label_stock_code(code) }"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_20"
                 android:textStyle="bold" />

@@ -318,9 +318,21 @@
             android:name=".screen.nhapkhocaptren.NhapKhoTuCapTren"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".screen.xuatkhocapduoi.ListXuatKhoCapDuoi" android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screen.xuatkhocapduoi.ListXuatKhoCapDuoi"
+            android:screenOrientation="portrait"/>
 
         <!--End Nhap kho cap tren-->
+
+        <!--Tra hang cap tren-->
+        <activity
+            android:name=".screen.trahangcaptren.create.LapLenhTraHangCapTrenActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".screen.trahangcaptren.create.TraHangCapTrenActivity"
+            android:screenOrientation="portrait"/>
+        <!--End Tra hang cap tren-->
+
     </application>
 
 </manifest>
