@@ -14,6 +14,8 @@ import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.R.attr.src;
+
 public class LapLenhXuatKhoCapDuoiActivity extends BaseCreateCommandNoteActivity<Shop> {
 
     private List<Shop> mListShop = new ArrayList<>();
@@ -107,5 +109,10 @@ public class LapLenhXuatKhoCapDuoiActivity extends BaseCreateCommandNoteActivity
     public void onCreateSuccess() {
         setResult(RESULT_OK);
         finish();
+    }
+
+    @Override
+    public long getReasonId() {
+        return 0;
     }
 }

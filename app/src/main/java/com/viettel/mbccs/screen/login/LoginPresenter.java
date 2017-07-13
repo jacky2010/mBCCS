@@ -58,8 +58,8 @@ public class LoginPresenter implements LoginContract.Presenter {
     }
 
     private void initData() {
-        userName = new ObservableField<>("LEVT");
-        password = new ObservableField<>("123456");
+        userName = new ObservableField<>();
+        password = new ObservableField<>();
         error = new ObservableField<>();
         loading = new ObservableBoolean();
         loading.set(false);

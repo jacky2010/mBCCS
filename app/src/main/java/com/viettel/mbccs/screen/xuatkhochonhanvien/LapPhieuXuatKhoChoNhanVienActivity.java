@@ -18,7 +18,7 @@ import java.util.List;
  * Created by eo_cuong on 7/9/17.
  */
 
-public class LapLenhXuatKhoChoNhanVienActivity extends BaseCreateCommandNoteActivity<OwnerCode> {
+public class LapPhieuXuatKhoChoNhanVienActivity extends BaseCreateCommandNoteActivity<OwnerCode> {
 
     private List<OwnerCode> ownerCodes = new ArrayList<>();
 
@@ -59,7 +59,7 @@ public class LapLenhXuatKhoChoNhanVienActivity extends BaseCreateCommandNoteActi
 
     @Override
     public int getActionType() {
-        return BaseCreateCommandNoteActivity.ACTION_CREATE_CMD;
+        return BaseCreateCommandNoteActivity.ACTION_CREATE_NOTE;
     }
 
     @Override
@@ -99,19 +99,17 @@ public class LapLenhXuatKhoChoNhanVienActivity extends BaseCreateCommandNoteActi
 
     @Override
     public int getStepType() {
-        return BaseCreateCommandNoteActivity.STEP_3;
+        return BaseCreateCommandNoteActivity.STEP_2;
     }
 
     @Override
     public void onRejectSuccess() {
-        setResult(RESULT_OK);
-        finish();
+
     }
 
     @Override
     public void onCreateSuccess() {
-        setResult(RESULT_OK);
-        finish();
+
     }
 
     @Override

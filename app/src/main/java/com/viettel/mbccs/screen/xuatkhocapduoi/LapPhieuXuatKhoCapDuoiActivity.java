@@ -70,4 +70,9 @@ public class LapPhieuXuatKhoCapDuoiActivity extends BaseCreateCommandNoteActivit
         setResult(RESULT_OK);
         finish();
     }
+
+    @Override
+    public long getReasonId() {
+        return 0;
+    }
 }

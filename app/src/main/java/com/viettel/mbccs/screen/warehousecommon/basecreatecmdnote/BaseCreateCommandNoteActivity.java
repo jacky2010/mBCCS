@@ -23,7 +23,9 @@ public abstract class BaseCreateCommandNoteActivity<T> extends
 
     public static final int STOCK_TOTAL_PICKER_REQUEST = 123;
     public static final int REQUEST_SUCCESS = 125;
+    // Lập lệnh
     public static final int ACTION_CREATE_CMD = 0;
+    // Lập phiếu
     public static final int ACTION_CREATE_NOTE = 1;
 
     public static final int STEP_2 = 2;
