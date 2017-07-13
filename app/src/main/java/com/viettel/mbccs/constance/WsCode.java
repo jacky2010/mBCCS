@@ -434,4 +434,9 @@ public class WsCode {
     public static final String GetQuotaByProductCode = "WS_getQuotaByProductCode";
     public static final String GetBankInfo = "WS_getBankInfo";
     public static final String GetCurrBillCycle = "WS_getCurrBillCycle";
+
+    public static final String GetProductSearch = "WS_getProductSearch";
+    public static final String SearchProduct = "WS_searchProduct";
+    public static final String SearchAdvancedProduct = "WS_searchAdvancedProduct";
+    public static final String GetProductInfo = "WS_getProductInfo";
 }

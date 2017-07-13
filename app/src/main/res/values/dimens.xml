@@ -39,6 +39,7 @@
     <dimen name="dp_200">200dp</dimen>
     <dimen name="dp_220">220dp</dimen>
     <dimen name="dp_240">240dp</dimen>
+    <dimen name="dp_250">250dp</dimen>
     <dimen name="dp_300">300dp</dimen>
     <dimen name="dp_360">360dp</dimen>
 
@@ -89,11 +90,11 @@
     <dimen name="dp_45">45dp</dimen>
 
     <!--labels & content-->
-    <dimen name="default_label_text_size">16dp</dimen>
-    <dimen name="default_content_text_size">16dp</dimen>
-    <dimen name="default_label_text_size2">16dp</dimen>
-    <dimen name="default_picker_text_size">16dp</dimen>
-    <dimen name="default_radio_text_size">16dp</dimen>
+    <dimen name="default_label_text_size">14sp</dimen>
+    <dimen name="default_content_text_size">14sp</dimen>
+    <dimen name="default_label_text_size2">14sp</dimen>
+    <dimen name="default_picker_text_size">14sp</dimen>
+    <dimen name="default_radio_text_size">14sp</dimen>
 
     <dimen name="cp_dialog_width">200dp</dimen>
     <dimen name="cp_dialog_height">300dp</dimen>

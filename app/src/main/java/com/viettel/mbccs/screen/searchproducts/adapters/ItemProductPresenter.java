@@ -4,7 +4,7 @@ import android.content.Context;
 import android.databinding.ObservableField;
 
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.data.model.ModelSale;
+import com.viettel.mbccs.data.model.SearchProduct;
 import com.viettel.mbccs.utils.Common;
 import com.viettel.mbccs.utils.FileUtils;
 
@@ -18,26 +18,32 @@ import java.util.List;
 
 public class ItemProductPresenter {
 
-    private ModelSale mItem;
+    private SearchProduct mItem;
     private Context mContext;
-    private List<Integer> colorIds;
+    private List<String> colorIds;
     private AvailableColorsListAdapter availableColorsAdapter;
 
     public ObservableField<AvailableColorsListAdapter> availableColorsListAdapter;
 
-    public ItemProductPresenter(Context context, ModelSale item) {
+    public ItemProductPresenter(Context context, SearchProduct item) {
         mItem = item;
         mContext = context;
         colorIds = new ArrayList<>();
-        colorIds.add(R.color.bg_config);
-        colorIds.add(R.color.blue);
-        colorIds.add(R.color.colorPrimary);
+
+        if (item.getColour() != null) {
+            String[] colours = item.getColour().split(";");
+            if (colours != null) {
+                for (int i = 0; i < colours.length; i++) {
+                    colorIds.add(colours[i]);
+                }
+            }
+        }
 
         availableColorsAdapter = new AvailableColorsListAdapter(context, colorIds);
         availableColorsListAdapter = new ObservableField<>(availableColorsAdapter);
     }
 
-    public ModelSale getItem() {
+    public SearchProduct getItem() {
         return mItem;
     }
 
@@ -47,7 +53,8 @@ public class ItemProductPresenter {
     }
 
     public String getUrlImage() {
-        File file = FileUtils.getImageFileByIdName(mContext, String.valueOf(mItem.getStockModelId()));
+        //TODO minhnx image?
+        File file = FileUtils.getImageFileByIdName(mContext, String.valueOf(mItem.getProductId()));
         if (file != null && file.exists()) {
             return file.getAbsolutePath();
         }

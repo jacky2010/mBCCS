@@ -326,6 +326,11 @@
             android:name=".screen.xuatkhocapduoi.ListXuatKhoCapDuoi"
             android:screenOrientation="portrait"/>
 
+        <activity
+            android:name=".screen.viewproduct.ViewProductDetailActivity"
+            android:screenOrientation="portrait"/>
+
+
         <!--End Nhap kho cap tren-->
 
         <!--Tra hang cap tren-->
