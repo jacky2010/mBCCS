@@ -18,6 +18,8 @@ import com.viettel.mbccs.variable.Constants;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.viettel.mbccs.R.string.common_label_notice;
+
 /**
  * Created by FRAMGIA\hoang.van.cuong on 28/06/2017.
  */
@@ -75,16 +77,17 @@ public class LapPhieuXuatTraHangActivity extends
 
     @Override
     public void onCreateExpSuccess(ArrayList<StockTotal> stockTotals, StockTrans stockTrans) {
-        ExportSuccessDialog exportSuccessDialog = ExportSuccessDialog.newInstance(stockTrans,
-                String.format(getString(R.string.nhanvien_xuattra_lable_cmd_title),
-                        String.valueOf(stockTrans.getStockTransId())),
-                String.format(getString(R.string.nhanvien_xuattra_lable_receive_title),
-                       ""));
+        ExportSuccessDialog exportSuccessDialog =
+                ExportSuccessDialog.newInstance(stockTrans, getString(common_label_notice),
+                        getString(R.string.nhanvien_xuattra_lable_cmd_title,
+                                String.valueOf(stockTrans.getStockTransId())),
+                        getString(R.string.nhanvien_xuattra_lable_receive_title,
+                                String.valueOf(stockTrans.getToOwnerId())));
         exportSuccessDialog.setOnDialogDismissListener(
                 new ExportSuccessDialog.OnDialogDismissListener() {
 
                     @Override
-                    public void onDialogDissmis() {
+                    public void onDialogDismiss() {
                         finish();
                         setResult(RESULT_OK);
                     }

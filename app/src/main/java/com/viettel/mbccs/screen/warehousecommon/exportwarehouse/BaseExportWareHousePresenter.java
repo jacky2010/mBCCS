@@ -165,15 +165,16 @@ public class BaseExportWareHousePresenter implements BaseExportWareHouseContract
         mCreateExpStockRequest.setWsCode(WsCode.CreateExpStock);
         CreateExpStockRequest request = new CreateExpStockRequest();
         request.setStockTransId(mStockTrans.getStockTransId());
+        request.setStaffId(mUserRepository.getUserInfo().getStaffInfo().getStaffId());
         List<StockSerial> stockSerials = new ArrayList<>();
         for (StockTransDetail stockTransDetail : mStockTransDetails) {
-            if (stockTransDetail.getCountChoice() > 0) {
+            if (stockTransDetail.getCheckSerial() == 0 || stockTransDetail.getCountChoice() > 0) {
                 stockSerials.add(stockTransDetail.getStockSerial());
             }
         }
         request.setStockSerials(stockSerials);
         mCreateExpStockRequest.setWsRequest(request);
-        Subscription subcription =
+        Subscription subscription =
                 mBanHangKhoTaiChinhRepository.createExpStock(mCreateExpStockRequest).subscribe(
 
                         new MBCCSSubscribe<BaseCreateCmdNoteResponse>() {
@@ -193,7 +194,7 @@ public class BaseExportWareHousePresenter implements BaseExportWareHouseContract
                                 mViewModel.hideLoading();
                             }
                         });
-        mSubscription.add(subcription);
+        mSubscription.add(subscription);
     }
 
     public boolean validate() {

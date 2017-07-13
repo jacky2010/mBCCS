@@ -18,6 +18,10 @@ public class PatternUtils {
     public static final String PATTERN_TEXT_LENGTH_100 = "^[a-zA-Z]{1,100}$";
 
     public static boolean validateString(String data, String pattern) {
-        return !StringUtils.isEmpty(data) && Pattern.matches(pattern, data);
+        return !StringUtils.isEmpty(data) && compilePattern(pattern).matcher(data).matches();
+    }
+
+    private static Pattern compilePattern(String pattern) {
+        return Pattern.compile(pattern, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
     }
 }

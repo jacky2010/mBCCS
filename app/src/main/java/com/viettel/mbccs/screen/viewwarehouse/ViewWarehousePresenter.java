@@ -5,14 +5,16 @@ import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
 import android.support.v7.widget.RecyclerView;
-import com.viettel.mbccs.constance.WsCode;
+import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.SaleTranType;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.model.UserInfo;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListStockModelRequest;
+import com.viettel.mbccs.data.source.remote.response.BaseErrorResponse;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetListStockModelResponse;
 import com.viettel.mbccs.screen.viewwarehouse.adapter.ViewWarehouseListOrderAdapter;
@@ -73,6 +75,13 @@ public class ViewWarehousePresenter implements ViewWarehouseContract.Presenter,
                 .subscribe(new MBCCSSubscribe<GetListStockModelResponse>() {
                     @Override
                     public void onSuccess(GetListStockModelResponse object) {
+                        if (object == null || object.getStockTotalList() == null)
+                        {
+                            BaseErrorResponse baseErrorResponse = new BaseErrorResponse();
+                            baseErrorResponse.setError(201, context.getString(R.string.no_data));
+                            onError(BaseException.toServerError(baseErrorResponse));
+                            return;
+                        }
                         stockTotalList = object.getStockTotalList();
                         view.setData(stockTotalList);
                         totalStock.set(stockTotalList.size());
@@ -80,7 +89,7 @@ public class ViewWarehousePresenter implements ViewWarehouseContract.Presenter,
 
                     @Override
                     public void onError(BaseException error) {
-                        view.onError(BaseException.toUnexpectedError(new Exception()));
+                        view.onError(error);
                     }
                 });
         subscriptions.add(subscription);

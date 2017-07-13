@@ -2,6 +2,7 @@ package com.viettel.mbccs.screen.xuatkhochonhanvien;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.listkho.BaseListOrderActivity;
 import com.viettel.mbccs.constance.OwnerType;
@@ -18,6 +19,12 @@ import com.viettel.mbccs.data.source.remote.request.GetListOwnerCodeRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetListExpCmdResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListOwneCodeReponse;
+import com.viettel.mbccs.screen.warehousecommon.exportsuccess.ExportSuccessDialog;
+import com.viettel.mbccs.screen.xuatkhochonhanvien.threestep.LapLenh3XuatKhoChoNhanVienActivity;
+import com.viettel.mbccs.screen.xuatkhochonhanvien.threestep.LapPhieu3XuatKhoChoNhanVienActivity;
+import com.viettel.mbccs.screen.xuatkhochonhanvien.threestep.XuatKho3XuatKhoChoNhanVienActivity;
+import com.viettel.mbccs.screen.xuatkhochonhanvien.twostep.LapPhieu2XuatKhoChoNhanVienActivity;
+import com.viettel.mbccs.screen.xuatkhochonhanvien.twostep.XuatKho2XuatKhoChoNhanVienActivity;
 import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import com.viettel.mbccs.variable.Constants;
@@ -25,15 +32,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.viettel.mbccs.R.string.xuat_kho_cho_nhan_vien_chi_tiet_phieu_xuat;
+
 /**
  * Created by HuyQuyet on 7/11/17.
  */
 
 public class XuatKhoChoNhanVienActivity extends BaseListOrderActivity {
-
-    List<String> staffListName = new ArrayList<>();
-    List<OwnerCode> ownerCodes = new ArrayList<>();
-    List<String> funtions = new ArrayList<>();
+    public static final int REQUEST_CODE = 101;
+    public static final String DATA_RESULT = "data_result";
+    private List<String> staffListName = new ArrayList<>();
+    private List<OwnerCode> ownerCodes = new ArrayList<>();
+    private List<String> funtions = new ArrayList<>();
 
     @Override
     public void doSearch() {
@@ -82,33 +92,35 @@ public class XuatKhoChoNhanVienActivity extends BaseListOrderActivity {
                                 if (Constants.FuntionConstant.ENVIROMENT_STEP
                                         == STEP_WAREHOUSE.STEP_3) {
                                     stockTrans.setActionName(
-                                            getString(R.string.nv_trahangcaptren_action_detail));
+                                            getString(R.string.xuat_kho_cho_nhan_vien_chi_tiet));
 
                                     switch ((int) stockTrans.getStockTransStatus()) {
-                                        case (int) StockTransStatus.TRANS_DONE:
-                                            if (funtions.contains(RoleWareHouse.LAP_LENH_NHAP)
-                                                    && stockTrans.getActionType()
-                                                    == StockTransType.TRANS_EXPORT) {
-                                                stockTrans.setActionName(getString(
-                                                        R.string.commmon_warehouse_action_create_cmd));
-                                            }
-
-                                            break;
                                         case (int) StockTransStatus.TRANS_NON_NOTE:
                                             if (funtions.contains(RoleWareHouse.LAP_PHIEU_NHAP)) {
                                                 stockTrans.setActionName(getString(
-                                                        R.string.commmon_warehouse_action_create_note));
+                                                        R.string.xuat_kho_cho_nhan_vien_lap_phieu));
                                             }
                                             break;
                                         case (int) StockTransStatus.TRANS_NOTED:
                                             if (funtions.contains(RoleWareHouse.NHAP_KHO)) {
                                                 stockTrans.setActionName(getString(
-                                                        R.string.commmon_warehouse_action_create_import));
+                                                        R.string.xuat_kho_cho_nhan_vien_xuat_kho));
                                             }
+                                            break;
+                                        case (int) StockTransStatus.TRANS_EXP_IMPED:
+                                        case (int) StockTransStatus.TRANS_CANCEL:
+                                        case (int) StockTransStatus.TRANS_DONE:
+                                            //  if (funtions.contains(RoleWareHouse.LAP_LENH_NHAP)
+                                            //    && stockTrans.getActionType()
+                                            //     == StockTransType.TRANS_EXPORT) {
+                                            stockTrans.setActionName(getString(
+                                                    R.string.xuat_kho_cho_nhan_vien_chi_tiet));
+                                            //                                            }
+
                                             break;
                                         default:
                                             stockTrans.setActionName(getString(
-                                                    R.string.nv_trahangcaptren_action_detail));
+                                                    R.string.xuat_kho_cho_nhan_vien_chi_tiet));
                                     }
                                 }
 
@@ -122,10 +134,10 @@ public class XuatKhoChoNhanVienActivity extends BaseListOrderActivity {
                                     switch ((int) stockTrans.getStockTransStatus()) {
 
                                         case (int) StockTransStatus.TRANS_NOTED:
-                                            //                                            if (funtions.contains(RoleWareHouse.LAP_PHIEU_XUAT)) {
-                                            stockTrans.setActionName(getString(
+                                            if (funtions.contains(RoleWareHouse.XUAT_KHO)) {
+                                                stockTrans.setActionName(getString(
                                                     R.string.xuat_kho_cho_nhan_vien_xuat_kho));
-                                            //                                            }
+                                            }
                                             break;
                                         case (int) StockTransStatus.TRANS_DONE:
                                         case (int) StockTransStatus.TRANS_EXP_IMPED:
@@ -162,7 +174,109 @@ public class XuatKhoChoNhanVienActivity extends BaseListOrderActivity {
 
     @Override
     public void onItemStockTransClick(StockTrans stockTrans) {
+        Intent intent = null;
+        String cmdCodeTitle = "";
+        String cmdNameTitle = "";
+        if (Constants.FuntionConstant.ENVIROMENT_STEP == STEP_WAREHOUSE.STEP_2) {
+            switch ((int) stockTrans.getStockTransStatus()) {
+                case (int) StockTransStatus.TRANS_NOTED:
+                    if (funtions.contains(RoleWareHouse.XUAT_KHO)) {
+                        intent = new Intent(this, XuatKho2XuatKhoChoNhanVienActivity.class);
+                    } else {
+                        cmdCodeTitle =
+                                getString(R.string.xuat_kho_cho_nhan_vien_lap_phieu_thanh_cong,
+                                        String.valueOf(stockTrans.getStockTransId()));
+                    }
+                    break;
 
+                case (int) StockTransStatus.TRANS_CANCEL:
+                    cmdCodeTitle = getString(R.string.xuat_kho_cho_nhan_vien_giao_dich_da_huy,
+                            String.valueOf(stockTrans.getStockTransId()));
+                    break;
+
+                case (int) StockTransStatus.TRANS_DONE:
+                    cmdCodeTitle = getString(R.string.xuat_kho_cho_nhan_vien_giao_dich_da_xuat,
+                            String.valueOf(stockTrans.getStockTransId()));
+                    break;
+
+                case (int) StockTransStatus.TRANS_REJECT:
+                    cmdCodeTitle = getString(R.string.xuat_kho_cho_nhan_vien_giao_dich_bi_tu_choi,
+                            String.valueOf(stockTrans.getStockTransId()));
+                    break;
+
+                case (int) StockTransStatus.TRANS_EXP_IMPED:
+                    cmdCodeTitle = getString(R.string.xuat_kho_cho_nhan_vien_giao_dich_da_nhap,
+                            String.valueOf(stockTrans.getStockTransId()));
+                    break;
+            }
+        } else {
+            switch ((int) stockTrans.getStockTransStatus()) {
+                case (int) StockTransStatus.TRANS_NON_NOTE:
+                    if (funtions.contains(RoleWareHouse.LAP_PHIEU_XUAT)) {
+                        intent = new Intent(this, LapPhieu3XuatKhoChoNhanVienActivity.class);
+                    } else {
+                        cmdCodeTitle =
+                                getString(R.string.xuat_kho_cho_nhan_vien_lap_lenh_thanh_cong,
+                                        String.valueOf(stockTrans.getStockTransId()));
+                    }
+                    break;
+
+                case (int) StockTransStatus.TRANS_NOTED:
+                    if (funtions.contains(RoleWareHouse.XUAT_KHO)) {
+                        intent = new Intent(this, XuatKho3XuatKhoChoNhanVienActivity.class);
+                    } else {
+                        cmdCodeTitle =
+                                getString(R.string.xuat_kho_cho_nhan_vien_lap_phieu_thanh_cong,
+                                        String.valueOf(stockTrans.getStockTransId()));
+                    }
+                    break;
+
+                case (int) StockTransStatus.TRANS_CANCEL:
+                    cmdCodeTitle = getString(R.string.xuat_kho_cho_nhan_vien_giao_dich_da_huy,
+                            String.valueOf(stockTrans.getStockTransId()));
+                    break;
+
+                case (int) StockTransStatus.TRANS_DONE:
+                    cmdCodeTitle = getString(R.string.xuat_kho_cho_nhan_vien_giao_dich_da_xuat,
+                            String.valueOf(stockTrans.getStockTransId()));
+                    break;
+
+                case (int) StockTransStatus.TRANS_REJECT:
+                    cmdCodeTitle = getString(R.string.xuat_kho_cho_nhan_vien_giao_dich_bi_tu_choi,
+                            String.valueOf(stockTrans.getStockTransId()));
+                    break;
+
+                case (int) StockTransStatus.TRANS_EXP_IMPED:
+                    cmdCodeTitle = getString(R.string.xuat_kho_cho_nhan_vien_giao_dich_da_nhap,
+                            String.valueOf(stockTrans.getStockTransId()));
+                    break;
+            }
+        }
+        if (intent == null) {
+            for (OwnerCode ownerCode : ownerCodes) {
+                if (ownerCode.getStaffId() == stockTrans.getToOwnerId()) {
+                    cmdNameTitle = getString(R.string.xuat_kho_cho_nhan_vien_nhan_vien_nhan,
+                            ownerCode.getName());
+                }
+            }
+            //            cmdNameTitle = getString(R.string.xuat_kho_cho_nhan_vien_nhan_vien_nhan,
+            //                    String.valueOf(stockTrans.getToOwnerId()));
+            ExportSuccessDialog exportSuccessDialog = ExportSuccessDialog.newInstance(stockTrans,
+                    getString(xuat_kho_cho_nhan_vien_chi_tiet_phieu_xuat), cmdCodeTitle,
+                    cmdNameTitle);
+            exportSuccessDialog.setOnDialogDismissListener(
+                    new ExportSuccessDialog.OnDialogDismissListener() {
+                        @Override
+                        public void onDialogDismiss() {
+                        }
+                    });
+            exportSuccessDialog.show(getSupportFragmentManager(), "");
+        } else {
+            Bundle bundle = new Bundle();
+            bundle.putParcelable(Constants.BundleConstant.STOCK_TRANS, stockTrans);
+            intent.putExtras(bundle);
+            startActivityForResult(intent, REQUEST_CODE);
+        }
     }
 
     @Override
@@ -172,7 +286,23 @@ public class XuatKhoChoNhanVienActivity extends BaseListOrderActivity {
 
     @Override
     public boolean isShowAddButton() {
-        return true;
+        boolean isShow = false;
+        switch ((int) Constants.FuntionConstant.ENVIROMENT_STEP) {
+            case (int) STEP_WAREHOUSE.STEP_2:
+                if (funtions.contains(RoleWareHouse.LAP_PHIEU_XUAT)) isShow = true;
+                break;
+
+            case (int) STEP_WAREHOUSE.STEP_3:
+                if (funtions.contains(RoleWareHouse.LAP_LENH_XUAT)) {
+                    isShow = true;
+                }
+                break;
+
+            default:
+                isShow = false;
+                break;
+        }
+        return isShow;
     }
 
     @Override
@@ -185,13 +315,13 @@ public class XuatKhoChoNhanVienActivity extends BaseListOrderActivity {
         Intent intent;
         if (Constants.FuntionConstant.ENVIROMENT_STEP == STEP_WAREHOUSE.STEP_2) {
             intent = new Intent(XuatKhoChoNhanVienActivity.this,
-                    LapPhieuXuatKhoChoNhanVienActivity.class);
+                    LapPhieu2XuatKhoChoNhanVienActivity.class);
         } else {
             intent = new Intent(XuatKhoChoNhanVienActivity.this,
-                    LapLenhXuatKhoChoNhanVienActivity.class);
+                    LapLenh3XuatKhoChoNhanVienActivity.class);
         }
 
-        startActivity(intent);
+        startActivityForResult(intent, REQUEST_CODE);
     }
 
     @Override
@@ -251,5 +381,11 @@ public class XuatKhoChoNhanVienActivity extends BaseListOrderActivity {
                         hideLoading();
                     }
                 });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        doSearch();
     }
 }

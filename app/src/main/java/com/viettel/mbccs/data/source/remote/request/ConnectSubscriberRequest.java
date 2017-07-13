@@ -3,6 +3,7 @@ package com.viettel.mbccs.data.source.remote.request;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.viettel.mbccs.data.model.Contract;
+import com.viettel.mbccs.data.model.ContractBank;
 import com.viettel.mbccs.data.model.Customer;
 import com.viettel.mbccs.data.model.Subscriber;
 
@@ -18,6 +19,10 @@ public class ConnectSubscriberRequest extends BaseRequest {
     @SerializedName("contract")
     @Expose
     private Contract contract;
+
+    @SerializedName("contractBank")
+    @Expose
+    private ContractBank contractBank;
 
     @SerializedName("subscriber")
     @Expose
@@ -61,6 +66,14 @@ public class ConnectSubscriberRequest extends BaseRequest {
 
     public void setContract(Contract contract) {
         this.contract = contract;
+    }
+
+    public ContractBank getContractBank() {
+        return contractBank;
+    }
+
+    public void setContractBank(ContractBank contractBank) {
+        this.contractBank = contractBank;
     }
 
     public Subscriber getSubscriber() {

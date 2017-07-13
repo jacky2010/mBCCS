@@ -26,6 +26,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.viettel.mbccs.R.string.common_label_notice;
+
 /**
  * Created by buidinhviet on 6/13/17.
  */
@@ -183,14 +185,15 @@ public class ListXuatKhoCapDuoi extends BaseListOrderActivity {
     private void showDialogExportSuccess(String title, StockTrans stockTrans,
             boolean isShowSerial) {
         ExportSuccessDialog exportSuccessDialog1 =
-                ExportSuccessDialog.newInstance(stockTrans, title,
+                ExportSuccessDialog.newInstance(stockTrans, getString(common_label_notice), title,
                         String.format(getString(R.string.warehouse_label_receive),
                                 String.valueOf(stockTrans.getToOwnerId())), isShowSerial);
         exportSuccessDialog1.setOnDialogDismissListener(
                 new ExportSuccessDialog.OnDialogDismissListener() {
 
                     @Override
-                    public void onDialogDissmis() {
+                    public void onDialogDismiss() {
+
                     }
                 });
         exportSuccessDialog1.show(getSupportFragmentManager(), "");

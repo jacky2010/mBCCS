@@ -28,6 +28,7 @@
     <string name="common_label_yes">Có</string>
     <string name="common_label_no">Không</string>
     <string name="error_load_data">Error load data</string>
+    <string name="no_data">Không có dữ liệu</string>
 
 
     <string formatted="false" name="count_serial_selected">
@@ -1227,12 +1228,27 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <!-- Nhân viên xác nhận hàng -->
     <string name="nv_xac_nhan_hang_title">Nhân viên xác nhận hàng</string>
     <string name="nv_xac_nhan_hang_ma_kho_xuat">Mã kho xuất</string>
+    <string name="nv_xac_nhan_hang_chi_tiet_phieu_nhap">Chi tiết phiếu nhập</string>
+    <string name="nv_xac_nhan_hang_chi_tiet_phieu_nhap_s">Chi tiết phiếu nhập: %s</string>
+    <string name="nv_xac_nhan_hang_nhan_vien_nhan">Nhân viên nhận: %s</string>
+    <string name="nv_xac_nhan_hang_chi_tiet_phieu_nhap_kho">Chi tiết phiếu nhập kho</string>
+    <string name="nv_xac_nhan_hang_nhap_kho">Nhập kho</string>
 
     <!-- Xuất kho cho nhân viên -->
     <string name="xuat_kho_cho_nhan_vien_title">Quản lý xuất kho cho nhân viên</string>
     <string name="xuat_kho_cho_nhan_vien_ma_kho_nhan">Mã kho nhận</string>
     <string name="xuat_kho_cho_nhan_vien_xuat_kho">Xuất kho</string>
-
+    <string name="xuat_kho_cho_nhan_vien_lap_phieu">Lập phiếu</string>
+    <string name="xuat_kho_cho_nhan_vien_chi_tiet">Chi tiết</string>
+    <string name="xuat_kho_cho_nhan_vien_chi_tiet_phieu_xuat">Chi tiết phiếu xuất</string>
+    <string name="xuat_kho_cho_nhan_vien_lap_phieu_xuat_kho_cho_nhan_vien">Lập phiếu xuất kho cho nhân viên</string>
+    <string name="xuat_kho_cho_nhan_vien_lap_phieu_thanh_cong">Lập phiếu thành công mã: %s</string>
+    <string name="xuat_kho_cho_nhan_vien_giao_dich_da_huy">Giao dịch đã hủy mã: %s</string>
+    <string name="xuat_kho_cho_nhan_vien_giao_dich_da_xuat">Giao dịch đã xuất mã: %s</string>
+    <string name="xuat_kho_cho_nhan_vien_giao_dich_bi_tu_choi">Giao dịch bị từ chối mã: %s</string>
+    <string name="xuat_kho_cho_nhan_vien_giao_dich_da_nhap">Giao dịch đã nhập mã: %s</string>
+    <string name="xuat_kho_cho_nhan_vien_nhan_vien_nhan">Nhân viên nhận: %s</string>
+    <string name="xuat_kho_cho_nhan_vien_lap_lenh_thanh_cong">Lập lệnh thành công mã: %s</string>
 
     <string name="common_export_label_create_cmd">Lập lệnh</string>
     <string name="common_export_label_cmd_detail">Chi tiết lệnh xuất</string>

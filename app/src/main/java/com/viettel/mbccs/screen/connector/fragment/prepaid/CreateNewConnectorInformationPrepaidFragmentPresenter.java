@@ -19,6 +19,7 @@ import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.ApDomainByType;
 import com.viettel.mbccs.data.model.BusType;
 import com.viettel.mbccs.data.model.Contract;
+import com.viettel.mbccs.data.model.ContractBank;
 import com.viettel.mbccs.data.model.Customer;
 import com.viettel.mbccs.data.model.Product;
 import com.viettel.mbccs.data.model.RegType;
@@ -82,6 +83,7 @@ public class CreateNewConnectorInformationPrepaidFragmentPresenter extends BaseO
     private Customer customerCurrent;
     private Subscriber subscriberCurrent;
     private Contract contractCurrent;
+    private ContractBank contractBankCurrent;
 
     private String nameCustomer;
     private String dateBirthday;
@@ -452,8 +454,10 @@ public class CreateNewConnectorInformationPrepaidFragmentPresenter extends BaseO
 
         UserInfo userInfo = userRepository.getUserInfo();
         getContract();
+        getContractBankCurrent();
         ConnectSubscriberRequest connectSubscriberRequest = new ConnectSubscriberRequest();
         connectSubscriberRequest.setContract(contractCurrent);
+        connectSubscriberRequest.setContractBank(contractBankCurrent);
         connectSubscriberRequest.setCustomer(customerCurrent);
         connectSubscriberRequest.setSubscriber(subscriberCurrent);
         connectSubscriberRequest.setStaffCode(userInfo.getStaffInfo().getStaffCode());
@@ -554,6 +558,12 @@ public class CreateNewConnectorInformationPrepaidFragmentPresenter extends BaseO
 
     private void getContract() {
         if (contractCurrent == null) contractCurrent = new Contract();
+    }
+
+    private void getContractBankCurrent() {
+        if (contractBankCurrent == null) {
+            contractBankCurrent = new ContractBank();
+        }
     }
 
     public boolean validateCustomer() {

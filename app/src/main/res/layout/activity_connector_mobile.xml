@@ -57,6 +57,9 @@
                         android:text="@{ @string/connector_mobile_danh_sach_yeu_cau( presenter.countResult )}"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp_18"
+                        android:layout_marginLeft="@dimen/dp_20"
+                        android:layout_marginRight="@dimen/dp_20"
+                        android:layout_marginTop="@dimen/dp_20"
                         />
 
                     <android.support.v7.widget.RecyclerView
@@ -120,7 +123,7 @@
                             android:paddingRight="@dimen/dp_20"
                             >
 
-                            <RadioButton
+                            <android.support.v7.widget.AppCompatRadioButton
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -128,10 +131,10 @@
                                 android:text="@string/connector_mobile_tra_truoc"
                                 android:textColor="@color/text_title_input"
                                 android:textSize="@dimen/sp_14"
-                                android:theme="@style/MyRadioCheckboxWhite"
+                                app:buttonTint="@color/white"
                                 />
 
-                            <RadioButton
+                            <android.support.v7.widget.AppCompatRadioButton
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -139,7 +142,7 @@
                                 android:text="@string/connector_mobile_tra_sau"
                                 android:textColor="@color/text_title_input"
                                 android:textSize="@dimen/sp_14"
-                                android:theme="@style/MyRadioCheckboxWhite"
+                                app:buttonTint="@color/white"
                                 />
                         </RadioGroup>
 

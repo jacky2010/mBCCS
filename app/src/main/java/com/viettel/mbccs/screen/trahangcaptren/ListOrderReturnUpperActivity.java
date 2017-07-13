@@ -26,6 +26,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static com.viettel.mbccs.R.string.common_label_notice;
+
 /**
  * Created by Anh Vu Viet on 5/31/2017.
  */
@@ -140,7 +142,7 @@ public class ListOrderReturnUpperActivity extends BaseListOrderActivity {
                 break;
             case (int) StockTransStatus.TRANS_CANCEL:
                 ExportSuccessDialog exportSuccessDialog =
-                        ExportSuccessDialog.newInstance(stockTrans, String.format(
+                        ExportSuccessDialog.newInstance(stockTrans, getString(common_label_notice), String.format(
                                 getString(R.string.warehouse_label_export_success_code),
                                 String.valueOf(stockTrans.getStockTransId())),
                                 String.format(getString(R.string.warehouse_label_receive),
@@ -149,14 +151,15 @@ public class ListOrderReturnUpperActivity extends BaseListOrderActivity {
                         new ExportSuccessDialog.OnDialogDismissListener() {
 
                             @Override
-                            public void onDialogDissmis() {
+                            public void onDialogDismiss() {
                             }
                         });
                 exportSuccessDialog.show(getSupportFragmentManager(), "");
                 return;
             default:
                 ExportSuccessDialog exportSuccessDialog1 =
-                        ExportSuccessDialog.newInstance(stockTrans, String.format(
+                        ExportSuccessDialog.newInstance(stockTrans, getString(common_label_notice),
+                                String.format(
                                 getString(R.string.warehouse_label_export_success_code),
                                 String.valueOf(stockTrans.getStockTransId())),
                                 String.format(getString(R.string.warehouse_label_receive),
@@ -165,7 +168,7 @@ public class ListOrderReturnUpperActivity extends BaseListOrderActivity {
                         new ExportSuccessDialog.OnDialogDismissListener() {
 
                             @Override
-                            public void onDialogDissmis() {
+                            public void onDialogDismiss() {
                             }
                         });
                 exportSuccessDialog1.show(getSupportFragmentManager(), "");
