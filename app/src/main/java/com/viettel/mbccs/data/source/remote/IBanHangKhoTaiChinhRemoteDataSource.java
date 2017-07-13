@@ -45,6 +45,7 @@ import com.viettel.mbccs.data.source.remote.response.GetListOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListProvinceResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListSerialResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListShopResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListStockModelAllResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListStockModelResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListTTKDResponse;
 import com.viettel.mbccs.data.source.remote.response.GetOrderInfoResponse;
@@ -82,6 +83,9 @@ public interface IBanHangKhoTaiChinhRemoteDataSource {
     Observable<GetListStockModelResponse> getListStockModel(
             DataRequest<GetListStockModelRequest> request);
 
+    Observable<GetListStockModelAllResponse> getListStockModelAll(
+            DataRequest<GetListStockModelRequest> request);
+
     Observable<GetListSerialResponse> getListSerial(DataRequest<GetListSerialRequest> request);
 
     Observable<GetListProvinceResponse> getListProvince(
@@ -113,7 +117,8 @@ public interface IBanHangKhoTaiChinhRemoteDataSource {
     Observable<ListStockTransDetailsReponse> getListStockTransDetail(
             DataRequest<GetListStockTransDetailRequest> request);
 
-    Observable<BaseCreateCmdNoteResponse> createExpStock(DataRequest<CreateExpStockRequest> requestDataRequest);
+    Observable<BaseCreateCmdNoteResponse> createExpStock(
+            DataRequest<CreateExpStockRequest> requestDataRequest);
 
     Observable<InputOrderResponse> getListInvoice(
             DataRequest<InputOrderRequest> requestDataRequest);

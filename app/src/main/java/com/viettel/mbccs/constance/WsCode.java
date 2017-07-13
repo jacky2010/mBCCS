@@ -221,6 +221,8 @@ public class WsCode {
     // 5.8.3.1 - 5.14.3 - 5.18.3
     public final static String GetListStockModel = "WS_getListStockModel";
 
+    public final static String GetListStockModelAll = "WS_getListStockModelAll";
+
     // 5.8.3.2 - 5.12.3
     public final static String ViewInfoSerial = "WS_ViewInfoSerial";
 
@@ -415,7 +417,6 @@ public class WsCode {
     public final static String GetDetailImageOfProduct = "WS_getDetailImageOfProduct";
     public final static String IsKPPManager = "WS_isManager";
     public final static String GetRegisterSub = "WS_getRegisterSub";
-
 
     public final static String GetTaskPrepareAssignStaff = "WS_getTaskPrepareAssignStaff";
     public final static String AssignTaskForStaff = "WS_assignTaskForStaff";

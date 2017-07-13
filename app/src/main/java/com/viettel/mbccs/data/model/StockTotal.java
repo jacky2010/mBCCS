@@ -118,8 +118,12 @@ public class StockTotal implements Parcelable {
     public StockSerial getStockSerial() {
         if (mStockSerial == null) {
             mStockSerial = new StockSerial();
-            mStockSerial.setQuantity(quantity);
-            mStockSerial.setSerialBOs(getSerialBlocks());
+            if (checkSerial==1){
+                mStockSerial.setQuantity(Common.getSerialCountByListSerialBlock(getSerialBlocks()));
+                mStockSerial.setSerialBOs(getSerialBlocks());
+            }else{
+                mStockSerial.setQuantity(countChoice);
+            }
             mStockSerial.setStockModelId(stockModelId);
             mStockSerial.setStockModelCode(stockModelCode);
             mStockSerial.setStockModelName(stockModelName);

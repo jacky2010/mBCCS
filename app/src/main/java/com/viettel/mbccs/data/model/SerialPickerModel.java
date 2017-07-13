@@ -28,9 +28,9 @@ public class SerialPickerModel implements Serializable {
     @Expose
     private List<SerialBO> lstSerial;
 
-    private long ownerId;
+    private Long ownerId;
 
-    private long ownwerType;
+    private Long ownwerType;
 
     public SerialPickerModel() {
         lstSerial = new ArrayList<>();

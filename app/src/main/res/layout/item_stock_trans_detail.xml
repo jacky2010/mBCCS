@@ -55,14 +55,6 @@
                     android:textSize="@dimen/sp_14"
                     app:textUnderLine="@{presenter.action}"
                     />
-                <com.viettel.mbccs.widget.CustomTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="right|center_vertical"
-                    android:textColor="@color/blue"
-                    android:textSize="@dimen/sp_14"
-                    android:text="@{presenter.action}"
-                    />
             </LinearLayout>
         </LinearLayout>
         <View

@@ -19,6 +19,7 @@ import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListStockModelRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseCreateCmdNoteResponse;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.GetListStockModelAllResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListStockModelResponse;
 import com.viettel.mbccs.utils.ActivityUtils;
 import com.viettel.mbccs.utils.Common;
@@ -71,17 +72,17 @@ public class LapPhieuXuatTraHangPresenter implements LapPhieuXuatTraHangContract
         mViewModel.showLoading();
         DataRequest<GetListStockModelRequest> mGetListStockModelRequestBaseRequest =
                 new DataRequest<>();
-        mGetListStockModelRequestBaseRequest.setWsCode(WsCode.GetListStockModel);
+        mGetListStockModelRequestBaseRequest.setWsCode(WsCode.GetListStockModelAll);
         GetListStockModelRequest request = new GetListStockModelRequest();
         request.setSaleTransType(SaleTranType.SALE_RETAIL);
         request.setOwnerId(mUserRepository.getUserInfo().getStaffInfo().getStaffId());
         request.setOwnerType(OwnerType.STAFF);
         mGetListStockModelRequestBaseRequest.setWsRequest(request);
-        Subscription subscription = mBanHangKhoTaiChinhRepository.getListStockModel(
+        Subscription subscription = mBanHangKhoTaiChinhRepository.getListStockModelAll(
                 mGetListStockModelRequestBaseRequest)
-                .subscribe(new MBCCSSubscribe<GetListStockModelResponse>() {
+                .subscribe(new MBCCSSubscribe<GetListStockModelAllResponse>() {
                     @Override
-                    public void onSuccess(GetListStockModelResponse object) {
+                    public void onSuccess(GetListStockModelAllResponse object) {
                         if (object != null && object.getStockTotalList() != null) {
                             if (object.getStockTotalList().size() == 0) {
                                 DialogUtils.showDialog(mContext, R.string.common_msg_no_data);
@@ -193,9 +194,7 @@ public class LapPhieuXuatTraHangPresenter implements LapPhieuXuatTraHangContract
             StockSerial stockSerial = stockTotal.getStockSerial();
             stockSerial.setStateId(
                     positionStatus == 0 ? StockStateId.TYPE_NEW : StockStateId.TYPE_OLD);
-            stockSerial.setQuantity(
-                    Common.getSerialCountByListSerialBlock(stockTotal.getSerialBlocks()));
-            if (stockSerial.getQuantity() > 0) {
+            if (stockSerial.getQuantity() != 0) {
                 stockSerials.add(stockSerial);
             }
         }

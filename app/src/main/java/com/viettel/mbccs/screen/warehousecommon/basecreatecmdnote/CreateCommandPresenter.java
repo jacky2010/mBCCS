@@ -30,6 +30,7 @@ import com.viettel.mbccs.data.source.remote.request.GetListStockModelRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListStockTransDetailRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseCreateCmdNoteResponse;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.GetListStockModelAllResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListStockModelResponse;
 import com.viettel.mbccs.data.source.remote.response.ListStockTransDetailsReponse;
 import com.viettel.mbccs.screen.nhanvientrahang.createNote.StockLapPhieuAdapter;
@@ -491,7 +492,7 @@ public class CreateCommandPresenter<T> implements CreateCommandContract.Presente
         mViewModel.showLoading();
         DataRequest<GetListStockModelRequest> mGetListStockModelRequestBaseRequest =
                 new DataRequest<>();
-        mGetListStockModelRequestBaseRequest.setWsCode(WsCode.GetListStockModel);
+        mGetListStockModelRequestBaseRequest.setWsCode(WsCode.GetListStockModelAll);
         GetListStockModelRequest request = new GetListStockModelRequest();
         //request.setStockTypeId(StockTotalType.TYPE_NEW);
         //request.setStateId(StockTotalType.TYPE_NEW);
@@ -499,11 +500,11 @@ public class CreateCommandPresenter<T> implements CreateCommandContract.Presente
         request.setSaleTransType(SaleTranType.SALE_RETAIL);
         request.setOwnerId(mViewModel.getOwnerStockIdCreate());
         mGetListStockModelRequestBaseRequest.setWsRequest(request);
-        Subscription subscription = mBanHangKhoTaiChinhRepository.getListStockModel(
+        Subscription subscription = mBanHangKhoTaiChinhRepository.getListStockModelAll(
                 mGetListStockModelRequestBaseRequest)
-                .subscribe(new MBCCSSubscribe<GetListStockModelResponse>() {
+                .subscribe(new MBCCSSubscribe<GetListStockModelAllResponse>() {
                     @Override
-                    public void onSuccess(GetListStockModelResponse object) {
+                    public void onSuccess(GetListStockModelAllResponse object) {
                         if (object != null && object.getStockTotalList() != null) {
                             if (object.getStockTotalList().size() == 0) {
                                 DialogUtils.showDialog(mContext, R.string.common_msg_no_data);
