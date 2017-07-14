@@ -9,14 +9,33 @@
             type="com.viettel.mbccs.screen.searchproducts.adapters.ItemProductColorPresenter" />
 
         <import type="android.view.View" />
+        <import type="android.graphics.Color"/>
     </data>
 
     <LinearLayout
-        android:layout_width="@dimen/dp_30"
-        android:layout_height="@dimen/dp_16"
+        android:layout_width="@dimen/dp_20"
+        android:layout_height="@dimen/dp_20"
+        android:gravity="center"
         android:layout_marginRight="@dimen/dp_4"
-        android:background="@{context.getResources().getColor(item.color)}"
-        android:descendantFocusability="beforeDescendants"
-        android:focusableInTouchMode="true"
-        android:orientation="vertical"></LinearLayout>
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="@dimen/dp_16"
+            android:layout_height="@dimen/dp_16"
+            android:background="@{Color.parseColor(item.color)}"
+            android:descendantFocusability="beforeDescendants"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:visibility="@{item.selected ? View.GONE : View.VISIBLE}"></LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@{Color.parseColor(item.color)}"
+            android:descendantFocusability="beforeDescendants"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:visibility="@{item.selected ? View.VISIBLE : View.GONE}"></LinearLayout>
+
+    </LinearLayout>
 </layout>

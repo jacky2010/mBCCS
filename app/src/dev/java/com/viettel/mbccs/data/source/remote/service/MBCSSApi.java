@@ -457,4 +457,20 @@ public interface MBCSSApi {
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<CreateTaskExtendResponse>>> createTaskExtend(
             @Body DataRequest<CreateTaskExtendRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<SearchProductResponse>>> searchProduct(
+            @Body DataRequest<SearchProductRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<SearchAdvancedProductResponse>>> searchAdvancedProduct(
+            @Body DataRequest<SearchAdvancedProductRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<GetProductSearchResponse>>> getProductSearch(
+            @Body DataRequest<GetProductSearchRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<GetProductInfoResponse>>> getProductInfo(
+            @Body DataRequest<GetProductInfoRequest> request);
 }

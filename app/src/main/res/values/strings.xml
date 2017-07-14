@@ -660,7 +660,7 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="create_CSKPP_task_activity_ban_co_chac_muon_giao_viec">Bạn có chắc muốn giao chăm sóc Kênh phân phối trên Tuyến \"%1$s\"</string>
     <string name="create_CSKPP_task_presenter_giao_viec_cskpp">Giao việc chăm sóc kênh phân phối</string>
 
-    <!--Base search input reposotory-->
+    <!--Base basicSearch input reposotory-->
     <string name="base_search_lable_from">Từ</string>
     <string name="base_search_lable_to">Đến</string>
     <string name="common_lable_search">Tìm kiếm</string>
@@ -1177,6 +1177,8 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <!--xuat kho cho nhan vien-->
     <string name="xuatkhochonhanvien_lablel_chi_tiet_xuat_kho_title">Chi tiết xuất kho cho nhân viên</string>
     <string name="xuatkhochonhanvien_lablel_chi_title">Lập phiếu trả hàng</string>
+
+    <!--search products-->
     <string name="search_products_title">Tra cứu sản phẩm</string>
     <string name="search_products_detail_title">Tra cứu sản phẩm</string>
     <string name="search_products_detail_hint_search_key">Tra cứu tên sản phẩm</string>
@@ -1187,10 +1189,30 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="search_products_detail_title_model">Loại máy</string>
     <string name="search_products_detail_title_feature">Tính năng</string>
     <string name="search_products_detail_label_products">Danh sách sản phẩm</string>
+    <string name="search_products_hint_search_product_name">Tìm theo tên</string>
     <string-array name="search_products_detail_title_tabs">
         <item>Sản phẩm</item>
         <item>So sánh</item>
     </string-array>
+    <string name="search_products_error_msg_empty_search_advanced">Bạn phải chọn thông tin tìm kiếm!</string>
+    <string name="search_products_error_msg_empty_search_basic">Bạn phải nhập từ khoá tìm kiếm!</string>
+
+    <!--search product detail-->
+    <string-array name="search_products_detail_title_tabs_desc">
+        <item>Mô tả sản phẩm</item>
+        <item>Thông số kỹ thuật</item>
+        <item>Đánh giá</item>
+    </string-array>
+    <string name="search_products_detail_label_cpu">CPU</string>
+    <string name="search_products_detail_label_ram">RAM</string>
+    <string name="search_products_detail_label_camera">Camera</string>
+    <string name="search_products_detail_label_screen">Màn hình</string>
+    <string name="search_products_detail_label_battery">Pin</string>
+    <string name="search_products_detail_label_manufacturer">Nhà sản xuất</string>
+    <string name="search_products_detail_label_features">Tính năng</string>
+    <string name="view_product_detail_title">Chi tiết sản phẩm</string>
+
+
     <!--Xuat kho cap duoi-->
     <string name="dialog_text_input_store">Nhập kho</string>
     <string name="xuatkhocapduoi_message_input_store">Bạn muốn nhập kho không?</string>

@@ -3,105 +3,7 @@ package com.viettel.mbccs.data.source.remote.service;
 import com.viettel.mbccs.data.model.EmptyObject;
 import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.model.UserInfo;
-import com.viettel.mbccs.data.source.remote.request.AddressRequest;
-import com.viettel.mbccs.data.source.remote.request.AssignTaskForStaffRequest;
-import com.viettel.mbccs.data.source.remote.request.ChangeSimRequest;
-import com.viettel.mbccs.data.source.remote.request.ChecOTPRequest;
-import com.viettel.mbccs.data.source.remote.request.CheckCalledIsdnsRequest;
-import com.viettel.mbccs.data.source.remote.request.CheckDebitChangeSimRequest;
-import com.viettel.mbccs.data.source.remote.request.CheckIdNoRequest;
-import com.viettel.mbccs.data.source.remote.request.CloseTaskRequest;
-import com.viettel.mbccs.data.source.remote.request.ConnectSubscriberRequest;
-import com.viettel.mbccs.data.source.remote.request.CreateDistributedChannelRequest;
-import com.viettel.mbccs.data.source.remote.request.CreateExpCmdRequest;
-import com.viettel.mbccs.data.source.remote.request.CreateExpNoteNoCmdRequest;
-import com.viettel.mbccs.data.source.remote.request.CreateExpNoteRequest;
-import com.viettel.mbccs.data.source.remote.request.CreateExpStockNotNoteRequest;
-import com.viettel.mbccs.data.source.remote.request.CreateExpStockRequest;
-import com.viettel.mbccs.data.source.remote.request.CreateImportCmdRequest;
-import com.viettel.mbccs.data.source.remote.request.CreateImportNoteRequest;
-import com.viettel.mbccs.data.source.remote.request.CreateImportStockRequest;
-import com.viettel.mbccs.data.source.remote.request.CreateSaleTransChannelRequest;
-import com.viettel.mbccs.data.source.remote.request.CreateSaleTransFromOrderRequest;
-import com.viettel.mbccs.data.source.remote.request.CreateTaskExtendRequest;
-import com.viettel.mbccs.data.source.remote.request.DataRequest;
-import com.viettel.mbccs.data.source.remote.request.DestroyStockTransRequest;
-import com.viettel.mbccs.data.source.remote.request.DownloadImageRequest;
-import com.viettel.mbccs.data.source.remote.request.GetAccessoryForUpdateTaskRequest;
-import com.viettel.mbccs.data.source.remote.request.GetAllInfoRequest;
-import com.viettel.mbccs.data.source.remote.request.GetAllSubInfoRequest;
-import com.viettel.mbccs.data.source.remote.request.GetAnypayAuthorizeRequest;
-import com.viettel.mbccs.data.source.remote.request.GetApDomainByTypeRequest;
-import com.viettel.mbccs.data.source.remote.request.GetBankInfoRequest;
-import com.viettel.mbccs.data.source.remote.request.GetChannelRouterRequest;
-import com.viettel.mbccs.data.source.remote.request.GetChannelWorkTypeRequest;
-import com.viettel.mbccs.data.source.remote.request.GetCreateInvoiceBillRequest;
-import com.viettel.mbccs.data.source.remote.request.GetCurrBillCycleRequest;
-import com.viettel.mbccs.data.source.remote.request.GetDistrictRequest;
-import com.viettel.mbccs.data.source.remote.request.GetHotNewsCSKPPRequest;
-import com.viettel.mbccs.data.source.remote.request.GetHotNewsInfoCSKPPRequest;
-import com.viettel.mbccs.data.source.remote.request.GetInfoSaleTranRequest;
-import com.viettel.mbccs.data.source.remote.request.GetInfoTaskForUpdateRequest;
-import com.viettel.mbccs.data.source.remote.request.GetKPPFeedbackInfoRequest;
-import com.viettel.mbccs.data.source.remote.request.GetKPPFeedbackRequest;
-import com.viettel.mbccs.data.source.remote.request.GetListBusTypeIdRequireRequest;
-import com.viettel.mbccs.data.source.remote.request.GetListBusTypeRequest;
-import com.viettel.mbccs.data.source.remote.request.GetListChannelByOwnerTypeIdRequest;
-import com.viettel.mbccs.data.source.remote.request.GetListChannelRequest;
-import com.viettel.mbccs.data.source.remote.request.GetListDsLamByTeamIdRequest;
-import com.viettel.mbccs.data.source.remote.request.GetListExpCmdRequest;
-import com.viettel.mbccs.data.source.remote.request.GetListIdImageRequest;
-import com.viettel.mbccs.data.source.remote.request.GetListOrderRequest;
-import com.viettel.mbccs.data.source.remote.request.GetListOwnerCodeRequest;
-import com.viettel.mbccs.data.source.remote.request.GetListProductRequest;
-import com.viettel.mbccs.data.source.remote.request.GetListProvinceRequest;
-import com.viettel.mbccs.data.source.remote.request.GetListRegTypeRequest;
-import com.viettel.mbccs.data.source.remote.request.GetListSearchTransRequest;
-import com.viettel.mbccs.data.source.remote.request.GetListSerialRequest;
-import com.viettel.mbccs.data.source.remote.request.GetListShopRequest;
-import com.viettel.mbccs.data.source.remote.request.GetListStockModelRequest;
-import com.viettel.mbccs.data.source.remote.request.GetListStockTransDetailRequest;
-import com.viettel.mbccs.data.source.remote.request.GetListSubTypeRequest;
-import com.viettel.mbccs.data.source.remote.request.GetListTTKDRequest;
-import com.viettel.mbccs.data.source.remote.request.GetListTeamRequest;
-import com.viettel.mbccs.data.source.remote.request.GetOTPRequest;
-import com.viettel.mbccs.data.source.remote.request.GetOrderInfoRequest;
-import com.viettel.mbccs.data.source.remote.request.GetPrecinctRequest;
-import com.viettel.mbccs.data.source.remote.request.GetProvinceRequest;
-import com.viettel.mbccs.data.source.remote.request.GetQuotaByProductCodeRequest;
-import com.viettel.mbccs.data.source.remote.request.GetReasonRequest;
-import com.viettel.mbccs.data.source.remote.request.GetReceiverChangeAddressRequest;
-import com.viettel.mbccs.data.source.remote.request.GetRegisterSubInfoRequest;
-import com.viettel.mbccs.data.source.remote.request.GetRegisterSubRequest;
-import com.viettel.mbccs.data.source.remote.request.GetSaleTransDetailRequest;
-import com.viettel.mbccs.data.source.remote.request.GetSerialRequest;
-import com.viettel.mbccs.data.source.remote.request.GetStaffToAssignTaskRequest;
-import com.viettel.mbccs.data.source.remote.request.GetStockModelForUpdateTaskRequest;
-import com.viettel.mbccs.data.source.remote.request.GetStockTransSerialDetailRequest;
-import com.viettel.mbccs.data.source.remote.request.GetSurveyKPPRequest;
-import com.viettel.mbccs.data.source.remote.request.GetTaskPrepareAssignStaffRequest;
-import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
-import com.viettel.mbccs.data.source.remote.request.GetTotalStockRequest;
-import com.viettel.mbccs.data.source.remote.request.GetUserInfoRequest;
-import com.viettel.mbccs.data.source.remote.request.InputOrderRequest;
-import com.viettel.mbccs.data.source.remote.request.IsKPPManagerRequest;
-import com.viettel.mbccs.data.source.remote.request.KPPFeedbackRequest;
-import com.viettel.mbccs.data.source.remote.request.KPPOrderRequest;
-import com.viettel.mbccs.data.source.remote.request.KPPRespondFeedbackRequest;
-import com.viettel.mbccs.data.source.remote.request.LoginRequest;
-import com.viettel.mbccs.data.source.remote.request.PassResetRequest;
-import com.viettel.mbccs.data.source.remote.request.RefillAnyPayRequest;
-import com.viettel.mbccs.data.source.remote.request.RegisterCustomerInfoRequest;
-import com.viettel.mbccs.data.source.remote.request.SearchBranchRequest;
-import com.viettel.mbccs.data.source.remote.request.SellAnypayToChannelRequest;
-import com.viettel.mbccs.data.source.remote.request.SellAnypayToCustomerRequest;
-import com.viettel.mbccs.data.source.remote.request.SendSurveyKPPRequest;
-import com.viettel.mbccs.data.source.remote.request.TransferAnyPayRequest;
-import com.viettel.mbccs.data.source.remote.request.UpdateAllSubInfoRequest;
-import com.viettel.mbccs.data.source.remote.request.UpdateSaleOrderRequest;
-import com.viettel.mbccs.data.source.remote.request.UpdateTaskRequest;
-import com.viettel.mbccs.data.source.remote.request.UploadImageRequest;
-import com.viettel.mbccs.data.source.remote.request.ViewInforSerialRequest;
+import com.viettel.mbccs.data.source.remote.request.*;
 import com.viettel.mbccs.data.source.remote.response.AssignTaskForStaffResponse;
 import com.viettel.mbccs.data.source.remote.response.BaseCreateCmdNoteResponse;
 import com.viettel.mbccs.data.source.remote.response.BaseResponse;
@@ -157,6 +59,8 @@ import com.viettel.mbccs.data.source.remote.response.GetListTeamResponse;
 import com.viettel.mbccs.data.source.remote.response.GetOTPResponse;
 import com.viettel.mbccs.data.source.remote.response.GetOrderInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetPrecinctResponse;
+import com.viettel.mbccs.data.source.remote.response.GetProductInfoResponse;
+import com.viettel.mbccs.data.source.remote.response.GetProductSearchResponse;
 import com.viettel.mbccs.data.source.remote.response.GetProvinceResponse;
 import com.viettel.mbccs.data.source.remote.response.GetQuotaByProductCodeResponse;
 import com.viettel.mbccs.data.source.remote.response.GetReasonResponse;
@@ -177,6 +81,8 @@ import com.viettel.mbccs.data.source.remote.response.KPPRespondFeedbackResponse;
 import com.viettel.mbccs.data.source.remote.response.ListStockTransDetailsReponse;
 import com.viettel.mbccs.data.source.remote.response.RefillAnyPayResponse;
 import com.viettel.mbccs.data.source.remote.response.RegisterCustomerInfoResponse;
+import com.viettel.mbccs.data.source.remote.response.SearchAdvancedProductResponse;
+import com.viettel.mbccs.data.source.remote.response.SearchProductResponse;
 import com.viettel.mbccs.data.source.remote.response.SellAnypayToChannelResponse;
 import com.viettel.mbccs.data.source.remote.response.SellAnypayToCustomerResponse;
 import com.viettel.mbccs.data.source.remote.response.SendCodeChangePassResponse;
@@ -189,6 +95,7 @@ import com.viettel.mbccs.data.source.remote.response.UpdateSaleOrderResponse;
 import com.viettel.mbccs.data.source.remote.response.UpdateTaskResponse;
 import com.viettel.mbccs.data.source.remote.response.UploadImageResponse;
 import com.viettel.mbccs.data.source.remote.response.ViewInforSerialResponse;
+
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -617,5 +524,21 @@ public interface MBCSSApi {
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<GetCurrBillCycleResponse>>> getCurrBillCycle(
             @Body DataRequest<GetCurrBillCycleRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<SearchProductResponse>>> searchProduct(
+            @Body DataRequest<SearchProductRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<SearchAdvancedProductResponse>>> searchAdvancedProduct(
+            @Body DataRequest<SearchAdvancedProductRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<GetProductSearchResponse>>> getProductSearch(
+            @Body DataRequest<GetProductSearchRequest> request);
+
+    @POST("/JsonAPI/webresources/CoreService/UserRouting")
+    Observable<ServerDataResponse<BaseResponse<GetProductInfoResponse>>> getProductInfo(
+            @Body DataRequest<GetProductInfoRequest> request);
 }
 

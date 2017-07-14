@@ -25,32 +25,29 @@
 
             type="android.view.View.OnClickListener" />
 
+        <variable
+            name="onSearchClick"
+
+            type="android.view.View.OnClickListener" />
+
         <import type="android.view.View" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_70"
-        android:paddingTop="@dimen/dp_10"
+        android:layout_height="@dimen/dp_80"
         android:background="@color/white"
-        android:onClick="@{onClick}"
         android:orientation="vertical"
+        android:paddingTop="@dimen/dp_10"
         android:visibility="@{isShow?View.VISIBLE:View.GONE}">
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/lyFilterCollapse"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_45"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="@dimen/dp_5">
-
-            <ImageView
-                android:layout_width="@dimen/dp_20"
-                android:layout_height="@dimen/dp_20"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/dp_10"
-                android:src="@drawable/ic_search_black_24dp" />
 
             <com.viettel.mbccs.widget.CustomEditText
                 style="@style/inputStyle"
@@ -66,42 +63,34 @@
                 android:lines="1"
                 android:maxLines="1"
                 android:padding="@dimen/dp_3"
+                android:paddingLeft="@dimen/dp_30"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
-                android:text="asdfasdfasdfasdfasdfasdf"
-                android:textSize="@dimen/sp_15"
-                app:bindText="@{text}" />
-            <!--<com.viettel.mbccs.widget.CustomEdittext-->
-            <!--style="@style/inputStyle"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_gravity="center_vertical"-->
-            <!--android:layout_marginLeft="@dimen/dp_10"-->
-            <!--android:layout_marginRight="@dimen/dp_10"-->
-            <!--android:ellipsize="marquee"-->
-            <!--android:focusable="true"-->
-            <!--android:focusableInTouchMode="true"-->
-            <!--android:freezesText="true"-->
-            <!--android:gravity="center_vertical"-->
-            <!--android:lines="1"-->
-            <!--android:maxLines="1"-->
-            <!--android:padding="@dimen/dp_3"-->
-            <!--android:scrollHorizontally="true"-->
-            <!--android:singleLine="true"-->
-            <!--android:text="asdfasdfasdfasdfasdfasdf"-->
-            <!--android:textColor="@color/white"-->
-            <!--android:textSize="@dimen/sp_15"-->
-            <!--app:bindText="@{text}"-->
-            <!--app:selected="@{true}" />-->
-        </LinearLayout>
+                android:text="@={text}"
+                android:textSize="@dimen/default_label_text_size" />
+
+            <ImageView
+                android:id="@+id/iv_search"
+                android:layout_width="@dimen/dp_20"
+                android:layout_height="@dimen/dp_20"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/dp_10"
+                android:clickable="true"
+                android:onClick="@{onSearchClick}"
+                android:src="@drawable/ic_search_black_24dp" />
+        </RelativeLayout>
 
         <com.viettel.mbccs.widget.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dp_10"
             android:gravity="right"
+            android:onClick="@{onClick}"
             android:textColor="@color/blue_dark"
-            android:textSize="@dimen/dp_15"
+            android:textSize="@dimen/default_label_text_size"
             app:textHtml="@{expandText}" />
 
     </LinearLayout>

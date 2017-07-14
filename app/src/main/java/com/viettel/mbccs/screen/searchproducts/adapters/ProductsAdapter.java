@@ -9,8 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.viettel.mbccs.R;
-import com.viettel.mbccs.data.model.ModelSale;
-import com.viettel.mbccs.data.model.StockModel;
+import com.viettel.mbccs.data.model.SearchProduct;
 import com.viettel.mbccs.databinding.ItemProductBinding;
 
 import java.util.List;
@@ -23,12 +22,12 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         implements View.OnFocusChangeListener {
 
     private Context mContext;
-    private List<ModelSale> mStockItems;
+    private List<SearchProduct> mItems;
     private OnItemClickListener mListener;
 
-    public ProductsAdapter(Context context, List<ModelSale> stockItems) {
+    public ProductsAdapter(Context context, List<SearchProduct> stockItems) {
         mContext = context;
-        mStockItems = stockItems;
+        mItems = stockItems;
     }
 
     public void setOnItemClickListener(OnItemClickListener onStockListener) {
@@ -43,12 +42,12 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         mContext = context;
     }
 
-    public List<ModelSale> getStockItems() {
-        return mStockItems;
+    public List<SearchProduct> getItems() {
+        return mItems;
     }
 
-    public void setStockItems(List<ModelSale> stockItems) {
-        mStockItems = stockItems;
+    public void setItems(List<SearchProduct> stockItems) {
+        mItems = stockItems;
     }
 
     @Override
@@ -60,12 +59,12 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
 
     @Override
     public void onBindViewHolder(ProductViewHolder holder, int position) {
-        holder.bind(mStockItems.get(position));
+        holder.bind(mItems.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return mStockItems.size();
+        return mItems.size();
     }
 
     @Override
@@ -86,22 +85,31 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
     class ProductViewHolder extends RecyclerView.ViewHolder {
 
         ItemProductBinding mBinding;
-        ModelSale mStockItem;
+        SearchProduct mItem;
 
         public ProductViewHolder(final ItemProductBinding binding) {
             super(binding.getRoot());
             mBinding = binding;
         }
 
-        public void bind(ModelSale item) {
-            mStockItem = item;
+        public void bind(SearchProduct item) {
+            mItem = item;
             ItemProductPresenter itemProductPresenter = new ItemProductPresenter(mContext, item);
             mBinding.setItem(itemProductPresenter);
+
+            mBinding.llProduct.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(mListener != null)
+                        mListener.onItemClick(mItem);
+                }
+            });
+
         }
     }
 
     public interface OnItemClickListener {
-        void onItemClick(StockModel item, int position);
+        void onItemClick(SearchProduct item);
 
         void onItemFocus();
     }
