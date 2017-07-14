@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
+import com.viettel.mbccs.base.createorder.BaseCreateOrderSuccessActivity;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.model.StockTrans;
 import com.viettel.mbccs.data.source.UserRepository;
@@ -115,8 +116,12 @@ public abstract class BaseCreateCommandNoteActivity<T> extends
     }
 
     @Override
-    public void onCreateExportSuccess() {
-        onCreateSuccess();
+    public void onCreateExportSuccess(StockTrans stockTrans) {
+        Intent intent = new Intent(this, BaseCreateOrderSuccessActivity.class);
+        intent.putExtra(Constants.BundleConstant.STOCK_TRANS, stockTrans);
+        intent.putExtra(Constants.BundleConstant.TRANS_TYPE, 1);
+        intent.putExtra(Constants.BundleConstant.ACTION_TYPE, getActionType());
+        startActivityForResult(intent, REQUEST_SUCCESS);
     }
 
     @Override
@@ -173,8 +178,7 @@ public abstract class BaseCreateCommandNoteActivity<T> extends
             mPresenter.pickStockTotalListSuccess(stockTotals);
         }
         if (requestCode == REQUEST_SUCCESS && resultCode == RESULT_OK) {
-            setResult(RESULT_OK);
-            finish();
+            onCreateSuccess();
         }
     }
 
