@@ -18,8 +18,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,32 +31,95 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2.5" />
 
-            <android.support.v7.widget.AppCompatAutoCompleteTextView
-                style="@style/inputStyle"
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="@dimen/dp_40"
                 android:layout_margin="@dimen/dp_6"
                 android:layout_weight="4"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:hint="@string/search_products_hint_search_product_name"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:textSize="@dimen/default_content_text_size" />
+                android:orientation="vertical">
 
-            <android.support.v7.widget.AppCompatAutoCompleteTextView
-                style="@style/inputStyle"
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <com.viettel.mbccs.widget.CustomEditText
+                        style="@style/inputStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:gravity="center_vertical"
+                        android:hint="@string/search_products_hint_search_product_name"
+                        android:lines="1"
+                        android:maxLines="1"
+                        android:padding="@dimen/dp_3"
+                        android:paddingLeft="@dimen/dp_30"
+                        android:scrollHorizontally="true"
+                        android:singleLine="true"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
+                        android:textSize="@dimen/default_label_text_size" />
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_20"
+                        android:layout_height="@dimen/dp_20"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_vertical"
+                        android:clickable="true"
+                        android:onClick="@{()->presenter.onSearch1Click()}"
+                        android:src="@drawable/ic_search_white_24dp" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="@dimen/dp_40"
                 android:layout_margin="@dimen/dp_6"
                 android:layout_weight="4"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:hint="@string/search_products_hint_search_product_name"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:textSize="@dimen/default_content_text_size" />
+                android:orientation="vertical">
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <com.viettel.mbccs.widget.CustomEditText
+                        style="@style/inputStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:gravity="center_vertical"
+                        android:hint="@string/search_products_hint_search_product_name"
+                        android:lines="1"
+                        android:maxLines="1"
+                        android:padding="@dimen/dp_3"
+                        android:paddingLeft="@dimen/dp_30"
+                        android:scrollHorizontally="true"
+                        android:singleLine="true"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
+                        android:textSize="@dimen/default_label_text_size" />
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_20"
+                        android:layout_height="@dimen/dp_20"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_vertical"
+                        android:clickable="true"
+                        android:onClick="@{()->presenter.onSearch2Click()}"
+                        android:src="@drawable/ic_search_white_24dp" />
+                </RelativeLayout>
+            </LinearLayout>
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
@@ -67,207 +130,4 @@
             android:scrollbars="vertical" />
 
     </LinearLayout>
-
-    <!--<ScrollView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent">-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:orientation="vertical">-->
-
-    <!--<TableLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content">-->
-
-    <!--<TableRow android:background="@color/colorAccent">-->
-
-    <!--<com.viettel.mbccs.widget.CustomTextView-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_weight="2.5" />-->
-
-    <!--<android.support.v7.widget.AppCompatAutoCompleteTextView-->
-    <!--style="@style/inputStyle"-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="@dimen/dp_40"-->
-    <!--android:layout_margin="@dimen/dp_6"-->
-    <!--android:layout_weight="4"-->
-    <!--android:focusable="true"-->
-    <!--android:focusableInTouchMode="true"-->
-    <!--android:hint="@string/search_products_hint_search_product_name"-->
-    <!--android:textColor="@color/white"-->
-    <!--android:textColorHint="@color/white"-->
-    <!--android:textSize="@dimen/default_content_text_size" />-->
-
-    <!--<android.support.v7.widget.AppCompatAutoCompleteTextView-->
-    <!--style="@style/inputStyle"-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="@dimen/dp_40"-->
-    <!--android:layout_margin="@dimen/dp_6"-->
-    <!--android:layout_weight="4"-->
-    <!--android:focusable="true"-->
-    <!--android:focusableInTouchMode="true"-->
-    <!--android:hint="@string/search_products_hint_search_product_name"-->
-    <!--android:textColor="@color/white"-->
-    <!--android:textColorHint="@color/white"-->
-    <!--android:textSize="@dimen/default_content_text_size" />-->
-    <!--</TableRow>-->
-
-    <!--<TableRow-->
-    <!--android:layout_marginLeft="@dimen/dp_10"-->
-    <!--android:layout_marginRight="@dimen/dp_10">-->
-
-    <!--<TextView-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_weight="2.5" />-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_margin="@dimen/dp_6"-->
-    <!--android:layout_weight="4"-->
-    <!--android:gravity="center"-->
-    <!--android:orientation="vertical">-->
-
-    <!--<com.viettel.mbccs.widget.CustomTextView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginBottom="@dimen/dp_15"-->
-    <!--android:layout_marginTop="@dimen/dp_15"-->
-    <!--android:gravity="center"-->
-    <!--android:text="ssdfsfsfsd"-->
-    <!--android:textSize="@dimen/default_label_text_size" />-->
-
-    <!--<ImageView-->
-    <!--android:layout_width="@dimen/dp_120"-->
-    <!--android:layout_height="@dimen/dp_120" />-->
-
-    <!--<com.viettel.mbccs.widget.CustomTextView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginBottom="@dimen/dp_15"-->
-    <!--android:layout_marginTop="@dimen/dp_15"-->
-    <!--android:gravity="center"-->
-    <!--android:text="323423423423"-->
-    <!--android:textColor="@color/red"-->
-    <!--android:textSize="@dimen/default_label_text_size" />-->
-    <!--</LinearLayout>-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_margin="@dimen/dp_6"-->
-    <!--android:layout_weight="4"-->
-    <!--android:gravity="center"-->
-    <!--android:orientation="vertical">-->
-
-    <!--<com.viettel.mbccs.widget.CustomTextView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginBottom="@dimen/dp_15"-->
-    <!--android:layout_marginTop="@dimen/dp_15"-->
-    <!--android:gravity="center"-->
-    <!--android:text="ssdfsfsfsd"-->
-    <!--android:textSize="@dimen/default_label_text_size" />-->
-
-    <!--<ImageView-->
-    <!--android:layout_width="@dimen/dp_120"-->
-    <!--android:layout_height="@dimen/dp_120" />-->
-
-    <!--<com.viettel.mbccs.widget.CustomTextView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginBottom="@dimen/dp_15"-->
-    <!--android:layout_marginTop="@dimen/dp_15"-->
-    <!--android:gravity="center"-->
-    <!--android:text="323423423423"-->
-    <!--android:textColor="@color/red"-->
-    <!--android:textSize="@dimen/default_label_text_size" />-->
-    <!--</LinearLayout>-->
-    <!--</TableRow>-->
-
-    <!--<TableRow-->
-    <!--android:layout_marginLeft="@dimen/dp_10"-->
-    <!--android:layout_marginRight="@dimen/dp_10">-->
-
-    <!--<com.viettel.mbccs.widget.CustomTextView-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_weight="2.5"-->
-    <!--android:text="Screen"-->
-    <!--android:textSize="@dimen/default_label_text_size" />-->
-
-    <!--<com.viettel.mbccs.widget.CustomTextView-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_weight="4"-->
-    <!--android:text="Screen"-->
-    <!--android:textSize="@dimen/default_label_text_size" />-->
-
-    <!--<com.viettel.mbccs.widget.CustomTextView-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_weight="4"-->
-    <!--android:text="Screen"-->
-    <!--android:textSize="@dimen/default_label_text_size" />-->
-    <!--</TableRow>-->
-
-    <!--<TableRow-->
-    <!--android:layout_marginLeft="@dimen/dp_10"-->
-    <!--android:layout_marginRight="@dimen/dp_10">-->
-
-    <!--<com.viettel.mbccs.widget.CustomTextView-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_weight="2.5"-->
-    <!--android:text="Screen"-->
-    <!--android:textSize="@dimen/default_label_text_size" />-->
-
-    <!--<com.viettel.mbccs.widget.CustomTextView-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_weight="4"-->
-    <!--android:text="Screen"-->
-    <!--android:textSize="@dimen/default_label_text_size" />-->
-
-    <!--<com.viettel.mbccs.widget.CustomTextView-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_weight="4"-->
-    <!--android:text="Screen"-->
-    <!--android:textSize="@dimen/default_label_text_size" />-->
-    <!--</TableRow>-->
-
-    <!--<TableRow-->
-    <!--android:layout_marginLeft="@dimen/dp_10"-->
-    <!--android:layout_marginRight="@dimen/dp_10">-->
-
-    <!--<com.viettel.mbccs.widget.CustomTextView-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_weight="2.5"-->
-    <!--android:text="Screen"-->
-    <!--android:textSize="@dimen/default_label_text_size" />-->
-
-    <!--<com.viettel.mbccs.widget.CustomTextView-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_weight="4"-->
-    <!--android:text="Screen"-->
-    <!--android:textSize="@dimen/default_label_text_size" />-->
-
-    <!--<com.viettel.mbccs.widget.CustomTextView-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_weight="4"-->
-    <!--android:text="Screen"-->
-    <!--android:textSize="@dimen/default_label_text_size" />-->
-    <!--</TableRow>-->
-    <!--</TableLayout>-->
-
-    <!--</LinearLayout>-->
-    <!--</ScrollView>-->
 </layout>

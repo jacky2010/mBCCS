@@ -104,4 +104,12 @@ public class CompareProductsDetailPresenter implements CompareProductsDetailCont
     public void unSubscribe() {
 
     }
+
+    public void onSearch1Click(){
+
+    }
+
+    public void onSearch2Click(){
+
+    }
 }

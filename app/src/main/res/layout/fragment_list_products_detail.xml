@@ -29,7 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_above="@id/btn_next"
-                android:layout_marginTop="@dimen/dp_70"
+                android:layout_marginTop="@dimen/dp_80"
                 android:orientation="vertical">
 
                 <com.viettel.mbccs.widget.CustomTextView
@@ -220,7 +220,8 @@
                     app:hint="@{@string/search_products_detail_hint_search_key}"
                     app:isShow="@{presenter.isCollapse}"
                     app:onClick="@{()->presenter.toogleExpand()}"
-                    app:text="@{presenter.filterText}" />
+                    app:onSearchClick="@{()->presenter.basicSearch()}"
+                    app:text="@={presenter.filterText}" />
             </LinearLayout>
             <!--basicSearch-->
         </RelativeLayout>

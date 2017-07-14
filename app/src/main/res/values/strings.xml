@@ -1195,6 +1195,7 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
         <item>So sánh</item>
     </string-array>
     <string name="search_products_error_msg_empty_search_advanced">Bạn phải chọn thông tin tìm kiếm!</string>
+    <string name="search_products_error_msg_empty_search_basic">Bạn phải nhập từ khoá tìm kiếm!</string>
 
     <!--search product detail-->
     <string-array name="search_products_detail_title_tabs_desc">
@@ -1202,7 +1203,13 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
         <item>Thông số kỹ thuật</item>
         <item>Đánh giá</item>
     </string-array>
-
+    <string name="search_products_detail_label_cpu">CPU</string>
+    <string name="search_products_detail_label_ram">RAM</string>
+    <string name="search_products_detail_label_camera">Camera</string>
+    <string name="search_products_detail_label_screen">Màn hình</string>
+    <string name="search_products_detail_label_battery">Pin</string>
+    <string name="search_products_detail_label_manufacturer">Nhà sản xuất</string>
+    <string name="search_products_detail_label_features">Tính năng</string>
     <string name="view_product_detail_title">Chi tiết sản phẩm</string>
 
 

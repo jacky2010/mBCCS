@@ -4,15 +4,26 @@ import android.content.Context;
 import android.databinding.ObservableField;
 
 import com.viettel.mbccs.R;
+import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.KeyValue;
 import com.viettel.mbccs.data.model.SearchProduct;
+import com.viettel.mbccs.data.source.SearchProductRepository;
+import com.viettel.mbccs.data.source.remote.request.DataRequest;
+import com.viettel.mbccs.data.source.remote.request.GetProductInfoRequest;
+import com.viettel.mbccs.data.source.remote.response.BaseException;
+import com.viettel.mbccs.data.source.remote.response.GetProductInfoResponse;
 import com.viettel.mbccs.screen.searchproducts.adapters.AvailableColorsListAdapter;
 import com.viettel.mbccs.screen.viewproduct.adapter.ProductImagePagerAdapter;
 import com.viettel.mbccs.screen.viewproduct.adapter.ViewProductDetailFragmentAdapter;
 import com.viettel.mbccs.utils.Common;
+import com.viettel.mbccs.utils.DialogUtils;
+import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import rx.Subscription;
+import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by minhnx on 7/13/17.
@@ -34,11 +45,13 @@ public class ViewProductDetailPresenter implements ViewProductDetailContract.Pre
     private AvailableColorsListAdapter availableColorsAdapter;
     private ProductImagePagerAdapter imageAdapter;
 
-    private String description;
     private List<KeyValue> features;
     private List<KeyValue> comments;
     private List<String> colorIds;
     private List<KeyValue> productImages;
+
+    private SearchProductRepository searchProductRepository;
+    private CompositeSubscription mSubscriptions;
 
     public ViewProductDetailPresenter(Context context, ViewProductDetailContract.ViewModel viewModel) {
         this.context = context;
@@ -49,6 +62,9 @@ public class ViewProductDetailPresenter implements ViewProductDetailContract.Pre
 
     private void initData() {
         try {
+            searchProductRepository = SearchProductRepository.getInstance();
+            mSubscriptions = new CompositeSubscription();
+
             title = new ObservableField<>(context.getString(R.string.view_product_detail_title));
             fragmentAdapter = new ObservableField<>();
             imageListAdapter = new ObservableField<>();
@@ -83,47 +99,97 @@ public class ViewProductDetailPresenter implements ViewProductDetailContract.Pre
     @Override
     public void displayProductDetail(SearchProduct item) {
         try {
-            productName.set(item.getName());
+            viewModel.showLoading();
 
-            description = "It means people without close family or business relationships in the US could be denied visas and barred entry.\n" +
-                    "Grandparents, aunts, uncles, nephews and nieces are not considered to be \"bona fide\" relations.\n" +
-                    "The rules apply to people in Iran, Libya, Syria, Somalia, Sudan and Yemen, as well as all refugees.\n" +
-                    "Moments before the ban began at 20:00 Washington time (00:00 GMT), it emerged that the state of Hawaii had asked a federal judge for clarification.";
+            DataRequest<GetProductInfoRequest> baseRequest = new DataRequest<>();
+            baseRequest.setWsCode(WsCode.GetProductInfo);
+            GetProductInfoRequest request = new GetProductInfoRequest();
+            request.setProductId(item.getProductId());
+            baseRequest.setWsRequest(request);
 
-            features.add(new KeyValue("CPU", "800hz"));
-            features.add(new KeyValue("RAM", "3GB"));
-            features.add(new KeyValue("Camera", "10MP"));
+            Subscription subscription =
+                    searchProductRepository.getProductInfo(baseRequest)
+                            .subscribe(new MBCCSSubscribe<GetProductInfoResponse>() {
+                                @Override
+                                public void onSuccess(GetProductInfoResponse object) {
+                                    try {
+                                        fillData(object.getProduct());
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
 
-            comments.add(new KeyValue("1", "It has in the past accused the US government of violating the Supreme Court's instructions by improperly excluding people."));
-            comments.add(new KeyValue("2", "Earlier this week, the Supreme Court partially upheld the ban, lifting injunctions that had halted one of the president's key policies."));
+                                @Override
+                                public void onError(BaseException error) {
+                                    DialogUtils.showDialog(context, null, error.getMessage(),
+                                            null);
 
-            viewProductDetailAdapter.setData(description, features, comments);
+                                }
 
-            //TODO minhnx modelId?
-            productImages.add(new KeyValue("1", "image id 1"));
-            productImages.add(new KeyValue("2", ""));
-            productImages.add(new KeyValue("3", ""));
+                                @Override
+                                public void onRequestFinish() {
+                                    super.onRequestFinish();
+                                    viewModel.hideLoading();
+                                }
+                            });
 
-            if (item.getColour() != null) {
-                String[] colours = item.getColour().split(";");
-                if (colours != null) {
-                    for (int i = 0; i < colours.length; i++) {
-                        colorIds.add(colours[i]);
-                    }
-                }
-            }
+            mSubscriptions.add(subscription);
 
-            imageAdapter.setItems(productImages);
-            availableColorsAdapter.setItems(colorIds);
-
-            price.set(String.format(context.getResources().getString(R.string.price),
-                    Common.formatDouble(item.getPrice())));
-            availableColorsListAdapter.set(availableColorsAdapter);
-
-            onImagePageChanged(0);//first item
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void fillData(SearchProduct item) throws Exception {
+        productName.set(item.getName());
+
+        features.add(new KeyValue(context.getString(R.string.search_products_detail_label_cpu), item.getCpu()));
+        features.add(new KeyValue(context.getString(R.string.search_products_detail_label_ram), item.getRam()));
+        features.add(new KeyValue(context.getString(R.string.search_products_detail_label_camera), item.getCamera()));
+        features.add(new KeyValue(context.getString(R.string.search_products_detail_label_screen), item.getScreen()));
+        features.add(new KeyValue(context.getString(R.string.search_products_detail_label_battery), item.getBattery()));
+        features.add(new KeyValue(context.getString(R.string.search_products_detail_label_manufacturer), item.getManufacturerName()));
+        features.add(new KeyValue(context.getString(R.string.search_products_detail_label_features), item.getFeatures()));
+
+        if (item.getComments() != null) {
+            comments.addAll(item.getComments());
+        }
+
+        viewProductDetailAdapter.setData(item.getDescription(), features, comments);
+
+        if (item.getProductImages() != null && item.getProductImages().size() > 0) {
+            for (KeyValue image : item.getProductImages()) {
+                productImages.add(new KeyValue(image.getValue(), image.getValue()));
+            }
+        } else {
+            productImages.add(new KeyValue("-1", "-1"));
+        }
+
+//            if (item.getColour() != null) {
+//                String[] colours = item.getColour().split(";");
+//                if (colours != null) {
+//                    for (int i = 0; i < colours.length; i++) {
+//                        colorIds.add(colours[i]);
+//                    }
+//                }
+//            }
+        //based on product images
+        if (item.getProductImages() != null) {
+            for (KeyValue color : item.getProductImages()) {
+                colorIds.add(color.getKey());//key = color (hex)
+            }
+        }
+
+        imageAdapter.setItems(productImages);
+        availableColorsAdapter.setItems(colorIds);
+
+        price.set(String.format(context.getResources().getString(R.string.price),
+                Common.formatDouble(item.getPrice())));
+        availableColorsListAdapter.set(availableColorsAdapter);
+
+        onImagePageChanged(0);//first item
+
+        viewProductDetailAdapter.notifyDataSetChanged();
     }
 
     public void setViewProductDetailFragmentAdapter(ViewProductDetailFragmentAdapter adapter) {

@@ -12,15 +12,21 @@ import com.viettel.mbccs.screen.searchproducts.fragments.SearchProductsDetailFra
 public class SearchProductsActivity extends BaseDataBindActivity<ActivitySearchProductsBinding, SearchProductsPresenter>
         implements SearchProductsContract.ViewModel {
 
+    private boolean isShownLoading = false;
 
     @Override
     public void showLoading() {
+        if (isShownLoading)
+            return;
+
         showLoadingDialog();
+        isShownLoading = true;
     }
 
     @Override
     public void hideLoading() {
         hideLoadingDialog();
+        isShownLoading = false;
     }
 
     @Override

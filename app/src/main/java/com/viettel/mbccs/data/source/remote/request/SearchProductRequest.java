@@ -13,19 +13,7 @@ public class SearchProductRequest extends BaseRequest {
     }
 
     @Expose
-    private String language;
-    @Expose
     private String product;
-
-    @Override
-    public String getLanguage() {
-        return language;
-    }
-
-    @Override
-    public void setLanguage(String language) {
-        this.language = language;
-    }
 
     public String getProduct() {
         return product;

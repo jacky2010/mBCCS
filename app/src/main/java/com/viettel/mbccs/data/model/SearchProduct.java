@@ -3,6 +3,8 @@ package com.viettel.mbccs.data.model;
 
 import com.google.gson.annotations.Expose;
 
+import java.util.List;
+
 /**
  * Created by minhnx on 7/13/17.
  */
@@ -38,6 +40,14 @@ public class SearchProduct {
     private String status;
     @Expose
     private String name;
+    @Expose
+    private String manufacturerName;
+    @Expose
+    private String features;
+    @Expose
+    private List<KeyValue> productImages;
+    @Expose
+    private List<KeyValue> comments;
 
     public Long getProductId() {
         return productId;
@@ -157,5 +167,37 @@ public class SearchProduct {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getManufacturerName() {
+        return manufacturerName;
+    }
+
+    public void setManufacturerName(String manufacturerName) {
+        this.manufacturerName = manufacturerName;
+    }
+
+    public String getFeatures() {
+        return features;
+    }
+
+    public void setFeatures(String features) {
+        this.features = features;
+    }
+
+    public List<KeyValue> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<KeyValue> comments) {
+        this.comments = comments;
+    }
+
+    public List<KeyValue> getProductImages() {
+        return productImages;
+    }
+
+    public void setProductImages(List<KeyValue> productImages) {
+        this.productImages = productImages;
     }
 }

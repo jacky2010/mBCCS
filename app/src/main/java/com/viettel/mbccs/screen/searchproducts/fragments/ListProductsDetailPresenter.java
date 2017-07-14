@@ -221,6 +221,13 @@ public class ListProductsDetailPresenter implements ListProductsDetailContract.P
         priceRangeList = response.getListPriceRanges();
         modelList = response.getListModels();
         featureList = response.getListFeatures();
+
+        manufacturerList.add(0, new KeyValue("", context.getString(R.string.all)));
+        screenSizeList.add(0, new KeyValue("", context.getString(R.string.all)));
+        cameraList.add(0, new KeyValue("", context.getString(R.string.all)));
+        priceRangeList.add(0, new KeyValue("", context.getString(R.string.all)));
+        modelList.add(0, new KeyValue("", context.getString(R.string.all)));
+        featureList.add(0, new KeyValue("", context.getString(R.string.all)));
     }
 
     private void initListeners() {
@@ -245,8 +252,10 @@ public class ListProductsDetailPresenter implements ListProductsDetailContract.P
     public void basicSearch() {
         try {
 
-            if (filterText.get() == null || TextUtils.isEmpty(filterText.get()))
+            if (filterText.get() == null || TextUtils.isEmpty(filterText.get())) {
+                viewModel.showError(context.getString(R.string.search_products_error_msg_empty_search_basic));
                 return;
+            }
 
             viewModel.showLoading();
 
