@@ -79,7 +79,7 @@ public class LapPhieuXuatTraHangActivity extends
                 String.format(getString(R.string.nhanvien_xuattra_lable_cmd_title),
                         String.valueOf(stockTrans.getStockTransId())),
                 String.format(getString(R.string.nhanvien_xuattra_lable_receive_title),
-                        String.valueOf(stockTrans.getToOwnerId())));
+                       ""));
         exportSuccessDialog.setOnDialogDismissListener(
                 new ExportSuccessDialog.OnDialogDismissListener() {
 

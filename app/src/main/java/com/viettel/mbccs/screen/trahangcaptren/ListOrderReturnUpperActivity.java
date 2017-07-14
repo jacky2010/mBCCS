@@ -210,7 +210,7 @@ public class ListOrderReturnUpperActivity extends BaseListOrderActivity {
         }
 
         setWareHouseData(Collections.singletonList(
-                String.valueOf(mUserRepository.getUserInfo().getShop().getParentShopId())));
+                String.valueOf(mUserRepository.getUserInfo().getShop().getParentShopName())));
         mShopList.add(mUserRepository.getUserInfo().getShop().getParentShopId());
         mFunctionList = mUserRepository.getFunctionsCodes();
     }

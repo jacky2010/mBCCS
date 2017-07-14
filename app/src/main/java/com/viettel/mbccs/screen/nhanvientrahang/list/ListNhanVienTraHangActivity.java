@@ -56,7 +56,7 @@ public class ListNhanVienTraHangActivity extends BaseListOrderActivity {
         mRequest.setEndDate(getToDateString());
         mRequest.setFromOwnerId(mUserRepository.getUserInfo().getStaffInfo().getStaffId());
         mRequest.setFromOwnerType(OwnerType.STAFF);
-        mRequest.setToOwnerId(Long.parseLong(getWareHouseData().get(getPositionWareHouser())));
+        mRequest.setToOwnerId(mUserRepository.getUserInfo().getShop().getShopId());
         mRequest.setToOwnerType(OwnerType.SHOP);
         mDataRequest.setWsCode(WsCode.GetListExpCmd);
         mDataRequest.setWsRequest(mRequest);
@@ -92,13 +92,11 @@ public class ListNhanVienTraHangActivity extends BaseListOrderActivity {
 
     @Override
     public void onItemStockTransClick(final StockTrans stockTrans) {
-        ExportSuccessDialog exportSuccessDialog =
-                ExportSuccessDialog.newInstance(stockTrans, String.format(
-                        getString(R.string.warehouse_label_export_success_code),
+        ExportSuccessDialog exportSuccessDialog = ExportSuccessDialog.newInstance(stockTrans,
+                String.format(getString(R.string.warehouse_label_export_success_code),
                         String.valueOf(stockTrans.getStockTransId())),
-                        String.format(
-                                getString(R.string.warehouse_label_receive),
-                                String.valueOf(stockTrans.getToOwnerId())));
+                String.format(getString(R.string.warehouse_label_receive),
+                        String.valueOf(stockTrans.getToOwnerId())));
         exportSuccessDialog.setOnDialogDismissListener(
                 new ExportSuccessDialog.OnDialogDismissListener() {
 
@@ -108,7 +106,6 @@ public class ListNhanVienTraHangActivity extends BaseListOrderActivity {
                 });
         exportSuccessDialog.show(getSupportFragmentManager(), "");
     }
-
 
     @Override
     public String getToolbarTitle() {
@@ -149,8 +146,8 @@ public class ListNhanVienTraHangActivity extends BaseListOrderActivity {
     public void init() {
         setStatus(Arrays.asList(
                 getResources().getStringArray(R.array.nhanvien_tranhang_captren_status)));
-        setWareHouseData(
-                Arrays.asList(String.valueOf(mUserRepository.getUserInfo().getShop().getShopId())));
+        setWareHouseData(Arrays.asList(
+                String.valueOf(mUserRepository.getUserInfo().getShop().getShopName())));
     }
 
     @Override

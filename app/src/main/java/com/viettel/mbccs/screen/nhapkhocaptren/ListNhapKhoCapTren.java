@@ -186,7 +186,7 @@ public class ListNhapKhoCapTren extends BaseListOrderActivity {
         setStatus(Arrays.asList(
                 getResources().getStringArray(R.array.import_from_staff_2_step_status)));
         setWareHouseData(
-                Arrays.asList(String.valueOf(mUserRepository.getUserInfo().getShop().getParentShopId())));
+                Arrays.asList(String.valueOf(mUserRepository.getUserInfo().getShop().getParentShopName())));
         funtions = mUserRepository.getFunctionsCodes();
     }
 

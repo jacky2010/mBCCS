@@ -59,57 +59,13 @@ public class Shop implements Parcelable {
     @Expose
     private long parentShopId;
 
+    @SerializedName("parent_shop_name")
+    @Expose
+    private String parentShopName;
+
     public Shop() {
 
     }
-
-    protected Shop(Parcel in) {
-        shopId = in.readLong();
-        shopCode = in.readString();
-        shopPath = in.readString();
-        address = in.readString();
-        discountPolicy = in.readString();
-        province = in.readString();
-        shopName = in.readString();
-        channelTypeId = in.readLong();
-        pricePolicy = in.readLong();
-        createDate = in.readString();
-        status = in.readString();
-        parentShopId = in.readLong();
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(shopId);
-        dest.writeString(shopCode);
-        dest.writeString(shopPath);
-        dest.writeString(address);
-        dest.writeString(discountPolicy);
-        dest.writeString(province);
-        dest.writeString(shopName);
-        dest.writeLong(channelTypeId);
-        dest.writeLong(pricePolicy);
-        dest.writeString(createDate);
-        dest.writeString(status);
-        dest.writeLong(parentShopId);
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    public static final Creator<Shop> CREATOR = new Creator<Shop>() {
-        @Override
-        public Shop createFromParcel(Parcel in) {
-            return new Shop(in);
-        }
-
-        @Override
-        public Shop[] newArray(int size) {
-            return new Shop[size];
-        }
-    };
 
     public Long getShopId() {
         return shopId;
@@ -207,8 +163,66 @@ public class Shop implements Parcelable {
         this.parentShopId = parentShopId;
     }
 
+    public String getParentShopName() {
+        return parentShopName == null ? "" : parentShopName;
+    }
+
+    public void setParentShopName(String parentShopName) {
+        this.parentShopName = parentShopName;
+    }
+
     @Override
     public String toString() {
         return shopName;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(this.shopId);
+        dest.writeString(this.shopCode);
+        dest.writeString(this.shopPath);
+        dest.writeString(this.address);
+        dest.writeString(this.discountPolicy);
+        dest.writeString(this.province);
+        dest.writeString(this.shopName);
+        dest.writeLong(this.channelTypeId);
+        dest.writeLong(this.pricePolicy);
+        dest.writeString(this.createDate);
+        dest.writeString(this.status);
+        dest.writeLong(this.parentShopId);
+        dest.writeString(this.parentShopName);
+    }
+
+    protected Shop(Parcel in) {
+        this.shopId = (Long) in.readValue(Long.class.getClassLoader());
+        this.shopCode = in.readString();
+        this.shopPath = in.readString();
+        this.address = in.readString();
+        this.discountPolicy = in.readString();
+        this.province = in.readString();
+        this.shopName = in.readString();
+        this.channelTypeId = in.readLong();
+        this.pricePolicy = in.readLong();
+        this.createDate = in.readString();
+        this.status = in.readString();
+        this.parentShopId = in.readLong();
+        this.parentShopName = in.readString();
+    }
+
+    public static final Creator<Shop> CREATOR = new Creator<Shop>() {
+        @Override
+        public Shop createFromParcel(Parcel source) {
+            return new Shop(source);
+        }
+
+        @Override
+        public Shop[] newArray(int size) {
+            return new Shop[size];
+        }
+    };
 }
