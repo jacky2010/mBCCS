@@ -47,7 +47,6 @@ import com.viettel.mbccs.data.source.remote.response.GetListRegTypeResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListSubTypeResponse;
 import com.viettel.mbccs.data.source.remote.response.GetQuotaByProductCodeResponse;
 import com.viettel.mbccs.screen.connector.listener.OnPageChange;
-import com.viettel.mbccs.utils.DatabaseUtils;
 import com.viettel.mbccs.utils.DateUtils;
 import com.viettel.mbccs.utils.PatternUtils;
 import com.viettel.mbccs.utils.SpinnerAdapter;
@@ -865,7 +864,13 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
     }
 
     public void onNextView1() {
+
         if (!validateCustomer()) {
+            return;
+        }
+
+        if (!validateImage()) {
+            createNewView1.showValidateImage();
             return;
         }
 
@@ -889,6 +894,15 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
             if (onPageChange != null) {
                 this.onPageChange.onPageChange(0);
             }
+            return;
+        }
+
+        if (!validateImage()) {
+            if (onPageChange != null) {
+                this.onPageChange.onPageChange(0);
+            }
+
+            createNewView1.showValidateImage();
             return;
         }
 
@@ -916,11 +930,9 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
         connectSubscriberRequest.setShopCode(userInfo.getShop().getShopCode());
         connectSubscriberRequest.setSubType(checkIdNoRequest.getSubType());
 
-        List<String> dataImage =
-                DatabaseUtils.getBitmapAndSaveDatabase(customer, customerCurrentImageFront,
-                        customerCurrentImageBackside, customerCurrentImagePortrait);
-
-        createNewView3.connectSubscriber(connectSubscriberRequest, userInfo, dataImage);
+        createNewView3.connectSubscriber(connectSubscriberRequest, userInfo,
+                customerCurrentImageFront, customerCurrentImageBackside,
+                customerCurrentImagePortrait);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -1133,6 +1145,16 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
                 PatternUtils.PATTERN_TEXT_LENGTH_100)) {
             viewModel.setCustomerNameCustomerError(
                     context.getString(R.string.create_new_connector_information_validate_name));
+            validate = false;
+        }
+        return validate;
+    }
+
+    boolean validateImage() {
+        boolean validate = true;
+        if (customerCurrentImageFront == null
+                || customerCurrentImageBackside == null
+                || customerCurrentImagePortrait == null) {
             validate = false;
         }
         return validate;

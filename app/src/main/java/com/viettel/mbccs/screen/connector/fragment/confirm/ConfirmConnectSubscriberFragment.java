@@ -1,7 +1,6 @@
 package com.viettel.mbccs.screen.connector.fragment.confirm;
 
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -83,23 +82,29 @@ public class ConfirmConnectSubscriberFragment extends BaseFragment
     }
 
     @Override
-    public void confirmUploadImage() {
-        DialogUtils.showDialog(getActivity(), "Send Image", "Send image now", "OK",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        presenter.clickSendData(true);
-                    }
-                }, "No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        presenter.clickSendData(false);
-                    }
-                });
+    public void connectSubscriberSuccess() {
+
+        //        DialogUtils.showDialog(getActivity(), "Send Image", "Send image now", "OK",
+        //                new DialogInterface.OnClickListener() {
+        //                    @Override
+        //                    public void onClick(DialogInterface dialog, int which) {
+        //                        presenter.clickSendImage(true);
+        //                        showDialog(result, isRegister);
+        //                    }
+        //                }, "No", new DialogInterface.OnClickListener() {
+        //                    @Override
+        //                    public void onClick(DialogInterface dialog, int which) {
+        //                        presenter.clickSendImage(false);
+        //                        showDialog(result, isRegister);
+        //                    }
+        //                });
+
+        presenter.clickSendImage(true);
+        showDialog();
+
     }
 
-    @Override
-    public void connectSubscriberSuccess() {
+    private void showDialog(){
         Dialog dia = new DialogFullScreen.Builder(getActivity()).setCenterContent(true)
                 .setTitle(getString(R.string.confirm_connect_subscriber_dialog_dau_noi_thanh_cong))
                 .setContent(getString(R.string.confirm_connect_subscriber_dialog_gui_tin_nhan))
@@ -115,8 +120,8 @@ public class ConfirmConnectSubscriberFragment extends BaseFragment
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-//                                startActivity(
-//                                        new Intent(getActivity(), ConnectorMobileActivity.class));
+                                //                                startActivity(
+                                //                                        new Intent(getActivity(), ConnectorMobileActivity.class));
                                 getActivity().finish();
                             }
                         }, 200);
@@ -128,8 +133,8 @@ public class ConfirmConnectSubscriberFragment extends BaseFragment
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
-//                                startActivity(
-//                                        new Intent(getActivity(), ConnectorMobileActivity.class));
+                                //                                startActivity(
+                                //                                        new Intent(getActivity(), ConnectorMobileActivity.class));
                                 getActivity().finish();
                             }
                         }, 200);

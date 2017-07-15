@@ -274,6 +274,18 @@ public class Customer implements Parcelable {
     @Expose
     private String imageNameNo2;
 
+    @SerializedName("imageData")
+    @Expose
+    private String imageData;
+
+    @SerializedName("imageDataNo1")
+    @Expose
+    private String imageDataNo1;
+
+    @SerializedName("imageDataNo2")
+    @Expose
+    private String imageDataNo2;
+
     @SerializedName("noimageSignaltes")
     @Expose
     private String imageSignal;
@@ -385,6 +397,9 @@ public class Customer implements Parcelable {
         imageName = in.readString();
         imageNameNo1 = in.readString();
         imageNameNo2 = in.readString();
+        imageData = in.readString();
+        imageDataNo1 = in.readString();
+        imageDataNo2 = in.readString();
         imageSignal = in.readString();
         pathFileBusiness = in.readString();
         pathName = in.readString();
@@ -456,6 +471,9 @@ public class Customer implements Parcelable {
         dest.writeString(imageName);
         dest.writeString(imageNameNo1);
         dest.writeString(imageNameNo2);
+        dest.writeString(imageData);
+        dest.writeString(imageDataNo1);
+        dest.writeString(imageDataNo2);
         dest.writeString(imageSignal);
         dest.writeString(pathFileBusiness);
         dest.writeString(pathName);
@@ -1076,5 +1094,29 @@ public class Customer implements Parcelable {
 
     public void setVasRegistration(String vasRegistration) {
         this.vasRegistration = vasRegistration;
+    }
+
+    public String getImageData() {
+        return imageData;
+    }
+
+    public void setImageData(String imageData) {
+        this.imageData = imageData;
+    }
+
+    public String getImageDataNo1() {
+        return imageDataNo1;
+    }
+
+    public void setImageDataNo1(String imageDataNo1) {
+        this.imageDataNo1 = imageDataNo1;
+    }
+
+    public String getImageDataNo2() {
+        return imageDataNo2;
+    }
+
+    public void setImageDataNo2(String imageDataNo2) {
+        this.imageDataNo2 = imageDataNo2;
     }
 }

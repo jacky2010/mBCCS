@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
+import android.graphics.Bitmap;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -133,6 +134,12 @@ public class CreateUpdateInformationFragmentPresenter
     public ObservableField<Date> maxDateBirthDay;
     public ObservableField<Date> minDateBirthDay;
 
+    private Bitmap imageFront;
+    private Bitmap imageBackside;
+    private Bitmap imagePortrait;
+
+    private List<String> dataImage;
+
     CreateUpdateInformationFragmentPresenter(Context context,
             CreateUpdateInformationFragmentContract.View view) {
         this.context = context;
@@ -153,6 +160,10 @@ public class CreateUpdateInformationFragmentPresenter
 
         txtNameCustomer = new ObservableField<>();
         txtNumberPassport = new ObservableField<>();
+
+        imageUrlFront = new ObservableField<>();
+        imageUrlBackside = new ObservableField<>();
+        imageUrlPortrait = new ObservableField<>();
 
         area = new ObservableField<>();
         textOTP = new ObservableField<>();
@@ -471,6 +482,10 @@ public class CreateUpdateInformationFragmentPresenter
 
         if (typeFragment == CreateUpdateInformationFragment.Type.UPDATE_INFORMATION
                 && getDataSubscriber().getSubType().equals(MobileType.TRA_SAU)) {
+            if (!validateImage(CreateUpdateInformationFragment.Type.UPDATE_INFORMATION)) {
+                return;
+            }
+
             otpError.set(null);
             Contract contract = getDataContract();
             if (StringUtils.isEmpty(textOTP.get())) {
@@ -502,7 +517,7 @@ public class CreateUpdateInformationFragmentPresenter
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    view.isSendImage();
+                                    clickSendData();
                                     view.hideLoading();
                                 }
                             }, TimeDelayHideDialogLoading);
@@ -515,7 +530,11 @@ public class CreateUpdateInformationFragmentPresenter
                     });
             subscriptions.add(subscription);
         } else {
-            view.isSendImage();
+            if (!validateImage(CreateUpdateInformationFragment.Type.CREATE_INFORMATION)) {
+                view.showImageError();
+                return;
+            }
+            clickSendData();
         }
     }
 
@@ -608,19 +627,10 @@ public class CreateUpdateInformationFragmentPresenter
         return contract;
     }
 
-    void clickSendData(boolean isSendImage) {
+    private void clickSendData() {
         view.showLoading();
         Customer customer = getDataCustomer();
         Subscriber subscriber = getDataSubscriber();
-
-        List<String> data = DatabaseUtils.getBitmapAndSaveDatabase(customer, view.imageFront(),
-                view.imageBackside(), view.imagePortrait());
-        if (isSendImage) {
-            Intent intent = new Intent(context, UploadImageService.class);
-            intent.putStringArrayListExtra(UploadImageService.ARG_DATA_INTENT,
-                    (ArrayList<String>) data);
-            context.startService(intent);
-        }
 
         if (typeFragment == CreateUpdateInformationFragment.Type.UPDATE_INFORMATION) {
 
@@ -639,6 +649,13 @@ public class CreateUpdateInformationFragmentPresenter
                     .subscribe(new MBCCSSubscribe<UpdateAllSubInfoResponse>() {
                         @Override
                         public void onSuccess(UpdateAllSubInfoResponse object) {
+                            List<String> dataId = new ArrayList<>();
+                            dataId.add(customerResponse.getImageName());
+                            dataId.add(customerResponse.getImageNameNo1());
+                            dataId.add(customerResponse.getImageNameNo2());
+
+                            dataImage = DatabaseUtils.getBitmapAndSaveDatabase(dataId, imageFront,
+                                    imageBackside, imagePortrait);
                             view.registerUpdateCustomerInfoSuccess(null, false);
                             view.hideLoading();
                         }
@@ -671,6 +688,10 @@ public class CreateUpdateInformationFragmentPresenter
                     .subscribe(new MBCCSSubscribe<RegisterCustomerInfoResponse>() {
                         @Override
                         public void onSuccess(RegisterCustomerInfoResponse object) {
+                            dataImage =
+                                    DatabaseUtils.getBitmapAndSaveDatabase(object.getNameImage(),
+                                            imageFront, imageBackside, imagePortrait);
+
                             view.registerUpdateCustomerInfoSuccess(object.getResult(), true);
                             view.hideLoading();
                         }
@@ -685,10 +706,13 @@ public class CreateUpdateInformationFragmentPresenter
         }
     }
 
-    boolean isExistsImageUpload() {
-        return view.imageFront() != null
-                || view.imageBackside() != null
-                || view.imagePortrait() != null;
+    public void clickSendImage(boolean isSend) {
+        if (isSend) {
+            Intent intent = new Intent(context, UploadImageService.class);
+            intent.putStringArrayListExtra(UploadImageService.ARG_DATA_INTENT,
+                    (ArrayList<String>) dataImage);
+            context.startService(intent);
+        }
     }
 
     private boolean validateField(Customer customer, Subscriber subscriber) {
@@ -716,6 +740,24 @@ public class CreateUpdateInformationFragmentPresenter
         if (StringUtils.isEmpty(subscriber.getIsdn())) {
             validate = false;
             isdnError.set(stringError);
+        }
+
+        return validate;
+    }
+
+    private boolean validateImage(int type) {
+        boolean validate = true;
+        imageFront = view.imageFront();
+        imageBackside = view.imageBackside();
+        imagePortrait = view.imagePortrait();
+        if (type == CreateUpdateInformationFragment.Type.UPDATE_INFORMATION) {
+
+        } else {
+            if (imageFront == null || imageBackside == null || imagePortrait != null) {
+                validate = false;
+            } else {
+                validate = true;
+            }
         }
 
         return validate;
@@ -911,6 +953,18 @@ public class CreateUpdateInformationFragmentPresenter
                     selectionPassport.set(i);
                     break;
                 }
+            }
+
+            if (!StringUtils.isEmpty(customerResponse.getImageData())) {
+                imageUrlFront.set(customerResponse.getImageData());
+            }
+
+            if (!StringUtils.isEmpty(customerResponse.getImageDataNo1())) {
+                imageUrlBackside.set(customerResponse.getImageDataNo1());
+            }
+
+            if (!StringUtils.isEmpty(customerResponse.getImageDataNo2())) {
+                imageUrlPortrait.set(customerResponse.getImageDataNo2());
             }
         }
         if (contractResponse != null) {

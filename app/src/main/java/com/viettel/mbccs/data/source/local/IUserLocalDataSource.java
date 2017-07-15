@@ -5,7 +5,7 @@ import com.viettel.mbccs.data.model.Area;
 import com.viettel.mbccs.data.model.Image;
 import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.model.Precinct;
-import com.viettel.mbccs.data.model.UploadImage;
+import com.viettel.mbccs.data.model.database.UploadImage;
 import com.viettel.mbccs.data.model.UserInfo;
 import com.viettel.mbccs.data.model.database.ImageDataBase;
 import java.util.List;
@@ -119,7 +119,7 @@ public interface IUserLocalDataSource {
 
     List<UploadImage> getUploadImage(@UploadImage.StatusUpload String status);
 
-    UploadImage getUploadImage(long idImage);
+    UploadImage getUploadImageByName(String name);
 
     void setUploadImage(List<UploadImage> data);
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
+import android.graphics.Bitmap;
 import com.viettel.mbccs.BR;
 import com.viettel.mbccs.constance.Data;
 import com.viettel.mbccs.constance.WsCode;
@@ -14,6 +15,7 @@ import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.ConnectSubscriberResponse;
 import com.viettel.mbccs.service.service.UploadImageService;
+import com.viettel.mbccs.utils.DatabaseUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,15 +44,22 @@ public class ConfirmConnectSubscriberPresenter extends BaseObservable
     private String nameStaff;
     private String phoneNumberStaff;
 
+    private Bitmap imageFront;
+    private Bitmap imageBackside;
+    private Bitmap imagePortrait;
+
     public ConfirmConnectSubscriberPresenter(Context context,
             ConfirmConnectSubscriberContract.View view, ConnectSubscriberRequest data,
-            UserInfo userInfo, List<String> dataImage) {
+            UserInfo userInfo, Bitmap customerCurrentImageFront,
+            Bitmap customerCurrentImageBackside, Bitmap customerCurrentImagePortrait) {
         this.context = context;
         this.view = view;
         view.setPresenter(this);
         this.data = data;
         this.userInfo = userInfo;
-        this.dataImage = dataImage;
+        this.imageFront = customerCurrentImageFront;
+        this.imageBackside = customerCurrentImageBackside;
+        this.imagePortrait = customerCurrentImagePortrait;
 
         qlKhachHangRepository = QLKhachHangRepository.getInstance();
         subscriptions = new CompositeSubscription();
@@ -72,22 +81,11 @@ public class ConfirmConnectSubscriberPresenter extends BaseObservable
     }
 
     public void onConnectSubscriber() {
-        if (dataImage != null && dataImage.size() != 0) {
-            view.confirmUploadImage();
-        } else {
-            clickSendData(false);
-        }
+        clickSendData();
     }
 
-    public void clickSendData(boolean status) {
+    public void clickSendData() {
         view.showLoading();
-
-        if (status) {
-            Intent intent = new Intent(context, UploadImageService.class);
-            intent.putStringArrayListExtra(UploadImageService.ARG_DATA_INTENT,
-                    (ArrayList<String>) dataImage);
-            context.startService(intent);
-        }
 
         DataRequest<ConnectSubscriberRequest> request = new DataRequest<>();
         request.setWsCode(WsCode.ConnectSubscriber);
@@ -96,6 +94,8 @@ public class ConfirmConnectSubscriberPresenter extends BaseObservable
                 .subscribe(new MBCCSSubscribe<ConnectSubscriberResponse>() {
                     @Override
                     public void onSuccess(ConnectSubscriberResponse object) {
+                        dataImage = DatabaseUtils.getBitmapAndSaveDatabase(object.getNameImage(),
+                                imageFront, imageBackside, imagePortrait);
                         view.connectSubscriberSuccess();
                     }
 
@@ -112,6 +112,16 @@ public class ConfirmConnectSubscriberPresenter extends BaseObservable
                 });
         subscriptions.add(subscription);
     }
+
+    public void clickSendImage(boolean isSend) {
+        if (isSend) {
+            Intent intent = new Intent(context, UploadImageService.class);
+            intent.putStringArrayListExtra(UploadImageService.ARG_DATA_INTENT,
+                    (ArrayList<String>) dataImage);
+            context.startService(intent);
+        }
+    }
+
 
     private void setData() {
         for (Data.DataField d : dataSpinner2DichVu) {

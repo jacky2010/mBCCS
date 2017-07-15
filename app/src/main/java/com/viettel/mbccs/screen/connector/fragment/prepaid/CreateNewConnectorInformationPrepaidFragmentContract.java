@@ -7,7 +7,6 @@ import com.viettel.mbccs.data.model.UserInfo;
 import com.viettel.mbccs.data.source.remote.request.ConnectSubscriberRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.widget.model.AddressApp;
-import java.util.List;
 
 /**
  * Created by HuyQuyet on 6/4/17.
@@ -44,11 +43,16 @@ public interface CreateNewConnectorInformationPrepaidFragmentContract {
         String getDateCreatePassport();
 
         String getDateOutDatePassport();
+
+        void imageError();
+
+        void showValidateImage();
     }
 
     interface ViewFragment2 extends View {
 
         void connectSubscriber(ConnectSubscriberRequest request, UserInfo userInfo,
-                List<String> dataImage);
+                Bitmap customerCurrentImageFront, Bitmap customerCurrentImageBackside,
+                Bitmap customerCurrentImagePortrait);
     }
 }

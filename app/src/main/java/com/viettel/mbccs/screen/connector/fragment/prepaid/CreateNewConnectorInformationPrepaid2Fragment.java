@@ -1,6 +1,7 @@
 package com.viettel.mbccs.screen.connector.fragment.prepaid;
 
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
@@ -17,7 +18,6 @@ import com.viettel.mbccs.screen.connector.fragment.confirm.ConfirmConnectSubscri
 import com.viettel.mbccs.screen.connector.fragment.confirm.ConfirmConnectSubscriberPresenter;
 import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.widget.model.AddressApp;
-import java.util.List;
 
 /**
  * Created by HuyQuyet on 6/5/17.
@@ -106,11 +106,13 @@ public class CreateNewConnectorInformationPrepaid2Fragment extends BaseFragment
 
     @Override
     public void connectSubscriber(ConnectSubscriberRequest request, UserInfo userInfo,
-            List<String> dataImage) {
+            Bitmap customerCurrentImageFront, Bitmap customerCurrentImageBackside,
+            Bitmap customerCurrentImagePortrait) {
         ConfirmConnectSubscriberFragment fragment = ConfirmConnectSubscriberFragment.newInstance();
         ConfirmConnectSubscriberPresenter presenter =
                 new ConfirmConnectSubscriberPresenter(getActivity(), fragment, request, userInfo,
-                        dataImage);
+                        customerCurrentImageFront, customerCurrentImageBackside,
+                        customerCurrentImagePortrait);
 
         FragmentTransaction transaction =
                 getActivity().getSupportFragmentManager().beginTransaction();

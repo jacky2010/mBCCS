@@ -40,7 +40,12 @@
             android:value="2"/>
         <meta-data
             android:name="AA_MODELS"
-            android:value="com.viettel.mbccs.data.model.Precinct,                            com.viettel.mbccs.data.model.Province,                            com.viettel.mbccs.data.model.District,                            com.viettel.mbccs.data.model.database.AreaDataBase,                            com.viettel.mbccs.data.model.database.ImageDataBase,                            com.viettel.mbccs.data.model.UploadImage"/>
+            android:value="com.viettel.mbccs.data.model.Precinct,
+                           com.viettel.mbccs.data.model.Province,
+                           com.viettel.mbccs.data.model.District,
+                           com.viettel.mbccs.data.model.database.AreaDataBase,
+                           com.viettel.mbccs.data.model.database.ImageDataBase,
+                           com.viettel.mbccs.data.model.database.UploadImage"/>
 
         <!-- Service -->
         <service

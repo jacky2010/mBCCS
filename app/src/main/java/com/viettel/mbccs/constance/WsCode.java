@@ -404,7 +404,7 @@ public class WsCode {
     public final static String SendSurveyKPP = "WS_sendSurvey";
     public final static String GetSurveyKPP = "WS_getListSurvey";
 
-    public final static String UpLoadImage = "WS_upLoad";
+    public final static String UpLoadImage = "WS_uploadImage";
     public final static String GetRegiterSubInfo = "WS_getRegiterSubInfo";
     public final static String GetListHotNews = "WS_getListHotNews";
     public final static String GetInfoHotNews = "WS_getInfoHotNews";

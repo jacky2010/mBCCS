@@ -4,7 +4,7 @@ import android.content.Context;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import com.viettel.mbccs.BR;
-import com.viettel.mbccs.data.model.UploadImage;
+import com.viettel.mbccs.data.model.database.UploadImage;
 import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.screen.uploadimage.adapter.AdapterUploadImage;
 import java.util.List;

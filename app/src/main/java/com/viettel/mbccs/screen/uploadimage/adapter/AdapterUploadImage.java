@@ -3,7 +3,7 @@ package com.viettel.mbccs.screen.uploadimage.adapter;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
-import com.viettel.mbccs.data.model.UploadImage;
+import com.viettel.mbccs.data.model.database.UploadImage;
 import java.util.List;
 
 /**

@@ -2,13 +2,12 @@ package com.viettel.mbccs.data.source;
 
 import com.viettel.mbccs.data.model.Area;
 import com.viettel.mbccs.data.model.EmptyObject;
-import com.viettel.mbccs.data.model.Function;
 import com.viettel.mbccs.data.model.Image;
 import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.model.Precinct;
-import com.viettel.mbccs.data.model.UploadImage;
 import com.viettel.mbccs.data.model.UserInfo;
 import com.viettel.mbccs.data.model.database.ImageDataBase;
+import com.viettel.mbccs.data.model.database.UploadImage;
 import com.viettel.mbccs.data.source.local.IUserLocalDataSource;
 import com.viettel.mbccs.data.source.local.datasource.UserLocalDataSource;
 import com.viettel.mbccs.data.source.remote.IUserRemoteDataSource;
@@ -215,8 +214,8 @@ public class UserRepository implements IUserLocalDataSource, IUserRemoteDataSour
     }
 
     @Override
-    public UploadImage getUploadImage(long idImage) {
-        return mUserLocalDataSource.getUploadImage(idImage);
+    public UploadImage getUploadImageByName(String name) {
+        return mUserLocalDataSource.getUploadImageByName(name);
     }
 
     @Override

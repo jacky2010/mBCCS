@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import java.util.List;
 
 /**
  * Created by HuyQuyet on 6/8/17.
@@ -15,19 +16,19 @@ public class UploadImageResponse implements Parcelable {
     @Expose
     private String result;
 
-    @SerializedName("fileName")
+    @SerializedName("lstName")
     @Expose
-    private String fileName;
+    private List<String> lstName;
 
     protected UploadImageResponse(Parcel in) {
         result = in.readString();
-        fileName = in.readString();
+        lstName = in.createStringArrayList();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(result);
-        dest.writeString(fileName);
+        dest.writeStringList(lstName);
     }
 
     @Override
@@ -47,19 +48,19 @@ public class UploadImageResponse implements Parcelable {
         }
     };
 
+    public List<String> getLstName() {
+        return lstName;
+    }
+
+    public void setLstName(List<String> lstName) {
+        this.lstName = lstName;
+    }
+
     public String getResult() {
         return result;
     }
 
     public void setResult(String result) {
         this.result = result;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
     }
 }
