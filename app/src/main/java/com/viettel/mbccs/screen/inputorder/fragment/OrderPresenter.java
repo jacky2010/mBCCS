@@ -108,8 +108,8 @@ public class OrderPresenter implements OrderContract.Presenter {
                         new MBCCSSubscribe<EmptyObject>() {
                             @Override
                             public void onSuccess(EmptyObject object) {
-                                getInvoiceList(mIndexTab);
                                 mViewModel.inputOrderSuccess();
+                                subscribe();
                             }
 
                             @Override
