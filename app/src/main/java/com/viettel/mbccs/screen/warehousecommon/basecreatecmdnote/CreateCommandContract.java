@@ -22,6 +22,8 @@ public interface CreateCommandContract {
 
     interface ViewModel<T> extends BaseView<Presenter> {
 
+        boolean isViewOnly();
+
         String getScreenTitle();
 
         void goGoStockPicker(ArrayList<StockTotal> stockTotals);

@@ -60,6 +60,15 @@ public abstract class BaseCreateCommandNoteActivity<T> extends
 
     public UserRepository mUserRepository;
 
+    public boolean viewOnly = false;
+
+    private String titleScreen;
+
+    @Override
+    public boolean isViewOnly() {
+        return viewOnly;
+    }
+
     @Override
     public int getAction() {
         return getActionType();
@@ -133,6 +142,9 @@ public abstract class BaseCreateCommandNoteActivity<T> extends
     protected void initData() {
         mUserRepository = UserRepository.getInstance();
         Bundle bundle = getIntent().getExtras();
+        viewOnly = bundle.getBoolean(Constants.BundleConstant.STOCK_VIEW_ONLY);
+        if (viewOnly) titleScreen = bundle.getString(Constants.BundleConstant.CMD_TITLE);
+
         try {
             mStockTrans = bundle.getParcelable(Constants.BundleConstant.STOCK_TRANS);
         } catch (Exception e) {
@@ -141,6 +153,7 @@ public abstract class BaseCreateCommandNoteActivity<T> extends
 
         mPresenter = new CreateCommandPresenter(this, this, mStockTrans);
         mBinding.setPresenter((CreateCommandPresenter) mPresenter);
+        ((CreateCommandPresenter) mPresenter).isViewOnly.set(viewOnly);
         init();
     }
 
@@ -184,7 +197,7 @@ public abstract class BaseCreateCommandNoteActivity<T> extends
 
     @Override
     public String getScreenTitle() {
-        return getTitleName();
+        return titleScreen == null ? getTitleName() : titleScreen;
     }
 
     @Override

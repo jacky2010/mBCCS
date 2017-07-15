@@ -89,6 +89,7 @@ public class ListNhapKhoCapTren extends BaseListOrderActivity {
     }
 
     private void setStockTran2StepRequest(GetListExpCmdRequest mRequest) {
+        mRequest.setStockTransType(StockTransType.TRANS_IMPORT);
         if (getPositionStatus() == 0) {
             mRequest.setStockTransStatus(StockTransStatus.TRANS_DONE);
             mRequest.setStockTransType(StockTransType.TRANS_EXPORT);
@@ -96,17 +97,14 @@ public class ListNhapKhoCapTren extends BaseListOrderActivity {
 
         if (getPositionStatus() == 1) {
             mRequest.setStockTransStatus(StockTransStatus.TRANS_NOTED);
-            mRequest.setStockTransType(StockTransType.TRANS_IMPORT);
         }
 
         if (getPositionStatus() == 2) {
             mRequest.setStockTransStatus(StockTransStatus.TRANS_DONE);
-            mRequest.setStockTransType(StockTransType.TRANS_IMPORT);
         }
 
         if (getPositionStatus() == 3) {
             mRequest.setStockTransStatus(StockTransStatus.TRANS_CANCEL);
-            mRequest.setStockTransType(StockTransType.TRANS_IMPORT);
         }
     }
 
@@ -194,8 +192,10 @@ public class ListNhapKhoCapTren extends BaseListOrderActivity {
         arrStatus = Arrays.asList(
                 getResources().getStringArray(R.array.import_from_staff_2_step_status));
         setStatus(arrStatus);
-        setWareHouseData(Arrays.asList(String.valueOf(
-                mUserRepository.getUserInfo().getShop().getParentShop().getShopName())));
+        if (mUserRepository.getUserInfo().getShop().getParentShop() != null) {
+            setWareHouseData(Arrays.asList(String.valueOf(
+                    mUserRepository.getUserInfo().getShop().getParentShop().getShopName())));
+        }
         funtions = mUserRepository.getFunctionsCodes();
     }
 
