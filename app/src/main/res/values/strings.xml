@@ -1244,5 +1244,11 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="common_export_label_create_note_from"><![CDATA[Lập phiếu xuất từ kho <font color="317BE1"><u>%s</u></font>]]></string>
     <string name="export_staff_label_create_cmd_staff">Lập lệnh xuất kho cho nhân viên</string>
     <string name="import_staff_label_create_cmd_staff">Lập lệnh nhập kho cho nhân viên</string>
+    <string name="common_kho_nhan_xuat">Kho %1$s: %2$s</string>
+    <string name="common_kho_nhan">nhận</string>
+    <string name="common_kho_xuat">xuất</string>
+    <string name="common_kho_lap_lenh_phieu_thanh_cong">Lập %1$s thành công mã: %2$s</string>
+    <string name="common_kho_lenh">lệnh</string>
+    <string name="common_kho_phieu">phiếu</string>
 
 </resources>

@@ -64,7 +64,7 @@ public class ListOrderReturnUpperActivity extends BaseListOrderActivity {
         }
 
         if (getPositionStatus() == 5) {
-            //TODO: will confirm after
+            //TODO: will confirm later
             mRequest.setStockTransStatus(StockTransStatus.TRANS_REJECT);
         }
 

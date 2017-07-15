@@ -485,7 +485,7 @@ public class CreateCommandPresenter<T> implements CreateCommandContract.Presente
 
         //TODO show lap phieu thanh cong
 
-        mViewModel.onCreateExportSuccess();
+        mViewModel.onCreateExportSuccess(stockTrans);
         Toast.makeText(mContext, "show dialog success", Toast.LENGTH_SHORT).show();
     }
 

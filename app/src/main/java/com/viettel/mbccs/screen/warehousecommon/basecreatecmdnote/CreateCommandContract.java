@@ -3,6 +3,7 @@ package com.viettel.mbccs.screen.warehousecommon.basecreatecmdnote;
 import com.viettel.mbccs.base.BasePresenter;
 import com.viettel.mbccs.base.BaseView;
 import com.viettel.mbccs.data.model.StockTotal;
+import com.viettel.mbccs.data.model.StockTrans;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +50,7 @@ public interface CreateCommandContract {
 
         void onRejectExportSuccess();
 
-        void onCreateExportSuccess();
+        void onCreateExportSuccess(StockTrans stockTrans);
 
         long getReasonId();
     }
