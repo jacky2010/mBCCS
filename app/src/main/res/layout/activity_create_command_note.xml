@@ -59,7 +59,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/dp_3"
                         android:onClick="@{()->presenter.showDialogReject()}"
-                        android:text="@string/common_label_close"
+                        android:text="@string/reject"
                         android:visibility="@{presenter.showReject ? View.VISIBLE : View.GONE}"
                         style="@style/button_negative_red2"
                         />

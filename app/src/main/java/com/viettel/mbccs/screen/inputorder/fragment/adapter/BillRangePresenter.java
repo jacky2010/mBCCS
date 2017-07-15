@@ -17,7 +17,6 @@ public class BillRangePresenter {
     public ObservableInt status;
     public ObservableBoolean isInvoiceImport;
 
-
     public BillRangePresenter(InvoiceList invoiceList) {
         mInvoiceList = invoiceList;
         initFields();
@@ -34,9 +33,10 @@ public class BillRangePresenter {
 
         codeFrom.set(mInvoiceList.getFromInvoice());
         codeTo.set(mInvoiceList.getToInvoice());
-        String dateAssign = DateUtils.getTimeFromDate(mInvoiceList.getDateAssign());
+        String dateAssign = DateUtils.convertStringToStringFormat(mInvoiceList.getDateAssign(),
+                DateUtils.DATE_FORMAT1);
         date.set(dateAssign);
-        count.set(mInvoiceList.getCurrInvoiceNo());
+        count.set(mInvoiceList.getToInvoice() - mInvoiceList.getFromInvoice());
         billOwnerName.set(mInvoiceList.getBillOwnerName());
         status.set((int) mInvoiceList.getStatus());
         isInvoiceImport.set(mInvoiceList.isInvoiceImport());

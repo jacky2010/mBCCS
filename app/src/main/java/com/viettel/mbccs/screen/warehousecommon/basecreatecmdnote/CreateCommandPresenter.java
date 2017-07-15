@@ -317,14 +317,14 @@ public class CreateCommandPresenter<T> implements CreateCommandContract.Presente
 
     public void showDialogReject() {
         new CustomDialog(mContext, R.string.confirm,
-                R.string.commmon_warehouse_msg_reject_create_note, false,
+                R.string.commmon_warehouse_msg_reject_create_note, true,
                 R.string.common_label_close, R.string.activity_create_order_success_tu_choi, null,
                 new CustomDialog.OnInputDialogListener() {
                     @Override
                     public void onClick(DialogInterface var1, int var2, String input) {
                         reject(input);
                     }
-                }, null, false, false).show();
+                }, null, false, true).show();
     }
 
     private void createCmd() {

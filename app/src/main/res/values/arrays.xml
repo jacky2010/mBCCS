@@ -49,9 +49,9 @@
     </string-array>
 
     <string-array name="xuatkhocd_status">
-        <item>Đã lập lệnh</item> <!--Not note type exp-->
+        <item>Đã lập lệnh xuất</item> <!--Not note type exp-->
         <item>Đã lập phiếu</item> <!--Noted-->
-        <item>Đã xuất</item> <!--tran done-->
+        <item>Đã xuất kho</item> <!--tran done-->
         <item>Phiếu xuất đã lập lệnh nhập</item> <!--implement-->
         <item>Đã hủy</item> <!--cancel-->
         <item>Đã bị từ chối</item> <!--reject-->

@@ -51,7 +51,7 @@ public class ListNhapKhoCapTren extends BaseListOrderActivity {
         mRequest.setEndDate(getToDateString());
 
         //get parent id
-        mRequest.setFromOwnerId(mUserRepository.getUserInfo().getShop().getParentShopId());
+        mRequest.setFromOwnerId(mUserRepository.getUserInfo().getShop().getParentShop().getShopId());
         mRequest.setFromOwnerType(OwnerType.SHOP);
         mRequest.setToOwnerId(mUserRepository.getUserInfo().getShop().getShopId());
         mRequest.setToOwnerType(OwnerType.SHOP);
@@ -186,7 +186,7 @@ public class ListNhapKhoCapTren extends BaseListOrderActivity {
         setStatus(Arrays.asList(
                 getResources().getStringArray(R.array.import_from_staff_2_step_status)));
         setWareHouseData(
-                Arrays.asList(String.valueOf(mUserRepository.getUserInfo().getShop().getParentShopName())));
+                Arrays.asList(String.valueOf(mUserRepository.getUserInfo().getShop().getParentShop().getShopName())));
         funtions = mUserRepository.getFunctionsCodes();
     }
 

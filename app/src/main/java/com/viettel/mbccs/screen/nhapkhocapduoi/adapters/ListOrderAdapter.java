@@ -65,7 +65,7 @@ public class ListOrderAdapter
             }
 
             mBinding.setCreatedDate(DateUtils.convertStringToStringFormat(item.getCreateDatetime(),
-                    DateUtils.DATE_TIME_FORMAT));
+                    DateUtils.DATE_FORMAT1));
             mBinding.setOnClicked(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
