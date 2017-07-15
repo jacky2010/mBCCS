@@ -289,7 +289,23 @@
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".screen.xuatkhochonhanvien.LapLenhXuatKhoChoNhanVienActivity"
+            android:name=".screen.xuatkhochonhanvien.threestep.LapLenh3XuatKhoChoNhanVienActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screen.xuatkhochonhanvien.threestep.LapPhieu3XuatKhoChoNhanVienActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screen.xuatkhochonhanvien.threestep.XuatKho3XuatKhoChoNhanVienActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screen.xuatkhochonhanvien.twostep.LapPhieu2XuatKhoChoNhanVienActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screen.xuatkhochonhanvien.twostep.XuatKho2XuatKhoChoNhanVienActivity"
             android:screenOrientation="portrait"/>
 
         <activity

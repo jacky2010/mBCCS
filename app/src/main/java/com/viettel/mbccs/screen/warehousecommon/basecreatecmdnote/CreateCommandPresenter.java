@@ -31,7 +31,6 @@ import com.viettel.mbccs.data.source.remote.request.GetListStockTransDetailReque
 import com.viettel.mbccs.data.source.remote.response.BaseCreateCmdNoteResponse;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetListStockModelAllResponse;
-import com.viettel.mbccs.data.source.remote.response.GetListStockModelResponse;
 import com.viettel.mbccs.data.source.remote.response.ListStockTransDetailsReponse;
 import com.viettel.mbccs.screen.nhanvientrahang.createNote.StockLapPhieuAdapter;
 import com.viettel.mbccs.screen.warehousecommon.exportwarehouse.StockTransDetailAdapter;
@@ -390,6 +389,7 @@ public class CreateCommandPresenter<T> implements CreateCommandContract.Presente
             CreateExpCmdRequest.CmdStock cmdStock = new CreateExpCmdRequest.CmdStock();
             cmdStock.cloneFromStockTotal(stockTotal);
             if (cmdStock.getQuantity() > 0) {
+                cmdStock.setStateId(listProductState.get(positionStatus).equals("NEW") ? 1L : 0L);
                 cmdStocks.add(cmdStock);
             }
         }

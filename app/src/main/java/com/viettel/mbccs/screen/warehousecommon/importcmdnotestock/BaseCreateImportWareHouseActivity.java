@@ -180,7 +180,7 @@ public abstract class BaseCreateImportWareHouseActivity extends BaseCreateOrderA
                 new ExportSuccessDialog.OnDialogDismissListener() {
 
                     @Override
-                    public void onDialogDissmis() {
+                    public void onDialogDismiss() {
                         onImportSuccess();
                     }
                 });

@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.searchlistview.BaseSearchListViewPresenter;
-import com.viettel.mbccs.constance.OrderStatus;
 import com.viettel.mbccs.data.model.StockTrans;
 import com.viettel.mbccs.screen.nhapkhocapduoi.adapters.ListOrderAdapter;
 import com.viettel.mbccs.utils.Common;
@@ -200,5 +199,9 @@ public class BaseListOrderPresenter
         }
 
         filterText.set(text);
+    }
+
+    public void notifyDataList() {
+        mAdaper.notifyDataSetChanged();
     }
 }

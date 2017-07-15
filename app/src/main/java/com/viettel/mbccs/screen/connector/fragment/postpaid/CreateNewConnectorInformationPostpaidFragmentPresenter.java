@@ -94,6 +94,7 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
     private Customer customerCurrent;
     private Subscriber subscriberCurrent;
     private Contract contractCurrent;
+    private ContractBank contractBankCurrent;
 
     //region Fragment 1
     /**
@@ -460,12 +461,13 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
                     public void onItemSelected(AdapterView<?> parent, View view, int position,
                             long id) {
                         contractPositionSpinner3HinhThucThanhToan = position;
-                        // TODO: 7/8/17  
                         if (contractDataSpinner3HinhThucThanhToan.get(position)
                                 .getCode()
-                                .equals("thuchi")) {
+                                .equals("03")) {
                             getDataTenNganHang();
                             viewModel.setViewThongTinNganHang(true);
+                        } else {
+                            viewModel.setViewThongTinNganHang(false);
                         }
                     }
 
@@ -897,7 +899,8 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
             return;
         }
 
-        if (!validateContract()) {
+        if (!validateContract() || (viewModel.isViewThongTinNganHang()
+                && !validateContractBank())) {
             return;
         }
 
@@ -908,6 +911,7 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
         connectSubscriberRequest.setContract(contractCurrent);
         connectSubscriberRequest.setCustomer(customerCurrent);
         connectSubscriberRequest.setSubscriber(subscriberCurrent);
+        connectSubscriberRequest.setContractBank(contractBankCurrent);
         connectSubscriberRequest.setStaffCode(userInfo.getStaffInfo().getStaffCode());
         connectSubscriberRequest.setShopCode(userInfo.getShop().getShopCode());
         connectSubscriberRequest.setSubType(checkIdNoRequest.getSubType());
@@ -1083,22 +1087,6 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
                     contractDataSpinner3ChiTietIn.get(contractPositionSpinner3ChiTietIn).getCode());
         }
 
-        if (viewModel.isViewThongTinNganHang()) {
-            ContractBank contractBank = new ContractBank();
-            contractBank.setBankContractDate(createNewView3.getNgayThu());
-            contractBank.setBankContractNo(viewModel.getContractHopDongThu());
-            if (contractDataSpinner3TenNganHang != null
-                    && contractDataSpinner3TenNganHang.size()
-                    >= contractPositionSpinner3TenNganHang) {
-                contractBank.setBankCode(
-                        contractDataSpinner3TenNganHang.get(contractPositionSpinner3TenNganHang)
-                                .getBankCode());
-            }
-            contractBank.setAccount(viewModel.getContractSoTaiKhoan());
-            contractBank.setAccountName(viewModel.getContractTenTaiKhoan());
-            contractCurrent.setContractBank(contractBank);
-        }
-
         contractCurrent.setProvince(addressApp3.getAreaProvince().getProvince());
         contractCurrent.setDistrict(addressApp3.getAreaDistrict().getDistrict());
         contractCurrent.setPrecinct(addressApp3.getAreaPrecinct().getPrecinct());
@@ -1111,6 +1099,22 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
             noticeCharge.add(contractDataSpinner3HinhThucThongBaoCuoc.get(
                     contractPositionSpinner3HinhThucThongBaoCuoc).getCode());
             contractCurrent.setNoticeCharge(noticeCharge);
+        }
+    }
+
+    private void getContractBankCurrent() {
+        if (viewModel.isViewThongTinNganHang()) {
+            contractBankCurrent.setBankContractDate(createNewView3.getNgayThu());
+            contractBankCurrent.setBankContractNo(viewModel.getContractHopDongThu());
+            if (contractDataSpinner3TenNganHang != null
+                    && contractDataSpinner3TenNganHang.size()
+                    >= contractPositionSpinner3TenNganHang) {
+                contractBankCurrent.setBankCode(
+                        contractDataSpinner3TenNganHang.get(contractPositionSpinner3TenNganHang)
+                                .getBankCode());
+            }
+            contractBankCurrent.setAccount(viewModel.getContractSoTaiKhoan());
+            contractBankCurrent.setAccountName(viewModel.getContractTenTaiKhoan());
         }
     }
 
@@ -1163,6 +1167,20 @@ public class CreateNewConnectorInformationPostpaidFragmentPresenter
             viewModel.setContractNguoiThanhToanError(
                     context.getString(R.string.create_new_connector_information_validate_name));
         }
+        return validate;
+    }
+
+    private boolean validateContractBank() {
+        getContractBankCurrent();
+        boolean validate = true;
+        if (StringUtils.isEmpty(contractBankCurrent.getAccountName())) {
+            viewModel.setContractTenTaiKhoanError(stringError);
+        }
+
+        if (StringUtils.isEmpty(contractBankCurrent.getAccount())) {
+            viewModel.setContractSoTaiKhoanError(stringError);
+        }
+
         return validate;
     }
 

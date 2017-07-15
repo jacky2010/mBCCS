@@ -146,6 +146,7 @@ public class Constants {
         public static final String CMD_RECEIVE_TITLE = "cmd_receive_title";
         public static final String CMD_SENDER_TITLE = "cmd_sender_title";
         public static final String ACTION_TYPE = "action_type";
+        public static final String CMD_TITLE = "cmd_title";
 
         /*survey*/
         public static final String SURVEY = "survey";

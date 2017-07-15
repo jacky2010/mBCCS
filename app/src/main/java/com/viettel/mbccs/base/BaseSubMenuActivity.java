@@ -47,7 +47,7 @@ import com.viettel.mbccs.screen.trahangcaptren.ListOrderReturnUpperActivity;
 import com.viettel.mbccs.screen.transferanypay.TransferAnyPayActivity;
 import com.viettel.mbccs.screen.viewwarehouse.ViewWarehouseActivity;
 import com.viettel.mbccs.screen.xuathangchonhanvien.ChiTietXuatKhoNhanVienActivity;
-import com.viettel.mbccs.screen.xuatkhochonhanvien.LapLenhXuatKhoChoNhanVienActivity;
+import com.viettel.mbccs.screen.xuatkhochonhanvien.threestep.LapLenh3XuatKhoChoNhanVienActivity;
 import com.viettel.mbccs.screen.xuatkhochonhanvien.XuatKhoChoNhanVienActivity;
 import com.viettel.mbccs.variable.Constants;
 import java.util.ArrayList;
@@ -330,7 +330,7 @@ public class BaseSubMenuActivity
                             //startActivity(intent);
 
                             Intent intent = new Intent(BaseSubMenuActivity.this,
-                                    LapLenhXuatKhoChoNhanVienActivity.class);
+                                    LapLenh3XuatKhoChoNhanVienActivity.class);
                             startActivity(intent);
                             break;
                     }

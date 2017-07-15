@@ -22,7 +22,7 @@
             app:isShow="@{ true }"
             app:leftIcon="@{ @drawable/ic_close_white }"
             app:leftIconClick="@{ () -> dialog.onClose() }"
-            app:title="@{ @string/common_label_notice}"
+            app:title="@{ dialog.cmdTitle }"
             />
 
         <LinearLayout

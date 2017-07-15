@@ -85,7 +85,7 @@ public abstract class CmdPrepareImportDetailActivity extends
                 new ExportSuccessDialog.OnDialogDismissListener() {
 
                     @Override
-                    public void onDialogDissmis() {
+                    public void onDialogDismiss() {
                         finish();
                     }
                 });

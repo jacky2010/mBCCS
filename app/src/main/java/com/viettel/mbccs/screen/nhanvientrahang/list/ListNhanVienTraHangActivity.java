@@ -9,19 +9,18 @@ import com.viettel.mbccs.constance.StockTransStatus;
 import com.viettel.mbccs.constance.StockTransType;
 import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.StockTrans;
-import com.viettel.mbccs.data.model.StockTransDetail;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListExpCmdRequest;
-import com.viettel.mbccs.data.source.remote.request.GetListStockTransDetailRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetListExpCmdResponse;
-import com.viettel.mbccs.data.source.remote.response.ListStockTransDetailsReponse;
 import com.viettel.mbccs.screen.nhanvientrahang.createNote.LapPhieuXuatTraHangActivity;
 import com.viettel.mbccs.screen.warehousecommon.exportsuccess.ExportSuccessDialog;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static com.viettel.mbccs.R.string.common_label_notice;
 
 /**
  * Created by eo_cuong on 7/5/17.
@@ -92,16 +91,17 @@ public class ListNhanVienTraHangActivity extends BaseListOrderActivity {
 
     @Override
     public void onItemStockTransClick(final StockTrans stockTrans) {
-        ExportSuccessDialog exportSuccessDialog = ExportSuccessDialog.newInstance(stockTrans,
-                String.format(getString(R.string.warehouse_label_export_success_code),
-                        String.valueOf(stockTrans.getStockTransId())),
-                String.format(getString(R.string.warehouse_label_receive),
-                        String.valueOf(stockTrans.getToOwnerId())));
+        ExportSuccessDialog exportSuccessDialog =
+                ExportSuccessDialog.newInstance(stockTrans, getString(common_label_notice),
+                        getString(R.string.warehouse_label_export_success_code,
+                                String.valueOf(stockTrans.getStockTransId())),
+                        getString(R.string.warehouse_label_receive,
+                                String.valueOf(stockTrans.getToOwnerId())));
         exportSuccessDialog.setOnDialogDismissListener(
                 new ExportSuccessDialog.OnDialogDismissListener() {
 
                     @Override
-                    public void onDialogDissmis() {
+                    public void onDialogDismiss() {
                     }
                 });
         exportSuccessDialog.show(getSupportFragmentManager(), "");

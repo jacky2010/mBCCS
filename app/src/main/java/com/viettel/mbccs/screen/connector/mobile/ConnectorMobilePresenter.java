@@ -93,12 +93,12 @@ public class ConnectorMobilePresenter extends BaseObservable
         stringPostpaid = context.getString(R.string.connector_mobile_thue_bao_tra_sau);
         setHideContractList(true);
         setHideCreate(true);
-        setTxtPassport("142411815");
+        setTxtPassport("17150362");
     }
 
     @Override
     public void unSubscribe() {
-
+        subscriptions.clear();
     }
 
     /* --------------------------- Set Get ---------------------------------- */

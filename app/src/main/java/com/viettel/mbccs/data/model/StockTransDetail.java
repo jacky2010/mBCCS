@@ -45,6 +45,10 @@ public class StockTransDetail implements Parcelable {
     @Expose
     private String stateName;
 
+    @SerializedName("checkSerial")
+    @Expose
+    private int checkSerial;
+
     private int countChoice;
 
     @Expose
@@ -72,7 +76,7 @@ public class StockTransDetail implements Parcelable {
     }
 
     public boolean isPickSerialOk() {
-        return getSerialCount() == quantity;
+        return checkSerial == 0 || getSerialCount() == quantity;
     }
 
     public List<String> getSerials() {
@@ -91,6 +95,7 @@ public class StockTransDetail implements Parcelable {
             mStockSerial.setStockModelId(stockModelId);
             mStockSerial.setStockModelCode(stockModelCode);
             mStockSerial.setStockModelName(stockModelName);
+            mStockSerial.setStateId(stateId);
         }
         return mStockSerial;
     }
@@ -187,6 +192,13 @@ public class StockTransDetail implements Parcelable {
         this.countChoice = countChoice;
     }
 
+    public int getCheckSerial() {
+        return checkSerial;
+    }
+
+    public void setCheckSerial(int checkSerial) {
+        this.checkSerial = checkSerial;
+    }
 
     public StockTransDetail() {
     }
@@ -209,6 +221,7 @@ public class StockTransDetail implements Parcelable {
         dest.writeSerializable(this.mStockSerial);
         dest.writeStringList(this.mSerials);
         dest.writeTypedList(this.mSerialBlocks);
+        dest.writeInt(this.checkSerial);
     }
 
     protected StockTransDetail(Parcel in) {
@@ -223,6 +236,7 @@ public class StockTransDetail implements Parcelable {
         this.mStockSerial = (StockSerial) in.readSerializable();
         this.mSerials = in.createStringArrayList();
         this.mSerialBlocks = in.createTypedArrayList(SerialBO.CREATOR);
+        this.checkSerial = in.readInt();
     }
 
     public static final Creator<StockTransDetail> CREATOR = new Creator<StockTransDetail>() {

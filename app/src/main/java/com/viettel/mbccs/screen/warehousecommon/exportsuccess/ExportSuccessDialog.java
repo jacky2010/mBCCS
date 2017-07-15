@@ -33,6 +33,7 @@ import com.viettel.mbccs.screen.common.success.DialogViewSerial;
 import com.viettel.mbccs.screen.warehousecommon.exportwarehouse.StockTransDetailAdapter;
 import com.viettel.mbccs.utils.Common;
 import com.viettel.mbccs.utils.DialogUtils;
+import com.viettel.mbccs.utils.StringUtils;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import com.viettel.mbccs.variable.Constants;
 import java.util.ArrayList;
@@ -51,10 +52,12 @@ public class ExportSuccessDialog extends DialogFragment
     public ObservableField<String> cmdCode;
     public ObservableField<String> cmdReceive;
     public ObservableField<String> cmdSender;
+    public ObservableField<String> cmdTitle;
     private List<StockTransDetail> mStockTransDetails = new ArrayList<>();
     private String cmdCodeTitle;
     private String cmdReceiveTitle;
     private String cmdSenderTitle;
+    private String title;
     DialogExportSuccessBinding mBinding;
     private AppCompatActivity mAppCompatActivity;
     private List<StockSerial> mStockSerials = new ArrayList<>();
@@ -73,42 +76,49 @@ public class ExportSuccessDialog extends DialogFragment
         mOnDialogDismissListener = onDialogDismissListener;
     }
 
-    public static ExportSuccessDialog newInstance(StockTrans stockTrans, String cmdCodeTitle,
+    public static ExportSuccessDialog newInstance(StockTrans stockTrans, String title,
+            String cmdCodeTitle,
             String cmdNameTitle) {
         Bundle bundle = new Bundle();
         bundle.putParcelable(Constants.BundleConstant.STOCK_TRANS, stockTrans);
         bundle.putString(Constants.BundleConstant.CMD_CODE_TITLE, cmdCodeTitle);
         bundle.putString(Constants.BundleConstant.CMD_RECEIVE_TITLE, cmdNameTitle);
+        bundle.putString(Constants.BundleConstant.CMD_TITLE, title);
         ExportSuccessDialog fragment = new ExportSuccessDialog();
         fragment.setArguments(bundle);
         return fragment;
     }
 
-    public static ExportSuccessDialog newInstance(StockTrans stockTrans, String cmdCodeTitle,
+    public static ExportSuccessDialog newInstance(StockTrans stockTrans, String title,
+            String cmdCodeTitle,
             String cmdNameTitle, boolean isShowSerial) {
         Bundle bundle = new Bundle();
         bundle.putParcelable(Constants.BundleConstant.STOCK_TRANS, stockTrans);
         bundle.putString(Constants.BundleConstant.CMD_CODE_TITLE, cmdCodeTitle);
         bundle.putString(Constants.BundleConstant.CMD_RECEIVE_TITLE, cmdNameTitle);
         bundle.putBoolean(Constants.BundleConstant.SHOW_SERIAL, isShowSerial);
+        bundle.putString(Constants.BundleConstant.CMD_TITLE, title);
         ExportSuccessDialog fragment = new ExportSuccessDialog();
         fragment.setArguments(bundle);
         return fragment;
     }
 
-    public static ExportSuccessDialog newInstance(StockTrans stockTrans, String cmdCodeTitle,
+    public static ExportSuccessDialog newInstance(StockTrans stockTrans, String title,
+            String cmdCodeTitle,
             String cmdNameTitle, String cmdSenderTitle) {
         Bundle bundle = new Bundle();
         bundle.putParcelable(Constants.BundleConstant.STOCK_TRANS, stockTrans);
         bundle.putString(Constants.BundleConstant.CMD_CODE_TITLE, cmdCodeTitle);
         bundle.putString(Constants.BundleConstant.CMD_RECEIVE_TITLE, cmdNameTitle);
         bundle.putString(Constants.BundleConstant.CMD_SENDER_TITLE, cmdSenderTitle);
+        bundle.putString(Constants.BundleConstant.CMD_TITLE, title);
         ExportSuccessDialog fragment = new ExportSuccessDialog();
         fragment.setArguments(bundle);
         return fragment;
     }
 
-    public static ExportSuccessDialog newInstance(StockTrans stockTrans, String cmdCodeTitle,
+    public static ExportSuccessDialog newInstance(StockTrans stockTrans, String title,
+            String cmdCodeTitle,
             String cmdNameTitle, String cmdSenderTitle, boolean isShowSerial) {
         Bundle bundle = new Bundle();
         bundle.putParcelable(Constants.BundleConstant.STOCK_TRANS, stockTrans);
@@ -116,6 +126,7 @@ public class ExportSuccessDialog extends DialogFragment
         bundle.putString(Constants.BundleConstant.CMD_RECEIVE_TITLE, cmdNameTitle);
         bundle.putString(Constants.BundleConstant.CMD_SENDER_TITLE, cmdSenderTitle);
         bundle.putBoolean(Constants.BundleConstant.SHOW_SERIAL, isShowSerial);
+        bundle.putString(Constants.BundleConstant.CMD_TITLE, title);
         ExportSuccessDialog fragment = new ExportSuccessDialog();
         fragment.setArguments(bundle);
         return fragment;
@@ -193,6 +204,7 @@ public class ExportSuccessDialog extends DialogFragment
         cmdCodeTitle = bundle.getString(Constants.BundleConstant.CMD_CODE_TITLE);
         cmdReceiveTitle = bundle.getString(Constants.BundleConstant.CMD_RECEIVE_TITLE);
         cmdSenderTitle = bundle.getString(Constants.BundleConstant.CMD_SENDER_TITLE);
+        title = bundle.getString(Constants.BundleConstant.CMD_TITLE);
         isShowSerial = bundle.getBoolean(Constants.BundleConstant.SHOW_SERIAL, true);
         mAdapter = new StockTransDetailAdapter(getActivity(), mStockTransDetails,
                 getActivity().getString(R.string.item_nhap_kho_cap_duoi_mat_hang_xem_serial),
@@ -206,9 +218,11 @@ public class ExportSuccessDialog extends DialogFragment
         cmdCode = new ObservableField<>();
         cmdReceive = new ObservableField<>();
         cmdSender = new ObservableField<>();
+        cmdTitle = new ObservableField<>();
         cmdCode.set(cmdCodeTitle);
         cmdReceive.set(cmdReceiveTitle);
         cmdSender.set(cmdSenderTitle);
+        cmdTitle.set(StringUtils.isEmpty(title) ? getString(R.string.common_label_notice) : title);
 
         getStockTransDetail();
     }
@@ -311,11 +325,11 @@ public class ExportSuccessDialog extends DialogFragment
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);
         if (mOnDialogDismissListener != null) {
-            mOnDialogDismissListener.onDialogDissmis();
+            mOnDialogDismissListener.onDialogDismiss();
         }
     }
 
     public interface OnDialogDismissListener {
-        void onDialogDissmis();
+        void onDialogDismiss();
     }
 }

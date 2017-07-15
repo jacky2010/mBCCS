@@ -1,4 +1,4 @@
-package com.viettel.mbccs.screen.xuatkhochonhanvien;
+package com.viettel.mbccs.screen.xuatkhochonhanvien.threestep;
 
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.OwnerType;
@@ -18,7 +18,7 @@ import java.util.List;
  * Created by eo_cuong on 7/9/17.
  */
 
-public class LapLenhXuatKhoChoNhanVienActivity extends BaseCreateCommandNoteActivity<OwnerCode> {
+public class LapLenh3XuatKhoChoNhanVienActivity extends BaseCreateCommandNoteActivity<OwnerCode> {
 
     private List<OwnerCode> ownerCodes = new ArrayList<>();
 

@@ -15,6 +15,8 @@ import com.viettel.mbccs.utils.GsonUtils;
 import com.viettel.mbccs.variable.Constants;
 import java.util.List;
 
+import static com.viettel.mbccs.R.string.common_label_notice;
+
 /**
  * Created by eo_cuong on 6/20/17.
  */
@@ -85,7 +87,7 @@ public abstract class BaseExportWareHouseActivity extends
 
     @Override
     public void onCreateExpStockSuccess(StockTrans stockTrans) {
-        ExportSuccessDialog exportSuccessDialog = ExportSuccessDialog.newInstance(mStockTrans,
+        ExportSuccessDialog exportSuccessDialog = ExportSuccessDialog.newInstance(mStockTrans, getString(common_label_notice),
                 String.format(getString(R.string.warehouse_label_export_success_code),
                         String.valueOf(stockTrans.getStockTransId())),
                 String.format(getString(R.string.warehouse_label_receive),
@@ -94,7 +96,7 @@ public abstract class BaseExportWareHouseActivity extends
                 new ExportSuccessDialog.OnDialogDismissListener() {
 
                     @Override
-                    public void onDialogDissmis() {
+                    public void onDialogDismiss() {
                         onExportSuccess();
                     }
                 });

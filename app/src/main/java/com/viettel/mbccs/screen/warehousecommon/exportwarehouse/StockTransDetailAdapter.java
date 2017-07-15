@@ -82,7 +82,12 @@ public class StockTransDetailAdapter extends
             if (!TextUtils.isEmpty(action)) {
                 itemStockTransDetailPresenter.setAction(action);
             }
-            itemStockTransDetailPresenter.setShowSerial(showSerial);
+            if (!showSerial || stockTransDetail.getCheckSerial() == 0) {
+                itemStockTransDetailPresenter.setShowSerial(false);
+            } else {
+                itemStockTransDetailPresenter.setShowSerial(showSerial);
+            }
+
             mBinding.setPresenter(itemStockTransDetailPresenter);
         }
     }

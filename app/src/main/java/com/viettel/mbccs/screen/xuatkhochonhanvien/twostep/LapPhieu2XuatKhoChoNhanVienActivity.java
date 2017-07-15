@@ -1,23 +1,26 @@
-package com.viettel.mbccs.screen.xuatkhocapduoi;
+package com.viettel.mbccs.screen.xuatkhochonhanvien.twostep;
 
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.OwnerType;
 import com.viettel.mbccs.constance.WsCode;
-import com.viettel.mbccs.data.model.Shop;
-import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
+import com.viettel.mbccs.data.model.OwnerCode;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
-import com.viettel.mbccs.data.source.remote.request.GetListShopRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListOwnerCodeRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
-import com.viettel.mbccs.data.source.remote.response.GetListShopResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListOwneCodeReponse;
 import com.viettel.mbccs.screen.warehousecommon.basecreatecmdnote.BaseCreateCommandNoteActivity;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import com.viettel.mbccs.variable.Constants;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LapLenhXuatKhoCapDuoiActivity extends BaseCreateCommandNoteActivity<Shop> {
+/**
+ * Created by eo_cuong on 7/9/17.
+ */
 
-    private List<Shop> mListShop = new ArrayList<>();
+public class LapPhieu2XuatKhoChoNhanVienActivity extends BaseCreateCommandNoteActivity<OwnerCode> {
+
+    private List<OwnerCode> ownerCodes = new ArrayList<>();
 
     @Override
     public void init() {
@@ -25,19 +28,20 @@ public class LapLenhXuatKhoCapDuoiActivity extends BaseCreateCommandNoteActivity
     }
 
     private void loadStaffList() {
-        DataRequest<GetListShopRequest> dataRequest = new DataRequest<>();
-        GetListShopRequest request = new GetListShopRequest();
-        request.setParentShopId((mUserRepository.getUserInfo().getShop().getShopId()));
-        dataRequest.setWsCode(WsCode.GetListShop);
+        GetListOwnerCodeRequest request = new GetListOwnerCodeRequest();
+        request.setShopId(String.valueOf(mUserRepository.getUserInfo().getShop().getShopId()));
+
+        DataRequest<GetListOwnerCodeRequest> dataRequest = new DataRequest<>();
+        dataRequest.setWsCode(WsCode.GetListOwnerCode);
         dataRequest.setWsRequest(request);
-        BanHangKhoTaiChinhRepository.getInstance()
-                .getListShop(dataRequest)
-                .subscribe(new MBCCSSubscribe<GetListShopResponse>() {
+        mUserRepository.getListOwnerCode(dataRequest)
+                .subscribe(new MBCCSSubscribe<GetListOwneCodeReponse>() {
                     @Override
-                    public void onSuccess(GetListShopResponse object) {
-                        if (object != null && object.getShopList() != null) {
-                            mListShop.addAll(object.getShopList());
-                            setListReceiverWareHouser(mListShop);
+                    public void onSuccess(GetListOwneCodeReponse object) {
+                        if (object != null && object.getOwnerCodes() != null) {
+                            if (ownerCodes != null && ownerCodes.size() != 0) ownerCodes.clear();
+                            ownerCodes.addAll(object.getOwnerCodes());
+                            setListReceiverWareHouser(ownerCodes);
                         }
                     }
 
@@ -60,7 +64,7 @@ public class LapLenhXuatKhoCapDuoiActivity extends BaseCreateCommandNoteActivity
 
     @Override
     public String getTitleName() {
-        return getString(R.string.xuatkhocapduoi_title_create_command);
+        return getString(R.string.export_staff_label_create_cmd_staff);
     }
 
     @Override
@@ -85,12 +89,12 @@ public class LapLenhXuatKhoCapDuoiActivity extends BaseCreateCommandNoteActivity
 
     @Override
     public long getToOwnerId() {
-        return mListShop.get(getPositionReceicerWareHouse()).getShopId();
+        return ownerCodes.get(getPositionReceicerWareHouse()).getStaffId();
     }
 
     @Override
     public long getToOwnerType() {
-        return OwnerType.SHOP;
+        return OwnerType.STAFF;
     }
 
     @Override
@@ -100,13 +104,11 @@ public class LapLenhXuatKhoCapDuoiActivity extends BaseCreateCommandNoteActivity
 
     @Override
     public void onRejectSuccess() {
-        setResult(RESULT_OK);
-        finish();
+
     }
 
     @Override
     public void onCreateSuccess() {
-        setResult(RESULT_OK);
         finish();
     }
 
