@@ -16,6 +16,7 @@ import com.viettel.mbccs.constance.SaleTranType;
 import com.viettel.mbccs.constance.WsCode;
 import com.viettel.mbccs.data.model.Apis;
 import com.viettel.mbccs.data.model.EmptyObject;
+import com.viettel.mbccs.data.model.StockStatus;
 import com.viettel.mbccs.data.model.StockTotal;
 import com.viettel.mbccs.data.model.StockTrans;
 import com.viettel.mbccs.data.model.StockTransDetail;
@@ -42,7 +43,6 @@ import com.viettel.mbccs.utils.StockTotalCompare;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import com.viettel.mbccs.widget.CustomDialog;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import rx.Subscription;
@@ -66,8 +66,8 @@ public class CreateCommandPresenter<T> implements CreateCommandContract.Presente
     private DataRequest mDataRequest;
     public List<T> mListReceiveWareHouse = new ArrayList<>();
     public SpinnerAdapter<T> spinnerReceiveWareHouse;
-    public SpinnerAdapter spinnerAdapterStatus;
-    protected List<String> listProductState = new ArrayList<>();
+    public SpinnerAdapter<StockStatus> spinnerAdapterStatus;
+    protected List<StockStatus> listProductState = new ArrayList<>();
     private int positionReceiveWareHouse = 0;
     private int positionStatus = 0;
     public ObservableField<Boolean> showReject = new ObservableField<>(false);
@@ -178,8 +178,7 @@ public class CreateCommandPresenter<T> implements CreateCommandContract.Presente
     }
 
     private void createSpinnerAdapter() {
-        listProductState =
-                Arrays.asList(mContext.getResources().getStringArray(R.array.stock_status));
+        listProductState = StockStatus.statusList();
         spinnerAdapterStatus = new SpinnerAdapter(mContext, listProductState);
         spinnerAdapterStatus.setOnItemSelectedListener(getStatusItemSelectedListener());
 
@@ -345,6 +344,7 @@ public class CreateCommandPresenter<T> implements CreateCommandContract.Presente
             CreateExpCmdRequest.CmdStock cmdStock = new CreateExpCmdRequest.CmdStock();
             cmdStock.cloneFromStockTotal(stockTotal);
             if (cmdStock.getQuantity() > 0) {
+                cmdStock.setStateId(listProductState.get(positionStatus).getId());
                 cmdStocks.add(cmdStock);
             }
         }
@@ -389,7 +389,7 @@ public class CreateCommandPresenter<T> implements CreateCommandContract.Presente
             CreateExpCmdRequest.CmdStock cmdStock = new CreateExpCmdRequest.CmdStock();
             cmdStock.cloneFromStockTotal(stockTotal);
             if (cmdStock.getQuantity() > 0) {
-                cmdStock.setStateId(listProductState.get(positionStatus).equals("NEW") ? 1L : 0L);
+                cmdStock.setStateId(listProductState.get(positionStatus).getId());
                 cmdStocks.add(cmdStock);
             }
         }

@@ -45,6 +45,6 @@ public interface CreateUpdateInformationFragmentContract {
 
         void updateAllSubInfoError(BaseException error);
 
-        void isSendImage();
+        void showImageError();
     }
 }

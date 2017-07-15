@@ -4,6 +4,7 @@
     <string-array name="stock_status">
         <item>NEW</item>
         <item>OLD</item>
+        <item>CORRUPTED</item>
     </string-array>
     <string-array name="task_type_no_home">
         <item>Chăm sóc kênh phân phối</item>
@@ -85,7 +86,7 @@
     </string-array>
 
     <string-array name="export_from_shop_3_step_status">
-        <item>Chưa lập phiếu</item>
+        <item>Đã lập lệnh</item>
         <item>Đã lập phiếu</item>
         <item>Đã xuất kho</item>
         <item>Phiếu xuất đã lập lệnh nhập</item>
@@ -104,7 +105,7 @@
     </string-array>
 
     <string-array name="nhan_vien_xav_nhan_hang">
-        <item>Chưa nhập kho</item>
+        <item>Chờ nhập kho</item>
         <item>Đã nhập kho</item>
         <item>Đã hủy</item>
         <item>Tất cả</item>

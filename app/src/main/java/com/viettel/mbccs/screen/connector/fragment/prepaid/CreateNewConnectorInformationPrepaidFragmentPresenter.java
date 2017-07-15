@@ -44,7 +44,6 @@ import com.viettel.mbccs.data.source.remote.response.GetListProductResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListRegTypeResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListSubTypeResponse;
 import com.viettel.mbccs.screen.connector.listener.OnPageChange;
-import com.viettel.mbccs.utils.DatabaseUtils;
 import com.viettel.mbccs.utils.DateUtils;
 import com.viettel.mbccs.utils.PatternUtils;
 import com.viettel.mbccs.utils.SpinnerAdapter;
@@ -434,6 +433,11 @@ public class CreateNewConnectorInformationPrepaidFragmentPresenter extends BaseO
             return;
         }
 
+        if (!validateImage()) {
+            createNewView1.showValidateImage();
+            return;
+        }
+
         if (onPageChange != null) {
             onPageChange.onPageChange(1);
         }
@@ -446,6 +450,12 @@ public class CreateNewConnectorInformationPrepaidFragmentPresenter extends BaseO
             }
             return;
         }
+
+        if (!validateImage()) {
+            createNewView1.showValidateImage();
+            return;
+        }
+
         if (!validateSubscriber()) {
             return;
         }
@@ -467,11 +477,9 @@ public class CreateNewConnectorInformationPrepaidFragmentPresenter extends BaseO
         connectSubscriberRequest.setChannelTypeId(null);
         connectSubscriberRequest.setSubType(checkIdNoRequest.getSubType());
 
-        List<String> dataImage =
-                DatabaseUtils.getBitmapAndSaveDatabase(customer, customerCurrentImageFront,
-                        customerCurrentImageBackside, customerCurrentImagePortrait);
-
-        createNewView2.connectSubscriber(connectSubscriberRequest, userInfo, dataImage);
+        createNewView2.connectSubscriber(connectSubscriberRequest, userInfo,
+                customerCurrentImageFront, customerCurrentImageBackside,
+                customerCurrentImagePortrait);
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -584,6 +592,16 @@ public class CreateNewConnectorInformationPrepaidFragmentPresenter extends BaseO
                 PatternUtils.PATTERN_TEXT_LENGTH_100)) {
             setNameCustomerError(
                     context.getString(R.string.create_new_connector_information_validate_name));
+            validate = false;
+        }
+        return validate;
+    }
+
+    boolean validateImage() {
+        boolean validate = true;
+        if (customerCurrentImageFront == null
+                || customerCurrentImageBackside == null
+                || customerCurrentImagePortrait == null) {
             validate = false;
         }
         return validate;

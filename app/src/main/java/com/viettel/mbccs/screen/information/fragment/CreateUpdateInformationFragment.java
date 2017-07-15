@@ -131,12 +131,32 @@ public class CreateUpdateInformationFragment extends BaseFragment
     }
 
     @Override
-    public void registerUpdateCustomerInfoSuccess(String result, final boolean isRegister) {
+    public void registerUpdateCustomerInfoSuccess(final String result, final boolean isRegister) {
+
+        //        DialogUtils.showDialog(getActivity(), "Send Image", "Send image now", "OK",
+        //                new DialogInterface.OnClickListener() {
+        //                    @Override
+        //                    public void onClick(DialogInterface dialog, int which) {
+        //                        presenter.clickSendImage(true);
+        //                        showDialog(result, isRegister);
+        //                    }
+        //                }, "No", new DialogInterface.OnClickListener() {
+        //                    @Override
+        //                    public void onClick(DialogInterface dialog, int which) {
+        //                        presenter.clickSendImage(false);
+        //                        showDialog(result, isRegister);
+        //                    }
+        //                });
+
+        presenter.clickSendImage(true);
+        showDialog(result, isRegister);
+    }
+
+    private void showDialog(final String result, final boolean isRegister) {
         Dialog dia = new DialogFullScreen.Builder(getActivity()).setCenterContent(true)
                 .setTitle(isRegister ? getString(
                         R.string.fragment_create_update_information_create_dk_thanh_cong)
-                        : getString(
-                                R.string.fragment_create_update_information_update_thanh_cong))
+                        : getString(R.string.fragment_create_update_information_update_thanh_cong))
                 .setContent(result == null ? (isRegister ? getString(
                         R.string.fragment_create_update_information_create_dk_thanh_cong)
                         : getString(R.string.fragment_create_update_information_update_thanh_cong))
@@ -147,7 +167,6 @@ public class CreateUpdateInformationFragment extends BaseFragment
                     public void onPositiveButtonClick(Dialog dialog) {
                         dialog.dismiss();
                         backActivity(isRegister);
-
                     }
 
                     @Override
@@ -205,23 +224,14 @@ public class CreateUpdateInformationFragment extends BaseFragment
     }
 
     @Override
-    public void isSendImage() {
-        if (presenter.isExistsImageUpload()) {
-            DialogUtils.showDialog(getActivity(), "Send Image", "Send image now", "OK",
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            presenter.clickSendData(true);
-                        }
-                    }, "No", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            presenter.clickSendData(false);
-                        }
-                    });
-        } else {
-        presenter.clickSendData(false);
-        }
+    public void showImageError() {
+        DialogUtils.showDialog(getActivity(),
+                getString(R.string.fragment_create_update_information_update_select_image),
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
     }
 
     @Override

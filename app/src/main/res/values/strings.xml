@@ -736,6 +736,7 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="fragment_create_update_information_create_dk_thanh_cong">Đăng ký thành công</string>
     <string name="fragment_create_update_information_update_thanh_cong">Cập nhật thông tin thành công</string>
     <string name="fragment_create_update_information_update_title">Cập nhật thông tin thuê bao</string>
+    <string name="fragment_create_update_information_update_select_image">Cần chọn đủ 3 ảnh!</string>
     <string name="fragment_create_update_information_update_notice_charge_empty">
         Chưa lựa chọn hình thức nhận thông báo cước
     </string>

@@ -6,6 +6,7 @@ import android.databinding.ObservableField;
 import android.view.View;
 import android.widget.AdapterView;
 import com.viettel.mbccs.R;
+import com.viettel.mbccs.data.model.StockStatus;
 import com.viettel.mbccs.constance.OwnerType;
 import com.viettel.mbccs.constance.SaleTranType;
 import com.viettel.mbccs.constance.StockStateId;
@@ -20,16 +21,13 @@ import com.viettel.mbccs.data.source.remote.request.GetListStockModelRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseCreateCmdNoteResponse;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.GetListStockModelAllResponse;
-import com.viettel.mbccs.data.source.remote.response.GetListStockModelResponse;
 import com.viettel.mbccs.utils.ActivityUtils;
-import com.viettel.mbccs.utils.Common;
 import com.viettel.mbccs.utils.DialogUtils;
 import com.viettel.mbccs.utils.SpinnerAdapter;
 import com.viettel.mbccs.utils.StockTotalCompare;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
 import com.viettel.mbccs.variable.Constants;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import rx.Subscription;
@@ -49,8 +47,8 @@ public class LapPhieuXuatTraHangPresenter implements LapPhieuXuatTraHangContract
     public ObservableField<String> titleExportFrom;
     public ObservableField<String> mStockReceiveName;
     public ObservableField<String> countStock;
-    private SpinnerAdapter<String> mStatusAdapter;
-    private List<String> mStatus = new ArrayList<>();
+    private SpinnerAdapter<StockStatus> mStatusAdapter;
+    private List<StockStatus> mStatus = new ArrayList<>();
     private UserRepository mUserRepository;
     private BanHangKhoTaiChinhRepository mBanHangKhoTaiChinhRepository;
     private CompositeSubscription mSubscription;
@@ -120,12 +118,12 @@ public class LapPhieuXuatTraHangPresenter implements LapPhieuXuatTraHangContract
         titleExportFrom.set(
                 String.format(mContext.getString(R.string.nhanvien_xuattra_label_export_from),
                         mUserRepository.getUserInfo().getStaffInfo().getStaffName()));
-        mStatusAdapter = new SpinnerAdapter<String>(mContext, mStatus);
         mAdapter = new StockLapPhieuAdapter(mContext, mStockTotals);
         mAdapter.setOnStockLapPhieuListener(this);
 
         mStockReceiveName.set(mUserRepository.getUserInfo().getShop().getShopName());
-        mStatus.addAll(Arrays.asList(mContext.getResources().getStringArray(R.array.stock_status)));
+        mStatus.addAll(StockStatus.statusList());
+        mStatusAdapter = new SpinnerAdapter<>(mContext, mStatus);
         mStatusAdapter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -234,7 +232,7 @@ public class LapPhieuXuatTraHangPresenter implements LapPhieuXuatTraHangContract
         return mAdapter;
     }
 
-    public SpinnerAdapter<String> getStatusAdapter() {
+    public SpinnerAdapter<StockStatus> getStatusAdapter() {
         return mStatusAdapter;
     }
 

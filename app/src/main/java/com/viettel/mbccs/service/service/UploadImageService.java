@@ -7,16 +7,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
-import android.widget.Toast;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.constance.WsCode;
-import com.viettel.mbccs.data.model.UploadImage;
+import com.viettel.mbccs.data.model.database.UploadImage;
 import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 import com.viettel.mbccs.data.source.remote.request.UploadImageRequest;
 import com.viettel.mbccs.data.source.remote.response.UploadImageResponse;
-import com.viettel.mbccs.utils.DateUtils;
 import java.util.ArrayList;
 import java.util.List;
 import rx.Observable;
@@ -52,7 +49,6 @@ public class UploadImageService extends IntentService {
 
     public UploadImageService() {
         super(UploadImageService.class.getName());
-        Log.i("UploadImageService", " -> UploadImageService: ----------------: UploadImageService");
         setIntentRedelivery(true);
         userRepository = UserRepository.getInstance();
         subscriptions = new CompositeSubscription();
@@ -69,20 +65,19 @@ public class UploadImageService extends IntentService {
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
-        Log.i("UploadImageService", " -> onHandleIntent: ----------------: ");
         observableList = new ArrayList<>();
         listIdImage = new ArrayList<>();
-        if (intent.getParcelableExtra(ARG_DATA_INTENT) != null) {
+
+        if (intent.hasExtra(ARG_DATA_INTENT)
+                || intent.getParcelableExtra(ARG_DATA_INTENT) == null) {
             uploadImageList = userRepository.getUploadImage();
         } else {
             listIdImage = intent.getStringArrayListExtra(ARG_DATA_INTENT);
             uploadImageList = new ArrayList<>();
             for (String s : listIdImage) {
-                uploadImageList.add(userRepository.getUploadImage(Long.parseLong(s)));
+                uploadImageList.add(userRepository.getUploadImageByName(s));
             }
         }
-        Log.i("UploadImageService",
-                " -> onHandleIntent: ----------------: uploadImageList: " + uploadImageList.size());
 
         if (uploadImageList.size() == 0) return;
         for (UploadImage uploadImage : uploadImageList) {
@@ -92,7 +87,6 @@ public class UploadImageService extends IntentService {
     }
 
     public void startUploadImage(final Intent intent) {
-        Log.i("UploadImageService", " -> startUploadImage: ----------------: ");
         createNotification();
         updateNotification(getString(R.string.upload_service_image_front), 0);
         Subscription subscription =
@@ -116,33 +110,11 @@ public class UploadImageService extends IntentService {
                                     @Override
                                     public void onNext(UploadImageResponse response) {
                                         if (++process <= observableList.size()) {
-                                            String name = "";
+                                            String name;
                                             if (process == observableList.size()) {
                                                 name = getString(R.string.upload_service_finish);
                                             } else {
-                                                switch (uploadImageList.get(process).getOrder()) {
-                                                    case UploadImage.ImageType.FRONT:
-                                                        name = getString(
-                                                                R.string.upload_service_image_front);
-                                                        Log.i("UploadImageService",
-                                                                " -> onNext: ----------------: name: "
-                                                                        + name);
-                                                        break;
-                                                    case UploadImage.ImageType.BACKSIDE:
-                                                        name = getString(
-                                                                R.string.upload_service_image_backside);
-                                                        Log.i("UploadImageService",
-                                                                " -> onNext: ----------------: name: "
-                                                                        + name);
-                                                        break;
-                                                    case UploadImage.ImageType.PORTRAIT:
-                                                        name = getString(
-                                                                R.string.upload_service_image_portrait);
-                                                        Log.i("UploadImageService",
-                                                                " -> onNext: ----------------: name: "
-                                                                        + name);
-                                                        break;
-                                                }
+                                                name = "";
                                             }
                                             updateNotification(name,
                                                     (process / observableList.size()) * 100);
@@ -153,8 +125,6 @@ public class UploadImageService extends IntentService {
                                                 cancelNotification();
                                             }
                                         } else {
-                                            Log.i("UploadImageService",
-                                                    " -> onNext: ----------------: onCompleted");
                                             subscriber.onCompleted();
                                         }
                                     }
@@ -168,16 +138,12 @@ public class UploadImageService extends IntentService {
                         intent.setAction(ACTION_UPLOAD_COMPLETED);
                         LocalBroadcastManager.getInstance(UploadImageService.this)
                                 .sendBroadcast(intent);
-                        Toast.makeText(UploadImageService.this, "Upload thanh cong",
-                                Toast.LENGTH_SHORT).show();
                         stopSelf();
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        //                        stopSelf();
                         intent.setAction(ACTION_UPLOAD_FAIL);
-                        Log.i("UploadImageService", " -> onError: ----------------: error");
                         LocalBroadcastManager.getInstance(UploadImageService.this)
                                 .sendBroadcast(intent);
                     }
@@ -186,8 +152,8 @@ public class UploadImageService extends IntentService {
                     public void onNext(UploadImageResponse response) {
                         for (int i = 0; i < uploadImageList.size(); i++) {
                             if (uploadImageList.get(i)
-                                    .getFileName()
-                                    .equals(response.getFileName())) {
+                                    .getImageName()
+                                    .equals(response.getLstName().get((0)))) {
                                 uploadImageList.get(i).setStatus(UploadImage.StatusUpload.SUCCESS);
                                 break;
                             }
@@ -228,15 +194,16 @@ public class UploadImageService extends IntentService {
     }
 
     private Observable<UploadImageResponse> createUploadImage(UploadImage data) {
+
+        UploadImageRequest.ImageRequest imageRequest = new UploadImageRequest.ImageRequest();
+        imageRequest.setFileName(data.getImageName());
+        imageRequest.setContent(data.getContent());
+
+        List<UploadImageRequest.ImageRequest> imageRequestsList = new ArrayList<>();
+        imageRequestsList.add(imageRequest);
+
         UploadImageRequest uploadImageRequest = new UploadImageRequest();
-        uploadImageRequest.setActionBusiness(data.getActionBusiness());
-        uploadImageRequest.setObjectId(data.getObjectId());
-        uploadImageRequest.setOrder(data.getOrder());
-        uploadImageRequest.setDocType(data.getDocType());
-        uploadImageRequest.setFileName(data.getFileName());
-        uploadImageRequest.setImageData(data.getImageData());
-        uploadImageRequest.setTransDate(DateUtils.convertDateToString(System.currentTimeMillis(),
-                DateUtils.TIMEZONE_FORMAT_SERVER));
+        uploadImageRequest.setLstUploadImageTran(imageRequestsList);
 
         DataRequest<UploadImageRequest> request = new DataRequest<>();
         request.setWsRequest(uploadImageRequest);

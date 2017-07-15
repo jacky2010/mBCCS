@@ -2,7 +2,7 @@ package com.viettel.mbccs.screen.uploadimage;
 
 import com.viettel.mbccs.base.BasePresenter;
 import com.viettel.mbccs.base.BaseView;
-import com.viettel.mbccs.data.model.UploadImage;
+import com.viettel.mbccs.data.model.database.UploadImage;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import java.util.List;
 

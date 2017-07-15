@@ -16,8 +16,6 @@ public class ConfirmConnectSubscriberContract {
     interface View extends BaseView<Presenter> {
         void setPresenter(Presenter presenter);
 
-        void confirmUploadImage();
-
         void connectSubscriberSuccess();
 
         void connectSubscriberError(BaseException error);

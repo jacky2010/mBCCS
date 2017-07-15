@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseFragment;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.databinding.FragmentCreateNewConnectorInformationPostpaid1Binding;
@@ -137,6 +138,17 @@ public class CreateNewConnectorInformationPostpaid1Fragment extends BaseFragment
             public void onClick(DialogInterface dialog, int which) {
             }
         }, false);
+    }
+
+    @Override
+    public void showValidateImage() {
+        DialogUtils.showDialog(getActivity(),
+                getString(R.string.fragment_create_update_information_update_select_image),
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
     }
 
     @Override

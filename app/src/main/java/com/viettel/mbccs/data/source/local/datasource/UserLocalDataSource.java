@@ -9,10 +9,10 @@ import com.viettel.mbccs.data.model.Function;
 import com.viettel.mbccs.data.model.Image;
 import com.viettel.mbccs.data.model.LoginInfo;
 import com.viettel.mbccs.data.model.Precinct;
-import com.viettel.mbccs.data.model.UploadImage;
 import com.viettel.mbccs.data.model.UserInfo;
 import com.viettel.mbccs.data.model.database.AreaDataBase;
 import com.viettel.mbccs.data.model.database.ImageDataBase;
+import com.viettel.mbccs.data.model.database.UploadImage;
 import com.viettel.mbccs.data.source.local.IUserLocalDataSource;
 import com.viettel.mbccs.utils.ObjectUtils;
 import com.viettel.mbccs.utils.SecureUtils;
@@ -234,8 +234,8 @@ public class UserLocalDataSource implements IUserLocalDataSource {
     }
 
     @Override
-    public UploadImage getUploadImage(long idImage) {
-        return new Select().from(UploadImage.class).where("id_image = ?", idImage).executeSingle();
+    public UploadImage getUploadImageByName(String name) {
+        return new Select().from(UploadImage.class).where("image_name = ?", name).executeSingle();
     }
 
     @Override

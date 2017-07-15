@@ -10,7 +10,7 @@ import android.util.Log;
 import android.widget.Toast;
 import com.viettel.mbccs.R;
 import com.viettel.mbccs.base.BaseDataBindActivity;
-import com.viettel.mbccs.data.model.UploadImage;
+import com.viettel.mbccs.data.model.database.UploadImage;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.remote.response.UploadImageResponse;
 import com.viettel.mbccs.databinding.ActivityUploadImageBinding;
@@ -38,13 +38,13 @@ public class UploadImageActivity
                 mPresenter.setProgressValue((process / total) * 100);
                 UploadImageResponse response =
                         intent.getParcelableExtra(UploadImageService.DATA_UPLOAD_SUCCESS);
-                for (int i = 0; i < uploadImageList.size(); i++) {
-                    if (uploadImageList.get(i).getFileName().equals(response.getFileName())) {
-                        uploadImageList.get(i).setStatus(UploadImage.StatusUpload.SUCCESS);
-                        recyclerAdapter.notifyItemInserted(i);
-                        break;
-                    }
-                }
+                //                for (int i = 0; i < uploadImageList.size(); i++) {
+                //                    if (uploadImageList.get(i).getFileName().equals(response.getFileName())) {
+                //                        uploadImageList.get(i).setStatus(UploadImage.StatusUpload.SUCCESS);
+                //                        recyclerAdapter.notifyItemInserted(i);
+                //                        break;
+                //                    }
+                //                }
             }
 
             if (intent.getAction().equals(UploadImageService.ACTION_UPLOAD_FAIL)) {
