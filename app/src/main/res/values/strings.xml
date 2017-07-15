@@ -1041,6 +1041,7 @@ Bạn đã nhập <font color="#000000"><b> %d/%d</b></font> serial cho mặt h�
     <string name="commmon_warehouse_msg_reject_create_note">Từ chối lập phiếu?</string>
     <string name="commmon_warehouse_msg_reject_create_import_stock">Từ chối nhập kho?</string>
     <string name="commmon_warehouse_msg_reject_create_export_stock">Từ chối xuất kho?</string>
+    <string name="commmon_warehouse_msg_reject_detail_title">Chi tiết giao dịch</string>
     <string name="commmon_warehouse_label_canceled">Đã hủy</string>
     <string name="commmon_warehouse_label_rejected">Đã từ chối</string>
 

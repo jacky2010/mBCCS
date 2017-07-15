@@ -76,6 +76,7 @@ public class CreateCommandPresenter<T> implements CreateCommandContract.Presente
     public ObservableField<String> cmdCode = new ObservableField<>();
     public ObservableField<String> receiveWarehouse = new ObservableField<>();
     public ObservableField<String> dayCreated = new ObservableField<>();
+    public ObservableBoolean isViewOnly = new ObservableBoolean();
 
     public CreateCommandPresenter(Context context, CreateCommandContract.ViewModel viewModel,
             StockTrans stockTrans) {

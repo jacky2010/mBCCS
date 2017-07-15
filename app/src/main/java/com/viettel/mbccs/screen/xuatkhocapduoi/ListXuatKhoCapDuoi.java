@@ -160,11 +160,10 @@ public class ListXuatKhoCapDuoi extends BaseListOrderActivity {
                 if (funtions.contains(RoleWareHouse.LAP_PHIEU_XUAT)) {
                     intent = new Intent(this, LapPhieuXuatKhoCapDuoiActivity.class);
                 } else {
-                    showDialogExportSuccess(
-                            String.format(getString(R.string.common_import_label_import_cmd),
-                                    String.valueOf(stockTrans.getStockTransId())), stockTrans,
-                            false);
-                    return;
+                    intent = new Intent(this, LapPhieuXuatKhoCapDuoiActivity.class);
+                    intent.putExtra(Constants.BundleConstant.STOCK_VIEW_ONLY, true);
+                    intent.putExtra(Constants.BundleConstant.CMD_TITLE,
+                            getString(R.string.common_export_label_cmd_detail));
                 }
 
                 break;
@@ -172,11 +171,10 @@ public class ListXuatKhoCapDuoi extends BaseListOrderActivity {
                 if (funtions.contains(RoleWareHouse.XUAT_KHO)) {
                     intent = new Intent(this, XuatKhoCapDuoiActivity.class);
                 } else {
-                    showDialogExportSuccess(
-                            String.format(getString(R.string.common_import_label_import_note),
-                                    String.valueOf(stockTrans.getStockTransId())), stockTrans,
-                            false);
-                    return;
+                    intent = new Intent(this, LapPhieuXuatKhoCapDuoiActivity.class);
+                    intent.putExtra(Constants.BundleConstant.STOCK_VIEW_ONLY, true);
+                    intent.putExtra(Constants.BundleConstant.CMD_TITLE,
+                            getString(R.string.common_export_label_cmd_detail));
                 }
                 break;
             case (int) StockTransStatus.TRANS_DONE:
@@ -185,10 +183,11 @@ public class ListXuatKhoCapDuoi extends BaseListOrderActivity {
                                 String.valueOf(stockTrans.getStockTransId())), stockTrans, true);
                 return;
             case (int) StockTransStatus.TRANS_CANCEL:
-                showDialogExportSuccess(
-                        String.format(getString(R.string.common_import_label_import_cmd),
-                                String.valueOf(stockTrans.getStockTransId())), stockTrans, false);
-                return;
+            case (int) StockTransStatus.TRANS_REJECT:
+                intent = new Intent(this, LapPhieuXuatKhoCapDuoiActivity.class);
+                intent.putExtra(Constants.BundleConstant.STOCK_VIEW_ONLY, true);
+                intent.putExtra(Constants.BundleConstant.CMD_TITLE,
+                        getString(R.string.commmon_warehouse_msg_reject_detail_title));
             default:
                 showDialogExportSuccess(
                         String.format(getString(R.string.common_import_label_import_cmd),
@@ -280,7 +279,7 @@ public class ListXuatKhoCapDuoi extends BaseListOrderActivity {
 
     @Override
     public String getWareHouseTitle() {
-        return getString(R.string.activity_list_order_return_upper_kho_xuat);
+        return getString(R.string.activity_list_order_return_upper_kho_nhan);
     }
 
     @Override

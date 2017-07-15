@@ -56,6 +56,7 @@ public class Shop implements Parcelable {
     private String status;
 
     @SerializedName("shopParent")
+    @Expose
     private Shop parentShop;
 
 
