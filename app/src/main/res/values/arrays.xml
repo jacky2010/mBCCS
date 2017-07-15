@@ -37,7 +37,6 @@
 
     <string-array name="nhanvien_tranhang_captren_status">
         <item>Đã xuất kho</item>
-        <item>Phiếu xuất đã lập lệnh nhập</item>
         <item>Đã bị từ chối nhập</item>
         <item>Tất cả</item>
     </string-array>
@@ -50,7 +49,7 @@
     </string-array>
 
     <string-array name="xuatkhocd_status">
-        <item>Chưa lập phiếu</item> <!--Not note type exp-->
+        <item>Đã lập lệnh</item> <!--Not note type exp-->
         <item>Đã lập phiếu</item> <!--Noted-->
         <item>Đã xuất</item> <!--tran done-->
         <item>Phiếu xuất đã lập lệnh nhập</item> <!--implement-->
@@ -59,7 +58,7 @@
         <item>Tất cả</item> <!--empty-->
     </string-array>
     <string-array name="import_from_staff_3_step_status">
-        <item>Chưa lập lệnh</item>
+        <item>Chưa nhập kho</item>
         <item>Đã lập lệnh</item>
         <item>Đã lập phiếu</item>
         <item>Đã nhập kho</item>
@@ -68,7 +67,7 @@
     </string-array>
 
     <string-array name="import_from_staff_2_step_status">
-        <item>Chưa lập phiếu</item>
+        <item>Chưa nhập kho</item>
         <item>Đã lập phiếu</item>
         <item>Đã nhập kho</item>
         <item>Đã hủy</item>
@@ -76,7 +75,7 @@
     </string-array>
 
     <string-array name="export_from_staff_3_step_status">
-        <item>Chưa lập phiếu</item>
+        <item>Đã lập lệnh</item>
         <item>Đã lập phiếu</item>
         <item>Đã xuất kho</item>
         <item>Phiếu xuất đã lập lệnh nhập</item>

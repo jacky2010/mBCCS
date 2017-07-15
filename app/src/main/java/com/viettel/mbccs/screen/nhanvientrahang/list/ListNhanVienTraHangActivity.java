@@ -42,13 +42,8 @@ public class ListNhanVienTraHangActivity extends BaseListOrderActivity {
         }
 
         if (getPositionStatus() == 1) {
-            mRequest.setStockTransStatus(StockTransStatus.TRANS_EXP_IMPED);
-            mRequest.setStockTransType(StockTransType.TRANS_EXPORT);
-        }
-
-        if (getPositionStatus() == 2) {
             mRequest.setStockTransStatus(StockTransStatus.TRANS_REJECT);
-            mRequest.setStockTransType(StockTransType.TRANS_IMPORT);
+            mRequest.setStockTransType(StockTransType.TRANS_EXPORT);
         }
 
         mRequest.setStartDate(getFromDateString());
