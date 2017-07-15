@@ -3,20 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
+    android:background="@color/blue_vice"
     android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/lyHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/blue_vice"
         android:orientation="vertical">
 
         <com.viettel.mbccs.widget.CustomTextView
             style="@style/ItemBilling"
             android:text="@string/msg_date_create_trans"
-            android:textSize="@dimen/sp_12" />
+            android:textSize="@dimen/sp_13" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,6 +30,8 @@
                 android:layout_height="@dimen/dp_40"
                 android:layout_marginEnd="@dimen/dp_6"
                 android:layout_marginRight="@dimen/dp_6"
+                app:dateTextColor="@color/text_title_input"
+                app:underLineColor="@color/white_light_theme"
                 android:layout_marginTop="@dimen/dp_6"
                 android:layout_weight="1" />
 
@@ -38,6 +40,7 @@
                 android:layout_height="@dimen/dp_40"
                 android:gravity="center"
                 android:text="-"
+                android:textColor="@color/text_title_input"
                 android:textSize="@dimen/sp_18"
                 android:textStyle="bold" />
 
@@ -46,6 +49,8 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/dp_40"
                 android:layout_marginLeft="@dimen/dp_6"
+                app:dateTextColor="@color/text_title_input"
+                app:underLineColor="@color/white_light_theme"
                 android:layout_marginStart="@dimen/dp_6"
                 android:layout_marginTop="@dimen/dp_6"
                 android:layout_weight="1" />
@@ -55,7 +60,7 @@
         <com.viettel.mbccs.widget.CustomTextView
             style="@style/ItemBilling"
             android:text="@string/msg_default_choose_time_trans"
-            android:textSize="@dimen/sp_14" />
+            android:textSize="@dimen/sp_13" />
 
         <!--<com.viettel.mbccs.widget.CustomTextView-->
         <!--style="@style/ItemBilling"-->
@@ -65,12 +70,14 @@
         <com.viettel.mbccs.widget.ItemSpinText
             android:id="@+id/id_ist_channel"
             style="@style/ItemSpinText"
-            app:istIconLeft="true"
-            app:istIconLeftBg="@drawable/ic_folder_black_16dp"
             app:istIconRight="true"
             app:istIconRightBg="@drawable/ic_arrow_drop_down_black_24dp"
             app:istSpinner="true"
+            app:istContentColor="@color/text_title_input"
+            app:istTextViewColor="@color/text_title_input"
             app:istSpinnerEnable="false"
+            app:istTextViewSize="@dimen/sp_13"
+            app:istContentSize="@dimen/all_btn_radius"
             app:istSpinnerTitle="@string/title_channel"
             app:istTextView="true"
             app:istTextViewTitle="@string/title_channel" />
@@ -83,28 +90,30 @@
         <com.viettel.mbccs.widget.ItemSpinText
             android:id="@+id/id_ist_trans"
             style="@style/ItemSpinText"
-            app:istIconLeft="true"
-            app:istIconLeftBg="@drawable/ic_folder_black_16dp"
             app:istIconRight="true"
             app:istIconRightBg="@drawable/ic_arrow_drop_down_black_24dp"
             app:istSpinner="true"
+            app:istContentColor="@color/text_title_input"
+            app:istTextViewColor="@color/text_title_input"
             app:istSpinnerEnable="false"
+            app:istTextViewSize="@dimen/sp_13"
+            app:istContentSize="@dimen/all_btn_radius"
             app:istSpinnerTitle="@string/msg_choose_transaction"
             app:istTextView="true"
             app:istTextViewTitle="@string/msg_choose_transaction" />
 
         <com.viettel.mbccs.widget.ButtonIconView
             android:id="@+id/bt_search"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/view_header"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_25"
+            android:layout_marginRight="@dimen/dp_25"
             android:gravity="center"
-            app:itb_bg="@color/blue"
+            app:itb_bg="@color/default_bg"
             app:itb_bg_pressed="@color/blue_trans"
-            app:itb_padding_left="@dimen/dp_50"
-            app:itb_padding_right="@dimen/dp_50"
             app:itb_radius="3dp"
             app:itb_text="@string/title_search" />
     </LinearLayout>

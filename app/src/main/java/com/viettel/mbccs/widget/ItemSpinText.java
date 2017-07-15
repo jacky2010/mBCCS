@@ -122,6 +122,8 @@ public class ItemSpinText extends LinearLayout implements View.OnClickListener, 
         if (isEnable && mIconRight != null) {
             mIconRight.setVisibility(TextUtils.isEmpty(mEditText.getText().toString()) ? GONE : VISIBLE);
         }
+        mEditText.setTextColor(mTypedArray.getColor(R.styleable.ItemSpinText_istContentColor,
+                getResources().getColor(R.color.default_item_spinner_text_color)));
     }
 
 
@@ -268,7 +270,9 @@ public class ItemSpinText extends LinearLayout implements View.OnClickListener, 
     @Override
     public final void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String data = ((BaseEditSpinnerAdapter) parent.getAdapter()).getItemString(position);
-        System.out.println("onItemClick" + position + "--" + data);
+        if (mOnSelectSpinnerListener != null) {
+            mOnSelectSpinnerListener.onItemSelect(this, position);
+        }
         mEditText.setText(data);
         popupWindow.dismiss();
     }

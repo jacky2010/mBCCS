@@ -15,6 +15,7 @@
         app:istIconRightBg="@drawable/ic_close"
         app:istSpinner="true"
         app:istTextView="true"
+        app:istSpinnerTitle="@string/title_phone_number"
         app:istTextViewTitle="@string/title_phone_number" />
 
     <com.viettel.mbccs.widget.ItemSpinText
@@ -26,10 +27,10 @@
         app:istIconRightBg="@drawable/ic_arrow_drop_down_black_24dp"
         app:istSpinner="true"
         app:istSpinnerEnable="false"
-        android:visibility="gone"
         app:istTextView="true"
         app:istSpinnerTitle="@string/title_type_page"
         app:istTextViewTitle="@string/title_type_page" />
+
 
     <com.viettel.mbccs.widget.ItemSpinText
         android:id="@+id/ist_number_of_pages"
@@ -39,9 +40,25 @@
         app:istIconRight="true"
         app:istIconRightBg="@drawable/ic_close"
         app:istSpinner="true"
-        android:visibility="gone"
+        android:visibility="visible"
         app:istTextView="true"
+        app:istSpinnerTitle="@string/title_total_page"
         app:istTextViewTitle="@string/title_total_page" />
+
+    <com.viettel.mbccs.widget.ItemSpinText
+        android:id="@+id/ist_type_of_telecommunications_services"
+        style="@style/ItemSpinText"
+        app:istIconLeft="true"
+        app:istIconLeftBg="@drawable/ic_folder_black_16dp"
+        app:istIconRight="true"
+        app:istIconRightBg="@drawable/ic_arrow_drop_down_black_24dp"
+        app:istSpinner="true"
+        app:istSpinnerEnable="false"
+        app:istTextView="true"
+        app:istSpinnerTitle="Loại dịch vụ viễn thông"
+        app:istTextViewTitle="Loại dịch vụ viễn thông" />
+
+
 
     <com.viettel.mbccs.widget.ButtonIconView
         android:id="@+id/bt_search"

@@ -11,29 +11,25 @@ public class GetListSearchTransRequest  extends BaseRequest  {
 
     @Expose
     @SerializedName("shopId")
-    public int mShopId;
+    public long mShopId;
 
-    @SerializedName("fromDate")
+    @SerializedName("startDate")
     @Expose
     public String mFromDate;
 
     @Expose
-    @SerializedName("toDate")
+    @SerializedName("endDate")
     public String mToDate;
 
-    @Expose
-    @SerializedName("staffId")
     public long mStaffId;
 
-    @Expose
-    @SerializedName("saleTransType")
     public int mSaleTransType;
 
     public GetListSearchTransRequest() {
         super();
     }
 
-    public int getShopId() {
+    public long getShopId() {
         return mShopId;
     }
 

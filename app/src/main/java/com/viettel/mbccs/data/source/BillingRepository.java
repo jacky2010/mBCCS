@@ -3,9 +3,11 @@ package com.viettel.mbccs.data.source;
 import com.viettel.mbccs.data.model.EmptyObject;
 import com.viettel.mbccs.data.source.remote.datasource.BillingRemoteDataSource;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListApParamsRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListSearchTransRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSaleTransDetailRequest;
 import com.viettel.mbccs.data.source.remote.request.GetCreateInvoiceBillRequest;
+import com.viettel.mbccs.data.source.remote.response.GetListApParamsResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListSearchTransResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSaleTransDetailResponse;
 
@@ -41,5 +43,9 @@ public class BillingRepository {
 
     public Observable<EmptyObject> createInvoiceBill(DataRequest<GetCreateInvoiceBillRequest> request) {
         return mBillingRemoteDataSource.createInvoiceBill(request);
+    }
+
+    public Observable<GetListApParamsResponse> getApParam(DataRequest<GetListApParamsRequest> request) {
+        return mBillingRemoteDataSource.getApParam(request);
     }
 }

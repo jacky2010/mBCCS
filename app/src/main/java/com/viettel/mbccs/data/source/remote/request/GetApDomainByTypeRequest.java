@@ -17,6 +17,7 @@ public class GetApDomainByTypeRequest extends BaseRequest {
     @Expose
     private String subType;
 
+
     public String getType() {
         return type;
     }

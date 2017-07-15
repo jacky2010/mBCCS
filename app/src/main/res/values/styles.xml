@@ -122,6 +122,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_margin">@dimen/dp_8</item>
+        <item name="android:textColor">@color/text_title_input</item>
     </style>
 
     <style name="ItemBillingRecyclerView">
@@ -203,7 +204,7 @@
     <style name="ItemSpinText">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_margin">@dimen/dp_5</item>
+        <item name="android:layout_margin">@dimen/dp_8</item>
     </style>
 
     <style name="AppThemeStyleDialog" parent="Theme.AppCompat.Light.NoActionBar.FullScreen">

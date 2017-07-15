@@ -15,12 +15,16 @@ import com.viettel.mbccs.data.model.Customer;
 import com.viettel.mbccs.data.source.QLKhachHangRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
 //import com.viettel.mbccs.data.source.remote.request.GetApDomainRequest;
+import com.viettel.mbccs.data.source.remote.request.GetAllSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.GetApDomainByTypeRequest;
 import com.viettel.mbccs.data.source.remote.request.GetRegisterSubInfoRequest;
+import com.viettel.mbccs.data.source.remote.request.GetRegisterSubRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 //import com.viettel.mbccs.data.source.remote.response.GetApDomainResponse;
+import com.viettel.mbccs.data.source.remote.response.GetAllSubInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetApDomainByTypeResponse;
 import com.viettel.mbccs.data.source.remote.response.GetRegisterSubInfoResponse;
+import com.viettel.mbccs.data.source.remote.response.GetRegisterSubResponse;
 import com.viettel.mbccs.screen.change.installation.adapter.InstallationAddressAdapter;
 import com.viettel.mbccs.utils.EditTextUtil;
 import com.viettel.mbccs.utils.rx.MBCCSSubscribe;
@@ -48,6 +52,8 @@ public class InstallationAddressFragment extends BaseDataFragment {
     ItemSpinText mTypeOfPage;
     @BindView(R.id.ist_number_of_pages)
     ItemSpinText mNumberOfPage;
+    @BindView(R.id.ist_type_of_telecommunications_services)
+    ItemSpinText mTelecomService;
 
     private LinearLayoutManager mLinearLayoutManager;
     private InstallationAddressAdapter mAdapter;
@@ -79,28 +85,12 @@ public class InstallationAddressFragment extends BaseDataFragment {
                 LinearLayoutManager.VERTICAL);
         mRecyclerView.addItemDecoration(dividerItemDecoration);
 
-        getDataSpinnerPassport();
+        getDataSpinnerPassport(ApDomainByType.Type.LOAI_GIAY_TO);
 
 
         EditTextUtil.hideKeyboard(getActivity());
     }
 
-    private List<String> fakeSearch() {
-        List<String> list = new ArrayList<>();
-        list.add("BCS 001");
-        list.add("BCS 002");
-        list.add("BCS 003");
-        list.add("BCS 004");
-        list.add("BCS 005");
-        list.add("BCS 006");
-        list.add("BCS 007");
-        list.add("BCS 008");
-        list.add("BCS 009");
-        list.add("BCS 0010");
-        list.add("BCS 0011");
-        list.add("BCS 0012");
-        return list;
-    }
 
     @Override
     public void onResume() {
@@ -150,30 +140,60 @@ public class InstallationAddressFragment extends BaseDataFragment {
 
     private void callApiSearch() {
         getBaseActivity().showLoadingDialog();
-        GetRegisterSubInfoRequest getRegisterSubInfoRequest = new GetRegisterSubInfoRequest();
-//        getRegisterSubInfoRequest.setIsdn(mPhoneNumber.getStringEditText());
-//        getRegisterSubInfoRequest.setIdNo(mTypeOfPage.getStringEditText());
-//        getRegisterSubInfoRequest.setIdType(mNumberOfPage.getStringEditText());
-        getRegisterSubInfoRequest.setIsdn("620103022");
-        getRegisterSubInfoRequest.setIdNo("145079102");
-        getRegisterSubInfoRequest.setIdType("1");
-        DataRequest<GetRegisterSubInfoRequest> request = new DataRequest<>();
-        request.setWsCode(WsCode.GetRegisterSub);
-        request.setWsRequest(getRegisterSubInfoRequest);
-        //
-        Subscription subscription = qlKhachHangRepository.getRegiterSubInfo(request)
-                .subscribe(new MBCCSSubscribe<GetRegisterSubInfoResponse>() {
+//        GetRegisterSubInfoRequest getRegisterSubRequest = new GetRegisterSubInfoRequest();
+////        getRegisterSubInfoRequest.setIsdn(mPhoneNumber.getStringEditText());
+////        getRegisterSubInfoRequest.setIdNo(mTypeOfPage.getStringEditText());
+////        getRegisterSubInfoRequest.setIdType(mNumberOfPage.getStringEditText());
+//        getRegisterSubRequest.setIsdn("620103022");
+//        getRegisterSubRequest.setIdNo("145079102");
+//        getRegisterSubRequest.setIdType("1");
+//        DataRequest<GetRegisterSubInfoRequest> request = new DataRequest<>();
+//        request.setWsCode(WsCode.GetAllSubInfo);
+//        request.setWsRequest(getRegisterSubRequest);
+//        //
+//        Subscription subscription = qlKhachHangRepository.getRegiterSubInfo(request)
+//                .subscribe(new MBCCSSubscribe<GetRegisterSubInfoResponse>() {
+//                    @Override
+//                    public void onSuccess(GetRegisterSubInfoResponse object) {
+//                        showSearchInfoCustomer(object);
+//                        getBaseActivity().hideLoadingDialog();
+//                        System.out.println("hideLoadingDialog" + 111);
+//                    }
+//
+//                    @Override
+//                    public void onError(BaseException error) {
+//                        getBaseActivity().hideLoadingDialog();
+//                        System.out.println("hideLoadingDialog" + 404);
+//                    }
+//                });
+//        subscriptions.add(subscription);
+
+        GetAllSubInfoRequest getAllSubInfoRequest = new GetAllSubInfoRequest();
+        getAllSubInfoRequest.setIsdn(mPhoneNumber.getStringEditText());
+        getAllSubInfoRequest.setIdNo(mTypeOfPage.getStringEditText());
+        getAllSubInfoRequest.setSubType("1");
+        getAllSubInfoRequest.setServiceType("L");
+        getAllSubInfoRequest.setIdType("1");
+
+        DataRequest<GetAllSubInfoRequest> request = new DataRequest<>();
+        request.setWsCode(WsCode.GetAllSubInfo);
+        request.setWsRequest(getAllSubInfoRequest);
+
+        Subscription subscription = qlKhachHangRepository.getAllSubInfo(request)
+                .subscribe(new MBCCSSubscribe<GetAllSubInfoResponse>() {
                     @Override
-                    public void onSuccess(GetRegisterSubInfoResponse object) {
-                        showSearchInfoCustomer(object);
+                    public void onSuccess(GetAllSubInfoResponse object) {
+                        if (object == null || object.getCustomer() == null) {
+                            onError(new Exception());
+                        } else {
+
+                        }
                         getBaseActivity().hideLoadingDialog();
-                        System.out.println("hideLoadingDialog" +111);
                     }
 
                     @Override
                     public void onError(BaseException error) {
                         getBaseActivity().hideLoadingDialog();
-                        System.out.println("hideLoadingDialog"+404);
                     }
                 });
         subscriptions.add(subscription);
@@ -181,20 +201,33 @@ public class InstallationAddressFragment extends BaseDataFragment {
     }
 
 
-    public void getDataSpinnerPassport() {
+    public void getDataSpinnerPassport(final String mType) {
         getBaseActivity().showLoadingDialog();
         DataRequest<GetApDomainByTypeRequest> request = new DataRequest<>();
         GetApDomainByTypeRequest getApDomainRequest = new GetApDomainByTypeRequest();
-        getApDomainRequest.setType(ApDomainByType.Type.LOAI_GIAY_TO);
-
+        getApDomainRequest.setType(mType);
+        getApDomainRequest.setSubType("1");
         request.setWsRequest(getApDomainRequest);
         request.setWsCode(WsCode.GetApDomainByType);
 
         Subscription subscription = qlKhachHangRepository.getApDomainByType(request)
                 .subscribe(new MBCCSSubscribe<GetApDomainByTypeResponse>() {
                     @Override
-                    public void onSuccess(GetApDomainByTypeResponse object) {
+                    public void onSuccess(GetApDomainByTypeResponse response) {
                         getBaseActivity().hideLoadingDialog();
+                        if (response != null) {
+                            switch (mType) {
+                                case ApDomainByType.Type.LOAI_GIAY_TO:
+                                    mTypeOfPage.setListSpinner(response.getListName());
+                                    getDataSpinnerPassport(ApDomainByType.Type.TELECOM_SERVICE);
+                                    break;
+                                case ApDomainByType.Type.TELECOM_SERVICE:
+                                    mTelecomService.setListSpinner(response.getListName());
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
                     }
 
                     @Override

@@ -3,9 +3,11 @@ package com.viettel.mbccs.data.source.remote.datasource;
 import com.viettel.mbccs.data.model.EmptyObject;
 import com.viettel.mbccs.data.source.remote.IBillingDataSource;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListApParamsRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListSearchTransRequest;
 import com.viettel.mbccs.data.source.remote.request.GetSaleTransDetailRequest;
 import com.viettel.mbccs.data.source.remote.request.GetCreateInvoiceBillRequest;
+import com.viettel.mbccs.data.source.remote.response.GetListApParamsResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListSearchTransResponse;
 import com.viettel.mbccs.data.source.remote.response.GetSaleTransDetailResponse;
 import com.viettel.mbccs.data.source.remote.service.RequestHelper;
@@ -56,4 +58,11 @@ public class BillingRemoteDataSource implements IBillingDataSource {
                 .compose(SchedulerUtils.<EmptyObject>applyAsyncSchedulers());
     }
 
+    @Override
+    public Observable<GetListApParamsResponse> getApParam(DataRequest<GetListApParamsRequest> request) {
+        return  RequestHelper.getRequest()
+                .getApParam(request)
+                .flatMap(SchedulerUtils.<GetListApParamsResponse>convertDataFlatMap())
+                .compose(SchedulerUtils.<GetListApParamsResponse>applyAsyncSchedulers());
+    }
 }

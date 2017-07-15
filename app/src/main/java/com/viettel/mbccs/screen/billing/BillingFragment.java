@@ -23,11 +23,13 @@ import com.viettel.mbccs.data.model.SaleTrans;
 import com.viettel.mbccs.data.source.BanHangKhoTaiChinhRepository;
 import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.data.source.remote.request.DataRequest;
+import com.viettel.mbccs.data.source.remote.request.GetListApParamsRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListChannelByOwnerTypeIdRequest;
 import com.viettel.mbccs.data.source.remote.request.GetListSearchTransRequest;
 import com.viettel.mbccs.data.source.remote.request.GetTelecomServiceAndSaleProgramRequest;
 import com.viettel.mbccs.data.source.remote.response.BaseException;
 import com.viettel.mbccs.data.source.BillingRepository;
+import com.viettel.mbccs.data.source.remote.response.GetListApParamsResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListChannelByOwnerTypeIdResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListSearchTransResponse;
 import com.viettel.mbccs.data.source.remote.response.TelecomServiceAndSaleProgramResponse;
@@ -121,13 +123,13 @@ public class BillingFragment extends BaseDataFragment {
     }
 
     private boolean isActiveSearch() {
-        if (TextUtils.isEmpty(mItemChannel.getStringSpinner())) {
-            DialogUtils.showDialog(getBaseActivity(), null, "Bạn chưa chọn kênh nào?", null);
-            return false;
-        } else if (TextUtils.isEmpty(mItemTrans.getStringSpinner())) {
-            DialogUtils.showDialog(getBaseActivity(), null, "Bạn chưa chọn giao dịch nào?", null);
-            return false;
-        }
+//        if (TextUtils.isEmpty(mItemChannel.getStringSpinner())) {
+//            DialogUtils.showDialog(getBaseActivity(), null, "Bạn chưa chọn kênh nào?", null);
+//            return false;
+//        } else if (TextUtils.isEmpty(mItemTrans.getStringSpinner())) {
+//            DialogUtils.showDialog(getBaseActivity(), null, "Bạn chưa chọn giao dịch nào?", null);
+//            return false;
+//        }
         return true;
     }
 
@@ -137,7 +139,6 @@ public class BillingFragment extends BaseDataFragment {
         mUserRepository = UserRepository.getInstance();
         mBillingRepository = BillingRepository.getInstance();
         mCompositeSubscription = new CompositeSubscription();
-
         getListChannelFromServer();
         //getListSearchTrans("22/06/2017 00:00:00", "22/07/2017 00:00:00");
         EditTextUtil.hideSoftKeyboard(getBaseActivity());
@@ -228,18 +229,20 @@ public class BillingFragment extends BaseDataFragment {
     }
 
     private void getListSearchTrans(final String fromDate, String toDate) {
+        getBaseActivity().showLoadingDialog();
         final DataRequest<GetListSearchTransRequest> request = new DataRequest<>();
         GetListSearchTransRequest mGetListSearchTransRequest = new GetListSearchTransRequest();
-        mGetListSearchTransRequest.mShopId =
-                7282;//mUserRepository.getUserInfo().getShop().getShopId()
+        mGetListSearchTransRequest.mShopId = (mUserRepository.getUserInfo().getShop().getShopId());
         mGetListSearchTransRequest.mFromDate = fromDate;
         mGetListSearchTransRequest.mToDate = toDate;
-        mGetListSearchTransRequest.mSaleTransType = Integer.valueOf(
-                TextUtils.isEmpty(mItemTrans.getStringSpinner()) ? "0"
-                        : mItemTrans.getStringSpinner());
-        mGetListSearchTransRequest.mStaffId = getIdChanelId(
-                TextUtils.isEmpty(mItemChannel.getStringSpinner()) ? "0"
-                        : mItemChannel.getStringSpinner());
+        if (!TextUtils.isEmpty(mItemChannel.getStringSpinner())) {
+            mGetListSearchTransRequest.mSaleTransType = 1;
+        }
+        if (TextUtils.isEmpty(mItemTrans.getStringSpinner())) {
+            mGetListSearchTransRequest.mStaffId = getIdChanelId(
+                    TextUtils.isEmpty(mItemChannel.getStringSpinner()) ? "0"
+                            : mItemChannel.getStringSpinner());
+        }
 
         request.setWsRequest(mGetListSearchTransRequest);
         request.setWsCode(WsCode.GetListSaleTrans);
@@ -294,7 +297,8 @@ public class BillingFragment extends BaseDataFragment {
                             object.getmGetListChannelByOwnerTypeIdResponse().getChannelInfoList();
                     mItemChannel.setListSpinner(
                             object.getmGetListChannelByOwnerTypeIdResponse().getListDataChannel());
-                    mItemTrans.setListSpinner(getListTrans());
+
+                    getExchange();
                 }
             }
 
@@ -311,11 +315,30 @@ public class BillingFragment extends BaseDataFragment {
         });
     }
 
-    private List<String> getListTrans() {
-        List<String> mList = new ArrayList<>();
-        mList.add(String.valueOf(SaleTranType.SALE_RETAIL));
-        mList.add(String.valueOf(SaleTranType.SALE_CHANNEL));
-        return mList;
+    private void getExchange() {
+        getBaseActivity().showLoadingDialog();
+        final DataRequest<GetListApParamsRequest> request = new DataRequest<>();
+        GetListApParamsRequest mListApParamsRequest = new GetListApParamsRequest();
+        mListApParamsRequest.mType = "SALE_TRANS_TYPE";
+        request.setWsRequest(mListApParamsRequest);
+        request.setWsCode(WsCode.GetApParam);
+
+        Subscription subscription = mBillingRepository.getApParam(request)
+                .subscribe(new MBCCSSubscribe<GetListApParamsResponse>() {
+                    @Override
+                    public void onSuccess(GetListApParamsResponse response) {
+                        if (response != null && response.getApParamsModelList() != null) {
+                            mItemTrans.setListSpinner(response.getListApParams());
+                        }
+                        getBaseActivity().hideLoadingDialog();
+                    }
+
+                    @Override
+                    public void onError(BaseException error) {
+                        getBaseActivity().hideLoadingDialog();
+                    }
+                });
+        mCompositeSubscription.add(subscription);
     }
 
     private long getIdChanelId(String mData) {

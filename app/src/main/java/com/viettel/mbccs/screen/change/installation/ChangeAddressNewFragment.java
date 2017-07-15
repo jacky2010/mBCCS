@@ -4,6 +4,7 @@ import com.viettel.mbccs.R;
 import com.viettel.mbccs.data.model.Area;
 import com.viettel.mbccs.data.source.UserRepository;
 import com.viettel.mbccs.screen.change.BaseChangeAddressFragment;
+import com.viettel.mbccs.utils.StringUtils;
 import com.viettel.mbccs.widget.ItemSpinText;
 
 import java.util.ArrayList;
@@ -60,6 +61,7 @@ public class ChangeAddressNewFragment extends BaseChangeAddressFragment implemen
 
 
     private void getDataAreaDistrict(String parentCode) {
+        if (mDataDistrict != null) mDataDistrict.clear();
         areaDistrictList = mUserRepository.getListDistrictByProvinceId(parentCode);
         if (mDataDistrict != null && mDataDistrict.size() != 0) mDataDistrict.clear();
         for (Area d : areaDistrictList) {
@@ -68,11 +70,23 @@ public class ChangeAddressNewFragment extends BaseChangeAddressFragment implemen
         mDistrict.setListSpinner(mDataDistrict);
     }
 
+    private void getDataAreaPrecinct(String parentCode) {
+        if (mDataPrecinct != null) mDataPrecinct.clear();
+        areaPrecinctList = mUserRepository.getListPrecinctByDistrictId(parentCode);
+        for (Area p : areaPrecinctList) {
+            mDataPrecinct.add(p.getName());
+        }
+        mPrecinct.setListSpinner(mDataPrecinct);
+    }
+
     @Override
     public void onItemSelect(ItemSpinText itemSpinText, int position) {
+        System.out.println("itemSpinText" + position);
         if (itemSpinText == mProvincial) {
-            System.out.println("itemSpinText" + position);
             getDataAreaDistrict(areaProvinceList.get(position).getProvince());
+        } else if (itemSpinText == mDistrict) {
+            getDataAreaPrecinct(areaDistrictList.get(position).getProvince() + areaDistrictList.get(
+                    position).getDistrict());
         }
     }
 }

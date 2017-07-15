@@ -16,8 +16,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_item_spin_text"
         android:layout_marginTop="@dimen/dp_8"
-        android:background="@drawable/bg_border"
         android:orientation="vertical">
+        <!--android:background="@drawable/bg_border"-->
 
         <ImageView
             android:id="@+id/iv_icon_left"
@@ -72,5 +72,10 @@
 
         <!--</RelativeLayout>-->
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/text_title_input"/>
     </RelativeLayout>
 </LinearLayout>

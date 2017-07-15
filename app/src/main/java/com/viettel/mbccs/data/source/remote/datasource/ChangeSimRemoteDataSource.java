@@ -52,7 +52,7 @@ public class ChangeSimRemoteDataSource implements IChangeSimRemoteDataSource {
     @Override
     public Observable<GetRegisterSubResponse> getRegisterSub(DataRequest<GetRegisterSubRequest> request) {
         return RequestHelper.getRequest()
-                .getRegiterSub(request)
+                .getRegisterSub(request)
                 .flatMap(SchedulerUtils.<GetRegisterSubResponse>convertDataFlatMap())
                 .compose(SchedulerUtils.<GetRegisterSubResponse>applyAsyncSchedulers());
     }

@@ -20,7 +20,7 @@
     <com.viettel.mbccs.widget.MultiDirectionSlidingDrawer
         android:id="@+id/drawer"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="380dp"
         android:visibility="visible"
         app:content="@+id/content"
         app:direction="topToBottom"

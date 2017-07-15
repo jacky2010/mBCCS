@@ -49,10 +49,6 @@
             android:layout_margin="@dimen/dp_5"
             app:iteTextViewTitle="Địa chỉ chi tiết (số nhà, tên đường, tổ)" />
 
-        <com.viettel.mbccs.widget.CustomSelectAddress
-            android:id="@+id/add"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></com.viettel.mbccs.widget.CustomSelectAddress>
 
         <com.viettel.mbccs.widget.ItemTitleWithEditText
             android:layout_width="match_parent"

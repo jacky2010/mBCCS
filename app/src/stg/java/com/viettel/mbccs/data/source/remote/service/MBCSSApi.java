@@ -36,6 +36,7 @@ import com.viettel.mbccs.data.source.remote.response.GetInfoSaleTranResponse;
 import com.viettel.mbccs.data.source.remote.response.GetInfoTaskForUpdateResponse;
 import com.viettel.mbccs.data.source.remote.response.GetKPPFeedbackInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.GetKPPFeedbackResponse;
+import com.viettel.mbccs.data.source.remote.response.GetListApParamsResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListBusTypeIdRequireResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListBusTypeResponse;
 import com.viettel.mbccs.data.source.remote.response.GetListChannelByOwnerTypeIdResponse;
@@ -385,7 +386,7 @@ public interface MBCSSApi {
             @Body DataRequest<GetCreateInvoiceBillRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
-    Observable<ServerDataResponse<BaseResponse<GetRegisterSubResponse>>> getRegiterSub(
+    Observable<ServerDataResponse<BaseResponse<GetRegisterSubResponse>>> getRegisterSub(
             @Body DataRequest<GetRegisterSubRequest> request);
 
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
@@ -540,5 +541,9 @@ public interface MBCSSApi {
     @POST("/JsonAPI/webresources/CoreService/UserRouting")
     Observable<ServerDataResponse<BaseResponse<GetProductInfoResponse>>> getProductInfo(
             @Body DataRequest<GetProductInfoRequest> request);
+
+    Observable<ServerDataResponse<BaseResponse<GetListApParamsResponse>>> getApParam(
+            @Body DataRequest<GetListApParamsRequest> request);
+
 }
 

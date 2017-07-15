@@ -211,6 +211,7 @@ public class WsCode {
 
     // 5.5.3.1
     public final static String GetListSaleTrans = "WS_getListSaleTrans";
+    public final static String GetApParam ="WS_getApParam";
 
     // 5.1.3.4
     public final static String GetSaleTransDetail = "WS_getSaleTransDetail";

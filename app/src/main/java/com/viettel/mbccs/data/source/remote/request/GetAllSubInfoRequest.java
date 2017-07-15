@@ -14,7 +14,12 @@ public class GetAllSubInfoRequest extends BaseRequest {
     // loại giấy tờ
     private String idType;
 
+    private String subType;
+
+    private String serviceType;
+
     private String checkRegisterStatus;
+
 
     public String getIsdn() {
         return isdn;
@@ -38,6 +43,14 @@ public class GetAllSubInfoRequest extends BaseRequest {
 
     public void setIdType(String idType) {
         this.idType = idType;
+    }
+
+    public void setSubType(String subType) {
+        this.subType = subType;
+    }
+
+    public void setServiceType(String serviceType) {
+        this.serviceType = serviceType;
     }
 
     public String getCheckRegisterStatus() {

@@ -22,7 +22,7 @@
         android:layout_marginRight="?android:attr/actionBarSize"
         android:gravity="center"
         android:textStyle="bold"
-        android:textSize="@dimen/sp_14"
+        android:textSize="@dimen/sp_20"
         android:maxLines="1" />
 
 </RelativeLayout>

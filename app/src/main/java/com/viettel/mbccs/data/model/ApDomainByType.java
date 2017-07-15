@@ -1,6 +1,7 @@
 package com.viettel.mbccs.data.model;
 
 import android.support.annotation.StringDef;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -9,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class ApDomainByType {
-    @StringDef({ Type.LOAI_GIAY_TO, Type.HINH_THUC_THANH_TOAN, Type.HINH_THUC_NHAN_THONG_BAO_CUOC })
+    @StringDef({Type.LOAI_GIAY_TO, Type.HINH_THUC_THANH_TOAN, Type.HINH_THUC_NHAN_THONG_BAO_CUOC})
     public @interface Type {
         String LOAI_HOP_DONG = "29";
         String LOAI_GIAY_TO = "301";
@@ -17,9 +18,10 @@ public class ApDomainByType {
         String HINH_THUC_THANH_TOAN = "303";
         String DAT_COC = "305";
         String HINH_THUC_NHAN_THONG_BAO_CUOC = "308";
+        String TELECOM_SERVICE = "310";
     }
 
-    public @interface SubType{
+    public @interface SubType {
         String PREPAID = "1";
         String POSTPAID = "2";
     }

@@ -16,6 +16,7 @@ import com.viettel.mbccs.data.source.remote.request.GetListSubTypeRequest;
 import com.viettel.mbccs.data.source.remote.request.GetOTPRequest;
 import com.viettel.mbccs.data.source.remote.request.GetQuotaByProductCodeRequest;
 import com.viettel.mbccs.data.source.remote.request.GetRegisterSubInfoRequest;
+import com.viettel.mbccs.data.source.remote.request.GetRegisterSubRequest;
 import com.viettel.mbccs.data.source.remote.request.RegisterCustomerInfoRequest;
 import com.viettel.mbccs.data.source.remote.request.UpdateAllSubInfoRequest;
 import com.viettel.mbccs.data.source.remote.response.CheckIdNoResponse;
@@ -33,6 +34,7 @@ import com.viettel.mbccs.data.source.remote.response.GetListSubTypeResponse;
 import com.viettel.mbccs.data.source.remote.response.GetOTPResponse;
 import com.viettel.mbccs.data.source.remote.response.GetQuotaByProductCodeResponse;
 import com.viettel.mbccs.data.source.remote.response.GetRegisterSubInfoResponse;
+import com.viettel.mbccs.data.source.remote.response.GetRegisterSubResponse;
 import com.viettel.mbccs.data.source.remote.response.RegisterCustomerInfoResponse;
 import com.viettel.mbccs.data.source.remote.response.UpdateAllSubInfoResponse;
 import rx.Observable;
@@ -84,4 +86,6 @@ public interface IQLKhachHangRemoteDataSource {
 
     Observable<GetCurrBillCycleResponse> getCurrBillCycle(
             DataRequest<GetCurrBillCycleRequest> request);
+
+    Observable<GetRegisterSubResponse> getRegisterSub(DataRequest<GetRegisterSubRequest> request);
 }
