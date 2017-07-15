@@ -32,6 +32,7 @@ public class ListNhapKhoCapTren extends BaseListOrderActivity {
 
     public static final int CODE = 123;
     List<String> funtions = new ArrayList<>();
+    private List<String> arrStatus;
 
     @Override
     public void onItemClicked(Object object) {
@@ -39,8 +40,6 @@ public class ListNhapKhoCapTren extends BaseListOrderActivity {
 
     @Override
     public void doSearch() {
-
-
 
         DataRequest<GetListExpCmdRequest> mDataRequest = new DataRequest<>();
         GetListExpCmdRequest mRequest = new GetListExpCmdRequest();
@@ -51,7 +50,8 @@ public class ListNhapKhoCapTren extends BaseListOrderActivity {
         mRequest.setEndDate(getToDateString());
 
         //get parent id
-        mRequest.setFromOwnerId(mUserRepository.getUserInfo().getShop().getParentShop().getShopId());
+        mRequest.setFromOwnerId(
+                mUserRepository.getUserInfo().getShop().getParentShop().getShopId());
         mRequest.setFromOwnerType(OwnerType.SHOP);
         mRequest.setToOwnerId(mUserRepository.getUserInfo().getShop().getShopId());
         mRequest.setToOwnerType(OwnerType.SHOP);
@@ -111,14 +111,18 @@ public class ListNhapKhoCapTren extends BaseListOrderActivity {
     }
 
     private void setActionName2Step(StockTrans stockTrans) {
-        stockTrans.setActionName(getString(R.string.nv_trahangcaptren_action_detail));
 
         switch ((int) stockTrans.getStockTransStatus()) {
             case (int) StockTransStatus.TRANS_DONE:
-                if (funtions.contains(RoleWareHouse.LAP_PHIEU_NHAP)
-                        && stockTrans.getActionType() == StockTransType.TRANS_EXPORT) {
-                    stockTrans.setActionName(
-                            getString(R.string.commmon_warehouse_action_create_note));
+                if (stockTrans.getActionType() == StockTransType.TRANS_EXPORT) {
+                    if (funtions.contains(RoleWareHouse.LAP_PHIEU_NHAP)) {
+                        stockTrans.setActionName(
+                                getString(R.string.commmon_warehouse_action_create_note));
+                    } else {
+                        stockTrans.setActionName(arrStatus.get(0));
+                    }
+                } else {
+                    stockTrans.setActionName(arrStatus.get(2));
                 }
 
                 break;
@@ -126,10 +130,14 @@ public class ListNhapKhoCapTren extends BaseListOrderActivity {
                 if (funtions.contains(RoleWareHouse.NHAP_KHO)) {
                     stockTrans.setActionName(
                             getString(R.string.commmon_warehouse_action_create_import));
+                } else {
+                    stockTrans.setActionName(arrStatus.get(1));
                 }
                 break;
-            default:
-                stockTrans.setActionName(getString(R.string.nv_trahangcaptren_action_detail));
+
+            case (int) StockTransStatus.TRANS_CANCEL:
+                stockTrans.setActionName(arrStatus.get(3));
+                break;
         }
     }
 
@@ -183,10 +191,11 @@ public class ListNhapKhoCapTren extends BaseListOrderActivity {
 
     @Override
     public void init() {
-        setStatus(Arrays.asList(
-                getResources().getStringArray(R.array.import_from_staff_2_step_status)));
-        setWareHouseData(
-                Arrays.asList(String.valueOf(mUserRepository.getUserInfo().getShop().getParentShop().getShopName())));
+        arrStatus = Arrays.asList(
+                getResources().getStringArray(R.array.import_from_staff_2_step_status));
+        setStatus(arrStatus);
+        setWareHouseData(Arrays.asList(String.valueOf(
+                mUserRepository.getUserInfo().getShop().getParentShop().getShopName())));
         funtions = mUserRepository.getFunctionsCodes();
     }
 

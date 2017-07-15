@@ -39,6 +39,7 @@ public class ListXuatKhoCapDuoi extends BaseListOrderActivity {
     List<String> funtions = new ArrayList<>();
     List<String> shopNames = new ArrayList<>();
     List<Shop> mListShop = new ArrayList<>();
+    private List<String> arrStatus;
 
     @Override
     public void onItemClicked(Object object) {
@@ -115,22 +116,38 @@ public class ListXuatKhoCapDuoi extends BaseListOrderActivity {
     }
 
     private void setActionName3Step(StockTrans stockTrans) {
-        stockTrans.setActionName(getString(R.string.nv_trahangcaptren_action_detail));
         switch ((int) stockTrans.getStockTransStatus()) {
             case (int) StockTransStatus.TRANS_NON_NOTE:
                 if (funtions.contains(RoleWareHouse.LAP_PHIEU_XUAT)) {
                     stockTrans.setActionName(
                             getString(R.string.commmon_warehouse_action_create_note));
+                } else {
+                    stockTrans.setActionName(arrStatus.get(0));
                 }
 
                 break;
             case (int) StockTransStatus.TRANS_NOTED:
                 if (funtions.contains(RoleWareHouse.XUAT_KHO)) {
                     stockTrans.setActionName(getString(R.string.common_label_export));
+                } else {
+                    stockTrans.setActionName(arrStatus.get(1));
                 }
                 break;
-            default:
-                stockTrans.setActionName(getString(R.string.nv_trahangcaptren_action_detail));
+
+            case (int) StockTransStatus.TRANS_DONE:
+                stockTrans.setActionName(arrStatus.get(2));
+                break;
+
+            case (int) StockTransStatus.TRANS_EXP_IMPED:
+                stockTrans.setActionName(arrStatus.get(3));
+                break;
+
+            case (int) StockTransStatus.TRANS_CANCEL:
+                stockTrans.setActionName(arrStatus.get(4));
+                break;
+
+            case (int) StockTransStatus.TRANS_REJECT:
+                stockTrans.setActionName(arrStatus.get(5));
                 break;
         }
     }
@@ -255,8 +272,9 @@ public class ListXuatKhoCapDuoi extends BaseListOrderActivity {
 
     @Override
     public void init() {
+        arrStatus = Arrays.asList(getResources().getStringArray(R.array.xuatkhocd_status));
         funtions = mUserRepository.getFunctionsCodes();
-        setStatus(Arrays.asList(getResources().getStringArray(R.array.xuatkhocd_status)));
+        setStatus(arrStatus);
         loadStaffList();
     }
 
