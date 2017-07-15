@@ -34,6 +34,8 @@ import static com.viettel.mbccs.R.string.common_label_notice;
 
 public class ListXuatKhoCapDuoi extends BaseListOrderActivity {
 
+    public static final int REQUEST_ITEM_XUAT_KHO_CD = 100;
+    public static final int RESULT_ITEM_XUAT_KHO_CD = 101;
     List<String> funtions = new ArrayList<>();
     List<String> shopNames = new ArrayList<>();
     List<Shop> mListShop = new ArrayList<>();
@@ -179,7 +181,7 @@ public class ListXuatKhoCapDuoi extends BaseListOrderActivity {
         Bundle bundle = new Bundle();
         bundle.putParcelable(Constants.BundleConstant.STOCK_TRANS, stockTrans);
         intent.putExtras(bundle);
-        startActivity(intent);
+        startActivityForResult(intent, REQUEST_ITEM_XUAT_KHO_CD);
     }
 
     private void showDialogExportSuccess(String title, StockTrans stockTrans,
@@ -266,6 +268,14 @@ public class ListXuatKhoCapDuoi extends BaseListOrderActivity {
     @Override
     public void onAddClick() {
         Intent intent = new Intent(ListXuatKhoCapDuoi.this, LapLenhXuatKhoCapDuoiActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, REQUEST_ITEM_XUAT_KHO_CD);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            doSearch();
+        }
     }
 }

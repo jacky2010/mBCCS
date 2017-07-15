@@ -234,9 +234,6 @@
             android:name=".screen.splash.DownloadDataActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".screen.stockdeliver.StockDeliverActivity"
-            android:screenOrientation="portrait"/>
-        <activity
             android:name=".screen.Test"
             android:screenOrientation="portrait"/>
         <activity
@@ -323,6 +320,22 @@
             android:name=".screen.xuatkhocapduoi.LapLenhXuatKhoCapDuoiActivity"
             android:screenOrientation="portrait"/>
 
+        <activity
+            android:name=".screen.xuatkhocapduoi.LapPhieuXuatKhoCapDuoiActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screen.xuatkhocapduoi.XuatKhoCapDuoiActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".screen.xuatkhocapduoi.ListXuatKhoCapDuoi"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".base.createorder.BaseCreateOrderSuccessActivity"
+            android:screenOrientation="portrait"/>
+
         <!--End Xuat kho cap duoi-->
 
         <!--Nhap kho cap tren-->
@@ -335,10 +348,6 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".screen.nhapkhocaptren.NhapKhoTuCapTren"
-            android:screenOrientation="portrait"/>
-
-        <activity
-            android:name=".screen.xuatkhocapduoi.ListXuatKhoCapDuoi"
             android:screenOrientation="portrait"/>
 
         <activity

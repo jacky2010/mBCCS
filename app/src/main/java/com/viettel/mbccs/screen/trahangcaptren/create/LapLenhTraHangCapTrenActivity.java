@@ -47,7 +47,7 @@ public class LapLenhTraHangCapTrenActivity extends BaseCreateCommandNoteActivity
 
     @Override
     public long getToOwnerId() {
-        return mUserRepository.getUserInfo().getShop().getParentShopId();
+        return mUserRepository.getUserInfo().getShop().getParentShop().getShopId();
     }
 
     @Override

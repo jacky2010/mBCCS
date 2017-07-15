@@ -200,7 +200,7 @@ public class ListOrderReturnUpperActivity extends BaseListOrderActivity {
     public void init() {
         setStatus(Arrays.asList(getResources().getStringArray(R.array.xuatkhocd_status)));
 
-        if (mUserRepository.getUserInfo().getShop().getParentShopId() == 0) {
+        if (mUserRepository.getUserInfo().getShop().getParentShop().getShopId() == 0) {
             BaseException e = BaseException.toUnexpectedError(
                     new Throwable(getString(R.string.common_msg_error_general)));
             showErrorDialog(e, new DialogInterface.OnClickListener() {
@@ -213,8 +213,8 @@ public class ListOrderReturnUpperActivity extends BaseListOrderActivity {
         }
 
         setWareHouseData(Collections.singletonList(
-                String.valueOf(mUserRepository.getUserInfo().getShop().getParentShopName())));
-        mShopList.add(mUserRepository.getUserInfo().getShop().getParentShopId());
+                String.valueOf(mUserRepository.getUserInfo().getShop().getParentShop().getShopName())));
+        mShopList.add(mUserRepository.getUserInfo().getShop().getParentShop().getShopId());
         mFunctionList = mUserRepository.getFunctionsCodes();
     }
 

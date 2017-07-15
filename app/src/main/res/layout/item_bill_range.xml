@@ -55,7 +55,7 @@
                 <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/dp_5"
+                    android:layout_marginRight="@dimen/dp_5"
                     android:layout_weight="1"
                     android:text="@{String.format(@string/input_order_count, presenter.count)}"
                     android:textColor="@color/black"
@@ -65,7 +65,7 @@
                 <com.viettel.mbccs.widget.CustomTextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/dp_5"
+                    android:layout_marginRight="@dimen/dp_5"
                     android:layout_weight="2"
                     android:text="@{String.format(@string/input_order_date, presenter.date)}"
                     android:textColor="@color/black"

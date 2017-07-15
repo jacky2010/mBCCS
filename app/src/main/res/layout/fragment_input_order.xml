@@ -39,7 +39,6 @@
             android:onClick="@{() -> presenter.onInputOrderClick()}"
             android:text="@string/btn_input_order"
             android:textAllCaps="false"
-            android:visibility="@{ presenter.isHideInputButton ? View.GONE : View.VISIBLE }"
             app:type="default"
             style="@style/button_positive"
             />
